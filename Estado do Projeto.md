@@ -1,4 +1,4 @@
-> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate, Tecnologia e Magia. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
+> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate, Tecnologia, Magia e Objetivo e Progressão. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
 
 ## Resolvido
 
@@ -85,6 +85,14 @@
 - Encantamento: Rank 3+, na Encantaria, por Mago de Ofício, com Mana e Pedra de Mana; um por item.
 - Árvore arcana de 15 a 25 itens, eras pelos marcos mundiais. Esquadrão de Magos: caro, limitado pelos Magos, só se a lei permitir.
 
+**Objetivo e Progressão**
+- Sandbox sem fim obrigatório. **Ambições** opcionais (uma sugerida por estilo de início, trocável; mais as grandes: conquistar capital, unificar região); ao cumprir, epílogo e o jogador continua ou encerra.
+- Sem nível nem XP geral. **Renome** 0 a 100 por feitos: atrai companheiros, libera títulos e missões maiores; a má fama é a Recompensa.
+- Escada de títulos: Plebeu → Cidadão → Cavaleiro → Nobre → Senhor de cidade → Líder de facção, com Renome e um requisito concreto.
+- Missões: eventos com escolha, contratos no quadro da Taverna (nascem do estado do mundo) e missões longas de 3 a 5 etapas.
+- Masmorras: conjunto fixo desenhado à mão, dificuldade 1 a 5, inimigos e Loot sorteados de tabelas, repovoam após estações; lendárias são únicas e guardam Artefatos.
+- Derrota para Criaturas: o grupo acorda ferido, perde o Loot carregado e mantém o equipamento. **Crônica** dos feitos, sem pontuação. A fatia vertical não tem este sistema.
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
@@ -96,16 +104,16 @@
 - **Construção:** custos e níveis das novas construções; ainda não estão nos canvases.
 - **Início de Jogo:** custo em pontos; o estilo Mercador depende das caravanas civis.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
-- **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; derrota para Criaturas; masmorras; confirmar a regra de armadura mista.
+- **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; confirmar a regra de armadura mista.
 - **Tecnologia:** valores a testar (janelas, adiantamento, pontos, custos, penalidade); lista dos marcos e das tecnologias iniciais; cultura Agrária.
 - **Construção:** custos e níveis do Laboratório, Torre Arcana, Forja Arcana e Encantaria.
 - **Magia:** lista de feitiços e da árvore arcana; valores a testar; como obter Grimório; Esquadrão de Magos no Mapa de Guerra; feitiços de Suporte fora do combate.
+- **Objetivo:** condições das Ambições e epílogos; Renome por feito e por título; repovoamento; lista de contratos, missões e masmorras; recrutamento de companheiros.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
 
 ## Sistemas ainda não escritos (ordem)
 
-1. Objetivo do jogo e progressão
-2. Comércio civil e caravanas
+1. Comércio civil e caravanas
 
 ## Como estamos trabalhando
 

@@ -43,6 +43,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 ### Jogo e engine
 
+- [[Objetivo e Progressão/Descrição|Objetivo e Progressão]] — Ambições, Renome, títulos, missões, masmorras
 - [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]
 - [[Arquitetura/Descrição|Arquitetura]] — decisões técnicas e fatia vertical
 
@@ -50,8 +51,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 Em ordem de prioridade:
 
-1. **Objetivo do jogo e progressão** — inclui masmorras e missões longas
-2. **Comércio civil e caravanas**
+1. **Comércio civil e caravanas**
 
 ## Primeira meta de desenvolvimento
 

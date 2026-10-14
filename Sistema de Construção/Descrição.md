@@ -47,7 +47,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | Construção | Função |
 |---|---|
 | **Mercado** | Loja geral onde os NPCs compram no Período Livre (a "Loja" do Sistema Econômico) |
-| **Taverna** | Entretenimento no Período Livre; vende Bebida |
+| **Taverna** | Entretenimento no Período Livre; vende Bebida; quadro de contratos (Objetivo e Progressão) |
 | **Quartel** | Onde os conscritos são alistados e os Esquadrões são formados |
 | **Prisão** | Mapa Interno onde NPCs presos cumprem pena (Sistema de Crime e Justiça) |
 | **Casa da Moeda** | Cunhagem: ganho anual de dinheiro (Sistema Econômico) |
