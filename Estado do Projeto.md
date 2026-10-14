@@ -1,4 +1,4 @@
-> Resumo compacto do projeto em 2026-10-13, depois da revisão geral, do Sistema de Eventos e do Sistema de Combate. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
+> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate e Tecnologia. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
 
 ## Resolvido
 
@@ -65,6 +65,15 @@
 - Combate local até cerca de 40 combatentes; acima ou com Esquadrões, Mapa de Guerra. Morte permanente; se o grupo todo cai, é **capturado** (sem Game Over). Duelo como modo especial. Montarias só fora de combate por ora.
 - Arte em camadas com animações por tipo de arma, em 4 direções.
 
+**Tecnologia e Pesquisa**
+- Duas camadas: **Tecnologia Mundial** (vale para todas as facções; desbloqueada por prazo no tempo, simulando o conhecimento se espalhando, como no Victoria 3) e **Tecnologia de Facção** (só para a facção; desbloqueada por pesquisa).
+- Pontos de Pesquisa gerados no **Laboratório** por NPCs, conforme a Inteligência; o Banco da Facção paga a manutenção; o imposto para pesquisa (Tecnocrata) aumenta o orçamento.
+- Árvore com pré-requisitos em 5 ramos (Agricultura e Produção, Construção, Militar, Economia, Administração) e 4 eras ligadas aos Tiers; pode ganhar camadas no futuro.
+- Desbloqueios concretos (construções, receitas, Tier/Rank, leis, níveis de cidade); bônus percentuais raros.
+- IA escolhe pela cultura/ideologia; o jogador escolhe se for líder. Difusão por conquista, diplomacia e roubo; nunca se esquece.
+- Cada cultura começa com 2 ou 3 tecnologias da era 1. Entre 40 e 60 tecnologias; progresso por estação; a fatia vertical não tem tecnologia.
+- Magia fica em sistema separado, com a mesma mecânica de pontos.
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
@@ -77,17 +86,18 @@
 - **Início de Jogo:** custo em pontos; o estilo Mercador depende das caravanas civis.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); encantamento (Rank mínimo, custo, quem faz); derrota para Criaturas; masmorras; confirmar a regra de armadura mista.
+- **Tecnologia:** prazo dos marcos mundiais (data fixa ou janela) e se algo os adianta; marcos abrem eras (proposta); desconto de difusão (proposta); vila do jogador sem facção; classe de quem trabalha no Laboratório; valores e lista inicial; cultura Agrária.
+- **Construção:** Laboratório entra nas novas construções.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
 
 ## Sistemas ainda não escritos (ordem)
 
-1. Tecnologia e Pesquisa
-2. Magia
-3. Objetivo do jogo e progressão
-4. Comércio civil e caravanas
+1. Magia
+2. Objetivo do jogo e progressão
+3. Comércio civil e caravanas
 
 ## Como estamos trabalhando
 
-- Cada rodada: uma lista de perguntas com sugestão. As respostas ficam em `Desktop\Respostas.txt`; "vamos seguir sua sugestão" aceita a proposta.
+- Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta.
 - Marcações nos documentos: **[Proposta]**, **[Em aberto]**, **[Refinar depois]**.
-- Backup anterior à revisão geral: pasta `scratchpad\backup\Jogo_antes_da_revisao` da sessão. A pasta do jogo não tem controle de versão.
+- O projeto está no GitHub (`FelipeSKT/Projeto-Jogo`), com histórico de versões. Cada rodada vira um pull request para revisão.

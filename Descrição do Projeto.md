@@ -38,6 +38,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Inventário/Descrição|Sistema de Inventário]]
 - [[Sistema de Produção/Descrição|Sistema de Produção]]
 - [[Sistema de Construção/Descrição|Sistema de Construção]]
+- [[Sistema de Tecnologia/Descrição|Sistema de Tecnologia e Pesquisa]] — tecnologia mundial e de facção
 
 ### Jogo e engine
 
@@ -48,10 +49,9 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 Em ordem de prioridade:
 
-1. **Tecnologia e Pesquisa**
-2. **Magia** — inclui encantamento e feitiços
-3. **Objetivo do jogo e progressão** — inclui masmorras e missões longas
-4. **Comércio civil e caravanas**
+1. **Magia** — inclui encantamento e feitiços
+2. **Objetivo do jogo e progressão** — inclui masmorras e missões longas
+3. **Comércio civil e caravanas**
 
 ## Primeira meta de desenvolvimento
 
