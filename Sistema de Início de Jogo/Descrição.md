@@ -60,7 +60,7 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 ### Perguntas em aberto
 
 1. **Custo em pontos do estilo personalizado.** Quanto custa cada escolha? Depende dos valores finais de dinheiro, itens e habilidades, definidos mais perto da fase de testes.
-2. **Mercador.** O bônus de itens de comércio depende do sistema de caravanas civis, ainda a definir no Sistema Econômico.
+2. **Mercador.** Bônus exato (dinheiro, caravana inicial, preços conhecidos); o comércio está no [[Sistema de Comércio/Descrição|Sistema de Comércio]].
 
 ### Atualizações recentes
 

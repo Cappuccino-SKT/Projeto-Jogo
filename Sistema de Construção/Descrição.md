@@ -47,10 +47,15 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | Construção | Função |
 |---|---|
 | **Mercado** | Loja geral onde os NPCs compram no Período Livre (a "Loja" do Sistema Econômico) |
-| **Taverna** | Entretenimento no Período Livre; vende Bebida |
+| **Taverna** | Entretenimento no Período Livre; vende Bebida; quadro de contratos (Objetivo e Progressão) |
 | **Quartel** | Onde os conscritos são alistados e os Esquadrões são formados |
 | **Prisão** | Mapa Interno onde NPCs presos cumprem pena (Sistema de Crime e Justiça) |
 | **Casa da Moeda** | Cunhagem: ganho anual de dinheiro (Sistema Econômico) |
 | **Templo** | Construção da cultura Religiosa; função detalhada com a Cultura |
+| **Posto Comercial** | Necessário para a cidade enviar caravanas civis (Sistema de Comércio) |
+| **Laboratório** | Gera Pontos de Pesquisa (Sistema de Tecnologia) |
+| **Torre Arcana** | Gera Pontos Arcanos com Magos (Sistema de Magia) |
+| **Forja Arcana** | Magos de Ofício produzem Aço Mágico (Sistema de Magia) |
+| **Encantaria** | Magos de Ofício encantam itens de Rank 3 ou maior (Sistema de Magia) |
 
 **Ficam para depois:** Posto da Guarda, Hospital, Muralha e Boticário (produção de Medicamentos, ver Sistema de Cura).

@@ -60,7 +60,7 @@ Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias
 
 **Suprimento e Caravana Militar.** O exército **carrega o próprio suprimento** durante excursões militares: Ração Militar e os materiais de manutenção de equipamento. A **Caravana** é a unidade auxiliar que armazena esses recursos.
 
-- A Caravana faz parte do **sistema militar** e é de **uso exclusivo militar**. As caravanas civis (comércio) serão tratadas no Sistema Econômico, não necessariamente com o mesmo sistema (a definir).
+- A Caravana faz parte do **sistema militar** e é de **uso exclusivo militar**. As caravanas civis (comércio) estão no [[Sistema de Comércio/Descrição|Sistema de Comércio]].
 - **[Proposta]** A Caravana usa o Inventário (herdando do Inventário abstrato), não luta, mas precisa acompanhar o exército.
 - **Suprimento esgotado:** a Moral cai gradualmente a cada dia sem suprimento. Abaixo de um limiar, os Esquadrões desertam, e não todos de uma vez.
 - **[Proposta]** Se a Caravana é capturada ou destruída, o exército perde o que ela carregava (saque).
@@ -78,6 +78,7 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 - **Crimes e penas** — define quais crimes valem, as punições (que variam por classe social) e a Recompensa. Ver Sistema de Crime e Justiça.
 - **Poder do líder** — define se o líder pode barrar a mudança de leis. **[Proposta]** Autoritário (o líder decide e pode bloquear), Moderado (o líder tem veto) e Fraco (a assembleia decide).
 - **Sistema de votação** — define como os votos das cidades são contados na assembleia (ver Assembleia e mudança de leis).
+- **Tarifa** — imposto sobre caravanas civis que entram no território da facção; vai para o Banco da Facção. Acordo comercial zera a tarifa; embargo e guerra bloqueiam o comércio (ver [[Sistema de Comércio/Descrição|Sistema de Comércio]]).
 
 **Herança total.** Toda cidade vinculada a uma facção adota todas as leis dela. Não há leis locais por cidade. O atributo "Itens proibidos" da Cidade passa a ser derivado das leis da facção.
 
@@ -196,7 +197,7 @@ Requisitos:
 | Cidade | Facção, itens proibidos (derivado das leis), conscritos (derivado), impostos, voto na assembleia |
 | NPC | Atributo Facção; alistar retira NPCs e cria Esquadrão; guardas ficam de fora; **[Proposta]** Título/Cargo para NPCs Importantes |
 | Cultura | Leis desejadas, Rito de Admissão, regra de sucessão, afinidades, arte (ver Sistema de Cultura) |
-| Econômico | Mercado da Facção, impostos para o Banco da Facção, soldo dos Esquadrões, cunhagem, tecnologias; caravanas civis (a definir) |
+| Econômico | Mercado da Facção, impostos para o Banco da Facção, soldo dos Esquadrões, cunhagem, tecnologias; Tarifa e caravanas civis (ver Sistema de Comércio) |
 | Classe Social | Eventos de mudança de lei; soldados não têm classe; dissolução gera NPCs Escravo e Civil |
 | Produção | Alistamento reduz trabalhadores e, portanto, produção; Ração Militar e materiais de manutenção para o exército |
 | Inventário | Caravana Militar herda do Inventário abstrato |

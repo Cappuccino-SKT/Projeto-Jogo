@@ -142,17 +142,15 @@ O NPC pode equipar uma arma acima da habilidade dele, mas leva **penalidade prop
 
 Uma arma (ou equipamento) de **Rank alto** pode ser **encantada**, o que **aumenta os atributos dela**, como o Atributo Mágico, o Dano, a Defesa e o Buff de habilidade (atributos que os itens já têm).
 
-**[Proposta]** para o início:
-
 - O encantamento é um **bônus fixo** aplicado ao item, sem gastar Mana na hora do combate.
-- Quem encanta é um **Mago**, gastando Mana e material mágico (a definir). Ver sistema de Magia.
-- Só itens a partir de um **Rank mínimo** podem ser encantados.
+- Só itens de **Rank 3 ou maior**. Feito na **Encantaria** por um **Mago de Ofício**, gastando Mana e Pedra de Mana.
+- Um encantamento por item; um novo substitui o antigo.
 
-**[Em aberto]** Rank mínimo, custo, limite de bônus e quem faz o serviço. **[Refinar depois]** no sistema de **Magia**.
+Detalhes no [[Sistema de Magia/Descrição|Sistema de Magia]]. **[Refinar depois]** tabela de bônus por Rank e custo.
 
 ### Fronteira com Magia
 
-No combate, entra agora só o que já existe: **cajado com Mana** (dano pelo atributo Magia) e **armas e equipamentos encantados**. Feitiços, escolas e habilidades especiais ficam para o sistema de Magia.
+No combate, entra agora só o que já existe: **cajado com Mana** (dano pelo atributo Magia) e **armas e equipamentos encantados**. Os feitiços (instantâneos ou em área, com Mana, conjuração interrompível e recarga; os de área acertam aliados) estão no [[Sistema de Magia/Descrição|Sistema de Magia]].
 
 ---
 
@@ -175,7 +173,7 @@ Ver o atributo Evolução em [[Sistema de NPC/Descrição|Sistema de NPC]].
 - **Criaturas (animais e monstros):** entidades **leves**, só com Vida, Dano, Defesa, Velocidade, Comportamento e Loot. Não têm personalidade, rotina nem inventário completo. Não são NPCs.
 - Criaturas surgem por eventos (Fauna, ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) e em masmorras (Mapa Interno).
 
-**[Em aberto]** Quem povoa as masmorras, o Loot e a progressão de ameaça ficam para o Mapa Interno e o sistema de Objetivo e progressão.
+Masmorras são povoadas por Criaturas e bandidos, com dificuldade de 1 a 5 e Loot de Rank compatível (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
 ---
 
@@ -194,7 +192,7 @@ Ver o atributo Evolução em [[Sistema de NPC/Descrição|Sistema de NPC]].
 - Se **todo o grupo** cai (Inconsciente), o jogador é **capturado** em vez de ter Game Over. O destino depende de quem venceu:
   - **guardas:** prisão ([[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]);
   - **bandidos ou facção:** escravidão, resgate ou morte;
-  - **Criaturas:** **[Em aberto]**, ver as perguntas abaixo.
+  - **Criaturas:** o grupo acorda ferido no mesmo lugar depois que elas vão embora; perde o Loot carregado e mantém o equipamento.
 - **Game Over** só acontece se ninguém puder ser capturado.
 
 ---
@@ -252,8 +250,6 @@ Toda a arte é feita à mão, então a escolha é feita para o volume de arte n�
 ### Perguntas em aberto
 
 1. **Valores a testar:** fórmula de dano e escala da habilidade, chance de acerto por distância, Intervalo de Ataque, multiplicadores de vantagem, raio de alerta, limiares de Medo, ganho de evolução, limite de combatentes.
-2. **Encantamento:** Rank mínimo, custo, limite de bônus e quem faz o serviço.
-3. **Derrota para Criaturas:** o grupo acorda ferido e despojado, morre por sangramento ou é poupado?
-4. **Masmorras:** quem as povoa, Loot e progressão (Mapa Interno e Objetivo).
-5. **Armadura mista:** confirmar a regra da classe de peso mais frequente.
-6. **Itens a cadastrar:** o atributo Intervalo de Ataque nas armas já existentes.
+2. **Encantamento:** tabela de bônus por Rank e custo (ver Sistema de Magia).
+3. **Armadura mista:** confirmar a regra da classe de peso mais frequente.
+4. **Itens a cadastrar:** o atributo Intervalo de Ataque nas armas já existentes.
