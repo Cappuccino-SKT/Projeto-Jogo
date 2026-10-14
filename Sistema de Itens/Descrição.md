@@ -336,5 +336,5 @@ Itens que aparecem nos canvases mas ainda não estão na lista. Tier e Rank são
 ### Atualizações de combate
 
 - **Intervalo de Ataque:** novo atributo das armas corpo a corpo, de longo alcance e dos cajados. Armas pesadas (Machado, Clava) são lentas e fortes (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
-- **Encantamento:** armas e equipamentos de Rank alto podem ser encantados, o que aumenta atributos como Atributo Mágico, Dano, Defesa e Buff de habilidade. Rank mínimo, custo e quem encanta estão em aberto (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
+- **Encantamento:** armas e equipamentos de Rank alto podem ser encantados, o que aumenta atributos como Atributo Mágico, Dano, Defesa e Buff de habilidade. A partir do Rank 3, na Encantaria, por um Mago de Ofício, com Mana e Pedra de Mana; um encantamento por item. Novos itens: **Grimório** (ensina feitiços) e **Pedra de Mana** consumível (recupera Mana). Ver [[Sistema de Magia/Descrição|Sistema de Magia]].
 - **Classe de peso da armadura:** em combate vale a classe de peso mais frequente entre as três peças (proposta).

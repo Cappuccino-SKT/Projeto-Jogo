@@ -85,7 +85,7 @@ As facções **não começam iguais**: cada cultura começa com 2 ou 3 tecnologi
 
 ## Magia
 
-A Magia **não entra na árvore**. Ela será um sistema próprio (o próximo da fila), mas usa a mesma mecânica de pontos, gerados num local próprio (por exemplo, uma Torre Arcana). A Tecnocrata não pesquisa magia; a Arcana pesquisa as duas, mais devagar.
+A Magia **não entra na árvore**. Ela tem árvore própria ([[Sistema de Magia/Descrição|Sistema de Magia]]), com a mesma mecânica de pontos: **Pontos Arcanos** gerados na **Torre Arcana**. A Tecnocrata não pesquisa magia; a Arcana pesquisa as duas, mais devagar.
 
 ## Parte técnica
 

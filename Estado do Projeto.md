@@ -1,4 +1,4 @@
-> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate e Tecnologia. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
+> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate, Tecnologia e Magia. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
 
 ## Resolvido
 
@@ -60,7 +60,7 @@
 - Tempo real com **pausa ativa**; o jogo volta a 1x ao iniciar combate. Ordens básicas e quatro posturas (Agressiva, Defensiva, Manter posição, Evitar combate). "Em combate" = hostil dentro do raio de alerta.
 - Dano: sorteio entre Dano Mín. e Máx. da arma × (habilidade ÷ 50) − Defesa, piso 1. Corpo a corpo sempre acerta; longo alcance tem chance por distância; sem projéteis físicos. Novo atributo **Intervalo de Ataque**. Vantagem arma × armadura de até ±25%.
 - Modo letal/não letal por NPC. Medo, fuga e rendição pela Coragem. Dois slots de arma + Escudo; munição consumida sem recolher; sem estamina; armadura Média e Pesada reduzem a velocidade; Atributo Mínimo dá penalidade, não trava.
-- **Armas e equipamentos de Rank alto podem ser encantados** (bônus de atributos). Feitiços ficam para Magia.
+- **Armas e equipamentos de Rank alto podem ser encantados** (bônus de atributos). Feitiços e detalhes do encantamento no Sistema de Magia.
 - Evolução por uso. Criaturas (animais/monstros) são entidades leves, não NPCs; bandidos e guardas são NPCs.
 - Combate local até cerca de 40 combatentes; acima ou com Esquadrões, Mapa de Guerra. Morte permanente; se o grupo todo cai, é **capturado** (sem Game Over). Duelo como modo especial. Montarias só fora de combate por ora.
 - Arte em camadas com animações por tipo de arma, em 4 direções.
@@ -76,6 +76,15 @@
 - Laboratório: trabalhadores Civis (bônus por Inteligência), gerente Nobre. Vila sem facção recebe os marcos e pesquisa com penalidade de custo.
 - Magia fica em sistema separado, com a mesma mecânica de pontos.
 
+**Magia**
+- Magos raros: 5% da população (15% na Arcana); filho de Mago tem chance maior. Sem falha aleatória: o custo da magia é social e político.
+- 3 escolas: Combate (dano e controle), Suporte (cura e bônus) e Ofício (encantamento e produção). Cada Mago tem afinidade com uma.
+- Feitiços liberados pela pesquisa arcana e aprendidos com Grimório ou mestre; quantidade pela Inteligência. Mana regenera com o tempo (mais rápido em descanso); Pedra de Mana recupera.
+- Combate: efeito instantâneo ou em área, com Mana, conjuração interrompível por dano e recarga; feitiços de área acertam aliados.
+- Novas construções: Torre Arcana (Pontos Arcanos), Forja Arcana (Aço Mágico), Encantaria. Mago de Suporte acelera o Hospital.
+- Encantamento: Rank 3+, na Encantaria, por Mago de Ofício, com Mana e Pedra de Mana; um por item.
+- Árvore arcana de 15 a 25 itens, eras pelos marcos mundiais. Esquadrão de Magos: caro, limitado pelos Magos, só se a lei permitir.
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
@@ -87,16 +96,16 @@
 - **Construção:** custos e níveis das novas construções; ainda não estão nos canvases.
 - **Início de Jogo:** custo em pontos; o estilo Mercador depende das caravanas civis.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
-- **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); encantamento (Rank mínimo, custo, quem faz); derrota para Criaturas; masmorras; confirmar a regra de armadura mista.
+- **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; derrota para Criaturas; masmorras; confirmar a regra de armadura mista.
 - **Tecnologia:** valores a testar (janelas, adiantamento, pontos, custos, penalidade); lista dos marcos e das tecnologias iniciais; cultura Agrária.
-- **Construção:** Laboratório entra nas novas construções.
+- **Construção:** custos e níveis do Laboratório, Torre Arcana, Forja Arcana e Encantaria.
+- **Magia:** lista de feitiços e da árvore arcana; valores a testar; como obter Grimório; Esquadrão de Magos no Mapa de Guerra; feitiços de Suporte fora do combate.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
 
 ## Sistemas ainda não escritos (ordem)
 
-1. Magia
-2. Objetivo do jogo e progressão
-3. Comércio civil e caravanas
+1. Objetivo do jogo e progressão
+2. Comércio civil e caravanas
 
 ## Como estamos trabalhando
 
