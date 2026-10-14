@@ -72,6 +72,8 @@
 - Desbloqueios concretos (construções, receitas, Tier/Rank, leis, níveis de cidade); bônus percentuais raros.
 - IA escolhe pela cultura/ideologia; o jogador escolhe se for líder. Difusão por conquista, diplomacia e roubo; nunca se esquece.
 - Cada cultura começa com 2 ou 3 tecnologias da era 1. Entre 40 e 60 tecnologias; progresso por estação; a fatia vertical não tem tecnologia.
+- Marcos mundiais: janela no calendário com sorteio; a pesquisa do mundo adianta, mas nunca fora da janela. 3 marcos maiores abrem as eras 2 a 4, mais 5 a 8 menores. Difusão: −10% de custo por facção que já tem a tecnologia, até −50%.
+- Laboratório: trabalhadores Civis (bônus por Inteligência), gerente Nobre. Vila sem facção recebe os marcos e pesquisa com penalidade de custo.
 - Magia fica em sistema separado, com a mesma mecânica de pontos.
 
 ## Em aberto
@@ -86,7 +88,7 @@
 - **Início de Jogo:** custo em pontos; o estilo Mercador depende das caravanas civis.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); encantamento (Rank mínimo, custo, quem faz); derrota para Criaturas; masmorras; confirmar a regra de armadura mista.
-- **Tecnologia:** prazo dos marcos mundiais (data fixa ou janela) e se algo os adianta; marcos abrem eras (proposta); desconto de difusão (proposta); vila do jogador sem facção; classe de quem trabalha no Laboratório; valores e lista inicial; cultura Agrária.
+- **Tecnologia:** valores a testar (janelas, adiantamento, pontos, custos, penalidade); lista dos marcos e das tecnologias iniciais; cultura Agrária.
 - **Construção:** Laboratório entra nas novas construções.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
 
