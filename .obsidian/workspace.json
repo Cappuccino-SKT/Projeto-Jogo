@@ -1,0 +1,217 @@
+{
+  "main": {
+    "id": "16f697bbbb196d55",
+    "type": "split",
+    "children": [
+      {
+        "id": "da1b23a2c804e208",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d0164bf862919096",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nova aba"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "51b884e93e769311",
+    "type": "split",
+    "children": [
+      {
+        "id": "ae4a965b0aa05932",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "94682b0091d86d4c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "c3b123392e90eba3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "e9167aa0dbaf84ba",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200.5
+  },
+  "right": {
+    "id": "83f1be07e9d9f92f",
+    "type": "split",
+    "children": [
+      {
+        "id": "2a1a2ae96b1876d4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "69db9e2bb7fa8671",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Links inversos"
+            }
+          },
+          {
+            "id": "85e26cb01107140e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "207c7dc3ac92861a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "5b1405c90a73460c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "da466f14da0378ba",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false
+    }
+  },
+  "active": "d0164bf862919096",
+  "lastOpenFiles": [
+    "Sistema Construção/Mapa de construções civis.canvas",
+    "Sistema Construção/Descrição.md",
+    "Sistema de Recursos/Recursos Existentes.md",
+    "Sistema Construção/Mapa de construções de produção.canvas",
+    "Sistema de Recursos/Descrição.md",
+    "Sem título.md",
+    "Sistema de Recursos",
+    "Sistema Construção/Exigencias de Recursos.md",
+    "Sistema de Produção/Mapa Produção.canvas",
+    "Sistema de Itens/Descrição.md",
+    "Descrição do Projeto.md",
+    "Sistema de Produção/Descrição.md",
+    "Sistema de Classe Social/Descrição.md",
+    "Sistema Cicade/Descrição.md",
+    "Sistema de NPC/Descrição.md",
+    "Sistema Construção",
+    "Sistema Mapa/Descrição.md",
+    "Sistema de IA/Descrição.md",
+    "Sistema Inventario/Descrição.md",
+    "Sistema Inventario",
+    "Sistema Cicade",
+    "Sistema de Produção",
+    "Sistema de Itens",
+    "Sistema Econômico/Descrição.md",
+    "Sistema Econômico",
+    "Sistema de Tempo/Descrição.md",
+    "Sistema de Tempo",
+    "Sistema de IA",
+    "Sistema de Classe Social",
+    "Bem-vindo.md"
+  ]
+}

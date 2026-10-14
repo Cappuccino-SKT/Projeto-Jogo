@@ -1,0 +1,1 @@
+Os recursos são atributos vinculados ao mapas locais, cada mapa local possui variedades de recursos que podem ser explorados nesse local, a sua extração só é possivel através de construções especificas.
