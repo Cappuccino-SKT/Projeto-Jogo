@@ -1,4 +1,4 @@
-> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate, Tecnologia, Magia e Objetivo e Progressão. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
+> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate, Tecnologia, Magia, Objetivo e Progressão e Comércio. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
 
 ## Resolvido
 
@@ -93,27 +93,35 @@
 - Masmorras: conjunto fixo desenhado à mão, dificuldade 1 a 5, inimigos e Loot sorteados de tabelas, repovoam após estações; lendárias são únicas e guardam Artefatos.
 - Derrota para Criaturas: o grupo acorda ferido, perde o Loot carregado e mantém o equipamento. **Crônica** dos feitos, sem pontuação. A fatia vertical não tem este sistema.
 
+**Comércio civil e caravanas**
+- Caravanas civis reais no mapa mundial (podem ser vistas e atacadas); em LOD 2 o comércio vira fluxo por estação.
+- Donos: a cidade (mercadores abstratos, dinheiro da cidade, leva o que sobra e traz o que falta) e o jogador. A cidade precisa de um **Posto Comercial**.
+- Rota pelo lucro esperado (diferença de preço − distância, risco e tarifas); o comércio aproxima os preços. O jogador só conhece os preços das cidades visitadas, com data.
+- Caravana = animais de carga (capacidade por peso) + guardas + manutenção. Lei de **Tarifa**; guerra bloqueia; embargo ou acordo comercial (zera a tarifa).
+- Riscos: bandidos, guerra, clima; perda de carga; contratos de escolta. Rota fixa liberada por tecnologia de Economia. Dinheiro passa entre cidades, total do mundo constante.
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
 - **Cultura:** nomes das culturas e regiões; como reaproveitar partes da arte de construção.
-- **Facção:** detalhes da assembleia; caravanas civis (Sistema Econômico).
+- **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto; itens de Medicamento.
 - **Itens:** Tier e Rank provisórios dos itens a cadastrar; peça de armadura Média; revisar o mapeamento Luxo/Exclusivo por Tier.
 - **Construção:** custos e níveis das novas construções; ainda não estão nos canvases.
-- **Início de Jogo:** custo em pontos; o estilo Mercador depende das caravanas civis.
+- **Início de Jogo:** custo em pontos; bônus exato do estilo Mercador.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; confirmar a regra de armadura mista.
 - **Tecnologia:** valores a testar (janelas, adiantamento, pontos, custos, penalidade); lista dos marcos e das tecnologias iniciais; cultura Agrária.
 - **Construção:** custos e níveis do Laboratório, Torre Arcana, Forja Arcana e Encantaria.
 - **Magia:** lista de feitiços e da árvore arcana; valores a testar; como obter Grimório; Esquadrão de Magos no Mapa de Guerra; feitiços de Suporte fora do combate.
 - **Objetivo:** condições das Ambições e epílogos; Renome por feito e por título; repovoamento; lista de contratos, missões e masmorras; recrutamento de companheiros.
+- **Comércio:** valores (capacidade, salário, Tarifa, peso do risco); animais de carga; guardas como NPCs ou valor abstrato; fórmula do fluxo em LOD 2.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
 
-## Sistemas ainda não escritos (ordem)
+## Próximos passos
 
-1. Comércio civil e caravanas
+Todos os sistemas planejados já têm descrição. Falta preencher o que está em aberto e começar a fatia vertical.
 
 ## Como estamos trabalhando
 

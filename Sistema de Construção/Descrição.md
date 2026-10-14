@@ -52,6 +52,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Prisão** | Mapa Interno onde NPCs presos cumprem pena (Sistema de Crime e Justiça) |
 | **Casa da Moeda** | Cunhagem: ganho anual de dinheiro (Sistema Econômico) |
 | **Templo** | Construção da cultura Religiosa; função detalhada com a Cultura |
+| **Posto Comercial** | Necessário para a cidade enviar caravanas civis (Sistema de Comércio) |
 | **Laboratório** | Gera Pontos de Pesquisa (Sistema de Tecnologia) |
 | **Torre Arcana** | Gera Pontos Arcanos com Magos (Sistema de Magia) |
 | **Forja Arcana** | Magos de Ofício produzem Aço Mágico (Sistema de Magia) |

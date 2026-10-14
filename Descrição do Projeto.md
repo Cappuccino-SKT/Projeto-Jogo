@@ -38,6 +38,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Inventário/Descrição|Sistema de Inventário]]
 - [[Sistema de Produção/Descrição|Sistema de Produção]]
 - [[Sistema de Construção/Descrição|Sistema de Construção]]
+- [[Sistema de Comércio/Descrição|Sistema de Comércio]] — caravanas civis, rotas, tarifas
 - [[Sistema de Tecnologia/Descrição|Sistema de Tecnologia e Pesquisa]] — tecnologia mundial e de facção
 - [[Sistema de Magia/Descrição|Sistema de Magia]] — Magos, escolas, feitiços, encantamento
 
@@ -47,11 +48,9 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]
 - [[Arquitetura/Descrição|Arquitetura]] — decisões técnicas e fatia vertical
 
-## Próximos sistemas a escrever
+## Próximos passos
 
-Em ordem de prioridade:
-
-1. **Comércio civil e caravanas**
+Todos os sistemas planejados já têm descrição. Falta preencher o que está em aberto (listas de conteúdo e valores a testar) e começar a fatia vertical.
 
 ## Primeira meta de desenvolvimento
 
