@@ -89,13 +89,13 @@ Velhice, mais causas que vêm de outros sistemas:
 
 | Classe | Moradia |
 |---|---|
-| Escravo | Alojamento coletivo |
-| Civil | Casa simples |
-| Rico | Casa média |
+| Escravo | Senzala |
+| Civil | Casa |
+| Rico | Casarão |
 | Nobreza | Mansão |
 | Realeza | Palácio |
 
-- Cada moradia abriga um número de **NPCs reais** por tipo. **[Refinar depois]** valores; exemplo: 2 na casa simples e 1 a 2 na mansão.
+- Cada moradia abriga um número de **NPCs reais** por tipo. **[Refinar depois]** valores; exemplo: 2 NPCs reais na Casa e 1 a 2 na Mansão. Os tipos e os níveis (1 a 5) vêm do canvas de construções civis.
 - A moradia é um **Mapa Interno do tipo Moradia** (ver [[Sistema de Mapa/Descrição|Sistema de Mapa]]).
 - O NPC **sem casa** dorme ao relento: a Felicidade cai e a chance de doença sobe.
 
@@ -168,7 +168,7 @@ As **mesmas regras e a mesma fórmula** valem para o jogador e para a IA. As cid
 
 1. **Valores a testar:** taxas de natalidade e mortalidade, vida em anos de jogo, capacidade por tipo de moradia, limiares de Felicidade, custo de subir de nível.
 2. **Quantidade de lotes** por Mapa Local e por nível, e tamanho de cada lote.
-3. **Atratividade da migração:** pesos de Felicidade, emprego, moradia e comida (o emprego depende do futuro sistema de Trabalho).
-4. **Alojamento coletivo:** quantos Escravos abriga e quem o possui (cidade, dono ou facção).
+3. **Atratividade da migração:** pesos de Felicidade, emprego, moradia e comida (o emprego vem do [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
+4. **Senzala:** quantos Escravos abriga e quem o possui (cidade, dono ou facção).
 5. **Moradia dos Controlados do jogador:** casa própria, quarto de Taverna ou alojamento.
 6. **Crianças decorativas:** vale a pena o custo de arte?

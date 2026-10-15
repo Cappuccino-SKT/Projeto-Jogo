@@ -26,7 +26,7 @@ O sistema de decisão é híbrido, ligado ao LOD do Mapa Local: NPCs em LOD 0 (v
 ### Comportamento por Necessidade — Controlados
 
 - **Fome** — ao se aproximar de 0, a IA busca ou consome alimento do inventário.
-- **Felicidade** — ao chegar a 0, o NPC toma decisões como abandono do grupo, migração ou revolta.
+- **Felicidade** — abaixo de 20 o jogador recebe um aviso; ao chegar a 0, o NPC pede para sair do grupo (só vai embora depois de alguns dias, dando chance de resolver por diálogo ou pagamento), migrar ou se revoltar (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]).
 - **Medo** — seu uso varia conforme a função: para Escravos, valores altos ajudam a prevenir revoltas; para NPCs normais, decide quando recuar, se render ou fugir.
 
 Esses atributos são individuais para cada NPC que faça parte do grupo do jogador ou que tenha interação próxima com ele.
@@ -36,7 +36,7 @@ Esses atributos são individuais para cada NPC que faça parte do grupo do jogad
 Para a IA geral, esses atributos são usados de forma agregada, vinculados à cidade, em vez de calculados individualmente por NPC — o que economiza processamento. Dependendo da situação desses atributos, eventos são desencadeados sem necessidade de calcular a necessidade de cada NPC dentro da cidade.
 
 - **Bens de Consumo** — inclui Comida e demais recursos exigidos pela classe social do NPC (ver Sistema de Classe Social). Calculado pela quantidade desses itens no inventário da cidade, em proporção ao número de NPCs. A falta ou diminuição do estoque causa eventos de reação dos NPCs, variando conforme a classe afetada. Substitui a antiga Fome como atributo separado, já que toda classe social já exige Comida como parte do seu consumo.
-- **Felicidade** — valor influenciado por diversos fatores em conjunto. Sua falta desencadeia principalmente eventos políticos.
+- **Felicidade** — valor influenciado por diversos fatores em conjunto, guardado por classe social em cada cidade. Sua falta desencadeia principalmente eventos políticos (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]).
 - **Medo** — usado de forma variada conforme a situação; de base, decide se o NPC deve fugir ou continuar em combate.
 
 ---

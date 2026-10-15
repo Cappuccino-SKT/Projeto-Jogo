@@ -26,6 +26,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Classe Social/Descrição|Sistema de Classe Social]]
 - [[Sistema de IA/Descrição|Sistema de IA]]
 - [[Sistema de Cultura/Descrição|Sistema de Cultura]] — 6 culturas iniciais
+- [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
 - [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, diplomacia, exércitos
 - [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]
 - [[Sistema de Cura/Descrição|Sistema de Cura]]
@@ -35,9 +36,10 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 ### Economia e produção
 
 - [[Sistema Econômico/Descrição|Sistema Econômico]]
+- [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]] — emprego, salários, impostos, donos de construções
 - [[Sistema de Itens/Descrição|Sistema de Itens]]
 - [[Sistema de Inventário/Descrição|Sistema de Inventário]]
-- [[Sistema de Produção/Descrição|Sistema de Produção]]
+- [[Sistema de Produção/Descrição|Sistema de Produção]] e [[Sistema de Produção/Funções e Construções|Funções e Construções]]
 - [[Sistema de Construção/Descrição|Sistema de Construção]]
 - [[Sistema de Comércio/Descrição|Sistema de Comércio]] — caravanas civis, rotas, tarifas
 - [[Sistema de Tecnologia/Descrição|Sistema de Tecnologia e Pesquisa]] — tecnologia mundial e de facção
@@ -47,6 +49,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 - [[Objetivo e Progressão/Descrição|Objetivo e Progressão]] — Ambições, Renome, títulos, missões, masmorras
 - [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]
+- [[Interface/Descrição|Interface e Controles]] — HUD personalizável, painéis, notificações
 - [[Arquitetura/Descrição|Arquitetura]] — decisões técnicas e fatia vertical
 
 ## Próximos passos
@@ -59,4 +62,4 @@ Uma **fatia vertical**: 1 cidade, 1 cadeia de produção (Fazenda → Cozinha �
 
 ## Estado atual
 
-O resumo do que já foi decidido e do que está em aberto está em [[Estado do Projeto]]. A revisão geral do projeto está em [[Revisão do Projeto]] e os termos usados nos documentos estão no [[Glossário]].
+O resumo do que já foi decidido e do que está em aberto está em [[Estado do Projeto]]. Para retomar o trabalho depois de uma pausa, veja a [[Retomada]]. A revisão geral do projeto está em [[Revisão do Projeto]] e os termos usados nos documentos estão no [[Glossário]].

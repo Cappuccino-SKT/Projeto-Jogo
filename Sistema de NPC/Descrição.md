@@ -28,12 +28,12 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 3. Estágio (estágio de vida: criança, adulto, velho; em anos de jogo, criança 0–3, adulto 4–20 e velho 21+; só Importantes e Controlados têm crianças como NPC, ver [[Sistema de População/Descrição|Sistema de População]])
 4. Facção
 5. Cultura (o NPC nasce com a cultura da cidade; migrantes e escravos capturados mantêm a cultura de origem)
-6. Função (tipo de trabalho: lenhador, ferreiro, comerciante, guarda, caçador de recompensa, etc.)
+6. Função (tipo de trabalho: ver [[Sistema de Produção/Funções e Construções|Funções e Construções]]; também guarda, comerciante, caçador de recompensa etc.)
 7. Classe Social (a qual classe pertence dentro da facção)
 8. Personalidade — conjunto de valores numéricos (0–100): Agressividade, Coragem, Lealdade, Ganância e Sociabilidade, organizados em "modelos" nomeados e reutilizáveis (ex: modelo "Covarde Ganancioso" = Coragem baixa + Ganância alta) para facilitar autoria. Esses valores alimentam diretamente as decisões da IA.
 9. Sexo (masculino ou feminino)
 10. Rotina
-11. Dinheiro
+11. Dinheiro (individual só para Importantes, Controlados e Ricos donos de empresas; os demais usam a riqueza média por classe da cidade, ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]])
 12. Posição atual (posição no mapa)
 13. Mago (booleana)
 14. Escravo (booleana — pode ser temporário, no caso de trabalho forçado)
@@ -83,7 +83,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 1. Tarefa designada — a tarefa que o NPC está executando agora.
 2. Lista de Prioridades (editável pelo jogador) — ordem de tarefas (ex: 1º Coleta, 2º Produção, 3º Descanso); o escravo sempre tenta executar a disponível de maior prioridade.
 3. Obediência — probabilidade de seguir a prioridade definida vs. resistir.
-4. Revolta — risco de rebelião, calculável a partir de Obediência baixa + Felicidade baixa.
+4. Revolta — risco de rebelião, calculável a partir de Obediência baixa + Felicidade baixa dos Escravos, reduzido pelo Controle da cidade (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]).
 5. Vínculo — dono ou facção responsável por esse escravo.
 
 **Esquadrão (não é NPC)**

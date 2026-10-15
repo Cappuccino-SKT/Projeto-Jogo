@@ -1,4 +1,4 @@
-> Resumo compacto do projeto em 2026-10-14, depois da revisão geral e dos Sistemas de Eventos, Combate, Tecnologia, Magia, Objetivo e Progressão e Comércio. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]).
+> Resumo compacto do projeto, atualizado ao fim da rodada P0-5, antes de uma pausa. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -113,8 +113,29 @@
 - Nascimentos e mortes em pessoas por estação com fração acumulada; a cada Fator de Escala nasce ou morre 1 NPC real. Importantes e Controlados têm ciclo de vida completo; NPCs comuns são repostos; crianças comuns não são NPCs.
 - Vida em anos de jogo (criança 0–3, adulto 4–20, velho 21+, morte natural entre 21 e 30); 1 ano ≈ 17 h reais a 1x.
 - Natalidade, mortalidade (velhice, doença, fome, guerra, crime) e migração por atratividade; migrantes mantêm a cultura; guerra e fronteira fechada bloqueiam a migração.
-- Moradia por classe (alojamento, casa simples, média, mansão, palácio); a cidade constrói sozinha em lotes fixos marcados no Tiled (3 tamanhos); poucos layouts por tipo e cultura.
+- Moradia por classe (Senzala, Casa, Casarão, Mansão, Palácio); a cidade constrói sozinha em lotes fixos marcados no Tiled (3 tamanhos); poucos layouts por tipo e cultura.
 - Subir de nível: ocupação acima de 90% por 2 estações, Felicidade, construções obrigatórias, tecnologia e custo. Queda de nível só em catástrofe grave. Mesmas regras para jogador e IA.
+
+**Trabalho, Salários e Propriedade**
+- Ciclo do dinheiro: consumidores → lojas → salários e insumos → trabalhadores. A distribuição rotativa do Banco da Cidade vira estabilizador. O jogo guarda a riqueza média por classe e por cidade; o Dinheiro individual só existe para Importantes, Controlados e Ricos donos de empresas.
+- Emprego por vagas por nível da construção; desemprego afeta renda, Felicidade, Criminalidade e migração. Escravos sem salário; guardas pagos pelo Banco da Cidade; soldo pelo Banco da Facção.
+- Atributo **Dono** nas construções: Cidade, Facção, Rico ou jogador. Empresas dos Ricos contadas por cidade em LOD 2. Comprar, vender e transferir; a conquista leva as construções da Cidade e da Facção.
+- Salário por Função e nível; jogador escolhe Baixo, Normal ou Alto. Imposto único sobre receita, por estação. Preço do jogador dentro de ±30% do Mercado Local. Insumos comprados do inventário da cidade.
+- Mobilidade Civil → Rico por vagas de empresa. Falência e leilão. A Universidade melhora a Inteligência e o Trabalho Especialista e dá bônus aos Pesquisadores.
+- Tabela mestre [[Sistema de Produção/Funções e Construções|Funções e Construções]] criada a partir dos canvases.
+
+**Felicidade e Estabilidade**
+- **Felicidade** de 0 a 100 **por classe social** em cada cidade (a da cidade é a média ponderada). Alvo = 50 + contribuições de: consumo, leis × cultura, Criminalidade, desemprego e renda, moradia, conscrição, guerra, imposto, eventos, religião e repressão. Inércia: anda uma fração por dia (10%) em direção ao alvo.
+- Faixas: Contente (>70), Estável (40–70), Inquieta (25–40), Protesto (10–25) e Revolta (<10). Reações por classe: Escravo foge/rebela, Civil faz greve e migra, Rico fecha empresas, Nobreza pressiona leis, Realeza golpe.
+- **Estabilidade = Felicidade ponderada + Controle − 10**; a revolta ocorre abaixo de zero por alguns dias. Controle (0 a 30) vem de guardas, Esquadrões estacionados e Medo; custa dinheiro e reduz a Felicidade das classes baixas (menos nas culturas Autoritárias).
+- A facção tem Estabilidade própria (cidades + legitimidade do líder). Controlados: 6 fatores, aviso abaixo de 20 e saída com atraso no 0. Painel "Por quê?" com os 5 maiores fatores.
+
+**Interface e Controles**
+- Mundo em pixel-art de escala inteira; **interface em resolução nativa e nítida**, com fontes comuns legíveis (letras não desenhadas à mão por ora), molduras e ícones à mão. Resolução de referência **1600 × 900**; escala ajustável de 100% a 200%. Tema único.
+- **HUD bastante personalizável**: mover, redimensionar, esconder, escala, opacidade, ancoragem com encaixe, perfis de layout e restaurar padrão, num modo de edição. Layout guardado em perfil do jogador, fora do save.
+- HUD padrão, **uma janela de gestão por vez** com abas, lentes do Mapa Mundial, modo construção por lotes, painel de trabalho (Função × prioridade), pausa ativa com ordens visíveis.
+- Só teclado e mouse (sem controle de console), atalhos remapeáveis, zoom em níveis inteiros (1x a 4x).
+- Notificações **personalizáveis** (categorias, limite, agrupamento, o que aparece em velocidade alta, se o Crítico pausa). "Por quê?" por passar o mouse e barra de alertas. Enciclopédia gerada dos dados. Menus: novo jogo em 3 passos, autosave por estação. Interface própria; Dear ImGui só para depuração.
 
 ## Em aberto
 
@@ -124,25 +145,40 @@
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto; itens de Medicamento.
 - **Itens:** Tier e Rank provisórios dos itens a cadastrar; peça de armadura Média; revisar o mapeamento Luxo/Exclusivo por Tier.
-- **Construção:** custos e níveis das novas construções; ainda não estão nos canvases.
 - **Início de Jogo:** custo em pontos; bônus exato do estilo Mercador.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; confirmar a regra de armadura mista.
 - **Tecnologia:** valores a testar (janelas, adiantamento, pontos, custos, penalidade); lista dos marcos e das tecnologias iniciais; cultura Agrária.
-- **Construção:** custos e níveis do Laboratório, Torre Arcana, Forja Arcana e Encantaria.
+- **Construção:** custos e níveis das construções novas (Mercado, Taverna, Quartel, Prisão, Casa da Moeda, Templo, Posto Comercial, Laboratório, Torre Arcana, Forja Arcana, Encantaria, Hospital, Boticário, Universidade); ainda não estão nos canvases.
 - **Magia:** lista de feitiços e da árvore arcana; valores a testar; como obter Grimório; Esquadrão de Magos no Mapa de Guerra; feitiços de Suporte fora do combate.
 - **Objetivo:** condições das Ambições e epílogos; Renome por feito e por título; repovoamento; lista de contratos, missões e masmorras; recrutamento de companheiros.
 - **Comércio:** valores (capacidade, salário, Tarifa, peso do risco); animais de carga; guardas como NPCs ou valor abstrato; fórmula do fluxo em LOD 2.
-- **População:** valores a testar (taxas, vida em anos de jogo, capacidade das moradias, custo de subir de nível); lotes por mapa e nível; pesos da migração; alojamento coletivo; moradia dos Controlados; crianças decorativas.
+- **População:** valores a testar (taxas, vida em anos de jogo, capacidade das moradias, custo de subir de nível); lotes por mapa e nível; pesos da migração; Senzala; moradia dos Controlados; crianças decorativas.
+- **Trabalho:** valores a testar (vagas, salários, faixa de preço, estabilizador, imposto, empresas dos Ricos); nome e categoria das Funções; Engenheiro e Operário sem construção; Espada sem construção no canvas do Ferreiro; gerente das construções da Cidade; leilão; forma de estudo na Universidade.
+- **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; fuga e rebelião de Escravos; greves; layout do painel "Por quê?".
+- **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; telas do Mapa de Guerra; IDs de texto para outros idiomas.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
 
 ## Próximos passos
 
-Todos os sistemas planejados têm uma primeira descrição. Agora, em rodadas curtas de perguntas, escrever os sistemas P0 que faltam (trabalho e salários, felicidade, interface, mundo e estado inicial, pipeline de arte; população e habitação já está escrito), depois os P1. Quando o autor estiver satisfeito com a documentação, fazer a ficha técnica lógica e só então programar.
+**Lista de sistemas (da [[Revisão do Projeto]]):**
+
+| Prioridade | Sistema | Estado |
+|---|---|---|
+| P0 | Felicidade e Estabilidade | Escrito |
+| P0 | População e Habitação | Escrito |
+| P0 | Trabalho, Salários e Propriedade (e Funções e Construções) | Escrito |
+| P0 | Interface e Controles | Escrito |
+| P0 | **Mundo e Estado Inicial (Lore)** | **Perguntas enviadas, aguardando respostas** |
+| P0 | Pipeline de arte e conteúdo | A fazer |
+| P1 | Viagem e Mundo; Reputação; Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
+| P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
+
+**Ordem:** responder a rodada P0-5 → rodada P0-6 (Pipeline de arte) → sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 
-- Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta.
+- Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta. A ideia própria do autor prevalece.
 - Marcações nos documentos: **[Proposta]**, **[Em aberto]**, **[Refinar depois]**. Os termos estão no [[Glossário]].
 - Por ora **não se escreve código**: a documentação vem primeiro, depois a ficha técnica lógica, depois a programação.
-- O projeto está no GitHub (`FelipeSKT/Projeto-Jogo`), com histórico de versões. Cada rodada vira um pull request para revisão.
+- O projeto está no GitHub (`FelipeSKT/Projeto-Jogo`), com histórico de versões. Cada rodada vira um pull request para o autor aceitar. O jeito de trabalhar e os cuidados técnicos estão na [[Retomada]].

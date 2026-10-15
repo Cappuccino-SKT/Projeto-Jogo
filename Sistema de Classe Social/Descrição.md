@@ -14,7 +14,7 @@ Adiciona profundidade ao jogo conforme o avanço da gameplay, ou dependendo do e
 
 **Títulos.** Os títulos do Objetivo e Progressão (Plebeu, Cidadão, Cavaleiro, Nobre, Senhor de cidade e Líder de facção) são **rótulos políticos**. A classe só muda pelas regras de mobilidade, com a exceção do Rito de Admissão da cultura (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
-**Mobilidade social:** transições de classe são específicas e raras, não livres. Um Civil pode virar Rico ao acumular Dinheiro acima de um limiar por tempo suficiente; um Escravo pode ser libertado e virar Civil; queda de classe também é possível (ex: um Rico que perde a fábrica). Isso dá profundidade sem exigir um sistema de mobilidade totalmente livre.
+**Mobilidade social:** transições de classe são específicas e raras, não livres. Um Civil de alta habilidade pode virar Rico quando a cidade abre uma empresa nova (as vagas de Rico dependem do número de empresas, e o jogador sobe com dinheiro próprio; ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]); um Escravo pode ser libertado e virar Civil; queda de classe também é possível (ex: um Rico que perde a fábrica). Isso dá profundidade sem exigir um sistema de mobilidade totalmente livre.
 
 ### Consumo
 
@@ -28,7 +28,7 @@ Consumo por classe:
 - **Nobre** — Comida, Materiais Básicos, Bens de Luxo, Bens Exclusivos
 - **Realeza** — Comida, Materiais Básicos, Bens de Luxo, Bens Exclusivos, Artefatos
 
-Cada classe social pode causar um evento diferente dependendo do recurso em falta — os mais comuns seriam: revoltas por parte de Escravos e Civis, perda de empresas por parte dos Ricos, e mudanças de leis por parte de Nobres e Realeza.
+Cada classe social pode causar um evento diferente dependendo do recurso em falta — os mais comuns seriam: revoltas por parte de Escravos e Civis, perda de empresas por parte dos Ricos, e mudanças de leis por parte de Nobres e Realeza. A Felicidade de cada classe e as reações estão no [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]].
 
 Um evento de escassez só dispara com base num contador de **"dias em déficit"** por recurso/cidade: o estoque precisa ficar abaixo de um limiar (ex: 10%) por um número mínimo de dias consecutivos, com chance crescente de evento quanto mais tempo durar o déficit. Isso evita eventos disparando por uma flutuação momentânea de estoque. É um caso da condição com duração mínima e histerese do [[Sistema de Eventos/Descrição|Sistema de Eventos]]: as reações por classe (revolta, perda de empresas, mudança de lei) são eventos condicionais, com as causas registradas e visíveis ao jogador.
 

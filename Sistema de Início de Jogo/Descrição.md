@@ -62,6 +62,7 @@ O mundo (mapas, cidades e regiões) é fixo e desenhado à mão. O que varia a c
 | Mapa | Local de partida |
 | Eventos | O jogador escolhe um narrador na criação do jogo; o narrador é a dificuldade, mas cada um tem um foco, para combinar com o estilo de jogo (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) |
 | Combate | Se todo o grupo cai, o jogador é capturado em vez de ter Game Over, o que conversa com os estilos Escravo e Aventureiro (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
+| Interface | Novo jogo em 3 passos: estilo de início, narrador e personagem (ver [[Interface/Descrição|Interface e Controles]]) |
 
 ### Perguntas em aberto
 

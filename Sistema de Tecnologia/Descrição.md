@@ -42,6 +42,7 @@ A tecnologia de facção pertence à **Facção**: todas as cidades dela usam o 
 - Produzidos pelos NPCs que trabalham nele: trabalhadores da classe **Civil**, com bônus para Inteligência alta; um **Nobre** pode ser o gerente (ver [[Sistema de Classe Social/Descrição|Sistema de Classe Social]] e [[Sistema de NPC/Descrição|Sistema de NPC]]). Níveis maiores de Laboratório produzem mais.
 - O **Banco da Facção** paga a manutenção dos Laboratórios. A lei de **imposto para pesquisa** (ideologia Tecnocrata) aumenta esse orçamento (ver [[Sistema de Cultura/Descrição|Sistema de Cultura]] e [[Sistema de Facção/Descrição|Sistema de Facção]]).
 - Os pontos de todas as cidades vão para um único projeto de pesquisa da facção.
+- A **Universidade** da cidade dá bônus aos Pesquisadores (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
 - **[Proposta]** Pontos por trabalhador por dia = Inteligência ÷ 50 × multiplicador do nível do Laboratório. Valores a testar.
 
 ### Organização
