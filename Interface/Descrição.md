@@ -171,6 +171,7 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 | Felicidade | Painel "Por quê?" por classe |
 | Combate | Seleção, barras de Vida, ordens e pausa |
 | Mapa | Lentes, busca, Viagem Rápida, minimapa |
+| Reputação | Painel de Reputação com faixas e "Por quê?"; notificação de mudança de faixa; Opinião no painel do Importante (ver [[Sistema de Reputação/Descrição\|Sistema de Reputação]]) |
 | Construção | Modo construção, lotes, fila de obras |
 | Trabalho e Propriedade | Painel de trabalho, contratação, preços |
 | Tecnologia e Magia | Aba de Pesquisa |

@@ -1,10 +1,10 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado ao aplicar a rodada P1-1 (Viagem) e abrir a P1-2 (2026-10-15).
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado ao aplicar a rodada P1-2 (Reputação) e abrir a P1-3 (2026-10-15).
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Rodada pendente: P1-2, Reputação e Relações do jogador** (o P0 está completo; a P1-1, Viagem, já foi aplicada). A lista de perguntas (seção 4) foi enviada ao autor e **ainda não foi respondida**. Ao retomar, pedir o `Respostas.txt` (ou as respostas no chat) e conferir se ele é desta rodada: os itens vão de A1 a D2 e falam de reputação, faixas e Opinião.
-3. Depois da P1-2: os outros sistemas P1, na ordem da seção 3.
+2. **Rodada pendente: P1-3, Companheiros, Relações familiares e Diálogo** (o P0 está completo; Viagem e Reputação já foram aplicadas). A lista de perguntas (seção 4) foi enviada ao autor e **ainda não foi respondida**. Ao retomar, pedir o `Respostas.txt` (ou as respostas no chat) e conferir se ele é desta rodada: os itens vão de A1 a D1 e falam de recrutamento, casamento e diálogo.
+3. Depois da P1-3: os outros sistemas P1, na ordem da seção 3.
 4. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -53,8 +53,8 @@ Regras extras:
 | P0 | Mundo e Estado Inicial | Escrito (a história fica para depois) |
 | P0 | Pipeline de arte e conteúdo | Escrito |
 | P1 | Viagem e Mundo | Escrito |
-| P1 | **Reputação e Relações do jogador** | **Perguntas enviadas, sem resposta** |
-| P1 | Companheiros, Relações familiares e Diálogo | A fazer |
+| P1 | Reputação e Relações do jogador | Escrito |
+| P1 | **Companheiros, Relações familiares e Diálogo** | **Perguntas enviadas, sem resposta** |
 | P1 | Guerra e Campanha | A fazer |
 | P1 | Batalha (Mapa de Guerra) | A fazer |
 | P1 | Diplomacia | A fazer |
@@ -63,125 +63,142 @@ Regras extras:
 | P1 | Notícias e Informação | A fazer |
 | P1 | Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
+| Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível, especialização de cidades, ordens de produção em lote, guarnição e defesa, modo observador, eventos de dinastia.
 
-## 4. Rodada P1-2 pendente: Reputação e Relações do jogador
+## 4. Rodada P1-3 pendente: Companheiros, Relações familiares e Diálogo
 
-Objetivo: definir **o que cada facção e cada personagem importante pensa do jogador**, como isso muda e o que isso muda no jogo (preços, guardas, contratos, títulos). Hoje existem a **Recompensa** (crime, por facção) e o **Renome** (feitos, global, 0 a 100), mas falta a relação do jogador com as facções, que o Início de Jogo já usa ("relação inicial com as facções") e que a revolta do jogador também considera (ver 4.11 da [[Revisão do Projeto]]).
+Objetivo: definir **como o jogador forma o grupo** (recrutar, pagar, manter leais), **como funcionam casamento, filhos e herdeiros**, e **como se conversa** com os NPCs. Hoje há peças soltas: o Renome "atrai companheiros melhores", a Felicidade dos Controlados (6 fatores, saída no 0), a Opinião (que vira lealdade), os atributos Grávida, Estágio e Relação, e o herdeiro que assume quando o personagem morre (ver 4.12 da [[Revisão do Projeto]]).
 
-### A. Estrutura da reputação
+**Fatos que as perguntas usam:** 1 ano = 64 dias (cerca de 17 h reais a 1x); 1 estação = 16 dias; criança de 0 a 3 anos, adulto de 4 a 20, velho a partir de 21, morte natural entre 21 e 30 anos; combate local de cerca de 40 combatentes; derrota = captura.
 
-**A1. Com quem o jogador tem reputação**
-- *Contexto:* são 6 facções, 3 Vilas Livres, 19 cidades de facção e alguns NPCs Importantes (líderes, herdeiros, nobres e os 5 Importantes fixos).
+### A. Companheiros
+
+**A1. Onde e como recrutar**
+- *Opções:* (a) só na **Taverna**; (b) Taverna e **encontros** (refugiados, prisioneiros libertados, escravos comprados ou libertados); (c) Taverna, encontros e **NPCs Importantes** convencidos por missão ou conversa.
+- *Sugestão:* **(c)**:
+  - **Taverna:** cada cidade tem de 1 a 4 recrutáveis (mais em cidades maiores), trocados a cada estação.
+  - **Encontros:** refugiados e prisioneiros libertados podem aceitar entrar no grupo de graça, com salário baixo.
+  - **Importantes:** alguns aceitam depois de uma missão pessoal, se a Opinião for de pelo menos +40.
+  - **O Renome define a qualidade de quem aceita:** Renome 0 a 19, só companheiros comuns; 20 a 49, também os bons; 50 ou mais, também os excelentes. "Qualidade" é a soma das habilidades na geração do NPC.
+- *Exemplo:* com Renome 25, a Taverna da Cidade Guerreira mostra um arqueiro bom e dois lanceiros comuns; um mago excelente ali recusaria ("não sigo desconhecidos").
+
+**A2. Quantos companheiros no grupo**
+- *Contexto:* o combate local aguenta cerca de 40 combatentes, somando os dois lados.
+- *Opções:* (a) limite fixo de 8; (b) **limite que cresce com o Renome**: 4 + Renome ÷ 20 (4 no começo, 9 com Renome 100); (c) sem limite, só o salário segura.
+- *Sugestão:* **(b)**. O começo fica pequeno e pessoal, e o crescimento vira recompensa. Companheiros que **ficam numa cidade** como governador, gerente ou comandante de Esquadrão **não contam** no limite.
+
+**A3. Salário e contratação**
+- *Sugestão* (valores a testar, por estação):
+
+| Qualidade | Taxa de entrada | Salário por estação |
+|---|---|---|
+| Comum | 100 moedas | 50 |
+| Bom | 300 | 150 |
+| Excelente | 1.000 | 400 |
+
+- O salário sai do dinheiro do jogador no início de cada estação. **Salário atrasado** derruba o fator "salário" da Felicidade (ver [[Sistema de Felicidade e Estabilidade/Descrição|Felicidade]]); com 2 estações sem pagar, o companheiro sai.
+- Escravos do jogador não recebem salário, mas têm Felicidade baixa e tendência a fugir.
+
+**A4. Lealdade: Felicidade e Opinião juntas**
+- *Contexto:* a **Felicidade** do Controlado é o humor do momento (6 fatores); a **Opinião** é o que ele pensa do jogador a longo prazo (decidida na Reputação).
+- *Sugestão:*
+
+| Opinião | Efeito |
+|---|---|
+| +60 ou mais | Fiel: com Felicidade 0, ainda fica 1 estação inteira antes de pedir para sair |
+| +20 a +59 | Normal: pede para sair com Felicidade 0, como já decidido |
+| −19 a +19 | Instável: a Felicidade cai 25% mais rápido |
+| −20 a −59 | Pede aumento de salário a cada estação |
+| −60 ou menos | Pode desertar à noite, levando o próprio equipamento |
+
+- O traço **Lealdade** da Personalidade muda a velocidade com que a Opinião sobe e desce.
+- A Opinião do companheiro sobe com vitórias juntos, salário em dia, presentes e missões pessoais; cai com companheiros mortos, ordens contra a Personalidade dele (por exemplo, mandar um não agressivo massacrar civis) e salário atrasado.
+
+**A5. Morte de companheiro**
+- *Opções:* (a) **morte permanente** (como Kenshi); (b) só ferido, volta depois de algum tempo.
+- *Sugestão:* **(a)**. Dá peso às decisões e liga ao fator "companheiros mortos" da Felicidade. O companheiro **Inconsciente** ainda pode ser salvo (ver [[Sistema de Cura/Descrição|Cura]]) e o **capturado** pode ser resgatado ou comprado de volta.
+
+**A6. O que um companheiro pode fazer fora do grupo**
+- *Sugestão:* cargos que usam as habilidades dele:
+
+| Cargo | Habilidade principal | Efeito |
+|---|---|---|
+| Governador da cidade do jogador | Inteligência e Carisma | Bônus de Controle e de imposto |
+| Gerente de construção do jogador | Trabalho Especialista | Bônus de produção |
+| Líder de caravana | Carisma | Preço melhor na venda |
+| Comandante de Esquadrão | Corpo a Corpo ou Longo Alcance | Moral e eficiência no Mapa de Guerra |
+| Professor (na Universidade) | A habilidade mais alta dele | Treina outro companheiro |
+
+### B. Relações familiares
+
+**B1. Casamento**
+- *Sugestão:*
+  - **Quem:** o personagem pode casar com um NPC Importante ou um companheiro.
+  - **Requisitos:** Opinião de pelo menos +60; título compatível (Nobreza e Realeza só casam com quem tem título de Cavaleiro ou acima); o costume da cultura (por exemplo, a Escravista pede um **dote** em dinheiro, a Guerreira pede um **duelo** vencido, a Religiosa pede uma **cerimônia** no Templo).
+  - **Efeitos:** o cônjuge vira Controlado (pode entrar no grupo ou cuidar da casa); +20 de reputação com a facção da família dele; casar com alguém da dinastia de uma facção é um dos Ritos de Admissão já previstos.
+- *Exemplo:* o Nobre exilado casa com a herdeira da Autoritária: entra na dinastia, ganha +20 na facção e uma chance real de "Retomar o trono".
+
+**B2. Filhos e educação**
+- *Contexto:* os atributos Grávida e Estágio já existem só para Importantes e Controlados.
+- *Sugestão:*
+  - **Gravidez:** dura **1 estação** (16 dias, cerca de 4,3 h reais a 1x). Só depois do casamento, com chance por estação.
+  - **Infância:** 3 anos de jogo (cerca de 51 h reais a 1x). A criança é um NPC que fica na casa da família.
+  - **Educação:** o jogador escolhe um foco (**Combate, Magia, Comércio ou Governo**); ao virar adulto, as habilidades daquele foco nascem no topo da faixa da cultura e classe. A Magia só pode ser escolhida se a criança for Maga.
+  - Aos 4 anos, o filho vira adulto e pode entrar no grupo como companheiro (sem salário, Opinião inicial +60).
+
+**B3. Se o personagem morrer**
+- *Contexto:* já está decidido que o herdeiro assume como Controlado. E se não houver herdeiro?
+- *Opções:* (a) a partida acaba, com um epílogo; (b) o jogador escolhe um **companheiro com Opinião de +60 ou mais** como sucessor; (c) o jogador sempre continua com qualquer companheiro.
+- *Sugestão:* **(b)**, e só se ninguém cumprir isso a partida acaba, com o epílogo da Crônica. Mantém a ideia de "sem Game Over comum" (a derrota leva à captura) e dá valor à família e à lealdade. O sucessor herda o dinheiro, as propriedades e o título (se a lei de sucessão da facção permitir).
+
+**B4. Famílias dos NPCs Importantes da IA**
+- *Sugestão:* as dinastias da IA também casam e têm filhos, com as mesmas regras, mas resolvidas **uma vez por estação** (sorteio de casamento e de nascimento), sem simulação no dia a dia. Os **casamentos entre dinastias** são eventos diplomáticos (relação +20 entre as facções) e notícia. Isso garante que toda facção tenha herdeiros e cria crises de sucessão de verdade.
+
+### C. Diálogo
+
+**C1. Formato dos diálogos**
 - *Opções:*
-  - (a) só **por facção**;
-  - (b) por facção **e por cidade** (cada cidade com o seu valor);
-  - (c) por facção (e por Vila Livre) **e opinião pessoal dos NPCs Importantes** que o jogador conheceu;
-  - (d) tudo: facção, cidade e Importantes.
-- *Sugestão:* **(c)**. Cada facção e cada Vila Livre tem um valor de **−100 a +100**; as cidades usam o valor da facção. Os NPCs Importantes têm uma **opinião pessoal**, também de −100 a +100, guardada só para quem o jogador já encontrou. É barato (algumas dezenas de números) e permite histórias como "a facção me odeia, mas o herdeiro é meu amigo". *Custo de (b) e (d):* 19 valores de cidade a mais, que confundem o jogador sem mudar muito o jogo.
+  - (a) **Árvores escritas à mão**, como nos RPGs clássicos: muito texto, inviável para uma pessoa só em centenas de NPCs.
+  - (b) **Modular por modelos de texto:** frases prontas com espaços ({nome}, {cidade}, {item}), e o tom muda conforme a Personalidade e a cultura do NPC.
+  - (c) **Misto:** modular nas conversas comuns e escrito à mão nos Importantes fixos e nas missões longas.
+- *Sugestão:* **(c)**. *Exemplo modular:* um guarda Guerreiro agressivo diz "Fala logo, {título}. O que quer em {cidade}?"; um mercador Escravista ganancioso diz "Ah, {nome}! Tenho {item} pelo melhor preço de {região}."
 
-**A2. Faixas de reputação**
-- *Sugestão:* cinco faixas, com nome visível na interface:
+**C2. Ações de conversa e chance de sucesso**
+- *Sugestão:* ações por menu:
 
-| Faixa | Valor |
-|---|---|
-| Inimigo | −100 a −60 |
-| Hostil | −59 a −20 |
-| Neutro | −19 a +19 |
-| Amigável | +20 a +59 |
-| Aliado | +60 a +100 |
+| Ação | O que faz | Comparado com |
+|---|---|---|
+| Conversar | Rumores e notícias | Sempre funciona |
+| Perguntar sobre | Preços, masmorras, contratos, caminhos | Sempre funciona; a resposta pode estar velha |
+| Persuadir | Pedir um favor, desconto ou informação | Carisma do jogador × Opinião do NPC |
+| Barganhar | Melhorar o preço de uma venda | Carisma × Ganância |
+| Intimidar | Forçar algo | Força e Renome × Coragem |
+| Subornar | Pagar por algo | Dinheiro oferecido × Ganância |
+| Elogiar ou presentear | Subir a Opinião | Presente × Ganância |
+| Recrutar, pedir casamento, aceitar missão | Ações especiais | Regras próprias (A1, B1) |
 
-**A3. O que cada faixa muda**
-- *Sugestão:*
+- **Chance** (ações com teste) = 50 + (habilidade do jogador − 50) ÷ 2 + Opinião ÷ 4 ± o traço de Personalidade do NPC, limitada entre 5% e 95%.
+- *Exemplo:* Carisma 70 (+10) e Opinião +20 (+5) contra um NPC de Ganância alta (−10 para persuadir) dão 55%.
 
-| Faixa | Preços no Mercado | Guardas | Contratos e missões | Títulos da facção |
-|---|---|---|---|---|
-| Inimigo | Lojas se recusam a negociar | Mandam sair da cidade; quem fica vira alvo | Nenhum | Nenhum; perde o título que tiver |
-| Hostil | +15% na compra, −15% na venda | Revistam na entrada (chance de achar itens proibidos) | Só os do quadro da Taverna | Nenhum |
-| Neutro | Normal | Normal | Quadro da Taverna | Plebeu e Cidadão |
-| Amigável | −5% na compra, +5% na venda | Normal | Missões de nobres | Cavaleiro (+20) e Nobre (+40) |
-| Aliado | −10% na compra, +10% na venda | Ajudam o jogador em brigas | Missões do líder | Senhor de cidade (+60) |
+**C3. O que acontece numa falha**
+- *Sugestão:* Persuadir ou Barganhar falhos: −5 de Opinião. Intimidar falho: −10 de Opinião e o NPC pode atacar (se tiver Agressividade alta). Subornar um guarda e falhar: **crime de suborno** (a acrescentar no [[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]) e tentativa de prisão.
 
-- Os títulos continuam pedindo também **Renome** e o requisito concreto já definidos no [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]; a reputação é um requisito a mais.
-- *Exemplo:* o Mercador com Amigável na Escravista compra algodão 5% mais barato lá e, se cair para Hostil por contrabando, passa a pagar 15% a mais e a ser revistado na entrada.
+**C4. Quem tem conversa completa**
+- *Sugestão:* **Importantes e companheiros** têm o menu completo. **NPCs comuns** têm um menu curto: comprar e vender (se for comerciante), um rumor, pedir caminho e as ações de crime (furtar, ameaçar). Isso reduz texto e processamento.
 
-**A4. Reputação e Recompensa: um valor ou dois?**
-- *Contexto:* a Recompensa é a dívida legal de um crime, por facção; some quando é paga ou cumprida.
-- *Opções:* (a) **juntar** tudo num único valor; (b) **manter separados**, mas ligados.
-- *Sugestão:* **(b)**. A Recompensa diz "a lei quer você"; a reputação diz "o que pensam de você". Todo crime **detectado** também tira reputação: **−2 × a gravidade do crime** (um crime de gravidade 2 tira 4; um assassinato, de gravidade 5, tira 10). Pagar a Recompensa limpa a ficha, mas a reputação volta só aos poucos (ver B3).
+**C5. Onde ficam os textos**
+- *Sugestão:* em `dialogos.json`, com **IDs de texto** (já previstos na [[Interface/Descrição|Interface]] para traduções futuras) e **frases por cultura** (cada cultura tem cumprimentos e despedidas próprios). As conversas escritas à mão dos Importantes ficam em arquivos separados, um por personagem.
 
-### B. Como a reputação sobe e desce
+### D. Interface da conversa
 
-**B1. Ações e valores**
-- *Sugestão* (valores iniciais, a testar):
+**D1. Retratos dos personagens**
+- *Contexto:* regra do autor: toda arte extra fica para o futuro.
+- *Opções:* (a) **sem retrato:** a janela mostra o boneco de 16 × 24 ampliado 4x, com nome, título e Opinião; (b) retratos montados por camadas (rosto, cabelo e roupa desenhados à mão e combinados); (c) retrato desenhado para cada Importante.
+- *Sugestão:* **(a)** nas primeiras versões; **(b)** fica para o futuro, junto com a arte extra. A janela de conversa fica na parte de baixo da tela, móvel como o resto do HUD.
 
-| Ação | Efeito na facção |
-|---|---|
-| Contrato da Taverna cumprido na cidade da facção | +2 |
-| Missão de nobre cumprida | +5 |
-| Missão longa (3 a 5 etapas) cumprida | +10 |
-| Derrotar bandidos no território da facção | +1 por bando |
-| Ajudar uma caravana em apuros | +2 com o dono |
-| Lutar ao lado da facção numa batalha | +5 |
-| Doar dinheiro à facção | +1 a cada 100 moedas, até +20 no total |
-| Crime detectado | −2 × gravidade |
-| Atacar caravana ou patrulha da facção | −10 |
-| Lutar contra a facção numa batalha | −15 |
-| Recusar o chamado às armas sendo vassalo | −10 |
-| Libertar escravos (só nas facções que permitem escravidão) | −5 por grupo |
-
-**B2. Efeito em cadeia entre facções**
-- *Opções:* (a) **sem cadeia**: cada ação mexe só com quem foi afetado; (b) **cadeia na guerra**: ajudar uma facção numa guerra tira reputação do inimigo dela; (c) **cadeia total**: aliados e inimigos de quem você ajudou sempre mudam junto.
-- *Sugestão:* **(b)**. Nas ações de guerra (batalha, saque, escolta de exército), o inimigo perde metade do que a facção ajudada ganhou. Nas outras ações, sem cadeia. *Exemplo:* lutar ao lado da Guerreira contra a Autoritária dá +5 na Guerreira e −2,5 na Autoritária. A cadeia total (c) pune o jogador por ações que ele nem sabia que tinham efeito.
-
-**B3. A reputação volta sozinha com o tempo?**
-- *Opções:* (a) não volta; (b) **volta devagar em direção à base**; (c) volta rápido.
-- *Sugestão:* **(b)**: **2 pontos por estação** em direção ao valor base (ver B4). Um jogador que sumiu por um ano (4 estações) volta 8 pontos. Assim um erro antigo não dura para sempre, e uma amizade precisa de cuidado.
-
-**B4. Valor inicial (base)**
-- *Contexto:* o Início de Jogo já prevê a "relação inicial com as facções" por estilo.
-- *Sugestão:* **base = afinidade da cultura do personagem + bônus do estilo de início**:
-
-| Origem | Efeito na base |
-|---|---|
-| Facção da mesma cultura | +20 |
-| Cultura afim | +10 |
-| Cultura neutra | 0 |
-| Cultura hostil | −15 |
-| Estilo Membro de facção | +20 na própria facção |
-| Estilo Nobre exilado | −30 na facção que derrubou a dinastia dele |
-| Estilo Escravo | −20 com o dono e a facção dele |
-
-*Exemplo:* um Mago de cultura Arcana começa com +20 na Arcana, 0 na Guerreira e −15 na Religiosa e na Tecnocrata.
-
-### C. Opinião dos NPCs Importantes
-
-**C1. Opinião pessoal: como funciona** (conflito de nome)
-- *Contexto:* o NPC já tem um atributo chamado **Relação**, que é a lista de vínculos de família dos Importantes (filho, cônjuge).
-- *Pergunta:* aceita chamar a nova medida de **Opinião**, para não confundir com o atributo Relação?
-- *Sugestão:* a Opinião vai de −100 a +100 e existe só para os Importantes que o jogador já encontrou (líder, herdeiro, nobres, os 5 Importantes fixos e os companheiros). Ela muda por:
-  - **conversa** (persuadir, elogiar, ameaçar), usando o Carisma (o sistema de Diálogo vem na rodada de Companheiros e Diálogo);
-  - **presentes**: +1 a +10, conforme o valor do presente e a Ganância do NPC;
-  - **missões** pedidas por ele: +10;
-  - **ações contra a família ou a cidade dele**: −10 a −50.
-
-**C2. O que a Opinião muda**
-- *Sugestão:*
-  - **Rito de Admissão por Indicação:** exige Opinião de pelo menos +40 de um nobre da facção.
-  - **Decisões do líder sobre o jogador** (aceitar um pedido de título, responder a uma revolta, aceitar vassalagem): a Opinião do líder entra no cálculo junto com a reputação da facção.
-  - **Herdeiro:** quando o líder morre, a Opinião do herdeiro passa a pesar nas decisões da facção.
-  - **Companheiros:** a Opinião vira a lealdade deles (detalhada na rodada de Companheiros).
-
-### D. Interface e dados
-
-**D1. Onde o jogador vê a reputação**
-- *Sugestão:* um painel de **Reputação** com a lista das facções e das Vilas Livres (valor, faixa e cor da faixa) e, para cada uma, o **"Por quê?"** com as 5 últimas mudanças ("+5: lutou ao lado da facção na batalha de (2,3), há 3 dias"). Uma **notificação** quando a faixa muda (por exemplo, de Neutro para Amigável). A Opinião aparece no painel do Importante, ao passar o mouse sobre ele.
-
-**D2. Dados e save**
-- *Sugestão:* as tabelas de faixas, efeitos e ações ficam em `reputacao.json` (para ajustar sem mexer no código). O save guarda o valor por facção e Vila Livre, a Opinião de cada Importante conhecido e o histórico das últimas mudanças, que alimenta o "Por quê?" e o diário.
-
-Depois das respostas: escrever `Sistema de Reputação/Descrição.md`; atualizar Facção (revolta e vinculação), Crime (crime tira reputação), Objetivo (títulos), Início de Jogo (base por estilo), NPC (Opinião), Econômico (preço por faixa), Interface (painel) e Viagem (patrulhas e caravana em apuros); abrir a próxima rodada do P1 (Companheiros, Relações familiares e Diálogo).
+Depois das respostas: escrever `Sistema de Companheiros e Diálogo/Descrição.md`; atualizar NPC, Felicidade (lealdade), Facção (dinastia e sucessão), População (gravidez e infância), Objetivo (recrutamento e Renome), Crime (suborno), Cultura (costumes de casamento), Interface (janela de conversa) e Reputação (Opinião); abrir a próxima rodada do P1 (Guerra, Batalha e Diplomacia).
 
 ## 5. Fatos que valem lembrar
 

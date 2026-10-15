@@ -60,6 +60,7 @@ O dinheiro circula em um ciclo: **consumidores gastam nas lojas, as lojas pagam 
 - **Proibição:** deriva das leis da facção. Os ajustes de preço por categoria do Mercado da Facção também vêm das leis.
 - **Mercado negro:** itens proibidos só são vendidos em lojas ilegais (qualquer construção de produção), com preço multiplicado (ver Sistema de Crime e Justiça).
 - **Multas e confiscos:** viram dinheiro da facção.
+- **Reputação:** o preço de compra e venda do jogador muda pela faixa de reputação na facção, de −10% (Aliado) a +15% (Hostil); com Inimigo, as lojas não negociam (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]).
 - **Casa da Moeda e Mercado:** novas construções (ver Sistema de Construção).
-- **Caravanas civis:** o comércio entre cidades está no [[Sistema de Comércio/Descrição|Sistema de Comércio]]: caravanas reais no mapa (fluxo por estação em LOD 2), rota pelo lucro esperado, Tarifa, e o dinheiro passa de uma cidade para outra.
+- **Caravanas civis:** o comércio entre cidades está no [[Sistema de Comércio/Descrição|Sistema de Comércio]]: caravanas sempre reais no Mapa Mundial, rota pelo lucro esperado, Tarifa, e o dinheiro passa de uma cidade para outra.
 - **Eventos:** o efeito "modificador de preço" de um evento (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) dispara o recálculo do Mercado Mundial ou da Facção. Quando a alta de preço já nasce da simulação (por exemplo, guerra consumindo Ração Militar), o evento só registra e explica a causa.

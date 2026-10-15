@@ -181,6 +181,7 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 | Eventos | Ameaça bandida; encontros como eventos do grupo; "criar grupo" (bandidos, mercador viajante) |
 | Combate | Lutar carrega o Mapa Local em LOD 0; render-se é a captura; montaria acelera a viagem |
 | Crime e Justiça | Patrulhas prendem quem tem Recompensa |
+| Reputação | Ajudar caravana em apuros dá reputação com o dono (ver [[Sistema de Reputação/Descrição\|Sistema de Reputação]]) |
 | Tempo | 8x só no Mapa Mundial; volta a 1x em encontros e chegadas; acampamento à noite |
 | Interface | Névoa, informações datadas, ícones das entidades, janela de encontro |
 | Início de Jogo | Conhecimento inicial do mapa por estilo |

@@ -165,7 +165,7 @@ A resposta da facção depende de um **valor calculado**, e esse valor decide a 
 - a **personalidade do líder** da facção (Agressividade, Lealdade, Ganância);
 - **[Proposta]** o valor da cidade para a facção (PIB, recursos, posição estratégica);
 - **[Proposta]** se a facção já está em outras guerras;
-- **[Proposta]** a relação atual com o jogador.
+- a reputação do jogador na facção e a Opinião do líder sobre ele (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]).
 
 **[Proposta]** Ações possíveis conforme o valor: aceitar a independência, negociar (por exemplo, tributo reduzido), declarar guerra (Mapa de Guerra) ou bloquear o comércio.
 

@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado ao aplicar a rodada P1-1, Viagem (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado ao aplicar a rodada P1-2, Reputação (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -94,7 +94,7 @@
 - Derrota para Criaturas: o grupo acorda ferido, perde o Loot carregado e mantém o equipamento. **Crônica** dos feitos, sem pontuação. A fatia vertical não tem este sistema.
 
 **Comércio civil e caravanas**
-- Caravanas civis reais no mapa mundial (podem ser vistas e atacadas); em LOD 2 o comércio vira fluxo por estação.
+- Caravanas civis reais no mapa mundial (podem ser vistas e atacadas), sempre, inclusive longe do jogador (decidido na Viagem).
 - Donos: a cidade (mercadores abstratos, dinheiro da cidade, leva o que sobra e traz o que falta) e o jogador. A cidade precisa de um **Posto Comercial**.
 - Rota pelo lucro esperado (diferença de preço − distância, risco e tarifas); o comércio aproxima os preços. O jogador só conhece os preços das cidades visitadas, com data.
 - Caravana = animais de carga (capacidade por peso) + guardas + manutenção. Lei de **Tarifa**; guerra bloqueia; embargo ou acordo comercial (zera a tarifa).
@@ -162,6 +162,15 @@
 - Entidades: grupo do jogador, caravanas, exércitos, bandos e **patrulhas**. **Caravanas sempre reais** no Mapa Mundial (substitui o fluxo por estação do Comércio). Em LOD 0 e 1, a entidade aparece de verdade e atravessa o mapa.
 - **Névoa** por Mapa Local com informações datadas; visão ao vivo no mapa atual e nos 4 vizinhos; capitais conhecidas desde o início. Sem névoa dentro dos Mapas Locais; névoa só nas masmorras. Estilos e mapas comprados revelam partes do mundo.
 
+**Reputação e Relações do jogador** — ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]
+- **Reputação** de −100 a +100 por facção e por Vila Livre (as cidades usam a da facção); **Opinião** de −100 a +100 para cada NPC Importante conhecido (nome escolhido para não confundir com o atributo Relação).
+- Faixas: Inimigo (≤ −60), Hostil, Neutro, Amigável e Aliado (≥ +60). Mudam preços (de −10% a +15%; Inimigo não negocia), guardas (revista, expulsão, ajuda), contratos (Taverna, nobres, líder) e títulos (Cavaleiro +20, Nobre +40, Senhor de cidade +60).
+- Reputação e Recompensa separadas; crime detectado tira 2 × gravidade. Tabela de ações (+2 contrato a −15 lutar contra); cadeia só na guerra (o inimigo perde metade); volta 2 pontos por estação à base.
+- Base = afinidade cultural (+20 mesma cultura a −15 hostil) + bônus do estilo de início. Opinião muda por conversa, presentes, missões e ações contra a família; pesa na Indicação (+40), nas decisões do líder e na lealdade dos companheiros.
+- Painel de Reputação com "Por quê?" e notificação de mudança de faixa.
+
+**Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
@@ -185,6 +194,7 @@
 - **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; telas do Mapa de Guerra; IDs de texto para outros idiomas.
 - **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quando entra a arte extra das estações; quando cada cultura ganha formas próprias.
 - **Viagem:** valores a testar; construção de estradas; multiplicadores de clima; quantidade e custo das patrulhas.
+- **Reputação:** valores a testar; requisitos de título podem mudar com o futuro sistema de Títulos de Nobreza.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
@@ -200,11 +210,13 @@
 | P0 | Mundo e Estado Inicial (a história fica para depois) | Escrito |
 | P0 | Pipeline de arte e conteúdo | Escrito |
 | P1 | Viagem e Mundo | Escrito |
-| P1 | **Reputação e Relações do jogador** | **Perguntas enviadas, aguardando respostas** |
-| P1 | Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
+| P1 | Reputação e Relações do jogador | Escrito |
+| P1 | **Companheiros, Relações familiares e Diálogo** | **Perguntas enviadas, aguardando respostas** |
+| P1 | Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
+| Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 está completo. Responder a rodada P1-2 (Reputação) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Responder a rodada P1-3 (Companheiros e Diálogo) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 

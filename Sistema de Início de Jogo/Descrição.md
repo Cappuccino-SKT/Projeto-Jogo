@@ -26,7 +26,7 @@ Os bônus valem **só no começo**: itens, dinheiro, habilidades e relação ini
 - dinheiro inicial;
 - itens e equipamento iniciais;
 - companheiros iniciais;
-- relação inicial com as facções;
+- relação inicial com as facções (bônus sobre a base de reputação, ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]);
 - bônus de habilidades.
 
 Como é só dado, novos estilos podem ser acrescentados sem mexer em código.
