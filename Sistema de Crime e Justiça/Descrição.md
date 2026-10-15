@@ -114,7 +114,7 @@ A Prisão é um **Mapa Interno** do tipo Construção Pública.
 Existe suborno: pagar um guarda para ignorar o crime.
 
 - A chance depende da **Ganância** e da **Lealdade** do guarda (Personalidade), do **valor oferecido** e da **gravidade do crime**.
-- Se falhar, a **recompensa sobe**.
+- Se falhar, a **recompensa sobe** e o guarda tenta prender. O suborno também é uma ação do Diálogo (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]).
 
 ### Mercado negro e itens ilegais
 

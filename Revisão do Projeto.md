@@ -131,7 +131,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 
 **4.11 Reputação e Relações do jogador.** *(Escrito: ver [[Sistema de Reputação/Descrição|Sistema de Reputação]].)* Existe a Recompensa (má fama) e o Renome (feitos), mas não a **relação do jogador com cada facção e cidade**, que o Início de Jogo já usa ("relação inicial com as facções"). Sugestão: valor de −100 a +100 por facção, que afeta preços, acesso a contratos, Rito de Admissão e ao tratamento pelos guardas (como em Mount & Blade).
 
-**4.12 Companheiros, Relações e Diálogo.**
+**4.12 Companheiros, Relações e Diálogo.** *(Escrito: ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]].)*
 - **Companheiros:** recrutamento (pergunta em aberto do Objetivo), salário, lealdade, saída por Felicidade 0, limite do grupo.
 - **Relações familiares:** casamento, filhos e herdeiros (os atributos Grávida e Relação existem, sem regras).
 - **Diálogo:** um sistema de opções por menu (persuadir, barganhar, intimidar, subornar, aceitar missão), usando Carisma. Sugestão: **diálogos modulares por modelos de texto**, não árvores escritas à mão, para o volume de texto ficar viável para uma pessoa só.

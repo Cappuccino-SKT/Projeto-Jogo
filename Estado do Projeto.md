@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado ao aplicar a rodada P1-2, Reputação (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado no fim da sessão de 2026-10-15 (rodadas P0-5 a P1-3), antes de uma pausa. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -169,6 +169,13 @@
 - Base = afinidade cultural (+20 mesma cultura a −15 hostil) + bônus do estilo de início. Opinião muda por conversa, presentes, missões e ações contra a família; pesa na Indicação (+40), nas decisões do líder e na lealdade dos companheiros.
 - Painel de Reputação com "Por quê?" e notificação de mudança de faixa.
 
+**Companheiros, Relações familiares e Diálogo** — ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]
+- Recrutamento na Taverna (1 a 4 por cidade, trocados por estação), em encontros e entre Importantes (Opinião +40); o Renome define a qualidade de quem aceita.
+- **Grupo controlado** = 4 + Renome ÷ 20 (4 a 9); **vinculados** = 10 + Renome ÷ 5 + 3 por cidade do jogador (família, escravos e soldados não contam). Salário por estação (50, 150 ou 400) e taxa de entrada; 2 estações sem pagar, o companheiro sai.
+- Lealdade = Felicidade + Opinião (fiel com +60; pode desertar com −60). Morte permanente; cargos fora do grupo (governador, gerente, líder de caravana, comandante, professor).
+- Casamento com Opinião +60, título compatível e costume da cultura; gravidez de 1 estação, infância de 3 anos, educação por foco. Sem herdeiro, sucessor entre companheiros com Opinião +60; senão, epílogo. Dinastias da IA casam e têm filhos por estação.
+- Diálogo misto (modular e escrito à mão para os Importantes), ações com fórmula de chance (5% a 95%), falhas com consequência, menu curto para NPCs comuns. **Sem retratos** nas conversas.
+
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
 ## Em aberto
@@ -195,6 +202,7 @@
 - **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quando entra a arte extra das estações; quando cada cultura ganha formas próprias.
 - **Viagem:** valores a testar; construção de estradas; multiplicadores de clima; quantidade e custo das patrulhas.
 - **Reputação:** valores a testar; requisitos de título podem mudar com o futuro sistema de Títulos de Nobreza.
+- **Companheiros:** valores a testar; bônus dos cargos; costumes de casamento de Autoritária, Tecnocrata e Arcana.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
@@ -211,12 +219,13 @@
 | P0 | Pipeline de arte e conteúdo | Escrito |
 | P1 | Viagem e Mundo | Escrito |
 | P1 | Reputação e Relações do jogador | Escrito |
-| P1 | **Companheiros, Relações familiares e Diálogo** | **Perguntas enviadas, aguardando respostas** |
-| P1 | Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
+| P1 | Companheiros, Relações familiares e Diálogo | Escrito |
+| P1 | **Guerra e Campanha; Batalha; Diplomacia** | **Próxima rodada (P1-4), a preparar** |
+| P1 | Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 está completo. Responder a rodada P1-3 (Companheiros e Diálogo) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Preparar a rodada P1-4 (Guerra, Batalha e Diplomacia) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 

@@ -144,6 +144,7 @@ Os estilos de início têm documento próprio: **Sistema de Início de Jogo**.
 | Mapa | Cultura da região; 6 regiões iniciais (ver [[Mundo e Estado Inicial/Descrição\|Mundo e Estado Inicial]]) |
 | Diplomacia | Afinidade entre culturas e pensamentos extremos |
 | Eventos | Violar um pensamento extremo, ou uma Felicidade baixa por muito tempo, dispara eventos condicionais duradouros com a causa registrada (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) |
+| Companheiros e Diálogo | Costume de casamento por cultura (dote, duelo, cerimônia...); frases e cumprimentos por cultura (ver [[Sistema de Companheiros e Diálogo/Descrição\|Sistema de Companheiros e Diálogo]]) |
 | Combate | O Duelo é um modo de combate usado como rito de "provar-se em combate" (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
 
 ### Perguntas em aberto
