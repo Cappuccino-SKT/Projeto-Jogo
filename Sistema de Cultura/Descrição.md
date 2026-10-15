@@ -12,7 +12,7 @@ Religião **não é um sistema à parte**: ela faz parte da Cultura. Uma cultura
 
 - O jogo começa com **6 culturas**, cada uma representando **uma das 6 regiões** do mapa.
 - Existem **6 facções principais**, uma para cada cultura.
-- Os nomes das culturas e a distribuição nas regiões **ainda não foram definidos**.
+- Os nomes definitivos ficam para quando a história for escrita; por enquanto, nomes significativos (Cultura Guerreira, Cultura Arcana...). A região de cada cultura e as afinidades iniciais estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
 - Cada cultura tem uma **ideologia completamente diferente** das outras.
 - Cada cultura tem **pelo menos 1 pensamento extremo**.
 - As 6 ideologias: **Escravista**, **Religiosa**, **Autoritária**, **Tecnocrata**, **Guerreira** e **Arcana**.
@@ -119,7 +119,7 @@ Vêm dos **traços**, com valor padrão por traço e possibilidade de sobrescrev
 ### Arte da cultura
 
 - **Itens, armas e roupas:** o item existe como um único item no jogo (por exemplo, uma espada), e a **textura muda conforme a cultura que o produziu**, como já definido no Sistema de Itens.
-- **Construções:** **cada cultura tem sua própria arte de construção.** Isso multiplica o volume de arte: hoje os canvases têm 22 tipos de construção (7 civis e 15 de produção), a maioria com 5 níveis, vezes 6 culturas. **[Em aberto, risco de escopo]** Vale planejar um jeito de reaproveitar partes (telhados, paredes, portas) entre os níveis e culturas, para a arte feita à mão ser viável.
+- **Construções:** **cada cultura tem sua própria arte de construção.** Isso multiplica o volume de arte: hoje os canvases têm 22 tipos de construção (7 civis e 15 de produção), a maioria com 5 níveis, vezes 6 culturas. Para isso ser viável: a aparência muda só nos níveis 1, 3 e 5, montada com peças reaproveitáveis (paredes, telhados, portas). Nas primeiras versões, as variações por cultura saem por **troca de paleta** (mesmo desenho, outras cores); o objetivo final é **estilo próprio por cultura** nas armas, armaduras e construções (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 
 ### Início de jogo e Cultura
 
@@ -141,12 +141,12 @@ Os estilos de início têm documento próprio: **Sistema de Início de Jogo**.
 | Itens | Textura por cultura em armas, equipamentos e roupas |
 | Construção | Arte própria por cultura |
 | Classe Social | Faixas de habilidade por Cultura + Classe (já existente) |
-| Mapa | Cultura da região; 6 regiões iniciais |
+| Mapa | Cultura da região; 6 regiões iniciais (ver [[Mundo e Estado Inicial/Descrição\|Mundo e Estado Inicial]]) |
 | Diplomacia | Afinidade entre culturas e pensamentos extremos |
 | Eventos | Violar um pensamento extremo, ou uma Felicidade baixa por muito tempo, dispara eventos condicionais duradouros com a causa registrada (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) |
 | Combate | O Duelo é um modo de combate usado como rito de "provar-se em combate" (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
 
 ### Perguntas em aberto
 
-1. **Nomes das culturas e regiões.** Ainda não definidos.
-2. **Arte de construções.** Como reaproveitar partes entre culturas e níveis?
+1. **Nomes das culturas e regiões.** Ficam para a história do jogo; por ora, nomes significativos.
+2. **Arte por cultura:** quando sair da troca de paleta para formas próprias (ver Pipeline de Arte e Conteúdo).

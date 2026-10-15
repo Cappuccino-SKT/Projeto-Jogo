@@ -53,6 +53,8 @@ Em mapas em LOD 2, o crime é **agregado por cidade**: nenhum crime individual �
 - **Diminui com o tempo.**
 - Só NPCs Criminosos têm a lista de recompensas, para não gastar memória com NPCs comuns.
 
+**Reputação.** Todo crime detectado também tira reputação do jogador na facção: −2 × a gravidade. Pagar a Recompensa limpa a ficha, mas a reputação volta só aos poucos (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]).
+
 **Efeito no Sistema de NPC.** O atributo Recompensa deixa de ser um valor único e passa a ser uma **lista (facção, valor)**. A booleana Criminoso passa a significar "tem recompensa em alguma facção".
 
 ### Reação dos guardas

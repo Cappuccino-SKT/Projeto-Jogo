@@ -15,10 +15,12 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 ### Mundo
 
 - [[Sistema de Mapa/Descrição|Sistema de Mapa]] — Mundial, Local, Interno e de Guerra
+- [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]] — regiões, cidades, masmorras e relações no primeiro dia
 - [[Sistema de Cidade/Descrição|Sistema de Cidade]]
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
 - [[Sistema de Recursos/Descrição|Sistema de Recursos]] e [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]
 - [[Sistema de Tempo/Descrição|Sistema de Tempo]]
+- [[Sistema de Viagem/Descrição|Sistema de Viagem]] — viagem pelo Mapa Mundial, encontros, caravanas, patrulhas e névoa
 
 ### Pessoas e política
 
@@ -28,6 +30,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Cultura/Descrição|Sistema de Cultura]] — 6 culturas iniciais
 - [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
 - [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, diplomacia, exércitos
+- [[Sistema de Reputação/Descrição|Sistema de Reputação]] — reputação do jogador com facções, Opinião dos Importantes
 - [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]
 - [[Sistema de Cura/Descrição|Sistema de Cura]]
 - [[Sistema de Combate/Descrição|Sistema de Combate]] — combate local do jogador, armas, derrota e captura
@@ -51,6 +54,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]
 - [[Interface/Descrição|Interface e Controles]] — HUD personalizável, painéis, notificações
 - [[Arquitetura/Descrição|Arquitetura]] — decisões técnicas e fatia vertical
+- [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]] — programas, especificação da arte, ordem de produção e peso da arte
 
 ## Próximos passos
 

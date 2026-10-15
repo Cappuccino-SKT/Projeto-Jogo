@@ -99,19 +99,19 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 - Princípio: **informação em camadas**, com resumos e detalhes sob demanda; tooltips com o "por quê" (já previsto nos Eventos).
 - Comece com wireframes simples antes de qualquer arte.
 
-**4.5 Estado Inicial do Mundo e Lore.** Há 6 regiões, 6 culturas e 6 facções, mas nenhum nome, mapa nem história. Sugestão:
+**4.5 Estado Inicial do Mundo e Lore.** *(Escrito: ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]; a história fica para depois.)* Há 6 regiões, 6 culturas e 6 facções, mas nenhum nome, mapa nem história. Sugestão:
 - Documento de **Mundo e História** (nomes das culturas e regiões, relações iniciais entre facções, guerras em andamento, NPCs Importantes e líderes).
 - Tabela do **estado inicial**: cidades, população, dinheiro, tecnologia, leis e relações de cada facção.
 - **Ano de início** ("história do mundo") e primeiros NPCs Importantes.
 
-**4.6 Pipeline de arte e ferramentas.** Toda a arte é à mão, inclusive 36 a 48 mapas de 128 × 128 tiles e todos os Mapas Internos. Isso exige ferramentas.
+**4.6 Pipeline de arte e ferramentas.** *(Escrito: ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]].)* Toda a arte é à mão, inclusive 36 a 48 mapas de 128 × 128 tiles e todos os Mapas Internos. Isso exige ferramentas.
 - **Editor de mapas:** sugestão de usar o **Tiled** (gratuito; exporta JSON) para desenhar mapas com camadas, lotes e pontos de entrada, em vez de escrever um editor próprio agora.
 - **Orçamento de arte:** estimar o volume (tiles por estação, construções × níveis × 6 culturas, bonecos em camadas, animações por tipo de arma) e escolher o que entra na primeira versão.
 - Pasta `data/` com esquemas e validação (já prevista).
 
 ### P1 — Jogo completo
 
-**4.7 Viagem e Mundo.** Resolve a inconsistência #4. Define:
+**4.7 Viagem e Mundo.** *(Escrito: ver [[Sistema de Viagem/Descrição|Sistema de Viagem]].)* Resolve a inconsistência #4. Define:
 - Entidades em trânsito no Mapa Mundial (grupo do jogador, caravanas, exércitos, bandos): posição, velocidade e rota.
 - Tempo de viagem entre Mapas Locais, viagem rápida, encontros no caminho (viram evento do "Grupo do jogador", com Criaturas ou bandidos).
 - **Névoa de exploração** e mapa descoberto.
@@ -129,7 +129,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 - Estados diplomáticos, tratados (comércio, aliança, vassalagem, passagem), motivos de guerra (casus belli), casamentos entre dinastias, reféns.
 - Como a IA decide (Personalidade do líder, Agressividade e Ganância).
 
-**4.11 Reputação e Relações do jogador.** Existe a Recompensa (má fama) e o Renome (feitos), mas não a **relação do jogador com cada facção e cidade**, que o Início de Jogo já usa ("relação inicial com as facções"). Sugestão: valor de −100 a +100 por facção, que afeta preços, acesso a contratos, Rito de Admissão e ao tratamento pelos guardas (como em Mount & Blade).
+**4.11 Reputação e Relações do jogador.** *(Escrito: ver [[Sistema de Reputação/Descrição|Sistema de Reputação]].)* Existe a Recompensa (má fama) e o Renome (feitos), mas não a **relação do jogador com cada facção e cidade**, que o Início de Jogo já usa ("relação inicial com as facções"). Sugestão: valor de −100 a +100 por facção, que afeta preços, acesso a contratos, Rito de Admissão e ao tratamento pelos guardas (como em Mount & Blade).
 
 **4.12 Companheiros, Relações e Diálogo.**
 - **Companheiros:** recrutamento (pergunta em aberto do Objetivo), salário, lealdade, saída por Felicidade 0, limite do grupo.

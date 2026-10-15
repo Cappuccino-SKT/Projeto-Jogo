@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado ao fim da rodada P0-5, antes de uma pausa. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado ao aplicar a rodada P1-2, Reputação (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -94,7 +94,7 @@
 - Derrota para Criaturas: o grupo acorda ferido, perde o Loot carregado e mantém o equipamento. **Crônica** dos feitos, sem pontuação. A fatia vertical não tem este sistema.
 
 **Comércio civil e caravanas**
-- Caravanas civis reais no mapa mundial (podem ser vistas e atacadas); em LOD 2 o comércio vira fluxo por estação.
+- Caravanas civis reais no mapa mundial (podem ser vistas e atacadas), sempre, inclusive longe do jogador (decidido na Viagem).
 - Donos: a cidade (mercadores abstratos, dinheiro da cidade, leva o que sobra e traz o que falta) e o jogador. A cidade precisa de um **Posto Comercial**.
 - Rota pelo lucro esperado (diferença de preço − distância, risco e tarifas); o comércio aproxima os preços. O jogador só conhece os preços das cidades visitadas, com data.
 - Caravana = animais de carga (capacidade por peso) + guardas + manutenção. Lei de **Tarifa**; guerra bloqueia; embargo ou acordo comercial (zera a tarifa).
@@ -137,10 +137,45 @@
 - Só teclado e mouse (sem controle de console), atalhos remapeáveis, zoom em níveis inteiros (1x a 4x).
 - Notificações **personalizáveis** (categorias, limite, agrupamento, o que aparece em velocidade alta, se o Crítico pausa). "Por quê?" por passar o mouse e barra de alertas. Enciclopédia gerada dos dados. Menus: novo jogo em 3 passos, autosave por estação. Interface própria; Dear ImGui só para depuração.
 
+**Mundo e Estado Inicial** — ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]
+- Malha de **48 Mapas Locais (8 × 6)**, 6 regiões de 8 mapas (2 × 3 blocos): Guerreira e Arcana ao norte, Autoritária e Religiosa no centro, Tecnocrata e Escravista ao sul. Culturas hostis ficam vizinhas.
+- Por região: 1 capital, 1 cidade e 1 vilarejo (a Escravista tem 2); mais 3 **Vilas Livres** sem facção. No primeiro dia: 16 mapas de território, 6 em disputa e 4 sem dono (8%, aceito pelo autor; a malha vem dos dados e pode crescer depois dos testes).
+- Bioma e 2 a 3 recursos de destaque por região, com escassez de outros. **12 masmorras** (2 por região), dificuldade pela distância da capital; 3 lendárias no meio do mundo.
+- **Tom:** baixa magia, chegada da pólvora, sombrio e político; criaturas míticas só no futuro, em masmorras. **Só humanos** nas primeiras versões.
+- **Nomes significativos** (Facção Guerreira, Capital Arcana) e **personagens abstratos** até a história ser escrita; a história do mundo fica para depois.
+- **Ano 412**, 1º dia da Primavera; todos na Era 1. PIB entre −19% e +21% da média; cada facção forte numa coisa (a Guerreira é a mais pobre e tem o maior exército).
+- Matriz de afinidade 6 × 6; valor de relação = afinidade (+40, 0, −40) − 15 se dividem mapa em disputa ± 15 sorteado; 1 ou 2 guerras iniciais e 2 acordos comerciais sorteados. Pacotes de construções por nível e cultura; 5 Importantes fixos por papel; 2 ou 3 pontos de partida por estilo; o Dono de vila escolhe começar em território de facção (vinculado) ou num mapa livre (independente).
+
+**Pipeline de Arte e Conteúdo** — ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]
+- Artista definitivo ainda não escolhido; por ora o autor desenha (sem experiência). Fatia vertical com **pacotes de terceiros** provisórios e rascunhos. Programas grátis: **Pixelorama** (proposta), Tiled e VS Code.
+- Tile 16 px, vista 3/4, **boneco 16 × 24**, zoom padrão 2x (50 × 28 tiles em 1600 × 900), paleta mestre de cerca de 48 cores + 2 cores por cultura. Padrão fixo de 6 camadas de tiles e 6 de objetos no Tiled.
+- Variação por cultura com **troca de paleta** nas primeiras versões; meta final: **estilo próprio** por cultura em armas, armaduras e construções. Construções mudam de aparência nos níveis 1, 3 e 5.
+- Animação: 54 quadros por direção, 3 direções e espelho (cerca de 162 por camada). Estações: só mudança de cor agora; neve, rios congelados, árvores sem folhas, folhas e flores ficam para o futuro (toda arte extra de estação fica para depois). Interior próprio só nas construções públicas mais visitadas e nas masmorras.
+- Ordem: fatia vertical (planície, cultura Autoritária) → cidade → primeira região → resto. **Sem prazo**: o limite é o peso da arte, estimado em menos de 100 MB na placa de vídeo para o jogo completo, a medir na fatia vertical.
+- Dados: foco em **C++**; CSV lido direto pelo jogo, validação em C++ (`--validar`). Os dados mandam nas listas quando a pasta `data/` existir. Arte no repositório do código, sem Git LFS.
+
+**Viagem e Mundo** — ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]
+- Entidades andam **de mapa em mapa** (grafo); a rota escolhe o caminho mais rápido. Viagem pelo Mapa Mundial de qualquer lugar, sem combate nem inimigo por perto.
+- **Tempo = 4 h × Terreno × Infraestrutura × Tamanho do grupo × Montaria × Carga.** Terreno de 1,0 a 1,5 (floresta densa e montanha); infraestrutura de 1,0 (selvagem) a 0,65 (mapa com cidade grande); tamanho de 1,0 (até 5 pessoas) a 2,0 (mais de 2.000); montados × 0,67.
+- Acampamento automático à noite (22 h às 6 h), uma refeição por dia, marcha forçada opcional. Encontros e chegadas voltam a 8x para 1x.
+- Encontros: 5% em território, 15% em disputa, 20% sem dono, mais a ameaça bandida; bandidos não atacam grupo 2 vezes mais forte; Lutar, Fugir, Negociar ou Render-se. Encontros sem luta (mercador, patrulha, refugiados, peregrinos, caravana em apuros). IA × bandidos pelo cálculo rápido de forças.
+- Entidades: grupo do jogador, caravanas, exércitos, bandos e **patrulhas**. **Caravanas sempre reais** no Mapa Mundial (substitui o fluxo por estação do Comércio). Em LOD 0 e 1, a entidade aparece de verdade e atravessa o mapa.
+- **Névoa** por Mapa Local com informações datadas; visão ao vivo no mapa atual e nos 4 vizinhos; capitais conhecidas desde o início. Sem névoa dentro dos Mapas Locais; névoa só nas masmorras. Estilos e mapas comprados revelam partes do mundo.
+
+**Reputação e Relações do jogador** — ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]
+- **Reputação** de −100 a +100 por facção e por Vila Livre (as cidades usam a da facção); **Opinião** de −100 a +100 para cada NPC Importante conhecido (nome escolhido para não confundir com o atributo Relação).
+- Faixas: Inimigo (≤ −60), Hostil, Neutro, Amigável e Aliado (≥ +60). Mudam preços (de −10% a +15%; Inimigo não negocia), guardas (revista, expulsão, ajuda), contratos (Taverna, nobres, líder) e títulos (Cavaleiro +20, Nobre +40, Senhor de cidade +60).
+- Reputação e Recompensa separadas; crime detectado tira 2 × gravidade. Tabela de ações (+2 contrato a −15 lutar contra); cadeia só na guerra (o inimigo perde metade); volta 2 pontos por estação à base.
+- Base = afinidade cultural (+20 mesma cultura a −15 hostil) + bônus do estilo de início. Opinião muda por conversa, presentes, missões e ações contra a família; pesa na Indicação (+40), nas decisões do líder e na lealdade dos companheiros.
+- Painel de Reputação com "Por quê?" e notificação de mudança de faixa.
+
+**Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
-- **Cultura:** nomes das culturas e regiões; como reaproveitar partes da arte de construção.
+- **Cultura:** como reaproveitar partes da arte de construção (os nomes ficam para a história do jogo).
+- **Mundo:** história, nomes e personagens; listas de tecnologias por cultura; valores do estado inicial.
 - **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto; itens de Medicamento.
@@ -157,7 +192,10 @@
 - **Trabalho:** valores a testar (vagas, salários, faixa de preço, estabilizador, imposto, empresas dos Ricos); nome e categoria das Funções; Engenheiro e Operário sem construção; Espada sem construção no canvas do Ferreiro; gerente das construções da Cidade; leilão; forma de estudo na Universidade.
 - **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; fuga e rebelião de Escravos; greves; layout do painel "Por quê?".
 - **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; telas do Mapa de Guerra; IDs de texto para outros idiomas.
-- **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
+- **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quando entra a arte extra das estações; quando cada cultura ganha formas próprias.
+- **Viagem:** valores a testar; construção de estradas; multiplicadores de clima; quantidade e custo das patrulhas.
+- **Reputação:** valores a testar; requisitos de título podem mudar com o futuro sistema de Títulos de Nobreza.
+- **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
 
@@ -169,16 +207,20 @@
 | P0 | População e Habitação | Escrito |
 | P0 | Trabalho, Salários e Propriedade (e Funções e Construções) | Escrito |
 | P0 | Interface e Controles | Escrito |
-| P0 | **Mundo e Estado Inicial (Lore)** | **Perguntas enviadas, aguardando respostas** |
-| P0 | Pipeline de arte e conteúdo | A fazer |
-| P1 | Viagem e Mundo; Reputação; Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
+| P0 | Mundo e Estado Inicial (a história fica para depois) | Escrito |
+| P0 | Pipeline de arte e conteúdo | Escrito |
+| P1 | Viagem e Mundo | Escrito |
+| P1 | Reputação e Relações do jogador | Escrito |
+| P1 | **Companheiros, Relações familiares e Diálogo** | **Perguntas enviadas, aguardando respostas** |
+| P1 | Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
+| Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** responder a rodada P0-5 → rodada P0-6 (Pipeline de arte) → sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Responder a rodada P1-3 (Companheiros e Diálogo) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 
-- Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta. A ideia própria do autor prevalece.
+- Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta. A ideia própria do autor prevalece. As perguntas e sugestões seguem o **padrão detalhado** descrito na [[Retomada]] (pedido do autor).
 - Marcações nos documentos: **[Proposta]**, **[Em aberto]**, **[Refinar depois]**. Os termos estão no [[Glossário]].
 - Por ora **não se escreve código**: a documentação vem primeiro, depois a ficha técnica lógica, depois a programação.
 - O projeto está no GitHub (`FelipeSKT/Projeto-Jogo`), com histórico de versões. Cada rodada vira um pull request para o autor aceitar. O jeito de trabalhar e os cuidados técnicos estão na [[Retomada]].

@@ -68,7 +68,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Desenho
 
-- **Tile base de 16 px**, ampliado na tela em escala inteira; vista de cima em 3/4 (como Stardew). Valores provisórios.
+- **Tile de 16 px**, ampliado na tela em escala inteira; vista de cima em 3/4 (como Stardew); boneco de 16 × 24 px; zoom padrão 2x (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 - Atlas de texturas e desenho em lote, para poucas chamadas de desenho.
 - Desenhar só o que está na câmera (culling).
 - Como cada cultura tem arte própria de construção, as partes (paredes, telhados, portas) devem ser peças reaproveitáveis.
@@ -95,7 +95,8 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 - **Mapas:** serão desenhados no **Tiled**, um editor de mapas de tiles gratuito e de código aberto (<https://www.mapeditor.org>). Ele não faz parte do jogo: é só a ferramenta de desenho. Cada mapa é salvo em um arquivo JSON, que o jogo lê. O Tiled permite camadas (chão, objetos, colisão) e pontos marcados no mapa, como lotes de construção, portas e pontos de entrada.
 - **Dados:** os arquivos JSON de `data/` (itens, eventos, tecnologias...) podem ser editados em um editor de texto comum, com validação ao carregar.
-- **Orçamento de arte:** estimar o volume de arte (tiles, construções, bonecos, animações) antes de fechar o escopo da primeira versão. **[Refinar depois]**
+- **Arte:** desenhada no Pixelorama (grátis), com pacotes de terceiros provisórios na fatia vertical. Volume, ordem de produção e peso da arte na memória estão no [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]].
+- **Validação dos dados em C++**, pelo próprio jogo (inclusive um modo `--validar`); tabelas grandes em CSV, lidas direto pelo jogo.
 
 ### Primeira meta: fatia vertical
 
@@ -120,12 +121,12 @@ Uma versão mínima jogável, só para validar a parte mais arriscada: a simula�
 ### Arte e mundo (provisório)
 
 - **Mapa Local:** 128 × 128 tiles de 16 px (a ajustar após testes de desempenho).
-- **Mundo:** 6 regiões de 6 a 8 Mapas Locais cada, de 36 a 48 mapas na primeira versão.
+- **Mundo:** 48 Mapas Locais (8 × 6), em 6 regiões de 8 mapas (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - O desenho pequeno é uma escolha consciente: um jogo de gerenciamento precisa mostrar muita coisa na tela.
 
 ### Perguntas em aberto
 
 1. **PC alvo mínimo** e meta de quadros por segundo.
 2. **Aprovação final das bibliotecas** (início do código).
-3. **Tamanho do tile, perspectiva e tamanho do mundo:** provisórios, a decidir com protótipo.
+3. **Tamanho do Mapa Local** (128 × 128): a confirmar com protótipo. Tile (16 px), vista (3/4) e mundo (48 mapas, malha ajustável pelos dados) já decididos.
 4. **Repositório Git do código:** criar quando o código começar, separado desta pasta de documentos.

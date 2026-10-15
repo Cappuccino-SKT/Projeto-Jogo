@@ -61,7 +61,14 @@ O título é um **rótulo político**; a classe social só muda pelas regras de 
 | Senhor de cidade | Nobreza |
 | Líder de facção | Realeza |
 
-**[Refinar depois]** Renome mínimo e requisito de cada degrau.
+**[Refinar depois]** Renome mínimo e requisito de cada degrau. A reputação mínima na facção para cada título está no [[Sistema de Reputação/Descrição|Sistema de Reputação]].
+
+**Sistema de Títulos de Nobreza (versão futura).** Ideia do autor para uma versão futura:
+
+- **Todas as culturas usam a mesma estrutura de títulos** (os mesmos degraus).
+- O que muda de uma cultura para outra é o **requisito** para obter cada título, os **privilégios** que ele dá e as **obrigações** que vêm com ele.
+- Tudo em dados, **modelável**: cada facção pode ter seus próprios valores, e as **leis da facção** podem alterá-los (por exemplo, uma lei que permite comprar títulos ou que obriga todo nobre a servir no exército).
+- **[Refinar depois]** Quando for escrito, decide os degraus, a lista de requisitos, privilégios e obrigações possíveis, e como as leis os mudam. Até lá vale a escada acima.
 
 ## Missões
 
@@ -116,5 +123,5 @@ Registro dos grandes feitos, montado a partir do **diário de eventos**: Ambiç�
 
 1. **Condições exatas** de cada Ambição e o conteúdo dos epílogos.
 2. **Valores a testar:** Renome por feito, Renome por degrau de título, tempo de repovoamento das masmorras.
-3. **Lista inicial** de contratos, missões longas e masmorras (quantas e onde).
+3. **Lista inicial** de contratos e missões longas. As 12 masmorras (3 lendárias) e onde ficam estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
 4. **Companheiros:** como são recrutados e quanto o Renome pesa.

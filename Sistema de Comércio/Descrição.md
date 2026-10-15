@@ -11,7 +11,7 @@ O comércio entre cidades é feito por **caravanas civis**. Elas ligam os Mercad
 ## Caravanas no mapa
 
 - A caravana civil **existe de verdade no mapa mundial**: é uma entidade simples que se move, pode ser vista e pode ser atacada.
-- **LOD 2** (longe do jogador): o comércio vira um **fluxo calculado por estação** entre as cidades, sem caravana individual, para não pesar no desempenho (ver [[Sistema de Mapa/Descrição|Sistema de Mapa]]).
+- **Sempre real no Mapa Mundial**, inclusive longe do jogador: o ícone anda de mapa em mapa, o que custa quase nada. Só a simulação tile a tile fica para os Mapas Locais em LOD 0 e 1. Isso substitui o fluxo calculado por estação previsto antes (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]).
 
 ## Donos
 
@@ -70,7 +70,7 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 
 - **Fatia vertical:** não tem este sistema (só uma cidade).
 - **Save:** caravanas ativas (posição, dono, carga, guardas, rota), rotas fixas do jogador e os preços conhecidos pelo jogador com a data.
-- **Desempenho:** caravanas da cidade fora da vista do jogador seguem o fluxo por estação; só caravanas em LOD 0 e 1 se movem tile a tile.
+- **Desempenho:** todas as caravanas andam de mapa em mapa no Mapa Mundial; só nos Mapas Locais em LOD 0 e 1 elas viram NPCs e se movem tile a tile.
 
 ### Ligação com outros sistemas
 
@@ -78,7 +78,7 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 |---|---|
 | Econômico | Diferença entre Mercados Locais; dinheiro move entre cidades |
 | Facção | Lei de Tarifa; Banco da Facção; guerra, embargo e acordo comercial |
-| Mapa | Caravana no mapa mundial; fluxo por estação em LOD 2 |
+| Mapa e Viagem | Caravana sempre real no Mapa Mundial; tempo de viagem, encontros e escolta (ver [[Sistema de Viagem/Descrição\|Sistema de Viagem]]) |
 | Construção | Posto Comercial |
 | Inventário / Itens | Carga por peso |
 | Eventos / Crime | Bandidos, clima, ataques |

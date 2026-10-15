@@ -205,7 +205,7 @@ Um modo entre **dois combatentes**: os outros NPCs não intervêm. Termina por *
 
 ### Montarias
 
-**[Refinar depois]** Fora do combate na primeira versão. A montaria serve para viagem e carga (velocidade e peso). A cavalaria em combate fica para o Mapa de Guerra, nos Esquadrões. O item Sela já existe.
+**[Refinar depois]** Fora do combate na primeira versão. A montaria serve para viagem e carga (velocidade e peso): com todos montados, a viagem pelo Mapa Mundial fica 50% mais rápida (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]). A cavalaria em combate fica para o Mapa de Guerra, nos Esquadrões. O item Sela já existe.
 
 ---
 
@@ -216,6 +216,7 @@ Toda a arte é feita à mão, então a escolha é feita para o volume de arte n�
 - **Boneco por camadas:** corpo base, 3 peças de armadura, arma e escudo, sobrepostos no mesmo conjunto de animações.
 - **Animações compartilhadas por tipo de arma:** Espada, Lança, Machado, Clava, Arco, Cajado, Musquete e Besta, em **4 direções**.
 - Criaturas têm sprites e animações próprios, em número reduzido.
+- Boneco de 16 × 24 px, 54 quadros por direção, 3 direções desenhadas e a esquerda espelhada (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 
 ---
 

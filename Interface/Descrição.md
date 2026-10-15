@@ -74,7 +74,7 @@ Todos esses elementos são ajustáveis (ver acima).
 
 - **Lentes de mapa** trocam o que é destacado: **Política** (facções), **Cultura, Felicidade, Comércio, Perigo** e **Tecnologia**.
 - **Busca** por nome e **Viagem Rápida** (já previstas em [[Sistema de Mapa/Descrição|Sistema de Mapa]]).
-- **Entidades em trânsito** visíveis e **névoa de exploração**.
+- **Entidades em trânsito** visíveis e **névoa de exploração** por Mapa Local, com a data de cada informação vista; janela de encontro (Lutar, Fugir, Negociar, Render-se) (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]).
 
 ### Modo construção
 
@@ -171,6 +171,7 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 | Felicidade | Painel "Por quê?" por classe |
 | Combate | Seleção, barras de Vida, ordens e pausa |
 | Mapa | Lentes, busca, Viagem Rápida, minimapa |
+| Reputação | Painel de Reputação com faixas e "Por quê?"; notificação de mudança de faixa; Opinião no painel do Importante (ver [[Sistema de Reputação/Descrição\|Sistema de Reputação]]) |
 | Construção | Modo construção, lotes, fila de obras |
 | Trabalho e Propriedade | Painel de trabalho, contratação, preços |
 | Tecnologia e Magia | Aba de Pesquisa |

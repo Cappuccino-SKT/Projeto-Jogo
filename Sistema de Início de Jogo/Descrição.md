@@ -26,7 +26,7 @@ Os bônus valem **só no começo**: itens, dinheiro, habilidades e relação ini
 - dinheiro inicial;
 - itens e equipamento iniciais;
 - companheiros iniciais;
-- relação inicial com as facções;
+- relação inicial com as facções (bônus sobre a base de reputação, ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]);
 - bônus de habilidades.
 
 Como é só dado, novos estilos podem ser acrescentados sem mexer em código.
@@ -39,7 +39,7 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 
 | Estilo | Ideia | Bônus inicial (exemplo) |
 |---|---|---|
-| **Dono de vila** | Começa com um assentamento em território de facção e tenta ascendê-lo a uma cidade independente | Assentamento nível 1, recursos de construção |
+| **Dono de vila** | Começa com um assentamento em território de facção (vinculado) ou num mapa livre (independente), à escolha, e tenta ascendê-lo a uma cidade independente | Assentamento nível 1, recursos de construção |
 | **Aventureiro** | Grupo errante, sem cidade, vivendo de masmorras e missões | Equipamento e habilidades de combate |
 | **Membro de facção** | Começa já como cidadão ou nobre de uma das 6 facções | Título, relação alta com a facção |
 | **Mercador** | Compra e vende entre cidades | Dinheiro, itens de comércio |
@@ -49,7 +49,7 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 
 ### Mundo fixo, estado inicial variável
 
-O mundo (mapas, cidades e regiões) é fixo e desenhado à mão. O que varia a cada partida é o **estado inicial**: relações entre facções, guerras em andamento, quais tecnologias extras cada cultura recebe, a localização do Loot das masmorras e a semente do Narrador. Isso dá rejogabilidade sem arte nova. **[Refinar depois]** lista exata do que varia e os limites (ver o futuro documento de Mundo e Estado Inicial).
+O mundo (mapas, cidades e regiões) é fixo e desenhado à mão. O que varia a cada partida é o **estado inicial**: relações entre facções, guerras em andamento, quais tecnologias extras cada cultura recebe, a localização do Loot das masmorras e a semente do Narrador. Isso dá rejogabilidade sem arte nova. A lista exata do que varia, os limites e os pontos de partida de cada estilo estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
 
 ### Ligação com outros sistemas
 
@@ -59,8 +59,9 @@ O mundo (mapas, cidades e regiões) é fixo e desenhado à mão. O que varia a c
 | Facção | Relação inicial com as facções; o estilo "Dono de vila" usa a vinculação a território |
 | NPC | Personagem e companheiros Controlados; geração dos atributos iniciais |
 | Itens e Inventário | Itens e dinheiro iniciais |
-| Mapa | Local de partida |
+| Mapa | Local de partida: 2 ou 3 pontos fixos por estilo (ver [[Mundo e Estado Inicial/Descrição\|Mundo e Estado Inicial]]) |
 | Eventos | O jogador escolhe um narrador na criação do jogo; o narrador é a dificuldade, mas cada um tem um foco, para combinar com o estilo de jogo (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) |
+| Viagem | Conhecimento inicial do mapa: Membro de facção vê o território da facção; Mercador, as cidades com Posto Comercial; Aventureiro, as masmorras da região (ver [[Sistema de Viagem/Descrição\|Sistema de Viagem]]) |
 | Combate | Se todo o grupo cai, o jogador é capturado em vez de ter Game Over, o que conversa com os estilos Escravo e Aventureiro (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
 | Interface | Novo jogo em 3 passos: estilo de início, narrador e personagem (ver [[Interface/Descrição|Interface e Controles]]) |
 

@@ -21,3 +21,4 @@ Não existem meses no jogo. Períodos longos usam a **Estação** (16 dias) ou o
 
 - **Eventos:** os eventos ocasionais são sorteados uma vez por **dia** em mapas LOD 0 e 1 e uma vez por **estação** em LOD 2. As condições dos eventos condicionais são avaliadas por sinal ou em varredura diária ou sazonal (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
 - **Combate:** quando um combate começa, o jogo reduz sozinho a velocidade para 1x. A pausa ativa vale durante o combate (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
+- **Viagem:** atravessar um Mapa Local pelo Mapa Mundial leva 4 horas a pé, com multiplicadores; o grupo acampa à noite; encontros e chegadas voltam a velocidade para 1x (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]).

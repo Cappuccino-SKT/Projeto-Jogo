@@ -8,7 +8,7 @@ O Nível 4 (Guerra) serve a uma funcionalidade específica do jogo — situaçõ
 
 ### Nível 1 — Mapa Mundial (RTS)
 
-O Mapa Mundial consiste em quadrados conectados entre si, formando uma malha quadriculada. Cada quadrado dessa malha representa um Mapa Local (Nível 2). Ele não guarda dados de jogo das cidades nem dos NPCs — funciona como um contêiner leve (grafo + gráfico geral), o que o torna barato de manter sempre carregado, sem necessidade de LOD. A única exceção é a lista de **entidades em trânsito** (grupo do jogador, caravanas, exércitos e bandos em viagem entre Mapas Locais); as regras de viagem ficam para o sistema de **Viagem e Mundo** **[Em aberto]**.
+O Mapa Mundial consiste em quadrados conectados entre si, formando uma malha quadriculada. Cada quadrado dessa malha representa um Mapa Local (Nível 2). Ele não guarda dados de jogo das cidades nem dos NPCs — funciona como um contêiner leve (grafo + gráfico geral), o que o torna barato de manter sempre carregado, sem necessidade de LOD. A única exceção é a lista de **entidades em trânsito** (grupo do jogador, caravanas, exércitos e bandos em viagem entre Mapas Locais); as regras de viagem estão no [[Sistema de Viagem/Descrição|Sistema de Viagem]].
 
 O Mapa Mundial serve para fornecer informações globais sobre o estado do mundo: localização de cada cidade, domínio de cada facção sobre os Mapas Locais, e — junto com outros sistemas do jogo — gerenciamento em escala global (relevante para quando o jogador tiver sua própria facção). Também serve para viagens de longa distância, sem que o jogador precise ir manualmente até a borda de cada Mapa Local.
 
@@ -18,7 +18,7 @@ Essa é a função pensada até agora para o Mapa Mundial. Novas funções ainda
 
 **População no Mapa Mundial.** A população mostrada é calculada com o **Fator de Escala** (global): 1 NPC real representa N pessoas. Ver Sistema de Facção.
 
-**Tamanho inicial (provisório).** O mundo é dividido em 6 regiões (uma por cultura inicial), com 6 a 8 Mapas Locais cada, de 36 a 48 mapas no total na primeira versão. Valores a ajustar depois de testes.
+**Tamanho do mundo.** 48 Mapas Locais numa malha de 8 × 6, divididos em 6 regiões de 8 mapas (uma por cultura inicial). Pode mudar no futuro. A disposição das regiões, cidades e masmorras está no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
 
 ### Nível 2 — Mapa Local (RPG)
 
@@ -61,6 +61,8 @@ O Mapa Interno é o interior das construções que residem no Mapa Local, refere
 
 Qualquer construção de produção pode funcionar como **loja ilegal** disfarçada (ver Sistema de Crime e Justiça).
 
+Os mapas são montados no Tiled com um padrão fixo de camadas (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]). Têm interior desenhado próprio: Taverna, Mercado, Templo, Prisão, Palácio, Quartel e as masmorras; Moradias e construções de produção usam interiores genéricos por tamanho e cultura.
+
 Cada Mapa Interno tem sua própria grade de tiles (em escala menor) e um **Nível de Segurança**, que afeta a chance de detecção em furtos e a dificuldade de masmorras. A entrada/saída usa um **ponto fixo** (a porta), diferente da transição por borda proporcional usada entre Mapas Locais — ao sair, o NPC reaparece no "Endereço da volta" no Mapa Local pai.
 
 Por padrão, todo Mapa Interno começa em **LOD 2 (Abstrato)**, mesmo que o Mapa Local pai esteja em LOD 0 — só sobe de nível quando alguém entra de fato, evitando simular o interior de toda casa de toda cidade o tempo todo.
@@ -83,7 +85,8 @@ O Mapa de Guerra guarda a lista de Facções/Exércitos participantes (com seus 
 
 - Endereço de um grafo que carrega a malha de Mapas Locais
 - Endereço do gráfico do Mapa Mundial
-- Lista de entidades em trânsito (ver Viagem e Mundo, a escrever)
+- Lista de entidades em trânsito (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]])
+- Por Mapa Local: terreno, infraestrutura e estradas, usados no tempo de viagem; névoa e informações datadas para o jogador
 
 **Mapa Local (Nível 2)**
 
