@@ -28,6 +28,7 @@ O mundo começa com **6 facções principais**, cada uma representando uma das *
 Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias pessoas no Mapa Mundial. Exemplo do autor: **1 NPC real = 100 pessoas**. Chamamos esse número de **Fator de Escala**.
 
 - O Fator de Escala é **global** (um único valor para o jogo todo).
+- A quantidade de NPCs reais de cada cidade vem do nível dela (ver Sistema de Cidade); a população total é NPCs reais × Fator de Escala.
 - O valor ainda não foi definido: será testado e discutido. Deve ficar em arquivo de dados, fácil de ajustar.
 - Vale para a população do Mapa Local e do Mapa Mundial ("População total da região") e para os conscritos. **[Proposta]** Documentar também no Sistema de Mapa.
 
@@ -203,14 +204,10 @@ Requisitos:
 | Inventário | Caravana Militar herda do Inventário abstrato |
 | IA | IA de Facção (diplomacia, guerra, resposta à revolta, disputa de mapas) em baixa frequência |
 | Tempo | Frequência das decisões da facção e das assembleias (uma por ano) |
+| Eventos | Assembleia extraordinária, revolta, crise de sucessão e escassez em tempo de guerra são eventos condicionais, com causas registradas (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]). Nos eventos com escolha, a IA decide pela Personalidade do líder |
+| Combate | Se o personagem principal morre, o herdeiro assume; se todo o grupo cai, o jogador é capturado, sem Game Over (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
 
 ### Perguntas em aberto
 
-1. **Caravanas civis.** Ficam para o Sistema Econômico, a discutir depois.
-2. **Limiar de controle** de um mapa em disputa e quanto cada resultado o move.
-3. **Detalhes da assembleia** (marcado para refinar depois).
-
-### Atualizações recentes
-
-- **Eventos:** assembleia extraordinária, revolta, crise de sucessão e escassez em tempo de guerra são eventos condicionais, com causas registradas (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]). Nos eventos com escolha, a IA decide pela Personalidade do líder.
-- **Combate:** se o personagem principal morre, o herdeiro assume; se todo o grupo cai, o jogador é capturado, sem Game Over (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
+1. **Limiar de controle** de um mapa em disputa e quanto cada resultado o move.
+2. **Detalhes da assembleia** (marcado para refinar depois).

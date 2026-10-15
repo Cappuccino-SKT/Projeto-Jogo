@@ -50,7 +50,7 @@ Para evitar o problema de uma economia fixa (onde a quantidade total de dinheiro
 - Categoria
 - Dono
 
-### Atualizações recentes
+### Integração com outros sistemas
 
 - **Banco da Facção e PIB:** os impostos vão para o Banco da Facção, e o soldo dos Esquadrões e as obras devolvem dinheiro às cidades. O PIB da facção é a soma do dinheiro das cidades (ver Sistema de Facção).
 - **Proibição:** deriva das leis da facção. Os ajustes de preço por categoria do Mercado da Facção também vêm das leis.

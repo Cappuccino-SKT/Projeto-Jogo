@@ -1,5 +1,3 @@
-> **Atualização recente (revisão geral).** A Realeza também consome Artefatos; novo mapeamento do consumo para itens; casos especiais de soldados, dissolução de exército e trabalho forçado.
-
 ## Sistema de Classe Social
 
 **Descrição geral**
@@ -13,6 +11,8 @@ Adiciona profundidade ao jogo conforme o avanço da gameplay, ou dependendo do e
 3. **Rico** — majoritariamente donos de fábricas ou de terras
 4. **Civil** — a maioria da população
 5. **Escravo** — todos os escravos
+
+**Títulos.** Os títulos do Objetivo e Progressão (Plebeu, Cidadão, Cavaleiro, Nobre, Senhor de cidade e Líder de facção) são **rótulos políticos**. A classe só muda pelas regras de mobilidade, com a exceção do Rito de Admissão da cultura (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
 **Mobilidade social:** transições de classe são específicas e raras, não livres. Um Civil pode virar Rico ao acumular Dinheiro acima de um limiar por tempo suficiente; um Escravo pode ser libertado e virar Civil; queda de classe também é possível (ex: um Rico que perde a fábrica). Isso dá profundidade sem exigir um sistema de mobilidade totalmente livre.
 
@@ -30,7 +30,7 @@ Consumo por classe:
 
 Cada classe social pode causar um evento diferente dependendo do recurso em falta — os mais comuns seriam: revoltas por parte de Escravos e Civis, perda de empresas por parte dos Ricos, e mudanças de leis por parte de Nobres e Realeza.
 
-Um evento de escassez só dispara com base num contador de **"dias em déficit"** por recurso/cidade: o estoque precisa ficar abaixo de um limiar (ex: 10%) por um número mínimo de dias consecutivos, com chance crescente de evento quanto mais tempo durar o déficit. Isso evita eventos disparando por uma flutuação momentânea de estoque.
+Um evento de escassez só dispara com base num contador de **"dias em déficit"** por recurso/cidade: o estoque precisa ficar abaixo de um limiar (ex: 10%) por um número mínimo de dias consecutivos, com chance crescente de evento quanto mais tempo durar o déficit. Isso evita eventos disparando por uma flutuação momentânea de estoque. É um caso da condição com duração mínima e histerese do [[Sistema de Eventos/Descrição|Sistema de Eventos]]: as reações por classe (revolta, perda de empresas, mudança de lei) são eventos condicionais, com as causas registradas e visíveis ao jogador.
 
 ### Mapeamento do consumo para itens
 
@@ -60,8 +60,3 @@ A classe social também afeta quais habilidades principais o NPC possui e o nív
 - **Nobres** — atributos altos em Inteligência e Carisma (70–100; demais: 20–50).
 - **Realeza** — atributos altos em combate, Inteligência e Carisma (70–100; demais: 30–60).
 
----
-
-## Atualizações recentes
-
-O contador de **dias em déficit** é um caso da condição com duração mínima e histerese do [[Sistema de Eventos/Descrição|Sistema de Eventos]]. As reações por classe (revolta, perda de empresas, mudança de lei) são eventos condicionais, com as causas registradas e visíveis ao jogador.

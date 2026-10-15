@@ -48,7 +48,20 @@ Ligada à Classe Social (ver [[Sistema de Classe Social/Descrição|Sistema de C
 
 Para subir é preciso **Renome** e um **requisito concreto**: serviço à facção, posse de terra ou o Rito de Admissão da cultura (ver [[Sistema de Cultura/Descrição|Sistema de Cultura]] e [[Sistema de Facção/Descrição|Sistema de Facção]]).
 
-**[Refinar depois]** Renome mínimo e requisito de cada degrau; como o Escravo entra na escada ao se libertar.
+O título é um **rótulo político**; a classe social só muda pelas regras de mobilidade (ver Classe Social), com a exceção do Rito de Admissão.
+
+**[Proposta]** classe típica de cada título:
+
+| Título | Classe típica |
+|---|---|
+| Plebeu | Civil (o Escravo libertado vira Civil e Plebeu) |
+| Cidadão | Civil ou Rico |
+| Cavaleiro | Rico |
+| Nobre | Nobreza |
+| Senhor de cidade | Nobreza |
+| Líder de facção | Realeza |
+
+**[Refinar depois]** Renome mínimo e requisito de cada degrau.
 
 ## Missões
 

@@ -47,6 +47,10 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 | **Escravo** | Começa como propriedade de alguém e tenta se libertar | Habilidades de Trabalho Braçal, aliados entre escravos |
 | **Mago** | Começa com a habilidade mágica desenvolvida | Magia, Mana, cajado |
 
+### Mundo fixo, estado inicial variável
+
+O mundo (mapas, cidades e regiões) é fixo e desenhado à mão. O que varia a cada partida é o **estado inicial**: relações entre facções, guerras em andamento, quais tecnologias extras cada cultura recebe, a localização do Loot das masmorras e a semente do Narrador. Isso dá rejogabilidade sem arte nova. **[Refinar depois]** lista exata do que varia e os limites (ver o futuro documento de Mundo e Estado Inicial).
+
 ### Ligação com outros sistemas
 
 | Sistema | O que o Início de Jogo fornece ou recebe |
@@ -56,13 +60,10 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 | NPC | Personagem e companheiros Controlados; geração dos atributos iniciais |
 | Itens e Inventário | Itens e dinheiro iniciais |
 | Mapa | Local de partida |
+| Eventos | O jogador escolhe um narrador na criação do jogo; o narrador é a dificuldade, mas cada um tem um foco, para combinar com o estilo de jogo (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) |
+| Combate | Se todo o grupo cai, o jogador é capturado em vez de ter Game Over, o que conversa com os estilos Escravo e Aventureiro (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
 
 ### Perguntas em aberto
 
 1. **Custo em pontos do estilo personalizado.** Quanto custa cada escolha? Depende dos valores finais de dinheiro, itens e habilidades, definidos mais perto da fase de testes.
 2. **Mercador.** Bônus exato (dinheiro, caravana inicial, preços conhecidos); o comércio está no [[Sistema de Comércio/Descrição|Sistema de Comércio]].
-
-### Atualizações recentes
-
-- **Narrador:** o jogador escolhe um narrador na criação do jogo. O narrador é a dificuldade, mas cada um tem um foco, para combinar com o estilo de jogo (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
-- **Derrota:** se todo o grupo cai, o jogador é capturado em vez de ter Game Over. Isso conversa com os estilos Escravo e Aventureiro (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).

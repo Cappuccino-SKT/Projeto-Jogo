@@ -55,7 +55,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 ### Simulação e tempo
 
 - **Passo de tempo fixo** (a frequência será definida em testes) e desenho independente.
-- **Velocidades 1x, 2x, 4x e 8x** aumentam a quantidade de ticks por frame, não o tamanho de cada tick.
+- **Velocidades 1x, 2x, 4x e 8x** aumentam a quantidade de ticks por frame, não o tamanho de cada tick. A 8x vale só no Mapa Mundial; nos outros mapas o máximo é 4x.
 - **Agendador por LOD:** cada Mapa Local roda no nível dele (0, 1 ou 2), com a frequência já definida no Sistema de Tempo.
 - **Combate** no passo fixo, com grade espacial para achar alvos e reavaliação de alvo a cada poucos ticks (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
 - **Números aleatórios** com semente: permite reproduzir bugs e testar. O Narrador e os eventos usam um gerador próprio (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
@@ -85,6 +85,16 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 - Alvo: rodar em PCs modestos.
 - **[Em aberto]** Definir o **PC alvo mínimo** (processador, memória, placa gráfica) e a meta de quadros por segundo (**[Proposta]** 60).
 - **[Em aberto]** Meta de NPCs simultâneos em LOD 0, a medir.
+
+### Ordem de trabalho
+
+**Decisão do autor:** o foco agora é **100% na documentação**, sem nenhuma linha de código. Quando a documentação estiver satisfatória, será feita uma **ficha técnica lógica** das possibilidades (como cada sistema vira estruturas, dados e regras no código). Só depois dela começa a programação. Os marcos abaixo continuam como plano, mas não serão iniciados antes disso.
+
+### Ferramentas de conteúdo
+
+- **Mapas:** serão desenhados no **Tiled**, um editor de mapas de tiles gratuito e de código aberto (<https://www.mapeditor.org>). Ele não faz parte do jogo: é só a ferramenta de desenho. Cada mapa é salvo em um arquivo JSON, que o jogo lê. O Tiled permite camadas (chão, objetos, colisão) e pontos marcados no mapa, como lotes de construção, portas e pontos de entrada.
+- **Dados:** os arquivos JSON de `data/` (itens, eventos, tecnologias...) podem ser editados em um editor de texto comum, com validação ao carregar.
+- **Orçamento de arte:** estimar o volume de arte (tiles, construções, bonecos, animações) antes de fechar o escopo da primeira versão. **[Refinar depois]**
 
 ### Primeira meta: fatia vertical
 

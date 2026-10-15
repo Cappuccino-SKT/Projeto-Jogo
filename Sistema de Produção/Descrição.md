@@ -16,8 +16,6 @@ O sistema de produção será baseado em estruturas, desenvolvido junto com o Si
 
 A produção terá um sistema logístico simplificado, detalhado no Sistema Econômico — a princípio, sem necessidade de "entregar" fisicamente a produção entre construções.
 
-### Atualizações recentes
+**Cadeia militar.** Ração Militar e materiais de manutenção de equipamento abastecem os exércitos (ver Sistema de Facção).
 
-- **Pescador** removido dos exemplos: o item Peixe foi descartado por enquanto.
-- **Cadeia militar:** Ração Militar e materiais de manutenção de equipamento abastecem os exércitos (ver Sistema de Facção).
-- Qualquer construção de produção pode funcionar como **loja ilegal** disfarçada (ver Sistema de Crime e Justiça).
+**Loja ilegal.** Qualquer construção de produção pode funcionar como loja ilegal disfarçada (ver Sistema de Crime e Justiça).

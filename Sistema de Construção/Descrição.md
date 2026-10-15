@@ -30,12 +30,6 @@ As construções podem ser construidas de nivel por nivel, com dessa forma você
 
 As construções podem ser construidas manualmente pelos NPCs do jogador, mas caso haja uma construtora, ela pode construir automaticamente os projetos do jogador ou da propria cidade.
 
-### Atualizações recentes
-
-- **Sem meses no jogo:** a manutenção e o cálculo de produção das construções em LOD 2 acontecem **por estação** (16 dias).
-- A manutenção é fornecida pelo **Construtor**: a cidade precisa ter um para manter as construções.
-- Novos atributos: **Ilegal** (loja ilegal disfarçada) e **Confiança** do gerente com o jogador.
-
 ### Loja ilegal
 
 **Qualquer construção de produção pode ser uma loja ilegal.** Ela se passa por outra coisa, mas compra e vende produtos ilegais. O jogador só passa a negociar nela depois de um evento ou missão em que o NPC ganha confiança nele. Ver Sistema de Crime e Justiça.
@@ -57,5 +51,8 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Torre Arcana** | Gera Pontos Arcanos com Magos (Sistema de Magia) |
 | **Forja Arcana** | Magos de Ofício produzem Aço Mágico (Sistema de Magia) |
 | **Encantaria** | Magos de Ofício encantam itens de Rank 3 ou maior (Sistema de Magia) |
+| **Hospital** | Cura os NPCs do grupo do jogador; um Mago de Suporte acelera a cura (Sistema de Cura e Sistema de Magia) |
+| **Boticário** | Produz Medicamentos (Sistema de Cura) |
+| **Moradias** | Alojamento coletivo (Escravos), Casa simples (Civil), Casa média (Rico), Mansão (Nobreza) e Palácio (Realeza); construídas em lotes fixos (ver [[Sistema de População/Descrição|Sistema de População]]) |
 
-**Ficam para depois:** Posto da Guarda, Hospital, Muralha e Boticário (produção de Medicamentos, ver Sistema de Cura).
+**Ficam para depois:** Posto da Guarda e Muralha.
