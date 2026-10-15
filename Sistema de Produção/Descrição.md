@@ -19,3 +19,5 @@ A produção terá um sistema logístico simplificado, detalhado no Sistema Econ
 **Cadeia militar.** Ração Militar e materiais de manutenção de equipamento abastecem os exércitos (ver Sistema de Facção).
 
 **Loja ilegal.** Qualquer construção de produção pode funcionar como loja ilegal disfarçada (ver Sistema de Crime e Justiça).
+
+**Funções e construções.** A tabela mestre que liga cada Função à construção e ao que ela produz está em [[Sistema de Produção/Funções e Construções|Funções e Construções]]. Os salários, as vagas e os donos das construções estão no [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]].

@@ -19,7 +19,7 @@ O Mercado Mundial é recalculado no início do jogo e sempre que ocorre um event
 
 ### Loja
 
-Cada construção comercial funciona como uma **Loja**, com atributos próprios: **Dono** (cidade ou jogador), **Categoria vendida** (liga com a Categoria dos Itens), **Dinheiro próprio** (usado pra pagar o jogador ao vender itens a ela) e **Construção associada** (referência ao Mapa Interno do tipo Construção Pública onde ela opera).
+Cada construção comercial funciona como uma **Loja**, com atributos próprios: **Dono** (Cidade, Facção, Rico ou jogador; ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]), **Categoria vendida** (liga com a Categoria dos Itens), **Dinheiro próprio** (usado pra pagar o jogador ao vender itens a ela) e **Construção associada** (referência ao Mapa Interno do tipo Construção Pública onde ela opera).
 
 ### Armazenamento de itens no Mercado
 
@@ -40,6 +40,10 @@ Os NPCs Não-Controlados têm rotinas que incluem atender sua demanda de consumo
 Para que NPCs Não-Controlados e lojas possuam dinheiro, o jogo terá um sistema de distribuição rotativa: cada cidade possui um dinheiro próprio (o "banco da cidade"), atribuído no início do jogo. A cidade distribui uma porcentagem desse valor entre todos os NPCs, variando conforme a classe social — a distribuição é igual entre NPCs da mesma classe. A outra parte é reservada e distribuída igualmente entre as lojas da cidade.
 
 Para evitar o problema de uma economia fixa (onde a quantidade total de dinheiro nunca muda, e o jogador poderia acabar concentrando todo o dinheiro do mundo), haverá métodos para aumentar a quantia total de dinheiro das cidades — principalmente a **cunhagem** (um ganho anual de dinheiro) e **tecnologias** desbloqueadas pela facção que aumentam o dinheiro total das cidades. Como contrapeso, impostos periódicos cobrados pela cidade/facção — ou perda de dinheiro em eventos negativos (saques, guerra) — funcionam como sumidouro, evitando inflação descontrolada ao longo de uma partida longa.
+
+### Ciclo do dinheiro
+
+O dinheiro circula em um ciclo: **consumidores gastam nas lojas, as lojas pagam salários e compram insumos, e os trabalhadores gastam de novo**. A distribuição rotativa descrita acima vira o **estabilizador** desse ciclo: a cidade só distribui dinheiro quando a média por classe cai abaixo de um limiar. O jogo guarda a **riqueza média por classe e por cidade**, não o dinheiro de cada NPC. Os salários, os donos das construções, o imposto único sobre receita e o preço nas lojas do jogador estão no [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]].
 
 ### Atributos exigidos pelo sistema econômico (nos itens)
 

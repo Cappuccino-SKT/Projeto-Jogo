@@ -128,3 +128,4 @@ O Mapa de Guerra guarda a lista de Facções/Exércitos participantes (com seus 
 - **Eventos:** o sorteio e a avaliação de eventos respeitam o LOD de cada Mapa Local. Em LOD 2 os efeitos são agregados. Bandidos ocupam mapas Sem dono ou de fronteira (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
 - **Combate local:** é para grupos pequenos e médios (cerca de 40 combatentes ativos, a testar). Acima disso, ou com Esquadrões, o confronto vai para o Mapa de Guerra (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
 - **População:** a migração entre cidades, em LOD 0, aparece como NPCs que chegam pela borda do mapa; em LOD 2 é um fluxo calculado por estação (ver [[Sistema de População/Descrição|Sistema de População]]).
+- **Interface:** o Mapa Mundial tem lentes (Política, Cultura, Felicidade, Comércio, Perigo e Tecnologia), busca, Viagem Rápida e névoa de exploração (ver [[Interface/Descrição|Interface e Controles]]).

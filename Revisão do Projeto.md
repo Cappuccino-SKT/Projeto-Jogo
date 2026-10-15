@@ -73,7 +73,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 
 ### P0 — Base da simulação
 
-**4.1 Felicidade e Estabilidade.** A Felicidade é citada em 11 documentos (Cidade, Cultura, Crime, IA, Eventos...), mas nenhum define a conta. Sugestão: um documento que reúna os fatores e transforme em um número.
+**4.1 Felicidade e Estabilidade.** *(Escrito: ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]].)* A Felicidade é citada em 11 documentos (Cidade, Cultura, Crime, IA, Eventos...), mas nenhum define a conta. Sugestão: um documento que reúna os fatores e transforme em um número.
 - Fatores: consumo atendido (por classe), distância entre leis e cultura, Criminalidade, conscrição, guerra, impostos, religião, eventos duradouros.
 - Limiares: **inquietação**, **protesto** e **revolta**, ligados aos eventos condicionais já previstos (revolta, assembleia extraordinária).
 - Individual só para Controlados; agregada na cidade para o resto (como a IA já prevê).
@@ -85,7 +85,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 - **Condições para subir o nível da cidade** (1 → 2 → 3): população, construções necessárias e tecnologia.
 - **População real por nível**: decidir quantos NPCs reais cada nível tem (por exemplo, 15, 40, 100 e 300), em vez de um único Fator de Escala (ver seção 7).
 
-**4.3 Trabalho, Salários e Propriedade.** O Econômico tem a distribuição rotativa de dinheiro, mas não diz como alguém consegue um emprego, quem paga salário, nem quem é o dono de uma construção.
+**4.3 Trabalho, Salários e Propriedade.** *(Escrito: ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]].)* O Econômico tem a distribuição rotativa de dinheiro, mas não diz como alguém consegue um emprego, quem paga salário, nem quem é o dono de uma construção.
 - **Função ↔ Construção:** tabela mestra (Lenhador ↔ Serraria, Ferreiro ↔ Ferraria...).
 - **Emprego:** a cidade atribui NPCs a vagas; desemprego aumenta a Criminalidade e reduz a Felicidade.
 - **Salários:** pagos pelo dono da construção; vêm do caixa da loja ou da cidade.
@@ -93,7 +93,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 - **Impostos:** definir sobre o quê incidem (renda, comércio, propriedade) e como chegam ao Banco da Facção.
 - **Lojas do jogador:** o jogador pode fixar o preço dentro de uma faixa em torno do Mercado Local.
 
-**4.4 Interface e Controles.** Nenhum documento trata da interface, e um jogo de gerenciamento com tantos sistemas vive disso. Sugestão de um documento curto:
+**4.4 Interface e Controles.** *(Escrito: ver [[Interface/Descrição|Interface e Controles]].)* Nenhum documento trata da interface, e um jogo de gerenciamento com tantos sistemas vive disso. Sugestão de um documento curto:
 - Telas: HUD do mapa local, mapa mundial, painel da cidade, inventário, produção, pesquisa, facção, diário de eventos.
 - Controles: câmera, seleção, ordens (já definidas no Combate), pausa ativa.
 - Princípio: **informação em camadas**, com resumos e detalhes sob demanda; tooltips com o "por quê" (já previsto nos Eventos).

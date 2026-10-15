@@ -73,7 +73,7 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 - **Itens proibidos** — alimenta o atributo Proibição dos itens e a lista de Itens proibidos da cidade.
 - **Ajustes de preço por categoria** — alimenta o Mercado da Facção.
 - **Escravidão** (permitida / proibida) — define se o atributo Escravo e a classe Escravo existem nas cidades da facção.
-- **Imposto** (% cobrado das cidades) — enche o Banco da Facção.
+- **Imposto** (% da receita das cidades: salários e lucros) — a cidade retém uma parte para obras e o resto enche o Banco da Facção; Escravos não pagam (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
 - **Conscrição** (% da população que pode ser alistada e quem é elegível) — define o teto de conscritos disponíveis em cada cidade.
 - **Magia** (livre / restrita / proibida) — define como tratar NPCs Magos. Inclui a opção "privilégio dos magos", para a cultura Arcana: a magia e o poder ficam com os NPCs que têm o atributo Mago.
 - **Crimes e penas** — define quais crimes valem, as punições (que variam por classe social) e a Recompensa. Ver Sistema de Crime e Justiça.
@@ -206,6 +206,7 @@ Requisitos:
 | Tempo | Frequência das decisões da facção e das assembleias (uma por ano) |
 | Eventos | Assembleia extraordinária, revolta, crise de sucessão e escassez em tempo de guerra são eventos condicionais, com causas registradas (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]). Nos eventos com escolha, a IA decide pela Personalidade do líder |
 | Combate | Se o personagem principal morre, o herdeiro assume; se todo o grupo cai, o jogador é capturado, sem Game Over (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
+| Felicidade | A facção tem uma Estabilidade própria (média ponderada das cidades + legitimidade do líder); Estabilidade baixa dispara assembleia extraordinária, crise de sucessão ou golpe (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]) |
 
 ### Perguntas em aberto
 

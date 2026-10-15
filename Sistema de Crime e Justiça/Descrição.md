@@ -151,7 +151,7 @@ Existe suborno: pagar um guarda para ignorar o crime.
 ### Perguntas em aberto
 
 1. **Valores de gravidade e das multas.** A tabela é um ponto de partida e precisa de testes.
-2. **Fórmula da Criminalidade.** Os pesos de Felicidade, pobreza e guardas (testes futuros).
+2. **Fórmula da Criminalidade.** Os pesos de Felicidade, pobreza, desemprego e guardas (testes futuros).
 3. **Valor mínimo da recompensa** para gerar Caçadores de Recompensa (testes futuros). Base inicial: crimes de gravidade 5.
 4. **Loja ilegal do jogador.** O jogador também pode transformar uma construção de produção dele em loja ilegal?
 5. **Missão de confiança.** Quais tipos de missão ou evento, e quanta Confiança é necessária.

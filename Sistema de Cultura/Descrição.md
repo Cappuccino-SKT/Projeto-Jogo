@@ -85,7 +85,7 @@ Isso é usado:
 
 ### Cultura e Felicidade
 
-A Cultura afeta a Felicidade da cidade: quanto **maior a distância** entre as leis da facção e as leis desejadas pela cultura da cidade, **menor a Felicidade**. Isso alimenta os eventos políticos e de revolta já previstos, e faz a conquista de uma cultura diferente ter custo real.
+A Cultura afeta a Felicidade da cidade: quanto **maior a distância** entre as leis da facção e as leis desejadas pela cultura da cidade, **menor a Felicidade**. Isso alimenta os eventos políticos e de revolta já previstos, e faz a conquista de uma cultura diferente ter custo real. A conta e os pesos estão no [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]].
 
 ### Cultura da cidade
 

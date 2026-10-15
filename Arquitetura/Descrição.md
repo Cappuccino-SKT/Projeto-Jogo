@@ -73,6 +73,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 - Desenhar só o que está na câmera (culling).
 - Como cada cultura tem arte própria de construção, as partes (paredes, telhados, portas) devem ser peças reaproveitáveis.
 - Personagens em **camadas** (corpo, 3 peças de armadura, arma, escudo) sobre animações compartilhadas por tipo de arma, em 4 direções (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
+- **Interface** desenhada pelo nosso próprio desenhista, em resolução nativa e separada do mundo, com layouts em JSON e perfil do jogador em arquivo próprio; o Dear ImGui fica só para depuração. Resolução de referência 1600 × 900 (ver [[Interface/Descrição|Interface e Controles]]).
 
 ### Salvar e carregar
 

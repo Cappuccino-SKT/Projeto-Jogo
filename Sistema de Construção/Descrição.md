@@ -10,6 +10,8 @@ Atributos
 - Nivel de inteligencia para permitir a construção (isso é como se construções avançadas precisasem de um engenheiro para monitorar a obra).
 - Tempo de construção
 - Trabalhadores construindo (Afeta o tempo para a construção terminar)
+- Dono (Cidade, Facção, Rico ou jogador; ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]])
+- Vagas (por nível; ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]])
 - Gerente
 - Empregados contratados
 - Empregados trabalhando no momentos
@@ -53,6 +55,11 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Encantaria** | Magos de Ofício encantam itens de Rank 3 ou maior (Sistema de Magia) |
 | **Hospital** | Cura os NPCs do grupo do jogador; um Mago de Suporte acelera a cura (Sistema de Cura e Sistema de Magia) |
 | **Boticário** | Produz Medicamentos (Sistema de Cura) |
-| **Moradias** | Alojamento coletivo (Escravos), Casa simples (Civil), Casa média (Rico), Mansão (Nobreza) e Palácio (Realeza); construídas em lotes fixos (ver [[Sistema de População/Descrição|Sistema de População]]) |
+| **Moradias** | Senzala (Escravos), Casa (Civil), Casarão (Rico), Mansão (Nobreza) e Palácio (Realeza), cada uma com níveis de 1 a 5 no canvas de construções civis; construídas em lotes fixos (ver [[Sistema de População/Descrição|Sistema de População]]) |
+| **Universidade** | Educação: melhora a Inteligência e o Trabalho Especialista dos NPCs da cidade e dá bônus aos Pesquisadores; construção da Facção (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]) |
 
 **Ficam para depois:** Posto da Guarda e Muralha.
+
+### Modo construção (interface)
+
+Ao entrar no modo construção, os lotes livres ficam destacados. Clicar num lote abre uma lista por categoria, com custo, vagas e materiais; há pré-visualização, fila de obras e demolição (ver [[Interface/Descrição|Interface e Controles]]).

@@ -227,7 +227,7 @@ Com as velocidades altas (até 8x no Mapa Mundial), o jogador perde coisas. Trê
 | **Aviso** | Ícone e som |
 | **Crítico** | Pausa o jogo automaticamente |
 
-Há um filtro por distância: eventos longe do jogador vão só para o diário.
+Há um filtro por distância: eventos longe do jogador vão só para o diário. O jogador também pode **personalizar** as notificações (categorias, limite, agrupamento, o que aparece em velocidade alta e se o Crítico pausa); ver [[Interface/Descrição|Interface e Controles]].
 
 ### Diário de eventos
 
@@ -259,6 +259,7 @@ Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limi
 | NPC | Efeitos visíveis em NPCs; NPCs Importantes podem disparar eventos ao morrer |
 | Combate | Criaturas e bandidos criados por eventos; evento Crítico pausa; combate reduz a velocidade para 1x |
 | População | Doença, fome, guerra e crime como causas de mortalidade; nascimentos e migração por estação |
+| Felicidade | As faixas de Felicidade e a Estabilidade disparam protestos, greves, rebeliões, saída de empresas e revolta; eventos mudam a Felicidade por modificadores com causa (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]) |
 | IA | Decisões de facções de IA nos eventos com escolha |
 | Início de Jogo | Escolha do narrador na criação |
 

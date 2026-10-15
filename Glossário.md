@@ -55,7 +55,9 @@
 | **PIB** | Soma do dinheiro das cidades; só para comparar facções |
 | **Banco da Facção** | Caixa da facção, alimentado por impostos |
 | **Banco da Cidade** | Dinheiro próprio da cidade, distribuído a NPCs e lojas |
-| **Felicidade** | Satisfação da cidade ou do NPC; alimenta revoltas e eventos políticos |
+| **Felicidade** | Satisfação, de 0 a 100, guardada por classe social em cada cidade. [[Sistema de Felicidade e Estabilidade/Descrição\|Felicidade e Estabilidade]] |
+| **Controle** | Força de contenção da cidade: guardas, Esquadrões estacionados e Medo |
+| **Estabilidade** | Felicidade ponderada + Controle − 10; abaixo de zero por alguns dias, ocorre a revolta |
 | **Criminalidade** | Valor agregado de crime da cidade. [[Sistema de Crime e Justiça/Descrição\|Crime e Justiça]] |
 | **Recompensa** | Valor pago por capturar um criminoso; é por facção e decai com o tempo |
 | **Renome** | Fama do personagem por feitos, de 0 a 100. [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]] |
@@ -73,6 +75,10 @@
 | **Tarifa** | Imposto sobre caravanas civis que entram no território da facção |
 | **Ração Militar** | Comida do exército |
 | **Posto Comercial** | Construção necessária para enviar caravanas civis |
+| **Vaga** | Posto de trabalho de uma construção, por nível. [[Sistema de Trabalho e Propriedade/Descrição\|Trabalho e Propriedade]] |
+| **Dono** | Quem possui uma construção: Cidade, Facção, Rico ou jogador |
+| **Empresa** | Construção de produção ou comércio pertencente a um Rico |
+| **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
 
 ## Eventos, tecnologia e magia
 
@@ -95,6 +101,17 @@
 | **Intervalo de Ataque** | Tempo entre ataques de uma arma |
 | **Modo letal / não letal** | Se Vida 0 mata ou deixa Inconsciente |
 | **Duelo** | Combate entre dois, sem interferência |
+
+## Interface
+
+| Termo | Significado |
+|---|---|
+| **HUD** | Elementos fixos na tela durante o jogo (barra superior, retratos, minimapa...). Personalizável pelo jogador. [[Interface/Descrição\|Interface]] |
+| **Modo de edição da interface** | Modo em que o jogador move, redimensiona e esconde os elementos do HUD |
+| **Lente de mapa** | Modo de visualização do Mapa Mundial (Política, Cultura, Felicidade, Comércio, Perigo, Tecnologia) |
+| **Barra de alertas** | Faixa com os problemas mais urgentes da cidade do jogador |
+| **Por quê?** | Detalhamento dos fatores por trás de um número ou evento |
+| **Perfil do jogador** | Arquivo com layout do HUD, escala, atalhos e notificações, separado do save |
 
 ## Desenvolvimento
 

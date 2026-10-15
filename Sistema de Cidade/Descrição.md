@@ -36,8 +36,10 @@ O jogador pode fundar um assentamento (nível 1) em um mapa sem dono, ou em terr
 - Layout (desenhado à mão, com lotes de construção pré-definidos)
 - Quantidade de NPCs de cada classe social
 - Dinheiro da cidade (o "banco da cidade" do Sistema Econômico)
+- Taxa de desemprego e riqueza média por classe (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]])
 - Inventário da cidade
-- Felicidade da cidade — afetada pela distância entre as leis da facção e as leis desejadas pela cultura, pela Criminalidade e por convocações altas
+- Felicidade da cidade — um valor de 0 a 100 por classe social (a da cidade é a média ponderada), afetada pela distância entre as leis da facção e as leis desejadas pela cultura, pela Criminalidade, por convocações altas e outros fatores
+- Estabilidade — Felicidade ponderada + Controle − 10; decide a revolta (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]])
 - Criminalidade — valor agregado de crime da cidade (ver Sistema de Crime e Justiça)
 - Bens de consumo de cada classe social (usado para causar eventos)
 - Nível da cidade
