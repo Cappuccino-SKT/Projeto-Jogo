@@ -119,7 +119,7 @@ Vêm dos **traços**, com valor padrão por traço e possibilidade de sobrescrev
 ### Arte da cultura
 
 - **Itens, armas e roupas:** o item existe como um único item no jogo (por exemplo, uma espada), e a **textura muda conforme a cultura que o produziu**, como já definido no Sistema de Itens.
-- **Construções:** **cada cultura tem sua própria arte de construção.** Isso multiplica o volume de arte: hoje os canvases têm 22 tipos de construção (7 civis e 15 de produção), a maioria com 5 níveis, vezes 6 culturas. **[Em aberto, risco de escopo]** Vale planejar um jeito de reaproveitar partes (telhados, paredes, portas) entre os níveis e culturas, para a arte feita à mão ser viável.
+- **Construções:** **cada cultura tem sua própria arte de construção.** Isso multiplica o volume de arte: hoje os canvases têm 22 tipos de construção (7 civis e 15 de produção), a maioria com 5 níveis, vezes 6 culturas. Para isso ser viável: a aparência muda só nos níveis 1, 3 e 5, montada com peças reaproveitáveis (paredes, telhados, portas). Nas primeiras versões, as variações por cultura saem por **troca de paleta** (mesmo desenho, outras cores); o objetivo final é **estilo próprio por cultura** nas armas, armaduras e construções (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 
 ### Início de jogo e Cultura
 
@@ -149,4 +149,4 @@ Os estilos de início têm documento próprio: **Sistema de Início de Jogo**.
 ### Perguntas em aberto
 
 1. **Nomes das culturas e regiões.** Ficam para a história do jogo; por ora, nomes significativos.
-2. **Arte de construções.** Como reaproveitar partes entre culturas e níveis?
+2. **Arte por cultura:** quando sair da troca de paleta para formas próprias (ver Pipeline de Arte e Conteúdo).

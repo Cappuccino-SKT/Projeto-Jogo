@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado ao aplicar as respostas da rodada P0-5 (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado ao fechar o P0 com a rodada P0-6 (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -139,18 +139,26 @@
 
 **Mundo e Estado Inicial** — ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]
 - Malha de **48 Mapas Locais (8 × 6)**, 6 regiões de 8 mapas (2 × 3 blocos): Guerreira e Arcana ao norte, Autoritária e Religiosa no centro, Tecnocrata e Escravista ao sul. Culturas hostis ficam vizinhas.
-- Por região: 1 capital, 1 cidade e 1 vilarejo (a Escravista tem 2); mais 3 **Vilas Livres** sem facção. No primeiro dia: 16 mapas de território, 6 em disputa e só 4 sem dono (8%, contra 30% sugeridos: em aberto).
+- Por região: 1 capital, 1 cidade e 1 vilarejo (a Escravista tem 2); mais 3 **Vilas Livres** sem facção. No primeiro dia: 16 mapas de território, 6 em disputa e 4 sem dono (8%, aceito pelo autor; a malha vem dos dados e pode crescer depois dos testes).
 - Bioma e 2 a 3 recursos de destaque por região, com escassez de outros. **12 masmorras** (2 por região), dificuldade pela distância da capital; 3 lendárias no meio do mundo.
 - **Tom:** baixa magia, chegada da pólvora, sombrio e político; criaturas míticas só no futuro, em masmorras. **Só humanos** nas primeiras versões.
 - **Nomes significativos** (Facção Guerreira, Capital Arcana) e **personagens abstratos** até a história ser escrita; a história do mundo fica para depois.
 - **Ano 412**, 1º dia da Primavera; todos na Era 1. PIB entre −19% e +21% da média; cada facção forte numa coisa (a Guerreira é a mais pobre e tem o maior exército).
-- Matriz de afinidade 6 × 6; valor de relação = afinidade (+40, 0, −40) − 15 se dividem mapa em disputa ± 15 sorteado; 1 ou 2 guerras iniciais e 2 acordos comerciais sorteados. Pacotes de construções por nível e cultura; 5 Importantes fixos por papel; 2 ou 3 pontos de partida por estilo.
+- Matriz de afinidade 6 × 6; valor de relação = afinidade (+40, 0, −40) − 15 se dividem mapa em disputa ± 15 sorteado; 1 ou 2 guerras iniciais e 2 acordos comerciais sorteados. Pacotes de construções por nível e cultura; 5 Importantes fixos por papel; 2 ou 3 pontos de partida por estilo; o Dono de vila escolhe começar em território de facção (vinculado) ou num mapa livre (independente).
+
+**Pipeline de Arte e Conteúdo** — ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]
+- Artista definitivo ainda não escolhido; por ora o autor desenha (sem experiência). Fatia vertical com **pacotes de terceiros** provisórios e rascunhos. Programas grátis: **Pixelorama** (proposta), Tiled e VS Code.
+- Tile 16 px, vista 3/4, **boneco 16 × 24**, zoom padrão 2x (50 × 28 tiles em 1600 × 900), paleta mestre de cerca de 48 cores + 2 cores por cultura. Padrão fixo de 6 camadas de tiles e 6 de objetos no Tiled.
+- Variação por cultura com **troca de paleta** nas primeiras versões; meta final: **estilo próprio** por cultura em armas, armaduras e construções. Construções mudam de aparência nos níveis 1, 3 e 5.
+- Animação: 54 quadros por direção, 3 direções e espelho (cerca de 162 por camada). Estações: tingimento e poucas peças agora; variação real da arte do ambiente no futuro. Interior próprio só nas construções públicas mais visitadas e nas masmorras.
+- Ordem: fatia vertical (planície, cultura Autoritária) → cidade → primeira região → resto. **Sem prazo**: o limite é o peso da arte, estimado em menos de 100 MB na placa de vídeo para o jogo completo, a medir na fatia vertical.
+- Dados: foco em **C++**; CSV lido direto pelo jogo, validação em C++ (`--validar`). Os dados mandam nas listas quando a pasta `data/` existir. Arte no repositório do código, sem Git LFS.
 
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
 - **Cultura:** como reaproveitar partes da arte de construção (os nomes ficam para a história do jogo).
-- **Mundo:** mapas sem dono (8% na proposta, contra 30% sugeridos); Dono de vila em mapa livre ou em território; história, nomes e personagens; listas de tecnologias por cultura; valores do estado inicial.
+- **Mundo:** história, nomes e personagens; listas de tecnologias por cultura; valores do estado inicial.
 - **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto; itens de Medicamento.
@@ -167,7 +175,8 @@
 - **Trabalho:** valores a testar (vagas, salários, faixa de preço, estabilizador, imposto, empresas dos Ricos); nome e categoria das Funções; Engenheiro e Operário sem construção; Espada sem construção no canvas do Ferreiro; gerente das construções da Cidade; leilão; forma de estudo na Universidade.
 - **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; fuga e rebelião de Escravos; greves; layout do painel "Por quê?".
 - **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; telas do Mapa de Guerra; IDs de texto para outros idiomas.
-- **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
+- **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quanto a arte varia por estação; quando cada cultura ganha formas próprias.
+- **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
 
@@ -180,11 +189,12 @@
 | P0 | Trabalho, Salários e Propriedade (e Funções e Construções) | Escrito |
 | P0 | Interface e Controles | Escrito |
 | P0 | Mundo e Estado Inicial (a história fica para depois) | Escrito |
-| P0 | **Pipeline de arte e conteúdo** | **Perguntas enviadas, aguardando respostas** |
-| P1 | Viagem e Mundo; Reputação; Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
+| P0 | Pipeline de arte e conteúdo | Escrito |
+| P1 | **Viagem e Mundo** | **Perguntas enviadas, aguardando respostas** |
+| P1 | Reputação; Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 
-**Ordem:** responder a rodada P0-6 (Pipeline de arte) → sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Responder a rodada P1-1 (Viagem e Mundo) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 

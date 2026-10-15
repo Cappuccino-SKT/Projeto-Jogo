@@ -61,6 +61,8 @@ O Mapa Interno é o interior das construções que residem no Mapa Local, refere
 
 Qualquer construção de produção pode funcionar como **loja ilegal** disfarçada (ver Sistema de Crime e Justiça).
 
+Os mapas são montados no Tiled com um padrão fixo de camadas (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]). Têm interior desenhado próprio: Taverna, Mercado, Templo, Prisão, Palácio, Quartel e as masmorras; Moradias e construções de produção usam interiores genéricos por tamanho e cultura.
+
 Cada Mapa Interno tem sua própria grade de tiles (em escala menor) e um **Nível de Segurança**, que afeta a chance de detecção em furtos e a dificuldade de masmorras. A entrada/saída usa um **ponto fixo** (a porta), diferente da transição por borda proporcional usada entre Mapas Locais — ao sair, o NPC reaparece no "Endereço da volta" no Mapa Local pai.
 
 Por padrão, todo Mapa Interno começa em **LOD 2 (Abstrato)**, mesmo que o Mapa Local pai esteja em LOD 0 — só sobe de nível quando alguém entra de fato, evitando simular o interior de toda casa de toda cidade o tempo todo.

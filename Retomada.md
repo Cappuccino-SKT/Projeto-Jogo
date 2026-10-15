@@ -1,10 +1,10 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado ao aplicar a rodada P0-5 e abrir a P0-6 (2026-10-15).
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado ao fechar o P0 (rodada P0-6) e abrir a P1-1 (2026-10-15).
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Rodada pendente: P0-6, Pipeline de arte e conteúdo** (última do P0). A lista de perguntas (seção 4) foi enviada ao autor e **ainda não foi respondida**. Ao retomar, pedir o `Respostas.txt` (ou as respostas no chat) e conferir se ele é desta rodada: os itens vão de A0a a E3.
-3. Depois da P0-6: os sistemas P1 (seção 3).
+2. **Rodada pendente: P1-1, Viagem e Mundo** (primeira do P1; o P0 está completo). A lista de perguntas (seção 4) foi enviada ao autor e **ainda não foi respondida**. Ao retomar, pedir o `Respostas.txt` (ou as respostas no chat) e conferir se ele é desta rodada: os itens vão de A1 a E2 e falam de viagem, encontros e névoa.
+3. Depois da P1-1: os outros sistemas P1, na ordem da seção 3.
 4. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -51,8 +51,8 @@ Regras extras:
 | P0 | Trabalho, Salários e Propriedade (+ Funções e Construções) | Escrito |
 | P0 | Interface e Controles | Escrito |
 | P0 | Mundo e Estado Inicial | Escrito (a história fica para depois) |
-| P0 | **Pipeline de arte e conteúdo** (Tiled, orçamento de arte) | **Perguntas enviadas, sem resposta** |
-| P1 | Viagem e Mundo (entidades em trânsito, encontros, névoa) | A fazer |
+| P0 | Pipeline de arte e conteúdo | Escrito |
+| P1 | **Viagem e Mundo** (entidades em trânsito, encontros, névoa) | **Perguntas enviadas, sem resposta** |
 | P1 | Reputação e Relações do jogador | A fazer |
 | P1 | Companheiros, Relações familiares e Diálogo | A fazer |
 | P1 | Guerra e Campanha | A fazer |
@@ -66,120 +66,146 @@ Regras extras:
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível, especialização de cidades, ordens de produção em lote, guarnição e defesa, modo observador, eventos de dinastia.
 
-## 4. Rodada P0-6 pendente: Pipeline de arte e conteúdo
+## 4. Rodada P1-1 pendente: Viagem e Mundo
 
-Objetivo: decidir **como a arte e os dados do jogo serão produzidos** e **quanto** cabe na primeira versão. Tudo é feito à mão, e é aqui que mora o maior risco do projeto (ver a seção 7 da [[Revisão do Projeto]]). Inclui duas pendências da P0-5 (A0a e A0b). Primeira rodada no padrão detalhado (seção 2).
+Objetivo: definir **como o grupo do jogador, as caravanas, os exércitos e os bandos se movem pelo Mapa Mundial**, quanto tempo leva, o que acontece no caminho e o que o jogador sabe do mundo (névoa). Resolve a inconsistência das "entidades em trânsito" (ver 4.7 da [[Revisão do Projeto]]). É a base de Guerra, Comércio e Notícias.
 
-### A. Pendências da P0-5
+**Fatos que as perguntas usam:** 24 h de jogo = 16 min reais a 1x (1 hora de jogo = 40 s reais); 8x só no Mapa Mundial; Mapa Local de 128 × 128 tiles; malha de 8 × 6 mapas; combate local de até cerca de 40 combatentes; derrota = captura, sem Game Over.
 
-**A0a. Quantos mapas sem dono?**
-- *Contexto:* foi aceito "cerca de 30% dos mapas sem dono" e também "1 capital, 1 cidade e 1 ou 2 vilarejos por região". Numa malha de 48 mapas, cada cidade de facção transforma até 4 vizinhos em território. Na disposição proposta no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]], sobram só **4 mapas sem dono (8%)**.
+### A. Movimento no Mapa Mundial
+
+**A1. Como uma entidade anda no Mapa Mundial**
+- *Contexto:* o Mapa Mundial é uma malha de 48 quadrados, cada um um Mapa Local. Ele não guarda dados de jogo, só a lista de entidades em trânsito.
 - *Opções:*
-  - (a) **Aceitar cerca de 8%.** Os territórios de facção continuam exploráveis (masmorras, recursos, bandidos) e permitem fundar assentamento vinculado; as 3 Vilas Livres completam o espaço sem facção. Não custa arte.
-  - (b) **Malha de 10 × 6 (60 mapas)**, com uma faixa central de 12 mapas selvagens entre o oeste e o leste: cerca de 27% sem dono, mas são 12 mapas de 128 × 128 a mais para desenhar (25% a mais de arte de mapa).
-  - (c) **Manter 48 e tirar os vilarejos** (só capital e cidade por região): 13 mapas sem dono (27%), mas sobram 12 cidades de facção e só 2 mapas em disputa, com menos guerra de fronteira.
-- *Sugestão:* **(a)**. O volume de arte é o maior risco do projeto, e o que importa para o jogador (espaço para explorar e fundar) já existe nos territórios e nas Vilas Livres. Se nos testes o mundo parecer apertado, a malha cresce depois (você já previu que o tamanho pode mudar).
+  - (a) **De mapa em mapa (grafo):** a posição é "mapa atual + próximo mapa + progresso de 0 a 100%". Na tela, um ícone desliza do centro de um quadrado ao centro do outro. Muito barato: cada entidade é só um contador.
+  - (b) **Posição livre** sobre a imagem do mundo (como Mount & Blade): mais bonito, mas exige busca de caminho sobre a imagem e colisão entre entidades.
+- *Sugestão:* **(a)**. Com 48 mapas, a rota é uma busca simples entre quadrados, e centenas de entidades custam quase nada. *Exemplo:* uma caravana sai da Cidade Escravista (7,5) para a Capital Autoritária (1,4): a rota passa por 6 ou 7 mapas, e o ícone dela anda quadrado a quadrado.
 
-**A0b. Onde o Dono de vila começa?**
-- *Contexto:* o [[Sistema de Início de Jogo/Descrição|Início de Jogo]] diz que o Dono de vila começa num assentamento **em território de facção** (vinculado a ela) e tenta torná-lo independente. A proposta do Mundo colocou os pontos em **mapas livres** (já independente).
-- *Opções:*
-  - (a) Mapa livre: começa independente, sem impostos nem leis de facção; mais tranquilo, com menos história.
-  - (b) Território de facção: começa vinculado; para cumprir a Ambição "Fundar uma facção", precisa crescer até o nível 3 e romper com a facção, o que pode virar revolta. Mais conflito.
-  - (c) **Os dois:** 3 pontos, 2 em territórios de facções diferentes e 1 livre; o jogador escolhe.
-- *Sugestão:* **(c)**, com os pontos: território Arcano (5,2), território Tecnocrata (2,5) e o mapa livre (5,3). Mantém a ideia original (ascender e se libertar) e dá uma opção pacífica.
+**A2. Quanto tempo leva atravessar um Mapa Local**
+- *Contexto:* dentro de um Mapa Local, em LOD 0, o boneco anda de verdade. Com velocidade de cerca de 4 tiles por segundo real, atravessar 128 tiles leva cerca de 32 s reais, quase 1 hora de jogo. No Mapa Mundial o tempo pode ser outro: ele representa estradas, descanso e terreno.
+- *Opções* (tempo por Mapa Local, a pé):
+  - (a) **1 hora:** coerente com andar no Mapa Local, mas o mundo fica minúsculo: cruzar o mundo de leste a oeste (8 mapas) leva 8 horas, e um exército chega a qualquer lugar no mesmo dia.
+  - (b) **4 horas:** cruzar o mundo leva cerca de 32 horas (1,3 dia). A 8x, cada mapa passa em cerca de 20 s reais, e cruzar o mundo leva menos de 3 minutos reais.
+  - (c) **8 horas:** cruzar o mundo leva 2,7 dias; as distâncias pesam bastante (comércio, guerra, notícias), mas viajar fica lento.
+- *Sugestão:* **(b) 4 horas**. Dá tempo para a distância importar (uma campanha de guerra leva alguns dias de uma estação de 16) sem deixar a viagem cansativa. A diferença para o andar no Mapa Local (1 hora) é aceita: andar até a borda é mais rápido, mas exige atenção; a viagem pelo Mapa Mundial é automática e pode correr a 8x.
+- *Impacto:* Comércio (viagens por estação), Guerra (tempo de marcha), Notícias (atraso das informações).
 
-### B. Quem desenha e com qual ferramenta
+**A3. De onde se pode começar uma viagem pelo Mapa Mundial**
+- *Contexto:* já está decidido que, ao chegar, o grupo reaparece no ponto de entrada de Viagem Rápida do destino.
+- *Opções:* (a) **de qualquer lugar**: abrir o Mapa Mundial e clicar no destino; (b) só **saindo pela borda** ou por um ponto de viagem (portão da cidade, estrada).
+- *Sugestão:* **(a)**, com duas travas: não pode haver combate e nenhum inimigo dentro do raio de alerta (como em Kenshi e Mount & Blade). Ao partir, o grupo some do Mapa Local e vira um ícone no Mapa Mundial. Também vale viajar para um mapa vizinho; nesse caso, chega pelo ponto de entrada, e não pela borda.
 
-**B1. Quem vai desenhar, e com quanta experiência?**
-- *Contexto:* tudo é à mão: 48 mapas, construções de 6 culturas, bonecos em camadas, animações, ícones e a interface. A [[Interface/Descrição|Interface]] diz "nosso próprio desenhista", mas não está definido quem é.
-- *Pergunta:* quem desenha: você, um amigo ou um artista contratado? Alguém já fez pixel art ou animação? Quantas horas por semana podem ir para a arte?
-- *Opções:* (a) você sozinho; (b) você e um artista parceiro (por exemplo: você monta os mapas no Tiled; o parceiro desenha tiles, bonecos e construções); (c) artista contratado por encomenda.
-- *Sugestão:* a escolha depende da sua resposta, mas em qualquer caso usar **arte provisória** na fatia vertical e nos protótipos: quadrados coloridos e bonecos simples de 16 px, feitos por você em minutos. Assim a programação não espera a arte, e a arte final entra depois, trocando só os arquivos de imagem. Arte provisória não é procedural; é um rascunho à mão, descartado depois. Também é possível usar pacotes gratuitos de terceiros **só como provisório**, nunca no jogo final.
+**A4. Terreno e estradas mudam a velocidade?**
+- *Contexto:* cada região tem um bioma, e os mapas desenhados no Tiled já podem ter estradas.
+- *Sugestão:* sim, com um **custo de travessia** por bioma e um bônus de estrada:
 
-**B2. Programa de desenho**
-- *Contexto:* o Tiled monta os mapas, mas não desenha os tiles nem os bonecos. Falta um programa de pixel art.
-- *Opções:*
-  - (a) **Aseprite**: cerca de US$ 20 (Steam ou itch.io), ou grátis se compilado a partir do código aberto. Tem camadas, animação, paleta travada, e exporta a folha de sprites (uma imagem com todos os quadros) com um arquivo JSON que o jogo lê. É o padrão dos jogos indie de pixel art.
-  - (b) **LibreSprite**: grátis, uma versão antiga do Aseprite, sem atualizações recentes.
-  - (c) **Pixelorama**: grátis e em desenvolvimento ativo, um pouco menos completo.
-- *Sugestão:* **(a) Aseprite**. Os arquivos `.aseprite` ficam guardados como fonte e o jogo usa só o PNG exportado. Se o custo pesar, começar no Pixelorama, que exporta no mesmo formato.
+| Terreno | Multiplicador do tempo |
+|---|---|
+| Planície, litoral | × 1,0 |
+| Floresta, colinas, terras áridas | × 1,25 |
+| Montanha | × 1,5 |
+| Com estrada ligando as cidades | × 0,75 sobre o valor acima |
 
-**B3. Padrão de camadas dos mapas no Tiled**
-- *Contexto:* o Tiled funciona como um "Paint de azulejos": você escolhe um tile e pinta no mapa. Cada mapa tem **camadas** (folhas transparentes empilhadas) e **objetos** (pontos e retângulos com nome). O jogo lê as camadas pelo nome, então o padrão precisa estar fixo antes do primeiro mapa.
-- *Pergunta:* aceita este padrão para todos os Mapas Locais?
+- A rota escolhe o caminho mais rápido, não o mais curto. *Exemplo:* da Capital Guerreira (1,1), na montanha, ir até (2,2) leva 6 h a pé (4 × 1,5); com estrada, 4,5 h.
+- *Custo:* desprezível (busca de caminho em 48 quadrados). As estradas são marcadas no `mapas.json`.
+
+### B. Encontros no caminho
+
+**B1. Como acontece um encontro durante a viagem do jogador**
+- *Contexto:* os bandidos ficam em mapas sem dono ou de fronteira, com tamanho ligado à Criminalidade da cidade mais próxima; em LOD 2 viram uma "ameaça bandida" por região ([[Sistema de Eventos/Descrição|Eventos]]).
 - *Sugestão:*
-  - **Camadas de tiles:** 1. Chão (grama, terra, água); 2. Detalhes do chão (flores, caminhos); 3. Objetos baixos (pedras, cercas, lavouras); 4. Construções e paredes; 5. Acima do personagem (copas de árvore, telhados); 6. Colisão (invisível no jogo; marca onde não se anda).
-  - **Camadas de objetos:** Lotes (pequeno, médio e grande, com o tipo permitido); Portas (ligam ao Mapa Interno); Bordas (saída para o mapa vizinho); Recursos (áreas de floresta, mina, pesca); Criaturas e bandidos (pontos de aparição); Pontos de interesse (quadro de contratos, entrada de masmorra).
-  - **Ajudas do editor:** o recurso de **terrenos** do Tiled (você pinta "grama" e ele escolhe sozinho o tile de borda certo) e os **carimbos** (pedaços prontos, como "bosque pequeno" ou "lavoura", colados várias vezes). São só ajudas na hora de desenhar: o mapa salvo é fixo e feito à mão, não é gerado pelo jogo.
+  - A cada Mapa Local atravessado, sorteia-se um encontro. Chance base: **Território 5%, Em disputa 15%, Sem dono 20%**, mais a ameaça bandida da região.
+  - **Os bandidos avaliam a força:** se o grupo do jogador for mais de 2 vezes mais forte, eles não atacam (como em Mount & Blade). Assim um grupo forte não é interrompido a toda hora.
+  - **No encontro:** o jogo **pausa** e mostra uma janela com as opções **Lutar**, **Fugir**, **Negociar ou subornar** e **Render-se**.
+  - **Lutar:** carrega aquele Mapa Local em LOD 0, com o grupo no ponto onde estava e os inimigos por perto; é o combate local normal.
+  - **Fugir:** chance pela diferença de velocidade (montaria ajuda); se falhar, vira luta.
+  - **Render-se:** é a captura que já existe no [[Sistema de Combate/Descrição|Combate]].
+- *Exemplo:* o Mercador atravessa o mapa em disputa (6,4) com 4 guardas; sai 15% + ameaça; aparecem 8 bandidos, que se acham mais fortes e atacam; o jogador suborna com 200 moedas e segue.
 
-### C. Especificação da arte
+**B2. Encontros das entidades da IA, longe do jogador**
+- *Contexto:* as guerras de IA já são resolvidas por um cálculo rápido de forças, sem gerar o Mapa de Guerra.
+- *Sugestão:* usar o **mesmo cálculo rápido** para caravana × bandidos e patrulha × bandidos: compara a força dos dois lados, com um pouco de sorte. A caravana que perde fica com **30% a 100% de perda da carga** (quanto maior a diferença, maior a perda); o resultado gera notícia (futuro sistema de Notícias) e pode criar um contrato de escolta.
 
-**C1. Tamanho do boneco e quanto aparece na tela**
-- *Contexto:* tile de 16 px e vista de cima em 3/4 (como Stardew) estão como provisórios. Você joga em 1600 × 900.
-- *Conta:* com zoom 2x, cada tile ocupa 32 px na tela, e 1600 × 900 mostra **50 × 28 tiles**; com 3x, 33 × 19; com 4x, 25 × 14. Um Mapa Local de 128 × 128 tem cerca de 2,5 telas de largura e 4,5 de altura em 2x.
-- *Opções do boneco:* (a) **16 × 24 px** (1 tile de largura e 1,5 de altura): multidões legíveis, estilo próximo de Songs of Syx; (b) **16 × 32 px** (estilo Stardew): mais detalhe de roupa e armadura, mas cada peça custa mais pixels em cada quadro.
-- *Sugestão:* confirmar o tile de 16 px e a vista 3/4, com boneco de **16 × 24** e zoom padrão de 2x. O jogo mostra muita gente (100 a 300 NPCs reais por cidade, combates de 40), e cada peça de armadura é desenhada em todos os quadros de animação; o boneco menor corta esse custo em cerca de 25%.
+**B3. Encontros que não são de luta**
+- *Sugestão:* uma lista curta, sorteada junto com os encontros hostis:
 
-**C2. Paleta de cores**
-- *Contexto:* arte feita por mais de uma pessoa, ou ao longo de anos, fica desencontrada sem uma paleta fixa.
-- *Opções:* (a) **paleta mestre** fixa para o jogo todo; (b) paleta livre em cada desenho.
-- *Sugestão:* **(a)**. Uma paleta de cerca de 48 cores (partindo de uma paleta pública conhecida de pixel art, como a Endesga 32 ou a Resurrect 64, ajustada) e **2 cores de destaque por cultura**, usadas em bandeiras, roupas e telhados: Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). As mesmas cores pintam a lente Política do Mapa Mundial.
+| Encontro | O que acontece |
+|---|---|
+| Mercador viajante | Compra e venda ali mesmo, com preços de outra região |
+| Patrulha da facção | Se o jogador tiver Recompensa nessa facção, tenta prender; se não, segue |
+| Refugiados | Fogem de guerra ou fome; podem pedir comida ou virar recrutas |
+| Peregrinos | Indo à Capital Religiosa; trazem rumores |
+| Caravana em apuros | Sendo atacada; ajudar dá dinheiro e relação com o dono |
 
-**C3. Troca de paleta nas variações por cultura** (decisão que mais mexe no volume de arte)
-- *Contexto:* cada item tem textura por cultura, e cada boneco usa camadas (corpo, 3 peças de armadura, arma e escudo). Se cada variação for um desenho novo, o número de quadros explode (ver D1).
-- *Como funciona:* desenha-se a peça uma vez, à mão (por exemplo, a Armadura Pesada), e o jogo troca cada cor por outra, de uma tabela. O "metal" vira ferro escuro na Guerreira e bronze polido na Escravista; o "tecido" vira vermelho ou púrpura. O desenho continua feito à mão; só as cores mudam.
-- *Opções:* (a) troca de paleta para cultura, material (Tier) e cor de roupa; desenho novo só quando a forma muda; (b) tudo desenhado separado: máximo de identidade, custo multiplicado por 6; (c) misto: corpo e roupas por troca de paleta; armaduras, armas e escudos com forma própria por cultura.
-- *Sugestão:* **(c)** como meta e **(a)** na primeira versão. Cada cultura ganha silhueta própria nas peças que mais aparecem (um elmo com chifres na Guerreira, um capuz na Arcana) e o resto vem das cores.
+- *Impacto:* liga a Viagem ao Crime (Recompensa), à Reputação (P1, futuro) e às Notícias (rumores).
 
-**C4. Quantos quadros de animação**
-- *Contexto:* as animações são compartilhadas por tipo de arma (8 tipos), em 4 direções ([[Sistema de Combate/Descrição|Combate]]).
-- *Sugestão (quadros por direção):* parado 2; andar 4 (correr usa o andar acelerado); ataque 4 para cada um dos 8 tipos de arma (32); ferido 1; cair 3; trabalhar 4 em cada um de 3 gestos (golpear: machado, picareta, martelo; abaixar e colher; carregar) (12). Total: 54 por direção, cerca de **216 quadros por camada**. Desenhando só 3 direções e espelhando a esquerda a partir da direita: cerca de **162**.
-- *Pergunta:* aceita esse orçamento e o espelhamento? Com o espelhamento, o escudo troca de mão quando o boneco vira; muitos jogos aceitam isso.
+### C. Entidades em trânsito
 
-### D. Orçamento e escopo da primeira versão
+**C1. Quais entidades andam no Mapa Mundial**
+- *Sugestão:* grupo do jogador; caravanas civis; exércitos (Esquadrões com a Caravana Militar); bandos de bandidos; **patrulhas** das facções (andam pelo próprio território, caçam bandidos e cobram Tarifa).
+- *Dados de cada uma:* tipo, dono, posição (mapa atual, próximo mapa e progresso), destino e rota, velocidade, força (para o cálculo rápido), carga e grupo de NPCs que ela representa.
+- *Pergunta:* aceita as patrulhas? Elas dão vida ao mundo e reduzem bandidos, mas custam soldo do Banco da Facção.
 
-**D1. Volume de arte e por onde começar**
-- *Contexto:* estimativa grosseira, para dimensionar (valores a refinar):
+**C2. O que acontece quando uma entidade passa por um Mapa Local**
+- *Contexto:* em LOD 2, o mapa é só dado; em LOD 0, tudo é simulado tile a tile.
+- *Sugestão:*
+  - **Mapa em LOD 2:** a entidade só passa; o mapa registra o efeito (Tarifa cobrada, comércio feito, ameaça bandida que atacou).
+  - **Mapa em LOD 0 ou 1** (com o jogador presente): a entidade **aparece de verdade** na borda, na posição proporcional, com seus NPCs (a caravana com os animais e os guardas), atravessa o mapa pela estrada e sai pela borda oposta. Enquanto isso, o progresso dela no Mapa Mundial fica parado. O jogador pode conversar, comerciar ou atacar.
+- *Exemplo:* o jogador está na Cidade Religiosa (7,3) e vê chegar pela borda leste a caravana da Escravista; pode comprar dela antes que chegue ao Mercado.
 
-| Item | Conta completa | Primeira cultura, com os cortes sugeridos |
-|---|---|---|
-| Tiles de terreno | cerca de 200 por bioma × 6 = 1.200 | 1 bioma: cerca de 200 |
-| Construções | 22 tipos × 5 níveis × 6 culturas = 660 desenhos | aparência muda só nos níveis 1, 3 e 5, com peças reaproveitáveis: 22 × 3 = 66 |
-| Bonecos | cerca de 20 camadas × 162 quadros = 3.200 quadros | troca de paleta (C3): cerca de 1.500 |
-| Mapas Locais | 48 mapas de 128 × 128 | 1 mapa na fatia vertical; 8 na primeira região |
-| Mapas Internos | ver D3 | moradias genéricas + 4 públicas |
-| Criaturas | cerca de 10 tipos × 40 quadros | 3 tipos |
-| Interface | molduras, botões e cerca de 150 ícones de itens | ícones da fatia vertical |
+**C3. Caravanas da IA: sempre reais no Mapa Mundial?** (conflito com uma decisão anterior)
+- *Contexto:* o [[Sistema de Comércio/Descrição|Comércio]] decidiu que, em LOD 2, o comércio vira um fluxo calculado por estação, sem caravana individual, para não pesar.
+- *Opções:*
+  - (a) **Manter o fluxo**: longe do jogador não existe caravana; perto dele, ela "nasce" do fluxo. Mais barato, mas o jogador não pode emboscar uma caravana longe, nem seguir uma de uma ponta à outra.
+  - (b) **Todas as caravanas são entidades reais** no Mapa Mundial, o tempo todo; só a simulação tile a tile fica para o LOD 0. Com o movimento de mapa em mapa (A1), 50 a 100 caravanas custam quase nada.
+- *Sugestão:* **(b)**. O que pesava era a simulação tile a tile, não o ícone no Mapa Mundial. Fica mais coerente: toda caravana pode ser seguida, emboscada e protegida, e os preços mudam quando ela chega de verdade. Se aceita, o texto do Comércio muda.
 
-- *Pergunta:* aceita produzir a arte em camadas, igual à programação, e qual cultura vem primeiro?
-- *Sugestão:* (1) **fatia vertical:** 1 bioma (planície), 1 cultura, 1 Mapa Local, Fazenda, Cozinheiro, Mercado e Casa, 1 boneco com parado, andar e trabalhar; (2) **cidade completa** da mesma cultura; (3) **a primeira região** inteira; (4) as outras culturas e biomas. Primeira cultura: **Autoritária**, porque a fatia vertical (Fazenda → Cozinha → Mercado) combina com a planície do grão, e a cultura dela é a mais "neutra" visualmente, boa base para as outras.
+### D. Névoa e exploração
 
-**D2. As estações mudam a aparência do mapa?**
-- *Contexto:* o ano tem 4 estações de 16 dias (cerca de 4,3 horas reais cada). O sistema de Clima e Estações ainda será escrito.
-- *Opções:* (a) sem mudança visual; (b) **tingimento** do mapa por estação (mais amarelado no outono, azulado no inverno) e algumas peças trocadas à mão (neve nos telhados, árvores sem folhas, lavoura colhida), cerca de 15% de tiles a mais; (c) um conjunto completo de tiles por estação, como Stardew: tiles de terreno × 4.
-- *Sugestão:* **(b)**: o jogador sente a estação, e o custo de arte é pequeno.
+**D1. O que o jogador vê do Mapa Mundial**
+- *Opções:* (a) tudo visível desde o início (como Mount & Blade); (b) **névoa por Mapa Local**: explorado ou não; (c) névoa e **informação que envelhece**: o que você viu fica registrado com a data ("visto há 12 dias").
+- *Sugestão:* **(b) com (c)**:
+  - **Não explorado:** só o contorno do quadrado e o bioma aproximado.
+  - **Explorado** (visitado ou atravessado): terreno, cidade, nível, dono e recursos, guardados com a data em que foram vistos.
+  - **Visão atual:** só o mapa onde o grupo está e os 4 vizinhos mostram as entidades em trânsito ao vivo; o resto mostra a última informação.
+  - **Conhecido desde o início:** as 6 capitais (são famosas) e os mapas vizinhos ao ponto de partida.
 
-**D3. Quais construções têm interior desenhado?**
-- *Contexto:* cada construção é um Mapa Interno com grade própria. Desenhar interiores para 22 tipos × níveis × culturas é enorme.
-- *Opções:* (a) todas; (b) só as que o jogador visita com frequência (Moradias, Taverna, Mercado, Templo, Prisão, Palácio, Quartel e as 12 masmorras); nas de produção, os trabalhadores entram pela porta e o interior existe só como dado, sem arte; (c) interiores genéricos por tamanho (pequeno, médio e grande), decorados com móveis do tipo da construção.
-- *Sugestão:* **(b) + (c)**: as públicas da lista com interior próprio; Moradias e construções de produção com interior genérico por tamanho e cultura. *Conflito resolvido:* o furto em loja ilegal disfarçada ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]) acontece numa construção de produção, que assim também tem interior (o genérico).
+**D2. Névoa dentro do Mapa Local e do Mapa Interno**
+- *Opções:* (a) sem névoa dentro do Mapa Local; (b) névoa também dentro (como as áreas escuras de muitos jogos de estratégia).
+- *Sugestão:* **(a) nos Mapas Locais e névoa só nas masmorras**: as salas ainda não visitadas ficam escuras, o que dá tensão à exploração e custa pouco.
 
-### E. Dados e ferramentas
+**D3. Conhecimento que vem do estilo de início e dos mapas comprados**
+- *Sugestão:*
 
-**E1. Como editar os dados (itens, receitas, construções)**
-- *Contexto:* está decidido JSON na pasta `data/`, com validação. Algumas tabelas terão centenas de linhas (itens, receitas, preços).
-- *Opções:* (a) JSON direto num editor de texto comum; (b) **VS Code** (grátis) com **esquemas JSON**: o editor completa os campos e sublinha os erros enquanto você digita; (c) planilhas (LibreOffice, Excel ou Google Sheets) convertidas em JSON por um script Python.
-- *Sugestão:* **(b)** para tudo e **(c)** só nas tabelas grandes e simples (itens, receitas, preços). Dois scripts em Python, que você já tem instalado: `converter_planilhas.py` (gera os JSON) e `validar_dados.py`, que roda antes do jogo e antes de cada commit e lista erros como "a receita Pão cita o item Farinha de Trigo, que não existe".
+| Fonte | O que revela |
+|---|---|
+| Membro de facção | Todo o território da própria facção |
+| Mercador | Todas as cidades com Posto Comercial e os preços delas no primeiro dia |
+| Aventureiro | As masmorras não lendárias da região de partida |
+| Mapa comprado (Mercado ou mercador viajante) | Uma região inteira, com as informações datadas do dia da compra |
 
-**E2. Quem manda nas listas depois que os dados existirem?**
-- *Contexto:* hoje as listas estão nos documentos e nos canvases do Obsidian, e já houve nomes diferentes entre eles.
-- *Sugestão:* quando a pasta `data/` for criada (na ficha técnica), **os dados passam a mandar nas listas** (itens, receitas, construções, preços) e os documentos ficam com as regras. Os canvases viram arquivo histórico ou são gerados a partir dos dados. Até lá, a lista do [[Sistema de Itens/Descrição|Sistema de Itens]] continua mandando.
+### E. Viagem e outros sistemas
 
-**E3. Onde guardar a arte**
-- *Contexto:* a arte terá arquivos-fonte (`.aseprite`, mapas do Tiled) e arquivos exportados (PNG). Pixel art é leve (poucos KB por imagem).
-- *Sugestão:* guardar tudo no **repositório do código**, que será criado quando a programação começar: `assets/` para as fontes e `data/` para o que o jogo lê. Sem Git LFS (um complemento do Git para arquivos grandes), que não é necessário com arquivos tão pequenos. Este repositório continua só com documentos.
+**E1. Comida, sono e noite durante a viagem**
+- *Contexto:* os NPCs têm necessidades; a viagem pelo Mapa Mundial é abstrata.
+- *Opções:* (a) viagem sem parar, 24 h por dia; (b) **parada automática à noite**: acampamento de 8 h (das 22 h às 6 h), com comida tirada do inventário do grupo; (c) parada automática, com **marcha forçada** opcional.
+- *Sugestão:* **(c)**. Por padrão, o grupo acampa à noite e come uma refeição por pessoa por dia. Com a marcha forçada, viaja sem parar, mas a cada noite sem dormir a Felicidade do grupo cai e o risco de encontro sobe (cansaço). Sem comida, cai a Vida aos poucos e a Felicidade rápido. *Exemplo:* uma viagem de 5 mapas a pé (20 h) termina no segundo dia, com uma noite de acampamento.
 
-Depois das respostas: escrever `Pipeline de Arte e Conteúdo/Descrição.md`; atualizar Arquitetura, Interface, Combate (animações), Construção (níveis visuais), Mapa (camadas do Tiled), Cultura (arte) e o Mundo (A0a e A0b); fechar o P0 e abrir o P1, começando por Viagem e Mundo.
+**E2. Velocidade do grupo**
+- *Sugestão:* o grupo anda na velocidade do **membro mais lento**, com estes multiplicadores sobre o tempo de travessia:
+
+| Situação | Multiplicador do tempo |
+|---|---|
+| A pé | × 1,0 |
+| Todos montados (Cavalo e Sela) | × 0,67 (50% mais rápido) |
+| Carga acima do limite | × 1,25 |
+| Caravana | × 1,33 |
+| Exército | × 1,5, mais × 1,25 se tiver mais de 20 Esquadrões |
+| Neve e chuva forte | definidos depois, no Clima e Estações |
+
+- Durante a viagem a 8x, qualquer encontro ou chegada **volta para 1x**, como já acontece no combate.
+
+Depois das respostas: escrever `Sistema de Viagem/Descrição.md`; atualizar Mapa (entidades em trânsito), Comércio (C3), Eventos (encontros), Interface (névoa), Combate (montaria), Tempo e Arquitetura (LOD das entidades); abrir a próxima rodada do P1 (Reputação e Relações do jogador).
 
 ## 5. Fatos que valem lembrar
 
@@ -187,7 +213,8 @@ Depois das respostas: escrever `Pipeline de Arte e Conteúdo/Descrição.md`; at
 - **População:** NPCs reais por nível de cidade: 15, 40, 100 e 300; o Fator de Escala (exemplo 100) converte em população total.
 - **Moradias** (canvas civil): Senzala, Casa, Casarão, Mansão e Palácio (níveis 1 a 5). A **Universidade** existe no canvas civil.
 - **Canvas de produção:** 15 construções de produção (Armeiro, Artesão, Açougue, Carpinteiro, Costureiro, Cozinheiro, Destilaria, Fazenda, Ferreiro, Metalurgia, Misturador, Pasto, Pedreira, Posto de Coleta e Rancho). O Ferreiro não lista Espada (provável erro; ver [[Sistema de Produção/Funções e Construções|Funções e Construções]]).
-- **Mapas:** serão desenhados no **Tiled** (editor gratuito); o autor ainda não conhece a ferramenta e pediu explicação simples quando chegar a hora.
+- **Arte:** o autor desenha por enquanto (sem experiência em pixel art), no **Pixelorama** (grátis), com pacotes de terceiros provisórios na fatia vertical. Mapas no **Tiled** (explicar em linguagem simples). Sem verba para programas pagos. Projeto **sem prazo**: o limite da arte é o peso no jogo, não o tempo (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
+- **Linguagem:** o foco é **C++**; ferramentas em outras linguagens só como ajuda, nunca essenciais.
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 

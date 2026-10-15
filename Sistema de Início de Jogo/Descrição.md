@@ -39,7 +39,7 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 
 | Estilo | Ideia | Bônus inicial (exemplo) |
 |---|---|---|
-| **Dono de vila** | Começa com um assentamento em território de facção e tenta ascendê-lo a uma cidade independente | Assentamento nível 1, recursos de construção |
+| **Dono de vila** | Começa com um assentamento em território de facção (vinculado) ou num mapa livre (independente), à escolha, e tenta ascendê-lo a uma cidade independente | Assentamento nível 1, recursos de construção |
 | **Aventureiro** | Grupo errante, sem cidade, vivendo de masmorras e missões | Equipamento e habilidades de combate |
 | **Membro de facção** | Começa já como cidadão ou nobre de uma das 6 facções | Título, relação alta com a facção |
 | **Mercador** | Compra e vende entre cidades | Dinheiro, itens de comércio |

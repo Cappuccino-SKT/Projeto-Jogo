@@ -61,7 +61,7 @@ Os estados de território (Terr., Disputa, Livre) **não são guardados**: saem 
 | Em disputa | 6 | 13% |
 | Sem dono (Livre) | 4 | 8% |
 
-**[Em aberto] Conflito com a meta de 30% sem dono.** A sugestão aceita pedia "cerca de 30% dos mapas sem dono", mas também 3 a 4 cidades por região. Numa malha de 48 mapas, cada cidade de facção transforma até 4 vizinhos em território, então sobra pouco mapa sem dono (8% nesta proposta). Os territórios de facção continuam exploráveis (masmorras, bandidos, recursos), mas não servem para fundar uma vila independente. As saídas possíveis estão na rodada P0-6 da [[Retomada]] (pergunta A0a).
+**Mapas sem dono: cerca de 8%.** A sugestão inicial pedia cerca de 30%, mas isso não cabe em 48 mapas com 3 a 4 cidades por região (cada cidade de facção transforma até 4 vizinhos em território). O autor decidiu ficar com os 48 mapas e os 8%: os territórios de facção continuam exploráveis (masmorras, bandidos, recursos) e permitem fundar assentamento vinculado, e as 3 Vilas Livres completam o espaço sem facção. O mundo pode crescer depois dos testes; por isso o tamanho da malha vem dos dados, não do código (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 
 #### Cidades iniciais
 
@@ -262,7 +262,7 @@ Cada estilo de início tem 2 ou 3 pontos fixos; o jogador escolhe um, ou deixa s
 
 | Estilo | Pontos de partida |
 |---|---|
-| Dono de vila | Mapas livres (5,1), (5,3) e (3,4), cada um perto de facções diferentes |
+| Dono de vila | Território Arcano (5,2), território Tecnocrata (2,5) ou o mapa livre (5,3) |
 | Aventureiro | Vila Livre do Norte (4,1), Vila Livre do Centro (4,3), Cidade Religiosa (7,3) |
 | Membro de facção | A capital da cultura escolhida |
 | Mercador | Cidade Escravista (7,5), Cidade Autoritária (2,3), Vila Livre do Sul (5,6) |
@@ -270,7 +270,10 @@ Cada estilo de início tem 2 ou 3 pontos fixos; o jogador escolhe um, ou deixa s
 | Escravo | Cidade Escravista (7,5), Capital Escravista (8,6) |
 | Mago | Capital Arcana (8,1), Cidade Arcana (7,2), Vila Livre do Norte (4,1) |
 
-O estilo Dono de vila começa com o assentamento **já fundado** no ponto escolhido. Como os três mapas são livres, ele nasce **independente**. Dois deles, (5,1) e (3,4), guardam masmorras lendárias: uma vizinhança perigosa, mas também um objetivo de longo prazo. Isso muda o texto atual do [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]] (lá ele nasce em território de facção): ver a pergunta A0b da rodada P0-6 na [[Retomada]].
+O estilo Dono de vila começa com o assentamento **já fundado** no ponto escolhido, e o jogador escolhe entre dois jeitos de jogar:
+
+- **Em território de facção** (5,2) ou (2,5): nasce **vinculado** à facção, paga impostos e segue as leis dela. Para cumprir a Ambição "Fundar uma facção", precisa chegar ao nível 3 e romper com a facção, o que pode virar revolta.
+- **No mapa livre** (5,3): nasce **independente**, mais tranquilo, entre a Arcana e a Religiosa.
 
 ### História do mundo
 
@@ -316,7 +319,6 @@ O estilo Dono de vila começa com o assentamento **já fundado** no ponto escolh
 
 ### Perguntas em aberto
 
-1. **Mapas sem dono:** 8% em vez dos 30% sugeridos (ver a pergunta A0a da rodada P0-6 na [[Retomada]]).
-2. **História, nomes e personagens:** depois, com a história do jogo.
-3. **Listas de tecnologias** iniciais e extras por cultura (Sistema de Tecnologia).
-4. **Valores a testar:** dinheiro inicial por nível, Esquadrões, desvio das relações, chance de 1 ou 2 guerras.
+1. **História, nomes e personagens:** depois, com a história do jogo.
+2. **Listas de tecnologias** iniciais e extras por cultura (Sistema de Tecnologia).
+3. **Valores a testar:** dinheiro inicial por nível, Esquadrões, desvio das relações, chance de 1 ou 2 guerras.

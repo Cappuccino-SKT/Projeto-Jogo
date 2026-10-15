@@ -60,6 +60,10 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 
 **Ficam para depois:** Posto da Guarda e Muralha.
 
+### Arte
+
+A aparência de cada construção muda nos níveis 1, 3 e 5, com peças reaproveitáveis por cultura. Interior próprio só nas públicas mais visitadas; as outras usam interiores genéricos (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
+
 ### Modo construção (interface)
 
 Ao entrar no modo construção, os lotes livres ficam destacados. Clicar num lote abre uma lista por categoria, com custo, vagas e materiais; há pré-visualização, fila de obras e demolição (ver [[Interface/Descrição|Interface e Controles]]).

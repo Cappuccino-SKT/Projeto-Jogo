@@ -216,6 +216,7 @@ Toda a arte é feita à mão, então a escolha é feita para o volume de arte n�
 - **Boneco por camadas:** corpo base, 3 peças de armadura, arma e escudo, sobrepostos no mesmo conjunto de animações.
 - **Animações compartilhadas por tipo de arma:** Espada, Lança, Machado, Clava, Arco, Cajado, Musquete e Besta, em **4 direções**.
 - Criaturas têm sprites e animações próprios, em número reduzido.
+- Boneco de 16 × 24 px, 54 quadros por direção, 3 direções desenhadas e a esquerda espelhada (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 
 ---
 
