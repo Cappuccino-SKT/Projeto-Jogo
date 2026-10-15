@@ -20,6 +20,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
 - [[Sistema de Recursos/Descrição|Sistema de Recursos]] e [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]
 - [[Sistema de Tempo/Descrição|Sistema de Tempo]]
+- [[Sistema de Viagem/Descrição|Sistema de Viagem]] — viagem pelo Mapa Mundial, encontros, caravanas, patrulhas e névoa
 
 ### Pessoas e política
 

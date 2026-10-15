@@ -205,7 +205,7 @@ Um modo entre **dois combatentes**: os outros NPCs não intervêm. Termina por *
 
 ### Montarias
 
-**[Refinar depois]** Fora do combate na primeira versão. A montaria serve para viagem e carga (velocidade e peso). A cavalaria em combate fica para o Mapa de Guerra, nos Esquadrões. O item Sela já existe.
+**[Refinar depois]** Fora do combate na primeira versão. A montaria serve para viagem e carga (velocidade e peso): com todos montados, a viagem pelo Mapa Mundial fica 50% mais rápida (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]). A cavalaria em combate fica para o Mapa de Guerra, nos Esquadrões. O item Sela já existe.
 
 ---
 

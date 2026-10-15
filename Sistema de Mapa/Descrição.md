@@ -8,7 +8,7 @@ O Nível 4 (Guerra) serve a uma funcionalidade específica do jogo — situaçõ
 
 ### Nível 1 — Mapa Mundial (RTS)
 
-O Mapa Mundial consiste em quadrados conectados entre si, formando uma malha quadriculada. Cada quadrado dessa malha representa um Mapa Local (Nível 2). Ele não guarda dados de jogo das cidades nem dos NPCs — funciona como um contêiner leve (grafo + gráfico geral), o que o torna barato de manter sempre carregado, sem necessidade de LOD. A única exceção é a lista de **entidades em trânsito** (grupo do jogador, caravanas, exércitos e bandos em viagem entre Mapas Locais); as regras de viagem ficam para o sistema de **Viagem e Mundo** **[Em aberto]**.
+O Mapa Mundial consiste em quadrados conectados entre si, formando uma malha quadriculada. Cada quadrado dessa malha representa um Mapa Local (Nível 2). Ele não guarda dados de jogo das cidades nem dos NPCs — funciona como um contêiner leve (grafo + gráfico geral), o que o torna barato de manter sempre carregado, sem necessidade de LOD. A única exceção é a lista de **entidades em trânsito** (grupo do jogador, caravanas, exércitos e bandos em viagem entre Mapas Locais); as regras de viagem estão no [[Sistema de Viagem/Descrição|Sistema de Viagem]].
 
 O Mapa Mundial serve para fornecer informações globais sobre o estado do mundo: localização de cada cidade, domínio de cada facção sobre os Mapas Locais, e — junto com outros sistemas do jogo — gerenciamento em escala global (relevante para quando o jogador tiver sua própria facção). Também serve para viagens de longa distância, sem que o jogador precise ir manualmente até a borda de cada Mapa Local.
 
@@ -85,7 +85,8 @@ O Mapa de Guerra guarda a lista de Facções/Exércitos participantes (com seus 
 
 - Endereço de um grafo que carrega a malha de Mapas Locais
 - Endereço do gráfico do Mapa Mundial
-- Lista de entidades em trânsito (ver Viagem e Mundo, a escrever)
+- Lista de entidades em trânsito (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]])
+- Por Mapa Local: terreno, infraestrutura e estradas, usados no tempo de viagem; névoa e informações datadas para o jogador
 
 **Mapa Local (Nível 2)**
 

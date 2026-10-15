@@ -111,7 +111,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 
 ### P1 — Jogo completo
 
-**4.7 Viagem e Mundo.** Resolve a inconsistência #4. Define:
+**4.7 Viagem e Mundo.** *(Escrito: ver [[Sistema de Viagem/Descrição|Sistema de Viagem]].)* Resolve a inconsistência #4. Define:
 - Entidades em trânsito no Mapa Mundial (grupo do jogador, caravanas, exércitos, bandos): posição, velocidade e rota.
 - Tempo de viagem entre Mapas Locais, viagem rápida, encontros no caminho (viram evento do "Grupo do jogador", com Criaturas ou bandidos).
 - **Névoa de exploração** e mapa descoberto.

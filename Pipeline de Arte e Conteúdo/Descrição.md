@@ -88,8 +88,9 @@ São desenhadas **3 direções** (cima, baixo, direita); a esquerda é a direita
 
 ### Estações
 
-- **Primeiras versões:** **tingimento** do mapa por estação (mais amarelado no outono, azulado no inverno) e algumas peças trocadas à mão: neve nos telhados, árvores sem folhas, lavoura colhida. Cerca de 15% de tiles a mais.
-- **Objetivo final:** a **arte do ambiente varia de verdade** a cada estação (árvores, chão, água), indo além do tingimento. **[Refinar depois]** quanto varia, junto com o sistema de Clima e Estações.
+- **Primeiras versões:** **só mudança de cor** (tingimento) do mapa por estação: mais amarelado no outono, azulado no inverno. Nenhum tile a mais.
+- **Regra do autor:** tudo o que exige arte a mais nas estações fica para o futuro.
+- **Futuro:** telhados com neve, rios congelados, árvores sem folhas, folhas caindo no outono e vegetação com flores na primavera. **[Refinar depois]** junto com o sistema de Clima e Estações.
 
 ### Interiores
 
@@ -123,7 +124,7 @@ O autor pediu atenção ao **peso da arte no jogo**. **[Proposta]** Estimativa, 
 | Item | Conta | Memória |
 |---|---|---|
 | 1 tile (16 × 16) | 256 pixels × 4 bytes | 1 KB |
-| Tiles de terreno, com as peças das estações | cerca de 1.400 tiles | cerca de 1,4 MB |
+| Tiles de terreno (sem arte extra de estações) | cerca de 1.200 tiles | cerca de 1,2 MB |
 | Bonecos, no pior caso (sem espelhamento) | 20 camadas × 216 quadros × 1,5 KB | cerca de 6,6 MB |
 | Bonecos com forma própria por cultura (meta final) | o mesmo × 6 | cerca de 40 MB |
 | Construções (média de 64 × 64 px) | 22 tipos × 5 níveis × 6 culturas × 16 KB | cerca de 11 MB |
@@ -184,7 +185,7 @@ data/
 | Construção | Aparência nos níveis 1, 3 e 5, com peças reaproveitáveis |
 | Combate | Boneco de 16 × 24, 54 quadros por direção, 3 direções e espelho |
 | Interface | Cores das culturas na lente Política; ícones de itens |
-| Clima e Estações (futuro) | Tingimento agora; variação de arte do ambiente no futuro |
+| Clima e Estações (futuro) | Só mudança de cor agora; neve, rios congelados, folhas e flores no futuro |
 | Itens | A lista de itens manda até a pasta `data/` existir |
 
 ### Perguntas em aberto
@@ -193,5 +194,5 @@ data/
 2. **Pacotes provisórios:** quais usar na fatia vertical (escolher na hora, conferindo a licença).
 3. **Ferramenta de atlas:** de terceiros ou própria, no início do código.
 4. **Teto de memória da arte:** depende do PC alvo mínimo (Arquitetura).
-5. **Estações no futuro:** quanto da arte do ambiente varia (com o Clima e Estações).
+5. **Estações no futuro:** quando entram neve, rios congelados, folhas e flores (com o Clima e Estações).
 6. **Estilo próprio por cultura:** quando sai da troca de paleta para formas próprias.

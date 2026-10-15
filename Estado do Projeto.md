@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado ao fechar o P0 com a rodada P0-6 (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado ao aplicar a rodada P1-1, Viagem (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -150,9 +150,17 @@
 - Artista definitivo ainda não escolhido; por ora o autor desenha (sem experiência). Fatia vertical com **pacotes de terceiros** provisórios e rascunhos. Programas grátis: **Pixelorama** (proposta), Tiled e VS Code.
 - Tile 16 px, vista 3/4, **boneco 16 × 24**, zoom padrão 2x (50 × 28 tiles em 1600 × 900), paleta mestre de cerca de 48 cores + 2 cores por cultura. Padrão fixo de 6 camadas de tiles e 6 de objetos no Tiled.
 - Variação por cultura com **troca de paleta** nas primeiras versões; meta final: **estilo próprio** por cultura em armas, armaduras e construções. Construções mudam de aparência nos níveis 1, 3 e 5.
-- Animação: 54 quadros por direção, 3 direções e espelho (cerca de 162 por camada). Estações: tingimento e poucas peças agora; variação real da arte do ambiente no futuro. Interior próprio só nas construções públicas mais visitadas e nas masmorras.
+- Animação: 54 quadros por direção, 3 direções e espelho (cerca de 162 por camada). Estações: só mudança de cor agora; neve, rios congelados, árvores sem folhas, folhas e flores ficam para o futuro (toda arte extra de estação fica para depois). Interior próprio só nas construções públicas mais visitadas e nas masmorras.
 - Ordem: fatia vertical (planície, cultura Autoritária) → cidade → primeira região → resto. **Sem prazo**: o limite é o peso da arte, estimado em menos de 100 MB na placa de vídeo para o jogo completo, a medir na fatia vertical.
 - Dados: foco em **C++**; CSV lido direto pelo jogo, validação em C++ (`--validar`). Os dados mandam nas listas quando a pasta `data/` existir. Arte no repositório do código, sem Git LFS.
+
+**Viagem e Mundo** — ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]
+- Entidades andam **de mapa em mapa** (grafo); a rota escolhe o caminho mais rápido. Viagem pelo Mapa Mundial de qualquer lugar, sem combate nem inimigo por perto.
+- **Tempo = 4 h × Terreno × Infraestrutura × Tamanho do grupo × Montaria × Carga.** Terreno de 1,0 a 1,5 (floresta densa e montanha); infraestrutura de 1,0 (selvagem) a 0,65 (mapa com cidade grande); tamanho de 1,0 (até 5 pessoas) a 2,0 (mais de 2.000); montados × 0,67.
+- Acampamento automático à noite (22 h às 6 h), uma refeição por dia, marcha forçada opcional. Encontros e chegadas voltam a 8x para 1x.
+- Encontros: 5% em território, 15% em disputa, 20% sem dono, mais a ameaça bandida; bandidos não atacam grupo 2 vezes mais forte; Lutar, Fugir, Negociar ou Render-se. Encontros sem luta (mercador, patrulha, refugiados, peregrinos, caravana em apuros). IA × bandidos pelo cálculo rápido de forças.
+- Entidades: grupo do jogador, caravanas, exércitos, bandos e **patrulhas**. **Caravanas sempre reais** no Mapa Mundial (substitui o fluxo por estação do Comércio). Em LOD 0 e 1, a entidade aparece de verdade e atravessa o mapa.
+- **Névoa** por Mapa Local com informações datadas; visão ao vivo no mapa atual e nos 4 vizinhos; capitais conhecidas desde o início. Sem névoa dentro dos Mapas Locais; névoa só nas masmorras. Estilos e mapas comprados revelam partes do mundo.
 
 ## Em aberto
 
@@ -175,7 +183,8 @@
 - **Trabalho:** valores a testar (vagas, salários, faixa de preço, estabilizador, imposto, empresas dos Ricos); nome e categoria das Funções; Engenheiro e Operário sem construção; Espada sem construção no canvas do Ferreiro; gerente das construções da Cidade; leilão; forma de estudo na Universidade.
 - **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; fuga e rebelião de Escravos; greves; layout do painel "Por quê?".
 - **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; telas do Mapa de Guerra; IDs de texto para outros idiomas.
-- **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quanto a arte varia por estação; quando cada cultura ganha formas próprias.
+- **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quando entra a arte extra das estações; quando cada cultura ganha formas próprias.
+- **Viagem:** valores a testar; construção de estradas; multiplicadores de clima; quantidade e custo das patrulhas.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
@@ -190,11 +199,12 @@
 | P0 | Interface e Controles | Escrito |
 | P0 | Mundo e Estado Inicial (a história fica para depois) | Escrito |
 | P0 | Pipeline de arte e conteúdo | Escrito |
-| P1 | **Viagem e Mundo** | **Perguntas enviadas, aguardando respostas** |
-| P1 | Reputação; Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
+| P1 | Viagem e Mundo | Escrito |
+| P1 | **Reputação e Relações do jogador** | **Perguntas enviadas, aguardando respostas** |
+| P1 | Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 
-**Ordem:** o P0 está completo. Responder a rodada P1-1 (Viagem e Mundo) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Responder a rodada P1-2 (Reputação) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 

@@ -255,7 +255,7 @@ Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limi
 | Crime e Justiça | Criminalidade gera bandidos; missão de confiança como evento |
 | Econômico | Modificadores de preço recalculam o Mercado Mundial ou da Facção |
 | Cura | Doenças e epidemias como eventos de Saúde |
-| Mapa | Mapas em disputa, grupos em mapas Sem dono, eventos por LOD |
+| Mapa e Viagem | Mapas em disputa, grupos em mapas Sem dono, eventos por LOD; encontros durante a viagem usam a ameaça bandida (ver [[Sistema de Viagem/Descrição\|Sistema de Viagem]]) |
 | NPC | Efeitos visíveis em NPCs; NPCs Importantes podem disparar eventos ao morrer |
 | Combate | Criaturas e bandidos criados por eventos; evento Crítico pausa; combate reduz a velocidade para 1x |
 | População | Doença, fome, guerra e crime como causas de mortalidade; nascimentos e migração por estação |
