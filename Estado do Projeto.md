@@ -100,6 +100,22 @@
 - Caravana = animais de carga (capacidade por peso) + guardas + manutenção. Lei de **Tarifa**; guerra bloqueia; embargo ou acordo comercial (zera a tarifa).
 - Riscos: bandidos, guerra, clima; perda de carga; contratos de escolta. Rota fixa liberada por tecnologia de Economia. Dinheiro passa entre cidades, total do mundo constante.
 
+**Revisão geral (2026-10-14)** — ver [[Revisão do Projeto]]
+- Lista de sistemas novos aceita (P0, P1 e P2): Felicidade e Estabilidade, População e Habitação, Trabalho/Salários/Propriedade, Interface, Mundo e Estado Inicial e Pipeline de arte (P0); Viagem, Guerra, Batalha, Diplomacia, Reputação, Companheiros e Diálogo, Religião, Clima, Notícias, Efeitos de itens e Escravidão (P1); Áudio, tutorial, configurações, localização, modding (P2).
+- **NPCs reais por nível de cidade** (provisório): 15, 40, 100 e 300; o Fator de Escala converte em população total.
+- As 8 inconsistências foram corrigidas (8x só no Mapa Mundial; título × classe; layout da cidade; entidades em trânsito; Hospital e Boticário; Grimório e Pedra de Mana; Intervalo de Ataque por tipo; Inventário por componentes).
+- Mapas desenhados no **Tiled**. Mundo fixo com estado inicial variável. Recursos não se esgotam, têm produtividade por estação.
+- **Ordem de trabalho:** foco total na documentação, sem código. Depois, uma **ficha técnica lógica**; só então a programação.
+- Documentos consolidados (sem "Atualizações recentes"); criado o [[Glossário]].
+
+**População e Habitação**
+- Capacidade de NPCs reais por nível (15, 40, 100 e 300) e ocupação limitada por moradias e comida; população total = NPCs reais × Fator de Escala.
+- Nascimentos e mortes em pessoas por estação com fração acumulada; a cada Fator de Escala nasce ou morre 1 NPC real. Importantes e Controlados têm ciclo de vida completo; NPCs comuns são repostos; crianças comuns não são NPCs.
+- Vida em anos de jogo (criança 0–3, adulto 4–20, velho 21+, morte natural entre 21 e 30); 1 ano ≈ 17 h reais a 1x.
+- Natalidade, mortalidade (velhice, doença, fome, guerra, crime) e migração por atratividade; migrantes mantêm a cultura; guerra e fronteira fechada bloqueiam a migração.
+- Moradia por classe (alojamento, casa simples, média, mansão, palácio); a cidade constrói sozinha em lotes fixos marcados no Tiled (3 tamanhos); poucos layouts por tipo e cultura.
+- Subir de nível: ocupação acima de 90% por 2 estações, Felicidade, construções obrigatórias, tecnologia e custo. Queda de nível só em catástrofe grave. Mesmas regras para jogador e IA.
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
@@ -117,14 +133,16 @@
 - **Magia:** lista de feitiços e da árvore arcana; valores a testar; como obter Grimório; Esquadrão de Magos no Mapa de Guerra; feitiços de Suporte fora do combate.
 - **Objetivo:** condições das Ambições e epílogos; Renome por feito e por título; repovoamento; lista de contratos, missões e masmorras; recrutamento de companheiros.
 - **Comércio:** valores (capacidade, salário, Tarifa, peso do risco); animais de carga; guardas como NPCs ou valor abstrato; fórmula do fluxo em LOD 2.
+- **População:** valores a testar (taxas, vida em anos de jogo, capacidade das moradias, custo de subir de nível); lotes por mapa e nível; pesos da migração; alojamento coletivo; moradia dos Controlados; crianças decorativas.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do tile, perspectiva e mundo (provisórios).
 
 ## Próximos passos
 
-Todos os sistemas planejados já têm descrição. Falta preencher o que está em aberto e começar a fatia vertical.
+Todos os sistemas planejados têm uma primeira descrição. Agora, em rodadas curtas de perguntas, escrever os sistemas P0 que faltam (trabalho e salários, felicidade, interface, mundo e estado inicial, pipeline de arte; população e habitação já está escrito), depois os P1. Quando o autor estiver satisfeito com a documentação, fazer a ficha técnica lógica e só então programar.
 
 ## Como estamos trabalhando
 
 - Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta.
-- Marcações nos documentos: **[Proposta]**, **[Em aberto]**, **[Refinar depois]**.
+- Marcações nos documentos: **[Proposta]**, **[Em aberto]**, **[Refinar depois]**. Os termos estão no [[Glossário]].
+- Por ora **não se escreve código**: a documentação vem primeiro, depois a ficha técnica lógica, depois a programação.
 - O projeto está no GitHub (`FelipeSKT/Projeto-Jogo`), com histórico de versões. Cada rodada vira um pull request para revisão.

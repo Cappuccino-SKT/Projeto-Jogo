@@ -1,10 +1,3 @@
-> **Atualização recente (revisão geral).** O que mudou neste documento:
-> - Atributos do Mapa Mundial e do Mapa Local reorganizados (a versão antiga misturava os dois).
-> - Novo: **Fator de Escala** aplicado à população (ver Sistema de Facção).
-> - Novo: cada Mapa Local comporta **no máximo uma cidade**, e o mapa tem **quatro estados de território**: Sem dono, Território de facção, Em disputa e Com cidade.
-> - Mapa de Guerra: soldados são **Esquadrões**, e guerras entre facções de IA são resolvidas **automaticamente**.
-> - A Prisão é um Mapa Interno do tipo Construção Pública.
-
 ## Sistema de Mapa
 
 **Descrição geral**
@@ -15,7 +8,7 @@ O Nível 4 (Guerra) serve a uma funcionalidade específica do jogo — situaçõ
 
 ### Nível 1 — Mapa Mundial (RTS)
 
-O Mapa Mundial consiste em quadrados conectados entre si, formando uma malha quadriculada. Cada quadrado dessa malha representa um Mapa Local (Nível 2). Ele não guarda dados de jogo diretamente — funciona como um contêiner leve (grafo + gráfico geral), o que o torna barato de manter sempre carregado, sem necessidade de LOD.
+O Mapa Mundial consiste em quadrados conectados entre si, formando uma malha quadriculada. Cada quadrado dessa malha representa um Mapa Local (Nível 2). Ele não guarda dados de jogo das cidades nem dos NPCs — funciona como um contêiner leve (grafo + gráfico geral), o que o torna barato de manter sempre carregado, sem necessidade de LOD. A única exceção é a lista de **entidades em trânsito** (grupo do jogador, caravanas, exércitos e bandos em viagem entre Mapas Locais); as regras de viagem ficam para o sistema de **Viagem e Mundo** **[Em aberto]**.
 
 O Mapa Mundial serve para fornecer informações globais sobre o estado do mundo: localização de cada cidade, domínio de cada facção sobre os Mapas Locais, e — junto com outros sistemas do jogo — gerenciamento em escala global (relevante para quando o jogador tiver sua própria facção). Também serve para viagens de longa distância, sem que o jogador precise ir manualmente até a borda de cada Mapa Local.
 
@@ -90,6 +83,7 @@ O Mapa de Guerra guarda a lista de Facções/Exércitos participantes (com seus 
 
 - Endereço de um grafo que carrega a malha de Mapas Locais
 - Endereço do gráfico do Mapa Mundial
+- Lista de entidades em trânsito (ver Viagem e Mundo, a escrever)
 
 **Mapa Local (Nível 2)**
 
@@ -129,7 +123,8 @@ O Mapa de Guerra guarda a lista de Facções/Exércitos participantes (com seus 
 
 ---
 
-### Atualizações recentes
+### Integração com outros sistemas
 
 - **Eventos:** o sorteio e a avaliação de eventos respeitam o LOD de cada Mapa Local. Em LOD 2 os efeitos são agregados. Bandidos ocupam mapas Sem dono ou de fronteira (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
 - **Combate local:** é para grupos pequenos e médios (cerca de 40 combatentes ativos, a testar). Acima disso, ou com Esquadrões, o confronto vai para o Mapa de Guerra (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
+- **População:** a migração entre cidades, em LOD 0, aparece como NPCs que chegam pela borda do mapa; em LOD 2 é um fluxo calculado por estação (ver [[Sistema de População/Descrição|Sistema de População]]).

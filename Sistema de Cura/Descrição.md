@@ -18,17 +18,17 @@ Define como os NPCs se recuperam de ferimentos. Hoje existe o **Estado Atual** (
 
 - Taxa base de regeneração por hora de jogo, maior enquanto o NPC dorme (Período de Dormir) ou está na Ação "descansando".
 - Em LOD 2, a regeneração é calculada em bloco (por hora de jogo), sem simular NPC a NPC.
-- A regeneração só acontece fora de combate.
+- A regeneração só acontece fora de combate. "Em combate" é definido no [[Sistema de Combate/Descrição|Sistema de Combate]] (hostil dentro do raio de alerta).
 
 ### Medicamentos
 
 - O tipo de item **Medicamento** já existe (Bem de Consumo), mas **ainda não há itens**.
-- Quem produz é o **Boticário** (Produção Especialista), em uma construção Boticário que ainda será criada.
+- Quem produz é o **Boticário** (Produção Especialista), em uma construção Boticário (ver Sistema de Construção).
 - **[Proposta]** Itens iniciais, a definir com Tier e receita: um curativo simples (Tier 1) e um medicamento mais forte (Tier 3), que usa Flor Espiritual.
 
 ### Hospital
 
-Construção futura. **[Proposta]** Cura os NPCs Controlados do grupo mediante pagamento, com velocidade que depende do nível da construção. Em LOD 2, funciona como a Taverna e o Mercado: serviço agregado para a cidade.
+Construção (ver Sistema de Construção). **[Proposta]** Cura os NPCs Controlados do grupo mediante pagamento, com velocidade que depende do nível da construção. Em LOD 2, funciona como a Taverna e o Mercado: serviço agregado para a cidade. Um Mago de Suporte trabalhando nele acelera a cura (ver Sistema de Magia).
 
 ### Estado Inconsciente e Morte
 
@@ -36,9 +36,10 @@ O guarda deixa o alvo **Inconsciente** em vez de Morto na prisão não letal (ve
 
 **[Em aberto]** Quando o Inconsciente vira Morto? **[Proposta]**
 
-- O Inconsciente **não morre sozinho** em combate não letal.
+- O Inconsciente **não morre sozinho** em combate não letal. No modo não letal (padrão contra cidadãos e guardas), Vida 0 deixa o alvo Inconsciente. O modo letal e o não letal estão no [[Sistema de Combate/Descrição|Sistema de Combate]].
 - Morre por **golpe de misericórdia** (um ataque letal intencional contra o alvo) ou por **sangramento**, se o combate for letal e ele ficar sem tratamento por um número de horas.
 - O Inconsciente acorda depois de um tempo, com Vida baixa.
+- Se o grupo do jogador é derrotado por Criaturas, ele acorda ferido no mesmo lugar depois que elas vão embora (ver Objetivo e Progressão).
 
 ### Fora de escopo por enquanto
 
@@ -52,8 +53,8 @@ Ferimentos por parte do corpo.
 |---|---|
 | NPC | Vida atual e Estado Atual; Ação atual "descansando" |
 | Itens | Tipo Medicamento (itens a criar) |
-| Produção | Boticário (função e construção a criar) |
-| Construção | Hospital e Boticário (futuros) |
+| Produção | Boticário (função e construção) |
+| Construção | Hospital e Boticário |
 | Crime e Justiça | Estado Inconsciente na prisão não letal |
 | Tempo | Regeneração por hora; Período de Dormir |
 | Eventos | Doenças e epidemias como eventos de Saúde |
@@ -64,9 +65,3 @@ Ferimentos por parte do corpo.
 2. Itens de Medicamento e suas receitas.
 3. Taxa de regeneração e custo do Hospital (testes).
 4. Doença em LOD 0: estado "Doente" do NPC ou só modificador da cidade (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
-
-### Atualizações de combate
-
-- **Em combate:** a regeneração só acontece fora de combate; "em combate" é definido no [[Sistema de Combate/Descrição|Sistema de Combate]] (hostil dentro do raio de alerta).
-- **Letal e não letal:** o Inconsciente só morre por golpe de misericórdia ou sangramento quando o combate é **letal**. No modo não letal, Vida 0 deixa o alvo Inconsciente e ele não morre sozinho.
-- **Derrota para Criaturas:** **[Em aberto]**, ver o [[Sistema de Combate/Descrição|Sistema de Combate]].

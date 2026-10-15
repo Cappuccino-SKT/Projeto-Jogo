@@ -1,0 +1,10 @@
+﻿# Configurações locais do Obsidian (mudam a cada abertura; não vale versionar)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Sistema
+Thumbs.db
+.DS_Store
+desktop.ini

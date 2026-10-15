@@ -1,10 +1,3 @@
-> **Atualização recente (revisão geral).** O que mudou neste documento:
-> - O **Exército** deixou de ser um grupo de NPCs: soldados de guerra agora fazem parte de **Esquadrões**, entidades próprias (ver Sistema de Facção).
-> - **Recompensa** passou a ser uma lista por facção, e **Criminoso** passou a significar "tem recompensa em alguma facção" (ver Sistema de Crime e Justiça).
-> - Regras de **Cultura** do NPC: herança e modificadores na geração (ver Sistema de Cultura).
-> - Nova Função: Caçador de Recompensa. **Escravo** pode ser temporário (trabalho forçado).
-> - NPCs gerados na dissolução de um exército nascem como Escravo ou Civil.
-
 ## Sistema de NPC
 
 **Descrição geral**
@@ -32,7 +25,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 
 1. Nome
 2. Idade
-3. Estágio (estágio de vida: criança, adulto, velho)
+3. Estágio (estágio de vida: criança, adulto, velho; em anos de jogo, criança 0–3, adulto 4–20 e velho 21+; só Importantes e Controlados têm crianças como NPC, ver [[Sistema de População/Descrição|Sistema de População]])
 4. Facção
 5. Cultura (o NPC nasce com a cultura da cidade; migrantes e escravos capturados mantêm a cultura de origem)
 6. Função (tipo de trabalho: lenhador, ferreiro, comerciante, guarda, caçador de recompensa, etc.)
@@ -47,7 +40,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 15. Prisioneiro (booleana)
 16. Criminoso (booleana — verdadeira se o NPC tem recompensa em alguma facção)
 17. Recompensa (lista de pares facção/valor, só para Criminosos — a recompensa é por facção e diminui com o tempo; ver Sistema de Crime e Justiça)
-18. Grávida (booleana, aplicável apenas ao sexo feminino)
+18. Grávida (booleana, aplicável apenas ao sexo feminino; só para Importantes e Controlados)
 19. Vida máxima / atual
 20. Mana máxima / atual (só existe se o atributo Mago estiver habilitado)
 21. Velocidade

@@ -219,7 +219,7 @@ Um evento pode ter de **0 a 3 opções**, cada uma com consequências próprias 
 
 ### Notificações
 
-Com a velocidade até 8x, o jogador perde coisas. Três níveis:
+Com as velocidades altas (até 8x no Mapa Mundial), o jogador perde coisas. Três níveis:
 
 | Nível | Efeito |
 |---|---|
@@ -258,6 +258,7 @@ Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limi
 | Mapa | Mapas em disputa, grupos em mapas Sem dono, eventos por LOD |
 | NPC | Efeitos visíveis em NPCs; NPCs Importantes podem disparar eventos ao morrer |
 | Combate | Criaturas e bandidos criados por eventos; evento Crítico pausa; combate reduz a velocidade para 1x |
+| População | Doença, fome, guerra e crime como causas de mortalidade; nascimentos e migração por estação |
 | IA | Decisões de facções de IA nos eventos com escolha |
 | Início de Jogo | Escolha do narrador na criação |
 

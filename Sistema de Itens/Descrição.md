@@ -1,8 +1,3 @@
-> **Atualização recente (revisão geral).** O que mudou neste documento:
-> - **Rank** (0 a 5) vale só para armas, equipamentos e artefatos; **Tier** (0 a 4) vale para materiais e bens de consumo. Na lista, "Nível" virou Rank ou Tier conforme o caso.
-> - O atributo Tipo agora é derivado da Categoria. Novo tipo de Arma: Munição.
-> - Regras de armadura (três peças separadas, peso Leve/Média/Pesada), nomes unificados com os canvases e lista de itens a cadastrar.
-
 ## Sistema de Itens
 
 **Descrição geral**
@@ -111,7 +106,7 @@ A cultura é um atributo das armas e equipamento, ele foi inspirado no mesmo sis
 
 ### Regras de armadura
 
-Cada receita de armadura produz as **três peças separadas** (Capacete, Peitoral e Perneiras). **Leve, Média e Pesada** indicam o peso de cada peça, e o NPC pode combinar peças de pesos diferentes. A lista abaixo só tem peças Leves e Pesadas de metal; a peça **Média** (couro e tecido reforçado, feita pelo Costureiro) ainda será cadastrada.
+Cada receita de armadura produz as **três peças separadas** (Capacete, Peitoral e Perneiras). **Leve, Média e Pesada** indicam o peso de cada peça, e o NPC pode combinar peças de pesos diferentes. A lista abaixo só tem peças Leves e Pesadas de metal; a peça **Média** (couro e tecido reforçado, feita pelo Costureiro) ainda será cadastrada. Em combate vale a classe de peso **mais frequente** entre as três peças (empate: Média) **[Proposta]**; ver [[Sistema de Combate/Descrição|Sistema de Combate]].
 
 ### Nomes unificados
 
@@ -328,13 +323,15 @@ Itens que aparecem nos canvases mas ainda não estão na lista. Tier e Rank são
 | Canhão de Guerra Moderno | Armamento de Exército | Rank 5 | Armeiro (nível 5) |
 | Anel Mágico - Pedra Mágica | Equipamento / Anel | Rank 1-5 | Artesão (nível 5) |
 | Armadura Média (3 peças) | Equipamento / Capacete, Peitoral, Perneiras | Rank 1-3 | Costureiro (nível 4+) |
+| Grimório | Artefato / Livro (ensina feitiços) | Rank 2-4 | A definir (comprado, produzido ou achado em masmorras; ver Sistema de Magia) |
+| Pedra de Mana | Bem de Consumo (recupera Mana) | Tier 2 | Produtor Mágico, a partir da Pedra de Mana Bruta |
 
 **Armamento de Exército** não é equipado por NPCs: faz parte do Equipamento de um Esquadrão (ver Sistema de Facção).
 
 **Medicamentos.** O tipo Medicamento existe, mas ainda não há itens. Ver Sistema de Cura.
 
-### Atualizações de combate
+**Intervalo de Ataque.** Cada arma da lista precisa de um valor. **[Proposta]** definir por tipo de arma (Espada e Lança rápidas, Machado e Clava lentas, Besta e Musquete muito lentas) e ajustar por Rank em testes.
 
-- **Intervalo de Ataque:** novo atributo das armas corpo a corpo, de longo alcance e dos cajados. Armas pesadas (Machado, Clava) são lentas e fortes (ver [[Sistema de Combate/Descrição|Sistema de Combate]]).
-- **Encantamento:** armas e equipamentos de Rank alto podem ser encantados, o que aumenta atributos como Atributo Mágico, Dano, Defesa e Buff de habilidade. A partir do Rank 3, na Encantaria, por um Mago de Ofício, com Mana e Pedra de Mana; um encantamento por item. Novos itens: **Grimório** (ensina feitiços) e **Pedra de Mana** consumível (recupera Mana). Ver [[Sistema de Magia/Descrição|Sistema de Magia]].
-- **Classe de peso da armadura:** em combate vale a classe de peso mais frequente entre as três peças (proposta).
+### Encantamento
+
+Armas e equipamentos de Rank alto podem ser encantados, o que aumenta atributos como Atributo Mágico, Dano, Defesa e Buff de habilidade. A partir do Rank 3, na Encantaria, por um Mago de Ofício, com Mana e Pedra de Mana; um encantamento por item. Ver [[Sistema de Magia/Descrição|Sistema de Magia]] e [[Sistema de Combate/Descrição|Sistema de Combate]].

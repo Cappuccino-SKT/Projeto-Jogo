@@ -1,14 +1,11 @@
-Inventario Abstrato, esse inventario é apenas um inventario generico que vai servir como herança para os inventarios especializados, vamos usa-lo apenas para criar a parte de armazenamente de informações de itens, como qual item esta sendo armazenado, a quantidade dele também o dinheiro, e as outras informações relevantes.
+## Sistema de Inventário
 
-Inventario NPC Geral, O inventario do NPC geral vai herdar as funções do Inventario abstrato, sua especialização vai ser a a implementação do sistema de equipamente que vai permitir usar equipamento do inventario do NPC.
+**Descrição geral**
 
-Inventario NPC jogador, esse é o inventario com mais funcionalidade por ser o principal inventario com interação do jogador, iremos herdar as funções do inventario do NPC, junto a isso iremos colocar uma parte grafica, alem de um limitante, que vai ser o peso aonde dependendo do capacidade de peso ele vai ficar limitado pela quantidade de itens ele vai poder carregar, a capacidade de peso vai ser influenciado pela força do NPC.
+O inventário guarda quais itens estão armazenados, a quantidade de cada um, o dinheiro e outras informações relevantes. No código ele é um **componente** reaproveitado por quem precisa dele (composição, ver [[Arquitetura/Descrição|Arquitetura]]), não uma cadeia de herança. Abaixo, o que cada dono de inventário acrescenta ao básico.
 
-Inventario Cidade, as cidades iram herdar o inventario Abstrato, o inventario da cidade vai passar informações para outros sistemas como o sistema de eventos para causar eventos nas cidades e nas regiões, o inventario da cidade vinculado ao inventario de construção, sendo uma relação aonde cada cidade vai ser vinculada a N inventarios de construções que estejam dentro da cidade.
-
-Inventario de Construção, o inventario de construção vai herdar do inventario Abstrato, ele vai possuir um sistema de limitação, aonde dependendo do tipo de construção sua capacidade pode ser diferente, além disso cada inventario de construção deve estar vinculado a apenas um inventario de cidade, se essa construção estiver dentro de uma cidade, esse inventario deve passar as informações do que tem dentro dela para o inventario da Cidade, para conseguirmos fazer o sistema de eventos funcionar.
-
-## Atualizações recentes
-
-Inventário da Caravana Militar: herda do Inventário abstrato e guarda Ração Militar, materiais de manutenção de equipamento e munição do exército (ver Sistema de Facção). O Esquadrão tem Equipamento próprio, que não é um inventário de NPC.
-Os estoques do Inventário da Cidade alimentam as condições do [[Sistema de Eventos/Descrição|Sistema de Eventos]] (por exemplo, dias em déficit de consumo).
+- **Inventário NPC geral.** Acrescenta o sistema de equipamento, que permite usar os equipamentos que estão no inventário do NPC.
+- **Inventário NPC jogador (Controlado).** É o inventário com mais funcionalidade, por ser o principal ponto de interação do jogador. Acrescenta a parte gráfica e um limite de **peso**: a quantidade de itens que ele carrega depende da Capacidade de peso, influenciada pela Força do NPC.
+- **Inventário da Cidade.** Passa informações para outros sistemas, como o Sistema de Eventos, para causar eventos nas cidades e nas regiões (por exemplo, dias em déficit de consumo; ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]). Cada cidade está vinculada a N inventários de construções que estejam dentro dela.
+- **Inventário de Construção.** Tem um sistema de limitação: a capacidade muda conforme o tipo de construção. Cada inventário de construção está vinculado a apenas um inventário de cidade, e passa a ele as informações do que há dentro, para o Sistema de Eventos funcionar.
+- **Inventário da Caravana.** A Caravana Militar guarda Ração Militar, materiais de manutenção de equipamento e munição do exército (ver Sistema de Facção). A Caravana Civil carrega mercadorias por peso (ver [[Sistema de Comércio/Descrição|Sistema de Comércio]]). O Esquadrão tem Equipamento próprio, que não é um inventário de NPC.

@@ -26,7 +26,7 @@ Princípios:
 
 - O combate é em tempo real, com **pausa ativa** (como RimWorld e Kenshi). A barra de espaço pausa.
 - Com o jogo pausado, o jogador dá ordens aos Controlados e elas são executadas ao despausar.
-- As velocidades 1x, 2x, 4x e 8x continuam valendo. Quando um combate começa, o jogo **reduz sozinho para 1x**.
+- As velocidades 1x, 2x e 4x continuam valendo (a 8x é exclusiva do Mapa Mundial). Quando um combate começa, o jogo **reduz sozinho para 1x**.
 
 ### Ordens
 

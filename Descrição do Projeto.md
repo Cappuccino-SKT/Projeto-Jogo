@@ -16,6 +16,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 - [[Sistema de Mapa/Descrição|Sistema de Mapa]] — Mundial, Local, Interno e de Guerra
 - [[Sistema de Cidade/Descrição|Sistema de Cidade]]
+- [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
 - [[Sistema de Recursos/Descrição|Sistema de Recursos]] e [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]
 - [[Sistema de Tempo/Descrição|Sistema de Tempo]]
 
@@ -50,7 +51,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 ## Próximos passos
 
-Todos os sistemas planejados já têm descrição. Falta preencher o que está em aberto (listas de conteúdo e valores a testar) e começar a fatia vertical.
+Todos os sistemas planejados têm uma primeira descrição. O foco agora é **só documentação**: escrever os sistemas que faltam (ver [[Revisão do Projeto]]), preencher o que está em aberto e, quando o autor estiver satisfeito, fazer uma **ficha técnica lógica** antes de qualquer código.
 
 ## Primeira meta de desenvolvimento
 
@@ -58,4 +59,4 @@ Uma **fatia vertical**: 1 cidade, 1 cadeia de produção (Fazenda → Cozinha �
 
 ## Estado atual
 
-O resumo do que já foi decidido e do que está em aberto está em [[Estado do Projeto]].
+O resumo do que já foi decidido e do que está em aberto está em [[Estado do Projeto]]. A revisão geral do projeto está em [[Revisão do Projeto]] e os termos usados nos documentos estão no [[Glossário]].
