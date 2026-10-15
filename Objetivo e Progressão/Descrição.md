@@ -124,4 +124,4 @@ Registro dos grandes feitos, montado a partir do **diário de eventos**: Ambiç�
 1. **Condições exatas** de cada Ambição e o conteúdo dos epílogos.
 2. **Valores a testar:** Renome por feito, Renome por degrau de título, tempo de repovoamento das masmorras.
 3. **Lista inicial** de contratos e missões longas. As 12 masmorras (3 lendárias) e onde ficam estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
-4. **Companheiros:** como são recrutados e quanto o Renome pesa.
+4. **Companheiros:** recrutamento, limite do grupo pelo Renome e salários estão no [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]].

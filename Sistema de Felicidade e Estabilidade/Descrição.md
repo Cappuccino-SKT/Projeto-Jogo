@@ -123,6 +123,7 @@ Consequências:
 
 - Abaixo de **20**, o jogador recebe um **aviso**.
 - No **0**, o NPC **pede para sair**, mas só vai embora depois de alguns dias, o que dá chance de resolver com diálogo ou pagamento.
+- A **Opinião** do companheiro muda essa regra: com +60 ou mais ele ainda fica 1 estação; com −60 ou menos pode desertar (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]).
 
 ---
 

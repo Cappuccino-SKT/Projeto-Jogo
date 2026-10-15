@@ -104,7 +104,7 @@ A mudança de leis é decidida por **votação em assembleia**, que depende da q
 
 - A **regra de sucessão** é definida pela Cultura: primogenitura, eleição entre os nobres, duelo ou mérito, ou escolha do líder.
 - Quando o líder morre, a sucessão acontece. Se não houver herdeiro, há uma crise: guerra civil, cidades que se declaram independentes ou dissolução da facção.
-- Se o líder for o personagem do jogador, o herdeiro passa a ser o NPC Controlado, em vez de fim de jogo. Isso conecta os atributos Grávida, Estágio e Relação que já existem.
+- Se o líder for o personagem do jogador, o herdeiro passa a ser o NPC Controlado, em vez de fim de jogo. Sem herdeiro, o jogador escolhe um companheiro com Opinião de +60 ou mais; as dinastias da IA casam e têm filhos por estação (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]). Isso conecta os atributos Grávida, Estágio e Relação que já existem.
 - Nobres da dinastia podem governar cidades (cargo de governador).
 
 ### Relações diplomáticas

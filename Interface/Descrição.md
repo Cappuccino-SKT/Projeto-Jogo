@@ -171,6 +171,7 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 | Felicidade | Painel "Por quê?" por classe |
 | Combate | Seleção, barras de Vida, ordens e pausa |
 | Mapa | Lentes, busca, Viagem Rápida, minimapa |
+| Companheiros e Diálogo | Janela de conversa sem retrato (boneco ampliado 4x, nome, título e Opinião); painel do grupo e dos vinculados (ver [[Sistema de Companheiros e Diálogo/Descrição\|Sistema de Companheiros e Diálogo]]) |
 | Reputação | Painel de Reputação com faixas e "Por quê?"; notificação de mudança de faixa; Opinião no painel do Importante (ver [[Sistema de Reputação/Descrição\|Sistema de Reputação]]) |
 | Construção | Modo construção, lotes, fila de obras |
 | Trabalho e Propriedade | Painel de trabalho, contratação, preços |

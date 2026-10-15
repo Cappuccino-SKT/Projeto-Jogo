@@ -95,7 +95,7 @@ O nome **Opinião** foi escolhido para não confundir com o atributo **Relação
 
 - Vai de **−100 a +100** e existe só para os Importantes que o jogador já encontrou: líder, herdeiro, nobres, os 5 Importantes fixos e os companheiros.
 - **Muda por:**
-  - **conversa** (persuadir, elogiar, ameaçar), usando o Carisma (o Diálogo será detalhado no sistema de Companheiros e Diálogo);
+  - **conversa** (persuadir, elogiar, ameaçar), usando o Carisma (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]);
   - **presentes**: +1 a +10, conforme o valor do presente e a Ganância do NPC;
   - **missões** pedidas por ele: +10;
   - **ações contra a família ou a cidade dele**: −10 a −50.
@@ -132,7 +132,7 @@ O nome **Opinião** foi escolhido para não confundir com o atributo **Relação
 | Interface | Painel de Reputação, "Por quê?" e notificação de mudança de faixa |
 | Viagem | Patrulhas prendem quem tem Recompensa; ajudar caravana em apuros dá reputação |
 | Cultura | Afinidade entre culturas define a base; Rito de Admissão por Indicação usa a Opinião |
-| Companheiros (futuro) | Opinião vira lealdade |
+| Companheiros e Diálogo | Opinião vira lealdade; casamento dá +20 na facção da família (ver [[Sistema de Companheiros e Diálogo/Descrição\|Sistema de Companheiros e Diálogo]]) |
 
 ### Perguntas em aberto
 

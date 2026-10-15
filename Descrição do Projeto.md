@@ -31,6 +31,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
 - [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, diplomacia, exércitos
 - [[Sistema de Reputação/Descrição|Sistema de Reputação]] — reputação do jogador com facções, Opinião dos Importantes
+- [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]] — recrutamento, lealdade, casamento, herdeiros e conversas
 - [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]
 - [[Sistema de Cura/Descrição|Sistema de Cura]]
 - [[Sistema de Combate/Descrição|Sistema de Combate]] — combate local do jogador, armas, derrota e captura

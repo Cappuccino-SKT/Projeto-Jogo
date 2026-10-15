@@ -52,7 +52,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 27. **Destino/Posição-alvo** — usado tanto pela Rotina dos Não-Controlados (ir até a construção de trabalho) quanto por ordens de movimento dos Controlados.
 28. **Geração de NPC** — ao criar um NPC novo, os Atributos de Habilidade nascem dentro de uma faixa aleatória definida pela combinação de Cultura e Classe Social. A Cultura aplica ainda modificadores pequenos (por exemplo, ±10 a 20) nas faixas de habilidade e uma tendência nos modelos de Personalidade. NPCs gerados na dissolução de um exército nascem como Escravo ou Civil.
 29. **Relação** — lista de vínculos com outros NPCs (ex: filho, cônjuge), restrita a NPCs marcados como Importante, para não gastar memória com isso em NPCs comuns.
-30. **Opinião** — o que um NPC Importante pensa do jogador, de −100 a +100; só existe para os Importantes que o jogador já encontrou. Não confundir com Relação (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]).
+30. **Opinião** — o que um NPC Importante pensa do jogador, de −100 a +100; só existe para os Importantes que o jogador já encontrou. Não confundir com Relação (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]). Para os companheiros, a Opinião é a lealdade (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]).
 
 ### Atributos de Habilidade (todo NPC possui)
 

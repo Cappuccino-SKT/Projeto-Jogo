@@ -64,7 +64,7 @@ Com 24 h de jogo = 16 min reais, **1 ano = cerca de 17 horas reais a 1x** (cerca
 
 - Taxa base **por estação** sobre os adultos, multiplicada por modificadores: **comida suficiente, moradia livre, Felicidade e paz**.
 - O teto é a **capacidade** da cidade.
-- Gravidez individual (atributos Grávida e Estágio) só para Importantes e Controlados.
+- Gravidez individual (atributos Grávida e Estágio) só para Importantes e Controlados: dura 1 estação, e a infância, 3 anos (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]).
 
 ### Mortalidade
 
