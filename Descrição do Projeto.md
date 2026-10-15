@@ -15,6 +15,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 ### Mundo
 
 - [[Sistema de Mapa/Descrição|Sistema de Mapa]] — Mundial, Local, Interno e de Guerra
+- [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]] — regiões, cidades, masmorras e relações no primeiro dia
 - [[Sistema de Cidade/Descrição|Sistema de Cidade]]
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
 - [[Sistema de Recursos/Descrição|Sistema de Recursos]] e [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]

@@ -18,7 +18,7 @@ Essa é a função pensada até agora para o Mapa Mundial. Novas funções ainda
 
 **População no Mapa Mundial.** A população mostrada é calculada com o **Fator de Escala** (global): 1 NPC real representa N pessoas. Ver Sistema de Facção.
 
-**Tamanho inicial (provisório).** O mundo é dividido em 6 regiões (uma por cultura inicial), com 6 a 8 Mapas Locais cada, de 36 a 48 mapas no total na primeira versão. Valores a ajustar depois de testes.
+**Tamanho do mundo.** 48 Mapas Locais numa malha de 8 × 6, divididos em 6 regiões de 8 mapas (uma por cultura inicial). Pode mudar no futuro. A disposição das regiões, cidades e masmorras está no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
 
 ### Nível 2 — Mapa Local (RPG)
 

@@ -12,7 +12,7 @@ Religião **não é um sistema à parte**: ela faz parte da Cultura. Uma cultura
 
 - O jogo começa com **6 culturas**, cada uma representando **uma das 6 regiões** do mapa.
 - Existem **6 facções principais**, uma para cada cultura.
-- Os nomes das culturas e a distribuição nas regiões **ainda não foram definidos**.
+- Os nomes definitivos ficam para quando a história for escrita; por enquanto, nomes significativos (Cultura Guerreira, Cultura Arcana...). A região de cada cultura e as afinidades iniciais estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
 - Cada cultura tem uma **ideologia completamente diferente** das outras.
 - Cada cultura tem **pelo menos 1 pensamento extremo**.
 - As 6 ideologias: **Escravista**, **Religiosa**, **Autoritária**, **Tecnocrata**, **Guerreira** e **Arcana**.
@@ -141,12 +141,12 @@ Os estilos de início têm documento próprio: **Sistema de Início de Jogo**.
 | Itens | Textura por cultura em armas, equipamentos e roupas |
 | Construção | Arte própria por cultura |
 | Classe Social | Faixas de habilidade por Cultura + Classe (já existente) |
-| Mapa | Cultura da região; 6 regiões iniciais |
+| Mapa | Cultura da região; 6 regiões iniciais (ver [[Mundo e Estado Inicial/Descrição\|Mundo e Estado Inicial]]) |
 | Diplomacia | Afinidade entre culturas e pensamentos extremos |
 | Eventos | Violar um pensamento extremo, ou uma Felicidade baixa por muito tempo, dispara eventos condicionais duradouros com a causa registrada (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) |
 | Combate | O Duelo é um modo de combate usado como rito de "provar-se em combate" (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
 
 ### Perguntas em aberto
 
-1. **Nomes das culturas e regiões.** Ainda não definidos.
+1. **Nomes das culturas e regiões.** Ficam para a história do jogo; por ora, nomes significativos.
 2. **Arte de construções.** Como reaproveitar partes entre culturas e níveis?

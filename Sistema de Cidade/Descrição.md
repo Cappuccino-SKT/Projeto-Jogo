@@ -19,6 +19,8 @@ O Fator de Escala converte NPCs reais em população total, mas a quantidade de 
 
 As condições para subir de nível, o crescimento da população, a migração e as moradias estão no [[Sistema de População/Descrição|Sistema de População]].
 
+As cidades que existem no primeiro dia (19 de facção e 3 Vilas Livres independentes) estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
+
 ### Facção da cidade
 
 Uma cidade pertence a uma facção por **vontade** (o dono oferece lealdade), por **conquista** ou por ter sido **fundada** em território de facção. A cidade herda **todas as leis** da facção (não há leis locais). Ver Sistema de Facção.

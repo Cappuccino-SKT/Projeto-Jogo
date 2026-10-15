@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado ao fim da rodada P0-5, antes de uma pausa. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado ao aplicar as respostas da rodada P0-5 (2026-10-15). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -137,10 +137,20 @@
 - Só teclado e mouse (sem controle de console), atalhos remapeáveis, zoom em níveis inteiros (1x a 4x).
 - Notificações **personalizáveis** (categorias, limite, agrupamento, o que aparece em velocidade alta, se o Crítico pausa). "Por quê?" por passar o mouse e barra de alertas. Enciclopédia gerada dos dados. Menus: novo jogo em 3 passos, autosave por estação. Interface própria; Dear ImGui só para depuração.
 
+**Mundo e Estado Inicial** — ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]
+- Malha de **48 Mapas Locais (8 × 6)**, 6 regiões de 8 mapas (2 × 3 blocos): Guerreira e Arcana ao norte, Autoritária e Religiosa no centro, Tecnocrata e Escravista ao sul. Culturas hostis ficam vizinhas.
+- Por região: 1 capital, 1 cidade e 1 vilarejo (a Escravista tem 2); mais 3 **Vilas Livres** sem facção. No primeiro dia: 16 mapas de território, 6 em disputa e só 4 sem dono (8%, contra 30% sugeridos: em aberto).
+- Bioma e 2 a 3 recursos de destaque por região, com escassez de outros. **12 masmorras** (2 por região), dificuldade pela distância da capital; 3 lendárias no meio do mundo.
+- **Tom:** baixa magia, chegada da pólvora, sombrio e político; criaturas míticas só no futuro, em masmorras. **Só humanos** nas primeiras versões.
+- **Nomes significativos** (Facção Guerreira, Capital Arcana) e **personagens abstratos** até a história ser escrita; a história do mundo fica para depois.
+- **Ano 412**, 1º dia da Primavera; todos na Era 1. PIB entre −19% e +21% da média; cada facção forte numa coisa (a Guerreira é a mais pobre e tem o maior exército).
+- Matriz de afinidade 6 × 6; valor de relação = afinidade (+40, 0, −40) − 15 se dividem mapa em disputa ± 15 sorteado; 1 ou 2 guerras iniciais e 2 acordos comerciais sorteados. Pacotes de construções por nível e cultura; 5 Importantes fixos por papel; 2 ou 3 pontos de partida por estilo.
+
 ## Em aberto
 
 - **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
-- **Cultura:** nomes das culturas e regiões; como reaproveitar partes da arte de construção.
+- **Cultura:** como reaproveitar partes da arte de construção (os nomes ficam para a história do jogo).
+- **Mundo:** mapas sem dono (8% na proposta, contra 30% sugeridos); Dono de vila em mapa livre ou em território; história, nomes e personagens; listas de tecnologias por cultura; valores do estado inicial.
 - **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto; itens de Medicamento.
@@ -169,16 +179,16 @@
 | P0 | População e Habitação | Escrito |
 | P0 | Trabalho, Salários e Propriedade (e Funções e Construções) | Escrito |
 | P0 | Interface e Controles | Escrito |
-| P0 | **Mundo e Estado Inicial (Lore)** | **Perguntas enviadas, aguardando respostas** |
-| P0 | Pipeline de arte e conteúdo | A fazer |
+| P0 | Mundo e Estado Inicial (a história fica para depois) | Escrito |
+| P0 | **Pipeline de arte e conteúdo** | **Perguntas enviadas, aguardando respostas** |
 | P1 | Viagem e Mundo; Reputação; Companheiros e Diálogo; Guerra e Campanha; Batalha; Diplomacia; Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 
-**Ordem:** responder a rodada P0-5 → rodada P0-6 (Pipeline de arte) → sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** responder a rodada P0-6 (Pipeline de arte) → sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 
-- Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta. A ideia própria do autor prevalece.
+- Cada rodada: uma lista de perguntas com sugestão. As respostas vêm num arquivo `Respostas.txt` enviado na conversa (ou direto no chat); "seguir sua sugestão" aceita a proposta. A ideia própria do autor prevalece. As perguntas e sugestões seguem o **padrão detalhado** descrito na [[Retomada]] (pedido do autor).
 - Marcações nos documentos: **[Proposta]**, **[Em aberto]**, **[Refinar depois]**. Os termos estão no [[Glossário]].
 - Por ora **não se escreve código**: a documentação vem primeiro, depois a ficha técnica lógica, depois a programação.
 - O projeto está no GitHub (`FelipeSKT/Projeto-Jogo`), com histórico de versões. Cada rodada vira um pull request para o autor aceitar. O jeito de trabalhar e os cuidados técnicos estão na [[Retomada]].

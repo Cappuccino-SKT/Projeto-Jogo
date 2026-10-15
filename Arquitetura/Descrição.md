@@ -120,7 +120,7 @@ Uma versão mínima jogável, só para validar a parte mais arriscada: a simula�
 ### Arte e mundo (provisório)
 
 - **Mapa Local:** 128 × 128 tiles de 16 px (a ajustar após testes de desempenho).
-- **Mundo:** 6 regiões de 6 a 8 Mapas Locais cada, de 36 a 48 mapas na primeira versão.
+- **Mundo:** 48 Mapas Locais (8 × 6), em 6 regiões de 8 mapas (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - O desenho pequeno é uma escolha consciente: um jogo de gerenciamento precisa mostrar muita coisa na tela.
 
 ### Perguntas em aberto

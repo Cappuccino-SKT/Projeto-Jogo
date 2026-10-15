@@ -114,5 +114,5 @@ A Magia **não entra na árvore**. Ela tem árvore própria ([[Sistema de Magia/
 
 1. **Valores a testar:** janelas dos marcos, quanto a pesquisa do mundo adianta um marco, pontos por trabalhador, custo de cada tecnologia, penalidade da vila sem facção.
 2. **Lista dos marcos mundiais** (3 maiores e 5 a 8 menores) e o que os menores liberam.
-3. **Lista inicial de tecnologias** e tecnologias iniciais de cada cultura.
+3. **Lista inicial de tecnologias** e tecnologias iniciais de cada cultura. Todas as facções começam na Era 1, no Ano 412; cada cultura recebe ainda 2 ou 3 tecnologias extras sorteadas de uma lista própria (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 4. **Cultura Agrária/Naturalista** (traço candidato, contra a tecnologia): como ela interage com a pesquisa.
