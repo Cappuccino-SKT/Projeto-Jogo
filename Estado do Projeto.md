@@ -220,12 +220,12 @@
 | P1 | Viagem e Mundo | Escrito |
 | P1 | Reputação e Relações do jogador | Escrito |
 | P1 | Companheiros, Relações familiares e Diálogo | Escrito |
-| P1 | **Guerra e Campanha; Batalha; Diplomacia** | **Próxima rodada (P1-4), a preparar** |
+| P1 | **Guerra e Campanha; Batalha; Diplomacia** | **Rodada P1-4 enviada, aguardando respostas** |
 | P1 | Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 está completo. Preparar a rodada P1-4 (Guerra, Batalha e Diplomacia) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Responder a rodada P1-4 (Guerra, Batalha e Diplomacia) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 
