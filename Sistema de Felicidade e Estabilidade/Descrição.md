@@ -35,13 +35,15 @@ A **Felicidade-alvo** de cada classe é **50 mais as contribuições** abaixo. C
 | **Desemprego e renda** | −10 a +10 | [[Sistema de Trabalho e Propriedade/Descrição\|Trabalho e Propriedade]] |
 | **Moradia** | 0 a −10 (sem casa) | [[Sistema de População/Descrição\|População]] |
 | **Conscrição alta** | 0 a −10 | [[Sistema de Facção/Descrição\|Facção]] |
-| **Guerra e ameaça** | 0 a −15 | Facção; Eventos |
+| **Guerra e ameaça** | 0 a −15 (−Cansaço de guerra × 0,15) | [[Sistema de Guerra/Descrição\|Guerra]]; Eventos |
 | **Imposto** | 0 a −10 | Lei de Imposto |
 | **Eventos duradouros** | −20 a +20 | [[Sistema de Eventos/Descrição\|Eventos]] (festival, luto, peste...) |
 | **Religião** | 0 a +10 | Templo e festivais (ver Cultura) |
 | **Repressão** | 0 a −10, só Escravo e Civil | Controle (ver abaixo) |
 
 O resultado é limitado entre 0 e 100.
+
+**Guerra na cidade** (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]): ocupada −20; conquistada −15 (some em 1 ano); saqueada −30 por 1 ano (−40 se também ocupada); cerco com fome. São modificadores próprios, fora do limite dos eventos duradouros. A **superextensão** tira 3 de Estabilidade da facção por cidade conquistada há menos de 1 ano (ver [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]]).
 
 ### Inércia
 

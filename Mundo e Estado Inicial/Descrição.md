@@ -207,20 +207,20 @@ Por quê: a Guerreira despreza a obediência imperial da Autoritária, mas vende
 
 **Contato:** as facções vizinhas se conhecem desde o início. A **Escravista**, por ser mercantil, tem contato com todas (rede de comércio). A Arcana e a Tecnocrata não se conhecem no primeiro dia.
 
-| Par | Valor base | Estado inicial |
+| Par | Valor base | Atitude inicial |
 |---|---|---|
 | Guerreira × Autoritária | −55 | Hostil, candidata a guerra |
 | Arcana × Religiosa | −55 | Hostil, candidata a guerra |
 | Religiosa × Escravista | −55 | Hostil, candidata a guerra |
-| Tecnocrata × Escravista | −15 | Neutro (disputa um mapa) |
-| Guerreira × Arcana | 0 | Neutro |
-| Autoritária × Religiosa | 0 | Neutro |
-| Escravista × Arcana | 0 | Neutro |
-| Autoritária × Tecnocrata | +40 | Neutro, candidata a acordo |
-| Escravista × Guerreira | +40 | Neutro, candidata a acordo |
-| Escravista × Autoritária | +40 | Neutro, candidata a acordo |
+| Tecnocrata × Escravista | −15 | Fria (disputa um mapa) |
+| Guerreira × Arcana | 0 | Neutra |
+| Autoritária × Religiosa | 0 | Neutra |
+| Escravista × Arcana | 0 | Neutra |
+| Autoritária × Tecnocrata | +40 | Amigável, candidata a acordo |
+| Escravista × Guerreira | +40 | Amigável, candidata a acordo |
+| Escravista × Autoritária | +40 | Amigável, candidata a acordo |
 
-**Guerras iniciais:** sorteia-se **1 guerra (70% das partidas) ou 2 (30%)** entre os três pares candidatos. O par em guerra começa com relação −70.
+**Guerras iniciais:** sorteia-se **1 guerra (70% das partidas) ou 2 (30%)** entre os três pares candidatos. O par em guerra começa com relação −70. Os outros pares começam em Paz; a atitude é a faixa da relação (ver [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]]).
 
 **Acordos comerciais iniciais:** sorteiam-se **2** entre os pares candidatos que, depois do desvio, ficaram com relação de +25 ou mais. Acordo comercial zera a Tarifa entre os dois (ver [[Sistema de Comércio/Descrição|Sistema de Comércio]]).
 

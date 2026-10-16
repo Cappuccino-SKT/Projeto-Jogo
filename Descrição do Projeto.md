@@ -29,12 +29,15 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de IA/Descrição|Sistema de IA]]
 - [[Sistema de Cultura/Descrição|Sistema de Cultura]] — 6 culturas iniciais
 - [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
-- [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, diplomacia, exércitos
+- [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, dinastia, exércitos
 - [[Sistema de Reputação/Descrição|Sistema de Reputação]] — reputação do jogador com facções, Opinião dos Importantes
 - [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]] — recrutamento, lealdade, casamento, herdeiros e conversas
 - [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]
 - [[Sistema de Cura/Descrição|Sistema de Cura]]
 - [[Sistema de Combate/Descrição|Sistema de Combate]] — combate local do jogador, armas, derrota e captura
+- [[Sistema de Guerra/Descrição|Sistema de Guerra]] — motivos, exércitos, suprimento, cerco, saque, paz e cálculo rápido
+- [[Sistema de Batalha/Descrição|Sistema de Batalha]] — Mapa de Guerra: Esquadrões, Moral, formações, terreno
+- [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]] — tratados, vassalagem, casamentos, IA das facções
 - [[Sistema de Eventos/Descrição|Sistema de Eventos e Narrador]] — eventos ocasionais e condicionais, narrador
 
 ### Economia e produção

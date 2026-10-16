@@ -53,7 +53,7 @@ A tecnologia de facção pertence à **Facção**: todas as cidades dela usam o 
 |---|---|
 | **Agricultura e Produção** | Novas receitas, construções de produção, mais produtividade |
 | **Construção** | Novas construções, níveis de construção, níveis de cidade |
-| **Militar** | Armas e armaduras de Rank maior, Quartel, pólvora, tamanho e equipamento dos Esquadrões |
+| **Militar** | Armas e armaduras de Rank maior, Quartel, pólvora (Atiradores e Artilharia na Era 2), Muralhas (Bastião na Era 3), tipos e equipamento dos Esquadrões (ver [[Sistema de Batalha/Descrição\|Batalha]]) |
 | **Economia** | Mercado, Casa da Moeda, cunhagem, caravanas |
 | **Administração** | Leis novas, Prisão, Templo, controle de Criminalidade |
 

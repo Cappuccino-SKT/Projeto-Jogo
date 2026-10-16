@@ -47,8 +47,9 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 4. **Construções e paredes.**
 5. **Acima do personagem:** copas de árvore, telhados.
 6. **Colisão:** invisível no jogo; marca onde não se anda.
+7. **Elevação** (opcional): pintada só nas colinas; usada no Mapa de Guerra (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]). Um mapa sem ela é plano.
 
-**Camadas de objetos:** Lotes (pequeno, médio e grande, com o tipo permitido); Portas (ligam ao Mapa Interno); Bordas (saída para o mapa vizinho); Recursos (áreas de floresta, mina, pesca); Criaturas e bandidos (pontos de aparição); Pontos de interesse (quadro de contratos, entrada de masmorra).
+**Camadas de objetos:** Lotes (pequeno, médio e grande, com o tipo permitido); Portas (ligam ao Mapa Interno); Bordas (saída para o mapa vizinho); Recursos (áreas de floresta, mina, pesca); Criaturas e bandidos (pontos de aparição); Pontos de interesse (quadro de contratos, entrada de masmorra, praça central para a batalha de cerco).
 
 **Ajudas do editor:** **terrenos** (pinta-se "grama" e o Tiled escolhe sozinho o tile de borda certo) e **carimbos** (pedaços prontos, como "bosque pequeno", colados várias vezes). São só ajudas de desenho: o mapa salvo é fixo e feito à mão, não é gerado pelo jogo.
 
@@ -116,6 +117,7 @@ A arte é feita em camadas, igual à programação:
 | Mapas Locais | 48 de 128 × 128 tiles | 1 na fatia vertical; 8 na primeira região |
 | Criaturas | cerca de 10 tipos × 40 quadros | 3 tipos |
 | Interface | molduras, botões e cerca de 150 ícones de itens | ícones da fatia vertical |
+| Muralhas | tileset de paliçada e de pedra (paleta por cultura), com portão e brecha | 1 tileset |
 
 ### Peso da arte
 
@@ -128,7 +130,7 @@ O autor pediu atenção ao **peso da arte no jogo**. **[Proposta]** Estimativa, 
 | Bonecos, no pior caso (sem espelhamento) | 20 camadas × 216 quadros × 1,5 KB | cerca de 6,6 MB |
 | Bonecos com forma própria por cultura (meta final) | o mesmo × 6 | cerca de 40 MB |
 | Construções (média de 64 × 64 px) | 22 tipos × 5 níveis × 6 culturas × 16 KB | cerca de 11 MB |
-| Mapas Locais | não são imagens, são números: 128 × 128 × 6 camadas × 2 bytes | cerca de 200 KB por mapa; 9,4 MB os 48 |
+| Mapas Locais | não são imagens, são números: 128 × 128 × 7 camadas × 2 bytes | cerca de 230 KB por mapa; 11 MB os 48 |
 
 **Conclusão:** mesmo o jogo completo deve ficar abaixo de **100 MB de arte** na placa de vídeo. Pixel art é leve; o que pesa de verdade é a **quantidade de coisas desenhadas por quadro** e a **simulação dos NPCs**.
 
@@ -184,6 +186,7 @@ data/
 | Cultura | Troca de paleta agora, estilo próprio no futuro; cores das culturas |
 | Construção | Aparência nos níveis 1, 3 e 5, com peças reaproveitáveis |
 | Combate | Boneco de 16 × 24, 54 quadros por direção, 3 direções e espelho |
+| Batalha e Guerra | 7ª camada Elevação; tileset de Muralha; os bonecos da batalha são os mesmos, com paleta por cultura (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Interface | Cores das culturas na lente Política; ícones de itens |
 | Clima e Estações (futuro) | Só mudança de cor agora; neve, rios congelados, folhas e flores no futuro |
 | Itens | A lista de itens manda até a pasta `data/` existir |

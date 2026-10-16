@@ -91,6 +91,8 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 **Decisão do autor:** o foco agora é **100% na documentação**, sem nenhuma linha de código. Quando a documentação estiver satisfatória, será feita uma **ficha técnica lógica** das possibilidades (como cada sistema vira estruturas, dados e regras no código). Só depois dela começa a programação. Os marcos abaixo continuam como plano, mas não serão iniciados antes disso.
 
+**Guerra:** depois que o mundo funcionar, a guerra entra primeiro pelo **cálculo rápido de forças** (o mundo já tem guerras e o jogador pode resolvê-las automaticamente). O **Mapa de Guerra** vem depois, como um marco próprio, porque é um jogo de estratégia inteiro (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]] e [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
+
 ### Ferramentas de conteúdo
 
 - **Mapas:** serão desenhados no **Tiled**, um editor de mapas de tiles gratuito e de código aberto (<https://www.mapeditor.org>). Ele não faz parte do jogo: é só a ferramenta de desenho. Cada mapa é salvo em um arquivo JSON, que o jogo lê. O Tiled permite camadas (chão, objetos, colisão) e pontos marcados no mapa, como lotes de construção, portas e pontos de entrada.

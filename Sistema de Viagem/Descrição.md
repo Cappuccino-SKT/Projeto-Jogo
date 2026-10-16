@@ -125,8 +125,8 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 | Entidade | Dono | O que faz |
 |---|---|---|
 | Grupo do jogador | Jogador | Vai aonde o jogador mandar |
-| Caravana civil | Cidade, Rico ou jogador | Leva mercadorias entre Mercados (ver [[Sistema de Comércio/Descrição|Comércio]]) |
-| Exército | Facção | Esquadrões com a Caravana Militar (ver Facção) |
+| Caravana civil | Cidade, Rico ou jogador | Leva mercadorias entre Mercados (ver [[Sistema de Comércio/Descrição\|Comércio]]) |
+| Exército | Facção | 1 a 20 Esquadrões, General e Caravanas Militares; ordens de cerco e saque (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 | Bando de bandidos | Nenhum | Ronda mapas sem dono e de fronteira; ataca caravanas e viajantes |
 | Patrulha | Facção | Anda pelo próprio território, caça bandidos e cobra a Tarifa; o soldo sai do Banco da Facção |
 
@@ -185,7 +185,9 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 | Tempo | 8x só no Mapa Mundial; volta a 1x em encontros e chegadas; acampamento à noite |
 | Interface | Névoa, informações datadas, ícones das entidades, janela de encontro |
 | Início de Jogo | Conhecimento inicial do mapa por estilo |
-| Guerra e Notícias (futuros) | Tempo de marcha dos exércitos; atraso das informações pela distância |
+| Guerra | Tempo de marcha dos exércitos; comboios de suprimento; mercenários (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
+| Diplomacia | Passagem Militar; fronteira fechada bloqueia rotas (ver [[Sistema de Diplomacia/Descrição\|Sistema de Diplomacia]]) |
+| Notícias (futuro) | Atraso das informações pela distância |
 | Clima e Estações (futuro) | Multiplicadores de neve e chuva |
 
 ### Perguntas em aberto

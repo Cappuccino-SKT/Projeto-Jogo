@@ -45,8 +45,8 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 ## Tarifas e fronteiras
 
 - Nova lei de facção: **Tarifa**. Cobra imposto sobre caravanas que **entram no território** da facção; o dinheiro vai para o **Banco da Facção**.
-- **Facções em guerra não comerciam** entre si.
-- A diplomacia pode criar um **embargo** ou um **acordo comercial** (estado diplomático "Comércio"), que **zera a tarifa**.
+- **Facções em guerra não comerciam** entre si. Uma cidade **sitiada** não recebe nem envia caravanas (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]).
+- A diplomacia pode criar um **embargo** ou um **acordo comercial** (tratado), que **zera a tarifa**; com atitude Hostil, a facção pode fechar a fronteira (ver [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]]).
 
 ## Riscos
 

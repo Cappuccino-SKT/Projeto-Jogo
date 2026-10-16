@@ -47,7 +47,8 @@ O jogador pode fundar um assentamento (nível 1) em um mapa sem dono, ou em terr
 - Nível da cidade
 - Itens proibidos — **derivado das leis da facção**
 - Conscritos disponíveis — **derivado**: população × lei de Conscrição ÷ Fator de Escala, menos os já alistados (usado para o sistema de Batalha)
-- Esquadrões da cidade (os que a cidade sustenta)
+- Esquadrões da cidade (os que a cidade sustenta) e guarnição (Esquadrões estacionados)
+- Muralha (nenhuma, Paliçada, Pedra ou Bastião) e situação de guerra: sitiada ou ocupada, e por quem (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]])
 - Guardas — quantidade depende do nível da cidade e da Criminalidade, com um mínimo definido pela lei da facção
 - Lotes de construção (fixos, marcados no mapa; vazios ou ocupados)
 - Capacidade de NPCs (pelo nível) e ocupação atual (ver [[Sistema de População/Descrição|Sistema de População]])

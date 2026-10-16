@@ -1,11 +1,11 @@
-> Resumo compacto do projeto, atualizado no fim da sessão de 2026-10-15 (rodadas P0-5 a P1-3), antes de uma pausa. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-16 (rodadas P0-5 a P1-4; P1-5 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
 **Mapa e Cidade**
 - 4 níveis de mapa; arte toda à mão. LOD 0/1/2 por Mapa Local; Mapa Interno começa em LOD 2.
 - Cada Mapa Local tem no máximo **uma cidade**. Estados de território: Sem dono, Território de facção (vizinho de cidade), Em disputa (vizinho de cidades de facções diferentes) e Com cidade. Facção e estado são derivados.
-- Mapa em disputa gera guerras constantes até uma facção dominar ou o jogador interferir. Guerras de IA são resolvidas por **cálculo rápido de forças**; o Mapa de Guerra só existe quando o jogador participa.
+- Mapa em disputa gera guerras constantes até uma facção dominar ou o jogador interferir; ele guarda quem o domina e só muda de dono no tratado de paz. Guerras de IA são resolvidas por **cálculo rápido de forças**; o Mapa de Guerra só existe quando o jogador participa.
 - **Fator de Escala** global (1 NPC real = N pessoas; exemplo 100; valor a testar).
 - Cidade nível 1 a 4 (nível 4 só capitais, por conquista). Dono de vila: o jogador pode fundar assentamento em território de facção.
 
@@ -83,7 +83,7 @@
 - Combate: efeito instantâneo ou em área, com Mana, conjuração interrompível por dano e recarga; feitiços de área acertam aliados.
 - Novas construções: Torre Arcana (Pontos Arcanos), Forja Arcana (Aço Mágico), Encantaria. Mago de Suporte acelera o Hospital.
 - Encantamento: Rank 3+, na Encantaria, por Mago de Ofício, com Mana e Pedra de Mana; um por item.
-- Árvore arcana de 15 a 25 itens, eras pelos marcos mundiais. Esquadrão de Magos: caro, limitado pelos Magos, só se a lei permitir.
+- Árvore arcana de 15 a 25 itens, eras pelos marcos mundiais. Esquadrão de Magos: 1 NPC Mago alistado, até 10% dos Magos da facção, 3× o soldo, só se a lei permitir (ver Batalha).
 
 **Objetivo e Progressão**
 - Sandbox sem fim obrigatório. **Ambições** opcionais (uma sugerida por estilo de início, trocável; mais as grandes: conquistar capital, unificar região); ao cumprir, epílogo e o jogador continua ou encerra.
@@ -148,7 +148,7 @@
 
 **Pipeline de Arte e Conteúdo** — ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]
 - Artista definitivo ainda não escolhido; por ora o autor desenha (sem experiência). Fatia vertical com **pacotes de terceiros** provisórios e rascunhos. Programas grátis: **Pixelorama** (proposta), Tiled e VS Code.
-- Tile 16 px, vista 3/4, **boneco 16 × 24**, zoom padrão 2x (50 × 28 tiles em 1600 × 900), paleta mestre de cerca de 48 cores + 2 cores por cultura. Padrão fixo de 6 camadas de tiles e 6 de objetos no Tiled.
+- Tile 16 px, vista 3/4, **boneco 16 × 24**, zoom padrão 2x (50 × 28 tiles em 1600 × 900), paleta mestre de cerca de 48 cores + 2 cores por cultura. Padrão fixo de 7 camadas de tiles (a 7ª, Elevação, é opcional) e 6 de objetos no Tiled.
 - Variação por cultura com **troca de paleta** nas primeiras versões; meta final: **estilo próprio** por cultura em armas, armaduras e construções. Construções mudam de aparência nos níveis 1, 3 e 5.
 - Animação: 54 quadros por direção, 3 direções e espelho (cerca de 162 por camada). Estações: só mudança de cor agora; neve, rios congelados, árvores sem folhas, folhas e flores ficam para o futuro (toda arte extra de estação fica para depois). Interior próprio só nas construções públicas mais visitadas e nas masmorras.
 - Ordem: fatia vertical (planície, cultura Autoritária) → cidade → primeira região → resto. **Sem prazo**: o limite é o peso da arte, estimado em menos de 100 MB na placa de vídeo para o jogo completo, a medir na fatia vertical.
@@ -176,11 +176,33 @@
 - Casamento com Opinião +60, título compatível e costume da cultura; gravidez de 1 estação, infância de 3 anos, educação por foco. Sem herdeiro, sucessor entre companheiros com Opinião +60; senão, epílogo. Dinastias da IA casam e têm filhos por estação.
 - Diálogo misto (modular e escrito à mão para os Importantes), ações com fórmula de chance (5% a 95%), falhas com consequência, menu curto para NPCs comuns. **Sem retratos** nas conversas.
 
+**Guerra e Campanha** — ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]
+- Guerra com ou sem **motivo** (7 motivos: mapa em disputa, reivindicação, guerra santa, honra, ofensa, independência, chamado de aliado); sem motivo: −20 de relação com todos, −20 de Confiabilidade e Cansaço inicial 20.
+- **Placar de Guerra** (−100 a +100) por batalhas, cidades ocupadas, mapa em disputa dominado e saque; a paz é paga com o Placar (de paz branca a vassalagem) e traz 1 ano de trégua.
+- Exército = 1 a 20 Esquadrões + Caravanas + 1 General (Comando = média de Carisma e Inteligência). Esquadrão leva 2 dias no Quartel. 6 a 8 companhias de mercenários (2× o soldo).
+- Suprimento: 1 Ração por Esquadrão por dia; Caravana leva 60; forrageio em território inimigo; comboio pode ser emboscado; sem suprimento, Moral −5 por dia e deserção.
+- **Cerco** com fome e rendição; Muralha exige Aríete ou brecha. Cidade **ocupada** até a paz (ou 2 anos). Saque: 50% do dinheiro, 30% dos estoques e 10% da população.
+- **Cansaço de guerra** (0 a 100) alimenta o fator "Guerra e ameaça". Muralha em 3 níveis (Paliçada, Pedra, Bastião), Posto da Guarda e milícia formada pelos guardas.
+- **Cálculo rápido** com as mesmas grandezas da batalha, em até 5 rodadas, calibrado com batalhas sem tela. Papel do jogador por situação (mercenário, membro, vassalo, líder).
+
+**Batalha (Mapa de Guerra)** — ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]
+- 9 tipos de Esquadrão com **kit** de itens (o Rank dá a qualidade) e bônus de um tipo por cultura; sem arte nova (paleta por cultura).
+- **Escala (decisão do autor):** batalhas grandes, até **4.000 soldados** na tela, como no Total War. A simulação é sempre por Esquadrão de 100 soldados; o jogador escolhe no novo jogo o **tamanho das unidades** (20, 50 ou 100 bonecos por Esquadrão). O Pequeno é o garantido; o Médio e o Grande dependem dos testes de desempenho.
+- Moral (Firme, Abalado, Fugindo, Destroçado) reduzida pela Disciplina; 5 formações; flanco +25% e retaguarda +50%; ciclo Lanceiros > Cavalaria > tiro > infantaria lenta.
+- O campo é uma cópia do Mapa Local, com a **7ª camada do Tiled, Elevação**. Artilharia na Era 2 abre brecha; Esquadrão de Magos de Combate ou Suporte; a Comitiva é o grupo do jogador; bônus do Comandante.
+- Controles no estilo Total War; **o mundo para durante a batalha** (avança 2 h no fim). Baixas: 40% mortos, 40% feridos, 20% capturados. Cerco simples (portão e brechas). Reforços pela borda.
+
+**Diplomacia** — ver [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]]
+- Três camadas: **estado** (Paz, Guerra, Trégua), **tratados** (vários ao mesmo tempo) e **atitude** (Hostil, Fria, Neutra, Amigável, Leal).
+- Tratados: Comercial, Embargo, Passagem, Não Agressão, Aliança Defensiva e Total, Vassalagem e Casamento. Nova nota de **Confiabilidade** (0 a 100).
+- Vassalo: leis próprias, 15% de tributo e chamado às armas; integração depois de 4 anos. Casamento dá Não Agressão e reivindicação; reféns em versão simples.
+- IA: "vontade de guerra" por pontos (declara acima de 60), avaliada a cada 4 dias; cada decisão guarda o "Por quê?". Painel do jogador com a chance de aceite. **Coalizão** contra quem cresce demais e superextensão.
+
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
 ## Em aberto
 
-- **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; limiar de controle de mapa em disputa; taxa de regeneração e custo do Hospital.
+- **Testes:** valor do Fator de Escala e tamanho final do esquadrão; gravidades e multas; fórmula da Criminalidade; recompensa mínima; taxa de regeneração e custo do Hospital.
 - **Cultura:** como reaproveitar partes da arte de construção (os nomes ficam para a história do jogo).
 - **Mundo:** história, nomes e personagens; listas de tecnologias por cultura; valores do estado inicial.
 - **Facção:** detalhes da assembleia.
@@ -192,17 +214,20 @@
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; confirmar a regra de armadura mista.
 - **Tecnologia:** valores a testar (janelas, adiantamento, pontos, custos, penalidade); lista dos marcos e das tecnologias iniciais; cultura Agrária.
 - **Construção:** custos e níveis das construções novas (Mercado, Taverna, Quartel, Prisão, Casa da Moeda, Templo, Posto Comercial, Laboratório, Torre Arcana, Forja Arcana, Encantaria, Hospital, Boticário, Universidade); ainda não estão nos canvases.
-- **Magia:** lista de feitiços e da árvore arcana; valores a testar; como obter Grimório; Esquadrão de Magos no Mapa de Guerra; feitiços de Suporte fora do combate.
+- **Magia:** lista de feitiços e da árvore arcana; valores a testar; como obter Grimório; feitiços de Suporte fora do combate.
 - **Objetivo:** condições das Ambições e epílogos; Renome por feito e por título; repovoamento; lista de contratos, missões e masmorras; recrutamento de companheiros.
 - **Comércio:** valores (capacidade, salário, Tarifa, peso do risco); animais de carga; guardas como NPCs ou valor abstrato; fórmula do fluxo em LOD 2.
 - **População:** valores a testar (taxas, vida em anos de jogo, capacidade das moradias, custo de subir de nível); lotes por mapa e nível; pesos da migração; Senzala; moradia dos Controlados; crianças decorativas.
 - **Trabalho:** valores a testar (vagas, salários, faixa de preço, estabilizador, imposto, empresas dos Ricos); nome e categoria das Funções; Engenheiro e Operário sem construção; Espada sem construção no canvas do Ferreiro; gerente das construções da Cidade; leilão; forma de estudo na Universidade.
 - **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; fuga e rebelião de Escravos; greves; layout do painel "Por quê?".
-- **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; telas do Mapa de Guerra; IDs de texto para outros idiomas.
+- **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; IDs de texto para outros idiomas.
 - **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quando entra a arte extra das estações; quando cada cultura ganha formas próprias.
 - **Viagem:** valores a testar; construção de estradas; multiplicadores de clima; quantidade e custo das patrulhas.
 - **Reputação:** valores a testar; requisitos de título podem mudar com o futuro sistema de Títulos de Nobreza.
-- **Companheiros:** valores a testar; bônus dos cargos; costumes de casamento de Autoritária, Tecnocrata e Arcana.
+- **Companheiros:** valores a testar; bônus dos cargos (menos o de comandante, já definido); costumes de casamento de Autoritária, Tecnocrata e Arcana.
+- **Guerra:** valores a testar (Placar, Cansaço, suprimento, cerco, saque, cálculo rápido); custo da Muralha e do Posto da Guarda; estradas destruídas; guerra civil.
+- **Batalha:** valores a testar; desempenho dos tamanhos Médio e Grande; combate individual no tamanho Grande; escadas e torres de cerco.
+- **Diplomacia:** pesos da IA; mensageiros; quando a coalizão se desfaz.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
@@ -220,12 +245,13 @@
 | P1 | Viagem e Mundo | Escrito |
 | P1 | Reputação e Relações do jogador | Escrito |
 | P1 | Companheiros, Relações familiares e Diálogo | Escrito |
-| P1 | **Guerra e Campanha; Batalha; Diplomacia** | **Rodada P1-4 enviada, aguardando respostas** |
-| P1 | Religião; Clima e Estações; Notícias; Efeitos de itens e Escravidão | A fazer |
+| P1 | Guerra e Campanha; Batalha; Diplomacia | Escrito |
+| P1 | **Religião; Clima e Estações; Notícias** | **Rodada P1-5 enviada, aguardando respostas** |
+| P1 | Efeitos de itens e Escravidão | A fazer (rodada P1-6) |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 está completo. Responder a rodada P1-4 (Guerra, Batalha e Diplomacia) → demais sistemas P1 → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Responder a rodada P1-5 (Religião, Clima e Estações, Notícias) → P1-6 (Efeitos de itens e Escravidão) → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 

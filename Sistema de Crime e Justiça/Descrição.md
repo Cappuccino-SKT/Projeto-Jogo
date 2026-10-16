@@ -131,7 +131,7 @@ Existe suborno: pagar um guarda para ignorar o crime.
 ### Prisioneiros de guerra
 
 - Só **líderes e NPCs Importantes** viram prisioneiros individuais, com a opção de **resgate** ou **execução**.
-- As **baixas comuns** de um esquadrão derrotado podem ser **escravizadas em massa**, se a lei da facção permitir, gerando NPCs Escravo conforme o Fator de Escala.
+- As **baixas comuns** de um esquadrão derrotado podem ser **escravizadas em massa**, se a lei da facção permitir, gerando NPCs Escravo conforme o Fator de Escala (100 prisioneiros = 1 NPC Escravo). Na batalha, 20% dos soldados derrubados são capturados, e os feridos do perdedor também (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
 ### Ligação com outros sistemas
 
@@ -147,8 +147,8 @@ Existe suborno: pagar um guarda para ignorar o crime.
 | Itens | Itens proibidos; Grilhões (item do Ferreiro) para prisioneiros |
 | Classe Social | Variação das penas por classe |
 | Tempo | Duração das penas e decaimento da recompensa |
-| Eventos | Bandidos surgem como evento condicional da Criminalidade alta: grupos soltos (não uma facção), com tamanho proporcional à Criminalidade da cidade mais próxima; em LOD 2 viram um número de "ameaça bandida" por região. A missão de confiança pode ser um evento com escolha (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) |
-| Combate | O modo de ataque (letal ou não letal) é do NPC; atacar guarda ou cidadão gera crime (Agressão ou Assassinato); se todo o grupo do jogador cai diante dos guardas, ele é preso; duelo aceito não é crime (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
+| Eventos | Bandidos surgem como evento condicional da Criminalidade alta: grupos soltos (não uma facção), com tamanho proporcional à Criminalidade da cidade mais próxima; em LOD 2 viram um número de "ameaça bandida" por região. A missão de confiança pode ser um evento com escolha (ver [[Sistema de Eventos/Descrição\|Sistema de Eventos]]) |
+| Combate | O modo de ataque (letal ou não letal) é do NPC; atacar guarda ou cidadão gera crime (Agressão ou Assassinato); se todo o grupo do jogador cai diante dos guardas, ele é preso; duelo aceito não é crime (ver [[Sistema de Combate/Descrição\|Sistema de Combate]]) |
 
 ### Perguntas em aberto
 

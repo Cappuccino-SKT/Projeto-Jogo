@@ -125,14 +125,14 @@ Velhice, mais causas que vêm de outros sistemas:
 | **Ocupação** | Acima de 90% da capacidade por 2 estações |
 | **Felicidade** | Acima de um limiar |
 | **Construções obrigatórias** | Nível 2: Mercado e Taverna. Nível 3: Quartel, Templo ou Laboratório, conforme a cultura |
-| **Tecnologia** | Do ramo Construção (ver [[Sistema de Tecnologia/Descrição|Sistema de Tecnologia]]) |
+| **Tecnologia** | Do ramo Construção (ver [[Sistema de Tecnologia/Descrição\|Sistema de Tecnologia]]) |
 | **Custo** | Materiais e dinheiro |
 
 O nível 4 continua restrito às capitais, por conquista (ver Sistema de Cidade).
 
 ### Queda de nível
 
-- A cidade só **cai de nível** em catástrofe grave (peste, fome longa ou saque), com **aviso** antes.
+- A cidade só **cai de nível** em catástrofe grave (peste, fome longa ou saque), com **aviso** antes. O saque e a fome no cerco estão no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 - As construções acima do novo nível ficam **inativas**, sem serem destruídas.
 
 ### Jogador e IA

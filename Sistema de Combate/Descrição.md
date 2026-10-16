@@ -205,7 +205,7 @@ Um modo entre **dois combatentes**: os outros NPCs não intervêm. Termina por *
 
 ### Montarias
 
-**[Refinar depois]** Fora do combate na primeira versão. A montaria serve para viagem e carga (velocidade e peso): com todos montados, a viagem pelo Mapa Mundial fica 50% mais rápida (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]). A cavalaria em combate fica para o Mapa de Guerra, nos Esquadrões. O item Sela já existe.
+**[Refinar depois]** Fora do combate na primeira versão. A montaria serve para viagem e carga (velocidade e peso): com todos montados, a viagem pelo Mapa Mundial fica 50% mais rápida (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]). A cavalaria em combate existe só no Mapa de Guerra, como tipo de Esquadrão (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]). O item Sela já existe.
 
 ---
 
@@ -241,13 +241,14 @@ Toda a arte é feita à mão, então a escolha é feita para o volume de arte n�
 | Cura | Regeneração só fora de combate; Inconsciente e Morto |
 | Crime e Justiça | Agressão e assassinato; prisão não letal; captura pelos guardas |
 | Facção | Herdeiro assume; Esquadrões vão ao Mapa de Guerra; prisioneiros |
+| Batalha | A Comitiva do jogador usa a Vida e o dano reais do combate local; mesma tabela de arma × armadura (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Cultura | Duelo como rito |
 | Mapa | Combate local e Mapa Interno; limite de combatentes; Mapa de Guerra |
 | Eventos | Criaturas e bandidos por evento; eventos Críticos pausam |
 | Tempo | Velocidade volta a 1x ao iniciar combate |
 | Início de Jogo | Derrota vira captura (estilos Escravo e Aventureiro) |
 | Magia | Cajado, encantamento e, depois, feitiços |
-| Interface | Seleção individual ou em caixa, barras de Vida, indicadores EM COMBATE e PAUSADO, ordens enfileiradas visíveis (ver [[Interface/Descrição|Interface e Controles]]) |
+| Interface | Seleção individual ou em caixa, barras de Vida, indicadores EM COMBATE e PAUSADO, ordens enfileiradas visíveis (ver [[Interface/Descrição\|Interface e Controles]]) |
 
 ### Perguntas em aberto
 

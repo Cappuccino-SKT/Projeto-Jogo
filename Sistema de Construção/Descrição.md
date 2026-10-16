@@ -44,7 +44,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 |---|---|
 | **Mercado** | Loja geral onde os NPCs compram no Período Livre (a "Loja" do Sistema Econômico) |
 | **Taverna** | Entretenimento no Período Livre; vende Bebida; quadro de contratos (Objetivo e Progressão) |
-| **Quartel** | Onde os conscritos são alistados e os Esquadrões são formados |
+| **Quartel** | Onde os conscritos são alistados e os Esquadrões são formados (2 dias cada; tantos ao mesmo tempo quanto o nível) |
 | **Prisão** | Mapa Interno onde NPCs presos cumprem pena (Sistema de Crime e Justiça) |
 | **Casa da Moeda** | Cunhagem: ganho anual de dinheiro (Sistema Econômico) |
 | **Templo** | Construção da cultura Religiosa; função detalhada com a Cultura |
@@ -55,10 +55,10 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Encantaria** | Magos de Ofício encantam itens de Rank 3 ou maior (Sistema de Magia) |
 | **Hospital** | Cura os NPCs do grupo do jogador; um Mago de Suporte acelera a cura (Sistema de Cura e Sistema de Magia) |
 | **Boticário** | Produz Medicamentos (Sistema de Cura) |
-| **Moradias** | Senzala (Escravos), Casa (Civil), Casarão (Rico), Mansão (Nobreza) e Palácio (Realeza), cada uma com níveis de 1 a 5 no canvas de construções civis; construídas em lotes fixos (ver [[Sistema de População/Descrição|Sistema de População]]) |
-| **Universidade** | Educação: melhora a Inteligência e o Trabalho Especialista dos NPCs da cidade e dá bônus aos Pesquisadores; construção da Facção (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]) |
-
-**Ficam para depois:** Posto da Guarda e Muralha.
+| **Moradias** | Senzala (Escravos), Casa (Civil), Casarão (Rico), Mansão (Nobreza) e Palácio (Realeza), cada uma com níveis de 1 a 5 no canvas de construções civis; construídas em lotes fixos (ver [[Sistema de População/Descrição\|Sistema de População]]) |
+| **Universidade** | Educação: melhora a Inteligência e o Trabalho Especialista dos NPCs da cidade e dá bônus aos Pesquisadores; construção da Facção (ver [[Sistema de Trabalho e Propriedade/Descrição\|Sistema de Trabalho e Propriedade]]) |
+| **Muralha** | Defesa da cidade em 3 níveis: Paliçada, Muralha de Pedra e Bastião (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
+| **Posto da Guarda** | Mais vagas de guarda (Controle) e ponto de reunião da milícia (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 
 ### Arte
 

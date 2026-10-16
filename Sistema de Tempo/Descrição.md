@@ -3,7 +3,7 @@
 
 O jogo terá um ciclo de tempo anual. Cada ano tem um ciclo de 64 dias, dividido em 4 estações de 16 dias cada, representando as estações reais do ano: primavera, verão, outono e inverno.
 
-Um dia tem 24 horas, sendo que 24 horas no jogo equivalem a 16 minutos reais na velocidade 1x. O jogo terá até 4 velocidades (1x, 2x, 4x, 8x), sendo a 8x exclusiva do Mapa Mundial. Nos Mapas Locais, Internos e de Guerra, o máximo é 4x.
+Um dia tem 24 horas, sendo que 24 horas no jogo equivalem a 16 minutos reais na velocidade 1x. O jogo terá até 4 velocidades (1x, 2x, 4x, 8x), sendo a 8x exclusiva do Mapa Mundial. Nos Mapas Locais, Internos e de Guerra, o máximo é 4x. **Durante uma batalha no Mapa de Guerra, o relógio do mundo fica parado**; no fim, ele avança 2 horas fixas (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
 A frequência de tick é amarrada ao LOD do Mapa Local, em vez de um valor fixo global: Mapas em LOD 0 rodam a cada tick "real" (frequência a definir com testes de performance). Mapas em LOD 1 rodam a cada N ticks. Mapas em LOD 2 avançam em blocos de tempo maiores (ex: a cada hora de jogo, não a cada tick). Isso também define o que pausa na velocidade 8x: pathfinding fino e decisão individual de Não-Controlados pausam; posição de Exércitos em trânsito e os agregados por cidade (Bens de Consumo/Felicidade) continuam avançando, fazendo 1 dia durar 2 minutos reais nessa velocidade.
 
