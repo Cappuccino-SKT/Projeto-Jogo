@@ -44,10 +44,10 @@ Cada Mapa Local comporta **apenas uma cidade**, mas nem todo Mapa Local tem uma.
 
 - **Sem dono** — sem cidade e sem cidade vizinha. Existe para o jogador explorar e, se quiser, fundar um assentamento.
 - **Território de facção** — sem cidade própria, mas **adjacente** (os 4 vizinhos na malha) a uma cidade de uma facção. É vinculado à facção dessa cidade, e pode ser tratado como vila ou entreposto em desenvolvimento.
-- **Em disputa** — adjacente a cidades de **facções diferentes**. Causa guerras constantes até uma facção dominá-lo ou o jogador interferir.
+- **Em disputa** — adjacente a cidades de **facções diferentes**. Causa guerras constantes até uma facção dominá-lo ou o jogador interferir. É o único estado que guarda quem domina o mapa; ele só muda de dono no tratado de paz (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]).
 - **Com cidade** — tem uma cidade. A facção do Mapa Local é a da cidade.
 
-O estado e a facção de um Mapa Local são **derivados** das cidades vizinhas, não armazenados: se uma cidade muda de facção por conquista, os mapas adjacentes seguem. Detalhes em Sistema de Facção.
+O estado e a facção de um Mapa Local são **derivados** das cidades vizinhas, não armazenados (a exceção é o domínio do mapa em disputa): se uma cidade muda de facção por conquista, os mapas adjacentes seguem. Detalhes em Sistema de Facção.
 
 O jogador pode fundar um assentamento (cidade nível 1) em um mapa sem dono ou em território de facção. No segundo caso, o assentamento nasce vinculado à facção dominante.
 
@@ -78,6 +78,8 @@ O Mapa de Guerra herda o terreno/bioma do Mapa Local onde o confronto foi dispar
 **Quando é gerado.** O Mapa de Guerra só é criado quando **o jogador participa**. Guerras entre facções de IA (por exemplo, por um mapa em disputa) são resolvidas **automaticamente**, por um cálculo rápido que compara a força dos dois exércitos.
 
 O Mapa de Guerra guarda a lista de Facções/Exércitos participantes (com seus Esquadrões, Formação e Moral — ver Sistema de Facção), uma condição de vitória/derrota (ex: moral do exército inimigo chega a 0) e o resultado pós-batalha (mudança de Facção dominante do Mapa Local, baixas nos Exércitos, possível saque, prisioneiros). Por ser temporário, o Mapa de Guerra é gerado e destruído sob demanda — não fica "adormecido" como os outros mapas.
+
+**Regras.** O Mapa de Guerra é uma **cópia simplificada do Mapa Local** (sem NPCs e itens; construções como obstáculos), lida do mesmo arquivo do Tiled, com a camada opcional de Elevação. O mundo fica parado durante a batalha. As regras da batalha (tipos de Esquadrão, Moral, formações, terreno, cerco, reforços e o tamanho visual das unidades) estão no [[Sistema de Batalha/Descrição|Sistema de Batalha]]; a campanha (exércitos, cerco, ocupação, saque, paz e o cálculo rápido), no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
 ### Atributos
 

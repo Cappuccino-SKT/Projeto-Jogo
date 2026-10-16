@@ -83,7 +83,8 @@ Cada Mago tem **afinidade com uma escola** (sorteada ao nascer). Ele pode aprend
 
 - **Esquadrão de Magos:** tipo especial de Esquadrão, **caro** e limitado pela **quantidade de Magos** da facção (ver [[Sistema de Facção/Descrição|Sistema de Facção]]).
 - Só existe se a **lei de Magia** permitir.
-- **[Refinar depois]** como ele age no Mapa de Guerra e no cálculo rápido de forças.
+- 1 Esquadrão de Magos = 1 NPC Mago alistado; até 10% dos NPCs Magos da facção e no máximo 1 para cada 4 Esquadrões comuns; custa 3× o soldo e 1 Pedra de Mana por batalha.
+- Magos de **Combate** causam dano em área; os de **Suporte** devolvem soldados feridos e dão Moral; os de **Ofício** não vão à guerra. No cálculo rápido, Combate vale Força × 2 e Suporte reduz as perdas em 15%. Detalhes no [[Sistema de Batalha/Descrição|Sistema de Batalha]].
 
 ## Risco e custo social
 
@@ -109,7 +110,7 @@ Cada Mago tem **afinidade com uma escola** (sorteada ao nascer). Ele pode aprend
 | Construção / Produção | Torre Arcana, Forja Arcana, Encantaria |
 | Cura | Regeneração de Mana; Mago de Suporte no Hospital |
 | Tecnologia | Mesma mecânica de pontos; eras pelos marcos mundiais |
-| Facção | Lei de Magia; Esquadrão de Magos |
+| Facção / Batalha | Lei de Magia; Esquadrão de Magos (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Cultura / Crime | Arcana, Tecnocrata, Religiosa; crime de magia |
 
 ### Perguntas em aberto
@@ -117,5 +118,4 @@ Cada Mago tem **afinidade com uma escola** (sorteada ao nascer). Ele pode aprend
 1. **Lista inicial de feitiços** por escola e o que a árvore arcana libera.
 2. **Valores a testar:** custo de Mana, conjuração, recarga, regeneração, bônus de encantamento, quantos feitiços por Inteligência.
 3. **Grimório:** como é obtido (comprado, produzido, achado em masmorras).
-4. **Esquadrão de Magos:** quantos Magos por esquadrão e como age no Mapa de Guerra.
-5. **Feitiços de Suporte fora do combate** além do Hospital (por exemplo, colheita, clima).
+4. **Feitiços de Suporte fora do combate** além do Hospital (por exemplo, colheita, clima).

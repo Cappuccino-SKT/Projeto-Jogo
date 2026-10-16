@@ -152,7 +152,7 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 
 ## Menus fora do jogo
 
-- **Menu principal**, **novo jogo em 3 passos** (estilo de início, narrador e personagem), carregar e salvar com slots, **autosave a cada estação** e opções.
+- **Menu principal**, **novo jogo em 3 passos** (estilo de início, narrador e personagem; o **tamanho das unidades** da batalha fica nas opções do novo jogo), carregar e salvar com slots, **autosave a cada estação** e opções.
 - Estilos de início em [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]] e narradores em Eventos.
 
 ---
@@ -176,7 +176,8 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 | Construção | Modo construção, lotes, fila de obras |
 | Trabalho e Propriedade | Painel de trabalho, contratação, preços |
 | Tecnologia e Magia | Aba de Pesquisa |
-| Facção | Aba de Facção (leis, diplomacia) |
+| Facção e Diplomacia | Aba de Facção (leis) e painel de Diplomacia com a chance de aceite e o porquê (ver [[Sistema de Diplomacia/Descrição\|Sistema de Diplomacia]]) |
+| Guerra e Batalha | Painel de guerra (Placar, Cansaço, exércitos); telas da batalha: pré-batalha, posicionamento, batalha e resultado (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Início de Jogo | Novo jogo em 3 passos |
 | Arquitetura | Desenhista próprio, JSON, Dear ImGui só para depuração |
 
@@ -186,5 +187,4 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 2. **Lista exata de opções** de notificações.
 3. **Fonte do texto** (qual usar) e tamanhos.
 4. **Layout do painel "Por quê?"**: as 5 classes de uma vez ou uma por vez.
-5. **Telas do Mapa de Guerra** (depende do sistema de Batalha).
-6. **Idioma:** o jogo nasce em português; usar IDs de texto desde o início para facilitar outros idiomas depois.
+5. **Idioma:** o jogo nasce em português; usar IDs de texto desde o início para facilitar outros idiomas depois.

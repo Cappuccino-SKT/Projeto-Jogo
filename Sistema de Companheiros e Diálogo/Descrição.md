@@ -77,7 +77,7 @@ A **Felicidade** é o humor do momento (6 fatores); a **Opinião** é o que o co
 | Comandante de Esquadrão | Corpo a Corpo ou Longo Alcance | Moral e eficiência no Mapa de Guerra |
 | Professor (na Universidade) | A habilidade mais alta dele | Treina outro companheiro |
 
-**[Refinar depois]** O tamanho de cada bônus, com os sistemas de Guerra e de Trabalho.
+O bônus do **Comandante de Esquadrão** está no [[Sistema de Batalha/Descrição|Sistema de Batalha]]: +1% de Ataque e Defesa e +1 de Moral a cada 10 pontos da habilidade principal. **[Refinar depois]** O tamanho dos outros bônus, com o sistema de Trabalho.
 
 ## Relações familiares
 
@@ -187,10 +187,10 @@ Os costumes de Autoritária, Tecnocrata e Arcana são **[Proposta]**; os de Escr
 | Cura | Inconsciente pode ser salvo; morte permanente |
 | Viagem | Refugiados e prisioneiros como recrutas; líder de caravana |
 | Interface | Janela de conversa sem retrato; painel do grupo e dos vinculados |
-| Guerra (futuro) | Companheiro como comandante de Esquadrão |
+| Guerra e Batalha | Companheiro como General ou Comandante de Esquadrão; o grupo controlado é a Comitiva na batalha (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 
 ## Perguntas em aberto
 
 1. **Valores a testar:** limites, salários, taxa de entrada, chances, tempo de gravidez e infância.
-2. **Bônus dos cargos:** tamanho exato, com Guerra e Trabalho.
+2. **Bônus dos cargos:** tamanho exato para governador, gerente, líder de caravana e professor (o de comandante já está na Batalha).
 3. **Costumes de casamento** das culturas Autoritária, Tecnocrata e Arcana (proposta).

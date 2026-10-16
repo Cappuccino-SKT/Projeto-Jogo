@@ -74,7 +74,7 @@ O título é um **rótulo político**; a classe social só muda pelas regras de 
 
 | Tipo | Como funciona |
 |---|---|
-| **Eventos com escolha** | Curtos; já existem no [[Sistema de Eventos/Descrição|Sistema de Eventos]] |
+| **Eventos com escolha** | Curtos; já existem no [[Sistema de Eventos/Descrição\|Sistema de Eventos]] |
 | **Contratos** | Ficam num **quadro na Taverna** e **nascem do estado do mundo**: Criminalidade alta gera caçar bandidos; caravana em risco gera escolta. Outros: entrega, limpar masmorra |
 | **Missões longas** | De 3 a 5 etapas, ligadas a uma Ambição ou a um NPC Importante |
 

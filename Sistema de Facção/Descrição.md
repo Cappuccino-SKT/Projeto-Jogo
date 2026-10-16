@@ -55,7 +55,7 @@ Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias
 - **Dissolução.** Ao desfazer o exército, os soldados voltam a compor a população da cidade, e **novos NPCs são gerados** (pela Geração de NPC) nas classes **Escravo e Civil**. Os NPCs originais não voltam.
 - **Baixas** em guerra são permanentes: a população da cidade diminui.
 
-**[Proposta]** O Esquadrão é uma entidade própria, não um NPC. Os atributos que hoje estão em "Semi-Controlados — Exército" no Sistema de NPC (ID do Esquadrão, Formação, Alvo de combate, Moral, Disciplina e Vínculo) migram para ele, junto com: Tamanho (quantidade de soldados), Cidade de origem, Equipamento e Manutenção.
+**[Proposta]** O Esquadrão é uma entidade própria, não um NPC. Os atributos que hoje estão em "Semi-Controlados — Exército" no Sistema de NPC (ID do Esquadrão, Formação, Alvo de combate, Moral, Disciplina e Vínculo) migram para ele, junto com: Tamanho (quantidade de soldados), Cidade de origem, Equipamento e Manutenção. Os 9 tipos de Esquadrão (com kit de equipamento), a Experiência e os números de batalha estão no [[Sistema de Batalha/Descrição|Sistema de Batalha]]; a formação no Quartel (2 dias), o General e os mercenários, no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
 **Manutenção de equipamentos.** Consumo periódico de materiais (por exemplo, barras de ferro e couro), proporcional ao tamanho e ao equipamento do Esquadrão, sem durabilidade item a item. Isso é coerente com soldados deixarem de ser NPCs individuais.
 
@@ -65,6 +65,7 @@ Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias
 - **[Proposta]** A Caravana usa o Inventário (herdando do Inventário abstrato), não luta, mas precisa acompanhar o exército.
 - **Suprimento esgotado:** a Moral cai gradualmente a cada dia sem suprimento. Abaixo de um limiar, os Esquadrões desertam, e não todos de uma vez.
 - **[Proposta]** Se a Caravana é capturada ou destruída, o exército perde o que ela carregava (saque).
+- Consumo por Esquadrão, capacidade da Caravana (60 unidades), reabastecimento, forrageio e comboio estão no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
 ### Leis
 
@@ -109,16 +110,11 @@ A mudança de leis é decidida por **votação em assembleia**, que depende da q
 
 ### Relações diplomáticas
 
-**[Proposta]** Para cada par de facções em contato:
+Cada par de facções em contato tem um **valor de relação** (−100 a +100). Só são guardados os pares que têm contato (fronteira em comum ou rota de comércio), não todas as combinações.
 
-- **Valor de relação** (-100 a +100).
-- **Estado**: Guerra, Hostil, Neutro, Comércio, Aliança, Vassalagem.
+O valor muda por: fronteira compartilhada, diferença de cultura (afinidade entre as culturas, ver Sistema de Cultura), personalidade dos líderes (Agressividade, Ganância e Lealdade), eventos (crimes contra cidadãos, comércio, casamentos entre dinastias), tratados e guerras.
 
-Só são guardados os pares que têm contato (fronteira em comum ou rota de comércio), não todas as combinações.
-
-O valor muda por: fronteira compartilhada, diferença de cultura (afinidade entre as culturas, ver Sistema de Cultura), personalidade dos líderes (reaproveitando Agressividade, Ganância e Lealdade do modelo de Personalidade do NPC), eventos (crimes contra cidadãos, comércio, casamentos entre dinastias). Estado Guerra dispara o Mapa de Guerra; o resultado dele pode mudar a facção dona de um Mapa Local.
-
-A IA da facção decide em baixa frequência (uma vez por dia de jogo ou por estação), independente do LOD, porque são poucas facções e o custo é desprezível.
+O **estado** (Paz, Guerra ou Trégua), os **tratados**, a **atitude** (faixa da relação), a vassalagem, os casamentos, os reféns, a Confiabilidade e as decisões da IA estão no [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]]. A guerra em si (motivos, exércitos, cerco, paz) está no [[Sistema de Guerra/Descrição|Sistema de Guerra]]; o Mapa de Guerra só é criado quando o jogador participa.
 
 ### Território: Mapas Locais sem cidade
 
@@ -128,12 +124,12 @@ Cada Mapa Local comporta **apenas uma cidade**, mas nem todo Mapa Local tem uma.
 - **Mapas sem dono** existem para o jogador explorar. O jogador pode fundar ali seu assentamento e, mais tarde, fazê-lo crescer até uma cidade independente.
 - **Mapa em disputa.** Um Mapa Local adjacente a cidades de **facções diferentes** fica **em disputa**: causa guerras constantes entre elas até que uma o domine, ou até que o jogador interfira e influencie o resultado.
 - Em guerras entre facções de IA sobre um mapa em disputa, o resultado é gerado **automaticamente**, por um **cálculo rápido que analisa a força dos dois exércitos** em conflito, sem gerar um Mapa de Guerra. O Mapa de Guerra só é criado quando o jogador participa.
-- **[Proposta]** Cada facção tem um valor de **controle** sobre o mapa em disputa, que sobe ou desce conforme o resultado desses cálculos; quando passa de um limiar, o mapa é dominado.
+- O mapa em disputa **guarda quem o domina** (exceção à regra do derivado): domínio = vencer a última batalha ali e ficar 4 dias sem oposição. O mapa só muda de dono no tratado de paz (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]).
 - **[Proposta]** O vínculo de um mapa adjacente é derivado (não armazenado): se a cidade mudar de facção por conquista, os mapas adjacentes seguem. O Mapa Local tem quatro estados possíveis: Sem dono, Território de facção, Em disputa e Com cidade.
 
 **Assentamento do jogador em território de facção.** O jogador **pode** fundar um assentamento num Mapa Local vizinho de uma cidade de facção. Ele fica **vinculado à facção dominante daquele território**. Isso abre um estilo de jogo: o **dono de vila** que tenta ascender sua vila a uma grande cidade independente (ver Criação de facção).
 
-**Assentamento em mapa em disputa.** Fica vinculado à facção com maior controle do mapa no momento da fundação, e passa a seguir o novo dominante se o controle mudar.
+**Assentamento em mapa em disputa.** Fica vinculado à facção que domina o mapa no momento da fundação, e passa a seguir o novo dono se o mapa for cedido num tratado de paz.
 
 ### Vinculação do jogador a uma facção existente
 
@@ -167,9 +163,9 @@ A resposta da facção depende de um **valor calculado**, e esse valor decide a 
 - **[Proposta]** se a facção já está em outras guerras;
 - a reputação do jogador na facção e a Opinião do líder sobre ele (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]).
 
-**[Proposta]** Ações possíveis conforme o valor: aceitar a independência, negociar (por exemplo, tributo reduzido), declarar guerra (Mapa de Guerra) ou bloquear o comércio.
+**[Proposta]** Ações possíveis conforme o valor: aceitar a independência, negociar (por exemplo, tributo reduzido), declarar guerra (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]) ou bloquear o comércio.
 
-**[Proposta]** Um jogador só pertence a uma facção por vez. Estados possíveis: Independente, Membro (nobre), Vassalo, Líder.
+**[Proposta]** Um jogador só pertence a uma facção por vez. Estados possíveis: Independente, Membro (nobre), Vassalo, Líder. A diferença entre Membro e Vassalo está no [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]].
 
 ### Criação de facção pelo jogador
 
@@ -204,11 +200,13 @@ Requisitos:
 | Inventário | Caravana Militar herda do Inventário abstrato |
 | IA | IA de Facção (diplomacia, guerra, resposta à revolta, disputa de mapas) em baixa frequência |
 | Tempo | Frequência das decisões da facção e das assembleias (uma por ano) |
-| Eventos | Assembleia extraordinária, revolta, crise de sucessão e escassez em tempo de guerra são eventos condicionais, com causas registradas (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]). Nos eventos com escolha, a IA decide pela Personalidade do líder |
-| Combate | Se o personagem principal morre, o herdeiro assume; se todo o grupo cai, o jogador é capturado, sem Game Over (ver [[Sistema de Combate/Descrição|Sistema de Combate]]) |
-| Felicidade | A facção tem uma Estabilidade própria (média ponderada das cidades + legitimidade do líder); Estabilidade baixa dispara assembleia extraordinária, crise de sucessão ou golpe (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]) |
+| Eventos | Assembleia extraordinária, revolta, crise de sucessão e escassez em tempo de guerra são eventos condicionais, com causas registradas (ver [[Sistema de Eventos/Descrição\|Sistema de Eventos]]). Nos eventos com escolha, a IA decide pela Personalidade do líder |
+| Combate | Se o personagem principal morre, o herdeiro assume; se todo o grupo cai, o jogador é capturado, sem Game Over (ver [[Sistema de Combate/Descrição\|Sistema de Combate]]) |
+| Felicidade | A facção tem uma Estabilidade própria (média ponderada das cidades + legitimidade do líder); Estabilidade baixa dispara assembleia extraordinária, crise de sucessão ou golpe (ver [[Sistema de Felicidade e Estabilidade/Descrição\|Sistema de Felicidade e Estabilidade]]) |
+| Guerra | Motivos, exércitos, suprimento, cerco, ocupação, saque, paz e cálculo rápido (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
+| Batalha | Tipos de Esquadrão, kit, Moral, Experiência e Comitiva no Mapa de Guerra (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
+| Diplomacia | Estado, tratados, atitude, vassalagem, casamentos, reféns, Confiabilidade e IA (ver [[Sistema de Diplomacia/Descrição\|Sistema de Diplomacia]]) |
 
 ### Perguntas em aberto
 
-1. **Limiar de controle** de um mapa em disputa e quanto cada resultado o move.
-2. **Detalhes da assembleia** (marcado para refinar depois).
+1. **Detalhes da assembleia** (marcado para refinar depois).

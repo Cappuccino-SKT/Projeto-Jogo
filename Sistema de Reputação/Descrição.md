@@ -124,6 +124,7 @@ O nome **Opinião** foi escolhido para não confundir com o atributo **Relação
 | Sistema | O que a Reputação fornece ou recebe |
 |---|---|
 | Facção | Reputação e Opinião do líder entram na resposta à revolta, na vassalagem e nos pedidos de título |
+| Guerra | Batalha, saque e escolta de exército são ações de guerra (cadeia de metade); lutar como mercenário conta como batalha; pedido de cidade conquistada usa a Opinião (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 | Crime e Justiça | Crime detectado tira reputação; Recompensa continua separada |
 | Objetivo e Progressão | Faixa mínima para cada título; missões de nobres e do líder |
 | Início de Jogo | Base por cultura e estilo de início |

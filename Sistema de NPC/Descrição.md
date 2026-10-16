@@ -89,7 +89,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 
 **Esquadrão (não é NPC)**
 
-Os atributos que antes pertenciam a "Semi-Controlados — Exército" migraram para o **Esquadrão**, entidade própria (ver Sistema de Facção): ID do Esquadrão, Formação de combate, Alvo de combate, Moral do grupo, Disciplina do grupo e Vínculo (jogador ou facção). Também ganhou: Tamanho (quantidade de soldados), Cidade de origem, Equipamento e Manutenção.
+Os atributos que antes pertenciam a "Semi-Controlados — Exército" migraram para o **Esquadrão**, entidade própria (ver Sistema de Facção): ID do Esquadrão, Formação de combate, Alvo de combate, Moral do grupo, Disciplina do grupo e Vínculo (jogador ou facção). Também ganhou: Tamanho (quantidade de soldados), Cidade de origem, Equipamento e Manutenção. Os tipos, o kit, a Experiência e os números de batalha estão no [[Sistema de Batalha/Descrição|Sistema de Batalha]].
 
 **Criatura (não é NPC)**
 

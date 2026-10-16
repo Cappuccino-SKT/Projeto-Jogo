@@ -117,15 +117,15 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 - **Névoa de exploração** e mapa descoberto.
 - O que acontece quando uma entidade passa por um mapa em LOD 2.
 
-**4.8 Guerra e Campanha.** Hoje só existe o Mapa de Guerra (a batalha). Falta:
+**4.8 Guerra e Campanha.** *(Escrito: ver [[Sistema de Guerra/Descrição|Sistema de Guerra]].)* Hoje só existe o Mapa de Guerra (a batalha). Falta:
 - Declaração de guerra, objetivos, **cerco e ocupação** de cidades, saque, cansaço de guerra e **tratado de paz**.
 - Movimento de exércitos no Mapa Mundial (usa a Viagem), linhas de suprimento e Caravana Militar.
 - **Defesa de cidade** (Muralha, Posto da Guarda).
 - A fórmula do **cálculo rápido de forças**, que deve ser coerente com a batalha real.
 
-**4.9 Batalha (Mapa de Guerra).** Regras do combate de Esquadrões, inspiradas em Total War: formação, Moral, terreno, flanco, artilharia (Canhão de Guerra), Esquadrão de Magos, condições de vitória e derrota. O Mapa de Guerra tem atributos, mas nenhuma regra.
+**4.9 Batalha (Mapa de Guerra).** *(Escrito: ver [[Sistema de Batalha/Descrição|Sistema de Batalha]].)* Regras do combate de Esquadrões, inspiradas em Total War: formação, Moral, terreno, flanco, artilharia (Canhão de Guerra), Esquadrão de Magos, condições de vitória e derrota. O Mapa de Guerra tem atributos, mas nenhuma regra.
 
-**4.10 Diplomacia.** Hoje vive dentro de Facção. Merece documento próprio:
+**4.10 Diplomacia.** *(Escrito: ver [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]].)* Hoje vivia dentro de Facção. Merece documento próprio:
 - Estados diplomáticos, tratados (comércio, aliança, vassalagem, passagem), motivos de guerra (casus belli), casamentos entre dinastias, reféns.
 - Como a IA decide (Personalidade do líder, Agressividade e Ganância).
 

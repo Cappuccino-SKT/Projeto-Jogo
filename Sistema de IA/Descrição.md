@@ -43,9 +43,9 @@ Para a IA geral, esses atributos são usados de forma agregada, vinculados à ci
 
 ### Ligações com outros sistemas
 
-- **IA de Facção:** decide diplomacia, guerra, resposta a revoltas e disputas de mapa em baixa frequência (uma vez por dia ou por estação), usando a Personalidade do líder (ver Sistema de Facção).
+- **IA de Facção:** decide diplomacia, guerra, resposta a revoltas e disputas de mapa em baixa frequência (a cada 4 dias para guerra e paz; por estação para tratados), usando a Personalidade do líder. Os pesos da decisão (vontade de guerra, paz, tratados, coalizão) estão no [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]].
 - **Guardas:** reação escalonada ao crime (ordem de rendição, prisão não letal, força letal); a detecção usa Percepção e Destreza, e o suborno usa Ganância e Lealdade (ver Sistema de Crime e Justiça).
-- **Esquadrões:** não usam a IA individual de NPC; no Mapa de Guerra são comandados por esquadrão. Guerras entre facções de IA são resolvidas por um cálculo rápido.
+- **Esquadrões:** não usam a IA individual de NPC; no Mapa de Guerra são comandados por esquadrão. Guerras entre facções de IA são resolvidas por um cálculo rápido (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]] e [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 - **Recuperação de Vida:** ver Sistema de Cura.
 - **Eventos:** nos eventos com escolha que afetam facções de IA, a decisão sai da Personalidade do líder (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
 - **Combate:** o núcleo de combate, as posturas dos Controlados, o Medo e a rendição estão no [[Sistema de Combate/Descrição|Sistema de Combate]]. A IA troca a arma conforme a distância do inimigo.

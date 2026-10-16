@@ -16,7 +16,7 @@
 | **Mapa Mundial** | Nível 1. Malha de quadrados, cada um um Mapa Local. Contêiner leve; 8x de velocidade só aqui. [[Sistema de Mapa/Descrição\|Mapa]] |
 | **Mapa Local** | Nível 2. Mapa em grade de tiles onde o jogo acontece; tem no máximo uma cidade |
 | **Mapa Interno** | Nível 3. Interior de uma construção: Moradia, Masmorra ou Construção Pública |
-| **Mapa de Guerra** | Nível 4. Batalha de Esquadrões, só criada quando o jogador participa |
+| **Mapa de Guerra** | Nível 4. Batalha de Esquadrões, só criada quando o jogador participa; cópia do Mapa Local; o mundo para durante ela. [[Sistema de Batalha/Descrição\|Batalha]] |
 | **LOD** | Nível de detalhe da simulação por Mapa Local: 0 completo, 1 reduzido, 2 abstrato |
 | **Fator de Escala** | Quantas pessoas um NPC real representa (exemplo 100). Valor a testar |
 | **Entidade em trânsito** | Grupo, caravana, exército ou bando viajando entre Mapas Locais |
@@ -101,6 +101,30 @@
 | **Intervalo de Ataque** | Tempo entre ataques de uma arma |
 | **Modo letal / não letal** | Se Vida 0 mata ou deixa Inconsciente |
 | **Duelo** | Combate entre dois, sem interferência |
+
+## Guerra e diplomacia
+
+| Termo | Significado |
+|---|---|
+| **Exército** | 1 a 20 Esquadrões, Caravanas Militares e 1 General. [[Sistema de Guerra/Descrição\|Guerra]] |
+| **General** | NPC Importante que comanda um exército; o Comando (Carisma e Inteligência) dá Moral |
+| **Motivo de guerra** | Razão para declarar guerra; sem motivo, a guerra custa relação e Confiabilidade |
+| **Placar de Guerra** | Pontos de −100 a +100 que medem quem está ganhando; pagam os termos da paz |
+| **Cansaço de guerra** | 0 a 100 por facção; tira Felicidade e empurra para a paz |
+| **Ocupada** | Cidade tomada que só muda de facção no tratado de paz (ou depois de 2 anos) |
+| **Guarnição** | Esquadrões parados numa cidade; somam ao Controle e defendem no cerco |
+| **Milícia** | Guardas e civis armados só para defender a própria cidade |
+| **Cálculo rápido** | Resolução de uma batalha sem o Mapa de Guerra, com as mesmas grandezas |
+| **Kit** | Itens que equipam um tipo de Esquadrão; o Rank define a qualidade. [[Sistema de Batalha/Descrição\|Batalha]] |
+| **Moral** | 0 a 100 por Esquadrão; abaixo de 25 ele foge |
+| **Comitiva** | Guarda do General na batalha; com o jogador, é o próprio grupo controlado |
+| **Tamanho das unidades** | Opção do jogador: 20, 50 ou 100 bonecos por Esquadrão; não muda a simulação |
+| **Trégua** | 1 ano sem guerra entre dois lados depois de um tratado de paz. [[Sistema de Diplomacia/Descrição\|Diplomacia]] |
+| **Atitude** | Faixa da relação entre facções: Hostil, Fria, Neutra, Amigável ou Leal |
+| **Tratado** | Acordo entre facções; vários ao mesmo tempo (Comercial, Passagem, Não Agressão, Alianças, Vassalagem, Casamento) |
+| **Confiabilidade** | Nota de 0 a 100 de cada facção; cai ao quebrar tratados |
+| **Vassalo** | Subordinado com leis próprias, que paga tributo e atende ao chamado às armas |
+| **Coalizão** | Aliança defensiva conjunta contra uma facção ameaçadora |
 
 ## Interface
 

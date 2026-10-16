@@ -326,7 +326,7 @@ Itens que aparecem nos canvases mas ainda não estão na lista. Tier e Rank são
 | Grimório | Artefato / Livro (ensina feitiços) | Rank 2-4 | A definir (comprado, produzido ou achado em masmorras; ver Sistema de Magia) |
 | Pedra de Mana | Bem de Consumo (recupera Mana) | Tier 2 | Produtor Mágico, a partir da Pedra de Mana Bruta |
 
-**Armamento de Exército** não é equipado por NPCs: faz parte do Equipamento de um Esquadrão (ver Sistema de Facção).
+**Armamento de Exército** não é equipado por NPCs: faz parte do Equipamento de um Esquadrão (ver Sistema de Facção). Cada tipo de Esquadrão recebe um **kit** (1 item de cada peça equipa os 100 soldados), e o Rank dos itens define a qualidade (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
 **Medicamentos.** O tipo Medicamento existe, mas ainda não há itens. Ver Sistema de Cura.
 
