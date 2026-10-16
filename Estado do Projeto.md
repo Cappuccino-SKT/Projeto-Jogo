@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-16 (rodadas P0-5 a P1-4; P1-5 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-16 (rodadas P0-5 a P1-4; P1-5 enviada), antes de uma pausa. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
