@@ -46,7 +46,7 @@ Também ficam aqui:
 
 ## O que cada marco trouxe
 
-### Marco 0: o ambiente e o "olá, janela" (2026-10-17)
+### Marco 0: o ambiente e o "olá, janela" (2026-10-17, confirmado pelo autor)
 
 **O que faz:** abre uma janela com o fundo verde-escuro. Fecha no X ou com a tecla **Esc**. **F11** liga e desliga a tela cheia (tecla provisória). O console mostra "Olá, janela!" ao abrir e "Janela fechada. Até a próxima!" ao fechar.
 
