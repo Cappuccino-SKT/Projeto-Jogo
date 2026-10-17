@@ -1,6 +1,6 @@
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> **Em reformulação:** o autor decidiu (revisão V1-2, V1-7 e V1-8) fazer rodadas próprias para **padronizar a produção**, **reformular os nomes dos itens** para o contexto do mundo e definir **os insumos de cada produto**. A lista abaixo é a atual, com os nomes já padronizados na revisão V1-6.
+> **Em reformulação:** a forma de produzir foi padronizada na rodada IP1 (ver [[Sistema de Produção/Descrição|Produção]]). Os nomes e a lista final dos itens vêm na rodada IP2, e os insumos de cada produto na IP3. A lista abaixo é a atual, com os nomes já padronizados na revisão V1-6.
 
 ## Sistema de Itens
 
@@ -62,9 +62,13 @@ A cultura é um atributo das armas e dos equipamentos, inspirado nos **Estilos**
 
 ## Regras
 
+### Rank do item produzido
+
+O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três valores (rodada IP1-4): o teto do **material** (Ferro 3, Aço 4, Aço Mágico 5; na prática, o máximo da faixa do item nesta lista), o teto do **nível** da construção e o Rank pela **habilidade** do trabalhador (1 + habilidade de Trabalho ÷ 25). Há 20% de chance de sair 1 Rank acima e 10% de sair 1 abaixo. Os itens de **Tier** não têm qualidade: a habilidade só acelera. Detalhes e exemplo no [[Sistema de Produção/Descrição|Produção]].
+
 ### Armadura
 
-Cada receita de armadura produz as **três peças separadas** (Capacete, Peitoral e Perneiras). **Leve, Média e Pesada** indicam o peso de cada peça, e o NPC pode combinar peças de pesos diferentes. A regra de combate da armadura mista está no [[Sistema de Combate/Descrição|Sistema de Combate]].
+Cada receita de armadura produz as **três peças separadas** (Capacete, Peitoral e Perneiras). **Leve, Média e Pesada** indicam o peso de cada peça, e o NPC pode combinar peças de pesos diferentes. A regra de combate da armadura mista está no [[Sistema de Combate/Descrição|Sistema de Combate]]. Pela rodada IP1-2, as peças Leves e Pesadas são do Ferreiro e a Média é do Costureiro (a IP2-7 propõe uma troca).
 
 ### Nomes unificados
 
@@ -173,9 +177,9 @@ Itens que aparecem nos canvases ou em outros sistemas mas ainda não estão na l
 | Canhão de Guerra | Armamento de Exército | Rank 3 | Armeiro (nível 3+) |
 | Canhão de Guerra Moderno | Armamento de Exército | Rank 5 | Armeiro (nível 5) |
 | Anel Mágico de Pedra Mágica | Equipamento / Anel | Rank 1-5 | Artesão (nível 5) |
-| Armadura Média (3 peças) | Equipamento / Capacete, Peitoral, Perneiras | Rank 1-3 | Costureiro (nível 4+) |
+| Armadura Média (3 peças) | Equipamento / Capacete, Peitoral, Perneiras | Rank 1-3 | Costureiro (IP1-2; materiais e nome na IP2) |
 | Grimório | Artefato / Livro (ensina feitiços) | Rank 2-4 | A definir (comprado, produzido ou achado em masmorras; ver [[Sistema de Magia/Descrição\|Magia]]) |
-| Pedra de Mana | Bem de Consumo (recupera Mana) | Tier 2 | Mago de Ofício, a partir da Pedra de Mana Bruta |
+| Pedra de Mana | Bem de Consumo (recupera Mana) | Tier 2 | Forja Arcana (Mago de Ofício), a partir da Pedra de Mana Bruta |
 
 ---
 
@@ -192,7 +196,7 @@ Itens que aparecem nos canvases ou em outros sistemas mas ainda não estão na l
 | Sistema | O que os Itens fornecem ou recebem |
 |---|---|
 | Efeitos de Itens | O que cada item especial faz ao ser usado |
-| Produção e Funções | Quem produz cada item; Tier e Rank pelo nível da construção |
+| Produção e Funções | Quem produz cada item (uma construção por item); Rank pelo material, pelo nível e pela habilidade |
 | Recursos | Itens de Matéria-Prima gerados por cada recurso |
 | Econômico e Comércio | Valor Global, da Facção e Local; peso na carga das caravanas |
 | Inventário | Pilhas e instâncias; Dono; peso |
@@ -205,7 +209,7 @@ Itens que aparecem nos canvases ou em outros sistemas mas ainda não estão na l
 
 ## Perguntas em aberto
 
-1. **Padronização da produção, nomes e insumos:** rodadas IP1, IP2 e IP3 (ver a [[Revisão Completa]]).
-2. **Peça de armadura Média:** materiais e quem faz (rodada IP1).
+1. **Nomes e lista final dos itens:** rodada IP2; **insumos:** rodada IP3 (ver a [[Revisão Completa]]). A padronização da produção foi decidida na IP1.
+2. **Peça de armadura Média:** o Costureiro faz (IP1-2); os materiais e o nome ficam para a IP2.
 3. **Preço base** de cada item (rodada V2).
 4. **Mapeamento Luxo × Exclusivo** por Tier (rodada IP2).

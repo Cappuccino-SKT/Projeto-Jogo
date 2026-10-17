@@ -102,6 +102,11 @@ Todos esses elementos são ajustáveis (ver acima).
 - Vale para os **Escravos do jogador** e os **empregados** dele.
 - Usa a Lista de Prioridades que já existe ([[Sistema de NPC/Descrição|Sistema de NPC]] e [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
 
+### Ordens de produção
+
+- No painel de cada construção do jogador, uma **fila de ordens** no estilo RimWorld: **Fazer N**, **Manter estoque de N** e **Repetir sempre**, cada uma com prioridade (rodada IP1-7; ver [[Sistema de Produção/Descrição|Produção]]).
+- **[Proposta]** Cada ordem mostra os insumos que faltam e o tempo estimado; uma ordem parada por falta de insumo vai para a barra de alertas.
+
 ---
 
 ## Controles
@@ -183,6 +188,7 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 | Reputação | Painel de Reputação com faixas e "Por quê?"; notificação de mudança de faixa; Opinião no painel do Importante (ver [[Sistema de Reputação/Descrição\|Sistema de Reputação]]) |
 | Construção | Modo construção, lotes, fila de obras |
 | Trabalho e Propriedade | Painel de trabalho, contratação, preços |
+| Produção | Fila de ordens no painel da construção |
 | Tecnologia e Magia | Aba de Pesquisa |
 | Facção e Diplomacia | Aba de Facção (leis) e painel de Diplomacia com a chance de aceite e o porquê (ver [[Sistema de Diplomacia/Descrição\|Sistema de Diplomacia]]) |
 | Guerra e Batalha | Painel de guerra (Placar, Cansaço, exércitos); telas da batalha: pré-batalha, posicionamento, batalha e resultado (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |

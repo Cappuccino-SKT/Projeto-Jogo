@@ -27,7 +27,7 @@ Os valores numéricos são iniciais e ficam em dados (`efeitos_itens.json`) para
 | **Relíquia** (Artefato Rank 1-3) | Guardar ou doar | Sem efeito em combate; doada a um Templo ou Palácio, +2 de Renome; conta na posse da Realeza | — | Masmorras, Mercado de capitais |
 | **Artefato lendário** (Rank 4-5) | Equipar ou carregar | Efeito próprio e único (ver "Artefatos lendários") | Enquanto estiver com o NPC | Masmorras lendárias |
 | **Curativo** (Tier 1) | Usar | Regeneração × 2; estanca o sangramento do Inconsciente | 8 h | Boticário nível 1 (Tecido + Água) |
-| **Remédio** (Tier 3) | Usar | Regeneração × 3; cura o estado Doente | 24 h | Boticário nível 3 (Flor Espiritual + Fardo de Especiaria) |
+| **Remédio** (Tier 3) | Usar | Regeneração × 3; cura o estado Doente | 24 h | Boticário nível 4, pela escada da IP1-3 (Flor Espiritual + Fardo de Especiaria) |
 | **Grilhões** (Tier 2) | Pôr num escravo ou prisioneiro | Obediência +15; Felicidade −5; velocidade −20%; não foge | Enquanto estiver com eles | Ferreiro nível 2 (ver [[Sistema de Escravidão/Descrição\|Escravidão]]) |
 
 ## Livros

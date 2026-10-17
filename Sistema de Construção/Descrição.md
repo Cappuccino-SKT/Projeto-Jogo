@@ -26,7 +26,7 @@ A tabela que liga cada construção de produção à Função e aos produtos de 
 - Capacidade de armazenamento por categoria (somada ao inventário da cidade; ver [[Sistema de Inventário/Descrição|Inventário]])
 - Lista do que pode ser produzido na construção
 - Lista do que está desbloqueado para produzir
-- Produção atual
+- Produção atual e, nas do jogador, a fila de ordens (Fazer N, Manter estoque de N, Repetir sempre)
 - Tempo até terminar de produzir
 - Manutenção por Estação: gasta uma quantidade de recursos a cada estação (16 dias) para manter a construção. O gasto é pago pela cidade e exige um **Construtor** na cidade, que fornece a manutenção.
 - Nível de LOD
@@ -38,12 +38,14 @@ O LOD precisa funcionar de forma eficiente nas construções, para não haver gr
 
 - **Todos os dados** só são usados nas construções que pertencem ao jogador e que estão na visão dele.
 - **Nas outras** (de outros donos, ou fora da visão do jogador), só a produção é processada: o que a construção está produzindo vira um **cálculo por estação** (16 dias), que gera a quantidade de produtos que ela geraria normalmente. Isso economiza processamento.
-- Nas construções que não são do jogador, a escolha do que produzir segue a **demanda da cidade** a que ela pertence.
+- Nas construções que não são do jogador, a escolha do que produzir segue a **demanda da cidade** a que ela pertence, pela nota (lucro × déficit) do [[Sistema de Produção/Descrição|Produção]]. As do jogador seguem a fila de ordens.
 
 ### Níveis
 
 - Quanto maior o nível, maior a **eficiência** da construção e, nas de produção, a **capacidade de produzir coisas novas**.
 - Em troca, quanto maior o nível, maior o **custo para construir** e o **gasto de dinheiro com a manutenção**.
+- **Escada padrão** (rodada IP1-3): nas construções de transformação, o nível 1 libera produtos de Tier 1 e Rank 1; o 2, Tier 2 e Rank 2; o 3, Tier 2 e Rank 3; o 4, Tier 3 e Rank 4; o 5, Tier 4 e Rank 5. A era da tecnologia também precisa permitir. Nas Braçais, o nível só aumenta a eficiência. Tabela no [[Sistema de Produção/Descrição|Produção]].
+- Cada nível acima do mínimo de uma receita a deixa **10% mais rápida**. Nas capitais que começam com construções de nível 4 e 5 na Era 1, o nível alto dá eficiência e vagas, e as receitas maiores esperam a era.
 - As construções podem ser feitas **nível por nível**, com desconto para construir o próximo nível. Quem quiser construir direto um nível alto paga o custo integral.
 
 ### Quem constrói
@@ -69,7 +71,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Posto Comercial** | Necessário para a cidade enviar caravanas civis ([[Sistema de Comércio/Descrição\|Comércio]]) |
 | **Laboratório** | Gera Pontos de Pesquisa ([[Sistema de Tecnologia/Descrição\|Tecnologia]]) |
 | **Torre Arcana** | Gera Pontos Arcanos com Magos ([[Sistema de Magia/Descrição\|Magia]]) |
-| **Forja Arcana** | Magos de Ofício produzem Aço Mágico ([[Sistema de Magia/Descrição\|Magia]]) |
+| **Forja Arcana** | Magos de Ofício produzem Aço Mágico e Pedra de Mana; é a única construção que faz Aço Mágico (rodada IP1-2; ver [[Sistema de Magia/Descrição\|Magia]]) |
 | **Encantaria** | Magos de Ofício encantam itens de Rank 3 ou maior ([[Sistema de Magia/Descrição\|Magia]]) |
 | **Hospital** | Cura os NPCs do grupo do jogador; um Mago de Suporte acelera a cura ([[Sistema de Cura/Descrição\|Cura]]) |
 | **Boticário** | Produz Curativos e Remédios ([[Sistema de Cura/Descrição\|Cura]]) |
