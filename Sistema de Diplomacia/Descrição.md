@@ -110,6 +110,7 @@ A IA **não faz tratado** com quem tem Confiabilidade abaixo de 30.
 | Guerras em andamento | −20 cada |
 | Cansaço de guerra | −Cansaço ÷ 2 |
 | Coalizão contra facção ameaçadora | +30 (ver "Freio contra quem cresce demais") |
+| Inverno | −15 (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 
 *Exemplo:* Guerreira (20 Esquadrões) contra Autoritária (16): força 1,25 → +12; Agressividade alta +25; Ganância média e celeiro rico +10; motivo (mapa em disputa) +20; relação −55 → +14; cultura +15. Total **96**: declara guerra.
 
@@ -117,7 +118,8 @@ A IA **não faz tratado** com quem tem Confiabilidade abaixo de 30.
 - **Lealdade** do líder: respeita tratados e atende chamados; abaixo de 30, pode trair.
 - **Sociabilidade:** mais propostas de tratado e casamento.
 - **[Proposta]** **Alianças:** a IA procura Aliança Defensiva com facções afins quando um vizinho tem força 1,5× maior que a dela.
-- Cada decisão guarda o **"Por quê?"**, para as Notícias e para o painel de depuração.
+- Cada decisão guarda o **"Por quê?"**, para as [[Sistema de Notícias/Descrição|Notícias]] e para o painel de depuração.
+- **Bênção e Anátema:** o Sumo Sacerdote muda as relações das facções Religiosas (+10 ou −20); o Anátema libera a "Guerra santa" (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 
 ## A diplomacia do jogador
 
@@ -129,7 +131,7 @@ A IA **não faz tratado** com quem tem Confiabilidade abaixo de 30.
 
 - **Painel de Diplomacia:** lista de facções com relação, atitude, tratados, Confiabilidade e o Placar das guerras. Cada proposta mostra a **chance de aceite e o porquê** ("+20 pela relação; −30 porque vocês estão em guerra com o aliado deles").
 - **Bônus pessoal na chance:** (Carisma − 50) ÷ 5 + Opinião do líder ÷ 5.
-- As propostas são **instantâneas** na primeira versão (sem mensageiro viajando); as **notícias** da guerra chegam com atraso (futuro sistema de Notícias).
+- As propostas são **instantâneas** na primeira versão (sem mensageiro viajando); as **notícias** da guerra chegam com atraso (ver [[Sistema de Notícias/Descrição|Notícias]]). As facções da IA sabem tudo na hora, uma simplificação da primeira versão.
 
 ## Freio contra quem cresce demais
 
@@ -167,6 +169,10 @@ Com 48 mapas e 6 facções, uma facção (ou o jogador) poderia engolir o mundo 
 | Objetivo e Progressão | Missões de reféns e de diplomacia |
 | Eventos | Declarações, tratados, quebras e casamentos como eventos com causa registrada |
 | Interface | Painel de Diplomacia, chance de aceite com o porquê, lente Política |
+| Religião | Bênção e Anátema do Sumo Sacerdote (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Clima e Estações | Vontade de guerra −15 no inverno (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
+| Notícias | Tratados e guerras viram notícia; a IA sabe na hora (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
+| Escravidão | −10 de relação da Religiosa com quem mantém Mercado de Escravos; venda de prisioneiros exige relação 0 ou mais (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 
 ## Perguntas em aberto
 

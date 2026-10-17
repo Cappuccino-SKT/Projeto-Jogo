@@ -148,6 +148,7 @@ A batalha acontece numa **cópia simplificada do Mapa Local** onde ela começou 
 | **Elevação** (colina) | De cima: +15% de alcance e de dano no tiro; +10% no corpo a corpo morro abaixo |
 
 - **Elevação:** o autor incluiu a **7ª camada do Tiled**, "Elevação", pintada só nas colinas. Um mapa sem ela é plano (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
+- **Clima e hora:** o clima do dia e a fase do dia no início valem a batalha toda (o mundo está parado). Chuva: −15% de alcance de tiro e −30% de dano dos Atiradores; Tempestade: −30% de alcance e os Atiradores não atiram; Neve: −20% de velocidade; Névoa: −40% de visão e de alcance; à noite, visão −30% (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - **Posicionamento:** o atacante entra pela borda de onde veio (a direção da viagem); o defensor se arma no centro ou no lado oposto.
 
 ## Artilharia e pólvora
@@ -261,10 +262,11 @@ Versão simples na primeira versão:
 | Companheiros | Comitiva e Comandante de Esquadrão |
 | Cultura | Bônus de um tipo de Esquadrão por cultura |
 | Tecnologia | Era dos tipos (pólvora na Era 2); Bastião na Era 3 |
-| Crime e Justiça | Prisioneiros comuns e Importantes; escravização em massa pela lei |
+| Crime e Justiça | Prisioneiros comuns e Importantes; escravização em massa pela lei; venda de prisioneiros (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Tempo | Mundo parado durante a batalha; até 4x |
 | Interface | Pré-batalha, posicionamento, cartões de Esquadrão, resultado; HUD personalizável |
 | Pipeline | Bonecos por camadas e paletas por cultura; 7ª camada Elevação; tileset de Muralha |
+| Clima e Estações | Clima e fase do dia no início valem a batalha toda (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 
 ## Perguntas em aberto
 

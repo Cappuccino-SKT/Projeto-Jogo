@@ -20,7 +20,9 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
 - [[Sistema de Recursos/Descrição|Sistema de Recursos]] e [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]
 - [[Sistema de Tempo/Descrição|Sistema de Tempo]]
+- [[Sistema de Clima e Estações/Descrição|Sistema de Clima e Estações]] — produção por estação, clima do dia, inverno, dia e noite
 - [[Sistema de Viagem/Descrição|Sistema de Viagem]] — viagem pelo Mapa Mundial, encontros, caravanas, patrulhas e névoa
+- [[Sistema de Notícias/Descrição|Sistema de Notícias]] — notícias com atraso, quadro da Taverna, Crônica do mundo
 
 ### Pessoas e política
 
@@ -28,11 +30,13 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Classe Social/Descrição|Sistema de Classe Social]]
 - [[Sistema de IA/Descrição|Sistema de IA]]
 - [[Sistema de Cultura/Descrição|Sistema de Cultura]] — 6 culturas iniciais
+- [[Sistema de Religião/Descrição|Religião e Fé]] — Devoção, Templo, festivais, heresia, assimilação e Sumo Sacerdote
 - [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
 - [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, dinastia, exércitos
 - [[Sistema de Reputação/Descrição|Sistema de Reputação]] — reputação do jogador com facções, Opinião dos Importantes
 - [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]] — recrutamento, lealdade, casamento, herdeiros e conversas
 - [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]
+- [[Sistema de Escravidão/Descrição|Sistema de Escravidão]] — fontes, Mercado de Escravos, Obediência, fuga, rebelião e libertação
 - [[Sistema de Cura/Descrição|Sistema de Cura]]
 - [[Sistema de Combate/Descrição|Sistema de Combate]] — combate local do jogador, armas, derrota e captura
 - [[Sistema de Guerra/Descrição|Sistema de Guerra]] — motivos, exércitos, suprimento, cerco, saque, paz e cálculo rápido
@@ -44,7 +48,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 - [[Sistema Econômico/Descrição|Sistema Econômico]]
 - [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]] — emprego, salários, impostos, donos de construções
-- [[Sistema de Itens/Descrição|Sistema de Itens]]
+- [[Sistema de Itens/Descrição|Sistema de Itens]] e [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]] — livros, joias, artefatos, medicamentos, comida e narcóticos
 - [[Sistema de Inventário/Descrição|Sistema de Inventário]]
 - [[Sistema de Produção/Descrição|Sistema de Produção]] e [[Sistema de Produção/Funções e Construções|Funções e Construções]]
 - [[Sistema de Construção/Descrição|Sistema de Construção]]
@@ -70,4 +74,4 @@ Uma **fatia vertical**: 1 cidade, 1 cadeia de produção (Fazenda → Cozinha �
 
 ## Estado atual
 
-O resumo do que já foi decidido e do que está em aberto está em [[Estado do Projeto]]. Para retomar o trabalho depois de uma pausa, veja a [[Retomada]]. A revisão geral do projeto está em [[Revisão do Projeto]] e os termos usados nos documentos estão no [[Glossário]].
+O resumo do que já foi decidido e do que está em aberto está em [[Estado do Projeto]]. Para retomar o trabalho depois de uma pausa, veja a [[Retomada]]. A revisão completa do projeto (2026-10-17) está em [[Revisão Completa]], e a primeira revisão em [[Revisão do Projeto]] e os termos usados nos documentos estão no [[Glossário]].

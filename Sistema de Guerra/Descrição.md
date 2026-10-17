@@ -29,7 +29,7 @@ Uma facção pode declarar guerra **com ou sem motivo**, mas sem motivo custa ca
 |---|---|---|
 | Mapa em disputa | Sempre, entre as facções que o disputam | Dominar o mapa |
 | Reivindicação | A cidade foi da facção nos últimos 2 anos, ou herança por casamento (ver [[Sistema de Diplomacia/Descrição\|Diplomacia]]) | Tomar a cidade |
-| Guerra santa | Religiosa contra cultura hostil | Tomar cidade ou impor tributo |
+| Guerra santa | Religiosa contra cultura hostil, ou facção Religiosa contra um líder sob Anátema (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) | Tomar cidade ou impor tributo |
 | Honra | Guerreira ofendida (duelo recusado, refém executado, tratado quebrado contra ela) | Tributo |
 | Ofensa | Tratado quebrado, refém executado, crime grave contra a dinastia | Indenização ou tributo |
 | Independência | Cidade ou vassalo que rompe com o suserano | Independência |
@@ -110,6 +110,7 @@ Mesma escala do Fator: **1 unidade abastece 100 soldados**, ou seja, um Esquadr�
 - **Em território próprio ou aliado:** a Caravana reabastece sozinha ao passar por cidade com Mercado (pago pelo Banco da Facção).
 - **Em território inimigo, forrageio:** o exército tira até **50% do consumo** do próprio mapa (fazendas e pastos), o que reduz a produção ali e a Felicidade da cidade daquele mapa.
 - **Comboio:** a Caravana pode ir e voltar sozinha até a cidade amiga mais próxima. Ela é uma entidade em trânsito (ver [[Sistema de Viagem/Descrição|Viagem]]) e pode ser emboscada. É a "linha de suprimento" sem um sistema novo.
+- **Campanha de inverno:** fora de cidade amiga, cada Esquadrão gasta 1,25 Ração por dia; nos biomas frios, Moral −1 por dia (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - **Sem suprimento:** Moral −5 por dia; abaixo de 30, deserta **1 Esquadrão a cada 2 dias** (o de menor Moral).
 - **Caravana capturada ou destruída:** o exército perde a carga, e quem capturou leva o que sobrou (+3 no Placar).
 
@@ -170,6 +171,7 @@ Ao tomar uma cidade, o vencedor escolhe:
 | Cada 2 Esquadrões perdidos | +1 |
 | Cada cidade própria ocupada, por estação | +5 |
 | Cada estação com comércio bloqueado pela guerra | +5 |
+| Cada estação de campanha no inverno | +5 |
 | Guerra declarada sem motivo | começa em 20 |
 
 - **Efeito na Felicidade:** fator "Guerra e ameaça" = **−Cansaço × 0,15** (Cansaço 100 → −15, o limite que já existe).
@@ -268,6 +270,7 @@ Batalha sem o jogador é sempre cálculo rápido. A Comitiva (o grupo do jogador
 | Mapa | Domínio do mapa em disputa; cerco no Mapa Local da cidade |
 | Felicidade e Estabilidade | Fator "Guerra e ameaça" pelo Cansaço; ocupação, conquista, saque e cerco; guarnição soma ao Controle |
 | População | Fome no cerco; mortes no saque; queda de nível; migração bloqueada |
+| Escravidão | Prisioneiros escravizados ou vendidos a facções que permitem; cidade conquistada por quem proíbe liberta os escravos (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Produção e Comércio | Ração Militar, munição e manutenção; forrageio; comércio bloqueado no cerco e na guerra |
 | Construção | Muralha (3 níveis), Posto da Guarda, Quartel |
 | Reputação | Saque, batalha e escolta como ações de guerra, com cadeia de metade |
@@ -275,6 +278,9 @@ Batalha sem o jogador é sempre cálculo rápido. A Comitiva (o grupo do jogador
 | Cultura | Guerra santa, Honra, Guerreira cansa menos, reação ao saque |
 | Eventos | Declaração, cerco, saque, rendição e paz como eventos com causa registrada |
 | Interface | Painel de guerra (Placar, Cansaço, exércitos), lente Perigo, ordens no Mapa Mundial |
+| Clima e Estações | Campanha de inverno mais cara; Moral −1 por dia no frio; IA prefere a primavera e o verão (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
+| Religião | Anátema do Sumo Sacerdote libera a Guerra santa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Notícias | Declarações, batalhas, cercos e paz viram notícia, com atraso (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
 
 ## Perguntas em aberto
 

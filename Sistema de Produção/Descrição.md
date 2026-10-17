@@ -16,6 +16,8 @@ O sistema de produção será baseado em estruturas, desenvolvido junto com o Si
 
 A produção terá um sistema logístico simplificado, detalhado no Sistema Econômico — a princípio, sem necessidade de "entregar" fisicamente a produção entre construções.
 
+**Estações e clima.** A produção Braçal muda com a estação e o bioma (na tabela base, a Fazenda rende 150% no outono e 25% no inverno); a Manufaturada e a Especialista não mudam (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
+
 **Cadeia militar.** Ração Militar e materiais de manutenção de equipamento abastecem os exércitos (ver Sistema de Facção).
 
 **Loja ilegal.** Qualquer construção de produção pode funcionar como loja ilegal disfarçada (ver Sistema de Crime e Justiça).

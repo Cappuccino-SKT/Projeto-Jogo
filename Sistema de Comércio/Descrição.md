@@ -30,7 +30,7 @@ A cidade precisa de um **Posto Comercial** (construção nova; ver [[Sistema de 
 ## Informação de preços
 
 - O jogador só vê os preços das **cidades que visitou**, com a **data da última visita**. A informação envelhece.
-- **Notícias e contratos** podem trazer preços de outras cidades.
+- **Notícias e contratos** trazem preços de outras cidades: um item 30% acima ou abaixo da média da facção vira notícia Local; as caravanas e os companheiros comerciantes do jogador trazem a tabela completa da cidade de onde vêm (ver [[Sistema de Notícias/Descrição|Notícias]]).
 
 ## Composição da caravana
 
@@ -50,7 +50,7 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 
 ## Riscos
 
-- **Bandidos** (ligados à Criminalidade; ver [[Sistema de Eventos/Descrição|Sistema de Eventos]] e [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]), **guerra no caminho** e **clima** que atrasa a viagem.
+- **Bandidos** (ligados à Criminalidade; ver [[Sistema de Eventos/Descrição|Sistema de Eventos]] e [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]), **guerra no caminho** e **clima** que atrasa a viagem (a tempestade para as caravanas; ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - Uma caravana atacada perde **parte ou toda a carga**.
 - **Contratos de escolta** nascem quando o risco de uma rota é alto (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
@@ -85,6 +85,9 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 | Objetivo e Progressão | Contratos de escolta; contratos e notícias trazem preços |
 | Tecnologia | Rota fixa no ramo Economia |
 | Início de Jogo | Estilo Mercador |
+| Escravidão | Mercado de Escravos; preço por oferta e procura; tráfico no mercado negro (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
+| Notícias | Preços como notícia; tabela de preços conhecidos com data (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
+| Clima e Estações | Comida mais cara no inverno pela simulação; tempestade para as caravanas (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 
 ### Perguntas em aberto
 

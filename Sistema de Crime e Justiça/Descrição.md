@@ -23,11 +23,13 @@ Quase tudo aqui é configurável **por lei da facção**: cada facção decide o
 | Contrabando (item proibido) | 2 |
 | Invasão de domicílio | 3 |
 | Agressão | 3 |
-| Fuga ou ajuda a escravo | 3 |
+| Fuga ou ajuda a escravo (5 na Escravista; ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) | 3 |
 | Assassinato | 5 |
 | Traição | 5 |
+| Heresia (ato contra a fé oficial; ver [[Sistema de Religião/Descrição\|Religião e Fé]]) | 3 (5 com a lei de Perseguição) |
+| Heresia sem o Livro Sagrado, na primeira vez na estação (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) | 2 |
 
-**Crimes culturais.** Alguns crimes vêm da **Cultura** da facção: heresia na Religiosa, magia na Tecnocrata, libertar escravo na Escravista, ser não Mago em certas funções na Arcana. Eles entram na lista da facção conforme as leis dela.
+**Crimes culturais.** Alguns crimes vêm da **Cultura** da facção: heresia na Religiosa, magia na Tecnocrata, libertar escravo na Escravista, ser não Mago em certas funções na Arcana. Eles entram na lista da facção conforme as leis dela. A **heresia** é um ato (construir culto de outra fé, blasfemar, profanar ou roubar um Templo), não a simples existência de uma minoria; na Religiosa, a pena é a execução.
 
 ### Detecção
 
@@ -35,7 +37,7 @@ Quase tudo aqui é configurável **por lei da facção**: cada facção decide o
 
 - A **Percepção** da testemunha é comparada à **Destreza (ocultação)** do criminoso.
 - O **Nível de Segurança** do Mapa Interno modifica o resultado.
-- O **período do dia** modifica o resultado: a noite reduz a detecção.
+- O **período do dia** modifica o resultado: a noite reduz a detecção em 30%, e a névoa, em 20% (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - Sem testemunha, nada é registrado.
 
 ### Criminalidade da cidade (LOD 2)
@@ -121,7 +123,7 @@ Existe suborno: pagar um guarda para ignorar o crime.
 - Alguns itens **já foram pensados para serem ilegais**.
 - Pela lei **Itens proibidos**, a facção pode **tornar ilegal um item comum** ou **tornar legal um item ilegal**.
 - Itens proibidos só são vendidos em **lojas ilegais**, com **preço multiplicado** e **risco de flagrante** pelos guardas.
-- Comprar, vender ou carregar um item proibido é o crime de **Contrabando**.
+- Comprar, vender ou carregar um item proibido é o crime de **Contrabando**. O tráfico de escravos onde a escravidão é proibida também é Contrabando, com venda só no mercado negro (ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
 
 **Lojas ilegais.** **Qualquer construção de produção pode ser uma loja ilegal.** Ela se passa por outra coisa (uma ferraria, uma cozinha), mas na verdade compra e vende produtos ilegais. Isso torna o mercado negro imersivo: o jogador não descobre qual loja é ilegal só olhando.
 
@@ -139,12 +141,15 @@ Existe suborno: pagar um guarda para ignorar o crime.
 |---|---|
 | Facção | Lei Crimes e penas, Itens proibidos, Escravidão; recompensa por facção |
 | Cultura | Crimes culturais e tendência de punição |
+| Religião | Heresia e a lei de Tolerância religiosa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Clima e Estações | Noite e névoa reduzem a detecção (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | NPC | Criminoso, Prisioneiro, Recompensa (agora uma lista); Função de guarda e de Caçador de Recompensa |
 | IA | Reação dos guardas, suborno (Personalidade), detecção (Percepção e Destreza) |
 | Mapa | Nível de Segurança do Mapa Interno; Prisão como Mapa Interno |
 | Cidade | Criminalidade, que influencia Felicidade e eventos |
 | Econômico | Lojas ilegais (qualquer construção de produção), preço multiplicado, multas e confiscos como dinheiro da facção |
-| Itens | Itens proibidos; Grilhões (item do Ferreiro) para prisioneiros |
+| Itens | Itens proibidos; Grilhões (item do Ferreiro) para prisioneiros; revista do Livro Sagrado (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
+| Escravidão | Fuga, ajuda a escravo, tráfico, fugitivos com Recompensa (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Classe Social | Variação das penas por classe |
 | Tempo | Duração das penas e decaimento da recompensa |
 | Eventos | Bandidos surgem como evento condicional da Criminalidade alta: grupos soltos (não uma facção), com tamanho proporcional à Criminalidade da cidade mais próxima; em LOD 2 viram um número de "ameaça bandida" por região. A missão de confiança pode ser um evento com escolha (ver [[Sistema de Eventos/Descrição\|Sistema de Eventos]]) |

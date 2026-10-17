@@ -117,18 +117,18 @@ Chance final = **chance base × modificadores** declarados no próprio JSON. O m
 
 ### Eventos positivos
 
-Entram, para o jogo não virar só punição: colheita farta, festival, jazida descoberta, mercador viajante, visitante ilustre.
+Entram, para o jogo não virar só punição: colheita farta, festa espontânea, jazida descoberta, mercador viajante, visitante ilustre. Os **festivais** deixaram de ser sorteados: vêm do calendário de cada cultura (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 
 ### Categorias iniciais
 
 | Categoria | Exemplos |
 |---|---|
-| Clima | seca, tempestade, geada, enchente |
+| Clima | seca, enchente, geada fora de hora, tempestade forte, onda de calor, inverno rigoroso (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | Saúde | doença, peste |
 | Natureza | incêndio, praga de lavoura, terremoto |
 | Fauna | ataque de animais, migração |
 | Sorte | colheita farta, jazida |
-| Social | festival, visitante, mercador |
+| Social | festa espontânea, visitante, mercador |
 
 Acréscimos serão pensados ao longo do desenvolvimento. **[Refinar depois]** O Narrador (ver abaixo) pode precisar de categorias de política e de ameaça para os focos dele.
 
@@ -231,7 +231,7 @@ Há um filtro por distância: eventos longe do jogador vão só para o diário. 
 
 ### Diário de eventos
 
-Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limite de tamanho, é gravado no save e serve também de "crônica do mundo".
+Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limite de tamanho e é gravado no save. A **Crônica do mundo** (o que o jogador soube do resto do mundo) fica nas [[Sistema de Notícias/Descrição|Notícias]].
 
 ---
 
@@ -262,6 +262,9 @@ Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limi
 | Felicidade | As faixas de Felicidade e a Estabilidade disparam protestos, greves, rebeliões, saída de empresas e revolta; eventos mudam a Felicidade por modificadores com causa (ver [[Sistema de Felicidade e Estabilidade/Descrição\|Sistema de Felicidade e Estabilidade]]) |
 | IA | Decisões de facções de IA nos eventos com escolha |
 | Início de Jogo | Escolha do narrador na criação |
+| Religião | Festivais do calendário; atos do Sumo Sacerdote (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Clima e Estações | Eventos climáticos extremos (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
+| Notícias | Cada evento pode virar notícia, com o modelo de frase e o "Por quê?" (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
 
 ### Perguntas em aberto
 

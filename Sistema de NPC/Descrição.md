@@ -27,7 +27,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 2. Idade
 3. Estágio (estágio de vida: criança, adulto, velho; em anos de jogo, criança 0–3, adulto 4–20 e velho 21+; só Importantes e Controlados têm crianças como NPC, ver [[Sistema de População/Descrição|Sistema de População]])
 4. Facção
-5. Cultura (o NPC nasce com a cultura da cidade; migrantes e escravos capturados mantêm a cultura de origem)
+5. Cultura (o NPC nasce com a cultura da cidade; migrantes e escravos capturados mantêm a cultura de origem; as minorias podem assimilar a cultura dominante, ver [[Sistema de Religião/Descrição|Religião e Fé]])
 6. Função (tipo de trabalho: ver [[Sistema de Produção/Funções e Construções|Funções e Construções]]; também guarda, comerciante, caçador de recompensa etc.)
 7. Classe Social (a qual classe pertence dentro da facção)
 8. Personalidade — conjunto de valores numéricos (0–100): Agressividade, Coragem, Lealdade, Ganância e Sociabilidade, organizados em "modelos" nomeados e reutilizáveis (ex: modelo "Covarde Ganancioso" = Coragem baixa + Ganância alta) para facilitar autoria. Esses valores alimentam diretamente as decisões da IA.
@@ -78,12 +78,13 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 2. Evolução (serve para evoluir os Atributos de Habilidade; as de combate sobem por uso, ver [[Sistema de Combate/Descrição|Sistema de Combate]])
 3. Postura (Agressiva, Defensiva, Manter posição ou Evitar combate; usada quando não há ordem)
 4. Modo de ataque (letal ou não letal)
+5. Livros lidos, traço Viciado e estado Doente (também nos Importantes; ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]])
 
 **Semi-Controlados — Escravo**
 
 1. Tarefa designada — a tarefa que o NPC está executando agora.
 2. Lista de Prioridades (editável pelo jogador) — ordem de tarefas (ex: 1º Coleta, 2º Produção, 3º Descanso); o escravo sempre tenta executar a disponível de maior prioridade.
-3. Obediência — probabilidade de seguir a prioridade definida vs. resistir.
+3. Obediência — probabilidade de seguir a prioridade definida vs. resistir (0 a 100; fórmula no [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
 4. Revolta — risco de rebelião, calculável a partir de Obediência baixa + Felicidade baixa dos Escravos, reduzido pelo Controle da cidade (ver [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]).
 5. Vínculo — dono ou facção responsável por esse escravo.
 

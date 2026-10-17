@@ -73,13 +73,15 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 
 - **Itens proibidos** — alimenta o atributo Proibição dos itens e a lista de Itens proibidos da cidade.
 - **Ajustes de preço por categoria** — alimenta o Mercado da Facção.
-- **Escravidão** (permitida / proibida) — define se o atributo Escravo e a classe Escravo existem nas cidades da facção.
+- **Escravidão** (permitida / proibida) — define se o atributo Escravo e a classe Escravo existem nas cidades da facção. A abolição liberta todos os Escravos em 1 estação (ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
+- **Livro Sagrado obrigatório** (sim / não) — exige que o grupo do jogador carregue um Livro Sagrado nas revistas; sem ele, é heresia. Desejada pela Religiosa (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
 - **Imposto** (% da receita das cidades: salários e lucros) — a cidade retém uma parte para obras e o resto enche o Banco da Facção; Escravos não pagam (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
 - **Conscrição** (% da população que pode ser alistada e quem é elegível) — define o teto de conscritos disponíveis em cada cidade.
 - **Magia** (livre / restrita / proibida) — define como tratar NPCs Magos. Inclui a opção "privilégio dos magos", para a cultura Arcana: a magia e o poder ficam com os NPCs que têm o atributo Mago.
 - **Crimes e penas** — define quais crimes valem, as punições (que variam por classe social) e a Recompensa. Ver Sistema de Crime e Justiça.
 - **Poder do líder** — define se o líder pode barrar a mudança de leis. **[Proposta]** Autoritário (o líder decide e pode bloquear), Moderado (o líder tem veto) e Fraco (a assembleia decide).
 - **Sistema de votação** — define como os votos das cidades são contados na assembleia (ver Assembleia e mudança de leis).
+- **Tolerância religiosa** (Tolerância / Fé oficial / Perseguição) — como a facção trata as minorias de outra cultura: imposto extra, culto proibido ou perseguição (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 - **Tarifa** — imposto sobre caravanas civis que entram no território da facção; vai para o Banco da Facção. Acordo comercial zera a tarifa; embargo e guerra bloqueiam o comércio (ver [[Sistema de Comércio/Descrição|Sistema de Comércio]]).
 
 **Herança total.** Toda cidade vinculada a uma facção adota todas as leis dela. Não há leis locais por cidade. O atributo "Itens proibidos" da Cidade passa a ser derivado das leis da facção.
@@ -103,7 +105,7 @@ A mudança de leis é decidida por **votação em assembleia**, que depende da q
 
 **[Proposta]** A Dinastia é a lista de NPCs nobres ligados ao líder (família e nobres vinculados), todos marcados como Importante, com um papel: Líder, Herdeiro ou Nobre.
 
-- A **regra de sucessão** é definida pela Cultura: primogenitura, eleição entre os nobres, duelo ou mérito, ou escolha do líder.
+- A **regra de sucessão** é definida pela Cultura: primogenitura, eleição entre os nobres, duelo ou mérito, escolha do líder ou escolha do clero (na Religiosa, o Sumo Sacerdote escolhe o herdeiro; ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 - Quando o líder morre, a sucessão acontece. Se não houver herdeiro, há uma crise: guerra civil, cidades que se declaram independentes ou dissolução da facção.
 - Se o líder for o personagem do jogador, o herdeiro passa a ser o NPC Controlado, em vez de fim de jogo. Sem herdeiro, o jogador escolhe um companheiro com Opinião de +60 ou mais; as dinastias da IA casam e têm filhos por estação (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]). Isso conecta os atributos Grávida, Estágio e Relação que já existem.
 - Nobres da dinastia podem governar cidades (cargo de governador).
@@ -194,6 +196,7 @@ Requisitos:
 | Cidade | Facção, itens proibidos (derivado das leis), conscritos (derivado), impostos, voto na assembleia |
 | NPC | Atributo Facção; alistar retira NPCs e cria Esquadrão; guardas ficam de fora; **[Proposta]** Título/Cargo para NPCs Importantes |
 | Cultura | Leis desejadas, Rito de Admissão, regra de sucessão, afinidades, arte (ver Sistema de Cultura) |
+| Escravidão | Lei de Escravidão, abolição e venda de prisioneiros (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Econômico | Mercado da Facção, impostos para o Banco da Facção, soldo dos Esquadrões, cunhagem, tecnologias; Tarifa e caravanas civis (ver Sistema de Comércio) |
 | Classe Social | Eventos de mudança de lei; soldados não têm classe; dissolução gera NPCs Escravo e Civil |
 | Produção | Alistamento reduz trabalhadores e, portanto, produção; Ração Militar e materiais de manutenção para o exército |
@@ -206,6 +209,7 @@ Requisitos:
 | Guerra | Motivos, exércitos, suprimento, cerco, ocupação, saque, paz e cálculo rápido (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 | Batalha | Tipos de Esquadrão, kit, Moral, Experiência e Comitiva no Mapa de Guerra (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Diplomacia | Estado, tratados, atitude, vassalagem, casamentos, reféns, Confiabilidade e IA (ver [[Sistema de Diplomacia/Descrição\|Sistema de Diplomacia]]) |
+| Religião | Lei de Tolerância religiosa; o Sumo Sacerdote escolhe o herdeiro da Religiosa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 
 ### Perguntas em aberto
 

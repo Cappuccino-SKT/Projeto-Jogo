@@ -2,4 +2,4 @@ Os recursos são atributos vinculados ao mapas locais, cada mapa local possui va
 
 ### Produtividade por estação
 
-Os recursos **não se esgotam**. Em vez de um sistema de esgotamento, cada recurso tem uma **produtividade por estação** (por exemplo, a floresta rende menos no inverno, a colheita é maior no outono). A tecnologia e as construções de nível maior aumentam a produtividade. Os modificadores climáticos virão do futuro sistema de Clima e Estações.
+Os recursos **não se esgotam**. Em vez de um sistema de esgotamento, cada recurso tem uma **produtividade por estação** (por exemplo, a floresta rende menos no inverno, a colheita é maior no outono). A tecnologia e as construções de nível maior aumentam a produtividade. Os valores por estação e por bioma, e os eventos de clima que os reduzem, estão no [[Sistema de Clima e Estações/Descrição|Clima e Estações]]. *Exemplo:* na tabela base, a Fazenda rende 75% na primavera, 100% no verão, 150% no outono e 25% no inverno.

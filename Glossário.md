@@ -79,6 +79,12 @@
 | **Dono** | Quem possui uma construção: Cidade, Facção, Rico ou jogador |
 | **Empresa** | Construção de produção ou comércio pertencente a um Rico |
 | **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
+| **Relíquia / Artefato lendário** | Artefato genérico (Rank 1 a 3) / único, com efeito próprio (Rank 4 e 5). [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]] |
+| **Livro Sagrado** | Livro exigido nas revistas das facções com a lei "Livro Sagrado obrigatório" (Religiosa) |
+| **Doente / Viciado** | Estado e traço que só existem em Controlados e Importantes |
+| **Obediência** | Chance de o escravo cumprir a prioridade, de 0 a 100. [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]] |
+| **Mercado de Escravos** | Construção onde se compram e vendem escravos, só onde a lei permite |
+| **Alforria / Abolição** | Escravo que compra a liberdade / lei que liberta todos os escravos da facção |
 
 ## Eventos, tecnologia e magia
 
@@ -125,6 +131,25 @@
 | **Confiabilidade** | Nota de 0 a 100 de cada facção; cai ao quebrar tratados |
 | **Vassalo** | Subordinado com leis próprias, que paga tributo e atende ao chamado às armas |
 | **Coalizão** | Aliança defensiva conjunta contra uma facção ameaçadora |
+
+## Religião, clima e notícias
+
+| Termo | Significado |
+|---|---|
+| **Devoção** | Quanto a fé de uma cultura pesa: Alta, Média, Baixa ou Nenhuma. [[Sistema de Religião/Descrição\|Religião e Fé]] |
+| **Cobertura do Templo** | Parte da cidade atendida pelos Sacerdotes (cada um atende 20 NPCs reais) |
+| **Festival** | Data fixa do calendário de cada cultura (2 por ano; 4 na Religiosa) |
+| **Tolerância religiosa** | Lei de facção: Tolerância, Fé oficial ou Perseguição das minorias |
+| **Heresia** | Crime cultural: um ato contra a fé oficial, não a simples existência de uma minoria |
+| **Assimilação** | Minorias adotando aos poucos a cultura dominante da cidade, por estação |
+| **Bênção / Anátema** | Atos do Sumo Sacerdote que mudam relações; o Anátema libera a Guerra santa |
+| **Clima do dia** | Limpo, Nublado, Chuva, Tempestade, Neve, Névoa ou Calor forte; sorteado por região. [[Sistema de Clima e Estações/Descrição\|Clima e Estações]] |
+| **Lenha** | Madeira Bruta gasta pelas moradias no inverno |
+| **Fase do dia** | Amanhecer, dia, entardecer ou noite; à noite, visão e detecção −30% |
+| **Notícia** | Acontecimento que anda 3 h por mapa até o jogador. [[Sistema de Notícias/Descrição\|Notícias]] |
+| **Importância** | Alcance da notícia: Local (2 mapas), Regional (5) ou Mundial |
+| **Rede do jogador** | Cidades, companheiros fora do grupo e caravanas do jogador, que recebem notícias por ele |
+| **Crônica do mundo** | Notícias Regionais e Mundiais que o jogador soube, com as duas datas |
 
 ## Interface
 

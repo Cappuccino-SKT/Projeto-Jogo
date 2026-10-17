@@ -24,11 +24,16 @@ Define como os NPCs se recuperam de ferimentos. Hoje existe o **Estado Atual** (
 
 - O tipo de item **Medicamento** já existe (Bem de Consumo), mas **ainda não há itens**.
 - Quem produz é o **Boticário** (Produção Especialista), em uma construção Boticário (ver Sistema de Construção).
-- **[Proposta]** Itens iniciais, a definir com Tier e receita: um curativo simples (Tier 1) e um medicamento mais forte (Tier 3), que usa Flor Espiritual.
+- Itens: **Curativo** (Tier 1; Tecido + Água): regeneração × 2 por 8 horas e estanca o sangramento; **Remédio** (Tier 3; Flor Espiritual + Fardo de Especiaria): regeneração × 3 por 24 horas e cura o estado Doente (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
+- **Na cidade:** numa epidemia, a cidade gasta 1 Remédio por 10 NPCs reais por dia; com estoque, a mortalidade da doença cai pela metade.
 
 ### Hospital
 
 Construção (ver Sistema de Construção). **[Proposta]** Cura os NPCs Controlados do grupo mediante pagamento, com velocidade que depende do nível da construção. Em LOD 2, funciona como a Taverna e o Mercado: serviço agregado para a cidade. Um Mago de Suporte trabalhando nele acelera a cura (ver Sistema de Magia).
+
+### Templo da Religiosa
+
+Nas cidades Religiosas, o Templo cuida dos feridos pobres: a cura dos NPCs comuns fica **25% mais rápida**, e a mortalidade por doença cai 25% (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 
 ### Estado Inconsciente e Morte
 
@@ -45,23 +50,22 @@ O guarda deixa o alvo **Inconsciente** em vez de Morto na prisão não letal (ve
 
 Ferimentos por parte do corpo.
 
-**Doenças e epidemias** agora entram como eventos ocasionais da categoria Saúde, em geral Duradouros (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]). A chance aumenta com população densa, pouca comida e ausência de Hospital ou Boticário. Medicamento e Hospital funcionam como resposta a elas. **[Em aberto]** Como a doença aparece em LOD 0: estado "Doente" no NPC ou só modificador da cidade.
+**Doenças e epidemias** agora entram como eventos ocasionais da categoria Saúde, em geral Duradouros (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]). A chance aumenta com população densa, pouca comida e ausência de Hospital ou Boticário. Medicamento e Hospital funcionam como resposta a elas. **Doença em LOD 0:** nos NPCs comuns, é só um modificador da cidade; nos **Controlados e Importantes**, existe o estado **Doente** (−20% nas habilidades e sem regeneração, até tomar Remédio, ir ao Hospital ou passar 8 dias). Ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]].
 
 ### Ligação com outros sistemas
 
 | Sistema | O que a Cura fornece ou recebe |
 |---|---|
 | NPC | Vida atual e Estado Atual; Ação atual "descansando" |
-| Itens | Tipo Medicamento (itens a criar) |
+| Itens | Curativo e Remédio; estado Doente (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
 | Produção | Boticário (função e construção) |
 | Construção | Hospital e Boticário |
 | Crime e Justiça | Estado Inconsciente na prisão não letal |
 | Tempo | Regeneração por hora; Período de Dormir |
 | Eventos | Doenças e epidemias como eventos de Saúde |
+| Religião | Templo da Religiosa acelera a cura e reduz as mortes por doença (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 
 ### Perguntas em aberto
 
 1. Quando o Inconsciente vira Morto (proposta acima).
-2. Itens de Medicamento e suas receitas.
-3. Taxa de regeneração e custo do Hospital (testes).
-4. Doença em LOD 0: estado "Doente" do NPC ou só modificador da cidade (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]).
+2. Taxa de regeneração e custo do Hospital (testes).
