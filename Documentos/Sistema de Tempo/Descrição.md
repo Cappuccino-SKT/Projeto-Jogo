@@ -48,8 +48,8 @@ Isso também define o que pausa na velocidade 8x: a busca de caminho fina e a de
 ## Parte técnica
 
 - **Relógio fixo:** a simulação anda em passos fixos, separados do desenho (ver [[Arquitetura/Descrição|Arquitetura]]). A velocidade (1x a 8x) muda quantos passos rodam por segundo, não o tamanho do passo.
-- **Calendário:** ano, estação, dia e hora num único contador de horas de jogo; o resto é derivado.
-- **Save:** o contador de horas de jogo e a velocidade atual.
+- **Calendário:** ano, estação, dia e hora num único contador de **ticks** desde o início da partida; o resto é derivado (contas na [[Ficha Logica/Tempo|Ficha Lógica: Tempo]]).
+- **Save:** o contador de ticks e a velocidade atual.
 - **Fatia vertical:** usa o relógio, as velocidades até 4x, as estações (produção) e as fases do dia (tom de cor).
 
 ## Ligação com outros sistemas

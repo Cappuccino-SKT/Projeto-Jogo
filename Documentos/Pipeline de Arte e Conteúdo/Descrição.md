@@ -60,7 +60,7 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 | Tile | 16 × 16 px |
 | Vista | De cima, em 3/4 (como Stardew) |
 | Boneco | 16 × 24 px (1 tile de largura, 1,5 de altura) |
-| Zoom padrão | 2x: em 1600 × 900 aparecem 50 × 28 tiles (3x: 33 × 19; 4x: 25 × 14) |
+| Zoom padrão | 3x (rodada FT1-4): em 1600 × 900 aparecem 33 × 19 tiles (2x: 50 × 28; 4x: 25 × 14) |
 | Paleta | Paleta mestre de cerca de 48 cores + 2 cores de destaque por cultura |
 
 **Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). A paleta mestre parte de uma paleta pública do Lospec (Endesga 32 ou Resurrect 64), ajustada.
