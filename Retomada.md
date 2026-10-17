@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada V3 (Pendências de regra) aplicada e a V4 (Confirmação das propostas, parte 1) enviada.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada V4 (Confirmação das propostas, parte 1) aplicada e a V5 (parte 2, a última da revisão) enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). A V1, a IP1 e a IP2 estão no `main` (PRs #9 a #11). A IP3, a V2 e a V3 estão em branches empilhadas, cada uma criada a partir da anterior: `docs/ip3-receitas` → `docs/v2-economia` → `docs/v3-pendencias`. A V3 foi aplicada em 2026-10-17 e criou o documento [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] (ideia do autor). A **rodada V4 (Confirmação das propostas, parte 1) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se os pull requests foram mesclados no `main`, na ordem IP3 → V2 → V3.**
-3. **Próximo passo:** pedir o `Respostas.txt` da V4 (conferir se é desta rodada), tirar as marcações confirmadas, aplicar as mudanças (F-14, A-4, A-7) e abrir a **V5** (propostas dos outros documentos).
-4. Depois: a **ficha técnica lógica da fatia vertical**. As listas de conteúdo ficam para as rodadas C1 a C3, mais para frente (ideia do autor na V3-13).
+2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está na última rodada (levantamento e plano na [[Revisão Completa]]). Já estão no `main` as rodadas V1, IP1, IP2, IP3, V2 e V3 (PRs #9 a #14). Em 2026-10-17 foi aplicada a **V4**, na branch `docs/v4-propostas`: as propostas de 7 documentos e os moldes de conteúdo foram confirmados, e a Arquitetura seguiu as recomendações, a pedido do autor. A **rodada V5 (Confirmação das propostas, parte 2) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/v4-propostas` foi mesclado no `main`.**
+3. **Próximo passo:** pedir o `Respostas.txt` da V5 (conferir se é desta rodada), tirar as marcações confirmadas, aplicar IT-4 e IT-5, marcar a revisão como concluída e começar a **ficha técnica lógica da fatia vertical** no formato da V5-9.
+4. Depois: a programação da fatia vertical. As listas de conteúdo ficam para as rodadas C1 a C3 (ideia do autor na V3-13).
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -69,138 +69,131 @@ Regras extras:
 | Revisão | Itens e Produção: IP3 (insumos) | Aplicada |
 | Revisão | V2 (economia numérica) | Aplicada |
 | Revisão | V3 (pendências de regra) | Aplicada |
-| Revisão | **V4 (propostas, parte 1)** | **Enviada, aguardando respostas** |
-| Revisão | V5 (propostas, parte 2) | A fazer |
+| Revisão | V4 (propostas, parte 1) | Aplicada |
+| Revisão | **V5 (propostas, parte 2)** | **Enviada, aguardando respostas** |
 | Depois | Ficha técnica da fatia vertical; rodadas de conteúdo C1 a C3 | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, modo observador, eventos de dinastia. As ordens de produção em lote foram decididas na IP1-7 ([[Sistema de Produção/Descrição|Produção]]). A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: V4, Confirmação das propostas (parte 1)
+## 4. Rodada pendente: V5, Confirmação das propostas (parte 2)
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** As marcações **[Proposta]** são detalhes que o assistente acrescentou às sugestões aceitas, ou sugestões que o autor ainda não viu uma por uma. Esta rodada confirma as de **7 documentos**, mais os moldes de conteúdo da V3-13. A V5 faz o mesmo com os outros documentos.
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** Esta é a última rodada da revisão completa. Ela confirma as **58 propostas** que sobraram nos outros documentos, em 8 grupos, e pergunta o formato da **ficha técnica lógica da fatia vertical**, o passo seguinte.
 
-**Como responder:** "Confirmar todas" ou "Confirmar todas, exceto F-3 e F-7 (e o que mudar)". Uma proposta confirmada perde a marcação e vira decisão do autor. A recomendação de cada uma vem no fim da linha: **Confirmar**, **Mudar** (com o motivo) ou **Já decidida** (só limpar a marcação).
+**Como responder:** "Confirmar todas" ou "Confirmar todas, exceto PR-3 e CB-4 (e o que mudar)". A recomendação vem no fim de cada linha:
 
-**V4-1. Facção (17 propostas).** [[Sistema de Facção/Descrição|Facção]]
+- **Confirmar:** a proposta vira decisão.
+- **Mudar:** vem com o motivo.
+- **Já decidida:** só limpar a marcação.
 
-- F-1. Cultura dominante = a de maior população somada nas cidades, recalculada a cada estação. **Confirmar.**
-- F-2. Número de cidades, PIB e exército não são guardados: são somados das cidades, em cache. **Confirmar.**
-- F-3. Alistamento e formação de Esquadrões no Quartel. **Confirmar.**
-- F-4. A Caravana Militar usa o componente de Inventário (Carga), não luta, mas acompanha o exército. **Confirmar.**
-- F-5. Caravana capturada ou destruída: o exército perde a carga (saque). **Confirmar.**
-- F-6. Poder do líder em 3 níveis: Autoritário, Moderado e Fraco. **Já decidida** (V3-1 usa os três).
-- F-7. Agressividade alta e Sociabilidade baixa aumentam a chance de veto. **Já decidida** (fórmula da V3-7).
-- F-8. Dinastia = lista de nobres ligados ao líder (Líder, Herdeiro, Nobre), todos Importantes. **Confirmar.**
-- F-9. O vínculo do mapa vizinho é derivado; 4 estados do Mapa Local. **Confirmar.**
-- F-10. Vassalagem: obrigações (tributo e chamado às armas) e benefícios (proteção, preços da facção, cargos). **Confirmar.**
-- F-11. A facção decide sobre a cidade que quer se desvincular pelo valor da cidade e pelas outras guerras. **Confirmar.**
-- F-12. Ações diante da independência: aceitar, negociar tributo menor, declarar guerra ou bloquear o comércio. **Confirmar.**
-- F-13. O jogador pertence a uma facção por vez: Independente, Membro, Vassalo ou Líder. **Confirmar.**
-- F-14. Requisitos para fundar facção: dinheiro mínimo e escolha da cultura, do nome e das leis. **Mudar:** dar o número da V2, **2.000 moedas** no Banco da Facção novo.
-- F-15. Facção sem cidades é dissolvida; o líder e a dinastia viram exilados e podem refundar. **Confirmar.**
-- F-16. Atributo Título/Cargo nos NPCs Importantes. **Confirmar.**
-- F-17. Legenda e textos que citam propostas já feitas. **Limpar.**
+**V5-1. Produção, Funções e Receitas (8 propostas).**
 
-**V4-2. Mundo e Estado Inicial (14 propostas).** [[Mundo e Estado Inicial/Descrição|Mundo]]
+- PR-1. Um ciclo interrompido guarda o progresso em horas; os insumos já gastos não voltam. **Confirmar.**
+- PR-2. O teto do material é o máximo da faixa do item na lista (vale também para itens sem metal, como as roupas). **Confirmar.**
+- PR-3. O Rank 0 não sai da produção: fica para itens quebrados ou improvisados. **Confirmar.**
+- PR-4. Horas reais = horas da receita ÷ (velocidade × (1 + 0,1 × níveis acima do mínimo)); cada trabalhador faz o seu ciclo. **Confirmar.**
+- PR-5. O déficit da nota da IA vai de 0 a 1, pelo contador de dias em déficit. **Confirmar.**
+- PR-6. Funções dos serviços públicos: Lojista, Taverneiro, Oficial instrutor, Carcereiro, Moedeiro, Sacerdote, Mercador, Pesquisador, Mago, Curandeiro e Professor. **Confirmar.**
+- PR-7. Habilidade mínima de cada nível da receita: 10, 25, 40, 55 e 70. **Confirmar.**
+- PR-8. Peixe por estação: 100% na primavera, no verão e no outono; 75% no inverno; 25% no inverno dos biomas frios. **Confirmar.**
 
-- M-1. Campo "Raça" no NPC, com um só valor (Humano), para não fechar a porta a outras raças. **Confirmar.**
-- M-2. Ordem das regiões: culturas hostis vizinhas; Tecnocrata e Arcana em cantos opostos. **Confirmar.**
-- M-3. Bordas: montanhas ao norte, mar a leste e ao sul, estepe e deserto a oeste. **Confirmar.**
-- M-4. O mapa inicial célula por célula (a malha 8 × 6). **Confirmar.**
-- M-5. Cidades iniciais: 1 capital, 1 cidade e 1 vilarejo por região (2 vilarejos na Escravista). **Confirmar.**
-- M-6. Biomas, recursos de destaque e escassos de cada região. **Confirmar.**
-- M-7. Dificuldade das masmorras pela distância até a capital (1 a 4; lendárias 5). **Confirmar.**
-- M-8. Valores iniciais das facções (NPCs, Riqueza, PIB, Esquadrões). **Confirmar.** O PIB já bate com os Bancos da V2.
-- M-9. Pacotes de construções por nível e cultura. **Confirmar.**
-- M-10. Afinidade entre as culturas (afim, neutra, hostil). **Confirmar.**
-- M-11. 5 Importantes fixos: Arquimago, Rei Exilado, Grande Mercador, Sumo Sacerdote e Mestre Inventor. **Confirmar.**
-- M-12. Limites do estado inicial variável (relações ±15, 1 ou 2 guerras, 2 acordos...). **Confirmar.**
-- M-13. Pontos de partida de cada estilo (2 ou 3 por estilo). **Confirmar.**
-- M-14. Frase "os detalhes marcados como [Proposta] foram acrescentados agora". **Limpar.**
+**V5-2. Itens, Inventário e NPC (5 propostas).**
 
-**V4-3. Religião (11 propostas).** [[Sistema de Religião/Descrição|Religião e Fé]]
+- IT-1. Intervalo de Ataque por tipo de arma: Espada e Lança rápidas; Machado e Clava lentas; Besta e armas de fogo muito lentas. **Confirmar.**
+- IT-2. Cetro: cajado de uma mão, que deixa usar Escudo, com dano 25% menor. **Confirmar.**
+- IT-3. O conjunto Furtivo dá Destreza; o Mercador e o Nobre dão Carisma. **Confirmar** (os valores ficam a testar).
+- IT-4. Capacidade de armazenamento de cada construção, que estava "para a V2" mas ficou sem número. **Mudar:** 100 × nível nas pequenas, 200 × nível nas médias e 400 × nível nas grandes, nas categorias que ela produz ou vende. Bate com o exemplo que já existe: Fazenda nível 2 = 200.
+- IT-5. Saciedade da comida "Básico 60, Refinado 80, Luxo 100". **Mudar:** pelo Tier, porque esses grupos deixaram de existir na IP2. Tier 1 = 60, Tier 2 = 80, Tier 3 = 90 e Tier 4 = 100.
 
-- R-1. Na Arcana, cada Mago da Torre Arcana conta como Sacerdote para a cobertura. **Confirmar.**
-- R-2. Datas dos festivais de cada cultura (Festa da Colheita nos dias 1 e 2 do Outono...). **Confirmar.**
-- R-3. Os dias santos da Religiosa duram 1 dia, com metade dos efeitos. **Confirmar.**
-- R-4. O bônus de Felicidade do festival dura 8 dias. **Confirmar.**
-- R-5. O evento Social positivo passa a ser a "festa espontânea" (vitória, casamento, visitante ilustre). **Confirmar.**
-- R-6. A Felicidade −15 da Perseguição vale só na parte da população que é minoria. **Confirmar.**
-- R-7. A IA do Sumo Sacerdote dá Bênção a quem tem +40 com a Religiosa e fez algo pela fé. **Confirmar.**
-- R-8. Anátema contra o jogador sem facção: −20 de reputação com as facções Religiosas. **Confirmar.**
-- R-9. Oferenda mínima de 50 moedas na Capital Religiosa. **Confirmar.** São cerca de 6 dias de salário de um Civil pela V2.
-- R-10. Peregrinos: +10% de consumidores na Capital Religiosa e na cidade de peregrinação. **Confirmar.**
-- R-11. Legenda. **Limpar.**
+**V5-3. Combate e Batalha (7 propostas).**
 
-**V4-4. Pipeline de Arte e Conteúdo (11 propostas).** [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]]
+- CB-1. Os valores iniciais da fórmula de dano e acerto. **Confirmar** (a testar).
+- CB-2. A tabela de vantagem entre arma e armadura, com no máximo ±25%. **Confirmar.**
+- CB-3. Armadura mista: vale o peso mais frequente entre as três peças (empate: Média). **Confirmar.** Era a I-18 da revisão.
+- CB-4. Cerca de 40 combatentes ativos no combate local. **Confirmar** como valor a testar.
+- CB-5. Atributos da Milícia na Batalha (só na defesa da própria cidade). **Confirmar.**
+- CB-6. O tamanho visual dos soldados pode ser trocado nas Configurações, fora da batalha, sem mexer no save. **Confirmar.**
+- CB-7. Com a lei de Magia "Restrita", só Magos de Suporte nos Esquadrões. **Confirmar.**
 
-- P-1. Pacotes provisórios de preferência CC0, com a origem anotada em `assets/provisorio/LEIA-ME.txt`. **Confirmar.**
-- P-2. Pixelorama para desenhar. **Já decidida** (o autor escolheu).
-- P-3. VS Code para editar os dados. **Confirmar.**
-- P-4. O texto "por que o Pixelorama". **Já decidida.**
-- P-5. Primeiros passos para aprender pixel art (tutoriais do Lospec, exercícios). **Confirmar.**
-- P-6. Paleta mestre a partir de uma paleta pública do Lospec (Endesga 32 ou Resurrect 64). **Confirmar.**
-- P-7. Estimativa do peso da arte na memória. **Confirmar** (é uma conta, não uma regra).
-- P-8. Teto inicial de 256 MB de memória de imagens. **Confirmar.** Cabe na placa de 2 GB da V3-12.
-- P-9. O jogo lê o CSV direto, em C++. **Confirmar.**
-- P-10. Modo `jogo --validar`. **Confirmar** (já usado em vários documentos).
-- P-11. Estrutura de pastas do projeto. **Confirmar.**
+**V5-4. Guerra, Diplomacia e Viagem (9 propostas).**
 
-**V4-5. Clima e Estações (9 propostas).** [[Sistema de Clima e Estações/Descrição|Clima e Estações]]
+- GU-1. Uma companhia mercenária sem contrato fica na sede e vira notícia. **Confirmar.**
+- GU-2. Para pedir ao líder a cidade que tomou, o jogador precisa de Renome 40 (além da Opinião +30). **Confirmar.**
+- GU-3. Numa guerra com aliados, cada lado negocia pelo seu líder de guerra; os aliados saem junto. **Confirmar.**
+- GU-4. Assinar um tratado dá +5 de relação; cancelar um que ainda vale dá −10. **Confirmar.**
+- GU-5. A IA procura Aliança Defensiva com facções afins quando um vizinho tem 1,5 vez a força dela. **Confirmar.**
+- GU-6. Multiplicadores de infraestrutura na Viagem (selvagem, trilha, estrada...). **Confirmar.**
+- GU-7. Multiplicadores do tamanho do grupo (um Esquadrão conta como 100 pessoas). **Confirmar.**
+- GU-8. Tempo mínimo de 1 hora por Mapa Local. **Confirmar.**
+- GU-9. O progresso das entidades em trânsito avança por hora, e os encontros são sorteados ao entrar num mapa. **Confirmar.**
 
-- C-1. A Água rende 100% o ano todo. **Confirmar.**
-- C-2. Tempestade: trabalho ao ar livre −50% naquele dia. **Confirmar.**
-- C-3. Chances de cada clima por estação (bioma temperado). **Confirmar.**
-- C-4. Ajustes por bioma (neve nas montanhas, pouca chuva nas terras áridas, tempestade no litoral). **Confirmar.**
-- C-5. A tempestade forte danifica construções de madeira; o reparo sai pela manutenção. **Confirmar.** O evento da V3-6 usa isso.
-- C-6. "Efeitos do inverno × 1,5" nos biomas frios. **Confirmar.**
-- C-7. Horas das 4 fases do dia. **Confirmar.**
-- C-8. Limite de 300 partículas de clima na tela. **Confirmar.**
-- C-9. Legenda. **Limpar.**
+**V5-5. Crime, Escravidão e Cultura (8 propostas).**
 
-**V4-6. Arquitetura (7 propostas).** [[Arquitetura/Descrição|Arquitetura]]
+- CJ-1. Lista inicial de crimes e gravidades. **Confirmar.**
+- CJ-2. A Criminalidade sobe com a infelicidade e a pobreza, e cai com os guardas. **Confirmar** (os pesos ficam a testar).
+- CJ-3. O trabalho forçado marca o NPC como Escravo com prazo; ao fim, ele volta à classe anterior. **Confirmar.**
+- CJ-4. A construção tem o atributo "Ilegal" e o dono guarda a Confiança no jogador. **Confirmar.** A V3-3 já usa isso.
+- CJ-5. Libertar um escravo dá +2 de reputação com a Religiosa. **Confirmar.**
+- CJ-6. Na primeira versão, só a Religiosa aplica o −10 de relação a quem mantém Mercado de Escravos. **Confirmar.**
+- CJ-7. A primeira lista de traços das 6 culturas (leis desejadas, rito, sucessão, pensamento extremo). **Confirmar** como base; as leis iniciais da V3-1 já saem dela.
+- CJ-8. O pensamento extremo é uma lei com valor ideal no limite e peso máximo. **Confirmar.**
 
-- A-1. g++ (MinGW) com CMake e Ninja, sem Visual Studio; C++20. **Confirmar.**
-- A-2. As bibliotecas sugeridas (SDL3, OpenGL 3.3, EnTT, leitor de JSON, Dear ImGui, Tracy). **Adiar:** a aprovação fica para o primeiro dia de código, como já previsto.
-- A-3. Composição em vez de herança (ECS). **Confirmar.**
-- A-4. Dados em JSON numa pasta `data/`. **Mudar:** JSON para os dados com estrutura e **CSV** para as tabelas grandes (itens, receitas, preços), como o Pipeline e os Moldes já dizem.
-- A-5. Memória por Mapa Local (arenas: tudo de um mapa é criado e apagado junto). **Confirmar.**
-- A-6. Save em arquivo binário com número de versão. **Confirmar.**
-- A-7. Os 8 marcos da fatia vertical. **Mudar:** acrescentar o marco "simulação sem tela de 1 ano" (o teste da V2-12) antes da interface.
+**V5-6. Notícias e Eventos (7 propostas).**
 
-**V4-7. Efeitos de Itens (8 propostas).** [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]
+- NE-1. A distância de uma notícia conta os passos no grafo dos 48 mapas, sem o terreno. **Confirmar.**
+- NE-2. Uma notícia além do alcance só chega se alguém da rede do jogador estiver dentro dele. **Confirmar.**
+- NE-3. A notícia ganha a versão mais precisa quando o jogador ou a rede dele chega mais perto. **Confirmar.**
+- NE-4. Preços fora da média: conferidos uma vez por dia; o mesmo item na mesma cidade só volta a ser notícia depois de 8 dias. **Confirmar.**
+- NE-5. Limite de 500 notícias ativas no mundo. **Confirmar.**
+- NE-6. No máximo 2 eventos negativos ativos ao mesmo tempo por cidade. **Confirmar.**
+- NE-7. Quatro focos de narrador. **Já decidida** (V3-5).
 
-- E-1. Livro de Atributos de Rank 4 e 5 só nas masmorras difíceis. **Confirmar.**
-- E-2. Livro Sagrado por 20 moedas, no Templo e no Mercado das cidades Religiosas. **Confirmar.**
-- E-3. Quem precisa do Livro Sagrado: só os Controlados (não os Escravos do jogador nem os NPCs comuns). **Confirmar.**
-- E-4. Chance de revista pela reputação do jogador. **Confirmar.**
-- E-5. Heresia leve na primeira vez da estação: gravidade 2, multa (100 moedas pela V3-3) e compra obrigatória do livro. **Confirmar.**
-- E-6. A lista dos Artefatos lendários iniciais (nomes provisórios). **Confirmar.**
-- E-7. Alimento de Tier 3: +4 no fator comida. **Confirmar.**
-- E-8. Vinho: +3 de Felicidade. **Confirmar.**
+**V5-7. Cidade, População, Felicidade e Cura (6 propostas).**
 
-**V4-8. Os moldes de conteúdo (ideia do autor na V3-13).**
+- CI-1. NPCs reais por nível de cidade (15, 40, 100 e 300) e os outros valores iniciais da Cidade. **Confirmar.**
+- CI-2. A Senzala pertence ao dono dos escravos (cidade, Rico ou jogador). **Confirmar.**
+- CI-3. A Felicidade anda 10% por dia em direção ao alvo, sem pular. **Confirmar.**
+- CI-4. O Controle vai de 0 a 30. **Confirmar.**
+- CI-5. Regeneração por hora, maior dormindo ou descansando; em bloco no LOD 2; só fora de combate. **Confirmar.**
+- CI-6. O Hospital cura o grupo mediante pagamento; em LOD 2 é um serviço agregado da cidade. **Confirmar.** A V3-4 já deu os números.
 
-- *Contexto:* o autor pediu que as listas grandes virem estruturas modulares, prontas para copiar e modificar, e que agora só os moldes fiquem prontos. O documento [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] foi criado com:
-  - as regras comuns: ID legível, listas fechadas, referência por ID, JSON e CSV;
-  - os moldes que já existiam: Item, Receita, Construção, Evento, Estilo de início e Traço de cultura;
-  - os moldes novos: Tecnologia, Marco mundial, Lei, Feitiço, Contrato e missão, Ambição, Narrador e Masmorra.
-- *Pergunta:* os moldes novos estão bons para começar? Falta algum tipo de conteúdo?
-- *Sugestão:* **confirmar os 8 moldes novos.** As listas completas ficam para as rodadas de conteúdo, mais para frente:
-  - **C1:** tecnologias e marcos;
-  - **C2:** feitiços;
-  - **C3:** contratos, missões, Ambições e eventos.
+**V5-8. Interface, Início, Objetivo, Companheiros, Comércio, Reputação e Tecnologia (8 propostas).**
 
-  Outros tipos que podem virar molde no futuro: Raça, Criatura e Título de Nobreza.
-- *Impacto:* Arquitetura, Tecnologia, Facção, Magia, Objetivo, Eventos.
+- OU-1. A ordem de produção mostra os insumos que faltam e o tempo estimado; parada por falta de insumo, ela vai para a barra de alertas. **Confirmar.**
+- OU-2. Padrão das notificações: tudo ligado, com agrupamento; acima de 4x, só Aviso e Crítico; o Crítico pausa. **Confirmar.**
+- OU-3. O estilo de início é um conjunto de dados lido de arquivo. **Já decidida** (moldes da V4-8).
+- OU-4. Classe típica de cada título (Plebeu = Civil, Cavaleiro = Rico, Nobre = Nobreza...). **Confirmar.**
+- OU-5. Companheiros vinculados: 10 + Renome ÷ 5 + 3 por cidade do jogador. **Confirmar.**
+- OU-6. Cada Cavalo dá +100 de capacidade de peso à caravana. **Confirmar.**
+- OU-7. As Vilas Livres começam com reputação 0 para todos. **Confirmar.**
+- OU-8. Pontos de Pesquisa por trabalhador por dia = Inteligência ÷ 50 × multiplicador do nível do Laboratório. **Confirmar** (a testar).
+
+**V5-9. O formato da ficha técnica lógica da fatia vertical.**
+
+- *Contexto:* depois da V5, a revisão termina e começa a **ficha técnica lógica**: o documento que traduz os sistemas em **estruturas, dados e regras** que o código vai seguir. Ela cobre só a fatia vertical, a vila de 15 NPCs da V2-12. O autor tem pouca experiência em C++.
+- *Opções:*
+  - (a) **um documento único**, só da fatia vertical, em linguagem simples, com tabelas e sem código de verdade;
+  - (b) um documento por sistema, já para o jogo inteiro: mais completo, mas muito maior, e a maior parte não entra na fatia vertical;
+  - (c) ir direto ao código, explicando enquanto programa: mais rápido, mas sem um mapa para consultar.
+- *Sugestão:* (a), com estas partes:
+  1. **Entidades e componentes:** o que existe (NPC, construção, cidade, item, pilha) e os campos de cada um, com o tipo: número inteiro, número com vírgula, texto, lista.
+  2. **Arquivos de dados:** quais arquivos `data/` a fatia lê (itens, receitas, construções, eventos) e um exemplo de cada.
+  3. **O ciclo do tempo:** o que roda a cada tick, a cada hora, a cada dia e a cada estação, e em que ordem (rotina → produção → consumo → mercado → Felicidade → eventos).
+  4. **As regras como receitas de bolo:** cada fórmula em passos numerados ("1. some os salários; 2. ...").
+  5. **Save:** o que é gravado.
+  6. **Os testes:** o teste de 1 ano sem tela e o que ele mede.
+  7. **Os marcos de programação**, na ordem da Arquitetura, com o que fica pronto em cada um.
+
+  A ficha vai num documento novo, `Ficha Técnica/Fatia Vertical.md`, e também em rodadas de perguntas, quando aparecer uma escolha.
+- *Impacto:* fecha a revisão; prepara o início do código.
 
 Depois das respostas:
 
-- tirar as marcações confirmadas;
-- aplicar as mudanças (F-14, A-4, A-7);
-- abrir a **V5** (propostas dos outros documentos).
+- tirar as marcações confirmadas e aplicar as mudanças (IT-4, IT-5);
+- marcar a [[Revisão Completa]] como concluída;
+- atualizar o [[Estado do Projeto]];
+- começar a ficha técnica.
 
 ## 5. Fatos que valem lembrar
 

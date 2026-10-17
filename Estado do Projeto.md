@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1, IP1 a IP3, V2 e V3 aplicadas; rodada V4 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1, IP1 a IP3 e V2 a V4 aplicadas; rodada V5, a última da revisão, enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -243,7 +243,8 @@
 - **IP3 aplicada (receitas):** todas as receitas em [[Sistema de Produção/Receitas|Receitas]] (lote pelo Tier, horas pelo degrau, moldes, munição em lote, Açougue com uma receita por animal, Adubo opcional); a nova [[Sistema de Produção/Funções e Construções|Funções e Construções]] nível por nível; **a era trava só os materiais de equipamento e os itens com Rank** (os bens de luxo existem desde a Era 1); Operário e Engenheiro no Construtor; categoria pela receita.
 - **V2 aplicada (economia em números):** moeda com 1 casa decimal (décimos inteiros por dentro); preço base = (insumos + horas × salário) ÷ lote × 1,2, com tabela de preços de partida; salários 0,75 / 1,0 / 1,5 / 2,5 por hora e soldo de 8 por dia; Mercado Local de × 0,5 a × 2,0 pelo estoque; cesta mínima por classe e regra do gasto de 80%; composição das cidades por classe; estabilizador, imposto de 10/20/30% e cunhagem; construções em 3 portes e capacidade das moradias; produtividade × 1,0 e × 1,5; rotina por classe; Utilidade simples; tick de 20 por segundo; números da fatia vertical (vila de 15 NPCs). Ver [[Revisão Completa]], seção 12.
 - **V3 aplicada (pendências de regra):** tabela de leis iniciais na Facção (**ideia do autor: só a Escravista permite narcóticos e é a única produtora, com mão de obra escrava**); bônus dos estilos de início e pontos do personalizado; multas e Caçadores; loja ilegal do jogador e missões de confiança; Inconsciente e Hospital; 4 narradores com intensidade; 12 eventos da fatia vertical; assembleia e guerra civil; lotes, moradia dos Controlados, leilão e Universidade; estradas, patrulhas e muralhas; coalizão e bônus dos cargos; Grimório e feitiços de Suporte; Noto Sans e PC mínimo; Destilaria no nível 2. **Ideia do autor (V3-13):** listas como estruturas modulares, com os moldes prontos agora ([[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]]) e as listas nas rodadas C1 a C3.
-- **Em seguida:** V4 (propostas, parte 1, enviada), V5 e a ficha técnica da fatia vertical.
+- **V4 aplicada:** confirmadas as propostas da Facção, do Mundo, da Religião, do Pipeline, do Clima e dos Efeitos de Itens, e os moldes de conteúdo. Fundar uma facção exige 2.000 moedas. Na Arquitetura (escolha deixada ao assistente): dados em JSON e CSV, marco novo da simulação sem tela de 1 ano, bibliotecas aprovadas no primeiro dia de código.
+- **Em seguida:** V5 (propostas, parte 2, e o formato da ficha técnica, enviada); depois, a ficha técnica da fatia vertical.
 
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
@@ -307,13 +308,13 @@
 | Revisão | Itens e Produção: IP3 | Aplicada |
 | Revisão | V2 (economia numérica) | Aplicada |
 | Revisão | V3 (pendências de regra) | Aplicada |
-| Revisão | **V4 (propostas, parte 1)** | **Enviada, aguardando respostas** |
-| Revisão | V5 | A fazer |
+| Revisão | V4 (propostas, parte 1) | Aplicada |
+| Revisão | **V5 (propostas, parte 2)** | **Enviada, aguardando respostas** |
 | Conteúdo | Rodadas C1 a C3 (tecnologias, feitiços, missões e eventos) | Depois da ficha técnica |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 e o P1 estão completos, e a V1, a IP1, a IP2, a IP3, a V2 e a V3 da revisão foram aplicadas. Agora: V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
+**Ordem:** o P0 e o P1 estão completos, e a V1, a IP1, a IP2, a IP3, a V2, a V3 e a V4 da revisão foram aplicadas. Agora: V5 (propostas, parte 2) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
 
 ## Como estamos trabalhando
 

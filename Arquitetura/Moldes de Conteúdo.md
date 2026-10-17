@@ -1,6 +1,6 @@
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> **Ideia do autor (rodada V3-13):** as listas grandes (tecnologias, leis, feitiços, missões...) viram **estruturas modulares**: um molde pronto, que depois é só copiar e modificar. As listas completas ficam para mais adiante (rodadas de conteúdo C1 a C3); agora só os moldes. Os moldes novos são **[Proposta]** até a confirmação na rodada V4.
+> **Ideia do autor (rodada V3-13):** as listas grandes (tecnologias, leis, feitiços, missões...) viram **estruturas modulares**: um molde pronto, que depois é só copiar e modificar. As listas completas ficam para mais adiante (rodadas de conteúdo C1 a C3); agora só os moldes. Os moldes novos foram confirmados na rodada V4-8.
 
 ## Moldes de Conteúdo
 
@@ -33,7 +33,7 @@ Estes já estão definidos nos seus sistemas; aqui fica só a referência.
 | Estilo de início | `estilos.json` | [[Sistema de Início de Jogo/Descrição\|Início de Jogo]] (cultura, local, dinheiro, itens, companheiros, relação, bônus; custo em pontos) |
 | Traço de cultura | `culturas.json` | [[Sistema de Cultura/Descrição\|Cultura]] (leis desejadas, Rito de Admissão, sucessão, Personalidade, pensamento extremo, afinidades) |
 
-## Moldes novos **[Proposta]**
+## Moldes novos (confirmados na rodada V4-8)
 
 ### Tecnologia (`tecnologias.json`)
 
@@ -165,7 +165,7 @@ Estes já estão definidos nos seus sistemas; aqui fica só a referência.
 
 ## Perguntas em aberto
 
-1. **Confirmar os moldes novos** (rodada V4).
+1. **Novos tipos de molde** no futuro: Raça, Criatura e Título de Nobreza.
 2. **Listas completas** nas rodadas de conteúdo, mais para frente:
    - **C1:** tecnologias e marcos;
    - **C2:** feitiços e árvore arcana;

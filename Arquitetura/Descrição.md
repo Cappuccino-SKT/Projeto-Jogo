@@ -10,7 +10,7 @@ Decisões técnicas da engine em C++. O objetivo do jogo é ser **extremamente e
 
 - **Experiência do autor:** C++ apenas na disciplina de orientação a objetos, cursada há cerca de 4 meses, e nenhuma experiência com bibliotecas. Isso é aceitável: o código será escrito em conjunto, e este documento serve para o autor entender e aprovar as decisões antes de elas virarem código.
 - **Ferramentas já instaladas no PC:** g++ 15.2.0 (MinGW-W64, UCRT), CMake 4.3.0, Ninja 1.13.2, Git 2.53 e Python 3.11. **Não há** Visual Studio (MSVC) nem vcpkg.
-- **[Proposta]** Usar o g++ (MinGW) que já existe, com CMake e Ninja, sem instalar o Visual Studio. Linguagem: **C++20**.
+- Usar o g++ (MinGW) que já existe, com CMake e Ninja, sem instalar o Visual Studio. Linguagem: **C++20**.
 
 ### Princípios
 
@@ -22,7 +22,7 @@ Decisões técnicas da engine em C++. O objetivo do jogo é ser **extremamente e
 
 ### Bibliotecas
 
-**[Proposta]** Todas leves, de código aberto e com bom desempenho. Nenhuma foi instalada ainda.
+**[Refinar depois]** Todas leves, de código aberto e com bom desempenho. Nenhuma foi instalada ainda; a aprovação fica para o primeiro dia de código (rodada V4-6).
 
 | Função | Biblioteca | Por quê |
 |---|---|---|
@@ -39,7 +39,7 @@ Decisões técnicas da engine em C++. O objetivo do jogo é ser **extremamente e
 
 ### Como os documentos viram código
 
-Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que gera os inventários especializados). Para desempenho com milhares de NPCs, **[Proposta]** usar **composição**:
+Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que gera os inventários especializados). Para desempenho com milhares de NPCs, usar **composição**:
 
 - **NPCs e Esquadrões** viram entidades do ECS, com componentes (Identidade, Personalidade, Habilidades, Inventário, Rotina...). O "Inventário abstrato" vira um componente reutilizado.
 - **Cidades, Facções, Culturas e Mapas** são poucos objetos. Ficam em listas simples (`vector`) acessadas por ID, sem ECS.
@@ -47,7 +47,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Dados
 
-- **[Proposta]** Formato **JSON** em uma pasta `data/`, com IDs de texto legíveis (por exemplo, `item.espada_curta_ferro`), convertidos em números ao carregar.
+- Formato **JSON** em uma pasta `data/` para os dados com estrutura, e **CSV** para as tabelas grandes e simples (itens, receitas, preços), editadas em planilha (rodada V4-6). IDs de texto legíveis (por exemplo, `item.espada_curta_ferro`), convertidos em números ao carregar.
 - Tipos de arquivo: itens, receitas, construções, culturas, traços, leis, estilos de início, crimes, eventos e narradores.
 - **Moldes de conteúdo:** a ficha de cada tipo, para copiar e modificar, está em [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] (ideia do autor, rodada V3-13).
 - **Validação ao carregar:** o jogo avisa se um item citado numa receita não existe. Isso evita as divergências de nome que apareceram nos canvases.
@@ -63,7 +63,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Memória
 
-- **[Proposta]** Arenas de memória por Mapa Local: tudo que pertence a um mapa é alocado junto e liberado junto.
+- Arenas de memória por Mapa Local: tudo que pertence a um mapa é alocado junto e liberado junto.
 - NPCs e itens em arrays contíguos; evitar `new` dentro de loops de simulação.
 - IDs com "geração" (número de versão), para detectar uso de entidade já destruída.
 
@@ -78,7 +78,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Salvar e carregar
 
-- **[Proposta]** Arquivo binário com número de versão.
+- Arquivo binário com número de versão.
 - Salvar por Mapa Local. Mapas em LOD 2 guardam só os dados agregados (população, estoques, Criminalidade).
 - Estado de facções, diplomacia e relações em seções próprias.
 
@@ -129,7 +129,7 @@ Uma versão mínima jogável, só para validar a parte mais arriscada: a simula�
 - **Dinheiro por dia:** entram cerca de 85 em salários; saem cerca de 25 da cesta mínima; até 68 voltam às lojas pela regra do gasto.
 - **O teste passa se**, em 1 ano de jogo sem tela, a vila não passa fome, o Banco não zera e o preço do Pão fica entre 1,2 e 2,6.
 
-**[Proposta]** Marcos, nesta ordem:
+Marcos, nesta ordem (rodada V4-6):
 
 1. Janela, loop principal, relógio fixo e desenho de um mapa de tiles.
 2. Câmera e entrada do jogador.
@@ -137,8 +137,9 @@ Uma versão mínima jogável, só para validar a parte mais arriscada: a simula�
 4. NPC se movendo na grade (busca de caminho).
 5. Rotina diária dos NPCs.
 6. Produção, inventário da cidade e consumo.
-7. Interface básica (inventário, informações da cidade).
-8. Salvar e carregar.
+7. **Simulação sem tela de 1 ano** (o teste da V2-12: a vila não passa fome, o Banco não zera e o Pão fica entre 1,2 e 2,6).
+8. Interface básica (inventário, informações da cidade).
+9. Salvar e carregar.
 
 ### Arte e mundo (provisório)
 

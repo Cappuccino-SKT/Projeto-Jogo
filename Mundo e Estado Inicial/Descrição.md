@@ -12,13 +12,11 @@ Ele **não** traz a história do mundo. O autor decidiu deixar a história, os n
 - os personagens são **abstratos** (papéis como "o Arquimago", sem nome nem biografia);
 - os nomes definitivos entram aos poucos, sem mudar nenhuma regra (os IDs internos dos dados não mudam quando o nome muda).
 
-Os detalhes marcados como **[Proposta]** foram acrescentados agora para deixar as sugestões aceitas concretas; o autor pode trocar qualquer um.
-
 ### Tom e raças
 
 - **Tom:** fantasia de **baixa magia**, com a tecnologia em transição para a **pólvora**. Sombrio e político, mais perto de Mount & Blade do que de um conto de fadas.
 - **Criaturas:** na primeira versão, só **animais e monstros comuns** (lobos, ursos, bandidos, aranhas gigantes). **Criaturas míticas** (dragões, mortos-vivos) podem aparecer no futuro, **dentro das masmorras**.
-- **Raças:** só **humanos** nas primeiras versões, diferenciados pelas 6 culturas. Outras raças podem entrar no futuro. **[Proposta]** Para não fechar essa porta, os dados do NPC já guardam um campo "Raça" (com um único valor, Humano), assim acrescentar raças depois não exige mudar o formato do save.
+- **Raças:** só **humanos** nas primeiras versões, diferenciados pelas 6 culturas. Outras raças podem entrar no futuro. Para não fechar essa porta, os dados do NPC já guardam um campo "Raça" (com um único valor, Humano), assim acrescentar raças depois não exige mudar o formato do save.
 
 ### Disposição do mundo
 
@@ -32,13 +30,13 @@ São **6 regiões de 8 mapas** (blocos de 4 × 2), arrumadas em **2 colunas × 3
 | **Centro** (linhas 3 e 4) | Região Autoritária | Região Religiosa |
 | **Sul** (linhas 5 e 6) | Região Tecnocrata | Região Escravista |
 
-**[Proposta]** Por que essa ordem: as culturas **hostis** entre si ficam vizinhas, para as fronteiras gerarem conflito desde o início (Guerreira × Autoritária, Arcana × Religiosa, Religiosa × Escravista). Tecnocrata e Arcana, as mais opostas, ficam em cantos distantes: o conflito entre elas é ideológico e comercial, não de fronteira.
+Por que essa ordem: as culturas **hostis** entre si ficam vizinhas, para as fronteiras gerarem conflito desde o início (Guerreira × Autoritária, Arcana × Religiosa, Religiosa × Escravista). Tecnocrata e Arcana, as mais opostas, ficam em cantos distantes: o conflito entre elas é ideológico e comercial, não de fronteira.
 
-**[Proposta]** Bordas do mundo: ao **norte**, montanhas intransponíveis; a **leste** e ao **sul**, o mar; a **oeste**, estepe e deserto. Ninguém atravessa as bordas.
+Bordas do mundo: ao **norte**, montanhas intransponíveis; a **leste** e ao **sul**, o mar; a **oeste**, estepe e deserto. Ninguém atravessa as bordas.
 
 #### Mapa inicial
 
-**[Proposta]** Cada célula é um Mapa Local, na posição (coluna, linha). Abreviações: Gue = Guerreira, Arc = Arcana, Aut = Autoritária, Rel = Religiosa, Tec = Tecnocrata, Esc = Escravista. **M1** a **M4** = masmorra com essa dificuldade; **ML** = masmorra lendária.
+Cada célula é um Mapa Local, na posição (coluna, linha). Abreviações: Gue = Guerreira, Arc = Arcana, Aut = Autoritária, Rel = Religiosa, Tec = Tecnocrata, Esc = Escravista. **M1** a **M4** = masmorra com essa dificuldade; **ML** = masmorra lendária.
 
 | | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
 |---|---|---|---|---|---|---|---|---|
@@ -65,7 +63,7 @@ Os estados de território (Terr., Disputa, Livre) **não são guardados**: saem 
 
 #### Cidades iniciais
 
-**[Proposta]** Cada região tem 1 capital (nível 4), 1 cidade (nível 3) e 1 vilarejo (nível 2); a Escravista tem 2 vilarejos (o segundo é um porto de pesca e de escravos). Os nomes são provisórios.
+Cada região tem 1 capital (nível 4), 1 cidade (nível 3) e 1 vilarejo (nível 2); a Escravista tem 2 vilarejos (o segundo é um porto de pesca e de escravos). Os nomes são provisórios.
 
 | Facção | Capital (nível 4) | Cidade (nível 3) | Vilarejo(s) (nível 2) |
 |---|---|---|---|
@@ -86,7 +84,7 @@ Os estados de território (Terr., Disputa, Livre) **não são guardados**: saem 
 
 ### Biomas e recursos
 
-Cada região tem um bioma ligado à sua cultura, 2 a 3 recursos de destaque e falta de outros, para obrigar o comércio. **[Proposta]** Distribuição concreta, usando a lista de [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]:
+Cada região tem um bioma ligado à sua cultura, 2 a 3 recursos de destaque e falta de outros, para obrigar o comércio. Distribuição concreta, usando a lista de [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]:
 
 | Região | Bioma | Recursos de destaque (produtividade alta) | Escassos (pouco ou nenhum) |
 |---|---|---|---|
@@ -107,7 +105,7 @@ Cada região tem um bioma ligado à sua cultura, 2 a 3 recursos de destaque e fa
 
 São **12 masmorras**, 2 por região, das quais **3 lendárias**, em regiões diferentes. A dificuldade cresce com a distância das capitais.
 
-**[Proposta]** Regra: dificuldade = distância (em Mapas Locais, contando só passos na horizontal e na vertical) até a capital mais próxima, de 1 a 4. As lendárias têm sempre dificuldade 5. O tipo de cada uma é só descritivo (os nomes vêm com a história).
+Regra: dificuldade = distância (em Mapas Locais, contando só passos na horizontal e na vertical) até a capital mais próxima, de 1 a 4. As lendárias têm sempre dificuldade 5. O tipo de cada uma é só descritivo (os nomes vêm com a história).
 
 | # | Posição | Região | Estado do mapa | Dificuldade | Tipo (provisório) |
 |---|---|---|---|---|---|
@@ -140,7 +138,7 @@ Começam as **6 facções principais** e as **3 Vilas Livres** (sem facção).
 
 Todas começam na **Era 1** de tecnologia. O PIB pode variar até ±30% entre as facções, e nenhuma pode ter mais que o dobro de outra.
 
-**[Proposta]** Valores iniciais (a testar), com a ideia de que **cada facção é forte numa coisa e fraca em outra**:
+Valores iniciais (a testar), com a ideia de que **cada facção é forte numa coisa e fraca em outra**:
 
 | Facção | NPCs reais | População (Fator 100) | Riqueza | PIB inicial | Esquadrões (1 = 100 soldados) | Ponto forte |
 |---|---|---|---|---|---|---|
@@ -166,7 +164,7 @@ Como foi calculado:
 
 #### Construções iniciais
 
-Cada cidade começa com um **pacote de construções** por nível e cultura, lido de arquivo de dados. **[Proposta]** Pacotes:
+Cada cidade começa com um **pacote de construções** por nível e cultura, lido de arquivo de dados. Pacotes:
 
 | Nível | Construções do pacote base |
 |---|---|
@@ -188,7 +186,7 @@ As **moradias** não entram no pacote: a quantidade sai da população inicial (
 
 ### Relações iniciais
 
-**[Proposta]** Afinidade entre as culturas (afim, neutra ou hostil, ver [[Sistema de Cultura/Descrição|Sistema de Cultura]]):
+Afinidade entre as culturas (afim, neutra ou hostil, ver [[Sistema de Cultura/Descrição|Sistema de Cultura]]):
 
 | | Gue | Arc | Aut | Rel | Tec | Esc |
 |---|---|---|---|---|---|---|
@@ -231,7 +229,7 @@ Por quê: a Guerreira despreza a obediência imperial da Autoritária, mas vende
 Nas primeiras versões os personagens são **abstratos**. Os personagens principais do mundo entram aos poucos, quando a história for escrita.
 
 - **Gerados no início de cada partida** (por facção): 1 líder (Realeza), 1 herdeiro e 2 ou 3 nobres da dinastia; o governador da cidade de nível 3 é um desses nobres. Os nomes saem de uma lista por cultura e a Personalidade, dos modelos, com a tendência da cultura.
-- **[Proposta]** 5 **Importantes fixos**, por papel, cada um ligado a uma Ambição:
+- 5 **Importantes fixos**, por papel, cada um ligado a uma Ambição:
 
 | Papel | Onde começa | Ligação |
 |---|---|---|
@@ -243,7 +241,7 @@ Nas primeiras versões os personagens são **abstratos**. Os personagens princip
 
 ### O que varia por partida
 
-O mundo é fixo; o estado inicial varia. **[Proposta]** Limites:
+O mundo é fixo; o estado inicial varia. Limites:
 
 | Varia | Como |
 |---|---|
@@ -260,7 +258,7 @@ O mundo é fixo; o estado inicial varia. **[Proposta]** Limites:
 
 ### Pontos de partida
 
-Cada estilo de início tem 2 ou 3 pontos fixos; o jogador escolhe um, ou deixa sortear. **[Proposta]**
+Cada estilo de início tem 2 ou 3 pontos fixos; o jogador escolhe um, ou deixa sortear.
 
 | Estilo | Pontos de partida |
 |---|---|

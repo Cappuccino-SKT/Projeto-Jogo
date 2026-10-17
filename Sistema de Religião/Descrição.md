@@ -49,7 +49,7 @@ Vagas de Sacerdote por nível do Templo: a **tabela geral de vagas** do [[Sistem
 - As cidades de **nível 4** (as capitais) podem ter **2 Templos**; as coberturas se somam.
 - *Exemplo:* cidade nível 3 (100 NPCs reais) com Templo nível 3 (5 Sacerdotes) = 100% de cobertura; com Templo nível 2, 60%. Uma capital (300 NPCs) com 1 Templo nível 5 tem 67% (acima do limite de 50% da Devoção Alta); com o 2º Templo, 100%.
 
-- **Arcana:** na Torre Arcana, cada Mago que trabalha nela conta como um Sacerdote para a cobertura (o culto é a própria magia). **[Proposta]**
+- **Arcana:** na Torre Arcana, cada Mago que trabalha nela conta como um Sacerdote para a cobertura (o culto é a própria magia).
 - **Tecnocrata:** Devoção Nenhuma; não há cobertura nem fator Religião.
 
 **Felicidade (fator Religião).** Cobertura × máximo da Devoção:
@@ -63,7 +63,7 @@ Vagas de Sacerdote por nível do Templo: a **tabela geral de vagas** do [[Sistem
 
 O fator Religião vai, portanto, de **−5 a +10** ([[Sistema de Felicidade e Estabilidade/Descrição|Felicidade]]). A conta usa a cultura de cada parte da população: uma minoria de outra fé não ganha o bônus do Templo da facção.
 
-**Oferendas.** No Período Livre, os NPCs visitam o Templo como visitam a Taverna e doam **2% da renda**. O dinheiro paga os Sacerdotes e entra no ciclo do dinheiro da cidade ([[Sistema de Trabalho e Propriedade/Descrição|Trabalho e Propriedade]]). **[Proposta]** A sobra vai para o Banco da Facção, dona do Templo.
+**Oferendas.** No Período Livre, os NPCs visitam o Templo como visitam a Taverna e doam **2% da renda**. O dinheiro paga os Sacerdotes e entra no ciclo do dinheiro da cidade ([[Sistema de Trabalho e Propriedade/Descrição|Trabalho e Propriedade]]). A sobra vai para o Banco da Facção, dona do Templo.
 
 **Templo da Religiosa** (o "ponto forte em cura" dela):
 
@@ -76,7 +76,7 @@ O fator Religião vai, portanto, de **−5 a +10** ([[Sistema de Felicidade e Es
 
 Cada cultura tem **2 festivais por ano**; a Religiosa tem mais 2 dias santos (4 no total).
 
-| Cultura | Festival próprio (nome provisório) | Quando **[Proposta]** |
+| Cultura | Festival próprio (nome provisório) | Quando |
 |---|---|---|
 | Todas | **Festa da Colheita** | Dias 1 e 2 do Outono |
 | Religiosa | Festa da Cidade Santa; e 2 dias santos | Dias 8 e 9 da Primavera; dias santos no dia 8 do Verão e no dia 8 do Inverno |
@@ -90,8 +90,8 @@ A Tecnocrata não tem fé organizada, mas tem festivais: eles são da cultura, n
 
 **Como funciona um festival:**
 
-- **Duração:** 2 dias. **[Proposta]** Os dias santos da Religiosa duram 1 dia, com metade dos efeitos.
-- **Felicidade +8**, como evento duradouro. **[Proposta]** O bônus dura 8 dias (meia estação).
+- **Duração:** 2 dias. Os dias santos da Religiosa duram 1 dia, com metade dos efeitos.
+- **Felicidade +8**, como evento duradouro. O bônus dura 8 dias (meia estação).
 - **Consumo** de Comida e Bebida × 1,5 nos dias do festival: a Taverna e o Mercado vendem mais.
 - **Produção −50% no 1º dia** (folga).
 - **Quem paga:** o dono da cidade, **2% do Banco da Cidade**.
@@ -100,7 +100,7 @@ A Tecnocrata não tem fé organizada, mas tem festivais: eles são da cultura, n
 
 *Exemplo:* na Festa da Colheita, a cidade Autoritária nível 3 (Banco de 5.000) paga 100 moedas; o jogador patrocina por 200, e a Felicidade sobe 12 por 8 dias, enquanto a Taverna vende uma vez e meia mais Cerveja.
 
-Os festivais deixam de ser um evento sorteado: agora vêm do **calendário**. O evento positivo da categoria Social passa a ser a **festa espontânea** (vitória numa guerra, casamento na dinastia, visitante ilustre). **[Proposta]** ([[Sistema de Eventos/Descrição|Eventos]])
+Os festivais deixam de ser um evento sorteado: agora vêm do **calendário**. O evento positivo da categoria Social passa a ser a **festa espontânea** (vitória numa guerra, casamento na dinastia, visitante ilustre). ([[Sistema de Eventos/Descrição|Eventos]])
 
 ## Heresia e tolerância
 
@@ -113,7 +113,7 @@ Os festivais deixam de ser um evento sorteado: agora vêm do **calendário**. O 
 | **Perseguição** | Minorias com **Felicidade −15** e **migração 2× mais rápida** para fora; **Controle +5** | Religiosa (pensamento extremo) |
 
 - A lei entra nas **leis desejadas** da Cultura e, portanto, na conta "Leis × cultura" da Felicidade. As leis iniciais de cada facção seguem o desejo da cultura dela: a Religiosa começa com Perseguição.
-- **[Proposta]** A Felicidade −15 da Perseguição é aplicada à parte da população que é minoria: numa cidade com 20% de minorias, a classe perde 15 × 0,2 = 3 pontos na média.
+- A Felicidade −15 da Perseguição é aplicada à parte da população que é minoria: numa cidade com 20% de minorias, a classe perde 15 × 0,2 = 3 pontos na média.
 
 **Heresia** é um **crime cultural** de **gravidade 3** (**5** com Perseguição). São **atos**, não a simples existência de uma minoria:
 
@@ -153,13 +153,13 @@ O **Sumo Sacerdote** é o Importante fixo da Capital Religiosa (8,4).
 | **Anátema** | Um líder | −20 de relação das facções Religiosas com ele; o motivo de guerra **"Guerra santa"** contra ele ([[Sistema de Guerra/Descrição\|Guerra]]) |
 
 - "Facções Religiosas" são as de cultura Religiosa: a facção principal e, se houver, vassalos e cidades independentes dessa cultura.
-- **[Proposta]** Como a IA dele escolhe: Bênção para quem tem relação ou reputação de **+40 ou mais** com a Religiosa e fez algo pela fé na última estação (peregrinação, doação, guerra santa, Templo purificado); Anátema para um líder com relação de **−40 ou menos** que saqueou cidade Religiosa, profanou um Templo ou persegue a fé da Religiosa. Sem candidato, não faz nada.
-- **[Proposta]** Anátema contra o jogador sem facção: −20 de reputação com as facções Religiosas.
+- Como a IA dele escolhe: Bênção para quem tem relação ou reputação de **+40 ou mais** com a Religiosa e fez algo pela fé na última estação (peregrinação, doação, guerra santa, Templo purificado); Anátema para um líder com relação de **−40 ou menos** que saqueou cidade Religiosa, profanou um Templo ou persegue a fé da Religiosa. Sem candidato, não faz nada.
+- Anátema contra o jogador sem facção: −20 de reputação com as facções Religiosas.
 
 ## Peregrinação
 
-- **Do jogador:** ir à Capital Religiosa (8,4) e fazer uma **oferenda** no Templo dá **+10 de reputação** com a Religiosa (1 vez por ano) e conta para o **Rito de Admissão** dela (Serviço). **[Proposta]** Oferenda mínima de 50 moedas ([[Sistema de Reputação/Descrição|Reputação]]).
-- **Peregrinos do mundo:** a cidade santa recebe peregrinos, que aumentam a demanda da Taverna e do Mercado dela. **[Proposta]** +10% de consumidores na Capital Religiosa (8,4) e na cidade de peregrinação (7,3), por estação. Os peregrinos também são encontros na estrada e trazem notícias ([[Sistema de Viagem/Descrição|Viagem]], [[Sistema de Notícias/Descrição|Notícias]]).
+- **Do jogador:** ir à Capital Religiosa (8,4) e fazer uma **oferenda** no Templo dá **+10 de reputação** com a Religiosa (1 vez por ano) e conta para o **Rito de Admissão** dela (Serviço). Oferenda mínima de 50 moedas ([[Sistema de Reputação/Descrição|Reputação]]).
+- **Peregrinos do mundo:** a cidade santa recebe peregrinos, que aumentam a demanda da Taverna e do Mercado dela. +10% de consumidores na Capital Religiosa (8,4) e na cidade de peregrinação (7,3), por estação. Os peregrinos também são encontros na estrada e trazem notícias ([[Sistema de Viagem/Descrição|Viagem]], [[Sistema de Notícias/Descrição|Notícias]]).
 - **Missões do Sumo Sacerdote:** caçar hereges, escoltar peregrinos e **purificar o Templo profanado** (5,4) ([[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
 ---
