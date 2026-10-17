@@ -1,15 +1,29 @@
 # Jogo/: o programa que abre a janela (jogo.exe).
 
+# glad: acha as funções do OpenGL 3.3 na placa de vídeo. Os arquivos foram
+# gerados uma vez e ficam em externo/glad (ver o LEIA-ME de lá).
+add_library(glad STATIC externo/glad/src/gl.c)
+target_include_directories(glad PUBLIC externo/glad/include)
+
 add_executable(jogo
     main.cpp
     TextoDaDataDoJogo.cpp
+    DesenhoDoMapa.cpp
+    ImplementacaoDoStbImage.cpp
 )
 
-# O jogo usa as regras do Codigo/ e a SDL3 (baixada pelo CMakeLists.txt da raiz).
-target_link_libraries(jogo PRIVATE regras_do_jogo SDL3::SDL3)
+# O jogo usa as regras do Codigo/, a SDL3 e o glad; o stb_image é só um cabeçalho.
+target_link_libraries(jogo PRIVATE regras_do_jogo SDL3::SDL3 glad)
+target_include_directories(jogo PRIVATE ${stb_SOURCE_DIR})
+
+# Onde ficam os dados (o mapa, as imagens). Por enquanto, a pasta Jogo/data
+# deste repositório: o jogo roda de dentro da pasta build/.
+target_compile_definitions(jogo PRIVATE PASTA_DOS_DADOS_DO_JOGO="${CMAKE_CURRENT_SOURCE_DIR}/data")
 
 # Avisos do compilador ligados: ele aponta coisas suspeitas no nosso código.
 target_compile_options(jogo PRIVATE -Wall -Wextra)
+# O código do stb_image é de fora: os avisos dele não são nossos.
+set_source_files_properties(ImplementacaoDoStbImage.cpp PROPERTIES COMPILE_OPTIONS "-w")
 
 # No MinGW, coloca as bibliotecas do próprio g++ dentro do jogo.exe.
 # Assim o programa abre com dois cliques, sem procurar DLLs do MinGW.

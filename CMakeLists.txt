@@ -44,6 +44,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(nlohmann_json)
 
+# stb_image: carrega as imagens PNG (os conjuntos de tiles). É um arquivo só,
+# sem CMakeLists; o FetchContent só baixa, e o Jogo/ inclui a pasta.
+# Versão fixa: o commit 2c980bb (2026-08-02).
+FetchContent_Declare(
+    stb
+    URL https://github.com/nothings/stb/archive/2c980bb59875b0d32144a71867fbdebb2f77cd20.tar.gz
+    URL_HASH SHA256=9a955b1b49a4410088a2e0ee2a9c057c3c907d0c1d75454144cb980aca0ba515
+)
+FetchContent_MakeAvailable(stb)
+
 # ---------------------------------------------------------------------------
 # As nossas pastas
 # ---------------------------------------------------------------------------
