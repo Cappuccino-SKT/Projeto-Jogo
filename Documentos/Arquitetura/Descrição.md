@@ -98,6 +98,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 - Alvo: rodar em PCs modestos.
 - **Meta de quadros:** 60 por segundo em 1600 × 900 (rodada V2-11). **PC alvo mínimo** (rodada V3-12): processador de 4 núcleos (2015 ou mais novo), 8 GB de memória, placa de vídeo com OpenGL 3.3 e 2 GB.
 - **Meta de NPCs** (rodada V2-11): 500 em LOD 0 e 5.000 em LOD 1 a 4x, num PC de gama média; a medir na fatia vertical.
+- **Vários núcleos (multithreading): objetivo futuro** (decisão do autor, 2026-10-17). A fatia roda num núcleo só. Depois dela, se o Tracy mostrar que falta tempo, a ideia é rodar cada Mapa Local numa thread, sem perder "mesma semente = mesma partida".
 - **Dinheiro em décimos inteiros** (rodada V2-1): 1,7 moedas = 17. Nada de número com vírgula no dinheiro.
 
 ### Ordem de trabalho
