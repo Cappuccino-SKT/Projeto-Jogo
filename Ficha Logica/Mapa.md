@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-17 para o **marco 1** (janela, loop, relógio fixo e mapa de tiles). Cobre só os **tiles e as camadas**. A busca de caminho entra nesta mesma ficha antes do marco 4. As propostas estão na rodada **FL1** ([[Retomada]], seção 4).
+> Ficha escrita em 2026-10-17 para o **marco 1** (janela, loop, relógio fixo e mapa de tiles). Cobre só os **tiles e as camadas**. A busca de caminho entra nesta mesma ficha antes do marco 4. As decisões da rodada **FL1** (2026-10-17, todas "seguir sugestão") já estão aplicadas.
 
 # Ficha Lógica: Mapa
 
@@ -18,9 +18,11 @@ Documentos do sistema: [[Sistema de Mapa/Descrição|Sistema de Mapa]] e o padr�
 
 ## 2. Dados
 
-### O arquivo do mapa [Proposta] (FL1-1 e FL1-5)
+### O arquivo do mapa (FL1-1 e FL1-5)
 
-- **Um arquivo:** `Jogo/data/mapas/vila.tmj`, salvo pelo Tiled direto no formato JSON (o `.tmj` é o JSON do Tiled).
+- **Um arquivo:** `Jogo/data/mapas/vila.tmj`, salvo pelo Tiled direto no formato JSON (o `.tmj` é o JSON do Tiled), sem passo de exportar. A `Jogo/assets/` guarda o projeto do Tiled e as imagens-fonte.
+- **Quem lê:** a biblioteca nlohmann/json, que entra já no marco 1 por causa do mapa (FL1-1).
+- **A arte do marco 1 (FL1-6):** um conjunto de tiles de teste, de quadrados de cor lisa (grama verde, água azul, terra marrom, parede cinza, árvore verde-escura, colisão vermelha), e um `vila.tmj` de teste com os 11 lotes e as 3 áreas de recurso, feitos pelo assistente. Depois, numa tarefa à parte, o autor escolhe um pacote grátis de licença CC0 e redesenha o mapa.
 - **Configurações no Tiled**, para o arquivo ficar simples de ler:
   - orientação "Ortogonal", tile de 16 × 16 e mapa de tamanho fixo (não "infinito");
   - formato das camadas "CSV" (números simples), e não "Base64" (texto comprimido);
@@ -59,7 +61,7 @@ Documentos do sistema: [[Sistema de Mapa/Descrição|Sistema de Mapa]] e o padr�
 | Cada lote: `identificadorDoLote` | inteiro | — | 4 |
 | Cada lote: `tileDoCantoSuperiorEsquerdo` | 2 inteiros | tiles | (12, 20) |
 | Cada lote: `porteDoLote` | Pequeno, Médio ou Grande | — | Pequeno = 4 × 4 tiles |
-| Cada lote: `tipoDeConstrucaoPermitido` | texto | — | `qualquer` **[Proposta]** |
+| Cada lote: `tipoDeConstrucaoPermitido` | texto | — | `qualquer` |
 | `areasDeRecurso` | lista | — | 3 na fatia |
 | Cada área: `tipoDeRecurso` e o retângulo em tiles | texto e 4 inteiros | tiles | `campo_de_grao` em (40, 8), 10 × 6 |
 
@@ -103,7 +105,7 @@ No marco 1, a passagem vem só da camada `colisao`. A partir do marco 6, as cons
 7. **Leia os lotes** (camada de objetos `lotes`). Para cada retângulo:
    - converta de pixels para tiles (divida por 16). Erro se a posição ou o tamanho não forem múltiplos de 16;
    - descubra o porte pelo tamanho. Erro se não for 4 × 4, 6 × 6 ou 8 × 8 tiles;
-   - erro se o lote sair do mapa, encostar em outro lote por cima ou tiver um tile bloqueado na `colisao` **[Proposta]**. Um lote precisa estar livre, porque a construção ainda vai nascer nele.
+   - erro se o lote sair do mapa, encostar em outro lote por cima ou tiver um tile bloqueado na `colisao` (FL1-5). Um lote precisa estar livre, porque a construção ainda vai nascer nele.
 8. **Leia as áreas de recurso** (camada `recursos`). Converta para tiles como os lotes. Erro se o tipo não for conhecido. Na fatia, os tipos são `campo_de_grao`, `poco` e `bosque`.
 9. Se a lista de erros estiver vazia, o mapa está pronto. Se não, devolva todos os erros de uma vez, não só o primeiro, para o autor corrigir tudo no Tiled numa passada.
 
@@ -122,7 +124,7 @@ A busca de caminho do marco 4 vai fazer esta pergunta milhares de vezes, por iss
 4. Por último, `acima_do_personagem`, para a copa da árvore cobrir quem passa por baixo.
 5. Pule os tiles com número 0 (vazios).
 6. Todos os tiles do mesmo conjunto vão numa só chamada de desenho para a placa de vídeo, o "desenho em lote".
-7. **Na depuração [Proposta] (FL1-3):** uma tecla pinta de vermelho translúcido os tiles bloqueados, para conferir a `colisao` sem abrir o Tiled.
+7. **Na depuração (FL1-3):** a tecla **F1** (provisória) pinta de vermelho translúcido os tiles bloqueados, para conferir a `colisao` sem abrir o Tiled.
 
 **No marco 1**, a câmera fica parada no canto de cima à esquerda, com zoom 3x. A câmera que anda e o zoom que muda vêm no marco 2.
 
@@ -213,7 +215,7 @@ Os testes usam **mapas pequenos de teste**, de 4 × 4 ou 8 × 8 tiles, guardados
 | Lote de 64 × 64 px em (192, 320) | Tile (12, 20), porte Pequeno |
 | Lote de 80 × 64 px | Erro de tamanho |
 | Dois lotes que se cobrem | Erro de lotes sobrepostos |
-| Lote sobre um tile de colisão | Erro **[Proposta]** |
+| Lote sobre um tile de colisão | Erro |
 | O `vila.tmj` da fatia | Sem erros; 64 × 64; 8 lotes pequenos e 3 médios; 3 áreas de recurso |
 
 ## 9. Fora da fatia

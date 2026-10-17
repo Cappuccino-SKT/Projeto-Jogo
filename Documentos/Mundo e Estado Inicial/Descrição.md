@@ -126,7 +126,7 @@ Resultado: 4 masmorras de dificuldade 1, 3 de 2, 1 de 3, 1 de 4 e 3 lendárias. 
 
 ### Calendário
 
-- A partida começa no **Ano 412**, no **1º dia da Primavera**.
+- A partida começa no **Ano 412**, no **1º dia da Primavera**, às **6h**, quando os Civis acordam (rodada FL1-2; contas na [[Ficha Logica/Tempo|ficha do Tempo]]).
 - Os **marcos de tecnologia** contam os anos desde o início da partida: o ano 1 da partida é o Ano 412. Um marco com janela "do ano 3 ao ano 5" chega entre os Anos 414 e 416.
 - Lembrete: 1 ano = 64 dias de jogo (4 estações de 16 dias), cerca de 17 horas reais a 1x (ver [[Sistema de Tempo/Descrição|Sistema de Tempo]]).
 
