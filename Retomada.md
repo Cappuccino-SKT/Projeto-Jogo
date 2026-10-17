@@ -1,11 +1,12 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a P1-6 aplicada (o P1 está completo) e a revisão completa aberta (rodada V1 enviada).
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a revisão V1 aplicada e a rodada IP1 (Padronização da produção) enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** **todos os sistemas P0 e P1 estão escritos.** Em 2026-10-17 foi aplicada a P1-6 (Efeitos de Itens e Escravidão) e, a pedido do autor (D2), começou a **revisão completa** do projeto: o levantamento está na [[Revisão Completa]], e a **rodada V1 (Inconsistências e faxina dos documentos) foi enviada e aguarda respostas** (seção 4). Branches: `docs/p1-5-religiao-clima-noticias` (P1-5) e `docs/p1-6-itens-escravidao` (P1-6 e a revisão, criada a partir da P1-5). **Ao retomar, rodar `git fetch` e conferir o que já foi mesclado no `main`.** Antes disso: a P1-4 (Guerra, Batalha e Diplomacia; pull request #7) e a sessão de 2026-10-15 (P0-5 a P1-3, o `CLAUDE.md` e o padrão de perguntas).
-3. **Próximo passo:** pedir o `Respostas.txt` da V1 (conferir se é desta rodada), aplicar as correções e a faxina dos 13 documentos antigos e abrir a **V2** (base numérica da economia).
-4. Depois: V3 (pendências e listas), V4 e V5 (confirmação das propostas), como no plano da [[Revisão Completa]].
+2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). Em 2026-10-17 foi aplicada a **V1** (faxina dos 13 documentos antigos, correções, animais como itens, volta da pesca, inventário único, Fome dos Controlados, vagas do Templo), na branch `docs/v1-faxina`. O autor pediu rodadas próprias de Itens e Produção, e a **rodada IP1 (Padronização da produção) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/v1-faxina` foi mesclado no `main`.**
+**Pausa em 2026-10-17:** a sessão foi compactada logo depois de enviar a IP1. Tudo está no GitHub na branch `docs/v1-faxina` (pull request para o autor aceitar). O `Respostas.txt` da Área de Trabalho já tem o modelo da IP1 com os 9 códigos; o autor ainda não respondeu.
+3. **Próximo passo:** pedir o `Respostas.txt` da IP1 (conferir se é desta rodada), aplicar as regras em Produção, Itens, Construção e Tecnologia e abrir a **IP2** (nomes e lista final dos itens).
+4. Depois: IP3 (insumos de cada produto), V2 (economia numérica), V3 (pendências), V4 e V5 (propostas), como no plano da [[Revisão Completa]].
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -63,186 +64,194 @@ Regras extras:
 | P1 | Clima e Estações | Escrito |
 | P1 | Notícias e Informação | Escrito |
 | P1 | Efeitos de itens e Escravidão | Escrito |
-| Revisão | **Revisão completa (rodadas V1 a V5; ver [[Revisão Completa\|Revisão Completa]])** | **V1 enviada, aguardando respostas** |
+| Revisão | Revisão completa: V1 (inconsistências e faxina) | Aplicada |
+| Revisão | **Itens e Produção: IP1 (padronização), IP2 (nomes), IP3 (insumos)** | **IP1 enviada, aguardando respostas** |
+| Revisão | V2 (economia numérica), V3 (pendências), V4 e V5 (propostas) | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, ordens de produção em lote, modo observador, eventos de dinastia. A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: V1, Inconsistências e faxina dos documentos
+## 4. Rodada pendente: IP1, Padronização da produção
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** É a primeira das 5 rodadas da **revisão completa** pedida pelo autor (D2 da P1-6). O levantamento inteiro, com o estado de cada documento, as 21 inconsistências, as 12 partes abstratas, as pendências e as propostas, está na [[Revisão Completa]]. Esta rodada resolve as inconsistências que pedem escolha e a faxina dos documentos antigos. Responder no `Respostas.txt` pelos códigos (V1-1, V1-2...). "Seguir sugestão" aceita a proposta.
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** Na revisão V1, o autor decidiu reformular os itens e a produção em rodadas próprias (respostas V1-2, V1-7 e V1-8):
+
+- **IP1 (esta):** a forma padrão de produzir.
+- **IP2:** os nomes e a lista final dos itens, encaixados no mundo.
+- **IP3:** os insumos de cada produto.
+
+Esta rodada decide as **regras**, e não ainda os itens um por um. Responder no `Respostas.txt` pelos códigos (IP1-1, IP1-2...). "Seguir sugestão" aceita a proposta. Valores numéricos são iniciais, a testar.
 
 **Já decidido (base das perguntas):**
 
-- A lista do [[Sistema de Itens/Descrição|Sistema de Itens]] **manda** sobre os canvases, até a pasta `data/` existir.
-- Armaduras: 3 peças separadas, de peso Leve, Média ou Pesada; o Costureiro faz a Média.
-- O **Peixe foi descartado** dos recursos.
-- Tom do mundo: baixa magia, chegada da pólvora, sombrio e político; 4 eras de tecnologia.
-- Arquitetura: **composição**, não herança; o inventário é um componente.
+- **3 categorias de produção** ligadas às habilidades: Braçal (do mapa), Manufaturada (transforma o básico) e Especialista (item de alto nível). A produção é em **cadeia**: cada produto mais complexo exige produtos anteriores ([[Sistema de Produção/Descrição|Produção]]).
+- **Tier** (0 a 4) nos materiais e bens; **Rank** (0 a 5) nas armas, equipamentos e artefatos. As faixas de Rank por material já existem: Ferro 1-3, Aço 1-4, Aço Mágico 1-5 ([[Sistema de Itens/Descrição|Itens]]).
+- Construções de produção com **níveis 1 a 5**: o nível libera produtos novos e aumenta a eficiência. Nas Braçais, o nível só aumenta a eficiência.
+- Tempo base por receita, reduzido pela habilidade; capacidade de armazenamento somada ao **inventário único da cidade** (V1-5); sem logística de entrega.
+- As **eras** da tecnologia acompanham os Tiers (a Era 1 libera o Tier 1, e assim por diante); a tabela de Rank por era ainda está em aberto ([[Sistema de Tecnologia/Descrição|Tecnologia]]).
+- Nas construções que não são do jogador, o que produzir segue a **demanda da cidade**; em LOD 2, a produção é um cálculo por estação.
 
-**V1-1. Faxina dos documentos antigos e correções óbvias.**
+**IP1-1. A estrutura padrão da receita.**
 
-- *Contexto:* 13 documentos são de antes do padrão: Mapa, Cidade, NPC, IA, Inventário, Econômico, Itens, Produção, Recursos, Recursos Existentes, Construção, Classe Social e Tempo. Faltam neles a legenda, a parte técnica, a tabela de ligações e as perguntas. Além disso, há 9 inconsistências com correção óbvia: I-1, I-6, I-8, I-12, I-15, I-17, I-18, I-20 (I-19 já foi corrigida).
-- *Pergunta:* posso padronizar os 13 documentos e aplicar as correções óbvias sem mudar nenhuma decisão?
-- *Sugestão:* sim, numa rodada só, sem mudar nenhuma regra:
-  - **Formato:** legenda no topo, "Descrição geral", as seções que já existem, "Parte técnica" (LOD, dados, save, fatia vertical), "Ligação com outros sistemas" e "Perguntas em aberto", como nos documentos novos.
-  - **Texto do autor:** o conteúdo continua o mesmo; só corrijo a ortografia e reorganizo. O que foi decisão do autor continua sem marcação.
-  - **Cidade vira o "documento de entrada" da cidade:** os atributos ficam, mais uma tabela "onde está cada regra" (Felicidade, População, Trabalho, Crime, Guerra, Religião).
-  - **Correções óbvias:**
-    - I-1: a IA aponta para a fórmula de dano do Combate.
-    - I-6: a Caravana usa o componente de Inventário.
-    - I-8: o Mapa usa a condição de vitória da Batalha.
-    - I-12: "Nobreza" em todo lugar.
-    - I-15: fecho as duas perguntas obsoletas do Comércio.
-    - I-17: limpo as duas propostas que já foram feitas.
-    - I-18: a armadura mista fica só no Combate.
-    - I-20: crime de **Sedição** (gravidade 3), só nas facções cuja lei proíbe pedir mudança de lei.
-- *Custo:* nenhum para o jogo; só deixa o vault mais fácil de ler e de transformar em ficha técnica.
+- *Contexto:* hoje o canvas só diz "Cozinheiro nível 1: Pão". Não há insumos, quantidades, tempo nem habilidade.
+- *Pergunta:* quais campos toda receita tem?
+- *Opções:*
+  - (a) **uma receita fixa por produto**, com campos padronizados;
+  - (b) receitas alternativas para o mesmo produto (Pão de Grão ou de Legumes): mais variedade, mas dobra os dados e as escolhas da IA.
+- *Sugestão:* (a), com estes campos:
 
-**V1-2. Armas sem produtor e produtos que não existem.**
-
-- *Contexto:* I-2 e I-3. O Ferreiro repete "Machado de Ferro" e não faz Espada. O Armeiro nível 4 faz "Rifle de Aço", que não existe na lista. Carabina de Aço Mágico, Besta de Repetição, Mosquete de Aço Mágico e os arcos e bestas de metal não têm quem os faça.
-- *Sugestão:* seguir os mesmos metais e níveis das outras armas:
-
-| Construção | Nível | Acrescenta ou corrige |
+| Campo | O que é | Exemplo (Pão) |
 |---|---|---|
-| Ferreiro | 1 | **Espada Curta e Espada Longa de Ferro** (no lugar do Machado repetido) |
-| Ferreiro | 3 | Espada Curta e Longa de Aço |
-| Ferreiro | 5 | Espada Curta e Longa de Aço Mágico |
-| Armeiro | 4 | **Carabina de Aço** (no lugar do "Rifle de Aço") |
-| Armeiro | 5 | Rifle, Carabina e Mosquete de Aço Mágico; Canhão de Guerra Moderno |
-| Carpinteiro | 4 | Arcos de Aço (Curto, Recurvo e Longo); Besta Leve de Aço; Besta de Repetição de Aço |
-| Carpinteiro | 5 | Arcos e Bestas de Aço Mágico, incluindo a Besta Pesada e a de Repetição |
+| Produto e quantidade | O que sai de um ciclo | 4 Pão |
+| Insumos | Itens e quantidades gastos | 2 Fardo de Grão + 1 Água |
+| Subprodutos | Saídas extras, se houver | — |
+| Construção e nível mínimo | Onde se faz | Cozinheiro, nível 1 |
+| Função e Trabalho | Quem faz e qual habilidade conta | Cozinheiro; Trabalho Manufaturado |
+| Habilidade mínima | Abaixo dela, o NPC não consegue fazer | 10 |
+| Horas de trabalho | Quanto trabalho um ciclo leva | 4 horas |
+| Era | Tecnologia mínima | Era 1 |
 
-  Os arcos e as bestas de metal usam Barra de Aço ou de Aço Mágico como insumo.
-- *Impacto:* Funções e Construções, Itens. Nenhuma arte nova: as armas já estão na lista.
+  Receitas alternativas podem entrar depois, como exceção, se a IP3 pedir.
+- *Impacto:* Produção, Itens, Arquitetura (formato dos dados em CSV, uma linha por receita).
 
-**V1-3. Animais como itens (o Cavalo).**
+**IP1-2. Uma família de produtos por construção.**
 
-- *Contexto:* I-4. Galinha, Porco, Ovelha, Vaca e Cavalo são recursos e produtos do Pasto, mas não são itens. A Viagem usa "Cavalo e Sela" para a montaria, a Cavalaria tem Cavalo no kit, e o Comércio ainda não decidiu os animais de carga.
+- *Contexto:* hoje há sobreposições e lacunas. A Metalurgia e a Forja Arcana fazem Aço Mágico (I-22). O Artesão faz Fumo. A Armadura Leve de metal está no Costureiro (I-21). Várias peças de roupa e comida não têm produtor (I-10).
 - *Opções:*
-  - (a) **animais viram itens** de um tipo novo, "Animal", sem mudar o resto;
-  - (b) animais só como número no Pasto, e o Cavalo como um item especial;
-  - (c) animais como Criaturas (entidades vivas no mapa): mais bonito, mas cada animal custaria simulação.
-- *Sugestão:* (a).
-  - **Novo tipo** em Matéria-Prima, Recurso Bruto: **Animal**. Itens: Galinha, Porco, Ovelha e Vaca (Tier 0) e **Cavalo** (Tier 1).
-  - O **Pasto** cria os animais.
-  - O **Rancho** precisa dos animais no estoque, mas **não os gasta**: Galinha dá ovos, Ovelha dá lã e Vaca dá leite, e todos dão Dejetos Animais.
-  - O **Açougue** gasta o animal e faz Pedaço de Carne, Ossos e Couro Bruto.
-  - **Cavalo:** montaria (com Sela, já decidido) e **animal de carga** das caravanas. Isso fecha a pendência do Comércio: **[Proposta]** +100 de capacidade de peso por Cavalo.
-  - **No mapa:** os animais do Pasto aparecem como decoração, desenhados com os sprites das Criaturas, mas não são simulados um a um.
-- *Impacto:* Itens, Produção, Comércio, Viagem, Batalha (kit da Cavalaria). Arte: os animais já existiam como Criaturas e decoração.
-
-**V1-4. Peixe e o "porto de pesca".**
-
-- *Contexto:* I-5. O autor descartou o Peixe, mas o vilarejo Escravista (6,6) é um "porto de pesca e de escravos", e o padrão do Tiled tem uma área de "pesca".
-- *Opções:*
-  - (a) **tirar a pesca**: o vilarejo (6,6) vira "porto de escravos e de carga", e a área de pesca sai do Tiled;
-  - (b) voltar com o Peixe: recurso nos mapas com rio ou litoral, mais uma construção ("Posto de Pesca") e uma receita. São mais arte, mais dados e mais um alimento no consumo.
-- *Sugestão:* (a), para respeitar a decisão de descartar o Peixe. Se a pesca fizer falta nos testes, ela volta como acréscimo pequeno.
-- *Impacto:* Mundo e Estado Inicial, Pipeline (camada de objetos), Escravidão (o porto continua sendo de escravos).
-
-**V1-5. Um inventário por cidade ou um por construção?**
-
-- *Contexto:* I-7. O Econômico decidiu **um único inventário por cidade**, compartilhado por todas as lojas, para não haver logística de entrega. O Inventário fala em "N inventários de construção" com limite, e a Produção dá a cada construção uma **capacidade de armazenamento**.
-- *Opções:*
-  - (a) **um inventário lógico por cidade, com a capacidade somada das construções**;
-  - (b) um inventário por construção, com transporte entre elas: mais realista, mas cria a logística que o Econômico quis evitar.
-- *Sugestão:* (a).
-  - A cidade tem **uma tabela única** (item, dono, quantidade), que é o que o Econômico já descreve.
-  - Cada construção **acrescenta capacidade** às categorias que produz ou vende. *Exemplo:* a Fazenda nível 2 dá +200 de capacidade de matéria-prima vegetal.
-  - Quando a capacidade de uma categoria enche, a produção dela **para** até alguém consumir ou vender. É o "limite de estoque contra acúmulo infinito" que a Produção pedia.
-  - O jogador continua tendo os itens dele separados pelo atributo **Dono**.
-  - O documento do Inventário é reescrito com os componentes: Itens (lista), Equipamento (NPC), Capacidade de peso (Controlado), Capacidade por categoria (cidade) e Carga (caravana).
-- *Impacto:* Inventário, Produção, Econômico, Construção. Desempenho: uma tabela por cidade é o mais barato possível.
-
-**V1-6. Nomes dos itens.**
-
-- *Contexto:* I-9. Há nomes em inglês ("Musket") e erros de concordância.
-- *Sugestão:* padronizar em português, nesta lista:
-
-| Hoje | Fica |
-|---|---|
-| Musket (itens) e Musquete (tipo) | **Mosquete** (item e tipo); o grupo "Canhão de mão" vira "Arma de fogo" |
-| Machado Curta / Longa | Machado Curto / Longo |
-| Perneiras Leve / Pesado; Capacete Leve / Pesado | Perneiras Leves / Pesadas; Capacete Leve / Pesado (já certo) |
-| Calça rasgadas; Calça Ninjas; Calça Modernas | Calças Rasgadas e as outras ajustadas na V1-8 |
-| Materias de Argila (lista) e Bens de Argila (Pedreira) | **Peças de Argila** nos dois |
-| Osso (Açougue) e Ossos (lista) | **Ossos** |
-| Carne (Açougue) e Pedaço de Carne (lista) | **Pedaço de Carne** |
-| Ovo, Lã, Leite (Rancho) | Saco de Ovos, Fardo de Lã, Balde de Leite (os nomes da lista) |
-| Roupa de Couro, Roupas de Tecido (Costureiro) | As peças com nome da lista (ver V1-7) |
-| Moveis de Madeira, Moveis Refinados | Móveis de Madeira, Móveis Refinados (acentos) |
-
-- *Impacto:* Itens, Funções e Construções, Glossário. Os IDs de dados (por exemplo, `item.mosquete_aco`) já nascem certos na ficha técnica.
-
-**V1-7. Itens sem produtor e a Armadura Leve.**
-
-- *Contexto:* I-10 e I-21. Vários itens da lista não são feitos por nenhuma construção. A Armadura Leve de metal está no Costureiro.
-- *Sugestão:*
-
-| Construção | Acrescenta |
-|---|---|
-| Cozinheiro | N1: Legumes Cozidos; N4: Torta de Fruta; N5: Carne Envelhecida e **Doce de Especiaria** (no lugar do Doce de Baunilha, porque a baunilha não é recurso; usa o Fardo de Especiaria) |
-| Artesão | N1: Anel de Cobre; N3: Anel de Ouro; N4: Coroa; N5: **Joia Mágica** (Ouro + Pedra Mágica) |
-| Ferreiro | **Armadura Leve de metal**: N2 de Ferro, N3 de Aço, N5 de Aço Mágico (sai do Costureiro); Chapéu de Mineiro (N1) |
-| Costureiro | N1: Couro Refinado, Trapos, Calças Rasgadas, Chapéu de Palha, Camiseta e Calça Robustas; N2: Tecido e as roupas de tecido simples; N3: **Armadura Média** (couro e tecido; sai do N4); N4: roupas nobres; N5: Sela |
-| Forja Arcana | Pedra de Mana (o "Produtor Mágico" vira o Mago de Ofício da Forja Arcana) |
-
-  Os livros continuam só comprados ou achados (decidido na P1-6).
-- *Impacto:* Funções e Construções, Itens, Combate (a Média vem um nível antes, o que dá ao Costureiro um papel militar).
-
-**V1-8. Nomes com cara moderna.**
-
-- *Contexto:* I-11. "Capuz, Camisa e Calça Ninja", "Terno", "Camiseta Moderna", "Calça social" e "Cajado Moderno" destoam de um mundo sombrio e político na chegada da pólvora.
-- *Opções:*
-  - (a) **renomear** para o tom do mundo;
-  - (b) manter, como roupas da Era 4 (a era mais moderna da tecnologia).
+  - (a) **família por ofício e material**, como nos ofícios reais;
+  - (b) família por uso (uma construção militar, uma civil, uma de luxo): menos construções, mas cada uma faria coisas muito diferentes.
 - *Sugestão:* (a):
 
-| Hoje | Fica | Ideia |
-|---|---|---|
-| Capuz, Camisa e Calça Ninja | Capuz, Gibão e Calça **de Sombra** | Roupa de ladrão: bônus de Destreza (ocultação) |
-| Camiseta Moderna, Calça Modernas | Casaca e Calça **de Oficial** | Era 3 e 4; bônus de Carisma com militares |
-| Terno, Calça social | **Gibão e Calça de Gala** | Roupa nobre da Era 4 |
-| Cajado Moderno | **Cajado Rúnico** | O mais alto da Era 4, mistura de magia e técnica |
+| Construção | Família (tudo o que é dela) |
+|---|---|
+| Fazenda | Vegetais |
+| Pasto | Animais vivos |
+| Rancho | Produtos de animais vivos (ovos, lã, leite, dejetos) |
+| Pesqueiro | Peixe |
+| Posto de Coleta | Madeira, pedra, argila, minérios, carvão, água, pedra mágica |
+| Açougue | Carne, ossos e couro bruto (gasta o animal) |
+| Metalurgia | Barras de Ferro, Cobre, Aço e Ouro |
+| **Forja Arcana** | **Aço Mágico** e Pedra de Mana (precisa de Mago de Ofício). Resolve a I-22 |
+| Pedreira | Tijolos e peças de argila |
+| Carpinteiro | Tudo de madeira: tábuas, móveis, arcos, bestas, munição de arco e besta, escudo de madeira, cajado de madeira |
+| Ferreiro | Tudo de metal batido: lâminas, hastes, clavas, escudos de metal, **armaduras Leves e Pesadas**, Grilhões, peças de metal das roupas |
+| Armeiro | Armas de fogo, munição de fogo e artilharia |
+| Costureiro | Tecido, couro refinado, roupas, **armadura Média**, Sela |
+| Artesão | Joias, anéis, ornamentos, coroas, cajados de metal, Joia Mágica |
+| Cozinheiro | Comida (do Pão à Carne Envelhecida) |
+| Destilaria | Bebidas (Cerveja, Licor) e essências (Perfume) |
+| Misturador | Misturas secas: Fertilizante, Pó Explosivo, **Fumo** e Pó Espiritual |
+| Boticário | Medicamentos |
 
-  O Rifle e a Carabina continuam: são da Era 4 da pólvora.
-- *Impacto:* Itens, Pipeline (só nomes; a arte é a mesma).
+  *Regra:* um item só pode ser feito numa construção. Assim a IA sabe onde produzir, e o jogador sabe onde procurar.
+- *Impacto:* Funções e Construções (a tabela inteira é refeita na IP3), Itens.
 
-**V1-9. Fome e Felicidade dos Controlados.**
+**IP1-3. O que cada nível da construção libera.**
 
-- *Contexto:* I-14. A IA usa **Fome** ("ao se aproximar de 0, busca alimento") e a Felicidade tem um valor individual para Controlados e Importantes, mas nenhum dos dois está na lista de atributos do NPC. A Viagem diz "uma refeição por pessoa por dia", e a comida tem o atributo **Saciedade**.
-- *Sugestão:* acrescentar dois atributos só para Controlados e Importantes:
-  - **Fome** (0 a 100; 100 = satisfeito): cai **100 em 36 horas** de jogo. O NPC come sozinho quando passa de 50, do inventário dele ou do grupo, pela melhor comida (decidido na P1-6). A **Saciedade** de cada comida devolve: Alimento Básico 60, Refinado 80, Luxo 100 **[Proposta]**. Com Fome 0, a Vida cai 2% por hora e a Felicidade cai rápido (como a Viagem já previa). Na prática, 1 a 2 refeições por dia.
-  - **Felicidade individual** (0 a 100): os 6 fatores já decididos na Felicidade.
-  - **Descanso:** não vira atributo (o jogo não tem estamina). Só um contador de **noites sem dormir**, usado pela marcha forçada.
-  - Os NPCs comuns continuam com tudo agregado na cidade.
-- *Impacto:* NPC, IA, Felicidade, Viagem, Efeitos de Itens.
+- *Contexto:* hoje cada construção libera produtos por nível sem regra comum (o Cozinheiro faz Ração no nível 3; o Ferreiro faz Grilhões no 2). Isso deixa o balanceamento difícil.
+- *Sugestão:* uma **escada padrão** para todas as construções de transformação:
 
-**V1-10. Vagas do Templo.**
+| Nível | Produtos de Tier até | Rank máximo do que sai | Era típica |
+|---|---|---|---|
+| 1 | 1 | 1 | Era 1 |
+| 2 | 2 | 2 | Era 1 |
+| 3 | 2 | 3 | Era 2 |
+| 4 | 3 | 4 | Era 3 |
+| 5 | 4 | 5 | Era 4 |
 
-- *Contexto:* I-16. A Religião propôs 1, 2, 5, 10 e 15 Sacerdotes por nível; a tabela geral de vagas é 2, 3, 5, 7 e 10.
+  - **Duas travas ao mesmo tempo:** o **nível** da construção e a **era** da tecnologia (a era libera o Tier no mundo; o nível libera a receita na construção). O material também limita o Rank (Ferro até 3, Aço até 4, Aço Mágico até 5).
+  - **Tabela de Rank por era** (fecha o "em aberto" da Tecnologia): Era 1, Rank até 3; Era 2, até 4 (Aço); Era 3, até 4; Era 4, até 5 (Aço Mágico).
+  - As construções **Braçais** continuam como estão: o nível só aumenta a eficiência.
+  - *Exemplo:* um Ferreiro nível 3, na Era 2, faz Espada de Aço até Rank 3; com nível 4 e Era 3, até Rank 4; a Espada de Aço Mágico só no nível 5, na Era 4.
+- *Conflito:* hoje há construções de nível 4 e 5 nas capitais já na Era 1 (pacotes do [[Mundo e Estado Inicial/Descrição|Mundo]]). Saída: o nível alto nas capitais continua dando **eficiência e mais vagas**, mas as receitas de Tier e Rank maiores só liberam com a era.
+- *Impacto:* Produção, Construção, Tecnologia, Itens.
+
+**IP1-4. De onde sai o Rank do item produzido.**
+
+- *Contexto:* "Espada Curta de Ferro (Rank 1-3)" diz o intervalo, mas não como se chega a um Rank.
+- *Sugestão:* o Rank do item é o **menor** de três valores:
+  1. o teto do **material** (Ferro 3, Aço 4, Aço Mágico 5);
+  2. o teto do **nível** da construção (IP1-3);
+  3. o Rank pela **habilidade** do trabalhador: **1 + habilidade de Trabalho ÷ 25**, arredondado para baixo (0 a 24 = 1; 25 a 49 = 2; 50 a 74 = 3; 75 a 99 = 4; 100 = 5).
+
+  - **Sorte:** 20% de chance de sair 1 Rank acima (se os tetos deixarem) e 10% de sair 1 abaixo.
+  - **Em LOD 2:** usa a habilidade média dos trabalhadores, sem sorte.
+  - *Exemplo:* um Ferreiro com Trabalho Especialista 60, num Ferreiro nível 4, fazendo Espada de Ferro: habilidade dá 3, nível dá 4, material dá 3 → **Rank 3**. Com Aço, o material deixa 4, mas a habilidade continua dando 3.
+  - Itens com **Tier** (materiais, comida) não têm qualidade: a habilidade só acelera.
+- *Impacto:* Itens, Produção, Trabalho (habilidade dos empregados), Combate e Batalha (o Rank do kit).
+
+**IP1-5. Escala: o que 1 NPC real produz e consome.**
+
+- *Contexto:* 1 NPC real representa um Fator de Escala de pessoas (exemplo 100), e 1 Esquadrão (100 soldados) = 1 NPC alistado que come 1 Ração por dia. Ainda não está escrito se, nas contas da economia, 1 NPC real conta como 1 pessoa ou como 100. Isso muda **todos** os números da V2.
 - *Opções:*
-  - (a) **o Templo segue a tabela geral** (2, 3, 5, 7 e 10), e as capitais podem ter **2 Templos**;
-  - (b) o Templo é uma exceção, com a própria tabela.
-- *Sugestão:* (a), para manter uma só regra de vagas.
-  - Cobertura com 1 Templo: 40, 60, 100, 140 e 200 NPCs reais.
-  - Uma capital (300 NPCs) com 1 Templo nível 5 tem 67% de cobertura, acima do limite de 50% da Devoção Alta. Com o 2º Templo, chega a 100%.
-  - O 2º Templo só existe nas cidades de nível 4.
-- *Impacto:* Religião, Construção, Mundo (pacote de construções das capitais).
+  - (a) **1 NPC real = 1 trabalhador e 1 consumidor nas contas.** O Fator de Escala só muda a **população exibida**, os conscritos e o tamanho visual dos soldados;
+  - (b) o Fator de Escala multiplica a produção e o consumo de cada NPC real: números realistas e enormes (uma cidade de 100 NPCs come 10 mil pães por dia), e o preço de um escravo NPC real compraria 100 pessoas.
+- *Sugestão:* (a). É coerente com o que já foi decidido:
+  - 1 Ração por Esquadrão por dia = 1 Ração por NPC alistado;
+  - o escravo é comprado como 1 NPC real que trabalha como 1 trabalhador;
+  - o Controlado come do mesmo item que a cidade vende.
+  - *Exemplo:* uma cidade de 100 NPCs reais come cerca de 100 a 150 unidades de comida por dia; a interface mostra "População: 10.000" (com o Fator 100), mas as contas usam 100.
+- *Impacto:* Classe Social, Econômico, Produção, Guerra, Escravidão, V2 (todos os números ficam pequenos e fáceis de balancear).
 
-**V1-11. Ordem e ritmo da revisão.**
+**IP1-6. Tempo e quantidade por ciclo.**
 
-- *Contexto:* o plano da [[Revisão Completa]] tem 5 rodadas: V1 (esta), V2 (economia numérica), V3 (pendências e listas), V4 e V5 (propostas).
-- *Opções:*
-  - (a) **seguir o plano** na ordem;
-  - (b) juntar V4 e V5 numa rodada só, com uma tabela grande respondida por "confirmar todas, exceto...";
-  - (c) fazer a V2 logo depois desta, porque ela destrava a ficha técnica, e deixar V3 a V5 para depois da ficha.
-- *Sugestão:* (a), com uma regra: nas rodadas V4 e V5, o autor pode responder **"confirmar todas, exceto..."**, e eu só detalho as que ele quiser mudar.
+- *Contexto:* "tempo base reduzido pela habilidade" está decidido, sem números.
+- *Sugestão:*
+  - **Horas de trabalho por unidade**, por Tier, como guia para a IP3:
 
-Depois das respostas: aplicar as correções, fazer a faxina dos 13 documentos e abrir a **V2** (base numérica da economia).
+| Produto | Horas por unidade |
+|---|---|
+| Tier 0 (Braçal) | 0,5 |
+| Tier 1 | 1 |
+| Tier 2 | 2 |
+| Tier 3 | 4 |
+| Tier 4 | 8 |
+| Arma ou peça de Ferro e Cobre | 8 |
+| Arma ou peça de Aço | 12 |
+| Arma ou peça de Aço Mágico | 24 |
+
+  - **Velocidade do trabalhador** = 0,5 + habilidade ÷ 100 (habilidade 0 = metade; 50 = normal; 100 = 1,5 vez).
+  - **Nível acima do mínimo:** +10% por nível.
+  - *Exemplo:* um Cozinheiro com habilidade 50 trabalha 8 horas e faz 8 Pães (Tier 1) por dia; uma cidade de 100 NPCs precisaria de cerca de 12 a 18 cozinheiros, ou de comidas que rendem mais por hora (a IP3 equilibra). As horas do turno vêm da rotina (V2).
+- *Impacto:* Produção, Trabalho, IA (rotina), V2 (preços pelo custo das horas).
+
+**IP1-7. Quem decide o que produzir.**
+
+- *Contexto:* a cidade produz pela demanda; o jogador ainda não tem ordens de produção (a ideia 4 da [[Revisão do Projeto]], ordens em lote estilo RimWorld, nunca foi decidida).
+- *Sugestão:*
+  - **Construções do jogador:** fila de **ordens**, como no RimWorld:
+    - **Fazer N** (por exemplo, 20 Espadas);
+    - **Manter estoque de N** (produz até ter N; volta a produzir quando cai);
+    - **Repetir sempre**.
+    Mais uma prioridade por ordem.
+  - **Construções da cidade e dos Ricos (IA):** a cada dia (LOD 0 e 1) ou estação (LOD 2), escolhem a receita liberada com a maior nota = **(preço local do produto − custo dos insumos) × (1 + déficit da cidade naquele item)**. A comida tem prioridade quando o estoque cai abaixo de 3 dias de consumo.
+- *Impacto:* Produção, Interface (painel de ordens), IA, Econômico.
+
+**IP1-8. Limites de complexidade.**
+
+- *Contexto:* o jogo é de uma pessoa só, e cada receita é dado a escrever e a balancear.
+- *Sugestão:*
+  - No máximo **3 insumos** e **3 saídas** (produto e subprodutos) por receita.
+  - Cadeia de no máximo **4 passos** do mapa ao produto final (por exemplo, Ferro Bruto → Barra de Ferro → Espada).
+  - **Nenhum item órfão:** todo item intermediário precisa ser usado por pelo menos uma receita ou consumido por alguma classe. O `jogo --validar` avisa os órfãos.
+  - **Sem ferramentas** como insumo na primeira versão; o desgaste das construções já é a manutenção.
+- *Impacto:* Produção, Itens, Pipeline (validação dos dados).
+
+**IP1-9. Ordem das rodadas de Itens e Produção.**
+
+- *Sugestão:*
+  - **IP2:** os nomes e a lista final dos itens. Inclui:
+    - encaixar os nomes no mundo (I-11);
+    - os itens que faltam e os que sobram;
+    - Luxo × Exclusivo por Tier;
+    - Pedra Mágica × Pedra de Mana;
+    - a peça Média.
+  - **IP3:** as receitas de cada produto, numa tabela por construção, com a nova Funções e Construções.
+  - **Depois:** V2 (preços, consumo, salários e custos, já com as receitas prontas), V3, V4 e V5.
+
+  Os preços ficam para a V2 porque saem das receitas: **preço base ≈ custo dos insumos + horas de trabalho × salário**.
+
+Depois das respostas: atualizar Produção, Itens, Construção e Tecnologia com as regras e abrir a **IP2**.
 
 ## 5. Fatos que valem lembrar
 
@@ -262,6 +271,7 @@ Depois das respostas: aplicar as correções, fazer a faxina dos 13 documentos e
 - **Notícias:** 3 h por mapa (o mundo em 1 dia); Local, Regional e Mundial; precisão cai com a distância; a IA sabe tudo na hora (simplificação) (ver [[Sistema de Notícias/Descrição|Notícias]]).
 - **Efeitos de itens:** só Controlados e Importantes usam itens com efeito individual; Livro +3 (até 60) e Livro Antigo +6 (até 80), sem se gastar; Livro de Atributos +2 × Rank, se gasta; **Livro Sagrado obrigatório** na Religiosa (ideia do autor; sem ele na revista, heresia de gravidade 2 na primeira vez); Artefatos da Realeza como posse; estado Doente e traço Viciado (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
 - **Escravidão:** 5 fontes; Mercado de Escravos com preço 200 + 4 × a melhor habilidade de Trabalho; Obediência com fórmula; fuga abaixo de 30 de Obediência; rebelião com Felicidade e Controle abaixo de 10 por 4 dias; abolição liberta tudo em 1 estação; 3 caminhos do estilo Escravo (ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
+- **Revisão V1:** a pesca voltou (Pesqueiro); animais são itens (Cavalo = montaria e carga); um inventário por cidade, com pilhas; Mosquete (não Musket); Fome dos Controlados cai 100 em 36 horas; Templo com a tabela geral de vagas (2 nas capitais); crime de Sedição; os 13 documentos antigos estão no formato padrão.
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 

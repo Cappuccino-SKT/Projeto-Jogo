@@ -36,8 +36,8 @@ A cidade precisa de um **Posto Comercial** (construção nova; ver [[Sistema de 
 
 | Parte | Função |
 |---|---|
-| **Animais de carga** | Capacidade, por peso |
-| **Guardas contratados** | Defesa |
+| **Animais de carga** | Capacidade, por peso: o **Cavalo**, item do tipo Animal desde a revisão V1-3 (**[Proposta]** +100 de capacidade de peso por Cavalo; ver [[Sistema de Itens/Descrição\|Itens]]) |
+| **Guardas contratados** | Defesa; viram NPCs de verdade só quando a caravana passa por um mapa em LOD 0 ou 1 ([[Sistema de Viagem/Descrição\|Viagem]]) |
 | **Manutenção** | Comida e salário dos guardas |
 
 O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
@@ -92,7 +92,4 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 ### Perguntas em aberto
 
 1. **Valores a testar:** capacidade por animal, salário dos guardas, valor da Tarifa, quanto o risco pesa na rota.
-2. **Animais de carga:** quais são e de onde vêm (recursos, criação).
-3. **Guardas da caravana:** são NPCs reais ou valor de defesa abstrato?
-4. **Fluxo em LOD 2:** fórmula do volume trocado por estação.
-5. **Bônus do estilo Mercador** (ver [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]).
+2. **Bônus do estilo Mercador** (ver [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]).

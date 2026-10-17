@@ -49,7 +49,7 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 6. **Colisão:** invisível no jogo; marca onde não se anda.
 7. **Elevação** (opcional): pintada só nas colinas; usada no Mapa de Guerra (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]). Um mapa sem ela é plano.
 
-**Camadas de objetos:** Lotes (pequeno, médio e grande, com o tipo permitido); Portas (ligam ao Mapa Interno); Bordas (saída para o mapa vizinho); Recursos (áreas de floresta, mina, pesca); Criaturas e bandidos (pontos de aparição); Pontos de interesse (quadro de contratos, entrada de masmorra, praça central para a batalha de cerco).
+**Camadas de objetos:** Lotes (pequeno, médio e grande, com o tipo permitido); Portas (ligam ao Mapa Interno); Bordas (saída para o mapa vizinho); Recursos (áreas de floresta, mina, pesca; a pesca voltou na revisão V1-4); Criaturas e bandidos (pontos de aparição); Pontos de interesse (quadro de contratos, entrada de masmorra, praça central para a batalha de cerco).
 
 **Ajudas do editor:** **terrenos** (pinta-se "grama" e o Tiled escolhe sozinho o tile de borda certo) e **carimbos** (pedaços prontos, como "bosque pequeno", colados várias vezes). São só ajudas de desenho: o mapa salvo é fixo e feito à mão, não é gerado pelo jogo.
 

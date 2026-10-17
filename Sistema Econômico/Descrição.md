@@ -1,66 +1,85 @@
+> Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 
 ## Sistema Econômico
 
 **Descrição geral**
 
-Dividido em 3 partes, cada uma influenciando a parte menor — isso permite preços variados dependendo da região do mapa.
+O preço é dividido em **3 camadas**, cada uma influenciando a menor. Isso permite preços diferentes conforme a região do mapa.
 
-- **Mercado Mundial** — atribui o valor primário de todos os produtos; é o primeiro a definir um valor para os itens.
-- **Mercado da Facção** — recebe o valor do Mercado Mundial e atribui um novo valor em porcentagem (aumentando ou diminuindo o valor base). Válido apenas dentro dos Mapas Locais dominados por essa facção.
-- **Mercado Local** — recebe o preço alterado pelo Mercado da Facção e o ajusta novamente. Esse é o valor final, usado pelo jogador na compra ou venda de um item.
-
-### Critérios de alteração de preço
-
-- **Mercado Mundial** — Eventos Climáticos, Descoberta de Tecnologia, Eventos Políticos.
-- **Mercado da Facção** — Lei de Proibição (se o item for proibido na facção), Eventos Exclusivos da Facção.
-- **Mercado Local** — Oferta e Demanda.
-
-O Mercado Mundial é recalculado no início do jogo e sempre que ocorre um evento mundial capaz de alterar o preço de um produto. O Mercado da Facção é recalculado no início do jogo e sempre que ocorre um evento interno à facção capaz de alterar preços. O Mercado Local é atualizado a cada dia do jogo, para acompanhar o preço dinâmico, e também é recalculado quando o jogador compra ou vende um produto.
+| Camada | O que faz | O que muda o preço | Quando é recalculada |
+|---|---|---|---|
+| **Mercado Mundial** | Dá o valor primário de todos os produtos; é o primeiro a definir um valor para cada item | Eventos climáticos, descoberta de tecnologia, eventos políticos | No início do jogo e a cada evento mundial que altere o preço de um produto |
+| **Mercado da Facção** | Recebe o valor do Mercado Mundial e aplica uma porcentagem (para mais ou para menos). Vale só nos Mapas Locais dominados pela facção | Lei de Proibição (item proibido), ajustes de preço por categoria (leis), eventos exclusivos da facção | No início do jogo e a cada evento interno da facção que altere preços |
+| **Mercado Local** | Recebe o preço da facção e o ajusta de novo. É o **valor final**, usado pelo jogador na compra e na venda | Oferta e demanda | A cada dia de jogo e quando o jogador compra ou vende |
 
 ### Loja
 
-Cada construção comercial funciona como uma **Loja**, com atributos próprios: **Dono** (Cidade, Facção, Rico ou jogador; ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]), **Categoria vendida** (liga com a Categoria dos Itens), **Dinheiro próprio** (usado pra pagar o jogador ao vender itens a ela) e **Construção associada** (referência ao Mapa Interno do tipo Construção Pública onde ela opera).
+Cada construção comercial funciona como uma **Loja**, com atributos próprios:
+
+- **Dono** (Cidade, Facção, Rico ou jogador; ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]);
+- **Categoria vendida** (liga com a Categoria dos itens);
+- **Dinheiro próprio** (usado para pagar o jogador quando ele vende itens a ela);
+- **Construção associada** (o Mapa Interno do tipo Construção Pública onde ela funciona).
 
 ### Armazenamento de itens no Mercado
 
-Cada cidade possui um Mercado Local e um inventário próprio, que contabiliza todos os itens dentro das lojas presentes na cidade. Esse inventário é compartilhado por todas as lojas da cidade — o que simplifica o sistema de logística, evitando um inventário separado por construção.
+Cada cidade tem um Mercado Local e **um inventário próprio**, que contabiliza todos os itens das lojas e construções da cidade. Esse inventário é **compartilhado** por todas as lojas, o que simplifica a logística: não há inventário separado por construção (decisão confirmada na revisão V1-5; ver [[Sistema de Inventário/Descrição|Inventário]]).
 
-Todos os itens armazenados dentro das construções estão, na prática, dentro de um único inventário compartilhado — o inventário da cidade. Para evitar que itens do jogador entrem em conflito com os da cidade (por exemplo, o jogador usar por engano materiais da cidade em sua própria produção), cada item possui um atributo de **Dono**. Além disso, os itens possuem um atributo de **Categoria**, que permite exibi-los nas lojas correspondentes — permitindo que o jogador frequente lojas diferentes para comprar materiais diferentes.
+- Para evitar que os itens do jogador se misturem com os da cidade (por exemplo, o jogador usar por engano os materiais da cidade na própria produção), cada item tem o atributo **Dono**.
+- O atributo **Categoria** permite mostrar cada item nas lojas certas, e o jogador frequenta lojas diferentes para comprar coisas diferentes.
 
-### Compra e venda por NPCs Não-Controlados
+### Compra e venda pelos NPCs Não-Controlados
 
-Os NPCs Não-Controlados têm rotinas que incluem atender sua demanda de consumo, frequentando lojas dentro da cidade — tanto lojas da própria cidade quanto do jogador.
+Os NPCs Não-Controlados têm rotinas que incluem atender a demanda de consumo, frequentando as lojas da cidade, tanto as da cidade quanto as do jogador.
 
-- Ao comprar de uma loja do jogador, o NPC muda o dono do item (do jogador para a cidade) dentro do inventário da cidade; em troca, o jogador recebe o valor do item.
-- Ao comprar de uma loja da cidade, o valor do item vai para o dinheiro da loja, e nada muda no inventário (o item já pertencia à cidade).
-- Quando o jogador compra um item de uma loja, além de o item mudar de dono, ele sai do inventário da cidade e vai para o inventário do NPC Controlado. Se o jogador posteriormente guardar esse item em sua própria loja, ele retorna ao inventário da cidade.
+- **Comprando de uma loja do jogador:** o NPC muda o dono do item (do jogador para a cidade) dentro do inventário da cidade; em troca, o jogador recebe o valor do item.
+- **Comprando de uma loja da cidade:** o valor vai para o dinheiro da loja, e nada muda no inventário (o item já era da cidade).
+- **O jogador comprando:** além de mudar de dono, o item sai do inventário da cidade e vai para o inventário do NPC Controlado. Se o jogador depois o guardar na própria loja, ele volta ao inventário da cidade.
 
 ### Distribuição de dinheiro
 
-Para que NPCs Não-Controlados e lojas possuam dinheiro, o jogo terá um sistema de distribuição rotativa: cada cidade possui um dinheiro próprio (o "banco da cidade"), atribuído no início do jogo. A cidade distribui uma porcentagem desse valor entre todos os NPCs, variando conforme a classe social — a distribuição é igual entre NPCs da mesma classe. A outra parte é reservada e distribuída igualmente entre as lojas da cidade.
+Para que os NPCs Não-Controlados e as lojas tenham dinheiro, há uma **distribuição rotativa**: cada cidade tem um dinheiro próprio (o **Banco da Cidade**), dado no início do jogo. A cidade distribui uma porcentagem desse valor entre os NPCs, conforme a classe social (igual entre os NPCs da mesma classe); a outra parte é distribuída igualmente entre as lojas.
 
-Para evitar o problema de uma economia fixa (onde a quantidade total de dinheiro nunca muda, e o jogador poderia acabar concentrando todo o dinheiro do mundo), haverá métodos para aumentar a quantia total de dinheiro das cidades — principalmente a **cunhagem** (um ganho anual de dinheiro) e **tecnologias** desbloqueadas pela facção que aumentam o dinheiro total das cidades. Como contrapeso, impostos periódicos cobrados pela cidade/facção — ou perda de dinheiro em eventos negativos (saques, guerra) — funcionam como sumidouro, evitando inflação descontrolada ao longo de uma partida longa.
+**Contra a economia fixa** (o total de dinheiro nunca muda, e o jogador poderia concentrar todo o dinheiro do mundo):
+
+- **Fontes:** a **cunhagem** (ganho anual na Casa da Moeda) e **tecnologias** da facção que aumentam o dinheiro total das cidades.
+- **Sumidouros:** **impostos** periódicos da cidade e da facção, e perdas em eventos negativos (saques, guerra), evitando inflação descontrolada numa partida longa.
 
 ### Ciclo do dinheiro
 
-O dinheiro circula em um ciclo: **consumidores gastam nas lojas, as lojas pagam salários e compram insumos, e os trabalhadores gastam de novo**. A distribuição rotativa descrita acima vira o **estabilizador** desse ciclo: a cidade só distribui dinheiro quando a média por classe cai abaixo de um limiar. O jogo guarda a **riqueza média por classe e por cidade**, não o dinheiro de cada NPC. Os salários, os donos das construções, o imposto único sobre receita e o preço nas lojas do jogador estão no [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]].
+O dinheiro circula num ciclo: **os consumidores gastam nas lojas, as lojas pagam salários e compram insumos, e os trabalhadores gastam de novo**. A distribuição rotativa vira o **estabilizador** desse ciclo: a cidade só distribui dinheiro quando a média por classe cai abaixo de um limiar. O jogo guarda a **riqueza média por classe e por cidade**, não o dinheiro de cada NPC. Os salários, os donos das construções, o imposto único sobre receita e o preço nas lojas do jogador estão no [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]].
 
-### Atributos exigidos pelo sistema econômico (nos itens)
+### Atributos exigidos nos itens
 
-- Valor Global
-- Valor Facção
-- Valor Local
-- Proibido
-- Categoria
-- Dono
+Valor Global, Valor Facção, Valor Local, Proibido, Categoria e Dono (ver [[Sistema de Itens/Descrição|Itens]]).
 
-### Integração com outros sistemas
+---
 
-- **Banco da Facção e PIB:** os impostos vão para o Banco da Facção, e o soldo dos Esquadrões e as obras devolvem dinheiro às cidades. O PIB da facção é a soma do dinheiro das cidades (ver Sistema de Facção).
-- **Proibição:** deriva das leis da facção. Os ajustes de preço por categoria do Mercado da Facção também vêm das leis.
-- **Mercado negro:** itens proibidos só são vendidos em lojas ilegais (qualquer construção de produção), com preço multiplicado (ver Sistema de Crime e Justiça).
-- **Multas e confiscos:** viram dinheiro da facção.
-- **Reputação:** o preço de compra e venda do jogador muda pela faixa de reputação na facção, de −10% (Aliado) a +15% (Hostil); com Inimigo, as lojas não negociam (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]).
-- **Casa da Moeda e Mercado:** novas construções (ver Sistema de Construção).
-- **Caravanas civis:** o comércio entre cidades está no [[Sistema de Comércio/Descrição|Sistema de Comércio]]: caravanas sempre reais no Mapa Mundial, rota pelo lucro esperado, Tarifa, e o dinheiro passa de uma cidade para outra.
-- **Eventos:** o efeito "modificador de preço" de um evento (ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]) dispara o recálculo do Mercado Mundial ou da Facção. Quando a alta de preço já nasce da simulação (por exemplo, guerra consumindo Ração Militar), o evento só registra e explica a causa.
+## Parte técnica
+
+- **Preço:** o Mercado Mundial é uma tabela por item; o da Facção, uma porcentagem por categoria e por item proibido; o Local, um ajuste por oferta e demanda por item e cidade. O preço final é calculado na hora, não guardado em cada item.
+- **Frequência:** o Mercado Local por dia e a cada compra do jogador; os outros só por evento.
+- **LOD:** em LOD 2 o Mercado Local é atualizado por estação, junto com a produção e o consumo agregados.
+- **Save:** Banco de cada cidade, dinheiro das lojas, riqueza média por classe, modificadores ativos dos Mercados Mundial e da Facção, e o ajuste local de cada item por cidade.
+- **Fatia vertical:** um Mercado Local, uma loja da cidade, o Banco da Cidade e o ciclo do dinheiro.
+
+## Ligação com outros sistemas
+
+| Sistema | O que o Econômico fornece ou recebe |
+|---|---|
+| Facção | Impostos para o Banco da Facção; soldo e obras devolvem dinheiro às cidades; PIB = soma do dinheiro das cidades; ajustes de preço e proibições pelas leis |
+| Trabalho e Propriedade | Salários, donos, imposto sobre receita, preço nas lojas do jogador |
+| Inventário | Inventário único da cidade, com Dono e Categoria |
+| Crime e Justiça | Mercado negro: itens proibidos só em lojas ilegais, com preço multiplicado; multas e confiscos viram dinheiro da facção |
+| Reputação | Preço do jogador de −10% (Aliado) a +15% (Hostil); com Inimigo, as lojas não negociam ([[Sistema de Reputação/Descrição\|Reputação]]) |
+| Construção | Casa da Moeda e Mercado |
+| Comércio | Caravanas civis sempre reais; rota pelo lucro esperado; Tarifa; o dinheiro passa de uma cidade para outra ([[Sistema de Comércio/Descrição\|Comércio]]) |
+| Eventos | O efeito "modificador de preço" recalcula o Mercado Mundial ou da Facção; quando a alta já nasce da simulação (guerra consumindo Ração Militar, comida no inverno), o evento só explica a causa ([[Sistema de Eventos/Descrição\|Eventos]]) |
+| Notícias | Preços 30% fora da média viram notícia ([[Sistema de Notícias/Descrição\|Notícias]]) |
+| Escravidão | Mercado de Escravos com oferta e procura ([[Sistema de Escravidão/Descrição\|Escravidão]]) |
+
+## Perguntas em aberto
+
+1. **Moeda e preços base** de cada item no Mercado Mundial (rodada V2 da [[Revisão Completa]]).
+2. **Banco inicial** de cada cidade, limiar do estabilizador e valor da cunhagem (rodada V2).
+3. **Fórmula da oferta e demanda** no Mercado Local (quanto o preço sobe com a falta).

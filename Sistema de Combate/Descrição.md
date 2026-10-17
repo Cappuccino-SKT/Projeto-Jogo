@@ -96,7 +96,7 @@ Uma tabela pequena em JSON, com multiplicadores de **no máximo ±25%**, dá ide
 | Espada, Lança | +25% | 0 | −25% |
 | Clava, Machado | −25% | 0 | +25% |
 | Arco | 0 | 0 | 0 |
-| Besta, Musquete | 0 | 0 | +25% |
+| Besta, Mosquete | 0 | 0 | +25% |
 
 A armadura tem **três peças** de pesos que podem ser diferentes. Como não há partes do corpo, **[Proposta]** vale a classe de peso **mais frequente** entre as três peças (empate: Média). A **Defesa** é a soma das peças.
 
@@ -214,7 +214,7 @@ Um modo entre **dois combatentes**: os outros NPCs não intervêm. Termina por *
 Toda a arte é feita à mão, então a escolha é feita para o volume de arte não multiplicar por item:
 
 - **Boneco por camadas:** corpo base, 3 peças de armadura, arma e escudo, sobrepostos no mesmo conjunto de animações.
-- **Animações compartilhadas por tipo de arma:** Espada, Lança, Machado, Clava, Arco, Cajado, Musquete e Besta, em **4 direções**.
+- **Animações compartilhadas por tipo de arma:** Espada, Lança, Machado, Clava, Arco, Cajado, Mosquete e Besta, em **4 direções**.
 - Criaturas têm sprites e animações próprios, em número reduzido.
 - Boneco de 16 × 24 px, 54 quadros por direção, 3 direções desenhadas e a esquerda espelhada (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 

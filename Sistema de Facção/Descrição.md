@@ -30,7 +30,7 @@ Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias
 - O Fator de Escala é **global** (um único valor para o jogo todo).
 - A quantidade de NPCs reais de cada cidade vem do nível dela (ver Sistema de Cidade); a população total é NPCs reais × Fator de Escala.
 - O valor ainda não foi definido: será testado e discutido. Deve ficar em arquivo de dados, fácil de ajustar.
-- Vale para a população do Mapa Local e do Mapa Mundial ("População total da região") e para os conscritos. **[Proposta]** Documentar também no Sistema de Mapa.
+- Vale para a população do Mapa Local e do Mapa Mundial ("População total da região") e para os conscritos.
 
 ### Conscritos, Esquadrões e Exército
 
@@ -55,14 +55,14 @@ Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias
 - **Dissolução.** Ao desfazer o exército, os soldados voltam a compor a população da cidade, e **novos NPCs são gerados** (pela Geração de NPC) nas classes **Escravo e Civil**. Os NPCs originais não voltam.
 - **Baixas** em guerra são permanentes: a população da cidade diminui.
 
-**[Proposta]** O Esquadrão é uma entidade própria, não um NPC. Os atributos que hoje estão em "Semi-Controlados — Exército" no Sistema de NPC (ID do Esquadrão, Formação, Alvo de combate, Moral, Disciplina e Vínculo) migram para ele, junto com: Tamanho (quantidade de soldados), Cidade de origem, Equipamento e Manutenção. Os 9 tipos de Esquadrão (com kit de equipamento), a Experiência e os números de batalha estão no [[Sistema de Batalha/Descrição|Sistema de Batalha]]; a formação no Quartel (2 dias), o General e os mercenários, no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
+O Esquadrão é uma entidade própria, não um NPC. Os atributos que antes estavam em "Semi-Controlados — Exército" no Sistema de NPC (ID do Esquadrão, Formação, Alvo de combate, Moral, Disciplina e Vínculo) migraram para ele, junto com: Tamanho (quantidade de soldados), Cidade de origem, Equipamento e Manutenção. Os 9 tipos de Esquadrão (com kit de equipamento), a Experiência e os números de batalha estão no [[Sistema de Batalha/Descrição|Sistema de Batalha]]; a formação no Quartel (2 dias), o General e os mercenários, no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
 **Manutenção de equipamentos.** Consumo periódico de materiais (por exemplo, barras de ferro e couro), proporcional ao tamanho e ao equipamento do Esquadrão, sem durabilidade item a item. Isso é coerente com soldados deixarem de ser NPCs individuais.
 
 **Suprimento e Caravana Militar.** O exército **carrega o próprio suprimento** durante excursões militares: Ração Militar e os materiais de manutenção de equipamento. A **Caravana** é a unidade auxiliar que armazena esses recursos.
 
 - A Caravana faz parte do **sistema militar** e é de **uso exclusivo militar**. As caravanas civis (comércio) estão no [[Sistema de Comércio/Descrição|Sistema de Comércio]].
-- **[Proposta]** A Caravana usa o Inventário (herdando do Inventário abstrato), não luta, mas precisa acompanhar o exército.
+- **[Proposta]** A Caravana usa o componente de Inventário (Carga; ver [[Sistema de Inventário/Descrição|Inventário]]), não luta, mas precisa acompanhar o exército.
 - **Suprimento esgotado:** a Moral cai gradualmente a cada dia sem suprimento. Abaixo de um limiar, os Esquadrões desertam, e não todos de uma vez.
 - **[Proposta]** Se a Caravana é capturada ou destruída, o exército perde o que ela carregava (saque).
 - Consumo por Esquadrão, capacidade da Caravana (60 unidades), reabastecimento, forrageio e comboio estão no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
