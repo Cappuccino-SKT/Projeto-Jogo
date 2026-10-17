@@ -24,7 +24,7 @@ Este é o **documento de entrada** da cidade: ele guarda os níveis e os atribut
 
 O Fator de Escala converte NPCs reais em população total, mas a quantidade de **NPCs reais** de cada cidade vem do nível dela. Assim as cidades não ficam vazias e o custo de simulação é previsível.
 
-**[Proposta]** Valores iniciais, a ajustar nos testes:
+Valores iniciais, a ajustar nos testes:
 
 | Nível | NPCs reais | População total (Fator 100, exemplo) |
 |---|---|---|

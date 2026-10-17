@@ -71,7 +71,7 @@ Valores iniciais com equipamento Rank 1 (Alcance em relação ao Arco = 1):
 | Atiradores | 14 | 2 | 0,7 | 0,9 | Recarga longa |
 | Artilharia | 20 em área | 1 | 3,0 | 0,4 | Não anda enquanto atira |
 | Magos | 12 em área | 2 | 1,0 | 1,0 | Gasta Mana |
-| Milícia **[Proposta]** | 5 | 3 | — | 1,0 | Só na defesa da própria cidade |
+| Milícia | 5 | 3 | — | 1,0 | Só na defesa da própria cidade |
 
 ## Escala da batalha e tamanho visual
 
@@ -86,7 +86,7 @@ Valores iniciais com equipamento Rank 1 (Alcance em relação ao Arco = 1):
 | Médio | 50 | 2 soldados | 2.000 |
 | Grande | 100 | 1 soldado | **4.000** |
 
-- **Onde se escolhe:** na criação do Novo Jogo, como no Total War. **[Proposta]** Como a escolha só muda o que aparece na batalha, ela pode ser trocada depois nas Configurações (fora de uma batalha), sem afetar o save.
+- **Onde se escolhe:** na criação do Novo Jogo, como no Total War. Como a escolha só muda o que aparece na batalha, ela pode ser trocada depois nas Configurações (fora de uma batalha), sem afetar o save.
 - **Os bonecos:** ocupam lugares na formação, animam ataque e queda; cai 1 boneco a cada "1 boneco =" soldados perdidos. O caminho é calculado por Esquadrão, e cada boneco só segue o seu lugar na formação.
 - **Primeira versão:** o tamanho Pequeno é o garantido em qualquer PC; o Médio e o Grande entram conforme os **testes de desempenho**. O PC mínimo roda o Pequeno.
 - **[Refinar depois]** No tamanho Grande, cada soldado pode ganhar o **próprio combate** (Vida individual e golpes um a um, como no Total War), desde que o resultado continue igual ao do cálculo por Esquadrão. Decidir depois dos testes de desempenho.
@@ -175,7 +175,7 @@ A batalha acontece numa **cópia simplificada do Mapa Local** onde ela começou 
 
 - **Mana do Esquadrão:** gasta por feitiço e volta devagar; a Pedra de Mana da Caravana enche.
 - **Feitiços de área acertam aliados** (regra do Combate), o que pede pausa e cuidado.
-- **Leis:** só existe se a lei de Magia permitir; a Tecnocrata (magia proibida) não forma. **[Proposta]** Com a lei "restrita" (Religiosa), só Magos de Suporte.
+- **Leis:** só existe se a lei de Magia permitir; a Tecnocrata (magia proibida) não forma. Com a lei "restrita" (Religiosa), só Magos de Suporte.
 
 ## General, Comitiva e Comandantes
 

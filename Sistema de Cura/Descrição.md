@@ -14,8 +14,6 @@ Define como os NPCs se recuperam de ferimentos. Hoje existe o **Estado Atual** (
 
 ### Regeneração por descanso
 
-**[Proposta]**
-
 - Taxa base de regeneração por hora de jogo, maior enquanto o NPC dorme (Período de Dormir) ou está na Ação "descansando".
 - Em LOD 2, a regeneração é calculada em bloco (por hora de jogo), sem simular NPC a NPC.
 - A regeneração só acontece fora de combate. "Em combate" é definido no [[Sistema de Combate/Descrição|Sistema de Combate]] (hostil dentro do raio de alerta).
@@ -29,7 +27,7 @@ Define como os NPCs se recuperam de ferimentos. Hoje existe o **Estado Atual** (
 
 ### Hospital
 
-Construção (ver Sistema de Construção). **[Proposta]** Cura os NPCs Controlados do grupo mediante pagamento, com velocidade que depende do nível da construção. Em LOD 2, funciona como a Taverna e o Mercado: serviço agregado para a cidade. Um Mago de Suporte trabalhando nele acelera a cura (ver Sistema de Magia).
+Construção (ver Sistema de Construção). Cura os NPCs Controlados do grupo mediante pagamento, com velocidade que depende do nível da construção. Em LOD 2, funciona como a Taverna e o Mercado: serviço agregado para a cidade. Um Mago de Suporte trabalhando nele acelera a cura (ver Sistema de Magia).
 
 ### Templo da Religiosa
 

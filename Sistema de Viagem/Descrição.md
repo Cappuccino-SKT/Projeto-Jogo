@@ -35,7 +35,7 @@ O tempo base para atravessar um Mapa Local é de **4 horas a pé**. Ele é multi
 | Floresta densa | 1,5 |
 | Montanha | 1,5 |
 
-**Infraestrutura** (o autor pediu que mapas mais desenvolvidos sejam mais fáceis de atravessar). **[Proposta]** Valores:
+**Infraestrutura** (o autor pediu que mapas mais desenvolvidos sejam mais fáceis de atravessar). Valores:
 
 | Infraestrutura do mapa | × |
 |---|---|
@@ -46,7 +46,7 @@ O tempo base para atravessar um Mapa Local é de **4 horas a pé**. Ele é multi
 
 Vale o melhor valor que o mapa tiver. Construir estradas: ver "Estradas e patrulhas" (rodada V3-9).
 
-**Tamanho do grupo** (o autor pediu que um exército ande muito mais devagar que uma pessoa sozinha). Conta cada pessoa; um Esquadrão conta como 100. **[Proposta]**
+**Tamanho do grupo** (o autor pediu que um exército ande muito mais devagar que uma pessoa sozinha). Conta cada pessoa; um Esquadrão conta como 100.
 
 | Pessoas no grupo | Exemplo | × |
 |---|---|---|
@@ -70,7 +70,7 @@ Vale o melhor valor que o mapa tiver. Construir estradas: ver "Estradas e patrul
 
 Estação e clima se multiplicam, com teto de × 2,0 (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
-O grupo anda na velocidade do **membro mais lento**. **[Proposta]** O tempo mínimo é de 1 hora por mapa.
+O grupo anda na velocidade do **membro mais lento**. O tempo mínimo é de 1 hora por mapa.
 
 **Exemplos:**
 
@@ -174,7 +174,7 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 ### Parte técnica
 
 - **LOD:** as entidades vivem no Mapa Mundial, que não tem LOD e fica sempre carregado. Elas só viram NPCs de verdade quando entram num Mapa Local em LOD 0 ou 1 (hidratação) e voltam a ser só dados quando saem (desidratação).
-- **Atualização:** o progresso de cada entidade avança a cada hora de jogo (ou a cada tick a 8x, para a animação ficar suave). **[Proposta]** Os sorteios de encontro acontecem ao entrar num novo mapa.
+- **Atualização:** o progresso de cada entidade avança a cada hora de jogo (ou a cada tick a 8x, para a animação ficar suave). Os sorteios de encontro acontecem ao entrar num novo mapa.
 - **Rota:** busca do caminho mais rápido no grafo de 48 mapas, refeita só quando o destino muda ou um mapa fica bloqueado (guerra, fronteira fechada).
 - **Dados:** `mapas.json` ganha terreno, infraestrutura e estradas de cada mapa; `viagem.json` guarda as tabelas de multiplicadores e as chances de encontro, para ajustar sem mexer no código.
 - **Névoa:** um registro por Mapa Local com "explorado" e a data de cada informação vista; cabe em poucos KB no save.

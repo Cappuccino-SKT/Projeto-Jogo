@@ -19,7 +19,7 @@ Os bônus valem **só no começo**: itens, dinheiro, habilidades e relação ini
 
 ### O que um estilo define
 
-**[Proposta]** Cada estilo de início é um conjunto de dados, lido de arquivo, com:
+Cada estilo de início é um conjunto de dados, lido de arquivo, com:
 
 - cultura do personagem;
 - local de partida (Mapa Local e posição);

@@ -22,7 +22,7 @@ Os NPCs comuns (Não-Controlados) não têm inventário próprio: o consumo dele
 
 ### Capacidade da cidade
 
-- Cada construção **acrescenta capacidade** às categorias que produz ou vende. *Exemplo:* a Fazenda nível 2 dá +200 de capacidade de matéria-prima vegetal. **[Proposta]** Os valores por construção e nível ficam com os custos das construções (rodada V2).
+- Cada construção **acrescenta capacidade** às categorias que produz ou vende. *Exemplo:* a Fazenda nível 2 dá +200 de capacidade de matéria-prima vegetal. **Capacidade por construção** (rodada V5, IT-4): 100 × nível nas construções pequenas, 200 × nível nas médias e 400 × nível nas grandes, nas categorias que ela produz ou vende.
 - Quando a capacidade de uma categoria **enche**, a produção dela **para** até alguém consumir ou vender: é o limite contra o acúmulo infinito.
 - O jogador tem os itens dele separados pelo atributo **Dono**, dentro da mesma tabela.
 

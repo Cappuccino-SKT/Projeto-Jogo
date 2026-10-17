@@ -47,7 +47,7 @@ Com atitude **Hostil**, a facção pode **fechar a fronteira** (bloqueia caravan
 | Vassalagem | Ver "Vassalagem" | Tratado de paz ou pedido | Até a independência ou a integração |
 | Casamento | Ver "Casamento e reféns" | Relação 0 | Enquanto o casal viver |
 
-- **[Proposta]** Assinar um tratado dá +5 de relação; cancelar um tratado ainda válido dá −10.
+- Assinar um tratado dá +5 de relação; cancelar um tratado ainda válido dá −10.
 - **Chamado de aliado:** quando um aliado entra em guerra, ele chama; quem atende entra na guerra com o motivo "Chamado de aliado" ([[Sistema de Guerra/Descrição|Guerra]]).
 
 ### Confiabilidade
@@ -117,7 +117,7 @@ A IA **não faz tratado** com quem tem Confiabilidade abaixo de 30.
 - **Paz:** aceita os termos se o Placar contra ela cobre o custo, ou se o Cansaço dela é alto (ver [[Sistema de Guerra/Descrição|Guerra]]).
 - **Lealdade** do líder: respeita tratados e atende chamados; abaixo de 30, pode trair.
 - **Sociabilidade:** mais propostas de tratado e casamento.
-- **[Proposta]** **Alianças:** a IA procura Aliança Defensiva com facções afins quando um vizinho tem força 1,5× maior que a dela.
+- **Alianças:** a IA procura Aliança Defensiva com facções afins quando um vizinho tem força 1,5× maior que a dela.
 - Cada decisão guarda o **"Por quê?"**, para as [[Sistema de Notícias/Descrição|Notícias]] e para o painel de depuração.
 - **Bênção e Anátema:** o Sumo Sacerdote muda as relações das facções Religiosas (+10 ou −20); o Anátema libera a "Guerra santa" (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 

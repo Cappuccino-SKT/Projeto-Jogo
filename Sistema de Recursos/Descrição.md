@@ -36,7 +36,7 @@ Decisão do autor na revisão (V1-4): **a pesca volta ao jogo** (o Peixe tinha s
 - **Recurso Peixe** nos mapas com rio, lago ou litoral (marcados na camada "Recursos" do Tiled, área de pesca).
 - **Construção nova: Pesqueiro** (Braçal; Função **Pescador**; níveis 1 a 5, que aumentam a eficiência, como a Fazenda).
 - **Item:** Peixe (Recurso Bruto, Animal, Tier 0). As receitas que usam o Peixe ficam para a rodada de receitas.
-- **[Proposta] Por estação:** 100% na primavera, no verão e no outono; 75% no inverno; 25% no inverno dos biomas frios (rios congelados).
+- **Por estação:** 100% na primavera, no verão e no outono; 75% no inverno; 25% no inverno dos biomas frios (rios congelados).
 - **Onde se destaca:** o litoral Escravista, que tem o porto de pesca (6,6), e o grande rio Autoritário.
 
 ---

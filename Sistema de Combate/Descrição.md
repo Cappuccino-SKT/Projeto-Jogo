@@ -68,7 +68,7 @@ O raio de alerta e o tempo de saída serão definidos em testes. **[Refinar depo
 
 ### Fórmula
 
-**[Proposta]** (valores ajustados em testes):
+Valores iniciais, ajustados em testes:
 
 1. **Dano bruto** = valor sorteado entre o Dano Mínimo e o Máximo da arma × (habilidade ÷ 50). Habilidade 50 dá 100% do dano da arma.
 2. **Dano final** = o maior valor entre 1 e (dano bruto − Defesa do alvo).
@@ -89,7 +89,7 @@ A arma ganha o atributo **Intervalo de Ataque** (ver [[Sistema de Itens/Descriç
 
 Uma tabela pequena em JSON, com multiplicadores de **no máximo ±25%**, dá identidade a cada tipo de arma sem complexidade.
 
-**[Proposta]** valores iniciais:
+Valores iniciais:
 
 | Arma | Contra Leve | Contra Média | Contra Pesada |
 |---|---|---|---|
@@ -98,7 +98,7 @@ Uma tabela pequena em JSON, com multiplicadores de **no máximo ±25%**, dá ide
 | Arco | 0 | 0 | 0 |
 | Besta e armas de fogo | 0 | 0 | +25% |
 
-A armadura tem **três peças** de pesos que podem ser diferentes. Como não há partes do corpo, **[Proposta]** vale a classe de peso **mais frequente** entre as três peças (empate: Média). A **Defesa** é a soma das peças.
+A armadura tem **três peças** de pesos que podem ser diferentes. Como não há partes do corpo, vale a classe de peso **mais frequente** entre as três peças (empate: Média). A **Defesa** é a soma das peças.
 
 ### Modo letal e não letal
 
@@ -179,7 +179,7 @@ Masmorras são povoadas por Criaturas e bandidos, com dificuldade de 1 a 5 e Loo
 
 ## Escala do combate
 
-- O combate local é para **grupos pequenos e médios**: **[Proposta]** cerca de **40 combatentes ativos**, a testar.
+- O combate local é para **grupos pequenos e médios**: cerca de **40 combatentes ativos**, a testar.
 - Acima disso, ou quando há **Esquadrões**, o confronto vai para o **Mapa de Guerra**.
 - Em **LOD 1 e 2**, os combates entre NPCs usam o **cálculo rápido** com a mesma fórmula de dano.
 

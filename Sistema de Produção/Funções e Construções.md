@@ -1,6 +1,6 @@
 > **Refeita na rodada IP3 (2026-10-17)**, com as regras da IP1 (família por construção e escada de níveis; ver [[Sistema de Produção/Descrição|Produção]]), a lista final da IP2 (ver [[Sistema de Itens/Descrição|Itens]]) e as receitas da IP3 (ver [[Sistema de Produção/Receitas|Receitas]]).
 >
-> Rascunho em construção. **[Proposta]** = sugestão ainda não decidida. As Funções, as categorias e os produtos por nível foram decididos nas rodadas IP1 a IP3; as Funções dos serviços públicos ainda são propostas.
+> Rascunho em construção. As Funções, as categorias e os produtos por nível foram decididos nas rodadas IP1 a IP3, e as Funções dos serviços públicos na V5.
 
 ## Funções e Construções
 
@@ -44,7 +44,7 @@ Cada construção de produção tem níveis de 1 a 5. A coluna de produtos mostr
 
 ### Construções civis e de serviço
 
-| Construção | Função **[Proposta]** | O que faz |
+| Construção | Função | O que faz |
 |---|---|---|
 | Construtor (níveis 1 a 3) | **Operário** (Trabalho Braçal) e **Engenheiro** (gerente da obra; Inteligência) | Constrói e mantém as construções da cidade. A Inteligência exigida numa obra é a do Engenheiro; sem ele, só obras de nível 1 (rodada IP3-11) |
 | Universidade | Professor | Educação (ver Sistema de Trabalho e Propriedade) |
@@ -80,5 +80,5 @@ O Sistema de Produção cita alguns nomes que **não aparecem** no canvas. Suges
 ### Perguntas em aberto
 
 1. **Destilaria:** construída já no nível 2 (confirmado na V3-13).
-2. **Funções dos serviços públicos** (Lojista, Taverneiro, Carcereiro, Moedeiro...): confirmar nas rodadas de propostas (V4 e V5).
+2. **Funções dos serviços públicos:** confirmadas na V5.
 3. **Valores a testar:** vagas por nível (a tabela geral 2, 3, 5, 7 e 10 vale para todas as construções, IP3-11) e habilidade mínima de cada nível.

@@ -50,7 +50,7 @@ Para subir é preciso **Renome** e um **requisito concreto**: serviço à facç�
 
 O título é um **rótulo político**; a classe social só muda pelas regras de mobilidade (ver Classe Social), com a exceção do Rito de Admissão.
 
-**[Proposta]** classe típica de cada título:
+classe típica de cada título:
 
 | Título | Classe típica |
 |---|---|
