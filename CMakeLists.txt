@@ -34,6 +34,16 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SDL3)
 
+# nlohmann/json: lê os arquivos JSON (o mapa do Tiled e, a partir do marco 3,
+# os dados). Entrou no marco 1 por causa do mapa (rodada FL1-1).
+# Versão 3.12.0; o pacote "json.tar.xz" é o pequeno, recomendado pelo autor.
+FetchContent_Declare(
+    nlohmann_json
+    URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+    URL_HASH SHA256=42f6e95cad6ec532fd372391373363b62a14af6d771056dbfc86160e6dfff7aa
+)
+FetchContent_MakeAvailable(nlohmann_json)
+
 # ---------------------------------------------------------------------------
 # As nossas pastas
 # ---------------------------------------------------------------------------
