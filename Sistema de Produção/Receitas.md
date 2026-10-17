@@ -44,7 +44,7 @@ Cada produto tem **uma receita fixa** (IP1-1), feita numa única construção (I
 
    O Armeiro, o Artesão, o Boticário e a Forja Arcana são sempre Especialistas.
 
-**Habilidade mínima (IP1-1):** **[Proposta]** 10 no nível 1, 25 no nível 2, 40 no nível 3, 55 no nível 4 e 70 no nível 5 da receita.
+**Habilidade mínima (IP1-1):** 10 no nível 1, 25 no nível 2, 40 no nível 3, 55 no nível 4 e 70 no nível 5 da receita.
 
 ---
 

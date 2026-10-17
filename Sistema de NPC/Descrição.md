@@ -82,7 +82,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 3. Postura (Agressiva, Defensiva, Manter posição ou Evitar combate; usada quando não há ordem)
 4. Modo de ataque (letal ou não letal)
 5. Livros lidos, traço Viciado e estado Doente (também nos Importantes; ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]])
-6. **Fome** (0 a 100; 100 = satisfeito; também nos Importantes). Cai **100 em 36 horas** de jogo. O NPC come sozinho quando passa de 50, do inventário dele ou do grupo, pela melhor comida. A **Saciedade** da comida devolve: Alimento Básico 60, Refinado 80, Luxo 100 **[Proposta]**. Com Fome 0, a Vida cai 2% por hora e a Felicidade cai rápido. Na prática, 1 a 2 refeições por dia (decisão do autor na revisão V1-9)
+6. **Fome** (0 a 100; 100 = satisfeito; também nos Importantes). Cai **100 em 36 horas** de jogo. O NPC come sozinho quando passa de 50, do inventário dele ou do grupo, pela melhor comida. A **Saciedade** da comida devolve, pelo Tier (rodada V5, IT-5): Tier 1 = 60, Tier 2 = 80, Tier 3 = 90 e Tier 4 = 100. Com Fome 0, a Vida cai 2% por hora e a Felicidade cai rápido. Na prática, 1 a 2 refeições por dia (decisão do autor na revisão V1-9)
 7. **Felicidade individual** (0 a 100; também nos Importantes), pelos 6 fatores do [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]]
 8. **Noites sem dormir** (contador, usado pela marcha forçada da [[Sistema de Viagem/Descrição|Viagem]]). Não há estamina nem atributo de descanso
 

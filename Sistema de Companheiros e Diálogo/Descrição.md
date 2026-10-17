@@ -25,7 +25,7 @@ O autor separou dois limites: o **grupo que o jogador controla diretamente** é 
 | Limite | Quem entra | Valor |
 |---|---|---|
 | **Grupo controlado** | Quem anda com o jogador e recebe ordens diretas (Controlados) | **4 + Renome ÷ 20** (4 no começo, 9 com Renome 100) |
-| **Vinculados** | Todos os companheiros: o grupo controlado e os que estão fora dele (em cargos, esperando numa cidade, liderando caravanas) | **[Proposta]** **10 + Renome ÷ 5 + 3 por cidade do jogador** (10 no começo; 30 com Renome 100; mais 3 por cidade que o jogador tiver) |
+| **Vinculados** | Todos os companheiros: o grupo controlado e os que estão fora dele (em cargos, esperando numa cidade, liderando caravanas) | **10 + Renome ÷ 5 + 3 por cidade do jogador** (10 no começo; 30 com Renome 100; mais 3 por cidade que o jogador tiver) |
 
 - **A família não conta** em nenhum limite: cônjuge e filhos são sempre vinculados.
 - **Escravos e soldados não contam:** escravos são propriedade; soldados estão nos Esquadrões.

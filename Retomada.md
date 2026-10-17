@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada V4 (Confirmação das propostas, parte 1) aplicada e a V5 (parte 2, a última da revisão) enviada.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a revisão completa concluída (V5 aplicada) e a rodada FT1 (ficha técnica da fatia vertical) enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está na última rodada (levantamento e plano na [[Revisão Completa]]). Já estão no `main` as rodadas V1, IP1, IP2, IP3, V2 e V3 (PRs #9 a #14). Em 2026-10-17 foi aplicada a **V4**, na branch `docs/v4-propostas`: as propostas de 7 documentos e os moldes de conteúdo foram confirmados, e a Arquitetura seguiu as recomendações, a pedido do autor. A **rodada V5 (Confirmação das propostas, parte 2) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/v4-propostas` foi mesclado no `main`.**
-3. **Próximo passo:** pedir o `Respostas.txt` da V5 (conferir se é desta rodada), tirar as marcações confirmadas, aplicar IT-4 e IT-5, marcar a revisão como concluída e começar a **ficha técnica lógica da fatia vertical** no formato da V5-9.
-4. Depois: a programação da fatia vertical. As listas de conteúdo ficam para as rodadas C1 a C3 (ideia do autor na V3-13).
+2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa terminou** (ver a [[Revisão Completa]]). No `main` estão as rodadas até a V3 (PRs #9 a #14). A V4 está na branch `docs/v4-propostas`, e a V5 na `docs/v5-ficha`, criada a partir dela. A V5 também trouxe a primeira versão da **ficha técnica lógica**: [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]]. A **rodada FT1 (escolhas da ficha técnica) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se os pull requests da `docs/v4-propostas` e da `docs/v5-ficha` foram mesclados no `main`, nessa ordem.**
+3. **Próximo passo:** pedir o `Respostas.txt` da FT1 (conferir se é desta rodada), atualizar a ficha, tirar as marcações confirmadas e ver com o autor se a ficha está pronta para o **marco 1** (a primeira linha de código).
+4. Depois: a programação da fatia vertical, marco a marco. As listas de conteúdo ficam para as rodadas C1 a C3 (ideia do autor na V3-13).
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -70,130 +70,124 @@ Regras extras:
 | Revisão | V2 (economia numérica) | Aplicada |
 | Revisão | V3 (pendências de regra) | Aplicada |
 | Revisão | V4 (propostas, parte 1) | Aplicada |
-| Revisão | **V5 (propostas, parte 2)** | **Enviada, aguardando respostas** |
-| Depois | Ficha técnica da fatia vertical; rodadas de conteúdo C1 a C3 | A fazer |
+| Revisão | V5 (propostas, parte 2) | Aplicada; **revisão concluída** |
+| Ficha técnica | **FT1 (escolhas da ficha da fatia vertical)** | **Enviada, aguardando respostas** |
+| Depois | Programação da fatia vertical; rodadas de conteúdo C1 a C3 | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, modo observador, eventos de dinastia. As ordens de produção em lote foram decididas na IP1-7 ([[Sistema de Produção/Descrição|Produção]]). A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: V5, Confirmação das propostas (parte 2)
+## 4. Rodada pendente: FT1, Ficha técnica da fatia vertical
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** Esta é a última rodada da revisão completa. Ela confirma as **58 propostas** que sobraram nos outros documentos, em 8 grupos, e pergunta o formato da **ficha técnica lógica da fatia vertical**, o passo seguinte.
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** A revisão completa terminou na V5. A primeira versão da **ficha técnica lógica** está em [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]], no formato da V5-9. Esta rodada fecha as escolhas novas que a ficha precisou fazer.
 
-**Como responder:** "Confirmar todas" ou "Confirmar todas, exceto PR-3 e CB-4 (e o que mudar)". A recomendação vem no fim de cada linha:
+Responder no `Respostas.txt` pelos códigos (FT1-1, FT1-2...). "Seguir sugestão" aceita a proposta.
 
-- **Confirmar:** a proposta vira decisão.
-- **Mudar:** vem com o motivo.
-- **Já decidida:** só limpar a marcação.
+**Correção avisada:** a V2-11 dizia "1 tick = 2 s de jogo". A conta certa é 4,5 s:
 
-**V5-1. Produção, Funções e Receitas (8 propostas).**
+- a 1x, 1 segundo real equivale a 90 segundos de jogo;
+- com 20 ticks por segundo, cada tick vale 90 ÷ 20 = 4,5 s.
 
-- PR-1. Um ciclo interrompido guarda o progresso em horas; os insumos já gastos não voltam. **Confirmar.**
-- PR-2. O teto do material é o máximo da faixa do item na lista (vale também para itens sem metal, como as roupas). **Confirmar.**
-- PR-3. O Rank 0 não sai da produção: fica para itens quebrados ou improvisados. **Confirmar.**
-- PR-4. Horas reais = horas da receita ÷ (velocidade × (1 + 0,1 × níveis acima do mínimo)); cada trabalhador faz o seu ciclo. **Confirmar.**
-- PR-5. O déficit da nota da IA vai de 0 a 1, pelo contador de dias em déficit. **Confirmar.**
-- PR-6. Funções dos serviços públicos: Lojista, Taverneiro, Oficial instrutor, Carcereiro, Moedeiro, Sacerdote, Mercador, Pesquisador, Mago, Curandeiro e Professor. **Confirmar.**
-- PR-7. Habilidade mínima de cada nível da receita: 10, 25, 40, 55 e 70. **Confirmar.**
-- PR-8. Peixe por estação: 100% na primavera, no verão e no outono; 75% no inverno; 25% no inverno dos biomas frios. **Confirmar.**
+O [[Sistema de Tempo/Descrição|Tempo]] e a ficha já estão corrigidos. Nada mais mudou: 1 hora de jogo continua sendo 40 s reais.
 
-**V5-2. Itens, Inventário e NPC (5 propostas).**
+**FT1-1. O que o jogador faz na fatia vertical.**
 
-- IT-1. Intervalo de Ataque por tipo de arma: Espada e Lança rápidas; Machado e Clava lentas; Besta e armas de fogo muito lentas. **Confirmar.**
-- IT-2. Cetro: cajado de uma mão, que deixa usar Escudo, com dano 25% menor. **Confirmar.**
-- IT-3. O conjunto Furtivo dá Destreza; o Mercador e o Nobre dão Carisma. **Confirmar** (os valores ficam a testar).
-- IT-4. Capacidade de armazenamento de cada construção, que estava "para a V2" mas ficou sem número. **Mudar:** 100 × nível nas pequenas, 200 × nível nas médias e 400 × nível nas grandes, nas categorias que ela produz ou vende. Bate com o exemplo que já existe: Fazenda nível 2 = 200.
-- IT-5. Saciedade da comida "Básico 60, Refinado 80, Luxo 100". **Mudar:** pelo Tier, porque esses grupos deixaram de existir na IP2. Tier 1 = 60, Tier 2 = 80, Tier 3 = 90 e Tier 4 = 100.
-
-**V5-3. Combate e Batalha (7 propostas).**
-
-- CB-1. Os valores iniciais da fórmula de dano e acerto. **Confirmar** (a testar).
-- CB-2. A tabela de vantagem entre arma e armadura, com no máximo ±25%. **Confirmar.**
-- CB-3. Armadura mista: vale o peso mais frequente entre as três peças (empate: Média). **Confirmar.** Era a I-18 da revisão.
-- CB-4. Cerca de 40 combatentes ativos no combate local. **Confirmar** como valor a testar.
-- CB-5. Atributos da Milícia na Batalha (só na defesa da própria cidade). **Confirmar.**
-- CB-6. O tamanho visual dos soldados pode ser trocado nas Configurações, fora da batalha, sem mexer no save. **Confirmar.**
-- CB-7. Com a lei de Magia "Restrita", só Magos de Suporte nos Esquadrões. **Confirmar.**
-
-**V5-4. Guerra, Diplomacia e Viagem (9 propostas).**
-
-- GU-1. Uma companhia mercenária sem contrato fica na sede e vira notícia. **Confirmar.**
-- GU-2. Para pedir ao líder a cidade que tomou, o jogador precisa de Renome 40 (além da Opinião +30). **Confirmar.**
-- GU-3. Numa guerra com aliados, cada lado negocia pelo seu líder de guerra; os aliados saem junto. **Confirmar.**
-- GU-4. Assinar um tratado dá +5 de relação; cancelar um que ainda vale dá −10. **Confirmar.**
-- GU-5. A IA procura Aliança Defensiva com facções afins quando um vizinho tem 1,5 vez a força dela. **Confirmar.**
-- GU-6. Multiplicadores de infraestrutura na Viagem (selvagem, trilha, estrada...). **Confirmar.**
-- GU-7. Multiplicadores do tamanho do grupo (um Esquadrão conta como 100 pessoas). **Confirmar.**
-- GU-8. Tempo mínimo de 1 hora por Mapa Local. **Confirmar.**
-- GU-9. O progresso das entidades em trânsito avança por hora, e os encontros são sorteados ao entrar num mapa. **Confirmar.**
-
-**V5-5. Crime, Escravidão e Cultura (8 propostas).**
-
-- CJ-1. Lista inicial de crimes e gravidades. **Confirmar.**
-- CJ-2. A Criminalidade sobe com a infelicidade e a pobreza, e cai com os guardas. **Confirmar** (os pesos ficam a testar).
-- CJ-3. O trabalho forçado marca o NPC como Escravo com prazo; ao fim, ele volta à classe anterior. **Confirmar.**
-- CJ-4. A construção tem o atributo "Ilegal" e o dono guarda a Confiança no jogador. **Confirmar.** A V3-3 já usa isso.
-- CJ-5. Libertar um escravo dá +2 de reputação com a Religiosa. **Confirmar.**
-- CJ-6. Na primeira versão, só a Religiosa aplica o −10 de relação a quem mantém Mercado de Escravos. **Confirmar.**
-- CJ-7. A primeira lista de traços das 6 culturas (leis desejadas, rito, sucessão, pensamento extremo). **Confirmar** como base; as leis iniciais da V3-1 já saem dela.
-- CJ-8. O pensamento extremo é uma lei com valor ideal no limite e peso máximo. **Confirmar.**
-
-**V5-6. Notícias e Eventos (7 propostas).**
-
-- NE-1. A distância de uma notícia conta os passos no grafo dos 48 mapas, sem o terreno. **Confirmar.**
-- NE-2. Uma notícia além do alcance só chega se alguém da rede do jogador estiver dentro dele. **Confirmar.**
-- NE-3. A notícia ganha a versão mais precisa quando o jogador ou a rede dele chega mais perto. **Confirmar.**
-- NE-4. Preços fora da média: conferidos uma vez por dia; o mesmo item na mesma cidade só volta a ser notícia depois de 8 dias. **Confirmar.**
-- NE-5. Limite de 500 notícias ativas no mundo. **Confirmar.**
-- NE-6. No máximo 2 eventos negativos ativos ao mesmo tempo por cidade. **Confirmar.**
-- NE-7. Quatro focos de narrador. **Já decidida** (V3-5).
-
-**V5-7. Cidade, População, Felicidade e Cura (6 propostas).**
-
-- CI-1. NPCs reais por nível de cidade (15, 40, 100 e 300) e os outros valores iniciais da Cidade. **Confirmar.**
-- CI-2. A Senzala pertence ao dono dos escravos (cidade, Rico ou jogador). **Confirmar.**
-- CI-3. A Felicidade anda 10% por dia em direção ao alvo, sem pular. **Confirmar.**
-- CI-4. O Controle vai de 0 a 30. **Confirmar.**
-- CI-5. Regeneração por hora, maior dormindo ou descansando; em bloco no LOD 2; só fora de combate. **Confirmar.**
-- CI-6. O Hospital cura o grupo mediante pagamento; em LOD 2 é um serviço agregado da cidade. **Confirmar.** A V3-4 já deu os números.
-
-**V5-8. Interface, Início, Objetivo, Companheiros, Comércio, Reputação e Tecnologia (8 propostas).**
-
-- OU-1. A ordem de produção mostra os insumos que faltam e o tempo estimado; parada por falta de insumo, ela vai para a barra de alertas. **Confirmar.**
-- OU-2. Padrão das notificações: tudo ligado, com agrupamento; acima de 4x, só Aviso e Crítico; o Crítico pausa. **Confirmar.**
-- OU-3. O estilo de início é um conjunto de dados lido de arquivo. **Já decidida** (moldes da V4-8).
-- OU-4. Classe típica de cada título (Plebeu = Civil, Cavaleiro = Rico, Nobre = Nobreza...). **Confirmar.**
-- OU-5. Companheiros vinculados: 10 + Renome ÷ 5 + 3 por cidade do jogador. **Confirmar.**
-- OU-6. Cada Cavalo dá +100 de capacidade de peso à caravana. **Confirmar.**
-- OU-7. As Vilas Livres começam com reputação 0 para todos. **Confirmar.**
-- OU-8. Pontos de Pesquisa por trabalhador por dia = Inteligência ÷ 50 × multiplicador do nível do Laboratório. **Confirmar** (a testar).
-
-**V5-9. O formato da ficha técnica lógica da fatia vertical.**
-
-- *Contexto:* depois da V5, a revisão termina e começa a **ficha técnica lógica**: o documento que traduz os sistemas em **estruturas, dados e regras** que o código vai seguir. Ela cobre só a fatia vertical, a vila de 15 NPCs da V2-12. O autor tem pouca experiência em C++.
+- *Contexto:* a Arquitetura diz "1 personagem controlável", mas não o que ele faz. Isso decide quais sistemas a fatia testa de verdade.
 - *Opções:*
-  - (a) **um documento único**, só da fatia vertical, em linguagem simples, com tabelas e sem código de verdade;
-  - (b) um documento por sistema, já para o jogo inteiro: mais completo, mas muito maior, e a maior parte não entra na fatia vertical;
-  - (c) ir direto ao código, explicando enquanto programa: mais rápido, mas sem um mapa para consultar.
-- *Sugestão:* (a), com estas partes:
-  1. **Entidades e componentes:** o que existe (NPC, construção, cidade, item, pilha) e os campos de cada um, com o tipo: número inteiro, número com vírgula, texto, lista.
-  2. **Arquivos de dados:** quais arquivos `data/` a fatia lê (itens, receitas, construções, eventos) e um exemplo de cada.
-  3. **O ciclo do tempo:** o que roda a cada tick, a cada hora, a cada dia e a cada estação, e em que ordem (rotina → produção → consumo → mercado → Felicidade → eventos).
-  4. **As regras como receitas de bolo:** cada fórmula em passos numerados ("1. some os salários; 2. ...").
-  5. **Save:** o que é gravado.
-  6. **Os testes:** o teste de 1 ano sem tela e o que ele mede.
-  7. **Os marcos de programação**, na ordem da Arquitetura, com o que fica pronto em cada um.
+  - (a) **só observar:** o personagem anda e compra no Mercado. É simples, mas não testa as ordens, os salários do jogador nem o Dono dos itens;
+  - (b) **dono de uma construção:** além de andar e comprar, ele tem uma Carpintaria própria;
+  - (c) **prefeito da vila:** controla todas as construções. Testa mais coisas, mas muda o jogo (no jogo completo, o jogador não manda na cidade da IA).
+- *Sugestão:* (b). O jogador começa com **100 moedas** e uma **Carpintaria nível 1 própria** (2 vagas). Ele pode:
+  - contratar desempregados;
+  - escolher o nível de salário (Baixo, Normal, Alto);
+  - dar ordens (Fazer N, Manter estoque, Repetir);
+  - fixar o preço na faixa de ±30%;
+  - andar, comprar e vender no Mercado.
 
-  A ficha vai num documento novo, `Ficha Técnica/Fatia Vertical.md`, e também em rodadas de perguntas, quando aparecer uma escolha.
-- *Impacto:* fecha a revisão; prepara o início do código.
+  Isso testa o atributo Dono, a fila de ordens, os salários do jogador e a venda para os NPCs. Os Móveis de Madeira dele são os Materiais Básicos da vila.
+- *Impacto:* ficha (componentes Controlado e Dono), Interface (painel da construção), Trabalho, Econômico.
+
+**FT1-2. A Felicidade da fatia vertical.**
+
+- *Contexto:* o [[Sistema de Felicidade e Estabilidade/Descrição|Felicidade]] tem 11 fatores, com faixas, mas sem as contas. A fatia não tem leis, crime, guerra nem religião.
+- *Sugestão:* só **4 fatores**, dentro das faixas que já existem:
+
+| Fator | Conta |
+|---|---|
+| Consumo atendido | −25 × a fração de NPCs sem comida no dia; −5 se os Materiais Básicos estão em déficit; até +5 pelo gasto extra |
+| Desemprego e renda | +10 − 20 × a taxa de desemprego, limitado entre −10 e +10 |
+| Moradia | −10 × a fração de NPCs sem casa |
+| Eventos duradouros | A soma dos eventos ativos, limitada entre −20 e +20 |
+
+  - Alvo = 50 + a soma; a Felicidade anda 10% por dia na direção do alvo.
+  - *Exemplo:* comida para todos, Materiais em dia, 2 de 15 desempregados (13%), todos com casa, sem evento: 50 + 0 + 7,3 + 0 + 0 = 57,3.
+  - Os outros fatores entram quando os sistemas deles entrarem.
+- *Impacto:* ficha (regra 4.8), Felicidade, Eventos (Fome).
+
+**FT1-3. Movimento e busca de caminho.**
+
+- *Contexto:* a Arquitetura prevê grade espacial e busca de caminho, sem detalhe.
+- *Opções:*
+  - (a) **A\* em 8 direções** (diagonal com custo 1,4), um caminho calculado por destino. A\* é o método mais usado em jogos de grade e fácil de achar explicado;
+  - (b) 4 direções: ainda mais simples, mas os NPCs andam em "L", o que fica feio;
+  - (c) mapas de fluxo (*flow fields*): ótimos para milhares de soldados, mas é coisa para a batalha, não para a fatia.
+- *Sugestão:* (a). Mais:
+  - na fatia, os NPCs **não colidem** entre si (passam um pelo outro), para simplificar;
+  - cada NPC calcula no máximo **1 caminho por destino**, e o cálculo é distribuído entre os ticks.
+- *Impacto:* ficha (regra 4.10), Arquitetura, Combate (mais tarde).
+
+**FT1-4. O mapa da fatia e a câmera.**
+
+- *Contexto:* os tiles são de 16 × 16 px e os bonecos de 16 × 24 ([[Pipeline de Arte e Conteúdo/Descrição|Pipeline]]); o autor joga em 1600 × 900. A vila de nível 1 tem 8 lotes pequenos e 3 médios.
+- *Sugestão:*
+  - **Mapa de 64 × 64 tiles** (1.024 × 1.024 px).
+  - **Zoom em números inteiros:** 2x, 3x e 4x (padrão 3x). Um número quebrado borra a pixel art. A 3x, a tela mostra cerca de 33 × 19 tiles.
+  - **Câmera** com WASD ou setas e roda do mouse para o zoom; arrastar com o botão do meio.
+  - **Lotes:** pequeno de 4 × 4 tiles; médio de 6 × 6; grande de 8 × 8.
+  - **Recursos no mapa:** um campo de Grão, um poço (Água) e um bosque (Tora).
+- *Impacto:* ficha (Mapa Local), Pipeline (o mapa a desenhar no Tiled), Interface (controles).
+
+**FT1-5. A ordem dos sistemas no dia.**
+
+- *Contexto:* várias regras rodam uma vez por dia, e a ordem muda o resultado. Por exemplo, consumir antes ou depois de pagar o salário.
+- *Sugestão:* a **virada do dia às 0h**, quando só o turno da noite está acordado. A ordem é a da ficha (parte 3):
+  1. consumo;
+  2. salários;
+  3. Mercado Local;
+  4. estabilizador;
+  5. dias em déficit e Felicidade;
+  6. eventos;
+  7. IA da produção.
+
+  A ordem vem de um arquivo de dados, para ser trocada nos testes sem mexer no código.
+- *Impacto:* ficha (parte 3), Tempo.
+
+**FT1-6. O teste de 1 ano sem tela.**
+
+- *Contexto:* a V2-12 definiu o critério (sem fome, Banco sem zerar, Pão entre 1,2 e 2,6); falta como rodar e como ler.
+- *Sugestão:*
+  - **Comando:** `jogo --simular 64 --semente 1`. Ele roda 64 dias na velocidade máxima, sem janela, e grava `relatorio.csv`.
+  - **Relatório:** uma linha por dia, com estoque de cada item, preço do Pão, Banco, riqueza média, Felicidade, empregados e eventos. O autor abre no LibreOffice e faz um gráfico.
+  - **Resultado:** no fim, o jogo escreve PASSOU ou FALHOU, com o motivo ("fome por 4 dias seguidos no dia 37").
+  - **Repetição:** a mesma semente tem que dar o mesmo relatório.
+- *Impacto:* ficha (parte 6), Arquitetura (marco 7).
+
+**FT1-7. O ambiente de programação.**
+
+- *Contexto:* já estão instalados o g++, o CMake, o Ninja e o Git; o VS Code foi escolhido para os dados (P-3). O autor tem pouca experiência em C++, e o primeiro dia de código também aprova as bibliotecas (A-2).
+- *Sugestão:*
+  - **Editor:** **VS Code**, com as extensões grátis "C/C++" e "CMake Tools", que dão autocompletar, botão de compilar e depurador.
+  - **Depurador:** o **gdb**, que vem com o MinGW. Ele deixa parar o programa numa linha e olhar os valores.
+  - **Primeiro passo de código:** um "olá, janela" com o SDL3, compilado pelo CMake, para provar que tudo funciona. Nesse dia se aprovam as bibliotecas.
+  - **Organização:** uma pasta `codigo/` no mesmo repositório, separada da documentação.
+- *Impacto:* Arquitetura, Pipeline (ferramentas), Retomada (cuidados técnicos).
 
 Depois das respostas:
 
-- tirar as marcações confirmadas e aplicar as mudanças (IT-4, IT-5);
-- marcar a [[Revisão Completa]] como concluída;
-- atualizar o [[Estado do Projeto]];
-- começar a ficha técnica.
+- atualizar a ficha;
+- tirar as marcações confirmadas;
+- decidir se a ficha está pronta para começar o marco 1.
 
 ## 5. Fatos que valem lembrar
 
@@ -235,6 +229,8 @@ Depois das respostas:
   - **interface:** fonte Noto Sans;
   - **PC mínimo:** 4 núcleos, 8 GB, OpenGL 3.3 e 2 GB de vídeo;
   - **conteúdo:** **moldes de conteúdo** prontos e listas nas rodadas C1 a C3 (ideia do autor).
+- **Propostas (V4 e V5):** todas confirmadas. Fundar facção custa 2.000 moedas; dados em JSON e CSV; marco da simulação sem tela; capacidade das construções de 100, 200 ou 400 × nível; Saciedade pelo Tier.
+- **Ficha técnica:** [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]], com entidades e componentes, arquivos de dados, ciclo do tempo, regras passo a passo, save, testes e marcos. **1 tick = 4,5 s de jogo** (correção da V2-11); 1 hora = 800 ticks.
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 

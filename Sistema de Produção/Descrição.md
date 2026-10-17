@@ -48,7 +48,7 @@ A produção é baseada em **construções**, desenvolvidas junto com o [[Sistem
 | Insumo opcional (opcional) | Gasto só se houver, com um bônus (IP3-2) | — (na Fazenda: Adubo, +25%) |
 
 - **Ciclo:** os insumos saem do inventário da cidade quando o ciclo começa, e o produto entra quando ele termina. Sem insumos, o ciclo não começa.
-- **[Proposta]** Um ciclo interrompido (fim do turno, falta de trabalhador) guarda o progresso em horas e continua depois; os insumos já gastos não voltam.
+- Um ciclo interrompido (fim do turno, falta de trabalhador) guarda o progresso em horas e continua depois; os insumos já gastos não voltam.
 
 ## Uma família de produtos por construção
 
@@ -101,7 +101,7 @@ Uma **escada padrão** para todas as construções de transformação (Manufatur
 
 O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três valores:
 
-1. o teto do **material** (Ferro 3, Aço 4, Aço Mágico 5). **[Proposta]** Na prática, é o máximo da faixa do item na lista do [[Sistema de Itens/Descrição|Sistema de Itens]] (a "Espada Curta de Ferro (Rank 1-3)" tem teto 3), o que também vale para itens sem metal, como as roupas;
+1. o teto do **material** (Ferro 3, Aço 4, Aço Mágico 5). Na prática, é o máximo da faixa do item na lista do [[Sistema de Itens/Descrição|Sistema de Itens]] (a "Espada Curta de Ferro (Rank 1-3)" tem teto 3), o que também vale para itens sem metal, como as roupas;
 2. o teto do **nível** da construção (tabela acima);
 3. o Rank pela **habilidade** do trabalhador: **1 + habilidade de Trabalho ÷ 25**, arredondado para baixo (0 a 24 = 1; 25 a 49 = 2; 50 a 74 = 3; 75 a 99 = 4; 100 = 5). Conta a habilidade de Trabalho da receita (Manufaturado ou Especialista).
 
@@ -109,7 +109,7 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 - **Em LOD 2:** usa a habilidade média dos trabalhadores, sem sorte.
 - *Exemplo:* um Ferreiro com Trabalho Especialista 60, num Ferreiro nível 4, fazendo Espada de Ferro: habilidade dá 3, nível dá 4, material dá 3 → **Rank 3**. Com Aço, o material deixa 4, mas a habilidade continua dando 3.
 - Itens com **Tier** (materiais, comida) não têm qualidade: a habilidade só acelera.
-- O Rank 0 não sai da produção: fica para itens quebrados ou improvisados **[Proposta]**.
+- O Rank 0 não sai da produção: fica para itens quebrados ou improvisados.
 
 ## Escala: o que 1 NPC real produz e consome
 
@@ -136,7 +136,7 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 
 - **Velocidade do trabalhador** = 0,5 + habilidade ÷ 100 (habilidade 0 = metade; 50 = normal; 100 = 1,5 vez).
 - **Nível acima do mínimo da receita:** +10% por nível.
-- **[Proposta]** Horas reais de um ciclo = horas da receita ÷ (velocidade × (1 + 0,1 × níveis acima do mínimo)). Vários trabalhadores na mesma construção fazem ciclos separados, ao mesmo tempo.
+- Horas reais de um ciclo = horas da receita ÷ (velocidade × (1 + 0,1 × níveis acima do mínimo)). Vários trabalhadores na mesma construção fazem ciclos separados, ao mesmo tempo.
 - Na produção **Braçal**, a estação e o bioma multiplicam o resultado ([[Sistema de Clima e Estações/Descrição|Clima e Estações]]); a produtividade base de cada recurso fica para a rodada V2.
 - *Exemplo:* um Cozinheiro com habilidade 50 trabalha 8 horas e faz 8 Pães (Tier 1) por dia; uma cidade de 100 NPCs precisaria de cerca de 12 a 18 cozinheiros, ou de comidas que rendem mais por hora (a IP3 equilibra). As horas do turno vêm da rotina (rodada V2).
 
@@ -151,7 +151,7 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 > **nota = (preço local do produto − custo dos insumos) × (1 + déficit da cidade naquele item)**
 
 - A **comida tem prioridade** quando o estoque cai abaixo de 3 dias de consumo.
-- **[Proposta]** O déficit vai de 0 (estoque cobre a demanda) a 1 (estoque zerado), pelo mesmo contador de dias em déficit da [[Sistema de Classe Social/Descrição|Classe Social]].
+- O déficit vai de 0 (estoque cobre a demanda) a 1 (estoque zerado), pelo mesmo contador de dias em déficit da [[Sistema de Classe Social/Descrição|Classe Social]].
 - *Exemplo:* um Ferreiro de um Rico pode fazer Lança de Ferro (lucro 20) ou Grilhões (lucro 12). A cidade não tem Grilhões (déficit 1): nota da Lança = 20 × 1 = 20; dos Grilhões = 12 × 2 = 24. Ele faz Grilhões.
 
 ## Limites de complexidade

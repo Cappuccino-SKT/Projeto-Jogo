@@ -36,7 +36,7 @@ A cidade precisa de um **Posto Comercial** (construção nova; ver [[Sistema de 
 
 | Parte | Função |
 |---|---|
-| **Animais de carga** | Capacidade, por peso: o **Cavalo**, item do tipo Animal desde a revisão V1-3 (**[Proposta]** +100 de capacidade de peso por Cavalo; ver [[Sistema de Itens/Descrição\|Itens]]) |
+| **Animais de carga** | Capacidade, por peso: o **Cavalo**, item do tipo Animal desde a revisão V1-3 (+100 de capacidade de peso por Cavalo; ver [[Sistema de Itens/Descrição\|Itens]]) |
 | **Guardas contratados** | Defesa; viram NPCs de verdade só quando a caravana passa por um mapa em LOD 0 ou 1 ([[Sistema de Viagem/Descrição\|Viagem]]) |
 | **Manutenção** | Comida e salário dos guardas |
 

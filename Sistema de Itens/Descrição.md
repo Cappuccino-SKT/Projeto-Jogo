@@ -153,7 +153,7 @@ Não é equipado por NPCs: faz parte do Equipamento de um Esquadrão. Cada tipo 
 
 ### Intervalo de Ataque
 
-Cada arma da lista precisa de um valor. **[Proposta]** Definir por tipo de arma (Espada e Lança rápidas; Machado e Clava lentas; Besta e armas de fogo muito lentas) e ajustar por Rank nos testes.
+Cada arma da lista precisa de um valor. Definir por tipo de arma (Espada e Lança rápidas; Machado e Clava lentas; Besta e armas de fogo muito lentas) e ajustar por Rank nos testes.
 
 ### Encantamento
 
@@ -225,7 +225,7 @@ Cada arma existe em três materiais: **Ferro (Rank 1-3)**, **Aço (Rank 1-4)** e
 | Cajado (arma mágica) | Cajado Simples de Madeira (1-2) e de Cobre (1-3); Cajado Arcano de Aço (1-4) e de Aço Mágico (1-5); **Cetro** de Aço Mágico (1-4) |
 | Munição | **Flecha** (1-3), **Virote** (1-3, da besta), **Cartucho** (1-3, bala com a pólvora em papel), **Bala de Canhão** (1-3) |
 
-- **[Proposta]** O **Cetro** é um cajado de uma mão, que deixa usar Escudo, com dano 25% menor.
+- O **Cetro** é um cajado de uma mão, que deixa usar Escudo, com dano 25% menor.
 - O cobre continua como insumo das armas de fogo, nas peças de latão (IP3).
 - Nenhuma animação nova: o Arcabuz, a Carabina e o Fuzil Raiado usam a do Mosquete, e o Cetro usa a do Cajado.
 
@@ -260,7 +260,7 @@ As roupas são organizadas em **conjuntos pelo papel social**:
 | Nobre | Chapéu Nobre | Túnica Nobre | Calça Nobre | Tecido de Algodão | 1-4 |
 | Realeza | Coroa (de Ouro, Artesão) | — | — | Barra de Ouro | 1-5 |
 
-- **[Proposta]** O conjunto Furtivo dá bônus de **Destreza** (ocultação), útil ao Ladrão; o Mercador e o Nobre dão bônus de **Carisma**. Os valores ficam para a V2.
+- O conjunto Furtivo dá bônus de **Destreza** (ocultação), útil ao Ladrão; o Mercador e o Nobre dão bônus de **Carisma**. Os valores ficam a testar.
 
 | Peça | Itens (Rank) | Construção |
 |---|---|---|

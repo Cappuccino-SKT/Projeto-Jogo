@@ -199,6 +199,6 @@ O porte de cada construção está na [[Sistema de Construção/Descrição|Cons
 1. **Valores a testar:** taxas de natalidade e mortalidade, vida em anos de jogo, capacidade por tipo de moradia, limiares de Felicidade, custo de subir de nível.
 2. **Lotes:** decididos na V3-8 (valores a testar).
 3. **Atratividade da migração:** pesos de Felicidade, emprego, moradia e comida (o emprego vem do [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
-4. **Senzala:** abriga 8 NPCs no nível 1, mais 4 por nível (V2-8). **[Proposta]** Pertence ao dono dos escravos (cidade, Rico ou jogador).
+4. **Senzala:** abriga 8 NPCs no nível 1, mais 4 por nível (V2-8). Pertence ao dono dos escravos (cidade, Rico ou jogador).
 5. **Moradia dos Controlados:** quarto na Taverna ou Casa do jogador (rodada V3-8).
 6. **Crianças decorativas:** não na primeira versão (rodada V3-8).

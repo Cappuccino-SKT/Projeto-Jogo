@@ -105,7 +105,7 @@ Todos esses elementos são ajustáveis (ver acima).
 ### Ordens de produção
 
 - No painel de cada construção do jogador, uma **fila de ordens** no estilo RimWorld: **Fazer N**, **Manter estoque de N** e **Repetir sempre**, cada uma com prioridade (rodada IP1-7; ver [[Sistema de Produção/Descrição|Produção]]).
-- **[Proposta]** Cada ordem mostra os insumos que faltam e o tempo estimado; uma ordem parada por falta de insumo vai para a barra de alertas.
+- Cada ordem mostra os insumos que faltam e o tempo estimado; uma ordem parada por falta de insumo vai para a barra de alertas.
 
 ---
 
@@ -135,7 +135,7 @@ Seguem os níveis definidos nos [[Sistema de Eventos/Descrição|Eventos]] (Info
 
 Há uma categoria **Notícias** para as notícias do mundo que chegam ao jogador (ver [[Sistema de Notícias/Descrição|Notícias]]).
 
-**[Proposta]** padrão: tudo ligado, agrupamento ativo, só Aviso e Crítico acima de 4x, e Crítico pausa. **[Refinar depois]** lista exata de opções.
+Padrão: tudo ligado, agrupamento ativo, só Aviso e Crítico acima de 4x, e Crítico pausa. **[Refinar depois]** lista exata de opções.
 
 ### "Por quê?"
 

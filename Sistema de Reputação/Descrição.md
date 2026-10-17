@@ -88,7 +88,7 @@ Valores iniciais, a testar:
 | Estilo Nobre exilado | −30 na facção que derrubou a dinastia dele |
 | Estilo Escravo | −20 com o dono e a facção dele |
 
-As afinidades estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. *Exemplo:* um Mago de cultura Arcana começa com +20 na Arcana, 0 na Guerreira e −15 na Religiosa e na Tecnocrata. **[Proposta]** As Vilas Livres começam em 0 para todos.
+As afinidades estão no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. *Exemplo:* um Mago de cultura Arcana começa com +20 na Arcana, 0 na Guerreira e −15 na Religiosa e na Tecnocrata. As Vilas Livres começam em 0 para todos.
 
 ### Opinião dos NPCs Importantes
 

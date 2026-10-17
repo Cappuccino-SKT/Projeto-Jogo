@@ -47,7 +47,7 @@ O resultado é limitado entre 0 e 100.
 
 ### Inércia
 
-- A Felicidade **não pula** para o alvo: a cada dia ela anda uma fração em direção a ele (**[Proposta]** 10% por dia).
+- A Felicidade **não pula** para o alvo: a cada dia ela anda uma fração em direção a ele (10% por dia).
 - Isso evita oscilação, dá tempo de o jogador reagir e combina com a histerese dos eventos.
 - Em **LOD 2**, aplica-se o efeito acumulado de uma estação (16 dias) de uma só vez.
 
@@ -93,7 +93,7 @@ Essas reações são **eventos condicionais** (ver [[Sistema de Eventos/Descriç
 ### Controle
 
 - O **Controle** vem de **guardas**, **Esquadrões estacionados** e do **Medo** agregado da cidade (ver [[Sistema de IA/Descrição|Sistema de IA]]).
-- **[Proposta]** vale de 0 a 30.
+- Vale de 0 a 30.
 - **Custo:** guardas e guarnição custam dinheiro (Banco da Cidade e da Facção) e **reduzem a Felicidade das classes baixas** (Escravo e Civil), menos nas culturas Autoritárias, que aprovam isso nas leis desejadas. Assim reprimir tem preço.
 
 ### Estabilidade e revolta

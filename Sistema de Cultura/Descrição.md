@@ -43,7 +43,7 @@ Cada traço define valores padrão de:
 - **Regra de sucessão**;
 - **tendências de Personalidade** dos NPCs.
 
-**[Proposta]** Primeira lista de traços, partindo das ideologias que você já escolheu. São exemplos para discutir, não definições finais.
+Primeira lista de traços, partindo das ideologias que você já escolheu. Confirmada como base na rodada V5 (CJ-7); os traços finais podem mudar com a história.
 
 | Traço | Leis desejadas (exemplos) | Rito de Admissão | Sucessão | Pensamento extremo (exemplo) |
 |---|---|---|---|---|
@@ -65,7 +65,7 @@ Cada traço define valores padrão de:
 
 Toda cultura tem **pelo menos um pensamento extremo**: uma ideia levada ao limite que a distingue de qualquer outra.
 
-**[Proposta]** Mecânica: um pensamento extremo é uma **lei com valor ideal no limite e peso máximo**. Efeitos:
+Mecânica: um pensamento extremo é uma **lei com valor ideal no limite e peso máximo**. Efeitos:
 
 - Se a facção desrespeita o pensamento extremo, a Felicidade das cidades dessa cultura cai muito mais que o normal, e o risco de revolta sobe.
 - Se a facção respeita, a cultura recebe um bônus próprio ligado ao tema.

@@ -35,7 +35,7 @@ As estações mudam a produção Braçal, o clima do dia, a viagem, a guerra e a
 
 A frequência do tick é amarrada ao **LOD do Mapa Local**, em vez de um valor fixo global:
 
-- **LOD 0:** **20 ticks por segundo real** a 1x, em passo fixo (1 tick = 2 s de jogo). A 4x, 80 ticks por segundo.
+- **LOD 0:** **20 ticks por segundo real** a 1x, em passo fixo (1 tick = 4,5 s de jogo: a 1x, 1 s real = 90 s de jogo, dividido por 20 ticks). A 4x, 80 ticks por segundo.
 - **LOD 1:** 1 vez a cada **10 ticks** (2 por segundo).
 - **LOD 2:** 1 vez por **hora de jogo** (a cada 40 s reais a 1x); a economia é somada por dia e por estação.
 

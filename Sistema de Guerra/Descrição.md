@@ -93,7 +93,7 @@ Mover, atacar exército, cercar cidade, saquear, guarnecer, seguir exército ali
 - **Vão embora** se o pagamento atrasa ou se o Placar do contratante fica abaixo de −50.
 - Trabalham para facções de IA (ricas e em guerra) e para o jogador.
 - O jogador dono de cidade, mesmo independente, também usa o próprio Quartel e a própria Conscrição.
-- **[Proposta]** Uma companhia sem contrato fica na sede e aparece nas Notícias ("Companhia X procura contrato na Vila Livre do Norte").
+- Uma companhia sem contrato fica na sede e aparece nas Notícias ("Companhia X procura contrato na Vila Livre do Norte").
 
 ## Suprimento
 
@@ -142,7 +142,7 @@ Uma cidade tomada fica **ocupada** até a paz; só o tratado muda a facção del
   - a população mantém a cultura, e a Cultura dominante da facção muda aos poucos, por estação ([[Sistema de Cultura/Descrição|Cultura]]);
   - Felicidade −15 "conquistada", que some em 1 ano;
   - os nobres antigos viram exilados.
-- **Cidade tomada pelo jogador a serviço de uma facção:** vai para o líder. O jogador pode pedi-la; o líder aceita se a Opinião sobre o jogador for **+30 ou mais** e o Renome for alto (como em Mount & Blade). **[Proposta]** Renome 40 ou mais.
+- **Cidade tomada pelo jogador a serviço de uma facção:** vai para o líder. O jogador pode pedi-la; o líder aceita se a Opinião sobre o jogador for **+30 ou mais** e o Renome for alto (como em Mount & Blade). Renome 40 ou mais.
 
 Uma cidade pertence a uma facção "por conquista" quando a conquista é confirmada no tratado ou pela posse de fato.
 
@@ -199,7 +199,7 @@ Cada termo tem um custo; o vencedor exige termos até o total do Placar.
 - **Trégua obrigatória de 1 ano** entre os dois. Quebrar a trégua: −50 de relação com todos e −30 de Confiabilidade.
 - A IA aceita se o Placar contra ela cobre o custo, ou se o Cansaço dela é alto.
 - *Exemplo:* com Placar +45, o vencedor exige "Ceder Cidade (30) + Tributo (15)".
-- **[Proposta]** Numa guerra com aliados, cada lado negocia pelo seu líder de guerra (quem declarou ou quem foi atacado); os aliados saem junto.
+- Numa guerra com aliados, cada lado negocia pelo seu líder de guerra (quem declarou ou quem foi atacado); os aliados saem junto.
 
 ## Defesa de cidade
 

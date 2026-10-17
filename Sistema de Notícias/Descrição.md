@@ -21,7 +21,7 @@ Os valores numéricos são iniciais e ficam em dados (`noticias.json`) para ajus
 
 Toda notícia **nasce num Mapa Local, numa hora**. Ela chega a cada outro mapa depois de **3 horas por mapa de distância**, o passo de um mensageiro a cavalo. Atravessar o mundo (8 mapas) leva **1 dia**.
 
-- **Distância:** número de passos no grafo de 48 mapas, sem contar o terreno. **[Proposta]**
+- **Distância:** número de passos no grafo de 48 mapas, sem contar o terreno.
 - O jogador recebe a notícia quando ela chega:
   - ao mapa onde ele está; **ou**
   - a um lugar da **rede dele**: as cidades dele (os governadores informam), os companheiros fora do grupo e as caravanas dele.
@@ -41,7 +41,7 @@ Cada notícia tem uma **importância**, que define **até onde ela vai** e **qua
 
 - As notícias **nascem dos eventos e das decisões** que já guardam o "Por quê?": Eventos, Guerra, Diplomacia, Comércio, Religião, Clima, Viagem e os contratos do Objetivo.
 - **Não há texto novo para escrever:** o modelo de frase vem do próprio evento ("A Facção Guerreira declarou guerra à Autoritária. Motivo: mapa em disputa (2,2).").
-- **[Proposta]** Uma notícia além do alcance não chega àquele mapa; o jogador só a vê se alguém da rede dele estiver dentro do alcance.
+- Uma notícia além do alcance não chega àquele mapa; o jogador só a vê se alguém da rede dele estiver dentro do alcance.
 
 ## Onde o jogador vê as notícias
 
@@ -66,7 +66,7 @@ A notícia perde detalhe com a distância **entre a origem e onde o jogador a re
 | 3 a 5 mapas | Arredondados | "cerca de 2.000 soldados" |
 | 6 mapas ou mais | Vagos | "um grande exército" |
 
-- **[Proposta]** A notícia ganha a versão mais precisa quando o jogador chega mais perto ou quando alguém da rede dele, mais perto, a recebe.
+- A notícia ganha a versão mais precisa quando o jogador chega mais perto ou quando alguém da rede dele, mais perto, a recebe.
 - **Boatos falsos** ficam para o futuro, para não frustrar na primeira versão. **[Refinar depois]**
 
 ## Preços como notícia
@@ -74,7 +74,7 @@ A notícia perde detalhe com a distância **entre a origem e onde o jogador a re
 - Quando um item fica **30% acima ou abaixo** da média da facção numa cidade, nasce uma notícia **Local** ("Grão caro na Capital Guerreira, +45%").
 - Ao chegar, ela atualiza a **tabela de preços conhecidos** do jogador para aquele item, com a data.
 - **Caravanas e companheiros comerciantes** do jogador trazem a **tabela completa** da cidade de onde vêm.
-- **[Proposta]** Verificado uma vez por dia; o mesmo item na mesma cidade só vira notícia de novo depois de 8 dias, para não encher o quadro.
+- Verificado uma vez por dia; o mesmo item na mesma cidade só vira notícia de novo depois de 8 dias, para não encher o quadro.
 - Dá ao jogador rotas de comércio sem visitar tudo ([[Sistema de Comércio/Descrição|Comércio]], [[Sistema Econômico/Descrição|Econômico]]).
 
 ## A IA e as notícias
@@ -90,7 +90,7 @@ A notícia perde detalhe com a distância **entre a origem e onde o jogador a re
 - **Dados:** `noticias.json` com o tempo por mapa, as importâncias (alcance e prazo no quadro), as faixas de precisão, o limiar dos preços e o modelo de frase de cada tipo de notícia que não venha de um evento.
 - **Registro da notícia:** ID, tipo, importância, mapa e hora de origem, causas (o "Por quê?"), números (para a precisão), hora de chegada em cada mapa (48 valores) e prazo.
 - **Frequência:** a chegada é conferida por hora de jogo, comparando horas; nada roda por tick.
-- **Memória:** as notícias saem da lista ao fim do prazo; as Regionais e Mundiais que o jogador soube passam para a Crônica do mundo. **[Proposta]** Limite de 500 notícias ativas no mundo.
+- **Memória:** as notícias saem da lista ao fim do prazo; as Regionais e Mundiais que o jogador soube passam para a Crônica do mundo. Limite de 500 notícias ativas no mundo.
 - **Save:** notícias ativas, a Crônica do mundo e a tabela de preços conhecidos do jogador com as datas.
 - **Depuração:** painel (Dear ImGui) com as notícias ativas, a origem e a hora de chegada em cada mapa.
 - **Fatia vertical:** não usa (uma cidade só).

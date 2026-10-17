@@ -105,7 +105,7 @@ Fecha a pergunta em aberto da Felicidade (fuga e rebelião local de Escravos).
 
 ## Libertação e abolição
 
-- **O dono liberta** (botão "Libertar"): o NPC vira **Civil e Plebeu**, e o libertado ganha **+20 de Opinião** sobre o jogador. **[Proposta]** +2 de reputação com a Religiosa; −5 com as facções escravistas (já decidido).
+- **O dono liberta** (botão "Libertar"): o NPC vira **Civil e Plebeu**, e o libertado ganha **+20 de Opinião** sobre o jogador. +2 de reputação com a Religiosa; −5 com as facções escravistas (já decidido).
 - **Alforria:** nas facções com a lei de **Tolerância** religiosa, 1% dos escravos da cidade compram a liberdade por estação; na Escravista, 0% ([[Sistema de Religião/Descrição|Religião e Fé]]).
 - **Abolição:** a facção muda a lei de Escravidão para "proibida" na assembleia.
   - Todos os Escravos viram **Civis em 1 estação**.
@@ -128,7 +128,7 @@ Fecha a pergunta em aberto da Felicidade (fuga e rebelião local de Escravos).
 - **Tráfico onde é proibido:** é **Contrabando** (gravidade 3). Escravos só são vendidos em lojas ilegais (mercado negro), com o preço × 1,5.
 - **Libertar escravo alheio:** crime "Fuga ou ajuda a escravo" (gravidade 3); na Escravista, gravidade 5 (crime cultural).
 - **Reputação do jogador:** cada venda de escravo dá −3 com a Religiosa; cada compra, −1; libertar dá +2.
-- **Diplomacia:** facções que proíbem a escravidão têm −10 de relação com as que mantêm Mercado de Escravos. **[Proposta]** Na primeira versão, só a Religiosa aplica esse −10, por já ser hostil à Escravista ([[Sistema de Diplomacia/Descrição|Diplomacia]]).
+- **Diplomacia:** facções que proíbem a escravidão têm −10 de relação com as que mantêm Mercado de Escravos. Na primeira versão, só a Religiosa aplica esse −10, por já ser hostil à Escravista ([[Sistema de Diplomacia/Descrição|Diplomacia]]).
 - **Missões:** da Religiosa, libertar caravanas de escravos; da Escravista, recapturar fugitivos e escoltar carregamentos.
 
 ### Narcóticos (ideia do autor, rodada V3-1)

@@ -112,7 +112,7 @@ Chance final = **chance base × modificadores** declarados no próprio JSON. O m
 ### Evitando sequências injustas
 
 - **Cooldown** por evento e por escopo.
-- **Limite de eventos negativos ativos** ao mesmo tempo por cidade. **[Proposta]** valor inicial 2, a ajustar em testes.
+- **Limite de eventos negativos ativos** ao mesmo tempo por cidade. valor inicial 2, a ajustar em testes.
 - O Narrador reforça isso para o jogador (ver abaixo).
 
 ### Eventos positivos
@@ -209,12 +209,7 @@ O jogador escolhe um narrador no início do jogo. **O narrador é a dificuldade 
 | A Corte | Política, intrigas e sucessão | Nobre exilado, Membro de facção |
 
 - **Intensidade:** um controle separado, de 50% a 150% (padrão 100%), que multiplica a tensão. O foco muda **o quê**; a intensidade muda **quanto**.
-- **[Proposta]** Quatro focos iniciais, com os nomes a definir:
-  - **Natureza:** clima, saúde, fauna e sorte.
-  - **Política:** visitantes, embaixadas, pedidos e rumores, mais pressão social.
-  - **Ameaça:** saques, bandos e perigos de fora.
-  - **Comércio:** mercadores, ofertas e oportunidades de negócio.
-- **[Em aberto]** Se existe também um controle separado de intensidade.
+- Os quatro focos antigos (Natureza, Política, Ameaça e Comércio) viraram os 4 narradores acima (rodada V3-5), e a intensidade é um controle separado.
 
 ### Ofertas e pedidos
 

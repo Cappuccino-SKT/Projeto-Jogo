@@ -61,6 +61,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Objetivo e Progressão/Descrição|Objetivo e Progressão]] — Ambições, Renome, títulos, missões, masmorras
 - [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]
 - [[Interface/Descrição|Interface e Controles]] — HUD personalizável, painéis, notificações
+- [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]] — estruturas, dados e regras da primeira versão jogável
 - [[Arquitetura/Descrição|Arquitetura]] — decisões técnicas e fatia vertical; [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] — fichas padrão de cada tipo de conteúdo
 - [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]] — programas, especificação da arte, ordem de produção e peso da arte
 

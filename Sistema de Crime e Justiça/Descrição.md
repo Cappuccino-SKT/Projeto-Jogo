@@ -14,7 +14,7 @@ Quase tudo aqui é configurável **por lei da facção**: cada facção decide o
 - Cada crime tem uma **gravidade de 1 a 5**.
 - Cada facção define, na lei **Crimes e penas**, quais crimes valem e qual a pena de cada um.
 
-**[Proposta]** Lista inicial e gravidade (valores ajustáveis):
+Lista inicial e gravidade (valores ajustáveis):
 
 | Crime | Gravidade |
 |---|---|
@@ -46,7 +46,7 @@ Quase tudo aqui é configurável **por lei da facção**: cada facção decide o
 Em mapas em LOD 2, o crime é **agregado por cidade**: nenhum crime individual é simulado fora da visão do jogador.
 
 - A cidade tem um valor de **Criminalidade**.
-- **[Proposta]** Influenciado por Felicidade, pobreza e presença de guardas.
+- Influenciado por Felicidade, pobreza e presença de guardas.
 - A Criminalidade alimenta **eventos** e a **Felicidade** da cidade.
 
 ### Recompensa
@@ -85,7 +85,7 @@ Tipos de punição:
 
 **A punição de cada crime pode ser alterada pela lei da facção.** Exemplos de tendência cultural: a Escravista aplica escravização, a Religiosa aplica punições severas.
 
-**[Proposta]** O trabalho forçado marca o NPC como Escravo com prazo. Ao fim, ele volta à classe anterior.
+O trabalho forçado marca o NPC como Escravo com prazo. Ao fim, ele volta à classe anterior.
 
 ### Penas por classe social
 
@@ -129,7 +129,7 @@ Existe suborno: pagar um guarda para ignorar o crime.
 **Lojas ilegais.** **Qualquer construção de produção pode ser uma loja ilegal.** Ela se passa por outra coisa (uma ferraria, uma cozinha), mas na verdade compra e vende produtos ilegais. Isso torna o mercado negro imersivo: o jogador não descobre qual loja é ilegal só olhando.
 
 - Para descobrir que uma loja é ilegal, e poder negociar produtos ilegais nela, o jogador precisa de um **evento ou missão**: é o NPC **ganhando confiança** no jogador para permitir a entrada no mercado negro.
-- **[Proposta]** A construção ganha um atributo "Ilegal" (disfarce), e o NPC dono ou gerente guarda um nível de Confiança com o jogador. Sem confiança, a loja se comporta como uma loja comum.
+- A construção ganha um atributo "Ilegal" (disfarce), e o NPC dono ou gerente guarda um nível de Confiança com o jogador. Sem confiança, a loja se comporta como uma loja comum.
 
 ### Prisioneiros de guerra
 
