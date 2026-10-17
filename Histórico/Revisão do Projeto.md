@@ -1,3 +1,5 @@
+> **Histórico.** Este documento é registro do passado; não precisa ser lido para retomar o trabalho. A situação atual está no [[Estado do Projeto]].
+>
 > **Primeira revisão, mantida como histórico.** A revisão completa de 2026-10-17, feita com o P0 e o P1 escritos, está na [[Revisão Completa]].
 >
 > Revisão do projeto em 2026-10-14, feita depois que todos os sistemas planejados ganharam uma primeira descrição. O autor respondeu as perguntas da seção 10 no mesmo dia (ver "Decisões" abaixo). A lista de sistemas das seções 4 e 5 foi **aceita**; cada sistema novo será escrito em rodadas curtas de perguntas (ver [[Estado do Projeto]] e [[Descrição do Projeto]]).

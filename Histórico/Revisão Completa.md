@@ -1,3 +1,5 @@
+> **Histórico.** Este documento é registro do passado; não precisa ser lido para retomar o trabalho. A situação atual está no [[Estado do Projeto]].
+>
 > Segunda revisão geral do projeto, feita em 2026-10-17, quando todos os sistemas P0 e P1 ficaram escritos. Pedido do autor (pergunta D2 da rodada P1-6): revisar o que já existe, achar o que está abstrato, levantar todas as pendências e conferir todas as propostas, para seguir com elas ou mudar. A primeira revisão (2026-10-14) está na [[Revisão do Projeto]], que fica como histórico. O que esta revisão encontrou vira as **rodadas V1 a V5** (seção 7), respondidas no `Respostas.txt` como as outras. **Concluída em 2026-10-17**, com a V5; o passo seguinte é a [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]].
 
 ## 1. Resumo

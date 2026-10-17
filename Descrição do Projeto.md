@@ -67,7 +67,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 ## Próximos passos
 
-Todos os sistemas planejados têm uma primeira descrição. O foco agora é **só documentação**: escrever os sistemas que faltam (ver [[Revisão do Projeto]]), preencher o que está em aberto e, quando o autor estiver satisfeito, fazer uma **ficha técnica lógica** antes de qualquer código.
+O design está completo e revisado. A fase agora é o **código da fatia vertical**, marco a marco, seguindo a [[Ficha Técnica/Fatia Vertical|Ficha Técnica]].
 
 ## Primeira meta de desenvolvimento
 
@@ -75,4 +75,4 @@ Uma **fatia vertical**: 1 cidade, 1 cadeia de produção (Fazenda → Cozinha �
 
 ## Estado atual
 
-O resumo do que já foi decidido e do que está em aberto está em [[Estado do Projeto]]. Para retomar o trabalho depois de uma pausa, veja a [[Retomada]]. A revisão completa do projeto (2026-10-17) está em [[Revisão Completa]], e a primeira revisão em [[Revisão do Projeto]] e os termos usados nos documentos estão no [[Glossário]].
+A situação geral e os números-chave estão no [[Estado do Projeto]]. Para retomar o trabalho, veja a [[Retomada]]. As revisões antigas estão na pasta `Histórico/` ([[Revisão do Projeto]] e [[Revisão Completa]]).

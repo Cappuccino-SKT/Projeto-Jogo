@@ -22,7 +22,7 @@ Decisões técnicas da engine em C++. O objetivo do jogo é ser **extremamente e
 
 ### Bibliotecas
 
-**[Refinar depois]** Todas leves, de código aberto e com bom desempenho. Nenhuma foi instalada ainda; a aprovação fica para o primeiro dia de código (rodada V4-6).
+Todas leves, de código aberto e com bom desempenho. **Aprovadas na rodada FT2-2**: cada uma é instalada no marco em que é usada (ver abaixo da tabela).
 
 | Função | Biblioteca | Por quê |
 |---|---|---|
@@ -34,6 +34,17 @@ Decisões técnicas da engine em C++. O objetivo do jogo é ser **extremamente e
 | Entidades (NPCs etc.) | **EnTT** | ECS muito rápido, só cabeçalhos |
 | Arquivos de dados | **nlohmann/json** | Simples de ler; troca por algo mais rápido se virar gargalo |
 | Medição de desempenho | **Tracy** | Mostra onde o tempo é gasto |
+
+**Quando entra cada uma** (FT2-2):
+
+| Marco | Bibliotecas |
+|---|---|
+| 0 e 1 | SDL3, glad (OpenGL 3.3), stb_image |
+| 3 | nlohmann/json (o CSV é lido por código próprio) |
+| 4 e 5 | EnTT |
+| 7 | Tracy |
+| 8 | Dear ImGui |
+| Depois da fatia | miniaudio |
 
 **Como instalar:** baixadas pelo próprio CMake (`FetchContent`) em versões fixas, sem precisar de vcpkg.
 
@@ -91,7 +102,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Ordem de trabalho
 
-**Decisão do autor:** o foco agora é **100% na documentação**, sem nenhuma linha de código. Quando a documentação estiver satisfatória, será feita uma **ficha técnica lógica** das possibilidades (como cada sistema vira estruturas, dados e regras no código). Só depois dela começa a programação. Os marcos abaixo continuam como plano, mas não serão iniciados antes disso.
+**Decisão do autor:** primeiro a documentação, depois a ficha técnica lógica e só então o código. Em 2026-10-17 (rodada FT2-1), com a ficha da fatia vertical pronta, o código foi liberado, **marco a marco**: um problema de design achado no código volta como pergunta numa rodada.
 
 **Guerra:** depois que o mundo funcionar, a guerra entra primeiro pelo **cálculo rápido de forças** (o mundo já tem guerras e o jogador pode resolvê-las automaticamente). O **Mapa de Guerra** vem depois, como um marco próprio, porque é um jogo de estratégia inteiro (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]] e [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
@@ -101,6 +112,16 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 - **Depurador:** gdb, que vem com o MinGW: para o programa numa linha e mostra os valores.
 - **Primeiro código:** um "olá, janela" com o SDL3, compilado pelo CMake (marco 0 da [[Ficha Técnica/Fatia Vertical|Ficha Técnica]]).
 - **Pasta:** `codigo/`, no mesmo repositório da documentação.
+
+### Jeito de trabalhar e nomes no código (rodadas FT2-3 e FT2-4)
+
+- **Um marco por vez:** cada marco tem uma branch e um pull request.
+  - O assistente escreve em passos pequenos, e cada passo compila e roda.
+  - O autor compila e roda no PC dele, com os comandos prontos, e conta o que viu.
+  - Cada marco termina com um resumo simples em `codigo/LEIA-ME.md`.
+- **Nomes em português, sem acento:** `Cidade`, `Construcao`, `precoBase`. Os comentários também são em português.
+  - **Ideia do autor:** nenhum nome abstrato demais. O nome da variável, da função ou da classe diz o motivo dela: `horasTrabalhadasNoCiclo`, não `h` nem `valor`; `calcularPrecoBaseDosItens`, não `processar`.
+  - As palavras do C++ (`int`, `vector`, `for`) e os nomes das bibliotecas continuam como são.
 
 ### Ferramentas de conteúdo
 
