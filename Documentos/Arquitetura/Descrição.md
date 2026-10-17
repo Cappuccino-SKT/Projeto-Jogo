@@ -46,7 +46,7 @@ Todas leves, de código aberto e com bom desempenho. **Aprovadas na rodada FT2-2
 | 8 | Dear ImGui |
 | Depois da fatia | miniaudio |
 
-**Como instalar:** baixadas pelo próprio CMake (`FetchContent`) em versões fixas, sem precisar de vcpkg.
+**Como instalar:** baixadas pelo próprio CMake (`FetchContent`) em versões fixas, sem precisar de vcpkg. **Exceção, o glad** (marco 1): o gerador dele precisa do Python com a biblioteca jinja2, então os arquivos do OpenGL 3.3 foram gerados uma vez e ficam guardados em `Jogo/externo/glad/`, com o comando anotado no LEIA-ME de lá. Assim, compilar só precisa do g++ e do CMake.
 
 ### Como os documentos viram código
 
