@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisão completa concluída; ficha técnica da fatia vertical em andamento, rodada FT1 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisão completa concluída; ficha técnica da fatia vertical pronta; rodada FT2, sobre começar a programar, enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -245,7 +245,8 @@
 - **V3 aplicada (pendências de regra):** tabela de leis iniciais na Facção (**ideia do autor: só a Escravista permite narcóticos e é a única produtora, com mão de obra escrava**); bônus dos estilos de início e pontos do personalizado; multas e Caçadores; loja ilegal do jogador e missões de confiança; Inconsciente e Hospital; 4 narradores com intensidade; 12 eventos da fatia vertical; assembleia e guerra civil; lotes, moradia dos Controlados, leilão e Universidade; estradas, patrulhas e muralhas; coalizão e bônus dos cargos; Grimório e feitiços de Suporte; Noto Sans e PC mínimo; Destilaria no nível 2. **Ideia do autor (V3-13):** listas como estruturas modulares, com os moldes prontos agora ([[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]]) e as listas nas rodadas C1 a C3.
 - **V4 aplicada:** confirmadas as propostas da Facção, do Mundo, da Religião, do Pipeline, do Clima e dos Efeitos de Itens, e os moldes de conteúdo. Fundar uma facção exige 2.000 moedas. Na Arquitetura (escolha deixada ao assistente): dados em JSON e CSV, marco novo da simulação sem tela de 1 ano, bibliotecas aprovadas no primeiro dia de código.
 - **V5 aplicada e revisão concluída:** as 58 propostas restantes confirmadas; capacidade das construções (100, 200 ou 400 × nível); Saciedade pelo Tier. Restam só os valores a testar e as ideias futuras.
-- **Ficha técnica (em andamento):** primeira versão em [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]], no formato da V5-9; rodada FT1 enviada. Correção: 1 tick = 4,5 s de jogo.
+- **Ficha técnica pronta:** [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]], no formato da V5-9, com as escolhas da FT1. O jogador começa com 100 moedas e uma Carpintaria; Felicidade com 4 fatores; A\* em 8 direções; mapa de 64 × 64 tiles e zoom de 2x a 4x; virada do dia às 0h; teste `jogo --simular 64`; VS Code e gdb. Correção: 1 tick = 4,5 s de jogo.
+- **Em seguida:** FT2 (liberar o código, bibliotecas, jeito de trabalhar, idioma dos nomes), enviada.
 
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
@@ -311,7 +312,8 @@
 | Revisão | V3 (pendências de regra) | Aplicada |
 | Revisão | V4 (propostas, parte 1) | Aplicada |
 | Revisão | V5 (propostas, parte 2) | Aplicada; revisão concluída |
-| Ficha técnica | **FT1 (escolhas da ficha da fatia vertical)** | **Enviada, aguardando respostas** |
+| Ficha técnica | FT1 (escolhas da ficha da fatia vertical) | Aplicada; ficha pronta |
+| Código | **FT2 (começar a programar)** | **Enviada, aguardando respostas** |
 | Conteúdo | Rodadas C1 a C3 (tecnologias, feitiços, missões e eventos) | Depois da ficha técnica |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |

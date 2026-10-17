@@ -1,6 +1,6 @@
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> **Ficha técnica lógica da fatia vertical**, primeira versão (2026-10-17), no formato decidido na rodada V5-9. Traduz os sistemas em **estruturas, dados e regras** que o código vai seguir, em linguagem simples e sem código de verdade. As escolhas novas estão marcadas como **[Proposta]** e vão para a rodada FT1 (ver a [[Retomada]]).
+> **Ficha técnica lógica da fatia vertical**, primeira versão (2026-10-17), no formato decidido na rodada V5-9. Traduz os sistemas em **estruturas, dados e regras** que o código vai seguir, em linguagem simples e sem código de verdade. As escolhas novas foram decididas na rodada FT1 (parte 8).
 
 # Ficha Técnica: Fatia Vertical
 
@@ -31,7 +31,7 @@ Esta ficha é o mapa para programar. Cada parte responde a uma pergunta:
 | Inventário da cidade, Mercado Local, salários, consumo, estabilizador | Mercado da Facção e Mundial (o preço mundial é só o preço base) |
 | Felicidade (4 fatores) | Leis, Religião, Criminalidade, guerra |
 | 12 eventos (V3-6), estações e clima do dia | Narradores (a fatia usa o sorteio simples) |
-| 1 personagem do jogador (FT1-1) | Companheiros, combate |
+| 1 personagem do jogador, com 100 moedas e uma Carpintaria própria (FT1-1) | Companheiros, combate |
 | Salvar e carregar; teste de 1 ano sem tela | Interface personalizável (só o HUD básico) |
 
 ---
@@ -69,7 +69,7 @@ O jogo usa **entidades e componentes** ([[Arquitetura/Descrição|Arquitetura]],
 
 | Campo | Tipo | Observação |
 |---|---|---|
-| Tamanho | Inteiros | **[Proposta]** 64 × 64 tiles (FT1-4) |
+| Tamanho | Inteiros | 64 × 64 tiles (FT1-4) |
 | Camadas de tiles | Listas | Lidas do Tiled, pelo nome da camada ([[Pipeline de Arte e Conteúdo/Descrição\|Pipeline]]) |
 | Passagem | Lista de sim/não por tile | Onde dá para andar |
 | Lotes | Lista: posição, tamanho, ocupado por | 8 pequenos e 3 médios no nível 1 (V3-8) |
@@ -150,7 +150,7 @@ Tudo o que é conteúdo fica fora do código ([[Arquitetura/Moldes de Conteúdo|
 | `data/construcoes.json` | JSON | As 7 construções da fatia |
 | `data/eventos.json` | JSON | Os 12 eventos da V3-6 |
 | `data/regras.json` | JSON | Todos os números das rodadas: salários, margem, cesta mínima, ticks, estações |
-| `data/vila_inicial.json` | JSON | O estado do primeiro dia: construções, NPCs, Banco, estoque |
+| `data/vila_inicial.json` | JSON | O estado do primeiro dia: construções (a Carpintaria é do jogador), NPCs, Banco, estoque e as 100 moedas do jogador |
 | `mapas/vila.tmx` | Tiled | O mapa, com as camadas e os lotes |
 | `textos/pt-BR.json` | JSON | Todos os textos da tela (V3-12) |
 
@@ -197,12 +197,12 @@ Os salários aparecem em décimos de moeda: 7,5 décimos = 0,75 moeda.
 | Quando | O que roda |
 |---|---|
 | **A cada tick** | Entrada do jogador; movimento dos NPCs pelo caminho; animação |
-| **A cada 5 minutos de jogo** (cerca de 67 ticks) | Reavaliar a Utilidade de cada NPC. **[Proposta]** Distribuída: em cada tick, só 1/67 dos NPCs reavalia, para não pesar num tick só |
+| **A cada 5 minutos de jogo** (cerca de 67 ticks) | Reavaliar a Utilidade de cada NPC. Distribuída: em cada tick, só 1/67 dos NPCs reavalia, para não pesar num tick só |
 | **A cada hora de jogo** | Produção (cada trabalhador presente soma horas no ciclo); obras; fase do dia (luz) |
-| **A cada dia** (virada às **0h**, **[Proposta]**, FT1-5) | A sequência do dia, na ordem abaixo |
+| **A cada dia** (virada às **0h**, rodada FT1-5) | A sequência do dia, na ordem abaixo |
 | **A cada estação** (no dia 1) | Produtividade da estação; manutenção das construções; redistribuição dos empregos; nascimentos e mortes; troca de paleta |
 
-**A sequência do dia** **[Proposta]** (FT1-5):
+**A sequência do dia** (FT1-5):
 
 1. **Consumo da cidade:** a cesta mínima e a regra do gasto (4.4).
 2. **Salários:** cada construção paga os empregados (4.5).
@@ -308,7 +308,7 @@ As construções do jogador seguem a fila de ordens, não esta conta.
 
 ### 4.8 Felicidade (a cada dia)
 
-**[Proposta]** Na fatia, só 4 fatores, dentro das faixas do [[Sistema de Felicidade e Estabilidade/Descrição|Felicidade]] (FT1-2):
+Na fatia, só 4 fatores, dentro das faixas do [[Sistema de Felicidade e Estabilidade/Descrição|Felicidade]] (FT1-2):
 
 | Fator | Conta |
 |---|---|
@@ -327,9 +327,9 @@ As construções do jogador seguem a fila de ordens, não esta conta.
 
 ### 4.10 Movimento (a cada tick)
 
-- **[Proposta]** Busca de caminho **A\*** numa grade de **8 direções** (diagonal custa 1,4), calculada uma vez por destino (FT1-3).
+- Busca de caminho **A\*** numa grade de **8 direções** (diagonal custa 1,4), calculada uma vez por destino (FT1-3).
 - O NPC anda pelo caminho na velocidade de andar. Se um tile ficar bloqueado (uma obra nova), ele pede outro caminho.
-- **[Proposta]** Na fatia, os NPCs **não colidem** entre si (passam um pelo outro), para simplificar.
+- Na fatia, os NPCs **não colidem** entre si (passam um pelo outro), para simplificar.
 
 ### 4.11 Obra
 
@@ -362,7 +362,7 @@ O formato é um arquivo binário com número de versão ([[Arquitetura/Descriç�
 ## 6. Testes
 
 - **Teste de 1 ano sem tela** (V2-12):
-  - **comando:** **[Proposta]** `jogo --simular 64 --semente 1` (FT1-6), que roda 64 dias na velocidade máxima, sem desenhar nada;
+  - **comando:** `jogo --simular 64 --semente 1` (FT1-6), que roda 64 dias na velocidade máxima, sem desenhar nada;
   - **relatório:** grava um CSV com uma linha por dia: estoque de cada item, preço do Pão, Banco, riqueza média, Felicidade, empregados, eventos do dia.
   - **Passa se:** ninguém passa fome por mais de 3 dias seguidos, o Banco nunca zera, e o preço do Pão fica entre 1,2 e 2,6.
 - **Repetição:** a mesma semente tem que dar o mesmo relatório, linha por linha. Isso pega erros que aparecem "às vezes".
@@ -377,6 +377,7 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 
 | Marco | Fica pronto quando |
 |---|---|
+| 0. Ambiente | O VS Code compila e roda um "olá, janela" com o SDL3; as bibliotecas do marco 1 estão aprovadas (FT1-7) |
 | 1. Janela, loop, relógio fixo e mapa de tiles | A janela abre, o relógio conta os dias e o mapa do Tiled aparece |
 | 2. Câmera e entrada | O jogador move a câmera e dá zoom |
 | 3. Carregar os dados | O jogo lê os arquivos, calcula os preços base, e o `--validar` funciona |
@@ -388,6 +389,18 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | 9. Salvar e carregar | O teste do save passa |
 
 ---
+
+## 8. Decisões da rodada FT1
+
+| Pergunta | Decisão |
+|---|---|
+| FT1-1 Papel do jogador | O jogador começa com **100 moedas** e uma **Carpintaria nível 1 própria** (2 vagas). Pode contratar desempregados, escolher o salário (Baixo, Normal, Alto), dar ordens (Fazer N, Manter estoque, Repetir), fixar o preço na faixa de ±30% e andar, comprar e vender no Mercado. Os Móveis de Madeira dele são os Materiais Básicos da vila |
+| FT1-2 Felicidade | Os 4 fatores da regra 4.8 |
+| FT1-3 Movimento | A\* em 8 direções (diagonal custa 1,4); um caminho por destino, com o cálculo distribuído entre os ticks; os NPCs não colidem entre si |
+| FT1-4 Mapa e câmera | Mapa de **64 × 64 tiles**; zoom de 2x, 3x e 4x (padrão 3x, cerca de 33 × 19 tiles na tela); câmera com WASD ou setas, roda do mouse para o zoom, arrastar com o botão do meio; lotes de 4 × 4 (pequeno), 6 × 6 (médio) e 8 × 8 tiles (grande); um campo de Grão, um poço e um bosque |
+| FT1-5 Ordem do dia | Virada às 0h; a ordem da parte 3 fica no `data/regras.json` (campo `ordem_do_dia`), para ser trocada nos testes sem mexer no código |
+| FT1-6 Teste sem tela | `jogo --simular 64 --semente 1` grava o `relatorio.csv` (uma linha por dia) e termina com PASSOU ou FALHOU e o motivo ("fome por 4 dias seguidos no dia 37"); a mesma semente dá o mesmo relatório |
+| FT1-7 Ambiente | VS Code com as extensões grátis "C/C++" e "CMake Tools"; depurador gdb (vem com o MinGW); primeiro código: um "olá, janela" com o SDL3, compilado pelo CMake; pasta `codigo/` no mesmo repositório |
 
 ## Ligação com outros sistemas
 
@@ -405,4 +418,5 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 
 ## Perguntas em aberto
 
-1. **Rodada FT1:** papel do jogador, Felicidade da fatia, movimento, mapa e câmera, ordem do dia, teste sem tela e o ambiente de programação.
+1. **Rodada FT2:** liberar o código, aprovar as bibliotecas, o jeito de trabalhar no código e o idioma dos nomes.
+2. **Valores a testar:** todos os números da fatia, no teste sem tela.

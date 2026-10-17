@@ -161,7 +161,7 @@ As **mesmas regras e a mesma fórmula** valem para o jogador e para a IA. As cid
 | Lotes médios | 3 | 6 | 12 | 24 |
 | Lotes grandes | 0 | 1 | 3 | 8 |
 
-O porte de cada construção está na [[Sistema de Construção/Descrição|Construção]].
+O porte de cada construção está na [[Sistema de Construção/Descrição|Construção]]. Tamanho dos lotes (rodada FT1-4): pequeno de 4 × 4 tiles, médio de 6 × 6 e grande de 8 × 8.
 
 - **Moradia dos Controlados:** um quarto na Taverna (2 moedas por dia por companheiro) ou uma Casa do jogador; sem nenhum dos dois, dormem ao relento.
 - **Crianças decorativas:** não na primeira versão. No futuro, só alguns bonecos genéricos, sem simulação.

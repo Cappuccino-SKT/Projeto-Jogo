@@ -95,6 +95,13 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 **Guerra:** depois que o mundo funcionar, a guerra entra primeiro pelo **cálculo rápido de forças** (o mundo já tem guerras e o jogador pode resolvê-las automaticamente). O **Mapa de Guerra** vem depois, como um marco próprio, porque é um jogo de estratégia inteiro (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]] e [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
+### Ambiente de programação (rodada FT1-7)
+
+- **Editor:** VS Code, com as extensões grátis "C/C++" e "CMake Tools" (autocompletar, botão de compilar, depurador).
+- **Depurador:** gdb, que vem com o MinGW: para o programa numa linha e mostra os valores.
+- **Primeiro código:** um "olá, janela" com o SDL3, compilado pelo CMake (marco 0 da [[Ficha Técnica/Fatia Vertical|Ficha Técnica]]).
+- **Pasta:** `codigo/`, no mesmo repositório da documentação.
+
 ### Ferramentas de conteúdo
 
 - **Mapas:** serão desenhados no **Tiled**, um editor de mapas de tiles gratuito e de código aberto (<https://www.mapeditor.org>). Ele não faz parte do jogo: é só a ferramenta de desenho. Cada mapa é salvo em um arquivo JSON, que o jogo lê. O Tiled permite camadas (chão, objetos, colisão) e pontos marcados no mapa, como lotes de construção, portas e pontos de entrada.

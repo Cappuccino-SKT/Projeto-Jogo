@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a revisão completa concluída (V5 aplicada) e a rodada FT1 (ficha técnica da fatia vertical) enviada.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a ficha técnica da fatia vertical pronta (FT1 aplicada) e a rodada FT2 (começar a programar) enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa terminou** (ver a [[Revisão Completa]]). No `main` estão as rodadas até a V3 (PRs #9 a #14). A V4 está na branch `docs/v4-propostas`, e a V5 na `docs/v5-ficha`, criada a partir dela. A V5 também trouxe a primeira versão da **ficha técnica lógica**: [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]]. A **rodada FT1 (escolhas da ficha técnica) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se os pull requests da `docs/v4-propostas` e da `docs/v5-ficha` foram mesclados no `main`, nessa ordem.**
-3. **Próximo passo:** pedir o `Respostas.txt` da FT1 (conferir se é desta rodada), atualizar a ficha, tirar as marcações confirmadas e ver com o autor se a ficha está pronta para o **marco 1** (a primeira linha de código).
-4. Depois: a programação da fatia vertical, marco a marco. As listas de conteúdo ficam para as rodadas C1 a C3 (ideia do autor na V3-13).
+2. **Onde paramos:** todos os sistemas estão escritos, e a **revisão completa terminou**. No `main` estão as rodadas até a V5 (PRs #9 a #16). Em 2026-10-17 foi aplicada a **FT1**, na branch `docs/ft1-ficha`: com ela, a [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]] ficou completa para os primeiros marcos. A **rodada FT2 (começar a programar) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/ft1-ficha` foi mesclado no `main`.**
+3. **Próximo passo:** pedir o `Respostas.txt` da FT2. Se o autor liberar o código, atualizar o `CLAUDE.md` e começar o **marco 0** (ambiente e "olá, janela"), numa branch própria.
+4. Depois: os marcos 1 a 9 da fatia vertical, um por vez. As listas de conteúdo ficam para as rodadas C1 a C3.
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -71,123 +71,71 @@ Regras extras:
 | Revisão | V3 (pendências de regra) | Aplicada |
 | Revisão | V4 (propostas, parte 1) | Aplicada |
 | Revisão | V5 (propostas, parte 2) | Aplicada; **revisão concluída** |
-| Ficha técnica | **FT1 (escolhas da ficha da fatia vertical)** | **Enviada, aguardando respostas** |
+| Ficha técnica | FT1 (escolhas da ficha da fatia vertical) | Aplicada; ficha pronta |
+| Código | **FT2 (liberar o código, bibliotecas, jeito de trabalhar, idioma)** | **Enviada, aguardando respostas** |
 | Depois | Programação da fatia vertical; rodadas de conteúdo C1 a C3 | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, modo observador, eventos de dinastia. As ordens de produção em lote foram decididas na IP1-7 ([[Sistema de Produção/Descrição|Produção]]). A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: FT1, Ficha técnica da fatia vertical
+## 4. Rodada pendente: FT2, Começar a programar
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** A revisão completa terminou na V5. A primeira versão da **ficha técnica lógica** está em [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]], no formato da V5-9. Esta rodada fecha as escolhas novas que a ficha precisou fazer.
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** Com a FT1, a [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]] tem tudo o que o marco 1 precisa. Até aqui, a regra do projeto foi "só documentação" (decisão do autor). Esta rodada decide **se e como** o código começa.
 
-Responder no `Respostas.txt` pelos códigos (FT1-1, FT1-2...). "Seguir sugestão" aceita a proposta.
+Responder no `Respostas.txt` pelos códigos (FT2-1, FT2-2...). "Seguir sugestão" aceita a proposta.
 
-**Correção avisada:** a V2-11 dizia "1 tick = 2 s de jogo". A conta certa é 4,5 s:
+**FT2-1. Liberar o código.**
 
-- a 1x, 1 segundo real equivale a 90 segundos de jogo;
-- com 20 ticks por segundo, cada tick vale 90 ÷ 20 = 4,5 s.
-
-O [[Sistema de Tempo/Descrição|Tempo]] e a ficha já estão corrigidos. Nada mais mudou: 1 hora de jogo continua sendo 40 s reais.
-
-**FT1-1. O que o jogador faz na fatia vertical.**
-
-- *Contexto:* a Arquitetura diz "1 personagem controlável", mas não o que ele faz. Isso decide quais sistemas a fatia testa de verdade.
+- *Contexto:* o autor decidiu que, primeiro, viria a documentação, depois a ficha técnica lógica e só então a programação. A documentação e a revisão estão completas, e a ficha da fatia vertical também.
 - *Opções:*
-  - (a) **só observar:** o personagem anda e compra no Mercado. É simples, mas não testa as ordens, os salários do jogador nem o Dono dos itens;
-  - (b) **dono de uma construção:** além de andar e comprar, ele tem uma Carpintaria própria;
-  - (c) **prefeito da vila:** controla todas as construções. Testa mais coisas, mas muda o jogo (no jogo completo, o jogador não manda na cidade da IA).
-- *Sugestão:* (b). O jogador começa com **100 moedas** e uma **Carpintaria nível 1 própria** (2 vagas). Ele pode:
-  - contratar desempregados;
-  - escolher o nível de salário (Baixo, Normal, Alto);
-  - dar ordens (Fazer N, Manter estoque, Repetir);
-  - fixar o preço na faixa de ±30%;
-  - andar, comprar e vender no Mercado.
+  - (a) **liberar o marco 0 e o marco 1 agora**. A documentação continua viva: o que o código mostrar volta para os documentos como rodada de perguntas;
+  - (b) fazer antes as rodadas de conteúdo C1 a C3 (tecnologias, feitiços, missões). Nenhuma delas entra na fatia vertical;
+  - (c) escrever a ficha técnica do jogo inteiro antes de programar: muito trabalho, sem saber ainda o que a fatia vai ensinar.
+- *Sugestão:* (a). A fatia vertical existe justamente para testar as ideias antes de escrever o resto. A regra do `CLAUDE.md` passa de "só documentação" para "**documentação primeiro, código marco a marco**".
+- *Impacto:* `CLAUDE.md`, Retomada, Arquitetura.
 
-  Isso testa o atributo Dono, a fila de ordens, os salários do jogador e a venda para os NPCs. Os Móveis de Madeira dele são os Materiais Básicos da vila.
-- *Impacto:* ficha (componentes Controlado e Dono), Interface (painel da construção), Trabalho, Econômico.
+**FT2-2. Aprovar as bibliotecas (a A-2 adiada na V4-6).**
 
-**FT1-2. A Felicidade da fatia vertical.**
+- *Contexto:* a [[Arquitetura/Descrição|Arquitetura]] propõe 8 bibliotecas, todas grátis, de código aberto e baixadas pelo próprio CMake: SDL3, OpenGL 3.3 (via glad), stb_image, miniaudio, Dear ImGui, EnTT, nlohmann/json e Tracy.
+- *Sugestão:* aprovar todas, mas instalar **cada uma no marco em que for usada**, para o projeto crescer aos poucos:
 
-- *Contexto:* o [[Sistema de Felicidade e Estabilidade/Descrição|Felicidade]] tem 11 fatores, com faixas, mas sem as contas. A fatia não tem leis, crime, guerra nem religião.
-- *Sugestão:* só **4 fatores**, dentro das faixas que já existem:
+| Marco | Bibliotecas | Para quê |
+|---|---|---|
+| 0 e 1 | SDL3, glad (OpenGL 3.3), stb_image | Janela, desenho, carregar os tiles |
+| 3 | nlohmann/json (o CSV é lido por código próprio) | Arquivos de dados |
+| 4 e 5 | EnTT | Entidades e componentes dos NPCs |
+| 7 | Tracy | Medir o tempo do tick no teste sem tela |
+| 8 | Dear ImGui | Painéis de depuração |
+| Depois da fatia | miniaudio | Som (a fatia não tem áudio) |
 
-| Fator | Conta |
-|---|---|
-| Consumo atendido | −25 × a fração de NPCs sem comida no dia; −5 se os Materiais Básicos estão em déficit; até +5 pelo gasto extra |
-| Desemprego e renda | +10 − 20 × a taxa de desemprego, limitado entre −10 e +10 |
-| Moradia | −10 × a fração de NPCs sem casa |
-| Eventos duradouros | A soma dos eventos ativos, limitada entre −20 e +20 |
+- *Impacto:* Arquitetura; o arquivo `CMakeLists.txt` do código.
 
-  - Alvo = 50 + a soma; a Felicidade anda 10% por dia na direção do alvo.
-  - *Exemplo:* comida para todos, Materiais em dia, 2 de 15 desempregados (13%), todos com casa, sem evento: 50 + 0 + 7,3 + 0 + 0 = 57,3.
-  - Os outros fatores entram quando os sistemas deles entrarem.
-- *Impacto:* ficha (regra 4.8), Felicidade, Eventos (Fome).
+**FT2-3. Como trabalhamos no código.**
 
-**FT1-3. Movimento e busca de caminho.**
+- *Contexto:* o autor tem pouca experiência em C++ e nenhuma com bibliotecas. O jeito das rodadas (perguntas, respostas, PR) funciona bem na documentação.
+- *Sugestão:* o mesmo ritmo, adaptado:
+  1. **Um marco por vez**, numa branch e num pull request próprios, como as rodadas.
+  2. O assistente escreve o código em **passos pequenos**, cada um compilando e rodando.
+  3. O autor compila e roda no PC dele. O assistente dá os comandos prontos, e o autor confirma o que viu ("a janela abriu").
+  4. Cada marco termina com um **resumo em linguagem simples**: o que cada arquivo faz e o que testar. O resumo fica em `codigo/LEIA-ME.md`.
+  5. Quando o código mostrar um problema de design, ele vira uma pergunta numa rodada, e os documentos são atualizados.
+- *Impacto:* Retomada (jeito de trabalhar), Arquitetura.
 
-- *Contexto:* a Arquitetura prevê grade espacial e busca de caminho, sem detalhe.
+**FT2-4. O idioma do código.**
+
+- *Contexto:* os documentos e os IDs dos dados estão em português (`item.pao`, `construcao.cozinheiro`). As bibliotecas e os exemplos da internet estão em inglês.
 - *Opções:*
-  - (a) **A\* em 8 direções** (diagonal com custo 1,4), um caminho calculado por destino. A\* é o método mais usado em jogos de grade e fácil de achar explicado;
-  - (b) 4 direções: ainda mais simples, mas os NPCs andam em "L", o que fica feio;
-  - (c) mapas de fluxo (*flow fields*): ótimos para milhares de soldados, mas é coisa para a batalha, não para a fatia.
-- *Sugestão:* (a). Mais:
-  - na fatia, os NPCs **não colidem** entre si (passam um pelo outro), para simplificar;
-  - cada NPC calcula no máximo **1 caminho por destino**, e o cálculo é distribuído entre os ticks.
-- *Impacto:* ficha (regra 4.10), Arquitetura, Combate (mais tarde).
-
-**FT1-4. O mapa da fatia e a câmera.**
-
-- *Contexto:* os tiles são de 16 × 16 px e os bonecos de 16 × 24 ([[Pipeline de Arte e Conteúdo/Descrição|Pipeline]]); o autor joga em 1600 × 900. A vila de nível 1 tem 8 lotes pequenos e 3 médios.
-- *Sugestão:*
-  - **Mapa de 64 × 64 tiles** (1.024 × 1.024 px).
-  - **Zoom em números inteiros:** 2x, 3x e 4x (padrão 3x). Um número quebrado borra a pixel art. A 3x, a tela mostra cerca de 33 × 19 tiles.
-  - **Câmera** com WASD ou setas e roda do mouse para o zoom; arrastar com o botão do meio.
-  - **Lotes:** pequeno de 4 × 4 tiles; médio de 6 × 6; grande de 8 × 8.
-  - **Recursos no mapa:** um campo de Grão, um poço (Água) e um bosque (Tora).
-- *Impacto:* ficha (Mapa Local), Pipeline (o mapa a desenhar no Tiled), Interface (controles).
-
-**FT1-5. A ordem dos sistemas no dia.**
-
-- *Contexto:* várias regras rodam uma vez por dia, e a ordem muda o resultado. Por exemplo, consumir antes ou depois de pagar o salário.
-- *Sugestão:* a **virada do dia às 0h**, quando só o turno da noite está acordado. A ordem é a da ficha (parte 3):
-  1. consumo;
-  2. salários;
-  3. Mercado Local;
-  4. estabilizador;
-  5. dias em déficit e Felicidade;
-  6. eventos;
-  7. IA da produção.
-
-  A ordem vem de um arquivo de dados, para ser trocada nos testes sem mexer no código.
-- *Impacto:* ficha (parte 3), Tempo.
-
-**FT1-6. O teste de 1 ano sem tela.**
-
-- *Contexto:* a V2-12 definiu o critério (sem fome, Banco sem zerar, Pão entre 1,2 e 2,6); falta como rodar e como ler.
-- *Sugestão:*
-  - **Comando:** `jogo --simular 64 --semente 1`. Ele roda 64 dias na velocidade máxima, sem janela, e grava `relatorio.csv`.
-  - **Relatório:** uma linha por dia, com estoque de cada item, preço do Pão, Banco, riqueza média, Felicidade, empregados e eventos. O autor abre no LibreOffice e faz um gráfico.
-  - **Resultado:** no fim, o jogo escreve PASSOU ou FALHOU, com o motivo ("fome por 4 dias seguidos no dia 37").
-  - **Repetição:** a mesma semente tem que dar o mesmo relatório.
-- *Impacto:* ficha (parte 6), Arquitetura (marco 7).
-
-**FT1-7. O ambiente de programação.**
-
-- *Contexto:* já estão instalados o g++, o CMake, o Ninja e o Git; o VS Code foi escolhido para os dados (P-3). O autor tem pouca experiência em C++, e o primeiro dia de código também aprova as bibliotecas (A-2).
-- *Sugestão:*
-  - **Editor:** **VS Code**, com as extensões grátis "C/C++" e "CMake Tools", que dão autocompletar, botão de compilar e depurador.
-  - **Depurador:** o **gdb**, que vem com o MinGW. Ele deixa parar o programa numa linha e olhar os valores.
-  - **Primeiro passo de código:** um "olá, janela" com o SDL3, compilado pelo CMake, para provar que tudo funciona. Nesse dia se aprovam as bibliotecas.
-  - **Organização:** uma pasta `codigo/` no mesmo repositório, separada da documentação.
-- *Impacto:* Arquitetura, Pipeline (ferramentas), Retomada (cuidados técnicos).
+  - (a) **nomes em português, sem acento** (`Cidade`, `Construcao`, `precoBase`), com comentários em português. Combina com os documentos e os dados, e o autor lê melhor. A mistura com o inglês das bibliotecas fica visível, o que até ajuda a saber o que é nosso;
+  - (b) tudo em inglês, o padrão da indústria, mas cada nome exigiria tradução mental para o autor;
+  - (c) nomes em inglês e comentários em português.
+- *Sugestão:* (a). Os nomes técnicos de C++ continuam como são (`int`, `vector`, `for`), porque não têm tradução.
+- *Impacto:* Arquitetura (convenções), todo o código.
 
 Depois das respostas:
 
-- atualizar a ficha;
-- tirar as marcações confirmadas;
-- decidir se a ficha está pronta para começar o marco 1.
+- atualizar o `CLAUDE.md` e a Retomada;
+- começar o **marco 0**: o ambiente e um "olá, janela" com o SDL3.
 
 ## 5. Fatos que valem lembrar
 
@@ -231,11 +179,19 @@ Depois das respostas:
   - **conteúdo:** **moldes de conteúdo** prontos e listas nas rodadas C1 a C3 (ideia do autor).
 - **Propostas (V4 e V5):** todas confirmadas. Fundar facção custa 2.000 moedas; dados em JSON e CSV; marco da simulação sem tela; capacidade das construções de 100, 200 ou 400 × nível; Saciedade pelo Tier.
 - **Ficha técnica:** [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]], com entidades e componentes, arquivos de dados, ciclo do tempo, regras passo a passo, save, testes e marcos. **1 tick = 4,5 s de jogo** (correção da V2-11); 1 hora = 800 ticks.
+- **Ficha (FT1):**
+  - **jogador:** 100 moedas e uma Carpintaria própria;
+  - **Felicidade:** 4 fatores;
+  - **movimento:** A\* em 8 direções, sem colisão entre NPCs;
+  - **mapa e câmera:** mapa de 64 × 64 tiles, zoom de 2x a 4x;
+  - **dia e teste:** virada do dia às 0h; teste com `jogo --simular 64 --semente 1`;
+  - **ambiente:** VS Code com C/C++ e CMake Tools, e o gdb.
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 
 ## 6. Cuidados técnicos (para quem edita)
 
+- **Ambiente de código** (FT1-7, quando o código começar): VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; pasta `codigo/` no mesmo repositório.
 - **Ferramentas do PC:** g++ 15.2, CMake, Ninja, Git e Python 3.11. **Não há** `gh` (GitHub CLI) nem Visual Studio. O Python precisa ser chamado com `-I` ao ler arquivos do vault.
 - **Edição em lote:** usar um script Python que carrega cada arquivo, troca trechos exatos com **verificação de que o trecho existe uma única vez**, e só então grava (com modo de teste "dry-run" antes). Preservar as quebras de linha (CRLF ou LF) e o BOM de cada arquivo. Backup da pasta antes de edições grandes (a pasta é um repositório Git, mas o backup extra é barato).
 - **Conferir links:** o vault não deve ter `[[link]]` quebrado. Em tabelas, o separador do alias precisa ser escapado: `[[Pasta/Descrição\|Texto]]`.
