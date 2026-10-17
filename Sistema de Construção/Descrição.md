@@ -48,6 +48,23 @@ O LOD precisa funcionar de forma eficiente nas construções, para não haver gr
 - Cada nível acima do mínimo de uma receita a deixa **10% mais rápida**. Nas capitais que começam com construções de nível 4 e 5 na Era 1, o nível alto dá eficiência e vagas, e as receitas maiores esperam a era.
 - As construções podem ser feitas **nível por nível**, com desconto para construir o próximo nível. Quem quiser construir direto um nível alto paga o custo integral.
 
+### Custos, tempo e manutenção (rodada V2-8)
+
+Três **portes**, para não escrever cada construção à mão:
+
+| Porte | Exemplos | Nível 1 | Horas de obra |
+|---|---|---|---|
+| Pequeno | Casa, Senzala, Fazenda, Pasto, Rancho, Posto de Coleta, Pesqueiro, Posto da Guarda | 10 Tábua + 10 Bloco de Pedra | 40 |
+| Médio | As oficinas (Cozinheiro, Carpinteiro, Ferreiro...), Mercado, Taverna, Casarão, Boticário, Posto Comercial | 20 Tábua + 30 Bloco de Pedra | 120 |
+| Grande | Templo, Quartel, Universidade, Laboratório, Torre e Forja Arcana, Hospital, Casa da Moeda, Prisão, Mansão, Palácio, Mercado de Escravos | 40 Tábua + 80 Bloco de Pedra + 10 Barra de Ferro | 400 |
+
+- **Subir para o nível N** custa o nível 1 × N. Construir direto no nível N custa a soma de todos os níveis × 1,25 (o "custo integral", sem o desconto).
+- **Tempo:** horas de obra ÷ (Operários × velocidade). O Construtor tem as vagas da tabela geral.
+- **Engenheiro:** Inteligência mínima de 30, 45, 60 e 75 nos níveis 2 a 5 (+10 nas construções grandes). Sem Engenheiro, só nível 1.
+- **Manutenção por estação:** 5% dos materiais do nível atual (no mínimo 1 Tábua) + 5% das horas de obra, feitas pelos Operários.
+- *Exemplo:* um Cozinheiro nível 1 custa 20 Tábuas (30 moedas) + 30 Blocos (54) e 120 h de obra (90 moedas de salário), cerca de 175 moedas; com 3 Operários, leva 5 dias. Do nível 2 para o 3: 60 Tábuas + 90 Blocos.
+- A capacidade das moradias está na [[Sistema de População/Descrição|População]].
+
 ### Quem constrói
 
 As construções podem ser feitas à mão pelos NPCs do jogador; mas, se houver uma **construtora** (o Construtor), ela pode construir sozinha os projetos do jogador ou da própria cidade. O Construtor tem duas Funções: **Operário** (Trabalho Braçal), que faz a obra e a manutenção, e **Engenheiro**, o gerente da obra; sem Engenheiro, só obras de nível 1 (rodada IP3-11).
@@ -122,4 +139,4 @@ Ao entrar no modo construção, os lotes livres ficam destacados. Clicar num lot
 
 ## Perguntas em aberto
 
-1. **Custos, tempos, manutenção e níveis** de cada construção, incluindo as novas (rodada V2 da [[Revisão Completa]]).
+1. **Valores a testar:** custos, tempos e manutenção dos três portes (rodada V2-8); confirmar o porte de cada construção nova.

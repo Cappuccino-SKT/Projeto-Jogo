@@ -84,8 +84,9 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 ### Desempenho
 
 - Alvo: rodar em PCs modestos.
-- **[Em aberto]** Definir o **PC alvo mínimo** (processador, memória, placa gráfica) e a meta de quadros por segundo (**[Proposta]** 60).
-- **[Em aberto]** Meta de NPCs simultâneos em LOD 0, a medir.
+- **Meta de quadros:** 60 por segundo em 1600 × 900 (rodada V2-11). **[Em aberto]** O **PC alvo mínimo** (processador, memória, placa gráfica): rodada V3-12.
+- **Meta de NPCs** (rodada V2-11): 500 em LOD 0 e 5.000 em LOD 1 a 4x, num PC de gama média; a medir na fatia vertical.
+- **Dinheiro em décimos inteiros** (rodada V2-1): 1,7 moedas = 17. Nada de número com vírgula no dinheiro.
 
 ### Ordem de trabalho
 
@@ -109,6 +110,23 @@ Uma versão mínima jogável, só para validar a parte mais arriscada: a simula�
 - 1 personagem controlável.
 - Produção por estação e tom de dia e noite (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - Sem guerra, facções, crime nem magia.
+
+**Números da fatia vertical** (rodada V2-12):
+
+| Construção | Vagas | Produz por dia |
+|---|---|---|
+| Fazenda nível 1 | 2 | 32 Grão (8 no inverno) |
+| Posto de Coleta nível 1 | 2 | 16 Água e 16 Tora |
+| Cozinheiro nível 1 | 2 | 16 Pães |
+| Carpinteiro nível 1 | 2 | Tábuas e, no nível 2, Móveis de Madeira |
+| Mercado | 2 Lojistas | — |
+| Construtor | 2 Operários | — |
+| Casas nível 1 | 4 Casas | 16 lugares |
+
+- **Vila:** nível 1, com 15 NPCs reais Civis e Banco de 400.
+- **Comida:** 15 Pães por dia, que gastam 7,5 Grão e 3,75 Água.
+- **Dinheiro por dia:** entram cerca de 85 em salários; saem cerca de 25 da cesta mínima; até 68 voltam às lojas pela regra do gasto.
+- **O teste passa se**, em 1 ano de jogo sem tela, a vila não passa fome, o Banco não zera e o preço do Pão fica entre 1,2 e 2,6.
 
 **[Proposta]** Marcos, nesta ordem:
 

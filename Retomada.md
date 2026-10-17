@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada IP3 (Insumos de cada produto) aplicada e a V2 (Base numérica da economia) enviada.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada V2 (Base numérica da economia) aplicada e a V3 (Pendências de regra) enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). A V1, a IP1 e a IP2 já estão no `main` (PRs #9 a #11). Em 2026-10-17 foi aplicada a **IP3** (receitas de todos os produtos, em [[Sistema de Produção/Receitas|Receitas]], e a nova [[Sistema de Produção/Funções e Construções|Funções e Construções]]), na branch `docs/ip3-receitas`. A **rodada V2 (Base numérica da economia) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/ip3-receitas` foi mesclado no `main`.**
-3. **Próximo passo:** pedir o `Respostas.txt` da V2 (conferir se é desta rodada), pôr os números no Econômico, Trabalho, Classe Social, Construção, Recursos, IA, Tempo e Arquitetura, e abrir a **V3** (pendências de regra e listas de conteúdo).
-4. Depois: V4 e V5 (propostas), como no plano da [[Revisão Completa]], e então a **ficha técnica lógica da fatia vertical**.
+2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). A V1, a IP1 e a IP2 já estão no `main` (PRs #9 a #11). A IP3 está na branch `docs/ip3-receitas`. Em 2026-10-17 foi aplicada a **V2** (a economia em números) na branch `docs/v2-economia`, criada a partir da `docs/ip3-receitas`. A **rodada V3 (Pendências de regra) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se os pull requests da `docs/ip3-receitas` e da `docs/v2-economia` foram mesclados no `main`, nessa ordem.**
+3. **Próximo passo:** pedir o `Respostas.txt` da V3 (conferir se é desta rodada), aplicar cada decisão no seu documento (a tabela de leis iniciais vai para a Facção e a Cultura) e abrir a **V4** (confirmação das propostas, parte 1).
+4. Depois: V5 e a **ficha técnica lógica da fatia vertical**. As listas de conteúdo (tecnologias, feitiços, missões) dependem da resposta da V3-13.
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -67,282 +67,295 @@ Regras extras:
 | Revisão | Itens e Produção: IP1 (padronização) | Aplicada |
 | Revisão | Itens e Produção: IP2 (nomes) | Aplicada |
 | Revisão | Itens e Produção: IP3 (insumos) | Aplicada |
-| Revisão | **V2 (economia numérica)** | **Enviada, aguardando respostas** |
-| Revisão | V3 (pendências), V4 e V5 (propostas) | A fazer |
+| Revisão | V2 (economia numérica) | Aplicada |
+| Revisão | **V3 (pendências de regra)** | **Enviada, aguardando respostas** |
+| Revisão | V4 e V5 (propostas) | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, modo observador, eventos de dinastia. As ordens de produção em lote foram decididas na IP1-7 ([[Sistema de Produção/Descrição|Produção]]). A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: V2, Base numérica da economia
+## 4. Rodada pendente: V3, Pendências de regra
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** Com a lista de itens (IP2) e as receitas (IP3) prontas, esta rodada dá os **números** que faltam para a ficha técnica da fatia vertical. Ela resolve as partes abstratas A-1 e A-3 a A-9 da [[Revisão Completa]].
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** Com a economia em números (V2), sobram as **pendências de regra** dos sistemas (seção 5 da [[Revisão Completa]]), as **leis iniciais** (A-10) e os **bônus dos estilos de início** (A-11). As listas grandes de conteúdo (A-12) ganham uma pergunta própria sobre quando fazê-las (V3-13).
 
-Responder no `Respostas.txt` pelos códigos (V2-1, V2-2...). "Seguir sugestão" aceita a proposta. Todos os números são **valores de partida**: o modo sem tela da fatia vertical vai testá-los.
+Responder no `Respostas.txt` pelos códigos (V3-1, V3-2...). "Seguir sugestão" aceita a proposta. Os números usam a moeda da V2: um Civil ganha 8 por dia, o Pão custa 1,7 e um escravo de habilidade 60 custa 440.
 
-**Já decidido (base das perguntas):**
+**V3-1. As leis iniciais de cada facção (A-10).**
 
-- **Escala (IP1-5):** 1 NPC real = 1 trabalhador e 1 consumidor.
-- **Preço base (IP1-9):** ≈ custo dos insumos + horas de trabalho × salário.
-- **Receitas:** estão em [[Sistema de Produção/Receitas|Receitas]].
-- **Tempo:** 1 hora de jogo = 40 s reais a 1x; estação = 16 dias.
-- **Banco inicial das cidades** (Mundo): 20.000 no nível 4, 6.000 no 3, 1.500 no 2 e 400 no 1, multiplicado pela Riqueza da cultura.
-- **Escravo** (Escravidão): 200 + 4 × a melhor habilidade de Trabalho. **Contratar um companheiro comum:** 100 moedas.
-- **Vagas por nível:** 2, 3, 5, 7 e 10. Os salários são pagos por dia (LOD 0 e 1) ou por estação (LOD 2), pelo dono da construção.
+- *Contexto:* as leis existem na [[Sistema de Facção/Descrição|Facção]], e o desejo de cada cultura está na [[Sistema de Cultura/Descrição|Cultura]]. Mas não há uma tabela única com a lei de cada facção no primeiro dia. Algumas já estão decididas:
+  - a Religiosa começa com Perseguição e com o Livro Sagrado obrigatório;
+  - a Escravista tem escravidão ampla e imposto alto;
+  - a Guerreira vende prisioneiros à Escravista.
+- *Sugestão:* as leis iniciais seguem o desejo de cada cultura, sem pensamento extremo (o extremo fica para o jogo produzir):
 
-**V2-1. A moeda.**
+| Lei | Guerreira | Arcana | Autoritária | Religiosa | Tecnocrata | Escravista |
+|---|---|---|---|---|---|---|
+| Escravidão | Permitida (só prisioneiros de guerra) | Proibida | Permitida (trabalho forçado como pena) | Proibida | Proibida | Permitida, ampla |
+| Imposto (V2-7) | Baixo | Normal | Normal | Normal | Normal, mais o imposto para pesquisa | Alto |
+| Conscrição | Alta (10% da população) | Baixa (3%) | Alta (8%) | Média (5%) | Baixa (3%) | Média (5%; escravos podem ser alistados) |
+| Magia | Restrita | Privilégio dos magos | Restrita | Restrita | Proibida | Livre |
+| Poder do líder | Moderado | Moderado | Autoritário | Moderado | Fraco | Fraco |
+| Sistema de votação | Maioria simples | Conselho (só Magos) | Conselho de nobres | Maioria qualificada (2/3) | Ponderada pela população | Ponderada pelo nível da cidade |
+| Tolerância religiosa | Tolerância | Fé oficial | Fé oficial | Perseguição | Tolerância | Tolerância |
+| Livro Sagrado obrigatório | Não | Não | Não | Sim | Não | Não |
+| Tarifa | Média (10% da carga) | Média | Alta (20%) | Média | Média | Baixa (5%) |
+| Itens proibidos | — | — | — | Narcóticos | Cajados, Cetro e Joia de Mana | — |
+| Ajuste de preço da facção | Armas −20% | Itens de mana −20% | Comida −20% | Remédio e Curativo −20% | Armas de fogo e Pólvora −20% | — |
 
-- *Contexto:* os documentos já falam em "moedas", mas sem regra de unidade nem de casas decimais.
+- *Conflito:* a Tecnocrata tem "magia proibida" como **pensamento extremo**, mas a lei inicial sugerida já é "Proibida".
+  - **Saída:** a lei Proibida significa que **usar** magia é crime;
+  - o extremo continua sendo **banir** os Magos da facção.
+- *Impacto:*
+  - Facção, Cultura, Crime (itens proibidos), Escravidão (fecha a pergunta "quem mais começa com escravidão");
+  - Felicidade (leis × cultura), Comércio (Tarifa), Mundo.
+
+**V3-2. Os bônus dos estilos de início (A-11).**
+
+- *Contexto:* os 7 estilos têm só exemplos de bônus, e o personalizado tem um "orçamento de pontos" sem números.
 - *Sugestão:*
-  - uma **unidade só, a moeda**, com **1 casa decimal** na interface (o Pão custa 1,7);
-  - por dentro, o jogo guarda o dinheiro em **décimos inteiros** (1,7 vira 17). Isso evita os erros de arredondamento dos números com vírgula, que fariam o dinheiro "vazar" ao longo de uma partida longa;
-  - o nome próprio da moeda de cada cultura fica para a história.
-- *Impacto:* Econômico, Interface, Arquitetura (tipo de dado do dinheiro).
 
-**V2-2. A rotina de cada classe (A-7).**
-
-- *Contexto:* a [[Sistema de IA/Descrição|IA]] divide o dia em dormir, trabalhar e Período Livre, mas não diz as horas. Elas também definem quanto cada NPC produz (IP1-6).
-- *Sugestão:*
-
-| Classe | Dormir | Trabalhar | Período Livre |
+| Estilo | Dinheiro | Itens e grupo | Habilidade e relação |
 |---|---|---|---|
-| Escravo | 22h às 5h (7 h) | 5h às 17h (12 h) | 17h às 22h (5 h) |
-| Civil | 22h às 6h (8 h) | 7h às 15h (8 h) | 6h às 7h e 15h às 22h (8 h) |
-| Rico | 23h às 7h (8 h) | 9h às 15h (6 h, gerência) | 10 h |
-| Nobreza e Realeza | 0h às 8h (8 h) | 10h às 14h (4 h, política e corte) | 12 h |
-| Guardas e Funções contínuas | Turnos de 8 h (6h às 14h, 14h às 22h, 22h às 6h); cada guarda faz 1 turno | | |
+| Dono de vila | 300 | Assentamento nível 1 (1 Casa, 1 Fazenda, 1 Posto de Coleta), 40 Tábuas, 40 Blocos de Pedra, 4 colonos Civis | +10 de Inteligência |
+| Aventureiro | 150 | 2 companheiros; armas e armadura Leve de Rank 2 | +10 em Corpo a Corpo ou Longo Alcance |
+| Membro de facção | 200 | Título Cidadão (ou Cavaleiro, se Nobre); uma Casa na cidade | Relação +30 com a facção |
+| Mercador | 800 | 2 Cavalos e 1 companheiro (líder de caravana); preços de 3 cidades vizinhas já conhecidos | +15 de Carisma |
+| Nobre exilado | 400 | 2 companheiros de Nobreza; Espada Longa de Aço de Rank 2 | Relação +20 com a sua cultura e −20 com a facção que tomou o trono |
+| Escravo | 0 | 2 escravos aliados (Vínculo alto); Grilhões | +20 de Trabalho Braçal |
+| Mago | 100 | Cajado Simples de Rank 2, 3 Pedras de Mana | Mago; +20 de Magia |
 
-  - Um turno de 8 h dura **5 min e 20 s reais** a 1x.
-  - A madrugada (22h às 5h), com só o turno da noite acordado, é a hora do crime, como já decidido.
-- *Impacto:* IA, Trabalho, Produção (horas do turno), Crime.
+  - **Personalizado:** 100 pontos, a partir de um personagem Civil sem nada:
 
-**V2-3. Salários e soldo (A-6).**
+| Escolha | Custo |
+|---|---|
+| 10 moedas | 1 ponto |
+| Companheiro | 15 pontos |
+| +10 numa habilidade | 10 pontos |
+| Item | 1 ponto a cada 10 moedas de preço |
+| Ser Mago | 30 pontos |
+| Assentamento nível 1 | 40 pontos |
+| Título Cidadão | 10 pontos |
 
-- *Contexto:* o Trabalho decidiu uma "tabela por Função e nível", multiplicada pela riqueza e pelo desemprego, com três níveis de salário no jogador. Faltam os números.
-- *Sugestão:* **salário por hora pela habilidade que a receita usa** (IP3-11):
+    A cultura é grátis. Cada estilo pronto vale cerca de 100 pontos, o que mantém o personalizado justo.
+- *Impacto:* Início de Jogo (fecha as 2 perguntas, inclusive o bônus do Mercador), Comércio, Companheiros.
 
-| Trabalho | Moedas por hora | Por dia (turno de 8 h) |
-|---|---|---|
-| Braçal | 0,75 | 6 |
-| Manufaturado | 1,0 | 8 |
-| Especialista | 1,5 | 12 |
-| Mago de Ofício | 2,5 | 20 |
-
-  - **Multiplicadores:**
-    - +10% por nível da construção acima do 1;
-    - gerente × 1,5;
-    - riqueza da cidade de × 0,8 a × 1,2;
-    - desemprego de × 0,9 (muito) a × 1,1 (falta gente);
-    - jogador: Baixo × 0,75, Normal × 1, Alto × 1,25.
-  - **Guarda:** 1,0 por hora, pago pelo Banco da Cidade.
-  - **Soldo do Esquadrão:** 8 moedas por dia, o salário de 1 trabalhador, porque 1 Esquadrão = 1 NPC alistado. O Esquadrão de Magos custa 3 vezes (24) e o mercenário 2 vezes por estação, adiantado (256), como já decidido.
-- *Exemplo:* um Cozinheiro Civil num Cozinheiro nível 1 ganha 8 por dia, 128 por estação. Um escravo de habilidade 60 custa 440, cerca de 55 dias desse salário.
-- *Impacto:* Trabalho, Facção (Banco da Facção paga o soldo), Guerra, Escravidão.
-
-**V2-4. Preço base de cada item (A-1).**
-
-- *Contexto:* o Mercado Mundial dá o valor primário de cada item, mas não há nenhum número.
-- *Sugestão:* uma **fórmula** aplicada a todas as receitas:
-
-> **preço base = (custo dos insumos + horas × salário por hora da receita) ÷ lote × 1,2**
-
-  - O 1,2 é a **margem do dono** (20%).
-  - O jogo calcula todos os preços ao carregar os dados, na ordem da cadeia: primeiro os brutos, depois o que usa os brutos, e assim por diante. Assim, mudar uma receita muda o preço sozinho.
-  - **Rank:** o preço do Rank 1 é multiplicado por 1 (Rank 1), 1,5 (2), 2,2 (3), 3,2 (4) e 4,5 (5). O Rank 0 vale metade.
-  - **Ajuste manual:** um campo opcional "multiplicador" por item, para casos como o Cavalo (raro e caro) ou os Artefatos.
-  - *Resultado* (preços de partida, em moedas):
-
-| Grupo | Item | Preço |
-|---|---|---|
-| Bruto Tier 0 | Grão, Legumes, Água, Pedra, Argila, Carvão, Tora, Minérios de Ferro e Cobre, Algodão, Folha de Fumo, Ovo, Leite | 0,5 |
-| Bruto Tier 1 e 2 | Fruta, Flor Espiritual, Pedra de Mana, Minério de Ouro / Especiarias | 0,9 / 1,8 |
-| Açougue | Carne Crua, Couro Cru, Ossos | 1,7 |
-| Animais | Galinha / Porco e Ovelha / Vaca / Cavalo (com multiplicador × 3) | 3,6 / 7,2 / 14,4 / 65 |
-| Intermediários | Tábua 1,5; Bloco de Pedra 1,8; Barra de Ferro 2,1; Barra de Cobre 2,0; Couro Refinado 3,5; Pólvora 3,6; Barra de Aço 5,5; Barra de Ouro 11,0; Barra de Aço Mágico 22,1 | — |
-| Comida Tier 1 | Pão, Sopa 1,7; Peixe Defumado 1,8; Ração Militar 2,0 | — |
-| Comida e bebida Tier 2 | Queijo, Cerveja 3,3; Torta de Fruta 3,5; Linguiça 5,5 | — |
-| Tier 3 | Vinho, Pó Espiritual, Remédio 10,4; Perfume 11,0; Roupa Fina 13,7; Assado Temperado 14,0; Móveis Refinados 15,4 | — |
-| Tier 4 | Doce de Especiarias 19,3; Presunto Curado 22,7; Licor 29,0; Ornamento 32,4; Joias 40,8 | — |
-| Materiais básicos | Cerâmica 1,8; Roupa Comum 2,3; Móveis de Madeira 5,1 | — |
-| Armas (Rank 1) | Flecha 0,5; Cartucho 1,0; Espada Curta de Ferro 13,9; Arco Longo de Madeira 15,5; Espada Longa de Ferro 16,4; Arcabuz 23,6; Espada Curta de Aço 30; de Aço Mágico 71,5 | — |
-| Armaduras (Rank 1, 3 peças) | Leve de Couro 54; Pesada de Ferro 57; Pesada de Aço 126 | — |
-| Artilharia | Bala de Canhão 25; Bombarda 67 | — |
-
-- *Exemplo:* um kit de Infantaria Pesada de Aço de Rank 3 custa cerca de 200 × 2,2 = 440 moedas, o mesmo que um escravo bom ou 55 dias de soldo.
-- *Impacto:* Itens (Valor Global), Econômico, Comércio, Batalha (custo dos kits).
-
-**V2-5. Mercado da Facção e Mercado Local (oferta e demanda).**
-
-- *Contexto:* o Econômico tem as 3 camadas, mas não a fórmula (pergunta aberta 3).
-- *Sugestão:*
-  - **Mercado da Facção:** preço mundial × ajuste da lei por categoria (−20%, 0 ou +20%). Os itens proibidos só aparecem nas lojas ilegais, a × 2.
-  - **Mercado Local:**
-    - **estoque-alvo** = 5 dias do consumo da cidade, somando as classes e as receitas que usam o item;
-    - **fator** = 1 + (alvo − estoque) ÷ alvo, limitado entre 0,5 e 2,0. Estoque zero dobra o preço; estoque de 1,5 vez o alvo corta pela metade;
-    - o preço anda no máximo **10% por dia** na direção do fator, para não pular.
-  - **Lojas da Cidade:** compram a 90% e vendem a 110% do preço local.
-  - O preço do jogador continua na faixa de ±30%, como já decidido.
-- *Exemplo:* uma cidade de 100 NPCs come 100 Pães por dia; o alvo é 500. Com 250 no estoque, o fator é 1,5: o Pão vai de 1,7 a 2,6 em cerca de 5 dias. Uma caravana que traga 400 Pães faz o preço cair.
-- *Impacto:* Econômico, Comércio (o lucro das rotas sai dessa diferença), Notícias (preço 30% fora da média vira notícia).
-
-**V2-6. O consumo de cada classe (A-3).**
+**V3-3. Crime: multas, Caçadores, loja ilegal do jogador e missão de confiança.**
 
 - *Contexto:*
-  - a Classe Social decidiu os tipos de consumo e o mapeamento pelo Tier (IP2-11);
-  - faltam as quantidades e a composição das cidades por classe;
-  - o salário de um Civil (8 por dia) é bem maior que a comida mínima (1,7). Se ele gastar só o mínimo, o dinheiro se acumula, e as lojas ficam sem clientes.
+  - o [[Sistema de Crime e Justiça/Descrição|Crime]] tem gravidades de 1 a 5, mas multas sem valor;
+  - não diz se o jogador pode ter loja ilegal;
+  - não diz quais são as missões de confiança.
 - *Sugestão:*
-  - **Cesta mínima por NPC real** (é ela que, se faltar, conta os dias em déficit):
+  - **Multa** = 25 × gravidade² moedas:
 
-| Classe | Comida por dia | Materiais Básicos | Luxo | Exclusivo |
+| Gravidade | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| Multa (moedas) | 25 | 100 | 225 | 400 | 625 |
+
+    A **Recompensa** é o dobro da multa, somada por crime. Os **Caçadores de Recompensa** surgem quando ela chega a **500** numa facção (um crime de gravidade 5, ou vários menores).
+  - **Loja ilegal do jogador:** sim, qualquer construção de produção dele.
+    - **Batida da guarda:** a cada estação, chance = Controle da cidade ÷ 200 (Controle 60 = 30%).
+    - **Se descoberta:** confisco do estoque ilegal, crime de Contrabando (gravidade 3) para o gerente e para o jogador, se ele estiver no mapa.
+  - **Missão de confiança:** a Confiança do NPC vai de 0 a 100. Com 50, o jogador compra na loja ilegal; com 80, também vende. Três tipos de missão, sorteados:
+
+| Missão | O que é | Confiança |
+|---|---|---|
+| Entrega | Levar mercadoria proibida a outra cidade | +25 |
+| Dívida | Cobrar um devedor do NPC | +20 |
+| Informante | Achar quem falou com a guarda e calá-lo, por suborno ou à força | +35 |
+
+- *Impacto:* Crime, Econômico, Reputação, Objetivo (missões).
+
+**V3-4. Cura: quando o Inconsciente vira Morto.**
+
+- *Contexto:* a [[Sistema de Cura/Descrição|Cura]] tem uma proposta (golpe de misericórdia ou sangramento), sem números.
+- *Sugestão:* confirmar a proposta, com números:
+  - **Modo não letal:** Vida 0 deixa Inconsciente, sem sangramento. Ele acorda em **4 horas de jogo** com 10% da Vida.
+  - **Modo letal:** Vida 0 deixa Inconsciente **sangrando**. Sem Curativo, ele morre em **2 horas de jogo** (80 s reais a 1x). O Curativo estanca o sangramento, como já decidido.
+  - **Golpe de misericórdia:** um ataque letal contra um Inconsciente mata na hora. É crime de Assassinato, se for contra um cidadão.
+  - **Hospital:** cura 5% da Vida por hora de jogo; com um Mago de Suporte, 10%. Custa 2 moedas por dia de internação.
+- *Impacto:* Cura, Combate, Crime.
+
+**V3-5. Narradores, intensidade e diário.**
+
+- *Contexto:* o [[Sistema de Eventos/Descrição|Narrador]] é a dificuldade, mas cada um tem um **foco**, e nenhum é mais difícil que outro. Faltam os nomes, os focos, um controle de intensidade e o formato do diário.
+- *Sugestão:*
+  - **4 narradores**, com nomes significativos até a história:
+
+| Narrador | Foco | Combina com |
+|---|---|---|
+| O Cronista | Equilíbrio entre todas as categorias | Qualquer estilo |
+| A Guerra | Ameaça, guerra e bandidos | Aventureiro, Membro de facção |
+| A Terra | Clima, colheita, saúde e economia | Dono de vila, Mercador |
+| A Corte | Política, intrigas e sucessão | Nobre exilado, Membro de facção |
+
+  - **Intensidade:** um controle separado, de 50% a 150%, que multiplica a tensão do Narrador. Padrão: 100%. O foco muda **o quê**; a intensidade muda **quanto**.
+  - **Diário:**
+    - guarda as últimas **300 entradas**, e as mais antigas vão para um resumo por ano;
+    - filtros por categoria, lugar e Aviso (Info, Aviso, Crítico);
+    - busca por texto.
+- *Impacto:* Eventos, Início de Jogo (escolha do narrador), Interface.
+
+**V3-6. Os eventos iniciais da fatia vertical (parte da A-12).**
+
+- *Contexto:* o Eventos sugere começar com 10 a 15 eventos, sobretudo Clima, Saúde, Sorte e o déficit de consumo. A fatia vertical tem só uma vila, sem guerra nem facção.
+- *Sugestão:* **12 eventos**:
+
+| Evento | Tipo | Gatilho e efeito |
+|---|---|---|
+| Chuva boa | Ocasional (Clima) | Primavera; Fazenda +20% por 4 dias |
+| Seca | Ocasional (Clima) | Verão; Fazenda −50% por 8 dias |
+| Geada precoce | Ocasional (Clima) | Fim do outono; a colheita para 2 dias antes |
+| Tempestade forte | Ocasional (Clima) | Danifica 1 construção de madeira (−20% de Vida) |
+| Febre | Ocasional (Saúde) | Mortalidade +50% por 8 dias; gasta Remédio se houver |
+| Colheita farta | Ocasional (Sorte) | Outono; Fazenda +30% por 4 dias |
+| Mercador viajante | Ocasional (Sorte) | Uma caravana pequena vende 3 itens de fora |
+| Achado na floresta | Ocasional (Sorte) | +20 Tora ou +5 Pedra de Mana no estoque |
+| Ratos no celeiro | Ocasional (Natureza) | −10% do Grão estocado |
+| Fome | Condicional | Comida abaixo de 10% por 3 dias: Felicidade −10 e migração para fora |
+| Falta de móveis | Condicional | Materiais Básicos em déficit por 8 dias: Felicidade dos Civis −5 |
+| Festa da Colheita | Data fixa (festival) | Felicidade +10 por 4 dias; consumo de Cerveja × 1,5 |
+
+- *Impacto:* Eventos, Clima, Classe Social (dias em déficit), Religião (festival), Arquitetura (dados da fatia vertical).
+
+**V3-7. Assembleia e guerra civil na sucessão.**
+
+- *Contexto:*
+  - a assembleia anual está decidida (quem vota, o Sistema de votação, o veto do líder), mas os detalhes estão "a refinar";
+  - a crise de sucessão "pode gerar guerra civil", sem dizer como os lados se formam.
+- *Sugestão:*
+  - **Pauta:** no máximo **3 leis** por assembleia. Cada cidade de IA propõe a lei mais distante do desejo da sua cultura. Ganham as 3 propostas por mais cidades.
+  - **Voto da IA:** a cidade vota sim se a lei aproxima a facção do desejo da sua cultura. Com Felicidade abaixo de 30, ela vota contra o líder.
+  - **Veto do líder** (quando a lei Poder do líder deixa): chance = 50% + (Agressividade − Sociabilidade) ÷ 2. Cada veto: legitimidade −5.
+  - **Efeito:** a lei vale no dia seguinte. As cidades que votaram e perderam têm Felicidade −5 por 1 estação.
+  - **Guerra civil:**
+    - **candidatos:** até 3, o herdeiro pela regra de sucessão, o nobre de maior Renome e o general do maior exército;
+    - **lados:** cada cidade escolhe pela Opinião do seu governador sobre cada candidato;
+    - **luta:** os lados viram facções separadas em guerra, com o Placar de Guerra comum;
+    - **fim:** quem chegar a +60 no Placar reúne a facção; se não houver acordo em 2 anos, o lado menor fica independente.
+- *Impacto:* Facção, Diplomacia, Guerra, Companheiros (herdeiros), Notícias.
+
+**V3-8. Cidade, população e trabalho.**
+
+- *Contexto:* sobram 5 pendências pequenas na População e no Trabalho (as moradias já têm capacidade pela V2-8).
+- *Sugestão:*
+  - **Lotes por nível de cidade** (pequeno / médio / grande):
+
+| Nível | 1 | 2 | 3 | 4 |
 |---|---|---|---|---|
-| Escravo | 1 (Tier 1) | — | — | — |
-| Civil | 1 (Tier 1 ou 2) | 1 a cada 8 dias | — | — |
-| Rico | 1 (Tier 2 ou mais) | 1 a cada 4 dias | 1 a cada 4 dias | — |
-| Nobreza | 1 (Tier 2 ou mais) | 1 a cada 4 dias | 1 a cada 2 dias | 1 a cada 4 dias |
-| Realeza | 1 (Tier 2 ou mais) | 1 a cada 2 dias | 1 por dia | 1 a cada 2 dias |
+| Lotes pequenos | 8 | 16 | 30 | 60 |
+| Lotes médios | 3 | 6 | 12 | 24 |
+| Lotes grandes | 0 | 1 | 3 | 8 |
 
-  - Mais a **Tora no inverno** (já decidido) e os **Artefatos como posse** da Realeza.
-  - **Regra do gasto:** cada classe gasta por dia **até 80% da renda**. Primeiro a cesta mínima; o que sobra sobe o Tier da comida, compra mais materiais e paga a **Bebida na Taverna** (até 25% da Comida pode ser Bebida). Os outros 20% são imposto e poupança, que vira a riqueza média. Assim o dinheiro volta às lojas, e uma cidade rica come melhor sozinha.
-  - **Bônus de Felicidade:** consumo acima da cesta dá até +5 no fator de consumo da classe.
-  - **Composição por classe** das cidades:
+    O porte das construções vem da V2-8.
+  - **Moradia dos Controlados:** um quarto na Taverna (2 moedas por dia por companheiro) ou uma Casa do jogador. Sem nenhum dos dois, eles dormem ao relento.
+  - **Crianças decorativas:** não na primeira versão. No futuro, só alguns bonecos genéricos, sem simulação.
+  - **Gerente das construções da Cidade (LOD 0):** o empregado de maior habilidade vira gerente, com salário × 1,5, sem precisar de outro NPC.
+  - **Leilão:** uma construção parada por 2 estações vai a leilão por 3 dias. O lance mínimo é 50% do custo de obra, e podem dar lance os Ricos da cidade e o jogador.
+  - **Universidade:** o Controlado paga 20 moedas por dia e estuda 8 h. Ganha +1 em Inteligência ou Trabalho Especialista a cada 2 dias, até 70.
+- *Impacto:* População, Trabalho, Construção, Companheiros.
 
-| Classe | Parcela da cidade |
+**V3-9. Estradas, patrulhas, muralhas e guerra.**
+
+- *Contexto:*
+  - a Viagem quer estradas construídas (quem, quanto, tecnologia) e o número de patrulhas;
+  - a Guerra quer o custo da Muralha e do Posto da Guarda e as estradas destruídas.
+- *Sugestão:*
+  - **Estrada** (multiplicador 0,75 da Viagem): construída num Mapa Local inteiro.
+    - **Custo:** 40 Blocos de Pedra + 20 Tábuas + 160 h de obra, pelo Construtor da facção ou do jogador.
+    - **Requisitos:** tecnologia "Estradas" (Era 1, ramo Construção).
+  - **Guerra e estradas:** o saque e o cerco danificam a estrada do mapa (multiplicador 0,9 até o reparo, com 25% do custo).
+  - **Patrulhas:** 1 Esquadrão leve para cada 4 mapas de território. Custa o soldo normal, 8 por dia.
+  - **Muralha** (3 níveis):
+
+| Nível | Custo |
 |---|---|
-| Escravo | 10% (30% na Escravista; zero onde a lei proíbe, e esses NPCs viram Civis) |
-| Civil | 76% (56% na Escravista) |
-| Rico | 10% |
-| Nobreza | 4% |
-| Realeza | Só na capital: 1% (3 NPCs de 300) |
+| Paliçada (porte médio) | 60 Tábuas |
+| Muralha de Pedra (grande) | 200 Blocos de Pedra + 40 Tábuas |
+| Bastião (grande, Era 3) | 400 Blocos de Pedra + 40 Barras de Ferro |
 
-- *Exemplo:* um Civil ganha 8 por dia e gasta até 6,4: o Pão (1,7), uma Cerveja (3,3) e um pouco de Materiais; os outros 1,6 vão para o imposto e a poupança.
-- *Impacto:* Classe Social, Felicidade, Econômico (fecha o ciclo do dinheiro), População (composição inicial), Mundo.
+    A manutenção segue a regra geral da V2-8.
+  - **Posto da Guarda:** porte pequeno.
+- *Impacto:* Viagem, Guerra, Construção, Tecnologia, Facção.
 
-**V2-7. Bancos, estabilizador, imposto, cunhagem e empresas.**
+**V3-10. Diplomacia e Companheiros.**
 
-- *Contexto:* o Econômico e o Trabalho deixaram em aberto o limiar do estabilizador, a taxa do imposto, a cunhagem e a fração de empresas dos Ricos.
+- *Contexto:*
+  - a Diplomacia não diz quando a coalizão se desfaz;
+  - os Companheiros têm os bônus dos cargos sem números e três costumes de casamento como proposta (Autoritária: permissão do líder; Tecnocrata: contrato com taxa; Arcana: os dois Magos, ou o não Mago aceita ficar abaixo).
 - *Sugestão:*
-  - **Estabilizador:** quando a riqueza média de uma classe cai abaixo de **3 dias da cesta mínima**, o Banco da Cidade paga até ela voltar a 5 dias. O teto é 10% do Banco por estação.
-  - **Lei de Imposto** (sobre salários e lucros, por estação):
+  - **Coalizão:** se desfaz quando a Ameaça do alvo fica abaixo de 40 por 1 estação, ou quando o alvo assina paz com todos os membros.
+  - **Bônus dos cargos:**
 
-| Nível | Taxa | Felicidade |
-|---|---|---|
-| Baixo | 10% | 0 |
-| Normal | 20% | −5 |
-| Alto | 30% | −10 |
+| Cargo | Bônus |
+|---|---|
+| Governador | +1 de Controle e +1% de imposto a cada 10 de Carisma acima de 30 (até +7) |
+| Gerente | +1% de produção a cada 5 de Trabalho Especialista acima de 40 (até +12%) |
+| Líder de caravana | −10% de risco e +5% de lucro a cada 20 de Carisma acima de 30 |
+| Professor | +10% no bônus de educação da Universidade |
 
-    A cidade fica com 30% do imposto, e o Banco da Facção com 70%.
-  - **Cunhagem:** a Casa da Moeda transforma **1 Barra de Ouro em 25 moedas** (a barra vale 11). Ela cunha até 4 × o nível da Casa barras por estação: o ouro vira dinheiro novo, a fonte contra a economia fixa.
-  - **Empresas dos Ricos:** 30% das construções de produção de cada cidade são de Ricos. As vagas de Rico = número de empresas.
-- *Exemplo:*
-  - uma Casa da Moeda nível 2 cunha 8 barras por estação = 200 moedas novas, com lucro de 112;
-  - a cidade de nível 3 com Banco de 6.000 sustenta o estabilizador por várias estações de crise.
-- *Impacto:* Econômico, Trabalho, Facção (lei de Imposto), Felicidade, Construção (Casa da Moeda).
+  - **Costumes de casamento:** confirmar os três propostos. A taxa do contrato Tecnocrata é de **50 moedas**.
+- *Impacto:* Diplomacia, Companheiros, Trabalho, Comércio.
 
-**V2-8. Construções: custo, tempo, manutenção e moradias (A-4).**
+**V3-11. Magia: Grimório, filhos de Mago e feitiços fora do combate.**
 
-- *Contexto:* a Construção decidiu o desconto de nível a nível, a manutenção por estação com um Construtor, e o Engenheiro (IP3-11). Faltam os números de todas as construções.
-- *Sugestão:* **três portes**, para não escrever cada construção à mão:
-
-| Porte | Exemplos | Nível 1 | Horas de obra |
-|---|---|---|---|
-| Pequeno | Casa, Senzala, Fazenda, Pasto, Rancho, Posto de Coleta, Pesqueiro, Posto da Guarda | 10 Tábua + 10 Bloco de Pedra | 40 |
-| Médio | As oficinas (Cozinheiro, Carpinteiro, Ferreiro...), Mercado, Taverna, Casarão, Boticário, Posto Comercial | 20 Tábua + 30 Bloco de Pedra | 120 |
-| Grande | Templo, Quartel, Universidade, Laboratório, Torre e Forja Arcana, Hospital, Casa da Moeda, Prisão, Mansão, Palácio, Mercado de Escravos | 40 Tábua + 80 Bloco de Pedra + 10 Barra de Ferro | 400 |
-
-  - **Subir para o nível N** custa o nível 1 × N. Construir direto no nível N custa a soma de todos os níveis × 1,25: é o "custo integral" sem o desconto, já decidido.
-  - **Tempo:** horas de obra ÷ (Operários × velocidade). O Construtor tem as vagas da tabela geral.
-  - **Engenheiro:** Inteligência mínima de 30, 45, 60 e 75 nos níveis 2 a 5 (+10 nas construções grandes). Sem Engenheiro, só nível 1.
-  - **Manutenção por estação:** 5% dos materiais do nível atual (no mínimo 1 Tábua) + 5% das horas de obra, feitas pelos Operários.
-  - **Moradias** (NPCs reais por construção):
-
-| Moradia | Nível 1 | Por nível a mais |
-|---|---|---|
-| Senzala | 8 | +4 |
-| Casa | 4 | +2 |
-| Casarão | 2 | +1 |
-| Mansão | 2 | +1 |
-| Palácio | 3 | +1 |
-
-- *Exemplo:*
-  - **Custo:** um Cozinheiro nível 1 custa 20 Tábuas (30 moedas) + 30 Blocos (54) e 120 h de obra (90 moedas de salário de Operário), cerca de 175 moedas;
-  - **Tempo:** com 3 Operários, a obra leva 5 dias;
-  - **Subir de nível:** do nível 2 para o 3 custa 60 Tábuas + 90 Blocos.
-- *Impacto:* Construção, População (capacidade das moradias, pergunta aberta), Trabalho (Operários), Guerra (Muralha como construção grande).
-
-**V2-9. Produtividade dos recursos e lotes (A-5).**
-
-- *Contexto:* a IP3-2 decidiu 1 unidade por 0,5 h de trabalho Braçal, multiplicada pela produtividade e pela estação. Falta o valor da produtividade e um limite, para uma cidade não pôr 20 Fazendas num mapa.
+- *Contexto:* a [[Sistema de Magia/Descrição|Magia]] não diz como se obtém o Grimório, qual a chance de filho de Mago nascer Mago, nem quais feitiços de Suporte existem fora do combate.
 - *Sugestão:*
-  - **Produtividade:** recurso normal × 1,0; de destaque × 1,5; ausente, não existe.
-  - **Construções Braçais por recurso, em cada Mapa Local:** até 2 num recurso normal e até 4 num de destaque. A Água não tem limite (poço).
-  - **Conta de comida** de uma cidade de 100 NPCs (100 Pães por dia):
+  - **Grimório:**
+    - **onde se acha:** nas masmorras, como loot, e no Mercado das capitais Arcanas (cerca de 80 moedas);
+    - **quem produz:** a **Torre Arcana nível 3** copia o Grimório de um feitiço que a facção já pesquisou, com 2 Couros Refinados + 1 Pedra de Mana, em 24 h, por um Mago.
+  - **Chance de nascer Mago:** 2% sem pais Magos; 25% com um; 60% com os dois. Em LOD 2, vale a média da cidade.
+  - **Feitiços de Suporte fora do combate** (só 3 na primeira versão):
 
-| Precisa de | Quanto | Quem faz | Trabalhadores |
-|---|---|---|---|
-| Grão | 50 por dia | 1 Fazendeiro (habilidade 50, 8 h) faz 16 por dia a 100% | 3 a 4 |
-| Água | 25 por dia | Coletor | 1 a 2 |
-| Pão | 100 por dia | 1 Cozinheiro faz 8 por dia | 12 a 13 |
-
-    Isso dá cerca de 18% da cidade para a comida.
-  - O **inverno** (Fazenda a 25%) obriga a estocar no outono, como já decidido.
-- *Conflito:* o **Cozinheiro é o gargalo**: são 13 cozinheiros para 4 fazendeiros, porque a IP1-6 deu 1 h por unidade de Tier 1. Saída: manter e testar. Se incomodar, o lote do Pão sobe para 8 (2 Pães por hora).
-- *Impacto:* Recursos, Mundo (lotes por mapa), População (lotes), Clima.
-
-**V2-10. A IA de Utilidade simples (A-8).**
-
-- *Contexto:* a IA decidiu Utilidade em LOD 0 e Regras Fixas em LOD 1; a fatia vertical precisa só de "trabalhar, comer, comprar, dormir".
-- *Sugestão:*
-  - **Ações:** Dormir, Trabalhar, Comer, Comprar, Lazer (Taverna) e Fugir.
-  - **Nota de cada ação:** 1,0 se a ação é a do período da rotina, 0 se não, mais os bônus:
-    - **Comer:** +1,5 nas horas das refeições (7h, 12h e 19h, por 30 min);
-    - **Comprar:** +1,2 uma vez a cada 2 dias, no Período Livre. A compra de verdade é a da cidade; a visita mostra isso na tela;
-    - **Lazer:** +0,5 × (1 − Felicidade ÷ 100);
-    - **Fugir:** +3,0 com combate a menos de 10 tiles, o que passa por cima de tudo.
-  - O NPC faz a ação de maior nota e reavalia a cada **5 minutos de jogo** (cerca de 3 s reais) ou quando algo muda.
-  - **LOD 1 (Regras Fixas):** a ação do período, sem as notas.
-- *Impacto:* IA, Arquitetura (custo da reavaliação), Combate (Fugir).
-
-**V2-11. O tick e as metas de desempenho (A-9).**
-
-- *Contexto:* o Tempo amarrou a frequência ao LOD, sem números; a Arquitetura tem "meta de NPCs em LOD 0 a medir".
-- *Sugestão:*
-
-| LOD | Frequência | Equivale a |
+| Feitiço | Efeito | Limite |
 |---|---|---|
-| 0 | **20 ticks por segundo real** a 1x (passo fixo) | 1 tick = 2 s de jogo |
-| 1 | 1 vez a cada 10 ticks (2 por segundo) | — |
-| 2 | 1 vez por hora de jogo (a cada 40 s reais a 1x) | Economia somada por dia e por estação |
+| Bênção da Colheita | Fazenda +20% por 1 estação | 1 por cidade por estação |
+| Acalmar Tempestade | Cancela uma Tempestade forte no mapa | Custa 3 Pedras de Mana |
+| Curar Ferimentos | Igual ao Hospital com Mago de Suporte, mas no campo | — |
 
-  - A 4x, o LOD 0 roda 80 ticks por segundo. Por isso a velocidade 8x fica só no Mapa Mundial, como já decidido.
-  - **Metas de partida**, a medir na fatia vertical:
-    - 500 NPCs em LOD 0 e 5.000 em LOD 1 a 4x;
-    - 60 quadros por segundo em 1600 × 900;
-    - num PC de gama média.
-- *Impacto:* Tempo, Arquitetura, IA, Combate.
+- *Impacto:* Magia, Itens, Produção, Clima, Cura.
 
-**V2-12. A fatia vertical em números.**
+**V3-12. Interface, fonte e PC alvo.**
 
-- *Contexto:* a fatia vertical é 1 cidade com Fazenda → Cozinheiro → Mercado, mas sem números ninguém sabe se o ciclo fecha.
-- *Sugestão:* uma **vila de nível 1, com 15 NPCs reais Civis**, Banco de 400, e 12 vagas:
+- *Contexto:* a Interface tem 5 pendências, e a Arquitetura o PC alvo mínimo. A V2-11 deu as metas de desempenho.
+- *Sugestão:*
+  - **HUD:** nenhum elemento fixo, nem o menu de pausa, que abre com Esc. As janelas de gestão também se movem e mudam de tamanho, e a posição fica salva no perfil do jogador.
+  - **Fonte:** **Noto Sans**. É grátis, tem licença livre e tem os acentos e os alfabetos de outros idiomas. O tamanho padrão é 14 px em 1600 × 900, com escala de 80% a 150%.
+  - **Painel "Por quê?":** uma classe por vez, em abas, com um resumo das 5 classes no topo.
+  - **Idioma:** IDs de texto desde o primeiro dia, no arquivo `textos/pt-BR.json`.
+  - **Notificações:** 15 tipos, cada um com Desligada, Diário, Ícone ou Pausa. Os padrões seguem o Aviso de cada evento.
+  - **PC alvo mínimo:** processador de 4 núcleos (2015 ou mais novo), 8 GB de memória, placa de vídeo com OpenGL 3.3 e 2 GB.
+- *Impacto:* Interface, Arquitetura, Pipeline (teto de memória da arte), Eventos.
 
-| Construção | Vagas | Produz por dia |
-|---|---|---|
-| Fazenda nível 1 | 2 | 32 Grão (8 no inverno) |
-| Posto de Coleta nível 1 | 2 | 16 Água e 16 Tora |
-| Cozinheiro nível 1 | 2 | 16 Pães |
-| Carpinteiro nível 1 | 2 | Tábuas e, no nível 2, Móveis de Madeira |
-| Mercado | 2 Lojistas | — |
-| Construtor | 2 Operários | — |
-| Casas nível 1 | 4 Casas | 16 lugares |
+**V3-13. Listas de conteúdo e pontas soltas.**
 
-  - **Comida:** a vila come 15 Pães por dia, que gastam 7,5 Grão e 3,75 Água. O Grão que sobra vai para o estoque do inverno e para a venda.
-  - **Dinheiro por dia:**
-    - entram cerca de 85 em salários (12 × 6 a 8);
-    - saem cerca de 25 da cesta mínima (15 × 1,7);
-    - até 68 voltam às lojas pela regra do gasto (80%).
-  - **O teste passa se**, em 1 ano de jogo sem tela, a vila não passa fome, o Banco não zera e o preço do Pão fica entre 1,2 e 2,6.
-- *Impacto:* Arquitetura (marcos da fatia vertical), todos os números acima. É a base da ficha técnica lógica.
+- *Contexto:* a A-12 pede listas grandes:
+  - 40 a 60 tecnologias e os marcos mundiais;
+  - os feitiços e a árvore arcana;
+  - os contratos e as missões;
+  - as condições das Ambições.
+
+  A fatia vertical **não usa** tecnologia, magia nem guerra (só os eventos da V3-6). Sobram também três pontas pequenas.
+- *Opções:*
+  - (a) fazer as listas agora, em 3 rodadas de conteúdo, antes da ficha técnica;
+  - (b) fazer a V4 e a V5 (propostas) e a **ficha técnica da fatia vertical** primeiro, e deixar as listas para as **rodadas de conteúdo C1 a C3**, durante a programação da fatia vertical.
+- *Sugestão:* (b), porque as listas não travam nada do que vem primeiro e ficam melhores quando a base já roda.
+  - **C1:** tecnologias e marcos mundiais.
+  - **C2:** feitiços, árvore arcana e Grimórios.
+  - **C3:** contratos, missões, Ambições e eventos além dos 12 da fatia vertical.
+
+  **Pontas soltas:**
+  - **Destilaria:** construída já no nível 2 (IP3), confirmar.
+  - **Cultura Agrária:** fica fora da primeira versão, como traço futuro.
+  - **Pipeline** (artista definitivo, pacotes provisórios, ferramenta de atlas): decidir no início do código.
+- *Impacto:* o plano da [[Revisão Completa]], Tecnologia, Magia, Objetivo.
+
+Depois das respostas:
+
+- aplicar cada decisão no seu documento;
+- montar a tabela de leis iniciais na Facção e na Cultura;
+- abrir a **V4** (confirmação das propostas, parte 1).
 
 ## 5. Fatos que valem lembrar
 
@@ -366,6 +379,16 @@ Responder no `Respostas.txt` pelos códigos (V2-1, V2-2...). "Seguir sugestão" 
 - **Produção (IP1):** uma receita fixa por produto; cada item numa só construção (Aço Mágico só na Forja Arcana); escada de níveis 1 a 5 (Tier 1, 2, 2, 3, 4 e Rank 1 a 5) mais a trava da era (Rank até 3, 4, 4, 5); Rank = menor entre material, nível e 1 + habilidade ÷ 25; **1 NPC real = 1 trabalhador e 1 consumidor**; horas por unidade de 0,5 a 8 por Tier (armas 8, 12 e 24); fila de ordens do jogador (Fazer N, Manter estoque, Repetir); no máximo 3 insumos, 4 passos e nenhum item órfão.
 - **Itens (IP2):** nomes de época, sem embalagem e no singular (Grão, Tora, Minério de Ferro, Carne Crua, Ovo); nomes de fantasia só no futuro (ideia do autor); **só a Pedra de Mana**, bruta e sem refino (ideia do autor); Pólvora, Adubo, Bloco de Pedra, Tecido de Algodão e de Lã; escada de materiais (de Madeira, Composto, Arcano; de Couro, Cravejado, Arcano); Arcabuz, Fuzil Raiado, Cetro, Flecha, Virote, Cartucho, Bombarda e Canhão; armadura **Leve de couro** (Costureiro), **Média de malha** e **Pesada de placas** (Ferreiro); roupas em conjuntos por papel social; Vinho, Peixe Defumado, Roupa Comum e Roupa Fina; **consumo pelo Tier** (Tier 3 = Luxo, Tier 4 = Exclusivo); cerca de 180 itens.
 - **Receitas (IP3):** lote 4/2/1/1 pelo Tier; 8, 12 ou 24 h pelo degrau; armadura faz as 3 peças juntas; moldes no Ferreiro, Carpinteiro e Armeiro; munição em lote (20 Flechas); Pólvora = Carvão + Dejetos Animais; Aço Mágico = Barra de Aço + Pedra de Mana; **a era trava só equipamento**, os bens de luxo existem desde a Era 1; Operário e Engenheiro no Construtor; cadeia máxima de 4 passos e nenhum órfão.
+- **Economia (V2):**
+  - **dinheiro:** moeda com 1 casa decimal, guardada em décimos inteiros; preço = (insumos + horas × salário) ÷ lote × 1,2;
+  - **salário por hora:** 0,75 Braçal, 1,0 Manufaturado, 1,5 Especialista; soldo 8 por Esquadrão por dia;
+  - **preços:** Pão 1,7; Barra de Ferro 2,1; Espada Curta de Ferro 13,9;
+  - **mercado:** Mercado Local de × 0,5 a × 2,0 pelo estoque (alvo de 5 dias), andando no máximo 10% por dia;
+  - **consumo:** cesta mínima por classe e regra do gasto de 80%;
+  - **leis:** imposto de 10, 20 ou 30%; cunhagem de 1 Barra de Ouro em 25 moedas;
+  - **obras:** 3 portes de construção;
+  - **rotina:** Civil trabalha das 7h às 15h; tick de 20 por segundo;
+  - **fatia vertical:** vila de 15 NPCs.
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 

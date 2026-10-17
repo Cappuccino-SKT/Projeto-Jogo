@@ -21,7 +21,7 @@ A cultura é um atributo das armas e dos equipamentos, inspirado nos **Estilos**
 
 ### Atributos (todos os itens)
 
-- **Valor Global** — valor dado pelo Mercado Mundial
+- **Valor Global** — valor dado pelo Mercado Mundial: o preço base, calculado pela receita (rodada V2-4; ver [[Sistema Econômico/Descrição|Econômico]])
 - **Valor Facção** — valor dado pelo Mercado da Facção
 - **Valor Local** — valor dado pelo Mercado Local
 - **Descrição**
@@ -310,6 +310,6 @@ Cerca de **180 itens**: 29 matérias-primas brutas (com os 5 animais), 14 manufa
 ## Perguntas em aberto
 
 1. **Insumos de cada produto:** decididos na IP3 ([[Sistema de Produção/Receitas|Receitas]]).
-2. **Preço base** de cada item e quantidades de consumo (rodada V2).
+2. **Valores a testar:** preços base (fórmula da V2-4, no [[Sistema Econômico/Descrição|Econômico]]) e os multiplicadores manuais, como o do Cavalo.
 3. **Grimório e livros:** quem produz (hoje só se compram ou se acham; ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
 4. **Nomes de fantasia:** para o futuro, quando a história existir (ideia do autor).

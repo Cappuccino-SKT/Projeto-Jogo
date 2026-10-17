@@ -35,9 +35,11 @@ As estações mudam a produção Braçal, o clima do dia, a viagem, a guerra e a
 
 A frequência do tick é amarrada ao **LOD do Mapa Local**, em vez de um valor fixo global:
 
-- **LOD 0:** roda a cada tick "real" (frequência a definir com testes de desempenho).
-- **LOD 1:** roda a cada N ticks.
-- **LOD 2:** avança em blocos de tempo maiores (por exemplo, a cada hora de jogo, não a cada tick).
+- **LOD 0:** **20 ticks por segundo real** a 1x, em passo fixo (1 tick = 2 s de jogo). A 4x, 80 ticks por segundo.
+- **LOD 1:** 1 vez a cada **10 ticks** (2 por segundo).
+- **LOD 2:** 1 vez por **hora de jogo** (a cada 40 s reais a 1x); a economia é somada por dia e por estação.
+
+Valores da rodada V2-11, a medir na fatia vertical.
 
 Isso também define o que pausa na velocidade 8x: a busca de caminho fina e a decisão individual dos Não-Controlados pausam; a posição dos exércitos em trânsito e os agregados por cidade (Bens de Consumo, Felicidade) continuam avançando. Assim, 1 dia dura 2 minutos reais nessa velocidade.
 
@@ -67,4 +69,4 @@ Isso também define o que pausa na velocidade 8x: a busca de caminho fina e a de
 
 ## Perguntas em aberto
 
-1. **Frequência do tick** em cada LOD e o valor de N do LOD 1 (testes de desempenho; ver a rodada V2 da [[Revisão Completa]]).
+1. **Valores a testar:** 20 ticks por segundo e N = 10 no LOD 1 (rodada V2-11), medidos na fatia vertical.

@@ -54,7 +54,7 @@ Cada tipo de consumo corresponde a um grupo de itens, definido pelo **Tier** do 
 
 - Os **remédios** ficam fora do consumo de classe: a cidade os gasta só nas epidemias ([[Sistema de Cura/Descrição|Cura]]).
 - Onde a lei proíbe os Narcóticos (na Religiosa), o Luxo vem só dos outros itens de Tier 3.
-- **[Proposta]** Quanto da Comida pode ser Bebida (por exemplo, até 25%) e as quantidades de tudo ficam para a V2.
+- Até **25%** da Comida pode ser Bebida; as quantidades estão em "Quantidades" (rodada V2-6).
 
 **Lenha no inverno.** No inverno, cada NPC real consome 1 Tora a cada 4 dias como aquecimento, dentro do consumo de Materiais e em **todas as classes**, inclusive os Escravos. O bioma multiplica (frio × 2; litoral quente e terras áridas × 0,25). Sem lenha: Felicidade −10 e mais mortes de velhos e crianças (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
@@ -65,6 +65,39 @@ Cada tipo de consumo corresponde a um grupo de itens, definido pelo **Tier** do 
 - **Trabalho forçado** (punição) torna o NPC Escravo por um período, e depois ele volta à classe anterior.
 - **Escravos:** fontes, compra e venda, Obediência, fuga, rebelião e libertação estão no [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]. O Escravo libertado vira Civil e Plebeu.
 - **Controlados e Importantes** comem do próprio inventário, com Fome individual (ver [[Sistema de NPC/Descrição|NPC]] e [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
+
+### Quantidades (rodada V2-6)
+
+**Cesta mínima por NPC real.** É ela que, se faltar, conta os dias em déficit:
+
+| Classe | Comida por dia | Materiais Básicos | Luxo | Exclusivo |
+|---|---|---|---|---|
+| Escravo | 1 (Tier 1) | — | — | — |
+| Civil | 1 (Tier 1 ou 2) | 1 a cada 8 dias | — | — |
+| Rico | 1 (Tier 2 ou mais) | 1 a cada 4 dias | 1 a cada 4 dias | — |
+| Nobreza | 1 (Tier 2 ou mais) | 1 a cada 4 dias | 1 a cada 2 dias | 1 a cada 4 dias |
+| Realeza | 1 (Tier 2 ou mais) | 1 a cada 2 dias | 1 por dia | 1 a cada 2 dias |
+
+Mais a Tora no inverno e os Artefatos como posse da Realeza.
+
+- **Regra do gasto:** cada classe gasta por dia **até 80% da renda**.
+  - Primeiro vem a cesta mínima.
+  - O que sobra sobe o Tier da comida, compra mais materiais e paga a **Bebida na Taverna** (até 25% da Comida pode ser Bebida).
+  - Os outros 20% são imposto e poupança, que vira a riqueza média.
+
+  Assim o dinheiro volta às lojas, e uma cidade rica come melhor sozinha.
+- **Bônus de Felicidade:** consumo acima da cesta dá até +5 no fator de consumo da classe.
+- *Exemplo:* um Civil ganha 8 por dia e gasta até 6,4: o Pão (1,7), uma Cerveja (3,3) e um pouco de Materiais.
+
+**Composição das cidades por classe:**
+
+| Classe | Parcela da cidade |
+|---|---|
+| Escravo | 10% (30% na Escravista; zero onde a lei proíbe, e esses NPCs viram Civis) |
+| Civil | 76% (56% na Escravista) |
+| Rico | 10% |
+| Nobreza | 4% |
+| Realeza | Só na capital: 1% (3 NPCs de 300) |
 
 ### Influência sobre habilidades
 
@@ -105,5 +138,4 @@ A classe social também afeta quais habilidades principais o NPC tem e o nível 
 
 ## Perguntas em aberto
 
-1. **Quantidades:** quanto cada NPC real de cada classe consome por dia (rodada V2 da [[Revisão Completa]]).
-2. **Quanto da Comida pode ser Bebida** (rodada V2). O mapeamento por Tier foi decidido na IP2-11.
+1. **Valores a testar:** cesta mínima, regra do gasto (80%), composição por classe e bônus de Felicidade (rodada V2-6).
