@@ -2,10 +2,11 @@
 
 add_executable(jogo
     main.cpp
+    TextoDaDataDoJogo.cpp
 )
 
-# O jogo usa a SDL3 (baixada pelo CMakeLists.txt da raiz).
-target_link_libraries(jogo PRIVATE SDL3::SDL3)
+# O jogo usa as regras do Codigo/ e a SDL3 (baixada pelo CMakeLists.txt da raiz).
+target_link_libraries(jogo PRIVATE regras_do_jogo SDL3::SDL3)
 
 # Avisos do compilador ligados: ele aponta coisas suspeitas no nosso código.
 target_compile_options(jogo PRIVATE -Wall -Wextra)

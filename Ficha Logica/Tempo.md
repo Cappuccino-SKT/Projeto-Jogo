@@ -67,16 +67,16 @@ No marco 1, ficam juntas numa estrutura do código. A partir do marco 3, são li
 
 ## 4. Regras passo a passo
 
-### 4.1 Avançar pelo tempo real (a cada quadro)
+### 4.1 Quantos ticks rodar (a cada quadro)
 
 1. O `Jogo/` mede quantos nanossegundos reais passaram desde o quadro anterior e entrega o número ao relógio.
 2. **Limite de segurança (FL1-3):** se passou mais de 250 milissegundos, use só 250. Isso acontece quando o PC trava ou quando a janela é arrastada (o Windows para o programa enquanto ela é arrastada). Sem o limite, o jogo tentaria rodar todos os ticks atrasados de uma vez e travaria de novo.
 3. Multiplique pela `velocidadeDoJogo` e some ao acumulador. Na pausa (velocidade 0), não soma nada.
-4. **Enquanto** o acumulador tiver 50.000.000 nanossegundos (1 tick) ou mais:
-   - rode a regra 4.2 (avançar 1 tick);
-   - tire 50.000.000 do acumulador.
+4. **Enquanto** o acumulador tiver 50.000.000 nanossegundos (1 tick) ou mais: conte 1 tick e tire 50.000.000 do acumulador.
 5. O que sobrar no acumulador fica para o próximo quadro. Nenhum tempo se perde.
-6. Devolva quantos ticks avançaram neste quadro. O número serve para a depuração e para os testes.
+6. Devolva quantos ticks devem rodar neste quadro. **Quem chama** roda a regra 4.2 essa quantidade de vezes e confere as viradas **depois de cada tick**.
+
+*Por que o relógio não roda os ticks sozinho* (achado no código do marco 1): num quadro com 2 ticks, se o relógio rodasse os dois e só depois alguém conferisse as viradas, a virada do primeiro tick se perderia.
 
 ### 4.2 Avançar 1 tick
 
@@ -155,7 +155,7 @@ Com o limite de 250 milissegundos, um quadro roda no máximo 250 ÷ 50 × 4 = **
 
 | Sistema | O que lê do relógio | O que entrega ao relógio |
 |---|---|---|
-| Jogo (o laço principal) | Quantos ticks rodaram | Os nanossegundos reais de cada quadro; as teclas de velocidade |
+| Jogo (o laço principal) | Quantos ticks rodar neste quadro; as viradas depois de cada tick | Os nanossegundos reais de cada quadro; as teclas de velocidade |
 | Interface (marco 8; no marco 1, o título da janela) | Data, hora, fase e velocidade | — |
 | Produção e obras (marco 6) | A virada de hora | — |
 | Sequência do dia (marcos 6 e 7) | A virada de dia, sempre às 0h | — |
@@ -172,7 +172,7 @@ Ficam em `Codigo/Tempo/`, sem nada do SDL nem do OpenGL.
 |---|---|
 | `RegrasDoTempo` | A estrutura com as definições da parte 2 |
 | `RelogioDoMundo` | A classe com o estado da parte 2 e as regras da parte 4 |
-| `avancarTicksPeloTempoReal(nanossegundosReaisDesdeOUltimoQuadro)` | A regra 4.1. Devolve `quantidadeDeTicksAvancados` |
+| `calcularTicksParaAvancarPeloTempoReal(nanossegundosReaisDesdeOUltimoQuadro)` | A regra 4.1. Devolve `quantidadeDeTicksParaAvancar` |
 | `avancarUmTick()` | A regra 4.2 |
 | `comecouUmaHoraNova()`, `comecouUmDiaNovo()`, `comecouUmaEstacaoNova()`, `comecouUmAnoNovo()` | As viradas do tick que acabou de chegar |
 | `definirVelocidadeDoJogo(novaVelocidade)` e `alternarPausa()` | A regra 4.3 |

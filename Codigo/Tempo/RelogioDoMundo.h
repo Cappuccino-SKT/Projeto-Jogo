@@ -23,9 +23,12 @@ public:
     // Cria o relógio de uma partida nova: 1º dia da Primavera, na hora inicial (6h).
     static RelogioDoMundo criarParaPartidaNova(const RegrasDoTempo& regrasDoTempo);
 
-    // --- Regra 4.1: avançar pelo tempo real (a cada quadro da tela) ---
-    // Devolve quantos ticks avançaram neste quadro.
-    int avancarTicksPeloTempoReal(int64_t nanossegundosReaisDesdeOUltimoQuadro);
+    // --- Regra 4.1: quantos ticks rodar neste quadro da tela ---
+    // Soma o tempo real ao acumulador e devolve quantos ticks devem rodar.
+    // Quem chama roda avancarUmTick() essa quantidade de vezes, conferindo as
+    // viradas depois de cada um: num quadro com 2 ticks, a virada do primeiro
+    // não pode se perder.
+    int calcularTicksParaAvancarPeloTempoReal(int64_t nanossegundosReaisDesdeOUltimoQuadro);
 
     // --- Regra 4.2: avançar 1 tick ---
     void avancarUmTick();

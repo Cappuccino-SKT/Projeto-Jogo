@@ -13,7 +13,7 @@ RelogioDoMundo RelogioDoMundo::criarParaPartidaNova(const RegrasDoTempo& regrasD
     return RelogioDoMundo(regrasDoTempo, tickDaHoraInicial);
 }
 
-int RelogioDoMundo::avancarTicksPeloTempoReal(int64_t nanossegundosReaisDesdeOUltimoQuadro)
+int RelogioDoMundo::calcularTicksParaAvancarPeloTempoReal(int64_t nanossegundosReaisDesdeOUltimoQuadro)
 {
     // Passo 2: o limite de segurança (FL1-3).
     const int64_t limiteEmNanossegundos =
@@ -28,17 +28,16 @@ int RelogioDoMundo::avancarTicksPeloTempoReal(int64_t nanossegundosReaisDesdeOUl
     // Passo 3: multiplica pela velocidade (na pausa, soma zero).
     nanossegundosAcumuladosParaOProximoTick += nanossegundosReaisDesdeOUltimoQuadro * velocidadeDoJogo;
 
-    // Passo 4: avança 1 tick para cada 50 milissegundos acumulados.
+    // Passo 4: conta 1 tick para cada 50 milissegundos acumulados.
     const int64_t nanossegundosDeUmTick = regras.nanossegundosReaisDeUmTickEmVelocidade1();
-    int quantidadeDeTicksAvancados = 0;
+    int quantidadeDeTicksParaAvancar = 0;
     while (nanossegundosAcumuladosParaOProximoTick >= nanossegundosDeUmTick) {
-        avancarUmTick();
         nanossegundosAcumuladosParaOProximoTick -= nanossegundosDeUmTick;
-        ++quantidadeDeTicksAvancados;
+        ++quantidadeDeTicksParaAvancar;
     }
 
     // Passo 5: o que sobrou fica no acumulador para o próximo quadro.
-    return quantidadeDeTicksAvancados;
+    return quantidadeDeTicksParaAvancar;
 }
 
 void RelogioDoMundo::avancarUmTick()

@@ -11,12 +11,22 @@ const RegrasDoTempo regrasPadraoDoTempo{};
 constexpr int64_t umMilissegundoEmNanossegundos = 1'000'000;
 constexpr int64_t umSegundoEmNanossegundos = 1'000'000'000;
 
+// Um quadro de tela, como o Jogo/ faz: calcula os ticks e roda um por um.
+int simularUmQuadroDeTela(RelogioDoMundo& relogio, int64_t nanossegundosDoQuadro)
+{
+    const int ticksParaAvancar = relogio.calcularTicksParaAvancarPeloTempoReal(nanossegundosDoQuadro);
+    for (int tick = 0; tick < ticksParaAvancar; ++tick) {
+        relogio.avancarUmTick();
+    }
+    return ticksParaAvancar;
+}
+
 // Passa "quantidadeDeQuadros" quadros de "milissegundosPorQuadro" cada e soma os ticks.
 int simularQuadrosDeTela(RelogioDoMundo& relogio, int quantidadeDeQuadros, int milissegundosPorQuadro)
 {
     int totalDeTicksAvancados = 0;
     for (int quadro = 0; quadro < quantidadeDeQuadros; ++quadro) {
-        totalDeTicksAvancados += relogio.avancarTicksPeloTempoReal(milissegundosPorQuadro * umMilissegundoEmNanossegundos);
+        totalDeTicksAvancados += simularUmQuadroDeTela(relogio, milissegundosPorQuadro * umMilissegundoEmNanossegundos);
     }
     return totalDeTicksAvancados;
 }
@@ -43,7 +53,7 @@ void testarAvancoPeloTempoReal()
     }
     {
         RelogioDoMundo relogio(regrasPadraoDoTempo, 0);
-        const int ticks = relogio.avancarTicksPeloTempoReal(2 * umSegundoEmNanossegundos);
+        const int ticks = simularUmQuadroDeTela(relogio, 2 * umSegundoEmNanossegundos);
         conferir(ticks == 5, "um quadro de 2 s é limitado a 250 ms: 5 ticks");
     }
     {
@@ -51,7 +61,7 @@ void testarAvancoPeloTempoReal()
         const int ticksEsperadosPorQuadro[] = {0, 1, 0, 1, 1, 0, 1, 0, 1, 1};
         bool todosOsQuadrosCertos = true;
         for (int ticksEsperados : ticksEsperadosPorQuadro) {
-            if (relogio.avancarTicksPeloTempoReal(30 * umMilissegundoEmNanossegundos) != ticksEsperados) {
+            if (simularUmQuadroDeTela(relogio, 30 * umMilissegundoEmNanossegundos) != ticksEsperados) {
                 todosOsQuadrosCertos = false;
             }
         }

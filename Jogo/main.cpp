@@ -1,11 +1,16 @@
-// main.cpp: o começo do programa (marco 0).
+// main.cpp: o começo do programa.
 //
-// Abre uma janela vazia com a SDL3, pinta o fundo de verde-escuro e espera
-// o jogador fechar a janela (no X ou com a tecla Esc).
-// Ainda não há regra de jogo: o relógio e o mapa chegam no marco 1.
+// Abre a janela, cria o relógio do mundo e repete o laço principal até o
+// jogador fechar (no X ou com a tecla Esc). A cada quadro: lê as teclas,
+// avança o relógio pelo tempo real e desenha.
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>  // deixa o main() funcionar como programa de janela no Windows
+
+#include <string>
+
+#include "Tempo/RelogioDoMundo.h"
+#include "TextoDaDataDoJogo.h"
 
 // Tamanho preferido da janela: a resolução de referência do jogo (1600 x 900).
 constexpr int larguraPreferidaDaJanelaEmPixels = 1600;
@@ -59,9 +64,49 @@ TamanhoInicialDaJanela escolherTamanhoInicialDaJanela()
     return {larguraAoRestaurar, alturaAoRestaurar, true};
 }
 
+// Escreve no console as viradas do tick que acabou de rodar (no marco 1,
+// é só isso que acontece nas viradas; as regras se penduram aqui depois).
+void escreverAsViradasNoConsole(const RelogioDoMundo& relogio)
+{
+    const char* nomeDaEstacao = nomeDaEstacaoParaMostrar(relogio.estacaoAtual());
+    if (relogio.comecouUmAnoNovo()) {
+        SDL_Log("Começou o Ano %d.", relogio.anoAtual());
+    }
+    if (relogio.comecouUmaEstacaoNova()) {
+        SDL_Log("Começou a estação: %s.", nomeDaEstacao);
+    }
+    if (relogio.comecouUmDiaNovo()) {
+        SDL_Log("Começou o dia %d da estação %s, Ano %d.", relogio.diaDaEstacaoAtual(), nomeDaEstacao, relogio.anoAtual());
+    }
+    if (relogio.comecouUmaHoraNova()) {
+        SDL_Log("  %s (%s)", montarTextoDaHora(relogio).c_str(), nomeDaFaseDoDiaParaMostrar(relogio.faseDoDiaAtual()));
+    }
+}
+
+// As teclas provisórias do marco 1 (FL1-3) que mexem no relógio.
+void tratarTeclaDoRelogio(SDL_Keycode teclaApertada, RelogioDoMundo& relogio)
+{
+    if (teclaApertada == SDLK_SPACE) {
+        relogio.alternarPausa();
+    } else if (teclaApertada == SDLK_1) {
+        relogio.definirVelocidadeDoJogo(1);
+    } else if (teclaApertada == SDLK_2) {
+        relogio.definirVelocidadeDoJogo(2);
+    } else if (teclaApertada == SDLK_3) {
+        relogio.definirVelocidadeDoJogo(4);
+    } else {
+        return;
+    }
+    if (relogio.jogoEstaPausado()) {
+        SDL_Log("Jogo pausado.");
+    } else {
+        SDL_Log("Velocidade: %dx.", relogio.velocidadeAtualDoJogo());
+    }
+}
+
 int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
 {
-    // O marco 0 ainda não lê nada da linha de comando (o --simular vem no marco 7).
+    // Ainda não lê nada da linha de comando (o --simular vem no marco 7).
     (void)quantidadeDeArgumentos;
     (void)argumentosDaLinhaDeComando;
 
@@ -76,7 +121,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     SDL_Window* janelaDoJogo = nullptr;
     SDL_Renderer* desenhistaDaJanela = nullptr;
     const bool janelaFoiCriada = SDL_CreateWindowAndRenderer(
-        "Projeto Jogo (marco 0)",
+        "Projeto Jogo",
         tamanhoInicial.larguraEmPixels,
         tamanhoInicial.alturaEmPixels,
         SDL_WINDOW_RESIZABLE,
@@ -95,12 +140,18 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     // (sincronia vertical). Sem isso, o laço abaixo usaria 100% do processador.
     SDL_SetRenderVSync(desenhistaDaJanela, 1);
 
-    SDL_Log("Olá, janela! Feche no X ou aperte Esc para sair. F11 liga e desliga a tela cheia.");
+    SDL_Log("Olá, janela! Esc ou o X fecham; F11 liga a tela cheia.");
+    SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
 
-    // 3. O laço principal: roda uma vez por quadro, até o jogador fechar.
+    // 3. O relógio do mundo de uma partida nova (6h do dia 1 da Primavera).
+    RelogioDoMundo relogioDoMundo = RelogioDoMundo::criarParaPartidaNova(RegrasDoTempo{});
+    std::string tituloMostradoNaJanela;
+    Uint64 instanteDoQuadroAnteriorEmNanossegundos = SDL_GetTicksNS();
+
+    // 4. O laço principal: roda uma vez por quadro, até o jogador fechar.
     bool jogadorPediuParaFechar = false;
     while (!jogadorPediuParaFechar) {
-        // 3a. Lê tudo o que aconteceu desde o último quadro (teclas, mouse, janela).
+        // 4a. Lê tudo o que aconteceu desde o último quadro (teclas, mouse, janela).
         SDL_Event eventoRecebido;
         while (SDL_PollEvent(&eventoRecebido)) {
             // O X da janela (ou "Fechar janela" na barra de tarefas).
@@ -116,9 +167,38 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                 const bool janelaEstaEmTelaCheia = (SDL_GetWindowFlags(janelaDoJogo) & SDL_WINDOW_FULLSCREEN) != 0;
                 SDL_SetWindowFullscreen(janelaDoJogo, !janelaEstaEmTelaCheia);
             }
+            // Teclas do relógio. O "repeat" ignora a repetição de quem segura a tecla.
+            if (eventoRecebido.type == SDL_EVENT_KEY_DOWN && !eventoRecebido.key.repeat) {
+                tratarTeclaDoRelogio(eventoRecebido.key.key, relogioDoMundo);
+            }
+            // Janela minimizada: pausa sozinho (FL1-3). Ao voltar, continua pausado.
+            if (eventoRecebido.type == SDL_EVENT_WINDOW_MINIMIZED && !relogioDoMundo.jogoEstaPausado()) {
+                relogioDoMundo.alternarPausa();
+                SDL_Log("Jogo pausado porque a janela foi minimizada.");
+            }
         }
 
-        // 3b. Pinta o fundo inteiro e mostra o quadro na tela.
+        // 4b. Avança o relógio pelo tempo real que passou, um tick por vez,
+        //     conferindo as viradas depois de cada tick.
+        const Uint64 instanteDesteQuadroEmNanossegundos = SDL_GetTicksNS();
+        const int64_t nanossegundosDesdeOQuadroAnterior =
+            static_cast<int64_t>(instanteDesteQuadroEmNanossegundos - instanteDoQuadroAnteriorEmNanossegundos);
+        instanteDoQuadroAnteriorEmNanossegundos = instanteDesteQuadroEmNanossegundos;
+
+        const int ticksParaAvancar = relogioDoMundo.calcularTicksParaAvancarPeloTempoReal(nanossegundosDesdeOQuadroAnterior);
+        for (int tick = 0; tick < ticksParaAvancar; ++tick) {
+            relogioDoMundo.avancarUmTick();
+            escreverAsViradasNoConsole(relogioDoMundo);
+        }
+
+        // 4c. A data no título da janela, trocada só quando o texto muda.
+        const std::string tituloDesteQuadro = montarTextoDoTituloDaJanela(relogioDoMundo);
+        if (tituloDesteQuadro != tituloMostradoNaJanela) {
+            SDL_SetWindowTitle(janelaDoJogo, tituloDesteQuadro.c_str());
+            tituloMostradoNaJanela = tituloDesteQuadro;
+        }
+
+        // 4d. Pinta o fundo inteiro e mostra o quadro na tela.
         SDL_SetRenderDrawColor(desenhistaDaJanela, vermelhoDoFundo, verdeDoFundo, azulDoFundo, 255);
         SDL_RenderClear(desenhistaDaJanela);
         SDL_RenderPresent(desenhistaDaJanela);
@@ -126,7 +206,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
 
     SDL_Log("Janela fechada. Até a próxima!");
 
-    // 4. Devolve ao sistema tudo o que foi pedido, na ordem contrária.
+    // 5. Devolve ao sistema tudo o que foi pedido, na ordem contrária.
     SDL_DestroyRenderer(desenhistaDaJanela);
     SDL_DestroyWindow(janelaDoJogo);
     SDL_Quit();
