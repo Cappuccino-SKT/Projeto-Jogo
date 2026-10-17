@@ -2,16 +2,27 @@
 
 ## Antes de tudo
 
-1. Ler a [[Retomada]] (onde paramos, rodada pendente, jeito de trabalhar e cuidados técnicos) e o [[Estado do Projeto]].
-2. Escrever sempre em português do Brasil.
-3. Por enquanto, **só documentação**: nada de código.
+1. Ler a [[Retomada]]: onde paramos, como trabalhamos e as regras do código. É curta de propósito.
+2. Rodar `git fetch` e conferir se o último pull request já está no `main`.
+3. Para programar, ler a [[Ficha Técnica/Fatia Vertical|Ficha Técnica]] e o marco da vez.
+4. O [[Estado do Projeto]] tem a situação geral e os números-chave. Não ler a pasta `Histórico/` sem necessidade.
 
-## Padrão obrigatório das perguntas e sugestões
+## Regras
 
-Pedido do autor (2026-10-15): as perguntas e as sugestões de cada rodada devem ser **detalhadas, concretas e completas**, nunca abstratas. O padrão completo, com exemplo, está na seção **"Padrão das perguntas e sugestões"** da [[Retomada]]. Em resumo, cada pergunta traz:
+- Sempre em **português do Brasil**, em linguagem simples: o autor tem pouca experiência em C++.
+- **Documentação primeiro, código marco a marco** (rodada FT2-1). Um problema de design achado no código vira pergunta numa rodada, e os documentos são atualizados.
+- **Nomes no código:** português sem acento e **sempre descritivos**. O nome diz o motivo da variável, da função ou da classe; nada abstrato demais (pedido do autor, FT2-4).
+- Cada rodada ou marco vira **uma branch e um pull request**.
+- Manter a Retomada e o Estado **enxutos** (pedido do autor): o detalhe fica no documento de cada sistema, e o que já foi resolvido não volta para os arquivos de contexto.
 
-- **Contexto:** o que já está decidido e o que esta pergunta trava ou destrava.
-- **Pergunta concreta:** com números, nomes, exemplos de situação de jogo; nada de "Tom?" ou "Equilíbrio?" soltos.
-- **Opções** (quando houver), com prós e contras.
-- **Sugestão completa e pronta para usar:** valores iniciais, exemplos, como funciona na prática, impacto em outros sistemas, custo (arte, programação, desempenho) e o que fica para testar.
-- **Conflitos:** se a sugestão ou uma resposta anterior bater com outra decisão, apontar e oferecer saídas.
+## Padrão das perguntas
+
+Pedido do autor: perguntas e sugestões **detalhadas, concretas e completas**, nunca abstratas. Cada pergunta traz:
+
+- contexto;
+- uma pergunta concreta, com números e um exemplo de jogo;
+- opções com prós e contras;
+- uma sugestão completa e pronta para usar;
+- os conflitos com decisões anteriores.
+
+O detalhe está na seção 2 da [[Retomada]].

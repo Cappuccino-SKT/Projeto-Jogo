@@ -402,6 +402,8 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | FT1-6 Teste sem tela | `jogo --simular 64 --semente 1` grava o `relatorio.csv` (uma linha por dia) e termina com PASSOU ou FALHOU e o motivo ("fome por 4 dias seguidos no dia 37"); a mesma semente dá o mesmo relatório |
 | FT1-7 Ambiente | VS Code com as extensões grátis "C/C++" e "CMake Tools"; depurador gdb (vem com o MinGW); primeiro código: um "olá, janela" com o SDL3, compilado pelo CMake; pasta `codigo/` no mesmo repositório |
 
+**Rodada FT2:** o código foi liberado marco a marco. As bibliotecas entram por marco, e os nomes são em português, sem acento e descritivos ([[Arquitetura/Descrição|Arquitetura]]).
+
 ## Ligação com outros sistemas
 
 | Sistema | O que a ficha usa |
@@ -418,5 +420,5 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 
 ## Perguntas em aberto
 
-1. **Rodada FT2:** liberar o código, aprovar as bibliotecas, o jeito de trabalhar no código e o idioma dos nomes.
-2. **Valores a testar:** todos os números da fatia, no teste sem tela.
+1. **Valores a testar:** todos os números da fatia, no teste sem tela.
+2. O que cada marco revelar vira pergunta numa rodada.
