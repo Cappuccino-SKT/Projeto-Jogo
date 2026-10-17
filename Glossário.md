@@ -88,6 +88,9 @@
 | **Ordem de produção** | Fazer N, Manter estoque de N ou Repetir sempre, nas construções do jogador |
 | **Escada de materiais** | Três degraus por família de material: Ferro, Aço e Aço Mágico; de Madeira, Composto e Arcano; de Couro, Cravejado e Arcano. [[Sistema de Itens/Descrição\|Itens]] |
 | **Pedra de Mana** | Único item de mana: bruto, sem refino; kit dos Magos, recuperar Mana, encantamento e itens Arcanos |
+| **Lote** | Quantas unidades uma receita faz por ciclo: 4 (Tier 1), 2 (Tier 2), 1 (Tier 3 e 4). [[Sistema de Produção/Receitas\|Receitas]] |
+| **Molde** | Receita escrita uma vez para os três materiais de uma arma ou armadura (por exemplo, Espada Longa = 2 barras + 1 Tábua) |
+| **Operário / Engenheiro** | As duas Funções do Construtor: quem faz a obra e o gerente cuja Inteligência libera obras de nível alto |
 | **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
 | **Relíquia / Artefato lendário** | Artefato genérico (Rank 1 a 3) / único, com efeito próprio (Rank 4 e 5). [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]] |
 | **Livro Sagrado** | Livro exigido nas revistas das facções com a lei "Livro Sagrado obrigatório" (Religiosa) |

@@ -15,7 +15,7 @@ A tabela que liga cada construção de produção à Função e aos produtos de 
 - Nível
 - Recursos para construir
 - Recursos que precisam existir no mapa para permitir a construção
-- Nível de Inteligência exigido para a construção (como se as construções avançadas precisassem de um engenheiro para acompanhar a obra)
+- Inteligência exigida para a construção: é a do **Engenheiro** do Construtor, o gerente da obra (rodada IP3-11)
 - Tempo de construção
 - Trabalhadores construindo (afetam o tempo para terminar)
 - Dono (Cidade, Facção, Rico ou jogador; ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]])
@@ -50,7 +50,7 @@ O LOD precisa funcionar de forma eficiente nas construções, para não haver gr
 
 ### Quem constrói
 
-As construções podem ser feitas à mão pelos NPCs do jogador; mas, se houver uma **construtora** (o Construtor), ela pode construir sozinha os projetos do jogador ou da própria cidade.
+As construções podem ser feitas à mão pelos NPCs do jogador; mas, se houver uma **construtora** (o Construtor), ela pode construir sozinha os projetos do jogador ou da própria cidade. O Construtor tem duas Funções: **Operário** (Trabalho Braçal), que faz a obra e a manutenção, e **Engenheiro**, o gerente da obra; sem Engenheiro, só obras de nível 1 (rodada IP3-11).
 
 ### Loja ilegal
 
@@ -123,4 +123,3 @@ Ao entrar no modo construção, os lotes livres ficam destacados. Clicar num lot
 ## Perguntas em aberto
 
 1. **Custos, tempos, manutenção e níveis** de cada construção, incluindo as novas (rodada V2 da [[Revisão Completa]]).
-2. **"Nível de Inteligência para construir":** é a Inteligência do Construtor, a do gerente da obra ou da cidade?

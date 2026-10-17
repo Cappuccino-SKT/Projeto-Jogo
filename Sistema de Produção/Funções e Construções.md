@@ -1,6 +1,6 @@
-> **Em reformulação:** a rodada IP1 decidiu as regras (uma família de produtos por construção e a escada padrão de níveis; ver [[Sistema de Produção/Descrição|Produção]]), e a IP2 fechou a lista dos itens (ver [[Sistema de Itens/Descrição|Itens]]). A tabela abaixo já usa a família e os nomes finais; as receitas e o nível de cada produto vêm na rodada IP3.
+> **Refeita na rodada IP3 (2026-10-17)**, com as regras da IP1 (família por construção e escada de níveis; ver [[Sistema de Produção/Descrição|Produção]]), a lista final da IP2 (ver [[Sistema de Itens/Descrição|Itens]]) e as receitas da IP3 (ver [[Sistema de Produção/Receitas|Receitas]]).
 >
-> Rascunho gerado a partir do canvas de produção. **[Proposta]** = sugestão ainda não decidida. A Função de cada construção, a categoria de produção e os serviços públicos abaixo são propostas para o autor revisar.
+> Rascunho em construção. **[Proposta]** = sugestão ainda não decidida. As Funções, as categorias e os produtos por nível foram decididos nas rodadas IP1 a IP3; as Funções dos serviços públicos ainda são propostas.
 
 ## Funções e Construções
 
@@ -12,40 +12,41 @@ Cada construção de produção tem níveis de 1 a 5. A coluna de produtos mostr
 
 ### Construções de produção
 
-| Construção | Função | Categoria de produção | Produtos (o nível de cada um sai na IP3) |
+| Construção | Função | Categoria de produção | Produtos por nível |
 |---|---|---|---|
-| Armeiro | Armeiro | Especialista | Arcabuz, Mosquete, Carabina, Fuzil Raiado; Cartucho; Bombarda, Canhão, Canhão de Aço Mágico; Bala de Canhão |
-| Artesão | Artesão | Especialista | Joias, Ornamento, Coroa; Anel de Cobre, de Ouro e de Mana; Joia de Mana; Cajado Simples de Cobre, Cajado Arcano, Cetro |
-| Açougue | Açougueiro | Manufaturada | Carne Crua, Ossos e Couro Cru (gasta o animal) |
-| Boticário | Boticário | Especialista | Curativo, Remédio |
-| Carpinteiro | Carpinteiro | Manufaturada | Tábua; Móveis de Madeira, Móveis Refinados; Arco Curto e Arco Longo (de Madeira, Composto e Arcano); Besta Leve, Pesada e de Repetição; Flecha, Virote; Escudo de Madeira; Cajado Simples de Madeira |
-| Costureiro | Costureiro | Manufaturada (níveis 1–3) e Especialista (4–5) | Tecido de Algodão, Tecido de Lã, Couro Refinado; Roupa Comum, Roupa Fina; as roupas equipáveis (menos o Chapéu de Mineiro e a Coroa); armadura Leve (de Couro, Cravejada e Arcana); Sela |
-| Cozinheiro | Cozinheiro | Manufaturada | Pão, Sopa, Peixe Defumado, Ração Militar, Torta de Fruta, Linguiça, Queijo, Assado Temperado, Presunto Curado, Doce de Especiarias |
-| Destilaria | Destilador | Manufaturada | Cerveja, Vinho, Licor; Perfume |
-| Fazenda | Fazendeiro | Braçal | Grão, Legumes, Fruta, Algodão, Especiarias, Folha de Fumo, Flor Espiritual |
-| Ferreiro | Ferreiro | Manufaturada (níveis 1–3) e Especialista (4–5) | Espada, Lança, Machado e Clava, Curtas e Longas, de Ferro, Aço e Aço Mágico; armadura Média (malha) e Pesada (placas); Escudo de Ferro, de Aço e de Aço Mágico; Grilhões; Chapéu de Mineiro |
-| Forja Arcana | Mago de Ofício | Especialista | Barra de Aço Mágico (única construção que faz Aço Mágico) |
-| Metalurgia | Metalúrgico | Manufaturada | Barra de Ferro, Barra de Cobre, Barra de Aço, Barra de Ouro |
-| Misturador | Misturador | Manufaturada | Adubo, Pólvora, Fumo, Pó Espiritual |
-| Pasto | Rancheiro | Braçal | Galinha, Porco, Ovelha, Vaca, Cavalo (itens do tipo Animal; revisão V1-3) |
-| Pedreira | Pedreiro | Manufaturada | Bloco de Pedra, Cerâmica |
-| Pesqueiro | Pescador | Braçal | Peixe (mapas com rio, lago ou litoral; revisão V1-4) |
-| Posto de Coleta | Coletor | Braçal | Água, Pedra, Argila, Tora, Minério de Ferro, Minério de Cobre, Minério de Ouro, Carvão, Pedra de Mana |
-| Rancho | Rancheiro | Braçal | Ovo, Lã, Leite, Dejetos Animais (usa os animais do estoque sem gastá-los) |
+| Armeiro | Armeiro | Especialista | **N1:** Arcabuz, Cartucho, Bombarda, Bala de Canhão (Era 2); **N2:** Mosquete, Carabina e Canhão de Aço (Era 3); **N5:** Mosquete, Carabina e Canhão de Aço Mágico, Fuzil Raiado (Era 4) |
+| Artesão | Artesão | Especialista | **N1:** Anel de Cobre, Cajado Simples de Cobre; **N2:** Cajado Arcano de Aço (Era 2); **N3:** Joia de Mana; **N4:** Coroa, Anel de Ouro, Anel de Mana; **N5:** Joias, Ornamento; Cajado Arcano de Aço Mágico e Cetro (Era 4) |
+| Açougue | Açougueiro | Manufaturada | **N1:** Carne Crua, Ossos e Couro Cru (uma receita por animal) |
+| Boticário | Boticário | Especialista | **N1:** Curativo; **N4:** Remédio |
+| Carpinteiro | Carpinteiro | Pela receita | **N1:** Tábua, Flecha, Virote; Arco Curto e Longo de Madeira, Besta Leve de Madeira, Escudo de Madeira, Cajado Simples de Madeira; **N2:** Móveis de Madeira; Arcos Compostos e Bestas de Aço (Era 2); **N4:** Móveis Refinados; **N5:** Arcos Arcanos e Bestas de Aço Mágico (Era 4) |
+| Costureiro | Costureiro | Pela receita | **N1:** Tecido de Algodão, Tecido de Lã, Couro Refinado, Roupa Comum; roupas dos conjuntos Pobre, Trabalhador, Artífice e Furtivo; armadura Leve de Couro; **N2:** Sela; conjuntos Mercador e Nobre; armadura Leve Cravejada (Era 2); **N4:** Roupa Fina; **N5:** armadura Leve Arcana (Era 4) |
+| Cozinheiro | Cozinheiro | Pela receita | **N1:** Pão, Sopa, Peixe Defumado, Ração Militar; **N2:** Torta de Fruta, Linguiça, Queijo; **N4:** Assado Temperado; **N5:** Presunto Curado, Doce de Especiarias |
+| Destilaria | Destilador | Pela receita | **N2:** Cerveja; **N4:** Vinho, Perfume; **N5:** Licor. **[Proposta]** Sem produto no nível 1: é construída já no nível 2 (V3) |
+| Fazenda | Fazendeiro | Braçal | **N1:** Grão, Legumes, Fruta, Algodão, Especiarias, Folha de Fumo, Flor Espiritual (com Adubo no estoque, +25%) |
+| Ferreiro | Ferreiro | Pela receita | **N1:** Espada, Lança, Machado e Clava de Ferro (Curtos e Longos), Escudo de Ferro, armaduras Média e Pesada de Ferro, Chapéu de Mineiro; **N2:** Grilhões; as mesmas armas, escudo e armaduras de Aço (Era 2); **N5:** de Aço Mágico (Era 4) |
+| Forja Arcana | Mago de Ofício | Especialista | **N1:** Barra de Aço Mágico (Era 4; exceção à escada: o nível dá velocidade e vagas) |
+| Metalurgia | Metalúrgico | Pela receita | **N1:** Barra de Ferro, Barra de Cobre; **N2:** Barra de Aço (Era 2); **N4:** Barra de Ouro |
+| Misturador | Misturador | Pela receita | **N1:** Adubo; **N2:** Fumo; Pólvora (Era 2); **N4:** Pó Espiritual |
+| Pasto | Rancheiro | Braçal | **N1:** Galinha, Porco, Ovelha, Vaca, Cavalo (exige 2 animais da espécie no estoque) |
+| Pedreira | Pedreiro | Manufaturada | **N1:** Bloco de Pedra, Cerâmica |
+| Pesqueiro | Pescador | Braçal | **N1:** Peixe (mapas com rio, lago ou litoral) |
+| Posto de Coleta | Coletor | Braçal | **N1:** Água, Pedra, Argila, Tora, Minério de Ferro, de Cobre e de Ouro, Carvão, Pedra de Mana |
+| Rancho | Rancheiro | Braçal | **N1:** Ovo, Lã, Leite, Dejetos Animais (1 ciclo por animal por dia; não gasta os animais) |
 
-As categorias vêm do [[Sistema de Produção/Descrição|Sistema de Produção]]: **Braçal** (a partir do mapa), **Manufaturada** (transforma produto básico) e **Especialista** (item de alto nível). O Ferreiro e o Costureiro mudam de categoria nos níveis altos, como o Sistema de Produção já prevê para o Ferreiro e o Alfaiate.
+**Categoria "pela receita"** (IP3-11): conta o Trabalho **Manufaturado** nos bens de Tier 1 e 2 e nos itens de degrau 3 (Ferro, Cobre, Madeira, Couro), e o **Especialista** nos bens de Tier 3 e 4 e nos itens de degrau 4 e 5. Isso generaliza o "Ferreiro e Costureiro mudam nos níveis altos". O Armeiro, o Artesão, o Boticário e a Forja Arcana são sempre Especialistas.
 
 **Observações:**
 
-- Os produtos seguem a família de cada construção (IP1-2, com a troca das armaduras da IP2-7) e os nomes finais da IP2. A **Espada**, que faltava no canvas, está no Ferreiro.
-- **Fazenda, Pasto, Posto de Coleta, Pesqueiro e Rancho** liberam todos os produtos já no nível 1: nesses casos o nível aumenta a eficiência, não o catálogo.
-- **Escada padrão (IP1-3):** nas construções de transformação, o nível N libera produtos até o Tier e o Rank da escada (nível 1: Tier 1 e Rank 1; 2: Tier 2 e Rank 2; 3: Tier 2 e Rank 3; 4: Tier 3 e Rank 4; 5: Tier 4 e Rank 5). A rodada IP3 põe cada produto no seu nível.
+- As receitas de cada produto (insumos, lote, horas) estão em [[Sistema de Produção/Receitas|Receitas]].
+- Cada produto está no nível mínimo da escada: pelo Tier nos bens (Tier 1 no nível 1, 2 no 2, 3 no 4, 4 no 5) e pelo degrau do material nos itens com Rank (degrau 3 no nível 1, 4 no 2, 5 no 5). Os níveis seguintes mantêm o que já havia, sobem o teto de Rank e deixam a receita 10% mais rápida por nível.
+- A era trava só os materiais de equipamento e os itens com Rank; os bens de consumo existem desde a Era 1 (IP3-9).
+- **Fazenda, Pasto, Posto de Coleta, Pesqueiro, Rancho e Açougue** liberam tudo no nível 1: o nível aumenta a eficiência, não o catálogo.
 
 ### Construções civis e de serviço
 
 | Construção | Função **[Proposta]** | O que faz |
 |---|---|---|
-| Construtor (níveis 1 a 3) | Construtor | Constrói e mantém as construções da cidade |
+| Construtor (níveis 1 a 3) | **Operário** (Trabalho Braçal) e **Engenheiro** (gerente da obra; Inteligência) | Constrói e mantém as construções da cidade. A Inteligência exigida numa obra é a do Engenheiro; sem ele, só obras de nível 1 (rodada IP3-11) |
 | Universidade | Professor | Educação (ver Sistema de Trabalho e Propriedade) |
 | Senzala, Casa, Casarão, Mansão, Palácio | (moradia) | Moradias por classe (ver [[Sistema de População/Descrição\|Sistema de População]]) |
 | Mercado | Lojista | Loja geral |
@@ -71,14 +72,13 @@ O Sistema de Produção cita alguns nomes que **não aparecem** no canvas. Suges
 | Oleiro | **Pedreiro**, na Pedreira (tijolo e bens de argila) |
 | Alfaiate | **Costureiro** |
 | Joalheiro | **Artesão** (Joias, Ornamento e anéis, inclusive o Anel de Mana) |
-| Engenheiro | Sem construção ainda **[Em aberto]** |
+| Engenheiro | **Construtor**: o gerente da obra (rodada IP3-11) |
 | Produtor Mágico | Forja Arcana e Encantaria (Mago de Ofício) |
-| Operário | Sem construção ainda **[Em aberto]** |
+| Operário | **Construtor**: faz a obra e a manutenção (rodada IP3-11) |
 | Comerciante | Mercado (Lojista) e Posto Comercial (Mercador) |
 
 ### Perguntas em aberto
 
-1. **Engenheiro e Operário:** que construção têm, se tiverem? (rodada IP3-11)
-2. **Nome das Funções** (Metalúrgico, Misturador, Destilador...): confirmar ou trocar.
-3. **Categoria de produção** de cada Função (Ferreiro e Costureiro mudam nos níveis 4 e 5?).
-4. **Vagas por nível** (ver Sistema de Trabalho e Propriedade).
+1. **Destilaria no nível 2:** confirmar a exceção à escada (rodada V3).
+2. **Funções dos serviços públicos** (Lojista, Taverneiro, Carcereiro, Moedeiro...): confirmar nas rodadas de propostas (V4 e V5).
+3. **Valores a testar:** vagas por nível (a tabela geral 2, 3, 5, 7 e 10 vale para todas as construções, IP3-11) e habilidade mínima de cada nível.

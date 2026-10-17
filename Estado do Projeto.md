@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1, IP1 e IP2 aplicadas; rodada IP3 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1, IP1, IP2 e IP3 aplicadas; rodada V2 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -240,7 +240,8 @@
 - **V1 aplicada:** os 13 documentos antigos no formato padrão (a Cidade virou documento de entrada); fórmula de dano única (Combate); animais como itens (Galinha, Porco, Ovelha, Vaca, Cavalo); **a pesca volta** (Pesqueiro, Pescador); **inventário único por cidade**, com pilhas e capacidade somada das construções; nomes padronizados (Mosquete, Machado Curto, Peças de Argila...); **Fome** (cai 100 em 36 h), Felicidade individual e noites sem dormir nos Controlados; Templo com a tabela geral de vagas (2 Templos nas cidades de nível 4); crime de Sedição.
 - **IP1 aplicada (padronização da produção):** uma receita fixa por produto (produto, insumos, construção, Função, habilidade mínima, horas, era); **uma família por construção** (Aço Mágico só na Forja Arcana; Leves e Pesadas no Ferreiro, Média no Costureiro; Fumo e Pó Espiritual no Misturador); **escada de níveis** (Tier 1, 2, 2, 3, 4 e Rank 1 a 5) mais a trava da era (Rank até 3, 4, 4, 5); Rank do produto = menor entre material, nível e habilidade; **1 NPC real = 1 trabalhador e 1 consumidor**; horas por unidade por Tier; fila de ordens do jogador e nota da IA; limites (3 insumos, 4 passos, nenhum órfão, sem ferramentas). Ver [[Sistema de Produção/Descrição|Produção]].
 - **IP2 aplicada (nomes e lista final dos itens):** nomes de época, sem embalagem e no singular (Grão, Tora, Minério de Ferro); nomes de fantasia só no futuro (ideia do autor); **só a Pedra de Mana**, bruta e sem refino (ideia do autor; Joia e Anel de Mana); Pólvora, Adubo, Bloco de Pedra, Tecidos de Algodão e de Lã; escada de materiais fora do metal (Composto, Cravejado, Arcano); Arcabuz, Fuzil Raiado, Cetro, Bombarda, Canhão, Flecha, Virote e Cartucho; armadura **Leve de couro** (Costureiro), **Média de malha** e **Pesada de placas** (Ferreiro); roupas em conjuntos por papel social; Vinho, Peixe Defumado, Assado Temperado, Roupa Comum e Roupa Fina; **consumo pelo Tier** (Tier 3 = Luxo, Tier 4 = Exclusivo). Cerca de 180 itens. Ver [[Sistema de Itens/Descrição|Itens]].
-- **Em seguida:** IP3 (insumos de cada produto, enviada). Depois: V2 (economia numérica), V3 (pendências), V4 e V5 (propostas).
+- **IP3 aplicada (receitas):** todas as receitas em [[Sistema de Produção/Receitas|Receitas]] (lote pelo Tier, horas pelo degrau, moldes, munição em lote, Açougue com uma receita por animal, Adubo opcional); a nova [[Sistema de Produção/Funções e Construções|Funções e Construções]] nível por nível; **a era trava só os materiais de equipamento e os itens com Rank** (os bens de luxo existem desde a Era 1); Operário e Engenheiro no Construtor; categoria pela receita.
+- **Em seguida:** V2 (economia numérica, enviada). Depois: V3 (pendências), V4 e V5 (propostas).
 
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
@@ -252,7 +253,7 @@
 - **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto.
-- **Itens e Produção:** insumos de cada produto e a nova Funções e Construções (rodada IP3); nomes de fantasia no futuro (ideia do autor).
+- **Itens e Produção:** números finais com os preços (rodada V2); Destilaria no nível 2 (V3); nomes de fantasia no futuro (ideia do autor).
 - **Início de Jogo:** custo em pontos; bônus exato do estilo Mercador.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; confirmar a regra de armadura mista.
@@ -301,12 +302,13 @@
 | Revisão | Revisão completa: V1 | Aplicada |
 | Revisão | Itens e Produção: IP1 | Aplicada |
 | Revisão | Itens e Produção: IP2 | Aplicada |
-| Revisão | **Itens e Produção: IP3** | **IP3 enviada, aguardando respostas** |
-| Revisão | V2, V3, V4 e V5 | A fazer |
+| Revisão | Itens e Produção: IP3 | Aplicada |
+| Revisão | **V2 (economia numérica)** | **Enviada, aguardando respostas** |
+| Revisão | V3, V4 e V5 | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 e o P1 estão completos, e a V1, a IP1 e a IP2 da revisão foram aplicadas. Agora: IP3 (insumos) → V2 (economia numérica) → V3 (pendências) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
+**Ordem:** o P0 e o P1 estão completos, e a V1, a IP1, a IP2 e a IP3 da revisão foram aplicadas. Agora: V2 (economia numérica) → V3 (pendências) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
 
 ## Como estamos trabalhando
 

@@ -23,7 +23,7 @@ A distribuição rotativa do Banco da Cidade vira só o **estabilizador** desse 
 - A cada **estação**, a cidade redistribui os NPCs sem vaga ou com vaga ruim.
 - A Função de cada vaga vem da tabela [[Sistema de Produção/Funções e Construções|Funções e Construções]].
 
-**[Proposta]** vagas por nível da construção (valores a testar):
+Vagas por nível da construção, iguais para todas (confirmado na rodada IP3-11; valores a testar):
 
 | Nível | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
@@ -200,7 +200,7 @@ Sem NPC a NPC. Em LOD 0 e 1, os salários são pagos por dia.
 ### Perguntas em aberto
 
 1. **Valores a testar:** vagas por nível, tabela de salários, faixa de preço (±30%), limiar do estabilizador, taxa de imposto e parte da cidade, fração de empresas dos Ricos.
-2. **Nome e categoria das Funções** e as lacunas do canvas (ver a tabela de Funções e Construções).
+2. **Funções:** nomes e categorias decididos na IP3-11; a habilidade que conta é a da receita ([[Sistema de Produção/Receitas|Receitas]]).
 3. **Quem gerencia** as construções da Cidade em LOD 0 (NPC gerente próprio ou a cidade).
 4. **Leilão:** como funciona quando uma construção volta à cidade.
 5. **Universidade:** forma exata de estudo dos Controlados e tamanho do bônus.

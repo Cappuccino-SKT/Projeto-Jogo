@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada IP2 (Nomes e lista final dos itens) aplicada e a IP3 (Insumos de cada produto) enviada.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada IP3 (Insumos de cada produto) aplicada e a V2 (Base numérica da economia) enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). A V1 e a IP1 já estão no `main` (PRs #9 e #10). Em 2026-10-17 foi aplicada a **IP2** (lista final e nomes dos itens; ver [[Sistema de Itens/Descrição|Sistema de Itens]]), na branch `docs/ip2-itens`. A **rodada IP3 (Insumos de cada produto) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/ip2-itens` foi mesclado no `main`.**
-3. **Próximo passo:** pedir o `Respostas.txt` da IP3 (conferir se é desta rodada), refazer a [[Sistema de Produção/Funções e Construções|Funções e Construções]] com as receitas, conferir cadeias e órfãos e abrir a **V2** (base numérica da economia).
-4. Depois: V3 (pendências), V4 e V5 (propostas), como no plano da [[Revisão Completa]].
+2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). A V1, a IP1 e a IP2 já estão no `main` (PRs #9 a #11). Em 2026-10-17 foi aplicada a **IP3** (receitas de todos os produtos, em [[Sistema de Produção/Receitas|Receitas]], e a nova [[Sistema de Produção/Funções e Construções|Funções e Construções]]), na branch `docs/ip3-receitas`. A **rodada V2 (Base numérica da economia) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/ip3-receitas` foi mesclado no `main`.**
+3. **Próximo passo:** pedir o `Respostas.txt` da V2 (conferir se é desta rodada), pôr os números no Econômico, Trabalho, Classe Social, Construção, Recursos, IA, Tempo e Arquitetura, e abrir a **V3** (pendências de regra e listas de conteúdo).
+4. Depois: V4 e V5 (propostas), como no plano da [[Revisão Completa]], e então a **ficha técnica lógica da fatia vertical**.
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -66,346 +66,290 @@ Regras extras:
 | Revisão | Revisão completa: V1 (inconsistências e faxina) | Aplicada |
 | Revisão | Itens e Produção: IP1 (padronização) | Aplicada |
 | Revisão | Itens e Produção: IP2 (nomes) | Aplicada |
-| Revisão | **Itens e Produção: IP3 (insumos)** | **IP3 enviada, aguardando respostas** |
-| Revisão | V2 (economia numérica), V3 (pendências), V4 e V5 (propostas) | A fazer |
+| Revisão | Itens e Produção: IP3 (insumos) | Aplicada |
+| Revisão | **V2 (economia numérica)** | **Enviada, aguardando respostas** |
+| Revisão | V3 (pendências), V4 e V5 (propostas) | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, modo observador, eventos de dinastia. As ordens de produção em lote foram decididas na IP1-7 ([[Sistema de Produção/Descrição|Produção]]). A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: IP3, Insumos de cada produto
+## 4. Rodada pendente: V2, Base numérica da economia
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** A IP1 decidiu a forma da receita e a IP2 fechou a lista dos itens. Esta rodada decide **do que cada produto é feito**: quantidades, nível e era de cada receita. Com ela, a [[Sistema de Produção/Funções e Construções|Funções e Construções]] será refeita.
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** Com a lista de itens (IP2) e as receitas (IP3) prontas, esta rodada dá os **números** que faltam para a ficha técnica da fatia vertical. Ela resolve as partes abstratas A-1 e A-3 a A-9 da [[Revisão Completa]].
 
-Responder no `Respostas.txt` pelos códigos (IP3-1, IP3-2...). "Seguir sugestão" aceita a proposta. Nas tabelas, dá para aceitar e trocar só algumas linhas, por exemplo: "Seguir sugestão, mas o Queijo com 4 Leite". As quantidades são iniciais: a V2 ajusta os números quando calcular os preços.
+Responder no `Respostas.txt` pelos códigos (V2-1, V2-2...). "Seguir sugestão" aceita a proposta. Todos os números são **valores de partida**: o modo sem tela da fatia vertical vai testá-los.
 
 **Já decidido (base das perguntas):**
 
-- **Receita (IP1-1):** uma receita fixa por produto, com 8 campos:
-  - produto e quantidade;
-  - insumos;
-  - subprodutos;
-  - construção e nível mínimo;
-  - Função e Trabalho;
-  - habilidade mínima;
-  - horas;
-  - era.
-- **Limites (IP1-8):** no máximo 3 insumos e 3 saídas; cadeia de até 4 passos do mapa ao produto; nenhum item órfão; sem ferramentas.
-- **Níveis (IP1-3):**
+- **Escala (IP1-5):** 1 NPC real = 1 trabalhador e 1 consumidor.
+- **Preço base (IP1-9):** ≈ custo dos insumos + horas de trabalho × salário.
+- **Receitas:** estão em [[Sistema de Produção/Receitas|Receitas]].
+- **Tempo:** 1 hora de jogo = 40 s reais a 1x; estação = 16 dias.
+- **Banco inicial das cidades** (Mundo): 20.000 no nível 4, 6.000 no 3, 1.500 no 2 e 400 no 1, multiplicado pela Riqueza da cultura.
+- **Escravo** (Escravidão): 200 + 4 × a melhor habilidade de Trabalho. **Contratar um companheiro comum:** 100 moedas.
+- **Vagas por nível:** 2, 3, 5, 7 e 10. Os salários são pagos por dia (LOD 0 e 1) ou por estação (LOD 2), pelo dono da construção.
 
-| Nível da construção | 1 | 2 | 3 | 4 | 5 |
-|---|---|---|---|---|---|
-| Tier até | 1 | 2 | 2 | 3 | 4 |
-| Rank até | 1 | 2 | 3 | 4 | 5 |
+**V2-1. A moeda.**
 
-  O Rank também tem teto por era: até 3 na Era 1, 4 nas Eras 2 e 3, e 5 na Era 4.
-- **Horas por unidade (IP1-6):** Tier 0 = 0,5; Tier 1 = 1; Tier 2 = 2; Tier 3 = 4; Tier 4 = 8. Armas e peças: Ferro 8, Aço 12, Aço Mágico 24.
-- **Escada de materiais (IP2-5):**
-  - Ferro, Aço, Aço Mágico;
-  - de Madeira, Composto, Arcano;
-  - de Couro, Cravejado, Arcano.
-- **Pedra de Mana (IP2-3, ideia do autor):** um único item bruto, sem refino.
-- **Armadura:** cada receita faz as 3 peças juntas (já decidido no [[Sistema de Itens/Descrição|Sistema de Itens]]).
-- **Munição:** o NPC gasta 1 unidade por tiro; o Esquadrão gasta 1 unidade por batalha ([[Sistema de Combate/Descrição|Combate]], [[Sistema de Guerra/Descrição|Guerra]]).
+- *Contexto:* os documentos já falam em "moedas", mas sem regra de unidade nem de casas decimais.
+- *Sugestão:*
+  - uma **unidade só, a moeda**, com **1 casa decimal** na interface (o Pão custa 1,7);
+  - por dentro, o jogo guarda o dinheiro em **décimos inteiros** (1,7 vira 17). Isso evita os erros de arredondamento dos números com vírgula, que fariam o dinheiro "vazar" ao longo de uma partida longa;
+  - o nome próprio da moeda de cada cultura fica para a história.
+- *Impacto:* Econômico, Interface, Arquitetura (tipo de dado do dinheiro).
 
-**IP3-1. As regras de quantidade.**
+**V2-2. A rotina de cada classe (A-7).**
 
-- *Contexto:* sem uma regra comum, cada uma das cerca de 120 receitas teria números soltos, difíceis de balancear na V2.
-- *Pergunta:* que regras todas as receitas seguem?
-- *Sugestão:* 6 regras:
-  1. **Lote pelo Tier**, para que um ciclo de bem de consumo leve cerca de 4 horas, meio turno:
+- *Contexto:* a [[Sistema de IA/Descrição|IA]] divide o dia em dormir, trabalhar e Período Livre, mas não diz as horas. Elas também definem quanto cada NPC produz (IP1-6).
+- *Sugestão:*
 
-| Tier do produto | Lote (unidades por ciclo) | Horas do ciclo |
+| Classe | Dormir | Trabalhar | Período Livre |
+|---|---|---|---|
+| Escravo | 22h às 5h (7 h) | 5h às 17h (12 h) | 17h às 22h (5 h) |
+| Civil | 22h às 6h (8 h) | 7h às 15h (8 h) | 6h às 7h e 15h às 22h (8 h) |
+| Rico | 23h às 7h (8 h) | 9h às 15h (6 h, gerência) | 10 h |
+| Nobreza e Realeza | 0h às 8h (8 h) | 10h às 14h (4 h, política e corte) | 12 h |
+| Guardas e Funções contínuas | Turnos de 8 h (6h às 14h, 14h às 22h, 22h às 6h); cada guarda faz 1 turno | | |
+
+  - Um turno de 8 h dura **5 min e 20 s reais** a 1x.
+  - A madrugada (22h às 5h), com só o turno da noite acordado, é a hora do crime, como já decidido.
+- *Impacto:* IA, Trabalho, Produção (horas do turno), Crime.
+
+**V2-3. Salários e soldo (A-6).**
+
+- *Contexto:* o Trabalho decidiu uma "tabela por Função e nível", multiplicada pela riqueza e pelo desemprego, com três níveis de salário no jogador. Faltam os números.
+- *Sugestão:* **salário por hora pela habilidade que a receita usa** (IP3-11):
+
+| Trabalho | Moedas por hora | Por dia (turno de 8 h) |
 |---|---|---|
-| 1 | 4 | 4 |
-| 2 | 2 | 4 |
-| 3 | 1 | 4 |
-| 4 | 1 | 8 |
+| Braçal | 0,75 | 6 |
+| Manufaturado | 1,0 | 8 |
+| Especialista | 1,5 | 12 |
+| Mago de Ofício | 2,5 | 20 |
 
-  2. **Itens com Rank:** 1 por ciclo, e as horas seguem o degrau do material:
-     - 8 h para Ferro, Cobre, Madeira e Couro;
-     - 12 h para Aço, Composto e Cravejado;
-     - 24 h para Aço Mágico e Arcano.
+  - **Multiplicadores:**
+    - +10% por nível da construção acima do 1;
+    - gerente × 1,5;
+    - riqueza da cidade de × 0,8 a × 1,2;
+    - desemprego de × 0,9 (muito) a × 1,1 (falta gente);
+    - jogador: Baixo × 0,75, Normal × 1, Alto × 1,25.
+  - **Guarda:** 1,0 por hora, pago pelo Banco da Cidade.
+  - **Soldo do Esquadrão:** 8 moedas por dia, o salário de 1 trabalhador, porque 1 Esquadrão = 1 NPC alistado. O Esquadrão de Magos custa 3 vezes (24) e o mercenário 2 vezes por estação, adiantado (256), como já decidido.
+- *Exemplo:* um Cozinheiro Civil num Cozinheiro nível 1 ganha 8 por dia, 128 por estação. Um escravo de habilidade 60 custa 440, cerca de 55 dias desse salário.
+- *Impacto:* Trabalho, Facção (Banco da Facção paga o soldo), Guerra, Escravidão.
 
-     A armadura faz 3 peças por ciclo, então leva 3 vezes isso (24, 36 ou 72 h). A artilharia leva 3 vezes o tempo de uma arma.
-  3. **"3 insumos" são 3 tipos de item**, em qualquer quantidade: "8 Barra de Aço + 2 Tábua + 2 Barra de Cobre" conta como 3.
-  4. **Nível mínimo:**
-     - nos bens, pelo Tier do produto: Tier 1 no nível 1, Tier 2 no 2, Tier 3 no 4 e Tier 4 no 5;
-     - nos itens com Rank, pelo degrau do material: degrau 3 no nível 1; degrau 4 no nível 2 (e Era 2); degrau 5 no nível 5 (e Era 4).
+**V2-4. Preço base de cada item (A-1).**
 
-     Depois disso, subir de nível só aumenta o teto de Rank e a velocidade (+10% por nível).
-  5. **Munição em lote:** 1 ciclo de 4 h faz 20 Flechas, 10 Virotes ou 20 Cartuchos, porque o NPC gasta 1 por tiro. A Bala de Canhão sai 1 por ciclo, porque 1 unidade é o suprimento de uma batalha (30 tiros).
-  6. **Exceção da Forja Arcana:** ela tem um único produto, então faz a Barra de Aço Mágico desde o nível 1. A trava é só a era (Era 4), e o nível dá velocidade e vagas.
-- *Exemplo:* um Ferreiro nível 2, na Era 2, pode fazer Espada Curta de Aço (degrau 4, nível 2) em 12 h. O Rank dela vai até 2, pelo teto do nível.
-- *Impacto:* todas as receitas abaixo; a V2 (preço ≈ insumos + horas × salário).
+- *Contexto:* o Mercado Mundial dá o valor primário de cada item, mas não há nenhum número.
+- *Sugestão:* uma **fórmula** aplicada a todas as receitas:
 
-**IP3-2. Fazenda, Posto de Coleta, Pesqueiro, Pasto, Rancho e Açougue.**
+> **preço base = (custo dos insumos + horas × salário por hora da receita) ÷ lote × 1,2**
+
+  - O 1,2 é a **margem do dono** (20%).
+  - O jogo calcula todos os preços ao carregar os dados, na ordem da cadeia: primeiro os brutos, depois o que usa os brutos, e assim por diante. Assim, mudar uma receita muda o preço sozinho.
+  - **Rank:** o preço do Rank 1 é multiplicado por 1 (Rank 1), 1,5 (2), 2,2 (3), 3,2 (4) e 4,5 (5). O Rank 0 vale metade.
+  - **Ajuste manual:** um campo opcional "multiplicador" por item, para casos como o Cavalo (raro e caro) ou os Artefatos.
+  - *Resultado* (preços de partida, em moedas):
+
+| Grupo | Item | Preço |
+|---|---|---|
+| Bruto Tier 0 | Grão, Legumes, Água, Pedra, Argila, Carvão, Tora, Minérios de Ferro e Cobre, Algodão, Folha de Fumo, Ovo, Leite | 0,5 |
+| Bruto Tier 1 e 2 | Fruta, Flor Espiritual, Pedra de Mana, Minério de Ouro / Especiarias | 0,9 / 1,8 |
+| Açougue | Carne Crua, Couro Cru, Ossos | 1,7 |
+| Animais | Galinha / Porco e Ovelha / Vaca / Cavalo (com multiplicador × 3) | 3,6 / 7,2 / 14,4 / 65 |
+| Intermediários | Tábua 1,5; Bloco de Pedra 1,8; Barra de Ferro 2,1; Barra de Cobre 2,0; Couro Refinado 3,5; Pólvora 3,6; Barra de Aço 5,5; Barra de Ouro 11,0; Barra de Aço Mágico 22,1 | — |
+| Comida Tier 1 | Pão, Sopa 1,7; Peixe Defumado 1,8; Ração Militar 2,0 | — |
+| Comida e bebida Tier 2 | Queijo, Cerveja 3,3; Torta de Fruta 3,5; Linguiça 5,5 | — |
+| Tier 3 | Vinho, Pó Espiritual, Remédio 10,4; Perfume 11,0; Roupa Fina 13,7; Assado Temperado 14,0; Móveis Refinados 15,4 | — |
+| Tier 4 | Doce de Especiarias 19,3; Presunto Curado 22,7; Licor 29,0; Ornamento 32,4; Joias 40,8 | — |
+| Materiais básicos | Cerâmica 1,8; Roupa Comum 2,3; Móveis de Madeira 5,1 | — |
+| Armas (Rank 1) | Flecha 0,5; Cartucho 1,0; Espada Curta de Ferro 13,9; Arco Longo de Madeira 15,5; Espada Longa de Ferro 16,4; Arcabuz 23,6; Espada Curta de Aço 30; de Aço Mágico 71,5 | — |
+| Armaduras (Rank 1, 3 peças) | Leve de Couro 54; Pesada de Ferro 57; Pesada de Aço 126 | — |
+| Artilharia | Bala de Canhão 25; Bombarda 67 | — |
+
+- *Exemplo:* um kit de Infantaria Pesada de Aço de Rank 3 custa cerca de 200 × 2,2 = 440 moedas, o mesmo que um escravo bom ou 55 dias de soldo.
+- *Impacto:* Itens (Valor Global), Econômico, Comércio, Batalha (custo dos kits).
+
+**V2-5. Mercado da Facção e Mercado Local (oferta e demanda).**
+
+- *Contexto:* o Econômico tem as 3 camadas, mas não a fórmula (pergunta aberta 3).
+- *Sugestão:*
+  - **Mercado da Facção:** preço mundial × ajuste da lei por categoria (−20%, 0 ou +20%). Os itens proibidos só aparecem nas lojas ilegais, a × 2.
+  - **Mercado Local:**
+    - **estoque-alvo** = 5 dias do consumo da cidade, somando as classes e as receitas que usam o item;
+    - **fator** = 1 + (alvo − estoque) ÷ alvo, limitado entre 0,5 e 2,0. Estoque zero dobra o preço; estoque de 1,5 vez o alvo corta pela metade;
+    - o preço anda no máximo **10% por dia** na direção do fator, para não pular.
+  - **Lojas da Cidade:** compram a 90% e vendem a 110% do preço local.
+  - O preço do jogador continua na faixa de ±30%, como já decidido.
+- *Exemplo:* uma cidade de 100 NPCs come 100 Pães por dia; o alvo é 500. Com 250 no estoque, o fator é 1,5: o Pão vai de 1,7 a 2,6 em cerca de 5 dias. Uma caravana que traga 400 Pães faz o preço cair.
+- *Impacto:* Econômico, Comércio (o lucro das rotas sai dessa diferença), Notícias (preço 30% fora da média vira notícia).
+
+**V2-6. O consumo de cada classe (A-3).**
 
 - *Contexto:*
-  - As construções **Braçais** tiram do mapa: não têm insumos, e o rendimento depende do recurso do mapa e da estação.
-  - O **Rancho** usa os animais sem gastá-los, e o **Açougue** gasta o animal.
-  - A produtividade base de cada recurso fica para a V2.
+  - a Classe Social decidiu os tipos de consumo e o mapeamento pelo Tier (IP2-11);
+  - faltam as quantidades e a composição das cidades por classe;
+  - o salário de um Civil (8 por dia) é bem maior que a comida mínima (1,7). Se ele gastar só o mínimo, o dinheiro se acumula, e as lojas ficam sem clientes.
 - *Sugestão:*
-  - **Braçais:** 1 unidade a cada 0,5 h de trabalho (Tier 0), 1 h (Tier 1: Minério de Ouro, Fruta, Flor Espiritual, Pedra de Mana) e 2 h (Tier 2: Especiarias). Isso é multiplicado pela produtividade do recurso no mapa e pela estação ([[Sistema de Clima e Estações/Descrição|Clima]]).
-  - **[Proposta]** O **Adubo** é um insumo **opcional** da Fazenda: com Adubo no estoque, ela gasta 1 por ciclo e rende +25%. Esse é o uso que impede o Adubo de ficar órfão.
-  - **Pasto:** sem insumo (o pasto é o capim do mapa). Precisa de **2 animais da mesma espécie no estoque**, que não são gastos, e faz 1 animal novo por ciclo:
+  - **Cesta mínima por NPC real** (é ela que, se faltar, conta os dias em déficit):
 
-| Animal | Horas por ciclo |
+| Classe | Comida por dia | Materiais Básicos | Luxo | Exclusivo |
+|---|---|---|---|---|
+| Escravo | 1 (Tier 1) | — | — | — |
+| Civil | 1 (Tier 1 ou 2) | 1 a cada 8 dias | — | — |
+| Rico | 1 (Tier 2 ou mais) | 1 a cada 4 dias | 1 a cada 4 dias | — |
+| Nobreza | 1 (Tier 2 ou mais) | 1 a cada 4 dias | 1 a cada 2 dias | 1 a cada 4 dias |
+| Realeza | 1 (Tier 2 ou mais) | 1 a cada 2 dias | 1 por dia | 1 a cada 2 dias |
+
+  - Mais a **Tora no inverno** (já decidido) e os **Artefatos como posse** da Realeza.
+  - **Regra do gasto:** cada classe gasta por dia **até 80% da renda**. Primeiro a cesta mínima; o que sobra sobe o Tier da comida, compra mais materiais e paga a **Bebida na Taverna** (até 25% da Comida pode ser Bebida). Os outros 20% são imposto e poupança, que vira a riqueza média. Assim o dinheiro volta às lojas, e uma cidade rica come melhor sozinha.
+  - **Bônus de Felicidade:** consumo acima da cesta dá até +5 no fator de consumo da classe.
+  - **Composição por classe** das cidades:
+
+| Classe | Parcela da cidade |
 |---|---|
-| Galinha | 4 |
-| Porco | 8 |
-| Ovelha | 8 |
-| Vaca | 16 |
-| Cavalo | 24 |
+| Escravo | 10% (30% na Escravista; zero onde a lei proíbe, e esses NPCs viram Civis) |
+| Civil | 76% (56% na Escravista) |
+| Rico | 10% |
+| Nobreza | 4% |
+| Realeza | Só na capital: 1% (3 NPCs de 300) |
 
-  - **Rancho:** cada animal no estoque permite **1 ciclo por dia**, de 2 h:
+- *Exemplo:* um Civil ganha 8 por dia e gasta até 6,4: o Pão (1,7), uma Cerveja (3,3) e um pouco de Materiais; os outros 1,6 vão para o imposto e a poupança.
+- *Impacto:* Classe Social, Felicidade, Econômico (fecha o ciclo do dinheiro), População (composição inicial), Mundo.
 
-| Animal | Produto | Subproduto |
+**V2-7. Bancos, estabilizador, imposto, cunhagem e empresas.**
+
+- *Contexto:* o Econômico e o Trabalho deixaram em aberto o limiar do estabilizador, a taxa do imposto, a cunhagem e a fração de empresas dos Ricos.
+- *Sugestão:*
+  - **Estabilizador:** quando a riqueza média de uma classe cai abaixo de **3 dias da cesta mínima**, o Banco da Cidade paga até ela voltar a 5 dias. O teto é 10% do Banco por estação.
+  - **Lei de Imposto** (sobre salários e lucros, por estação):
+
+| Nível | Taxa | Felicidade |
 |---|---|---|
-| Galinha | 4 Ovo | — |
-| Ovelha | 2 Lã | 1 Dejetos Animais |
-| Vaca | 4 Leite | 2 Dejetos Animais |
-| Porco | — | 2 Dejetos Animais |
+| Baixo | 10% | 0 |
+| Normal | 20% | −5 |
+| Alto | 30% | −10 |
 
-  - **Açougue** (gasta o animal; 4 h):
+    A cidade fica com 30% do imposto, e o Banco da Facção com 70%.
+  - **Cunhagem:** a Casa da Moeda transforma **1 Barra de Ouro em 25 moedas** (a barra vale 11). Ela cunha até 4 × o nível da Casa barras por estação: o ouro vira dinheiro novo, a fonte contra a economia fixa.
+  - **Empresas dos Ricos:** 30% das construções de produção de cada cidade são de Ricos. As vagas de Rico = número de empresas.
+- *Exemplo:*
+  - uma Casa da Moeda nível 2 cunha 8 barras por estação = 200 moedas novas, com lucro de 112;
+  - a cidade de nível 3 com Banco de 6.000 sustenta o estabilizador por várias estações de crise.
+- *Impacto:* Econômico, Trabalho, Facção (lei de Imposto), Felicidade, Construção (Casa da Moeda).
 
-| Animal | Saídas |
-|---|---|
-| 1 Galinha | 2 Carne Crua |
-| 1 Porco | 6 Carne Crua, 1 Couro Cru, 1 Ossos |
-| 1 Ovelha | 4 Carne Crua, 1 Couro Cru, 1 Ossos |
-| 1 Vaca | 8 Carne Crua, 2 Couro Cru, 2 Ossos |
+**V2-8. Construções: custo, tempo, manutenção e moradias (A-4).**
 
-    O Cavalo não vai para o Açougue: é montaria e carga.
-- *Conflitos:*
-  - O Açougue precisa de **uma receita por animal** para o mesmo produto (Carne Crua). Isso é a exceção que a IP1-1 permitiu "se a IP3 pedir". A saída é aceitar a exceção só no Açougue.
-  - O Pasto e o Rancho precisam de um campo novo, "**Exige no estoque (não gasta)**", que não está entre os 8 da IP1-1. A saída é acrescentar esse campo opcional, usado só por eles.
-- *Impacto:* Produção, Recursos (produtividade na V2), Comércio (animais comprados para começar um Pasto).
+- *Contexto:* a Construção decidiu o desconto de nível a nível, a manutenção por estação com um Construtor, e o Engenheiro (IP3-11). Faltam os números de todas as construções.
+- *Sugestão:* **três portes**, para não escrever cada construção à mão:
 
-**IP3-3. Metalurgia, Forja Arcana e Pedreira.**
-
-- *Sugestão:*
-
-| Construção | Produto | Lote | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|---|---|
-| Metalurgia | Barra de Ferro | 4 | 4 Minério de Ferro + 2 Carvão | 1 | 1 | 4 |
-| Metalurgia | Barra de Cobre | 4 | 4 Minério de Cobre + 1 Carvão | 1 | 1 | 4 |
-| Metalurgia | Barra de Aço | 2 | 2 Barra de Ferro + 2 Carvão | 2 | 2 | 4 |
-| Metalurgia | Barra de Ouro | 1 | 3 Minério de Ouro + 1 Carvão | 4 | 3 | 4 |
-| Forja Arcana | Barra de Aço Mágico | 1 | 1 Barra de Aço + 1 Pedra de Mana | 1 (exceção) | 4 | 8 |
-| Pedreira | Bloco de Pedra | 4 | 4 Pedra | 1 | 1 | 4 |
-| Pedreira | Cerâmica | 4 | 3 Argila + 1 Tora (lenha do forno) | 1 | 1 | 4 |
-
-  - **Cadeia mais longa do jogo**, exatamente no limite de 4 passos: Minério de Ferro → Barra de Ferro → Barra de Aço → Barra de Aço Mágico → Espada.
-  - O **Carvão** vira o gargalo do metal: a Guerreira e a Tecnocrata (com destaque em Carvão) ganham força, e a Arcana (sem Carvão) precisa comprá-lo.
-- *Impacto:* Itens, Comércio, Mundo (recursos de destaque), V2.
-
-**IP3-4. Carpinteiro.**
-
-- *Sugestão:* bens e munição:
-
-| Produto | Lote | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|---|
-| Tábua | 4 | 2 Tora | 1 | 1 | 4 |
-| Móveis de Madeira | 2 | 3 Tábua | 2 | 1 | 4 |
-| Móveis Refinados | 1 | 2 Tábua + 1 Tecido de Algodão + 1 Barra de Cobre | 4 | 3 | 4 |
-| Flecha | 20 | 2 Tábua + 1 Barra de Ferro | 1 | 1 | 4 |
-| Virote | 10 | 2 Tábua + 1 Barra de Ferro | 1 | 1 | 4 |
-
-  **Moldes** (1 por ciclo; as horas e o nível seguem o degrau, IP3-1):
-
-| Molde | de Madeira (degrau 3) | Composto (degrau 4) | Arcano (degrau 5) |
+| Porte | Exemplos | Nível 1 | Horas de obra |
 |---|---|---|---|
-| Arco Curto | 1 Tábua + 1 Tecido de Lã (corda) | 1 Tábua + 1 Ossos + 1 Couro Refinado | 1 Tábua + 1 Pedra de Mana + 1 Tecido de Lã |
-| Arco Longo | 2 Tábua + 1 Tecido de Lã | 2 Tábua + 1 Ossos + 1 Couro Refinado | 2 Tábua + 1 Pedra de Mana + 1 Tecido de Lã |
-| Escudo de Madeira | 2 Tábua + 1 Couro Refinado | — | — |
-| Cajado Simples de Madeira | 2 Tábua + 1 Pedra de Mana | — | — |
+| Pequeno | Casa, Senzala, Fazenda, Pasto, Rancho, Posto de Coleta, Pesqueiro, Posto da Guarda | 10 Tábua + 10 Bloco de Pedra | 40 |
+| Médio | As oficinas (Cozinheiro, Carpinteiro, Ferreiro...), Mercado, Taverna, Casarão, Boticário, Posto Comercial | 20 Tábua + 30 Bloco de Pedra | 120 |
+| Grande | Templo, Quartel, Universidade, Laboratório, Torre e Forja Arcana, Hospital, Casa da Moeda, Prisão, Mansão, Palácio, Mercado de Escravos | 40 Tábua + 80 Bloco de Pedra + 10 Barra de Ferro | 400 |
 
-| Molde (besta) | de Madeira | de Aço | de Aço Mágico |
+  - **Subir para o nível N** custa o nível 1 × N. Construir direto no nível N custa a soma de todos os níveis × 1,25: é o "custo integral" sem o desconto, já decidido.
+  - **Tempo:** horas de obra ÷ (Operários × velocidade). O Construtor tem as vagas da tabela geral.
+  - **Engenheiro:** Inteligência mínima de 30, 45, 60 e 75 nos níveis 2 a 5 (+10 nas construções grandes). Sem Engenheiro, só nível 1.
+  - **Manutenção por estação:** 5% dos materiais do nível atual (no mínimo 1 Tábua) + 5% das horas de obra, feitas pelos Operários.
+  - **Moradias** (NPCs reais por construção):
+
+| Moradia | Nível 1 | Por nível a mais |
+|---|---|---|
+| Senzala | 8 | +4 |
+| Casa | 4 | +2 |
+| Casarão | 2 | +1 |
+| Mansão | 2 | +1 |
+| Palácio | 3 | +1 |
+
+- *Exemplo:*
+  - **Custo:** um Cozinheiro nível 1 custa 20 Tábuas (30 moedas) + 30 Blocos (54) e 120 h de obra (90 moedas de salário de Operário), cerca de 175 moedas;
+  - **Tempo:** com 3 Operários, a obra leva 5 dias;
+  - **Subir de nível:** do nível 2 para o 3 custa 60 Tábuas + 90 Blocos.
+- *Impacto:* Construção, População (capacidade das moradias, pergunta aberta), Trabalho (Operários), Guerra (Muralha como construção grande).
+
+**V2-9. Produtividade dos recursos e lotes (A-5).**
+
+- *Contexto:* a IP3-2 decidiu 1 unidade por 0,5 h de trabalho Braçal, multiplicada pela produtividade e pela estação. Falta o valor da produtividade e um limite, para uma cidade não pôr 20 Fazendas num mapa.
+- *Sugestão:*
+  - **Produtividade:** recurso normal × 1,0; de destaque × 1,5; ausente, não existe.
+  - **Construções Braçais por recurso, em cada Mapa Local:** até 2 num recurso normal e até 4 num de destaque. A Água não tem limite (poço).
+  - **Conta de comida** de uma cidade de 100 NPCs (100 Pães por dia):
+
+| Precisa de | Quanto | Quem faz | Trabalhadores |
 |---|---|---|---|
-| Besta Leve | 2 Tábua + 1 Barra de Ferro | 1 Tábua + 2 Barra de Aço | 1 Tábua + 2 Barra de Aço Mágico |
-| Besta Pesada | — | 2 Tábua + 3 Barra de Aço | 2 Tábua + 3 Barra de Aço Mágico |
-| Besta de Repetição | — | 2 Tábua + 2 Barra de Aço + 1 Barra de Cobre | 2 Tábua + 2 Barra de Aço Mágico + 1 Barra de Cobre |
+| Grão | 50 por dia | 1 Fazendeiro (habilidade 50, 8 h) faz 16 por dia a 100% | 3 a 4 |
+| Água | 25 por dia | Coletor | 1 a 2 |
+| Pão | 100 por dia | 1 Cozinheiro faz 8 por dia | 12 a 13 |
 
-- *Impacto:* Itens, Batalha (Arqueiros e Besteiros), Magia (o Cajado Simples gasta Pedra de Mana).
+    Isso dá cerca de 18% da cidade para a comida.
+  - O **inverno** (Fazenda a 25%) obriga a estocar no outono, como já decidido.
+- *Conflito:* o **Cozinheiro é o gargalo**: são 13 cozinheiros para 4 fazendeiros, porque a IP1-6 deu 1 h por unidade de Tier 1. Saída: manter e testar. Se incomodar, o lote do Pão sobe para 8 (2 Pães por hora).
+- *Impacto:* Recursos, Mundo (lotes por mapa), População (lotes), Clima.
 
-**IP3-5. Ferreiro.**
+**V2-10. A IA de Utilidade simples (A-8).**
 
-- *Sugestão:* **moldes**. "B" é a barra do material: Barra de Ferro (nível 1, 8 h), Barra de Aço (nível 2, Era 2, 12 h) ou Barra de Aço Mágico (nível 5, Era 4, 24 h).
+- *Contexto:* a IA decidiu Utilidade em LOD 0 e Regras Fixas em LOD 1; a fatia vertical precisa só de "trabalhar, comer, comprar, dormir".
+- *Sugestão:*
+  - **Ações:** Dormir, Trabalhar, Comer, Comprar, Lazer (Taverna) e Fugir.
+  - **Nota de cada ação:** 1,0 se a ação é a do período da rotina, 0 se não, mais os bônus:
+    - **Comer:** +1,5 nas horas das refeições (7h, 12h e 19h, por 30 min);
+    - **Comprar:** +1,2 uma vez a cada 2 dias, no Período Livre. A compra de verdade é a da cidade; a visita mostra isso na tela;
+    - **Lazer:** +0,5 × (1 − Felicidade ÷ 100);
+    - **Fugir:** +3,0 com combate a menos de 10 tiles, o que passa por cima de tudo.
+  - O NPC faz a ação de maior nota e reavalia a cada **5 minutos de jogo** (cerca de 3 s reais) ou quando algo muda.
+  - **LOD 1 (Regras Fixas):** a ação do período, sem as notas.
+- *Impacto:* IA, Arquitetura (custo da reavaliação), Combate (Fugir).
 
-| Molde | Insumos |
-|---|---|
-| Espada Curta, Lança Curta, Machado Curto, Clava Curta | 1 B + 1 Tábua (cabo) |
-| Espada Longa, Machado Longo, Clava Longa | 2 B + 1 Tábua |
-| Lança Longa | 1 B + 2 Tábua (haste) |
-| Escudo de metal | 2 B + 1 Tábua |
-| Armadura Média (Coifa, Cota e Perneiras de Malha) | 6 B + 1 Tecido de Lã (acolchoado) |
-| Armadura Pesada (Elmo, Couraça e Grevas) | 8 B + 2 Couro Refinado (forro e correias) |
+**V2-11. O tick e as metas de desempenho (A-9).**
 
-  Mais dois produtos fixos:
-
-| Produto | Lote | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|---|
-| Grilhões (Tier 2) | 2 | 2 Barra de Ferro | 2 | 1 | 4 |
-| Chapéu de Mineiro (1-2) | 1 | 1 Barra de Ferro + 1 Couro Refinado | 1 | 1 | 8 |
-
-- *Exemplo:* um kit de Infantaria Pesada de Aço:
-  - Espada Longa: 2 Barras;
-  - armadura Pesada: 8 Barras;
-  - Escudo: 2 Barras.
-
-  São 12 Barras de Aço = 24 Barras de Ferro + 24 Carvão. Isso dá peso real à guerra na economia.
-- *Impacto:* Itens, Batalha (custo dos kits), Escravidão (Grilhões), V2.
-
-**IP3-6. Armeiro.**
-
-- *Sugestão:* "B" é a barra do material. O cobre entra nas peças de latão (gatilho e guarnições), como a IP2-6 previu.
-
-| Produto | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|
-| Arcabuz de Ferro | 2 Barra de Ferro + 1 Tábua + 1 Barra de Cobre | 1 | 2 | 8 |
-| Mosquete (Aço ou Aço Mágico) | 2 B + 1 Tábua + 1 Barra de Cobre | 2 ou 5 | 3 ou 4 | 12 ou 24 |
-| Carabina (Aço ou Aço Mágico) | 1 B + 1 Tábua + 1 Barra de Cobre | 2 ou 5 | 3 ou 4 | 12 ou 24 |
-| Fuzil Raiado de Aço Mágico | 3 Barra de Aço Mágico + 1 Tábua + 1 Barra de Cobre | 5 | 4 | 24 |
-| Cartucho (lote 20) | 1 Barra de Ferro + 2 Pólvora + 1 Tecido de Algodão (o papel do cartucho) | 1 | 2 | 4 |
-| Bombarda de Ferro | 8 Barra de Ferro + 2 Tábua | 1 | 2 | 24 |
-| Canhão (Aço ou Aço Mágico) | 8 B + 2 Tábua + 2 Barra de Cobre | 2 ou 5 | 3 ou 4 | 36 ou 72 |
-| Bala de Canhão (1 por batalha) | 2 Barra de Ferro + 3 Pólvora | 1 | 2 | 4 |
-
-- *Impacto:* Itens, Batalha (Atiradores e Artilharia), Tecnologia (pólvora na Era 2).
-
-**IP3-7. Costureiro.**
-
+- *Contexto:* o Tempo amarrou a frequência ao LOD, sem números; a Arquitetura tem "meta de NPCs em LOD 0 a medir".
 - *Sugestão:*
 
-| Produto | Lote | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|---|
-| Tecido de Algodão | 4 | 4 Algodão | 1 | 1 | 4 |
-| Tecido de Lã | 4 | 4 Lã | 1 | 1 | 4 |
-| Couro Refinado | 4 | 4 Couro Cru + 2 Água | 1 | 1 | 4 |
-| Roupa Comum | 4 | 2 Tecido de Lã | 1 | 1 | 4 |
-| Roupa Fina | 1 | 2 Tecido de Algodão + 1 Especiarias (açafrão e outras tinturas) | 4 | 3 | 4 |
-| Sela | 2 | 3 Couro Refinado + 1 Barra de Ferro (fivelas) | 2 | 1 | 4 |
+| LOD | Frequência | Equivale a |
+|---|---|---|
+| 0 | **20 ticks por segundo real** a 1x (passo fixo) | 1 tick = 2 s de jogo |
+| 1 | 1 vez a cada 10 ticks (2 por segundo) | — |
+| 2 | 1 vez por hora de jogo (a cada 40 s reais a 1x) | Economia somada por dia e por estação |
 
-  **Roupas equipáveis:** 1 peça por ciclo, de 4 h (2 h no conjunto Pobre).
-  - Molde: chapéu ou capuz = 1 tecido; camisa ou túnica = 2; calças = 2. O tecido é o do conjunto (IP2-8).
-  - Os conjuntos Mercador e Nobre gastam também 1 Especiarias (a tintura), e saem no nível 2.
-  - Os outros conjuntos saem no nível 1.
+  - A 4x, o LOD 0 roda 80 ticks por segundo. Por isso a velocidade 8x fica só no Mapa Mundial, como já decidido.
+  - **Metas de partida**, a medir na fatia vertical:
+    - 500 NPCs em LOD 0 e 5.000 em LOD 1 a 4x;
+    - 60 quadros por segundo em 1600 × 900;
+    - num PC de gama média.
+- *Impacto:* Tempo, Arquitetura, IA, Combate.
 
-  **Armadura Leve** (3 peças por ciclo):
+**V2-12. A fatia vertical em números.**
 
-| Material | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|
-| de Couro | 6 Couro Refinado | 1 | 1 | 24 |
-| Cravejado | 5 Couro Refinado + 2 Barra de Aço | 2 | 2 | 36 |
-| Arcano | 5 Couro Refinado + 1 Pedra de Mana | 5 | 4 | 72 |
+- *Contexto:* a fatia vertical é 1 cidade com Fazenda → Cozinheiro → Mercado, mas sem números ninguém sabe se o ciclo fecha.
+- *Sugestão:* uma **vila de nível 1, com 15 NPCs reais Civis**, Banco de 400, e 12 vagas:
 
-- *Impacto:* Itens, Classe Social (Roupa Comum e Roupa Fina), Batalha (kits leves), Comércio (Algodão da Escravista, Lã da Religiosa).
+| Construção | Vagas | Produz por dia |
+|---|---|---|
+| Fazenda nível 1 | 2 | 32 Grão (8 no inverno) |
+| Posto de Coleta nível 1 | 2 | 16 Água e 16 Tora |
+| Cozinheiro nível 1 | 2 | 16 Pães |
+| Carpinteiro nível 1 | 2 | Tábuas e, no nível 2, Móveis de Madeira |
+| Mercado | 2 Lojistas | — |
+| Construtor | 2 Operários | — |
+| Casas nível 1 | 4 Casas | 16 lugares |
 
-**IP3-8. Artesão.**
-
-- *Sugestão:*
-
-| Produto | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|
-| Joias (Tier 4) | 2 Barra de Ouro | 5 | 4 | 8 |
-| Ornamento (Tier 4) | 1 Barra de Ouro + 2 Barra de Cobre | 5 | 4 | 8 |
-| Coroa (1-5) | 3 Barra de Ouro | 4 | 3 | 24 |
-| Anel de Cobre (1-3) | 1 Barra de Cobre | 1 | 1 | 8 |
-| Anel de Ouro (1-5) | 1 Barra de Ouro | 4 | 3 | 8 |
-| Anel de Mana (1-5) | 1 Barra de Ouro + 1 Pedra de Mana | 4 | 3 | 12 |
-| Joia de Mana (1-5) | 1 Barra de Cobre + 2 Pedra de Mana | 3 | 1 | 12 |
-| Cajado Simples de Cobre (1-3) | 2 Barra de Cobre + 1 Pedra de Mana | 1 | 1 | 8 |
-| Cajado Arcano (Aço ou Aço Mágico) | 2 B + 1 Tábua + 1 Pedra de Mana | 2 ou 5 | 2 ou 4 | 12 ou 24 |
-| Cetro de Aço Mágico (1-4) | 1 Barra de Aço Mágico + 1 Pedra de Mana + 1 Barra de Ouro | 5 | 4 | 24 |
-
-- *Conflito:* a regra do degrau (IP3-1) não cobre o ouro nem a Pedra de Mana nas joias. A saída é usar o Tier da barra principal: a Barra de Ouro é Tier 3, então nível 4. A **Joia de Mana** fica no nível 3, para os Magos terem acesso cedo; o Rank dela continua limitado pelo nível e pela era.
-- *Impacto:* Itens, Magia (Joia e Anel de Mana), Classe Social (Joias e Ornamento são Exclusivos).
-
-**IP3-9. Cozinheiro e Destilaria.**
-
-- *Sugestão:*
-
-| Construção | Produto | Lote | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|---|---|
-| Cozinheiro | Pão | 4 | 2 Grão + 1 Água | 1 | 1 | 4 |
-| Cozinheiro | Sopa | 4 | 2 Legumes + 1 Água | 1 | 1 | 4 |
-| Cozinheiro | Peixe Defumado | 4 | 3 Peixe + 1 Tora | 1 | 1 | 4 |
-| Cozinheiro | Ração Militar | 4 | 2 Grão + 1 Carne Crua | 1 | 1 | 4 |
-| Cozinheiro | Torta de Fruta | 2 | 1 Fruta + 1 Grão + 1 Ovo | 2 | 1 | 4 |
-| Cozinheiro | Linguiça | 2 | 2 Carne Crua + 1 Especiarias | 2 | 1 | 4 |
-| Cozinheiro | Queijo | 2 | 3 Leite | 2 | 1 | 4 |
-| Cozinheiro | Assado Temperado | 1 | 2 Carne Crua + 1 Especiarias + 1 Tora | 4 | 3 | 4 |
-| Cozinheiro | Presunto Curado | 1 | 3 Carne Crua + 1 Especiarias | 5 | 4 | 8 |
-| Cozinheiro | Doce de Especiarias | 1 | 2 Fruta + 1 Especiarias + 1 Leite | 5 | 4 | 8 |
-| Destilaria | Cerveja | 2 | 2 Grão + 1 Água | 2 | 1 | 4 |
-| Destilaria | Vinho | 1 | 3 Fruta | 4 | 3 | 4 |
-| Destilaria | Licor | 1 | 1 Vinho + 1 Especiarias | 5 | 4 | 8 |
-| Destilaria | Perfume | 1 | 1 Flor Espiritual + 1 Especiarias + 1 Água | 4 | 3 | 4 |
-
-- *Conflito:* a escada põe os bens de Tier 3 e 4 nas Eras 3 e 4. Com isso, **no começo do jogo (Era 1) não existem Luxo nem Exclusivos**, e a Nobreza e a Realeza ficariam sempre sem esses consumos. Saídas:
-  - (a) separar a **era do Tier** dos bens de consumo: os bens de Tier 3 e 4 já existem na Era 1, e só as armas seguem a era;
-  - (b) a Felicidade não cobra Luxo e Exclusivos enquanto a era não os liberar.
-
-  **Sugestão:** (a), porque o mundo começa no Ano 412 com reinos estabelecidos, que já têm vinho e joias. Assim:
-  - a **era trava só os materiais e os itens com Rank** (Aço, Pólvora, Aço Mágico);
-  - os bens de consumo ficam travados só pelo nível da construção;
-  - nas tabelas acima, os bens de Tier 3 e 4 passam a ser da Era 1. Isso vale também para a Barra de Ouro, que é material de joia e de luxo.
-- *Impacto:* Tecnologia (o texto "a Era N libera o Tier N" passa a valer só para materiais de equipamento), Classe Social, Felicidade, Mundo (as capitais começam com construções de nível 4 e 5).
-
-**IP3-10. Misturador e Boticário.**
-
-- *Sugestão:*
-
-| Construção | Produto | Lote | Insumos | Nível | Era | Horas |
-|---|---|---|---|---|---|---|
-| Misturador | Adubo | 4 | 3 Dejetos Animais + 1 Ossos (farinha de osso) | 1 | 1 | 4 |
-| Misturador | Pólvora | 2 | 2 Carvão + 2 Dejetos Animais (o salitre vinha do esterco curtido) | 2 | 2 | 4 |
-| Misturador | Fumo | 2 | 2 Folha de Fumo | 2 | 1 | 4 |
-| Misturador | Pó Espiritual | 1 | 3 Flor Espiritual | 4 | 1 (IP3-9) | 4 |
-| Boticário | Curativo | 4 | 1 Tecido de Algodão + 1 Água | 1 | 1 | 4 |
-| Boticário | Remédio | 1 | 1 Flor Espiritual + 1 Especiarias | 4 | 1 (IP3-9) | 4 |
-
-  - A Pólvora feita de Carvão e Dejetos Animais liga a guerra da Era 2 ao Rancho e ao Posto de Coleta: quem tem gado e carvão faz pólvora.
-- *Impacto:* Itens, Guerra (Pólvora), Cura (Curativo e Remédio, ingredientes já decididos), Efeitos de Itens.
-
-**IP3-11. As Funções: nomes, categorias, Engenheiro e Operário.**
-
-- *Contexto:* a [[Sistema de Produção/Funções e Construções|Funções e Construções]] tem 4 perguntas em aberto:
-  - o Engenheiro e o Operário ainda não têm construção;
-  - os nomes das Funções não foram confirmados;
-  - falta a categoria de produção de cada Função;
-  - faltam as vagas por nível.
-
-  A [[Sistema de Construção/Descrição|Construção]] também pergunta de quem é a "Inteligência exigida para construir".
-- *Sugestão:*
-  - **Construtor** (a construção) passa a ter duas Funções:
-    - **Operário** (Trabalho Braçal), que faz a obra e a manutenção;
-    - **Engenheiro** (Inteligência), o gerente da obra.
-
-    A **Inteligência exigida para construir** é a do Engenheiro, o que responde também à pergunta da Construção. Sem Engenheiro, o Construtor só faz obras de nível 1.
-  - **Categoria:** a habilidade que conta é a da receita, não a da construção:
-    - **Manufaturado** nos bens de Tier 1 e 2 e nos itens de degrau 3;
-    - **Especialista** nos bens de Tier 3 e 4 e nos itens de degrau 4 e 5.
-
-    Isso generaliza o "Ferreiro e Costureiro mudam nos níveis altos". O Armeiro, o Artesão, o Boticário e a Forja Arcana são sempre Especialistas.
-  - **Nomes das Funções** confirmados como estão: Armeiro, Artesão, Açougueiro, Boticário, Carpinteiro, Coletor, Costureiro, Cozinheiro, Destilador, Fazendeiro, Ferreiro, Mago de Ofício, Metalúrgico, Misturador, Pedreiro, Pescador e Rancheiro.
-  - **Vagas por nível:** a tabela geral do [[Sistema de Trabalho e Propriedade/Descrição|Trabalho]] (2, 3, 5, 7, 10) vale para todas; a pergunta fecha.
-- *Impacto:* Funções e Construções, Construção, Trabalho, NPC (habilidade usada).
-
-Depois das respostas:
-
-- refazer a [[Sistema de Produção/Funções e Construções|Funções e Construções]] com as receitas, nível por nível;
-- pôr as receitas no [[Sistema de Produção/Descrição|Produção]] (ou num documento próprio de receitas);
-- conferir as cadeias, os órfãos e os limites;
-- abrir a **V2** (base numérica da economia).
+  - **Comida:** a vila come 15 Pães por dia, que gastam 7,5 Grão e 3,75 Água. O Grão que sobra vai para o estoque do inverno e para a venda.
+  - **Dinheiro por dia:**
+    - entram cerca de 85 em salários (12 × 6 a 8);
+    - saem cerca de 25 da cesta mínima (15 × 1,7);
+    - até 68 voltam às lojas pela regra do gasto (80%).
+  - **O teste passa se**, em 1 ano de jogo sem tela, a vila não passa fome, o Banco não zera e o preço do Pão fica entre 1,2 e 2,6.
+- *Impacto:* Arquitetura (marcos da fatia vertical), todos os números acima. É a base da ficha técnica lógica.
 
 ## 5. Fatos que valem lembrar
 
 - **Tempo:** 24 h de jogo = 16 min reais a 1x; 1 ano (64 dias) ≈ 17 h reais a 1x; 1 estação (16 dias) ≈ 4,3 h. Velocidade 8x só no Mapa Mundial; nos outros mapas, até 4x.
 - **População:** NPCs reais por nível de cidade: 15, 40, 100 e 300; o Fator de Escala (exemplo 100) converte em população total.
 - **Moradias** (canvas civil): Senzala, Casa, Casarão, Mansão e Palácio (níveis 1 a 5). A **Universidade** existe no canvas civil.
-- **Canvas de produção:** 15 construções de produção (Armeiro, Artesão, Açougue, Carpinteiro, Costureiro, Cozinheiro, Destilaria, Fazenda, Ferreiro, Metalurgia, Misturador, Pasto, Pedreira, Posto de Coleta e Rancho). A família de cada uma foi fixada na IP1-2 (a Espada está no Ferreiro), e as receitas vêm na IP3 ([[Sistema de Produção/Funções e Construções|Funções e Construções]]).
+- **Canvas de produção:** 15 construções de produção (Armeiro, Artesão, Açougue, Carpinteiro, Costureiro, Cozinheiro, Destilaria, Fazenda, Ferreiro, Metalurgia, Misturador, Pasto, Pedreira, Posto de Coleta e Rancho). A família de cada uma foi fixada na IP1-2 (a Espada está no Ferreiro), e as receitas estão em [[Sistema de Produção/Receitas|Receitas]] (IP3).
 - **Arte:** o autor desenha por enquanto (sem experiência em pixel art), no **Pixelorama** (grátis), com pacotes de terceiros provisórios na fatia vertical. Mapas no **Tiled** (explicar em linguagem simples). Sem verba para programas pagos. Projeto **sem prazo**: o limite da arte é o peso no jogo, não o tempo (ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]).
 - **Estações na arte:** só mudança de cor por enquanto; **toda arte extra de estação fica para o futuro** (neve, rios congelados, folhas, flores).
 - **Viagem:** 4 h por Mapa Local a pé, multiplicada por terreno, infraestrutura, tamanho do grupo, montaria e carga; caravanas sempre reais no Mapa Mundial (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]).
@@ -421,6 +365,7 @@ Depois das respostas:
 - **Revisão V1:** a pesca voltou (Pesqueiro); animais são itens (Cavalo = montaria e carga); um inventário por cidade, com pilhas; Mosquete (não Musket); Fome dos Controlados cai 100 em 36 horas; Templo com a tabela geral de vagas (2 nas capitais); crime de Sedição; os 13 documentos antigos estão no formato padrão.
 - **Produção (IP1):** uma receita fixa por produto; cada item numa só construção (Aço Mágico só na Forja Arcana); escada de níveis 1 a 5 (Tier 1, 2, 2, 3, 4 e Rank 1 a 5) mais a trava da era (Rank até 3, 4, 4, 5); Rank = menor entre material, nível e 1 + habilidade ÷ 25; **1 NPC real = 1 trabalhador e 1 consumidor**; horas por unidade de 0,5 a 8 por Tier (armas 8, 12 e 24); fila de ordens do jogador (Fazer N, Manter estoque, Repetir); no máximo 3 insumos, 4 passos e nenhum item órfão.
 - **Itens (IP2):** nomes de época, sem embalagem e no singular (Grão, Tora, Minério de Ferro, Carne Crua, Ovo); nomes de fantasia só no futuro (ideia do autor); **só a Pedra de Mana**, bruta e sem refino (ideia do autor); Pólvora, Adubo, Bloco de Pedra, Tecido de Algodão e de Lã; escada de materiais (de Madeira, Composto, Arcano; de Couro, Cravejado, Arcano); Arcabuz, Fuzil Raiado, Cetro, Flecha, Virote, Cartucho, Bombarda e Canhão; armadura **Leve de couro** (Costureiro), **Média de malha** e **Pesada de placas** (Ferreiro); roupas em conjuntos por papel social; Vinho, Peixe Defumado, Roupa Comum e Roupa Fina; **consumo pelo Tier** (Tier 3 = Luxo, Tier 4 = Exclusivo); cerca de 180 itens.
+- **Receitas (IP3):** lote 4/2/1/1 pelo Tier; 8, 12 ou 24 h pelo degrau; armadura faz as 3 peças juntas; moldes no Ferreiro, Carpinteiro e Armeiro; munição em lote (20 Flechas); Pólvora = Carvão + Dejetos Animais; Aço Mágico = Barra de Aço + Pedra de Mana; **a era trava só equipamento**, os bens de luxo existem desde a Era 1; Operário e Engenheiro no Construtor; cadeia máxima de 4 passos e nenhum órfão.
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 
