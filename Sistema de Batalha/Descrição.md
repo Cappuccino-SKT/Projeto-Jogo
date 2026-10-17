@@ -262,7 +262,7 @@ Versão simples na primeira versão:
 | Companheiros | Comitiva e Comandante de Esquadrão |
 | Cultura | Bônus de um tipo de Esquadrão por cultura |
 | Tecnologia | Era dos tipos (pólvora na Era 2); Bastião na Era 3 |
-| Crime e Justiça | Prisioneiros comuns e Importantes; escravização em massa pela lei |
+| Crime e Justiça | Prisioneiros comuns e Importantes; escravização em massa pela lei; venda de prisioneiros (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Tempo | Mundo parado durante a batalha; até 4x |
 | Interface | Pré-batalha, posicionamento, cartões de Esquadrão, resultado; HUD personalizável |
 | Pipeline | Bonecos por camadas e paletas por cultura; 7ª camada Elevação; tileset de Muralha |

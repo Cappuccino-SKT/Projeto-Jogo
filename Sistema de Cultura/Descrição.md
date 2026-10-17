@@ -48,7 +48,7 @@ Cada traço define valores padrão de:
 | Traço | Leis desejadas (exemplos) | Rito de Admissão | Sucessão | Pensamento extremo (exemplo) |
 |---|---|---|---|---|
 | **Escravista** (mercantil) | Escravidão permitida e ampla; comércio livre (tudo é mercadoria); imposto alto; poucos itens proibidos | Pagar título | Herança | A liberdade de escravos é crime; qualquer pessoa pode ser propriedade |
-| **Religiosa** | Narcóticos (Fumo, Pó Espiritual) proibidos; magia restrita; leis severas contra heresia | Serviço (peregrinação, missões) | Escolha do clero ou eleição entre nobres | Heresia é crime capital; guerra santa contra culturas hostis |
+| **Religiosa** | Narcóticos (Fumo, Pó Espiritual) proibidos; magia restrita; leis severas contra heresia; Livro Sagrado obrigatório | Serviço (peregrinação, missões) | Escolha do clero ou eleição entre nobres | Heresia é crime capital; guerra santa contra culturas hostis |
 | **Autoritária** | Poder do líder autoritário; conscrição alta; assembleia limitada | Indicação (lealdade jurada) | Escolha do líder ou herança | O líder é inquestionável; pedir mudança de lei é crime |
 | **Tecnocrata** | Tecnologia e pólvora incentivadas; imposto para pesquisa; mérito acima de nascimento | Serviço (provar competência) | Mérito | Magia proibida; magos são banidos |
 | **Guerreira** | Conscrição alta; guerra como honra; benefícios a veteranos | Provar-se em combate | Duelo | Só vale quem luta; civis sem serviço militar perdem direitos; recusa paz permanente |

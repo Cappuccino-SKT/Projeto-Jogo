@@ -159,6 +159,8 @@ Consequências:
 | Eventos | Faixas e Estabilidade como condições; modificadores com causa |
 | IA | Felicidade dos Controlados; Medo agregado |
 | NPC | Revolta do Escravo (Obediência e Felicidade) |
+| Escravidão | Fuga e rebelião local; tratamento dos escravos (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
+| Itens | Comida, bebida e narcóticos no fator "comida e descanso" dos Controlados; vício (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
 | Combate | Esquadrões estacionados somam ao Controle |
 | Religião | Fator Religião (−5 a +10); festivais; Perseguição das minorias (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | Clima e Estações | Lenha no inverno; calor forte e onda de calor (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
@@ -167,6 +169,6 @@ Consequências:
 
 1. **Valores a testar:** contribuição de cada fator, velocidade da inércia, faixa do Controle, número de dias para a revolta, efeitos numéricos de cada faixa.
 2. **Medo agregado:** como se calcula o Medo de uma cidade em LOD 2 e o que o aumenta (execuções, guarnição, derrotas).
-3. **Fuga e rebelião local de Escravos:** como funcionam em LOD 0 e quanto duram.
+3. **Fuga e rebelião local de Escravos:** resolvida no [[Sistema de Escravidão/Descrição|Sistema de Escravidão]] (fuga com Obediência abaixo de 30; rebelião com Felicidade dos Escravos abaixo de 10 e Controle abaixo de 10 por 4 dias).
 4. **Greves e manifestações:** efeito exato na produção e na Criminalidade.
 5. **Interface:** layout do painel "Por quê?" (as 5 classes de uma vez ou uma por vez; ver [[Interface/Descrição|Interface e Controles]]).

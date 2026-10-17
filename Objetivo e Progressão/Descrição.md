@@ -17,7 +17,7 @@ O jogo é um **sandbox sem fim obrigatório**, como Kenshi e Mount & Blade. O jo
 | Estilo | Ambição sugerida |
 |---|---|
 | Dono de vila | Fundar uma facção |
-| Escravo | Conquistar a liberdade |
+| Escravo | Conquistar a liberdade (comprar, fugir ou servir; ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Nobre exilado | Retomar o trono |
 | Mercador | Ter a maior fortuna do mundo |
 | Aventureiro | Limpar uma masmorra lendária |
@@ -117,7 +117,8 @@ Registro dos grandes feitos, montado a partir do **diário de eventos**: Ambiç�
 | Crime e Justiça | Recompensa como má fama; Criminalidade gera contratos |
 | Eventos | Eventos com escolha; diário alimenta a Crônica; varredura gera contratos |
 | Mapa | Masmorras como Mapa Interno com Nível de Segurança |
-| Itens / Magia | Loot por Rank, Grimório, Pedra Mágica, Artefatos |
+| Itens / Magia | Loot por Rank, Grimório, Pedra Mágica, Livros de Atributos, Relíquias e Artefatos lendários (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
+| Escravidão | Contratos de recaptura de fugitivos e de libertação de caravanas (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Construção | Quadro de contratos na Taverna |
 | NPC | NPCs Importantes oferecem missões longas; companheiros por Renome |
 | Religião | Missões do Sumo Sacerdote; peregrinação (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |

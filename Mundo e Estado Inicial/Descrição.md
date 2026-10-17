@@ -181,7 +181,7 @@ Cada cidade começa com um **pacote de construções** por nível e cultura, lid
 | Autoritária | Quartel e Prisão 1 nível acima |
 | Religiosa | Templo 1 nível acima; + Boticário |
 | Tecnocrata | Templo trocado pelo Laboratório |
-| Escravista | + Senzala grande; + Posto Comercial já no nível 3 |
+| Escravista | + Senzala grande; + Posto Comercial já no nível 3; + Mercado de Escravos na Capital (8,6), na Cidade (7,5) e no porto (6,6) (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 
 As **moradias** não entram no pacote: a quantidade sai da população inicial (ver [[Sistema de População/Descrição|Sistema de População]]). Os níveis exatos de cada construção ficam para a lista de construções novas **[Em aberto]**.
 

@@ -106,7 +106,7 @@ Cada Mago tem **afinidade com uma escola** (sorteada ao nascer). Ele pode aprend
 |---|---|
 | NPC | Mago, Mana, habilidade Magia, Inteligência, afinidade de escola |
 | Combate | Feitiços com conjuração, recarga e área; cajado; itens encantados |
-| Itens | Grimório, Pedra de Mana, Aço Mágico, encantamentos |
+| Itens | Grimório, Pedra de Mana, Aço Mágico, encantamentos; Joia Mágica (+Mana do Mago), Anel Mágico e Pó Espiritual (+regeneração de Mana) (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
 | Construção / Produção | Torre Arcana, Forja Arcana, Encantaria |
 | Cura | Regeneração de Mana; Mago de Suporte no Hospital |
 | Tecnologia | Mesma mecânica de pontos; eras pelos marcos mundiais |

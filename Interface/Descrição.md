@@ -189,6 +189,8 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 | Religião | Calendário com os festivais; patrocinar e cancelar; cobertura do Templo no painel da cidade (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | Clima e Estações | Clima do dia no HUD; camada de clima; tom do dia e paleta das estações (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | Notícias | Categoria "Notícias"; quadro da Taverna; Crônica do mundo; mapa atualizado (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
+| Itens | Botões "Usar" e "Ler"; ícones de Viciado e Doente no retrato (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
+| Escravidão | Painel de trabalho dos escravos; botões "Libertar" e "Vender"; tratamento (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Início de Jogo | Novo jogo em 3 passos |
 | Arquitetura | Desenhista próprio, JSON, Dear ImGui só para depuração |
 

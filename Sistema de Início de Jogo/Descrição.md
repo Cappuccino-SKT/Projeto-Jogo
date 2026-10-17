@@ -44,7 +44,7 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 | **Membro de facção** | Começa já como cidadão ou nobre de uma das 6 facções | Título, relação alta com a facção |
 | **Mercador** | Compra e vende entre cidades | Dinheiro, itens de comércio |
 | **Nobre exilado** | Herdeiro de uma dinastia caída, quer retomar o poder | Companheiros nobres, relação alta com sua cultura |
-| **Escravo** | Começa como propriedade de alguém e tenta se libertar | Habilidades de Trabalho Braçal, aliados entre escravos |
+| **Escravo** | Começa como propriedade de alguém e tenta se libertar: comprar, fugir ou servir (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) | Habilidades de Trabalho Braçal, aliados entre escravos |
 | **Mago** | Começa com a habilidade mágica desenvolvida | Magia, Mana, cajado |
 
 ### Mundo fixo, estado inicial variável

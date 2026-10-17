@@ -270,6 +270,7 @@ Batalha sem o jogador é sempre cálculo rápido. A Comitiva (o grupo do jogador
 | Mapa | Domínio do mapa em disputa; cerco no Mapa Local da cidade |
 | Felicidade e Estabilidade | Fator "Guerra e ameaça" pelo Cansaço; ocupação, conquista, saque e cerco; guarnição soma ao Controle |
 | População | Fome no cerco; mortes no saque; queda de nível; migração bloqueada |
+| Escravidão | Prisioneiros escravizados ou vendidos a facções que permitem; cidade conquistada por quem proíbe liberta os escravos (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Produção e Comércio | Ração Militar, munição e manutenção; forrageio; comércio bloqueado no cerco e na guerra |
 | Construção | Muralha (3 níveis), Posto da Guarda, Quartel |
 | Reputação | Saque, batalha e escolta como ações de guerra, com cadeia de metade |

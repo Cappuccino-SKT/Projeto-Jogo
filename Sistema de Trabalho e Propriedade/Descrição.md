@@ -39,6 +39,7 @@ A distribuição rotativa do Banco da Cidade vira só o **estabilizador** desse 
 
 - **Não recebem salário.** Produzem para o dono (cidade, Rico ou jogador), que paga a comida e a Senzala.
 - O Escravo do jogador segue a **Lista de Prioridades** que já existe ([[Sistema de NPC/Descrição|Sistema de NPC]]).
+- Vagas Braçais sem trabalhador podem ser preenchidas com escravos comprados no Mercado de Escravos (preço base 200 + 4 × a melhor habilidade de Trabalho), pela cidade, pelos Ricos ou pelo jogador (ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
 
 ### Guardas e soldados
 

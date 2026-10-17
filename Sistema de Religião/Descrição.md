@@ -120,7 +120,7 @@ Os festivais deixam de ser um evento sorteado: agora vêm do **calendário**. O 
 - blasfemar (opção de diálogo);
 - profanar ou roubar um Templo.
 
-Na primeira versão, os NPCs de minoria **não são presos só por existirem**. Na Religiosa, a pena da heresia é a execução (o pensamento extremo "heresia é crime capital"), pela lei Crimes e penas ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]).
+Na primeira versão, os NPCs de minoria **não são presos só por existirem**. **Livro Sagrado** (ideia do autor): com a lei "Livro Sagrado obrigatório", o grupo do jogador precisa carregar o livro nas revistas; sem ele, é heresia (gravidade 2 na primeira vez na estação; ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]). Na Religiosa, a pena da heresia é a execução (o pensamento extremo "heresia é crime capital"), pela lei Crimes e penas ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]).
 
 ## Assimilação (conversão)
 

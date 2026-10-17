@@ -162,6 +162,7 @@ As **mesmas regras e a mesma fórmula** valem para o jogador e para a IA. As cid
 | Construção | Moradias, lotes e construções obrigatórias por nível; Construtor |
 | Classe Social | Moradia por classe |
 | Cultura | Migrantes mantêm a cultura; construções obrigatórias dependem da cultura |
+| Escravidão | Filhos de Escravos nascem Escravos onde a lei permite; fuga; Senzalas viram Casas na abolição (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Facção | Fator de Escala, guerra e fronteira bloqueiam a migração |
 | Eventos | Doença, fome, guerra e crime como causas de mortalidade |
 | Religião | Assimilação das minorias; migração das perseguidas; menos doença na Religiosa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |

@@ -79,6 +79,12 @@
 | **Dono** | Quem possui uma construção: Cidade, Facção, Rico ou jogador |
 | **Empresa** | Construção de produção ou comércio pertencente a um Rico |
 | **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
+| **Relíquia / Artefato lendário** | Artefato genérico (Rank 1 a 3) / único, com efeito próprio (Rank 4 e 5). [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]] |
+| **Livro Sagrado** | Livro exigido nas revistas das facções com a lei "Livro Sagrado obrigatório" (Religiosa) |
+| **Doente / Viciado** | Estado e traço que só existem em Controlados e Importantes |
+| **Obediência** | Chance de o escravo cumprir a prioridade, de 0 a 100. [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]] |
+| **Mercado de Escravos** | Construção onde se compram e vendem escravos, só onde a lei permite |
+| **Alforria / Abolição** | Escravo que compra a liberdade / lei que liberta todos os escravos da facção |
 
 ## Eventos, tecnologia e magia
 

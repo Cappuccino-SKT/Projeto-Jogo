@@ -85,6 +85,7 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 | Objetivo e Progressão | Contratos de escolta; contratos e notícias trazem preços |
 | Tecnologia | Rota fixa no ramo Economia |
 | Início de Jogo | Estilo Mercador |
+| Escravidão | Mercado de Escravos; preço por oferta e procura; tráfico no mercado negro (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Notícias | Preços como notícia; tabela de preços conhecidos com data (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
 | Clima e Estações | Comida mais cara no inverno pela simulação; tempestade para as caravanas (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 

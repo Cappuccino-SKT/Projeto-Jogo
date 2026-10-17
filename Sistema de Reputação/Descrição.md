@@ -68,6 +68,7 @@ Valores iniciais, a testar:
 | Lutar contra a facção numa batalha | −15 |
 | Recusar o chamado às armas sendo vassalo | −10 |
 | Libertar escravos (só nas facções que permitem escravidão) | −5 por grupo |
+| Vender / comprar / libertar escravo (com a Religiosa) | −3 / −1 / +2 (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 
 **Efeito em cadeia, só na guerra.** Nas ações de guerra (batalha, saque, escolta de exército), o inimigo da facção ajudada perde **metade** do que ela ganhou. Nas outras ações, não há cadeia. *Exemplo:* lutar ao lado da Guerreira contra a Autoritária dá +5 na Guerreira e −2,5 na Autoritária.
 
@@ -126,6 +127,7 @@ O nome **Opinião** foi escolhido para não confundir com o atributo **Relação
 | Facção | Reputação e Opinião do líder entram na resposta à revolta, na vassalagem e nos pedidos de título |
 | Guerra | Batalha, saque e escolta de exército são ações de guerra (cadeia de metade); lutar como mercenário conta como batalha; pedido de cidade conquistada usa a Opinião (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 | Crime e Justiça | Crime detectado tira reputação; Recompensa continua separada |
+| Itens | A faixa define a chance de revista do Livro Sagrado (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
 | Objetivo e Progressão | Faixa mínima para cada título; missões de nobres e do líder |
 | Início de Jogo | Base por cultura e estilo de início |
 | NPC | Opinião dos Importantes (diferente do atributo Relação) |

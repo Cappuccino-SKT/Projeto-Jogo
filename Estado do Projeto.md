@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-16 (rodadas P0-5 a P1-5; P1-6 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-17 (rodadas P0-5 a P1-6: P0 e P1 completos; revisão completa aberta, rodada V1 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -13,7 +13,7 @@
 - 6 facções principais = 6 culturas = 6 regiões.
 - **PIB** (soma do dinheiro das cidades, só para comparar) e **Banco da Facção** (impostos; paga soldo, obras e guerra).
 - Fundar facção: cidade nível 3, sem vínculo com outra facção (senão revolta), com 2 nobres na dinastia.
-- Cidade herda **todas** as leis da facção. Leis: itens proibidos, preços, escravidão, imposto, conscrição, magia (inclui "privilégio dos magos"), crimes e penas, Poder do líder, Sistema de votação, Tarifa e Tolerância religiosa.
+- Cidade herda **todas** as leis da facção. Leis: itens proibidos, preços, escravidão, imposto, conscrição, magia (inclui "privilégio dos magos"), crimes e penas, Poder do líder, Sistema de votação, Tarifa, Tolerância religiosa e Livro Sagrado obrigatório.
 - Assembleia: uma por ano e extraordinárias; votos por cultura/cidade conforme a lei de votação; veto do líder depende da personalidade e do Poder do líder.
 - Revolta: a resposta sai de um valor calculado (força, personalidade do líder, valor da cidade, outras guerras).
 - Rito de Admissão e sucessão vêm da Cultura.
@@ -220,6 +220,25 @@
 - Aparece nas notificações (categoria Notícias), no quadro da Taverna, na conversa, no Mapa Mundial e na **Crônica do mundo** (com as duas datas, e no epílogo).
 - Precisão cai com a distância (exato, arredondado, vago); boatos falsos no futuro. Preço 30% fora da média vira notícia. A IA sabe tudo na hora (simplificação).
 
+**Efeitos de Itens** — ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]
+- Só **Controlados e Importantes** usam itens com efeito individual; os NPCs comuns consomem de forma agregada.
+- **Livros:** Livro +3 (até 60) e Livro Antigo +6 (até 80) numa habilidade de fora do combate, uma vez por leitor, sem se gastar; **Livro de Atributos** +2 × Rank numa habilidade de combate, se gasta.
+- **Livro Sagrado (ideia do autor, inspirada no Kenshi):** lei "Livro Sagrado obrigatório", desejada pela Religiosa; os Controlados precisam carregar o livro nas revistas. Sem ele, heresia (gravidade 2 na primeira vez na estação).
+- **Joia Mágica** aumenta a Mana do Mago; **Anel Mágico** dá bônus de habilidade. **Relíquias** e cerca de 6 **Artefatos lendários** únicos; a Realeza tem os Artefatos como posse (2 por NPC real, 10% de desgaste por estação).
+- **Curativo** e **Remédio**; estado **Doente** só nos Controlados e Importantes; a cidade gasta Remédios nas epidemias.
+- Qualidade da comida, bebida e narcóticos no grupo; traço **Viciado**.
+
+**Escravidão** — ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]
+- 5 fontes (prisioneiros, trabalho forçado, captura, nascimento, compra); quem proíbe pode vender prisioneiros a quem permite.
+- **Mercado de Escravos** (Facção ou Rico): 1 NPC real = 1 trabalhador; preço 200 + 4 × a melhor habilidade de Trabalho; venda por 70%.
+- **Obediência** = 50 + Medo + Grilhões + tempo − infelicidade; tratamentos (comida, Grilhões, castigo público).
+- **Fuga** com Obediência abaixo de 30; **rebelião** com Felicidade e Controle abaixo de 10 por 4 dias (combate local até 40; acima disso, Mapa de Guerra).
+- **Libertação**, alforria e **abolição** (todos viram Civis em 1 estação); 3 caminhos do estilo Escravo (comprar, fugir, servir). Tráfico onde é proibido = Contrabando; reputação com a Religiosa.
+
+**Revisão completa (2026-10-17)** — ver [[Revisão Completa]]
+- Pedida pelo autor ao fim do P1: estado de cada documento, 21 inconsistências, 12 partes abstratas (a principal: **não há base numérica da economia**), pendências por sistema e cerca de 128 propostas a confirmar.
+- Resolvida em 5 rodadas: V1 (inconsistências e faxina), V2 (economia numérica), V3 (pendências e listas), V4 e V5 (propostas).
+
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
 ## Em aberto
@@ -229,7 +248,7 @@
 - **Mundo:** história, nomes e personagens; listas de tecnologias por cultura; valores do estado inicial.
 - **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
-- **Cura:** quando o Inconsciente vira Morto; itens de Medicamento.
+- **Cura:** quando o Inconsciente vira Morto.
 - **Itens:** Tier e Rank provisórios dos itens a cadastrar; peça de armadura Média; revisar o mapeamento Luxo/Exclusivo por Tier.
 - **Início de Jogo:** custo em pontos; bônus exato do estilo Mercador.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
@@ -241,7 +260,7 @@
 - **Comércio:** valores (capacidade, salário, Tarifa, peso do risco); animais de carga; guardas como NPCs ou valor abstrato; fórmula do fluxo em LOD 2.
 - **População:** valores a testar (taxas, vida em anos de jogo, capacidade das moradias, custo de subir de nível); lotes por mapa e nível; pesos da migração; Senzala; moradia dos Controlados; crianças decorativas.
 - **Trabalho:** valores a testar (vagas, salários, faixa de preço, estabilizador, imposto, empresas dos Ricos); nome e categoria das Funções; Engenheiro e Operário sem construção; Espada sem construção no canvas do Ferreiro; gerente das construções da Cidade; leilão; forma de estudo na Universidade.
-- **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; fuga e rebelião de Escravos; greves; layout do painel "Por quê?".
+- **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; greves; layout do painel "Por quê?".
 - **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; IDs de texto para outros idiomas.
 - **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quando entra a arte extra das estações; quando cada cultura ganha formas próprias.
 - **Viagem:** valores a testar; construção de estradas; quantidade e custo das patrulhas.
@@ -253,6 +272,9 @@
 - **Religião:** valores a testar (cobertura, Devoção, festivais, assimilação); nomes das fés e dos festivais; critérios da Bênção e do Anátema; missionários; Magos e heresia na Religiosa.
 - **Clima e Estações:** valores a testar (produção, chances, efeitos, lenha); arte extra das estações; feitiços de clima; roupas de inverno; luzes dinâmicas.
 - **Notícias:** valores a testar (horas por mapa, alcance, precisão, limiar de preço); boatos falsos; IA que espera as notícias e mensageiros; jornal impresso.
+- **Efeitos de Itens:** valores a testar; lista final dos Artefatos lendários; produção de livros e da Joia Mágica; exigências parecidas com o Livro Sagrado em outras culturas.
+- **Escravidão:** valores a testar; grande revolta (futuro); dívida como fonte; quais facções começam com a escravidão permitida.
+- **Revisão completa:** as inconsistências, as partes abstratas e as propostas estão na [[Revisão Completa]] e serão resolvidas nas rodadas V1 a V5.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
@@ -272,11 +294,12 @@
 | P1 | Companheiros, Relações familiares e Diálogo | Escrito |
 | P1 | Guerra e Campanha; Batalha; Diplomacia | Escrito |
 | P1 | Religião; Clima e Estações; Notícias | Escrito |
-| P1 | **Efeitos de itens e Escravidão** | **Rodada P1-6 enviada, aguardando respostas** |
+| P1 | Efeitos de itens e Escravidão | Escrito |
+| Revisão | **Revisão completa (V1 a V5)** | **V1 enviada, aguardando respostas** |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 está completo. Responder a rodada P1-6 (Efeitos de itens e Escravidão), a última do P1 → **[Proposta]** 1 ou 2 rodadas de pendências que travam a ficha técnica (pergunta D2) → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 e o P1 estão completos. Agora a **revisão completa** ([[Revisão Completa]]): responder a V1 (inconsistências e faxina) → V2 (base numérica da economia) → V3 (pendências e listas) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 

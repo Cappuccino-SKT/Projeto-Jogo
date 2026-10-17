@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-16, com as rodadas P1-4 e P1-5 aplicadas e a P1-6 enviada.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a P1-6 aplicada (o P1 está completo) e a revisão completa aberta (rodada V1 enviada).
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** a **rodada P1-6 (Efeitos de itens e Escravidão), a última do P1, foi enviada e aguarda respostas** (seção 4). Em 2026-10-16 foram aplicadas a P1-4 (Guerra, Batalha e Diplomacia; pull request #7, já mesclado) e a P1-5 (Religião e Fé, Clima e Estações, Notícias: três documentos novos), esta na branch `docs/p1-5-religiao-clima-noticias`, com o pull request aberto para o autor aceitar. **Ao retomar, rodar `git fetch` e conferir se ele foi mesclado no `main`.** Antes disso, a sessão de 2026-10-15 aplicou cinco rodadas (P0-5 Mundo, P0-6 Pipeline de arte, P1-1 Viagem, P1-2 Reputação e P1-3 Companheiros e Diálogo), fechou o P0, criou o `CLAUDE.md` e o padrão de perguntas detalhadas (seção 2) e registrou a ideia futura dos Títulos de Nobreza.
-3. **Próximo passo:** pedir o `Respostas.txt` da P1-6 (conferir se é desta rodada; o arquivo pode ainda ser o da P1-5) e escrever os documentos de Escravidão e de Efeitos de Itens. Depois, seguir a resposta da D2 (o que vem depois do P1).
-4. Depois do P1: pela sugestão da D2, 1 ou 2 rodadas de pendências que travam a ficha técnica.
+2. **Onde paramos:** **todos os sistemas P0 e P1 estão escritos.** Em 2026-10-17 foi aplicada a P1-6 (Efeitos de Itens e Escravidão) e, a pedido do autor (D2), começou a **revisão completa** do projeto: o levantamento está na [[Revisão Completa]], e a **rodada V1 (Inconsistências e faxina dos documentos) foi enviada e aguarda respostas** (seção 4). Branches: `docs/p1-5-religiao-clima-noticias` (P1-5) e `docs/p1-6-itens-escravidao` (P1-6 e a revisão, criada a partir da P1-5). **Ao retomar, rodar `git fetch` e conferir o que já foi mesclado no `main`.** Antes disso: a P1-4 (Guerra, Batalha e Diplomacia; pull request #7) e a sessão de 2026-10-15 (P0-5 a P1-3, o `CLAUDE.md` e o padrão de perguntas).
+3. **Próximo passo:** pedir o `Respostas.txt` da V1 (conferir se é desta rodada), aplicar as correções e a faxina dos 13 documentos antigos e abrir a **V2** (base numérica da economia).
+4. Depois: V3 (pendências e listas), V4 e V5 (confirmação das propostas), como no plano da [[Revisão Completa]].
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -62,220 +62,187 @@ Regras extras:
 | P1 | Religião | Escrito |
 | P1 | Clima e Estações | Escrito |
 | P1 | Notícias e Informação | Escrito |
-| P1 | **Efeitos de itens e Escravidão** | **Rodada P1-6 enviada, aguardando respostas** |
+| P1 | Efeitos de itens e Escravidão | Escrito |
+| Revisão | **Revisão completa (rodadas V1 a V5; ver [[Revisão Completa\|Revisão Completa]])** | **V1 enviada, aguardando respostas** |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, ordens de produção em lote, modo observador, eventos de dinastia. A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: P1-6, Efeitos de itens e Escravidão
+## 4. Rodada pendente: V1, Inconsistências e faxina dos documentos
 
-**Perguntas enviadas em 2026-10-16, aguardando respostas.** É a última rodada do P1 (item 4.16 da [[Revisão do Projeto]]). Junta dois temas que hoje estão espalhados: o que os itens especiais fazem ao serem usados (Itens, Cura, Magia, Classe Social) e a escravidão (NPC, Crime, Cultura, Trabalho, Guerra). Responder no `Respostas.txt` pelos códigos (I1, E2...). "Seguir sugestão" aceita a proposta. Valores numéricos são iniciais, a testar.
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** É a primeira das 5 rodadas da **revisão completa** pedida pelo autor (D2 da P1-6). O levantamento inteiro, com o estado de cada documento, as 21 inconsistências, as 12 partes abstratas, as pendências e as propostas, está na [[Revisão Completa]]. Esta rodada resolve as inconsistências que pedem escolha e a faxina dos documentos antigos. Responder no `Respostas.txt` pelos códigos (V1-1, V1-2...). "Seguir sugestão" aceita a proposta.
 
 **Já decidido (base das perguntas):**
 
-- **Artefatos** na lista de itens: Livro (Rank 2), Livro Antigo (Rank 4), Livro de Atributos (Rank 1-5), Joias Mágicas de Pedra Mágica (Rank 1-5) e Artefato (Rank 1-5); a cadastrar: Grimório (ensina feitiços) e Anel Mágico (Artesão nível 5). A **Realeza consome Artefatos** (Livro, Joia Mágica e Artefato); as **masmorras lendárias** guardam Artefatos ([[Sistema de Itens/Descrição|Itens]], [[Sistema de Classe Social/Descrição|Classe Social]], [[Objetivo e Progressão/Descrição|Objetivo]]).
-- **Medicamento** existe como tipo, sem itens; o **Boticário** produz; proposta antiga: um curativo (Tier 1) e um remédio forte (Tier 3) com Flor Espiritual. Em aberto: a doença em LOD 0 é um estado "Doente" ou só um modificador da cidade ([[Sistema de Cura/Descrição|Cura]]).
-- A **Pedra de Mana** recupera Mana; não há poção de mana ([[Sistema de Magia/Descrição|Magia]]).
-- **Narcóticos** (Fumo, Pó Espiritual) são Bens de Luxo e proibidos na Religiosa; o grupo come 1 refeição por dia na viagem ([[Sistema de Viagem/Descrição|Viagem]]).
-- **Escravidão:**
-  - É uma lei de facção (permitida ou proibida). Escravos não têm salário e produzem para o dono, que paga a comida e a Senzala.
-  - O NPC escravo tem **Obediência**, **Revolta** e **Vínculo**; o Escravo do jogador é Semi-Controlado e segue a Lista de Prioridades.
-  - **Trabalho forçado** é pena com prazo. **Prisioneiros de guerra:** 100 = 1 NPC Escravo, se a lei permitir. **Grilhões** são feitos pelo Ferreiro nível 2.
-  - **Crimes:** "Fuga ou ajuda a escravo" (gravidade 3); libertar escravo é crime cultural na Escravista. Libertar escravos dá −5 de reputação nas facções escravistas.
-  - **Estilo Escravo:** Ambição "Conquistar a liberdade". A Escravista tem a "infantaria de escravos" (metade do soldo, −15 de Moral). A Guerreira vende prisioneiros à Escravista; o 2º vilarejo Escravista (6,6) é porto de pesca e de escravos.
-  - Em aberto na Felicidade: como funcionam a **fuga e a rebelião local** de Escravos.
+- A lista do [[Sistema de Itens/Descrição|Sistema de Itens]] **manda** sobre os canvases, até a pasta `data/` existir.
+- Armaduras: 3 peças separadas, de peso Leve, Média ou Pesada; o Costureiro faz a Média.
+- O **Peixe foi descartado** dos recursos.
+- Tom do mundo: baixa magia, chegada da pólvora, sombrio e político; 4 eras de tecnologia.
+- Arquitetura: **composição**, não herança; o inventário é um componente.
 
-### I. Efeitos de itens
+**V1-1. Faxina dos documentos antigos e correções óbvias.**
 
-**I1. Livro e Livro Antigo.**
+- *Contexto:* 13 documentos são de antes do padrão: Mapa, Cidade, NPC, IA, Inventário, Econômico, Itens, Produção, Recursos, Recursos Existentes, Construção, Classe Social e Tempo. Faltam neles a legenda, a parte técnica, a tabela de ligações e as perguntas. Além disso, há 9 inconsistências com correção óbvia: I-1, I-6, I-8, I-12, I-15, I-17, I-18, I-20 (I-19 já foi corrigida).
+- *Pergunta:* posso padronizar os 13 documentos e aplicar as correções óbvias sem mudar nenhuma decisão?
+- *Sugestão:* sim, numa rodada só, sem mudar nenhuma regra:
+  - **Formato:** legenda no topo, "Descrição geral", as seções que já existem, "Parte técnica" (LOD, dados, save, fatia vertical), "Ligação com outros sistemas" e "Perguntas em aberto", como nos documentos novos.
+  - **Texto do autor:** o conteúdo continua o mesmo; só corrijo a ortografia e reorganizo. O que foi decisão do autor continua sem marcação.
+  - **Cidade vira o "documento de entrada" da cidade:** os atributos ficam, mais uma tabela "onde está cada regra" (Felicidade, População, Trabalho, Crime, Guerra, Religião).
+  - **Correções óbvias:**
+    - I-1: a IA aponta para a fórmula de dano do Combate.
+    - I-6: a Caravana usa o componente de Inventário.
+    - I-8: o Mapa usa a condição de vitória da Batalha.
+    - I-12: "Nobreza" em todo lugar.
+    - I-15: fecho as duas perguntas obsoletas do Comércio.
+    - I-17: limpo as duas propostas que já foram feitas.
+    - I-18: a armadura mista fica só no Combate.
+    - I-20: crime de **Sedição** (gravidade 3), só nas facções cuja lei proíbe pedir mudança de lei.
+- *Custo:* nenhum para o jogo; só deixa o vault mais fácil de ler e de transformar em ficha técnica.
 
-- *Contexto:* existem na lista, sem efeito e sem quem os produza; a Realeza os "consome" (ver I4).
-- *Pergunta:* o que acontece quando um NPC lê um Livro?
-- *Opções:* (a) **livro de estudo que não se gasta**: ensina uma habilidade de fora do combate, uma vez por leitor; (b) livro que se gasta e dá bônus temporário; (c) só objeto de valor e de consumo da Realeza, sem leitura.
-- *Sugestão:* (a).
-  - Cada Livro tem um **assunto**, sorteado quando é criado ou achado: Inteligência, Carisma, Percepção, Trabalho Braçal, Manufaturado ou Especialista.
-  - **Ler** é uma ação de 8 horas, fora de combate (no descanso ou no Período Livre), só para Controlados e Importantes.
-  - **Efeito:** Livro **+3** e Livro Antigo **+6** na habilidade do assunto, uma vez por NPC. O livro não leva a habilidade além de **60** (Livro) ou **80** (Livro Antigo).
-  - O livro **não se gasta**: pode ser emprestado aos companheiros, vendido ou guardado.
-  - **Universidade:** cada livro guardado nela dá +2% ao bônus de educação da cidade, até 10 livros.
-  - **De onde vem:** Mercado das cidades nível 3 ou mais e masmorras; Livro Antigo só em masmorras. Produção futura com uma tecnologia de "Imprensa" (Era 2).
-  - *Exemplo:* o Mercador lê "Tratado de Comércio" (Carisma) e passa de 48 para 51; empresta ao companheiro, que passa de 30 para 33.
-- *Impacto:* NPC (lista de livros lidos, só para Controlados e Importantes), Itens, Trabalho (Universidade), Interface (botão "Ler").
+**V1-2. Armas sem produtor e produtos que não existem.**
 
-**I2. Livro de Atributos (Rank 1 a 5).**
+- *Contexto:* I-2 e I-3. O Ferreiro repete "Machado de Ferro" e não faz Espada. O Armeiro nível 4 faz "Rifle de Aço", que não existe na lista. Carabina de Aço Mágico, Besta de Repetição, Mosquete de Aço Mágico e os arcos e bestas de metal não têm quem os faça.
+- *Sugestão:* seguir os mesmos metais e níveis das outras armas:
 
-- *Contexto:* o nome sugere um aumento de atributo, e o Rank vai de 1 a 5.
-- *Sugestão:* é o livro raro de **combate**, e ele **se gasta** ao ser lido.
-  - **Assunto:** uma habilidade de combate (Corpo a Corpo, Longo Alcance, Defesa, Força, Agilidade, Destreza; Magia só para Magos).
-  - **Efeito:** **+2 × Rank** na habilidade (Rank 5 = +10), sem teto além de 100. A leitura leva 8 horas.
-  - **De onde vem:** só de masmorras e de recompensas de missão; Rank 4 e 5 só nas masmorras de dificuldade 4 e nas lendárias. Não é vendido no Mercado comum.
-  - **Preço:** **[Proposta]** cerca de 300 × Rank.
-- *Por quê:* combina com a evolução por uso do Combate. O livro é um atalho raro, não a regra.
+| Construção | Nível | Acrescenta ou corrige |
+|---|---|---|
+| Ferreiro | 1 | **Espada Curta e Espada Longa de Ferro** (no lugar do Machado repetido) |
+| Ferreiro | 3 | Espada Curta e Longa de Aço |
+| Ferreiro | 5 | Espada Curta e Longa de Aço Mágico |
+| Armeiro | 4 | **Carabina de Aço** (no lugar do "Rifle de Aço") |
+| Armeiro | 5 | Rifle, Carabina e Mosquete de Aço Mágico; Canhão de Guerra Moderno |
+| Carpinteiro | 4 | Arcos de Aço (Curto, Recurvo e Longo); Besta Leve de Aço; Besta de Repetição de Aço |
+| Carpinteiro | 5 | Arcos e Bestas de Aço Mágico, incluindo a Besta Pesada e a de Repetição |
 
-**I3. Joia Mágica e Anel Mágico.**
+  Os arcos e as bestas de metal usam Barra de Aço ou de Aço Mágico como insumo.
+- *Impacto:* Funções e Construções, Itens. Nenhuma arte nova: as armas já estão na lista.
 
-- *Contexto:* a Joia Mágica (Pedra Mágica, Rank 1 a 5) é um Artefato; o Anel Mágico é um Equipamento com "Buff de habilidade".
-- *Opções:* (a) **Joia carregada no inventário que reforça a Mana do Mago**, e o Anel equipado que dá bônus de habilidade; (b) um novo slot "Amuleto" para a Joia: mais um encaixe de equipamento e mais arte; (c) Joia só como objeto de valor.
-- *Sugestão:* (a).
-  - **Joia Mágica:** no inventário de um Mago, dá **+10 × Rank de Mana máxima** e **+5% × Rank de regeneração**. Só a melhor joia carregada conta. Para quem não é Mago, é só objeto de valor e de consumo da Realeza.
-  - **Anel Mágico:** equipado no slot Anel; **+3% × Rank** numa habilidade, escolhida na produção. Também pode receber encantamento a partir do Rank 3, como os outros equipamentos.
-  - *Exemplo:* um Mago de Suporte com Joia Rank 3 tem 30 de Mana a mais e regenera 15% mais rápido.
-- *Impacto:* Magia (Mana), Itens, Combate. Não precisa de arte nova (a joia não aparece no boneco).
+**V1-3. Animais como itens (o Cavalo).**
 
-**I4. Artefato e o consumo de Artefatos da Realeza.**
-
-- *Contexto:* "Artefato" (Rank 1 a 5) não tem efeito. A Realeza "consome" Artefatos, mas gastar um livro ou um artefato por estação não faz sentido.
-- *Pergunta:* o que é um Artefato, e como a Realeza o "consome"?
-- *Sugestão:*
-  - **Dois tipos de Artefato:**
-    - **Relíquias** (Rank 1 a 3): genéricas e sem efeito em combate. Valem muito, servem ao consumo da Realeza e, doadas a um Templo ou Palácio, dão +2 de Renome.
-    - **Artefatos lendários** (Rank 4 e 5): **únicos**, com nome e efeito próprios, escritos à mão (cerca de 6 na primeira versão, 1 a 2 por masmorra lendária). *Exemplos:* "Estandarte do Primeiro Rei" (+10 de Moral no exército do portador quando ele é General); "Elmo do Juramento" (+15 de Coragem, imune ao Medo).
-  - **Consumo da Realeza como posse:** a cidade precisa ter **2 itens de Artefato** (Livro, Joia ou Relíquia) **por NPC real de Realeza**, guardados no Palácio. Eles **não somem**: 1 em cada 10 sai por estação (presentes, roubos), e isso gera a demanda.
-- *Conflito:* a Classe Social trata todo consumo como gasto do estoque. A Realeza passa a ter um consumo de **posse com desgaste**. Saída: só os Artefatos funcionam assim, e o resto continua igual.
-- *Impacto:* Classe Social, Itens, Objetivo (Loot das lendárias), Mundo (as 3 masmorras lendárias).
-
-**I5. Medicamentos e doença.**
-
-- *Contexto:* o tipo existe, sem itens; o Boticário produz; a doença em LOD 0 está em aberto.
-- *Sugestão:*
-  - **Curativo** (Tier 1; Tecido + Água; Boticário nível 1): por 8 horas, a regeneração fica **× 2**; estanca o **sangramento** do Inconsciente em combate letal.
-  - **Remédio** (Tier 3; Flor Espiritual + Fardo de Especiaria; Boticário nível 3): por 24 horas, a regeneração fica **× 3**; **cura o estado Doente**.
-  - **Doença:** nos **NPCs comuns**, é só um modificador da cidade (o evento de Saúde). Nos **Controlados e Importantes**, existe o estado **Doente**: −20% nas habilidades e sem regeneração, até tomar Remédio, ir ao Hospital ou passar 8 dias. Isso fecha a pergunta em aberto da Cura.
-  - **Na cidade:** durante uma epidemia, a cidade gasta **1 Remédio por 10 NPCs reais por dia**. Com estoque, a mortalidade da doença cai pela metade. Isso dá demanda real ao Boticário.
-  - *Exemplo:* uma peste na Cidade Autoritária (100 NPCs) gasta 10 Remédios por dia; com 80 no estoque, ela aguenta 8 dias protegida, e o preço do Remédio sobe pela simulação.
-- *Impacto:* Cura, Eventos (Saúde), Produção (Boticário), Comércio.
-
-**I6. Comida, bebida e narcóticos no grupo.**
-
-- *Contexto:* o grupo come 1 refeição por dia; a Felicidade dos Controlados tem o fator "comida e descanso"; os narcóticos são Luxo.
-- *Opções:* (a) **qualidade da comida e efeitos curtos, com vício simples** só para Controlados e Importantes; (b) o mesmo, sem vício; (c) toda comida é igual.
-- *Sugestão:* (a).
-
-| Item | Efeito no Controlado (no dia) |
-|---|---|
-| Alimento Básico (Pão, Sopa, Legumes Cozidos, Ração) | Fator comida 0 |
-| Alimento Refinado (Torta, Linguiça, Queijo) | +3 |
-| Alimento de Luxo (Licor, Carne Envelhecida, Doce) | +6 |
-| Cerveja | +2 de Felicidade |
-| Fumo | +3 de Felicidade por 1 dia |
-| Pó Espiritual | +6 de Felicidade; Mago: +25% de regeneração de Mana por 1 dia |
-
-  - **Vício:** cada uso tem chance de criar o traço **Viciado** (5% no Fumo, 10% no Pó Espiritual). Viciado sem a droga por 2 dias: Felicidade −10. Some depois de 1 estação sem uso.
-  - Nas cidades, nada muda: os narcóticos continuam sendo consumo de Luxo agregado, sem vício.
-  - O grupo come a melhor comida do inventário, a menos que o jogador mande "economizar".
-- *Impacto:* Felicidade (Controlados), Viagem (comida do grupo), Magia (Pó Espiritual), Crime (narcótico proibido na Religiosa).
-
-### E. Escravidão
-
-**E1. De onde vêm os escravos.**
-
-- *Contexto:* já existem prisioneiros de guerra, trabalho forçado e o estilo Escravo; falta a lista completa das fontes.
-- *Sugestão:* 5 fontes, todas só onde a lei de **Escravidão** permite:
-
-| Fonte | Como |
-|---|---|
-| Prisioneiros de guerra | Já decidido: 100 prisioneiros = 1 NPC Escravo |
-| Pena de trabalho forçado | Já decidido: Escravo com prazo |
-| Captura por bandidos e caçadores | Viajantes e vítimas capturados em encontros são vendidos no porto (6,6) ou na Vila Livre do Sul (5,6) |
-| Nascimento | Nas facções que permitem, filhos de Escravos nascem Escravos (pela natalidade da classe) |
-| Compra | No Mercado de Escravos (ver E2) |
-
-  - **Venda de prisioneiros:** uma facção que **proíbe** a escravidão pode **vender** prisioneiros a uma que permite, se houver contato e relação 0 ou mais. É o caso já previsto da Guerreira, que vende à Escravista. Ela recebe o preço de mercado e não guarda escravos.
-  - **Dívida** (vender-se por dívida) fica para o futuro.
-- *Impacto:* Guerra, Crime, População, Viagem (encontros), Diplomacia.
-
-**E2. Mercado de Escravos e preço.**
-
-- *Contexto:* a Revisão pede compra e venda; a Escravista é mercantil; o porto (6,6) é de escravos.
-- *Pergunta:* onde se compra, quanto custa e o que exatamente se compra?
-- *Sugestão:*
-  - **Mercado de Escravos:** construção nova (Facção ou Rico), só em facção que permite a escravidão. No primeiro dia, a Escravista tem um na Capital (8,6), na Cidade (7,5) e no porto (6,6).
-  - **O que se compra:** **1 NPC real**, que trabalha como **1 trabalhador** numa vaga (a mesma escala de qualquer NPC real que ocupa uma vaga).
-  - **Preço base:** **200 + 4 × a melhor habilidade de Trabalho** (Braçal, Manufaturado ou Especialista).
-  - **Modificadores:** Mago × 2; velho × 0,5; cultura hostil à do comprador × 0,8. Depois disso, oferta e procura no Mercado Local, como qualquer item.
-  - *Exemplo:* um escravo com Trabalho Braçal 80 custa 520; o mesmo escravo velho, 260.
-  - **Quem compra:** o jogador (o escravo vira Escravo do jogador, Semi-Controlado, com Vínculo = jogador), os Ricos (para as empresas) e a cidade (para vagas Braçais sem trabalhador). Em LOD 2, a compra da cidade é um fluxo por estação.
-  - **Vender:** o dono pode vender o próprio escravo no Mercado de Escravos por 70% do preço.
-- *Conflito:* o NPC real representa um Fator de Escala de pessoas nas contas da cidade, mas trabalha como um trabalhador numa vaga. Saída: o preço é **por NPC real como trabalhador**; o Fator de Escala só pesa na população total, como já acontece.
-- *Impacto:* Construção (nova), Comércio e Econômico, Trabalho, NPC, Mundo (Mercados iniciais).
-
-**E3. Obediência e tratamento.**
-
-- *Contexto:* o atributo Obediência existe, sem fórmula; a IA diz que o Medo previne revoltas.
-- *Sugestão:*
-  - **Obediência** (0 a 100) = 50 + Medo da cidade (0 a 30) + Grilhões (+15) + tempo de cativeiro (+1 por estação, até +10) − (30 − Felicidade, se a Felicidade estiver abaixo de 30) − 10 se o escravo é Guerreiro (orgulho).
-  - **Efeito:** a chance de cumprir a prioridade a cada tarefa é igual à Obediência. Abaixo de 30, ele pode fugir (E4).
-  - **Escolhas do dono** (o jogador, para os escravos dele; a cidade, pela lei):
-
-| Tratamento | Efeito |
-|---|---|
-| Comida Básica (padrão) | — |
-| Comida Refinada | Felicidade +5; custa mais |
-| Grilhões | Obediência +15; Felicidade −5; velocidade −20%; não fogem |
-| Castigo público | Medo +5 na cidade por 8 dias; Felicidade dos Escravos −10; Reputação −2 com a Religiosa |
-
-  - *Exemplo:* um escravo novo, sem Grilhões, numa cidade com Medo 10 e Felicidade 25: 50 + 10 − 5 = 55 de Obediência; com Grilhões, 70.
-- *Impacto:* NPC, IA (Medo), Felicidade, Itens (Grilhões).
-
-**E4. Fuga e rebelião.**
-
-- *Contexto:* pergunta em aberto da Felicidade (como a fuga e a rebelião local funcionam em LOD 0 e quanto duram).
-- *Sugestão:*
-  - **Fuga em LOD 0:** à noite, o escravo com Obediência abaixo de 30 tem chance diária de fugir (30 − Obediência)%. A fuga usa a detecção do crime (Percepção dos guardas × Destreza dele). Se escapa, vira **fugitivo**: crime "Fuga" (gravidade 3) e Recompensa na facção. Ele vai para uma Vila Livre ou um mapa sem dono; metade vira bandido.
-  - **Fuga em LOD 2:** a cada estação, foge (25 − Felicidade dos Escravos)% dos escravos da cidade, se a Felicidade estiver abaixo de 25. *Exemplo:* Felicidade 15 = 10% fogem.
-  - **Rebelião local:** Felicidade dos Escravos abaixo de 10 **e** Controle abaixo de 10 por 4 dias seguidos. Em LOD 0, os escravos se armam com o que acham: 1 Esquadrão de Milícia rebelde para cada 10 NPCs escravos, contra os guardas e a guarnição. Se vencem, fogem todos, a produção Braçal da cidade cai e a cidade perde 5 de Estabilidade por 1 estação; se perdem, 20% são executados ou vendidos. Em LOD 2, é resolvida pelo cálculo rápido de forças.
-  - **Caçadores de escravos:** uma fuga grande cria contratos de recaptura no quadro da Taverna.
-  - **Grande revolta** (várias cidades ao mesmo tempo, como a de Espártaco) fica para o futuro.
-- *Impacto:* Felicidade (fecha a pergunta 3), Crime, Guerra (cálculo rápido), Objetivo (contratos), Eventos.
-
-**E5. Libertação e abolição.**
-
-- *Contexto:* o Escravo libertado vira Civil e Plebeu; libertar dá −5 de reputação nas facções escravistas; a Escravista tem o pensamento extremo "a liberdade de escravos é crime".
-- *Sugestão:*
-  - **O dono liberta** (botão "Libertar"): o NPC vira Civil e Plebeu. **[Proposta]** +2 de reputação com a Religiosa e −5 com as escravistas (já decidido). O libertado ganha +20 de Opinião sobre o jogador.
-  - **Alforria:** nas facções com Tolerância (ver Religião), 1% dos escravos da cidade compram a liberdade por estação; na Escravista, 0%.
-  - **Abolição:** a facção muda a lei de Escravidão para "proibida" na assembleia. Todos os Escravos viram **Civis em 1 estação**, as Senzalas viram Casas do mesmo nível, os Ricos perdem 15 de Felicidade por 1 ano (perdem a mão de obra) e a produção Braçal cai até os Civis ocuparem as vagas com salário. Na Escravista, isso viola o pensamento extremo.
-  - **Conquista:** uma cidade que passa a uma facção que proíbe a escravidão liberta os escravos dela no tratado (+10 de Felicidade dos libertos).
-  - **Estilo Escravo**, 3 caminhos para a liberdade:
-    - **comprar** (1,5 × o preço de mercado do próprio jogador; ele pode juntar dinheiro com tarefas extras);
-    - **fugir** (vira fugitivo com Recompensa na facção do dono, sem Game Over);
-    - **servir** (o dono liberta depois de 4 estações com Opinião +40).
-- *Impacto:* Facção (lei), Classe Social, População (Senzala), Felicidade, Início de Jogo, Reputação.
-
-**E6. Tráfico, crime e diplomacia.**
-
-- *Contexto:* a Religiosa condena o tráfico (afinidade hostil com a Escravista); libertar escravo é crime na Escravista.
-- *Sugestão:*
-  - **Tráfico onde é proibido:** é **Contrabando** (gravidade 3). Escravos só são vendidos em lojas ilegais (mercado negro), com o preço × 1,5.
-  - **Libertar escravo alheio:** crime "Fuga ou ajuda a escravo" (gravidade 3); na Escravista, gravidade 5 (crime cultural).
-  - **Reputação do jogador:** cada venda de escravo dá −3 com a Religiosa, e cada compra, −1. Libertar dá +2 (ver E5).
-  - **Diplomacia:** facções que proíbem a escravidão têm −10 de relação com as que mantêm Mercado de Escravos. **[Proposta]** Só a Religiosa aplica esse −10 na primeira versão, por já ser hostil à Escravista.
-  - **Missões:** da Religiosa, libertar caravanas de escravos; da Escravista, recapturar fugitivos e escoltar carregamentos.
-- *Impacto:* Crime, Reputação, Diplomacia, Objetivo, Comércio.
-
-### D. Escopo e depois do P1
-
-**D1. Documentos.**
-
-- *Sugestão:*
-  - **Dois documentos novos:**
-    - `Sistema de Escravidão/Descrição.md`, que junta o que está espalhado;
-    - `Sistema de Itens/Efeitos de Itens.md`, uma tabela mestre como a de Funções e Construções.
-  - **Atualizar:** Itens, Cura (estado Doente), Magia (Joia, Pó Espiritual), Classe Social (posse de Artefatos, escravos), NPC (Obediência, livros lidos, Viciado), Crime, Facção (lei de Escravidão), Trabalho, População (natalidade e Senzala), Felicidade (fuga e rebelião), Construção (Mercado de Escravos), Comércio, Reputação, Início de Jogo (estilo Escravo), Guerra e Batalha (venda de prisioneiros), Diplomacia, Objetivo (Artefatos lendários e contratos), Mundo (Mercados de Escravos iniciais), Interface (botões "Usar" e "Ler"), Glossário.
-  - **Dados:** `efeitos_itens.json` e `escravidao.json`.
-  - **Fatia vertical:** só a qualidade da comida na Felicidade (I6); o resto fica para depois.
-
-**D2. O que vem depois do P1?**
-
-- *Contexto:* com a P1-6, todos os sistemas P1 estarão escritos. A ordem decidida é: documentação, depois **ficha técnica lógica**, depois programação. Há uma lista grande de itens "Em aberto" no [[Estado do Projeto]].
+- *Contexto:* I-4. Galinha, Porco, Ovelha, Vaca e Cavalo são recursos e produtos do Pasto, mas não são itens. A Viagem usa "Cavalo e Sela" para a montaria, a Cavalaria tem Cavalo no kit, e o Comércio ainda não decidiu os animais de carga.
 - *Opções:*
-  - (a) **1 ou 2 rodadas de pendências**: só os "Em aberto" que travam a ficha técnica (Fator de Escala, Espada no Ferreiro, peça de armadura Média, consumo Luxo e Exclusivo por Tier, custos das construções novas), depois a ficha técnica da **fatia vertical**;
-  - (b) ir direto para a ficha técnica e resolver as pendências quando aparecerem;
-  - (c) escrever primeiro os sistemas P2 (áudio, tutorial, configurações...).
-- *Sugestão:* (a). A ficha técnica começa pela **fatia vertical** (1 cidade, Fazenda → Cozinha → Mercado), que é o primeiro código. Os sistemas P2 ficam para perto do lançamento, como a Revisão já diz.
+  - (a) **animais viram itens** de um tipo novo, "Animal", sem mudar o resto;
+  - (b) animais só como número no Pasto, e o Cavalo como um item especial;
+  - (c) animais como Criaturas (entidades vivas no mapa): mais bonito, mas cada animal custaria simulação.
+- *Sugestão:* (a).
+  - **Novo tipo** em Matéria-Prima, Recurso Bruto: **Animal**. Itens: Galinha, Porco, Ovelha e Vaca (Tier 0) e **Cavalo** (Tier 1).
+  - O **Pasto** cria os animais.
+  - O **Rancho** precisa dos animais no estoque, mas **não os gasta**: Galinha dá ovos, Ovelha dá lã e Vaca dá leite, e todos dão Dejetos Animais.
+  - O **Açougue** gasta o animal e faz Pedaço de Carne, Ossos e Couro Bruto.
+  - **Cavalo:** montaria (com Sela, já decidido) e **animal de carga** das caravanas. Isso fecha a pendência do Comércio: **[Proposta]** +100 de capacidade de peso por Cavalo.
+  - **No mapa:** os animais do Pasto aparecem como decoração, desenhados com os sprites das Criaturas, mas não são simulados um a um.
+- *Impacto:* Itens, Produção, Comércio, Viagem, Batalha (kit da Cavalaria). Arte: os animais já existiam como Criaturas e decoração.
 
-Depois das respostas: escrever os dois documentos, atualizar os vizinhos e seguir pela resposta da D2.
+**V1-4. Peixe e o "porto de pesca".**
+
+- *Contexto:* I-5. O autor descartou o Peixe, mas o vilarejo Escravista (6,6) é um "porto de pesca e de escravos", e o padrão do Tiled tem uma área de "pesca".
+- *Opções:*
+  - (a) **tirar a pesca**: o vilarejo (6,6) vira "porto de escravos e de carga", e a área de pesca sai do Tiled;
+  - (b) voltar com o Peixe: recurso nos mapas com rio ou litoral, mais uma construção ("Posto de Pesca") e uma receita. São mais arte, mais dados e mais um alimento no consumo.
+- *Sugestão:* (a), para respeitar a decisão de descartar o Peixe. Se a pesca fizer falta nos testes, ela volta como acréscimo pequeno.
+- *Impacto:* Mundo e Estado Inicial, Pipeline (camada de objetos), Escravidão (o porto continua sendo de escravos).
+
+**V1-5. Um inventário por cidade ou um por construção?**
+
+- *Contexto:* I-7. O Econômico decidiu **um único inventário por cidade**, compartilhado por todas as lojas, para não haver logística de entrega. O Inventário fala em "N inventários de construção" com limite, e a Produção dá a cada construção uma **capacidade de armazenamento**.
+- *Opções:*
+  - (a) **um inventário lógico por cidade, com a capacidade somada das construções**;
+  - (b) um inventário por construção, com transporte entre elas: mais realista, mas cria a logística que o Econômico quis evitar.
+- *Sugestão:* (a).
+  - A cidade tem **uma tabela única** (item, dono, quantidade), que é o que o Econômico já descreve.
+  - Cada construção **acrescenta capacidade** às categorias que produz ou vende. *Exemplo:* a Fazenda nível 2 dá +200 de capacidade de matéria-prima vegetal.
+  - Quando a capacidade de uma categoria enche, a produção dela **para** até alguém consumir ou vender. É o "limite de estoque contra acúmulo infinito" que a Produção pedia.
+  - O jogador continua tendo os itens dele separados pelo atributo **Dono**.
+  - O documento do Inventário é reescrito com os componentes: Itens (lista), Equipamento (NPC), Capacidade de peso (Controlado), Capacidade por categoria (cidade) e Carga (caravana).
+- *Impacto:* Inventário, Produção, Econômico, Construção. Desempenho: uma tabela por cidade é o mais barato possível.
+
+**V1-6. Nomes dos itens.**
+
+- *Contexto:* I-9. Há nomes em inglês ("Musket") e erros de concordância.
+- *Sugestão:* padronizar em português, nesta lista:
+
+| Hoje | Fica |
+|---|---|
+| Musket (itens) e Musquete (tipo) | **Mosquete** (item e tipo); o grupo "Canhão de mão" vira "Arma de fogo" |
+| Machado Curta / Longa | Machado Curto / Longo |
+| Perneiras Leve / Pesado; Capacete Leve / Pesado | Perneiras Leves / Pesadas; Capacete Leve / Pesado (já certo) |
+| Calça rasgadas; Calça Ninjas; Calça Modernas | Calças Rasgadas e as outras ajustadas na V1-8 |
+| Materias de Argila (lista) e Bens de Argila (Pedreira) | **Peças de Argila** nos dois |
+| Osso (Açougue) e Ossos (lista) | **Ossos** |
+| Carne (Açougue) e Pedaço de Carne (lista) | **Pedaço de Carne** |
+| Ovo, Lã, Leite (Rancho) | Saco de Ovos, Fardo de Lã, Balde de Leite (os nomes da lista) |
+| Roupa de Couro, Roupas de Tecido (Costureiro) | As peças com nome da lista (ver V1-7) |
+| Moveis de Madeira, Moveis Refinados | Móveis de Madeira, Móveis Refinados (acentos) |
+
+- *Impacto:* Itens, Funções e Construções, Glossário. Os IDs de dados (por exemplo, `item.mosquete_aco`) já nascem certos na ficha técnica.
+
+**V1-7. Itens sem produtor e a Armadura Leve.**
+
+- *Contexto:* I-10 e I-21. Vários itens da lista não são feitos por nenhuma construção. A Armadura Leve de metal está no Costureiro.
+- *Sugestão:*
+
+| Construção | Acrescenta |
+|---|---|
+| Cozinheiro | N1: Legumes Cozidos; N4: Torta de Fruta; N5: Carne Envelhecida e **Doce de Especiaria** (no lugar do Doce de Baunilha, porque a baunilha não é recurso; usa o Fardo de Especiaria) |
+| Artesão | N1: Anel de Cobre; N3: Anel de Ouro; N4: Coroa; N5: **Joia Mágica** (Ouro + Pedra Mágica) |
+| Ferreiro | **Armadura Leve de metal**: N2 de Ferro, N3 de Aço, N5 de Aço Mágico (sai do Costureiro); Chapéu de Mineiro (N1) |
+| Costureiro | N1: Couro Refinado, Trapos, Calças Rasgadas, Chapéu de Palha, Camiseta e Calça Robustas; N2: Tecido e as roupas de tecido simples; N3: **Armadura Média** (couro e tecido; sai do N4); N4: roupas nobres; N5: Sela |
+| Forja Arcana | Pedra de Mana (o "Produtor Mágico" vira o Mago de Ofício da Forja Arcana) |
+
+  Os livros continuam só comprados ou achados (decidido na P1-6).
+- *Impacto:* Funções e Construções, Itens, Combate (a Média vem um nível antes, o que dá ao Costureiro um papel militar).
+
+**V1-8. Nomes com cara moderna.**
+
+- *Contexto:* I-11. "Capuz, Camisa e Calça Ninja", "Terno", "Camiseta Moderna", "Calça social" e "Cajado Moderno" destoam de um mundo sombrio e político na chegada da pólvora.
+- *Opções:*
+  - (a) **renomear** para o tom do mundo;
+  - (b) manter, como roupas da Era 4 (a era mais moderna da tecnologia).
+- *Sugestão:* (a):
+
+| Hoje | Fica | Ideia |
+|---|---|---|
+| Capuz, Camisa e Calça Ninja | Capuz, Gibão e Calça **de Sombra** | Roupa de ladrão: bônus de Destreza (ocultação) |
+| Camiseta Moderna, Calça Modernas | Casaca e Calça **de Oficial** | Era 3 e 4; bônus de Carisma com militares |
+| Terno, Calça social | **Gibão e Calça de Gala** | Roupa nobre da Era 4 |
+| Cajado Moderno | **Cajado Rúnico** | O mais alto da Era 4, mistura de magia e técnica |
+
+  O Rifle e a Carabina continuam: são da Era 4 da pólvora.
+- *Impacto:* Itens, Pipeline (só nomes; a arte é a mesma).
+
+**V1-9. Fome e Felicidade dos Controlados.**
+
+- *Contexto:* I-14. A IA usa **Fome** ("ao se aproximar de 0, busca alimento") e a Felicidade tem um valor individual para Controlados e Importantes, mas nenhum dos dois está na lista de atributos do NPC. A Viagem diz "uma refeição por pessoa por dia", e a comida tem o atributo **Saciedade**.
+- *Sugestão:* acrescentar dois atributos só para Controlados e Importantes:
+  - **Fome** (0 a 100; 100 = satisfeito): cai **100 em 36 horas** de jogo. O NPC come sozinho quando passa de 50, do inventário dele ou do grupo, pela melhor comida (decidido na P1-6). A **Saciedade** de cada comida devolve: Alimento Básico 60, Refinado 80, Luxo 100 **[Proposta]**. Com Fome 0, a Vida cai 2% por hora e a Felicidade cai rápido (como a Viagem já previa). Na prática, 1 a 2 refeições por dia.
+  - **Felicidade individual** (0 a 100): os 6 fatores já decididos na Felicidade.
+  - **Descanso:** não vira atributo (o jogo não tem estamina). Só um contador de **noites sem dormir**, usado pela marcha forçada.
+  - Os NPCs comuns continuam com tudo agregado na cidade.
+- *Impacto:* NPC, IA, Felicidade, Viagem, Efeitos de Itens.
+
+**V1-10. Vagas do Templo.**
+
+- *Contexto:* I-16. A Religião propôs 1, 2, 5, 10 e 15 Sacerdotes por nível; a tabela geral de vagas é 2, 3, 5, 7 e 10.
+- *Opções:*
+  - (a) **o Templo segue a tabela geral** (2, 3, 5, 7 e 10), e as capitais podem ter **2 Templos**;
+  - (b) o Templo é uma exceção, com a própria tabela.
+- *Sugestão:* (a), para manter uma só regra de vagas.
+  - Cobertura com 1 Templo: 40, 60, 100, 140 e 200 NPCs reais.
+  - Uma capital (300 NPCs) com 1 Templo nível 5 tem 67% de cobertura, acima do limite de 50% da Devoção Alta. Com o 2º Templo, chega a 100%.
+  - O 2º Templo só existe nas cidades de nível 4.
+- *Impacto:* Religião, Construção, Mundo (pacote de construções das capitais).
+
+**V1-11. Ordem e ritmo da revisão.**
+
+- *Contexto:* o plano da [[Revisão Completa]] tem 5 rodadas: V1 (esta), V2 (economia numérica), V3 (pendências e listas), V4 e V5 (propostas).
+- *Opções:*
+  - (a) **seguir o plano** na ordem;
+  - (b) juntar V4 e V5 numa rodada só, com uma tabela grande respondida por "confirmar todas, exceto...";
+  - (c) fazer a V2 logo depois desta, porque ela destrava a ficha técnica, e deixar V3 a V5 para depois da ficha.
+- *Sugestão:* (a), com uma regra: nas rodadas V4 e V5, o autor pode responder **"confirmar todas, exceto..."**, e eu só detalho as que ele quiser mudar.
+
+Depois das respostas: aplicar as correções, fazer a faxina dos 13 documentos e abrir a **V2** (base numérica da economia).
 
 ## 5. Fatos que valem lembrar
 
@@ -293,6 +260,8 @@ Depois das respostas: escrever os dois documentos, atualizar os vizinhos e segui
 - **Religião:** uma fé por cultura, com Devoção (Alta na Religiosa, nenhuma na Tecnocrata); cada Sacerdote atende 20 NPCs; fator Religião de −5 a +10; 2 festivais por ano (4 na Religiosa); lei de Tolerância religiosa; heresia é um ato; assimilação de 1% a 4% por estação; Bênção e Anátema do Sumo Sacerdote (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 - **Clima:** Fazenda 75%, 100%, 150% e 25% nas quatro estações (base temperada); clima do dia sorteado por região, com 60% de repetir; lenha no inverno (1 Madeira Bruta por NPC real a cada 4 dias, × bioma); vontade de guerra −15 no inverno; noite com visão −30%; arte só com paleta, tom e partículas (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - **Notícias:** 3 h por mapa (o mundo em 1 dia); Local, Regional e Mundial; precisão cai com a distância; a IA sabe tudo na hora (simplificação) (ver [[Sistema de Notícias/Descrição|Notícias]]).
+- **Efeitos de itens:** só Controlados e Importantes usam itens com efeito individual; Livro +3 (até 60) e Livro Antigo +6 (até 80), sem se gastar; Livro de Atributos +2 × Rank, se gasta; **Livro Sagrado obrigatório** na Religiosa (ideia do autor; sem ele na revista, heresia de gravidade 2 na primeira vez); Artefatos da Realeza como posse; estado Doente e traço Viciado (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
+- **Escravidão:** 5 fontes; Mercado de Escravos com preço 200 + 4 × a melhor habilidade de Trabalho; Obediência com fórmula; fuga abaixo de 30 de Obediência; rebelião com Felicidade e Controle abaixo de 10 por 4 dias; abolição liberta tudo em 1 estação; 3 caminhos do estilo Escravo (ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 

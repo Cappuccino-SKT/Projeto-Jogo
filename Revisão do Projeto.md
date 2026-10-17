@@ -1,4 +1,6 @@
-> Revisão completa do projeto em 2026-10-14, feita depois que todos os sistemas planejados ganharam uma primeira descrição. O autor respondeu as perguntas da seção 10 no mesmo dia (ver "Decisões" abaixo). A lista de sistemas das seções 4 e 5 foi **aceita**; cada sistema novo será escrito em rodadas curtas de perguntas (ver [[Estado do Projeto]] e [[Descrição do Projeto]]).
+> **Primeira revisão, mantida como histórico.** A revisão completa de 2026-10-17, feita com o P0 e o P1 escritos, está na [[Revisão Completa]].
+>
+> Revisão do projeto em 2026-10-14, feita depois que todos os sistemas planejados ganharam uma primeira descrição. O autor respondeu as perguntas da seção 10 no mesmo dia (ver "Decisões" abaixo). A lista de sistemas das seções 4 e 5 foi **aceita**; cada sistema novo será escrito em rodadas curtas de perguntas (ver [[Estado do Projeto]] e [[Descrição do Projeto]]).
 >
 > **Decisões (2026-10-14).** (1) Lista de sistemas P0, P1 e P2 aceita. (2) NPCs reais por nível de cidade: 15, 40, 100 e 300. (3) As 8 correções da seção 3 foram aplicadas. (4) Mapas no Tiled. (5) Mundo fixo com estado inicial variável. (6) Recursos não esgotam, têm produtividade por estação. (7) **Sem código por enquanto**: documentação, depois uma ficha técnica lógica, depois programação. (8) Documentos consolidados e [[Glossário]] criado.
 
@@ -142,7 +144,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 
 **4.15 Notícias e Informação.** *(Escrito: ver [[Sistema de Notícias/Descrição|Notícias]].)* O Comércio já fala de "notícias" e de preços que envelhecem. Sugestão: rumores que se espalham pelas tavernas e rotas (guerras, recompensas, preços, contratos), com atraso por distância. Une Comércio, Objetivo, Crime e Eventos, e dá vida à Crônica do mundo.
 
-**4.16 Efeitos de itens e Escravidão.**
+**4.16 Efeitos de itens e Escravidão.** *(Escrito: ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]] e [[Sistema de Escravidão/Descrição|Sistema de Escravidão]].)*
 - **Efeitos de itens:** o que fazem Livro, Livro de Atributos, Joia Mágica, Artefato e Medicamento ao serem usados.
 - **Escravidão e tráfico:** compra e venda de escravos (Mercado de Escravos, preço, captura de prisioneiros, Grilhões), hoje espalhada entre NPC, Crime e Cultura.
 
@@ -175,7 +177,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 | **Estado Guerra** | Facção | 4.8 e 4.9 |
 | **Relação inicial com facções** | Início de Jogo | 4.11 |
 | **"Armadura mista", "Escudo"** | Itens, Combate | Só decisão de regra, já proposta |
-| **Artefatos** | Classe Social, Objetivo | 4.16 (efeitos de itens) |
+| **Artefatos** | Classe Social, Objetivo | 4.16 (efeitos de itens; resolvido) |
 | **Esgotamento de recursos** | Recursos | Decidir: recursos esgotam ou regeneram (floresta, mina)? |
 
 ---

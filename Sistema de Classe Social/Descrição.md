@@ -42,7 +42,7 @@ Para o consumo da cidade funcionar, cada tipo de consumo corresponde a um grupo 
 | Materiais Básicos | Mobília Básica |
 | Bens de Luxo | Perfumes, Mobília Refinada e Narcóticos |
 | Bens Exclusivos | Bens de luxo de Tier 4 (Licor, Carne Envelhecida, Doce de Baunilha, Joias, Ornamento) |
-| Artefatos | Livro, Joia Mágica e Artefato |
+| Artefatos | Livro, Joia Mágica e Relíquia, como **posse**: 2 por NPC real de Realeza, guardados no Palácio; 1 em cada 10 sai por estação (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
 | Lenha (só no inverno, todas as classes) | Madeira Bruta |
 
 **Lenha no inverno.** No inverno, cada NPC real consome 1 Madeira Bruta a cada 4 dias como aquecimento, dentro do consumo de Materiais e em **todas as classes**, inclusive os Escravos. O bioma multiplica (frio × 2; litoral quente e terras áridas × 0,25). Sem lenha: Felicidade −10 e mais mortes de velhos e crianças (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
@@ -52,6 +52,7 @@ Para o consumo da cidade funcionar, cada tipo de consumo corresponde a um grupo 
 - **Soldados em Esquadrão** não têm Classe Social. O consumo deles é definido pelo próprio Esquadrão (Ração Militar e materiais de manutenção).
 - **Dissolução de exército:** os soldados voltam à população como novos NPCs das classes Escravo e Civil.
 - **Trabalho forçado** (punição) torna o NPC Escravo por um período, voltando depois à classe anterior.
+- **Escravos:** fontes, compra e venda, Obediência, fuga, rebelião e libertação estão no [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]. O Escravo libertado vira Civil e Plebeu.
 
 ### Influência sobre habilidades
 

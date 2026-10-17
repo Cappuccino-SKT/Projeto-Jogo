@@ -172,6 +172,7 @@ Com 48 mapas e 6 facções, uma facção (ou o jogador) poderia engolir o mundo 
 | Religião | Bênção e Anátema do Sumo Sacerdote (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | Clima e Estações | Vontade de guerra −15 no inverno (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | Notícias | Tratados e guerras viram notícia; a IA sabe na hora (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
+| Escravidão | −10 de relação da Religiosa com quem mantém Mercado de Escravos; venda de prisioneiros exige relação 0 ou mais (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 
 ## Perguntas em aberto
 

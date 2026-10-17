@@ -59,6 +59,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Universidade** | Educação: melhora a Inteligência e o Trabalho Especialista dos NPCs da cidade e dá bônus aos Pesquisadores; construção da Facção (ver [[Sistema de Trabalho e Propriedade/Descrição\|Sistema de Trabalho e Propriedade]]) |
 | **Muralha** | Defesa da cidade em 3 níveis: Paliçada, Muralha de Pedra e Bastião (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 | **Posto da Guarda** | Mais vagas de guarda (Controle) e ponto de reunião da milícia (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
+| **Mercado de Escravos** | Compra e venda de escravos (dono: Facção ou Rico), só onde a escravidão é permitida (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 
 ### Clima
 

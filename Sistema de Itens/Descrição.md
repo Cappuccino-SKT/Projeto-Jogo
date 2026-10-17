@@ -4,6 +4,8 @@
 
 Os itens são divididos em categorias, cada uma com uma função dentro do jogo. Os itens têm duas escalas distintas: o **Rank** (0 a 5, seis níveis), usado em armas, equipamentos e artefatos, e o **Tier** (0 a 4), usado em materiais e bens de consumo, ligado à complexidade de produção e ao tipo de Trabalho exigido (Braçal, Manufaturado ou Especialista). Materiais e bens de consumo não têm Rank, e armas, equipamentos e artefatos não têm Tier. Cada rank acima de 0 concede um bônus percentual no Atributo de Habilidade relevante ao equipar (ex: uma espada rank 3 aumenta um pouco mais o Corpo a Corpo do que uma rank 1), e/ou passa a exigir uma Habilidade mínima pra ser usado com eficácia total.
 
+O que os itens especiais fazem ao serem usados (livros, joias, artefatos, medicamentos, comida, bebida e narcóticos) está em [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]].
+
 ### Cultura
 
 A cultura é um atributo das armas e equipamento, ele foi inspirado no mesmo sistema do jogo rimworld aonde temos os Estilos em certos itens, aonde um unico item pode ter mais de uma aparencia dependendo da cultura que o produziu, a ideia é a mesma, invés de criar diversas armas e equipamentos e depois ter que balancear todos eles, vamos criar os itens padrão, e depois apenas atribuir uma textura diferente dependendo a cultura que o produziu.
@@ -325,10 +327,17 @@ Itens que aparecem nos canvases mas ainda não estão na lista. Tier e Rank são
 | Armadura Média (3 peças) | Equipamento / Capacete, Peitoral, Perneiras | Rank 1-3 | Costureiro (nível 4+) |
 | Grimório | Artefato / Livro (ensina feitiços) | Rank 2-4 | A definir (comprado, produzido ou achado em masmorras; ver Sistema de Magia) |
 | Pedra de Mana | Bem de Consumo (recupera Mana) | Tier 2 | Produtor Mágico, a partir da Pedra de Mana Bruta |
+| Livro Sagrado | Artefato / Livro | Rank 1 | Vendido no Templo e no Mercado das cidades Religiosas; exigido pela lei "Livro Sagrado obrigatório" |
+| Curativo | Bem de Consumo / Medicamento | Tier 1 | Boticário nível 1 (Tecido + Água) |
+| Remédio | Bem de Consumo / Medicamento | Tier 3 | Boticário nível 3 (Flor Espiritual + Fardo de Especiaria) |
+| Relíquia | Artefato / Artefato | Rank 1-3 | Masmorras; Mercado das capitais |
+| Artefatos lendários (cerca de 6, únicos) | Artefato / Artefato | Rank 4-5 | Masmorras lendárias |
 
 **Armamento de Exército** não é equipado por NPCs: faz parte do Equipamento de um Esquadrão (ver Sistema de Facção). Cada tipo de Esquadrão recebe um **kit** (1 item de cada peça equipa os 100 soldados), e o Rank dos itens define a qualidade (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
-**Medicamentos.** O tipo Medicamento existe, mas ainda não há itens. Ver Sistema de Cura.
+**Medicamentos.** Curativo e Remédio (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]] e [[Sistema de Cura/Descrição|Sistema de Cura]]).
+
+**Artefatos.** O tipo Artefato tem as **Relíquias** (Rank 1 a 3, genéricas) e os **Artefatos lendários** (Rank 4 e 5, únicos, com efeito próprio). A Realeza tem os Artefatos como **posse** com desgaste, não como gasto (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
 
 **Intervalo de Ataque.** Cada arma da lista precisa de um valor. **[Proposta]** definir por tipo de arma (Espada e Lança rápidas, Machado e Clava lentas, Besta e Musquete muito lentas) e ajustar por Rank em testes.
 

@@ -73,7 +73,8 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 
 - **Itens proibidos** — alimenta o atributo Proibição dos itens e a lista de Itens proibidos da cidade.
 - **Ajustes de preço por categoria** — alimenta o Mercado da Facção.
-- **Escravidão** (permitida / proibida) — define se o atributo Escravo e a classe Escravo existem nas cidades da facção.
+- **Escravidão** (permitida / proibida) — define se o atributo Escravo e a classe Escravo existem nas cidades da facção. A abolição liberta todos os Escravos em 1 estação (ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
+- **Livro Sagrado obrigatório** (sim / não) — exige que o grupo do jogador carregue um Livro Sagrado nas revistas; sem ele, é heresia. Desejada pela Religiosa (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
 - **Imposto** (% da receita das cidades: salários e lucros) — a cidade retém uma parte para obras e o resto enche o Banco da Facção; Escravos não pagam (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
 - **Conscrição** (% da população que pode ser alistada e quem é elegível) — define o teto de conscritos disponíveis em cada cidade.
 - **Magia** (livre / restrita / proibida) — define como tratar NPCs Magos. Inclui a opção "privilégio dos magos", para a cultura Arcana: a magia e o poder ficam com os NPCs que têm o atributo Mago.
@@ -195,6 +196,7 @@ Requisitos:
 | Cidade | Facção, itens proibidos (derivado das leis), conscritos (derivado), impostos, voto na assembleia |
 | NPC | Atributo Facção; alistar retira NPCs e cria Esquadrão; guardas ficam de fora; **[Proposta]** Título/Cargo para NPCs Importantes |
 | Cultura | Leis desejadas, Rito de Admissão, regra de sucessão, afinidades, arte (ver Sistema de Cultura) |
+| Escravidão | Lei de Escravidão, abolição e venda de prisioneiros (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Econômico | Mercado da Facção, impostos para o Banco da Facção, soldo dos Esquadrões, cunhagem, tecnologias; Tarifa e caravanas civis (ver Sistema de Comércio) |
 | Classe Social | Eventos de mudança de lei; soldados não têm classe; dissolução gera NPCs Escravo e Civil |
 | Produção | Alistamento reduz trabalhadores e, portanto, produção; Ração Militar e materiais de manutenção para o exército |
