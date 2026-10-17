@@ -35,7 +35,7 @@
 - **No início do código:** escolher os pacotes de arte provisórios e a ferramenta de atlas. O artista definitivo também segue sem escolha.
 - **A história do mundo:** nomes, personagens e os nomes de fantasia dos itens.
 - **Cerca de 80 marcações** [Em aberto] e [Refinar depois] nos documentos: detalhes e ideias futuras, sem pressa.
-- **Ideias futuras:** Títulos de Nobreza, outras raças, arte própria por cultura, arte extra das estações e os sistemas P2 (áudio, tutorial, configurações, localização, modding, conquistas).
+- **Ideias futuras:** vários núcleos (multithreading, ver [[Arquitetura/Descrição|Arquitetura]]), Títulos de Nobreza, outras raças, arte própria por cultura, arte extra das estações e os sistemas P2 (áudio, tutorial, configurações, localização, modding, conquistas).
 
 ## Próximos passos
 
