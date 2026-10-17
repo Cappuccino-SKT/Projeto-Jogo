@@ -1,6 +1,6 @@
 # CMakeLists.txt principal: a "receita" que diz ao CMake como montar o projeto.
 # Ele junta as duas pastas de código:
-#   Codigo/ -> as regras do jogo, sem janela (começa no marco 1)
+#   Codigo/ -> as regras do jogo, sem janela (testadas sozinhas pelo ctest)
 #   Jogo/   -> o programa de verdade: janela, desenho, mouse e teclado
 
 cmake_minimum_required(VERSION 3.24)
@@ -37,5 +37,8 @@ FetchContent_MakeAvailable(SDL3)
 # ---------------------------------------------------------------------------
 # As nossas pastas
 # ---------------------------------------------------------------------------
-# A pasta Codigo/ entra no marco 1, com o relógio do mundo.
+# Liga o ctest, que roda os testes automáticos (rodada FL1-4).
+enable_testing()
+
+add_subdirectory(Codigo)
 add_subdirectory(Jogo)
