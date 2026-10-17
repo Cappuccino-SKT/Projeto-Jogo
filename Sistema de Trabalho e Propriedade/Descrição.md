@@ -43,8 +43,8 @@ Vagas por nível da construção, iguais para todas (confirmado na rodada IP3-11
 
 ### Guardas e soldados
 
-- Os **guardas** são pagos pelo **Banco da Cidade**, com o mínimo definido pela lei da facção ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]).
-- Os **Esquadrões** recebem **soldo** do **Banco da Facção**, como já decidido.
+- Os **guardas** são pagos pelo **Banco da Cidade**, com o mínimo definido pela lei da facção ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]). Salário: 1,0 moeda por hora (rodada V2-3).
+- Os **Esquadrões** recebem **soldo** do **Banco da Facção**: **8 moedas por dia** por Esquadrão, o salário de 1 trabalhador, porque 1 Esquadrão = 1 NPC alistado. O Esquadrão de Magos custa 3 vezes; o mercenário, 2 vezes por estação, adiantado (rodada V2-3).
 
 ---
 
@@ -63,7 +63,7 @@ Novo atributo **Dono** nas construções, com quatro valores:
 
 ### Empresas dos Ricos
 
-- Uma **fração** das construções de produção de cada cidade pertence a Ricos.
+- **30%** das construções de produção de cada cidade pertencem a Ricos (rodada V2-7).
 - Em **LOD 2** só existe a **contagem de empresas** por cidade, sem rastrear cada Rico.
 - Em **LOD 0**, o Rico dono é um NPC de verdade, com **Dinheiro individual**.
 - O evento "perda de empresas" (ver [[Sistema de Classe Social/Descrição|Classe Social]]) tira a construção do Rico e a **devolve à cidade**.
@@ -83,20 +83,36 @@ Novo atributo **Dono** nas construções, com quatro valores:
 - O valor vem de uma **tabela por Função e nível**, multiplicada por um fator da **riqueza média** da cidade e do **desemprego**.
 - O dinheiro sai do **caixa da construção** (lucro das vendas). Nas construções da **Cidade**, sai do **Banco da Cidade**.
 
+**Tabela de salários** (rodada V2-3), por hora, pela habilidade que a receita usa:
+
+| Trabalho | Moedas por hora | Por dia (turno de 8 h) |
+|---|---|---|
+| Braçal | 0,75 | 6 |
+| Manufaturado | 1,0 | 8 |
+| Especialista | 1,5 | 12 |
+| Mago de Ofício | 2,5 | 20 |
+
+- **Multiplicadores:**
+  - +10% por nível da construção acima do 1;
+  - gerente × 1,5;
+  - riqueza da cidade de × 0,8 a × 1,2;
+  - desemprego de × 0,9 (muito) a × 1,1 (falta gente).
+- *Exemplo:* um Cozinheiro Civil num Cozinheiro nível 1 ganha 8 por dia, 128 por estação.
+
 ### Salários do jogador
 
 O jogador escolhe entre três níveis de salário:
 
 | Nível | Efeito |
 |---|---|
-| **Baixo** | Reduz a Felicidade e a lealdade; aumenta a rotatividade |
-| **Normal** | Padrão |
-| **Alto** | Aumenta a produtividade e atrai trabalhadores melhores |
+| **Baixo** (× 0,75) | Reduz a Felicidade e a lealdade; aumenta a rotatividade |
+| **Normal** (× 1) | Padrão |
+| **Alto** (× 1,25) | Aumenta a produtividade e atrai trabalhadores melhores |
 
 ### A distribuição rotativa do Banco da Cidade
 
 - Deixa de ser a fonte principal de dinheiro e vira **estabilizador**.
-- A cidade só distribui dinheiro quando a **média por classe** cai abaixo de um limiar, para evitar colapso.
+- A cidade só distribui dinheiro quando a **média por classe** cai abaixo de **3 dias da cesta mínima**, e paga até voltar a 5 dias, com teto de 10% do Banco por estação (rodada V2-7).
 - O ciclo normal é: consumo → lojas → salários → consumo.
 
 ### Dinheiro dos NPCs
@@ -117,8 +133,8 @@ O jogador escolhe entre três níveis de salário:
 
 ### Imposto
 
-- Um **imposto único sobre receita** (salários e lucros), na taxa da lei de **Imposto** da facção, cobrado **por estação**.
-- A **cidade fica com uma parte** para obras; o resto vai para o **Banco da Facção**.
+- Um **imposto único sobre receita** (salários e lucros), na taxa da lei de **Imposto** da facção, cobrado **por estação**: Baixo 10%, Normal 20% ou Alto 30% (rodada V2-7).
+- A **cidade fica com 30%** para obras; o resto vai para o **Banco da Facção**.
 - **Escravos não pagam.**
 - A Tarifa do comércio continua separada ([[Sistema de Comércio/Descrição|Sistema de Comércio]]).
 
@@ -126,7 +142,7 @@ O jogador escolhe entre três níveis de salário:
 
 - O jogador fixa o preço dentro de uma **faixa de ±30%** em torno do **Mercado Local**.
 - Fora da faixa, vende pouco ou nada (se for mais caro) ou perde lucro (se for mais barato).
-- As lojas da Cidade têm uma pequena **margem** entre o preço de compra e o de venda.
+- As lojas da Cidade compram a **90%** e vendem a **110%** do preço local (rodada V2-5).
 
 ### Insumos
 

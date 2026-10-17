@@ -84,15 +84,15 @@ O que existe só como ideia, sem regras ou números suficientes para virar códi
 
 | Código | O que falta | Onde | Trava a fatia vertical? | Rodada |
 |---|---|---|---|---|
-| A-1 | **Moeda e preços base**: quanto vale cada item (por Tier e Rank) | Econômico, Itens | **Sim** | V2 |
+| A-1 | **Moeda e preços base**: quanto vale cada item (por Tier e Rank) | Econômico, Itens | **Sim** | **Resolvida na V2** |
 | A-2 | **Receitas**: insumos, quantidades e tempo de cada produto (a fatia vertical precisa ao menos de Grão → Pão) | Produção | **Sim** | **Resolvida na IP3** ([[Sistema de Produção/Receitas\|Receitas]]) |
-| A-3 | **Consumo por classe**: quanto cada NPC real consome por dia (Comida, Materiais, Luxo...) | Classe Social | **Sim** | V2 |
-| A-4 | **Construções**: custo, tempo de obra, manutenção por estação e níveis | Construção | **Sim** (Fazenda, Cozinheiro, Mercado, Casa) | V2 |
-| A-5 | **Recursos**: produtividade base por recurso e qual item cada um gera | Recursos | **Sim** (Grão, Água) | V2 |
-| A-6 | **Salários**: tabela por Função e nível | Trabalho | **Sim** | V2 |
-| A-7 | **Rotina**: horas de dormir, trabalhar e Período Livre por classe | IA | **Sim** | V2 |
-| A-8 | **IA de Utilidade**: quais ações o NPC escolhe e como os pesos se combinam | IA | Sim, mas simples na fatia vertical | V2 |
-| A-9 | **Tick**: quantas vezes por segundo a simulação roda em cada LOD | Tempo, Arquitetura | Sim (valor de partida) | V2 |
+| A-3 | **Consumo por classe**: quanto cada NPC real consome por dia (Comida, Materiais, Luxo...) | Classe Social | **Sim** | **Resolvida na V2** |
+| A-4 | **Construções**: custo, tempo de obra, manutenção por estação e níveis | Construção | **Sim** (Fazenda, Cozinheiro, Mercado, Casa) | **Resolvida na V2** |
+| A-5 | **Recursos**: produtividade base por recurso e qual item cada um gera | Recursos | **Sim** (Grão, Água) | **Resolvida na V2** |
+| A-6 | **Salários**: tabela por Função e nível | Trabalho | **Sim** | **Resolvida na V2** |
+| A-7 | **Rotina**: horas de dormir, trabalhar e Período Livre por classe | IA | **Sim** | **Resolvida na V2** |
+| A-8 | **IA de Utilidade**: quais ações o NPC escolhe e como os pesos se combinam | IA | Sim, mas simples na fatia vertical | **Resolvida na V2** |
+| A-9 | **Tick**: quantas vezes por segundo a simulação roda em cada LOD | Tempo, Arquitetura | Sim (valor de partida) | **Resolvida na V2** |
 | A-10 | **Leis iniciais** de cada facção, numa tabela única (hoje espalhadas) | Cultura, Facção | Não | V3 |
 | A-11 | **Bônus dos estilos de início** e o custo do personalizado | Início de Jogo | Não | V3 |
 | A-12 | **Listas de conteúdo**: 40 a 60 tecnologias, feitiços e árvore arcana, 10 a 15 eventos iniciais, contratos e missões | Tecnologia, Magia, Eventos, Objetivo | Só os eventos iniciais | V3 |
@@ -106,21 +106,21 @@ Resumo das "Perguntas em aberto" e das marcações **[Em aberto]**. Os itens **"
 | Sistema | Pendências que pedem decisão (não só teste) |
 |---|---|
 | Produção / Funções | Resolvidas na IP3-11 (Operário e Engenheiro no Construtor; categoria pela receita; vagas pela tabela geral); falta a Destilaria no nível 2 (V3) |
-| Construção | Custos, níveis e moradias (rodada V2-8) |
+| Construção | Resolvidas na V2-8 (portes, custos, manutenção, moradias) |
 | Itens | Resolvidas na IP2 (lista final) e na IP3 (receitas) |
-| Classe Social | Quanto da Comida pode ser Bebida (V2); o mapeamento por Tier foi decidido na IP2-11 |
+| Classe Social | Resolvidas na IP2-11 (mapeamento por Tier) e na V2-6 (quantidades) |
 | Crime | Loja ilegal do jogador; tipos de missão de confiança; valor mínimo da recompensa para Caçadores |
 | Cura | Quando o Inconsciente vira Morto (há proposta) |
 | Eventos | Controle de intensidade do Narrador; nomes e focos dos narradores; formato do diário |
 | Cultura | Nomes (história); traços finais |
 | Facção | Detalhes da assembleia; guerra civil na crise de sucessão |
 | Objetivo | Condições das Ambições; Renome por título; lista de contratos e missões |
-| Comércio | Animais de carga (quais e de onde vêm) |
-| População | Lotes por mapa e nível; capacidade das moradias; moradia dos Controlados; crianças decorativas |
+| Comércio | Resolvida: o Cavalo é o animal de carga (V1-3); capacidade a testar |
+| População | Lotes por nível, moradia dos Controlados e crianças decorativas (V3-8); capacidade das moradias decidida na V2-8 |
 | Trabalho | Gerente das construções da Cidade; leilão; estudo na Universidade |
 | Interface | Elementos fixos do HUD; janelas de gestão móveis; fonte do texto; IDs de texto para outros idiomas |
 | Pipeline | Artista; pacotes provisórios; ferramenta de atlas |
-| Arquitetura | PC alvo mínimo e meta de quadros; meta de NPCs em LOD 0; aprovação das bibliotecas |
+| Arquitetura | PC alvo mínimo (V3-12); aprovação das bibliotecas (início do código); metas de quadros e de NPCs decididas na V2-11 |
 | Viagem | Construção de estradas; quantidade e custo das patrulhas |
 | Guerra | Custo da Muralha; estradas destruídas; guerra civil |
 | Diplomacia | Fim da coalizão; mensageiros (futuro) |
@@ -162,8 +162,8 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 | **IP1** | Padronização da produção | Estrutura da receita, família de cada construção, escada de níveis, Rank do produto, escala das unidades, tempo, ordens de produção, limites | **Respondida e aplicada** (ver seção 9) |
 | **IP2** | Nomes e lista final dos itens | Regra dos nomes, matérias-primas, família da mana, intermediários, escada de materiais, armas, armaduras (peça Média), roupas, comida, outros bens, Luxo × Exclusivo (I-9, I-10, I-11, I-13) | **Respondida e aplicada** (ver seção 10) |
 | **IP3** | Insumos de cada produto | Regras de quantidade e receitas de cada construção (A-2); Funções (Engenheiro, Operário, categorias); nova Funções e Construções | **Respondida e aplicada** (ver seção 11) |
-| **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | **Enviada** |
-| **V3** | Pendências de regra e listas de conteúdo | Seção 5 e A-10 a A-12 | A fazer |
+| **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | **Respondida e aplicada** (ver seção 12) |
+| **V3** | Pendências de regra | Seção 5, A-10 e A-11; quando fazer as listas da A-12 | **Enviada** |
 | **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos ("confirmar todas, exceto...") | A fazer |
 | **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos | A fazer |
 
@@ -236,3 +236,22 @@ Todas as 11 perguntas: **Seguir sugestão**. As receitas viraram o documento [[S
 | IP3-11 Funções | Operário e Engenheiro no Construtor (fecha a pergunta da Inteligência na Construção); categoria pela receita; nomes confirmados; vagas pela tabela geral |
 
 **Conferência:** a cadeia mais longa tem 4 passos (Aço Mágico); nenhum item órfão. **Achado novo:** a Destilaria não tem produto no nível 1 (a Cerveja é de Tier 2); a proposta é construí-la já no nível 2, a confirmar na V3.
+
+## 12. Resultado da V2 (2026-10-17)
+
+Todas as 12 perguntas: **Seguir sugestão**. As partes abstratas A-1 e A-3 a A-9 estão resolvidas.
+
+| Pergunta | Onde ficou |
+|---|---|
+| V2-1 Moeda | [[Sistema Econômico/Descrição\|Econômico]] e [[Arquitetura/Descrição\|Arquitetura]]: 1 casa decimal, décimos inteiros por dentro |
+| V2-2 Rotina | [[Sistema de IA/Descrição\|IA]]: horas por classe e turnos de 8 h |
+| V2-3 Salários e soldo | [[Sistema de Trabalho e Propriedade/Descrição\|Trabalho]]: 0,75 / 1,0 / 1,5 / 2,5 por hora; soldo 8 por dia |
+| V2-4 Preço base | Econômico: fórmula, multiplicadores de Rank e tabela de preços de partida |
+| V2-5 Mercados | Econômico: ajuste da facção ±20%; fator do Mercado Local de 0,5 a 2,0; 10% por dia |
+| V2-6 Consumo | [[Sistema de Classe Social/Descrição\|Classe Social]]: cesta mínima, regra do gasto (80%), composição por classe |
+| V2-7 Bancos e imposto | Econômico, Trabalho e Facção: estabilizador, imposto 10/20/30%, cunhagem, 30% de empresas dos Ricos |
+| V2-8 Construções | [[Sistema de Construção/Descrição\|Construção]] (3 portes) e [[Sistema de População/Descrição\|População]] (moradias) |
+| V2-9 Recursos | [[Sistema de Recursos/Descrição\|Recursos]]: × 1,0 e × 1,5; limite por recurso; conta de comida |
+| V2-10 IA simples | IA: 6 ações e notas |
+| V2-11 Tick | [[Sistema de Tempo/Descrição\|Tempo]] e Arquitetura: 20 Hz; metas de 500 e 5.000 NPCs |
+| V2-12 Fatia vertical | Arquitetura: vila de 15 NPCs e o teste que diz se o ciclo do dinheiro fecha |

@@ -18,6 +18,18 @@ As ações de um NPC Não-Controlado seguem a **rotina**: um ciclo diário de 24
 
 Conforme a Função, a rotina deixa de depender dos períodos do dia e se torna **contínua**, como a dos guardas, que trabalham 24 horas fazendo rondas.
 
+**Horas da rotina** (rodada V2-2):
+
+| Classe | Dormir | Trabalhar | Período Livre |
+|---|---|---|---|
+| Escravo | 22h às 5h (7 h) | 5h às 17h (12 h) | 17h às 22h (5 h) |
+| Civil | 22h às 6h (8 h) | 7h às 15h (8 h) | 6h às 7h e 15h às 22h (8 h) |
+| Rico | 23h às 7h (8 h) | 9h às 15h (6 h, gerência) | 10 h |
+| Nobreza e Realeza | 0h às 8h (8 h) | 10h às 14h (4 h, política e corte) | 12 h |
+| Guardas e Funções contínuas | Turnos de 8 h (6h às 14h, 14h às 22h, 22h às 6h); cada guarda faz 1 turno | | |
+
+Um turno de 8 h dura 5 min e 20 s reais a 1x. A madrugada, com só o turno da noite acordado, é a hora do crime.
+
 ### IA de combate local
 
 - **Início:** a agressividade da IA no Mapa Local depende de **gatilhos e ações do jogador**: atacar um NPC, roubar, insultar, entre outros. Esses gatilhos iniciam uma ação hostil do NPC afetado.
@@ -33,6 +45,17 @@ O sistema de decisão é **híbrido**, ligado ao LOD do Mapa Local:
 - **LOD 1 e 2:** **Regras Fixas**, mais baratas de processar.
 
 Isso se liga à agregação por cidade dos Não-Controlados: o LOD 2 é exatamente o caso em que essa agregação se aplica.
+
+**Utilidade simples** (rodada V2-10, a da fatia vertical):
+
+- **Ações:** Dormir, Trabalhar, Comer, Comprar, Lazer (Taverna) e Fugir.
+- **Nota:** 1,0 se a ação é a do período da rotina (0 se não), mais os bônus:
+  - **Comer:** +1,5 nas refeições (7h, 12h e 19h, por 30 min);
+  - **Comprar:** +1,2 uma vez a cada 2 dias, no Período Livre. A compra de verdade é a da cidade; a visita mostra isso na tela;
+  - **Lazer:** +0,5 × (1 − Felicidade ÷ 100);
+  - **Fugir:** +3,0 com combate a menos de 10 tiles, o que passa por cima de tudo.
+- O NPC faz a ação de maior nota e reavalia a cada **5 minutos de jogo** (cerca de 3 s reais) ou quando algo muda.
+- **LOD 1:** a ação do período, sem as notas (Regras Fixas).
 
 ### Necessidades dos Controlados
 
@@ -76,6 +99,6 @@ Para a IA geral, as necessidades são usadas de forma **agregada, por cidade**, 
 
 ## Perguntas em aberto
 
-1. **Horas da rotina** por classe (quando cada uma dorme, trabalha e tem Período Livre): rodada V2 da [[Revisão Completa]].
+1. **Valores a testar:** horas da rotina e notas da Utilidade (rodada V2).
 2. **Utilidade:** a lista de ações e como os pesos se combinam (rodada V2, versão simples para a fatia vertical).
 3. **Medo agregado** da cidade em LOD 2 (pendência da Felicidade).

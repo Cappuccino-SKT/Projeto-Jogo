@@ -76,7 +76,7 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 - **Ajustes de preço por categoria** — alimenta o Mercado da Facção.
 - **Escravidão** (permitida / proibida) — define se o atributo Escravo e a classe Escravo existem nas cidades da facção. A abolição liberta todos os Escravos em 1 estação (ver [[Sistema de Escravidão/Descrição|Sistema de Escravidão]]).
 - **Livro Sagrado obrigatório** (sim / não) — exige que o grupo do jogador carregue um Livro Sagrado nas revistas; sem ele, é heresia. Desejada pela Religiosa (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
-- **Imposto** (% da receita das cidades: salários e lucros) — a cidade retém uma parte para obras e o resto enche o Banco da Facção; Escravos não pagam (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
+- **Imposto** (% da receita das cidades: salários e lucros) — a cidade retém uma parte para obras e o resto enche o Banco da Facção; Escravos não pagam. Níveis (rodada V2-7): Baixo 10%, Normal 20% e Alto 30% (Felicidade 0, −5 e −10); a cidade fica com 30% (ver [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
 - **Conscrição** (% da população que pode ser alistada e quem é elegível) — define o teto de conscritos disponíveis em cada cidade.
 - **Magia** (livre / restrita / proibida) — define como tratar NPCs Magos. Inclui a opção "privilégio dos magos", para a cultura Arcana: a magia e o poder ficam com os NPCs que têm o atributo Mago.
 - **Crimes e penas** — define quais crimes valem, as punições (que variam por classe social) e a Recompensa. Ver Sistema de Crime e Justiça.

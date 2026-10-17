@@ -99,7 +99,15 @@ Na Religiosa, o Templo reduz a mortalidade por doença em 25% (ver [[Sistema de 
 | Nobreza | Mansão |
 | Realeza | Palácio |
 
-- Cada moradia abriga um número de **NPCs reais** por tipo. **[Refinar depois]** valores; exemplo: 2 NPCs reais na Casa e 1 a 2 na Mansão. Os tipos e os níveis (1 a 5) vêm do canvas de construções civis.
+- Cada moradia abriga um número de **NPCs reais** por tipo e nível (rodada V2-8):
+
+| Moradia | Nível 1 | Por nível a mais |
+|---|---|---|
+| Senzala | 8 | +4 |
+| Casa | 4 | +2 |
+| Casarão | 2 | +1 |
+| Mansão | 2 | +1 |
+| Palácio | 3 | +1 |
 - A moradia é um **Mapa Interno do tipo Moradia** (ver [[Sistema de Mapa/Descrição|Sistema de Mapa]]).
 - O NPC **sem casa** dorme ao relento: a Felicidade cai e a chance de doença sobe.
 
