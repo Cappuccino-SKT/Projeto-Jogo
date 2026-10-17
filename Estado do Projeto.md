@@ -39,7 +39,7 @@
 
 ## Próximos passos
 
-1. **Marco 0:** o ambiente e um "olá, janela" com o SDL3.
+1. **Marco 0:** o ambiente e um "olá, janela" com o SDL3. Pronto e confirmado pelo autor.
 2. **Marcos 1 a 9** da fatia vertical, um por pull request.
 3. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 

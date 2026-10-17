@@ -6,8 +6,9 @@
 - **Rodada FT2 (2026-10-17):** o autor **liberou o código, marco a marco**.
 - **Pastas reorganizadas (2026-10-17):** `Documentos/`, `Ficha Logica/`, `Codigo/` e `Jogo/` (seção 3).
 - **Fichas do marco 1 (2026-10-17):** [[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]] (tiles e camadas) escritas, com a **rodada FL1 aplicada**. O marco 0 não tem ficha.
-- **Próximo passo:** fechar o marco 0 (seção 3) e começar o marco 1.
-- **Ao retomar:** rodar `git fetch` e conferir se o pull request mais recente foi mesclado no `main`. O último é o da branch `docs/fichas-marco-1`.
+- **Marco 0 (2026-10-17):** na branch `codigo/marco-0-ambiente` (feita em cima da `docs/fichas-marco-1`). No primeiro teste do autor, a janela de 1600 × 900 não cabia na tela dele (1600 × 900, com 1600 × 860 livres) e o X ficou escondido; corrigido e **confirmado pelo autor** (seção 3).
+- **Próximo passo:** o marco 1, na branch `codigo/marco-1-relogio-e-mapa` (feita em cima da `codigo/marco-0-ambiente`).
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`, nesta ordem: `docs/fichas-marco-1` e depois `codigo/marco-0-ambiente`.
 
 ## 2. Como trabalhamos
 
@@ -37,7 +38,7 @@
   - um por sistema (`Sistema de X/Descrição.md`), com legenda, descrição, seções, Parte técnica, Ligação com outros sistemas e Perguntas em aberto;
   - sem seção de "atualizações recentes": o histórico fica no Git.
 - **Preferências do autor:**
-  - interface personalizável (ele joga em 1600 × 900);
+  - interface personalizável (ele joga em 1600 × 900, que é o tamanho do monitor dele: só 1600 × 860 ficam livres acima da barra de tarefas);
   - fontes legíveis;
   - arte toda à mão;
   - só teclado e mouse;
@@ -73,11 +74,7 @@
 | Depois da fatia | miniaudio |
 
 - **Ambiente (FT1-7):** g++ 15.2 (MinGW), CMake, Ninja e Git, já instalados; VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; tudo neste repositório.
-- **Marco 0, o próximo:**
-  1. o autor instala as duas extensões do VS Code;
-  2. o assistente cria o `CMakeLists.txt` da raiz e o `Jogo/main.cpp`, que abre uma janela vazia com o SDL3 (o marco 0 não tem regra, então a `Codigo/` ainda fica vazia);
-  3. compilar e rodar;
-  4. escrever o LEIA-ME do marco.
+- **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 
 ## 4. Rodada pendente
 
@@ -102,7 +99,8 @@ Nenhuma. A **FL1** (fichas do marco 1) foi aplicada em 2026-10-17, com "seguir s
 - **Edição em lote:**
   - um script Python troca trechos exatos e confere que cada trecho existe uma vez só;
   - rodar antes no modo de teste (`--dry`);
-  - preservar as quebras de linha (CRLF ou LF) e o BOM de cada arquivo.
+  - preservar as quebras de linha (CRLF ou LF) e o BOM de cada arquivo. Vários documentos estão em CRLF: num trecho de várias linhas, trocar o `
+` pela quebra do arquivo antes de procurar.
 - **Links:** nenhum link interno do Obsidian pode ficar quebrado. Nas tabelas, o separador do texto do link é escapado (`\|`).
 - **Console do Windows:** os acentos aparecem corrompidos só na tela; os arquivos estão em UTF-8.
 - **Git:**
