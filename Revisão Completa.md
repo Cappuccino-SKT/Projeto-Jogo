@@ -85,7 +85,7 @@ O que existe só como ideia, sem regras ou números suficientes para virar códi
 | Código | O que falta | Onde | Trava a fatia vertical? | Rodada |
 |---|---|---|---|---|
 | A-1 | **Moeda e preços base**: quanto vale cada item (por Tier e Rank) | Econômico, Itens | **Sim** | V2 |
-| A-2 | **Receitas**: insumos, quantidades e tempo de cada produto (a fatia vertical precisa ao menos de Grão → Pão) | Produção | **Sim** | V2 |
+| A-2 | **Receitas**: insumos, quantidades e tempo de cada produto (a fatia vertical precisa ao menos de Grão → Pão) | Produção | **Sim** | **Resolvida na IP3** ([[Sistema de Produção/Receitas\|Receitas]]) |
 | A-3 | **Consumo por classe**: quanto cada NPC real consome por dia (Comida, Materiais, Luxo...) | Classe Social | **Sim** | V2 |
 | A-4 | **Construções**: custo, tempo de obra, manutenção por estação e níveis | Construção | **Sim** (Fazenda, Cozinheiro, Mercado, Casa) | V2 |
 | A-5 | **Recursos**: produtividade base por recurso e qual item cada um gera | Recursos | **Sim** (Grão, Água) | V2 |
@@ -105,9 +105,9 @@ Resumo das "Perguntas em aberto" e das marcações **[Em aberto]**. Os itens **"
 
 | Sistema | Pendências que pedem decisão (não só teste) |
 |---|---|
-| Produção / Funções | Engenheiro e Operário sem construção; nomes e categorias das Funções; vagas por nível (rodada IP3-11) |
-| Construção | Lista de níveis e custos das construções novas |
-| Itens | Resolvidas na IP2 (lista final); faltam os insumos (IP3) |
+| Produção / Funções | Resolvidas na IP3-11 (Operário e Engenheiro no Construtor; categoria pela receita; vagas pela tabela geral); falta a Destilaria no nível 2 (V3) |
+| Construção | Custos, níveis e moradias (rodada V2-8) |
+| Itens | Resolvidas na IP2 (lista final) e na IP3 (receitas) |
 | Classe Social | Quanto da Comida pode ser Bebida (V2); o mapeamento por Tier foi decidido na IP2-11 |
 | Crime | Loja ilegal do jogador; tipos de missão de confiança; valor mínimo da recompensa para Caçadores |
 | Cura | Quando o Inconsciente vira Morto (há proposta) |
@@ -161,8 +161,8 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 | **V1** | Inconsistências e faxina dos documentos | Seção 3 e o formato dos 13 documentos antigos | **Respondida e aplicada** (ver seção 8) |
 | **IP1** | Padronização da produção | Estrutura da receita, família de cada construção, escada de níveis, Rank do produto, escala das unidades, tempo, ordens de produção, limites | **Respondida e aplicada** (ver seção 9) |
 | **IP2** | Nomes e lista final dos itens | Regra dos nomes, matérias-primas, família da mana, intermediários, escada de materiais, armas, armaduras (peça Média), roupas, comida, outros bens, Luxo × Exclusivo (I-9, I-10, I-11, I-13) | **Respondida e aplicada** (ver seção 10) |
-| **IP3** | Insumos de cada produto | Regras de quantidade e receitas de cada construção (A-2); Funções (Engenheiro, Operário, categorias); nova Funções e Construções | **Enviada** |
-| **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | A fazer |
+| **IP3** | Insumos de cada produto | Regras de quantidade e receitas de cada construção (A-2); Funções (Engenheiro, Operário, categorias); nova Funções e Construções | **Respondida e aplicada** (ver seção 11) |
+| **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | **Enviada** |
 | **V3** | Pendências de regra e listas de conteúdo | Seção 5 e A-10 a A-12 | A fazer |
 | **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos ("confirmar todas, exceto...") | A fazer |
 | **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos | A fazer |
@@ -221,3 +221,18 @@ Depois da V5: atualizar o [[Estado do Projeto]], marcar esta revisão como concl
 | IP2-11 Consumo por Tier | Seguir sugestão | Tabela nova na [[Sistema de Classe Social/Descrição\|Classe Social]]; resolve a I-13 |
 
 **Documentos atualizados:** Itens (reescrito), Recursos Existentes, Funções e Construções (família e nomes; receitas na IP3), Produção, Classe Social, Efeitos de Itens, Cura, Magia, Mundo, Objetivo, Clima, Construção, Batalha, Combate e Glossário.
+
+## 11. Resultado da IP3 (2026-10-17)
+
+Todas as 11 perguntas: **Seguir sugestão**. As receitas viraram o documento [[Sistema de Produção/Receitas\|Receitas]], e a [[Sistema de Produção/Funções e Construções\|Funções e Construções]] foi refeita nível por nível.
+
+| Pergunta | O que foi feito |
+|---|---|
+| IP3-1 Regras de quantidade | Lote pelo Tier (4, 2, 1, 1); horas pelo degrau (8, 12, 24); 3 insumos = 3 tipos; nível mínimo pelo Tier ou pelo degrau; munição em lote; exceção da Forja Arcana |
+| IP3-2 Construções do mapa | Braçais sem insumo; Adubo opcional (+25%); Pasto e Rancho com "exige no estoque"; Açougue com uma receita por animal (única exceção) |
+| IP3-3 a IP3-8 Oficinas | Receitas da Metalurgia, Forja Arcana, Pedreira, Carpinteiro, Ferreiro (moldes), Armeiro, Costureiro e Artesão |
+| IP3-9 Cozinheiro e Destilaria | Receitas; **a era trava só os materiais de equipamento e os itens com Rank**: os bens de luxo existem desde a Era 1 (Tecnologia, Produção e Itens atualizados) |
+| IP3-10 Misturador e Boticário | Receitas; Pólvora de Carvão e Dejetos Animais |
+| IP3-11 Funções | Operário e Engenheiro no Construtor (fecha a pergunta da Inteligência na Construção); categoria pela receita; nomes confirmados; vagas pela tabela geral |
+
+**Conferência:** a cadeia mais longa tem 4 passos (Aço Mágico); nenhum item órfão. **Achado novo:** a Destilaria não tem produto no nível 1 (a Cerveja é de Tier 2); a proposta é construí-la já no nível 2, a confirmar na V3.

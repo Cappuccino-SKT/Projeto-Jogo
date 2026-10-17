@@ -50,7 +50,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]] — emprego, salários, impostos, donos de construções
 - [[Sistema de Itens/Descrição|Sistema de Itens]] e [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]] — livros, joias, artefatos, medicamentos, comida e narcóticos
 - [[Sistema de Inventário/Descrição|Sistema de Inventário]]
-- [[Sistema de Produção/Descrição|Sistema de Produção]] e [[Sistema de Produção/Funções e Construções|Funções e Construções]]
+- [[Sistema de Produção/Descrição|Sistema de Produção]], [[Sistema de Produção/Funções e Construções|Funções e Construções]] e [[Sistema de Produção/Receitas|Receitas]]
 - [[Sistema de Construção/Descrição|Sistema de Construção]]
 - [[Sistema de Comércio/Descrição|Sistema de Comércio]] — caravanas civis, rotas, tarifas
 - [[Sistema de Tecnologia/Descrição|Sistema de Tecnologia e Pesquisa]] — tecnologia mundial e de facção

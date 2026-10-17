@@ -57,7 +57,7 @@ A tecnologia de facção pertence à **Facção**: todas as cidades dela usam o 
 | **Economia** | Mercado, Casa da Moeda, cunhagem, caravanas |
 | **Administração** | Leis novas, Prisão, Templo, controle de Criminalidade |
 
-**Eras e Tier:** as eras acompanham os Tiers de material. A era 1 libera Tier 1, a era 2 libera Tier 2 e assim por diante; o Tier 0 está disponível desde o início. O Rank máximo de armas e equipamentos sobe junto (ver [[Sistema de Itens/Descrição|Sistema de Itens]]): **Era 1, Rank até 3; Era 2, até 4 (Aço); Era 3, até 4; Era 4, até 5 (Aço Mágico)** (rodada IP1-3). A era é uma das duas travas da produção; a outra é o nível da construção (ver [[Sistema de Produção/Descrição|Produção]]).
+**Eras e Tier:** as eras acompanham os **materiais de equipamento**: a Era 2 libera o Aço, o degrau 4 (Composto, Cravejado) e a Pólvora; a Era 3, o Mosquete, a Carabina e o Canhão de Aço; a Era 4, o Aço Mágico e o degrau Arcano. Os **bens de consumo** de qualquer Tier existem desde a Era 1, travados só pelo nível da construção (rodada IP3-9). O Rank máximo de armas e equipamentos sobe junto (ver [[Sistema de Itens/Descrição|Sistema de Itens]]): **Era 1, Rank até 3; Era 2, até 4 (Aço); Era 3, até 4; Era 4, até 5 (Aço Mágico)** (rodada IP1-3). A era é uma das duas travas da produção; a outra é o nível da construção (ver [[Sistema de Produção/Descrição|Produção]]).
 
 ### Quem escolhe o que pesquisar
 

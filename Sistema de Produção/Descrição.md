@@ -1,6 +1,6 @@
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> **Regras padronizadas na rodada IP1 (2026-10-17).** Os nomes dos itens foram fechados na rodada IP2; os insumos de cada produto vêm na IP3. Os valores numéricos são iniciais, a testar.
+> **Regras padronizadas na rodada IP1 (2026-10-17).** Os nomes dos itens foram fechados na rodada IP2, e as receitas de todos os produtos na IP3 (ver [[Sistema de Produção/Receitas|Receitas]]). Os valores numéricos são iniciais, a testar.
 
 ## Sistema de Produção
 
@@ -32,7 +32,7 @@ A produção é baseada em **construções**, desenvolvidas junto com o [[Sistem
 
 ## Receita padrão
 
-**Uma receita fixa por produto**, sempre com os mesmos campos. Receitas alternativas para o mesmo produto (Pão de Grão ou de Legumes) só entram depois, como exceção, se a rodada IP3 pedir.
+**Uma receita fixa por produto**, sempre com os mesmos campos. Receitas alternativas para o mesmo produto (Pão de Grão ou de Legumes) só entram depois, como exceção. A única exceção, decidida na IP3-2, é o **Açougue**: uma receita por animal.
 
 | Campo | O que é | Exemplo (Pão) |
 |---|---|---|
@@ -44,6 +44,8 @@ A produção é baseada em **construções**, desenvolvidas junto com o [[Sistem
 | Habilidade mínima | Abaixo dela, o NPC não consegue fazer | 10 |
 | Horas de trabalho | Quanto trabalho um ciclo leva | 4 horas |
 | Era | Tecnologia mínima | Era 1 |
+| Exige no estoque (opcional) | Itens que precisam existir e não são gastos (IP3-2) | — (no Pasto e no Rancho: os animais) |
+| Insumo opcional (opcional) | Gasto só se houver, com um bônus (IP3-2) | — (na Fazenda: Adubo, +25%) |
 
 - **Ciclo:** os insumos saem do inventário da cidade quando o ciclo começa, e o produto entra quando ele termina. Sem insumos, o ciclo não começa.
 - **[Proposta]** Um ciclo interrompido (fim do turno, falta de trabalhador) guarda o progresso em horas e continua depois; os insumos já gastos não voltam.
@@ -89,10 +91,10 @@ Uma **escada padrão** para todas as construções de transformação (Manufatur
 | 4 | 3 | 4 | Era 3 |
 | 5 | 4 | 5 | Era 4 |
 
-- **Duas travas ao mesmo tempo:** o **nível** da construção libera a receita na construção, e a **era** da tecnologia libera o Tier e o Rank no mundo. O material também limita o Rank (ver abaixo).
-- **Rank por era:** Era 1, Rank até 3; Era 2, até 4 (Aço); Era 3, até 4; Era 4, até 5 (Aço Mágico). O Tier 0 existe desde o início; a Era N libera o Tier N ([[Sistema de Tecnologia/Descrição|Tecnologia]]).
+- **Duas travas ao mesmo tempo:** o **nível** da construção libera a receita na construção, e a **era** da tecnologia libera o Tier e o Rank no mundo. O material também limita o Rank (ver abaixo). Pela IP3-9, a era trava só os **materiais de equipamento e os itens com Rank**; os bens de consumo de qualquer Tier existem desde a Era 1, travados só pelo nível.
+- **Rank por era:** Era 1, Rank até 3; Era 2, até 4 (Aço); Era 3, até 4; Era 4, até 5 (Aço Mágico). A Era 2 libera o Aço, o degrau 4 e a Pólvora; a Era 4, o Aço Mágico e o degrau Arcano ([[Sistema de Tecnologia/Descrição|Tecnologia]]).
 - As construções **Braçais** (Fazenda, Pasto, Rancho, Pesqueiro, Posto de Coleta) não seguem a escada: liberam tudo no nível 1, e o nível só aumenta a eficiência.
-- **Capitais na Era 1:** as construções de nível 4 e 5 das capitais (pacotes do [[Mundo e Estado Inicial/Descrição|Mundo]]) continuam dando **eficiência e mais vagas**, mas as receitas de Tier e Rank maiores só liberam com a era.
+- **Capitais na Era 1:** as construções de nível 4 e 5 das capitais (pacotes do [[Mundo e Estado Inicial/Descrição|Mundo]]) continuam dando **eficiência e mais vagas**, mas as receitas de equipamento de Rank maior só liberam com a era; os bens de luxo já saem (IP3-9).
 - *Exemplo:* um Ferreiro nível 3, na Era 2, faz Espada de Aço até Rank 3; com nível 4 e Era 3, até Rank 4; a Espada de Aço Mágico só no nível 5, na Era 4.
 
 ## De onde sai o Rank do item produzido
@@ -119,7 +121,7 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 
 ## Tempo e quantidade por ciclo
 
-**Horas de trabalho por unidade**, por Tier, como guia para as receitas da rodada IP3:
+**Horas de trabalho por unidade**, por Tier, usadas nas [[Sistema de Produção/Receitas|Receitas]] (IP3):
 
 | Produto | Horas por unidade |
 |---|---|
@@ -154,7 +156,7 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 
 ## Limites de complexidade
 
-- No máximo **3 insumos** e **3 saídas** (produto e subprodutos) por receita.
+- No máximo **3 insumos** e **3 saídas** (produto e subprodutos) por receita. Contam os **tipos** de item, em qualquer quantidade (IP3-1).
 - Cadeia de no máximo **4 passos** do mapa ao produto final (por exemplo, Minério de Ferro → Barra de Ferro → Espada).
 - **Nenhum item órfão:** todo item intermediário precisa ser usado por pelo menos uma receita ou consumido por alguma classe. O `jogo --validar` avisa os órfãos.
 - **Sem ferramentas** como insumo na primeira versão; o desgaste das construções já é a manutenção.
@@ -182,6 +184,7 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 
 | Sistema | O que a Produção fornece ou recebe |
 |---|---|
+| Receitas | Todas as receitas, construção por construção |
 | Recursos | Recursos de cada Mapa Local e produtividade por estação |
 | Construção | Construções, níveis (escada padrão) e capacidade de armazenamento |
 | Itens | Produtos e insumos; Tier e Rank; teto de Rank pelo material |
@@ -198,6 +201,6 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 ## Perguntas em aberto
 
 1. **Nomes e lista final dos itens:** fechados na rodada IP2 (ver [[Sistema de Itens/Descrição|Itens]]).
-2. **Insumos de cada produto** e a nova tabela de Funções e Construções: rodada IP3.
+2. **Insumos de cada produto:** decididos na rodada IP3 ([[Sistema de Produção/Receitas|Receitas]]).
 3. **Números:** produtividade base dos recursos, horas do turno e preço base (≈ custo dos insumos + horas de trabalho × salário): rodada V2.
 4. **Valores a testar:** horas por unidade, chances de sorte no Rank, bônus de +10% por nível, limiar de 3 dias de comida.

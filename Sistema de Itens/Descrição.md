@@ -1,6 +1,6 @@
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> **Lista final dos itens:** decidida na rodada IP2 (2026-10-17). A forma de produzir foi padronizada na IP1 (ver [[Sistema de Produção/Descrição|Produção]]); os insumos de cada produto vêm na IP3, e os preços na V2.
+> **Lista final dos itens:** decidida na rodada IP2 (2026-10-17). A forma de produzir foi padronizada na IP1 (ver [[Sistema de Produção/Descrição|Produção]]); os insumos de cada produto estão nas [[Sistema de Produção/Receitas|Receitas]] (IP3), e os preços vêm na V2.
 
 ## Sistema de Itens
 
@@ -91,7 +91,7 @@ Cada família de material tem três degraus. O degrau 4 vem de um reforço que e
 
 - Cada item é feito na construção da sua família: o Carpinteiro faz o Arco Composto e o Arcano; o Costureiro faz o Cravejado e o Arcano de couro.
 - As **bestas** continuam de metal (a besta de aço existia); o Carpinteiro as monta com Barra de Aço como insumo.
-- Os insumos exatos saem na rodada IP3.
+- Os insumos estão nas [[Sistema de Produção/Receitas|Receitas]].
 
 ### Armadura
 
@@ -107,7 +107,7 @@ Pela ordem histórica (rodada IP2-7, que mudou um ponto da IP1-2):
 
 Existe **um único item de mana**, a **Pedra de Mana**: o recurso bruto, tirado do mapa pelo Posto de Coleta e usado direto no kit dos Magos, sem etapa de refino. O nome "Pedra Mágica" saiu do jogo.
 
-**[Proposta]** O que sai dela (a IP3 confirma os insumos):
+O que sai dela (confirmado na IP3; ver [[Sistema de Produção/Receitas|Receitas]]):
 
 | Uso | Onde | Como |
 |---|---|---|
@@ -309,7 +309,7 @@ Cerca de **180 itens**: 29 matérias-primas brutas (com os 5 animais), 14 manufa
 
 ## Perguntas em aberto
 
-1. **Insumos de cada produto:** rodada IP3 (ver a [[Revisão Completa]]).
+1. **Insumos de cada produto:** decididos na IP3 ([[Sistema de Produção/Receitas|Receitas]]).
 2. **Preço base** de cada item e quantidades de consumo (rodada V2).
 3. **Grimório e livros:** quem produz (hoje só se compram ou se acham; ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
 4. **Nomes de fantasia:** para o futuro, quando a história existir (ideia do autor).
