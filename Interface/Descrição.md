@@ -115,7 +115,7 @@ Todos esses elementos são ajustáveis (ver acima).
 - **Botão esquerdo** seleciona e **botão direito** dá ordem (padrão de RTS).
 - **Câmera:** WASD, bordas da tela ou arrastar com o botão do meio.
 - **Atalhos remapeáveis.**
-- **Zoom** em **níveis inteiros** (1x a 4x) para a pixel-art continuar nítida; a roda do mouse troca de nível.
+- **Zoom** em **níveis inteiros** (2x, 3x e 4x; padrão 3x em 1600 × 900, cerca de 33 × 19 tiles na tela) para a pixel-art continuar nítida; a roda do mouse troca de nível. A câmera anda com WASD ou com as setas, ou arrastando com o botão do meio (rodada FT1-4).
 
 ---
 

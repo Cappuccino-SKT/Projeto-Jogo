@@ -166,7 +166,7 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 | **V3** | Pendências de regra | Seção 5, A-10 e A-11; quando fazer as listas da A-12 | **Respondida e aplicada** (ver seção 13) |
 | **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos, mais os Moldes de Conteúdo ("confirmar todas, exceto...") | **Respondida e aplicada** (ver seção 14) |
 | **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos (58 propostas) e o formato da ficha técnica | **Respondida e aplicada** (ver seção 15) |
-| Ficha técnica | Ficha técnica lógica da fatia vertical | Estruturas, dados e regras da vila de 15 NPCs (V2-12) | **Em andamento:** primeira versão em [[Ficha Técnica/Fatia Vertical\|Ficha Técnica: Fatia Vertical]]; rodada FT1 enviada |
+| Ficha técnica | Ficha técnica lógica da fatia vertical | Estruturas, dados e regras da vila de 15 NPCs (V2-12) | **Pronta para o código** (FT1 aplicada): [[Ficha Técnica/Fatia Vertical\|Ficha Técnica: Fatia Vertical]]; a rodada FT2 decide o início |
 | **C1 a C3** | Rodadas de conteúdo (ideia do autor na V3-13: primeiro os moldes) | C1 tecnologias e marcos; C2 feitiços; C3 contratos, missões, Ambições e eventos | Mais para frente |
 
 Depois da V5: atualizar o [[Estado do Projeto]], marcar esta revisão como concluída e começar a **ficha técnica lógica da fatia vertical**.
