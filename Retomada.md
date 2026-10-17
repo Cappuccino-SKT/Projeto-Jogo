@@ -4,6 +4,7 @@
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
 2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). Em 2026-10-17 foi aplicada a **V1** (faxina dos 13 documentos antigos, correções, animais como itens, volta da pesca, inventário único, Fome dos Controlados, vagas do Templo), na branch `docs/v1-faxina`. O autor pediu rodadas próprias de Itens e Produção, e a **rodada IP1 (Padronização da produção) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se o pull request da `docs/v1-faxina` foi mesclado no `main`.**
+**Pausa em 2026-10-17:** a sessão foi compactada logo depois de enviar a IP1. Tudo está no GitHub na branch `docs/v1-faxina` (pull request para o autor aceitar). O `Respostas.txt` da Área de Trabalho já tem o modelo da IP1 com os 9 códigos; o autor ainda não respondeu.
 3. **Próximo passo:** pedir o `Respostas.txt` da IP1 (conferir se é desta rodada), aplicar as regras em Produção, Itens, Construção e Tecnologia e abrir a **IP2** (nomes e lista final dos itens).
 4. Depois: IP3 (insumos de cada produto), V2 (economia numérica), V3 (pendências), V4 e V5 (propostas), como no plano da [[Revisão Completa]].
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
