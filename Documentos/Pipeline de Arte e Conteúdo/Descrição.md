@@ -37,19 +37,21 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 
 ### Mapas no Tiled
 
-O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no mapa. Cada Mapa Local segue o mesmo padrão, porque o jogo lê as camadas pelo nome.
+O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no mapa. Cada Mapa Local segue o mesmo padrão, porque o jogo lê as camadas pelo nome. Entre parênteses, o **nome exato no Tiled**, sem acento e em minúsculas (rodada FL1-5).
 
 **Camadas de tiles:**
 
-1. **Chão:** grama, terra, água.
-2. **Detalhes do chão:** flores, caminhos.
-3. **Objetos baixos:** pedras, cercas, lavouras.
-4. **Construções e paredes.**
-5. **Acima do personagem:** copas de árvore, telhados.
-6. **Colisão:** invisível no jogo; marca onde não se anda.
-7. **Elevação** (opcional): pintada só nas colinas; usada no Mapa de Guerra (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]). Um mapa sem ela é plano.
+1. **Chão** (`chao`): grama, terra, água.
+2. **Detalhes do chão** (`detalhes_do_chao`): flores, caminhos.
+3. **Objetos baixos** (`objetos_baixos`): pedras, cercas, lavouras.
+4. **Construções e paredes** (`construcoes_e_paredes`): só o que nunca muda, como um muro. As construções da cidade **não são pintadas no Tiled**: o jogo as desenha nos lotes, porque elas mudam durante a partida.
+5. **Acima do personagem** (`acima_do_personagem`): copas de árvore, telhados.
+6. **Colisão** (`colisao`): invisível no jogo; marca onde não se anda.
+7. **Elevação** (`elevacao`, opcional): pintada só nas colinas; usada no Mapa de Guerra (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]). Um mapa sem ela é plano.
 
-**Camadas de objetos:** Lotes (pequeno, médio e grande, com o tipo permitido); Portas (ligam ao Mapa Interno); Bordas (saída para o mapa vizinho); Recursos (áreas de floresta, mina, pesca; a pesca voltou na revisão V1-4); Criaturas e bandidos (pontos de aparição); Pontos de interesse (quadro de contratos, entrada de masmorra, praça central para a batalha de cerco).
+**Configuração do Tiled (FL1-1 e FL1-5):** o mapa é salvo direto em JSON (`.tmj`) em `Jogo/data/mapas/`; camadas no formato CSV; conjunto de tiles embutido no mapa, sem margem; nenhum tile espelhado; um lote não pode ter tile de colisão. O jogo lista todos os erros do mapa de uma vez ([[Ficha Logica/Mapa|ficha do Mapa]]).
+
+**Camadas de objetos:** Lotes (`lotes`: pequeno, médio e grande, com a propriedade `tipo_permitido`, que na fatia é sempre `qualquer`); Portas (ligam ao Mapa Interno); Bordas (saída para o mapa vizinho); Recursos (áreas de floresta, mina, pesca; a pesca voltou na revisão V1-4); Criaturas e bandidos (pontos de aparição); Pontos de interesse (quadro de contratos, entrada de masmorra, praça central para a batalha de cerco).
 
 **Ajudas do editor:** **terrenos** (pinta-se "grama" e o Tiled escolhe sozinho o tile de borda certo) e **carimbos** (pedaços prontos, como "bosque pequeno", colados várias vezes). São só ajudas de desenho: o mapa salvo é fixo e feito à mão, não é gerado pelo jogo.
 
@@ -194,7 +196,7 @@ data/
 
 ### Perguntas em aberto
 
-1. **Artista definitivo:** ainda não escolhido; decidir no início do código, junto com os pacotes provisórios e a ferramenta de atlas (rodada V3-13).
+1. **Artista definitivo:** ainda não escolhido; decidir no início do código, junto com os pacotes provisórios e a ferramenta de atlas (rodada V3-13). O marco 1 usa um conjunto de tiles de teste, de quadrados de cor lisa, feito pelo assistente; depois, o autor escolhe um pacote CC0 e redesenha o mapa (rodada FL1-6).
 2. **Pacotes provisórios:** quais usar na fatia vertical (escolher na hora, conferindo a licença).
 3. **Ferramenta de atlas:** de terceiros ou própria, no início do código.
 4. **Teto de memória da arte:** 256 MB proposto; o PC alvo mínimo tem placa de vídeo de 2 GB (rodada V3-12).

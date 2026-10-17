@@ -5,9 +5,9 @@
 - **Design completo:** todos os sistemas estão escritos, a revisão completa terminou, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta.
 - **Rodada FT2 (2026-10-17):** o autor **liberou o código, marco a marco**.
 - **Pastas reorganizadas (2026-10-17):** `Documentos/`, `Ficha Logica/`, `Codigo/` e `Jogo/` (seção 3).
-- **Fichas do marco 1 (2026-10-17):** [[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]] (tiles e camadas) escritas. O marco 0 não tem ficha. A **rodada FL1** foi enviada (seção 4).
-- **Marco 0 (2026-10-17):** escrito na branch `codigo/marco-0-ambiente` (feita em cima da `docs/fichas-marco-1`). Compila e abre a janela; falta o autor rodar e confirmar o que vê (seção 3).
-- **Próximo passo:** o autor roda o marco 0 e responde a FL1; depois, o marco 1.
+- **Fichas do marco 1 (2026-10-17):** [[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]] (tiles e camadas) escritas, com a **rodada FL1 aplicada**. O marco 0 não tem ficha.
+- **Marco 0 (2026-10-17):** na branch `codigo/marco-0-ambiente` (feita em cima da `docs/fichas-marco-1`). No primeiro teste do autor, a janela de 1600 × 900 não cabia na tela dele (1600 × 900, com 1600 × 860 livres) e o X ficou escondido; corrigido (seção 3). Falta o autor confirmar a correção.
+- **Próximo passo:** o autor confirma o marco 0; depois, o marco 1.
 - **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`, nesta ordem: `docs/fichas-marco-1` e depois `codigo/marco-0-ambiente`.
 
 ## 2. Como trabalhamos
@@ -38,7 +38,7 @@
   - um por sistema (`Sistema de X/Descrição.md`), com legenda, descrição, seções, Parte técnica, Ligação com outros sistemas e Perguntas em aberto;
   - sem seção de "atualizações recentes": o histórico fica no Git.
 - **Preferências do autor:**
-  - interface personalizável (ele joga em 1600 × 900);
+  - interface personalizável (ele joga em 1600 × 900, que é o tamanho do monitor dele: só 1600 × 860 ficam livres acima da barra de tarefas);
   - fontes legíveis;
   - arte toda à mão;
   - só teclado e mouse;
@@ -67,99 +67,18 @@
 | Marco | Bibliotecas |
 |---|---|
 | 0 e 1 | SDL3, glad (OpenGL 3.3), stb_image |
-| 3 | nlohmann/json (o CSV é lido por código próprio) |
+| 1 | nlohmann/json, antecipada do marco 3 para ler o mapa do Tiled (FL1-1); o CSV é lido por código próprio |
 | 4 e 5 | EnTT |
 | 7 | Tracy |
 | 8 | Dear ImGui |
 | Depois da fatia | miniaudio |
 
 - **Ambiente (FT1-7):** g++ 15.2 (MinGW), CMake, Ninja e Git, já instalados; VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; tudo neste repositório.
-- **Marco 0 (escrito, falta o autor confirmar):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
+- **Marco 0 (corrigido, falta o autor confirmar):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 
-## 4. Rodada pendente: FL1, as fichas do marco 1
+## 4. Rodada pendente
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** Ao escrever as fichas do [[Ficha Logica/Tempo|Tempo]] e do [[Ficha Logica/Mapa|Mapa]], apareceram 6 pontos que os documentos não decidem. As fichas já usam as sugestões, marcadas como [Proposta].
-
-Responder no `Respostas.txt` pelos códigos (FL1-1, FL1-2...). "Seguir sugestão" aceita a proposta.
-
-**FL1-1. Como o marco 1 lê o mapa do Tiled.**
-
-- *Contexto:* o marco 1 termina quando "o mapa do Tiled aparece". A Arquitetura e o Pipeline dizem que o mapa é salvo em **JSON**, mas a Fatia Vertical cita `mapas/vila.tmx`, o formato XML do Tiled. E a biblioteca de JSON (nlohmann/json) só entra no **marco 3** (FT2-2).
-- *Pergunta:* no marco 1, como o jogo lê um mapa de 64 × 64 tiles com 6 camadas, ou seja, cerca de 25.000 números?
-- *Opções:*
-  - (a) **antecipar a nlohmann/json para o marco 1** e salvar o mapa em JSON (`vila.tmj`). Ganha: um formato só para os mapas e os dados, a mesma biblioteca do marco 3, e cerca de 100 linhas de leitura. Perde: uma biblioteca a mais logo no início, mas ela já está aprovada, é só de cabeçalhos e o CMake baixa sozinho;
-  - (b) manter o `.tmx` e trazer uma biblioteca de XML (por exemplo, a pugixml). Ganha: o formato padrão do Tiled. Perde: uma biblioteca nova, que não foi aprovada e só serve para isso, e dois formatos no projeto;
-  - (c) no marco 1, um mapa de teste escrito no próprio código, e o Tiled só no marco 3. Ganha: nenhuma biblioteca antes da hora. Perde: o marco 1 não cumpre o que promete, e esse código vai para o lixo depois.
-- *Sugestão:* (a). O Tiled salva direto em `Jogo/data/mapas/vila.tmj`: um arquivo só, sem passo de exportar para esquecer. A `Jogo/assets/` guarda o projeto do Tiled e as imagens-fonte.
-- *Impacto:* Arquitetura e Retomada (a nlohmann/json passa a entrar no marco 1), Fatia Vertical (parte 2), Pipeline.
-- *Conflitos:* a FT2-2 dizia "marco 3" para a nlohmann/json. Muda só a data de entrada, não a aprovação. O `vila.tmx` da Fatia Vertical vira `vila.tmj`.
-
-**FL1-2. A hora em que a partida começa.**
-
-- *Contexto:* a partida começa no 1º dia da Primavera do Ano 412 ([[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]), mas a hora não foi decidida. O dia vira às 0h (FT1-5), e os Civis dormem das 22h às 6h ([[Sistema de IA/Descrição|IA]]).
-- *Pergunta:* a partida nova começa a que horas? *Exemplo:* começando às 0h, o jogador abre o jogo e vê a vila escura, com todos dormindo, por 6 horas de jogo, ou seja, 4 minutos reais a 1x.
-- *Opções:*
-  - (a) **0h** (tick 0). Ganha: a conta mais simples. Perde: um começo parado e escuro;
-  - (b) **6h** (tick 4.800). Ganha: os Civis acordam, o amanhecer está no meio, e o trabalho começa 1 hora depois. Perde: o dia 1 tem só 18 horas, mas o turno de trabalho (7h às 15h) fica inteiro;
-  - (c) **7h** (tick 5.600). Ganha: já começa de dia, com todos trabalhando. Perde: o jogador não vê a vila acordar.
-- *Sugestão:* (b) 6h. O contador continua contando a partir da 0h do dia 1, então nenhuma conta muda: só o tick inicial é 4.800. O valor fica nas regras (`hora_inicial_da_partida: 6`). No teste sem tela, `--simular 64` conta 64 viradas de dia.
-- *Conflitos:* nenhum.
-
-**FL1-3. As proteções do relógio e o que o marco 1 mostra.**
-
-- *Contexto:* o relógio anda pelo tempo real de cada quadro. O HUD só chega no marco 8, e as teclas da câmera no marco 2, mas o marco 1 já precisa mostrar que o relógio anda.
-- *Pergunta 1:* o PC trava por 3 segundos, ou o autor arrasta a janela (o Windows para o programa enquanto ela é arrastada). O que o relógio faz com esses 3 segundos?
-  - (a) **limite de 250 milissegundos por quadro:** o mundo anda só 250 milissegundos e o resto do tempo é perdido. Ganha: nunca trava em cadeia. Perde: o mundo "pula" um pedacinho do tempo, o que ninguém nota;
-  - (b) sem limite: roda os 60 ticks atrasados de uma vez. Ganha: o tempo é exato. Perde: num PC lento, cada quadro demora mais e acumula mais atraso, até o jogo travar;
-  - (c) além de (a), **pausar sozinho quando a janela é minimizada**.
-- *Pergunta 2:* como ver a data e mudar a velocidade no marco 1?
-- *Sugestão:* (a) e (c). Ao perder o foco, o jogo continua rodando, para o autor poder olhar outra janela. No marco 1:
-  - a data e a velocidade aparecem **no título da janela**: "Primavera, dia 1, 06h00, Ano 412, 1x". Isso não precisa de fonte nem de desenho de texto;
-  - cada virada de hora e de dia escreve uma linha no console;
-  - **teclas provisórias:** Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x; F1 pinta a colisão de vermelho.
-- *Conflitos:* a [[Interface/Descrição|Interface]] quer atalhos remapeáveis. As teclas do marco 1 são provisórias e entram na tabela de atalhos depois.
-
-**FL1-4. Como rodar os testes automáticos.**
-
-- *Contexto:* cada ficha tem uma tabela de testes (16 no Tempo, 15 no Mapa). A FT2-2 aprovou 8 bibliotecas, nenhuma de testes.
-- *Pergunta:* como esses testes viram um programa? *Exemplo:* o teste "o tick 1.000.000 é 2h do dia 5 do Inverno" precisa rodar sozinho, sem janela, e dizer PASSOU ou FALHOU.
-- *Opções:*
-  - (a) **um programa de testes próprio** (`Codigo/Testes/`), com uma função `conferir(condicao, "o que está sendo conferido")` de cerca de 20 linhas. Roda com `ctest --test-dir build`, que já vem com o CMake. Ganha: nada novo para aprender e nenhuma biblioteca. Perde: mensagens mais simples;
-  - (b) a biblioteca **doctest** (um arquivo só, muito usada). Ganha: mensagens melhores ("esperava 2, veio 3"). Perde: uma biblioteca nova e comandos (`TEST_CASE`, `CHECK`) que parecem mágica para quem está começando;
-  - (c) testar à mão, rodando o jogo. Perde: a garantia de que uma mudança não quebrou o que já funcionava.
-- *Sugestão:* (a). Se os testes crescerem muito (no marco 7), a doctest volta como pergunta.
-- *Conflitos:* nenhum, porque não entra biblioteca nova.
-
-**FL1-5. O padrão do arquivo do Tiled.**
-
-- *Contexto:* o [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]] define 7 camadas de tiles e as camadas de objetos, com nomes com acento e espaço ("Detalhes do chão"). O jogo procura cada camada pelo nome.
-- *Pergunta:* como escrever os nomes e configurar o Tiled? *Exemplo:* se a camada se chamar "Colisão" no Tiled e "Colisao" no código, o jogo diz "falta a camada `colisao`", e o erro é difícil de enxergar.
-- *Opções:*
-  - (a) **nomes sem acento e em minúsculas** (`chao`, `detalhes_do_chao`, `colisao`...), como os IDs dos dados (`item.pao`). Ganha: igual no Tiled, no código e nos dados. Perde: um pouco menos bonito no Tiled;
-  - (b) nomes com acento, como no Pipeline. Ganha: mais bonito no Tiled. Perde: é fácil errar ao digitar, e o erro é invisível.
-- *Sugestão:* (a), com a tabela da parte 2 da [[Ficha Logica/Mapa|ficha do Mapa]], e também:
-  - camadas em formato CSV, conjunto de tiles embutido no mapa, sem margem e sem tiles espelhados;
-  - lotes como retângulos na camada `lotes`, com a propriedade `tipo_permitido` (na fatia, sempre `qualquer`);
-  - **as construções não são pintadas no Tiled**: o jogo as desenha nos lotes, porque elas mudam durante a partida;
-  - um lote não pode ter tile de colisão, porque a construção ainda vai nascer nele;
-  - o jogo lista **todos** os erros do mapa de uma vez.
-- *Conflitos:* o Pipeline passa a mostrar os nomes novos.
-
-**FL1-6. A arte do marco 1.**
-
-- *Contexto:* o [[Estado do Projeto]] diz que os pacotes de arte provisórios são escolhidos no início do código. O marco 1 precisa de um conjunto de tiles de 16 × 16 e de um mapa de 64 × 64 no Tiled.
-- *Pergunta:* com que arte o marco 1 desenha o mapa?
-- *Opções:*
-  - (a) **um conjunto de teste feito pelo assistente:** quadrados de cor lisa (grama verde, água azul, terra marrom, parede cinza, árvore verde-escura, colisão vermelha) e um `vila.tmj` de teste com os 11 lotes e as 3 áreas de recurso. O autor abre no Tiled e mexe à vontade. Ganha: o marco 1 não espera pela arte, e os erros de leitura aparecem logo. Perde: é feio;
-  - (b) **um pacote grátis de licença CC0** (livre para qualquer uso), por exemplo o "Tiny Town" da Kenney, de tiles de 16 × 16 (conferir a licença na página antes de baixar). O autor baixa e desenha o mapa. Ganha: já parece um jogo. Perde: o autor precisa aprender o Tiled antes de ver o marco 1, e o estilo pode não ser o 3/4 da Arquitetura;
-  - (c) o autor desenha os primeiros tiles no Pixelorama. Perde: é lento para um marco de teste.
-- *Sugestão:* (a) no marco 1. Depois, (b) com calma, numa tarefa à parte: o autor escolhe o pacote, guarda em `Jogo/assets/provisorio/` com o LEIA-ME da origem (Pipeline) e redesenha o `vila.tmj`. A ferramenta de atlas continua para depois: na fatia, um conjunto de tiles já é uma imagem só.
-- *Conflitos:* nenhum.
-
-Depois das respostas:
-
-- ajustar as duas fichas, a Fatia Vertical, a Arquitetura e o Pipeline;
-- tirar as marcas [Proposta] do que foi aceito.
+Nenhuma. A **FL1** (fichas do marco 1) foi aplicada em 2026-10-17, com "seguir sugestão" em todas: as decisões estão nas fichas do [[Ficha Logica/Tempo|Tempo]] e do [[Ficha Logica/Mapa|Mapa]] e na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]].
 
 ## 5. Onde está cada coisa
 
@@ -180,7 +99,8 @@ Depois das respostas:
 - **Edição em lote:**
   - um script Python troca trechos exatos e confere que cada trecho existe uma vez só;
   - rodar antes no modo de teste (`--dry`);
-  - preservar as quebras de linha (CRLF ou LF) e o BOM de cada arquivo.
+  - preservar as quebras de linha (CRLF ou LF) e o BOM de cada arquivo. Vários documentos estão em CRLF: num trecho de várias linhas, trocar o `
+` pela quebra do arquivo antes de procurar.
 - **Links:** nenhum link interno do Obsidian pode ficar quebrado. Nas tabelas, o separador do texto do link é escapado (`\|`).
 - **Console do Windows:** os acentos aparecem corrompidos só na tela; os arquivos estão em UTF-8.
 - **Git:**

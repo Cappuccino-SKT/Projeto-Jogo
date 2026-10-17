@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-17 para o **marco 1** (janela, loop, relógio fixo e mapa de tiles). As propostas desta ficha estão na rodada **FL1** ([[Retomada]], seção 4).
+> Ficha escrita em 2026-10-17 para o **marco 1** (janela, loop, relógio fixo e mapa de tiles). As decisões da rodada **FL1** (2026-10-17, todas "seguir sugestão") já estão aplicadas.
 
 # Ficha Lógica: Tempo
 
@@ -30,9 +30,9 @@ No marco 1, ficam juntas numa estrutura do código. A partir do marco 3, são li
 | `diasPorEstacao` | inteiro | dias | 16 |
 | `estacoesPorAno` | inteiro | estações | 4 |
 | `anoInicialDaPartida` | inteiro | ano | 412 ([[Mundo e Estado Inicial/Descrição\|Mundo e Estado Inicial]]) |
-| `horaInicialDaPartida` | inteiro | hora | 6 **[Proposta]** (FL1-2) |
+| `horaInicialDaPartida` | inteiro | hora | 6 (FL1-2) |
 | `velocidadesPermitidas` | lista de inteiros | multiplicador | 0 (pausa), 1, 2, 4 |
-| `limiteDeTempoRealPorQuadro` | inteiro | milissegundos | 250 **[Proposta]** (FL1-3) |
+| `limiteDeTempoRealPorQuadro` | inteiro | milissegundos | 250 (FL1-3) |
 | Horas das fases do dia | inteiros | hora | amanhecer 5h, dia 7h, entardecer 18h, noite 20h ([[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 
 **Valores derivados** (calculados, não escritos no arquivo):
@@ -70,7 +70,7 @@ No marco 1, ficam juntas numa estrutura do código. A partir do marco 3, são li
 ### 4.1 Avançar pelo tempo real (a cada quadro)
 
 1. O `Jogo/` mede quantos nanossegundos reais passaram desde o quadro anterior e entrega o número ao relógio.
-2. **Limite de segurança [Proposta]:** se passou mais de 250 milissegundos, use só 250. Isso acontece quando o PC trava ou quando a janela é arrastada (o Windows para o programa enquanto ela é arrastada). Sem o limite, o jogo tentaria rodar todos os ticks atrasados de uma vez e travaria de novo.
+2. **Limite de segurança (FL1-3):** se passou mais de 250 milissegundos, use só 250. Isso acontece quando o PC trava ou quando a janela é arrastada (o Windows para o programa enquanto ela é arrastada). Sem o limite, o jogo tentaria rodar todos os ticks atrasados de uma vez e travaria de novo.
 3. Multiplique pela `velocidadeDoJogo` e some ao acumulador. Na pausa (velocidade 0), não soma nada.
 4. **Enquanto** o acumulador tiver 50.000.000 nanossegundos (1 tick) ou mais:
    - rode a regra 4.2 (avançar 1 tick);
@@ -102,6 +102,8 @@ No marco 1, ficam juntas numa estrutura do código. A partir do marco 3, são li
    - se está pausado, volte para a `velocidadeAntesDaPausa`.
    - *Exemplo:* o jogador está em 2x e pausa. Ao despausar, volta para 2x, não para 1x.
 3. **Na troca de velocidade, o acumulador não é zerado.** O que sobrou continua valendo.
+4. **Janela minimizada (FL1-3):** o `Jogo/` pausa sozinho (como o passo 2). Quando a janela volta, o jogo continua pausado, e o jogador despausa quando estiver olhando. Ao só perder o foco (outra janela por cima), o jogo continua rodando.
+5. **Teclas provisórias do marco 1 (FL1-3):** Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x. Elas entram na tabela de atalhos remapeáveis da [[Interface/Descrição|Interface]] mais tarde.
 
 ### 4.4 Ler a data e a fase do dia
 
@@ -178,11 +180,11 @@ Ficam em `Codigo/Tempo/`, sem nada do SDL nem do OpenGL.
 | `estacaoAtual()`, que devolve `Estacao` | `Primavera`, `Verao`, `Outono`, `Inverno` |
 | `faseDoDiaAtual()`, que devolve `FaseDoDia` | `Amanhecer`, `Dia`, `Entardecer`, `Noite` |
 
-No `Jogo/`, a função `escreverDataNoTituloDaJanela` monta o texto da tela (por exemplo, "Primavera, dia 1, 06h00, Ano 412, 1x"), porque escrever na tela não é regra do jogo **[Proposta]** (FL1-3).
+No `Jogo/`, a função `escreverDataNoTituloDaJanela` monta o texto da tela (por exemplo, "Primavera, dia 1, 06h00, Ano 412, 1x"), porque escrever na tela não é regra do jogo (FL1-3). No marco 1, cada virada de hora e de dia também escreve uma linha no console.
 
 ## 8. Testes
 
-Cada linha vira um teste automático (o jeito de rodar está na FL1-4).
+Cada linha vira um teste automático, num programa de testes próprio em `Codigo/Testes/`, com a função `conferir(condicao, "o que está sendo conferido")`, rodado pelo `ctest --test-dir build` (FL1-4).
 
 | Entrada | Resultado esperado |
 |---|---|

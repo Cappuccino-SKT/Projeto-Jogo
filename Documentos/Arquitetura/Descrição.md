@@ -40,7 +40,7 @@ Todas leves, de código aberto e com bom desempenho. **Aprovadas na rodada FT2-2
 | Marco | Bibliotecas |
 |---|---|
 | 0 e 1 | SDL3, glad (OpenGL 3.3), stb_image |
-| 3 | nlohmann/json (o CSV é lido por código próprio) |
+| 1 | nlohmann/json, antecipada do marco 3 para ler o mapa do Tiled (FL1-1); o CSV é lido por código próprio |
 | 4 e 5 | EnTT |
 | 7 | Tracy |
 | 8 | Dear ImGui |
@@ -118,6 +118,12 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
   - `Codigo/`: as regras em C++, uma biblioteca que **nunca abre janela nem desenha**. Assim o teste sem tela (`--simular`) roda só com ela, e cada regra pode ser testada sozinha;
   - `Jogo/`: o programa (janela, desenho, entrada, interface), que chama o `Codigo/`; também guarda `data/` e `assets/`;
   - `CMakeLists.txt` na raiz, que junta as duas; a pasta `build/` fica fora do Git e do Obsidian.
+
+### Testes automáticos (rodada FL1-4)
+
+- Um **programa de testes próprio**, em `Codigo/Testes/`, sem biblioteca: uma função `conferir(condicao, "o que está sendo conferido")` de cerca de 20 linhas.
+- Roda com `ctest --test-dir build`, que já vem com o CMake, e diz quais testes passaram e quais falharam.
+- Os testes saem da parte 8 de cada ficha em `Ficha Logica/`. Se crescerem muito (no marco 7), a biblioteca doctest volta como pergunta.
 
 ### Jeito de trabalhar e nomes no código (rodadas FT2-3 e FT2-4)
 

@@ -151,7 +151,7 @@ Tudo o que é conteúdo fica fora do código, na pasta `Jogo/` ([[Arquitetura/Mo
 | `data/eventos.json` | JSON | Os 12 eventos da V3-6 |
 | `data/regras.json` | JSON | Todos os números das rodadas: salários, margem, cesta mínima, ticks, estações |
 | `data/vila_inicial.json` | JSON | O estado do primeiro dia: construções (a Carpintaria é do jogador), NPCs, Banco, estoque e as 100 moedas do jogador |
-| `mapas/vila.tmx` | Tiled | O mapa, com as camadas e os lotes |
+| `data/mapas/vila.tmj` | JSON do Tiled (FL1-1) | O mapa, com as camadas, os lotes e as áreas de recurso ([[Ficha Logica/Mapa\|ficha do Mapa]]) |
 | `textos/pt-BR.json` | JSON | Todos os textos da tela (V3-12) |
 
 *Exemplo de linha do `receitas.csv`* (as colunas seguem a receita padrão da IP1-1):
@@ -401,6 +401,8 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | FT1-5 Ordem do dia | Virada às 0h; a ordem da parte 3 fica no `data/regras.json` (campo `ordem_do_dia`), para ser trocada nos testes sem mexer no código |
 | FT1-6 Teste sem tela | `jogo --simular 64 --semente 1` grava o `relatorio.csv` (uma linha por dia) e termina com PASSOU ou FALHOU e o motivo ("fome por 4 dias seguidos no dia 37"); a mesma semente dá o mesmo relatório |
 | FT1-7 Ambiente | VS Code com as extensões grátis "C/C++" e "CMake Tools"; depurador gdb (vem com o MinGW); primeiro código: um "olá, janela" com o SDL3, compilado pelo CMake; no mesmo repositório (depois organizado em `Codigo/` e `Jogo/`, ver [[Arquitetura/Descrição|Arquitetura]]) |
+
+**Rodada FL1 (2026-10-17):** as fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]). O mapa é salvo em JSON (`vila.tmj`), lido pela nlohmann/json já no marco 1; a partida começa às **6h** (tick 4.800); o relógio usa no máximo 250 milissegundos por quadro e pausa quando a janela é minimizada; os testes rodam num programa próprio pelo `ctest`; as camadas do Tiled têm nomes sem acento; o marco 1 usa um conjunto de tiles de teste.
 
 **Rodada FT2:** o código foi liberado marco a marco. As bibliotecas entram por marco, e os nomes são em português, sem acento e descritivos ([[Arquitetura/Descrição|Arquitetura]]).
 
