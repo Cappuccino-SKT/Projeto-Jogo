@@ -182,7 +182,7 @@
 | Termo | Significado |
 |---|---|
 | **Fatia vertical** | Versão mínima jogável: 1 cidade, Fazenda → Cozinha → Mercado. [[Arquitetura/Descrição\|Arquitetura]] |
-| **Ficha técnica lógica** | Documento que traduz os sistemas em estruturas, dados e regras de código; vem antes da programação. A primeira, da fatia vertical, está em [[Ficha Técnica/Fatia Vertical\|Ficha Técnica: Fatia Vertical]] |
+| **Ficha Lógica** | Documento que traduz um sistema em dados, regras passo a passo e testes, pronto para virar código; vem antes da programação. Fica na pasta `Ficha Logica/`; o mapa geral da fatia está em [[Ficha Logica/Fatia Vertical\|Ficha Lógica: Fatia Vertical]] |
 | **Tick** | Um passo da simulação: 20 por segundo real a 1x; 1 tick = 4,5 s de jogo |
 | **Tiled** | Editor gratuito de mapas de tiles, usado para desenhar os mapas |
 | **ECS** | Forma de organizar o código em entidades e componentes, para muitos NPCs rodarem rápido |

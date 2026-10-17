@@ -2,10 +2,11 @@
 
 ## 1. Onde paramos
 
-- **Design completo:** todos os sistemas estão escritos, a revisão completa terminou, e a [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]] está pronta.
+- **Design completo:** todos os sistemas estão escritos, a revisão completa terminou, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta.
 - **Rodada FT2 (2026-10-17):** o autor **liberou o código, marco a marco**.
+- **Pastas reorganizadas (2026-10-17):** `Documentos/`, `Ficha Logica/`, `Codigo/` e `Jogo/` (seção 3).
 - **Próximo passo: o marco 0** (seção 3).
-- **Ao retomar:** rodar `git fetch` e conferir se o pull request mais recente foi mesclado no `main`. O último é o da branch `docs/ft2-limpeza`.
+- **Ao retomar:** rodar `git fetch` e conferir se o pull request mais recente foi mesclado no `main`. O último é o da branch `docs/organiza-pastas` (feita em cima da `docs/ft2-limpeza`).
 
 ## 2. Como trabalhamos
 
@@ -44,12 +45,18 @@
 
 ## 3. Código (rodada FT2)
 
+- **Pastas (organização de 2026-10-17):**
+  - `Documentos/`: todo o design (os sistemas, o Glossário, o índice e o `Histórico/`);
+  - `Ficha Logica/`: cada sistema virado lógica de programação (dados, regras passo a passo, testes). O modelo está na [[Ficha Logica/Descrição|Ficha Lógica]]. Um sistema é convertido **pouco antes do marco que o usa**, não todos de uma vez;
+  - `Codigo/`: as regras em C++ (tempo, economia, produção, NPCs). **Nunca abre janela nem desenha**, para o teste sem tela rodar;
+  - `Jogo/`: o programa de verdade (janela, desenho, mouse e teclado), que chama o `Codigo/`. Os dados (`data/`) e a arte (`assets/`) ficam aqui;
+  - na raiz: `CLAUDE.md`, esta Retomada, o Estado e o `CMakeLists.txt` principal. A pasta `build/` (o que o compilador gera) fica fora do Git.
 - **Marcos:** de 0 a 9, na ficha (parte 7). Cada marco tem uma branch própria (`codigo/marco-N-nome`) e um pull request.
 - **Jeito de trabalhar (FT2-3):**
   - o assistente escreve em passos pequenos, e cada passo compila e roda;
   - ele dá os comandos prontos;
   - o autor compila, roda e conta o que viu;
-  - cada marco termina com um resumo simples em `codigo/LEIA-ME.md`.
+  - cada marco termina com um resumo simples em `Jogo/LEIA-ME.md`.
 - **Nomes (FT2-4):** português sem acento (`Cidade`, `Construcao`, `precoBase`), com comentários em português.
   - **Ideia do autor:** nada abstrato demais. Todo nome de variável, função ou classe diz o motivo dele: `horasTrabalhadasNoCiclo`, não `h` nem `valor`.
   - As palavras do C++ (`int`, `vector`, `for`) e os nomes das bibliotecas continuam como são.
@@ -64,10 +71,10 @@
 | 8 | Dear ImGui |
 | Depois da fatia | miniaudio |
 
-- **Ambiente (FT1-7):** g++ 15.2 (MinGW), CMake, Ninja e Git, já instalados; VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; pasta `codigo/` neste repositório.
+- **Ambiente (FT1-7):** g++ 15.2 (MinGW), CMake, Ninja e Git, já instalados; VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; tudo neste repositório.
 - **Marco 0, o próximo:**
   1. o autor instala as duas extensões do VS Code;
-  2. o assistente cria `codigo/`, com o `CMakeLists.txt` e um `main.cpp` que abre uma janela vazia com o SDL3;
+  2. o assistente cria o `CMakeLists.txt` da raiz e o `Jogo/main.cpp`, que abre uma janela vazia com o SDL3 (o marco 0 não tem regra, então a `Codigo/` ainda fica vazia);
   3. compilar e rodar;
   4. escrever o LEIA-ME do marco.
 
@@ -80,13 +87,13 @@ Nenhuma. O próximo passo é o marco 0.
 | Preciso de | Onde |
 |---|---|
 | Índice dos sistemas | [[Descrição do Projeto]] |
-| O que programar e como | [[Ficha Técnica/Fatia Vertical\|Ficha Técnica]] |
+| O que programar e como | [[Ficha Logica/Fatia Vertical\|Ficha Lógica: Fatia Vertical]] e as fichas de cada sistema em `Ficha Logica/` |
 | Decisões técnicas, bibliotecas, marcos | [[Arquitetura/Descrição\|Arquitetura]] |
 | Itens, receitas, preços | [[Sistema de Itens/Descrição\|Itens]], [[Sistema de Produção/Receitas\|Receitas]], [[Sistema Econômico/Descrição\|Econômico]] |
 | Moldes de conteúdo | [[Arquitetura/Moldes de Conteúdo\|Moldes de Conteúdo]] |
 | Termos | [[Glossário]] |
 | Situação, números-chave e o que falta | [[Estado do Projeto]] |
-| Histórico das revisões (não precisa ler) | `Histórico/` |
+| Histórico das revisões (não precisa ler) | `Documentos/Histórico/` |
 
 ## 6. Cuidados técnicos (para quem edita)
 
