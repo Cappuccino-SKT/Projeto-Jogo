@@ -9,7 +9,7 @@ A magia é rara e poderosa. Ela aparece no combate (feitiços, cajados), na prod
 Já existe nos outros sistemas:
 
 - **NPC:** booleana **Mago**, **Mana** máxima/atual (só para Magos), habilidade **Magia** e **Inteligência** (influencia a Mana). Ver [[Sistema de NPC/Descrição|Sistema de NPC]].
-- **Itens:** cajados que gastam Mana, Atributo Mágico, Pedra Mágica, Pedra de Mana Bruta e Aço Mágico. Ver [[Sistema de Itens/Descrição|Sistema de Itens]].
+- **Itens:** cajados que gastam Mana, Atributo Mágico, Pedra de Mana (item bruto, sem refino; rodada IP2-3) e Aço Mágico. Ver [[Sistema de Itens/Descrição|Sistema de Itens]].
 - **Combate:** cajado com Mana e itens encantados. Ver [[Sistema de Combate/Descrição|Sistema de Combate]].
 - **Facção, Cultura e Crime:** lei de Magia (livre / restrita / proibida, com "privilégio dos magos"); Arcana dá privilégio aos Magos, Tecnocrata os bane, Religiosa restringe; magia é crime na Tecnocrata.
 
@@ -106,7 +106,7 @@ Cada Mago tem **afinidade com uma escola** (sorteada ao nascer). Ele pode aprend
 |---|---|
 | NPC | Mago, Mana, habilidade Magia, Inteligência, afinidade de escola |
 | Combate | Feitiços com conjuração, recarga e área; cajado; itens encantados |
-| Itens | Grimório, Pedra de Mana, Aço Mágico, encantamentos; Joia Mágica (+Mana do Mago), Anel Mágico e Pó Espiritual (+regeneração de Mana) (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
+| Itens | Grimório, Pedra de Mana, Aço Mágico, encantamentos; Joia de Mana (+Mana do Mago), Anel de Mana e Pó Espiritual (+regeneração de Mana) (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
 | Construção / Produção | Torre Arcana, Forja Arcana, Encantaria |
 | Cura | Regeneração de Mana; Mago de Suporte no Hospital |
 | Tecnologia | Mesma mecânica de pontos; eras pelos marcos mundiais |

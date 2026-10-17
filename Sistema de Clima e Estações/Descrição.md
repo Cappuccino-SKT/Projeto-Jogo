@@ -98,14 +98,14 @@ O clima é sorteado **1 vez por dia por região** (6 sorteios por dia, baratos e
 
 ## Inverno e aquecimento
 
-No inverno, as moradias gastam **lenha** (Madeira Bruta):
+No inverno, as moradias gastam **lenha** (Tora):
 
-- Cada **NPC real** consome **1 Madeira Bruta a cada 4 dias** como "aquecimento", dentro do consumo de Materiais da Classe Social. Vale para **todas as classes**, inclusive os Escravos na Senzala ([[Sistema de Classe Social/Descrição|Classe Social]]).
+- Cada **NPC real** consome **1 Tora a cada 4 dias** como "aquecimento", dentro do consumo de Materiais da Classe Social. Vale para **todas as classes**, inclusive os Escravos na Senzala ([[Sistema de Classe Social/Descrição|Classe Social]]).
 - **Por bioma:** frio × 2; temperado × 1; litoral quente e terras áridas × 0,25.
 - **Neve** no dia: × 1,5. **Inverno rigoroso:** × 2.
 - **Falta de lenha:** Felicidade −10 (pelo fator Consumo atendido) e mortalidade de velhos e crianças **+50%** na estação ([[Sistema de População/Descrição|População]]).
 
-*Exemplo:* uma cidade Guerreira de 100 NPCs reais no inverno de 16 dias gasta 4 × 100 × 2 = **800 de Madeira Bruta**, que precisa estar estocada no outono.
+*Exemplo:* uma cidade Guerreira de 100 NPCs reais no inverno de 16 dias gasta 4 × 100 × 2 = **800 de Tora**, que precisa estar estocada no outono.
 
 ## Estações na viagem e na guerra
 

@@ -23,14 +23,14 @@ São **9 tipos fixos**. A qualidade vem do **Rank** do equipamento entregue no k
 
 | Tipo | Kit | Papel | Era |
 |---|---|---|---|
-| Infantaria Leve | Espada ou Lança Curta, armadura leve, escudo | Barata e versátil | 1 |
-| Infantaria Pesada | Espada Longa, Machado ou Clava, armadura pesada, escudo | Segura a linha | 1 |
-| Lanceiros | Lança Longa, armadura média | Contra cavalaria | 1 |
-| Arqueiros | Arco, armadura leve, Munição de Arco | Tiro de longe, barato | 1 |
-| Besteiros | Besta, armadura média, Munição de Besta | Tiro forte contra pesados | 1 |
-| Cavalaria | Cavalo, Sela, Lança ou Espada, armadura média | Carga e perseguição | 1 |
-| Atiradores | Mosquete, armadura leve, Munição de Arma de Fogo | Tiro devastador e lento | 2 |
-| Artilharia | Canhão de Guerra, Munição de Canhão de Guerra | Brecha e dano em área | 2 |
+| Infantaria Leve | Espada ou Lança Curta, armadura Leve (couro), escudo | Barata e versátil | 1 |
+| Infantaria Pesada | Espada Longa, Machado ou Clava, armadura Pesada (placas), escudo | Segura a linha | 1 |
+| Lanceiros | Lança Longa, armadura Média (malha) | Contra cavalaria | 1 |
+| Arqueiros | Arco, armadura Leve, Flecha | Tiro de longe, barato | 1 |
+| Besteiros | Besta, armadura Média, Virote | Tiro forte contra pesados | 1 |
+| Cavalaria | Cavalo, Sela, Lança ou Espada, armadura Média | Carga e perseguição | 1 |
+| Atiradores | Arcabuz ou Mosquete, armadura Leve, Cartucho | Tiro devastador e lento | 2 |
+| Artilharia | Bombarda ou Canhão, Bala de Canhão | Brecha e dano em área | 2 |
 | Magos | Cajado, Pedra de Mana | Dano em área ou suporte | 1 |
 
 Mais um tipo especial, só de defesa: a **Milícia** (guardas e civis armados no cerco, equipamento leve; ver [[Sistema de Guerra/Descrição|Guerra]]).
@@ -153,11 +153,11 @@ A batalha acontece numa **cópia simplificada do Mapa Local** onde ela começou 
 
 ## Artilharia e pólvora
 
-- **Esquadrão de Artilharia** = 100 artilheiros com o Canhão de Guerra (kit). O Canhão de Guerra Moderno (Rank 5) é a versão melhor.
+- **Esquadrão de Artilharia** = 100 artilheiros com a Bombarda (Era 2) ou o Canhão (Era 3) no kit; o Canhão de Aço Mágico (Era 4) é a versão melhor.
 - Alcance 3× o do Arco; **dano em área**; −3 de Moral por tiro nos atingidos.
 - **Brecha na Muralha:** Paliçada em 20 s de tiro, Pedra em 60 s, Bastião em 120 s.
 - Não anda enquanto atira; muito lenta; quase sem defesa no corpo a corpo.
-- 1 Munição de Canhão de Guerra por batalha, com limite de **30 tiros**.
+- 1 Bala de Canhão por batalha, com limite de **30 tiros**.
 - Artilharia e Atiradores a partir da **Era 2**; a Tecnocrata pode tê-los na Era 1 por tecnologia inicial ([[Sistema de Tecnologia/Descrição|Tecnologia]]). O Bastião (Era 3) é a resposta das muralhas.
 
 ## Esquadrão de Magos
@@ -257,7 +257,7 @@ Versão simples na primeira versão:
 | Facção | Esquadrões, Quartel, soldo; baixas reduzem a população |
 | Mapa | Mapa de Guerra a partir do Mapa Local; Elevação; praça central e Muralha marcadas no Tiled |
 | Combate | Fórmula de dano, arma × armadura, Comitiva com as regras do combate local |
-| Itens | Kits por tipo; Rank do equipamento; Canhão de Guerra e munições |
+| Itens | Kits por tipo; Rank do equipamento; artilharia (Bombarda e Canhão) e munições |
 | Magia | Esquadrão de Magos (Combate e Suporte); lei de Magia |
 | Companheiros | Comitiva e Comandante de Esquadrão |
 | Cultura | Bônus de um tipo de Esquadrão por cultura |

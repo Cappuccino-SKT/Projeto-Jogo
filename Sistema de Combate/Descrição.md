@@ -96,7 +96,7 @@ Uma tabela pequena em JSON, com multiplicadores de **no máximo ±25%**, dá ide
 | Espada, Lança | +25% | 0 | −25% |
 | Clava, Machado | −25% | 0 | +25% |
 | Arco | 0 | 0 | 0 |
-| Besta, Mosquete | 0 | 0 | +25% |
+| Besta e armas de fogo | 0 | 0 | +25% |
 
 A armadura tem **três peças** de pesos que podem ser diferentes. Como não há partes do corpo, **[Proposta]** vale a classe de peso **mais frequente** entre as três peças (empate: Média). A **Defesa** é a soma das peças.
 
@@ -127,7 +127,7 @@ A armadura tem **três peças** de pesos que podem ser diferentes. Como não há
 
 - Cada tiro gasta **1 unidade** de Munição do inventário, **sem recolher** depois.
 - Sem munição, o NPC troca para a arma secundária.
-- Quem produz a munição é o Armeiro, o que cria demanda econômica.
+- Quem produz a munição é o Carpinteiro (Flecha e Virote) e o Armeiro (Cartucho e Bala de Canhão), o que cria demanda econômica.
 
 ### Peso e armadura
 

@@ -85,7 +85,7 @@ Segue o princípio do projeto: **a simulação vem primeiro**. Um contrato só e
 ## Masmorras
 
 - **Conjunto fixo** no mapa mundial, com mapas **desenhados à mão** (Mapa Interno; ver [[Sistema de Mapa/Descrição|Sistema de Mapa]]). O que varia são os **inimigos e o Loot**, sorteados de tabelas.
-- **Dificuldade de 1 a 5**; o Loot tem Rank compatível, com chance de **Grimório** e **Pedra Mágica** (ver [[Sistema de Magia/Descrição|Sistema de Magia]]).
+- **Dificuldade de 1 a 5**; o Loot tem Rank compatível, com chance de **Grimório** e **Pedra de Mana** (ver [[Sistema de Magia/Descrição|Sistema de Magia]]).
 - Povoadas por **Criaturas e bandidos**.
 - Uma masmorra limpa pode ser **repovoada** depois de algumas estações.
 - **Masmorras lendárias:** únicas, não repovoam e guardam **Artefatos** (ver [[Sistema de Itens/Descrição|Sistema de Itens]]).
@@ -117,7 +117,7 @@ Registro dos grandes feitos, montado a partir do **diário de eventos**: Ambiç�
 | Crime e Justiça | Recompensa como má fama; Criminalidade gera contratos |
 | Eventos | Eventos com escolha; diário alimenta a Crônica; varredura gera contratos |
 | Mapa | Masmorras como Mapa Interno com Nível de Segurança |
-| Itens / Magia | Loot por Rank, Grimório, Pedra Mágica, Livros de Atributos, Relíquias e Artefatos lendários (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
+| Itens / Magia | Loot por Rank, Grimório, Pedra de Mana, Livros de Atributos, Relíquias e Artefatos lendários (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
 | Escravidão | Contratos de recaptura de fugitivos e de libertação de caravanas (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Construção | Quadro de contratos na Taverna |
 | NPC | NPCs Importantes oferecem missões longas; companheiros por Renome |

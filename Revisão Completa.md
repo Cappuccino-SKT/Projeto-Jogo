@@ -64,10 +64,10 @@ Contradições entre documentos, ou textos que ficaram para trás depois de uma 
 | I-7 | Inventário × Econômico × Produção | O Inventário diz que a cidade tem "N inventários de construção"; o Econômico diz que há **um único inventário da cidade**; a Produção dá capacidade de armazenamento a cada construção | V1-5 |
 | I-8 | Mapa × Batalha | O Mapa diz que a batalha acaba quando a "moral chega a 0"; a Batalha decidiu "todos fugindo ou destruídos" | Corrigir o texto |
 | I-9 | Itens | Nomes misturados: "Musket" e "Musquete"; "Machado Curta", "Perneiras Pesado", "Calça rasgadas"; "Materias de Argila" × "Bens de Argila"; "Osso" × "Ossos"; "Carne" × "Pedaço de Carne"; "Ovo" × "Saco de Ovos"; o Costureiro faz "Roupa de Couro", mas a lista tem peças com nome | V1-6 |
-| I-10 | Itens × Funções e Construções | Itens sem produtor: Torta de Fruta, Legumes Cozidos, Carne Envelhecida, **Doce de Baunilha** (baunilha não é recurso), Anel de Cobre e de Ouro, Coroa, chapéus, camisas e calças com nome, arcos e bestas de Aço, Pedra de Mana, Joia Mágica | V1-7 |
-| I-11 | Itens × Mundo (tom) | "Capuz Ninja", "Terno", "Camiseta Moderna", "Calça social" e "Cajado Moderno" soam modernos num mundo sombrio de chegada da pólvora | V1-8 |
+| I-10 | Itens × Funções e Construções | Itens sem produtor: Torta de Fruta, Legumes Cozidos, Carne Envelhecida, **Doce de Baunilha** (baunilha não é recurso), Anel de Cobre e de Ouro, Coroa, chapéus, camisas e calças com nome, arcos e bestas de Aço, Pedra de Mana, Joia Mágica | **Resolvida na IP2** (lista final); os produtores e insumos saem na IP3 |
+| I-11 | Itens × Mundo (tom) | "Capuz Ninja", "Terno", "Camiseta Moderna", "Calça social" e "Cajado Moderno" soam modernos num mundo sombrio de chegada da pólvora | **Resolvida na IP2** (regra dos nomes e conjuntos de roupa) |
 | I-12 | Classe Social | Usa "Nobre" na lista de consumo e "Nobreza" no resto | Padronizar "Nobreza" |
-| I-13 | Classe Social × Itens | Bens Exclusivos incluem o Licor, que na lista é "Alimento de Luxo"; o mapeamento Luxo × Exclusivo por Tier já estava em aberto | V2-3 |
+| I-13 | Classe Social × Itens | Bens Exclusivos incluem o Licor, que na lista é "Alimento de Luxo"; o mapeamento Luxo × Exclusivo por Tier já estava em aberto | **Resolvida na IP2-11** (consumo pelo Tier) |
 | I-14 | NPC × IA × Felicidade | A IA usa **Fome** dos Controlados e a Felicidade tem um valor individual, mas os dois não estão na lista de atributos do NPC | V1-9 |
 | I-15 | Comércio × Viagem | A pergunta "fluxo de caravanas em LOD 2" ficou obsoleta: a Viagem decidiu caravanas sempre reais. A pergunta "guardas reais ou abstratos" também foi respondida (viram NPCs só em LOD 0 e 1) | Fechar as duas perguntas |
 | I-16 | Religião × Trabalho | O Templo tem 1, 2, 5, 10 e 15 vagas por nível; a tabela geral de vagas é 2, 3, 5, 7 e 10 | V1-10 |
@@ -75,7 +75,7 @@ Contradições entre documentos, ou textos que ficaram para trás depois de uma 
 | I-18 | Itens × Combate | A regra da armadura mista está escrita duas vezes, como proposta, nos dois documentos | Confirmar uma vez (V4) e deixar só no Combate |
 | I-19 | Escravidão × Combate | A rebelião de escravos usava Esquadrões no combate local | **Já corrigido nesta revisão:** combate local até 40; acima disso, Mapa de Guerra com 1 Esquadrão por NPC escravo |
 | I-20 | Cultura × Crime | O pensamento extremo da Autoritária diz "pedir mudança de lei é crime", mas o crime não está na lista | Acrescentar o crime "Sedição" (gravidade 3) só nas facções com essa lei |
-| I-21 | Itens × Funções e Construções | A lista de itens diz que as peças Leves e Pesadas são de metal e a Média é de couro (Costureiro); o canvas põe a "Armadura Leve" no Costureiro nível 3 e só a Pesada no Ferreiro | **Resolvida na IP1-2:** Leves e Pesadas no Ferreiro, Média no Costureiro (a IP2-7 propõe trocar: Leve de couro, Média de malha) |
+| I-21 | Itens × Funções e Construções | A lista de itens diz que as peças Leves e Pesadas são de metal e a Média é de couro (Costureiro); o canvas põe a "Armadura Leve" no Costureiro nível 3 e só a Pesada no Ferreiro | **Resolvida na IP1-2:** Leves e Pesadas no Ferreiro, Média no Costureiro ; a IP2-7 trocou: Leve de couro no Costureiro, Média de malha no Ferreiro |
 | I-22 | Funções e Construções × Construção | A Metalurgia nível 5 faz Barra de Aço Mágico, e a Forja Arcana também faz Aço Mágico (com Mago de Ofício) | **Resolvida na IP1-2:** só a Forja Arcana faz Aço Mágico |
 
 ## 4. Partes abstratas
@@ -105,10 +105,10 @@ Resumo das "Perguntas em aberto" e das marcações **[Em aberto]**. Os itens **"
 
 | Sistema | Pendências que pedem decisão (não só teste) |
 |---|---|
-| Produção / Funções | Engenheiro e Operário sem construção; nomes e categorias das Funções; vagas por nível |
+| Produção / Funções | Engenheiro e Operário sem construção; nomes e categorias das Funções; vagas por nível (rodada IP3-11) |
 | Construção | Lista de níveis e custos das construções novas |
-| Itens | Peça de armadura Média; Tier e Rank provisórios dos itens a cadastrar |
-| Classe Social | Mapeamento Luxo e Exclusivo por Tier |
+| Itens | Resolvidas na IP2 (lista final); faltam os insumos (IP3) |
+| Classe Social | Quanto da Comida pode ser Bebida (V2); o mapeamento por Tier foi decidido na IP2-11 |
 | Crime | Loja ilegal do jogador; tipos de missão de confiança; valor mínimo da recompensa para Caçadores |
 | Cura | Quando o Inconsciente vira Morto (há proposta) |
 | Eventos | Controle de intensidade do Narrador; nomes e focos dos narradores; formato do diário |
@@ -160,8 +160,8 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 |---|---|---|---|
 | **V1** | Inconsistências e faxina dos documentos | Seção 3 e o formato dos 13 documentos antigos | **Respondida e aplicada** (ver seção 8) |
 | **IP1** | Padronização da produção | Estrutura da receita, família de cada construção, escada de níveis, Rank do produto, escala das unidades, tempo, ordens de produção, limites | **Respondida e aplicada** (ver seção 9) |
-| **IP2** | Nomes e lista final dos itens | Regra dos nomes, matérias-primas, família da mana, intermediários, escada de materiais, armas, armaduras (peça Média), roupas, comida, outros bens, Luxo × Exclusivo (I-9, I-10, I-11, I-13) | **Enviada** |
-| **IP3** | Insumos de cada produto | A-2 (receitas); nova Funções e Construções | A fazer |
+| **IP2** | Nomes e lista final dos itens | Regra dos nomes, matérias-primas, família da mana, intermediários, escada de materiais, armas, armaduras (peça Média), roupas, comida, outros bens, Luxo × Exclusivo (I-9, I-10, I-11, I-13) | **Respondida e aplicada** (ver seção 10) |
+| **IP3** | Insumos de cada produto | Regras de quantidade e receitas de cada construção (A-2); Funções (Engenheiro, Operário, categorias); nova Funções e Construções | **Enviada** |
 | **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | A fazer |
 | **V3** | Pendências de regra e listas de conteúdo | Seção 5 e A-10 a A-12 | A fazer |
 | **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos ("confirmar todas, exceto...") | A fazer |
@@ -203,3 +203,21 @@ Depois da V5: atualizar o [[Estado do Projeto]], marcar esta revisão como concl
 
 - A escada de níveis deixa alguns produtos do canvas abaixo do nível exigido: Licor, Ornamento e Joias, de Tier 4, aparecem antes do nível 5. O Remédio, de Tier 3, passou do Boticário nível 3 para o 4. A IP3 reposiciona todos.
 - A IP2-7 propõe mudar um ponto da IP1-2: a armadura Leve de couro, no Costureiro, e a Média de malha, no Ferreiro.
+
+## 10. Resultado da IP2 (2026-10-17)
+
+| Pergunta | Decisão do autor | O que foi feito |
+|---|---|---|
+| IP2-1 Regra dos nomes | Seguir sugestão; **nomes de fantasia no futuro**, quando a história existir | 6 regras no [[Sistema de Itens/Descrição\|Itens]]; os nomes num arquivo de textos separado |
+| IP2-2 Matérias-primas | Seguir sugestão | Sem embalagem (Grão, Tora, Minério de Ferro, Carne Crua, Ovo...) em todos os documentos |
+| IP2-3 Mana | **Ideia do autor:** só a Pedra de Mana, como recurso bruto do kit dos Magos, sem refino; os derivados ficaram como sugestão | "Pedra Mágica" e a Pedra de Mana refinada saíram; Joia e Anel de Mana; derivados como **[Proposta]** (Aço Mágico = Barra de Aço + Pedra de Mana; joias; itens Arcanos) |
+| IP2-4 Intermediários | Seguir sugestão | Bloco de Pedra, Tecido de Algodão e de Lã, Adubo, Pólvora; Barra de Cobre de Tier 1 |
+| IP2-5 Escada de materiais | Seguir sugestão | de Madeira, Composto, Arcano; de Couro, Cravejado, Arcano |
+| IP2-6 Armas | Seguir sugestão | Arcabuz, Fuzil Raiado, Cetro, Flecha, Virote, Cartucho, Bombarda e Canhão; sai o Arco Recurvo; Combate e Batalha atualizados |
+| IP2-7 Armaduras | Seguir sugestão | Leve de couro (Costureiro), Média de malha e Pesada de placas (Ferreiro); kits da Batalha atualizados |
+| IP2-8 Roupas | Seguir sugestão | Conjuntos por papel social (Pobre, Trabalhador, Mineiro, Artífice, Furtivo, Mercador, Nobre, Realeza) |
+| IP2-9 Comida | Seguir sugestão | Vinho, Peixe Defumado, Assado Temperado, Presunto Curado e Doce de Especiarias; saem os Legumes Cozidos; Efeitos de Itens atualizados |
+| IP2-10 Outros bens | Seguir sugestão | Cerâmica, Roupa Comum e Roupa Fina |
+| IP2-11 Consumo por Tier | Seguir sugestão | Tabela nova na [[Sistema de Classe Social/Descrição\|Classe Social]]; resolve a I-13 |
+
+**Documentos atualizados:** Itens (reescrito), Recursos Existentes, Funções e Construções (família e nomes; receitas na IP3), Produção, Classe Social, Efeitos de Itens, Cura, Magia, Mundo, Objetivo, Clima, Construção, Batalha, Combate e Glossário.

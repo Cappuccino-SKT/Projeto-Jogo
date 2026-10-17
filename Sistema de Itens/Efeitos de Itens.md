@@ -21,13 +21,13 @@ Os valores numéricos são iniciais e ficam em dados (`efeitos_itens.json`) para
 | **Livro Sagrado** (Rank 1) | Carregar | Exigido na revista das facções com a lei "Livro Sagrado obrigatório" (ver abaixo) | — | Templo e Mercado das cidades Religiosas |
 | **Livro de Atributos** (Rank 1-5) | Ler: 8 h; **se gasta** | +2 × Rank numa habilidade de combate, até 100 | Permanente | Masmorras e recompensas de missão |
 | **Grimório** (Rank 2-4) | Estudar (só Magos) | Ensina um feitiço (ver [[Sistema de Magia/Descrição\|Magia]]) | Permanente | A definir na Magia |
-| **Joia Mágica** (Rank 1-5) | Carregar no inventário (só a melhor conta) | Mago: +10 × Rank de Mana máxima e +5% × Rank de regeneração de Mana | Enquanto carregar | Masmorras, Artesão (futuro) |
-| **Anel Mágico** (Rank 1-5) | Equipar no slot Anel | +3% × Rank numa habilidade escolhida na produção; encantável a partir do Rank 3 | Enquanto equipado | Artesão nível 5 |
-| **Pedra de Mana** (Tier 2) | Consumir | Recupera Mana (já decidido) | Na hora | Produtor Mágico |
+| **Joia de Mana** (Rank 1-5) | Carregar no inventário (só a melhor conta) | Mago: +10 × Rank de Mana máxima e +5% × Rank de regeneração de Mana | Enquanto carregar | Masmorras, Artesão (rodada IP2-3) |
+| **Anel de Mana** (Rank 1-5) | Equipar no slot Anel | +3% × Rank numa habilidade escolhida na produção; encantável a partir do Rank 3 | Enquanto equipado | Artesão nível 5 |
+| **Pedra de Mana** (Tier 1) | Consumir | Recupera Mana (já decidido) | Na hora | Posto de Coleta: item bruto, sem refino (rodada IP2-3) |
 | **Relíquia** (Artefato Rank 1-3) | Guardar ou doar | Sem efeito em combate; doada a um Templo ou Palácio, +2 de Renome; conta na posse da Realeza | — | Masmorras, Mercado de capitais |
 | **Artefato lendário** (Rank 4-5) | Equipar ou carregar | Efeito próprio e único (ver "Artefatos lendários") | Enquanto estiver com o NPC | Masmorras lendárias |
-| **Curativo** (Tier 1) | Usar | Regeneração × 2; estanca o sangramento do Inconsciente | 8 h | Boticário nível 1 (Tecido + Água) |
-| **Remédio** (Tier 3) | Usar | Regeneração × 3; cura o estado Doente | 24 h | Boticário nível 4, pela escada da IP1-3 (Flor Espiritual + Fardo de Especiaria) |
+| **Curativo** (Tier 1) | Usar | Regeneração × 2; estanca o sangramento do Inconsciente | 8 h | Boticário nível 1 (Tecido de Algodão + Água) |
+| **Remédio** (Tier 3) | Usar | Regeneração × 3; cura o estado Doente | 24 h | Boticário nível 4, pela escada da IP1-3 (Flor Espiritual + Especiarias) |
 | **Grilhões** (Tier 2) | Pôr num escravo ou prisioneiro | Obediência +15; Felicidade −5; velocidade −20%; não foge | Enquanto estiver com eles | Ferreiro nível 2 (ver [[Sistema de Escravidão/Descrição\|Escravidão]]) |
 
 ## Livros
@@ -79,7 +79,7 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 | Mapa do Navegante | Revela todos os mapas da região onde está; viagem do grupo × 0,9 |
 | Coroa Partida | Para um líder: +10 de legitimidade (Estabilidade da facção) |
 
-**Consumo da Realeza como posse.** A cidade precisa ter **2 itens de Artefato** (Livro, Joia Mágica ou Relíquia) **por NPC real de Realeza**, guardados no Palácio. Eles **não somem**: 1 em cada 10 sai por estação (presentes, roubos), e isso gera a demanda. Os Artefatos lendários não entram nessa conta.
+**Consumo da Realeza como posse.** A cidade precisa ter **2 itens de Artefato** (Livro, Joia de Mana ou Relíquia) **por NPC real de Realeza**, guardados no Palácio. Eles **não somem**: 1 em cada 10 sai por estação (presentes, roubos), e isso gera a demanda. Os Artefatos lendários não entram nessa conta.
 
 - *Conflito resolvido:* a Classe Social trata todo consumo como gasto do estoque. Só os Artefatos passam a ser posse com desgaste; o resto continua igual ([[Sistema de Classe Social/Descrição|Classe Social]]).
 
@@ -94,10 +94,12 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 
 | Item | Efeito no Controlado (no dia) |
 |---|---|
-| Alimento Básico (Pão, Sopa, Legumes Cozidos, Ração Militar) | Fator comida 0 |
-| Alimento Refinado (Torta de Fruta, Linguiça, Queijo) | +3 |
-| Alimento de Luxo (Licor, Carne Envelhecida, Doce de Baunilha) | +6 |
+| Alimento de Tier 1 (Pão, Sopa, Peixe Defumado, Ração Militar) | Fator comida 0 |
+| Alimento de Tier 2 (Torta de Fruta, Linguiça, Queijo) | +3 |
+| Alimento de Tier 3 (Assado Temperado) | **[Proposta]** +4 |
+| Alimento ou bebida de Tier 4 (Presunto Curado, Doce de Especiarias, Licor) | +6 |
 | Cerveja | +2 de Felicidade |
+| Vinho | **[Proposta]** +3 de Felicidade |
 | Fumo | +3 de Felicidade por 1 dia |
 | Pó Espiritual | +6 de Felicidade; Mago: +25% de regeneração de Mana por 1 dia |
 
@@ -125,13 +127,13 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 | NPC | Livros lidos, Viciado e Doente, só para Controlados e Importantes |
 | Classe Social | Posse de Artefatos pela Realeza |
 | Cura | Curativo, Remédio e estado Doente |
-| Magia | Joia Mágica, Pó Espiritual e Grimório |
+| Magia | Joia de Mana, Anel de Mana, Pedra de Mana, Pó Espiritual e Grimório |
 | Felicidade | Comida, bebida e narcóticos no fator "comida e descanso"; vício |
 | Combate e Batalha | Livro de Atributos; Artefatos lendários (Moral, Coragem) |
 | Religião e Crime | Livro Sagrado obrigatório; revista; heresia sem o livro |
 | Reputação | Chance de revista pela faixa; Renome por doação de Relíquia |
 | Trabalho e Propriedade | Livros guardados na Universidade |
-| Produção | Boticário (Curativo e Remédio); Artesão (Anel Mágico) |
+| Produção | Boticário (Curativo e Remédio); Artesão (Joia e Anel de Mana) |
 | Objetivo e Progressão | Loot das masmorras; Artefatos lendários |
 | Interface | Botões "Usar" e "Ler"; ícone de Viciado e Doente no retrato |
 
@@ -139,5 +141,5 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 
 1. **Valores a testar:** pontos por livro e tetos, preços, duração dos efeitos, chances de vício, chance de revista.
 2. **Artefatos lendários:** lista final e nomes (com a história do jogo).
-3. **Produção de livros** (Imprensa) e quem produz a Joia Mágica.
+3. **Produção de livros** (Imprensa). A Joia de Mana passou a ser do Artesão (rodada IP2-3; insumos na IP3).
 4. **Livro Sagrado:** se outras culturas ganham uma exigência parecida (por exemplo, a Autoritária com um documento de identidade).

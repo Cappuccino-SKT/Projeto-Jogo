@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1 e IP1 aplicadas; rodada IP2 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1, IP1 e IP2 aplicadas; rodada IP3 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -210,7 +210,7 @@
 - **Produção Braçal por estação** (base temperada): Fazenda 75%, 100%, 150% e 25%; Pasto e madeira 75% no inverno; minérios 90%. Ajustes por bioma: a Guerreira não colhe no inverno.
 - **Clima do dia:** sorteado 1 vez por dia por região, com 60% de chance de repetir. Limpo, Nublado, Chuva, Tempestade, Neve, Névoa e Calor forte, com efeitos na viagem, no tiro, na visão e na Felicidade. Camada visual de partículas, névoa e tom, sem tiles novos.
 - **Eventos extremos:** seca, enchente, geada fora de hora, tempestade forte, onda de calor e inverno rigoroso (cerca de 1 a cada 5 anos).
-- **Inverno:** lenha (1 Madeira Bruta por NPC real a cada 4 dias, × bioma); sem lenha, Felicidade −10 e mais mortes de velhos e crianças.
+- **Inverno:** lenha (1 Tora por NPC real a cada 4 dias, × bioma); sem lenha, Felicidade −10 e mais mortes de velhos e crianças.
 - **Viagem e guerra:** lama na primavera e inverno lento, com teto de × 2,0; campanha de inverno mais cara; IA com −15 de vontade de guerra no inverno.
 - **Tela:** paleta por estação e 4 fases do dia (à noite, visão e detecção −30%). Na fatia vertical: produção por estação e tom de dia e noite.
 
@@ -224,7 +224,7 @@
 - Só **Controlados e Importantes** usam itens com efeito individual; os NPCs comuns consomem de forma agregada.
 - **Livros:** Livro +3 (até 60) e Livro Antigo +6 (até 80) numa habilidade de fora do combate, uma vez por leitor, sem se gastar; **Livro de Atributos** +2 × Rank numa habilidade de combate, se gasta.
 - **Livro Sagrado (ideia do autor, inspirada no Kenshi):** lei "Livro Sagrado obrigatório", desejada pela Religiosa; os Controlados precisam carregar o livro nas revistas. Sem ele, heresia (gravidade 2 na primeira vez na estação).
-- **Joia Mágica** aumenta a Mana do Mago; **Anel Mágico** dá bônus de habilidade. **Relíquias** e cerca de 6 **Artefatos lendários** únicos; a Realeza tem os Artefatos como posse (2 por NPC real, 10% de desgaste por estação).
+- **Joia de Mana** aumenta a Mana do Mago; **Anel de Mana** dá bônus de habilidade. **Relíquias** e cerca de 6 **Artefatos lendários** únicos; a Realeza tem os Artefatos como posse (2 por NPC real, 10% de desgaste por estação).
 - **Curativo** e **Remédio**; estado **Doente** só nos Controlados e Importantes; a cidade gasta Remédios nas epidemias.
 - Qualidade da comida, bebida e narcóticos no grupo; traço **Viciado**.
 
@@ -239,7 +239,8 @@
 - Pedida pelo autor ao fim do P1: estado de cada documento, 22 inconsistências, 12 partes abstratas (a principal: **não há base numérica da economia**), pendências por sistema e cerca de 128 propostas a confirmar.
 - **V1 aplicada:** os 13 documentos antigos no formato padrão (a Cidade virou documento de entrada); fórmula de dano única (Combate); animais como itens (Galinha, Porco, Ovelha, Vaca, Cavalo); **a pesca volta** (Pesqueiro, Pescador); **inventário único por cidade**, com pilhas e capacidade somada das construções; nomes padronizados (Mosquete, Machado Curto, Peças de Argila...); **Fome** (cai 100 em 36 h), Felicidade individual e noites sem dormir nos Controlados; Templo com a tabela geral de vagas (2 Templos nas cidades de nível 4); crime de Sedição.
 - **IP1 aplicada (padronização da produção):** uma receita fixa por produto (produto, insumos, construção, Função, habilidade mínima, horas, era); **uma família por construção** (Aço Mágico só na Forja Arcana; Leves e Pesadas no Ferreiro, Média no Costureiro; Fumo e Pó Espiritual no Misturador); **escada de níveis** (Tier 1, 2, 2, 3, 4 e Rank 1 a 5) mais a trava da era (Rank até 3, 4, 4, 5); Rank do produto = menor entre material, nível e habilidade; **1 NPC real = 1 trabalhador e 1 consumidor**; horas por unidade por Tier; fila de ordens do jogador e nota da IA; limites (3 insumos, 4 passos, nenhum órfão, sem ferramentas). Ver [[Sistema de Produção/Descrição|Produção]].
-- **Em seguida:** IP2 (nomes e lista final dos itens, enviada) e IP3 (insumos de cada produto). Depois: V2 (economia numérica), V3 (pendências), V4 e V5 (propostas).
+- **IP2 aplicada (nomes e lista final dos itens):** nomes de época, sem embalagem e no singular (Grão, Tora, Minério de Ferro); nomes de fantasia só no futuro (ideia do autor); **só a Pedra de Mana**, bruta e sem refino (ideia do autor; Joia e Anel de Mana); Pólvora, Adubo, Bloco de Pedra, Tecidos de Algodão e de Lã; escada de materiais fora do metal (Composto, Cravejado, Arcano); Arcabuz, Fuzil Raiado, Cetro, Bombarda, Canhão, Flecha, Virote e Cartucho; armadura **Leve de couro** (Costureiro), **Média de malha** e **Pesada de placas** (Ferreiro); roupas em conjuntos por papel social; Vinho, Peixe Defumado, Assado Temperado, Roupa Comum e Roupa Fina; **consumo pelo Tier** (Tier 3 = Luxo, Tier 4 = Exclusivo). Cerca de 180 itens. Ver [[Sistema de Itens/Descrição|Itens]].
+- **Em seguida:** IP3 (insumos de cada produto, enviada). Depois: V2 (economia numérica), V3 (pendências), V4 e V5 (propostas).
 
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
@@ -251,7 +252,7 @@
 - **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto.
-- **Itens e Produção:** nomes e lista final dos itens (rodada IP2: peça Média, Luxo × Exclusivo por Tier, família da mana); insumos de cada produto (IP3).
+- **Itens e Produção:** insumos de cada produto e a nova Funções e Construções (rodada IP3); nomes de fantasia no futuro (ideia do autor).
 - **Início de Jogo:** custo em pontos; bônus exato do estilo Mercador.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; confirmar a regra de armadura mista.
@@ -274,7 +275,7 @@
 - **Religião:** valores a testar (cobertura, Devoção, festivais, assimilação); nomes das fés e dos festivais; critérios da Bênção e do Anátema; missionários; Magos e heresia na Religiosa.
 - **Clima e Estações:** valores a testar (produção, chances, efeitos, lenha); arte extra das estações; feitiços de clima; roupas de inverno; luzes dinâmicas.
 - **Notícias:** valores a testar (horas por mapa, alcance, precisão, limiar de preço); boatos falsos; IA que espera as notícias e mensageiros; jornal impresso.
-- **Efeitos de Itens:** valores a testar; lista final dos Artefatos lendários; produção de livros e da Joia Mágica; exigências parecidas com o Livro Sagrado em outras culturas.
+- **Efeitos de Itens:** valores a testar; lista final dos Artefatos lendários; produção de livros; exigências parecidas com o Livro Sagrado em outras culturas.
 - **Escravidão:** valores a testar; grande revolta (futuro); dívida como fonte; quais facções começam com a escravidão permitida.
 - **Revisão completa:** as inconsistências, as partes abstratas e as propostas estão na [[Revisão Completa]] e serão resolvidas nas rodadas V1 a V5.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
@@ -299,12 +300,13 @@
 | P1 | Efeitos de itens e Escravidão | Escrito |
 | Revisão | Revisão completa: V1 | Aplicada |
 | Revisão | Itens e Produção: IP1 | Aplicada |
-| Revisão | **Itens e Produção: IP2 e IP3** | **IP2 enviada, aguardando respostas** |
+| Revisão | Itens e Produção: IP2 | Aplicada |
+| Revisão | **Itens e Produção: IP3** | **IP3 enviada, aguardando respostas** |
 | Revisão | V2, V3, V4 e V5 | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 e o P1 estão completos, e a V1 e a IP1 da revisão foram aplicadas. Agora: IP2 (nomes dos itens) → IP3 (insumos) → V2 (economia numérica) → V3 (pendências) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
+**Ordem:** o P0 e o P1 estão completos, e a V1, a IP1 e a IP2 da revisão foram aplicadas. Agora: IP3 (insumos) → V2 (economia numérica) → V3 (pendências) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
 
 ## Como estamos trabalhando
 
