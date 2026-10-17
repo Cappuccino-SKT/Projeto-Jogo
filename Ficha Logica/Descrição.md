@@ -17,7 +17,7 @@ O mapa geral da fatia (entidades, arquivos de dados, ordem do dia, marcos) está
 | Marco | Fichas a escrever antes |
 |---|---|
 | 0. Ambiente | Nenhuma (só abre uma janela) |
-| 1. Janela, loop, relógio e mapa | Tempo (relógio fixo); Mapa (tiles e camadas) |
+| 1. Janela, loop, relógio e mapa | [[Ficha Logica/Tempo\|Tempo]] (relógio fixo); [[Ficha Logica/Mapa\|Mapa]] (tiles e camadas). Escritas em 2026-10-17 |
 | 2. Câmera e entrada | Interface (só câmera, zoom e teclas) |
 | 3. Carregar os dados | Itens, Recursos e Receitas (incluindo o preço base) |
 | 4. NPC andando | Mapa (busca de caminho); NPC (só posição e movimento) |

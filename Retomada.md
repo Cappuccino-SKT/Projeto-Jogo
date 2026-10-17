@@ -5,8 +5,9 @@
 - **Design completo:** todos os sistemas estão escritos, a revisão completa terminou, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta.
 - **Rodada FT2 (2026-10-17):** o autor **liberou o código, marco a marco**.
 - **Pastas reorganizadas (2026-10-17):** `Documentos/`, `Ficha Logica/`, `Codigo/` e `Jogo/` (seção 3).
-- **Próximo passo: o marco 0** (seção 3).
-- **Ao retomar:** rodar `git fetch` e conferir se o pull request mais recente foi mesclado no `main`. O último é o da branch `docs/organiza-pastas` (feita em cima da `docs/ft2-limpeza`).
+- **Fichas do marco 1 (2026-10-17):** [[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]] (tiles e camadas) escritas, com a **rodada FL1 aplicada**. O marco 0 não tem ficha.
+- **Próximo passo:** fechar o marco 0 (seção 3) e começar o marco 1.
+- **Ao retomar:** rodar `git fetch` e conferir se o pull request mais recente foi mesclado no `main`. O último é o da branch `docs/fichas-marco-1`.
 
 ## 2. Como trabalhamos
 
@@ -65,7 +66,7 @@
 | Marco | Bibliotecas |
 |---|---|
 | 0 e 1 | SDL3, glad (OpenGL 3.3), stb_image |
-| 3 | nlohmann/json (o CSV é lido por código próprio) |
+| 1 | nlohmann/json, antecipada do marco 3 para ler o mapa do Tiled (FL1-1); o CSV é lido por código próprio |
 | 4 e 5 | EnTT |
 | 7 | Tracy |
 | 8 | Dear ImGui |
@@ -80,7 +81,7 @@
 
 ## 4. Rodada pendente
 
-Nenhuma. O próximo passo é o marco 0.
+Nenhuma. A **FL1** (fichas do marco 1) foi aplicada em 2026-10-17, com "seguir sugestão" em todas: as decisões estão nas fichas do [[Ficha Logica/Tempo|Tempo]] e do [[Ficha Logica/Mapa|Mapa]] e na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]].
 
 ## 5. Onde está cada coisa
 
