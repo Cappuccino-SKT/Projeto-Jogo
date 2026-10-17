@@ -21,7 +21,7 @@ Cada construção de produção tem níveis de 1 a 5. A coluna de produtos mostr
 | Carpinteiro | Carpinteiro | Pela receita | **N1:** Tábua, Flecha, Virote; Arco Curto e Longo de Madeira, Besta Leve de Madeira, Escudo de Madeira, Cajado Simples de Madeira; **N2:** Móveis de Madeira; Arcos Compostos e Bestas de Aço (Era 2); **N4:** Móveis Refinados; **N5:** Arcos Arcanos e Bestas de Aço Mágico (Era 4) |
 | Costureiro | Costureiro | Pela receita | **N1:** Tecido de Algodão, Tecido de Lã, Couro Refinado, Roupa Comum; roupas dos conjuntos Pobre, Trabalhador, Artífice e Furtivo; armadura Leve de Couro; **N2:** Sela; conjuntos Mercador e Nobre; armadura Leve Cravejada (Era 2); **N4:** Roupa Fina; **N5:** armadura Leve Arcana (Era 4) |
 | Cozinheiro | Cozinheiro | Pela receita | **N1:** Pão, Sopa, Peixe Defumado, Ração Militar; **N2:** Torta de Fruta, Linguiça, Queijo; **N4:** Assado Temperado; **N5:** Presunto Curado, Doce de Especiarias |
-| Destilaria | Destilador | Pela receita | **N2:** Cerveja; **N4:** Vinho, Perfume; **N5:** Licor. **[Proposta]** Sem produto no nível 1: é construída já no nível 2 (V3) |
+| Destilaria | Destilador | Pela receita | **N2:** Cerveja; **N4:** Vinho, Perfume; **N5:** Licor. Sem produto no nível 1: é construída já no nível 2 (rodada V3-13) |
 | Fazenda | Fazendeiro | Braçal | **N1:** Grão, Legumes, Fruta, Algodão, Especiarias, Folha de Fumo, Flor Espiritual (com Adubo no estoque, +25%) |
 | Ferreiro | Ferreiro | Pela receita | **N1:** Espada, Lança, Machado e Clava de Ferro (Curtos e Longos), Escudo de Ferro, armaduras Média e Pesada de Ferro, Chapéu de Mineiro; **N2:** Grilhões; as mesmas armas, escudo e armaduras de Aço (Era 2); **N5:** de Aço Mágico (Era 4) |
 | Forja Arcana | Mago de Ofício | Especialista | **N1:** Barra de Aço Mágico (Era 4; exceção à escada: o nível dá velocidade e vagas) |
@@ -79,6 +79,6 @@ O Sistema de Produção cita alguns nomes que **não aparecem** no canvas. Suges
 
 ### Perguntas em aberto
 
-1. **Destilaria no nível 2:** confirmar a exceção à escada (rodada V3).
+1. **Destilaria:** construída já no nível 2 (confirmado na V3-13).
 2. **Funções dos serviços públicos** (Lojista, Taverneiro, Carcereiro, Moedeiro...): confirmar nas rodadas de propostas (V4 e V5).
 3. **Valores a testar:** vagas por nível (a tabela geral 2, 3, 5, 7 e 10 vale para todas as construções, IP3-11) e habilidade mínima de cada nível.

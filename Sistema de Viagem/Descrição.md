@@ -44,7 +44,7 @@ O tempo base para atravessar um Mapa Local é de **4 horas a pé**. Ele é multi
 | Estrada ligando cidades | 0,75 |
 | Mapa com cidade de nível 3 ou 4 (ruas e pontes) | 0,65 |
 
-Vale o melhor valor que o mapa tiver. **[Refinar depois]** Construir estradas (pela facção ou pelo jogador), ligado à Construção e à Tecnologia.
+Vale o melhor valor que o mapa tiver. Construir estradas: ver "Estradas e patrulhas" (rodada V3-9).
 
 **Tamanho do grupo** (o autor pediu que um exército ande muito mais devagar que uma pessoa sozinha). Conta cada pessoa; um Esquadrão conta como 100. **[Proposta]**
 
@@ -163,6 +163,14 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 | Estilo Aventureiro | As masmorras não lendárias da região de partida |
 | Mapa comprado (Mercado ou mercador viajante) | Uma região inteira, com as informações datadas do dia da compra |
 
+### Estradas e patrulhas (rodada V3-9)
+
+- **Estrada** (multiplicador 0,75): construída num Mapa Local inteiro.
+  - **Custo:** 40 Blocos de Pedra + 20 Tábuas + 160 h de obra, pelo Construtor da facção ou do jogador.
+  - **Requisito:** a tecnologia "Estradas" (Era 1, ramo Construção).
+- **Guerra:** o saque e o cerco danificam a estrada do mapa (multiplicador 0,9 até o reparo, que custa 25% da obra).
+- **Patrulhas:** 1 Esquadrão leve para cada 4 mapas de território, pelo soldo normal (8 moedas por dia).
+
 ### Parte técnica
 
 - **LOD:** as entidades vivem no Mapa Mundial, que não tem LOD e fica sempre carregado. Elas só viram NPCs de verdade quando entram num Mapa Local em LOD 0 ou 1 (hidratação) e voltam a ser só dados quando saem (desidratação).
@@ -197,6 +205,6 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 ### Perguntas em aberto
 
 1. **Valores a testar:** tempo base, multiplicadores, chances de encontro, perda de carga, preço do suborno.
-2. **Construção de estradas:** quem constrói, quanto custa e se precisa de tecnologia.
+2. **Estradas:** custo, requisito e dano na guerra decididos na V3-9.
 3. **Clima:** valores a testar dos multiplicadores de clima e estação (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
-4. **Quantas patrulhas** cada facção mantém e quanto custam.
+4. **Patrulhas:** 1 a cada 4 mapas, pelo soldo normal (rodada V3-9).

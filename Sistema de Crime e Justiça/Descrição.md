@@ -136,6 +136,28 @@ Existe suborno: pagar um guarda para ignorar o crime.
 - Só **líderes e NPCs Importantes** viram prisioneiros individuais, com a opção de **resgate** ou **execução**.
 - As **baixas comuns** de um esquadrão derrotado podem ser **escravizadas em massa**, se a lei da facção permitir, gerando NPCs Escravo conforme o Fator de Escala (100 prisioneiros = 1 NPC Escravo). Na batalha, 20% dos soldados derrubados são capturados, e os feridos do perdedor também (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
+### Valores, loja ilegal do jogador e confiança (rodada V3-3)
+
+- **Multa** = 25 × gravidade² moedas:
+
+| Gravidade | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| Multa (moedas) | 25 | 100 | 225 | 400 | 625 |
+
+- **Recompensa:** o dobro da multa, somada por crime. Os **Caçadores de Recompensa** surgem quando ela chega a **500** numa facção (um crime de gravidade 5, ou vários menores).
+- **Loja ilegal do jogador:** sim, qualquer construção de produção dele.
+  - **Batida da guarda:** a cada estação, chance = Controle da cidade ÷ 200 (Controle 60 = 30%).
+  - **Se descoberta:** confisco do estoque ilegal e crime de Contrabando (gravidade 3) para o gerente e para o jogador, se ele estiver no mapa.
+- **Missão de confiança:** a Confiança do NPC vai de 0 a 100. Com 50, o jogador compra na loja ilegal; com 80, também vende.
+
+| Missão | O que é | Confiança |
+|---|---|---|
+| Entrega | Levar mercadoria proibida a outra cidade | +25 |
+| Dívida | Cobrar um devedor do NPC | +20 |
+| Informante | Achar quem falou com a guarda e calá-lo, por suborno ou à força | +35 |
+
+- **Narcóticos** (ideia do autor, V3-1): proibidos em todas as facções menos a Escravista. Fora dela, carregá-los é Contrabando, e as lojas ilegais os vendem a × 2.
+
 ### Ligação com outros sistemas
 
 | Sistema | O que Crime e Justiça fornece ou recebe |
@@ -160,6 +182,6 @@ Existe suborno: pagar um guarda para ignorar o crime.
 
 1. **Valores de gravidade e das multas.** A tabela é um ponto de partida e precisa de testes.
 2. **Fórmula da Criminalidade.** Os pesos de Felicidade, pobreza, desemprego e guardas (testes futuros).
-3. **Valor mínimo da recompensa** para gerar Caçadores de Recompensa (testes futuros). Base inicial: crimes de gravidade 5.
-4. **Loja ilegal do jogador.** O jogador também pode transformar uma construção de produção dele em loja ilegal?
-5. **Missão de confiança.** Quais tipos de missão ou evento, e quanta Confiança é necessária.
+3. **Valores a testar:** multas (25 × gravidade²) e o limiar de 500 dos Caçadores (rodada V3-3).
+4. **Loja ilegal do jogador:** sim, com batida da guarda (rodada V3-3).
+5. **Missão de confiança:** 3 tipos e os limiares de 50 e 80 (rodada V3-3); mais missões na rodada de conteúdo C3.

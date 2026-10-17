@@ -64,6 +64,11 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 - O comércio **move dinheiro entre cidades**: o total do mundo não muda. Cidades ricas e pobres surgem naturalmente.
 - A **cunhagem** (fonte) e os **impostos** (sumidouro) continuam como estão no Sistema Econômico.
 
+### Contrabando de narcóticos (ideia do autor, rodada V3-1)
+
+- Só a **Escravista** produz e vende Fumo e Pó Espiritual legalmente. Nas outras facções, são Contrabando.
+- Uma caravana que leva narcóticos para fora da Escravista corre o risco da revista. Em troca, vende nas lojas ilegais a × 2 do preço: é a rota mais lucrativa e mais arriscada do jogo.
+
 ---
 
 ## Parte técnica
@@ -92,4 +97,4 @@ O jogador monta a dele. A da cidade vem pronta, conforme o **nível da cidade**.
 ### Perguntas em aberto
 
 1. **Valores a testar:** capacidade por animal, salário dos guardas, valor da Tarifa, quanto o risco pesa na rota.
-2. **Bônus do estilo Mercador** (ver [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]).
+2. **Bônus do estilo Mercador:** decidido na V3-2 (800 moedas, 2 Cavalos, 1 companheiro e os preços de 3 cidades vizinhas).

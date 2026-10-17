@@ -141,6 +141,10 @@ Com 48 mapas e 6 facções, uma facção (ou o jogador) poderia engolir o mundo 
 - **Superextensão:** cada cidade conquistada há menos de 1 ano dá **−3 de Estabilidade** à facção ([[Sistema de Felicidade e Estabilidade/Descrição|Felicidade e Estabilidade]]).
 - Vale também para o jogador líder.
 
+## Fim da coalizão (rodada V3-10)
+
+A coalizão se desfaz quando a Ameaça do alvo fica abaixo de 40 por 1 estação, ou quando o alvo assina paz com todos os membros.
+
 ---
 
 ## Parte técnica
@@ -178,4 +182,4 @@ Com 48 mapas e 6 facções, uma facção (ou o jogador) poderia engolir o mundo 
 
 1. **Valores a testar:** pesos da vontade de guerra, limiar de declaração (60), Confiabilidade, exigências dos tratados.
 2. **Mensageiros:** no futuro, as propostas podem levar tempo de viagem (ligado às Notícias).
-3. **Coalizão:** quando ela se desfaz (por exemplo, quando a Ameaça cai).
+3. **Coalizão:** fim decidido na V3-10.

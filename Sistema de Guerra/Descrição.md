@@ -242,6 +242,19 @@ Usado nas guerras de IA, nos encontros de caravanas e patrulhas (ver [[Sistema d
 
 Batalha sem o jogador é sempre cálculo rápido. A Comitiva (o grupo do jogador dentro da batalha) está no [[Sistema de Batalha/Descrição|Sistema de Batalha]].
 
+## Muralha, Posto da Guarda e estradas (rodada V3-9)
+
+| Nível da Muralha | Porte | Custo |
+|---|---|---|
+| Paliçada | Médio | 60 Tábuas |
+| Muralha de Pedra | Grande | 200 Blocos de Pedra + 40 Tábuas |
+| Bastião (Era 3) | Grande | 400 Blocos de Pedra + 40 Barras de Ferro |
+
+- A manutenção segue a regra geral da [[Sistema de Construção/Descrição|Construção]].
+- O **Posto da Guarda** é de porte pequeno.
+- O saque e o cerco danificam a estrada do mapa ([[Sistema de Viagem/Descrição|Viagem]]).
+- A **guerra civil** na crise de sucessão está na [[Sistema de Facção/Descrição|Facção]] (rodada V3-7).
+
 ---
 
 ## Parte técnica
@@ -285,6 +298,6 @@ Batalha sem o jogador é sempre cálculo rápido. A Comitiva (o grupo do jogador
 ## Perguntas em aberto
 
 1. **Valores a testar:** pontos do Placar, Cansaço, consumo e capacidade da Caravana, tempo de cerco, efeitos do saque e coeficientes do cálculo rápido.
-2. **Custo e manutenção** da Muralha e do Posto da Guarda.
-3. **Estradas e pontes** destruídas ou construídas pela guerra (ligado à Viagem e à Construção).
-4. **Guerra civil** na crise de sucessão: como os lados se formam.
+2. **Muralha e Posto da Guarda:** custos decididos na V3-9.
+3. **Estradas:** o saque e o cerco as danificam (rodada V3-9).
+4. **Guerra civil:** decidida na V3-7 (ver Facção).

@@ -20,7 +20,7 @@ Já existe nos outros sistemas:
 - Magos são **raros**: cerca de **5%** da população nasce Mago, e **15%** na cultura Arcana.
 - **Filho de Mago** tem chance maior de nascer Mago.
 - Ser Mago não se aprende: é a booleana do NPC, definida no nascimento.
-- **[Refinar depois]** chance exata para filhos de Mago e como o Fator de Escala afeta a contagem em LOD 2.
+- **Chance de nascer Mago** (rodada V3-11): 2% sem pais Magos, 25% com um e 60% com os dois. Em LOD 2, vale a média da cidade.
 
 ## Escolas
 
@@ -91,6 +91,21 @@ Cada Mago tem **afinidade com uma escola** (sorteada ao nascer). Ele pode aprend
 - Não existe falha ou acidente aleatório ao conjurar.
 - O custo é social e político: a lei de Magia da facção, a discriminação na cultura Arcana, o crime de magia na Tecnocrata, a restrição na Religiosa e a reação de culturas hostis (ver [[Sistema de Cultura/Descrição|Sistema de Cultura]] e [[Sistema de Crime e Justiça/Descrição|Sistema de Crime e Justiça]]).
 
+## Grimório e feitiços fora do combate (rodada V3-11)
+
+- **Grimório:**
+  - **onde se acha:** nas masmorras, como loot, e no Mercado das capitais Arcanas (cerca de 80 moedas);
+  - **quem produz:** a **Torre Arcana nível 3** copia o Grimório de um feitiço que a facção já pesquisou, com 2 Couros Refinados + 1 Pedra de Mana, em 24 h, por um Mago.
+- **Feitiços de Suporte fora do combate** (só 3 na primeira versão):
+
+| Feitiço | Efeito | Limite |
+|---|---|---|
+| Bênção da Colheita | Fazenda +20% por 1 estação | 1 por cidade por estação |
+| Acalmar Tempestade | Cancela uma Tempestade forte no mapa | Custa 3 Pedras de Mana |
+| Curar Ferimentos | Igual ao Hospital com Mago de Suporte, mas no campo | — |
+
+- A lista completa de feitiços vem na rodada de conteúdo C2, com o molde de [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]].
+
 ---
 
 ## Parte técnica
@@ -115,7 +130,7 @@ Cada Mago tem **afinidade com uma escola** (sorteada ao nascer). Ele pode aprend
 
 ### Perguntas em aberto
 
-1. **Lista inicial de feitiços** por escola e o que a árvore arcana libera.
+1. **Lista de feitiços** e árvore arcana: rodada de conteúdo C2 (molde em [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]]).
 2. **Valores a testar:** custo de Mana, conjuração, recarga, regeneração, bônus de encantamento, quantos feitiços por Inteligência.
-3. **Grimório:** como é obtido (comprado, produzido, achado em masmorras).
-4. **Feitiços de Suporte fora do combate** além do Hospital (por exemplo, colheita, clima).
+3. **Grimório:** masmorras, Mercado Arcano e cópia na Torre Arcana (rodada V3-11).
+4. **Feitiços de Suporte fora do combate:** 3 decididos na V3-11; mais na C2.

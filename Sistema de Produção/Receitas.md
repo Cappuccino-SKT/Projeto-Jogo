@@ -272,7 +272,7 @@ Todos são da Era 1 (IP3-9).
 | Tecido de Lã | Roupa Comum, Cota de Malha, arcos, roupas Pobre e Furtiva |
 | Tecido de Algodão | Curativo, Cartucho, Móveis Refinados, Roupa Fina, roupas |
 
-**[Proposta] A Destilaria não tem produto no nível 1:** a Cerveja é de Tier 2, então a primeira receita fica no nível 2. Saída: a Destilaria é construída **já no nível 2**, uma exceção à escada como a da Forja Arcana. Fica para confirmar na V3.
+**A Destilaria não tem produto no nível 1:** a Cerveja é de Tier 2. Por isso a Destilaria é construída **já no nível 2**, uma exceção à escada como a da Forja Arcana (confirmado na rodada V3-13).
 
 ---
 
@@ -300,5 +300,5 @@ Todos são da Era 1 (IP3-9).
 ## Perguntas em aberto
 
 1. **Números finais:** a V2 ajusta lotes, horas e quantidades junto com os preços.
-2. **Destilaria no nível 2** (ver "Conferência"): V3.
+2. **Destilaria no nível 2:** confirmada na V3-13.
 3. **Valores a testar:** habilidade mínima por nível, rendimento do Adubo, ciclos do Pasto e do Rancho.

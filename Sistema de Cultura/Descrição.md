@@ -58,6 +58,9 @@ Cada traço define valores padrão de:
 
 **Outros traços candidatos** para combinações futuras e para novas culturas: Agrária/Naturalista (contra a tecnologia) e Erudita.
 
+- A cultura **Agrária/Naturalista** fica fora da primeira versão, como traço futuro (rodada V3-13).
+- **Leis iniciais:** as leis de cada facção no primeiro dia seguem o desejo da cultura, sem o pensamento extremo. A tabela está na [[Sistema de Facção/Descrição|Facção]] (rodada V3-1). Ideia do autor: só a Escravista permite os narcóticos.
+
 ### Pensamentos extremos
 
 Toda cultura tem **pelo menos um pensamento extremo**: uma ideia levada ao limite que a distingue de qualquer outra.

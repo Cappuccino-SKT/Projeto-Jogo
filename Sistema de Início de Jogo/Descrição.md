@@ -35,7 +35,7 @@ Como é só dado, novos estilos podem ser acrescentados sem mexer em código.
 
 ### Estilos
 
-Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o autor tiver novas ideias. Os bônus são exemplos.
+Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o autor tiver novas ideias. Os bônus finais estão em "Bônus de cada estilo", abaixo (rodada V3-2).
 
 | Estilo | Ideia | Bônus inicial (exemplo) |
 |---|---|---|
@@ -46,6 +46,32 @@ Por enquanto, os estilos abaixo. Novos estilos serão acrescentados quando o aut
 | **Nobre exilado** | Herdeiro de uma dinastia caída, quer retomar o poder | Companheiros nobres, relação alta com sua cultura |
 | **Escravo** | Começa como propriedade de alguém e tenta se libertar: comprar, fugir ou servir (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) | Habilidades de Trabalho Braçal, aliados entre escravos |
 | **Mago** | Começa com a habilidade mágica desenvolvida | Magia, Mana, cajado |
+
+### Bônus de cada estilo (rodada V3-2)
+
+| Estilo | Dinheiro | Itens e grupo | Habilidade e relação |
+|---|---|---|---|
+| Dono de vila | 300 | Assentamento nível 1 (1 Casa, 1 Fazenda, 1 Posto de Coleta), 40 Tábuas, 40 Blocos de Pedra, 4 colonos Civis | +10 de Inteligência |
+| Aventureiro | 150 | 2 companheiros; armas e armadura Leve de Rank 2 | +10 em Corpo a Corpo ou Longo Alcance |
+| Membro de facção | 200 | Título Cidadão (ou Cavaleiro, se Nobre); uma Casa na cidade | Relação +30 com a facção |
+| Mercador | 800 | 2 Cavalos e 1 companheiro (líder de caravana); preços de 3 cidades vizinhas já conhecidos | +15 de Carisma |
+| Nobre exilado | 400 | 2 companheiros de Nobreza; Espada Longa de Aço de Rank 2 | Relação +20 com a sua cultura e −20 com a facção que tomou o trono |
+| Escravo | 0 | 2 escravos aliados (Vínculo alto); Grilhões | +20 de Trabalho Braçal |
+| Mago | 100 | Cajado Simples de Rank 2, 3 Pedras de Mana | Mago; +20 de Magia |
+
+**Personalizado:** 100 pontos, a partir de um personagem Civil sem nada. A cultura é grátis.
+
+| Escolha | Custo |
+|---|---|
+| 10 moedas | 1 ponto |
+| Companheiro | 15 pontos |
+| +10 numa habilidade | 10 pontos |
+| Item | 1 ponto a cada 10 moedas de preço |
+| Ser Mago | 30 pontos |
+| Assentamento nível 1 | 40 pontos |
+| Título Cidadão | 10 pontos |
+
+Cada estilo pronto vale cerca de 100 pontos, o que mantém o personalizado justo.
 
 ### Mundo fixo, estado inicial variável
 
@@ -67,5 +93,5 @@ O mundo (mapas, cidades e regiões) é fixo e desenhado à mão. O que varia a c
 
 ### Perguntas em aberto
 
-1. **Custo em pontos do estilo personalizado.** Quanto custa cada escolha? Depende dos valores finais de dinheiro, itens e habilidades, definidos mais perto da fase de testes.
-2. **Mercador.** Bônus exato (dinheiro, caravana inicial, preços conhecidos); o comércio está no [[Sistema de Comércio/Descrição|Sistema de Comércio]].
+1. **Custo em pontos do personalizado:** decidido na V3-2 (valores a testar).
+2. **Mercador:** decidido na V3-2.

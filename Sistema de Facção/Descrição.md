@@ -87,9 +87,34 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 
 **Herança total.** Toda cidade vinculada a uma facção adota todas as leis dela. Não há leis locais por cidade. O atributo "Itens proibidos" da Cidade passa a ser derivado das leis da facção.
 
+### Leis iniciais de cada facção (rodada V3-1)
+
+As leis do primeiro dia seguem o desejo de cada cultura, sem o pensamento extremo (o extremo fica para o jogo produzir). **Ideia do autor:** todas as facções proíbem os **narcóticos**, menos a **Escravista**, que é a única produtora inicial, sobretudo com mão de obra escrava.
+
+| Lei | Guerreira | Arcana | Autoritária | Religiosa | Tecnocrata | Escravista |
+|---|---|---|---|---|---|---|
+| Escravidão | Permitida (só prisioneiros de guerra) | Proibida | Permitida (trabalho forçado como pena) | Proibida | Proibida | Permitida, ampla |
+| Imposto | Baixo | Normal | Normal | Normal | Normal, mais o imposto para pesquisa | Alto |
+| Conscrição | Alta (10% da população) | Baixa (3%) | Alta (8%) | Média (5%) | Baixa (3%) | Média (5%; escravos podem ser alistados) |
+| Magia | Restrita | Privilégio dos magos | Restrita | Restrita | Proibida (usar magia é crime; banir os Magos é o pensamento extremo) | Livre |
+| Poder do líder | Moderado | Moderado | Autoritário | Moderado | Fraco | Fraco |
+| Sistema de votação | Maioria simples | Conselho (só Magos) | Conselho de nobres | Maioria qualificada (2/3) | Ponderada pela população | Ponderada pelo nível da cidade |
+| Tolerância religiosa | Tolerância | Fé oficial | Fé oficial | Perseguição | Tolerância | Tolerância |
+| Livro Sagrado obrigatório | Não | Não | Não | Sim | Não | Não |
+| Tarifa | Média (10% da carga) | Média | Alta (20%) | Média | Média | Baixa (5%) |
+| Itens proibidos | Narcóticos | Narcóticos | Narcóticos | Narcóticos | Narcóticos; Cajados, Cetro e Joia de Mana | — |
+| Ajuste de preço da facção | Armas −20% | Itens de mana −20% | Comida −20% | Remédio e Curativo −20% | Armas de fogo e Pólvora −20% | — |
+
+**Consequências dos narcóticos (ideia do autor):**
+
+- Fora da Escravista, o Fumo e o Pó Espiritual são **Contrabando**: só aparecem nas lojas ilegais, a × 2 ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]).
+- Isso cria uma **rota de contrabando** a partir da Escravista e dá trabalho às lojas ilegais do jogador.
+- A **Flor Espiritual** (bruta, destaque da Arcana) continua legal. A Escravista precisa comprá-la para fazer o Pó Espiritual.
+- Os **Magos Arcanos** que quiserem o Pó Espiritual (regeneração de Mana) dependem do contrabando. Uma exceção por lei pode entrar no futuro.
+
 ### Assembleia e mudança de leis
 
-A mudança de leis é decidida por **votação em assembleia**, que depende da quantidade de cidades da facção e da cultura de cada uma. **[Refinar depois]**
+A mudança de leis é decidida por **votação em assembleia**, que depende da quantidade de cidades da facção e da cultura de cada uma. Os detalhes estão no fim desta seção (rodada V3-7).
 
 - Cada dono de cidade tem uma **cultura base**.
 - Cada Cultura está vinculada a um **conjunto de leis que ela deseja** (ver Sistema de Cultura).
@@ -100,6 +125,13 @@ A mudança de leis é decidida por **votação em assembleia**, que depende da q
 - **O líder pode barrar uma lei**, mas isso depende de **dois fatores juntos**: a **personalidade do líder** (**[Proposta]** Agressividade alta e Sociabilidade baixa aumentam a chance de barrar) e se a lei **Poder do líder** da facção **permite** essa ação.
 - Eventos de pressão de Nobres e Realeza (previstos na Classe Social) também podem forçar uma assembleia ou uma mudança de lei.
 
+**Detalhes da assembleia** (rodada V3-7):
+
+- **Pauta:** no máximo **3 leis** por assembleia. Cada cidade de IA propõe a lei mais distante do desejo da sua cultura; ganham as 3 propostas por mais cidades.
+- **Voto da IA:** a cidade vota sim se a lei aproxima a facção do desejo da sua cultura; com Felicidade abaixo de 30, ela vota contra o líder.
+- **Veto do líder** (quando a lei Poder do líder deixa): chance = 50% + (Agressividade − Sociabilidade) ÷ 2. Cada veto: legitimidade −5.
+- **Efeito:** a lei vale no dia seguinte; as cidades que votaram e perderam têm Felicidade −5 por 1 estação.
+
 **Cidades pequenas** (como o assentamento nível 1 do jogador) votam com o peso definido pelo Sistema de votação ativo da facção: em alguns, o peso é igual por cidade; em outros, proporcional ao nível ou à população.
 
 ### Dinastia
@@ -108,6 +140,11 @@ A mudança de leis é decidida por **votação em assembleia**, que depende da q
 
 - A **regra de sucessão** é definida pela Cultura: primogenitura, eleição entre os nobres, duelo ou mérito, escolha do líder ou escolha do clero (na Religiosa, o Sumo Sacerdote escolhe o herdeiro; ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 - Quando o líder morre, a sucessão acontece. Se não houver herdeiro, há uma crise: guerra civil, cidades que se declaram independentes ou dissolução da facção.
+- **Guerra civil** (rodada V3-7):
+  - **candidatos:** até 3, o herdeiro pela regra de sucessão, o nobre de maior Renome e o general do maior exército;
+  - **lados:** cada cidade escolhe pela Opinião do seu governador sobre cada candidato;
+  - **luta:** os lados viram facções separadas em guerra, com o Placar de Guerra comum;
+  - **fim:** quem chega a +60 reúne a facção; sem acordo em 2 anos, o lado menor fica independente.
 - Se o líder for o personagem do jogador, o herdeiro passa a ser o NPC Controlado, em vez de fim de jogo. Sem herdeiro, o jogador escolhe um companheiro com Opinião de +60 ou mais; as dinastias da IA casam e têm filhos por estação (ver [[Sistema de Companheiros e Diálogo/Descrição|Sistema de Companheiros e Diálogo]]). Isso conecta os atributos Grávida, Estágio e Relação que já existem.
 - Nobres da dinastia podem governar cidades (cargo de governador).
 
@@ -214,4 +251,4 @@ Requisitos:
 
 ### Perguntas em aberto
 
-1. **Detalhes da assembleia** (marcado para refinar depois).
+1. **Valores a testar:** pauta de 3 leis, chance de veto e prazo da guerra civil (rodada V3-7).

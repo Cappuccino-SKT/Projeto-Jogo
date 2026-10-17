@@ -39,11 +39,16 @@ Nas cidades Religiosas, o Templo cuida dos feridos pobres: a cura dos NPCs comun
 
 O guarda deixa o alvo **Inconsciente** em vez de Morto na prisão não letal (ver Sistema de Crime e Justiça), então o Inconsciente precisa ser um estado estável.
 
-**[Em aberto]** Quando o Inconsciente vira Morto? **[Proposta]**
+**Quando o Inconsciente vira Morto** (proposta confirmada na rodada V3-4, com números):
 
 - O Inconsciente **não morre sozinho** em combate não letal. No modo não letal (padrão contra cidadãos e guardas), Vida 0 deixa o alvo Inconsciente. O modo letal e o não letal estão no [[Sistema de Combate/Descrição|Sistema de Combate]].
 - Morre por **golpe de misericórdia** (um ataque letal intencional contra o alvo) ou por **sangramento**, se o combate for letal e ele ficar sem tratamento por um número de horas.
 - O Inconsciente acorda depois de um tempo, com Vida baixa.
+- **Números:**
+  - **não letal:** o Inconsciente não sangra e acorda em **4 horas de jogo**, com 10% da Vida;
+  - **letal:** ele **sangra** e morre em **2 horas de jogo** (80 s reais a 1x) sem Curativo;
+  - **golpe de misericórdia:** mata na hora e é crime de Assassinato, se for contra um cidadão.
+- **Hospital:** cura 5% da Vida por hora de jogo (10% com um Mago de Suporte) e custa 2 moedas por dia de internação.
 - Se o grupo do jogador é derrotado por Criaturas, ele acorda ferido no mesmo lugar depois que elas vão embora (ver Objetivo e Progressão).
 
 ### Fora de escopo por enquanto
@@ -67,5 +72,5 @@ Ferimentos por parte do corpo.
 
 ### Perguntas em aberto
 
-1. Quando o Inconsciente vira Morto (proposta acima).
-2. Taxa de regeneração e custo do Hospital (testes).
+1. **Valores a testar:** 4 h para acordar, 2 h de sangramento, cura e custo do Hospital (rodada V3-4).
+2. Taxa de regeneração fora do Hospital (testes).

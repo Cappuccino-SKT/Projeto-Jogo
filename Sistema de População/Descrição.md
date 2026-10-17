@@ -122,7 +122,7 @@ Na Religiosa, o Templo reduz a mortalidade por doença em 25% (ver [[Sistema de 
 - **Lotes fixos**, marcados no **Tiled** (ver [[Arquitetura/Descrição|Arquitetura]]) em 3 tamanhos: pequeno, médio e grande.
 - Os interiores têm **poucos layouts por tipo de moradia e por cultura**, reaproveitados entre casas.
 - Em **LOD 2** a casa não tem interior até alguém entrar.
-- **[Refinar depois]** quantidade de lotes por Mapa Local e por nível.
+- Quantidade de lotes por nível: ver "Lotes e Controlados" (rodada V3-8).
 
 ---
 
@@ -150,6 +150,21 @@ O nível 4 continua restrito às capitais, por conquista (ver Sistema de Cidade)
 ### Jogador e IA
 
 As **mesmas regras e a mesma fórmula** valem para o jogador e para a IA. As cidades da IA em LOD 2 crescem pelo cálculo por estação.
+
+### Lotes e Controlados (rodada V3-8)
+
+**Lotes por nível de cidade:**
+
+| Nível | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|
+| Lotes pequenos | 8 | 16 | 30 | 60 |
+| Lotes médios | 3 | 6 | 12 | 24 |
+| Lotes grandes | 0 | 1 | 3 | 8 |
+
+O porte de cada construção está na [[Sistema de Construção/Descrição|Construção]].
+
+- **Moradia dos Controlados:** um quarto na Taverna (2 moedas por dia por companheiro) ou uma Casa do jogador; sem nenhum dos dois, dormem ao relento.
+- **Crianças decorativas:** não na primeira versão. No futuro, só alguns bonecos genéricos, sem simulação.
 
 ---
 
@@ -182,8 +197,8 @@ As **mesmas regras e a mesma fórmula** valem para o jogador e para a IA. As cid
 ### Perguntas em aberto
 
 1. **Valores a testar:** taxas de natalidade e mortalidade, vida em anos de jogo, capacidade por tipo de moradia, limiares de Felicidade, custo de subir de nível.
-2. **Quantidade de lotes** por Mapa Local e por nível, e tamanho de cada lote.
+2. **Lotes:** decididos na V3-8 (valores a testar).
 3. **Atratividade da migração:** pesos de Felicidade, emprego, moradia e comida (o emprego vem do [[Sistema de Trabalho e Propriedade/Descrição|Sistema de Trabalho e Propriedade]]).
-4. **Senzala:** quantos Escravos abriga e quem o possui (cidade, dono ou facção).
-5. **Moradia dos Controlados do jogador:** casa própria, quarto de Taverna ou alojamento.
-6. **Crianças decorativas:** vale a pena o custo de arte?
+4. **Senzala:** abriga 8 NPCs no nível 1, mais 4 por nível (V2-8). **[Proposta]** Pertence ao dono dos escravos (cidade, Rico ou jogador).
+5. **Moradia dos Controlados:** quarto na Taverna ou Casa do jogador (rodada V3-8).
+6. **Crianças decorativas:** não na primeira versão (rodada V3-8).

@@ -172,7 +172,12 @@ A **Universidade** é uma construção da **Facção**, presente no canvas civil
 - **Melhora a Inteligência e o Trabalho Especialista** dos NPCs da cidade ao longo do tempo (educação).
 - Dá **bônus aos Pesquisadores** do Laboratório ([[Sistema de Tecnologia/Descrição|Sistema de Tecnologia]]).
 - Exige a tecnologia do ramo **Administração**.
-- **[Refinar depois]** como um Controlado estuda nela e o tamanho do bônus.
+- **Estudo** (rodada V3-8): o Controlado paga 20 moedas por dia e estuda 8 h; ganha +1 em Inteligência ou Trabalho Especialista a cada 2 dias, até 70.
+
+### Gerente e leilão (rodada V3-8)
+
+- **Gerente das construções da Cidade (LOD 0):** o empregado de maior habilidade vira gerente, com salário × 1,5, sem precisar de outro NPC.
+- **Leilão:** uma construção parada por 2 estações vai a leilão por 3 dias. O lance mínimo é 50% do custo de obra, e podem dar lance os Ricos da cidade e o jogador.
 
 ---
 
@@ -217,6 +222,6 @@ Sem NPC a NPC. Em LOD 0 e 1, os salários são pagos por dia.
 
 1. **Valores a testar:** vagas por nível, tabela de salários, faixa de preço (±30%), limiar do estabilizador, taxa de imposto e parte da cidade, fração de empresas dos Ricos.
 2. **Funções:** nomes e categorias decididos na IP3-11; a habilidade que conta é a da receita ([[Sistema de Produção/Receitas|Receitas]]).
-3. **Quem gerencia** as construções da Cidade em LOD 0 (NPC gerente próprio ou a cidade).
-4. **Leilão:** como funciona quando uma construção volta à cidade.
-5. **Universidade:** forma exata de estudo dos Controlados e tamanho do bônus.
+3. **Gerente das construções da Cidade:** o empregado de maior habilidade (rodada V3-8).
+4. **Leilão:** 2 estações parada, 3 dias, lance mínimo de 50% (rodada V3-8).
+5. **Universidade:** 20 moedas por dia, +1 a cada 2 dias até 70 (rodada V3-8); o bônus da cidade fica a testar.
