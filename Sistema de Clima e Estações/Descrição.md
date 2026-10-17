@@ -31,7 +31,7 @@ A produção **Braçal** (a que sai direto do mapa) muda com a estação. A Manu
 | Posto de Coleta: madeira | 100% | 100% | 100% | 75% |
 | Posto de Coleta: pedra, argila, minérios, carvão e pedra mágica | 100% | 100% | 100% | 90% |
 
-- O Posto de Coleta junta madeira e minérios; por isso a tabela vale **por produto**, não por construção. **[Proposta]** A Água rende 100% o ano todo.
+- O Posto de Coleta junta madeira e minérios; por isso a tabela vale **por produto**, não por construção. A Água rende 100% o ano todo.
 - **Média anual da Fazenda** na tabela base: 87,5%. Quem não guarda comida no outono passa fome no inverno.
 
 **Ajustes por bioma** (só o que muda):
@@ -63,10 +63,10 @@ O clima é sorteado **1 vez por dia por região** (6 sorteios por dia, baratos e
 | Calor forte | × 1,1 | — | Felicidade −2 |
 
 - **Combate local** usa os mesmos efeitos de tiro e visão ([[Sistema de Combate/Descrição|Combate]]). **Batalha:** como o mundo para durante ela, o clima do início **vale a batalha toda** ([[Sistema de Batalha/Descrição|Batalha]]).
-- **Tempestade, "NPCs ficam em casa":** no Período Livre ninguém vai à Taverna nem ao Mercado. **[Proposta]** O trabalho ao ar livre (Fazenda, Pasto, Rancho, Posto de Coleta) rende −50% naquele dia.
+- **Tempestade, "NPCs ficam em casa":** no Período Livre ninguém vai à Taverna nem ao Mercado. O trabalho ao ar livre (Fazenda, Pasto, Rancho, Posto de Coleta) rende −50% naquele dia.
 - **Calor forte:** −2 de Felicidade enquanto durar, como modificador com causa.
 
-**[Proposta] Chances por estação** (bioma temperado, em %):
+**Chances por estação** (bioma temperado, em %):
 
 | Estação | Limpo | Nublado | Chuva | Tempestade | Neve | Névoa | Calor forte |
 |---|---|---|---|---|---|---|---|
@@ -75,7 +75,7 @@ O clima é sorteado **1 vez por dia por região** (6 sorteios por dia, baratos e
 | Outono | 30 | 30 | 25 | 5 | — | 10 | — |
 | Inverno | 25 | 30 | — | 5 | 30 | 10 | — |
 
-**[Proposta] Ajustes por bioma:** montanhas frias com neve também no outono (15%) e na primavera (10%) e neve 50% no inverno; terras áridas com um terço da chuva e calor forte 30% no verão; litoral com o dobro de tempestades e chuva no lugar da neve; floresta enevoada (Arcana) com o dobro de névoa.
+**Ajustes por bioma:** montanhas frias com neve também no outono (15%) e na primavera (10%) e neve 50% no inverno; terras áridas com um terço da chuva e calor forte 30% no verão; litoral com o dobro de tempestades e chuva no lugar da neve; floresta enevoada (Arcana) com o dobro de névoa.
 
 **Visual:** uma **camada por cima do mapa**, com partículas (pingos, flocos), **névoa translúcida** e um **tom de cor**. São poucos sprites pequenos, sem tiles novos.
 
@@ -88,13 +88,13 @@ O clima é sorteado **1 vez por dia por região** (6 sorteios por dia, baratos e
 | **Seca** | Verão; terras áridas e planície | Fazenda −50% | 1 estação |
 | **Enchente** | Primavera; mapas com rio | Fazenda −30%; perde 10% do estoque de comida da cidade | 4 dias |
 | **Geada fora de hora** | Primavera ou outono; montanhas e colinas | Fazenda perde 50% da produção da estação | Pontual |
-| **Tempestade forte** | Qualquer estação; litoral | Caravanas paradas; danifica construções de madeira (custo de reparo pela manutenção) **[Proposta]** | 2 dias |
+| **Tempestade forte** | Qualquer estação; litoral | Caravanas paradas; danifica construções de madeira (custo de reparo pela manutenção) | 2 dias |
 | **Onda de calor** | Verão; terras áridas e litoral | Felicidade −5; chance de doença maior | 4 dias |
 | **Inverno rigoroso** | Inverno; o mundo todo (cerca de 1 vez a cada 5 anos) | Efeitos do inverno × 1,5; Lenha × 2; mortalidade de velhos maior | A estação inteira |
 
 - São **eventos ocasionais** da categoria Clima, com a chance base e os modificadores no JSON de eventos. O Narrador continua regulando os que afetam o jogador ([[Sistema de Eventos/Descrição|Eventos]]).
 - O inverno rigoroso tem escopo **Mundo**; os outros, escopo **Cidade/Mapa Local** ou região.
-- **[Proposta]** "Efeitos do inverno × 1,5" multiplica as perdas: a Fazenda temperada cai de 25% para cerca de 17%, e o multiplicador de viagem do inverno sobe 50%.
+- "Efeitos do inverno × 1,5" multiplica as perdas: a Fazenda temperada cai de 25% para cerca de 17%, e o multiplicador de viagem do inverno sobe 50%.
 
 ## Inverno e aquecimento
 
@@ -129,10 +129,10 @@ No inverno, as moradias gastam **lenha** (Tora):
 
 ## Dia, noite e estações na tela
 
-- **Estações:** troca de paleta na placa de vídeo, como a das culturas (sem memória extra): primavera verde vivo, verão quente, outono alaranjado, inverno frio e dessaturado. A troca é gradual nos 2 primeiros dias da estação. **[Proposta]**
+- **Estações:** troca de paleta na placa de vídeo, como a das culturas (sem memória extra): primavera verde vivo, verão quente, outono alaranjado, inverno frio e dessaturado. A troca é gradual nos 2 primeiros dias da estação.
 - **Dia e noite:** um tom de cor sobre o mapa em 4 fases, sem luzes dinâmicas na primeira versão:
 
-| Fase **[Proposta]** | Horas |
+| Fase | Horas |
 |---|---|
 | Amanhecer | 5 h às 7 h |
 | Dia | 7 h às 18 h |
@@ -150,7 +150,7 @@ No inverno, as moradias gastam **lenha** (Tora):
 - **Dados:** `clima.json` com a produção por estação e por bioma, as chances de clima por bioma e estação, os efeitos de cada clima, o aquecimento, os multiplicadores de viagem e de campanha, as paletas das estações e as fases do dia. Os eventos extremos ficam no JSON de eventos, na categoria Clima.
 - **Frequência:** 1 sorteio de clima por dia por região; a produtividade muda no 1º dia de cada estação; a lenha é descontada junto com o consumo da cidade (por dia em LOD 0 e 1, por estação em LOD 2).
 - **Aleatoriedade com semente**, como o resto do jogo: a mesma semente dá o mesmo clima.
-- **Desempenho:** a camada de clima é desenhada em lote, com um limite de partículas na tela (**[Proposta]** 300); o tom do dia e a paleta das estações são feitos na placa de vídeo, sem custo de memória.
+- **Desempenho:** a camada de clima é desenhada em lote, com um limite de partículas na tela (300); o tom do dia e a paleta das estações são feitos na placa de vídeo, sem custo de memória.
 - **Save:** clima atual de cada região, eventos extremos ativos e o ano do último inverno rigoroso.
 - **Depuração:** painel (Dear ImGui) para forçar um clima ou uma estação.
 - **Fatia vertical:** entram a **produção por estação** (testa os estoques e a fome) e o **tom de dia e noite**. O clima do dia fica para depois.

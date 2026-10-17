@@ -15,13 +15,13 @@ O mundo começa com **6 facções principais**, cada uma representando uma das *
 3. Dinastia — ver seção própria.
 4. Cidades — lista das cidades vinculadas. A quantidade é derivada da lista.
 5. Leis — ver seção própria.
-6. Cultura dominante — **[Proposta]** a cultura com maior população somada nas cidades da facção, recalculada no fim de cada estação (assim uma conquista muda a cultura aos poucos, não de um dia para o outro).
+6. Cultura dominante — a cultura com maior população somada nas cidades da facção, recalculada no fim de cada estação (assim uma conquista muda a cultura aos poucos, não de um dia para o outro).
 7. Relações diplomáticas — ver seção própria.
 8. **PIB** — dinheiro total da facção: soma do dinheiro de todas as cidades vinculadas. Serve para comparar facções entre si (IA, diplomacia, medição de poder). Não é gastável.
 9. **Banco da Facção** — caixa próprio da facção. Acumula o que é arrecadado de impostos e é gasto em soldo do exército, obras, tributos e guerra. Os gastos devolvem dinheiro às cidades (salário de soldados, obras), fechando o ciclo do dinheiro. É o destino concreto do sumidouro de impostos previsto no Sistema Econômico.
 10. **Exército** — conjunto dos Esquadrões pertencentes às cidades da facção. Veja a seção Conscritos, Esquadrões e Exército.
 
-**Valores derivados.** **[Proposta]** Quantidade de cidades, PIB e total do Exército não são armazenados na facção: são somados a partir das cidades e mantidos em cache, atualizados só quando uma cidade muda. Isso evita ter o mesmo dado em dois lugares e dessincronizar. O Banco da Facção é o único valor financeiro armazenado na facção.
+**Valores derivados.** Quantidade de cidades, PIB e total do Exército não são armazenados na facção: são somados a partir das cidades e mantidos em cache, atualizados só quando uma cidade muda. Isso evita ter o mesmo dado em dois lugares e dessincronizar. O Banco da Facção é o único valor financeiro armazenado na facção.
 
 ### Escala de população
 
@@ -42,7 +42,7 @@ Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias
 - **Quem pode ser alistado** é definido pelas leis de cada facção. Padrão: adultos com Função. **NPCs Importantes são sempre ignorados.**
 - **Guardas não fazem parte do sistema de soldados de guerra.** NPCs com a Função de guarda continuam NPCs, fazendo a segurança da cidade, e nunca são alistados.
 - Convocações altas reduzem a Felicidade da cidade enquanto durarem.
-- **[Proposta]** O alistamento e a formação de Esquadrões acontecem no **Quartel** (ver Sistema de Construção).
+- O alistamento e a formação de Esquadrões acontecem no **Quartel** (ver Sistema de Construção).
 
 **Esquadrão.** No Mapa de Guerra, como no Total War, o jogador não controla soldados individuais, mas **esquadrões**. Um exército de 2000 soldados é um conjunto de 20 esquadrões. Cada esquadrão é a unidade de comando.
 
@@ -63,9 +63,9 @@ O Esquadrão é uma entidade própria, não um NPC. Os atributos que antes estav
 **Suprimento e Caravana Militar.** O exército **carrega o próprio suprimento** durante excursões militares: Ração Militar e os materiais de manutenção de equipamento. A **Caravana** é a unidade auxiliar que armazena esses recursos.
 
 - A Caravana faz parte do **sistema militar** e é de **uso exclusivo militar**. As caravanas civis (comércio) estão no [[Sistema de Comércio/Descrição|Sistema de Comércio]].
-- **[Proposta]** A Caravana usa o componente de Inventário (Carga; ver [[Sistema de Inventário/Descrição|Inventário]]), não luta, mas precisa acompanhar o exército.
+- A Caravana usa o componente de Inventário (Carga; ver [[Sistema de Inventário/Descrição|Inventário]]), não luta, mas precisa acompanhar o exército.
 - **Suprimento esgotado:** a Moral cai gradualmente a cada dia sem suprimento. Abaixo de um limiar, os Esquadrões desertam, e não todos de uma vez.
-- **[Proposta]** Se a Caravana é capturada ou destruída, o exército perde o que ela carregava (saque).
+- Se a Caravana é capturada ou destruída, o exército perde o que ela carregava (saque).
 - Consumo por Esquadrão, capacidade da Caravana (60 unidades), reabastecimento, forrageio e comboio estão no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
 ### Leis
@@ -80,7 +80,7 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 - **Conscrição** (% da população que pode ser alistada e quem é elegível) — define o teto de conscritos disponíveis em cada cidade.
 - **Magia** (livre / restrita / proibida) — define como tratar NPCs Magos. Inclui a opção "privilégio dos magos", para a cultura Arcana: a magia e o poder ficam com os NPCs que têm o atributo Mago.
 - **Crimes e penas** — define quais crimes valem, as punições (que variam por classe social) e a Recompensa. Ver Sistema de Crime e Justiça.
-- **Poder do líder** — define se o líder pode barrar a mudança de leis. **[Proposta]** Autoritário (o líder decide e pode bloquear), Moderado (o líder tem veto) e Fraco (a assembleia decide).
+- **Poder do líder** — define se o líder pode barrar a mudança de leis. Autoritário (o líder decide e pode bloquear), Moderado (o líder tem veto) e Fraco (a assembleia decide).
 - **Sistema de votação** — define como os votos das cidades são contados na assembleia (ver Assembleia e mudança de leis).
 - **Tolerância religiosa** (Tolerância / Fé oficial / Perseguição) — como a facção trata as minorias de outra cultura: imposto extra, culto proibido ou perseguição (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 - **Tarifa** — imposto sobre caravanas civis que entram no território da facção; vai para o Banco da Facção. Acordo comercial zera a tarifa; embargo e guerra bloqueiam o comércio (ver [[Sistema de Comércio/Descrição|Sistema de Comércio]]).
@@ -122,7 +122,7 @@ A mudança de leis é decidida por **votação em assembleia**, que depende da q
 - Cada lei em pauta passa por votação. O peso de cada cultura corresponde à quantidade de cidades dela na facção. Muitas cidades de uma mesma cultura formam um bloco forte.
 - **A forma de contar os votos não é fixa:** depende da lei **Sistema de votação** da facção. Opções: maioria simples, maioria qualificada (2/3), ponderada pela população da cidade, ponderada pelo nível da cidade, e decisão só do conselho de nobres.
 - Se o jogador é dono de uma cidade da facção, ele também participa da votação.
-- **O líder pode barrar uma lei**, mas isso depende de **dois fatores juntos**: a **personalidade do líder** (**[Proposta]** Agressividade alta e Sociabilidade baixa aumentam a chance de barrar) e se a lei **Poder do líder** da facção **permite** essa ação.
+- **O líder pode barrar uma lei**, mas isso depende de **dois fatores juntos**: a **personalidade do líder** (Agressividade alta e Sociabilidade baixa aumentam a chance de barrar) e se a lei **Poder do líder** da facção **permite** essa ação.
 - Eventos de pressão de Nobres e Realeza (previstos na Classe Social) também podem forçar uma assembleia ou uma mudança de lei.
 
 **Detalhes da assembleia** (rodada V3-7):
@@ -136,7 +136,7 @@ A mudança de leis é decidida por **votação em assembleia**, que depende da q
 
 ### Dinastia
 
-**[Proposta]** A Dinastia é a lista de NPCs nobres ligados ao líder (família e nobres vinculados), todos marcados como Importante, com um papel: Líder, Herdeiro ou Nobre.
+A Dinastia é a lista de NPCs nobres ligados ao líder (família e nobres vinculados), todos marcados como Importante, com um papel: Líder, Herdeiro ou Nobre.
 
 - A **regra de sucessão** é definida pela Cultura: primogenitura, eleição entre os nobres, duelo ou mérito, escolha do líder ou escolha do clero (na Religiosa, o Sumo Sacerdote escolhe o herdeiro; ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 - Quando o líder morre, a sucessão acontece. Se não houver herdeiro, há uma crise: guerra civil, cidades que se declaram independentes ou dissolução da facção.
@@ -165,7 +165,7 @@ Cada Mapa Local comporta **apenas uma cidade**, mas nem todo Mapa Local tem uma.
 - **Mapa em disputa.** Um Mapa Local adjacente a cidades de **facções diferentes** fica **em disputa**: causa guerras constantes entre elas até que uma o domine, ou até que o jogador interfira e influencie o resultado.
 - Em guerras entre facções de IA sobre um mapa em disputa, o resultado é gerado **automaticamente**, por um **cálculo rápido que analisa a força dos dois exércitos** em conflito, sem gerar um Mapa de Guerra. O Mapa de Guerra só é criado quando o jogador participa.
 - O mapa em disputa **guarda quem o domina** (exceção à regra do derivado): domínio = vencer a última batalha ali e ficar 4 dias sem oposição. O mapa só muda de dono no tratado de paz (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]).
-- **[Proposta]** O vínculo de um mapa adjacente é derivado (não armazenado): se a cidade mudar de facção por conquista, os mapas adjacentes seguem. O Mapa Local tem quatro estados possíveis: Sem dono, Território de facção, Em disputa e Com cidade.
+- O vínculo de um mapa adjacente é derivado (não armazenado): se a cidade mudar de facção por conquista, os mapas adjacentes seguem. O Mapa Local tem quatro estados possíveis: Sem dono, Território de facção, Em disputa e Com cidade.
 
 **Assentamento do jogador em território de facção.** O jogador **pode** fundar um assentamento num Mapa Local vizinho de uma cidade de facção. Ele fica **vinculado à facção dominante daquele território**. Isso abre um estilo de jogo: o **dono de vila** que tenta ascender sua vila a uma grande cidade independente (ver Criação de facção).
 
@@ -188,7 +188,7 @@ O Rito de Admissão é definido por dados na Cultura, escolhendo entre tipos pro
 
 **Líder de cidade vinculada.** O jogador que possui uma cidade vinculada participa das assembleias e pode votar nas leis (ver Assembleia e mudança de leis).
 
-**Obrigações e benefícios.** **[Proposta]**
+**Obrigações e benefícios.**
 
 - **Obrigações:** tributo (% do imposto) e chamado às armas (conscritos).
 - **Benefícios:** proteção diplomática e militar, preços do Mercado da Facção, acesso a recrutamento e cargos.
@@ -199,13 +199,13 @@ A resposta da facção depende de um **valor calculado**, e esse valor decide a 
 
 - se a facção tem **capacidade de impedir** a revolta (força militar disponível contra a da cidade);
 - a **personalidade do líder** da facção (Agressividade, Lealdade, Ganância);
-- **[Proposta]** o valor da cidade para a facção (PIB, recursos, posição estratégica);
-- **[Proposta]** se a facção já está em outras guerras;
+- o valor da cidade para a facção (PIB, recursos, posição estratégica);
+- se a facção já está em outras guerras;
 - a reputação do jogador na facção e a Opinião do líder sobre ele (ver [[Sistema de Reputação/Descrição|Sistema de Reputação]]).
 
-**[Proposta]** Ações possíveis conforme o valor: aceitar a independência, negociar (por exemplo, tributo reduzido), declarar guerra (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]) ou bloquear o comércio.
+Ações possíveis conforme o valor: aceitar a independência, negociar (por exemplo, tributo reduzido), declarar guerra (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]) ou bloquear o comércio.
 
-**[Proposta]** Um jogador só pertence a uma facção por vez. Estados possíveis: Independente, Membro (nobre), Vassalo, Líder. A diferença entre Membro e Vassalo está no [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]].
+Um jogador só pertence a uma facção por vez. Estados possíveis: Independente, Membro (nobre), Vassalo, Líder. A diferença entre Membro e Vassalo está no [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]].
 
 ### Criação de facção pelo jogador
 
@@ -215,16 +215,16 @@ Requisitos:
 - Ter **pelo menos 2 nobres** na dinastia: o líder e mais um companheiro. Os companheiros são promovidos à classe Nobre no ato da fundação, como exceção à regra de mobilidade social rara.
 - A cidade não pode estar vinculada a outra facção. Se estiver, o jogador precisa antes se desvincular (o que causa uma revolta).
 
-**[Proposta]** Demais requisitos:
+Demais requisitos:
 
-- Valor mínimo de dinheiro (Banco da Facção inicial).
+- Dinheiro mínimo: **2.000 moedas**, que viram o Banco da Facção inicial (rodada V4-1).
 - Escolher a Cultura dominante entre as presentes na cidade, o nome e as leis iniciais.
 
 **Caminho do dono de vila.** Fundar um assentamento em território de facção (nível 1), crescer até o nível 3, desvincular-se da facção dominante (revolta e possível guerra), reunir 2 nobres e fundar a própria facção.
 
 ### Fim de uma facção
 
-**[Proposta]** Uma facção com 0 cidades é dissolvida. O líder e a dinastia viram NPCs sem facção (exilados) e podem refundar uma facção se conseguirem uma cidade.
+Uma facção com 0 cidades é dissolvida. O líder e a dinastia viram NPCs sem facção (exilados) e podem refundar uma facção se conseguirem uma cidade.
 
 ### Ligação com outros sistemas
 
@@ -232,7 +232,7 @@ Requisitos:
 |---|---|
 | Mapa | Facção do Mapa Local = facção da cidade ou da cidade adjacente; estados Sem dono / Território / Em disputa / Com cidade; participantes do Mapa de Guerra; Fator de Escala na População |
 | Cidade | Facção, itens proibidos (derivado das leis), conscritos (derivado), impostos, voto na assembleia |
-| NPC | Atributo Facção; alistar retira NPCs e cria Esquadrão; guardas ficam de fora; **[Proposta]** Título/Cargo para NPCs Importantes |
+| NPC | Atributo Facção; alistar retira NPCs e cria Esquadrão; guardas ficam de fora; Título/Cargo para NPCs Importantes |
 | Cultura | Leis desejadas, Rito de Admissão, regra de sucessão, afinidades, arte (ver Sistema de Cultura) |
 | Escravidão | Lei de Escravidão, abolição e venda de prisioneiros (ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) |
 | Econômico | Mercado da Facção, impostos para o Banco da Facção, soldo dos Esquadrões, cunhagem, tecnologias; Tarifa e caravanas civis (ver Sistema de Comércio) |

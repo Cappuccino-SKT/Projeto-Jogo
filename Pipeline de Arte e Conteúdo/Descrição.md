@@ -13,23 +13,23 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 - O **artista definitivo ainda não foi escolhido**. Por enquanto, quem desenha é o autor, que **não tem experiência com pixel art**.
 - **Fatia vertical e testes:** usar **pacotes de arte de terceiros** para agilizar, e rascunhos feitos pelo autor onde faltar alguma peça.
 - **Jogo final:** toda a arte é feita à mão pelo artista do projeto; os pacotes de terceiros saem.
-- **[Proposta]** Preferir pacotes com licença **CC0** (domínio público, uso livre) ou que permitam uso em protótipo, e anotar a origem de cada um num arquivo `assets/provisorio/LEIA-ME.txt`, para saber o que precisa ser trocado antes de qualquer versão pública. Procurar pacotes de **16 px em vista 3/4** (como Stardew), para os testes já usarem o tamanho final.
+- Preferir pacotes com licença **CC0** (domínio público, uso livre) ou que permitam uso em protótipo, e anotar a origem de cada um num arquivo `assets/provisorio/LEIA-ME.txt`, para saber o que precisa ser trocado antes de qualquer versão pública. Procurar pacotes de **16 px em vista 3/4** (como Stardew), para os testes já usarem o tamanho final.
 
 ### Programas
 
 | Uso | Programa | Custo |
 |---|---|---|
 | Montar os mapas | **Tiled** | Grátis |
-| Desenhar tiles, bonecos e construções | **[Proposta]** **Pixelorama** | Grátis |
-| Editar os dados | **[Proposta]** **VS Code** | Grátis |
+| Desenhar tiles, bonecos e construções | **Pixelorama** | Grátis |
+| Editar os dados | **VS Code** | Grátis |
 
-**Por que o Pixelorama [Proposta].** O autor pediu um programa **grátis**, **fácil** e com **bastante suporte**, para quem nunca fez pixel art. O Aseprite foi descartado por ser pago.
+**Por que o Pixelorama.** O autor pediu um programa **grátis**, **fácil** e com **bastante suporte**, para quem nunca fez pixel art. O Aseprite foi descartado por ser pago.
 
 - É de código aberto e está em desenvolvimento ativo, com manual on-line e comunidade.
 - Tem o que o projeto precisa: camadas, linha do tempo de animação, pele de cebola (mostra o quadro anterior em transparência, para animar), paletas, espelhamento (desenha os dois lados ao mesmo tempo) e exportação em **folha de sprites** (uma imagem com todos os quadros).
 - **Alternativa:** o **LibreSprite**, também grátis. Ele é uma versão antiga do Aseprite, então os muitos tutoriais de Aseprite servem para ele, mas não recebe novidades. O Aseprite só pode ser usado de graça compilando o código-fonte, o que é difícil para quem está começando; não vale agora.
 
-**[Proposta] Primeiros passos para aprender:**
+**Primeiros passos para aprender:**
 
 1. **Lospec** (lospec.com): paletas prontas (inclusive a paleta mestre, ver abaixo) e uma lista de tutoriais por assunto.
 2. Tutoriais curtos de **Pedro Medeiros (Saint11)**, artista brasileiro de pixel art (Celeste, TowerFall), com dicas animadas de um assunto por vez.
@@ -63,7 +63,7 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 | Zoom padrão | 2x: em 1600 × 900 aparecem 50 × 28 tiles (3x: 33 × 19; 4x: 25 × 14) |
 | Paleta | Paleta mestre de cerca de 48 cores + 2 cores de destaque por cultura |
 
-**Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). **[Proposta]** A paleta mestre parte de uma paleta pública do Lospec (Endesga 32 ou Resurrect 64), ajustada.
+**Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). A paleta mestre parte de uma paleta pública do Lospec (Endesga 32 ou Resurrect 64), ajustada.
 
 ### Variações por cultura
 
@@ -123,7 +123,7 @@ A arte é feita em camadas, igual à programação:
 
 ### Peso da arte
 
-O autor pediu atenção ao **peso da arte no jogo**. **[Proposta]** Estimativa, considerando imagens sem compressão na memória da placa de vídeo (4 bytes por pixel):
+O autor pediu atenção ao **peso da arte no jogo**. Estimativa, considerando imagens sem compressão na memória da placa de vídeo (4 bytes por pixel):
 
 | Item | Conta | Memória |
 |---|---|---|
@@ -142,15 +142,15 @@ O autor pediu atenção ao **peso da arte no jogo**. **[Proposta]** Estimativa, 
 - **Carregar só o necessário:** a arte das culturas e biomas dos mapas ativos; o resto fica no disco.
 - O Mapa Mundial usa arte própria, pequena.
 
-**Como verificar:** na fatia vertical, medir com o **Tracy** (já previsto na [[Arquitetura/Descrição|Arquitetura]]) e com um contador de memória de imagens no painel de depuração. **[Proposta]** Teto inicial: **256 MB** de arte na placa de vídeo, a revisar quando o PC alvo mínimo for definido.
+**Como verificar:** na fatia vertical, medir com o **Tracy** (já previsto na [[Arquitetura/Descrição|Arquitetura]]) e com um contador de memória de imagens no painel de depuração. Teto inicial: **256 MB** de arte na placa de vídeo, a revisar quando o PC alvo mínimo for definido.
 
 ### Dados e ferramentas
 
 O jogo é feito em **C++**. Outras linguagens podem ajudar, mas nada essencial depende delas.
 
 - **Edição:** **VS Code** com **esquemas JSON**: o editor completa os campos e sublinha os erros enquanto se digita.
-- **Tabelas grandes e simples** (itens, receitas, preços): editadas em planilha (LibreOffice ou Excel) e salvas em **CSV**, um formato de texto simples. **[Proposta]** O próprio jogo lê o CSV direto, em C++, então não é preciso um script de conversão em outra linguagem.
-- **Validação:** feita **pelo jogo, em C++**, ao carregar os dados. **[Proposta]** O jogo também tem um modo só de verificação (`jogo --validar`), que confere os dados, lista os erros ("a receita Pão cita o item Farinha de Trigo, que não existe") e fecha. Pode ser usado antes de cada commit.
+- **Tabelas grandes e simples** (itens, receitas, preços): editadas em planilha (LibreOffice ou Excel) e salvas em **CSV**, um formato de texto simples. O próprio jogo lê o CSV direto, em C++, então não é preciso um script de conversão em outra linguagem.
+- **Validação:** feita **pelo jogo, em C++**, ao carregar os dados. O jogo também tem um modo só de verificação (`jogo --validar`), que confere os dados, lista os erros ("a receita Pão cita o item Farinha de Trigo, que não existe") e fecha. Pode ser usado antes de cada commit.
 - **Quem manda nas listas:** quando a pasta `data/` for criada (na ficha técnica), **os dados passam a mandar** nas listas (itens, receitas, construções, preços) e os documentos ficam com as regras. Os canvases viram arquivo histórico ou são gerados a partir dos dados. Até lá, a lista do [[Sistema de Itens/Descrição|Sistema de Itens]] continua mandando.
 
 ### Onde guardar
@@ -162,7 +162,7 @@ O jogo é feito em **C++**. Outras linguagens podem ajudar, mas nada essencial d
 ### Parte técnica
 
 - **Fluxo:** Pixelorama → PNG (folhas de sprites) → atlas; Tiled → mapa em JSON. **[Refinar depois]** A ferramenta que monta os atlas (de terceiros ou nossa, em C++) fica para o início do código.
-- **[Proposta] Pastas:**
+- **Pastas:**
 
 ```
 assets/            fontes (Pixelorama, Tiled)

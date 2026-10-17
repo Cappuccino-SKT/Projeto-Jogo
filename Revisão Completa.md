@@ -164,8 +164,8 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 | **IP3** | Insumos de cada produto | Regras de quantidade e receitas de cada construção (A-2); Funções (Engenheiro, Operário, categorias); nova Funções e Construções | **Respondida e aplicada** (ver seção 11) |
 | **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | **Respondida e aplicada** (ver seção 12) |
 | **V3** | Pendências de regra | Seção 5, A-10 e A-11; quando fazer as listas da A-12 | **Respondida e aplicada** (ver seção 13) |
-| **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos, mais os Moldes de Conteúdo ("confirmar todas, exceto...") | **Enviada** |
-| **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos | A fazer |
+| **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos, mais os Moldes de Conteúdo ("confirmar todas, exceto...") | **Respondida e aplicada** (ver seção 14) |
+| **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos (58 propostas) e o formato da ficha técnica | **Enviada** |
 | Ficha técnica | Ficha técnica lógica da fatia vertical | Estruturas, dados e regras da vila de 15 NPCs (V2-12) | Depois da V5 |
 | **C1 a C3** | Rodadas de conteúdo (ideia do autor na V3-13: primeiro os moldes) | C1 tecnologias e marcos; C2 feitiços; C3 contratos, missões, Ambições e eventos | Mais para frente |
 
@@ -277,3 +277,16 @@ Todas as 12 perguntas: **Seguir sugestão**. As partes abstratas A-1 e A-3 a A-9
 | V3-13 Listas e pontas | Seguir sugestão, com **ideia própria: listas como estruturas modulares; agora só os moldes** | Novo documento [[Arquitetura/Moldes de Conteúdo\|Moldes de Conteúdo]]; rodadas C1 a C3 depois; Destilaria no nível 2; Agrária fora da primeira versão |
 
 **Pendências da seção 5** que a V3 fechou: Crime, Cura, Eventos (narradores e diário), Facção (assembleia), Comércio, População, Trabalho, Interface, Arquitetura (PC alvo), Viagem, Guerra, Diplomacia, Companheiros, Magia, Tecnologia (Agrária) e Produção (Destilaria). Ficam para depois: os nomes da história, as listas de conteúdo (C1 a C3) e as escolhas do Pipeline no início do código.
+
+## 14. Resultado da V4 (2026-10-17)
+
+| Documento | Decisão do autor | O que foi feito |
+|---|---|---|
+| Facção (17) | Confirmar todas | Marcações retiradas; F-14: fundar uma facção exige **2.000 moedas** |
+| Mundo e Estado Inicial (14) | Confirmar todas | Marcações e a frase das propostas retiradas |
+| Religião (11) | Confirmar todas | Marcações retiradas |
+| Pipeline (11) | Confirmar todas | Marcações retiradas |
+| Clima e Estações (9) | Confirmar todas | Marcações retiradas |
+| Arquitetura (7) | O autor deixou a escolha com o assistente | Seguidas as recomendações: A-1, A-3, A-5 e A-6 confirmadas; A-2 (bibliotecas) adiada para o primeiro dia de código; A-4: **JSON e CSV**; A-7: marco novo da **simulação sem tela de 1 ano** |
+| Efeitos de Itens (8) | Confirmar todas | Marcações retiradas |
+| Moldes de Conteúdo | Seguir sugestão | Os 8 moldes novos confirmados |

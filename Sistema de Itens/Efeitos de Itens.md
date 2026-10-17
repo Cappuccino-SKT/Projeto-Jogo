@@ -39,16 +39,16 @@ Os valores numéricos são iniciais e ficam em dados (`efeitos_itens.json`) para
 - **Produção:** por enquanto, só se compra ou se acha. **[Refinar depois]** Uma tecnologia de "Imprensa" (Era 2) pode liberar a produção ([[Sistema de Tecnologia/Descrição|Tecnologia]]).
 - *Exemplo:* o Mercador lê "Tratado de Comércio" e passa de 48 para 51 de Carisma; empresta ao companheiro, que passa de 30 para 33.
 
-**Livro de Atributos:** o livro raro de **combate**. Assunto: Corpo a Corpo, Longo Alcance, Defesa, Força, Agilidade, Destreza ou Magia (só para Magos). **Se gasta** ao ser lido. Rank 4 e 5 só nas masmorras de dificuldade 4 e nas lendárias; não é vendido no Mercado comum. **[Proposta]** Preço de cerca de 300 × Rank. É um atalho raro; a regra continua sendo a evolução por uso do Combate.
+**Livro de Atributos:** o livro raro de **combate**. Assunto: Corpo a Corpo, Longo Alcance, Defesa, Força, Agilidade, Destreza ou Magia (só para Magos). **Se gasta** ao ser lido. Rank 4 e 5 só nas masmorras de dificuldade 4 e nas lendárias; não é vendido no Mercado comum. Preço de cerca de 300 × Rank. É um atalho raro; a regra continua sendo a evolução por uso do Combate.
 
 ### Livro Sagrado (ideia do autor)
 
 Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do jogador precisa carregar um Livro Sagrado**. Se um guarda revistar o grupo e alguém estiver sem o livro, isso é **crime de heresia**.
 
 - **Lei:** nova lei de facção, **Livro Sagrado obrigatório** (sim ou não). A Religiosa deseja "sim", com peso alto, e começa com ela ([[Sistema de Facção/Descrição|Facção]], [[Sistema de Cultura/Descrição|Cultura]]).
-- **Item:** Livro Sagrado, Artefato do tipo Livro, Rank 1, peso baixo. **[Proposta]** 20 moedas, vendido no Templo e no Mercado das cidades Religiosas. Não ensina habilidade; é um objeto de fé.
-- **Quem precisa:** os **Controlados** do grupo. **[Proposta]** Os Escravos do jogador não precisam (são propriedade); os NPCs comuns da cidade não são revistados (a simulação considera que eles cumprem a lei).
-- **Revista:** os guardas da cidade (na entrada e nas rondas) e as patrulhas da facção. **[Proposta]** Chance de revista conforme a reputação do jogador na facção ([[Sistema de Reputação/Descrição|Reputação]]):
+- **Item:** Livro Sagrado, Artefato do tipo Livro, Rank 1, peso baixo. 20 moedas, vendido no Templo e no Mercado das cidades Religiosas. Não ensina habilidade; é um objeto de fé.
+- **Quem precisa:** os **Controlados** do grupo. Os Escravos do jogador não precisam (são propriedade); os NPCs comuns da cidade não são revistados (a simulação considera que eles cumprem a lei).
+- **Revista:** os guardas da cidade (na entrada e nas rondas) e as patrulhas da facção. Chance de revista conforme a reputação do jogador na facção ([[Sistema de Reputação/Descrição|Reputação]]):
 
 | Reputação | Na entrada da cidade | Encontro com patrulha ou ronda |
 |---|---|---|
@@ -57,7 +57,7 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 | Hostil | Sempre (já decidido na Reputação) | 25% |
 | Inimigo | Sempre | 50% |
 
-- **Sem o livro:** crime de heresia ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]). **[Proposta]** Na primeira vez numa estação, é a forma leve: **gravidade 2**, multa, e o guarda obriga a comprar o livro ali mesmo pelo dobro do preço. Se alguém do grupo for pego de novo sem o livro na mesma estação, vira heresia comum (gravidade 3, ou 5 com a lei de Perseguição).
+- **Sem o livro:** crime de heresia ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]). Na primeira vez numa estação, é a forma leve: **gravidade 2**, multa, e o guarda obriga a comprar o livro ali mesmo pelo dobro do preço. Se alguém do grupo for pego de novo sem o livro na mesma estação, vira heresia comum (gravidade 3, ou 5 com a lei de Perseguição).
 - *Conflito:* na Religião, a heresia é um **ato**, e um NPC não é preso só por ser de outra fé. Andar sem o livro numa facção que o exige é uma **omissão de um dever da lei**, que vale para qualquer cultura, por isso não contradiz a regra. A gravidade leve evita que esquecer um livro leve à execução, a pena da heresia na Religiosa ([[Sistema de Religião/Descrição|Religião e Fé]]).
 - *Exemplo:* o Aventureiro entra na Cidade Religiosa (7,3) com 3 companheiros; a reputação é Neutra e sai a revista (10%). Um companheiro não tem o livro: o grupo paga a multa e 40 moedas pelo livro. Dois dias depois, outro guarda pega o mesmo companheiro sem o livro (ele o vendeu): agora é heresia de gravidade 5, e o guarda dá a ordem de rendição.
 
@@ -68,7 +68,7 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 - **Relíquias** (Rank 1 a 3): genéricas e sem efeito em combate. Valem muito, servem ao consumo da Realeza e, doadas a um Templo ou Palácio, dão +2 de Renome.
 - **Artefatos lendários** (Rank 4 e 5): **únicos**, com nome e efeito próprios, escritos à mão. Cerca de 6 na primeira versão, de 1 a 2 por masmorra lendária ([[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 
-**[Proposta] Artefatos lendários iniciais** (nomes provisórios, até a história ser escrita):
+**Artefatos lendários iniciais** (nomes provisórios, até a história ser escrita):
 
 | Artefato | Efeito |
 |---|---|
@@ -96,10 +96,10 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 |---|---|
 | Alimento de Tier 1 (Pão, Sopa, Peixe Defumado, Ração Militar) | Fator comida 0 |
 | Alimento de Tier 2 (Torta de Fruta, Linguiça, Queijo) | +3 |
-| Alimento de Tier 3 (Assado Temperado) | **[Proposta]** +4 |
+| Alimento de Tier 3 (Assado Temperado) | +4 |
 | Alimento ou bebida de Tier 4 (Presunto Curado, Doce de Especiarias, Licor) | +6 |
 | Cerveja | +2 de Felicidade |
-| Vinho | **[Proposta]** +3 de Felicidade |
+| Vinho | +3 de Felicidade |
 | Fumo | +3 de Felicidade por 1 dia |
 | Pó Espiritual | +6 de Felicidade; Mago: +25% de regeneração de Mana por 1 dia |
 
