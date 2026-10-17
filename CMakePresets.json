@@ -1,0 +1,24 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "padrao",
+      "displayName": "Padrão (g++, Ninja, com depuração)",
+      "description": "Compila com o g++ do MinGW e o Ninja, na pasta build/, com as informações para o depurador (gdb).",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "padrao",
+      "displayName": "Padrão",
+      "configurePreset": "padrao"
+    }
+  ]
+}

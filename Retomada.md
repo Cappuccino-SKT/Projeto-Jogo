@@ -6,8 +6,9 @@
 - **Rodada FT2 (2026-10-17):** o autor **liberou o código, marco a marco**.
 - **Pastas reorganizadas (2026-10-17):** `Documentos/`, `Ficha Logica/`, `Codigo/` e `Jogo/` (seção 3).
 - **Fichas do marco 1 (2026-10-17):** [[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]] (tiles e camadas) escritas. O marco 0 não tem ficha. A **rodada FL1** foi enviada (seção 4).
-- **Próximo passo:** as respostas da FL1, que ajustam as duas fichas. O marco 0 (seção 3) não depende delas e pode começar antes.
-- **Ao retomar:** rodar `git fetch` e conferir se o pull request mais recente foi mesclado no `main`. O último é o da branch `docs/fichas-marco-1`.
+- **Marco 0 (2026-10-17):** escrito na branch `codigo/marco-0-ambiente` (feita em cima da `docs/fichas-marco-1`). Compila e abre a janela; falta o autor rodar e confirmar o que vê (seção 3).
+- **Próximo passo:** o autor roda o marco 0 e responde a FL1; depois, o marco 1.
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`, nesta ordem: `docs/fichas-marco-1` e depois `codigo/marco-0-ambiente`.
 
 ## 2. Como trabalhamos
 
@@ -73,11 +74,7 @@
 | Depois da fatia | miniaudio |
 
 - **Ambiente (FT1-7):** g++ 15.2 (MinGW), CMake, Ninja e Git, já instalados; VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; tudo neste repositório.
-- **Marco 0, o próximo:**
-  1. o autor instala as duas extensões do VS Code;
-  2. o assistente cria o `CMakeLists.txt` da raiz e o `Jogo/main.cpp`, que abre uma janela vazia com o SDL3 (o marco 0 não tem regra, então a `Codigo/` ainda fica vazia);
-  3. compilar e rodar;
-  4. escrever o LEIA-ME do marco.
+- **Marco 0 (escrito, falta o autor confirmar):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 
 ## 4. Rodada pendente: FL1, as fichas do marco 1
 
