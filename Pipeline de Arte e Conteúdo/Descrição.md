@@ -195,9 +195,9 @@ data/
 
 ### Perguntas em aberto
 
-1. **Artista definitivo:** ainda não escolhido.
+1. **Artista definitivo:** ainda não escolhido; decidir no início do código, junto com os pacotes provisórios e a ferramenta de atlas (rodada V3-13).
 2. **Pacotes provisórios:** quais usar na fatia vertical (escolher na hora, conferindo a licença).
 3. **Ferramenta de atlas:** de terceiros ou própria, no início do código.
-4. **Teto de memória da arte:** depende do PC alvo mínimo (Arquitetura).
+4. **Teto de memória da arte:** 256 MB proposto; o PC alvo mínimo tem placa de vídeo de 2 GB (rodada V3-12).
 5. **Estações no futuro:** quando entram neve, rios congelados, folhas e flores (com o Clima e Estações).
 6. **Estilo próprio por cultura:** quando sai da troca de paleta para formas próprias.

@@ -49,6 +49,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 - **[Proposta]** Formato **JSON** em uma pasta `data/`, com IDs de texto legíveis (por exemplo, `item.espada_curta_ferro`), convertidos em números ao carregar.
 - Tipos de arquivo: itens, receitas, construções, culturas, traços, leis, estilos de início, crimes, eventos e narradores.
+- **Moldes de conteúdo:** a ficha de cada tipo, para copiar e modificar, está em [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] (ideia do autor, rodada V3-13).
 - **Validação ao carregar:** o jogo avisa se um item citado numa receita não existe. Isso evita as divergências de nome que apareceram nos canvases.
 - Os documentos do Obsidian e os canvases continuam sendo a documentação, não o dado do jogo.
 
@@ -84,7 +85,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 ### Desempenho
 
 - Alvo: rodar em PCs modestos.
-- **Meta de quadros:** 60 por segundo em 1600 × 900 (rodada V2-11). **[Em aberto]** O **PC alvo mínimo** (processador, memória, placa gráfica): rodada V3-12.
+- **Meta de quadros:** 60 por segundo em 1600 × 900 (rodada V2-11). **PC alvo mínimo** (rodada V3-12): processador de 4 núcleos (2015 ou mais novo), 8 GB de memória, placa de vídeo com OpenGL 3.3 e 2 GB.
 - **Meta de NPCs** (rodada V2-11): 500 em LOD 0 e 5.000 em LOD 1 a 4x, num PC de gama média; a medir na fatia vertical.
 - **Dinheiro em décimos inteiros** (rodada V2-1): 1,7 moedas = 17. Nada de número com vírgula no dinheiro.
 

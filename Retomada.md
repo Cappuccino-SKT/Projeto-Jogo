@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada V2 (Base numérica da economia) aplicada e a V3 (Pendências de regra) enviada.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-17, com a rodada V3 (Pendências de regra) aplicada e a V4 (Confirmação das propostas, parte 1) enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). A V1, a IP1 e a IP2 já estão no `main` (PRs #9 a #11). A IP3 está na branch `docs/ip3-receitas`. Em 2026-10-17 foi aplicada a **V2** (a economia em números) na branch `docs/v2-economia`, criada a partir da `docs/ip3-receitas`. A **rodada V3 (Pendências de regra) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se os pull requests da `docs/ip3-receitas` e da `docs/v2-economia` foram mesclados no `main`, nessa ordem.**
-3. **Próximo passo:** pedir o `Respostas.txt` da V3 (conferir se é desta rodada), aplicar cada decisão no seu documento (a tabela de leis iniciais vai para a Facção e a Cultura) e abrir a **V4** (confirmação das propostas, parte 1).
-4. Depois: V5 e a **ficha técnica lógica da fatia vertical**. As listas de conteúdo (tecnologias, feitiços, missões) dependem da resposta da V3-13.
+2. **Onde paramos:** todos os sistemas P0 e P1 estão escritos, e a **revisão completa** está em andamento (levantamento e plano na [[Revisão Completa]]). A V1, a IP1 e a IP2 estão no `main` (PRs #9 a #11). A IP3, a V2 e a V3 estão em branches empilhadas, cada uma criada a partir da anterior: `docs/ip3-receitas` → `docs/v2-economia` → `docs/v3-pendencias`. A V3 foi aplicada em 2026-10-17 e criou o documento [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] (ideia do autor). A **rodada V4 (Confirmação das propostas, parte 1) foi enviada e aguarda respostas** (seção 4). **Ao retomar, rodar `git fetch` e conferir se os pull requests foram mesclados no `main`, na ordem IP3 → V2 → V3.**
+3. **Próximo passo:** pedir o `Respostas.txt` da V4 (conferir se é desta rodada), tirar as marcações confirmadas, aplicar as mudanças (F-14, A-4, A-7) e abrir a **V5** (propostas dos outros documentos).
+4. Depois: a **ficha técnica lógica da fatia vertical**. As listas de conteúdo ficam para as rodadas C1 a C3, mais para frente (ideia do autor na V3-13).
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -68,294 +68,139 @@ Regras extras:
 | Revisão | Itens e Produção: IP2 (nomes) | Aplicada |
 | Revisão | Itens e Produção: IP3 (insumos) | Aplicada |
 | Revisão | V2 (economia numérica) | Aplicada |
-| Revisão | **V3 (pendências de regra)** | **Enviada, aguardando respostas** |
-| Revisão | V4 e V5 (propostas) | A fazer |
+| Revisão | V3 (pendências de regra) | Aplicada |
+| Revisão | **V4 (propostas, parte 1)** | **Enviada, aguardando respostas** |
+| Revisão | V5 (propostas, parte 2) | A fazer |
+| Depois | Ficha técnica da fatia vertical; rodadas de conteúdo C1 a C3 | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
 Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, modo observador, eventos de dinastia. As ordens de produção em lote foram decididas na IP1-7 ([[Sistema de Produção/Descrição|Produção]]). A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: V3, Pendências de regra
+## 4. Rodada pendente: V4, Confirmação das propostas (parte 1)
 
-**Perguntas enviadas em 2026-10-17, aguardando respostas.** Com a economia em números (V2), sobram as **pendências de regra** dos sistemas (seção 5 da [[Revisão Completa]]), as **leis iniciais** (A-10) e os **bônus dos estilos de início** (A-11). As listas grandes de conteúdo (A-12) ganham uma pergunta própria sobre quando fazê-las (V3-13).
+**Perguntas enviadas em 2026-10-17, aguardando respostas.** As marcações **[Proposta]** são detalhes que o assistente acrescentou às sugestões aceitas, ou sugestões que o autor ainda não viu uma por uma. Esta rodada confirma as de **7 documentos**, mais os moldes de conteúdo da V3-13. A V5 faz o mesmo com os outros documentos.
 
-Responder no `Respostas.txt` pelos códigos (V3-1, V3-2...). "Seguir sugestão" aceita a proposta. Os números usam a moeda da V2: um Civil ganha 8 por dia, o Pão custa 1,7 e um escravo de habilidade 60 custa 440.
+**Como responder:** "Confirmar todas" ou "Confirmar todas, exceto F-3 e F-7 (e o que mudar)". Uma proposta confirmada perde a marcação e vira decisão do autor. A recomendação de cada uma vem no fim da linha: **Confirmar**, **Mudar** (com o motivo) ou **Já decidida** (só limpar a marcação).
 
-**V3-1. As leis iniciais de cada facção (A-10).**
+**V4-1. Facção (17 propostas).** [[Sistema de Facção/Descrição|Facção]]
 
-- *Contexto:* as leis existem na [[Sistema de Facção/Descrição|Facção]], e o desejo de cada cultura está na [[Sistema de Cultura/Descrição|Cultura]]. Mas não há uma tabela única com a lei de cada facção no primeiro dia. Algumas já estão decididas:
-  - a Religiosa começa com Perseguição e com o Livro Sagrado obrigatório;
-  - a Escravista tem escravidão ampla e imposto alto;
-  - a Guerreira vende prisioneiros à Escravista.
-- *Sugestão:* as leis iniciais seguem o desejo de cada cultura, sem pensamento extremo (o extremo fica para o jogo produzir):
+- F-1. Cultura dominante = a de maior população somada nas cidades, recalculada a cada estação. **Confirmar.**
+- F-2. Número de cidades, PIB e exército não são guardados: são somados das cidades, em cache. **Confirmar.**
+- F-3. Alistamento e formação de Esquadrões no Quartel. **Confirmar.**
+- F-4. A Caravana Militar usa o componente de Inventário (Carga), não luta, mas acompanha o exército. **Confirmar.**
+- F-5. Caravana capturada ou destruída: o exército perde a carga (saque). **Confirmar.**
+- F-6. Poder do líder em 3 níveis: Autoritário, Moderado e Fraco. **Já decidida** (V3-1 usa os três).
+- F-7. Agressividade alta e Sociabilidade baixa aumentam a chance de veto. **Já decidida** (fórmula da V3-7).
+- F-8. Dinastia = lista de nobres ligados ao líder (Líder, Herdeiro, Nobre), todos Importantes. **Confirmar.**
+- F-9. O vínculo do mapa vizinho é derivado; 4 estados do Mapa Local. **Confirmar.**
+- F-10. Vassalagem: obrigações (tributo e chamado às armas) e benefícios (proteção, preços da facção, cargos). **Confirmar.**
+- F-11. A facção decide sobre a cidade que quer se desvincular pelo valor da cidade e pelas outras guerras. **Confirmar.**
+- F-12. Ações diante da independência: aceitar, negociar tributo menor, declarar guerra ou bloquear o comércio. **Confirmar.**
+- F-13. O jogador pertence a uma facção por vez: Independente, Membro, Vassalo ou Líder. **Confirmar.**
+- F-14. Requisitos para fundar facção: dinheiro mínimo e escolha da cultura, do nome e das leis. **Mudar:** dar o número da V2, **2.000 moedas** no Banco da Facção novo.
+- F-15. Facção sem cidades é dissolvida; o líder e a dinastia viram exilados e podem refundar. **Confirmar.**
+- F-16. Atributo Título/Cargo nos NPCs Importantes. **Confirmar.**
+- F-17. Legenda e textos que citam propostas já feitas. **Limpar.**
 
-| Lei | Guerreira | Arcana | Autoritária | Religiosa | Tecnocrata | Escravista |
-|---|---|---|---|---|---|---|
-| Escravidão | Permitida (só prisioneiros de guerra) | Proibida | Permitida (trabalho forçado como pena) | Proibida | Proibida | Permitida, ampla |
-| Imposto (V2-7) | Baixo | Normal | Normal | Normal | Normal, mais o imposto para pesquisa | Alto |
-| Conscrição | Alta (10% da população) | Baixa (3%) | Alta (8%) | Média (5%) | Baixa (3%) | Média (5%; escravos podem ser alistados) |
-| Magia | Restrita | Privilégio dos magos | Restrita | Restrita | Proibida | Livre |
-| Poder do líder | Moderado | Moderado | Autoritário | Moderado | Fraco | Fraco |
-| Sistema de votação | Maioria simples | Conselho (só Magos) | Conselho de nobres | Maioria qualificada (2/3) | Ponderada pela população | Ponderada pelo nível da cidade |
-| Tolerância religiosa | Tolerância | Fé oficial | Fé oficial | Perseguição | Tolerância | Tolerância |
-| Livro Sagrado obrigatório | Não | Não | Não | Sim | Não | Não |
-| Tarifa | Média (10% da carga) | Média | Alta (20%) | Média | Média | Baixa (5%) |
-| Itens proibidos | — | — | — | Narcóticos | Cajados, Cetro e Joia de Mana | — |
-| Ajuste de preço da facção | Armas −20% | Itens de mana −20% | Comida −20% | Remédio e Curativo −20% | Armas de fogo e Pólvora −20% | — |
+**V4-2. Mundo e Estado Inicial (14 propostas).** [[Mundo e Estado Inicial/Descrição|Mundo]]
 
-- *Conflito:* a Tecnocrata tem "magia proibida" como **pensamento extremo**, mas a lei inicial sugerida já é "Proibida".
-  - **Saída:** a lei Proibida significa que **usar** magia é crime;
-  - o extremo continua sendo **banir** os Magos da facção.
-- *Impacto:*
-  - Facção, Cultura, Crime (itens proibidos), Escravidão (fecha a pergunta "quem mais começa com escravidão");
-  - Felicidade (leis × cultura), Comércio (Tarifa), Mundo.
+- M-1. Campo "Raça" no NPC, com um só valor (Humano), para não fechar a porta a outras raças. **Confirmar.**
+- M-2. Ordem das regiões: culturas hostis vizinhas; Tecnocrata e Arcana em cantos opostos. **Confirmar.**
+- M-3. Bordas: montanhas ao norte, mar a leste e ao sul, estepe e deserto a oeste. **Confirmar.**
+- M-4. O mapa inicial célula por célula (a malha 8 × 6). **Confirmar.**
+- M-5. Cidades iniciais: 1 capital, 1 cidade e 1 vilarejo por região (2 vilarejos na Escravista). **Confirmar.**
+- M-6. Biomas, recursos de destaque e escassos de cada região. **Confirmar.**
+- M-7. Dificuldade das masmorras pela distância até a capital (1 a 4; lendárias 5). **Confirmar.**
+- M-8. Valores iniciais das facções (NPCs, Riqueza, PIB, Esquadrões). **Confirmar.** O PIB já bate com os Bancos da V2.
+- M-9. Pacotes de construções por nível e cultura. **Confirmar.**
+- M-10. Afinidade entre as culturas (afim, neutra, hostil). **Confirmar.**
+- M-11. 5 Importantes fixos: Arquimago, Rei Exilado, Grande Mercador, Sumo Sacerdote e Mestre Inventor. **Confirmar.**
+- M-12. Limites do estado inicial variável (relações ±15, 1 ou 2 guerras, 2 acordos...). **Confirmar.**
+- M-13. Pontos de partida de cada estilo (2 ou 3 por estilo). **Confirmar.**
+- M-14. Frase "os detalhes marcados como [Proposta] foram acrescentados agora". **Limpar.**
 
-**V3-2. Os bônus dos estilos de início (A-11).**
+**V4-3. Religião (11 propostas).** [[Sistema de Religião/Descrição|Religião e Fé]]
 
-- *Contexto:* os 7 estilos têm só exemplos de bônus, e o personalizado tem um "orçamento de pontos" sem números.
-- *Sugestão:*
+- R-1. Na Arcana, cada Mago da Torre Arcana conta como Sacerdote para a cobertura. **Confirmar.**
+- R-2. Datas dos festivais de cada cultura (Festa da Colheita nos dias 1 e 2 do Outono...). **Confirmar.**
+- R-3. Os dias santos da Religiosa duram 1 dia, com metade dos efeitos. **Confirmar.**
+- R-4. O bônus de Felicidade do festival dura 8 dias. **Confirmar.**
+- R-5. O evento Social positivo passa a ser a "festa espontânea" (vitória, casamento, visitante ilustre). **Confirmar.**
+- R-6. A Felicidade −15 da Perseguição vale só na parte da população que é minoria. **Confirmar.**
+- R-7. A IA do Sumo Sacerdote dá Bênção a quem tem +40 com a Religiosa e fez algo pela fé. **Confirmar.**
+- R-8. Anátema contra o jogador sem facção: −20 de reputação com as facções Religiosas. **Confirmar.**
+- R-9. Oferenda mínima de 50 moedas na Capital Religiosa. **Confirmar.** São cerca de 6 dias de salário de um Civil pela V2.
+- R-10. Peregrinos: +10% de consumidores na Capital Religiosa e na cidade de peregrinação. **Confirmar.**
+- R-11. Legenda. **Limpar.**
 
-| Estilo | Dinheiro | Itens e grupo | Habilidade e relação |
-|---|---|---|---|
-| Dono de vila | 300 | Assentamento nível 1 (1 Casa, 1 Fazenda, 1 Posto de Coleta), 40 Tábuas, 40 Blocos de Pedra, 4 colonos Civis | +10 de Inteligência |
-| Aventureiro | 150 | 2 companheiros; armas e armadura Leve de Rank 2 | +10 em Corpo a Corpo ou Longo Alcance |
-| Membro de facção | 200 | Título Cidadão (ou Cavaleiro, se Nobre); uma Casa na cidade | Relação +30 com a facção |
-| Mercador | 800 | 2 Cavalos e 1 companheiro (líder de caravana); preços de 3 cidades vizinhas já conhecidos | +15 de Carisma |
-| Nobre exilado | 400 | 2 companheiros de Nobreza; Espada Longa de Aço de Rank 2 | Relação +20 com a sua cultura e −20 com a facção que tomou o trono |
-| Escravo | 0 | 2 escravos aliados (Vínculo alto); Grilhões | +20 de Trabalho Braçal |
-| Mago | 100 | Cajado Simples de Rank 2, 3 Pedras de Mana | Mago; +20 de Magia |
+**V4-4. Pipeline de Arte e Conteúdo (11 propostas).** [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]]
 
-  - **Personalizado:** 100 pontos, a partir de um personagem Civil sem nada:
+- P-1. Pacotes provisórios de preferência CC0, com a origem anotada em `assets/provisorio/LEIA-ME.txt`. **Confirmar.**
+- P-2. Pixelorama para desenhar. **Já decidida** (o autor escolheu).
+- P-3. VS Code para editar os dados. **Confirmar.**
+- P-4. O texto "por que o Pixelorama". **Já decidida.**
+- P-5. Primeiros passos para aprender pixel art (tutoriais do Lospec, exercícios). **Confirmar.**
+- P-6. Paleta mestre a partir de uma paleta pública do Lospec (Endesga 32 ou Resurrect 64). **Confirmar.**
+- P-7. Estimativa do peso da arte na memória. **Confirmar** (é uma conta, não uma regra).
+- P-8. Teto inicial de 256 MB de memória de imagens. **Confirmar.** Cabe na placa de 2 GB da V3-12.
+- P-9. O jogo lê o CSV direto, em C++. **Confirmar.**
+- P-10. Modo `jogo --validar`. **Confirmar** (já usado em vários documentos).
+- P-11. Estrutura de pastas do projeto. **Confirmar.**
 
-| Escolha | Custo |
-|---|---|
-| 10 moedas | 1 ponto |
-| Companheiro | 15 pontos |
-| +10 numa habilidade | 10 pontos |
-| Item | 1 ponto a cada 10 moedas de preço |
-| Ser Mago | 30 pontos |
-| Assentamento nível 1 | 40 pontos |
-| Título Cidadão | 10 pontos |
+**V4-5. Clima e Estações (9 propostas).** [[Sistema de Clima e Estações/Descrição|Clima e Estações]]
 
-    A cultura é grátis. Cada estilo pronto vale cerca de 100 pontos, o que mantém o personalizado justo.
-- *Impacto:* Início de Jogo (fecha as 2 perguntas, inclusive o bônus do Mercador), Comércio, Companheiros.
+- C-1. A Água rende 100% o ano todo. **Confirmar.**
+- C-2. Tempestade: trabalho ao ar livre −50% naquele dia. **Confirmar.**
+- C-3. Chances de cada clima por estação (bioma temperado). **Confirmar.**
+- C-4. Ajustes por bioma (neve nas montanhas, pouca chuva nas terras áridas, tempestade no litoral). **Confirmar.**
+- C-5. A tempestade forte danifica construções de madeira; o reparo sai pela manutenção. **Confirmar.** O evento da V3-6 usa isso.
+- C-6. "Efeitos do inverno × 1,5" nos biomas frios. **Confirmar.**
+- C-7. Horas das 4 fases do dia. **Confirmar.**
+- C-8. Limite de 300 partículas de clima na tela. **Confirmar.**
+- C-9. Legenda. **Limpar.**
 
-**V3-3. Crime: multas, Caçadores, loja ilegal do jogador e missão de confiança.**
+**V4-6. Arquitetura (7 propostas).** [[Arquitetura/Descrição|Arquitetura]]
 
-- *Contexto:*
-  - o [[Sistema de Crime e Justiça/Descrição|Crime]] tem gravidades de 1 a 5, mas multas sem valor;
-  - não diz se o jogador pode ter loja ilegal;
-  - não diz quais são as missões de confiança.
-- *Sugestão:*
-  - **Multa** = 25 × gravidade² moedas:
+- A-1. g++ (MinGW) com CMake e Ninja, sem Visual Studio; C++20. **Confirmar.**
+- A-2. As bibliotecas sugeridas (SDL3, OpenGL 3.3, EnTT, leitor de JSON, Dear ImGui, Tracy). **Adiar:** a aprovação fica para o primeiro dia de código, como já previsto.
+- A-3. Composição em vez de herança (ECS). **Confirmar.**
+- A-4. Dados em JSON numa pasta `data/`. **Mudar:** JSON para os dados com estrutura e **CSV** para as tabelas grandes (itens, receitas, preços), como o Pipeline e os Moldes já dizem.
+- A-5. Memória por Mapa Local (arenas: tudo de um mapa é criado e apagado junto). **Confirmar.**
+- A-6. Save em arquivo binário com número de versão. **Confirmar.**
+- A-7. Os 8 marcos da fatia vertical. **Mudar:** acrescentar o marco "simulação sem tela de 1 ano" (o teste da V2-12) antes da interface.
 
-| Gravidade | 1 | 2 | 3 | 4 | 5 |
-|---|---|---|---|---|---|
-| Multa (moedas) | 25 | 100 | 225 | 400 | 625 |
+**V4-7. Efeitos de Itens (8 propostas).** [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]
 
-    A **Recompensa** é o dobro da multa, somada por crime. Os **Caçadores de Recompensa** surgem quando ela chega a **500** numa facção (um crime de gravidade 5, ou vários menores).
-  - **Loja ilegal do jogador:** sim, qualquer construção de produção dele.
-    - **Batida da guarda:** a cada estação, chance = Controle da cidade ÷ 200 (Controle 60 = 30%).
-    - **Se descoberta:** confisco do estoque ilegal, crime de Contrabando (gravidade 3) para o gerente e para o jogador, se ele estiver no mapa.
-  - **Missão de confiança:** a Confiança do NPC vai de 0 a 100. Com 50, o jogador compra na loja ilegal; com 80, também vende. Três tipos de missão, sorteados:
+- E-1. Livro de Atributos de Rank 4 e 5 só nas masmorras difíceis. **Confirmar.**
+- E-2. Livro Sagrado por 20 moedas, no Templo e no Mercado das cidades Religiosas. **Confirmar.**
+- E-3. Quem precisa do Livro Sagrado: só os Controlados (não os Escravos do jogador nem os NPCs comuns). **Confirmar.**
+- E-4. Chance de revista pela reputação do jogador. **Confirmar.**
+- E-5. Heresia leve na primeira vez da estação: gravidade 2, multa (100 moedas pela V3-3) e compra obrigatória do livro. **Confirmar.**
+- E-6. A lista dos Artefatos lendários iniciais (nomes provisórios). **Confirmar.**
+- E-7. Alimento de Tier 3: +4 no fator comida. **Confirmar.**
+- E-8. Vinho: +3 de Felicidade. **Confirmar.**
 
-| Missão | O que é | Confiança |
-|---|---|---|
-| Entrega | Levar mercadoria proibida a outra cidade | +25 |
-| Dívida | Cobrar um devedor do NPC | +20 |
-| Informante | Achar quem falou com a guarda e calá-lo, por suborno ou à força | +35 |
+**V4-8. Os moldes de conteúdo (ideia do autor na V3-13).**
 
-- *Impacto:* Crime, Econômico, Reputação, Objetivo (missões).
+- *Contexto:* o autor pediu que as listas grandes virem estruturas modulares, prontas para copiar e modificar, e que agora só os moldes fiquem prontos. O documento [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] foi criado com:
+  - as regras comuns: ID legível, listas fechadas, referência por ID, JSON e CSV;
+  - os moldes que já existiam: Item, Receita, Construção, Evento, Estilo de início e Traço de cultura;
+  - os moldes novos: Tecnologia, Marco mundial, Lei, Feitiço, Contrato e missão, Ambição, Narrador e Masmorra.
+- *Pergunta:* os moldes novos estão bons para começar? Falta algum tipo de conteúdo?
+- *Sugestão:* **confirmar os 8 moldes novos.** As listas completas ficam para as rodadas de conteúdo, mais para frente:
+  - **C1:** tecnologias e marcos;
+  - **C2:** feitiços;
+  - **C3:** contratos, missões, Ambições e eventos.
 
-**V3-4. Cura: quando o Inconsciente vira Morto.**
-
-- *Contexto:* a [[Sistema de Cura/Descrição|Cura]] tem uma proposta (golpe de misericórdia ou sangramento), sem números.
-- *Sugestão:* confirmar a proposta, com números:
-  - **Modo não letal:** Vida 0 deixa Inconsciente, sem sangramento. Ele acorda em **4 horas de jogo** com 10% da Vida.
-  - **Modo letal:** Vida 0 deixa Inconsciente **sangrando**. Sem Curativo, ele morre em **2 horas de jogo** (80 s reais a 1x). O Curativo estanca o sangramento, como já decidido.
-  - **Golpe de misericórdia:** um ataque letal contra um Inconsciente mata na hora. É crime de Assassinato, se for contra um cidadão.
-  - **Hospital:** cura 5% da Vida por hora de jogo; com um Mago de Suporte, 10%. Custa 2 moedas por dia de internação.
-- *Impacto:* Cura, Combate, Crime.
-
-**V3-5. Narradores, intensidade e diário.**
-
-- *Contexto:* o [[Sistema de Eventos/Descrição|Narrador]] é a dificuldade, mas cada um tem um **foco**, e nenhum é mais difícil que outro. Faltam os nomes, os focos, um controle de intensidade e o formato do diário.
-- *Sugestão:*
-  - **4 narradores**, com nomes significativos até a história:
-
-| Narrador | Foco | Combina com |
-|---|---|---|
-| O Cronista | Equilíbrio entre todas as categorias | Qualquer estilo |
-| A Guerra | Ameaça, guerra e bandidos | Aventureiro, Membro de facção |
-| A Terra | Clima, colheita, saúde e economia | Dono de vila, Mercador |
-| A Corte | Política, intrigas e sucessão | Nobre exilado, Membro de facção |
-
-  - **Intensidade:** um controle separado, de 50% a 150%, que multiplica a tensão do Narrador. Padrão: 100%. O foco muda **o quê**; a intensidade muda **quanto**.
-  - **Diário:**
-    - guarda as últimas **300 entradas**, e as mais antigas vão para um resumo por ano;
-    - filtros por categoria, lugar e Aviso (Info, Aviso, Crítico);
-    - busca por texto.
-- *Impacto:* Eventos, Início de Jogo (escolha do narrador), Interface.
-
-**V3-6. Os eventos iniciais da fatia vertical (parte da A-12).**
-
-- *Contexto:* o Eventos sugere começar com 10 a 15 eventos, sobretudo Clima, Saúde, Sorte e o déficit de consumo. A fatia vertical tem só uma vila, sem guerra nem facção.
-- *Sugestão:* **12 eventos**:
-
-| Evento | Tipo | Gatilho e efeito |
-|---|---|---|
-| Chuva boa | Ocasional (Clima) | Primavera; Fazenda +20% por 4 dias |
-| Seca | Ocasional (Clima) | Verão; Fazenda −50% por 8 dias |
-| Geada precoce | Ocasional (Clima) | Fim do outono; a colheita para 2 dias antes |
-| Tempestade forte | Ocasional (Clima) | Danifica 1 construção de madeira (−20% de Vida) |
-| Febre | Ocasional (Saúde) | Mortalidade +50% por 8 dias; gasta Remédio se houver |
-| Colheita farta | Ocasional (Sorte) | Outono; Fazenda +30% por 4 dias |
-| Mercador viajante | Ocasional (Sorte) | Uma caravana pequena vende 3 itens de fora |
-| Achado na floresta | Ocasional (Sorte) | +20 Tora ou +5 Pedra de Mana no estoque |
-| Ratos no celeiro | Ocasional (Natureza) | −10% do Grão estocado |
-| Fome | Condicional | Comida abaixo de 10% por 3 dias: Felicidade −10 e migração para fora |
-| Falta de móveis | Condicional | Materiais Básicos em déficit por 8 dias: Felicidade dos Civis −5 |
-| Festa da Colheita | Data fixa (festival) | Felicidade +10 por 4 dias; consumo de Cerveja × 1,5 |
-
-- *Impacto:* Eventos, Clima, Classe Social (dias em déficit), Religião (festival), Arquitetura (dados da fatia vertical).
-
-**V3-7. Assembleia e guerra civil na sucessão.**
-
-- *Contexto:*
-  - a assembleia anual está decidida (quem vota, o Sistema de votação, o veto do líder), mas os detalhes estão "a refinar";
-  - a crise de sucessão "pode gerar guerra civil", sem dizer como os lados se formam.
-- *Sugestão:*
-  - **Pauta:** no máximo **3 leis** por assembleia. Cada cidade de IA propõe a lei mais distante do desejo da sua cultura. Ganham as 3 propostas por mais cidades.
-  - **Voto da IA:** a cidade vota sim se a lei aproxima a facção do desejo da sua cultura. Com Felicidade abaixo de 30, ela vota contra o líder.
-  - **Veto do líder** (quando a lei Poder do líder deixa): chance = 50% + (Agressividade − Sociabilidade) ÷ 2. Cada veto: legitimidade −5.
-  - **Efeito:** a lei vale no dia seguinte. As cidades que votaram e perderam têm Felicidade −5 por 1 estação.
-  - **Guerra civil:**
-    - **candidatos:** até 3, o herdeiro pela regra de sucessão, o nobre de maior Renome e o general do maior exército;
-    - **lados:** cada cidade escolhe pela Opinião do seu governador sobre cada candidato;
-    - **luta:** os lados viram facções separadas em guerra, com o Placar de Guerra comum;
-    - **fim:** quem chegar a +60 no Placar reúne a facção; se não houver acordo em 2 anos, o lado menor fica independente.
-- *Impacto:* Facção, Diplomacia, Guerra, Companheiros (herdeiros), Notícias.
-
-**V3-8. Cidade, população e trabalho.**
-
-- *Contexto:* sobram 5 pendências pequenas na População e no Trabalho (as moradias já têm capacidade pela V2-8).
-- *Sugestão:*
-  - **Lotes por nível de cidade** (pequeno / médio / grande):
-
-| Nível | 1 | 2 | 3 | 4 |
-|---|---|---|---|---|
-| Lotes pequenos | 8 | 16 | 30 | 60 |
-| Lotes médios | 3 | 6 | 12 | 24 |
-| Lotes grandes | 0 | 1 | 3 | 8 |
-
-    O porte das construções vem da V2-8.
-  - **Moradia dos Controlados:** um quarto na Taverna (2 moedas por dia por companheiro) ou uma Casa do jogador. Sem nenhum dos dois, eles dormem ao relento.
-  - **Crianças decorativas:** não na primeira versão. No futuro, só alguns bonecos genéricos, sem simulação.
-  - **Gerente das construções da Cidade (LOD 0):** o empregado de maior habilidade vira gerente, com salário × 1,5, sem precisar de outro NPC.
-  - **Leilão:** uma construção parada por 2 estações vai a leilão por 3 dias. O lance mínimo é 50% do custo de obra, e podem dar lance os Ricos da cidade e o jogador.
-  - **Universidade:** o Controlado paga 20 moedas por dia e estuda 8 h. Ganha +1 em Inteligência ou Trabalho Especialista a cada 2 dias, até 70.
-- *Impacto:* População, Trabalho, Construção, Companheiros.
-
-**V3-9. Estradas, patrulhas, muralhas e guerra.**
-
-- *Contexto:*
-  - a Viagem quer estradas construídas (quem, quanto, tecnologia) e o número de patrulhas;
-  - a Guerra quer o custo da Muralha e do Posto da Guarda e as estradas destruídas.
-- *Sugestão:*
-  - **Estrada** (multiplicador 0,75 da Viagem): construída num Mapa Local inteiro.
-    - **Custo:** 40 Blocos de Pedra + 20 Tábuas + 160 h de obra, pelo Construtor da facção ou do jogador.
-    - **Requisitos:** tecnologia "Estradas" (Era 1, ramo Construção).
-  - **Guerra e estradas:** o saque e o cerco danificam a estrada do mapa (multiplicador 0,9 até o reparo, com 25% do custo).
-  - **Patrulhas:** 1 Esquadrão leve para cada 4 mapas de território. Custa o soldo normal, 8 por dia.
-  - **Muralha** (3 níveis):
-
-| Nível | Custo |
-|---|---|
-| Paliçada (porte médio) | 60 Tábuas |
-| Muralha de Pedra (grande) | 200 Blocos de Pedra + 40 Tábuas |
-| Bastião (grande, Era 3) | 400 Blocos de Pedra + 40 Barras de Ferro |
-
-    A manutenção segue a regra geral da V2-8.
-  - **Posto da Guarda:** porte pequeno.
-- *Impacto:* Viagem, Guerra, Construção, Tecnologia, Facção.
-
-**V3-10. Diplomacia e Companheiros.**
-
-- *Contexto:*
-  - a Diplomacia não diz quando a coalizão se desfaz;
-  - os Companheiros têm os bônus dos cargos sem números e três costumes de casamento como proposta (Autoritária: permissão do líder; Tecnocrata: contrato com taxa; Arcana: os dois Magos, ou o não Mago aceita ficar abaixo).
-- *Sugestão:*
-  - **Coalizão:** se desfaz quando a Ameaça do alvo fica abaixo de 40 por 1 estação, ou quando o alvo assina paz com todos os membros.
-  - **Bônus dos cargos:**
-
-| Cargo | Bônus |
-|---|---|
-| Governador | +1 de Controle e +1% de imposto a cada 10 de Carisma acima de 30 (até +7) |
-| Gerente | +1% de produção a cada 5 de Trabalho Especialista acima de 40 (até +12%) |
-| Líder de caravana | −10% de risco e +5% de lucro a cada 20 de Carisma acima de 30 |
-| Professor | +10% no bônus de educação da Universidade |
-
-  - **Costumes de casamento:** confirmar os três propostos. A taxa do contrato Tecnocrata é de **50 moedas**.
-- *Impacto:* Diplomacia, Companheiros, Trabalho, Comércio.
-
-**V3-11. Magia: Grimório, filhos de Mago e feitiços fora do combate.**
-
-- *Contexto:* a [[Sistema de Magia/Descrição|Magia]] não diz como se obtém o Grimório, qual a chance de filho de Mago nascer Mago, nem quais feitiços de Suporte existem fora do combate.
-- *Sugestão:*
-  - **Grimório:**
-    - **onde se acha:** nas masmorras, como loot, e no Mercado das capitais Arcanas (cerca de 80 moedas);
-    - **quem produz:** a **Torre Arcana nível 3** copia o Grimório de um feitiço que a facção já pesquisou, com 2 Couros Refinados + 1 Pedra de Mana, em 24 h, por um Mago.
-  - **Chance de nascer Mago:** 2% sem pais Magos; 25% com um; 60% com os dois. Em LOD 2, vale a média da cidade.
-  - **Feitiços de Suporte fora do combate** (só 3 na primeira versão):
-
-| Feitiço | Efeito | Limite |
-|---|---|---|
-| Bênção da Colheita | Fazenda +20% por 1 estação | 1 por cidade por estação |
-| Acalmar Tempestade | Cancela uma Tempestade forte no mapa | Custa 3 Pedras de Mana |
-| Curar Ferimentos | Igual ao Hospital com Mago de Suporte, mas no campo | — |
-
-- *Impacto:* Magia, Itens, Produção, Clima, Cura.
-
-**V3-12. Interface, fonte e PC alvo.**
-
-- *Contexto:* a Interface tem 5 pendências, e a Arquitetura o PC alvo mínimo. A V2-11 deu as metas de desempenho.
-- *Sugestão:*
-  - **HUD:** nenhum elemento fixo, nem o menu de pausa, que abre com Esc. As janelas de gestão também se movem e mudam de tamanho, e a posição fica salva no perfil do jogador.
-  - **Fonte:** **Noto Sans**. É grátis, tem licença livre e tem os acentos e os alfabetos de outros idiomas. O tamanho padrão é 14 px em 1600 × 900, com escala de 80% a 150%.
-  - **Painel "Por quê?":** uma classe por vez, em abas, com um resumo das 5 classes no topo.
-  - **Idioma:** IDs de texto desde o primeiro dia, no arquivo `textos/pt-BR.json`.
-  - **Notificações:** 15 tipos, cada um com Desligada, Diário, Ícone ou Pausa. Os padrões seguem o Aviso de cada evento.
-  - **PC alvo mínimo:** processador de 4 núcleos (2015 ou mais novo), 8 GB de memória, placa de vídeo com OpenGL 3.3 e 2 GB.
-- *Impacto:* Interface, Arquitetura, Pipeline (teto de memória da arte), Eventos.
-
-**V3-13. Listas de conteúdo e pontas soltas.**
-
-- *Contexto:* a A-12 pede listas grandes:
-  - 40 a 60 tecnologias e os marcos mundiais;
-  - os feitiços e a árvore arcana;
-  - os contratos e as missões;
-  - as condições das Ambições.
-
-  A fatia vertical **não usa** tecnologia, magia nem guerra (só os eventos da V3-6). Sobram também três pontas pequenas.
-- *Opções:*
-  - (a) fazer as listas agora, em 3 rodadas de conteúdo, antes da ficha técnica;
-  - (b) fazer a V4 e a V5 (propostas) e a **ficha técnica da fatia vertical** primeiro, e deixar as listas para as **rodadas de conteúdo C1 a C3**, durante a programação da fatia vertical.
-- *Sugestão:* (b), porque as listas não travam nada do que vem primeiro e ficam melhores quando a base já roda.
-  - **C1:** tecnologias e marcos mundiais.
-  - **C2:** feitiços, árvore arcana e Grimórios.
-  - **C3:** contratos, missões, Ambições e eventos além dos 12 da fatia vertical.
-
-  **Pontas soltas:**
-  - **Destilaria:** construída já no nível 2 (IP3), confirmar.
-  - **Cultura Agrária:** fica fora da primeira versão, como traço futuro.
-  - **Pipeline** (artista definitivo, pacotes provisórios, ferramenta de atlas): decidir no início do código.
-- *Impacto:* o plano da [[Revisão Completa]], Tecnologia, Magia, Objetivo.
+  Outros tipos que podem virar molde no futuro: Raça, Criatura e Título de Nobreza.
+- *Impacto:* Arquitetura, Tecnologia, Facção, Magia, Objetivo, Eventos.
 
 Depois das respostas:
 
-- aplicar cada decisão no seu documento;
-- montar a tabela de leis iniciais na Facção e na Cultura;
-- abrir a **V4** (confirmação das propostas, parte 1).
+- tirar as marcações confirmadas;
+- aplicar as mudanças (F-14, A-4, A-7);
+- abrir a **V5** (propostas dos outros documentos).
 
 ## 5. Fatos que valem lembrar
 
@@ -389,6 +234,14 @@ Depois das respostas:
   - **obras:** 3 portes de construção;
   - **rotina:** Civil trabalha das 7h às 15h; tick de 20 por segundo;
   - **fatia vertical:** vila de 15 NPCs.
+- **Pendências (V3):**
+  - **leis iniciais:** numa tabela única na Facção; **só a Escravista permite narcóticos** e é a única produtora (ideia do autor);
+  - **crime:** multa = 25 × gravidade²; Caçadores a partir de 500 de Recompensa;
+  - **narradores:** 4 (Cronista, Guerra, Terra, Corte), com intensidade de 50% a 150%;
+  - **fatia vertical:** 12 eventos;
+  - **interface:** fonte Noto Sans;
+  - **PC mínimo:** 4 núcleos, 8 GB, OpenGL 3.3 e 2 GB de vídeo;
+  - **conteúdo:** **moldes de conteúdo** prontos e listas nas rodadas C1 a C3 (ideia do autor).
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 

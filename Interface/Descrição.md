@@ -46,7 +46,7 @@ O autor pediu um HUD **bastante modificável** pelo jogador.
 - Um **modo de edição da interface**: o jogador entra, arrasta os elementos e sai.
 - Os layouts padrão são feitos para resoluções comuns (1280 × 720, 1600 × 900, 1920 × 1080).
 - O layout fica num **arquivo de perfil do jogador**, separado do save do jogo, e vale para todas as partidas.
-- **[Refinar depois]** quais elementos são fixos (se houver) e se as janelas de gestão também podem ser movidas e redimensionadas.
+- **Nenhum elemento fixo**, nem o menu de pausa, que abre com Esc. As janelas de gestão também se movem e mudam de tamanho, e a posição fica salva no perfil do jogador (rodada V3-12).
 
 ---
 
@@ -168,6 +168,13 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 - **Menu principal**, **novo jogo em 3 passos** (estilo de início, narrador e personagem; o **tamanho das unidades** da batalha fica nas opções do novo jogo), carregar e salvar com slots, **autosave a cada estação** e opções.
 - Estilos de início em [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]] e narradores em Eventos.
 
+### Fonte, painel "Por quê?" e idioma (rodada V3-12)
+
+- **Fonte:** **Noto Sans**. É grátis, tem licença livre e tem os acentos e os alfabetos de outros idiomas. Tamanho padrão de 14 px em 1600 × 900, com escala de 80% a 150%.
+- **Painel "Por quê?":** uma classe por vez, em abas, com um resumo das 5 classes no topo.
+- **Idioma:** IDs de texto desde o primeiro dia, no arquivo `textos/pt-BR.json`.
+- **Notificações:** 15 tipos, cada um com Desligada, Diário, Ícone ou Pausa; os padrões seguem o Aviso de cada evento.
+
 ---
 
 ## Parte técnica
@@ -202,8 +209,8 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 
 ### Perguntas em aberto
 
-1. **Elementos fixos** do HUD (se houver) e se as janelas de gestão também são móveis e redimensionáveis.
-2. **Lista exata de opções** de notificações.
-3. **Fonte do texto** (qual usar) e tamanhos.
-4. **Layout do painel "Por quê?"**: as 5 classes de uma vez ou uma por vez.
-5. **Idioma:** o jogo nasce em português; usar IDs de texto desde o início para facilitar outros idiomas depois.
+1. **HUD:** nenhum elemento fixo; janelas móveis (rodada V3-12).
+2. **Os 15 tipos de notificação:** listar junto com os eventos da rodada de conteúdo C3.
+3. **Fonte:** Noto Sans, 14 px (rodada V3-12).
+4. **Painel "Por quê?":** uma classe por vez, com resumo (rodada V3-12).
+5. **Idioma:** IDs de texto desde o início, em `textos/pt-BR.json` (rodada V3-12).

@@ -98,7 +98,7 @@ O bônus do **Comandante de Esquadrão** está no [[Sistema de Batalha/Descriç�
 - **Efeitos:** o cônjuge vira Controlado (pode entrar no grupo ou cuidar da casa); +20 de reputação na facção da família dele; casar com alguém da dinastia de uma facção é um dos Ritos de Admissão já previstos.
 - *Exemplo:* o Nobre exilado casa com a herdeira da Autoritária: entra na dinastia, ganha +20 na facção e uma chance real de "Retomar o trono".
 
-Os costumes de Autoritária, Tecnocrata e Arcana são **[Proposta]**; os de Escravista, Guerreira e Religiosa vieram da sugestão aceita.
+Os costumes de todas as culturas estão confirmados (rodada V3-10). O contrato Tecnocrata custa 50 moedas.
 
 ### Filhos e educação
 
@@ -161,6 +161,16 @@ Os costumes de Autoritária, Tecnocrata e Arcana são **[Proposta]**; os de Escr
 - **Sem retratos.** O autor não planeja retratos dos personagens nas conversas. A janela mostra o **boneco de 16 × 24 ampliado 4x**, com nome, título e Opinião.
 - A janela fica na parte de baixo da tela e é móvel, como o resto do HUD (ver [[Interface/Descrição|Interface]]).
 
+## Bônus dos cargos (rodada V3-10)
+
+| Cargo | Bônus |
+|---|---|
+| Governador | +1 de Controle e +1% de imposto a cada 10 de Carisma acima de 30 (até +7) |
+| Gerente | +1% de produção a cada 5 de Trabalho Especialista acima de 40 (até +12%) |
+| Líder de caravana | −10% de risco e +5% de lucro a cada 20 de Carisma acima de 30 |
+| Professor | +10% no bônus de educação da Universidade |
+| Comandante | Já decidido na [[Sistema de Batalha/Descrição\|Batalha]] |
+
 ## Parte técnica
 
 - **Dados:**
@@ -192,5 +202,5 @@ Os costumes de Autoritária, Tecnocrata e Arcana são **[Proposta]**; os de Escr
 ## Perguntas em aberto
 
 1. **Valores a testar:** limites, salários, taxa de entrada, chances, tempo de gravidez e infância.
-2. **Bônus dos cargos:** tamanho exato para governador, gerente, líder de caravana e professor (o de comandante já está na Batalha).
-3. **Costumes de casamento** das culturas Autoritária, Tecnocrata e Arcana (proposta).
+2. **Bônus dos cargos:** decididos na V3-10 (valores a testar).
+3. **Costumes de casamento:** confirmados na V3-10.

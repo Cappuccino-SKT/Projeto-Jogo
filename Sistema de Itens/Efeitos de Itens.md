@@ -107,7 +107,7 @@ Inspirado no Kenshi. Nas facções de cultura Religiosa, **todo NPC do grupo do 
 - O grupo come a **melhor comida do inventário**, a menos que o jogador mande "economizar".
 - **Vício:** cada uso tem chance de criar o traço **Viciado** (5% no Fumo, 10% no Pó Espiritual). Viciado sem a droga por 2 dias: Felicidade −10. Some depois de 1 estação sem uso.
 - **Nas cidades, nada muda:** os narcóticos continuam sendo consumo de Luxo agregado, sem vício.
-- Os narcóticos são proibidos na Religiosa: carregar é Contrabando ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]).
+- Os narcóticos são proibidos em todas as facções, menos na Escravista, a única produtora (ideia do autor, rodada V3-1): carregar é Contrabando ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]).
 
 ---
 

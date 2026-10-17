@@ -89,7 +89,7 @@
 | **Escada de materiais** | Três degraus por família de material: Ferro, Aço e Aço Mágico; de Madeira, Composto e Arcano; de Couro, Cravejado e Arcano. [[Sistema de Itens/Descrição\|Itens]] |
 | **Pedra de Mana** | Único item de mana: bruto, sem refino; kit dos Magos, recuperar Mana, encantamento e itens Arcanos |
 | **Lote** | Quantas unidades uma receita faz por ciclo: 4 (Tier 1), 2 (Tier 2), 1 (Tier 3 e 4). [[Sistema de Produção/Receitas\|Receitas]] |
-| **Molde** | Receita escrita uma vez para os três materiais de uma arma ou armadura (por exemplo, Espada Longa = 2 barras + 1 Tábua) |
+| **Molde** | (1) Ficha padrão de um tipo de conteúdo, para copiar e modificar ([[Arquitetura/Moldes de Conteúdo\|Moldes de Conteúdo]]); (2) nas receitas, a receita escrita uma vez para os três materiais de uma arma ou armadura |
 | **Operário / Engenheiro** | As duas Funções do Construtor: quem faz a obra e o gerente cuja Inteligência libera obras de nível alto |
 | **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
 | **Relíquia / Artefato lendário** | Artefato genérico (Rank 1 a 3) / único, com efeito próprio (Rank 4 e 5). [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]] |
@@ -108,6 +108,8 @@
 | **Pontual / Duradouro** | Evento que acontece e acaba / evento que fica ativo por um tempo |
 | **Escopo** | Onde o evento acontece: Mundo, Facção, Cidade/Mapa Local ou Grupo do jogador |
 | **Narrador** | Regulador de ritmo dos eventos ocasionais; escolhido no início e funciona como dificuldade |
+| **Intensidade** | Controle de 50% a 150% que multiplica a tensão do Narrador, separado do foco |
+| **Rodadas de conteúdo (C1 a C3)** | Rodadas futuras com as listas completas: tecnologias, feitiços, missões e eventos |
 | **Marco mundial** | Tecnologia que chega para o mundo todo numa janela de tempo. [[Sistema de Tecnologia/Descrição\|Tecnologia]] |
 | **Pontos de Pesquisa / Pontos Arcanos** | Gerados no Laboratório / na Torre Arcana |
 | **Encantamento** | Bônus fixo em item de Rank 3 ou maior, feito na Encantaria |

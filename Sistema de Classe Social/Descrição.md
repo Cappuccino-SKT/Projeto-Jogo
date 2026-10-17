@@ -53,7 +53,7 @@ Cada tipo de consumo corresponde a um grupo de itens, definido pelo **Tier** do 
 | Artefatos | Livro, Joia de Mana e Relíquia, como **posse**: 2 por NPC real de Realeza, guardados no Palácio; 1 em cada 10 sai por estação (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) | Realeza |
 
 - Os **remédios** ficam fora do consumo de classe: a cidade os gasta só nas epidemias ([[Sistema de Cura/Descrição|Cura]]).
-- Onde a lei proíbe os Narcóticos (na Religiosa), o Luxo vem só dos outros itens de Tier 3.
+- Onde a lei proíbe os Narcóticos (todas as facções menos a Escravista; rodada V3-1), o Luxo vem só dos outros itens de Tier 3.
 - Até **25%** da Comida pode ser Bebida; as quantidades estão em "Quantidades" (rodada V2-6).
 
 **Lenha no inverno.** No inverno, cada NPC real consome 1 Tora a cada 4 dias como aquecimento, dentro do consumo de Materiais e em **todas as classes**, inclusive os Escravos. O bioma multiplica (frio × 2; litoral quente e terras áridas × 0,25). Sem lenha: Felicidade −10 e mais mortes de velhos e crianças (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).

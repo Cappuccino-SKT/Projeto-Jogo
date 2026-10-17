@@ -198,6 +198,17 @@ O Narrador é o **regulador de ritmo** do jogo (como o de RimWorld), sem criar e
 O jogador escolhe um narrador no início do jogo. **O narrador é a dificuldade do jogo, mas um não é mais difícil que o outro:** cada um tem um **foco**, e o jogador combina o foco com o estilo de jogo que deseja (ver Sistema de Início de Jogo).
 
 - O foco muda **quais categorias de ocasionais** o Narrador favorece e o ritmo da tensão. Ele não muda as regras do mundo.
+
+**Os 4 narradores** (rodada V3-5; nomes significativos até a história):
+
+| Narrador | Foco | Combina com |
+|---|---|---|
+| O Cronista | Equilíbrio entre todas as categorias | Qualquer estilo |
+| A Guerra | Ameaça, guerra e bandidos | Aventureiro, Membro de facção |
+| A Terra | Clima, colheita, saúde e economia | Dono de vila, Mercador |
+| A Corte | Política, intrigas e sucessão | Nobre exilado, Membro de facção |
+
+- **Intensidade:** um controle separado, de 50% a 150% (padrão 100%), que multiplica a tensão. O foco muda **o quê**; a intensidade muda **quanto**.
 - **[Proposta]** Quatro focos iniciais, com os nomes a definir:
   - **Natureza:** clima, saúde, fauna e sorte.
   - **Política:** visitantes, embaixadas, pedidos e rumores, mais pressão social.
@@ -232,6 +243,28 @@ Há um filtro por distância: eventos longe do jogador vão só para o diário. 
 ### Diário de eventos
 
 Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limite de tamanho e é gravado no save. A **Crônica do mundo** (o que o jogador soube do resto do mundo) fica nas [[Sistema de Notícias/Descrição|Notícias]].
+
+### Diário e eventos da fatia vertical (rodadas V3-5 e V3-6)
+
+- **Diário:** guarda as últimas **300 entradas**, e as mais antigas vão para um resumo por ano; filtros por categoria, lugar e Aviso; busca por texto.
+- **12 eventos da fatia vertical:**
+
+| Evento | Tipo | Gatilho e efeito |
+|---|---|---|
+| Chuva boa | Ocasional (Clima) | Primavera; Fazenda +20% por 4 dias |
+| Seca | Ocasional (Clima) | Verão; Fazenda −50% por 8 dias |
+| Geada precoce | Ocasional (Clima) | Fim do outono; a colheita para 2 dias antes |
+| Tempestade forte | Ocasional (Clima) | Danifica 1 construção de madeira (−20% de Vida) |
+| Febre | Ocasional (Saúde) | Mortalidade +50% por 8 dias; gasta Remédio se houver |
+| Colheita farta | Ocasional (Sorte) | Outono; Fazenda +30% por 4 dias |
+| Mercador viajante | Ocasional (Sorte) | Uma caravana pequena vende 3 itens de fora |
+| Achado na floresta | Ocasional (Sorte) | +20 Tora ou +5 Pedra de Mana no estoque |
+| Ratos no celeiro | Ocasional (Natureza) | −10% do Grão estocado |
+| Fome | Condicional | Comida abaixo de 10% por 3 dias: Felicidade −10 e migração para fora |
+| Falta de móveis | Condicional | Materiais Básicos em déficit por 8 dias: Felicidade dos Civis −5 |
+| Festa da Colheita | Data fixa (festival) | Felicidade +10 por 4 dias; consumo de Cerveja × 1,5 |
+
+- Mais eventos vêm na rodada de conteúdo C3, usando o molde de [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]].
 
 ---
 
@@ -269,8 +302,8 @@ Histórico com **data** (ano, estação, dia), **escopo** e **causas**. Tem limi
 ### Perguntas em aberto
 
 1. **Valores a testar:** chance base de cada ocasional, limite de eventos negativos por cidade, escala da tensão do Narrador, limiares e histerese dos condicionais.
-2. **Nomes e foco final dos narradores**, e se existe um controle de intensidade além do foco.
+2. **Narradores:** os 4 e a intensidade foram decididos na V3-5; os pesos de cada foco ficam a testar.
 3. **Categorias extras** de ocasionais (política, ameaça) e novos efeitos na lista fechada.
 4. **Doença em LOD 0:** estado "Doente" no NPC ou só modificador da cidade? Depende do Sistema de Cura.
-5. **Tamanho e formato do diário** (limite de entradas, filtros, busca).
-6. **Lista inicial de eventos** a escrever. **[Proposta]** começar com poucos (cerca de 10 a 15, sobretudo Clima, Saúde, Sorte e o déficit de consumo) para a fatia vertical.
+5. **Diário:** 300 entradas, filtros e busca (rodada V3-5).
+6. **Lista inicial de eventos:** os 12 da fatia vertical foram decididos na V3-6; mais eventos na rodada de conteúdo C3.

@@ -93,9 +93,9 @@ O que existe só como ideia, sem regras ou números suficientes para virar códi
 | A-7 | **Rotina**: horas de dormir, trabalhar e Período Livre por classe | IA | **Sim** | **Resolvida na V2** |
 | A-8 | **IA de Utilidade**: quais ações o NPC escolhe e como os pesos se combinam | IA | Sim, mas simples na fatia vertical | **Resolvida na V2** |
 | A-9 | **Tick**: quantas vezes por segundo a simulação roda em cada LOD | Tempo, Arquitetura | Sim (valor de partida) | **Resolvida na V2** |
-| A-10 | **Leis iniciais** de cada facção, numa tabela única (hoje espalhadas) | Cultura, Facção | Não | V3 |
-| A-11 | **Bônus dos estilos de início** e o custo do personalizado | Início de Jogo | Não | V3 |
-| A-12 | **Listas de conteúdo**: 40 a 60 tecnologias, feitiços e árvore arcana, 10 a 15 eventos iniciais, contratos e missões | Tecnologia, Magia, Eventos, Objetivo | Só os eventos iniciais | V3 |
+| A-10 | **Leis iniciais** de cada facção, numa tabela única (hoje espalhadas) | Cultura, Facção | Não | **Resolvida na V3-1** |
+| A-11 | **Bônus dos estilos de início** e o custo do personalizado | Início de Jogo | Não | **Resolvida na V3-2** |
+| A-12 | **Listas de conteúdo**: 40 a 60 tecnologias, feitiços e árvore arcana, 10 a 15 eventos iniciais, contratos e missões | Tecnologia, Magia, Eventos, Objetivo | Só os eventos iniciais | **Moldes prontos (V3-13)**; os 12 eventos da fatia vertical na V3-6; listas nas rodadas C1 a C3 |
 
 **Fora da revisão** (decidido que fica para depois): a história do mundo e os nomes; a arte extra das estações; os sistemas P2; os Títulos de Nobreza; tudo marcado como "futuro".
 
@@ -163,9 +163,11 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 | **IP2** | Nomes e lista final dos itens | Regra dos nomes, matérias-primas, família da mana, intermediários, escada de materiais, armas, armaduras (peça Média), roupas, comida, outros bens, Luxo × Exclusivo (I-9, I-10, I-11, I-13) | **Respondida e aplicada** (ver seção 10) |
 | **IP3** | Insumos de cada produto | Regras de quantidade e receitas de cada construção (A-2); Funções (Engenheiro, Operário, categorias); nova Funções e Construções | **Respondida e aplicada** (ver seção 11) |
 | **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | **Respondida e aplicada** (ver seção 12) |
-| **V3** | Pendências de regra | Seção 5, A-10 e A-11; quando fazer as listas da A-12 | **Enviada** |
-| **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos ("confirmar todas, exceto...") | A fazer |
+| **V3** | Pendências de regra | Seção 5, A-10 e A-11; quando fazer as listas da A-12 | **Respondida e aplicada** (ver seção 13) |
+| **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos, mais os Moldes de Conteúdo ("confirmar todas, exceto...") | **Enviada** |
 | **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos | A fazer |
+| Ficha técnica | Ficha técnica lógica da fatia vertical | Estruturas, dados e regras da vila de 15 NPCs (V2-12) | Depois da V5 |
+| **C1 a C3** | Rodadas de conteúdo (ideia do autor na V3-13: primeiro os moldes) | C1 tecnologias e marcos; C2 feitiços; C3 contratos, missões, Ambições e eventos | Mais para frente |
 
 Depois da V5: atualizar o [[Estado do Projeto]], marcar esta revisão como concluída e começar a **ficha técnica lógica da fatia vertical**.
 
@@ -255,3 +257,23 @@ Todas as 12 perguntas: **Seguir sugestão**. As partes abstratas A-1 e A-3 a A-9
 | V2-10 IA simples | IA: 6 ações e notas |
 | V2-11 Tick | [[Sistema de Tempo/Descrição\|Tempo]] e Arquitetura: 20 Hz; metas de 500 e 5.000 NPCs |
 | V2-12 Fatia vertical | Arquitetura: vila de 15 NPCs e o teste que diz se o ciclo do dinheiro fecha |
+
+## 13. Resultado da V3 (2026-10-17)
+
+| Pergunta | Decisão do autor | Onde ficou |
+|---|---|---|
+| V3-1 Leis iniciais | Seguir sugestão, com **ideia própria: todas as facções proíbem os narcóticos, menos a Escravista, a única produtora inicial, com mão de obra escrava** | Tabela na [[Sistema de Facção/Descrição\|Facção]]; contrabando no Crime, Comércio, Escravidão, Efeitos e Classe Social |
+| V3-2 Estilos de início | Seguir sugestão | [[Sistema de Início de Jogo/Descrição\|Início de Jogo]] |
+| V3-3 Crime | Seguir sugestão | Multas, Caçadores (500), loja ilegal do jogador, missões de confiança |
+| V3-4 Cura | Seguir sugestão | 4 h para acordar; 2 h de sangramento; Hospital |
+| V3-5 Narradores | Seguir sugestão | 4 narradores, intensidade e diário no [[Sistema de Eventos/Descrição\|Eventos]] |
+| V3-6 Eventos da fatia vertical | Seguir sugestão | 12 eventos no Eventos |
+| V3-7 Assembleia e guerra civil | Seguir sugestão | Facção |
+| V3-8 Cidade e trabalho | Seguir sugestão | Lotes e Controlados na População; gerente, leilão e Universidade no Trabalho |
+| V3-9 Estradas e muralhas | Seguir sugestão | Viagem e Guerra |
+| V3-10 Diplomacia e Companheiros | Seguir sugestão | Coalizão; bônus dos cargos; costumes confirmados |
+| V3-11 Magia | Seguir sugestão | Grimório, chance de nascer Mago, 3 feitiços de Suporte |
+| V3-12 Interface e PC alvo | Seguir sugestão | Interface (HUD sem fixos, Noto Sans, IDs de texto) e Arquitetura (PC mínimo) |
+| V3-13 Listas e pontas | Seguir sugestão, com **ideia própria: listas como estruturas modulares; agora só os moldes** | Novo documento [[Arquitetura/Moldes de Conteúdo\|Moldes de Conteúdo]]; rodadas C1 a C3 depois; Destilaria no nível 2; Agrária fora da primeira versão |
+
+**Pendências da seção 5** que a V3 fechou: Crime, Cura, Eventos (narradores e diário), Facção (assembleia), Comércio, População, Trabalho, Interface, Arquitetura (PC alvo), Viagem, Guerra, Diplomacia, Companheiros, Magia, Tecnologia (Agrária) e Produção (Destilaria). Ficam para depois: os nomes da história, as listas de conteúdo (C1 a C3) e as escolhas do Pipeline no início do código.

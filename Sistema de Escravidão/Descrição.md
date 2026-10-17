@@ -131,6 +131,11 @@ Fecha a pergunta em aberto da Felicidade (fuga e rebelião local de Escravos).
 - **Diplomacia:** facções que proíbem a escravidão têm −10 de relação com as que mantêm Mercado de Escravos. **[Proposta]** Na primeira versão, só a Religiosa aplica esse −10, por já ser hostil à Escravista ([[Sistema de Diplomacia/Descrição|Diplomacia]]).
 - **Missões:** da Religiosa, libertar caravanas de escravos; da Escravista, recapturar fugitivos e escoltar carregamentos.
 
+### Narcóticos (ideia do autor, rodada V3-1)
+
+- A Escravista é a **única produtora legal** de Fumo e Pó Espiritual no início do jogo. As Fazendas de Folha de Fumo e os Misturadores dela são trabalhados sobretudo por escravos.
+- Nas outras facções, os narcóticos são Contrabando ([[Sistema de Facção/Descrição|Facção]]).
+
 ---
 
 ## Parte técnica
@@ -170,4 +175,4 @@ Fecha a pergunta em aberto da Felicidade (fuga e rebelião local de Escravos).
 1. **Valores a testar:** preço, Obediência, chances de fuga, condições da rebelião, alforria, efeitos da abolição.
 2. **Grande revolta** entre várias cidades (futuro).
 3. **Dívida** como fonte de escravos (futuro).
-4. **Escravos fora da Escravista:** quais outras facções começam com a escravidão permitida (depende das leis iniciais de cada cultura).
+4. **Escravos fora da Escravista:** a Guerreira (só prisioneiros de guerra) e a Autoritária (trabalho forçado como pena) também começam com a escravidão permitida (rodada V3-1).

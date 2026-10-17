@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1, IP1 a IP3 e V2 aplicadas; rodada V3 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisões V1, IP1 a IP3, V2 e V3 aplicadas; rodada V4 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -242,7 +242,8 @@
 - **IP2 aplicada (nomes e lista final dos itens):** nomes de época, sem embalagem e no singular (Grão, Tora, Minério de Ferro); nomes de fantasia só no futuro (ideia do autor); **só a Pedra de Mana**, bruta e sem refino (ideia do autor; Joia e Anel de Mana); Pólvora, Adubo, Bloco de Pedra, Tecidos de Algodão e de Lã; escada de materiais fora do metal (Composto, Cravejado, Arcano); Arcabuz, Fuzil Raiado, Cetro, Bombarda, Canhão, Flecha, Virote e Cartucho; armadura **Leve de couro** (Costureiro), **Média de malha** e **Pesada de placas** (Ferreiro); roupas em conjuntos por papel social; Vinho, Peixe Defumado, Assado Temperado, Roupa Comum e Roupa Fina; **consumo pelo Tier** (Tier 3 = Luxo, Tier 4 = Exclusivo). Cerca de 180 itens. Ver [[Sistema de Itens/Descrição|Itens]].
 - **IP3 aplicada (receitas):** todas as receitas em [[Sistema de Produção/Receitas|Receitas]] (lote pelo Tier, horas pelo degrau, moldes, munição em lote, Açougue com uma receita por animal, Adubo opcional); a nova [[Sistema de Produção/Funções e Construções|Funções e Construções]] nível por nível; **a era trava só os materiais de equipamento e os itens com Rank** (os bens de luxo existem desde a Era 1); Operário e Engenheiro no Construtor; categoria pela receita.
 - **V2 aplicada (economia em números):** moeda com 1 casa decimal (décimos inteiros por dentro); preço base = (insumos + horas × salário) ÷ lote × 1,2, com tabela de preços de partida; salários 0,75 / 1,0 / 1,5 / 2,5 por hora e soldo de 8 por dia; Mercado Local de × 0,5 a × 2,0 pelo estoque; cesta mínima por classe e regra do gasto de 80%; composição das cidades por classe; estabilizador, imposto de 10/20/30% e cunhagem; construções em 3 portes e capacidade das moradias; produtividade × 1,0 e × 1,5; rotina por classe; Utilidade simples; tick de 20 por segundo; números da fatia vertical (vila de 15 NPCs). Ver [[Revisão Completa]], seção 12.
-- **Em seguida:** V3 (pendências de regra, enviada). Depois: V4 e V5 (propostas) e a ficha técnica da fatia vertical.
+- **V3 aplicada (pendências de regra):** tabela de leis iniciais na Facção (**ideia do autor: só a Escravista permite narcóticos e é a única produtora, com mão de obra escrava**); bônus dos estilos de início e pontos do personalizado; multas e Caçadores; loja ilegal do jogador e missões de confiança; Inconsciente e Hospital; 4 narradores com intensidade; 12 eventos da fatia vertical; assembleia e guerra civil; lotes, moradia dos Controlados, leilão e Universidade; estradas, patrulhas e muralhas; coalizão e bônus dos cargos; Grimório e feitiços de Suporte; Noto Sans e PC mínimo; Destilaria no nível 2. **Ideia do autor (V3-13):** listas como estruturas modulares, com os moldes prontos agora ([[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]]) e as listas nas rodadas C1 a C3.
+- **Em seguida:** V4 (propostas, parte 1, enviada), V5 e a ficha técnica da fatia vertical.
 
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
@@ -305,12 +306,14 @@
 | Revisão | Itens e Produção: IP2 | Aplicada |
 | Revisão | Itens e Produção: IP3 | Aplicada |
 | Revisão | V2 (economia numérica) | Aplicada |
-| Revisão | **V3 (pendências de regra)** | **Enviada, aguardando respostas** |
-| Revisão | V4 e V5 | A fazer |
+| Revisão | V3 (pendências de regra) | Aplicada |
+| Revisão | **V4 (propostas, parte 1)** | **Enviada, aguardando respostas** |
+| Revisão | V5 | A fazer |
+| Conteúdo | Rodadas C1 a C3 (tecnologias, feitiços, missões e eventos) | Depois da ficha técnica |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 e o P1 estão completos, e a V1, a IP1, a IP2, a IP3 e a V2 da revisão foram aplicadas. Agora: V3 (pendências) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
+**Ordem:** o P0 e o P1 estão completos, e a V1, a IP1, a IP2, a IP3, a V2 e a V3 da revisão foram aplicadas. Agora: V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
 
 ## Como estamos trabalhando
 
