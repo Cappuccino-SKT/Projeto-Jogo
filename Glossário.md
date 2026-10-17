@@ -18,7 +18,7 @@
 | **Mapa Interno** | Nível 3. Interior de uma construção: Moradia, Masmorra ou Construção Pública |
 | **Mapa de Guerra** | Nível 4. Batalha de Esquadrões, só criada quando o jogador participa; cópia do Mapa Local; o mundo para durante ela. [[Sistema de Batalha/Descrição\|Batalha]] |
 | **LOD** | Nível de detalhe da simulação por Mapa Local: 0 completo, 1 reduzido, 2 abstrato |
-| **Fator de Escala** | Quantas pessoas um NPC real representa (exemplo 100). Valor a testar |
+| **Fator de Escala** | Quantas pessoas um NPC real representa (exemplo 100). Valor a testar. Nas contas da economia, 1 NPC real = 1 trabalhador e 1 consumidor |
 | **Entidade em trânsito** | Grupo, caravana, exército ou bando viajando entre Mapas Locais |
 | **Dia, Estação, Ano** | 24 h de jogo = 16 min reais a 1x; estação = 16 dias; ano = 4 estações = 64 dias. Não existem meses. [[Sistema de Tempo/Descrição\|Tempo]] |
 | **Pausa ativa** | Pausar o jogo para dar ordens, que são executadas ao despausar |
@@ -82,6 +82,10 @@
 | **Animal (item)** | Tipo de Matéria-Prima: Galinha, Porco, Ovelha, Vaca e Cavalo; o Pasto cria, o Rancho usa, o Açougue gasta |
 | **Pesqueiro** | Construção Braçal que extrai Peixe nos mapas com rio, lago ou litoral |
 | **Pilha** | Item + dono + quantidade; o jeito como o inventário guarda materiais e bens. [[Sistema de Inventário/Descrição\|Inventário]] |
+| **Receita** | Produto, insumos, construção, Função, habilidade mínima, horas e era; uma por produto. [[Sistema de Produção/Descrição\|Produção]] |
+| **Família de produtos** | O que cada construção faz; cada item só é feito numa construção |
+| **Escada de níveis** | Tier e Rank que cada nível (1 a 5) de uma construção de transformação libera |
+| **Ordem de produção** | Fazer N, Manter estoque de N ou Repetir sempre, nas construções do jogador |
 | **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
 | **Relíquia / Artefato lendário** | Artefato genérico (Rank 1 a 3) / único, com efeito próprio (Rank 4 e 5). [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]] |
 | **Livro Sagrado** | Livro exigido nas revistas das facções com a lei "Livro Sagrado obrigatório" (Religiosa) |

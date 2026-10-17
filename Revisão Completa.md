@@ -75,8 +75,8 @@ Contradições entre documentos, ou textos que ficaram para trás depois de uma 
 | I-18 | Itens × Combate | A regra da armadura mista está escrita duas vezes, como proposta, nos dois documentos | Confirmar uma vez (V4) e deixar só no Combate |
 | I-19 | Escravidão × Combate | A rebelião de escravos usava Esquadrões no combate local | **Já corrigido nesta revisão:** combate local até 40; acima disso, Mapa de Guerra com 1 Esquadrão por NPC escravo |
 | I-20 | Cultura × Crime | O pensamento extremo da Autoritária diz "pedir mudança de lei é crime", mas o crime não está na lista | Acrescentar o crime "Sedição" (gravidade 3) só nas facções com essa lei |
-| I-21 | Itens × Funções e Construções | A lista de itens diz que as peças Leves e Pesadas são de metal e a Média é de couro (Costureiro); o canvas põe a "Armadura Leve" no Costureiro nível 3 e só a Pesada no Ferreiro | IP1-2 |
-| I-22 | Funções e Construções × Construção | A Metalurgia nível 5 faz Barra de Aço Mágico, e a Forja Arcana também faz Aço Mágico (com Mago de Ofício) | IP1-2 (sugestão: só a Forja Arcana) |
+| I-21 | Itens × Funções e Construções | A lista de itens diz que as peças Leves e Pesadas são de metal e a Média é de couro (Costureiro); o canvas põe a "Armadura Leve" no Costureiro nível 3 e só a Pesada no Ferreiro | **Resolvida na IP1-2:** Leves e Pesadas no Ferreiro, Média no Costureiro (a IP2-7 propõe trocar: Leve de couro, Média de malha) |
+| I-22 | Funções e Construções × Construção | A Metalurgia nível 5 faz Barra de Aço Mágico, e a Forja Arcana também faz Aço Mágico (com Mago de Ofício) | **Resolvida na IP1-2:** só a Forja Arcana faz Aço Mágico |
 
 ## 4. Partes abstratas
 
@@ -126,7 +126,7 @@ Resumo das "Perguntas em aberto" e das marcações **[Em aberto]**. Os itens **"
 | Diplomacia | Fim da coalizão; mensageiros (futuro) |
 | Companheiros | Bônus dos cargos (fora o de comandante); costumes de casamento de Autoritária, Tecnocrata e Arcana |
 | Magia | Como se obtém o Grimório; chance de filho de Mago; feitiços de Suporte fora do combate |
-| Tecnologia | Listas iniciais por cultura; cultura Agrária; tabela de Rank por era |
+| Tecnologia | Listas iniciais por cultura; cultura Agrária (a tabela de Rank por era foi decidida na IP1-3) |
 | Religião, Clima, Notícias, Escravidão, Efeitos | Escritos agora; quase só valores a testar e "futuro" |
 
 ## 6. Propostas a confirmar
@@ -159,8 +159,8 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 | Rodada | Tema | O que resolve | Estado |
 |---|---|---|---|
 | **V1** | Inconsistências e faxina dos documentos | Seção 3 e o formato dos 13 documentos antigos | **Respondida e aplicada** (ver seção 8) |
-| **IP1** | Padronização da produção | Estrutura da receita, família de cada construção, escada de níveis, Rank do produto, escala das unidades, tempo, ordens de produção, limites | **Enviada** |
-| **IP2** | Nomes e lista final dos itens | I-9 (resto), I-10, I-11, I-13; Pedra Mágica × Pedra de Mana; peça Média | A fazer |
+| **IP1** | Padronização da produção | Estrutura da receita, família de cada construção, escada de níveis, Rank do produto, escala das unidades, tempo, ordens de produção, limites | **Respondida e aplicada** (ver seção 9) |
+| **IP2** | Nomes e lista final dos itens | Regra dos nomes, matérias-primas, família da mana, intermediários, escada de materiais, armas, armaduras (peça Média), roupas, comida, outros bens, Luxo × Exclusivo (I-9, I-10, I-11, I-13) | **Enviada** |
 | **IP3** | Insumos de cada produto | A-2 (receitas); nova Funções e Construções | A fazer |
 | **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | A fazer |
 | **V3** | Pendências de regra e listas de conteúdo | Seção 5 e A-10 a A-12 | A fazer |
@@ -184,3 +184,22 @@ Depois da V5: atualizar o [[Estado do Projeto]], marcar esta revisão como concl
 | V1-9 Fome e Felicidade | Seguir sugestão | Fome, Felicidade individual e noites sem dormir no [[Sistema de NPC/Descrição\|NPC]] |
 | V1-10 Templo | Seguir sugestão | Tabela geral de vagas; 2 Templos nas cidades de nível 4 |
 | V1-11 Ordem | Seguir sugestão | "Confirmar todas, exceto..." nas V4 e V5 |
+
+## 9. Resultado da IP1 (2026-10-17)
+
+| Pergunta | Decisão do autor | O que foi feito |
+|---|---|---|
+| IP1-1 Receita padrão | Seguir sugestão | Uma receita fixa por produto, com 8 campos ([[Sistema de Produção/Descrição\|Produção]]) |
+| IP1-2 Família por construção | Seguir sugestão | Cada item numa só construção; Aço Mágico só na Forja Arcana (resolve a I-22); Leves e Pesadas no Ferreiro e Média no Costureiro (resolve a I-21); Fumo e Pó Espiritual no Misturador |
+| IP1-3 Escada de níveis | Seguir sugestão | Escada padrão de Tier e Rank por nível; Rank por era na [[Sistema de Tecnologia/Descrição\|Tecnologia]]; nas capitais, o nível alto na Era 1 só dá eficiência e vagas |
+| IP1-4 Rank do produto | Seguir sugestão | Menor entre material, nível e habilidade (1 + habilidade ÷ 25); sorte de +1 (20%) e −1 (10%) |
+| IP1-5 Escala | Seguir sugestão | 1 NPC real = 1 trabalhador e 1 consumidor; o Fator de Escala só muda a população exibida (Facção, Classe Social, Glossário) |
+| IP1-6 Tempo | Seguir sugestão | Horas por unidade por Tier; velocidade 0,5 + habilidade ÷ 100; +10% por nível acima do mínimo |
+| IP1-7 Ordens | Seguir sugestão | Fila de ordens do jogador (Fazer N, Manter estoque, Repetir) na [[Interface/Descrição\|Interface]]; nota da IA = lucro × (1 + déficit); comida com prioridade abaixo de 3 dias |
+| IP1-8 Limites | Seguir sugestão | 3 insumos e 3 saídas; 4 passos; nenhum item órfão; sem ferramentas |
+| IP1-9 Ordem das rodadas | Seguir sugestão | IP2 (nomes) → IP3 (insumos) → V2 |
+
+**Consequências notadas ao aplicar:**
+
+- A escada de níveis deixa alguns produtos do canvas abaixo do nível exigido: Licor, Ornamento e Joias, de Tier 4, aparecem antes do nível 5. O Remédio, de Tier 3, passou do Boticário nível 3 para o 4. A IP3 reposiciona todos.
+- A IP2-7 propõe mudar um ponto da IP1-2: a armadura Leve de couro, no Costureiro, e a Média de malha, no Ferreiro.

@@ -31,6 +31,7 @@ Um NPC real (aquele com que o jogador interage no Mapa Local) representa várias
 - A quantidade de NPCs reais de cada cidade vem do nível dela (ver Sistema de Cidade); a população total é NPCs reais × Fator de Escala.
 - O valor ainda não foi definido: será testado e discutido. Deve ficar em arquivo de dados, fácil de ajustar.
 - Vale para a população do Mapa Local e do Mapa Mundial ("População total da região") e para os conscritos.
+- **Na economia** (rodada IP1-5), 1 NPC real conta como **1 trabalhador e 1 consumidor**: o Fator de Escala não multiplica a produção nem o consumo (ver [[Sistema de Produção/Descrição|Produção]]).
 
 ### Conscritos, Esquadrões e Exército
 

@@ -26,7 +26,7 @@ Isso dá profundidade sem exigir um sistema de mobilidade totalmente livre.
 
 ### Consumo
 
-O consumo **não é atribuído a cada NPC**: isso gastaria muito processamento em informações pouco úteis. Ele é vinculado às **cidades**: o jogo verifica o inventário da cidade e, se ele tiver os recursos exigidos, a demanda é atendida. Com o tempo, esses recursos são gastos do inventário, na proporção da quantidade de pessoas de cada classe.
+O consumo **não é atribuído a cada NPC**: isso gastaria muito processamento em informações pouco úteis. Ele é vinculado às **cidades**: o jogo verifica o inventário da cidade e, se ele tiver os recursos exigidos, a demanda é atendida. Com o tempo, esses recursos são gastos do inventário, na proporção da quantidade de pessoas de cada classe. Nas contas, **1 NPC real é 1 consumidor** (rodada IP1-5): o Fator de Escala só muda a população exibida.
 
 | Classe | Consome |
 |---|---|
@@ -103,4 +103,4 @@ A classe social também afeta quais habilidades principais o NPC tem e o nível 
 ## Perguntas em aberto
 
 1. **Quantidades:** quanto cada NPC real de cada classe consome por dia (rodada V2 da [[Revisão Completa]]).
-2. **Mapeamento Luxo × Exclusivo** por Tier e o Doce de Baunilha (rodadas de Itens e Produção).
+2. **Mapeamento Luxo × Exclusivo** por Tier e o Doce de Baunilha (rodada IP2).
