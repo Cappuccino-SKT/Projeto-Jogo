@@ -71,7 +71,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Posto Comercial** | Necessário para a cidade enviar caravanas civis ([[Sistema de Comércio/Descrição\|Comércio]]) |
 | **Laboratório** | Gera Pontos de Pesquisa ([[Sistema de Tecnologia/Descrição\|Tecnologia]]) |
 | **Torre Arcana** | Gera Pontos Arcanos com Magos ([[Sistema de Magia/Descrição\|Magia]]) |
-| **Forja Arcana** | Magos de Ofício produzem Aço Mágico e Pedra de Mana; é a única construção que faz Aço Mágico (rodada IP1-2; ver [[Sistema de Magia/Descrição\|Magia]]) |
+| **Forja Arcana** | Magos de Ofício produzem a Barra de Aço Mágico, com Pedra de Mana; é a única construção que faz Aço Mágico (rodadas IP1-2 e IP2-3; ver [[Sistema de Magia/Descrição\|Magia]]) |
 | **Encantaria** | Magos de Ofício encantam itens de Rank 3 ou maior ([[Sistema de Magia/Descrição\|Magia]]) |
 | **Hospital** | Cura os NPCs do grupo do jogador; um Mago de Suporte acelera a cura ([[Sistema de Cura/Descrição\|Cura]]) |
 | **Boticário** | Produz Curativos e Remédios ([[Sistema de Cura/Descrição\|Cura]]) |
@@ -84,7 +84,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 
 ### Clima
 
-A **tempestade forte** danifica as construções de madeira; o reparo sai pela manutenção. No inverno, as moradias gastam Madeira Bruta como lenha (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
+A **tempestade forte** danifica as construções de madeira; o reparo sai pela manutenção. No inverno, as moradias gastam Tora como lenha (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
 ### Arte
 

@@ -1,6 +1,6 @@
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> **Regras padronizadas na rodada IP1 (2026-10-17).** Os nomes dos itens ainda serão revistos na rodada IP2 e os insumos de cada produto na IP3. Os valores numéricos são iniciais, a testar.
+> **Regras padronizadas na rodada IP1 (2026-10-17).** Os nomes dos itens foram fechados na rodada IP2; os insumos de cada produto vêm na IP3. Os valores numéricos são iniciais, a testar.
 
 ## Sistema de Produção
 
@@ -37,7 +37,7 @@ A produção é baseada em **construções**, desenvolvidas junto com o [[Sistem
 | Campo | O que é | Exemplo (Pão) |
 |---|---|---|
 | Produto e quantidade | O que sai de um ciclo | 4 Pão |
-| Insumos | Itens e quantidades gastos | 2 Fardo de Grão + 1 Água |
+| Insumos | Itens e quantidades gastos | 2 Grão + 1 Água |
 | Subprodutos | Saídas extras, se houver | — |
 | Construção e nível mínimo | Onde se faz | Cozinheiro, nível 1 |
 | Função e Trabalho | Quem faz e qual habilidade conta | Cozinheiro; Trabalho Manufaturado |
@@ -58,22 +58,22 @@ A produção é baseada em **construções**, desenvolvidas junto com o [[Sistem
 | Pasto | Animais vivos |
 | Rancho | Produtos de animais vivos (ovos, lã, leite, dejetos) |
 | Pesqueiro | Peixe |
-| Posto de Coleta | Madeira, pedra, argila, minérios, carvão, água, pedra mágica |
-| Açougue | Carne, ossos e couro bruto (gasta o animal) |
+| Posto de Coleta | Tora, Pedra, Argila, minérios, Carvão, Água e Pedra de Mana |
+| Açougue | Carne Crua, Ossos e Couro Cru (gasta o animal) |
 | Metalurgia | Barras de Ferro, Cobre, Aço e Ouro |
-| **Forja Arcana** | **Aço Mágico** e Pedra de Mana (precisa de Mago de Ofício) |
-| Pedreira | Tijolos e peças de argila |
-| Carpinteiro | Tudo de madeira: tábuas, móveis, arcos, bestas, munição de arco e besta, escudo de madeira, cajado de madeira |
-| Ferreiro | Tudo de metal batido: lâminas, hastes, clavas, escudos de metal, **armaduras Leves e Pesadas**, Grilhões, peças de metal das roupas |
-| Armeiro | Armas de fogo, munição de fogo e artilharia |
-| Costureiro | Tecido, couro refinado, roupas, **armadura Média**, Sela |
-| Artesão | Joias, anéis, ornamentos, coroas, cajados de metal, Joia Mágica |
-| Cozinheiro | Comida (do Pão à Carne Envelhecida) |
-| Destilaria | Bebidas (Cerveja, Licor) e essências (Perfume) |
-| Misturador | Misturas secas: Fertilizante, Pó Explosivo, **Fumo** e Pó Espiritual |
+| **Forja Arcana** | **Barra de Aço Mágico** (precisa de Mago de Ofício). A Pedra de Mana é bruta e não passa por refino (IP2-3) |
+| Pedreira | Bloco de Pedra e Cerâmica |
+| Carpinteiro | Tudo de madeira: Tábua, móveis, arcos (de Madeira, Compostos e Arcanos), bestas, Flecha e Virote, Escudo de Madeira, Cajado Simples de Madeira |
+| Ferreiro | Tudo de metal batido: lâminas, hastes, clavas, escudos de metal, **armaduras Médias (malha) e Pesadas (placas)**, Grilhões, Chapéu de Mineiro |
+| Armeiro | Armas de fogo, Cartucho, artilharia e Bala de Canhão |
+| Costureiro | Tecido de Algodão e de Lã, Couro Refinado, roupas (as equipáveis e as de consumo), **armadura Leve** (couro), Sela |
+| Artesão | Joias, anéis, Ornamento, Coroa, cajados de metal e Cetro, Joia de Mana |
+| Cozinheiro | Comida (do Pão ao Doce de Especiarias) |
+| Destilaria | Bebidas (Cerveja, Vinho, Licor) e Perfume |
+| Misturador | Misturas secas: Adubo, Pólvora, **Fumo** e Pó Espiritual |
 | Boticário | Medicamentos |
 
-- **Mudanças em relação ao canvas:** a Metalurgia deixa de fazer Aço Mágico (só a Forja Arcana faz); o Fumo sai do Artesão e vai para o Misturador; o Pó Espiritual sai da Destilaria e vai para o Misturador; as armaduras Leves saem do Costureiro e vão para o Ferreiro.
+- **Mudanças em relação ao canvas:** a Metalurgia deixa de fazer Aço Mágico (só a Forja Arcana faz); o Fumo sai do Artesão e vai para o Misturador; o Pó Espiritual sai da Destilaria e vai para o Misturador; as armaduras de metal (Média de malha e Pesada de placas) ficam no Ferreiro, e a Leve, de couro, no Costureiro (a IP2-7 mudou este ponto da IP1-2).
 - A tabela completa, produto por produto e nível por nível, será refeita na rodada IP3 em [[Sistema de Produção/Funções e Construções|Funções e Construções]].
 - A **Encantaria** não tem família: ela muda um item que já existe (ver [[Sistema de Magia/Descrição|Magia]]).
 
@@ -155,14 +155,14 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 ## Limites de complexidade
 
 - No máximo **3 insumos** e **3 saídas** (produto e subprodutos) por receita.
-- Cadeia de no máximo **4 passos** do mapa ao produto final (por exemplo, Ferro Bruto → Barra de Ferro → Espada).
+- Cadeia de no máximo **4 passos** do mapa ao produto final (por exemplo, Minério de Ferro → Barra de Ferro → Espada).
 - **Nenhum item órfão:** todo item intermediário precisa ser usado por pelo menos uma receita ou consumido por alguma classe. O `jogo --validar` avisa os órfãos.
 - **Sem ferramentas** como insumo na primeira versão; o desgaste das construções já é a manutenção.
 
 ## Regras já decididas
 
 - **Estações e clima:** a produção Braçal muda com a estação e o bioma (na tabela base, a Fazenda rende 150% no outono e 25% no inverno); a Manufaturada e a Especialista não mudam ([[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
-- **Animais** (revisão V1-3): o **Pasto** cria Galinha, Porco, Ovelha, Vaca e Cavalo, que são itens do tipo Animal. O **Rancho** precisa dos animais no estoque, mas não os gasta (ovos, lã, leite e dejetos). O **Açougue** gasta o animal e faz Pedaço de Carne, Ossos e Couro Bruto.
+- **Animais** (revisão V1-3): o **Pasto** cria Galinha, Porco, Ovelha, Vaca e Cavalo, que são itens do tipo Animal. O **Rancho** precisa dos animais no estoque, mas não os gasta (ovos, lã, leite e dejetos). O **Açougue** gasta o animal e faz Carne Crua, Ossos e Couro Cru.
 - **Pesca** (revisão V1-4): o **Pesqueiro** extrai Peixe nos mapas com rio, lago ou litoral ([[Sistema de Recursos/Descrição|Recursos]]).
 - **Cadeia militar:** Ração Militar e materiais de manutenção de equipamento abastecem os exércitos ([[Sistema de Guerra/Descrição|Guerra]]).
 - **Loja ilegal:** qualquer construção de produção pode funcionar como loja ilegal disfarçada ([[Sistema de Crime e Justiça/Descrição|Crime e Justiça]]).
@@ -197,7 +197,7 @@ O Rank de uma arma, equipamento ou artefato produzido é o **menor** de três va
 
 ## Perguntas em aberto
 
-1. **Nomes e lista final dos itens:** rodada IP2.
+1. **Nomes e lista final dos itens:** fechados na rodada IP2 (ver [[Sistema de Itens/Descrição|Itens]]).
 2. **Insumos de cada produto** e a nova tabela de Funções e Construções: rodada IP3.
 3. **Números:** produtividade base dos recursos, horas do turno e preço base (≈ custo dos insumos + horas de trabalho × salário): rodada V2.
 4. **Valores a testar:** horas por unidade, chances de sorte no Rank, bônus de +10% por nível, limiar de 3 dias de comida.

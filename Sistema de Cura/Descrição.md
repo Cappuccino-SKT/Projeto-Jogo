@@ -24,7 +24,7 @@ Define como os NPCs se recuperam de ferimentos. Hoje existe o **Estado Atual** (
 
 - O tipo de item **Medicamento** já existe (Bem de Consumo), mas **ainda não há itens**.
 - Quem produz é o **Boticário** (Produção Especialista), em uma construção Boticário (ver Sistema de Construção).
-- Itens: **Curativo** (Tier 1; Tecido + Água): regeneração × 2 por 8 horas e estanca o sangramento; **Remédio** (Tier 3; Flor Espiritual + Fardo de Especiaria): regeneração × 3 por 24 horas e cura o estado Doente (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
+- Itens: **Curativo** (Tier 1; Tecido de Algodão + Água): regeneração × 2 por 8 horas e estanca o sangramento; **Remédio** (Tier 3; Flor Espiritual + Especiarias): regeneração × 3 por 24 horas e cura o estado Doente (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
 - **Na cidade:** numa epidemia, a cidade gasta 1 Remédio por 10 NPCs reais por dia; com estoque, a mortalidade da doença cai pela metade.
 
 ### Hospital

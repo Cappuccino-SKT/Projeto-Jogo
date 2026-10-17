@@ -86,6 +86,8 @@
 | **Família de produtos** | O que cada construção faz; cada item só é feito numa construção |
 | **Escada de níveis** | Tier e Rank que cada nível (1 a 5) de uma construção de transformação libera |
 | **Ordem de produção** | Fazer N, Manter estoque de N ou Repetir sempre, nas construções do jogador |
+| **Escada de materiais** | Três degraus por família de material: Ferro, Aço e Aço Mágico; de Madeira, Composto e Arcano; de Couro, Cravejado e Arcano. [[Sistema de Itens/Descrição\|Itens]] |
+| **Pedra de Mana** | Único item de mana: bruto, sem refino; kit dos Magos, recuperar Mana, encantamento e itens Arcanos |
 | **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
 | **Relíquia / Artefato lendário** | Artefato genérico (Rank 1 a 3) / único, com efeito próprio (Rank 4 e 5). [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]] |
 | **Livro Sagrado** | Livro exigido nas revistas das facções com a lei "Livro Sagrado obrigatório" (Religiosa) |
@@ -152,7 +154,7 @@
 | **Assimilação** | Minorias adotando aos poucos a cultura dominante da cidade, por estação |
 | **Bênção / Anátema** | Atos do Sumo Sacerdote que mudam relações; o Anátema libera a Guerra santa |
 | **Clima do dia** | Limpo, Nublado, Chuva, Tempestade, Neve, Névoa ou Calor forte; sorteado por região. [[Sistema de Clima e Estações/Descrição\|Clima e Estações]] |
-| **Lenha** | Madeira Bruta gasta pelas moradias no inverno |
+| **Lenha** | Tora gasta pelas moradias no inverno |
 | **Fase do dia** | Amanhecer, dia, entardecer ou noite; à noite, visão e detecção −30% |
 | **Notícia** | Acontecimento que anda 3 h por mapa até o jogador. [[Sistema de Notícias/Descrição\|Notícias]] |
 | **Importância** | Alcance da notícia: Local (2 mapas), Regional (5) ou Mundial |

@@ -91,11 +91,11 @@ Cada região tem um bioma ligado à sua cultura, 2 a 3 recursos de destaque e fa
 | Região | Bioma | Recursos de destaque (produtividade alta) | Escassos (pouco ou nenhum) |
 |---|---|---|---|
 | Guerreira | Montanhas frias e taiga | Ferro, Carvão, Cavalos | Grão, Fruta, Algodão, Especiaria |
-| Arcana | Floresta antiga e enevoada | Pedra Mágica, Flor Espiritual, Madeira | Ferro, Cobre, Carvão |
-| Autoritária | Planície fértil cortada por um grande rio | Grão, Pedra, Vacas | Pedra Mágica, Especiaria, Ouro |
+| Arcana | Floresta antiga e enevoada | Pedra de Mana, Flor Espiritual, Madeira | Ferro, Cobre, Carvão |
+| Autoritária | Planície fértil cortada por um grande rio | Grão, Pedra, Vacas | Pedra de Mana, Especiaria, Ouro |
 | Religiosa | Colinas e vales temperados | Fruta, Ovelhas, Argila | Carvão, Ferro, Folha de Fumo |
 | Tecnocrata | Terras áridas e cânions | Cobre, Ouro, Carvão | Grão, Madeira, Flor Espiritual |
-| Escravista | Litoral quente | Algodão, Especiaria, Folha de Fumo | Ferro, Pedra Mágica, Pedra |
+| Escravista | Litoral quente | Algodão, Especiaria, Folha de Fumo | Ferro, Pedra de Mana, Pedra |
 
 - **Peixe** (revisão V1-4): destaque no litoral Escravista, com o porto de pesca (6,6), e no grande rio Autoritário (ver [[Sistema de Recursos/Descrição|Recursos]]).
 - **Bioma e clima:** o bioma muda a produção por estação, as chances de clima e a lenha no inverno (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
@@ -145,7 +145,7 @@ Todas começam na **Era 1** de tecnologia. O PIB pode variar até ±30% entre as
 | Facção | NPCs reais | População (Fator 100) | Riqueza | PIB inicial | Esquadrões (1 = 100 soldados) | Ponto forte |
 |---|---|---|---|---|---|---|
 | Guerreira | 440 | 44.000 | × 0,85 | 23.375 | 20 | Exército grande e cavalos |
-| Arcana | 440 | 44.000 | × 0,95 | 26.125 | 10 | Magos e Pedra Mágica |
+| Arcana | 440 | 44.000 | × 0,95 | 26.125 | 10 | Magos e Pedra de Mana |
 | Autoritária | 440 | 44.000 | × 1,15 | 31.625 | 16 | Comida e ordem (Controle alto) |
 | Religiosa | 440 | 44.000 | × 1,00 | 27.500 | 13 | Felicidade estável e cura |
 | Tecnocrata | 440 | 44.000 | × 1,05 | 28.875 | 11 | Pesquisa e cobre/ouro |

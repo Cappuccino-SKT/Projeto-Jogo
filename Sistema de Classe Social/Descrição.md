@@ -42,18 +42,21 @@ Cada classe pode causar um evento diferente conforme o recurso em falta. Os mais
 
 ### Mapeamento do consumo para itens
 
-Cada tipo de consumo corresponde a um grupo de itens (ver [[Sistema de Itens/Descrição|Sistema de Itens]]). Ajuste provisório, a rever nas rodadas de Itens e Produção:
+Cada tipo de consumo corresponde a um grupo de itens, definido pelo **Tier** do bem (rodada IP2-11; ver [[Sistema de Itens/Descrição|Itens]]). Um item novo já cai no grupo certo, sem mexer na tabela.
 
-| Consumo | Itens |
-|---|---|
-| Comida | Alimento Básico, Alimento Refinado e Bebida |
-| Materiais Básicos | Mobília Básica |
-| Bens de Luxo | Perfumes, Mobília Refinada e Narcóticos |
-| Bens Exclusivos | Bens de luxo de Tier 4 (Licor, Carne Envelhecida, Doce de Baunilha, Joias, Ornamento) |
-| Artefatos | Livro, Joia Mágica e Relíquia, como **posse**: 2 por NPC real de Realeza, guardados no Palácio; 1 em cada 10 sai por estação (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
-| Lenha (só no inverno, todas as classes) | Madeira Bruta |
+| Consumo | O que conta | Quem consome |
+|---|---|---|
+| Comida | Alimentos e bebidas. O Escravo come Tier 1; o Civil, Tier 1 e 2; o Rico e acima, Tier 2 ou mais (nobre não come Ração) | Todas as classes |
+| Materiais Básicos | Mobília e Vestuário de Tier 1 e 2 (Cerâmica, Móveis de Madeira, Roupa Comum), mais a Tora no inverno | Civil e acima (a Tora, todas as classes) |
+| Bens de Luxo | Tudo de Tier 3 que não é remédio (Móveis Refinados, Roupa Fina, Perfume, Vinho, Assado Temperado), mais os Narcóticos | Rico e acima |
+| Bens Exclusivos | Tudo de Tier 4 (Licor, Presunto Curado, Doce de Especiarias, Joias, Ornamento) | Nobreza e Realeza |
+| Artefatos | Livro, Joia de Mana e Relíquia, como **posse**: 2 por NPC real de Realeza, guardados no Palácio; 1 em cada 10 sai por estação (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) | Realeza |
 
-**Lenha no inverno.** No inverno, cada NPC real consome 1 Madeira Bruta a cada 4 dias como aquecimento, dentro do consumo de Materiais e em **todas as classes**, inclusive os Escravos. O bioma multiplica (frio × 2; litoral quente e terras áridas × 0,25). Sem lenha: Felicidade −10 e mais mortes de velhos e crianças (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
+- Os **remédios** ficam fora do consumo de classe: a cidade os gasta só nas epidemias ([[Sistema de Cura/Descrição|Cura]]).
+- Onde a lei proíbe os Narcóticos (na Religiosa), o Luxo vem só dos outros itens de Tier 3.
+- **[Proposta]** Quanto da Comida pode ser Bebida (por exemplo, até 25%) e as quantidades de tudo ficam para a V2.
+
+**Lenha no inverno.** No inverno, cada NPC real consome 1 Tora a cada 4 dias como aquecimento, dentro do consumo de Materiais e em **todas as classes**, inclusive os Escravos. O bioma multiplica (frio × 2; litoral quente e terras áridas × 0,25). Sem lenha: Felicidade −10 e mais mortes de velhos e crianças (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
 **Casos especiais.**
 
@@ -103,4 +106,4 @@ A classe social também afeta quais habilidades principais o NPC tem e o nível 
 ## Perguntas em aberto
 
 1. **Quantidades:** quanto cada NPC real de cada classe consome por dia (rodada V2 da [[Revisão Completa]]).
-2. **Mapeamento Luxo × Exclusivo** por Tier e o Doce de Baunilha (rodada IP2).
+2. **Quanto da Comida pode ser Bebida** (rodada V2). O mapeamento por Tier foi decidido na IP2-11.
