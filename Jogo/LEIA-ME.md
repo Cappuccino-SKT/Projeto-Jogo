@@ -48,18 +48,21 @@ Também ficam aqui:
 
 ### Marco 0: o ambiente e o "olá, janela" (2026-10-17)
 
-**O que faz:** abre uma janela de 1600 × 900 com o fundo verde-escuro. Fecha no X ou com a tecla **Esc**. O console mostra "Olá, janela!" ao abrir e "Janela fechada. Até a próxima!" ao fechar.
+**O que faz:** abre uma janela com o fundo verde-escuro. Fecha no X ou com a tecla **Esc**. **F11** liga e desliga a tela cheia (tecla provisória). O console mostra "Olá, janela!" ao abrir e "Janela fechada. Até a próxima!" ao fechar.
+
+**O tamanho da janela:** se 1600 × 900 cabe na tela com a barra de título, a janela abre com esse tamanho. Se não cabe (uma tela de 1600 × 900, como a do autor, só tem 1600 × 860 livres acima da barra de tarefas), ela abre **maximizada**, e ao restaurar fica com 90% da área livre, em 16:9. *Por quê:* no primeiro teste, a janela de 1600 × 900 não cabia, e o Windows escondeu a barra de título, com o X, acima da tela.
 
 **Os arquivos:**
 
-- `Jogo/main.cpp`: o começo do programa. Liga a SDL, cria a janela e repete o **laço principal** até o jogador fechar. O laço lê os eventos (teclas, o X da janela) e pinta o fundo, uma vez por quadro;
+- `Jogo/main.cpp`: o começo do programa. Liga a SDL, escolhe o tamanho da janela (`escolherTamanhoInicialDaJanela`), cria a janela e repete o **laço principal** até o jogador fechar. O laço lê os eventos (teclas, o X da janela) e pinta o fundo, uma vez por quadro;
 - a **SDL3** (versão 3.4.18) é baixada pelo CMake e entra dentro do `jogo.exe`, então o programa não precisa de nenhuma DLL ao lado dele.
 
 **O que testar:**
 
-1. A janela abre, verde-escura, com o título "Projeto Jogo (marco 0)".
-2. Dá para mudar o tamanho da janela arrastando a borda.
+1. A janela abre verde-escura, com a barra de título "Projeto Jogo (marco 0)" à vista (maximizada, numa tela de 1600 × 900).
+2. O botão de restaurar, ao lado do X, diminui a janela; depois, dá para mudar o tamanho arrastando a borda.
 3. O X e a tecla Esc fecham a janela, e o console mostra a mensagem de despedida.
-4. Com a janela aberta, o processador fica perto de 0% no Gerenciador de Tarefas, porque o laço espera o monitor a cada quadro.
+4. F11 entra e sai da tela cheia.
+5. Com a janela aberta, o processador fica perto de 0% no Gerenciador de Tarefas, porque o laço espera o monitor a cada quadro.
 
 **O que vem no marco 1:** a pasta `Codigo/` ganha o relógio do mundo ([[Ficha Logica/Tempo|ficha do Tempo]]), e a janela passa a desenhar o mapa do Tiled ([[Ficha Logica/Mapa|ficha do Mapa]]) com o OpenGL.
