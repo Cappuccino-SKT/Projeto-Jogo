@@ -49,7 +49,7 @@ As categorias vêm do [[Sistema de Produção/Descrição|Sistema de Produção]
 | Quartel | Oficial instrutor | Alistamento e formação de Esquadrões |
 | Prisão | Carcereiro (Guarda) | Cumprimento de pena |
 | Casa da Moeda | Moedeiro | Cunhagem |
-| Templo | Sacerdote | Cultura Religiosa |
+| Templo | Sacerdote (Civil; gerente Nobre) | Culto da facção: cobertura (cada Sacerdote atende 20 NPCs), Felicidade, oferendas e festivais; na Religiosa, menos doença (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | Posto Comercial | Mercador | Envio de caravanas civis |
 | Laboratório | Pesquisador | Pontos de Pesquisa |
 | Torre Arcana | Mago | Pontos Arcanos |

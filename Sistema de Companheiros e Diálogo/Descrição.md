@@ -130,7 +130,7 @@ Os costumes de Autoritária, Tecnocrata e Arcana são **[Proposta]**; os de Escr
 
 | Ação | O que faz | Comparado com |
 |---|---|---|
-| Conversar | Rumores e notícias | Sempre funciona |
+| Conversar | Rumores e notícias que já chegaram à cidade (ver [[Sistema de Notícias/Descrição\|Notícias]]) | Sempre funciona |
 | Perguntar sobre | Preços, masmorras, contratos, caminhos | Sempre funciona; a resposta pode estar velha |
 | Persuadir | Pedir um favor, desconto ou informação | Carisma do jogador × Opinião do NPC |
 | Barganhar | Melhorar o preço de uma venda | Carisma × Ganância |

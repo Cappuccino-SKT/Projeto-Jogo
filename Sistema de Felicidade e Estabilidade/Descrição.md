@@ -29,7 +29,7 @@ A **Felicidade-alvo** de cada classe é **50 mais as contribuições** abaixo. C
 
 | Fator | Contribuição (valores iniciais) | De onde vem |
 |---|---|---|
-| **Consumo atendido** | −25 a +5, conforme a classe (Comida, Materiais, Luxo, Exclusivos, Artefatos) | [[Sistema de Classe Social/Descrição\|Classe Social]]; estoques da cidade |
+| **Consumo atendido** | −25 a +5, conforme a classe (Comida, Materiais, Luxo, Exclusivos, Artefatos); falta de lenha no inverno, −10 | [[Sistema de Classe Social/Descrição\|Classe Social]]; estoques da cidade; [[Sistema de Clima e Estações/Descrição\|Clima e Estações]] |
 | **Leis × cultura** | −30 a +10 | [[Sistema de Cultura/Descrição\|Cultura]] (ver abaixo) |
 | **Criminalidade** | 0 a −15 | [[Sistema de Crime e Justiça/Descrição\|Crime e Justiça]] |
 | **Desemprego e renda** | −10 a +10 | [[Sistema de Trabalho e Propriedade/Descrição\|Trabalho e Propriedade]] |
@@ -38,7 +38,7 @@ A **Felicidade-alvo** de cada classe é **50 mais as contribuições** abaixo. C
 | **Guerra e ameaça** | 0 a −15 (−Cansaço de guerra × 0,15) | [[Sistema de Guerra/Descrição\|Guerra]]; Eventos |
 | **Imposto** | 0 a −10 | Lei de Imposto |
 | **Eventos duradouros** | −20 a +20 | [[Sistema de Eventos/Descrição\|Eventos]] (festival, luto, peste...) |
-| **Religião** | 0 a +10 | Templo e festivais (ver Cultura) |
+| **Religião** | −5 a +10 | Cobertura do Templo × Devoção da cultura; os festivais entram como eventos duradouros (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | **Repressão** | 0 a −10, só Escravo e Civil | Controle (ver abaixo) |
 
 O resultado é limitado entre 0 e 100.
@@ -57,6 +57,8 @@ O resultado é limitado entre 0 e 100.
 - O **pensamento extremo respeitado** dá bônus grande; o **violado** dá penalidade grande.
 - Em cidades com **várias culturas**, a conta usa a proporção de cada uma.
 - **Minorias com afinidade hostil** sofrem uma penalidade extra (por exemplo, a discriminação aos Magos na cultura Arcana).
+- **Lei de Tolerância religiosa:** com Perseguição, as minorias perdem 15 de Felicidade (na proporção delas na classe) e a cidade ganha 5 de Controle (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
+- **Clima:** calor forte (−2 no dia) e onda de calor (−5) entram como modificadores com causa (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
 ---
 
@@ -158,6 +160,8 @@ Consequências:
 | IA | Felicidade dos Controlados; Medo agregado |
 | NPC | Revolta do Escravo (Obediência e Felicidade) |
 | Combate | Esquadrões estacionados somam ao Controle |
+| Religião | Fator Religião (−5 a +10); festivais; Perseguição das minorias (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Clima e Estações | Lenha no inverno; calor forte e onda de calor (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 
 ### Perguntas em aberto
 

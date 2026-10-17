@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-16 (rodadas P0-5 a P1-4; P1-5 enviada), antes de uma pausa. Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-16 (rodadas P0-5 a P1-5; P1-6 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -13,7 +13,7 @@
 - 6 facções principais = 6 culturas = 6 regiões.
 - **PIB** (soma do dinheiro das cidades, só para comparar) e **Banco da Facção** (impostos; paga soldo, obras e guerra).
 - Fundar facção: cidade nível 3, sem vínculo com outra facção (senão revolta), com 2 nobres na dinastia.
-- Cidade herda **todas** as leis da facção. Leis: itens proibidos, preços, escravidão, imposto, conscrição, magia (inclui "privilégio dos magos"), crimes e penas, Poder do líder, Sistema de votação.
+- Cidade herda **todas** as leis da facção. Leis: itens proibidos, preços, escravidão, imposto, conscrição, magia (inclui "privilégio dos magos"), crimes e penas, Poder do líder, Sistema de votação, Tarifa e Tolerância religiosa.
 - Assembleia: uma por ano e extraordinárias; votos por cultura/cidade conforme a lei de votação; veto do líder depende da personalidade e do Poder do líder.
 - Revolta: a resposta sai de um valor calculado (força, personalidade do líder, valor da cidade, outras guerras).
 - Rito de Admissão e sucessão vêm da Cultura.
@@ -27,7 +27,7 @@
 
 **Cultura**
 - Traços pré-feitos combináveis; leis desejadas (valor ideal e peso); Felicidade cai com a distância entre as leis da facção e o ideal da cultura; cada cultura tem pelo menos 1 pensamento extremo.
-- 6 ideologias: Escravista (mercantil), Religiosa, Autoritária, Tecnocrata, Guerreira e Arcana (Mago gera discriminação). Religião faz parte da cultura.
+- 6 ideologias: Escravista (mercantil), Religiosa, Autoritária, Tecnocrata, Guerreira e Arcana (Mago gera discriminação). Religião faz parte da cultura (as mecânicas da fé estão em [[Sistema de Religião/Descrição|Religião e Fé]]).
 - Cultura da cidade = do dono + proporção de outras; NPC nasce com a da cidade; afinidades em 3 níveis (afim, neutra, hostil). Arte própria de construção por cultura.
 
 **Crime e Justiça**
@@ -198,6 +198,28 @@
 - Vassalo: leis próprias, 15% de tributo e chamado às armas; integração depois de 4 anos. Casamento dá Não Agressão e reivindicação; reféns em versão simples.
 - IA: "vontade de guerra" por pontos (declara acima de 60), avaliada a cada 4 dias; cada decisão guarda o "Por quê?". Painel do jogador com a chance de aceite. **Coalizão** contra quem cresce demais e superextensão.
 
+**Religião e Fé** — ver [[Sistema de Religião/Descrição|Religião e Fé]]
+- Complemento da Cultura: **uma fé por cultura**, com **Devoção** (Alta na Religiosa; Média na Autoritária e na Guerreira; Baixa na Escravista e na Arcana; Nenhuma na Tecnocrata).
+- **Templo:** cada Sacerdote (Civil, gerente Nobre) atende 20 NPCs reais; fator Religião = cobertura × Devoção (de −5 a +10); oferendas de 2% da renda; na Religiosa, −25% de mortes por doença e cura 25% mais rápida. A Torre Arcana e o Laboratório fazem o papel na Arcana e na Tecnocrata.
+- **Festivais:** Festa da Colheita (dias 1 e 2 do Outono) e um festival próprio por cultura; a Religiosa tem mais 2 dias santos. Felicidade +8, consumo × 1,5, produção −50% no 1º dia; o dono paga 2% do Banco da Cidade e pode patrocinar ou cancelar.
+- **Lei de Tolerância religiosa:** Tolerância, Fé oficial (+5% de imposto das minorias) ou Perseguição (minorias −15 de Felicidade e migração 2×; Controle +5). **Heresia** é um ato (gravidade 3, ou 5 com Perseguição), não a existência da minoria.
+- **Assimilação:** 1%, 2% ou 4% das minorias por estação, conforme a lei; Importantes e Controlados só mudam por evento.
+- **Sumo Sacerdote:** escolhe o herdeiro da Religiosa; 1 vez por estação, Bênção ou Anátema (que libera a Guerra santa). Peregrinação do jogador: +10 de reputação por ano.
+
+**Clima e Estações** — ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]
+- **Produção Braçal por estação** (base temperada): Fazenda 75%, 100%, 150% e 25%; Pasto e madeira 75% no inverno; minérios 90%. Ajustes por bioma: a Guerreira não colhe no inverno.
+- **Clima do dia:** sorteado 1 vez por dia por região, com 60% de chance de repetir. Limpo, Nublado, Chuva, Tempestade, Neve, Névoa e Calor forte, com efeitos na viagem, no tiro, na visão e na Felicidade. Camada visual de partículas, névoa e tom, sem tiles novos.
+- **Eventos extremos:** seca, enchente, geada fora de hora, tempestade forte, onda de calor e inverno rigoroso (cerca de 1 a cada 5 anos).
+- **Inverno:** lenha (1 Madeira Bruta por NPC real a cada 4 dias, × bioma); sem lenha, Felicidade −10 e mais mortes de velhos e crianças.
+- **Viagem e guerra:** lama na primavera e inverno lento, com teto de × 2,0; campanha de inverno mais cara; IA com −15 de vontade de guerra no inverno.
+- **Tela:** paleta por estação e 4 fases do dia (à noite, visão e detecção −30%). Na fatia vertical: produção por estação e tom de dia e noite.
+
+**Notícias e Informação** — ver [[Sistema de Notícias/Descrição|Notícias]]
+- Toda notícia nasce num mapa e numa hora e anda **3 h por mapa** (o mundo em 1 dia). O jogador sabe quando ela chega a ele ou à rede dele (cidades, companheiros fora do grupo e caravanas).
+- Importância: **Local** (2 mapas, 8 dias no quadro), **Regional** (5 mapas, 16 dias) e **Mundial** (todo o mundo, 64 dias). O texto vem do modelo do próprio evento.
+- Aparece nas notificações (categoria Notícias), no quadro da Taverna, na conversa, no Mapa Mundial e na **Crônica do mundo** (com as duas datas, e no epílogo).
+- Precisão cai com a distância (exato, arredondado, vago); boatos falsos no futuro. Preço 30% fora da média vira notícia. A IA sabe tudo na hora (simplificação).
+
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
 ## Em aberto
@@ -222,12 +244,15 @@
 - **Felicidade:** valores a testar (contribuições, inércia, Controle, dias para revolta, efeitos das faixas); Medo agregado; fuga e rebelião de Escravos; greves; layout do painel "Por quê?".
 - **Interface:** elementos fixos do HUD; janelas de gestão móveis ou não; opções exatas de notificação; fonte do texto; painel "Por quê?"; IDs de texto para outros idiomas.
 - **Pipeline:** artista definitivo; pacotes provisórios; ferramenta de atlas; teto de memória da arte (depende do PC alvo); quando entra a arte extra das estações; quando cada cultura ganha formas próprias.
-- **Viagem:** valores a testar; construção de estradas; multiplicadores de clima; quantidade e custo das patrulhas.
+- **Viagem:** valores a testar; construção de estradas; quantidade e custo das patrulhas.
 - **Reputação:** valores a testar; requisitos de título podem mudar com o futuro sistema de Títulos de Nobreza.
 - **Companheiros:** valores a testar; bônus dos cargos (menos o de comandante, já definido); costumes de casamento de Autoritária, Tecnocrata e Arcana.
 - **Guerra:** valores a testar (Placar, Cansaço, suprimento, cerco, saque, cálculo rápido); custo da Muralha e do Posto da Guarda; estradas destruídas; guerra civil.
 - **Batalha:** valores a testar; desempenho dos tamanhos Médio e Grande; combate individual no tamanho Grande; escadas e torres de cerco.
 - **Diplomacia:** pesos da IA; mensageiros; quando a coalizão se desfaz.
+- **Religião:** valores a testar (cobertura, Devoção, festivais, assimilação); nomes das fés e dos festivais; critérios da Bênção e do Anátema; missionários; Magos e heresia na Religiosa.
+- **Clima e Estações:** valores a testar (produção, chances, efeitos, lenha); arte extra das estações; feitiços de clima; roupas de inverno; luzes dinâmicas.
+- **Notícias:** valores a testar (horas por mapa, alcance, precisão, limiar de preço); boatos falsos; IA que espera as notícias e mensageiros; jornal impresso.
 - **Arquitetura:** PC alvo mínimo; aprovação das bibliotecas; tamanho do Mapa Local (128 × 128, a confirmar).
 
 ## Próximos passos
@@ -246,12 +271,12 @@
 | P1 | Reputação e Relações do jogador | Escrito |
 | P1 | Companheiros, Relações familiares e Diálogo | Escrito |
 | P1 | Guerra e Campanha; Batalha; Diplomacia | Escrito |
-| P1 | **Religião; Clima e Estações; Notícias** | **Rodada P1-5 enviada, aguardando respostas** |
-| P1 | Efeitos de itens e Escravidão | A fazer (rodada P1-6) |
+| P1 | Religião; Clima e Estações; Notícias | Escrito |
+| P1 | **Efeitos de itens e Escravidão** | **Rodada P1-6 enviada, aguardando respostas** |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 está completo. Responder a rodada P1-5 (Religião, Clima e Estações, Notícias) → P1-6 (Efeitos de itens e Escravidão) → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 está completo. Responder a rodada P1-6 (Efeitos de itens e Escravidão), a última do P1 → **[Proposta]** 1 ou 2 rodadas de pendências que travam a ficha técnica (pergunta D2) → quando o autor estiver satisfeito com a documentação, a **ficha técnica lógica** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
 
 ## Como estamos trabalhando
 

@@ -91,7 +91,8 @@ São desenhadas **3 direções** (cima, baixo, direita); a esquerda é a direita
 
 - **Primeiras versões:** **só mudança de cor** (tingimento) do mapa por estação: mais amarelado no outono, azulado no inverno. Nenhum tile a mais.
 - **Regra do autor:** tudo o que exige arte a mais nas estações fica para o futuro.
-- **Futuro:** telhados com neve, rios congelados, árvores sem folhas, folhas caindo no outono e vegetação com flores na primavera. **[Refinar depois]** junto com o sistema de Clima e Estações.
+- **Clima e dia** (decididos no [[Sistema de Clima e Estações/Descrição|Clima e Estações]]): paleta por estação na placa de vídeo (primavera verde vivo, verão quente, outono alaranjado, inverno frio e dessaturado); tom de cor nas 4 fases do dia, sem luzes dinâmicas; camada de clima com partículas (pingos, flocos) e névoa translúcida. Nenhum tile novo: **neve caindo sim, neve no chão no futuro**.
+- **Futuro:** telhados com neve, rios congelados, árvores sem folhas, folhas caindo no outono, vegetação com flores na primavera, tochas e janelas acesas à noite. **[Refinar depois]**
 
 ### Interiores
 
@@ -118,6 +119,7 @@ A arte é feita em camadas, igual à programação:
 | Criaturas | cerca de 10 tipos × 40 quadros | 3 tipos |
 | Interface | molduras, botões e cerca de 150 ícones de itens | ícones da fatia vertical |
 | Muralhas | tileset de paliçada e de pedra (paleta por cultura), com portão e brecha | 1 tileset |
+| Clima | poucos sprites de partícula (pingo, floco) e uma textura de névoa | os mesmos |
 
 ### Peso da arte
 
@@ -188,7 +190,7 @@ data/
 | Combate | Boneco de 16 × 24, 54 quadros por direção, 3 direções e espelho |
 | Batalha e Guerra | 7ª camada Elevação; tileset de Muralha; os bonecos da batalha são os mesmos, com paleta por cultura (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Interface | Cores das culturas na lente Política; ícones de itens |
-| Clima e Estações (futuro) | Só mudança de cor agora; neve, rios congelados, folhas e flores no futuro |
+| Clima e Estações | Paleta por estação, tom do dia, partículas e névoa; neve no chão, rios congelados, folhas e flores no futuro (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | Itens | A lista de itens manda até a pasta `data/` existir |
 
 ### Perguntas em aberto

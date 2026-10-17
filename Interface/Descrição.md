@@ -56,7 +56,7 @@ O autor pediu um HUD **bastante modificável** pelo jogador.
 
 | Posição | Elemento |
 |---|---|
-| Barra superior | Data e hora, velocidade e pausa, dinheiro, notificações |
+| Barra superior | Data e hora, clima do dia, velocidade e pausa, dinheiro, notificações |
 | Canto inferior esquerdo | Retratos dos Controlados com Vida, Mana e Postura |
 | Canto inferior direito | Minimapa |
 | Barra inferior central | Ordens e modo de construção |
@@ -69,11 +69,13 @@ Todos esses elementos são ajustáveis (ver acima).
 - **Uma janela de gestão por vez**, com abas, no estilo de Songs of Syx.
 - Abas: **Cidade, Construções, Inventário e Equipamento, Pesquisa, Facção, Contratos, Comércio** e **Diário**.
 - Evita janelas flutuantes soltas, que complicam a interface e o código.
+- A aba **Diário** tem o **calendário** (estações e festivais, com os botões de patrocinar e cancelar; ver [[Sistema de Religião/Descrição|Religião e Fé]]) e a **Crônica do mundo**, com a data do acontecimento e a data em que o jogador soube (ver [[Sistema de Notícias/Descrição|Notícias]]).
 
 ### Mapa Mundial
 
 - **Lentes de mapa** trocam o que é destacado: **Política** (facções), **Cultura, Felicidade, Comércio, Perigo** e **Tecnologia**.
 - **Busca** por nome e **Viagem Rápida** (já previstas em [[Sistema de Mapa/Descrição|Sistema de Mapa]]).
+- As **notícias** atualizam a informação datada de cada mapa ("Cidade Autoritária ocupada pela Guerreira, soube há 2 dias").
 - **Entidades em trânsito** visíveis e **névoa de exploração** por Mapa Local, com a data de cada informação vista; janela de encontro (Lutar, Fugir, Negociar, Render-se) (ver [[Sistema de Viagem/Descrição|Sistema de Viagem]]).
 
 ### Modo construção
@@ -89,6 +91,10 @@ Todos esses elementos são ajustáveis (ver acima).
 - Indicadores "**EM COMBATE**" e "**PAUSADO**" bem visíveis.
 - As **ordens enfileiradas** durante a pausa aparecem como linhas e ícones no mapa.
 - Regras em [[Sistema de Combate/Descrição|Sistema de Combate]].
+
+### Clima e hora na tela
+
+- Camada de clima por cima do mapa (pingos, flocos e névoa translúcida), tom de cor das 4 fases do dia e paleta de cada estação (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
 ### Painel de trabalho
 
@@ -121,6 +127,8 @@ Seguem os níveis definidos nos [[Sistema de Eventos/Descrição|Eventos]] (Info
 - o que aparece em **velocidade alta** (por exemplo, só Aviso e Crítico);
 - o **tempo** que cada notificação fica na tela;
 - se um aviso Crítico **pausa** o jogo ou só reduz a velocidade, por categoria.
+
+Há uma categoria **Notícias** para as notícias do mundo que chegam ao jogador (ver [[Sistema de Notícias/Descrição|Notícias]]).
 
 **[Proposta]** padrão: tudo ligado, agrupamento ativo, só Aviso e Crítico acima de 4x, e Crítico pausa. **[Refinar depois]** lista exata de opções.
 
@@ -178,6 +186,9 @@ O resto (legendas, modo para daltônicos) entra nas **configurações**, depois.
 | Tecnologia e Magia | Aba de Pesquisa |
 | Facção e Diplomacia | Aba de Facção (leis) e painel de Diplomacia com a chance de aceite e o porquê (ver [[Sistema de Diplomacia/Descrição\|Sistema de Diplomacia]]) |
 | Guerra e Batalha | Painel de guerra (Placar, Cansaço, exércitos); telas da batalha: pré-batalha, posicionamento, batalha e resultado (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
+| Religião | Calendário com os festivais; patrocinar e cancelar; cobertura do Templo no painel da cidade (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Clima e Estações | Clima do dia no HUD; camada de clima; tom do dia e paleta das estações (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
+| Notícias | Categoria "Notícias"; quadro da Taverna; Crônica do mundo; mapa atualizado (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
 | Início de Jogo | Novo jogo em 3 passos |
 | Arquitetura | Desenhista próprio, JSON, Dear ImGui só para depuração |
 

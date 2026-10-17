@@ -6,7 +6,7 @@
 
 A Cultura é o conjunto de ideologia, leis desejadas, ritos e estilo visual de um povo. Ela já existe como atributo de NPC, Cidade, Item, Mapa Local e Facção, mas até agora não tinha documento próprio. A Cultura é o que torna as facções diferentes entre si, não só em aparência, mas em como pensam e governam.
 
-Religião **não é um sistema à parte**: ela faz parte da Cultura. Uma cultura religiosa é uma cultura que busca ideais religiosos.
+Religião **não é um sistema à parte**: ela faz parte da Cultura. Uma cultura religiosa é uma cultura que busca ideais religiosos. As mecânicas da fé (a Devoção de cada cultura, o Templo, os festivais, a heresia, a assimilação das minorias e o Sumo Sacerdote) estão em [[Sistema de Religião/Descrição|Religião e Fé]], um complemento deste documento.
 
 ### As 6 culturas iniciais
 
@@ -89,11 +89,11 @@ A Cultura afeta a Felicidade da cidade: quanto **maior a distância** entre as l
 
 ### Cultura da cidade
 
-A cultura de uma cidade é a **cultura do dono (base)**, mais uma **proporção agregada de outras culturas**, sem registrar NPC por NPC. Após uma conquista, essa proporção muda **devagar**, ao longo de anos.
+A cultura de uma cidade é a **cultura do dono (base)**, mais uma **proporção agregada de outras culturas**, sem registrar NPC por NPC. Após uma conquista, essa proporção muda **devagar**, ao longo de anos, pela **assimilação** das minorias (1% a 4% por estação, conforme a lei de Tolerância religiosa; ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 
 ### Cultura do NPC
 
-O NPC **nasce com a cultura da cidade**. Migrantes e escravos capturados **mantêm a cultura de origem**, o que permite minorias dentro de uma cidade.
+O NPC **nasce com a cultura da cidade**. Migrantes e escravos capturados **mantêm a cultura de origem**, o que permite minorias dentro de uma cidade. As minorias podem mudar para a cultura dominante pela assimilação; NPCs Importantes e Controlados só mudam por evento ou diálogo.
 
 ### Efeitos nos atributos do NPC
 
@@ -146,6 +146,7 @@ Os estilos de início têm documento próprio: **Sistema de Início de Jogo**.
 | Eventos | Violar um pensamento extremo, ou uma Felicidade baixa por muito tempo, dispara eventos condicionais duradouros com a causa registrada (ver [[Sistema de Eventos/Descrição\|Sistema de Eventos]]) |
 | Companheiros e Diálogo | Costume de casamento por cultura (dote, duelo, cerimônia...); frases e cumprimentos por cultura (ver [[Sistema de Companheiros e Diálogo/Descrição\|Sistema de Companheiros e Diálogo]]) |
 | Combate | O Duelo é um modo de combate usado como rito de "provar-se em combate" (ver [[Sistema de Combate/Descrição\|Sistema de Combate]]) |
+| Religião | Uma fé por cultura e a Devoção; festivais próprios; lei de Tolerância desejada; assimilação das minorias (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 
 ### Perguntas em aberto
 

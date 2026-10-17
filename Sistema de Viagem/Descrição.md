@@ -65,7 +65,10 @@ Vale o melhor valor que o mapa tiver. **[Refinar depois]** Construir estradas (p
 | Todos montados (Cavalo e Sela) | 0,67 (50% mais rápido) |
 | Carga acima do limite | 1,25 |
 | Caravana (anda no passo dos animais de carga) | 1,33 |
-| Neve, chuva forte | definidos no futuro sistema de Clima e Estações |
+| Clima do dia: Chuva / Neve ou Tempestade / Calor forte | 1,25 / 1,5 / 1,1 (na Tempestade, as caravanas param) |
+| Estação: lama na primavera (sem estrada) / inverno nos biomas frios / inverno nos outros | 1,1 / 1,5 / 1,1 |
+
+Estação e clima se multiplicam, com teto de × 2,0 (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
 O grupo anda na velocidade do **membro mais lento**. **[Proposta]** O tempo mínimo é de 1 hora por mapa.
 
@@ -115,7 +118,7 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 | Mercador viajante | Compra e venda ali mesmo, com preços de outra região |
 | Patrulha da facção | Se o jogador tiver Recompensa nessa facção, tenta prender; se não, segue |
 | Refugiados | Fogem de guerra ou fome; podem pedir comida ou virar recrutas |
-| Peregrinos | Indo à Capital Religiosa; trazem rumores |
+| Peregrinos | Indo à Capital Religiosa; trazem rumores e notícias e aumentam a demanda da cidade santa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | Caravana em apuros | Sendo atacada; ajudar dá dinheiro e relação com o dono |
 
 **Encontros da IA, longe do jogador.** Caravana × bandidos e patrulha × bandidos usam o mesmo **cálculo rápido de forças** das guerras de IA (ver [[Sistema de Facção/Descrição|Facção]]), com um pouco de sorte. A caravana que perde fica com 30% a 100% de perda da carga (quanto maior a diferença de força, maior a perda). O resultado vira notícia e pode criar um **contrato de escolta**.
@@ -187,12 +190,13 @@ A chance sobe com a **ameaça bandida** da região (ver [[Sistema de Eventos/Des
 | Início de Jogo | Conhecimento inicial do mapa por estilo |
 | Guerra | Tempo de marcha dos exércitos; comboios de suprimento; mercenários (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 | Diplomacia | Passagem Militar; fronteira fechada bloqueia rotas (ver [[Sistema de Diplomacia/Descrição\|Sistema de Diplomacia]]) |
-| Notícias (futuro) | Atraso das informações pela distância |
-| Clima e Estações (futuro) | Multiplicadores de neve e chuva |
+| Notícias | A notícia anda 3 h por mapa, o passo de um mensageiro a cavalo; caravanas e companheiros levam notícias à rede do jogador (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
+| Clima e Estações | Multiplicadores do clima do dia e da estação; tempestade para as caravanas (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
+| Religião | Peregrinos e peregrinação do jogador à Capital Religiosa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 
 ### Perguntas em aberto
 
 1. **Valores a testar:** tempo base, multiplicadores, chances de encontro, perda de carga, preço do suborno.
 2. **Construção de estradas:** quem constrói, quanto custa e se precisa de tecnologia.
-3. **Clima:** multiplicadores de neve e chuva (futuro sistema de Clima e Estações).
+3. **Clima:** valores a testar dos multiplicadores de clima e estação (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 4. **Quantas patrulhas** cada facção mantém e quanto custam.

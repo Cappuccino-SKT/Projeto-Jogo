@@ -136,11 +136,11 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 - **Relações familiares:** casamento, filhos e herdeiros (os atributos Grávida e Relação existem, sem regras).
 - **Diálogo:** um sistema de opções por menu (persuadir, barganhar, intimidar, subornar, aceitar missão), usando Carisma. Sugestão: **diálogos modulares por modelos de texto**, não árvores escritas à mão, para o volume de texto ficar viável para uma pessoa só.
 
-**4.13 Religião.** Está dentro da Cultura, mas só existe o nome. Sugestão: Templo gera **Fé**; clérigo como Função; festivais (eventos); heresia como crime cultural; conversão; efeito na Felicidade. Religião também define o conteúdo da cultura Religiosa.
+**4.13 Religião.** *(Escrito: ver [[Sistema de Religião/Descrição|Religião e Fé]].)* Está dentro da Cultura, mas só existe o nome. Sugestão: Templo gera **Fé**; clérigo como Função; festivais (eventos); heresia como crime cultural; conversão; efeito na Felicidade. Religião também define o conteúdo da cultura Religiosa.
 
-**4.14 Clima e Estações.** Há 4 estações e eventos climáticos, mas as estações não afetam nada de forma regular. Sugestão: modificadores por estação (colheita no outono, produção agrícola menor no inverno, viagem mais lenta com neve) e clima do dia como evento duradouro. **Atenção à arte:** 4 estações multiplicam os tiles; começar com variação apenas de cor.
+**4.14 Clima e Estações.** *(Escrito: ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]].)* Há 4 estações e eventos climáticos, mas as estações não afetam nada de forma regular. Sugestão: modificadores por estação (colheita no outono, produção agrícola menor no inverno, viagem mais lenta com neve) e clima do dia como evento duradouro. **Atenção à arte:** 4 estações multiplicam os tiles; começar com variação apenas de cor.
 
-**4.15 Notícias e Informação.** O Comércio já fala de "notícias" e de preços que envelhecem. Sugestão: rumores que se espalham pelas tavernas e rotas (guerras, recompensas, preços, contratos), com atraso por distância. Une Comércio, Objetivo, Crime e Eventos, e dá vida à Crônica do mundo.
+**4.15 Notícias e Informação.** *(Escrito: ver [[Sistema de Notícias/Descrição|Notícias]].)* O Comércio já fala de "notícias" e de preços que envelhecem. Sugestão: rumores que se espalham pelas tavernas e rotas (guerras, recompensas, preços, contratos), com atraso por distância. Une Comércio, Objetivo, Crime e Eventos, e dá vida à Crônica do mundo.
 
 **4.16 Efeitos de itens e Escravidão.**
 - **Efeitos de itens:** o que fazem Livro, Livro de Atributos, Joia Mágica, Artefato e Medicamento ao serem usados.
@@ -222,7 +222,7 @@ Prioridade: **P0** = necessário para a fatia vertical; **P1** = necessário par
 Opcionais, em ordem de custo-benefício:
 
 1. **Mundo fixo, estado inicial variável.** O mapa é desenhado à mão, mas relações iniciais, tecnologia inicial, localização do Loot e a "semente" do Narrador variam. Dá rejogabilidade sem arte nova.
-2. **Crônica do mundo visível.** Um "jornal" na Taverna com os eventos recentes do mundo (Notícias). Mostra a simulação funcionando.
+2. **Crônica do mundo visível.** Um "jornal" na Taverna com os eventos recentes do mundo (Notícias). Mostra a simulação funcionando. *(Resolvida no [[Sistema de Notícias/Descrição|Notícias]]: quadro da Taverna e Crônica do mundo.)*
 3. **Especialização das cidades** (como Songs of Syx): cada cidade fica conhecida por um produto, o que dá motivo para o comércio.
 4. **Ordens de produção do jogador** em lote (fila por construção) e prioridades por Função, no estilo RimWorld.
 5. **Guarnição e defesa de cidade:** a cidade do jogador pode ter Guardas pagos, uma Muralha e uma milícia (conscritos da cidade) em caso de ataque.

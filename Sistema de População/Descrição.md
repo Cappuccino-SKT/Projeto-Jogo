@@ -72,12 +72,16 @@ Velhice, mais causas que vêm de outros sistemas:
 
 - **doença** (evento de Saúde; ver [[Sistema de Eventos/Descrição|Sistema de Eventos]]);
 - **fome** (déficit de comida por muitos dias; efeito **gradual**, não instantâneo);
-- **guerra** e **crime**.
+- **guerra** e **crime**;
+- **frio** (falta de lenha no inverno: velhos e crianças +50%) e eventos de clima, como a onda de calor e o inverno rigoroso (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
+
+Na Religiosa, o Templo reduz a mortalidade por doença em 25% (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
 
 ### Migração
 
 - Cada estação, as pessoas vão para cidades mais **atraentes**: Felicidade alta, emprego livre, moradia livre e comida.
-- Os **migrantes mantêm a cultura de origem** (ver [[Sistema de Cultura/Descrição|Sistema de Cultura]]).
+- Os **migrantes mantêm a cultura de origem** (ver [[Sistema de Cultura/Descrição|Sistema de Cultura]]); depois, podem assimilar a cultura dominante aos poucos (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
+- Com a lei de **Perseguição**, as minorias migram para fora 2× mais rápido.
 - Em LOD 0 aparecem como NPCs que **chegam pela borda do mapa**. Em LOD 2 é só um fluxo calculado.
 - Facções em **guerra** ou com **fronteira fechada** bloqueiam a migração entre elas.
 
@@ -160,6 +164,8 @@ As **mesmas regras e a mesma fórmula** valem para o jogador e para a IA. As cid
 | Cultura | Migrantes mantêm a cultura; construções obrigatórias dependem da cultura |
 | Facção | Fator de Escala, guerra e fronteira bloqueiam a migração |
 | Eventos | Doença, fome, guerra e crime como causas de mortalidade |
+| Religião | Assimilação das minorias; migração das perseguidas; menos doença na Religiosa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Clima e Estações | Frio e eventos de clima como causas de morte; fome no inverno sem estoque (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | Tecnologia | Ramo Construção libera níveis de cidade |
 | Econômico | Emprego livre atrai migrantes; custo de subir de nível |
 | Tempo | Taxas por estação; vida em anos de jogo |

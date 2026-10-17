@@ -1,11 +1,11 @@
-> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-16, com a rodada P1-4 aplicada e a P1-5 enviada, antes de uma pausa.
+> Notas para **retomar o trabalho** depois de uma pausa ou de uma compactação da conversa. Guarda o que não cabe no [[Estado do Projeto]]: onde paramos, a pergunta que está pendente, o jeito de trabalhar e os cuidados técnicos. Atualizado em 2026-10-16, com as rodadas P1-4 e P1-5 aplicadas e a P1-6 enviada.
 
 ## 1. Por onde começar
 
 1. Ler o [[Estado do Projeto]] (o que está resolvido e em aberto) e a [[Revisão do Projeto]] (lista de sistemas que faltam).
-2. **Onde paramos:** a **rodada P1-5 (Religião, Clima e Estações, Notícias) foi enviada e aguarda respostas** (seção 4). Em 2026-10-16 foi aplicada a P1-4 (Guerra, Batalha e Diplomacia: três documentos novos), na branch `docs/p1-4-guerra-diplomacia`; a sessão foi pausada com o pull request dessa branch aberto para o autor aceitar. **Ao retomar, rodar `git fetch` e conferir se ele foi mesclado no `main`**; se sim, trabalhar a partir do `main` atualizado. Antes dela, a sessão de 2026-10-15 aplicou cinco rodadas (P0-5 Mundo, P0-6 Pipeline de arte, P1-1 Viagem, P1-2 Reputação e P1-3 Companheiros e Diálogo), fechou o P0, criou o `CLAUDE.md` e o padrão de perguntas detalhadas (seção 2) e registrou a ideia futura dos Títulos de Nobreza.
-3. **Próximo passo:** pedir o `Respostas.txt` da P1-5 (conferir se é desta rodada; o arquivo pode ainda ser o da P1-4), escrever os documentos de Religião, Clima e Estações e Notícias, e abrir a P1-6 (Efeitos de itens e Escravidão), a última do P1.
-4. Depois: os outros sistemas P1, na ordem da seção 3.
+2. **Onde paramos:** a **rodada P1-6 (Efeitos de itens e Escravidão), a última do P1, foi enviada e aguarda respostas** (seção 4). Em 2026-10-16 foram aplicadas a P1-4 (Guerra, Batalha e Diplomacia; pull request #7, já mesclado) e a P1-5 (Religião e Fé, Clima e Estações, Notícias: três documentos novos), esta na branch `docs/p1-5-religiao-clima-noticias`, com o pull request aberto para o autor aceitar. **Ao retomar, rodar `git fetch` e conferir se ele foi mesclado no `main`.** Antes disso, a sessão de 2026-10-15 aplicou cinco rodadas (P0-5 Mundo, P0-6 Pipeline de arte, P1-1 Viagem, P1-2 Reputação e P1-3 Companheiros e Diálogo), fechou o P0, criou o `CLAUDE.md` e o padrão de perguntas detalhadas (seção 2) e registrou a ideia futura dos Títulos de Nobreza.
+3. **Próximo passo:** pedir o `Respostas.txt` da P1-6 (conferir se é desta rodada; o arquivo pode ainda ser o da P1-5) e escrever os documentos de Escravidão e de Efeitos de Itens. Depois, seguir a resposta da D2 (o que vem depois do P1).
+4. Depois do P1: pela sugestão da D2, 1 ou 2 rodadas de pendências que travam a ficha técnica.
 5. Quando o autor estiver satisfeito com a documentação: **ficha técnica lógica**, e só então a programação.
 
 ## 2. Como trabalhamos
@@ -59,251 +59,223 @@ Regras extras:
 | P1 | Guerra e Campanha | Escrito |
 | P1 | Batalha (Mapa de Guerra) | Escrito |
 | P1 | Diplomacia | Escrito |
-| P1 | **Religião** | **Rodada P1-5 enviada, aguardando respostas** |
-| P1 | **Clima e Estações** | **Rodada P1-5 enviada, aguardando respostas** |
-| P1 | **Notícias e Informação** | **Rodada P1-5 enviada, aguardando respostas** |
-| P1 | Efeitos de itens e Escravidão | A fazer (rodada P1-6) |
+| P1 | Religião | Escrito |
+| P1 | Clima e Estações | Escrito |
+| P1 | Notícias e Informação | Escrito |
+| P1 | **Efeitos de itens e Escravidão** | **Rodada P1-6 enviada, aguardando respostas** |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | **Títulos de Nobreza**: mesma estrutura para todas as culturas; requisitos, privilégios e obrigações por cultura, modeláveis por facção e alteráveis pelas leis (ideia registrada no [[Objetivo e Progressão/Descrição\|Objetivo e Progressão]]) | Ideia do autor, para uma versão futura |
 
-Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (entra na P1-5, em Notícias), especialização de cidades, ordens de produção em lote, modo observador, eventos de dinastia. A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
+Ordem sugerida do P1: Viagem → Reputação → Companheiros e Diálogo → Guerra, Batalha e Diplomacia → Religião, Clima, Notícias → Efeitos de itens e Escravidão. **Ideias da seção 8 da Revisão** ainda sem decisão do autor, exceto "mundo fixo com estado inicial variável" (aceita): crônica do mundo visível (resolvida no [[Sistema de Notícias/Descrição|Sistema de Notícias]]), especialização de cidades, ordens de produção em lote, modo observador, eventos de dinastia. A "guarnição e defesa" foi resolvida no [[Sistema de Guerra/Descrição|Sistema de Guerra]].
 
-## 4. Rodada pendente: P1-5, Religião, Clima e Estações, Notícias
+## 4. Rodada pendente: P1-6, Efeitos de itens e Escravidão
 
-**Perguntas enviadas em 2026-10-16, aguardando respostas.** Junta três sistemas da [[Revisão do Projeto]] (4.13, 4.14 e 4.15), que são menores e se tocam (festivais nas estações, peregrinos que trazem notícias, clima que vira notícia). Responder no `Respostas.txt` pelos códigos (R1, E2...). "Seguir sugestão" aceita a proposta. Valores numéricos são iniciais, a testar.
+**Perguntas enviadas em 2026-10-16, aguardando respostas.** É a última rodada do P1 (item 4.16 da [[Revisão do Projeto]]). Junta dois temas que hoje estão espalhados: o que os itens especiais fazem ao serem usados (Itens, Cura, Magia, Classe Social) e a escravidão (NPC, Crime, Cultura, Trabalho, Guerra). Responder no `Respostas.txt` pelos códigos (I1, E2...). "Seguir sugestão" aceita a proposta. Valores numéricos são iniciais, a testar.
 
 **Já decidido (base das perguntas):**
 
-- **Religião faz parte da Cultura**, não é um sistema à parte; a cultura Religiosa busca ideais religiosos; heresia é crime capital nela, e ela faz guerra santa contra culturas hostis ([[Sistema de Cultura/Descrição|Cultura]], [[Sistema de Guerra/Descrição|Guerra]]).
-- O **Templo** é uma construção da Facção, com a Função Sacerdote; é obrigatório no nível 3 (ou Laboratório, conforme a cultura); a Arcana troca o Templo pela Torre Arcana e a Tecnocrata pelo Laboratório ([[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]], [[Sistema de População/Descrição|População]]).
-- Felicidade tem o fator **Religião, de 0 a +10** (Templo e festivais) ([[Sistema de Felicidade e Estabilidade/Descrição|Felicidade]]).
-- Recursos **não se esgotam**: têm **produtividade por estação**, com modificadores do futuro Clima ([[Sistema de Recursos/Descrição|Recursos]]).
-- Estações na arte: **só mudança de cor** por enquanto; neve no chão, rios congelados, folhas e flores ficam para o futuro ([[Pipeline de Arte e Conteúdo/Descrição|Pipeline]]).
-- Eventos de clima já existem como categoria (seca, tempestade, geada, enchente) e o Narrador regula os que afetam o jogador ([[Sistema de Eventos/Descrição|Eventos]]).
-- O jogador só conhece o mundo com **informações datadas** (névoa); conhece os preços das cidades visitadas, com data; as propostas diplomáticas são instantâneas, mas as **notícias da guerra chegam com atraso** ([[Sistema de Viagem/Descrição|Viagem]], [[Sistema de Comércio/Descrição|Comércio]], [[Sistema de Diplomacia/Descrição|Diplomacia]]).
-- Diálogo: "Conversar" dá rumores e notícias; peregrinos trazem rumores ([[Sistema de Companheiros e Diálogo/Descrição|Companheiros e Diálogo]]).
+- **Artefatos** na lista de itens: Livro (Rank 2), Livro Antigo (Rank 4), Livro de Atributos (Rank 1-5), Joias Mágicas de Pedra Mágica (Rank 1-5) e Artefato (Rank 1-5); a cadastrar: Grimório (ensina feitiços) e Anel Mágico (Artesão nível 5). A **Realeza consome Artefatos** (Livro, Joia Mágica e Artefato); as **masmorras lendárias** guardam Artefatos ([[Sistema de Itens/Descrição|Itens]], [[Sistema de Classe Social/Descrição|Classe Social]], [[Objetivo e Progressão/Descrição|Objetivo]]).
+- **Medicamento** existe como tipo, sem itens; o **Boticário** produz; proposta antiga: um curativo (Tier 1) e um remédio forte (Tier 3) com Flor Espiritual. Em aberto: a doença em LOD 0 é um estado "Doente" ou só um modificador da cidade ([[Sistema de Cura/Descrição|Cura]]).
+- A **Pedra de Mana** recupera Mana; não há poção de mana ([[Sistema de Magia/Descrição|Magia]]).
+- **Narcóticos** (Fumo, Pó Espiritual) são Bens de Luxo e proibidos na Religiosa; o grupo come 1 refeição por dia na viagem ([[Sistema de Viagem/Descrição|Viagem]]).
+- **Escravidão:**
+  - É uma lei de facção (permitida ou proibida). Escravos não têm salário e produzem para o dono, que paga a comida e a Senzala.
+  - O NPC escravo tem **Obediência**, **Revolta** e **Vínculo**; o Escravo do jogador é Semi-Controlado e segue a Lista de Prioridades.
+  - **Trabalho forçado** é pena com prazo. **Prisioneiros de guerra:** 100 = 1 NPC Escravo, se a lei permitir. **Grilhões** são feitos pelo Ferreiro nível 2.
+  - **Crimes:** "Fuga ou ajuda a escravo" (gravidade 3); libertar escravo é crime cultural na Escravista. Libertar escravos dá −5 de reputação nas facções escravistas.
+  - **Estilo Escravo:** Ambição "Conquistar a liberdade". A Escravista tem a "infantaria de escravos" (metade do soldo, −15 de Moral). A Guerreira vende prisioneiros à Escravista; o 2º vilarejo Escravista (6,6) é porto de pesca e de escravos.
+  - Em aberto na Felicidade: como funcionam a **fuga e a rebelião local** de Escravos.
 
-### R. Religião
+### I. Efeitos de itens
 
-**R1. Religiões separadas ou a fé de cada cultura?**
+**I1. Livro e Livro Antigo.**
 
-- *Contexto:* o autor decidiu que a religião faz parte da Cultura. A Revisão listou "Religião" como sistema do P1 para dar mecânica ao Templo, aos festivais e à heresia.
-- *Pergunta:* existem religiões próprias, que atravessam as culturas, ou cada cultura tem a sua fé?
-- *Opções:* (a) **uma fé por cultura**: respeita a decisão anterior, sem dados novos de "religião" no NPC; (b) 2 ou 3 religiões que atravessam as culturas (estilo Crusader Kings): mais política, mas cada NPC ganha um segundo atributo, e conversão e conflito dobram; (c) uma fé única com seitas.
-- *Sugestão:* (a). A "religião" de um NPC é a cultura dele; o novo documento só dá **mecânica** à fé. Cada cultura tem uma **Devoção**, que define quanto a fé pesa:
+- *Contexto:* existem na lista, sem efeito e sem quem os produza; a Realeza os "consome" (ver I4).
+- *Pergunta:* o que acontece quando um NPC lê um Livro?
+- *Opções:* (a) **livro de estudo que não se gasta**: ensina uma habilidade de fora do combate, uma vez por leitor; (b) livro que se gasta e dá bônus temporário; (c) só objeto de valor e de consumo da Realeza, sem leitura.
+- *Sugestão:* (a).
+  - Cada Livro tem um **assunto**, sorteado quando é criado ou achado: Inteligência, Carisma, Percepção, Trabalho Braçal, Manufaturado ou Especialista.
+  - **Ler** é uma ação de 8 horas, fora de combate (no descanso ou no Período Livre), só para Controlados e Importantes.
+  - **Efeito:** Livro **+3** e Livro Antigo **+6** na habilidade do assunto, uma vez por NPC. O livro não leva a habilidade além de **60** (Livro) ou **80** (Livro Antigo).
+  - O livro **não se gasta**: pode ser emprestado aos companheiros, vendido ou guardado.
+  - **Universidade:** cada livro guardado nela dá +2% ao bônus de educação da cidade, até 10 livros.
+  - **De onde vem:** Mercado das cidades nível 3 ou mais e masmorras; Livro Antigo só em masmorras. Produção futura com uma tecnologia de "Imprensa" (Era 2).
+  - *Exemplo:* o Mercador lê "Tratado de Comércio" (Carisma) e passa de 48 para 51; empresta ao companheiro, que passa de 30 para 33.
+- *Impacto:* NPC (lista de livros lidos, só para Controlados e Importantes), Itens, Trabalho (Universidade), Interface (botão "Ler").
 
-| Cultura | Fé (nome provisório) | Devoção | Construção de culto |
-|---|---|---|---|
-| Religiosa | Fé da Cidade Santa | Alta | Templo (1 nível acima, já decidido) |
-| Autoritária | Culto ao Imperador | Média | Templo |
-| Guerreira | Culto aos Ancestrais | Média | Templo |
-| Escravista | Culto da Fortuna | Baixa | Templo |
-| Arcana | Culto da Magia | Baixa | Torre Arcana faz o papel |
-| Tecnocrata | Secular, sem fé organizada | Nenhuma | Laboratório e Universidade fazem o papel |
+**I2. Livro de Atributos (Rank 1 a 5).**
 
-  Os nomes ficam para a história do jogo.
-- *Conflito:* nenhum com a Cultura; o documento novo se chama "Religião e Fé" e diz, logo no começo, que é um complemento da Cultura.
+- *Contexto:* o nome sugere um aumento de atributo, e o Rank vai de 1 a 5.
+- *Sugestão:* é o livro raro de **combate**, e ele **se gasta** ao ser lido.
+  - **Assunto:** uma habilidade de combate (Corpo a Corpo, Longo Alcance, Defesa, Força, Agilidade, Destreza; Magia só para Magos).
+  - **Efeito:** **+2 × Rank** na habilidade (Rank 5 = +10), sem teto além de 100. A leitura leva 8 horas.
+  - **De onde vem:** só de masmorras e de recompensas de missão; Rank 4 e 5 só nas masmorras de dificuldade 4 e nas lendárias. Não é vendido no Mercado comum.
+  - **Preço:** **[Proposta]** cerca de 300 × Rank.
+- *Por quê:* combina com a evolução por uso do Combate. O livro é um atalho raro, não a regra.
 
-**R2. O que o Templo faz?**
+**I3. Joia Mágica e Anel Mágico.**
 
-- *Contexto:* o Templo existe como nome, com a Função Sacerdote, sem efeito. O ponto forte da Religiosa no Mundo é "Felicidade estável e cura".
+- *Contexto:* a Joia Mágica (Pedra Mágica, Rank 1 a 5) é um Artefato; o Anel Mágico é um Equipamento com "Buff de habilidade".
+- *Opções:* (a) **Joia carregada no inventário que reforça a Mana do Mago**, e o Anel equipado que dá bônus de habilidade; (b) um novo slot "Amuleto" para a Joia: mais um encaixe de equipamento e mais arte; (c) Joia só como objeto de valor.
+- *Sugestão:* (a).
+  - **Joia Mágica:** no inventário de um Mago, dá **+10 × Rank de Mana máxima** e **+5% × Rank de regeneração**. Só a melhor joia carregada conta. Para quem não é Mago, é só objeto de valor e de consumo da Realeza.
+  - **Anel Mágico:** equipado no slot Anel; **+3% × Rank** numa habilidade, escolhida na produção. Também pode receber encantamento a partir do Rank 3, como os outros equipamentos.
+  - *Exemplo:* um Mago de Suporte com Joia Rank 3 tem 30 de Mana a mais e regenera 15% mais rápido.
+- *Impacto:* Magia (Mana), Itens, Combate. Não precisa de arte nova (a joia não aparece no boneco).
+
+**I4. Artefato e o consumo de Artefatos da Realeza.**
+
+- *Contexto:* "Artefato" (Rank 1 a 5) não tem efeito. A Realeza "consome" Artefatos, mas gastar um livro ou um artefato por estação não faz sentido.
+- *Pergunta:* o que é um Artefato, e como a Realeza o "consome"?
 - *Sugestão:*
-  - **Cobertura:** cada Sacerdote (NPC real) atende 20 NPCs reais. Cobertura = (Sacerdotes × 20) ÷ NPCs da cidade, até 100%. *Exemplo:* cidade nível 3 (100 NPCs) com Templo nível 3 (5 Sacerdotes) = 100%.
-  - **Felicidade (fator Religião):** cobertura × máximo da Devoção: Alta +10, Média +7, Baixa +4, Nenhuma 0. Com Devoção Alta e cobertura abaixo de 50%: −5 em vez de bônus.
-  - **Oferendas:** no Período Livre, os NPCs visitam o Templo como visitam a Taverna e doam 2% da renda. Isso paga os Sacerdotes e entra no ciclo do dinheiro.
-  - **Templo da Religiosa:** reduz a mortalidade por doença na cidade em 25% e cuida dos feridos pobres (a cura de NPCs comuns fica 25% mais rápida). É o "ponto forte em cura" dela.
-  - Casamentos da Religiosa acontecem no Templo (já decidido).
-- *Impacto:* Felicidade, Trabalho (vagas de Sacerdote), Econômico (oferendas), Cura, Construção.
+  - **Dois tipos de Artefato:**
+    - **Relíquias** (Rank 1 a 3): genéricas e sem efeito em combate. Valem muito, servem ao consumo da Realeza e, doadas a um Templo ou Palácio, dão +2 de Renome.
+    - **Artefatos lendários** (Rank 4 e 5): **únicos**, com nome e efeito próprios, escritos à mão (cerca de 6 na primeira versão, 1 a 2 por masmorra lendária). *Exemplos:* "Estandarte do Primeiro Rei" (+10 de Moral no exército do portador quando ele é General); "Elmo do Juramento" (+15 de Coragem, imune ao Medo).
+  - **Consumo da Realeza como posse:** a cidade precisa ter **2 itens de Artefato** (Livro, Joia ou Relíquia) **por NPC real de Realeza**, guardados no Palácio. Eles **não somem**: 1 em cada 10 sai por estação (presentes, roubos), e isso gera a demanda.
+- *Conflito:* a Classe Social trata todo consumo como gasto do estoque. A Realeza passa a ter um consumo de **posse com desgaste**. Saída: só os Artefatos funcionam assim, e o resto continua igual.
+- *Impacto:* Classe Social, Itens, Objetivo (Loot das lendárias), Mundo (as 3 masmorras lendárias).
 
-**R3. Festivais.**
+**I5. Medicamentos e doença.**
 
-- *Contexto:* "festival" já é um evento positivo e um evento duradouro na Felicidade, sem calendário.
+- *Contexto:* o tipo existe, sem itens; o Boticário produz; a doença em LOD 0 está em aberto.
 - *Sugestão:*
-  - **2 festivais por ano** em cada cultura: a **Festa da Colheita** (dias 1 e 2 do Outono, para todas) e um **festival próprio** da cultura, numa estação fixa. A Religiosa tem mais 2 dias santos (4 no total).
-  - **Duração:** 2 dias. **Efeitos:** Felicidade +8 (evento duradouro); consumo de Comida e Bebida × 1,5 nesses dias; produção −50% no 1º dia (folga).
-  - **Quem paga:** o dono da cidade, 2% do Banco da Cidade. O jogador pode **patrocinar** um festival maior (o dobro do custo, +4 a mais) ou **cancelar**. Cancelar com Devoção Alta dá −5 por 1 estação.
-  - O calendário da interface mostra os festivais.
-- *Impacto:* Felicidade, Econômico (demanda de Bebida e Comida), Eventos, Interface.
+  - **Curativo** (Tier 1; Tecido + Água; Boticário nível 1): por 8 horas, a regeneração fica **× 2**; estanca o **sangramento** do Inconsciente em combate letal.
+  - **Remédio** (Tier 3; Flor Espiritual + Fardo de Especiaria; Boticário nível 3): por 24 horas, a regeneração fica **× 3**; **cura o estado Doente**.
+  - **Doença:** nos **NPCs comuns**, é só um modificador da cidade (o evento de Saúde). Nos **Controlados e Importantes**, existe o estado **Doente**: −20% nas habilidades e sem regeneração, até tomar Remédio, ir ao Hospital ou passar 8 dias. Isso fecha a pergunta em aberto da Cura.
+  - **Na cidade:** durante uma epidemia, a cidade gasta **1 Remédio por 10 NPCs reais por dia**. Com estoque, a mortalidade da doença cai pela metade. Isso dá demanda real ao Boticário.
+  - *Exemplo:* uma peste na Cidade Autoritária (100 NPCs) gasta 10 Remédios por dia; com 80 no estoque, ela aguenta 8 dias protegida, e o preço do Remédio sobe pela simulação.
+- *Impacto:* Cura, Eventos (Saúde), Produção (Boticário), Comércio.
 
-**R4. Heresia e tolerância.**
+**I6. Comida, bebida e narcóticos no grupo.**
 
-- *Contexto:* a heresia é crime capital na Religiosa, mas não há definição do que é heresia. A Felicidade já pune minorias pela distância entre as leis e a cultura.
-- *Pergunta:* o que é heresia, e como a facção trata as minorias de outra cultura?
-- *Sugestão:* nova lei de facção, **Tolerância religiosa**, com 3 valores:
+- *Contexto:* o grupo come 1 refeição por dia; a Felicidade dos Controlados tem o fator "comida e descanso"; os narcóticos são Luxo.
+- *Opções:* (a) **qualidade da comida e efeitos curtos, com vício simples** só para Controlados e Importantes; (b) o mesmo, sem vício; (c) toda comida é igual.
+- *Sugestão:* (a).
 
-| Valor | Efeito nas minorias | Quem deseja |
-|---|---|---|
-| Tolerância | Nenhum | Escravista, Guerreira, Tecnocrata |
-| Fé oficial | Minorias pagam +5% de imposto; não podem ter construção de culto própria | Autoritária, Arcana |
-| Perseguição | Minorias com Felicidade −15 e migração 2× mais rápida para fora; Controle +5 | Religiosa (pensamento extremo) |
-
-  - **Heresia** (crime cultural, gravidade 3; gravidade 5 com Perseguição) são **atos**, não a simples existência: construir culto de outra fé, blasfemar (opção de diálogo), profanar ou roubar um Templo. Na primeira versão, os NPCs de minoria não são presos só por existirem.
-- *Impacto:* Facção (nova lei), Crime (heresia), Felicidade, População (migração), Cultura (leis desejadas).
-
-**R5. Conversão.**
-
-- *Contexto:* o NPC nasce com a cultura da cidade e o migrante mantém a dele; a Cultura dominante de uma facção muda por estação, pela população.
-- *Opções:* (a) **sem conversão**: a cultura só muda por nascimento e migração, o que leva gerações; (b) **assimilação lenta**: uma parte das minorias adota a cultura dominante da cidade a cada estação; (c) missionários ativos (NPCs que convertem): mais conteúdo e mais simulação.
-- *Sugestão:* (b). A cada estação, uma parte de cada minoria da cidade adota a cultura dominante, se houver construção de culto dela: **1% com Tolerância, 2% com Fé oficial, 4% com Perseguição**. Funciona como a População: uma fração acumulada; a cada Fator de Escala, 1 NPC real muda de cultura. NPCs Importantes e Controlados nunca mudam sozinhos, só por evento ou diálogo.
-  - *Exemplo:* Cidade Autoritária conquistada pela Religiosa, com 40 NPCs Autoritários, Fé oficial: 2% por estação = 0,8 NPC por estação; em 5 estações, cerca de 4 NPCs mudaram de cultura.
-- *Conflito:* a Cultura dizia que a cultura vem do nascimento; passa a ter também a assimilação.
-
-**R6. Clero, Sumo Sacerdote e peregrinação.**
-
-- *Contexto:* o Sumo Sacerdote é um Importante fixo na Capital Religiosa (8,4); na Religiosa, a sucessão é "escolha do clero"; peregrinos já são encontros da Viagem; o Rito de Admissão da Religiosa é "Serviço (peregrinação, missões)"; há a masmorra "Templo profanado" em (5,4).
-- *Sugestão:*
-  - **Sacerdote** é uma Função da classe Civil; o gerente do Templo é Nobre. Sem classe "clero".
-  - **Sumo Sacerdote:** escolhe o herdeiro na sucessão da Religiosa. Uma vez por estação, a IA dele pode dar uma **Bênção** (a uma facção ou ao jogador: +10 de relação ou reputação com as facções Religiosas e +5 de Felicidade nas cidades Religiosas da abençoada, por 1 estação) ou um **Anátema** (contra um líder: −20 de relação das facções Religiosas com ele e o motivo de guerra "Guerra santa" contra ele).
-  - **Peregrinação:** ir à Capital Religiosa e fazer uma oferenda dá +10 de reputação com a Religiosa (1 vez por ano) e conta para o Rito de Admissão. A cidade santa recebe peregrinos: mais demanda na Taverna e no Mercado dela.
-  - **Missões do Sumo Sacerdote:** caçar hereges, escoltar peregrinos, purificar o Templo profanado (5,4).
-- *Impacto:* Facção (sucessão), Diplomacia e Guerra (Anátema), Reputação, Objetivo (missões), Viagem (peregrinos).
-
-### E. Clima e Estações
-
-**E1. Produção por estação.**
-
-- *Contexto:* os recursos têm produtividade por estação, mas sem números. Planejar estoques para o inverno é o ritmo de jogos como RimWorld.
-- *Sugestão:* tabela base (bioma temperado), em `clima.json`:
-
-| Construção | Primavera | Verão | Outono | Inverno |
-|---|---|---|---|---|
-| Fazenda (grãos, legumes, fruta, algodão, fumo, especiaria) | 75% | 100% | 150% (colheita) | 25% |
-| Pasto, Rancho | 100% | 100% | 100% | 75% |
-| Posto de Coleta (madeira, coleta) | 100% | 100% | 100% | 75% |
-| Pedreira e minas | 100% | 100% | 100% | 90% |
-
-  Ajustes por bioma (só o que muda):
-
-| Bioma (região) | Mudança |
+| Item | Efeito no Controlado (no dia) |
 |---|---|
-| Montanhas frias e taiga (Guerreira) | Inverno: Fazenda 0%, Pasto 50% |
-| Terras áridas (Tecnocrata) | Verão: Fazenda 75% (calor); Inverno: Fazenda 50% |
-| Litoral quente (Escravista) | Inverno: Fazenda 75% |
-| Planície, colinas, floresta (Autoritária, Religiosa, Arcana) | Tabela base |
+| Alimento Básico (Pão, Sopa, Legumes Cozidos, Ração) | Fator comida 0 |
+| Alimento Refinado (Torta, Linguiça, Queijo) | +3 |
+| Alimento de Luxo (Licor, Carne Envelhecida, Doce) | +6 |
+| Cerveja | +2 de Felicidade |
+| Fumo | +3 de Felicidade por 1 dia |
+| Pó Espiritual | +6 de Felicidade; Mago: +25% de regeneração de Mana por 1 dia |
 
-  - Média anual da Fazenda na tabela base: 87,5%. Quem não guarda comida no outono passa fome no inverno, e a Guerreira, que já tem pouca comida, depende ainda mais do comércio ou da guerra pelo celeiro.
-- *Impacto:* Produção, Recursos, Comércio (preço da comida sobe no inverno pela própria simulação), População (fome).
+  - **Vício:** cada uso tem chance de criar o traço **Viciado** (5% no Fumo, 10% no Pó Espiritual). Viciado sem a droga por 2 dias: Felicidade −10. Some depois de 1 estação sem uso.
+  - Nas cidades, nada muda: os narcóticos continuam sendo consumo de Luxo agregado, sem vício.
+  - O grupo come a melhor comida do inventário, a menos que o jogador mande "economizar".
+- *Impacto:* Felicidade (Controlados), Viagem (comida do grupo), Magia (Pó Espiritual), Crime (narcótico proibido na Religiosa).
 
-**E2. Clima do dia.**
+### E. Escravidão
 
-- *Contexto:* hoje só existem estações e eventos climáticos raros. A Viagem já espera multiplicadores de "neve e chuva forte".
-- *Opções:* (a) só estações, sem clima diário; (b) **clima do dia sorteado por região**, com efeito em viagem e combate e um efeito visual simples; (c) clima por Mapa Local, com frentes que se movem: bonito, mais caro e difícil de ler.
-- *Sugestão:* (b). Sorteado **1 vez por dia por região** (6 sorteios por dia; barato e coerente entre mapas vizinhos), com 60% de chance de repetir o do dia anterior. As chances por bioma e estação ficam em dados.
+**E1. De onde vêm os escravos.**
 
-| Clima | Viagem | Combate e Batalha | Outros |
-|---|---|---|---|
-| Limpo | × 1,0 | — | — |
-| Nublado | × 1,0 | — | — |
-| Chuva | × 1,25 | Alcance de tiro −15%; Atiradores −30% de dano (pólvora molhada) | — |
-| Tempestade | × 1,5; caravanas param | Alcance de tiro −30%; Atiradores não atiram | NPCs ficam em casa |
-| Neve | × 1,5 | Velocidade −20% | Lenha × 1,5 (ver E4) |
-| Névoa | × 1,0 | Alcance de visão e de tiro −40% | Detecção de crime −20% |
-| Calor forte | × 1,1 | — | Felicidade −2 |
+- *Contexto:* já existem prisioneiros de guerra, trabalho forçado e o estilo Escravo; falta a lista completa das fontes.
+- *Sugestão:* 5 fontes, todas só onde a lei de **Escravidão** permite:
 
-  - **Visual:** uma camada por cima do mapa, com partículas (pingos, flocos), névoa translúcida e um tom de cor. São poucos sprites pequenos, sem tiles novos.
-- *Conflito:* o Pipeline decidiu "estações só com cor". A camada de clima não é arte de tile: neve **caindo** sim, neve **no chão** continua para o futuro.
+| Fonte | Como |
+|---|---|
+| Prisioneiros de guerra | Já decidido: 100 prisioneiros = 1 NPC Escravo |
+| Pena de trabalho forçado | Já decidido: Escravo com prazo |
+| Captura por bandidos e caçadores | Viajantes e vítimas capturados em encontros são vendidos no porto (6,6) ou na Vila Livre do Sul (5,6) |
+| Nascimento | Nas facções que permitem, filhos de Escravos nascem Escravos (pela natalidade da classe) |
+| Compra | No Mercado de Escravos (ver E2) |
 
-**E3. Eventos climáticos extremos.**
+  - **Venda de prisioneiros:** uma facção que **proíbe** a escravidão pode **vender** prisioneiros a uma que permite, se houver contato e relação 0 ou mais. É o caso já previsto da Guerreira, que vende à Escravista. Ela recebe o preço de mercado e não guarda escravos.
+  - **Dívida** (vender-se por dívida) fica para o futuro.
+- *Impacto:* Guerra, Crime, População, Viagem (encontros), Diplomacia.
 
-- *Contexto:* seca, tempestade, geada e enchente já são eventos; falta dizer onde e quando acontecem e o que fazem.
+**E2. Mercado de Escravos e preço.**
+
+- *Contexto:* a Revisão pede compra e venda; a Escravista é mercantil; o porto (6,6) é de escravos.
+- *Pergunta:* onde se compra, quanto custa e o que exatamente se compra?
 - *Sugestão:*
+  - **Mercado de Escravos:** construção nova (Facção ou Rico), só em facção que permite a escravidão. No primeiro dia, a Escravista tem um na Capital (8,6), na Cidade (7,5) e no porto (6,6).
+  - **O que se compra:** **1 NPC real**, que trabalha como **1 trabalhador** numa vaga (a mesma escala de qualquer NPC real que ocupa uma vaga).
+  - **Preço base:** **200 + 4 × a melhor habilidade de Trabalho** (Braçal, Manufaturado ou Especialista).
+  - **Modificadores:** Mago × 2; velho × 0,5; cultura hostil à do comprador × 0,8. Depois disso, oferta e procura no Mercado Local, como qualquer item.
+  - *Exemplo:* um escravo com Trabalho Braçal 80 custa 520; o mesmo escravo velho, 260.
+  - **Quem compra:** o jogador (o escravo vira Escravo do jogador, Semi-Controlado, com Vínculo = jogador), os Ricos (para as empresas) e a cidade (para vagas Braçais sem trabalhador). Em LOD 2, a compra da cidade é um fluxo por estação.
+  - **Vender:** o dono pode vender o próprio escravo no Mercado de Escravos por 70% do preço.
+- *Conflito:* o NPC real representa um Fator de Escala de pessoas nas contas da cidade, mas trabalha como um trabalhador numa vaga. Saída: o preço é **por NPC real como trabalhador**; o Fator de Escala só pesa na população total, como já acontece.
+- *Impacto:* Construção (nova), Comércio e Econômico, Trabalho, NPC, Mundo (Mercados iniciais).
 
-| Evento | Quando e onde | Efeito | Duração |
-|---|---|---|---|
-| Seca | Verão; terras áridas e planície | Fazenda −50% | 1 estação |
-| Enchente | Primavera; mapas com rio | Fazenda −30%; perde 10% do estoque de comida da cidade | 4 dias |
-| Geada fora de hora | Primavera ou outono; montanhas e colinas | Fazenda perde 50% da produção da estação | Pontual |
-| Tempestade forte | Qualquer estação; litoral | Caravanas paradas; danifica construções de madeira (custo de reparo pela manutenção) **[Proposta]** | 2 dias |
-| Onda de calor | Verão; terras áridas e litoral | Felicidade −5; chance de doença maior | 4 dias |
-| Inverno rigoroso | Inverno; o mundo todo (cerca de 1 vez a cada 5 anos) | Efeitos do inverno × 1,5; Lenha × 2; mortalidade de velhos maior | A estação inteira |
+**E3. Obediência e tratamento.**
 
-  O Narrador continua regulando os que afetam o jogador.
-
-**E4. Inverno e aquecimento.**
-
-- *Contexto:* o consumo das classes não muda com a estação.
-- *Opções:* (a) nada muda no inverno; (b) **as moradias gastam Lenha no inverno**; (c) Lenha e roupas de inverno.
-- *Sugestão:* (b). No inverno, cada NPC real consome **1 Madeira Bruta a cada 4 dias** como "aquecimento", dentro do consumo de Materiais da Classe Social. Por bioma: frio × 2; temperado × 1; litoral quente e terras áridas × 0,25. Falta de Lenha: Felicidade −10 (pelo fator Consumo atendido) e mortalidade de velhos e crianças +50% na estação.
-  - *Exemplo:* cidade Guerreira de 100 NPCs no inverno de 16 dias: 4 × 100 × 2 = 800 de Madeira Bruta, que precisa estar estocada no outono.
-- *Impacto:* Classe Social (consumo), Produção (Posto de Coleta), Comércio, População.
-
-**E5. Estações na viagem e na guerra.**
-
-- *Contexto:* uma campanha cabe numa estação; nada impede a guerra no inverno.
+- *Contexto:* o atributo Obediência existe, sem fórmula; a IA diz que o Medo previne revoltas.
 - *Sugestão:*
-  - **Viagem:** primavera com lama, × 1,1 em mapas sem estrada; inverno × 1,5 nos biomas frios e × 1,1 nos outros (somando com o clima do dia, até × 2,0 no máximo).
-  - **Campanha de inverno:** exército fora de cidade amiga gasta 1,25 Ração por Esquadrão por dia; nos biomas frios, Moral −1 por dia; Cansaço +5 por estação de campanha no inverno.
-  - **IA:** vontade de guerra −15 no inverno. As guerras ganham um ritmo: campanhas na primavera e no verão, paz e reconstrução no inverno.
-- *Impacto:* Viagem, Guerra, Diplomacia (IA).
+  - **Obediência** (0 a 100) = 50 + Medo da cidade (0 a 30) + Grilhões (+15) + tempo de cativeiro (+1 por estação, até +10) − (30 − Felicidade, se a Felicidade estiver abaixo de 30) − 10 se o escravo é Guerreiro (orgulho).
+  - **Efeito:** a chance de cumprir a prioridade a cada tarefa é igual à Obediência. Abaixo de 30, ele pode fugir (E4).
+  - **Escolhas do dono** (o jogador, para os escravos dele; a cidade, pela lei):
 
-**E6. Noite e estações na tela.**
+| Tratamento | Efeito |
+|---|---|
+| Comida Básica (padrão) | — |
+| Comida Refinada | Felicidade +5; custa mais |
+| Grilhões | Obediência +15; Felicidade −5; velocidade −20%; não fogem |
+| Castigo público | Medo +5 na cidade por 8 dias; Felicidade dos Escravos −10; Reputação −2 com a Religiosa |
 
-- *Contexto:* o dia tem 24 horas e os grupos acampam à noite; o crime já usa a noite na detecção; a arte das estações é só cor.
+  - *Exemplo:* um escravo novo, sem Grilhões, numa cidade com Medo 10 e Felicidade 25: 50 + 10 − 5 = 55 de Obediência; com Grilhões, 70.
+- *Impacto:* NPC, IA (Medo), Felicidade, Itens (Grilhões).
+
+**E4. Fuga e rebelião.**
+
+- *Contexto:* pergunta em aberto da Felicidade (como a fuga e a rebelião local funcionam em LOD 0 e quanto duram).
 - *Sugestão:*
-  - **Estações:** troca de paleta na placa de vídeo, como a das culturas (sem memória extra): primavera verde vivo, verão quente, outono alaranjado, inverno frio e dessaturado.
-  - **Dia e noite:** um tom de cor sobre o mapa em 4 fases (amanhecer, dia, entardecer, noite), sem luzes dinâmicas na primeira versão. À noite, visão e detecção −30% (vale para crime e combate).
-  - **Futuro:** tochas e janelas acesas, e a arte extra das estações (já decidido para depois).
-- *Impacto:* Pipeline, Interface, Crime, Combate. Entra na fatia vertical (barato e dá vida).
+  - **Fuga em LOD 0:** à noite, o escravo com Obediência abaixo de 30 tem chance diária de fugir (30 − Obediência)%. A fuga usa a detecção do crime (Percepção dos guardas × Destreza dele). Se escapa, vira **fugitivo**: crime "Fuga" (gravidade 3) e Recompensa na facção. Ele vai para uma Vila Livre ou um mapa sem dono; metade vira bandido.
+  - **Fuga em LOD 2:** a cada estação, foge (25 − Felicidade dos Escravos)% dos escravos da cidade, se a Felicidade estiver abaixo de 25. *Exemplo:* Felicidade 15 = 10% fogem.
+  - **Rebelião local:** Felicidade dos Escravos abaixo de 10 **e** Controle abaixo de 10 por 4 dias seguidos. Em LOD 0, os escravos se armam com o que acham: 1 Esquadrão de Milícia rebelde para cada 10 NPCs escravos, contra os guardas e a guarnição. Se vencem, fogem todos, a produção Braçal da cidade cai e a cidade perde 5 de Estabilidade por 1 estação; se perdem, 20% são executados ou vendidos. Em LOD 2, é resolvida pelo cálculo rápido de forças.
+  - **Caçadores de escravos:** uma fuga grande cria contratos de recaptura no quadro da Taverna.
+  - **Grande revolta** (várias cidades ao mesmo tempo, como a de Espártaco) fica para o futuro.
+- *Impacto:* Felicidade (fecha a pergunta 3), Crime, Guerra (cálculo rápido), Objetivo (contratos), Eventos.
 
-### N. Notícias
+**E5. Libertação e abolição.**
 
-**N1. Como as notícias andam pelo mundo.**
-
-- *Contexto:* o jogador só conhece o mundo com informações datadas; as notícias da guerra devem chegar com atraso.
-- *Opções:* (a) o jogador sabe tudo na hora: simples, mas quebra a névoa; (b) **atraso pela distância**, calculado; (c) notícias como objetos levados por caravanas e peregrinos: realista, mas caro e imprevisível.
-- *Sugestão:* (b). Toda notícia nasce num Mapa Local, numa hora. Ela chega a cada outro mapa depois de **3 horas por mapa de distância** (o passo de um mensageiro a cavalo): atravessar o mundo (8 mapas) leva 1 dia.
-  - O jogador recebe a notícia quando ela chega ao mapa onde ele está **ou** a um lugar da rede dele: as cidades dele (governadores informam), os companheiros fora do grupo e as caravanas dele.
-  - **Custo:** ao nascer, a notícia calcula a distância até cada mapa (48 mapas); depois basta comparar horas. Quase nada.
-- *Impacto:* Viagem (névoa), Interface (notificações), Companheiros (rede de informação).
-
-**N2. Tipos e alcance.**
-
-- *Sugestão:* cada notícia tem uma **importância**, que define até onde vai e quanto tempo fica no quadro:
-
-| Importância | Alcance | Fica no quadro da Taverna | Exemplos |
-|---|---|---|---|
-| Local | 2 mapas | 8 dias | Bandidos numa estrada, festival, preço alto numa cidade, contrato |
-| Regional | 5 mapas | 16 dias | Batalha, cerco, revolta, epidemia, seca, companhia de mercenários |
-| Mundial | O mundo todo | 64 dias | Guerra declarada, paz, morte de líder, sucessão, marco de tecnologia, Anátema |
-
-  As notícias nascem dos eventos e das decisões que já guardam o "Por quê?" (Eventos, Guerra, Diplomacia, Comércio). Não há texto novo para escrever: o modelo de frase vem do próprio evento.
-
-**N3. Onde o jogador vê as notícias.**
-
+- *Contexto:* o Escravo libertado vira Civil e Plebeu; libertar dá −5 de reputação nas facções escravistas; a Escravista tem o pensamento extremo "a liberdade de escravos é crime".
 - *Sugestão:*
-  - **Notificação**, numa categoria "Notícias", personalizável como as outras (já decidido).
-  - **Quadro da Taverna:** as notícias que chegaram àquela cidade. É a "Crônica do mundo visível" da Revisão.
-  - **Conversa:** "Conversar" com um NPC dá uma notícia local ou regional (já decidido no Diálogo).
-  - **Mapa Mundial:** a notícia atualiza a informação datada do mapa ("Cidade Autoritária ocupada pela Guerreira, soube há 2 dias").
-  - **Diário e Crônica do mundo:** uma aba com a data do acontecimento e a data em que o jogador soube. No epílogo, a Crônica do mundo aparece junto com a do jogador.
+  - **O dono liberta** (botão "Libertar"): o NPC vira Civil e Plebeu. **[Proposta]** +2 de reputação com a Religiosa e −5 com as escravistas (já decidido). O libertado ganha +20 de Opinião sobre o jogador.
+  - **Alforria:** nas facções com Tolerância (ver Religião), 1% dos escravos da cidade compram a liberdade por estação; na Escravista, 0%.
+  - **Abolição:** a facção muda a lei de Escravidão para "proibida" na assembleia. Todos os Escravos viram **Civis em 1 estação**, as Senzalas viram Casas do mesmo nível, os Ricos perdem 15 de Felicidade por 1 ano (perdem a mão de obra) e a produção Braçal cai até os Civis ocuparem as vagas com salário. Na Escravista, isso viola o pensamento extremo.
+  - **Conquista:** uma cidade que passa a uma facção que proíbe a escravidão liberta os escravos dela no tratado (+10 de Felicidade dos libertos).
+  - **Estilo Escravo**, 3 caminhos para a liberdade:
+    - **comprar** (1,5 × o preço de mercado do próprio jogador; ele pode juntar dinheiro com tarefas extras);
+    - **fugir** (vira fugitivo com Recompensa na facção do dono, sem Game Over);
+    - **servir** (o dono liberta depois de 4 estações com Opinião +40).
+- *Impacto:* Facção (lei), Classe Social, População (Senzala), Felicidade, Início de Jogo, Reputação.
 
-**N4. Precisão.**
+**E6. Tráfico, crime e diplomacia.**
 
-- *Opções:* (a) sempre exata; (b) **menos precisa com a distância**; (c) com boatos falsos.
-- *Sugestão:* (b). Até 2 mapas: números exatos ("1.800 soldados"). De 3 a 5: arredondados ("cerca de 2.000"). 6 ou mais: vagos ("um grande exército"). **Boatos falsos** ficam para o futuro, para não frustrar na primeira versão.
+- *Contexto:* a Religiosa condena o tráfico (afinidade hostil com a Escravista); libertar escravo é crime na Escravista.
+- *Sugestão:*
+  - **Tráfico onde é proibido:** é **Contrabando** (gravidade 3). Escravos só são vendidos em lojas ilegais (mercado negro), com o preço × 1,5.
+  - **Libertar escravo alheio:** crime "Fuga ou ajuda a escravo" (gravidade 3); na Escravista, gravidade 5 (crime cultural).
+  - **Reputação do jogador:** cada venda de escravo dá −3 com a Religiosa, e cada compra, −1. Libertar dá +2 (ver E5).
+  - **Diplomacia:** facções que proíbem a escravidão têm −10 de relação com as que mantêm Mercado de Escravos. **[Proposta]** Só a Religiosa aplica esse −10 na primeira versão, por já ser hostil à Escravista.
+  - **Missões:** da Religiosa, libertar caravanas de escravos; da Escravista, recapturar fugitivos e escoltar carregamentos.
+- *Impacto:* Crime, Reputação, Diplomacia, Objetivo, Comércio.
 
-**N5. Preços como notícia.**
-
-- *Contexto:* o jogador só sabe os preços das cidades visitadas, com data.
-- *Sugestão:* quando um item fica 30% acima ou abaixo da média da facção numa cidade, nasce uma notícia Local ("Grão caro na Capital Guerreira, +45%"). Ao chegar, ela atualiza a tabela de preços conhecidos do jogador para aquele item, com a data. Caravanas e companheiros comerciantes do jogador trazem a tabela completa da cidade de onde vêm.
-- *Impacto:* Comércio (rotas do jogador), Econômico.
-
-**N6. A IA também espera as notícias?**
-
-- *Opções:* (a) **as facções da IA sabem tudo na hora**: barato e simples, uma simplificação comum em jogos de estratégia; (b) a IA também espera: justo, mas mais dados e decisões mais lentas.
-- *Sugestão:* (a) na primeira versão, marcada como simplificação **[Refinar depois]**. Os NPCs comuns só "sabem" (para rumores) o que já chegou à cidade deles.
-
-### D. Escopo
+### D. Escopo e depois do P1
 
 **D1. Documentos.**
 
 - *Sugestão:*
-  - **Três documentos novos:** `Sistema de Religião/Descrição.md` ("Religião e Fé", complemento da Cultura), `Sistema de Clima e Estações/Descrição.md` e `Sistema de Notícias/Descrição.md`.
-  - **Atualizar:** Cultura, Construção (Templo), Felicidade (fator Religião e Lenha), Crime (heresia), Facção (lei de Tolerância), Classe Social (Lenha), Recursos e Produção (tabela por estação), Viagem, Combate e Batalha (clima), Guerra (campanha de inverno), Eventos (clima e festivais), Comércio (preços como notícia), Interface (camada de clima, quadro da Taverna, calendário), Pipeline (partículas e tom da noite), Objetivo (missões do Sumo Sacerdote e Crônica), Glossário.
-  - **Dados:** `religiao.json`, `clima.json` e `noticias.json`.
-  - **Fatia vertical:** entram a produção por estação (testa os estoques) e o tom de dia e noite; o clima do dia, a religião e as notícias ficam para depois.
+  - **Dois documentos novos:**
+    - `Sistema de Escravidão/Descrição.md`, que junta o que está espalhado;
+    - `Sistema de Itens/Efeitos de Itens.md`, uma tabela mestre como a de Funções e Construções.
+  - **Atualizar:** Itens, Cura (estado Doente), Magia (Joia, Pó Espiritual), Classe Social (posse de Artefatos, escravos), NPC (Obediência, livros lidos, Viciado), Crime, Facção (lei de Escravidão), Trabalho, População (natalidade e Senzala), Felicidade (fuga e rebelião), Construção (Mercado de Escravos), Comércio, Reputação, Início de Jogo (estilo Escravo), Guerra e Batalha (venda de prisioneiros), Diplomacia, Objetivo (Artefatos lendários e contratos), Mundo (Mercados de Escravos iniciais), Interface (botões "Usar" e "Ler"), Glossário.
+  - **Dados:** `efeitos_itens.json` e `escravidao.json`.
+  - **Fatia vertical:** só a qualidade da comida na Felicidade (I6); o resto fica para depois.
 
-Depois das respostas: escrever os três documentos, atualizar os vizinhos e abrir a última rodada do P1 (P1-6: Efeitos de itens e Escravidão).
+**D2. O que vem depois do P1?**
+
+- *Contexto:* com a P1-6, todos os sistemas P1 estarão escritos. A ordem decidida é: documentação, depois **ficha técnica lógica**, depois programação. Há uma lista grande de itens "Em aberto" no [[Estado do Projeto]].
+- *Opções:*
+  - (a) **1 ou 2 rodadas de pendências**: só os "Em aberto" que travam a ficha técnica (Fator de Escala, Espada no Ferreiro, peça de armadura Média, consumo Luxo e Exclusivo por Tier, custos das construções novas), depois a ficha técnica da **fatia vertical**;
+  - (b) ir direto para a ficha técnica e resolver as pendências quando aparecerem;
+  - (c) escrever primeiro os sistemas P2 (áudio, tutorial, configurações...).
+- *Sugestão:* (a). A ficha técnica começa pela **fatia vertical** (1 cidade, Fazenda → Cozinha → Mercado), que é o primeiro código. Os sistemas P2 ficam para perto do lançamento, como a Revisão já diz.
+
+Depois das respostas: escrever os dois documentos, atualizar os vizinhos e seguir pela resposta da D2.
 
 ## 5. Fatos que valem lembrar
 
@@ -318,6 +290,9 @@ Depois das respostas: escrever os três documentos, atualizar os vizinhos e abri
 - **Linguagem:** o foco é **C++**; ferramentas em outras linguagens só como ajuda, nunca essenciais.
 - **Guerra e Batalha:** Placar de Guerra (−100 a +100) paga a paz; cidade ocupada só muda de dono no tratado; exército de até 20 Esquadrões com General; **o mundo para durante a batalha**; a simulação é sempre por Esquadrão de 100 soldados, e o jogador escolhe o **tamanho visual** (20, 50 ou 100 bonecos por Esquadrão; até 4.000 soldados na tela, pedido do autor). A 7ª camada do Tiled é a Elevação. Na programação, a guerra por cálculo rápido vem antes do Mapa de Guerra (ver [[Sistema de Guerra/Descrição|Guerra]], [[Sistema de Batalha/Descrição|Batalha]]).
 - **Diplomacia:** estado (Paz, Guerra, Trégua) + tratados que se somam + atitude (faixa da relação); Confiabilidade; vassalo tem leis próprias (ver [[Sistema de Diplomacia/Descrição|Diplomacia]]).
+- **Religião:** uma fé por cultura, com Devoção (Alta na Religiosa, nenhuma na Tecnocrata); cada Sacerdote atende 20 NPCs; fator Religião de −5 a +10; 2 festivais por ano (4 na Religiosa); lei de Tolerância religiosa; heresia é um ato; assimilação de 1% a 4% por estação; Bênção e Anátema do Sumo Sacerdote (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
+- **Clima:** Fazenda 75%, 100%, 150% e 25% nas quatro estações (base temperada); clima do dia sorteado por região, com 60% de repetir; lenha no inverno (1 Madeira Bruta por NPC real a cada 4 dias, × bioma); vontade de guerra −15 no inverno; noite com visão −30%; arte só com paleta, tom e partículas (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
+- **Notícias:** 3 h por mapa (o mundo em 1 dia); Local, Regional e Mundial; precisão cai com a distância; a IA sabe tudo na hora (simplificação) (ver [[Sistema de Notícias/Descrição|Notícias]]).
 - **Mundo:** 48 Mapas Locais (8 × 6), 6 regiões de 8 mapas; partida no Ano 412; nomes significativos até a história ser escrita (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
 - **Git:** o repositório é `FelipeSKT/Projeto-Jogo`. Cada rodada vira um pull request para o autor aceitar.
 

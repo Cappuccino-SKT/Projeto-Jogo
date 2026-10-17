@@ -246,6 +246,7 @@ Toda a arte é feita à mão, então a escolha é feita para o volume de arte n�
 | Mapa | Combate local e Mapa Interno; limite de combatentes; Mapa de Guerra |
 | Eventos | Criaturas e bandidos por evento; eventos Críticos pausam |
 | Tempo | Velocidade volta a 1x ao iniciar combate |
+| Clima e Estações | Chuva, tempestade e névoa reduzem o tiro e a visão; à noite, visão −30% (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | Início de Jogo | Derrota vira captura (estilos Escravo e Aventureiro) |
 | Magia | Cajado, encantamento e, depois, feitiços |
 | Interface | Seleção individual ou em caixa, barras de Vida, indicadores EM COMBATE e PAUSADO, ordens enfileiradas visíveis (ver [[Interface/Descrição\|Interface e Controles]]) |

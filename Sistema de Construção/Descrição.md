@@ -47,7 +47,7 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Quartel** | Onde os conscritos são alistados e os Esquadrões são formados (2 dias cada; tantos ao mesmo tempo quanto o nível) |
 | **Prisão** | Mapa Interno onde NPCs presos cumprem pena (Sistema de Crime e Justiça) |
 | **Casa da Moeda** | Cunhagem: ganho anual de dinheiro (Sistema Econômico) |
-| **Templo** | Construção da cultura Religiosa; função detalhada com a Cultura |
+| **Templo** | Construção de culto da Facção, em todas as culturas (a Arcana usa a Torre Arcana e a Tecnocrata o Laboratório); Sacerdotes, cobertura, oferendas e festivais (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | **Posto Comercial** | Necessário para a cidade enviar caravanas civis (Sistema de Comércio) |
 | **Laboratório** | Gera Pontos de Pesquisa (Sistema de Tecnologia) |
 | **Torre Arcana** | Gera Pontos Arcanos com Magos (Sistema de Magia) |
@@ -59,6 +59,10 @@ Construções que o resto do projeto já exige e ainda não existem nos canvases
 | **Universidade** | Educação: melhora a Inteligência e o Trabalho Especialista dos NPCs da cidade e dá bônus aos Pesquisadores; construção da Facção (ver [[Sistema de Trabalho e Propriedade/Descrição\|Sistema de Trabalho e Propriedade]]) |
 | **Muralha** | Defesa da cidade em 3 níveis: Paliçada, Muralha de Pedra e Bastião (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
 | **Posto da Guarda** | Mais vagas de guarda (Controle) e ponto de reunião da milícia (ver [[Sistema de Guerra/Descrição\|Sistema de Guerra]]) |
+
+### Clima
+
+A **tempestade forte** danifica as construções de madeira; o reparo sai pela manutenção. No inverno, as moradias gastam Madeira Bruta como lenha (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
 ### Arte
 

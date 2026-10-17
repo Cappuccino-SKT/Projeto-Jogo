@@ -78,6 +78,8 @@ O título é um **rótulo político**; a classe social só muda pelas regras de 
 | **Contratos** | Ficam num **quadro na Taverna** e **nascem do estado do mundo**: Criminalidade alta gera caçar bandidos; caravana em risco gera escolta. Outros: entrega, limpar masmorra |
 | **Missões longas** | De 3 a 5 etapas, ligadas a uma Ambição ou a um NPC Importante |
 
+**Missões do Sumo Sacerdote:** caçar hereges, escoltar peregrinos e purificar o Templo profanado (5,4); a peregrinação à Capital Religiosa conta para o Rito de Admissão dela (ver [[Sistema de Religião/Descrição|Religião e Fé]]). Os contratos também aparecem como notícias Locais (ver [[Sistema de Notícias/Descrição|Notícias]]).
+
 Segue o princípio do projeto: **a simulação vem primeiro**. Um contrato só existe se o mundo tiver o problema que ele resolve.
 
 ## Masmorras
@@ -94,7 +96,7 @@ O grupo **acorda ferido no mesmo lugar** depois que as Criaturas vão embora. Pe
 
 ## Crônica
 
-Registro dos grandes feitos, montado a partir do **diário de eventos**: Ambições cumpridas, grandes vitórias, masmorras lendárias e as **gerações da dinastia**. Sem pontuação.
+Registro dos grandes feitos, montado a partir do **diário de eventos**: Ambições cumpridas, grandes vitórias, masmorras lendárias e as **gerações da dinastia**. Sem pontuação. No epílogo, ela aparece junto com a **Crônica do mundo**, as grandes notícias que o jogador soube (ver [[Sistema de Notícias/Descrição|Notícias]]).
 
 ---
 
@@ -118,6 +120,8 @@ Registro dos grandes feitos, montado a partir do **diário de eventos**: Ambiç�
 | Itens / Magia | Loot por Rank, Grimório, Pedra Mágica, Artefatos |
 | Construção | Quadro de contratos na Taverna |
 | NPC | NPCs Importantes oferecem missões longas; companheiros por Renome |
+| Religião | Missões do Sumo Sacerdote; peregrinação (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
+| Notícias | Contratos como notícia Local; Crônica do mundo no epílogo (ver [[Sistema de Notícias/Descrição\|Notícias]]) |
 
 ### Perguntas em aberto
 

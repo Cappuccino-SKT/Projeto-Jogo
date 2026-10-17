@@ -20,7 +20,9 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
 - [[Sistema de Recursos/Descrição|Sistema de Recursos]] e [[Sistema de Recursos/Recursos Existentes|Recursos Existentes]]
 - [[Sistema de Tempo/Descrição|Sistema de Tempo]]
+- [[Sistema de Clima e Estações/Descrição|Sistema de Clima e Estações]] — produção por estação, clima do dia, inverno, dia e noite
 - [[Sistema de Viagem/Descrição|Sistema de Viagem]] — viagem pelo Mapa Mundial, encontros, caravanas, patrulhas e névoa
+- [[Sistema de Notícias/Descrição|Sistema de Notícias]] — notícias com atraso, quadro da Taverna, Crônica do mundo
 
 ### Pessoas e política
 
@@ -28,6 +30,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Classe Social/Descrição|Sistema de Classe Social]]
 - [[Sistema de IA/Descrição|Sistema de IA]]
 - [[Sistema de Cultura/Descrição|Sistema de Cultura]] — 6 culturas iniciais
+- [[Sistema de Religião/Descrição|Religião e Fé]] — Devoção, Templo, festivais, heresia, assimilação e Sumo Sacerdote
 - [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
 - [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, dinastia, exércitos
 - [[Sistema de Reputação/Descrição|Sistema de Reputação]] — reputação do jogador com facções, Opinião dos Importantes

@@ -97,6 +97,7 @@ Cada região tem um bioma ligado à sua cultura, 2 a 3 recursos de destaque e fa
 | Tecnocrata | Terras áridas e cânions | Cobre, Ouro, Carvão | Grão, Madeira, Flor Espiritual |
 | Escravista | Litoral quente | Algodão, Especiaria, Folha de Fumo | Ferro, Pedra Mágica, Pedra |
 
+- **Bioma e clima:** o bioma muda a produção por estação, as chances de clima e a lenha no inverno (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - **Recursos básicos** (Água, Madeira, Pedra, Legumes, Galinha, Porcos) existem em quase todos os mapas, com produtividade normal; só o destaque e a escassez mudam por região.
 - **Exemplo de comércio que nasce disso:** a Guerreira tem ferro e cavalos, mas pouca comida; o maior celeiro é a Autoritária, sua inimiga. Ela precisa comprar grão por intermédio da Escravista ou atacar o celeiro (1,3), o que dá motivo real para a guerra na fronteira.
 - **Recursos por Mapa Local:** cada mapa tem de 3 a 6 recursos; os de destaque aparecem em mais mapas da região e com produtividade maior. A lista exata fica em dados, desenhada junto com o mapa no Tiled.
@@ -236,7 +237,7 @@ Nas primeiras versões os personagens são **abstratos**. Os personagens princip
 | O Arquimago | Capital Arcana (8,1) | Ambição "Tornar-se Arquimago" |
 | O Rei Exilado | Vila Livre do Centro (4,3) | Ambição "Retomar o trono"; dono de uma dinastia caída |
 | O Grande Mercador | Cidade Escravista (7,5) | Ambição "Ter a maior fortuna do mundo" |
-| O Sumo Sacerdote | Capital Religiosa (8,4) | Missões de peregrinação e de heresia |
+| O Sumo Sacerdote | Capital Religiosa (8,4) | Missões de peregrinação e de heresia; Bênção e Anátema; escolhe o herdeiro da Religiosa (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 | O Mestre Inventor | Capital Tecnocrata (2,6) | Missões de pesquisa e da pólvora |
 
 ### O que varia por partida

@@ -27,7 +27,7 @@ O atributo booleano **Escravo** (Atributos Gerais) e a categoria **Escravo do jo
 2. Idade
 3. Estágio (estágio de vida: criança, adulto, velho; em anos de jogo, criança 0–3, adulto 4–20 e velho 21+; só Importantes e Controlados têm crianças como NPC, ver [[Sistema de População/Descrição|Sistema de População]])
 4. Facção
-5. Cultura (o NPC nasce com a cultura da cidade; migrantes e escravos capturados mantêm a cultura de origem)
+5. Cultura (o NPC nasce com a cultura da cidade; migrantes e escravos capturados mantêm a cultura de origem; as minorias podem assimilar a cultura dominante, ver [[Sistema de Religião/Descrição|Religião e Fé]])
 6. Função (tipo de trabalho: ver [[Sistema de Produção/Funções e Construções|Funções e Construções]]; também guarda, comerciante, caçador de recompensa etc.)
 7. Classe Social (a qual classe pertence dentro da facção)
 8. Personalidade — conjunto de valores numéricos (0–100): Agressividade, Coragem, Lealdade, Ganância e Sociabilidade, organizados em "modelos" nomeados e reutilizáveis (ex: modelo "Covarde Ganancioso" = Coragem baixa + Ganância alta) para facilitar autoria. Esses valores alimentam diretamente as decisões da IA.

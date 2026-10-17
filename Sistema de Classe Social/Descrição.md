@@ -43,6 +43,9 @@ Para o consumo da cidade funcionar, cada tipo de consumo corresponde a um grupo 
 | Bens de Luxo | Perfumes, Mobília Refinada e Narcóticos |
 | Bens Exclusivos | Bens de luxo de Tier 4 (Licor, Carne Envelhecida, Doce de Baunilha, Joias, Ornamento) |
 | Artefatos | Livro, Joia Mágica e Artefato |
+| Lenha (só no inverno, todas as classes) | Madeira Bruta |
+
+**Lenha no inverno.** No inverno, cada NPC real consome 1 Madeira Bruta a cada 4 dias como aquecimento, dentro do consumo de Materiais e em **todas as classes**, inclusive os Escravos. O bioma multiplica (frio × 2; litoral quente e terras áridas × 0,25). Sem lenha: Felicidade −10 e mais mortes de velhos e crianças (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 
 **Casos especiais.**
 

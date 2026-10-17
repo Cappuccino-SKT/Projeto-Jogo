@@ -30,6 +30,10 @@ Define como os NPCs se recuperam de ferimentos. Hoje existe o **Estado Atual** (
 
 Construção (ver Sistema de Construção). **[Proposta]** Cura os NPCs Controlados do grupo mediante pagamento, com velocidade que depende do nível da construção. Em LOD 2, funciona como a Taverna e o Mercado: serviço agregado para a cidade. Um Mago de Suporte trabalhando nele acelera a cura (ver Sistema de Magia).
 
+### Templo da Religiosa
+
+Nas cidades Religiosas, o Templo cuida dos feridos pobres: a cura dos NPCs comuns fica **25% mais rápida**, e a mortalidade por doença cai 25% (ver [[Sistema de Religião/Descrição|Religião e Fé]]).
+
 ### Estado Inconsciente e Morte
 
 O guarda deixa o alvo **Inconsciente** em vez de Morto na prisão não letal (ver Sistema de Crime e Justiça), então o Inconsciente precisa ser um estado estável.
@@ -58,6 +62,7 @@ Ferimentos por parte do corpo.
 | Crime e Justiça | Estado Inconsciente na prisão não letal |
 | Tempo | Regeneração por hora; Período de Dormir |
 | Eventos | Doenças e epidemias como eventos de Saúde |
+| Religião | Templo da Religiosa acelera a cura e reduz as mortes por doença (ver [[Sistema de Religião/Descrição\|Religião e Fé]]) |
 
 ### Perguntas em aberto
 

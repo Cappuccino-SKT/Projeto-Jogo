@@ -107,6 +107,7 @@ Uma versão mínima jogável, só para validar a parte mais arriscada: a simula�
 - 1 cidade, 1 cadeia de produção (Fazenda → Cozinha → Mercado).
 - NPCs com rotina (dormir, trabalhar, livre), consumo e Felicidade.
 - 1 personagem controlável.
+- Produção por estação e tom de dia e noite (ver [[Sistema de Clima e Estações/Descrição|Clima e Estações]]).
 - Sem guerra, facções, crime nem magia.
 
 **[Proposta]** Marcos, nesta ordem:
