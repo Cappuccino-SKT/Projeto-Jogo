@@ -1,6 +1,6 @@
 > **Histórico.** Este documento é registro do passado; não precisa ser lido para retomar o trabalho. A situação atual está no [[Estado do Projeto]].
 >
-> Segunda revisão geral do projeto, feita em 2026-10-17, quando todos os sistemas P0 e P1 ficaram escritos. Pedido do autor (pergunta D2 da rodada P1-6): revisar o que já existe, achar o que está abstrato, levantar todas as pendências e conferir todas as propostas, para seguir com elas ou mudar. A primeira revisão (2026-10-14) está na [[Revisão do Projeto]], que fica como histórico. O que esta revisão encontrou vira as **rodadas V1 a V5** (seção 7), respondidas no `Respostas.txt` como as outras. **Concluída em 2026-10-17**, com a V5; o passo seguinte é a [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]].
+> Segunda revisão geral do projeto, feita em 2026-10-17, quando todos os sistemas P0 e P1 ficaram escritos. Pedido do autor (pergunta D2 da rodada P1-6): revisar o que já existe, achar o que está abstrato, levantar todas as pendências e conferir todas as propostas, para seguir com elas ou mudar. A primeira revisão (2026-10-14) está na [[Revisão do Projeto]], que fica como histórico. O que esta revisão encontrou vira as **rodadas V1 a V5** (seção 7), respondidas no `Respostas.txt` como as outras. **Concluída em 2026-10-17**, com a V5; o passo seguinte é a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]].
 
 ## 1. Resumo
 
@@ -168,7 +168,7 @@ Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produç
 | **V3** | Pendências de regra | Seção 5, A-10 e A-11; quando fazer as listas da A-12 | **Respondida e aplicada** (ver seção 13) |
 | **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos, mais os Moldes de Conteúdo ("confirmar todas, exceto...") | **Respondida e aplicada** (ver seção 14) |
 | **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos (58 propostas) e o formato da ficha técnica | **Respondida e aplicada** (ver seção 15) |
-| Ficha técnica | Ficha técnica lógica da fatia vertical | Estruturas, dados e regras da vila de 15 NPCs (V2-12) | **Pronta para o código** (FT1 aplicada): [[Ficha Técnica/Fatia Vertical\|Ficha Técnica: Fatia Vertical]]; a rodada FT2 decide o início |
+| Ficha técnica | Ficha técnica lógica da fatia vertical | Estruturas, dados e regras da vila de 15 NPCs (V2-12) | **Pronta para o código** (FT1 aplicada): [[Ficha Logica/Fatia Vertical\|Ficha Lógica: Fatia Vertical]]; a rodada FT2 decide o início |
 | **C1 a C3** | Rodadas de conteúdo (ideia do autor na V3-13: primeiro os moldes) | C1 tecnologias e marcos; C2 feitiços; C3 contratos, missões, Ambições e eventos | Mais para frente |
 
 Depois da V5: atualizar o [[Estado do Projeto]], marcar esta revisão como concluída e começar a **ficha técnica lógica da fatia vertical**.
@@ -298,7 +298,7 @@ Todas as 12 perguntas: **Seguir sugestão**. As partes abstratas A-1 e A-3 a A-9
 | Grupo | Decisão do autor | O que foi feito |
 |---|---|---|
 | V5-1 a V5-8 (58 propostas) | Confirmar todas | Marcações retiradas de todos os documentos; IT-4: capacidade das construções (100, 200 ou 400 × nível pelo porte); IT-5: Saciedade pelo Tier (60, 80, 90, 100); os 4 focos antigos do Narrador trocados pelos 4 narradores da V3-5 |
-| V5-9 Formato da ficha técnica | Seguir sugestão | Primeira versão da [[Ficha Técnica/Fatia Vertical\|Ficha Técnica: Fatia Vertical]] e a rodada FT1 |
+| V5-9 Formato da ficha técnica | Seguir sugestão | Primeira versão da [[Ficha Logica/Fatia Vertical\|Ficha Lógica: Fatia Vertical]] e a rodada FT1 |
 
 **Revisão concluída.**
 

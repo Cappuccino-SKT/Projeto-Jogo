@@ -8,3 +8,6 @@
 Thumbs.db
 .DS_Store
 desktop.ini
+
+# O que o compilador gera (CMake, Ninja, bibliotecas baixadas)
+build/

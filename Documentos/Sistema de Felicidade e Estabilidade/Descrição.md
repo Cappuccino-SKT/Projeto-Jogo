@@ -43,7 +43,7 @@ A **Felicidade-alvo** de cada classe é **50 mais as contribuições** abaixo. C
 
 O resultado é limitado entre 0 e 100.
 
-**Fatia vertical** (rodada FT1-2): só 4 fatores (Consumo, Desemprego e renda, Moradia, Eventos), com as contas na [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]] (regra 4.8).
+**Fatia vertical** (rodada FT1-2): só 4 fatores (Consumo, Desemprego e renda, Moradia, Eventos), com as contas na [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] (regra 4.8).
 
 **Guerra na cidade** (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]]): ocupada −20; conquistada −15 (some em 1 ano); saqueada −30 por 1 ano (−40 se também ocupada); cerco com fome. São modificadores próprios, fora do limite dos eventos duradouros. A **superextensão** tira 3 de Estabilidade da facção por cidade conquistada há menos de 1 ano (ver [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]]).
 

@@ -61,13 +61,14 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Objetivo e Progressão/Descrição|Objetivo e Progressão]] — Ambições, Renome, títulos, missões, masmorras
 - [[Sistema de Início de Jogo/Descrição|Sistema de Início de Jogo]]
 - [[Interface/Descrição|Interface e Controles]] — HUD personalizável, painéis, notificações
-- [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]] — estruturas, dados e regras da primeira versão jogável
+- [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] — estruturas, dados e regras da primeira versão jogável
+- [[Ficha Logica/Descrição|Ficha Lógica]] — o modelo das fichas de cada sistema e a ordem em que são feitas
 - [[Arquitetura/Descrição|Arquitetura]] — decisões técnicas e fatia vertical; [[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]] — fichas padrão de cada tipo de conteúdo
 - [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]] — programas, especificação da arte, ordem de produção e peso da arte
 
 ## Próximos passos
 
-O design está completo e revisado. A fase agora é o **código da fatia vertical**, marco a marco, seguindo a [[Ficha Técnica/Fatia Vertical|Ficha Técnica]].
+O design está completo e revisado. A fase agora é o **código da fatia vertical**, marco a marco, seguindo a [[Ficha Logica/Fatia Vertical|Ficha Lógica]]. O caminho de cada sistema é: este documento → a ficha dele em `Ficha Logica/` → as regras em `Codigo/` → o programa em `Jogo/`.
 
 ## Primeira meta de desenvolvimento
 
@@ -75,4 +76,4 @@ Uma **fatia vertical**: 1 cidade, 1 cadeia de produção (Fazenda → Cozinha �
 
 ## Estado atual
 
-A situação geral e os números-chave estão no [[Estado do Projeto]]. Para retomar o trabalho, veja a [[Retomada]]. As revisões antigas estão na pasta `Histórico/` ([[Revisão do Projeto]] e [[Revisão Completa]]).
+A situação geral e os números-chave estão no [[Estado do Projeto]]. Para retomar o trabalho, veja a [[Retomada]]. As revisões antigas estão na pasta `Histórico/`, dentro de `Documentos/` ([[Revisão do Projeto]] e [[Revisão Completa]]).

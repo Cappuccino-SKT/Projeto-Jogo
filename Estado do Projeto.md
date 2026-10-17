@@ -2,7 +2,7 @@
 
 ## Fase atual
 
-**Começo do código: marco 0.** O design está completo e revisado, e a [[Ficha Técnica/Fatia Vertical|Ficha Técnica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco.
+**Começo do código: marco 0.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco.
 
 ## O que está pronto
 
@@ -45,7 +45,7 @@
 
 ## Histórico
 
-As revisões ficam na pasta `Histórico/`, e cada rodada está no Git:
+As revisões ficam na pasta `Documentos/Histórico/`, e cada rodada está no Git:
 
 - [[Revisão do Projeto]] (2026-10-14);
 - [[Revisão Completa]] (2026-10-17, rodadas V1 a V5 e IP1 a IP3).

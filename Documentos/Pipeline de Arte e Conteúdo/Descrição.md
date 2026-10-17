@@ -155,9 +155,8 @@ O jogo é feito em **C++**. Outras linguagens podem ajudar, mas nada essencial d
 
 ### Onde guardar
 
-- Tudo no **repositório do código**, criado quando a programação começar: `assets/` com as fontes (arquivos do Pixelorama e do Tiled) e `data/` com o que o jogo lê.
+- Tudo na pasta `Jogo/` deste repositório (rodada FT1-7 e organização de 2026-10-17): `Jogo/assets/` com as fontes (arquivos do Pixelorama e do Tiled) e `Jogo/data/` com o que o jogo lê.
 - **Sem Git LFS** (complemento do Git para arquivos grandes): pixel art é leve.
-- Este repositório continua só com os documentos.
 
 ### Parte técnica
 

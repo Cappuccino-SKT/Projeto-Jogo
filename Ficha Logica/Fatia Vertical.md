@@ -2,7 +2,7 @@
 >
 > **Ficha técnica lógica da fatia vertical**, primeira versão (2026-10-17), no formato decidido na rodada V5-9. Traduz os sistemas em **estruturas, dados e regras** que o código vai seguir, em linguagem simples e sem código de verdade. As escolhas novas foram decididas na rodada FT1 (parte 8).
 
-# Ficha Técnica: Fatia Vertical
+# Ficha Lógica: Fatia Vertical
 
 **Descrição geral**
 
@@ -141,7 +141,7 @@ O **personagem do jogador** tem também os componentes **Controlado** (Fome de 0
 
 ## 2. Arquivos de dados
 
-Tudo o que é conteúdo fica fora do código ([[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]]):
+Tudo o que é conteúdo fica fora do código, na pasta `Jogo/` ([[Arquitetura/Moldes de Conteúdo|Moldes de Conteúdo]]):
 
 | Arquivo | Formato | O que tem na fatia |
 |---|---|---|
@@ -400,9 +400,11 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | FT1-4 Mapa e câmera | Mapa de **64 × 64 tiles**; zoom de 2x, 3x e 4x (padrão 3x, cerca de 33 × 19 tiles na tela); câmera com WASD ou setas, roda do mouse para o zoom, arrastar com o botão do meio; lotes de 4 × 4 (pequeno), 6 × 6 (médio) e 8 × 8 tiles (grande); um campo de Grão, um poço e um bosque |
 | FT1-5 Ordem do dia | Virada às 0h; a ordem da parte 3 fica no `data/regras.json` (campo `ordem_do_dia`), para ser trocada nos testes sem mexer no código |
 | FT1-6 Teste sem tela | `jogo --simular 64 --semente 1` grava o `relatorio.csv` (uma linha por dia) e termina com PASSOU ou FALHOU e o motivo ("fome por 4 dias seguidos no dia 37"); a mesma semente dá o mesmo relatório |
-| FT1-7 Ambiente | VS Code com as extensões grátis "C/C++" e "CMake Tools"; depurador gdb (vem com o MinGW); primeiro código: um "olá, janela" com o SDL3, compilado pelo CMake; pasta `codigo/` no mesmo repositório |
+| FT1-7 Ambiente | VS Code com as extensões grátis "C/C++" e "CMake Tools"; depurador gdb (vem com o MinGW); primeiro código: um "olá, janela" com o SDL3, compilado pelo CMake; no mesmo repositório (depois organizado em `Codigo/` e `Jogo/`, ver [[Arquitetura/Descrição|Arquitetura]]) |
 
 **Rodada FT2:** o código foi liberado marco a marco. As bibliotecas entram por marco, e os nomes são em português, sem acento e descritivos ([[Arquitetura/Descrição|Arquitetura]]).
+
+**Organização das pastas (2026-10-17):** esta ficha é o mapa geral da fatia. Cada sistema ganha a sua ficha nesta pasta, no modelo da [[Ficha Logica/Descrição|Ficha Lógica]], pouco antes do marco que o usa.
 
 ## Ligação com outros sistemas
 

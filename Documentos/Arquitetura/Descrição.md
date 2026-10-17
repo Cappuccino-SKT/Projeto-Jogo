@@ -102,7 +102,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Ordem de trabalho
 
-**Decisão do autor:** primeiro a documentação, depois a ficha técnica lógica e só então o código. Em 2026-10-17 (rodada FT2-1), com a ficha da fatia vertical pronta, o código foi liberado, **marco a marco**: um problema de design achado no código volta como pergunta numa rodada.
+**Decisão do autor:** primeiro a documentação, depois a ficha lógica e só então o código. Em 2026-10-17 (rodada FT2-1), com a ficha da fatia vertical pronta, o código foi liberado, **marco a marco**: um problema de design achado no código volta como pergunta numa rodada.
 
 **Guerra:** depois que o mundo funcionar, a guerra entra primeiro pelo **cálculo rápido de forças** (o mundo já tem guerras e o jogador pode resolvê-las automaticamente). O **Mapa de Guerra** vem depois, como um marco próprio, porque é um jogo de estratégia inteiro (ver [[Sistema de Guerra/Descrição|Sistema de Guerra]] e [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
 
@@ -110,15 +110,20 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 - **Editor:** VS Code, com as extensões grátis "C/C++" e "CMake Tools" (autocompletar, botão de compilar, depurador).
 - **Depurador:** gdb, que vem com o MinGW: para o programa numa linha e mostra os valores.
-- **Primeiro código:** um "olá, janela" com o SDL3, compilado pelo CMake (marco 0 da [[Ficha Técnica/Fatia Vertical|Ficha Técnica]]).
-- **Pasta:** `codigo/`, no mesmo repositório da documentação.
+- **Primeiro código:** um "olá, janela" com o SDL3, compilado pelo CMake (marco 0 da [[Ficha Logica/Fatia Vertical|Ficha Lógica]]).
+- **Pastas** (organização de 2026-10-17), todas no mesmo repositório:
+  - `Documentos/`: o design;
+  - `Ficha Logica/`: cada sistema virado lógica de programação, feito pouco antes do marco que o usa;
+  - `Codigo/`: as regras em C++, uma biblioteca que **nunca abre janela nem desenha**. Assim o teste sem tela (`--simular`) roda só com ela, e cada regra pode ser testada sozinha;
+  - `Jogo/`: o programa (janela, desenho, entrada, interface), que chama o `Codigo/`; também guarda `data/` e `assets/`;
+  - `CMakeLists.txt` na raiz, que junta as duas; a pasta `build/` fica fora do Git e do Obsidian.
 
 ### Jeito de trabalhar e nomes no código (rodadas FT2-3 e FT2-4)
 
 - **Um marco por vez:** cada marco tem uma branch e um pull request.
   - O assistente escreve em passos pequenos, e cada passo compila e roda.
   - O autor compila e roda no PC dele, com os comandos prontos, e conta o que viu.
-  - Cada marco termina com um resumo simples em `codigo/LEIA-ME.md`.
+  - Cada marco termina com um resumo simples em `Jogo/LEIA-ME.md`.
 - **Nomes em português, sem acento:** `Cidade`, `Construcao`, `precoBase`. Os comentários também são em português.
   - **Ideia do autor:** nenhum nome abstrato demais. O nome da variável, da função ou da classe diz o motivo dela: `horasTrabalhadasNoCiclo`, não `h` nem `valor`; `calcularPrecoBaseDosItens`, não `processar`.
   - As palavras do C++ (`int`, `vector`, `for`) e os nomes das bibliotecas continuam como são.
