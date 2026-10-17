@@ -1,4 +1,4 @@
-> Resumo compacto do projeto, atualizado em 2026-10-17 (rodadas P0-5 a P1-6: P0 e P1 completos; revisão completa aberta, rodada V1 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
+> Resumo compacto do projeto, atualizado em 2026-10-17 (P0 e P1 completos; revisão V1 aplicada; rodada IP1 enviada). Serve para retomar o trabalho sem reler tudo. As descrições completas ficam em cada pasta de sistema (ver [[Descrição do Projeto]]). **Para saber por onde recomeçar, veja a [[Retomada]].**
 
 ## Resolvido
 
@@ -41,7 +41,7 @@
 - **Rank** (0 a 5) para armas, equipamentos e artefatos; **Tier** (0 a 4) para materiais e consumo. Armadura = 3 peças separadas (Leve/Média/Pesada). Nomes unificados e canvases atualizados.
 - Classe Social: Realeza consome Artefatos; mapeamento de consumo para itens (provisório).
 - **Sem meses:** manutenção e produção em LOD 2 por estação (16 dias). O Construtor fornece a manutenção.
-- Fruta entrou nos recursos; Peixe descartado. Novas construções previstas: Mercado, Taverna, Quartel, Prisão, Casa da Moeda e Templo.
+- Fruta entrou nos recursos; o Peixe, descartado antes, **voltou na revisão V1-4** (Pesqueiro). Novas construções previstas: Mercado, Taverna, Quartel, Prisão, Casa da Moeda e Templo.
 - Início de Jogo: 7 estilos, personalizado com orçamento de pontos, bônus só iniciais, grupo por estilo.
 - Cura: regeneração por descanso, Medicamento acelera, Hospital cura o grupo.
 - Arquitetura: C++20 com g++/CMake/Ninja já instalados; stack proposta (SDL3, OpenGL 3.3, EnTT, JSON); primeira meta = fatia vertical.
@@ -237,7 +237,8 @@
 
 **Revisão completa (2026-10-17)** — ver [[Revisão Completa]]
 - Pedida pelo autor ao fim do P1: estado de cada documento, 21 inconsistências, 12 partes abstratas (a principal: **não há base numérica da economia**), pendências por sistema e cerca de 128 propostas a confirmar.
-- Resolvida em 5 rodadas: V1 (inconsistências e faxina), V2 (economia numérica), V3 (pendências e listas), V4 e V5 (propostas).
+- **V1 aplicada:** os 13 documentos antigos no formato padrão (a Cidade virou documento de entrada); fórmula de dano única (Combate); animais como itens (Galinha, Porco, Ovelha, Vaca, Cavalo); **a pesca volta** (Pesqueiro, Pescador); **inventário único por cidade**, com pilhas e capacidade somada das construções; nomes padronizados (Mosquete, Machado Curto, Peças de Argila...); **Fome** (cai 100 em 36 h), Felicidade individual e noites sem dormir nos Controlados; Templo com a tabela geral de vagas (2 Templos nas cidades de nível 4); crime de Sedição.
+- **Itens e Produção serão reformulados** (pedido do autor): IP1 (padronização da produção), IP2 (nomes e lista dos itens no contexto do mundo), IP3 (insumos de cada produto). Depois: V2 (economia numérica), V3 (pendências), V4 e V5 (propostas).
 
 **Ideia futura: Títulos de Nobreza** — mesma estrutura de títulos em todas as culturas; muda por cultura o requisito, os privilégios e as obrigações; tudo modelável por facção e alterável pelas leis (ver [[Objetivo e Progressão/Descrição|Objetivo e Progressão]]).
 
@@ -249,7 +250,7 @@
 - **Facção:** detalhes da assembleia.
 - **Crime:** loja ilegal do jogador; tipos de missão de confiança.
 - **Cura:** quando o Inconsciente vira Morto.
-- **Itens:** Tier e Rank provisórios dos itens a cadastrar; peça de armadura Média; revisar o mapeamento Luxo/Exclusivo por Tier.
+- **Itens e Produção:** em reformulação nas rodadas IP1 a IP3 (padronização, nomes, insumos); peça de armadura Média; mapeamento Luxo/Exclusivo por Tier; Aço Mágico em duas construções (I-22).
 - **Início de Jogo:** custo em pontos; bônus exato do estilo Mercador.
 - **Eventos:** valores a testar (chances, limite de negativos, tensão, histerese); nomes e foco final dos narradores e se há controle de intensidade; categorias e efeitos extras; doença em LOD 0; formato do diário; lista inicial de eventos.
 - **Combate:** valores a testar (dano, acerto, Intervalo de Ataque, vantagens, raio de alerta, Medo, evolução, limite de combatentes); tabela de bônus e custo do encantamento; confirmar a regra de armadura mista.
@@ -295,11 +296,13 @@
 | P1 | Guerra e Campanha; Batalha; Diplomacia | Escrito |
 | P1 | Religião; Clima e Estações; Notícias | Escrito |
 | P1 | Efeitos de itens e Escravidão | Escrito |
-| Revisão | **Revisão completa (V1 a V5)** | **V1 enviada, aguardando respostas** |
+| Revisão | Revisão completa: V1 | Aplicada |
+| Revisão | **Itens e Produção (IP1 a IP3)** | **IP1 enviada, aguardando respostas** |
+| Revisão | V2, V3, V4 e V5 | A fazer |
 | P2 | Áudio, tutorial, configurações, localização, modding, conquistas | Depois |
 | Futuro | Títulos de Nobreza (requisitos, privilégios e obrigações por cultura, modeláveis por facção e lei) | Ideia registrada |
 
-**Ordem:** o P0 e o P1 estão completos. Agora a **revisão completa** ([[Revisão Completa]]): responder a V1 (inconsistências e faxina) → V2 (base numérica da economia) → V3 (pendências e listas) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → só então a programação. Os detalhes da rodada pendente estão na [[Retomada]].
+**Ordem:** o P0 e o P1 estão completos e a V1 da revisão foi aplicada. Agora: IP1 (padronização da produção) → IP2 (nomes dos itens) → IP3 (insumos) → V2 (economia numérica) → V3 (pendências) → V4 e V5 (propostas) → **ficha técnica lógica da fatia vertical** → programação. Os detalhes da rodada pendente estão na [[Retomada]] e o plano na [[Revisão Completa]].
 
 ## Como estamos trabalhando
 

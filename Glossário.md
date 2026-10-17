@@ -32,6 +32,7 @@
 | **Não-Controlado** | A maioria dos NPCs; agido pela IA |
 | **Importante** | NPC com importância para o mundo; nunca é alistado |
 | **Estado Atual** | Vivo, Ferido, Inconsciente ou Morto, derivado da Vida |
+| **Fome** | 0 a 100, só para Controlados e Importantes; cai 100 em 36 horas; a comida devolve pela Saciedade |
 | **Classe Social** | Realeza, Nobreza, Rico, Civil ou Escravo. [[Sistema de Classe Social/Descrição\|Classe Social]] |
 | **Esquadrão** | Unidade de soldados; entidade própria, **não** um NPC. Sem classe social |
 | **Criatura** | Animal ou monstro; entidade leve, **não** um NPC. [[Sistema de Combate/Descrição\|Combate]] |
@@ -78,6 +79,9 @@
 | **Vaga** | Posto de trabalho de uma construção, por nível. [[Sistema de Trabalho e Propriedade/Descrição\|Trabalho e Propriedade]] |
 | **Dono** | Quem possui uma construção: Cidade, Facção, Rico ou jogador |
 | **Empresa** | Construção de produção ou comércio pertencente a um Rico |
+| **Animal (item)** | Tipo de Matéria-Prima: Galinha, Porco, Ovelha, Vaca e Cavalo; o Pasto cria, o Rancho usa, o Açougue gasta |
+| **Pesqueiro** | Construção Braçal que extrai Peixe nos mapas com rio, lago ou litoral |
+| **Pilha** | Item + dono + quantidade; o jeito como o inventário guarda materiais e bens. [[Sistema de Inventário/Descrição\|Inventário]] |
 | **Riqueza média** | Dinheiro médio por classe em uma cidade; substitui o dinheiro individual de cada NPC |
 | **Relíquia / Artefato lendário** | Artefato genérico (Rank 1 a 3) / único, com efeito próprio (Rank 4 e 5). [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]] |
 | **Livro Sagrado** | Livro exigido nas revistas das facções com a lei "Livro Sagrado obrigatório" (Religiosa) |

@@ -39,14 +39,15 @@ Os nomes ficam para a história do jogo.
 
 Cobertura = (Sacerdotes × 20) ÷ NPCs reais da cidade, até 100%.
 
-**[Proposta]** Vagas de Sacerdote por nível do Templo:
+Vagas de Sacerdote por nível do Templo: a **tabela geral de vagas** do [[Sistema de Trabalho e Propriedade/Descrição|Trabalho e Propriedade]] (decisão do autor na revisão V1-10):
 
 | Nível do Templo | 1 | 2 | 3 | 4 | 5 |
 |---|---|---|---|---|---|
-| Sacerdotes | 1 | 2 | 5 | 10 | 15 |
-| Atende (NPCs reais) | 20 | 40 | 100 | 200 | 300 |
+| Sacerdotes | 2 | 3 | 5 | 7 | 10 |
+| Atende (NPCs reais) | 40 | 60 | 100 | 140 | 200 |
 
-*Exemplo:* cidade nível 3 (100 NPCs reais) com Templo nível 3 (5 Sacerdotes) = 100% de cobertura. A mesma cidade com Templo nível 2 tem 40%.
+- As cidades de **nível 4** (as capitais) podem ter **2 Templos**; as coberturas se somam.
+- *Exemplo:* cidade nível 3 (100 NPCs reais) com Templo nível 3 (5 Sacerdotes) = 100% de cobertura; com Templo nível 2, 60%. Uma capital (300 NPCs) com 1 Templo nível 5 tem 67% (acima do limite de 50% da Devoção Alta); com o 2º Templo, 100%.
 
 - **Arcana:** na Torre Arcana, cada Mago que trabalha nela conta como um Sacerdote para a cobertura (o culto é a própria magia). **[Proposta]**
 - **Tecnocrata:** Devoção Nenhuma; não há cobertura nem fator Religião.
@@ -178,7 +179,7 @@ O **Sumo Sacerdote** é o Importante fixo da Capital Religiosa (8,4).
 |---|---|
 | Cultura | Uma fé por cultura e a Devoção; festivais próprios; lei de Tolerância desejada; assimilação das minorias |
 | Felicidade e Estabilidade | Fator Religião (−5 a +10); festivais como eventos duradouros; Perseguição: −15 nas minorias e Controle +5 |
-| Construção | Templo (Torre Arcana e Laboratório fazem o papel); vagas de Sacerdote por nível |
+| Construção | Templo (Torre Arcana e Laboratório fazem o papel); vagas da tabela geral; 2 Templos nas cidades de nível 4 |
 | Trabalho e Propriedade | Função Sacerdote (Civil) e gerente Nobre; oferendas no ciclo do dinheiro |
 | Facção | Lei de Tolerância religiosa; escolha do herdeiro pelo Sumo Sacerdote na Religiosa |
 | Crime e Justiça | Heresia como crime cultural (gravidade 3 ou 5) |

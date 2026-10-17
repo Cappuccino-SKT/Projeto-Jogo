@@ -1,3 +1,5 @@
+> **Em reformulação:** o autor decidiu (revisão V1-2, V1-7 e V1-8) padronizar a produção, reformular os nomes e definir os insumos de cada produto em rodadas próprias (IP1 a IP3). Os erros do canvas (Espada, Rifle de Aço, itens sem produtor, Armadura Leve) serão resolvidos nelas.
+>
 > Rascunho gerado a partir do canvas de produção. **[Proposta]** = sugestão ainda não decidida. A Função de cada construção, a categoria de produção e os serviços públicos abaixo são propostas para o autor revisar.
 
 ## Funções e Construções
@@ -12,21 +14,22 @@ Cada construção de produção tem níveis de 1 a 5. A coluna de produtos mostr
 
 | Construção | Função | Categoria de produção | Produtos por nível |
 |---|---|---|---|
-| Armeiro | Armeiro | Especialista | **N1:** Musket de Cobre, Munição de Canhão de Mão; **N2:** Musket de Aço; **N3:** Canhão de Guerra, Munição de Canhão de Guerra; **N4:** Rifle de Aço; **N5:** Rifle de Aço Magico, Canhão de Guerra Moderno |
+| Armeiro | Armeiro | Especialista | **N1:** Mosquete de Cobre, Munição de Arma de Fogo; **N2:** Mosquete de Aço; **N3:** Canhão de Guerra, Munição de Canhão de Guerra; **N4:** Rifle de Aço; **N5:** Rifle de Aço Mágico, Canhão de Guerra Moderno |
 | Artesão | Artesão | Especialista | **N1:** Cajado Simples; **N2:** Fumo; **N3:** Cajado Arcano, Ornamentos; **N4:** Joias; **N5:** Cajado Moderno, Anéis Magicos |
-| Açougue | Açougueiro | Manufaturada | **N1:** Carne; **N2:** Osso; **N3:** Couro Bruto |
+| Açougue | Açougueiro | Manufaturada | **N1:** Pedaço de Carne; **N2:** Ossos; **N3:** Couro Bruto (gasta o animal) |
 | Carpinteiro | Carpinteiro | Manufaturada | **N1:** Tábua, Arco, Munição de Arco; **N2:** Móveis de Madeira, Arco Recurvo; **N3:** Arco Longo, Besta Leve, Munição de Besta; **N4:** Móveis Refinados, Besta; **N5:** Besta Pesada |
 | Costureiro | Costureiro | Manufaturada (níveis 1–3) e Especialista (4–5) | **N1:** Couro Refinado, Roupa de Couro; **N2:** Tecido, Roupas de Tecido; **N3:** Armadura Leve; **N4:** Armadura Media; **N5:** Sela |
 | Cozinheiro | Cozinheiro | Manufaturada | **N1:** Pão; **N2:** Sopa; **N3:** Ração Militar; **N4:** Queijo; **N5:** Linguiça |
 | Destilaria | Destilador | Manufaturada | **N1:** Cerveja; **N3:** Licor; **N4:** Perfume; **N5:** Pó Espiritual |
 | Fazenda | Fazendeiro | Braçal | **N1:** Grão, Legumes, Algodão, Fruta, Especiaria, Folha Fumo, Flor Espiritual |
 | Ferreiro | Ferreiro | Manufaturada (níveis 1–3) e Especialista (4–5) | **N1:** Lança de Ferro, Machado de Ferro, Clava de Ferro, Escudo de Ferro; **N2:** Grilhões; **N3:** Lança de Aço, Machado de Aço, Clava de Aço, Escudo de Aço, Armadura Pesada Ferro; **N4:** Armadura Pesada Aço; **N5:** Lança de Aço Magico, Machado de Aço Magico, Clava de Aço Magico, Escudo de Aço Magico, Armadura Pesada Aço Magico |
-| Metalurgia | Metalúrgico | Manufaturada | **N1:** Barra de Ferro; **N2:** Barra de Cobre; **N3:** Barra de Aço; **N4:** Barra de Ouro; **N5:** Barra de Aço Magico |
+| Metalurgia | Metalúrgico | Manufaturada | **N1:** Barra de Ferro; **N2:** Barra de Cobre; **N3:** Barra de Aço; **N4:** Barra de Ouro; **N5:** Barra de Aço Magico (a Forja Arcana também faz Aço Mágico: ver I-22 na [[Revisão Completa]]) |
 | Misturador | Misturador | Manufaturada | **N1:** Fertilizante; **N4:** Pó Explosivo |
-| Pasto | Rancheiro | Braçal | **N1:** Galinha, Porco, Ovelha, Vaca, Cavalo |
-| Pedreira | Pedreiro | Manufaturada | **N1:** Tijolo; **N2:** Bens de Argila |
-| Posto de Coleta | Coletor | Braçal | **N1:** Água, Pedra Bruta, Argila, Madeira, Ferro Bruto, Carvão, Cobre Bruto, Ouro Bruto, Pedra Magica |
-| Rancho | Rancheiro | Braçal | **N1:** Dejetos Animais, Ovo, Lã, Leite |
+| Pasto | Rancheiro | Braçal | **N1:** Galinha, Porco, Ovelha, Vaca, Cavalo (itens do tipo Animal; revisão V1-3) |
+| Pedreira | Pedreiro | Manufaturada | **N1:** Tijolos de Pedra; **N2:** Peças de Argila |
+| Posto de Coleta | Coletor | Braçal | **N1:** Água, Pedra Bruta, Argila, Madeira, Ferro Bruto, Carvão, Cobre Bruto, Ouro Bruto, Pedra de Mana Bruta |
+| Rancho | Rancheiro | Braçal | **N1:** Dejetos Animais, Saco de Ovos, Fardo de Lã, Balde de Leite (usa os animais do estoque sem gastá-los) |
+| Pesqueiro | Pescador | Braçal | **N1:** Peixe (mapas com rio, lago ou litoral; revisão V1-4) |
 
 As categorias vêm do [[Sistema de Produção/Descrição|Sistema de Produção]]: **Braçal** (a partir do mapa), **Manufaturada** (transforma produto básico) e **Especialista** (item de alto nível). O Ferreiro e o Costureiro mudam de categoria nos níveis altos, como o Sistema de Produção já prevê para o Ferreiro e o Alfaiate.
 

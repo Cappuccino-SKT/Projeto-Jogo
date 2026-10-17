@@ -29,7 +29,7 @@ São **9 tipos fixos**. A qualidade vem do **Rank** do equipamento entregue no k
 | Arqueiros | Arco, armadura leve, Munição de Arco | Tiro de longe, barato | 1 |
 | Besteiros | Besta, armadura média, Munição de Besta | Tiro forte contra pesados | 1 |
 | Cavalaria | Cavalo, Sela, Lança ou Espada, armadura média | Carga e perseguição | 1 |
-| Atiradores | Musket, armadura leve, Munição de Canhão de Mão | Tiro devastador e lento | 2 |
+| Atiradores | Mosquete, armadura leve, Munição de Arma de Fogo | Tiro devastador e lento | 2 |
 | Artilharia | Canhão de Guerra, Munição de Canhão de Guerra | Brecha e dano em área | 2 |
 | Magos | Cajado, Pedra de Mana | Dano em área ou suporte | 1 |
 

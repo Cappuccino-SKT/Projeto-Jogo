@@ -26,6 +26,7 @@ Quase tudo aqui é configurável **por lei da facção**: cada facção decide o
 | Fuga ou ajuda a escravo (5 na Escravista; ver [[Sistema de Escravidão/Descrição\|Sistema de Escravidão]]) | 3 |
 | Assassinato | 5 |
 | Traição | 5 |
+| Sedição (pedir mudança de lei onde a lei proíbe; pensamento extremo da Autoritária) | 3 |
 | Heresia (ato contra a fé oficial; ver [[Sistema de Religião/Descrição\|Religião e Fé]]) | 3 (5 com a lei de Perseguição) |
 | Heresia sem o Livro Sagrado, na primeira vez na estação (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) | 2 |
 

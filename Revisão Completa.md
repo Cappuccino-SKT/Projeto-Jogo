@@ -10,7 +10,7 @@
 | Marcações **[Proposta]** (sugestões ainda não confirmadas) | cerca de 128 |
 | Marcações **[Em aberto]** e **[Refinar depois]** no texto | cerca de 44 |
 | Itens nas listas "Perguntas em aberto" | cerca de 119 (cerca de 30 são só "valores a testar") |
-| Inconsistências encontradas nesta revisão | 21 (seção 3) |
+| Inconsistências encontradas nesta revisão | 22 (seção 3) |
 | Partes abstratas que travam a ficha técnica | 12 (seção 4) |
 
 **Conclusão em uma frase:** as **regras** dos sistemas estão quase todas escritas, mas a **base numérica da economia** (preços, receitas, consumo, salários e custos) não existe em nenhum documento, e a ficha técnica da fatia vertical não pode começar sem ela. Os 13 documentos antigos também precisam de uma faxina de formato.
@@ -75,7 +75,8 @@ Contradições entre documentos, ou textos que ficaram para trás depois de uma 
 | I-18 | Itens × Combate | A regra da armadura mista está escrita duas vezes, como proposta, nos dois documentos | Confirmar uma vez (V4) e deixar só no Combate |
 | I-19 | Escravidão × Combate | A rebelião de escravos usava Esquadrões no combate local | **Já corrigido nesta revisão:** combate local até 40; acima disso, Mapa de Guerra com 1 Esquadrão por NPC escravo |
 | I-20 | Cultura × Crime | O pensamento extremo da Autoritária diz "pedir mudança de lei é crime", mas o crime não está na lista | Acrescentar o crime "Sedição" (gravidade 3) só nas facções com essa lei |
-| I-21 | Itens × Funções e Construções | A lista de itens diz que as peças Leves e Pesadas são de metal e a Média é de couro (Costureiro); o canvas põe a "Armadura Leve" no Costureiro nível 3 e só a Pesada no Ferreiro | V1-7 |
+| I-21 | Itens × Funções e Construções | A lista de itens diz que as peças Leves e Pesadas são de metal e a Média é de couro (Costureiro); o canvas põe a "Armadura Leve" no Costureiro nível 3 e só a Pesada no Ferreiro | IP1-2 |
+| I-22 | Funções e Construções × Construção | A Metalurgia nível 5 faz Barra de Aço Mágico, e a Forja Arcana também faz Aço Mágico (com Mago de Ofício) | IP1-2 (sugestão: só a Forja Arcana) |
 
 ## 4. Partes abstratas
 
@@ -153,12 +154,33 @@ A lista completa, proposta por proposta, com a recomendação, vai nas rodadas *
 
 ## 7. Plano das rodadas de revisão
 
-| Rodada | Tema | O que resolve |
-|---|---|---|
-| **V1** | Inconsistências e faxina dos documentos | Seção 3 (as que pedem escolha) e o formato dos 13 documentos antigos |
-| **V2** | Base numérica da economia e da fatia vertical | A-1 a A-9: moeda, preços, receitas, consumo, construções, recursos, salários, rotina, IA simples e tick |
-| **V3** | Pendências de regra e listas de conteúdo | Seção 5 e A-10 a A-12 |
-| **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos |
-| **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos |
+Plano refeito depois da V1: o autor pediu rodadas próprias de **Itens e Produção** (IP1 a IP3) antes da economia numérica.
+
+| Rodada | Tema | O que resolve | Estado |
+|---|---|---|---|
+| **V1** | Inconsistências e faxina dos documentos | Seção 3 e o formato dos 13 documentos antigos | **Respondida e aplicada** (ver seção 8) |
+| **IP1** | Padronização da produção | Estrutura da receita, família de cada construção, escada de níveis, Rank do produto, escala das unidades, tempo, ordens de produção, limites | **Enviada** |
+| **IP2** | Nomes e lista final dos itens | I-9 (resto), I-10, I-11, I-13; Pedra Mágica × Pedra de Mana; peça Média | A fazer |
+| **IP3** | Insumos de cada produto | A-2 (receitas); nova Funções e Construções | A fazer |
+| **V2** | Base numérica da economia e da fatia vertical | A-1 e A-3 a A-9: moeda, preços (a partir das receitas), consumo, construções, recursos, salários, rotina, IA simples e tick | A fazer |
+| **V3** | Pendências de regra e listas de conteúdo | Seção 5 e A-10 a A-12 | A fazer |
+| **V4** | Confirmação das propostas, parte 1 | Facção, Mundo, Religião, Pipeline, Clima, Arquitetura e Efeitos ("confirmar todas, exceto...") | A fazer |
+| **V5** | Confirmação das propostas, parte 2 | Todos os outros documentos | A fazer |
 
 Depois da V5: atualizar o [[Estado do Projeto]], marcar esta revisão como concluída e começar a **ficha técnica lógica da fatia vertical**.
+
+## 8. Resultado da V1 (2026-10-17)
+
+| Pergunta | Decisão do autor | O que foi feito |
+|---|---|---|
+| V1-1 Faxina e correções óbvias | Seguir sugestão | Os 13 documentos antigos ganharam o formato padrão; aplicadas I-1, I-6, I-8, I-12, I-15, I-17, I-18 e I-20 (crime de Sedição); a Cidade virou documento de entrada |
+| V1-2 Armas sem produtor | Reformular Itens e Produção em rodadas próprias | Rodadas IP1 a IP3 |
+| V1-3 Animais como itens | Seguir sugestão | Tipo Animal; Pasto, Rancho e Açougue; Cavalo como montaria e carga |
+| V1-4 Peixe | **A pesca volta** (o mundo tem portos) | Recurso Peixe, construção Pesqueiro, Função Pescador |
+| V1-5 Inventário | Seguir sugestão, com pedido de análise de eficiência | Inventário reescrito: tabela única por cidade com pilhas; análise na parte técnica do [[Sistema de Inventário/Descrição\|Inventário]] |
+| V1-6 Nomes | Seguir sugestão | Mosquete, Machado Curto, Peças de Argila, Ossos etc. aplicados |
+| V1-7 Itens sem produtor | Padronizar a produção e decidir os insumos em rodadas | IP1 e IP3 |
+| V1-8 Nomes modernos | Reformular os nomes para o mundo numa rodada | IP2 |
+| V1-9 Fome e Felicidade | Seguir sugestão | Fome, Felicidade individual e noites sem dormir no [[Sistema de NPC/Descrição\|NPC]] |
+| V1-10 Templo | Seguir sugestão | Tabela geral de vagas; 2 Templos nas cidades de nível 4 |
+| V1-11 Ordem | Seguir sugestão | "Confirmar todas, exceto..." nas V4 e V5 |

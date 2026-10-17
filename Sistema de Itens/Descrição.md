@@ -1,316 +1,165 @@
+> Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
+>
+> **Em reformulação:** o autor decidiu (revisão V1-2, V1-7 e V1-8) fazer rodadas próprias para **padronizar a produção**, **reformular os nomes dos itens** para o contexto do mundo e definir **os insumos de cada produto**. A lista abaixo é a atual, com os nomes já padronizados na revisão V1-6.
+
 ## Sistema de Itens
 
 **Descrição geral**
 
-Os itens são divididos em categorias, cada uma com uma função dentro do jogo. Os itens têm duas escalas distintas: o **Rank** (0 a 5, seis níveis), usado em armas, equipamentos e artefatos, e o **Tier** (0 a 4), usado em materiais e bens de consumo, ligado à complexidade de produção e ao tipo de Trabalho exigido (Braçal, Manufaturado ou Especialista). Materiais e bens de consumo não têm Rank, e armas, equipamentos e artefatos não têm Tier. Cada rank acima de 0 concede um bônus percentual no Atributo de Habilidade relevante ao equipar (ex: uma espada rank 3 aumenta um pouco mais o Corpo a Corpo do que uma rank 1), e/ou passa a exigir uma Habilidade mínima pra ser usado com eficácia total.
+Os itens são divididos em **categorias**, cada uma com uma função dentro do jogo. Os itens têm duas escalas distintas:
+
+- **Rank** (0 a 5, seis níveis): usado em armas, equipamentos e artefatos. Cada Rank acima de 0 dá um bônus percentual no Atributo de Habilidade relevante ao equipar (por exemplo, uma espada Rank 3 aumenta um pouco mais o Corpo a Corpo do que uma Rank 1) e/ou passa a exigir uma habilidade mínima para ser usado com eficácia total.
+- **Tier** (0 a 4): usado em materiais e bens de consumo, ligado à complexidade da produção e ao tipo de Trabalho exigido (Braçal, Manufaturado ou Especialista).
+
+Materiais e bens de consumo não têm Rank, e armas, equipamentos e artefatos não têm Tier.
 
 O que os itens especiais fazem ao serem usados (livros, joias, artefatos, medicamentos, comida, bebida e narcóticos) está em [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]].
 
 ### Cultura
 
-A cultura é um atributo das armas e equipamento, ele foi inspirado no mesmo sistema do jogo rimworld aonde temos os Estilos em certos itens, aonde um unico item pode ter mais de uma aparencia dependendo da cultura que o produziu, a ideia é a mesma, invés de criar diversas armas e equipamentos e depois ter que balancear todos eles, vamos criar os itens padrão, e depois apenas atribuir uma textura diferente dependendo a cultura que o produziu.
+A cultura é um atributo das armas e dos equipamentos, inspirado nos **Estilos** do RimWorld: um único item pode ter mais de uma aparência, conforme a cultura que o produziu. Em vez de criar diversas armas e equipamentos e depois ter que balancear todos, o jogo cria os itens padrão e só atribui uma **textura diferente** conforme a cultura que o produziu ([[Sistema de Cultura/Descrição|Cultura]], [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]]).
 
+### Atributos (todos os itens)
 
-### Atributos (Geral)
+- **Valor Global** — valor dado pelo Mercado Mundial
+- **Valor Facção** — valor dado pelo Mercado da Facção
+- **Valor Local** — valor dado pelo Mercado Local
+- **Descrição**
+- **Proibição** — em quais facções o item é proibido
+- **Dono** — quem tem a posse legal do item
+- **Categoria** — agrupa itens parecidos
+- **Nome**
+- **Rank** (armas, equipamentos e artefatos, de 0 a 5)
+- **Tier** (materiais e bens de consumo, de 0 a 4)
+- **Peso** — usado pela Capacidade de peso do NPC
+- **Tipo** — derivado da Categoria (ver abaixo)
+- **Textura**
 
-- **Valor Global** — valor fornecido pelo mercado global
-- **Valor Facção** — valor fornecido pelo mercado da facção
-- **Valor Local** — valor fornecido pelo mercado local
-- **Descrição** — descrição do item
-- **Proibição** — estrutura que marca em quais facções esse item é proibido
-- **Dono** — indica quem tem a posse legal do item
-- **Categoria** — indicativo para agrupar itens parecidos
-- **Nome** — nome do item
-- **Rank** — nível de armas, equipamentos e artefatos, de 0 a 5
-- **Tier** — nível de materiais e bens de consumo, de 0 a 4
-- **Peso** — usado pela "Capacidade de peso" do NPC
-- **Tipo** — derivado da Categoria (ver Tipos, abaixo)
-- Textura
+### Atributos por tipo
 
-### Atributos (Arma Corpo a Corpo)
-- Dano Maximo/Minimo
-- Intervalo de Ataque
-- Alcance
-- Atributo Magico
-- Atributo Minimo
-- Cultura
+| Tipo | Atributos |
+|---|---|
+| Arma corpo a corpo | Dano mínimo e máximo, Intervalo de Ataque, Alcance, Atributo Mágico, Atributo Mínimo, Cultura |
+| Arma de longo alcance | Intervalo de Ataque, Alcance máximo, Munição, Atributo Mínimo, Cultura |
+| Munição | Dano mínimo e máximo, Atributo Mágico |
+| Cajado mágico | Dano mínimo e máximo, Alcance máximo, Mana (quanto gasta por disparo), Intervalo de Ataque, Atributo Mágico, Atributo Mínimo, Cultura |
+| Comida | Saciedade (quanto da Fome ela enche; ver [[Sistema de NPC/Descrição\|NPC]]) |
+| Equipamento | Defesa, Lugar (capacete, peitoral, perneiras, chapéu, camisa, calças, anel, escudo), Atributo Mágico, Buff de habilidade, Cultura |
 
-### Atributos (Arma Longo Alcance)
-- Intervalo de Ataque
-- Alcance Maximo
-- Munição
-- Atributo Minimo
-- Cultura
+### Categorias e tipos
 
-### Atributos (Municação)
-- Dano Maximo/Minimo
-- Atributo Magico
+| Categoria | Tipos |
+|---|---|
+| Matéria-Prima | Recurso Bruto (Mineral, Vegetal, **Animal**), Recurso Manufaturado |
+| Bem de Consumo | Alimento, Bebida, Medicamento, Luxo, Exclusivo |
+| Arma | Espada, Lança, Machado, Clava, Arco, Cajado, **Mosquete**, Besta, Munição |
+| Equipamento | Capacete, Peitoral e Perneiras (militares); Chapéu, Camisa e Calças (não militares); Anel; Escudo |
+| Artefato | Livro, Joia Mágica, Artefato |
 
-### Atributos (Cajado Magico)
-- Dano Maximo/Minimo
-- Alcance Maximo
-- Mana (Quanto de mana gasta para atirar)
-- Intervalo de Ataque
-- Atributo Magico
-- Atributo Minimo
-- Cultura
+**Animais** (revisão V1-3): Galinha, Porco, Ovelha, Vaca e Cavalo são itens do tipo **Animal**. O Pasto os cria; o Rancho os usa sem gastar; o Açougue os transforma em carne, ossos e couro. O **Cavalo** é montaria (com Sela) e animal de carga das caravanas ([[Sistema de Produção/Descrição|Produção]], [[Sistema de Comércio/Descrição|Comércio]]).
 
-### Atributos (Comida)
-- Saciedade (Quanto da fome ela enche)
-
-### Atributos (Equipamento)
-- Defesa
-- Lugar (Aonde esse equipamento fica no NPC, tipo capacete, torax, calça, anel, Escudo)
-- Atributo Magico
-- Buff de habilidade
-- Cultura
-### Categorias
-1. Materia Prima
-2. Bem de Consumo
-3. Arma
-4. Equipamento
-5. Artefato
-
-### Tipos (Derivado de Categoria)
-- Materia Prima:
-	1. Recurso Bruto
-	2. Recurso Manufaturado
-- Bem de Consumo:
-	1. Alimento
-	2. Bebida
-	3. Medicamento
-	4. Luxo
-	5. Exclusivo
-- Arma:
-	1. Espada
-	2. Lança
-	3. Machado
-	4. Clava
-	5. Arco
-	6. Cajado
-	7. Musquete
-	8. Besta
-	9. Munição
-- Equipamento
-	 1. Capacete (Militar)
-	 2. Peitoral (Militar)
-	 3. Perneiras (Militar)
-	 4. Chapeu (Não Militar)
-	 5. Camisa (Não Militar)
-	 6. Calças (Não Militar)
-	 7. Anel
-	 8. Escudo
-- Artefato
-	1. Livro
-	2. Joia Magica
-	3. Artefato
 ---
 
-### Regras de armadura
+## Regras
 
-Cada receita de armadura produz as **três peças separadas** (Capacete, Peitoral e Perneiras). **Leve, Média e Pesada** indicam o peso de cada peça, e o NPC pode combinar peças de pesos diferentes. A lista abaixo só tem peças Leves e Pesadas de metal; a peça **Média** (couro e tecido reforçado, feita pelo Costureiro) ainda será cadastrada. Em combate vale a classe de peso **mais frequente** entre as três peças (empate: Média) **[Proposta]**; ver [[Sistema de Combate/Descrição|Sistema de Combate]].
+### Armadura
+
+Cada receita de armadura produz as **três peças separadas** (Capacete, Peitoral e Perneiras). **Leve, Média e Pesada** indicam o peso de cada peça, e o NPC pode combinar peças de pesos diferentes. A regra de combate da armadura mista está no [[Sistema de Combate/Descrição|Sistema de Combate]].
 
 ### Nomes unificados
 
-A lista de itens manda sobre os canvases: **Couro Refinado** (não "Couro Tratado"), **Móveis Refinados** (não "Móveis de Luxo"), **Cajado Simples** (não "Cajado Básico"), **Clava** (não "Maça") e **Dejetos Animais** (não "Esterco"). Os canvases foram atualizados.
+A lista de itens **manda sobre os canvases**. Já unificados: **Couro Refinado** (não "Couro Tratado"), **Móveis Refinados** (não "Móveis de Luxo"), **Cajado Simples** (não "Cajado Básico"), **Clava** (não "Maça") e **Dejetos Animais** (não "Esterco"). Na revisão V1-6: **Mosquete** (não "Musket"), "Arma de fogo" como grupo (não "Canhão de mão"), **Machado Curto e Longo**, **Perneiras Leves e Pesadas**, **Calças Rasgadas**, **Peças de Argila** (não "Materias" ou "Bens de Argila"), **Ossos**, **Pedaço de Carne**, **Saco de Ovos**, **Fardo de Lã** e **Balde de Leite**.
 
-### Itens Existentes:
+### Armamento de Exército
 
-Materia-Prima:
-- Recurso Bruto:
-	- Mineral:
-		1. Ferro Bruto (Tier 0)
-		2. Cobre Bruto (Tier 0)
-		3. Ouro Bruto (Tier 1)
-		4. Pedra Bruta (Tier 0)
-		5. Argila Bruta (Tier 0)
-		6. Carvão (Tier 0)
-		7. Pedra de Mana Bruta (Tier 1)
-		8. Agua (Tier 0)
-	- Vegetal:
-		1. Fardo de Grão (Tier 0)
-		2. Saco de Vegetal (Tier 0) 
-		3. Saco de Frutas (Tier 1)
-		4. Fardo de Folha de Fumo (Tier 0)
-		5. Saco de Flor Espiritual (Tier 1)
-		6. Fardo de Especiaria (Tier 2)
-		7. Fardo de Algodão (Tier 0)
-		8. Madeira Bruta (Tier 0)
-	- Animal:
-		1. Pedaço de Carne (Tier 0)
-		2. Couro Bruto (Tier 0)
-		3. Balde de Leite (Tier 0)
-		4. Fardo de Lã (Tier 0)
-		5. Ossos (Tier 0)
-		6. Saco de Ovos (Tier 0) 
-		7. Dejetos Animais (Tier 0)
-- Recurso Manufaturado:
-	 - Produção:
-		1. Barra de Ferro (Tier 1)
-		2. Barra de Aço (Tier 2)
-		3. Barra de Aço Magico (Tier 4)
-		4. Barra de Cobre (Tier 2)
-		5. Barra de Ouro (Tier 3)
-		6. Tijolos de Pedra (Tier 1)
-	 - Manufaturado:
-		1. Tecido (Tier 1)
-		2. Fertilizante (Tier 1)
-		3. Couro Refinado (Tier 1)
-		4. Pó Explosivo (Tier 2)
-- Bens de Consumo:
-	- Alimento - Basico:
-		1. Pão (Tier 1)
-		2. Sopa (Tier 1)
-		3. Legumes Cozidos (Tier 1)
-		4. Ração Militar (Tier 1)
-	- Mobilia - Basica:
-		1. Materias de Argila (Tier 1)
-		2. Moveis de Madeira (Tier 2)
-	- Alimento - Refinado:
-		1. Torta de Fruta (Tier 2)
-		2. Linguiça (Tier 2)
-		3. Queijo (Tier 2)
-		4. Cerveja (Tier 2)
-	- Mobilia - Refinada:
-		1. Moveis Refinados (Tier 3)
-		2. Ornamento (Tier 4)
-	- Alimento de Luxo:
-		1. Licor (Tier 4)
-		2. Carne Envelhecida (Tier 4)
-		3. Doce de Baunilha (Tier 4)
-	 - Bens de Luxo:
-		 1. Joias (Tier 4)
-		 2. Perfumes (Tier 3)
-	- Narcotico:
-		1. Fumo (Tier 2)
-		2. Pó Espiritual (Tier 3)
-- Armas Corpo a Corpo:
-	- Espada:
-		Espada Curta - Ferro (Rank 1-3)
-		Espada Curta - Aço (Rank 1-4)
-		Espada Curta - Aço Magico (Rank 1-5)
-		Espada Longa - Ferro (Rank 1-3)
-		Espada Longa - Aço (Rank 1-4)
-		Espada Longa - Aço Magico (Rank 1-5)
-	- Lança:
-		Lança Curta - Ferro (Rank 1-3)
-		Lança Curta - Aço (Rank 1-4)
-		Lança Curta - Aço Magico (Rank 1-5)
-		Lança Longa - Ferro (Rank 1-3)
-		Lança Longa - Aço (Rank 1-4)
-		Lança Longa - Aço Magico (Rank 1-5)
-	- Machado:
-		Machado Curta - Ferro (Rank 1-3)
-		Machado Curta - Aço (Rank 1-4)
-		Machado Curta - Aço Magico (Rank 1-5)
-		Machado Longa - Ferro (Rank 1-3)
-		Machado Longa - Aço (Rank 1-4)
-		Machado Longa - Aço Magico (Rank 1-5)
-	- Clava:
-		Clava Curta - Ferro (Rank 1-3)
-		Clava Curta - Aço (Rank 1-4)
-		Clava Curta - Aço Magico (Rank 1-5)
-		Clava Longa - Ferro (Rank 1-3)
-		Clava Longa - Aço (Rank 1-4)
-		Clava Longa - Aço Magico (Rank 1-5)
-- Arma Longo Alcance:
-	- Arco:
-		Arco Curto - Madeira (Rank 1-3)
-		Arco Curto - Aço (Rank 1-4)
-		Arco Curto - Aço Magico (Rank 1-5)
-		Arco Recurvo - Madeira (Rank 1-3)
-		Arco Recurvo - Aço (Rank 1-4)
-		Arco Recurvo - Aço Magico (Rank 1-5)
-		Arco Longo - Madeira (Rank 1-3)
-		Arco Longo - Aço (Rank 1-4)
-		Arco Longo - Aço Magico (Rank 1-5)
-	- Besta:
-		Besta Leve - Madeira (Rank 1-3)
-		Besta Leve - Aço (Rank 1-4)
-		Besta Leve - Aço Magico (Rank 1-5)
-		Besta Pesada - Aço (Rank 1-4)
-		Besta Pesada - Aço Magico (Rank 3-5)
-		Besta Repetição - Aço (Rank 1-4)
-		Besta Repetição - Aço Magico (Rank 1-5)
-	 Canhão de mão:
-		Musket - Cobre (Rank 1-3)
-		Musket - Aço (Rank 1-4)
-		Musket - Aço Magico (Rank 1-5)
-		Carabina - Aço (Rank 1-4)
-		Carabina - Aço Magico (Rank 1-5)
-		Rifle - Aço Magico (Rank 1-5)
-- Arma Magica:
-	Cajado:
-		Cajado Simples - Madeira (Rank 1-2)
-		Cajado Simples - Cobre (Rank 1-3)
-		Cajado Arcano - Aço (Rank 1-4)
-		Cajado Arcano - Aço Magico (Rank 1-5)
-		Cajado Moderno - Aço Magico (Rank 1-4)
-- Equipamento
-	-  Capacete (Militar):
-		Capacete Leve - Ferro (Rank 1-3)
-		Capacete Leve - Aço (Rank 1-4)
-		Capacete Leve - Aço Magico (Rank 1-5)
-		Capacete Pesado - Ferro (Rank 1-3)
-		Capacete Pesado - Aço (Rank 1-4)
-		Capacete Pesado - Aço Magico (Rank 1-5)
-	- Peitoral (Militar)
-		Peitoral Leve - Ferro (Rank 1-3)
-		Peitoral Leve - Aço (Rank 1-4)
-		Peitoral Leve - Aço Magico (Rank 1-5)
-		Peitoral Pesado - Ferro (Rank 1-3)
-		Peitoral Pesado - Aço (Rank 1-4)
-		Peitoral Pesado - Aço Magico (Rank 1-5)  
-	- Perneiras (Militar)
-		Perneiras Leve - Ferro (Rank 1-3)
-		Perneiras Leve - Aço (Rank 1-4)
-		Perneiras Leve - Aço Magico (Rank 1-5)
-		Perneiras Pesado - Ferro (Rank 1-3)
-		Perneiras Pesado - Aço (Rank 1-4)
-		Perneiras Pesado - Aço Magico (Rank 1-5)    
-	- Chapeu (Não Militar)
-		Chapeu de Palha - Grão (Rank 1-2)
-		Chapeu de Mineiro - Ferro (Rank 1-2)
-		Capuz Ninja - Tecido - (Rank 1-3)
-		Chapeu Nobre - Tecido (Rank 1-4)
-		Coroa - Ouro (Rank 1-5)
-	- Camisa (Não Militar)
-		Trapos - Tecido (Rank 1-2)
-		Camiseta Robusta - Couro (Rank 1-2)
-		Camisa Ninja - Tecido (Rank 1-3)
-		Camiseta Moderna - Tecido (Rank 1-3)
-		Camiseta Nobre - Tecido (Rank 1-4)
-		Terno - Tecido (Rank 1-4)
-	- Calças (Não Militar)
-		Calça rasgadas - Tecido (Rank 1-2)
-		Calça Robusta - Couro (Rank 1-2)
-		Calça Ninjas - Tecido (Rank 1-3)
-		Calça Modernas - Tecido (Rank 1-3)
-		Calça Nobre - Tecido (Rank 1-4)
-		Calça social - (Rank 1-4)
-	- Anel
-		Anel de Cobre - Cobre (Rank 1-3)
-		Anel de Ouro - Ouro (Rank 1-5)
-	- Escudo
-		Escudo Primitivo - Madeira (Rank 1-2)
-		Escudo - Ferro (Rank 1-3)
-		Escudo - Aço (Rank 1-4)
-		Escudo - Aço Magico (Rank 1-5)
-- Artefato:
-	Livros:
-		Livro (Rank 2)
-		Livro Antigo (Rank 4)
-		Livro de Atributos (Rank 1-5)
-	Joias Magicas:
-		Joias Magicas- Pedra Magica (Rank 1-5)
-	Artefato:
-		Artefato (Rank 1-5)
+Não é equipado por NPCs: faz parte do Equipamento de um Esquadrão. Cada tipo de Esquadrão recebe um **kit** (1 item de cada peça equipa os 100 soldados), e o Rank dos itens define a qualidade ([[Sistema de Batalha/Descrição|Sistema de Batalha]]).
+
+### Intervalo de Ataque
+
+Cada arma da lista precisa de um valor. **[Proposta]** Definir por tipo de arma (Espada e Lança rápidas; Machado e Clava lentas; Besta e Mosquete muito lentas) e ajustar por Rank nos testes.
+
+### Encantamento
+
+Armas e equipamentos de Rank alto podem ser encantados, o que aumenta atributos como Atributo Mágico, Dano, Defesa e Buff de habilidade. A partir do Rank 3, na Encantaria, por um Mago de Ofício, com Mana e Pedra de Mana; um encantamento por item. Ver [[Sistema de Magia/Descrição|Sistema de Magia]] e [[Sistema de Combate/Descrição|Sistema de Combate]].
 
 ---
 
+## Itens existentes
+
+### Matéria-Prima: Recurso Bruto
+
+| Tipo | Itens (Tier) |
+|---|---|
+| Mineral | Ferro Bruto (0), Cobre Bruto (0), Ouro Bruto (1), Pedra Bruta (0), Argila Bruta (0), Carvão (0), Pedra de Mana Bruta (1), Água (0) |
+| Vegetal | Fardo de Grão (0), Saco de Vegetal (0), Saco de Frutas (1), Fardo de Folha de Fumo (0), Saco de Flor Espiritual (1), Fardo de Especiaria (2), Fardo de Algodão (0), Madeira Bruta (0) |
+| Animal | Pedaço de Carne (0), Couro Bruto (0), Balde de Leite (0), Fardo de Lã (0), Ossos (0), Saco de Ovos (0), Dejetos Animais (0), **Peixe (0)**; animais vivos: Galinha (0), Porco (0), Ovelha (0), Vaca (0), **Cavalo (1)** |
+
+### Matéria-Prima: Recurso Manufaturado
+
+| Tipo | Itens (Tier) |
+|---|---|
+| Produção | Barra de Ferro (1), Barra de Aço (2), Barra de Aço Mágico (4), Barra de Cobre (2), Barra de Ouro (3), Tijolos de Pedra (1) |
+| Manufaturado | Tecido (1), Fertilizante (1), Couro Refinado (1), Pó Explosivo (2) |
+
+### Bens de Consumo
+
+| Grupo | Itens (Tier) |
+|---|---|
+| Alimento Básico | Pão (1), Sopa (1), Legumes Cozidos (1), Ração Militar (1) |
+| Mobília Básica | Peças de Argila (1), Móveis de Madeira (2) |
+| Alimento Refinado | Torta de Fruta (2), Linguiça (2), Queijo (2), Cerveja (2) |
+| Mobília Refinada | Móveis Refinados (3), Ornamento (4) |
+| Alimento de Luxo | Licor (4), Carne Envelhecida (4), Doce de Baunilha (4) |
+| Bens de Luxo | Joias (4), Perfumes (3) |
+| Narcótico | Fumo (2), Pó Espiritual (3) |
+| Medicamento | Curativo (1), Remédio (3) (ver [[Sistema de Itens/Efeitos de Itens\|Efeitos de Itens]]) |
+
+### Armas corpo a corpo
+
+Cada arma existe em três materiais: **Ferro (Rank 1-3)**, **Aço (Rank 1-4)** e **Aço Mágico (Rank 1-5)**.
+
+| Tipo | Versões |
+|---|---|
+| Espada | Espada Curta, Espada Longa |
+| Lança | Lança Curta, Lança Longa |
+| Machado | Machado Curto, Machado Longo |
+| Clava | Clava Curta, Clava Longa |
+
+### Armas de longo alcance
+
+| Tipo | Itens (Rank) |
+|---|---|
+| Arco | Arco Curto, Arco Recurvo e Arco Longo, cada um de Madeira (1-3), Aço (1-4) e Aço Mágico (1-5) |
+| Besta | Besta Leve de Madeira (1-3), de Aço (1-4) e de Aço Mágico (1-5); Besta Pesada de Aço (1-4) e de Aço Mágico (3-5); Besta de Repetição de Aço (1-4) e de Aço Mágico (1-5) |
+| Arma de fogo | Mosquete de Cobre (1-3), de Aço (1-4) e de Aço Mágico (1-5); Carabina de Aço (1-4) e de Aço Mágico (1-5); Rifle de Aço Mágico (1-5) |
+| Cajado (arma mágica) | Cajado Simples de Madeira (1-2) e de Cobre (1-3); Cajado Arcano de Aço (1-4) e de Aço Mágico (1-5); Cajado Moderno de Aço Mágico (1-4) |
+
+### Equipamento
+
+| Peça | Itens (Rank) |
+|---|---|
+| Capacete (militar) | Capacete Leve e Capacete Pesado, de Ferro (1-3), Aço (1-4) e Aço Mágico (1-5) |
+| Peitoral (militar) | Peitoral Leve e Peitoral Pesado, de Ferro (1-3), Aço (1-4) e Aço Mágico (1-5) |
+| Perneiras (militar) | Perneiras Leves e Perneiras Pesadas, de Ferro (1-3), Aço (1-4) e Aço Mágico (1-5) |
+| Chapéu (não militar) | Chapéu de Palha, de Grão (1-2); Chapéu de Mineiro, de Ferro (1-2); Capuz Ninja, de Tecido (1-3); Chapéu Nobre, de Tecido (1-4); Coroa, de Ouro (1-5) |
+| Camisa (não militar) | Trapos, de Tecido (1-2); Camiseta Robusta, de Couro (1-2); Camisa Ninja, de Tecido (1-3); Camiseta Moderna, de Tecido (1-3); Camiseta Nobre, de Tecido (1-4); Terno, de Tecido (1-4) |
+| Calças (não militar) | Calças Rasgadas, de Tecido (1-2); Calça Robusta, de Couro (1-2); Calça Ninja, de Tecido (1-3); Calça Moderna, de Tecido (1-3); Calça Nobre, de Tecido (1-4); Calça Social (1-4) |
+| Anel | Anel de Cobre (1-3), Anel de Ouro (1-5) |
+| Escudo | Escudo Primitivo, de Madeira (1-2); Escudo de Ferro (1-3), de Aço (1-4) e de Aço Mágico (1-5) |
+
+Os nomes com cara moderna (Ninja, Moderna, Terno, Social, Cajado Moderno) serão reformulados na rodada de nomes.
+
+### Artefatos
+
+| Tipo | Itens (Rank) |
+|---|---|
+| Livro | Livro (2), Livro Antigo (4), Livro de Atributos (1-5), Livro Sagrado (1) |
+| Joia Mágica | Joia Mágica de Pedra Mágica (1-5) |
+| Artefato | Relíquia (1-3); Artefatos lendários, únicos (4-5) |
+
 ### Itens a cadastrar (provisório)
 
-Itens que aparecem nos canvases mas ainda não estão na lista. Tier e Rank são provisórios.
+Itens que aparecem nos canvases ou em outros sistemas mas ainda não estão na lista principal. Tier e Rank são provisórios.
 
 | Item | Categoria / Tipo | Tier ou Rank | Feito por |
 |---|---|---|---|
@@ -319,28 +168,44 @@ Itens que aparecem nos canvases mas ainda não estão na lista. Tier e Rank são
 | Sela | Matéria-Prima / Recurso Manufaturado (Manufaturado) | Tier 2 | Costureiro (nível 5); usada com Cavalos |
 | Munição de Arco | Arma / Munição | Rank 1-3 | Carpinteiro |
 | Munição de Besta | Arma / Munição | Rank 1-3 | Carpinteiro (nível 3+) |
-| Munição de Canhão de Mão | Arma / Munição | Rank 1-3 | Armeiro |
+| Munição de Arma de Fogo | Arma / Munição | Rank 1-3 | Armeiro |
 | Munição de Canhão de Guerra | Arma / Munição | Rank 1-3 | Armeiro (nível 3+) |
 | Canhão de Guerra | Armamento de Exército | Rank 3 | Armeiro (nível 3+) |
 | Canhão de Guerra Moderno | Armamento de Exército | Rank 5 | Armeiro (nível 5) |
-| Anel Mágico - Pedra Mágica | Equipamento / Anel | Rank 1-5 | Artesão (nível 5) |
+| Anel Mágico de Pedra Mágica | Equipamento / Anel | Rank 1-5 | Artesão (nível 5) |
 | Armadura Média (3 peças) | Equipamento / Capacete, Peitoral, Perneiras | Rank 1-3 | Costureiro (nível 4+) |
-| Grimório | Artefato / Livro (ensina feitiços) | Rank 2-4 | A definir (comprado, produzido ou achado em masmorras; ver Sistema de Magia) |
-| Pedra de Mana | Bem de Consumo (recupera Mana) | Tier 2 | Produtor Mágico, a partir da Pedra de Mana Bruta |
-| Livro Sagrado | Artefato / Livro | Rank 1 | Vendido no Templo e no Mercado das cidades Religiosas; exigido pela lei "Livro Sagrado obrigatório" |
-| Curativo | Bem de Consumo / Medicamento | Tier 1 | Boticário nível 1 (Tecido + Água) |
-| Remédio | Bem de Consumo / Medicamento | Tier 3 | Boticário nível 3 (Flor Espiritual + Fardo de Especiaria) |
-| Relíquia | Artefato / Artefato | Rank 1-3 | Masmorras; Mercado das capitais |
-| Artefatos lendários (cerca de 6, únicos) | Artefato / Artefato | Rank 4-5 | Masmorras lendárias |
+| Grimório | Artefato / Livro (ensina feitiços) | Rank 2-4 | A definir (comprado, produzido ou achado em masmorras; ver [[Sistema de Magia/Descrição\|Magia]]) |
+| Pedra de Mana | Bem de Consumo (recupera Mana) | Tier 2 | Mago de Ofício, a partir da Pedra de Mana Bruta |
 
-**Armamento de Exército** não é equipado por NPCs: faz parte do Equipamento de um Esquadrão (ver Sistema de Facção). Cada tipo de Esquadrão recebe um **kit** (1 item de cada peça equipa os 100 soldados), e o Rank dos itens define a qualidade (ver [[Sistema de Batalha/Descrição|Sistema de Batalha]]).
+---
 
-**Medicamentos.** Curativo e Remédio (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]] e [[Sistema de Cura/Descrição|Sistema de Cura]]).
+## Parte técnica
 
-**Artefatos.** O tipo Artefato tem as **Relíquias** (Rank 1 a 3, genéricas) e os **Artefatos lendários** (Rank 4 e 5, únicos, com efeito próprio). A Realeza tem os Artefatos como **posse** com desgaste, não como gasto (ver [[Sistema de Itens/Efeitos de Itens|Efeitos de Itens]]).
+- **Dados:** a lista de itens em CSV (editada em planilha) e os atributos por tipo em JSON, com IDs de texto legíveis (por exemplo, `item.mosquete_aco`), convertidos em números ao carregar ([[Arquitetura/Descrição|Arquitetura]]).
+- **Validação:** o jogo confere, ao carregar, se toda receita, kit e loot cita um item que existe (`jogo --validar`).
+- **Instâncias:** materiais e bens de consumo são **pilhas** (item + quantidade + dono), sem instância individual; armas e equipamentos guardam também o Rank, a cultura e o encantamento (ver [[Sistema de Inventário/Descrição|Inventário]]).
+- **Save:** só as pilhas e as instâncias que existem nos inventários; a lista de itens vem dos dados.
+- **Fatia vertical:** Fardo de Grão, Água, Pão e Móveis de Madeira (ou Peças de Argila).
 
-**Intervalo de Ataque.** Cada arma da lista precisa de um valor. **[Proposta]** definir por tipo de arma (Espada e Lança rápidas, Machado e Clava lentas, Besta e Musquete muito lentas) e ajustar por Rank em testes.
+## Ligação com outros sistemas
 
-### Encantamento
+| Sistema | O que os Itens fornecem ou recebem |
+|---|---|
+| Efeitos de Itens | O que cada item especial faz ao ser usado |
+| Produção e Funções | Quem produz cada item; Tier e Rank pelo nível da construção |
+| Recursos | Itens de Matéria-Prima gerados por cada recurso |
+| Econômico e Comércio | Valor Global, da Facção e Local; peso na carga das caravanas |
+| Inventário | Pilhas e instâncias; Dono; peso |
+| Classe Social | Grupos de itens de cada tipo de consumo |
+| Combate e Batalha | Atributos das armas e armaduras; kits dos Esquadrões |
+| Cultura e Pipeline | Textura por cultura |
+| Crime e Justiça | Itens proibidos; Grilhões |
+| Magia | Cajados, Pedra de Mana, Aço Mágico, encantamento, Grimório |
+| Tecnologia | Eras liberam Tiers e Ranks |
 
-Armas e equipamentos de Rank alto podem ser encantados, o que aumenta atributos como Atributo Mágico, Dano, Defesa e Buff de habilidade. A partir do Rank 3, na Encantaria, por um Mago de Ofício, com Mana e Pedra de Mana; um encantamento por item. Ver [[Sistema de Magia/Descrição|Sistema de Magia]] e [[Sistema de Combate/Descrição|Sistema de Combate]].
+## Perguntas em aberto
+
+1. **Padronização da produção, nomes e insumos:** rodadas IP1, IP2 e IP3 (ver a [[Revisão Completa]]).
+2. **Peça de armadura Média:** materiais e quem faz (rodada IP1).
+3. **Preço base** de cada item (rodada V2).
+4. **Mapeamento Luxo × Exclusivo** por Tier (rodada IP2).
