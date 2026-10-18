@@ -41,7 +41,7 @@
 
 1. **Marco 0:** o ambiente e um "olá, janela" com o SDL3. Pronto e confirmado pelo autor.
 2. **Marco 1:** relógio, leitura do mapa e o mapa desenhado. Pronto e confirmado pelo autor.
-3. **Marco 2:** câmera e zoom. Escrito e testado; falta a rodada FL2 e a confirmação do autor.
+3. **Marco 2:** câmera e zoom. Pronto e confirmado pelo autor; falta aplicar a rodada FL2.
 4. **Marcos 3 a 9** da fatia vertical, um por pull request.
 5. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 
