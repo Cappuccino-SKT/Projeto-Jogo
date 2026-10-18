@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+#include "Dados/Construcoes.h"
 #include "Dados/Itens.h"
 #include "Dados/ProblemasDosDados.h"
 #include "Dados/TextosERegras.h"

@@ -44,7 +44,9 @@ CatalogoDeConstrucoes construcoesDaFatia()
 {
     CatalogoDeConstrucoes construcoes;
     for (const char* identificador : {"construcao.fazenda", "construcao.posto_de_coleta", "construcao.cozinheiro", "construcao.carpinteiro"}) {
-        construcoes.acrescentarConstrucao(identificador);
+        DefinicaoDeConstrucao definicao;
+        definicao.identificadorDeTexto = identificador;
+        construcoes.acrescentarConstrucao(definicao);
     }
     return construcoes;
 }
@@ -302,9 +304,9 @@ void testarDadosDaFatia()
         std::printf("    %s: %s\n", problema.ehErro ? "erro" : "aviso", problema.textoParaMostrar().c_str());
     }
     conferir(dados.dadosEstaoProntos() && dados.listaDeProblemas.quantidadeDeAvisos() == 0, "os dados da fatia (Jogo/data) não têm erro nem aviso");
-    conferir(dados.catalogoDeItens.quantidadeDeItens() == 6 && dados.catalogoDeReceitas.quantidadeDeReceitas() == 6
-                 && dados.catalogoDeRecursos.quantidadeDeRecursos() == 3 && dados.catalogoDeConstrucoes.quantidadeDeConstrucoes() == 7,
-             "a fatia tem 6 itens, 6 receitas, 3 recursos e 7 construções");
+    conferir(dados.catalogoDeItens.quantidadeDeItens() == 8 && dados.catalogoDeReceitas.quantidadeDeReceitas() == 8
+                 && dados.catalogoDeRecursos.quantidadeDeRecursos() == 4 && dados.catalogoDeConstrucoes.quantidadeDeConstrucoes() == 8,
+             "a fatia tem 8 itens, 8 receitas, 4 recursos e 8 construções (com a Pedra, o Bloco e a Pedreira da FL6-5)");
     conferir(precoDoItem(dados.catalogoDeItens, "item.pao") == 17, "nos dados da fatia, o Pão custa 1,7");
     conferir(dados.regras.velocidadeDeAndarEmTilesPorHora == 128 && dados.regras.caminhosCalculadosPorTick == 4,
              "o regras.json da fatia tem a velocidade de andar (128 tiles por hora) e 4 caminhos por tick");

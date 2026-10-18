@@ -28,6 +28,7 @@ enum class AcaoDoJogador {
     CorrerComACamera,
     MostrarCaminhosParaDepuracao,  // F2 (marco 4, FL4-6): o caminho de cada NPC em azul
     MostrarAcoesDosNpcsParaDepuracao,  // F3 (marco 5, FL5-6): a cor da ação em cima de cada NPC e a tabela no console
+    MostrarEstoqueEProducao,  // F4 (marco 6, FL6-8): a tabela do estoque, das construções e do dinheiro no console
 };
 
 // Uma linha da tabela: a ação, a tecla principal e uma alternativa (opcional).
@@ -39,7 +40,7 @@ struct TeclasDeUmaAcao {
 
 class TabelaDeAcoesDoTeclado {
 public:
-    // As teclas padrão: as provisórias dos marcos 1, 2, 4 e 5 (FL1-3, FT1-4, FL4-6 e FL5-6).
+    // As teclas padrão: as provisórias dos marcos 1, 2, 4, 5 e 6 (FL1-3, FT1-4, FL4-6, FL5-6 e FL6-8).
     static TabelaDeAcoesDoTeclado criarComAsTeclasPadrao();
 
     // A ação de uma tecla que acabou de ser apertada, ou vazio se a tecla não faz nada.

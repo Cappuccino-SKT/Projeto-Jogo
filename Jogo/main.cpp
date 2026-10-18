@@ -1,10 +1,10 @@
 // main.cpp: o começo do programa.
 //
-// Abre a janela com o OpenGL 3.3, lê os dados e o mapa da vila, cria o
-// relógio do mundo e os 15 NPCs da vila (marco 5) e repete o laço principal
-// até o jogador fechar (no X ou com a tecla Esc). A cada quadro: lê as teclas
-// e o mouse, avança o relógio pelo tempo real (a cada tick, os NPCs decidem o
-// que fazer e andam) e desenha.
+// Abre a janela com o OpenGL 3.3, lê os dados e o mapa da vila, monta a
+// partida (o relógio, os 15 NPCs, o estoque e o dinheiro: marcos 5 e 6) e
+// repete o laço principal até o jogador fechar (no X ou com a tecla Esc). A
+// cada quadro: lê as teclas e o mouse, avança a vila pelo tempo real (a cada
+// tick, os NPCs decidem e andam, e a vila produz e consome) e desenha.
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>  // deixa o main() funcionar como programa de janela no Windows
@@ -25,13 +25,13 @@
 #include "Dados/DadosDoJogo.h"
 #include "DesenhoDoMapa.h"
 #include "DesenhoDosPersonagens.h"
-#include "Mapa/BuscaDeCaminho.h"
 #include "Mapa/MapaLocal.h"
 #include "Npc/MovimentoDosNpcs.h"
 #include "Npc/RotinaDosNpcs.h"
-#include "Tempo/SorteioComSemente.h"
+#include "Producao/ProducaoDaVila.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "TextoDaDataDoJogo.h"
+#include "Vila/SimulacaoDaVila.h"
 
 // Tamanho preferido da janela: a resolução de referência do jogo (1600 x 900).
 constexpr int larguraPreferidaDaJanelaEmPixels = 1600;
@@ -347,6 +347,12 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     for (const std::string& aviso : avisosDoBoneco) {
         SDL_Log("Aviso: %s", aviso.c_str());
     }
+    // As imagens das construções que o autor já desenhou (marco 6, FA1-5).
+    std::vector<std::string> avisosDasConstrucoes;
+    desenhistaDoMapa.prepararImagensDasConstrucoes(dadosDoJogo.vilaInicial, mapaDaVila, pastaDosDadosDoJogo, avisosDasConstrucoes);
+    for (const std::string& aviso : avisosDasConstrucoes) {
+        SDL_Log("Aviso: %s", aviso.c_str());
+    }
 
     // A câmera (ficha da Interface): zoom 3x, centralizada no primeiro quadro,
     // quando o tamanho da janela já é o certo.
@@ -363,24 +369,17 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
     SDL_Log("Câmera: WASD ou setas (Shift corre), roda do mouse para o zoom, botão do meio para arrastar.");
     SDL_Log("NPCs: F2 mostra os caminhos; F3 mostra a cor da ação de cada um e escreve a tabela no console.");
+    SDL_Log("Economia: F4 escreve o estoque, as construções e o dinheiro; o resumo de cada dia sai sozinho à meia-noite.");
 
-    // 5. O relógio do mundo de uma partida nova (6h do dia 1 da Primavera).
+    // 5. A partida nova (marcos 1, 4, 5 e 6): o relógio às 6h do dia 1 da
+    //    Primavera, os 15 NPCs dentro das casas, o estoque e o dinheiro do primeiro dia.
     const RegrasDoTempo regrasDoTempo;
-    RelogioDoMundo relogioDoMundo = RelogioDoMundo::criarParaPartidaNova(regrasDoTempo);
-
-    // 5b. Os NPCs (marcos 4 e 5): as regras do movimento, a busca de caminho,
-    //     o sorteio com a semente da partida e os 15 NPCs da vila, dentro das casas.
-    RegrasDoMovimento regrasDoMovimento;
-    regrasDoMovimento.velocidadeDeAndarEmMilesimosPorTick =
-        converterVelocidadeParaMilesimosPorTick(dadosDoJogo.regras.velocidadeDeAndarEmTilesPorHora, regrasDoTempo.ticksPorHoraDeJogo);
-    regrasDoMovimento.caminhosCalculadosPorTick = dadosDoJogo.regras.caminhosCalculadosPorTick;
-    regrasDoMovimento.distanciaDoCicloDeAndarEmMilesimos = definicaoDoBoneco.distanciaDoCicloDeAndarEmMilesimos();
-    entt::registry registroDasEntidades;
-    BuscadorDeCaminho buscadorDeCaminho;
-    SorteioComSemente sorteioDosNpcs(dadosDoJogo.vilaInicial.sementeDaPartida, sequenciaDoSorteioDosNpcs);
-    ContextoDaRotina contextoDaRotina{registroDasEntidades, mapaDaVila, dadosDoJogo.vilaInicial, dadosDoJogo.regras.vidaDosNpcs,
-                                      regrasDoTempo.ticksPorHoraDeJogo, sorteioDosNpcs};
-    criarOsNpcsDaVila(contextoDaRotina, relogioDoMundo);
+    SimulacaoDaVila simulacaoDaVila(dadosDoJogo, regrasDoTempo, definicaoDoBoneco.distanciaDoCicloDeAndarEmMilesimos());
+    RelogioDoMundo& relogioDoMundo = simulacaoDaVila.relogio;
+    const entt::registry& registroDasEntidades = simulacaoDaVila.registroDasEntidades;
+    for (const std::string& aviso : simulacaoDaVila.avisosAoMontar) {
+        SDL_Log("Aviso: %s.", aviso.c_str());
+    }
     SDL_Log("A vila: %d construções e %d NPCs.", static_cast<int>(dadosDoJogo.vilaInicial.construcoes.size()),
             static_cast<int>(dadosDoJogo.vilaInicial.npcsIniciais.size()));
 
@@ -417,8 +416,12 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                     mostrarAcoesDosNpcsParaDepuracao = !mostrarAcoesDosNpcsParaDepuracao;
                     if (mostrarAcoesDosNpcsParaDepuracao) {
                         SDL_Log("%s:\n%s", montarTextoDaHora(relogioDoMundo).c_str(),
-                                montarTabelaDasAcoesDosNpcs(contextoDaRotina, relogioDoMundo).c_str());
+                                montarTabelaDasAcoesDosNpcs(simulacaoDaVila.contextoDaRotina(), relogioDoMundo).c_str());
                     }
+                } else if (acao == AcaoDoJogador::MostrarEstoqueEProducao) {
+                    // O estoque, as construções e o dinheiro (FL6-8).
+                    SDL_Log("%s:\n%s", montarTextoDaHora(relogioDoMundo).c_str(),
+                            montarTabelaDaProducao(simulacaoDaVila.contextoDaProducao()).c_str());
                 } else if (acao.has_value()) {
                     tratarAcaoDoRelogio(*acao, relogioDoMundo);
                 }
@@ -455,7 +458,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             }
         }
 
-        // 6b. Avança o relógio pelo tempo real que passou, um tick por vez,
+        // 6b. Avança a vila pelo tempo real que passou, um tick por vez,
         //     conferindo as viradas depois de cada tick.
         const Uint64 instanteDesteQuadroEmNanossegundos = SDL_GetTicksNS();
         const int64_t nanossegundosDesdeOQuadroAnterior =
@@ -464,16 +467,12 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
 
         const int ticksParaAvancar = relogioDoMundo.calcularTicksParaAvancarPeloTempoReal(nanossegundosDesdeOQuadroAnterior);
         for (int tick = 0; tick < ticksParaAvancar; ++tick) {
-            relogioDoMundo.avancarUmTick();
-            escreverAsViradasNoConsole(relogioDoMundo);
-            // A cada tick (ficha da IA, parte 3): a rotina decide, os caminhos
-            // pedidos são calculados, os NPCs andam e, por fim, quem chegou entra.
-            rodarARotinaAntesDeAndar(contextoDaRotina, relogioDoMundo);
-            for (const std::string& aviso : atenderPedidosDeCaminho(registroDasEntidades, mapaDaVila, buscadorDeCaminho, regrasDoMovimento)) {
-                SDL_Log("Aviso: %s.", aviso.c_str());
+            // A ordem de cada tick está na SimulacaoDaVila (a mesma do teste sem
+            // tela). O resumo do dia sai antes do "Começou o dia".
+            for (const std::string& linha : simulacaoDaVila.avancarUmTick()) {
+                SDL_Log("%s", linha.c_str());
             }
-            andarOsNpcsUmTick(registroDasEntidades, mapaDaVila, regrasDoMovimento, relogioDoMundo.tickAtual());
-            cuidarDasChegadas(contextoDaRotina, relogioDoMundo);
+            escreverAsViradasNoConsole(relogioDoMundo);
         }
 
         // 6c. A data no título da janela, trocada só quando o texto muda.
@@ -505,9 +504,10 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         glClear(GL_COLOR_BUFFER_BIT);
 
         desenhistaDoMapa.desenharCamadasAbaixoDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        desenhistaDoMapa.desenharConstrucoesProvisorias(dadosDoJogo.vilaInicial, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        desenhistaDoMapa.desenharConstrucoes(dadosDoJogo.vilaInicial, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         desenhistaDosPersonagens.desenharNpcs(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(), mapaDaVila.tamanhoDoTileEmPixels,
                                               cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        desenhistaDoMapa.desenharTelhadosDasConstrucoes(dadosDoJogo.vilaInicial, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         desenhistaDoMapa.desenharCamadasAcimaDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         if (mostrarColisaoParaDepuracao) {
             desenhistaDoMapa.desenharTilesBloqueadosParaDepuracao(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);

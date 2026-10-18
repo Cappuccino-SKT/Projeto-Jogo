@@ -45,7 +45,7 @@
 4. **Marco 3:** carregar os dados, o preço base e o `--validar`. Pronto e confirmado pelo autor.
 5. **Marco 4:** um NPC andando pela busca de caminho. Pronto e confirmado pelo autor.
 6. **Marco 5:** a rotina dos 15 NPCs. Pronto e confirmado pelo autor.
-7. **Marco 6:** produção, inventário e consumo. Fichas escritas ([[Ficha Logica/Producao|Produção]], [[Ficha Logica/Inventario|Inventário]], [[Ficha Logica/Economia|Economia]], [[Ficha Logica/Construcao|Construção]]), com a rodada FL6 aplicada. Em código, na branch `codigo/marco-6-producao`.
+7. **Marco 6:** produção, inventário e consumo. Fichas escritas ([[Ficha Logica/Producao|Produção]], [[Ficha Logica/Inventario|Inventário]], [[Ficha Logica/Economia|Economia]], [[Ficha Logica/Construcao|Construção]]), com a rodada FL6 aplicada. Escrito na branch `codigo/marco-6-producao`; falta o teste do autor.
 8. **Marcos 7 a 9** da fatia vertical, um por pull request.
 9. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 

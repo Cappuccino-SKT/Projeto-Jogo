@@ -23,6 +23,11 @@ struct DefinicaoDeItem {
     int pesoEmUnidades = 1;             // o Pão vale 1 (FL3-4)
     int multiplicadorDoPrecoEmPorcento = 100;
     int precoBaseEmDecimos = 0;         // calculado pelas receitas; 0 = ainda sem preço
+
+    // A cesta mínima (Classe Social, IP2-11): o alimento é comida; a mobília
+    // e o vestuário são Materiais Básicos.
+    bool ehComida() const { return tipoDoItem == "alimento"; }
+    bool ehMaterialBasico() const { return tipoDoItem == "mobilia" || tipoDoItem == "vestuario"; }
 };
 
 class CatalogoDeItens {
@@ -47,17 +52,6 @@ private:
 CatalogoDeItens lerArquivoDeItens(const std::string& textoDoArquivo, const TabelaDeTextos& tabelaDeTextos,
                                   ListaDeProblemasDosDados& listaDeProblemas);
 
-// A lista das construções. No marco 3, só os IDs (FL3-5).
-class CatalogoDeConstrucoes {
-public:
-    bool existeConstrucao(const std::string& identificadorDeTexto) const;
-    int quantidadeDeConstrucoes() const { return static_cast<int>(identificadores.size()); }
-    void acrescentarConstrucao(const std::string& identificadorDeTexto) { identificadores.push_back(identificadorDeTexto); }
-
-private:
-    std::vector<std::string> identificadores;
-};
-
-// Lê o construcoes.json: uma lista [{"id": "construcao.fazenda"}, ...].
-CatalogoDeConstrucoes lerArquivoDeConstrucoes(const std::string& textoDoArquivo, const TabelaDeTextos& tabelaDeTextos,
-                                              ListaDeProblemasDosDados& listaDeProblemas);
+// "materia_prima" -> MateriaPrima, e assim por diante; vazio para outro texto.
+// Usado também pelo "guarda" do construcoes.json.
+std::optional<CategoriaDoItem> lerCategoriaDoTexto(const std::string& texto);

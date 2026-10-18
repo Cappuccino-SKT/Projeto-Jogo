@@ -299,3 +299,18 @@ void conferirEscadaDeNiveis(const CatalogoDeItens& catalogoDeItens, const Catalo
         }
     }
 }
+
+void conferirTrabalhoDasConstrucoes(const CatalogoDeConstrucoes& catalogoDeConstrucoes, const CatalogoDeReceitas& catalogoDeReceitas,
+                                    ListaDeProblemasDosDados& listaDeProblemas)
+{
+    for (const DefinicaoDeConstrucao& definicao : catalogoDeConstrucoes.todasAsConstrucoes()) {
+        bool temReceita = false;
+        for (const DefinicaoDeReceita& receita : catalogoDeReceitas.todasAsReceitas()) {
+            temReceita = temReceita || receita.construcaoQueProduz == definicao.identificadorDeTexto;
+        }
+        if (!temReceita && !definicao.ehMoradia() && !definicao.trabalhoSemReceita.has_value()) {
+            listaDeProblemas.anotarErro("construcoes.json", 0, definicao.identificadorDeTexto
+                                        + ": não tem receitas nem moradores, então precisa do \"trabalho_sem_receita\"");
+        }
+    }
+}

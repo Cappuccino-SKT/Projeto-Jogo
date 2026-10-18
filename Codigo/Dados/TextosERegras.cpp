@@ -1,5 +1,7 @@
 #include "Dados/TextosERegras.h"
 
+#include <vector>
+
 #include <nlohmann/json.hpp>
 
 using Json = nlohmann::json;
@@ -95,6 +97,105 @@ void lerRegrasDaVidaDosNpcs(const Json& documento, RegrasDaVidaDosNpcs& vida, Li
             if (minutosDeEspera[0] > minutosDeEspera[1]) {
                 listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"minutos_de_espera\" do passeio: o primeiro precisa ser o menor");
             }
+        }
+    }
+}
+
+// O marco 6 (ficha da Construção): as vagas, a capacidade e o custo das obras.
+void lerRegrasDasConstrucoes(const Json& documento, RegrasDasConstrucoes& construcoes, ListaDeProblemasDosDados& listaDeProblemas)
+{
+    const auto vagas = documento.find("vagas_por_nivel");
+    bool vagasCertas = vagas != documento.end() && vagas->is_array() && !vagas->empty();
+    std::vector<int> vagasLidas;
+    for (std::size_t nivel = 0; vagasCertas && nivel < vagas->size(); ++nivel) {
+        const Json& valor = (*vagas)[nivel];
+        vagasCertas = valor.is_number_integer() && valor.get<int>() > 0 && (vagasLidas.empty() || valor.get<int>() >= vagasLidas.back());
+        if (vagasCertas) {
+            vagasLidas.push_back(valor.get<int>());
+        }
+    }
+    if (vagasCertas) {
+        construcoes.vagasPorNivel = vagasLidas;
+    } else {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"vagas_por_nivel\" precisa de uma lista de inteiros maiores que 0, um por nível, sem diminuir");
+    }
+
+    const char* const nomesDosPortes[3] = {"pequeno", "medio", "grande"};
+    const auto capacidade = documento.find("capacidade_por_nivel");
+    if (capacidade == documento.end() || !capacidade->is_object()) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "falta \"capacidade_por_nivel\" (pequeno, medio e grande)");
+    } else {
+        for (int porte = 0; porte < 3; ++porte) {
+            int& capacidadeDoPorte = construcoes.capacidadePorNivelDeCadaPorte[porte];
+            if (lerInteiroObrigatorio(*capacidade, nomesDosPortes[porte], capacidadeDoPorte, "capacidade_por_nivel", listaDeProblemas)
+                && capacidadeDoPorte < 0) {
+                listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "a capacidade não pode ser negativa");
+            }
+        }
+    }
+
+    const auto obras = documento.find("obra_por_porte");
+    if (obras == documento.end() || !obras->is_object()) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "falta \"obra_por_porte\" (pequeno, medio e grande)");
+        return;
+    }
+    for (int porte = 0; porte < 3; ++porte) {
+        const auto obra = obras->find(nomesDosPortes[porte]);
+        const std::string onde = std::string("obra_por_porte.") + nomesDosPortes[porte];
+        if (obra == obras->end() || !obra->is_object()) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "falta " + onde);
+            continue;
+        }
+        CustoDaObra& custo = construcoes.obraDeCadaPorte[porte];
+        lerInteiroObrigatorio(*obra, "tabua", custo.tabuas, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*obra, "bloco_de_pedra", custo.blocosDePedra, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*obra, "barra_de_ferro", custo.barrasDeFerro, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*obra, "horas", custo.horasDeTrabalho, onde, listaDeProblemas);
+        if (custo.tabuas < 0 || custo.blocosDePedra < 0 || custo.barrasDeFerro < 0 || custo.horasDeTrabalho <= 0) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, onde + ": os itens não podem ser negativos, e as horas precisam ser maiores que 0");
+        }
+    }
+}
+
+// O marco 6 (ficha da Economia): a cesta mínima, a loja da cidade, os salários e a ordem do dia.
+void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, ListaDeProblemasDosDados& listaDeProblemas)
+{
+    const auto cesta = documento.find("cesta_minima_civil");
+    if (cesta == documento.end() || !cesta->is_object()) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "falta \"cesta_minima_civil\"");
+    } else {
+        lerInteiroObrigatorio(*cesta, "comida_por_dia", economia.comidaPorDiaDoCivil, "cesta_minima_civil", listaDeProblemas);
+        lerInteiroObrigatorio(*cesta, "materiais_a_cada_dias", economia.diasEntreMateriaisDoCivil, "cesta_minima_civil", listaDeProblemas);
+        if (economia.comidaPorDiaDoCivil < 0 || economia.diasEntreMateriaisDoCivil < 1) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"cesta_minima_civil\": a comida não pode ser negativa, e os dias precisam ser 1 ou mais");
+        }
+    }
+    const std::string onde = "regras.json";
+    lerInteiroObrigatorio(documento, "loja_da_cidade_vende_em_porcento", economia.lojaDaCidadeVendeEmPorcento, onde, listaDeProblemas);
+    lerInteiroObrigatorio(documento, "bonus_do_salario_por_nivel_em_porcento", economia.bonusDoSalarioPorNivelEmPorcento, onde, listaDeProblemas);
+    lerInteiroObrigatorio(documento, "salario_do_gerente_em_porcento", economia.salarioDoGerenteEmPorcento, onde, listaDeProblemas);
+    if (economia.lojaDaCidadeVendeEmPorcento < 1 || economia.bonusDoSalarioPorNivelEmPorcento < 0 || economia.salarioDoGerenteEmPorcento < 1) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "as porcentagens da loja, do bônus de nível e do gerente precisam ser positivas");
+    }
+
+    // A ordem do dia (FT1-5): um nome desconhecido é erro.
+    const auto ordem = documento.find("ordem_do_dia");
+    if (ordem == documento.end() || !ordem->is_array()) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "falta a lista \"ordem_do_dia\"");
+        return;
+    }
+    economia.ordemDoDia.clear();
+    for (const Json& passo : *ordem) {
+        const std::string nomeDoPasso = passo.is_string() ? passo.get<std::string>() : passo.dump();
+        if (nomeDoPasso == "consumo") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Consumo);
+        } else if (nomeDoPasso == "salarios") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Salarios);
+        } else if (nomeDoPasso == "escolha_das_receitas") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::EscolhaDasReceitas);
+        } else {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "o passo \"" + nomeDoPasso + "\" da \"ordem_do_dia\" não existe "
+                                        "(os do marco 6: consumo, salarios, escolha_das_receitas)");
         }
     }
 }
@@ -198,5 +299,7 @@ RegrasDoJogo lerArquivoDeRegras(const std::string& textoDoArquivo, ListaDeProble
     }
 
     lerRegrasDaVidaDosNpcs(documento, regras.vidaDosNpcs, listaDeProblemas);
+    lerRegrasDasConstrucoes(documento, regras.construcoes, listaDeProblemas);
+    lerRegrasDaEconomia(documento, regras.economia, listaDeProblemas);
     return regras;
 }

@@ -156,7 +156,7 @@ As teclas do marco 1 (Espaço, 1, 2, 3, F1, F11, Esc) continuam iguais. A câmer
 
 | Arquivo | O que tem | Como editar |
 |---|---|---|
-| `itens.csv` | Os 6 itens da fatia: categoria, tipo, Tier, peso | Planilha, salvando em CSV com ponto e vírgula |
+| `itens.csv` | Os itens da fatia (8 desde o marco 6): categoria, tipo, Tier, peso | Planilha, salvando em CSV com ponto e vírgula |
 | `receitas.csv` | Uma receita por item: lote, insumos, construção, horas | Planilha |
 | `recursos.csv` | Grão, Água e Madeira: o item gerado e a área do Tiled | Planilha |
 | `construcoes.json` | Só a lista das 7 construções (o resto vem antes do marco 6) | Editor de texto |
@@ -283,3 +283,50 @@ Se o destino não tem caminho (um clique no meio do lago, por exemplo), o NPC va
 8. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
 
 **O que vem no marco 6:** a produção, o inventário da cidade e o consumo (o Pão sai do Cozinheiro, entra no estoque e é comido), depois das fichas da Produção, do Inventário, do Trabalho e Propriedade, do Econômico (consumo e salários) e da Construção.
+
+### Marco 6: produção, inventário e consumo (2026-10-18)
+
+**O que faz:** a vila passa a **produzir, guardar, comer e pagar**. Os empregados que estão trabalhando somam horas; a cada hora, o trabalho vira progresso do ciclo de cada construção, e o ciclo terminado põe o lote no **inventário da cidade**. À meia-noite, a vila **come** (cada Civil, 1 Pão; a cada 8 dias, 1 Móvel) e paga ao dono do item, e os empregados **recebem** pelas horas do dia. Tudo segue as fichas da [[Ficha Logica/Producao|Produção]], do [[Ficha Logica/Inventario|Inventário]], da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Construcao|Construção]], com a rodada FL6.
+
+**O que muda na tela:**
+
+- os **Braçais** (Ana e Bento na Fazenda, Clara e Davi no Posto de Coleta) não entram mais na construção: trabalham **parados num tile do campo** (o campo de Grão, o poço ou o bosque) e almoçam lá;
+- o **café da manhã** passou para as **6h** (FL6-7): às 7h, todos já vão direto para o trabalho;
+- quando o autor desenhar uma construção e salvar em `data/imagens/construcoes/<tipo>_nivel_<n>.png` (por exemplo, `casa_nivel_1.png`, com 64 × 96 px; o Guia da Arte, parte 7), o jogo a desenha no lugar do retângulo, sem mexer no código. O telhado (os 32 px de cima) fica por cima de quem passa atrás. Uma imagem de tamanho errado vira um aviso no console.
+
+**O console** (FL6-8):
+
+- **à meia-noite**, sai sozinha uma linha de resumo do dia: o estoque de cada item, o Banco, o dinheiro do jogador, a riqueza média dos Civis, os salários pagos e os dias em déficit;
+- a tecla **F4** escreve a tabela completa: o estoque de cada dono (Cidade / jogador), a capacidade, cada construção (a receita, o progresso do ciclo, o motivo de estar parada, quem trabalha agora, o gerente e o que fez hoje) e o dinheiro.
+
+**O que esperar** (é de propósito, ficha da Economia, parte 5): o Banco perde cerca de **54 moedas por dia** e fica quase sem dinheiro por volta do **dia 8**; o jogador também. Quem devolve o dinheiro ao Banco (o Mercado Local, o gasto extra, o imposto e o estabilizador) entra no marco 7. Sem dinheiro, os salários deixam de ser pagos, e o console mostra isso.
+
+**Os dados novos:**
+
+| Arquivo | O que mudou |
+|---|---|
+| `construcoes.json` | Cada tipo ganhou o porte, o que guarda, a Função e o Trabalho de quem não tem receita; e a Pedreira (só nos dados, FL6-5) |
+| `itens.csv`, `receitas.csv`, `recursos.csv` | A Pedra e o Bloco de Pedra (8 itens, FL6-5) |
+| `regras.json` | As vagas e a capacidade por nível, o custo das obras, a cesta mínima, a loja da cidade (110%), o bônus de nível e do gerente, a ordem do dia e o café às 6h |
+| `vila_inicial.json` | O dinheiro do primeiro dia (Banco 400, jogador 100, 12 por Civil), o estoque inicial, o nível de cada construção (a Carpintaria do jogador no 2), as ordens da Carpintaria e as habilidades (50) |
+
+**Os arquivos novos:**
+
+- `Codigo/Inventario/`: o inventário da cidade (duas listas, uma por dono, e a capacidade por categoria);
+- `Codigo/Producao/`: o ciclo, a escolha da receita da cidade, a fila de ordens do jogador e o campo dos Braçais;
+- `Codigo/Economia/`: o dinheiro, o consumo, os salários e a ordem do dia;
+- `Codigo/Construcao/`: as vagas, a capacidade e o gerente;
+- `Codigo/Dados/Construcoes.cpp`: a leitura do `construcoes.json` completo;
+- `Codigo/Vila/SimulacaoDaVila.cpp`: a vila inteira num tick (o jogo e o teste sem tela usam a mesma);
+- `Jogo/ImagemDasConstrucoes.cpp`: o nome e o tamanho das imagens das construções;
+- os testes: 46 conferências novas no `Codigo/` (239 no total), entre elas **3 dias sem tela** (às 10h, os 12 empregados trabalham, e os 4 Braçais estão no campo; o Cozinheiro faz 16 Pães por dia depois do primeiro; a vila nunca fica sem Pão; o dinheiro total nunca muda), e 5 no `Jogo/` (42 no total).
+
+**O que testar:**
+
+1. `.\build\Jogo\jogo.exe --validar` diz "8 itens, 8 construções, 4 recursos, 8 receitas, 1 mapa, 1 vila (10 construções e 15 NPCs). 0 erros, 0 avisos", e os preços mostram a Pedra a 0,5 e o Bloco de Pedra a 1,8.
+2. Abrir o jogo e apertar **3** (4x). Às 6h, todos comem em casa; às 7h, os empregados vão trabalhar. Arrastar a câmera para o campo de Grão (em cima, à esquerda) e para o poço: Ana, Bento, Clara e Davi ficam parados lá, visíveis.
+3. Às 10h, apertar **F3**: os 4 Braçais aparecem "no campo de ...", e os outros 8 empregados "dentro de ...". Apertar **F4**: o estoque, a Fazenda e o Posto "2 de 2 trabalhando agora", o Pão subindo, e a Carpintaria "PARADA: sem ordem" no primeiro dia (o jogador já tem os 6 Móveis e as 12 Tábuas que as ordens pedem).
+4. Às 12h, os Braçais continuam no campo (o almoço conta como trabalho).
+5. À meia-noite, o console escreve o "Resumo do dia 1". Deixar correr uns 3 dias e comparar: o Pão fica perto de 45, o Banco cai cerca de 54 moedas por dia, os dias em déficit ficam em 0.
+6. Apertar **F4** no dia 2: a Carpintaria passa a fazer Móveis (a vila comeu 1 Móvel na primeira meia-noite).
+7. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".

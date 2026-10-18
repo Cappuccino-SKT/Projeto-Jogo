@@ -52,6 +52,7 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "receitas.csv", problemas)) {
         dados.catalogoDeReceitas = lerArquivoDeReceitas(*texto, dados.catalogoDeItens, dados.catalogoDeConstrucoes, problemas);
     }
+    conferirTrabalhoDasConstrucoes(dados.catalogoDeConstrucoes, dados.catalogoDeReceitas, problemas);
 
     // 7. Os preços base e a escada de níveis.
     calcularPrecosBaseDosItens(dados.catalogoDeItens, dados.catalogoDeReceitas, dados.regras.regrasDoPreco, problemas);
@@ -72,7 +73,8 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     // 9. A vila inicial (marco 5): as construções nos lotes e os NPCs. Os lotes
     //    ocupados passam a bloquear a passagem (ficha da IA, regra 4.1).
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "vila_inicial.json", problemas)) {
-        dados.vilaInicial = lerVilaInicial(*texto, dados.mapaDaVila, dados.catalogoDeConstrucoes, problemas);
+        const CatalogosParaAVila catalogos{dados.catalogoDeConstrucoes, dados.catalogoDeItens, dados.regras.construcoes};
+        dados.vilaInicial = lerVilaInicial(*texto, dados.mapaDaVila, catalogos, problemas);
         bloquearOsLotesOcupados(dados.mapaDaVila, dados.vilaInicial);
     }
     return dados;

@@ -86,7 +86,8 @@ Para cada construção de produção da vila:
 2. **O ciclo não começou:** tente tirar os **insumos** do inventário (tudo ou nada, regra 4.2 do Inventário):
    - nas da Cidade, os itens da Cidade;
    - nas do jogador, os itens do jogador; o que faltar, ele **compra** da Cidade, pelo preço de venda da cidade (ficha da Economia), se tiver dinheiro (FL6-3);
-   - se faltar, a construção fica parada ("sem Grão") e tenta de novo na hora seguinte. As receitas Braçais não têm insumo.
+   - se faltar, a construção fica parada ("sem Grão") e tenta de novo na hora seguinte. As receitas Braçais não têm insumo;
+   - numa hora em que ninguém trabalhou (de noite), o ciclo não começa: os insumos só saem quando há trabalho para somar [Proposta].
 3. **Some ao progresso** o trabalho de cada empregado na última hora:
    > ticks trabalhados na hora × velocidade × bônus de nível
    - velocidade, em porcentagem = 50 + a habilidade do Trabalho da receita (habilidade 50 = 100%);
@@ -108,7 +109,7 @@ Para cada construção de produção da **Cidade**:
 2. **A nota de cada uma** (Produção, IA):
    > nota = (preço do produto − custo dos insumos) × (100 + déficit) ÷ 100
    - os preços são os **preços base** no marco 6 (o Mercado Local entra no marco 7);
-   - o **déficit** do produto, em porcentagem = 100 − estoque × 100 ÷ estoque-alvo, preso entre 0 e 100;
+   - o **déficit** do produto, em porcentagem = 100 − estoque × 100 ÷ estoque-alvo, preso entre 0 e 100; o estoque conta os dois donos juntos [Proposta];
    - o **estoque-alvo** = 5 dias do consumo previsto do item (como o Mercado Local, V2-5): a cesta mínima da vila mais os insumos que as receitas atuais de todas as construções gastam num dia cheio (8 horas por empregado). Com alvo 0 (ninguém usa o item), o déficit é 0.
 3. **A comida em perigo:** se o estoque de comida da cidade é menor que **3 dias** da cesta mínima, as receitas de comida ganham sempre.
 4. Escolha a de **maior nota**; no empate, a primeira do `receitas.csv`. Ela vira a `receitaEscolhidaParaOProximoCiclo`: o ciclo atual termina com a receita dele.
@@ -191,7 +192,7 @@ Em `Codigo/Producao/`:
 | Ordens: manter 6 Móveis e 12 Tábuas; o jogador tem 2 Móveis e 1 Tábua | Faz Tábua (não há 3 Tábuas para os Móveis) |
 | O mesmo, com 5 Tábuas | Faz Móveis |
 | Um Braçal fora da área, com a ação Trabalhar | Não soma ticks |
-| Um dia inteiro sem tela, com a vila da fatia | O Cozinheiro faz pelo menos 15 Pães; a vila não fica sem Pão |
+| Três dias sem tela, com a vila da fatia | Depois do primeiro dia, o Cozinheiro faz pelo menos 15 Pães por dia (16; o primeiro dia fecha só 3 ciclos, e a sobra passa para o seguinte); a vila não fica sem Pão |
 
 ## 9. Fora da fatia (e fora do marco 6)
 

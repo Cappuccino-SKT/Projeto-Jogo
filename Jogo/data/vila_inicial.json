@@ -1,32 +1,48 @@
 {
   "semente_da_partida": 1,
+  "banco_da_cidade": 4000,
+  "dinheiro_do_jogador": 1000,
+  "dinheiro_inicial_por_civil": 120,
+  "estoque_inicial": [
+    { "item": "item.pao", "dono": "cidade", "quantidade": 45 },
+    { "item": "item.grao", "dono": "cidade", "quantidade": 32 },
+    { "item": "item.agua", "dono": "cidade", "quantidade": 16 },
+    { "item": "item.tora", "dono": "cidade", "quantidade": 16 },
+    { "item": "item.tabua", "dono": "jogador", "quantidade": 12 },
+    { "item": "item.moveis_madeira", "dono": "jogador", "quantidade": 6 },
+    { "item": "item.bloco_de_pedra", "dono": "cidade", "quantidade": 150 }
+  ],
   "construcoes": [
-    { "id": "fazenda", "tipo": "construcao.fazenda", "lote": 1, "dono": "cidade" },
-    { "id": "posto_de_coleta", "tipo": "construcao.posto_de_coleta", "lote": 6, "dono": "cidade" },
-    { "id": "cozinheiro", "tipo": "construcao.cozinheiro", "lote": 10, "dono": "cidade" },
-    { "id": "mercado", "tipo": "construcao.mercado", "lote": 9, "dono": "cidade" },
-    { "id": "construtor", "tipo": "construcao.construtor", "lote": 3, "dono": "cidade" },
-    { "id": "carpintaria_do_jogador", "tipo": "construcao.carpinteiro", "lote": 11, "dono": "jogador" },
-    { "id": "casa_1", "tipo": "construcao.casa", "lote": 2, "dono": "cidade" },
-    { "id": "casa_2", "tipo": "construcao.casa", "lote": 7, "dono": "cidade" },
-    { "id": "casa_3", "tipo": "construcao.casa", "lote": 8, "dono": "cidade" },
-    { "id": "casa_4", "tipo": "construcao.casa", "lote": 4, "dono": "cidade" }
+    { "id": "fazenda", "tipo": "construcao.fazenda", "lote": 1, "dono": "cidade", "nivel": 1 },
+    { "id": "posto_de_coleta", "tipo": "construcao.posto_de_coleta", "lote": 6, "dono": "cidade", "nivel": 1 },
+    { "id": "cozinheiro", "tipo": "construcao.cozinheiro", "lote": 10, "dono": "cidade", "nivel": 1 },
+    { "id": "mercado", "tipo": "construcao.mercado", "lote": 9, "dono": "cidade", "nivel": 1 },
+    { "id": "construtor", "tipo": "construcao.construtor", "lote": 3, "dono": "cidade", "nivel": 1 },
+    { "id": "carpintaria_do_jogador", "tipo": "construcao.carpinteiro", "lote": 11, "dono": "jogador", "nivel": 2,
+      "ordens": [
+        { "tipo": "manter_estoque", "item": "item.moveis_madeira", "quantidade": 6 },
+        { "tipo": "manter_estoque", "item": "item.tabua", "quantidade": 12 }
+      ] },
+    { "id": "casa_1", "tipo": "construcao.casa", "lote": 2, "dono": "cidade", "nivel": 1 },
+    { "id": "casa_2", "tipo": "construcao.casa", "lote": 7, "dono": "cidade", "nivel": 1 },
+    { "id": "casa_3", "tipo": "construcao.casa", "lote": 8, "dono": "cidade", "nivel": 1 },
+    { "id": "casa_4", "tipo": "construcao.casa", "lote": 4, "dono": "cidade", "nivel": 1 }
   ],
   "npcs": [
-    { "nome": "Ana", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda" },
-    { "nome": "Bento", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda" },
-    { "nome": "Clara", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta" },
-    { "nome": "Davi", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta" },
-    { "nome": "Elisa", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro" },
-    { "nome": "Fábio", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro" },
-    { "nome": "Gil", "classe": "civil", "casa": "casa_2", "trabalho": "mercado" },
-    { "nome": "Helena", "classe": "civil", "casa": "casa_2", "trabalho": "mercado" },
-    { "nome": "Iago", "classe": "civil", "casa": "casa_3", "trabalho": "construtor" },
-    { "nome": "Joana", "classe": "civil", "casa": "casa_3", "trabalho": "construtor" },
-    { "nome": "Lauro", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador" },
-    { "nome": "Marta", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador" },
-    { "nome": "Nuno", "classe": "civil", "casa": "casa_4", "trabalho": "" },
-    { "nome": "Olga", "classe": "civil", "casa": "casa_4", "trabalho": "" },
-    { "nome": "Pedro", "classe": "civil", "casa": "casa_4", "trabalho": "" }
+    { "nome": "Ana", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Bento", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Clara", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Davi", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Elisa", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Fábio", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Gil", "classe": "civil", "casa": "casa_2", "trabalho": "mercado", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Helena", "classe": "civil", "casa": "casa_2", "trabalho": "mercado", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Iago", "classe": "civil", "casa": "casa_3", "trabalho": "construtor", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Joana", "classe": "civil", "casa": "casa_3", "trabalho": "construtor", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Lauro", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Marta", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Nuno", "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Olga", "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Pedro", "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } }
   ]
 }

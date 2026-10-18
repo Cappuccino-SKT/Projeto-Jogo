@@ -18,8 +18,8 @@
 - **Arte (2026-10-18):** o autor testou gerar a arte com o Gemini e **abandonou a ideia**; ele vai **desenhar à mão, no Pixelorama**, com a paleta **Resurrect 64** (mais algumas cores, se precisar). O [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] junta todos os critérios, na branch `docs/guia-da-arte` (feita em cima da `codigo/marco-5-rotina`), e abriu a **rodada FA1**, aplicada em 2026-10-18, toda com "seguir sugestão".
 - **Marco 5 (2026-10-18):** escrito na branch `codigo/marco-5-rotina` (feita do `main`, que já tem a ficha do marco 5); **confirmado pelo autor** (seção 3).
 - **Fichas do marco 6 (2026-10-18):** a [[Ficha Logica/Producao|Produção]], o [[Ficha Logica/Inventario|Inventário]], a [[Ficha Logica/Economia|Economia]] (consumo e salários) e a [[Ficha Logica/Construcao|Construção]], na branch `docs/fichas-marco-6` (feita em cima da `docs/guia-da-arte`). A **rodada FL6** foi aplicada (2026-10-18), toda com "seguir sugestão".
-- **Marco 6 (2026-10-18):** em escrita na branch `codigo/marco-6-producao` (feita do `main`, que já tem as fichas do marco 6).
-- **Próximo passo:** terminar o marco 6; o autor testa (os comandos e o que olhar estão no `Jogo/LEIA-ME.md`) e continua desenhando.
+- **Marco 6 (2026-10-18):** escrito na branch `codigo/marco-6-producao` (feita do `main`, que já tem as fichas do marco 6), com a FA1 e a FL6 aplicadas; falta o teste do autor (seção 3).
+- **Próximo passo:** o autor testa o marco 6 (o que olhar está no `Jogo/LEIA-ME.md`) e continua desenhando; depois, as fichas do marco 7 (o Mercado Local, o estabilizador, o gasto extra, o imposto, a Felicidade e os eventos), com os 2 pontos da seção 4.
 - **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até as fichas do marco 6 (e o Guia da Arte) já entrou no `main`; falta o `codigo/marco-6-producao`.
 
 ## 2. Como trabalhamos
@@ -89,6 +89,7 @@
 - **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 - **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
 - **Marco 2 (pronto, confirmado pelo autor em 2026-10-18):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
+- **Marco 6 (escrito em 2026-10-18, falta o teste do autor):** o inventário da cidade, a produção (o ciclo, a escolha da receita, as ordens da Carpintaria, os Braçais no campo), o consumo da cesta mínima e os salários (`Codigo/Inventario/`, `Producao/`, `Economia/`, `Construcao/`), juntos na `Codigo/Vila/SimulacaoDaVila.cpp`; o resumo do dia no console e o F4; as imagens das construções, quando existirem. 239 testes no `Codigo/` (com 3 dias sem tela) e 42 no `Jogo/`.
 - **Marco 5 (pronto, confirmado pelo autor em 2026-10-18):** a vila inicial (`data/vila_inicial.json`: 10 construções em retângulos de cor, que bloqueiam o lote, e 15 Civis com casa e emprego) e a rotina com a Utilidade (`Codigo/Npc/RotinaDosNpcs.cpp`, `Codigo/Vila/`), com o sorteio PCG32 (`Codigo/Tempo/SorteioComSemente.cpp`); F3 mostra as ações. 193 testes no `Codigo/` (com um dia inteiro sem tela) e 37 no `Jogo/`.
 - **Marco 4 (pronto, confirmado pelo autor em 2026-10-18):** um NPC no centro da vila anda até o tile do botão direito pela busca A\* (`Codigo/Mapa/BuscaDeCaminho.cpp`, `Codigo/Npc/`), com a EnTT 3.16.0; o boneco do Mana Seed (ou o de teste, sem a pasta) é desenhado entre os ticks; N cria mais NPCs e F2 mostra os caminhos. 167 testes no `Codigo/` e 36 no `Jogo/`.
 - **Marco 3 (pronto, confirmado pelo autor em 2026-10-18):** os dados em `Jogo/data` (itens, receitas, recursos, construções, regras e textos), lidos e conferidos por `Codigo/Dados/`, com o preço base (Pão 1,7) e o `jogo --validar`; as teclas passam pela tabela de ações (FL2-4). 124 testes no `Codigo/` e 25 no `Jogo/`.
@@ -96,6 +97,11 @@
 ## 4. Rodada pendente
 
 Nenhuma. A FA1 (a arte) e a FL6 (o marco 6) foram aplicadas em 2026-10-18, todas com "seguir sugestão"; as decisões estão na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]].
+
+**Para a rodada do marco 7** (achados ao rodar 30 dias sem tela no marco 6; além do Banco e do jogador sem dinheiro por volta do dia 8, que já eram esperados):
+
+1. **A Tora acaba.** O estoque-alvo só conta os insumos das receitas *atuais*. Como a Carpintaria passa a maior parte do tempo nos Móveis (que gastam Tábua), a previsão de Tora quase sempre é 0, e o Posto de Coleta fica na Água (no empate, a primeira do `receitas.csv`). A Tora acaba no dia 12; sem Tábua, os Móveis acabam no dia 19, e os dias em déficit de materiais começam.
+2. **O estoque de matéria-prima enche.** Com déficit 0, a nota ainda é positiva, então os Braçais nunca param: o Grão e a Água sobem uns 40 por dia e enchem a capacidade (900) por volta do dia 17; depois, a produção para com "o estoque encheu", e quem fica por último (a Carpintaria) é a que mais perde.
 
 ## 5. Onde está cada coisa
 
