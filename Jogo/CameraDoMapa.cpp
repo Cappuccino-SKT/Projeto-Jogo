@@ -156,3 +156,15 @@ void CameraDoMapa::posicionarNoMundo(double novaPosicaoXNoMundo, double novaPosi
     posicaoXNoMundo = novaPosicaoXNoMundo;
     posicaoYNoMundo = novaPosicaoYNoMundo;
 }
+
+std::optional<PosicaoDeTile> CameraDoMapa::converterPontoDaTelaEmTile(double xNaTela, double yNaTela, int tamanhoDoTileEmPixels) const
+{
+    // Da tela ao mundo: (ponto + deslocamento) ÷ zoom. Depois, ÷ 16 arredondando para baixo.
+    const double xNoMundo = (xNaTela + deslocamentoXNaTela()) / zoom;
+    const double yNoMundo = (yNaTela + deslocamentoYNaTela()) / zoom;
+    if (xNoMundo < 0.0 || yNoMundo < 0.0 || xNoMundo >= larguraDoMapaNoMundo || yNoMundo >= alturaDoMapaNoMundo) {
+        return std::nullopt;
+    }
+    return PosicaoDeTile{static_cast<int>(std::floor(xNoMundo / tamanhoDoTileEmPixels)),
+                         static_cast<int>(std::floor(yNoMundo / tamanhoDoTileEmPixels))};
+}

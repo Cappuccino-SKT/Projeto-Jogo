@@ -190,4 +190,48 @@ Uma linha que começa com `#` nas planilhas é comentário.
 4. Todas as teclas dos marcos 1 e 2 continuam funcionando.
 5. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
 
-**O que vem no marco 4:** um NPC andando pela busca de caminho, depois da ficha do NPC (posição e movimento) e da busca de caminho na ficha do Mapa.
+### Marco 4: NPC andando (2026-10-18, confirmado pelo autor)
+
+**O que faz:** um NPC nasce no centro da vila, em (32, 32). Com o **botão direito** num tile, ele calcula o caminho mais curto (a busca A\* em 8 direções) e anda até lá, contornando o que bloqueia, sem cortar a quina de árvores e paredes. O boneco vira para o lado em que anda e mexe as pernas. Tudo segue a [[Ficha Logica/NPC|ficha do NPC]] e a regra 4.4 da [[Ficha Logica/Mapa|ficha do Mapa]], com a rodada FL4.
+
+**Como ele anda** (FL4-1 e FL4-5):
+
+- 128 tiles por hora de jogo: 3,2 tiles por segundo a 1x. A velocidade fica no `regras.json` (`velocidade_de_andar_em_tiles_por_hora`);
+- ele anda pelos ticks: o Espaço o pausa, e as teclas 2 e 3 o aceleram junto com o relógio;
+- o desenho fica entre um tick e o seguinte, então o movimento é liso, sem pulinhos.
+
+**As teclas novas, provisórias (FL4-6):**
+
+| Tecla | O que faz |
+|---|---|
+| Botão direito | Manda **todos** os NPCs ao tile clicado |
+| N | Cria mais um NPC perto do centro (até 50) |
+| F2 | Pinta de azul o caminho que falta a cada NPC |
+
+Se o destino não tem caminho (um clique no meio do lago, por exemplo), o NPC vai até o tile mais perto, e o console avisa (FL4-3).
+
+**O boneco** (FL4-4) é descrito no `data/personagens/boneco_provisorio.json`: o tamanho do quadro (64), o ponto dos pés, as linhas de cada animação e as 3 camadas do Mana Seed (corpo, roupa, cabelo), lidas da pasta `Assents Temporarios/`, que fica fora do Git. As camadas são juntadas numa folha só ao abrir. **Sem essa pasta** (por exemplo, em outro PC), o console mostra um aviso e o jogo usa o **boneco de teste** (`data/imagens/boneco_de_teste.png`, feito por `assets/teste/gerar_boneco_de_teste.py`), que tem o mesmo formato. Para trocar a roupa ou o cabelo, é só mudar os nomes das imagens no arquivo.
+
+**A biblioteca nova:** a **EnTT** 3.16.0 (FT2-2), baixada pelo CMake na primeira vez. Ela guarda cada NPC como uma entidade com os componentes dele (a posição, o caminho, o pedido de caminho). Por isso, rode o `cmake --preset padrao` de novo antes de compilar.
+
+**Os arquivos novos:**
+
+- `Codigo/Mapa/BuscaDeCaminho.cpp`: a busca A\*, que reaproveita a memória de uma busca para a outra;
+- `Codigo/Npc/`: os componentes do NPC e o movimento (criar, pedir caminho, atender os pedidos, andar a cada tick);
+- `Jogo/BonecoDoNpc.cpp`: a leitura do arquivo do boneco e a escolha do quadro da animação;
+- `Jogo/DesenhoDosPersonagens.cpp`: o desenho dos NPCs, de cima para baixo na tela;
+- `Jogo/DesenhoDeQuadrados.cpp`: o "pincel" da placa de vídeo, separado do desenho do mapa para os dois usarem o mesmo;
+- os testes: 43 conferências novas no `Codigo/` (167 no total) e 11 no `Jogo/` (36 no total).
+
+**O que testar:**
+
+1. `cmake --preset padrao` e depois `cmake --build --preset padrao` (a EnTT é baixada na primeira vez).
+2. Ao abrir, o NPC aparece no centro da vila, parado, olhando para baixo, com a arte do Mana Seed. O console diz "NPC 1 criado em (32, 32)" e **não** mostra o aviso do boneco.
+3. Clicar com o botão direito num tile perto: o NPC anda até lá, virado para o lado certo e mexendo as pernas, e para em cima do tile clicado.
+4. Clicar com o botão direito do outro lado de algo que bloqueia (as árvores do bosque, embaixo à esquerda, ou o lago, embaixo à direita). Com o **F2** ligado, o caminho azul contorna o obstáculo; com o **F1**, dá para ver os tiles bloqueados.
+5. Clicar no meio do lago: o NPC vai até a margem mais perto, e o console avisa "não tem caminho".
+6. Apertar **N** umas 5 vezes e clicar com o botão direito: todos andam juntos e passam um pelo outro (eles não colidem). Quem está mais embaixo na tela aparece na frente.
+7. Durante a caminhada: **Espaço** pausa o NPC (a câmera continua andando), e **3** (4x) o deixa 4 vezes mais rápido.
+8. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
+
+**O que vem no marco 5:** a rotina dos 15 NPCs (dormir, trabalhar e passear nos horários), depois da parte da rotina e da Utilidade na ficha do NPC.

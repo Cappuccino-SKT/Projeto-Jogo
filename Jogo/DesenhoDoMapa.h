@@ -7,21 +7,13 @@
 #include <string>
 #include <vector>
 
-#include <glad/gl.h>
-
 #include "CameraDoMapa.h"
+#include "DesenhoDeQuadrados.h"
 #include "Mapa/MapaLocal.h"
-
-// A imagem de um conjunto de tiles, já carregada na placa de vídeo.
-struct TexturaDoConjuntoDeTiles {
-    GLuint identificadorNaPlacaDeVideo = 0;
-    int larguraEmPixels = 0;
-    int alturaEmPixels = 0;
-};
 
 class DesenhistaDoMapa {
 public:
-    // Prepara os programas da placa de vídeo e carrega as imagens dos conjuntos.
+    // Prepara o pincel da placa de vídeo e carrega as imagens dos conjuntos.
     // Precisa do OpenGL já ligado. Devolve false e explica o erro se algo falhar.
     bool preparar(const MapaLocal& mapa, std::string& mensagemDeErro);
 
@@ -31,25 +23,18 @@ public:
     void desenharCamadasAcimaDosPersonagens(const MapaLocal& mapa, const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
     // F1 (FL1-3): pinta de vermelho translúcido os tiles bloqueados.
     void desenharTilesBloqueadosParaDepuracao(const MapaLocal& mapa, const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
+    // F2 (FL4-6): pinta de azul translúcido uma lista de tiles (os caminhos dos NPCs).
+    void desenharTilesDosCaminhosParaDepuracao(const std::vector<PosicaoDeTile>& tilesDosCaminhos, const MapaLocal& mapa,
+                                               const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
 
     // Devolve à placa de vídeo tudo o que foi pedido. Chamar antes de fechar o OpenGL.
     void liberar();
 
 private:
-    GLuint programaDeSombreamento = 0;  // o "shader": o programa que roda na placa de vídeo
-    GLuint arranjoDeVertices = 0;       // VAO: como ler os números de cada canto
-    GLuint memoriaDeVertices = 0;       // VBO: os números dos cantos, mandados a cada quadro
-    GLint localDoTamanhoDaTela = -1;
-    GLint localDoUsarTextura = -1;
-    GLint localDaCorSemTextura = -1;
+    DesenhistaDeQuadrados pincel;
 
     // Uma textura para cada conjunto de tiles do mapa, na mesma ordem.
-    std::vector<TexturaDoConjuntoDeTiles> texturasDosConjuntos;
-
-    // Os cantos dos quadrados a desenhar neste lote: x e y na tela, u e v na imagem.
-    std::vector<float> verticesDoLote;
+    std::vector<TexturaNaPlacaDeVideo> texturasDosConjuntos;
 
     void desenharCamadaPeloNome(const MapaLocal& mapa, const char* nomeDaCamada, const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
-    void comecarDesenho(int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
-    void mandarLoteParaAPlacaDeVideo();
 };

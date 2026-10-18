@@ -7,6 +7,9 @@
 // entrega os números. Assim as contas podem ser testadas sozinhas.
 
 #include <array>
+#include <optional>
+
+#include "Mapa/MapaLocal.h"
 
 // As definições da câmera (ficha, parte 2). No futuro, o perfil do jogador.
 struct RegrasDaCamera {
@@ -45,6 +48,10 @@ public:
     // Regra 4.6: o deslocamento do desenho, em pixels inteiros da tela.
     int deslocamentoXNaTela() const;
     int deslocamentoYNaTela() const;
+
+    // Marco 4 (ficha do NPC, parte 5): o tile embaixo de um ponto da tela, ou
+    // nada se o ponto cai fora do mapa. Usa o mesmo deslocamento do desenho.
+    std::optional<PosicaoDeTile> converterPontoDaTelaEmTile(double xNaTela, double yNaTela, int tamanhoDoTileEmPixels) const;
 
     int zoomAtual() const { return zoom; }
     double posicaoXNoMundoAtual() const { return posicaoXNoMundo; }

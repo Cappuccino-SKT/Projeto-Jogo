@@ -31,13 +31,17 @@ struct RegrasDoPreco {
     int margemDoDonoEmPorcento = 120;
 };
 
-// Os números do regras.json usados no marco 3.
+// Os números do regras.json usados até o marco 4.
 struct RegrasDoJogo {
     RegrasDoPreco regrasDoPreco;
     // Grupo da estação -> produção na Primavera, Verão, Outono e Inverno, em % (FL3-6).
     std::map<std::string, std::array<int, 4>> producaoPorEstacaoEmPorcento;
     int produtividadeNormalEmPorcento = 100;
     int produtividadeDeDestaqueEmPorcento = 150;
+    // O movimento dos NPCs (marco 4, ficha do NPC): a velocidade de andar
+    // (FL4-1) e quantos caminhos a busca calcula por tick (FT1-3).
+    int velocidadeDeAndarEmTilesPorHora = 128;
+    int caminhosCalculadosPorTick = 4;
 };
 
 TabelaDeTextos lerArquivoDeTextos(const std::string& textoDoArquivo, ListaDeProblemasDosDados& listaDeProblemas);

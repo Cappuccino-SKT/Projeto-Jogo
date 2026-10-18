@@ -13,6 +13,9 @@ void testarTabelaDeAcoesDoTeclado()
     conferir(tabela.acaoDaTeclaApertada(SDL_SCANCODE_3) == AcaoDoJogador::Velocidade4x, "a tecla 3 é a velocidade 4x");
     conferir(tabela.acaoDaTeclaApertada(SDL_SCANCODE_UP) == AcaoDoJogador::MoverCameraParaCima, "a seta para cima é Mover para cima");
     conferir(!tabela.acaoDaTeclaApertada(SDL_SCANCODE_Q).has_value(), "a tecla Q não faz nada");
+    conferir(tabela.acaoDaTeclaApertada(SDL_SCANCODE_N) == AcaoDoJogador::CriarNpcDeTeste
+                 && tabela.acaoDaTeclaApertada(SDL_SCANCODE_F2) == AcaoDoJogador::MostrarCaminhosParaDepuracao,
+             "o N cria um NPC de teste e o F2 mostra os caminhos (FL4-6)");
 
     bool teclaEstaSegurada[SDL_SCANCODE_COUNT] = {};
     conferir(!tabela.acaoEstaSegurada(AcaoDoJogador::MoverCameraParaDireita, teclaEstaSegurada), "sem tecla segurada, nada se move");

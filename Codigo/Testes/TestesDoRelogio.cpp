@@ -172,6 +172,12 @@ void testarPartidaNovaEVelocidades()
         const bool velocidade3FoiAceita = relogio.definirVelocidadeDoJogo(3);
         conferir(!velocidade3FoiAceita && relogio.velocidadeAtualDoJogo() == 2, "a velocidade 3 é ignorada");
     }
+    {
+        // Marco 4 (FL4-5): 25 milissegundos guardados de 50 = meio caminho do próximo tick.
+        RelogioDoMundo relogio(regrasPadraoDoTempo, 0);
+        const int ticks = relogio.calcularTicksParaAvancarPeloTempoReal(75'000'000);
+        conferir(ticks == 1 && relogio.fracaoJaPassadaDoProximoTick() == 0.5, "com 75 ms a 1x: 1 tick, e meio caminho do próximo");
+    }
 }
 
 }  // namespace

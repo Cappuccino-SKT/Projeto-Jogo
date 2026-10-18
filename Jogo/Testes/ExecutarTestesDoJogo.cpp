@@ -1,4 +1,4 @@
-// O programa de testes do Jogo/: só as partes que não abrem janela (a câmera e as teclas).
+// O programa de testes do Jogo/: só as partes que não abrem janela (a câmera, as teclas e o boneco).
 // Pelo terminal: ctest --test-dir build (roda este e o do Codigo/).
 
 #include <cstdio>
@@ -11,6 +11,7 @@
 
 void testarCameraDoMapa();
 void testarTabelaDeAcoesDoTeclado();
+void testarBonecoDoNpc();
 
 int main()
 {
@@ -20,6 +21,7 @@ int main()
 
     testarCameraDoMapa();
     testarTabelaDeAcoesDoTeclado();
+    testarBonecoDoNpc();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {

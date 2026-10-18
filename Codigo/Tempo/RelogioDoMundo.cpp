@@ -13,6 +13,11 @@ RelogioDoMundo RelogioDoMundo::criarParaPartidaNova(const RegrasDoTempo& regrasD
     return RelogioDoMundo(regrasDoTempo, tickDaHoraInicial);
 }
 
+double RelogioDoMundo::fracaoJaPassadaDoProximoTick() const
+{
+    return static_cast<double>(nanossegundosAcumuladosParaOProximoTick) / regras.nanossegundosReaisDeUmTickEmVelocidade1();
+}
+
 int RelogioDoMundo::calcularTicksParaAvancarPeloTempoReal(int64_t nanossegundosReaisDesdeOUltimoQuadro)
 {
     // Passo 2: o limite de segurança (FL1-3).

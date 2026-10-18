@@ -109,5 +109,15 @@ RegrasDoJogo lerArquivoDeRegras(const std::string& textoDoArquivo, ListaDeProble
         lerInteiroObrigatorio(*produtividade, "normal", regras.produtividadeNormalEmPorcento, onde, listaDeProblemas);
         lerInteiroObrigatorio(*produtividade, "destaque", regras.produtividadeDeDestaqueEmPorcento, onde, listaDeProblemas);
     }
+
+    // O movimento dos NPCs (marco 4). Os dois precisam ser maiores que zero.
+    if (lerInteiroObrigatorio(documento, "velocidade_de_andar_em_tiles_por_hora", regras.velocidadeDeAndarEmTilesPorHora, "regras.json", listaDeProblemas)
+        && regras.velocidadeDeAndarEmTilesPorHora <= 0) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"velocidade_de_andar_em_tiles_por_hora\" precisa ser maior que zero");
+    }
+    if (lerInteiroObrigatorio(documento, "caminhos_calculados_por_tick", regras.caminhosCalculadosPorTick, "regras.json", listaDeProblemas)
+        && regras.caminhosCalculadosPorTick <= 0) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"caminhos_calculados_por_tick\" precisa ser maior que zero");
+    }
     return regras;
 }

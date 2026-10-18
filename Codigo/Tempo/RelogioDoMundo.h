@@ -30,6 +30,10 @@ public:
     // não pode se perder.
     int calcularTicksParaAvancarPeloTempoReal(int64_t nanossegundosReaisDesdeOUltimoQuadro);
 
+    // Quanto do próximo tick já passou, de 0 a 1 (marco 4, FL4-5): o desenho
+    // põe os NPCs entre a posição do tick anterior e a do atual.
+    double fracaoJaPassadaDoProximoTick() const;
+
     // --- Regra 4.2: avançar 1 tick ---
     void avancarUmTick();
 

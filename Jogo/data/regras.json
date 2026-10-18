@@ -8,5 +8,7 @@
     "minerais": [100, 100, 100, 90],
     "agua":     [100, 100, 100, 100]
   },
-  "produtividade_do_recurso_em_porcento": { "normal": 100, "destaque": 150 }
+  "produtividade_do_recurso_em_porcento": { "normal": 100, "destaque": 150 },
+  "velocidade_de_andar_em_tiles_por_hora": 128,
+  "caminhos_calculados_por_tick": 4
 }

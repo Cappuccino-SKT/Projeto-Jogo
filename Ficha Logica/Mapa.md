@@ -6,7 +6,7 @@ tags: [ficha-logica]
 >
 > Ficha escrita em 2026-10-17 para o **marco 1** (janela, loop, relógio fixo e mapa de tiles). Cobre os **tiles e as camadas**. As decisões da rodada **FL1** (2026-10-17, todas "seguir sugestão") já estão aplicadas.
 >
-> **Busca de caminho** (2026-10-18, para o **marco 4**): a regra 4.4, com os dados, as contas, os nomes e os testes dela. Os pontos marcados com FL4 estão na **rodada FL4** ([[Retomada]], seção 4), ainda sem resposta, e a ficha já usa as sugestões, marcadas como [Proposta]. Quem usa a busca é a [[Ficha Logica/NPC|ficha do NPC]].
+> **Busca de caminho** (2026-10-18, para o **marco 4**): a regra 4.4, com os dados, as contas, os nomes e os testes dela. As decisões da rodada **FL4** (2026-10-18, todas "seguir sugestão") já estão aplicadas. Quem usa a busca é a [[Ficha Logica/NPC|ficha do NPC]].
 
 # Ficha Lógica: Mapa
 
@@ -90,6 +90,7 @@ Não vai no save nem muda o mapa: é o rascunho de cada busca. É reservada **um
 | `custoAteAquiPorTile` | lista de 4.096 inteiros | O menor custo já achado da saída até cada tile, em décimos de tile (o "g" do A\*) |
 | `tileAnteriorPorTile` | lista de 4.096 índices | De onde se chegou a cada tile, para montar o caminho no fim |
 | `numeroDaBuscaPorTile` | lista de 4.096 inteiros | Em qual busca o tile foi mexido pela última vez. Assim, não é preciso apagar as listas a cada busca: um número velho quer dizer "ainda não visto nesta busca" |
+| `numeroDaBuscaQueExaminouOTile` | lista de 4.096 inteiros | O mesmo truque, para "já saiu da fila nesta busca" (passo 3.2; acrescentado no código do marco 4) |
 | `filaDeTilesAbertos` | fila com prioridade | Os tiles a examinar, o de menor custo estimado na frente |
 
 ## 3. Quando roda
@@ -155,11 +156,11 @@ A busca **A\*** (lê-se "A estrela") acha o caminho mais curto numa grade de **8
    2. se ele já foi examinado nesta busca, pule-o;
    3. marque-o como examinado. Se a estimativa dele até o destino for a menor até agora, guarde-o como o **tile mais perto** (no empate, o de menor custo até aqui; depois, o de menor índice);
    4. se ele é o destino, pare: achou;
-   5. olhe os **8 vizinhos**, sempre nesta ordem: cima, direita, baixo, esquerda, e depois as diagonais (cima-direita, baixo-direita, baixo-esquerda, cima-esquerda). Pule o vizinho que estiver fora do mapa ou não der para andar (regra 4.2). **Na diagonal**, pule também se **um dos dois tiles retos do lado** estiver bloqueado [Proposta] (FL4-2): o NPC não corta a quina de uma árvore ou de uma parede;
+   5. olhe os **8 vizinhos**, sempre nesta ordem: cima, direita, baixo, esquerda, e depois as diagonais (cima-direita, baixo-direita, baixo-esquerda, cima-esquerda). Pule o vizinho que estiver fora do mapa ou não der para andar (regra 4.2). **Na diagonal**, pule também se **um dos dois tiles retos do lado** estiver bloqueado (FL4-2): o NPC não corta a quina de uma árvore ou de uma parede;
    6. custo novo = custo até aqui + 10 (reto) ou 14 (diagonal). Se o vizinho ainda não foi visto nesta busca, ou se o custo novo for menor que o dele, guarde o custo novo e de onde veio, e ponha-o na fila.
 4. **Monte o caminho:**
    - se achou o destino, comece por ele;
-   - se a fila acabou sem achar (o destino está bloqueado ou cercado), comece pelo **tile mais perto** [Proposta] (FL4-3);
+   - se a fila acabou sem achar (o destino está bloqueado ou cercado), comece pelo **tile mais perto** (FL4-3);
    - volte de tile em tile pelo `tileAnteriorPorTile` até a saída, e inverta a lista. O caminho **não tem** o tile de saída e **termina** no destino (ou no tile mais perto).
 5. **Devolva** o caminho, se ele chega no destino, o custo total e quantos tiles foram examinados (para medir).
 
@@ -253,7 +254,8 @@ Em `Jogo/` (com OpenGL e stb_image):
 
 | Nome | O que é |
 |---|---|
-| `TexturaDoConjuntoDeTiles` | A imagem do conjunto já na placa de vídeo |
+| `TexturaNaPlacaDeVideo` | A imagem do conjunto já na placa de vídeo (o nome ficou geral no marco 4, porque o boneco usa a mesma) |
+| `DesenhistaDeQuadrados` | O "pincel" da placa de vídeo, separado no marco 4 para o mapa e os personagens usarem o mesmo |
 | `CameraDoMapa` | A posição da câmera em pixels do mundo e o zoom |
 | `DesenhistaDoMapa` | A classe que prepara o desenho (`preparar`) e desenha |
 | `desenharCamadasAbaixoDosPersonagens(...)` e `desenharCamadasAcimaDosPersonagens(...)` | A regra 4.3 |

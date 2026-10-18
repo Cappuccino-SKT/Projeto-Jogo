@@ -1,8 +1,9 @@
 // main.cpp: o começo do programa.
 //
-// Abre a janela com o OpenGL 3.3, lê o mapa da vila, cria o relógio do mundo
-// e repete o laço principal até o jogador fechar (no X ou com a tecla Esc).
-// A cada quadro: lê as teclas, avança o relógio pelo tempo real e desenha.
+// Abre a janela com o OpenGL 3.3, lê os dados e o mapa da vila, cria o
+// relógio do mundo e o NPC (marco 4) e repete o laço principal até o jogador
+// fechar (no X ou com a tecla Esc). A cada quadro: lê as teclas e o mouse,
+// avança o relógio pelo tempo real (os NPCs andam a cada tick) e desenha.
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>  // deixa o main() funcionar como programa de janela no Windows
@@ -10,13 +11,22 @@
 #include <glad/gl.h>
 
 #include <algorithm>
+#include <fstream>
+#include <iterator>
 #include <optional>
 #include <string>
+#include <vector>
+
+#include <entt/entity/registry.hpp>
 
 #include "AcoesDoTeclado.h"
+#include "BonecoDoNpc.h"
 #include "Dados/DadosDoJogo.h"
 #include "DesenhoDoMapa.h"
+#include "DesenhoDosPersonagens.h"
+#include "Mapa/BuscaDeCaminho.h"
 #include "Mapa/MapaLocal.h"
+#include "Npc/MovimentoDosNpcs.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "TextoDaDataDoJogo.h"
 
@@ -37,6 +47,12 @@ const std::string pastaDosDadosDoJogo = PASTA_DOS_DADOS_DO_JOGO;
 
 // Quantos problemas cabem na caixa de mensagem; o resto fica só no console.
 constexpr int limiteDeProblemasNaCaixaDeMensagem = 25;
+
+// O boneco dos NPCs (ficha do NPC, FL4-4), dentro da pasta dos dados.
+const std::string caminhoDoArquivoDoBoneco = pastaDosDadosDoJogo + "/personagens/boneco_provisorio.json";
+
+// A tecla N cria NPCs de teste até este tanto (FL4-6).
+constexpr int limiteDeNpcsDeTeste = 50;
 
 // O tamanho com que a janela abre, e se ela já abre maximizada.
 struct TamanhoInicialDaJanela {
@@ -125,13 +141,37 @@ bool lerDadosDoJogo(DadosDoJogo& dadosDoJogo)
     return true;
 }
 
+// Lê o boneco_provisorio.json (ficha do NPC, regra 4.7, passo 1). Devolve
+// false e escreve os erros no console se faltar o arquivo ou algum campo.
+bool lerArquivoDoBoneco(DefinicaoDoBoneco& definicaoDoBoneco, std::string& todosOsErros)
+{
+    std::ifstream arquivo(caminhoDoArquivoDoBoneco, std::ios::binary);
+    if (!arquivo) {
+        todosOsErros = "personagens/boneco_provisorio.json: não foi possível abrir o arquivo";
+        SDL_Log("ERRO:  %s", todosOsErros.c_str());
+        return false;
+    }
+    const std::string textoDoArquivo((std::istreambuf_iterator<char>(arquivo)), std::istreambuf_iterator<char>());
+    std::vector<std::string> errosDoBoneco;
+    definicaoDoBoneco = lerDefinicaoDoBoneco(textoDoArquivo, errosDoBoneco);
+    for (const std::string& erro : errosDoBoneco) {
+        SDL_Log("ERRO:  personagens/boneco_provisorio.json: %s", erro.c_str());
+        todosOsErros += "personagens/boneco_provisorio.json: " + erro + "\n";
+    }
+    return errosDoBoneco.empty();
+}
+
 // O modo "jogo --validar" (ficha dos Itens, regra 4.4): lê e confere todos os
-// dados, sem abrir janela, e termina com 0 (tudo certo) ou 1 (há erro).
+// dados (e o arquivo do boneco), sem abrir janela, e termina com 0 (tudo
+// certo) ou 1 (há erro).
 int validarDadosSemJanela()
 {
     const DadosDoJogo dadosDoJogo = carregarDadosDoJogo(pastaDosDadosDoJogo);
     escreverProblemasEResumoNoConsole(dadosDoJogo);
-    return dadosDoJogo.dadosEstaoProntos() ? 0 : 1;
+    DefinicaoDoBoneco definicaoDoBoneco;
+    std::string errosDoBoneco;
+    const bool bonecoEstaCerto = lerArquivoDoBoneco(definicaoDoBoneco, errosDoBoneco);
+    return dadosDoJogo.dadosEstaoProntos() && bonecoEstaCerto ? 0 : 1;
 }
 
 // Escreve no console as viradas do tick que acabou de rodar (no marco 1,
@@ -203,6 +243,37 @@ void tratarAcaoDoRelogio(AcaoDoJogador acao, RelogioDoMundo& relogio)
     }
 }
 
+// O tile do centro do mapa, onde os NPCs do marco 4 nascem (ficha do NPC, regra 4.1).
+PosicaoDeTile tileDoCentroDoMapa(const MapaLocal& mapa)
+{
+    return {mapa.larguraEmTiles / 2, mapa.alturaEmTiles / 2};
+}
+
+// Cria mais um NPC no tile livre seguinte ao último usado (regra 4.1 e tecla N).
+void criarMaisUmNpc(entt::registry& registroDasEntidades, const MapaLocal& mapa, int& quantidadeDeNpcsCriados)
+{
+    const std::optional<PosicaoDeTile> tileLivre = acharTileLivreEmVoltaDe(mapa, tileDoCentroDoMapa(mapa), quantidadeDeNpcsCriados);
+    if (!tileLivre.has_value()) {
+        SDL_Log("Não há tile livre para mais um NPC.");
+        return;
+    }
+    criarNpcNoTile(registroDasEntidades, *tileLivre);
+    ++quantidadeDeNpcsCriados;
+    SDL_Log("NPC %d criado em (%d, %d).", quantidadeDeNpcsCriados, tileLivre->tileX, tileLivre->tileY);
+}
+
+// Os tiles que faltam andar em todos os caminhos (para o F2).
+std::vector<PosicaoDeTile> juntarTilesDosCaminhos(const entt::registry& registroDasEntidades)
+{
+    std::vector<PosicaoDeTile> tilesDosCaminhos;
+    for (const auto [npc, caminho] : registroDasEntidades.view<CaminhoDoNpc>().each()) {
+        for (std::size_t indice = caminho.indiceDoProximoTileDoCaminho; indice < caminho.tilesDoCaminho.size(); ++indice) {
+            tilesDosCaminhos.push_back(caminho.tilesDoCaminho[indice]);
+        }
+    }
+    return tilesDosCaminhos;
+}
+
 int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
 {
     // 0. A linha de comando: "jogo --validar" só confere os dados (o --simular vem no marco 7).
@@ -218,6 +289,12 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         return 1;
     }
     MapaLocal& mapaDaVila = dadosDoJogo.mapaDaVila;
+    DefinicaoDoBoneco definicaoDoBoneco;
+    std::string errosDoBoneco;
+    if (!lerArquivoDoBoneco(definicaoDoBoneco, errosDoBoneco)) {
+        mostrarErroGrave("O arquivo do boneco tem erros:\n" + errosDoBoneco);
+        return 1;
+    }
 
     // 2. Liga a parte de vídeo da SDL e pede o OpenGL 3.3 "core" (sem as funções antigas).
     if (!SDL_Init(SDL_INIT_VIDEO)) {
@@ -274,6 +351,22 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         SDL_Quit();
         return 1;
     }
+    // O desenho dos NPCs: as camadas do boneco, ou o boneco de teste se elas faltarem.
+    DesenhistaDosPersonagens desenhistaDosPersonagens;
+    std::vector<std::string> avisosDoBoneco;
+    if (!desenhistaDosPersonagens.preparar(definicaoDoBoneco, pastaDosDadosDoJogo, avisosDoBoneco, mensagemDeErroDoDesenho)) {
+        mostrarErroGrave("Não foi possível preparar o desenho dos personagens: " + mensagemDeErroDoDesenho);
+        desenhistaDosPersonagens.liberar();
+        desenhistaDoMapa.liberar();
+        SDL_GL_DestroyContext(ligacaoComOOpenGL);
+        SDL_DestroyWindow(janelaDoJogo);
+        SDL_Quit();
+        return 1;
+    }
+    for (const std::string& aviso : avisosDoBoneco) {
+        SDL_Log("Aviso: %s", aviso.c_str());
+    }
+
     // A câmera (ficha da Interface): zoom 3x, centralizada no primeiro quadro,
     // quando o tamanho da janela já é o certo.
     CameraDoMapa cameraDoMapa;
@@ -281,14 +374,30 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                                       mapaDaVila.alturaEmTiles * mapaDaVila.tamanhoDoTileEmPixels);
     bool cameraJaFoiCentralizada = false;
     bool mostrarColisaoParaDepuracao = false;
+    bool mostrarCaminhosParaDepuracao = false;
     const TabelaDeAcoesDoTeclado tabelaDeAcoes = TabelaDeAcoesDoTeclado::criarComAsTeclasPadrao();
 
     SDL_Log("Esc ou o X fecham; F11 liga a tela cheia; F1 mostra a colisão.");
     SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
     SDL_Log("Câmera: WASD ou setas (Shift corre), roda do mouse para o zoom, botão do meio para arrastar.");
+    SDL_Log("NPCs: botão direito manda todos ao tile; N cria mais um (até %d); F2 mostra os caminhos.", limiteDeNpcsDeTeste);
 
     // 5. O relógio do mundo de uma partida nova (6h do dia 1 da Primavera).
-    RelogioDoMundo relogioDoMundo = RelogioDoMundo::criarParaPartidaNova(RegrasDoTempo{});
+    const RegrasDoTempo regrasDoTempo;
+    RelogioDoMundo relogioDoMundo = RelogioDoMundo::criarParaPartidaNova(regrasDoTempo);
+
+    // 5b. Os NPCs (marco 4, ficha do NPC): as regras do movimento, a busca de
+    //     caminho e o primeiro NPC, no centro do mapa.
+    RegrasDoMovimento regrasDoMovimento;
+    regrasDoMovimento.velocidadeDeAndarEmMilesimosPorTick =
+        converterVelocidadeParaMilesimosPorTick(dadosDoJogo.regras.velocidadeDeAndarEmTilesPorHora, regrasDoTempo.ticksPorHoraDeJogo);
+    regrasDoMovimento.caminhosCalculadosPorTick = dadosDoJogo.regras.caminhosCalculadosPorTick;
+    regrasDoMovimento.distanciaDoCicloDeAndarEmMilesimos = definicaoDoBoneco.distanciaDoCicloDeAndarEmMilesimos();
+    entt::registry registroDasEntidades;
+    BuscadorDeCaminho buscadorDeCaminho;
+    int quantidadeDeNpcsCriados = 0;
+    criarMaisUmNpc(registroDasEntidades, mapaDaVila, quantidadeDeNpcsCriados);
+
     std::string tituloMostradoNaJanela;
     Uint64 instanteDoQuadroAnteriorEmNanossegundos = SDL_GetTicksNS();
 
@@ -314,6 +423,15 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                 } else if (acao == AcaoDoJogador::MostrarColisaoParaDepuracao) {
                     // Mostra os tiles bloqueados em vermelho (FL1-3).
                     mostrarColisaoParaDepuracao = !mostrarColisaoParaDepuracao;
+                } else if (acao == AcaoDoJogador::MostrarCaminhosParaDepuracao) {
+                    // Mostra os caminhos dos NPCs em azul (FL4-6).
+                    mostrarCaminhosParaDepuracao = !mostrarCaminhosParaDepuracao;
+                } else if (acao == AcaoDoJogador::CriarNpcDeTeste) {
+                    if (quantidadeDeNpcsCriados < limiteDeNpcsDeTeste) {
+                        criarMaisUmNpc(registroDasEntidades, mapaDaVila, quantidadeDeNpcsCriados);
+                    } else {
+                        SDL_Log("Já há %d NPCs de teste (o limite).", limiteDeNpcsDeTeste);
+                    }
                 } else if (acao.has_value()) {
                     tratarAcaoDoRelogio(*acao, relogioDoMundo);
                 }
@@ -339,6 +457,17 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_UP && eventoRecebido.button.button == SDL_BUTTON_MIDDLE) {
                 cameraDoMapa.terminarArrasto();
             }
+            // O botão direito dá ordem (Interface): no marco 4, manda todos os NPCs ao tile (FL4-6).
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_RIGHT) {
+                const std::optional<PosicaoDeTile> tileClicado = cameraDoMapa.converterPontoDaTelaEmTile(
+                    eventoRecebido.button.x * densidadeDePixels, eventoRecebido.button.y * densidadeDePixels, mapaDaVila.tamanhoDoTileEmPixels);
+                if (tileClicado.has_value()) {
+                    for (const entt::entity npc : registroDasEntidades.view<PosicaoDoNpc>()) {
+                        pedirCaminhoParaONpc(registroDasEntidades, npc, *tileClicado, relogioDoMundo.tickAtual());
+                    }
+                    SDL_Log("Destino dos NPCs: (%d, %d).", tileClicado->tileX, tileClicado->tileY);
+                }
+            }
             if (eventoRecebido.type == SDL_EVENT_MOUSE_MOTION) {
                 cameraDoMapa.arrastarPeloMouse(eventoRecebido.motion.xrel * densidadeDePixels,
                                                eventoRecebido.motion.yrel * densidadeDePixels);
@@ -361,6 +490,11 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         for (int tick = 0; tick < ticksParaAvancar; ++tick) {
             relogioDoMundo.avancarUmTick();
             escreverAsViradasNoConsole(relogioDoMundo);
+            // A cada tick (ficha do NPC, parte 3): primeiro os caminhos pedidos, depois o andar.
+            for (const std::string& aviso : atenderPedidosDeCaminho(registroDasEntidades, mapaDaVila, buscadorDeCaminho, regrasDoMovimento)) {
+                SDL_Log("Aviso: %s.", aviso.c_str());
+            }
+            andarOsNpcsUmTick(registroDasEntidades, mapaDaVila, regrasDoMovimento, relogioDoMundo.tickAtual());
         }
 
         // 6c. A data no título da janela, trocada só quando o texto muda.
@@ -386,15 +520,21 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         cameraDoMapa.moverPeloTeclado(direcao.direcaoX, direcao.direcaoY, segundosReaisDoQuadro, direcao.correndoComShift);
         cameraDoMapa.limitarAoMapa();
 
-        // 6e. Desenha o quadro: fundo, mapa (personagens no meio, a partir do marco 4) e depuração.
+        // 6e. Desenha o quadro: fundo, mapa (os NPCs no meio das camadas) e depuração.
         glViewport(0, 0, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         glClearColor(corDoFundoAtrasDoMapa[0], corDoFundoAtrasDoMapa[1], corDoFundoAtrasDoMapa[2], 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         desenhistaDoMapa.desenharCamadasAbaixoDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        desenhistaDosPersonagens.desenharNpcs(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(), mapaDaVila.tamanhoDoTileEmPixels,
+                                              cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         desenhistaDoMapa.desenharCamadasAcimaDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         if (mostrarColisaoParaDepuracao) {
             desenhistaDoMapa.desenharTilesBloqueadosParaDepuracao(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        }
+        if (mostrarCaminhosParaDepuracao) {
+            desenhistaDoMapa.desenharTilesDosCaminhosParaDepuracao(juntarTilesDosCaminhos(registroDasEntidades), mapaDaVila, cameraDoMapa,
+                                                                   larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         }
 
         SDL_GL_SwapWindow(janelaDoJogo);
@@ -403,6 +543,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     SDL_Log("Janela fechada. Até a próxima!");
 
     // 7. Devolve ao sistema tudo o que foi pedido, na ordem contrária.
+    desenhistaDosPersonagens.liberar();
     desenhistaDoMapa.liberar();
     SDL_GL_DestroyContext(ligacaoComOOpenGL);
     SDL_DestroyWindow(janelaDoJogo);

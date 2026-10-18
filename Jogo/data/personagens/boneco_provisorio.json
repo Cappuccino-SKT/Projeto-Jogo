@@ -1,0 +1,14 @@
+{
+  "tamanho_do_quadro_em_pixels": 64,
+  "pes_no_quadro": [32, 43],
+  "linha_parado": 0,
+  "linha_andando": 4,
+  "quadros_de_andar": 6,
+  "distancia_por_quadro_de_andar_em_milesimos": 400,
+  "camadas": [
+    "../../Assents Temporarios/char_a_p1/char_a_p1_0bas_humn_v01.png",
+    "../../Assents Temporarios/char_a_p1/1out/char_a_p1_1out_fstr_v01.png",
+    "../../Assents Temporarios/char_a_p1/4har/char_a_p1_4har_dap1_v01.png"
+  ],
+  "imagem_de_reserva": "imagens/boneco_de_teste.png"
+}

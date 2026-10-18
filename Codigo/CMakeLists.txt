@@ -4,6 +4,8 @@
 add_library(regras_do_jogo STATIC
     Tempo/RelogioDoMundo.cpp
     Mapa/MapaLocal.cpp
+    Mapa/BuscaDeCaminho.cpp
+    Npc/MovimentoDosNpcs.cpp
     Dados/ProblemasDosDados.cpp
     Dados/TabelaCsv.cpp
     Dados/TextosERegras.cpp
@@ -20,6 +22,10 @@ target_compile_options(regras_do_jogo PRIVATE -Wall -Wextra)
 
 # A leitura do mapa e dos dados usa a nlohmann/json, mas só por dentro (PRIVATE).
 target_link_libraries(regras_do_jogo PRIVATE nlohmann_json::nlohmann_json)
+
+# Os NPCs usam a EnTT, e quem usa a biblioteca também a enxerga (PUBLIC): o
+# Jogo/ lê as posições para desenhar.
+target_link_libraries(regras_do_jogo PUBLIC EnTT::EnTT)
 
 # Os testes automáticos (rodada FL1-4).
 add_subdirectory(Testes)
