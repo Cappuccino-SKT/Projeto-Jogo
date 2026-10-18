@@ -113,4 +113,33 @@ Minimizar a janela pausa o jogo sozinho; ao voltar, ele continua pausado.
 6. `ctest --test-dir build` termina com "100% tests passed".
 7. Abrir o `Jogo/data/mapas/vila.tmj` no Tiled (opcional): mudar um tile, salvar e abrir o jogo de novo.
 
-**O que vem no marco 2:** a câmera que anda (WASD, setas, botão do meio) e o zoom de 2x a 4x pela roda do mouse, depois da ficha da Interface.
+### Marco 2: câmera e entrada (2026-10-18)
+
+**O que faz:** a câmera começa com o centro do mapa no centro da tela, em 3x, e o jogador a move pelo mapa. Ela nunca mostra o vazio além da borda. Tudo segue a [[Ficha Logica/Interface|ficha da Interface]], com as sugestões da rodada FL2 (ainda sem resposta).
+
+| Controle | O que faz |
+|---|---|
+| W, A, S, D ou as setas | Move a câmera (900 pixels da tela por segundo, em qualquer zoom) |
+| Shift (segurado) | A câmera anda 2 vezes mais rápido |
+| Roda do mouse | Zoom 2x, 3x ou 4x; o ponto embaixo do mouse fica parado |
+| Botão do meio (segurado) | Arrasta o mapa junto com o mouse |
+
+As teclas do marco 1 (Espaço, 1, 2, 3, F1, F11, Esc) continuam iguais. A câmera anda também com o jogo pausado, porque usa o tempo real, e não os ticks.
+
+**Os arquivos novos:**
+
+- `Jogo/CameraDoMapa.cpp`: as contas da câmera (teclado, arrasto, zoom, limite, centro e pixel inteiro), sem SDL nem OpenGL;
+- `Jogo/Testes/`: o programa `testes_do_jogo`, com 18 conferências da câmera. O `ctest` agora roda os dois programas de testes;
+- `Jogo/DesenhoDoMapa.cpp`: desenha a partir do deslocamento da câmera, arredondado uma vez só, para os tiles andarem juntos, sem linhas finas entre eles.
+
+**O que testar:**
+
+1. O jogo abre com o cruzamento das duas ruas perto do meio da tela.
+2. WASD e as setas movem a câmera; na diagonal, a velocidade parece a mesma; com Shift, mais rápido.
+3. Segurando A, a câmera para na borda esquerda do mapa, sem mostrar fundo preto. O mesmo nas outras bordas.
+4. A roda troca o zoom (o console escreve "Zoom: 4x."), e o que está embaixo do mouse continua embaixo dele.
+5. Arrastar com o botão do meio move o mapa junto com o mouse.
+6. Com o jogo pausado (Espaço), a câmera ainda anda.
+7. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
+
+**O que vem no marco 3:** carregar os dados (itens, receitas e construções) e calcular os preços base, depois das fichas de Itens, Recursos e Receitas.

@@ -9,6 +9,7 @@
 
 #include <glad/gl.h>
 
+#include "CameraDoMapa.h"
 #include "Mapa/MapaLocal.h"
 
 // A imagem de um conjunto de tiles, já carregada na placa de vídeo.
@@ -16,14 +17,6 @@ struct TexturaDoConjuntoDeTiles {
     GLuint identificadorNaPlacaDeVideo = 0;
     int larguraEmPixels = 0;
     int alturaEmPixels = 0;
-};
-
-// Onde a câmera está olhando. No marco 1 ela fica parada no canto de cima à
-// esquerda, com zoom 3x; a câmera que anda e o zoom que muda vêm no marco 2.
-struct CameraDoMapa {
-    int posicaoXEmPixelsDoMundo = 0;
-    int posicaoYEmPixelsDoMundo = 0;
-    int zoom = 3;
 };
 
 class DesenhistaDoMapa {

@@ -68,14 +68,23 @@ struct FaixaDeTilesVisiveis {
     int ultimaLinha = -1;
 };
 
+// Divisão que arredonda para baixo também nos negativos (-1 ÷ 48 dá -1, não 0).
+int dividirArredondandoParaBaixo(int dividendo, int divisor)
+{
+    return dividendo >= 0 ? dividendo / divisor : -((-dividendo + divisor - 1) / divisor);
+}
+
 FaixaDeTilesVisiveis calcularTilesVisiveis(const MapaLocal& mapa, const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
 {
-    const int tamanhoDoTile = mapa.tamanhoDoTileEmPixels;
+    // O lado de um tile na tela, por exemplo 16 x 3 = 48 pixels.
+    const int ladoDoTileNaTela = mapa.tamanhoDoTileEmPixels * camera.zoomAtual();
+    const int deslocamentoX = camera.deslocamentoXNaTela();
+    const int deslocamentoY = camera.deslocamentoYNaTela();
     FaixaDeTilesVisiveis faixa;
-    faixa.primeiraColuna = std::max(0, camera.posicaoXEmPixelsDoMundo / tamanhoDoTile);
-    faixa.primeiraLinha = std::max(0, camera.posicaoYEmPixelsDoMundo / tamanhoDoTile);
-    faixa.ultimaColuna = std::min(mapa.larguraEmTiles - 1, (camera.posicaoXEmPixelsDoMundo + larguraDaTelaEmPixels / camera.zoom) / tamanhoDoTile);
-    faixa.ultimaLinha = std::min(mapa.alturaEmTiles - 1, (camera.posicaoYEmPixelsDoMundo + alturaDaTelaEmPixels / camera.zoom) / tamanhoDoTile);
+    faixa.primeiraColuna = std::max(0, dividirArredondandoParaBaixo(deslocamentoX, ladoDoTileNaTela));
+    faixa.primeiraLinha = std::max(0, dividirArredondandoParaBaixo(deslocamentoY, ladoDoTileNaTela));
+    faixa.ultimaColuna = std::min(mapa.larguraEmTiles - 1, dividirArredondandoParaBaixo(deslocamentoX + larguraDaTelaEmPixels, ladoDoTileNaTela));
+    faixa.ultimaLinha = std::min(mapa.alturaEmTiles - 1, dividirArredondandoParaBaixo(deslocamentoY + alturaDaTelaEmPixels, ladoDoTileNaTela));
     return faixa;
 }
 
@@ -196,10 +205,10 @@ void DesenhistaDoMapa::desenharCamadaPeloNome(const MapaLocal& mapa, const char*
                 if (numeroDoTile == 0 || mapa.procurarConjuntoDoTile(numeroDoTile) != &conjunto) {
                     continue;  // vazio, ou de outro conjunto
                 }
-                // Do tile à tela: (tile x 16 - câmera) x zoom.
-                const float esquerda = static_cast<float>((tileX * tamanhoDoTile - camera.posicaoXEmPixelsDoMundo) * camera.zoom);
-                const float topo = static_cast<float>((tileY * tamanhoDoTile - camera.posicaoYEmPixelsDoMundo) * camera.zoom);
-                const float ladoNaTela = static_cast<float>(tamanhoDoTile * camera.zoom);
+                // Do tile à tela: tile x 16 x zoom - deslocamento (ficha da Interface, regra 4.6).
+                const float ladoNaTela = static_cast<float>(tamanhoDoTile * camera.zoomAtual());
+                const float esquerda = tileX * ladoNaTela - camera.deslocamentoXNaTela();
+                const float topo = tileY * ladoNaTela - camera.deslocamentoYNaTela();
                 // Do número do tile ao recorte na imagem.
                 const RecorteNaImagem recorte = calcularRecorteDoTileNaImagem(conjunto, numeroDoTile, tamanhoDoTile);
                 const float uEsquerda = static_cast<float>(recorte.pixelX) / textura.larguraEmPixels;
@@ -245,9 +254,9 @@ void DesenhistaDoMapa::desenharTilesBloqueadosParaDepuracao(const MapaLocal& map
             if (mapa.tileDaParaAndar(tileX, tileY)) {
                 continue;
             }
-            const float esquerda = static_cast<float>((tileX * tamanhoDoTile - camera.posicaoXEmPixelsDoMundo) * camera.zoom);
-            const float topo = static_cast<float>((tileY * tamanhoDoTile - camera.posicaoYEmPixelsDoMundo) * camera.zoom);
-            const float ladoNaTela = static_cast<float>(tamanhoDoTile * camera.zoom);
+            const float ladoNaTela = static_cast<float>(tamanhoDoTile * camera.zoomAtual());
+            const float esquerda = tileX * ladoNaTela - camera.deslocamentoXNaTela();
+            const float topo = tileY * ladoNaTela - camera.deslocamentoYNaTela();
             acrescentarQuadrado(verticesDoLote, esquerda, topo, esquerda + ladoNaTela, topo + ladoNaTela, 0, 0, 0, 0);
         }
     }
