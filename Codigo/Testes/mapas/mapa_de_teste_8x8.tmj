@@ -1,0 +1,206 @@
+{
+ "type": "map",
+ "version": "1.10",
+ "tiledversion": "1.11.2",
+ "orientation": "orthogonal",
+ "renderorder": "right-down",
+ "infinite": false,
+ "compressionlevel": -1,
+ "width": 8,
+ "height": 8,
+ "tilewidth": 16,
+ "tileheight": 16,
+ "nextlayerid": 9,
+ "nextobjectid": 3,
+ "tilesets": [
+  {
+   "firstgid": 1,
+   "name": "terreno_de_teste",
+   "image": "terreno_de_teste.png",
+   "imagewidth": 128,
+   "imageheight": 32,
+   "columns": 8,
+   "tilecount": 16,
+   "tilewidth": 16,
+   "tileheight": 16,
+   "margin": 0,
+   "spacing": 0
+  }
+ ],
+ "layers": [
+  {
+   "id": 1,
+   "name": "chao",
+   "type": "tilelayer",
+   "x": 0,
+   "y": 0,
+   "width": 8,
+   "height": 8,
+   "opacity": 1,
+   "visible": true,
+   "data": [1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,1,1]
+  },
+  {
+   "id": 2,
+   "name": "detalhes_do_chao",
+   "type": "tilelayer",
+   "x": 0,
+   "y": 0,
+   "width": 8,
+   "height": 8,
+   "opacity": 1,
+   "visible": true,
+   "data": [0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0]
+  },
+  {
+   "id": 3,
+   "name": "objetos_baixos",
+   "type": "tilelayer",
+   "x": 0,
+   "y": 0,
+   "width": 8,
+   "height": 8,
+   "opacity": 1,
+   "visible": true,
+   "data": [0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,7,0,0,
+  0,0,0,0,0,0,0,0]
+  },
+  {
+   "id": 4,
+   "name": "construcoes_e_paredes",
+   "type": "tilelayer",
+   "x": 0,
+   "y": 0,
+   "width": 8,
+   "height": 8,
+   "opacity": 1,
+   "visible": true,
+   "data": [0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0]
+  },
+  {
+   "id": 5,
+   "name": "acima_do_personagem",
+   "type": "tilelayer",
+   "x": 0,
+   "y": 0,
+   "width": 8,
+   "height": 8,
+   "opacity": 1,
+   "visible": true,
+   "data": [0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0]
+  },
+  {
+   "id": 6,
+   "name": "colisao",
+   "type": "tilelayer",
+   "x": 0,
+   "y": 0,
+   "width": 8,
+   "height": 8,
+   "opacity": 1,
+   "visible": false,
+   "data": [0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,
+  0,0,0,0,0,13,0,0,
+  0,0,0,0,0,0,0,0]
+  },
+  {
+   "id": 7,
+   "name": "lotes",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "x": 0,
+   "y": 0,
+   "opacity": 1,
+   "visible": true,
+   "objects": [
+    {
+     "id": 1,
+     "name": "lote_pequeno_1",
+     "type": "",
+     "rotation": 0,
+     "visible": true,
+     "x": 0,
+     "y": 0,
+     "width": 64,
+     "height": 64,
+     "properties": [
+      {
+       "name": "tipo_permitido",
+       "type": "string",
+       "value": "qualquer"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "name": "recursos",
+   "type": "objectgroup",
+   "draworder": "topdown",
+   "x": 0,
+   "y": 0,
+   "opacity": 1,
+   "visible": true,
+   "objects": [
+    {
+     "id": 2,
+     "name": "poco",
+     "type": "",
+     "rotation": 0,
+     "visible": true,
+     "x": 96,
+     "y": 0,
+     "width": 32,
+     "height": 32,
+     "properties": [
+      {
+       "name": "tipo_de_recurso",
+       "type": "string",
+       "value": "poco"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

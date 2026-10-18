@@ -63,7 +63,7 @@ Documentos do sistema: [[Sistema de Mapa/Descrição|Sistema de Mapa]] e o padr�
 | Cada lote: `porteDoLote` | Pequeno, Médio ou Grande | — | Pequeno = 4 × 4 tiles |
 | Cada lote: `tipoDeConstrucaoPermitido` | texto | — | `qualquer` |
 | `areasDeRecurso` | lista | — | 3 na fatia |
-| Cada área: `tipoDeRecurso` e o retângulo em tiles | texto e 4 inteiros | tiles | `campo_de_grao` em (40, 8), 10 × 6 |
+| Cada área: `tipoDeRecurso` (a propriedade `tipo_de_recurso` do objeto no Tiled) e o retângulo em tiles | texto e 4 inteiros | tiles | `campo_de_grao` em (4, 6), 10 × 8 |
 
 - **Por que 16 bits por tile:** dá até 65.535 tiles diferentes, muito mais do que a fatia usa, e o mapa inteiro ocupa 64 × 64 × 7 × 2 bytes = **57 KB**.
 - **O porte do lote** sai do tamanho do retângulo, não de um campo extra: 4 × 4 é pequeno, 6 × 6 é médio e 8 × 8 é grande (FT1-4).
@@ -99,7 +99,7 @@ No marco 1, a passagem vem só da camada `colisao`. A partir do marco 6, as cons
 4. **Leia as camadas de tiles.** Para cada camada:
    - se o nome não for um dos 7 da tabela, mostre um aviso e ignore a camada;
    - confira que ela tem largura × altura números (4.096 na fatia);
-   - para cada número: se ele tiver os bits de espelhamento do Tiled (os 3 bits mais altos), anote o erro "tile espelhado em (x, y)"; se não pertencer a nenhum conjunto, anote o erro "tile desconhecido em (x, y)".
+   - para cada número: se ele tiver os bits de espelhamento do Tiled (os 3 bits mais altos), anote o erro "tile espelhado em (x, y)"; se não pertencer a nenhum conjunto, anote o erro "tile desconhecido em (x, y)". Depois de 10 erros na mesma camada, anote só "e mais N tiles com erro", para a lista não ficar enorme quando a camada inteira estiver errada.
 5. **Confira se as 6 camadas obrigatórias existem** (todas menos `elevacao`). Faltou uma: erro "falta a camada `colisao`".
 6. **Monte a passagem:** cada tile da `colisao` com número 0 dá para andar; qualquer outro número, não.
 7. **Leia os lotes** (camada de objetos `lotes`). Para cada retângulo:
@@ -186,19 +186,24 @@ Em `Codigo/Mapa/` (sem SDL nem OpenGL):
 | `indiceDoTileNaLista(tileX, tileY)` | A conta do índice |
 | `procurarCamadaPeloNome(nomeDaCamada)` | Acha uma camada, ou avisa que ela não existe |
 | `procurarConjuntoDoTile(numeroDoTile)` | O passo 1 do recorte |
+| `ResultadoDaLeituraDoMapa` | O mapa, a `listaDeErrosDoMapa` e a `listaDeAvisosDoMapa` |
+| `carregarMapaDoTextoDoTiled(texto, pasta)` | A regra 4.1 a partir do texto do arquivo (usada pelos testes) |
+| `calcularRecorteDoTileNaImagem(conjunto, numeroDoTile, tamanhoDoTile)` | Os passos 2 a 4 do recorte. Ficou no `Codigo/` (é só conta), para poder ser testada |
+| `converterRetanguloDePixelsParaTiles(...)` e `descobrirPorteDoLote(...)` | As contas dos lotes e das áreas |
 
 Em `Jogo/` (com OpenGL e stb_image):
 
 | Nome | O que é |
 |---|---|
 | `TexturaDoConjuntoDeTiles` | A imagem do conjunto já na placa de vídeo |
-| `calcularRecorteDoTileNaImagem(numeroDoTile)` | Os passos 2 a 4 do recorte |
+| `CameraDoMapa` | A posição da câmera em pixels do mundo e o zoom |
+| `DesenhistaDoMapa` | A classe que prepara o desenho (`preparar`) e desenha |
 | `desenharCamadasAbaixoDosPersonagens(...)` e `desenharCamadasAcimaDosPersonagens(...)` | A regra 4.3 |
-| `desenharTilesBloqueadosParaDepuracao(...)` | O passo 7 da regra 4.3 |
+| `desenharTilesBloqueadosParaDepuracao(...)` | O passo 7 da regra 4.3 (tecla F1) |
 
 ## 8. Testes
 
-Os testes usam **mapas pequenos de teste**, de 4 × 4 ou 8 × 8 tiles, guardados em `Codigo/Testes/mapas/`, que se leem em milissegundos.
+Os testes usam **um mapa pequeno de teste**, de 8 × 8 tiles, em `Codigo/Testes/mapas/` (grama, uma pedra com colisão em (5, 6), um lote pequeno em (0, 0) e um poço). Os mapas com defeito são montados no próprio teste, estragando uma cópia dele (feito no código do marco 1: um arquivo só, em vez de um por defeito).
 
 | Entrada | Resultado esperado |
 |---|---|
@@ -206,10 +211,10 @@ Os testes usam **mapas pequenos de teste**, de 4 × 4 ou 8 × 8 tiles, guardados
 | O mesmo mapa sem a camada `colisao` | Erro "falta a camada `colisao`" |
 | Camada com 63 números num mapa 8 × 8 | Erro de tamanho na camada |
 | Um tile espelhado em (2, 5) | Erro "tile espelhado em (2, 5)" |
-| Um tile 300 num conjunto de 256 tiles | Erro "tile desconhecido" |
+| Um tile 20 num conjunto de 16 tiles | Erro "tile desconhecido" |
 | Mapa com 3 erros diferentes | A lista traz os 3, não só o primeiro |
-| Tile de colisão em (5, 9) | `tileDaParaAndar(5, 9)` = não; (5, 8) = sim |
-| Perguntar (−1, 0) e (64, 0) num mapa 64 × 64 | Não, os dois |
+| Tile de colisão em (5, 6) | `tileDaParaAndar(5, 6)` = não; (5, 5) = sim |
+| Perguntar (−1, 0) e (8, 0) num mapa 8 × 8 | Não, os dois |
 | Índice de (10, 3) com largura 64 | 202 |
 | Tile 35, conjunto com primeiro número 1 e 16 colunas | Recorte em (32, 32) |
 | Lote de 64 × 64 px em (192, 320) | Tile (12, 20), porte Pequeno |

@@ -60,6 +60,6 @@ Cada ficha se chama pelo sistema (`Ficha Logica/Tempo.md`, `Ficha Logica/Produca
 
 **Contas:** hora do dia = (`tickAtualDaPartida` ÷ 800) resto 24. *Exemplo:* tick 27.200 → 27.200 ÷ 800 = 34 → 34 resto 24 = **10h** do dia 2.
 
-**Nomes no código:** `RelogioDoMundo`, `avancarTicksPeloTempoReal`, `horaDoDiaAtual`.
+**Nomes no código:** `RelogioDoMundo`, `calcularTicksParaAvancarPeloTempoReal`, `horaDoDiaAtual`.
 
 **Testes:** com a velocidade 1, 40 segundos reais avançam 800 ticks (1 hora); com a velocidade 0, nada avança.

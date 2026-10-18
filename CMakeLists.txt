@@ -1,6 +1,6 @@
 # CMakeLists.txt principal: a "receita" que diz ao CMake como montar o projeto.
 # Ele junta as duas pastas de código:
-#   Codigo/ -> as regras do jogo, sem janela (começa no marco 1)
+#   Codigo/ -> as regras do jogo, sem janela (testadas sozinhas pelo ctest)
 #   Jogo/   -> o programa de verdade: janela, desenho, mouse e teclado
 
 cmake_minimum_required(VERSION 3.24)
@@ -34,8 +34,31 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SDL3)
 
+# nlohmann/json: lê os arquivos JSON (o mapa do Tiled e, a partir do marco 3,
+# os dados). Entrou no marco 1 por causa do mapa (rodada FL1-1).
+# Versão 3.12.0; o pacote "json.tar.xz" é o pequeno, recomendado pelo autor.
+FetchContent_Declare(
+    nlohmann_json
+    URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+    URL_HASH SHA256=42f6e95cad6ec532fd372391373363b62a14af6d771056dbfc86160e6dfff7aa
+)
+FetchContent_MakeAvailable(nlohmann_json)
+
+# stb_image: carrega as imagens PNG (os conjuntos de tiles). É um arquivo só,
+# sem CMakeLists; o FetchContent só baixa, e o Jogo/ inclui a pasta.
+# Versão fixa: o commit 2c980bb (2026-08-02).
+FetchContent_Declare(
+    stb
+    URL https://github.com/nothings/stb/archive/2c980bb59875b0d32144a71867fbdebb2f77cd20.tar.gz
+    URL_HASH SHA256=9a955b1b49a4410088a2e0ee2a9c057c3c907d0c1d75454144cb980aca0ba515
+)
+FetchContent_MakeAvailable(stb)
+
 # ---------------------------------------------------------------------------
 # As nossas pastas
 # ---------------------------------------------------------------------------
-# A pasta Codigo/ entra no marco 1, com o relógio do mundo.
+# Liga o ctest, que roda os testes automáticos (rodada FL1-4).
+enable_testing()
+
+add_subdirectory(Codigo)
 add_subdirectory(Jogo)

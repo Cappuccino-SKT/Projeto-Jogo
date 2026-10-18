@@ -10,4 +10,10 @@ Aqui ficam **as regras do jogo em C++**: tempo, economia, produção, NPCs. Cada
 
 **Nomes:** português sem acento e sempre descritivos (`horasTrabalhadasNoCiclo`, não `h`).
 
-Começa vazia: a primeira regra entra no marco 1 (o relógio do mundo).
+**O que já tem:**
+
+| Pasta | O que faz | Ficha |
+|---|---|---|
+| `Tempo/` | O relógio do mundo: ticks, data, fase do dia, viradas, velocidade e pausa | [[Ficha Logica/Tempo\|Tempo]] |
+| `Mapa/` | A leitura e a conferência do mapa do Tiled: camadas, passagem, lotes e áreas de recurso | [[Ficha Logica/Mapa\|Mapa]] |
+| `Testes/` | O programa de testes (rodada FL1-4): `ctest --test-dir build` | A parte 8 de cada ficha |
