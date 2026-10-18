@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 3** (carregar os dados e calcular os preços base). As propostas estão na rodada **FL3** ([[Retomada]], seção 4).
+> Ficha escrita em 2026-10-18 para o **marco 3** (carregar os dados e calcular os preços base). As decisões da rodada **FL3** (2026-10-18, todas "seguir sugestão") já estão aplicadas.
 
 # Ficha Lógica: Receitas e preço base
 
@@ -20,7 +20,7 @@ Documentos do sistema: [[Sistema de Produção/Receitas|Receitas]], a receita pa
 
 ## 2. Dados
 
-### O arquivo `data/receitas.csv` [Proposta] (FL3-2)
+### O arquivo `data/receitas.csv` (FL3-2)
 
 As colunas são as da receita padrão (IP1-1), no formato que a Fatia Vertical já mostrava, com o Trabalho em letras minúsculas, como os outros IDs:
 
@@ -35,9 +35,9 @@ receita.moveis_madeira;item.moveis_madeira;2;item.tabua:3;construcao.carpinteiro
 ```
 
 - **Insumos:** `item:quantidade`, separados por `|`. Vazio = sem insumo (as Braçais).
-- **As Braçais em horas inteiras [Proposta] (FL3-2):** a regra diz "1 unidade a cada 0,5 h" no Tier 0. Em vez de horas com vírgula, a receita diz **2 unidades em 1 hora**. É a mesma velocidade, e o ciclo fecha a cada hora, junto com a "hora nova" do relógio. No Tier 1 (Fruta, Minério de Ouro...) será 1 unidade em 1 hora; no Tier 2 (Especiarias), 1 em 2 horas.
+- **As Braçais em horas inteiras (FL3-2):** a regra diz "1 unidade a cada 0,5 h" no Tier 0. Em vez de horas com vírgula, a receita diz **2 unidades em 1 hora**. É a mesma velocidade, e o ciclo fecha a cada hora, junto com a "hora nova" do relógio. No Tier 1 (Fruta, Minério de Ouro...) será 1 unidade em 1 hora; no Tier 2 (Especiarias), 1 em 2 horas.
 
-### As regras do preço, no `data/regras.json` [Proposta] (FL3-3)
+### As regras do preço, no `data/regras.json` (FL3-3)
 
 ```json
 "salario_por_hora_em_centesimos": { "bracal": 75, "manufaturado": 100, "especialista": 150 },
@@ -116,7 +116,7 @@ Para cada receita, compare com as regras da IP3-1 e avise se não bater (pode se
 
 > preço base = (custo dos insumos + horas × salário por hora) ÷ lote × 1,2
 
-**Em inteiros [Proposta] (FL3-3):**
+**Em inteiros (FL3-3):**
 
 1. Custo em centésimos = soma de (quantidade × preço do insumo em décimos × 10) + horas × salário por hora em centésimos.
 2. Preço em décimos = custo em centésimos × margem (120) × multiplicador do item (100) ÷ (lote × 100 × 100 × 10).

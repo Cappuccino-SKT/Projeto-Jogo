@@ -2,7 +2,7 @@
 
 ## Fase atual
 
-**Código: marco 2.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco. As fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]) estão escritas, com a rodada FL1 aplicada; a da Interface (marco 2), com a rodada FL2 aplicada; as do marco 3 (Itens, Recursos e Receitas) abriram a rodada FL3.
+**Código: marco 3.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco. As fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]) estão escritas, com a rodada FL1 aplicada; a da Interface (marco 2), com a rodada FL2 aplicada; as do marco 3 (Itens, Recursos e Receitas), com a rodada FL3 aplicada.
 
 ## O que está pronto
 
