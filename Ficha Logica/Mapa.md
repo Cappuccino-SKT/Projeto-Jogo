@@ -90,6 +90,7 @@ Não vai no save nem muda o mapa: é o rascunho de cada busca. É reservada **um
 | `custoAteAquiPorTile` | lista de 4.096 inteiros | O menor custo já achado da saída até cada tile, em décimos de tile (o "g" do A\*) |
 | `tileAnteriorPorTile` | lista de 4.096 índices | De onde se chegou a cada tile, para montar o caminho no fim |
 | `numeroDaBuscaPorTile` | lista de 4.096 inteiros | Em qual busca o tile foi mexido pela última vez. Assim, não é preciso apagar as listas a cada busca: um número velho quer dizer "ainda não visto nesta busca" |
+| `numeroDaBuscaQueExaminouOTile` | lista de 4.096 inteiros | O mesmo truque, para "já saiu da fila nesta busca" (passo 3.2; acrescentado no código do marco 4) |
 | `filaDeTilesAbertos` | fila com prioridade | Os tiles a examinar, o de menor custo estimado na frente |
 
 ## 3. Quando roda
@@ -253,7 +254,8 @@ Em `Jogo/` (com OpenGL e stb_image):
 
 | Nome | O que é |
 |---|---|
-| `TexturaDoConjuntoDeTiles` | A imagem do conjunto já na placa de vídeo |
+| `TexturaNaPlacaDeVideo` | A imagem do conjunto já na placa de vídeo (o nome ficou geral no marco 4, porque o boneco usa a mesma) |
+| `DesenhistaDeQuadrados` | O "pincel" da placa de vídeo, separado no marco 4 para o mapa e os personagens usarem o mesmo |
 | `CameraDoMapa` | A posição da câmera em pixels do mundo e o zoom |
 | `DesenhistaDoMapa` | A classe que prepara o desenho (`preparar`) e desenha |
 | `desenharCamadasAbaixoDosPersonagens(...)` e `desenharCamadasAcimaDosPersonagens(...)` | A regra 4.3 |
