@@ -107,18 +107,19 @@ void testarVilaInicial()
     conferir(montarResumoDosDados(dados).find("1 vila (10 construções e 15 NPCs)") != std::string::npos, "o resumo conta a vila");
 
     // Vilas com defeito, montadas aqui mesmo, sobre o mapa e o catálogo da fatia.
+    const CatalogosParaAVila catalogos{dados.catalogoDeConstrucoes, dados.catalogoDeItens, dados.regras.construcoes};
     ListaDeProblemasDosDados problemasDoLoteRepetido;
     lerVilaInicial(R"({"semente_da_partida": 1, "construcoes": [
         {"id": "casa_1", "tipo": "construcao.casa", "lote": 2, "dono": "cidade"},
         {"id": "casa_2", "tipo": "construcao.casa", "lote": 2, "dono": "cidade"}], "npcs": []})",
-                   dados.mapaDaVila, dados.catalogoDeConstrucoes, problemasDoLoteRepetido);
+                   dados.mapaDaVila, catalogos, problemasDoLoteRepetido);
     conferir(problemasDoLoteRepetido.algumErroContem("o lote 2 já tem"), "duas construções no lote 2: erro");
 
     ListaDeProblemasDosDados problemasDaCasaErrada;
     lerVilaInicial(R"({"semente_da_partida": 1, "construcoes": [
         {"id": "fazenda", "tipo": "construcao.fazenda", "lote": 1, "dono": "cidade"}],
         "npcs": [{"nome": "Ana", "classe": "civil", "casa": "fazenda", "trabalho": ""}]})",
-                   dados.mapaDaVila, dados.catalogoDeConstrucoes, problemasDaCasaErrada);
+                   dados.mapaDaVila, catalogos, problemasDaCasaErrada);
     conferir(problemasDaCasaErrada.algumErroContem("não é uma Casa"), "um NPC morando na Fazenda: erro");
 
     std::string vilaLotada = R"({"semente_da_partida": 1, "construcoes": [
@@ -128,7 +129,7 @@ void testarVilaInicial()
     }
     vilaLotada += "]}";
     ListaDeProblemasDosDados problemasDaCasaLotada;
-    lerVilaInicial(vilaLotada, dados.mapaDaVila, dados.catalogoDeConstrucoes, problemasDaCasaLotada);
+    lerVilaInicial(vilaLotada, dados.mapaDaVila, catalogos, problemasDaCasaLotada);
     conferir(problemasDaCasaLotada.quantidadeDeErros() == 1 && problemasDaCasaLotada.algumErroContem("já tem 4 moradores"),
              "5 NPCs na mesma Casa: erro no quinto");
 }

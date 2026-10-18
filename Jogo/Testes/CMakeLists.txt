@@ -6,6 +6,7 @@ add_executable(testes_do_jogo
     TestesDaCamera.cpp
     TestesDasAcoesDoTeclado.cpp
     TestesDoBoneco.cpp
+    TestesDaImagemDasConstrucoes.cpp
 )
 
 target_link_libraries(testes_do_jogo PRIVATE interface_do_jogo)

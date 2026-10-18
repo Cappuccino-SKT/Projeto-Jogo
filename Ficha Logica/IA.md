@@ -148,7 +148,7 @@ Pausado, nada disso roda.
    | Dormir | 100 no período Dormir |
    | Trabalhar | 100 no período Trabalhar, **se tem emprego** |
    | Passear | 100 no período Livre; e no período Trabalhar, para quem não tem emprego (FL5-3) |
-   | Comer | +150 da hora da refeição (7h, 12h, 19h) até 30 minutos depois |
+   | Comer | +150 da hora da refeição (6h, 12h, 19h; o café passou das 7h para as 6h na FL6-7) até 30 minutos depois |
    | Comprar | +120 no período Livre, se é o dia de compra dele e ainda não comprou hoje |
 
 3. **Escolha a de maior nota.** No empate, vale esta ordem: Comer, Comprar, Trabalhar, Dormir, Passear (só para o resultado nunca depender da sorte).
@@ -164,7 +164,7 @@ Pausado, nada disso roda.
 |---|---|---|
 | Dormir | A porta da casa | Entra e fica |
 | Trabalhar | A porta do trabalho. **Marco 6:** os Braçais vão para um tile da área do recurso ([[Ficha Logica/Producao\|Produção]], regra 4.1) | Entra e fica (o Braçal fica no campo, visível) |
-| Comer (FL5-4) | Se está **dentro** da casa ou do trabalho, fica lá. Se não, vai para casa | Come até o fim da meia hora da refeição |
+| Comer (FL5-4) | Se está **dentro** da casa ou do trabalho, fica lá; o Braçal parado no tile dele no campo também fica (FL6-7). Se não, vai para casa | Come até o fim da meia hora da refeição. No trabalho, a meia hora conta como trabalhada (FL6-7) |
 | Comprar | A porta do Mercado | Entra e fica 30 minutos; depois anota `diaDaUltimaCompra` = hoje |
 | Passear (FL5-5) | Um tile livre sorteado, a até 12 tiles de onde está (regra 4.6) | Fica de 15 a 45 minutos (sorteados) e sorteia outro |
 
@@ -210,23 +210,24 @@ Como os NPCs reavaliam sempre na mesma ordem (pelo tick e pelo número), a ordem
 
 **As esperas em ticks:** 30 minutos = 1.800 s ÷ 4,5 = **400 ticks**; 15 a 45 minutos = 200 a 600 ticks.
 
-**O dia de um Civil empregado** (Ana, da Fazenda, que mora na `casa_1`, dia de compra):
+**O dia de um Civil empregado** (Ana, da Fazenda, que mora na `casa_1`, num dia sem compra; com o café às 6h da FL6-7):
 
 | Hora | Notas que ganham | Ação | Onde |
 |---|---|---|---|
-| 6h00 | Comprar 120 > Passear 100 | Comprar | É dia de compra e já é Período Livre: vai ao Mercado e fica 30 minutos |
-| 6h40 | Passear 100 | Passear | Já comprou: sai do Mercado e passeia |
-| 7h00 | Comer 150 > Trabalhar 100 | Comer | Volta para casa e come até 7h30 |
-| 7h30 | Trabalhar 100 | Trabalhar | Anda até a Fazenda: da porta (19, 25) à (14, 25), 5 tiles, cerca de 2,3 minutos de jogo |
-| 12h00 | Comer 150 > Trabalhar 100 | Comer | Come dentro da Fazenda |
-| 15h00 | Passear 100 | Passear | Passeia (a compra do dia já foi feita) |
+| 6h00 | Comer 150 > Passear 100 | Comer | Acordou em casa: come lá até 6h30 |
+| 6h30 | Passear 100 | Passear | Sai de casa e passeia |
+| 7h00 | Trabalhar 100 | Trabalhar | Anda até um tile do campo de Grão (Braçal, marco 6) |
+| 12h00 | Comer 150 > Trabalhar 100 | Comer | Come no campo, e a meia hora conta como trabalhada (FL6-7) |
+| 15h00 | Passear 100 | Passear | Passeia |
 | 19h00 | Comer 150 > Passear 100 | Comer | Volta para casa e come até 19h30 |
 | 19h30 | Passear 100 | Passear | Passeia |
 | 22h00 | Dormir 100 | Dormir | Volta para casa |
 
-*Nota para o marco 6:* com o café da manhã às 7h, o empregado chega ao trabalho por volta das 7h35 e fica até as 15h: cerca de **7,4 horas** de trabalho, e não 8. A produção do marco 6 é por hora presente, então isso aparece no teste de 1 ano.
+No **dia de compra**, às 6h30 o Comprar (120) ganha do Passear: ela vai ao Mercado. Se a reavaliação das 7h chega antes do fim da meia hora, o Trabalhar ganha, e ela sai sem terminar; nesse caso, compra às 15h.
 
-**Quantos andam juntos:** às **6h** do dia de compra (o primeiro Período Livre do dia), os NPCs da vez vão ao Mercado quase juntos: no dia 0, os 8 de número par (visto no código do marco 5). Um Lojista que compra no próprio Mercado não sai: a espera começa lá dentro.
+*O dia de trabalho:* ela chega ao campo por volta das 7h05 e fica até as 15h, com o almoço contando: cerca de **7,9 horas** (FL6-7). Com o café às 7h (FL5-4), seriam 6,9 horas, e a vila passaria fome (ficha da [[Ficha Logica/Producao|Produção]], parte 5).
+
+**Quantos andam juntos:** às **6h30** do dia de compra (depois do café), os NPCs da vez vão ao Mercado quase juntos: no dia 0, os 8 de número par (visto no código do marco 5). Um Lojista que compra no próprio Mercado não sai: a espera começa lá dentro.
 
 ## 6. Conversa com outros sistemas
 

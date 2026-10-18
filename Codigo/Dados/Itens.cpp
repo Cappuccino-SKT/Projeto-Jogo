@@ -1,13 +1,10 @@
 #include "Dados/Itens.h"
 
-#include <nlohmann/json.hpp>
-
 #include "Dados/TabelaCsv.h"
 
 namespace {
 
 const char* const nomeDoArquivoDeItens = "itens.csv";
-const char* const nomeDoArquivoDeConstrucoes = "construcoes.json";
 
 struct CategoriaEOsSeusTipos {
     const char* nomeNoArquivo;
@@ -185,43 +182,12 @@ CatalogoDeItens lerArquivoDeItens(const std::string& textoDoArquivo, const Tabel
     return catalogo;
 }
 
-bool CatalogoDeConstrucoes::existeConstrucao(const std::string& identificadorDeTexto) const
+std::optional<CategoriaDoItem> lerCategoriaDoTexto(const std::string& texto)
 {
-    for (const std::string& identificador : identificadores) {
-        if (identificador == identificadorDeTexto) {
-            return true;
+    for (const CategoriaEOsSeusTipos& categoria : categoriasConhecidas()) {
+        if (texto == categoria.nomeNoArquivo) {
+            return categoria.categoria;
         }
     }
-    return false;
-}
-
-CatalogoDeConstrucoes lerArquivoDeConstrucoes(const std::string& textoDoArquivo, const TabelaDeTextos& tabelaDeTextos,
-                                              ListaDeProblemasDosDados& listaDeProblemas)
-{
-    CatalogoDeConstrucoes catalogo;
-    const nlohmann::json documento = nlohmann::json::parse(textoDoArquivo, nullptr, false);
-    if (documento.is_discarded() || !documento.is_array()) {
-        listaDeProblemas.anotarErro(nomeDoArquivoDeConstrucoes, 0, "o arquivo precisa ser uma lista JSON: [{\"id\": \"construcao.fazenda\"}, ...]");
-        return catalogo;
-    }
-    int posicaoNaLista = 0;
-    for (const nlohmann::json& construcao : documento) {
-        ++posicaoNaLista;
-        const auto campoId = construcao.find("id");
-        const std::string identificador = (campoId != construcao.end() && campoId->is_string()) ? campoId->get<std::string>() : "";
-        if (!identificadorEhValido(identificador, "construcao.")) {
-            listaDeProblemas.anotarErro(nomeDoArquivoDeConstrucoes, 0, "a construção " + std::to_string(posicaoNaLista)
-                                        + " da lista precisa de um \"id\" começando com \"construcao.\"");
-            continue;
-        }
-        if (catalogo.existeConstrucao(identificador)) {
-            listaDeProblemas.anotarErro(nomeDoArquivoDeConstrucoes, 0, identificador + " aparece duas vezes");
-            continue;
-        }
-        if (!tabelaDeTextos.temTexto(identificador)) {
-            listaDeProblemas.anotarErro(nomeDoArquivoDeConstrucoes, 0, identificador + " não tem nome em textos/pt-BR.json");
-        }
-        catalogo.acrescentarConstrucao(identificador);
-    }
-    return catalogo;
+    return std::nullopt;
 }

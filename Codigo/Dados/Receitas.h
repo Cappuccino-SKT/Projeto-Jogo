@@ -7,11 +7,10 @@
 #include <string>
 #include <vector>
 
+#include "Dados/Construcoes.h"
 #include "Dados/Itens.h"
 #include "Dados/ProblemasDosDados.h"
 #include "Dados/TextosERegras.h"
-
-enum class TrabalhoDaReceita { Bracal, Manufaturado, Especialista };
 
 struct InsumoDaReceita {
     int numeroDoItem = 0;
@@ -58,6 +57,11 @@ int calcularPrecoDeUmaReceitaEmDecimos(const DefinicaoDeReceita& receita, const 
 
 // Divide arredondando a metade para cima: (33, 2) dá 17; (9, 2) dá 5.
 long long arredondarMetadeParaCima(long long numerador, long long denominador);
+
+// Ficha da Construção, regra 4.1, passo 2: uma construção sem receitas e sem
+// moradores precisa do "trabalho_sem_receita" (o Mercado, o Construtor).
+void conferirTrabalhoDasConstrucoes(const CatalogoDeConstrucoes& catalogoDeConstrucoes, const CatalogoDeReceitas& catalogoDeReceitas,
+                                    ListaDeProblemasDosDados& listaDeProblemas);
 
 // Regra 4.3: avisos quando a receita foge da escada de níveis da IP3-1.
 void conferirEscadaDeNiveis(const CatalogoDeItens& catalogoDeItens, const CatalogoDeReceitas& catalogoDeReceitas,

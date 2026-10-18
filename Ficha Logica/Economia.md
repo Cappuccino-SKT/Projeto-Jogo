@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **o dinheiro, o consumo diário e os salários**. O Mercado Local, o estabilizador e o imposto entram nesta mesma ficha antes do marco 7. Os pontos marcados com FL6 estão na **rodada FL6** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **o dinheiro, o consumo diário e os salários**. O Mercado Local, o estabilizador e o imposto entram nesta mesma ficha antes do marco 7. Os pontos marcados com FL6 foram decididos na **rodada FL6** (2026-10-18, toda com "seguir sugestão").
 
 # Ficha Lógica: Economia (consumo e salários)
 
@@ -20,7 +20,7 @@ Documentos do sistema: [[Sistema Econômico/Descrição|Econômico]] (a moeda, o
 
 ### Definições
 
-Já no `regras.json`: o salário por hora em centésimos (75, 100, 150; FL3-3). Novos [Proposta]:
+Já no `regras.json`: o salário por hora em centésimos (75, 100, 150; FL3-3). Novos (FL6-1):
 
 ```json
 "cesta_minima_civil": { "comida_por_dia": 1, "materiais_a_cada_dias": 8 },
@@ -47,7 +47,7 @@ Já no `regras.json`: o salário por hora em centésimos (75, 100, 150; FL3-3). 
 | Cada construção: `diasDeSalarioAtrasado` | inteiro | 0 | Sim |
 
 - A **riqueza média** do Civil é o `dinheiroDaClasseCivil` ÷ 15: o jogo guarda a soma, para nunca perder décimos na divisão.
-- O dinheiro do primeiro dia vem do `vila_inicial.json` [Proposta] (FL6-4): `"banco_da_cidade": 4000`, `"dinheiro_do_jogador": 1000`, `"dinheiro_inicial_por_civil": 120`.
+- O dinheiro do primeiro dia vem do `vila_inicial.json` (FL6-4): `"banco_da_cidade": 4000`, `"dinheiro_do_jogador": 1000`, `"dinheiro_inicial_por_civil": 120`.
 
 ## 3. Quando roda
 
@@ -70,9 +70,9 @@ Para a classe Civil (a única da fatia):
 3. **Pagar ao dono:** cada item tirado é pago do `dinheiroDaClasseCivil`:
    - item da **Cidade**: o preço de venda da loja da cidade, **110% do preço** (V2-5), vai para o `bancoDaCidade`;
    - item do **jogador**: o preço do item, que ele fixará na faixa de ±30% no marco 8 (até lá, o preço base), vai para o `dinheiroDoJogador`;
-   - **sem dinheiro**, o item sai do mesmo jeito, e o dono não recebe a parte que faltou [Proposta] (FL6-1): a conta vai para o `consumoNaoPagoHoje`, que o estabilizador do marco 7 usa.
+   - **sem dinheiro**, o item sai do mesmo jeito, e o dono não recebe a parte que faltou (FL6-1): a conta vai para o `consumoNaoPagoHoje`, que o estabilizador do marco 7 usa.
 4. **Dias em déficit:** se faltou comida para alguém, some 1 a `diasEmDeficitDeComida`; se não, zere. O mesmo para os Materiais.
-5. **O gasto extra** (a regra do gasto, até 80% da renda) fica para o marco 7 [Proposta] (FL6-1): na fatia, não há comida de Tier 2 nem Bebida para comprar, e para onde vai esse dinheiro é o que o teste de 1 ano vai medir.
+5. **O gasto extra** (a regra do gasto, até 80% da renda) fica para o marco 7 (FL6-1): na fatia, não há comida de Tier 2 nem Bebida para comprar, e para onde vai esse dinheiro é o que o teste de 1 ano vai medir.
 
 ### 4.2 Salários (a cada dia)
 
@@ -83,7 +83,7 @@ Para cada NPC empregado, com as horas que ele trabalhou no dia (`ticksTrabalhado
    - o Trabalho é o da receita da construção (ou o `trabalho_sem_receita`: o Lojista é Manufaturado, o Operário é Braçal);
    - bônus de nível = +10% por nível acima do 1 (Trabalho e Propriedade);
    - gerente = × 1,5 (ficha da Construção, regra 4.2);
-   - os multiplicadores da riqueza da cidade e do desemprego ficam em × 1 no marco 6 [Proposta] (FL6-1); as fórmulas deles entram no marco 7;
+   - os multiplicadores da riqueza da cidade e do desemprego ficam em × 1 no marco 6 (FL6-1); as fórmulas deles entram no marco 7;
    - nas construções do jogador, o nível de salário Normal (× 1); Baixo e Alto entram com a interface (marco 8).
 2. **Quem paga:** nas construções da Cidade, o `bancoDaCidade`; nas do jogador, o `dinheiroDoJogador`.
 3. **Sem dinheiro para o salário inteiro:** o empregado não recebe nada, e a construção soma 1 a `diasDeSalarioAtrasado` (Fatia Vertical, 4.5). Os empregados saírem depois de 1 estação em atraso entra no marco 7.

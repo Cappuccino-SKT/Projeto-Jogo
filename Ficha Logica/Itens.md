@@ -16,7 +16,7 @@ Documento do sistema: [[Sistema de Itens/Descrição|Sistema de Itens]]. Formato
 
 **Por que um número interno:** comparar `item.pao` com `item.pao` é comparar 8 letras; comparar o número 3 com o 3 é uma conta só. No meio da simulação, o jogo faz isso milhões de vezes. O texto continua existindo para quem edita os dados e para as mensagens de erro.
 
-**Na fatia: 6 itens (FL3-1):** Grão, Água, Tora, Pão, Tábua e Móveis de Madeira. Os outros cerca de 174 ficam para uma tarefa de dados depois da fatia.
+**Na fatia: 8 itens:** Grão, Água, Tora, Pão, Tábua e Móveis de Madeira (FL3-1), e a Pedra e o Bloco de Pedra, para as obras (FL6-5). Os outros cerca de 172 ficam para uma tarefa de dados depois da fatia.
 
 ## 2. Dados
 
@@ -32,7 +32,11 @@ item.tora;materia_prima;bruto_vegetal;0;;;3;100
 item.pao;bem_de_consumo;alimento;1;;;1;100
 item.tabua;materia_prima;manufaturado;1;;;2;100
 item.moveis_madeira;bem_de_consumo;mobilia;2;;;8;100
+item.pedra;materia_prima;bruto_mineral;0;;;3;100
+item.bloco_de_pedra;materia_prima;manufaturado;1;;;3;100
 ```
+
+O peso da Pedra e do Bloco (3, como a Tora) é [Proposta].
 
 - A primeira linha diz o nome de cada coluna. As colunas podem vir em qualquer ordem, e o jogo as acha pelo nome.
 - Linha vazia, ou que começa com `#`, é ignorada: serve para comentários e para separar grupos na planilha.
@@ -153,7 +157,7 @@ Em `Codigo/Dados/` (sem SDL nem OpenGL):
 
 | Entrada | Resultado esperado |
 |---|---|
-| O `itens.csv` da fatia | 6 itens, sem erro; `item.pao` é o número 3 |
+| O `itens.csv` da fatia | 8 itens, sem erro; `item.pao` é o número 3 |
 | As colunas em outra ordem | O mesmo resultado |
 | Uma linha `# comentário` e uma linha vazia | Ignoradas; os números internos não mudam |
 | `item.pao` duas vezes | Erro com as duas linhas |

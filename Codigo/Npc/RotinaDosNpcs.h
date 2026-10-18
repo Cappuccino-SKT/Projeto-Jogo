@@ -18,6 +18,9 @@
 #include "Tempo/SorteioComSemente.h"
 #include "Vila/VilaInicial.h"
 
+// A produção de cada construção (marco 6): a rotina só lê o campo dos Braçais.
+struct ProducaoDaConstrucao;
+
 enum class PeriodoDaRotina { Dormir, Trabalhar, Livre };
 
 // Uma hora está no período [inicio, fim)? O período pode passar da meia-noite (22 a 6).
@@ -73,6 +76,9 @@ struct ContextoDaRotina {
     const RegrasDaVidaDosNpcs& regras;
     int ticksPorHoraDeJogo;
     SorteioComSemente& sorteioDosNpcs;
+    // Marco 6: o campo de cada construção (Produção, regra 4.1). Sem ele
+    // (nullptr, como nos testes do marco 5), todos trabalham dentro.
+    const std::vector<ProducaoDaConstrucao>* producaoDasConstrucoes = nullptr;
 };
 
 // Regra 4.1, passos 5 e 6: cria os NPCs da vila dentro das casas, e cada um já

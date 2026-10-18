@@ -16,7 +16,7 @@ struct RegrasDaRotina {
 struct RegrasDaUtilidade {
     int notaDaAcaoDoPeriodo = 100;
     int bonusDeComer = 150;
-    int horasDasRefeicoes[3] = {7, 12, 19};
+    int horasDasRefeicoes[3] = {6, 12, 19};  // o café às 6h (FL6-7)
     int minutosDaRefeicao = 30;
     int bonusDeComprar = 120;
     int diasEntreCompras = 2;

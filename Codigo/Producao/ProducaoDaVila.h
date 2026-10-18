@@ -1,0 +1,142 @@
+#pragma once
+
+// A produção da vila (Ficha Lógica: Produção, marco 6): cada construção de
+// produção tem uma receita; quem está trabalhando soma ticks; a cada hora, o
+// trabalho vira progresso do ciclo, e o ciclo terminado põe o lote no
+// inventário. A Cidade escolhe a receita todo dia; o jogador, pela fila de
+// ordens. Nada aqui abre janela: o teste sem tela roda isto.
+
+#include <cstdint>
+#include <map>
+#include <string>
+#include <vector>
+
+#include <entt/entity/registry.hpp>
+
+#include "Dados/DadosDoJogo.h"
+#include "Economia/DinheiroDaVila.h"
+#include "Inventario/InventarioDaCidade.h"
+#include "Producao/OrdemDoJogador.h"
+#include "Tempo/RelogioDoMundo.h"
+
+// ---------------------------------------------------------------------------
+// Os componentes do NPC (parte 2).
+// ---------------------------------------------------------------------------
+
+struct HabilidadesDoNpc {
+    int bracal = 50;
+    int manufaturado = 50;
+
+    // A habilidade usada num Trabalho. A fatia não tem Especialistas: 0.
+    int habilidadeNoTrabalho(TrabalhoDaReceita trabalho) const;
+};
+
+struct TrabalhoDoDia {
+    int ticksTrabalhadosNestaHora = 0;
+    int ticksTrabalhadosHoje = 0;  // os salários do dia (ficha da Economia)
+};
+
+// ---------------------------------------------------------------------------
+// O estado de cada construção da vila (parte 2): uma por construção, na mesma
+// ordem da vila. As que não produzem (Casa, Mercado, Construtor) só usam o
+// gerente e o salário atrasado.
+// ---------------------------------------------------------------------------
+
+struct ProducaoDaConstrucao {
+    bool ehDeProducao = false;                    // o tipo tem receitas no receitas.csv
+    int receitaDoCiclo = -1;                      // a posição no catálogo de receitas; -1 = nenhuma
+    int receitaEscolhidaParaOProximoCiclo = -1;   // a escolha do dia, nas da Cidade
+    bool cicloComecou = false;                    // os insumos já saíram
+    int64_t progressoDoCiclo = 0;                 // em ticks × porcentagem (parte 5)
+    int restoDaProducaoBracal = 0;                // de 0 a 99: a fração de unidade guardada
+    bool estaParada = false;
+    std::string motivoDaParada;                   // "sem Água", "o estoque encheu"...
+    std::vector<OrdemDoJogador> ordens;           // só nas do jogador (regra 4.4)
+
+    int numeroDoGerente = -1;                     // ficha da Construção, regra 4.2
+    int diasDeSalarioAtrasado = 0;                // ficha da Economia, regra 4.2
+
+    // O campo dos Braçais (regra 4.1): os tiles livres da área do recurso da
+    // receita atual, de cima para baixo e da esquerda para a direita. Vazio =
+    // os empregados trabalham dentro da construção.
+    int areaDoCampoNoMapa = -1;
+    std::vector<PosicaoDeTile> tilesDeTrabalhoNoCampo;
+
+    // O que saiu hoje, por item (só para o console e a tecla F4).
+    std::map<int, int> producaoDeHojePorItem;
+};
+
+// Tudo o que as regras da produção e da economia usam, junto.
+struct ContextoDaProducao {
+    entt::registry& registroDasEntidades;
+    const DadosDoJogo& dados;
+    InventarioDaCidade& inventario;
+    DinheiroDaVila& dinheiro;
+    std::vector<ProducaoDaConstrucao>& producaoDasConstrucoes;
+    int ticksPorHoraDeJogo = 800;
+};
+
+// ---------------------------------------------------------------------------
+// As contas da parte 5.
+// ---------------------------------------------------------------------------
+
+// horas × 800 × 100: um Pão (4 horas) precisa de 320.000.
+int64_t progressoNecessarioDoCiclo(const DefinicaoDeReceita& receita, int ticksPorHoraDeJogo);
+
+// ticks × velocidade × bônus de nível, com a velocidade = 50 + habilidade (%)
+// e o bônus = 100 + 10 × (nível − nível mínimo) (%). Uma hora (800 ticks) de
+// habilidade 60 no nível mínimo: 800 × 110 × 100 ÷ 100 = 88.000.
+int64_t calcularProgressoDoTrabalho(int ticksTrabalhados, int habilidade, int nivelDaConstrucao, int nivelMinimoDaReceita);
+
+// O déficit do item, em %: 100 − estoque × 100 ÷ alvo, preso entre 0 e 100. O
+// alvo vem em centésimos de unidade (1,875 Móveis = 187); com alvo 0, é 0.
+int calcularDeficitDoItem(int estoque, int64_t estoqueAlvoEmCentesimos);
+
+// A nota da regra 4.3: (preço − custo dos insumos) × (100 + déficit), em
+// décimos × %, sem dividir por 100 (assim não se perde a fração).
+int64_t calcularNotaDaReceita(int precoDoProdutoEmDecimos, int custoDosInsumosEmDecimos, int deficitEmPorcento);
+
+// O preço de venda da loja da cidade: 110% do preço, com a metade subindo (1,7 vira 1,9).
+int calcularPrecoDaLojaDaCidade(int precoEmDecimos, const RegrasDaEconomia& regras);
+
+// Os tiles livres de uma área de recurso (os que dão para andar e não são
+// porta), de cima para baixo e da esquerda para a direita.
+std::vector<PosicaoDeTile> montarTilesDeTrabalhoDaArea(const MapaLocal& mapa, const VilaDoJogo& vila, const AreaDeRecurso& area);
+
+// ---------------------------------------------------------------------------
+// As regras da parte 4.
+// ---------------------------------------------------------------------------
+
+// Ao montar a vila: põe as habilidades e o trabalho do dia em cada NPC (na
+// ordem da vila), monta o inventário (a capacidade e o estoque inicial), o
+// dinheiro do primeiro dia e a produção de cada construção, e faz a primeira
+// escolha das receitas. Devolve os avisos (um estoque inicial que não coube).
+std::vector<std::string> montarAProducaoDaVila(ContextoDaProducao& contexto, const std::vector<entt::entity>& npcsDaVila);
+
+// Se o NPC está trabalhando agora (regra 4.1): Trabalhar (ou Comer, o almoço,
+// FL6-7) no lugar de trabalho, dentro da construção ou no tile do campo.
+bool npcEstaTrabalhandoAgora(const ContextoDaProducao& contexto, entt::entity npc);
+
+// Regra 4.1, a cada tick: quem está trabalhando soma 1 tick.
+void contarOsTicksTrabalhados(ContextoDaProducao& contexto);
+
+// Regra 4.2, a cada hora: o ciclo de cada construção.
+void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& relogio);
+
+// Regra 4.3, a cada dia (e ao montar a vila): a receita de cada construção da Cidade.
+void escolherAsReceitasDaCidade(ContextoDaProducao& contexto);
+
+// Regra 4.4: a receita que a fila de ordens do jogador pede agora, ou -1. Não
+// muda nada (nem compra): só olha.
+int escolherReceitaPelaFilaDeOrdens(const ContextoDaProducao& contexto, int indiceDaConstrucao);
+
+// Ficha da Construção, regra 4.2: o gerente de cada construção com empregados.
+void escolherOsGerentes(ContextoDaProducao& contexto);
+
+// O Trabalho de quem trabalha na construção: o da receita atual, ou o
+// "trabalho_sem_receita" (Lojista, Operário).
+TrabalhoDaReceita trabalhoDaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao);
+
+// A tabela da tecla F4 (FL6-8): o estoque de cada dono, a capacidade, cada
+// construção (receita, progresso, motivo da parada) e o dinheiro.
+std::string montarTabelaDaProducao(const ContextoDaProducao& contexto);

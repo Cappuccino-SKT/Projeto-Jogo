@@ -28,9 +28,19 @@ public:
     void desenharTilesDosCaminhosParaDepuracao(const std::vector<PosicaoDeTile>& tilesDosCaminhos, const MapaLocal& mapa,
                                                const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
 
-    // Marco 5 (FL5-1): cada construção da vila vira um retângulo de cor lisa
-    // no lote, uma cor por tipo, com a parede da porta mais escura.
-    void desenharConstrucoesProvisorias(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
+    // Marco 6 (ficha da Construção, regra 4.3): carrega a imagem de cada
+    // construção que existir em data/imagens/construcoes/. Uma imagem de
+    // tamanho errado vira um aviso, e a construção fica com o retângulo.
+    void prepararImagensDasConstrucoes(const VilaDoJogo& vila, const MapaLocal& mapa, const std::string& pastaDosDados,
+                                       std::vector<std::string>& avisos);
+
+    // Antes dos personagens: a parte da imagem dentro do lote, ou, sem
+    // imagem, o retângulo de cor do marco 5 (FL5-1), com a porta mais escura.
+    void desenharConstrucoes(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
+                             int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
+    // Depois dos personagens: os 32 px de cima da imagem (o telhado), que
+    // cobrem quem passa atrás da construção (regra 4.3, passo 3).
+    void desenharTelhadosDasConstrucoes(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
                                         int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
 
     // Devolve à placa de vídeo tudo o que foi pedido. Chamar antes de fechar o OpenGL.
@@ -41,6 +51,11 @@ private:
 
     // Uma textura para cada conjunto de tiles do mapa, na mesma ordem.
     std::vector<TexturaNaPlacaDeVideo> texturasDosConjuntos;
+
+    // As imagens das construções (uma por arquivo) e qual cada construção da
+    // vila usa (-1 = o retângulo de cor).
+    std::vector<TexturaNaPlacaDeVideo> texturasDasConstrucoes;
+    std::vector<int> texturaDeCadaConstrucao;
 
     void desenharCamadaPeloNome(const MapaLocal& mapa, const char* nomeDaCamada, const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
 };

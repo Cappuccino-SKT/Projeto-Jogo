@@ -2,8 +2,12 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <filesystem>
 #include <initializer_list>
+#include <map>
 #include <string>
+
+#include "ImagemDasConstrucoes.h"
 
 namespace {
 
@@ -173,17 +177,67 @@ void DesenhistaDoMapa::desenharTilesDosCaminhosParaDepuracao(const std::vector<P
     pincel.mandarLoteParaAPlacaDeVideo();
 }
 
-void DesenhistaDoMapa::desenharConstrucoesProvisorias(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
-                                                      int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
+void DesenhistaDoMapa::prepararImagensDasConstrucoes(const VilaDoJogo& vila, const MapaLocal& mapa, const std::string& pastaDosDados,
+                                                     std::vector<std::string>& avisos)
+{
+    texturaDeCadaConstrucao.assign(vila.construcoes.size(), -1);
+    std::map<std::string, int> texturaDeCadaArquivo;  // o mesmo arquivo carrega uma vez só
+    for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
+        const ConstrucaoDaVila& construcao = vila.construcoes[indice];
+        const std::string caminhoNosDados = caminhoDaImagemDaConstrucao(construcao.tipo, construcao.nivel);
+        const std::string caminhoCompleto = pastaDosDados + "/" + caminhoNosDados;
+        if (!std::filesystem::exists(caminhoCompleto)) {
+            continue;  // ainda não desenhada: fica o retângulo
+        }
+        const auto jaCarregada = texturaDeCadaArquivo.find(caminhoNosDados);
+        if (jaCarregada != texturaDeCadaArquivo.end()) {
+            texturaDeCadaConstrucao[indice] = jaCarregada->second;
+            continue;
+        }
+        TexturaNaPlacaDeVideo textura;
+        std::string mensagemDeErro;
+        if (!carregarImagemNaPlacaDeVideo(caminhoCompleto, textura, mensagemDeErro)) {
+            avisos.push_back(mensagemDeErro + "; usando o retângulo de cor");
+            continue;
+        }
+        if (!tamanhoDaImagemDaConstrucaoEstaCerto(textura.larguraEmPixels, textura.alturaEmPixels, construcao.areaDoLote, mapa.tamanhoDoTileEmPixels)) {
+            avisos.push_back(caminhoNosDados + " tem " + std::to_string(textura.larguraEmPixels) + " x " + std::to_string(textura.alturaEmPixels)
+                             + " px, mas o lote pede " + std::to_string(construcao.areaDoLote.larguraEmTiles * mapa.tamanhoDoTileEmPixels) + " x "
+                             + std::to_string(construcao.areaDoLote.alturaEmTiles * mapa.tamanhoDoTileEmPixels + alturaDaImagemAcimaDoLoteEmPixels)
+                             + " (Guia da Arte, parte 7); usando o retângulo de cor");
+            liberarTexturaDaPlacaDeVideo(textura);
+            continue;
+        }
+        texturasDasConstrucoes.push_back(textura);
+        texturaDeCadaArquivo[caminhoNosDados] = static_cast<int>(texturasDasConstrucoes.size()) - 1;
+        texturaDeCadaConstrucao[indice] = texturaDeCadaArquivo[caminhoNosDados];
+    }
+}
+
+void DesenhistaDoMapa::desenharConstrucoes(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
+                                           int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
 {
     pincel.comecarDesenho(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
     const float ladoDoTileNaTela = static_cast<float>(mapa.tamanhoDoTileEmPixels * camera.zoomAtual());
-    for (const ConstrucaoDaVila& construcao : vila.construcoes) {
+    for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
+        const ConstrucaoDaVila& construcao = vila.construcoes[indice];
         const RetanguloEmTiles& area = construcao.areaDoLote;
         const float esquerda = area.tileX * ladoDoTileNaTela - camera.deslocamentoXNaTela();
         const float topo = area.tileY * ladoDoTileNaTela - camera.deslocamentoYNaTela();
         const float direita = esquerda + area.larguraEmTiles * ladoDoTileNaTela;
         const float baixo = topo + area.alturaEmTiles * ladoDoTileNaTela;
+
+        // Com imagem: só a parte dentro do lote (abaixo dos 32 px do telhado).
+        const int texturaDaConstrucao = indice < texturaDeCadaConstrucao.size() ? texturaDeCadaConstrucao[indice] : -1;
+        if (texturaDaConstrucao >= 0) {
+            const TexturaNaPlacaDeVideo& textura = texturasDasConstrucoes[texturaDaConstrucao];
+            pincel.comecarLoteComImagem(textura);
+            pincel.acrescentarQuadrado(esquerda, topo, direita, baixo, 0, static_cast<float>(alturaDaImagemAcimaDoLoteEmPixels),
+                                       static_cast<float>(textura.larguraEmPixels),
+                                       static_cast<float>(textura.alturaEmPixels - alturaDaImagemAcimaDoLoteEmPixels));
+            pincel.mandarLoteParaAPlacaDeVideo();
+            continue;
+        }
 
         // O corpo da construção, na cor do tipo.
         const float* cor = corDoTipoDeConstrucao(construcao.tipo);
@@ -201,8 +255,34 @@ void DesenhistaDoMapa::desenharConstrucoesProvisorias(const VilaDoJogo& vila, co
     }
 }
 
+void DesenhistaDoMapa::desenharTelhadosDasConstrucoes(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
+                                                      int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
+{
+    pincel.comecarDesenho(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+    const int zoom = camera.zoomAtual();
+    const float ladoDoTileNaTela = static_cast<float>(mapa.tamanhoDoTileEmPixels * zoom);
+    for (std::size_t indice = 0; indice < vila.construcoes.size() && indice < texturaDeCadaConstrucao.size(); ++indice) {
+        if (texturaDeCadaConstrucao[indice] < 0) {
+            continue;
+        }
+        const TexturaNaPlacaDeVideo& textura = texturasDasConstrucoes[texturaDeCadaConstrucao[indice]];
+        const RetanguloEmTiles& area = vila.construcoes[indice].areaDoLote;
+        const float esquerda = area.tileX * ladoDoTileNaTela - camera.deslocamentoXNaTela();
+        const float topoDoLote = area.tileY * ladoDoTileNaTela - camera.deslocamentoYNaTela();
+        const float direita = esquerda + area.larguraEmTiles * ladoDoTileNaTela;
+        pincel.comecarLoteComImagem(textura);
+        pincel.acrescentarQuadrado(esquerda, topoDoLote - static_cast<float>(alturaDaImagemAcimaDoLoteEmPixels * zoom), direita, topoDoLote, 0, 0,
+                                   static_cast<float>(textura.larguraEmPixels), static_cast<float>(alturaDaImagemAcimaDoLoteEmPixels));
+        pincel.mandarLoteParaAPlacaDeVideo();
+    }
+}
+
 void DesenhistaDoMapa::liberar()
 {
+    for (TexturaNaPlacaDeVideo& textura : texturasDasConstrucoes) {
+        liberarTexturaDaPlacaDeVideo(textura);
+    }
+    texturasDasConstrucoes.clear();
     for (TexturaNaPlacaDeVideo& textura : texturasDosConjuntos) {
         liberarTexturaDaPlacaDeVideo(textura);
     }

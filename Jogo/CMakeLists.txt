@@ -10,7 +10,7 @@ target_include_directories(glad PUBLIC externo/glad/include)
 # testes_do_jogo. Usa só os cabeçalhos da SDL (os nomes das teclas), sem
 # ligar a SDL; as regras do Codigo/ (os NPCs); e a nlohmann/json, para ler o
 # arquivo do boneco.
-add_library(interface_do_jogo STATIC CameraDoMapa.cpp AcoesDoTeclado.cpp BonecoDoNpc.cpp)
+add_library(interface_do_jogo STATIC CameraDoMapa.cpp AcoesDoTeclado.cpp BonecoDoNpc.cpp ImagemDasConstrucoes.cpp)
 target_include_directories(interface_do_jogo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(interface_do_jogo PUBLIC SDL3::Headers regras_do_jogo PRIVATE nlohmann_json::nlohmann_json)
 target_compile_options(interface_do_jogo PRIVATE -Wall -Wextra)

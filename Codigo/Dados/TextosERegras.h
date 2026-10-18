@@ -8,7 +8,9 @@
 #include <map>
 #include <string>
 
+#include "Construcao/RegrasDasConstrucoes.h"
 #include "Dados/ProblemasDosDados.h"
+#include "Economia/RegrasDaEconomia.h"
 #include "Npc/RegrasDaRotina.h"
 
 // Os nomes da tela, pelo ID: "item.pao" -> "Pão".
@@ -32,7 +34,7 @@ struct RegrasDoPreco {
     int margemDoDonoEmPorcento = 120;
 };
 
-// Os números do regras.json usados até o marco 5.
+// Os números do regras.json usados até o marco 6.
 struct RegrasDoJogo {
     RegrasDoPreco regrasDoPreco;
     // Grupo da estação -> produção na Primavera, Verão, Outono e Inverno, em % (FL3-6).
@@ -45,6 +47,10 @@ struct RegrasDoJogo {
     int caminhosCalculadosPorTick = 4;
     // A rotina, as notas da Utilidade e o passeio (marco 5, ficha da IA, FL5-3).
     RegrasDaVidaDosNpcs vidaDosNpcs;
+    // As vagas, a capacidade e as obras (marco 6, ficha da Construção).
+    RegrasDasConstrucoes construcoes;
+    // A cesta mínima, a loja da cidade, os salários e a ordem do dia (marco 6, ficha da Economia).
+    RegrasDaEconomia economia;
 };
 
 TabelaDeTextos lerArquivoDeTextos(const std::string& textoDoArquivo, ListaDeProblemasDosDados& listaDeProblemas);

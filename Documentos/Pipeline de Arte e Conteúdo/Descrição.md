@@ -11,7 +11,7 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 ### Quem desenha
 
 - O **artista definitivo ainda não foi escolhido**. Por enquanto, quem desenha é o autor, que **não tem experiência com pixel art**.
-- **Fatia vertical (decisão do autor, 2026-10-18):** o autor **desenha a arte à mão, no Pixelorama**, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]], que junta todos os critérios num lugar só. Enquanto o boneco próprio não fica pronto, o jogo usa o boneco provisório do Mana Seed (fora do Git, rodada FL4-4).
+- **Fatia vertical (decisão do autor, 2026-10-18):** o autor **desenha a arte à mão, no Pixelorama**, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]], que junta todos os critérios num lugar só. A **rodada FA1** (2026-10-18) decidiu os critérios novos: o quadro do boneco de 32 × 32 px, com os pés em (16, 28) e a esquerda espelhada no Pixelorama; a luz de cima, à esquerda, com contorno colorido; a sombra no chão como a cor 65 (a 01 com 50% de transparência) e no máximo 8 cores a mais; os conjuntos de cantos de 16 tiles para as bordas; e as construções com 32 px a mais de altura que o lote (64 × 96 e 96 × 128). Enquanto o boneco próprio não fica pronto, o jogo usa o boneco provisório do Mana Seed (fora do Git, rodada FL4-4).
 - **Arte gerada por IA: abandonada** (decisão do autor, 2026-10-18). O autor testou o Gemini, e o resultado não serviu.
 - **Pacotes de terceiros:** só onde ainda faltar uma peça, com a origem anotada em `assets/provisorio/LEIA-ME.txt`.
 - **Jogo final:** toda a arte é feita à mão pelo artista do projeto; o que for provisório sai.
@@ -200,8 +200,7 @@ data/
 ### Perguntas em aberto
 
 1. **Artista definitivo:** ainda não escolhido (rodada V3-13). Na fatia, desenha o autor. O marco 1 usa um conjunto de tiles de teste, de quadrados de cor lisa, feito pelo assistente; depois, o autor redesenha o mapa com os tiles dele (rodada FL1-6).
-2. **Os critérios novos do Guia da Arte** (o quadro do boneco, a luz e o contorno, as cores a mais, as bordas do terreno e a altura das construções): rodada FA1, na [[Retomada]].
-3. **Ferramenta de atlas:** de terceiros ou própria, no início do código.
-4. **Teto de memória da arte:** 256 MB proposto; o PC alvo mínimo tem placa de vídeo de 2 GB (rodada V3-12).
-5. **Estações no futuro:** quando entram neve, rios congelados, folhas e flores (com o Clima e Estações).
-6. **Estilo próprio por cultura:** quando sai da troca de paleta para formas próprias.
+2. **Ferramenta de atlas:** de terceiros ou própria, no início do código.
+3. **Teto de memória da arte:** 256 MB proposto; o PC alvo mínimo tem placa de vídeo de 2 GB (rodada V3-12).
+4. **Estações no futuro:** quando entram neve, rios congelados, folhas e flores (com o Clima e Estações).
+5. **Estilo próprio por cultura:** quando sai da troca de paleta para formas próprias.

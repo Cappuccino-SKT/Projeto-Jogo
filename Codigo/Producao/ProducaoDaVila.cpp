@@ -1,0 +1,674 @@
+#include "Producao/ProducaoDaVila.h"
+
+#include <algorithm>
+#include <utility>
+
+#include "Construcao/ContasDasConstrucoes.h"
+#include "Npc/ComponentesDoNpc.h"
+
+namespace {
+
+// No máximo 10 ciclos terminados por construção numa hora (regra 4.2, passo 4.4).
+constexpr int ciclosPorHoraNoMaximo = 10;
+// O estoque-alvo da escolha da cidade: 5 dias do consumo previsto (V2-5).
+constexpr int diasDoEstoqueAlvo = 5;
+// A comida em perigo: menos de 3 dias da cesta mínima.
+constexpr int diasDaComidaEmPerigo = 3;
+// O consumo previsto das receitas conta um dia cheio: 8 horas por empregado.
+constexpr int horasDeUmDiaCheioDeTrabalho = 8;
+
+const DefinicaoDeReceita& receitaPeloIndice(const ContextoDaProducao& contexto, int indiceDaReceita)
+{
+    return contexto.dados.catalogoDeReceitas.todasAsReceitas()[indiceDaReceita];
+}
+
+std::string nomeDoItem(const ContextoDaProducao& contexto, int numeroDoItem)
+{
+    return contexto.dados.tabelaDeTextos.textoDe(contexto.dados.catalogoDeItens.itemPeloNumero(numeroDoItem).identificadorDeTexto);
+}
+
+bool construcaoEhDoJogador(const ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    return contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].donoEhOJogador;
+}
+
+DonoDoItem donoDaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    return construcaoEhDoJogador(contexto, indiceDaConstrucao) ? DonoDoItem::Jogador : DonoDoItem::Cidade;
+}
+
+// A receita que vale agora: a do ciclo, ou a escolhida para o próximo.
+int receitaAtualDaConstrucao(const ProducaoDaConstrucao& producao)
+{
+    return producao.receitaDoCiclo >= 0 ? producao.receitaDoCiclo : producao.receitaEscolhidaParaOProximoCiclo;
+}
+
+// Os empregados de uma construção, em ordem pelo número na vila.
+std::vector<entt::entity> empregadosDaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    std::vector<std::pair<int, entt::entity>> empregadosComNumero;
+    for (const auto [npc, identidade, casaETrabalho] : contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc>().each()) {
+        if (casaETrabalho.indiceDoTrabalho == indiceDaConstrucao) {
+            empregadosComNumero.emplace_back(identidade.numeroDoNpc, npc);
+        }
+    }
+    std::sort(empregadosComNumero.begin(), empregadosComNumero.end(),
+              [](const auto& primeiro, const auto& segundo) { return primeiro.first < segundo.first; });
+    std::vector<entt::entity> empregados;
+    for (const auto& [numero, npc] : empregadosComNumero) {
+        empregados.push_back(npc);
+    }
+    return empregados;
+}
+
+// A área do mapa onde a receita Braçal tira o recurso, ou -1 (não é Braçal,
+// ou o mapa não tem a área: a Pedra da fatia, FL6-5).
+int areaDoRecursoDaReceita(const ContextoDaProducao& contexto, const DefinicaoDeReceita& receita)
+{
+    if (receita.trabalhoUsado != TrabalhoDaReceita::Bracal) {
+        return -1;
+    }
+    const std::vector<DefinicaoDeRecurso>& recursos = contexto.dados.catalogoDeRecursos.todosOsRecursos();
+    const std::vector<AreaDeRecurso>& areas = contexto.dados.mapaDaVila.areasDeRecurso;
+    for (std::size_t recurso = 0; recurso < recursos.size(); ++recurso) {
+        if (recursos[recurso].numeroDoItemGerado != receita.numeroDoProduto || recursos[recurso].construcaoQueExtrai != receita.construcaoQueProduz) {
+            continue;
+        }
+        for (std::size_t area = 0; area < areas.size(); ++area) {
+            if (areas[area].numeroDoRecurso == static_cast<int>(recurso)) {
+                return static_cast<int>(area);
+            }
+        }
+    }
+    return -1;
+}
+
+// Troca o campo dos Braçais quando a receita atual muda de área (regra 4.1).
+void atualizarOCampoDeTrabalho(ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indiceDaConstrucao];
+    const int receitaAtual = receitaAtualDaConstrucao(producao);
+    const int areaNova = receitaAtual >= 0 ? areaDoRecursoDaReceita(contexto, receitaPeloIndice(contexto, receitaAtual)) : -1;
+    if (areaNova == producao.areaDoCampoNoMapa) {
+        return;
+    }
+    producao.areaDoCampoNoMapa = areaNova;
+    producao.tilesDeTrabalhoNoCampo.clear();
+    if (areaNova >= 0) {
+        producao.tilesDeTrabalhoNoCampo =
+            montarTilesDeTrabalhoDaArea(contexto.dados.mapaDaVila, contexto.dados.vilaInicial, contexto.dados.mapaDaVila.areasDeRecurso[areaNova]);
+    }
+}
+
+// Algum empregado consegue fazer a receita (habilidade ≥ a mínima)?
+bool algumEmpregadoConsegueFazer(const ContextoDaProducao& contexto, int indiceDaConstrucao, const DefinicaoDeReceita& receita)
+{
+    for (const entt::entity empregado : empregadosDaConstrucao(contexto, indiceDaConstrucao)) {
+        if (contexto.registroDasEntidades.get<HabilidadesDoNpc>(empregado).habilidadeNoTrabalho(receita.trabalhoUsado) >= receita.habilidadeMinima) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// A receita pode rodar nesta construção: é dela, o nível dá, alguém sabe fazer
+// e, se for Braçal, o mapa tem a área do recurso.
+bool receitaPodeRodarNaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao, const DefinicaoDeReceita& receita)
+{
+    const ConstrucaoDaVila& construcao = contexto.dados.vilaInicial.construcoes[indiceDaConstrucao];
+    return receita.construcaoQueProduz == construcao.tipo && construcao.nivel >= receita.nivelMinimoDaConstrucao
+        && algumEmpregadoConsegueFazer(contexto, indiceDaConstrucao, receita)
+        && (receita.trabalhoUsado != TrabalhoDaReceita::Bracal || areaDoRecursoDaReceita(contexto, receita) >= 0);
+}
+
+// Quanto o jogador gastaria comprando da Cidade o que falta dos insumos, ou
+// -1 se a Cidade não tem o que falta.
+int64_t custoDaCompraDosInsumosQueFaltam(const ContextoDaProducao& contexto, const DefinicaoDeReceita& receita)
+{
+    int64_t custo = 0;
+    for (const InsumoDaReceita& insumo : receita.insumos) {
+        const int falta = std::max(0, insumo.quantidade - contexto.inventario.quantidadeDe(insumo.numeroDoItem, DonoDoItem::Jogador));
+        if (falta > contexto.inventario.quantidadeDe(insumo.numeroDoItem, DonoDoItem::Cidade)) {
+            return -1;
+        }
+        const int preco = contexto.dados.catalogoDeItens.itemPeloNumero(insumo.numeroDoItem).precoBaseEmDecimos;
+        custo += static_cast<int64_t>(falta) * calcularPrecoDaLojaDaCidade(preco, contexto.dados.regras.economia);
+    }
+    return custo;
+}
+
+bool jogadorConsegueOsInsumos(const ContextoDaProducao& contexto, const DefinicaoDeReceita& receita)
+{
+    const int64_t custo = custoDaCompraDosInsumosQueFaltam(contexto, receita);
+    return custo >= 0 && custo <= contexto.dinheiro.dinheiroDoJogador;
+}
+
+// Regra 4.2, passo 2: tira os insumos (tudo ou nada). O jogador compra da
+// Cidade o que faltar (FL6-3). Devolve o motivo da parada, ou vazio se deu certo.
+std::string tentarTirarOsInsumos(ContextoDaProducao& contexto, int indiceDaConstrucao, const DefinicaoDeReceita& receita)
+{
+    const DonoDoItem dono = donoDaConstrucao(contexto, indiceDaConstrucao);
+    if (dono == DonoDoItem::Jogador && jogadorConsegueOsInsumos(contexto, receita)) {
+        const int64_t custo = custoDaCompraDosInsumosQueFaltam(contexto, receita);
+        for (const InsumoDaReceita& insumo : receita.insumos) {
+            const int falta = std::max(0, insumo.quantidade - contexto.inventario.quantidadeDe(insumo.numeroDoItem, DonoDoItem::Jogador));
+            contexto.inventario.passarParaOutroDono(insumo.numeroDoItem, DonoDoItem::Cidade, DonoDoItem::Jogador, falta);
+        }
+        contexto.dinheiro.dinheiroDoJogador -= custo;
+        contexto.dinheiro.bancoDaCidade += custo;
+        contexto.dinheiro.gastoDoJogadorComInsumosHoje += custo;
+    }
+    if (contexto.inventario.tentarTirarVarios(receita.insumos, dono)) {
+        return "";
+    }
+    for (const InsumoDaReceita& insumo : receita.insumos) {
+        if (contexto.inventario.quantidadeDe(insumo.numeroDoItem, dono) < insumo.quantidade) {
+            return "sem " + nomeDoItem(contexto, insumo.numeroDoItem);
+        }
+    }
+    return "sem insumos";
+}
+
+// O fator da estação e da produtividade da área, em % (ficha dos Recursos).
+int fatorDaProducaoBracalEmPorcento(const ContextoDaProducao& contexto, const ProducaoDaConstrucao& producao, Estacao estacao)
+{
+    if (producao.areaDoCampoNoMapa < 0) {
+        return 100;
+    }
+    const AreaDeRecurso& area = contexto.dados.mapaDaVila.areasDeRecurso[producao.areaDoCampoNoMapa];
+    const DefinicaoDeRecurso& recurso = contexto.dados.catalogoDeRecursos.todosOsRecursos()[area.numeroDoRecurso];
+    const auto grupo = contexto.dados.regras.producaoPorEstacaoEmPorcento.find(recurso.grupoDaEstacao);
+    const int producaoDaEstacao = grupo == contexto.dados.regras.producaoPorEstacaoEmPorcento.end() ? 100 : grupo->second[static_cast<int>(estacao)];
+    return area.produtividadeEmPorcento * producaoDaEstacao / 100;
+}
+
+// O trabalho de todos os empregados na última hora (regra 4.2, passo 3).
+int64_t somarOTrabalhoDaHora(const ContextoDaProducao& contexto, int indiceDaConstrucao, const DefinicaoDeReceita& receita)
+{
+    const int nivel = contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].nivel;
+    int64_t trabalhoDaHora = 0;
+    for (const entt::entity empregado : empregadosDaConstrucao(contexto, indiceDaConstrucao)) {
+        const int ticks = contexto.registroDasEntidades.get<TrabalhoDoDia>(empregado).ticksTrabalhadosNestaHora;
+        const int habilidade = contexto.registroDasEntidades.get<HabilidadesDoNpc>(empregado).habilidadeNoTrabalho(receita.trabalhoUsado);
+        trabalhoDaHora += calcularProgressoDoTrabalho(ticks, habilidade, nivel, receita.nivelMinimoDaConstrucao);
+    }
+    return trabalhoDaHora;
+}
+
+void pararAConstrucao(ProducaoDaConstrucao& producao, const std::string& motivo)
+{
+    producao.estaParada = true;
+    producao.motivoDaParada = motivo;
+}
+
+// Regra 4.2 inteira para uma construção de produção.
+void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstrucao, Estacao estacao)
+{
+    ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indiceDaConstrucao];
+    const bool ehDoJogador = construcaoEhDoJogador(contexto, indiceDaConstrucao);
+    producao.estaParada = false;
+    producao.motivoDaParada.clear();
+
+    int ticksDaHora = 0;
+    for (const entt::entity empregado : empregadosDaConstrucao(contexto, indiceDaConstrucao)) {
+        ticksDaHora += contexto.registroDasEntidades.get<TrabalhoDoDia>(empregado).ticksTrabalhadosNestaHora;
+    }
+
+    for (int rodada = 0; rodada < ciclosPorHoraNoMaximo; ++rodada) {
+        // Passo 1: sem receita, pega a próxima (a do jogador, pela fila de ordens).
+        if (producao.receitaDoCiclo < 0) {
+            producao.receitaDoCiclo = ehDoJogador ? escolherReceitaPelaFilaDeOrdens(contexto, indiceDaConstrucao)
+                                                  : producao.receitaEscolhidaParaOProximoCiclo;
+            atualizarOCampoDeTrabalho(contexto, indiceDaConstrucao);
+            if (producao.receitaDoCiclo < 0) {
+                pararAConstrucao(producao, ehDoJogador ? "sem ordem" : "sem receita");
+                return;
+            }
+        }
+        const DefinicaoDeReceita& receita = receitaPeloIndice(contexto, producao.receitaDoCiclo);
+
+        // Passo 2: o ciclo começa tirando os insumos. Sem ninguém trabalhando
+        // (de noite), ele não começa: os insumos só saem quando há trabalho.
+        if (!producao.cicloComecou) {
+            if (ticksDaHora == 0 && rodada == 0) {
+                return;
+            }
+            const std::string motivoDaFalta = tentarTirarOsInsumos(contexto, indiceDaConstrucao, receita);
+            if (!motivoDaFalta.empty()) {
+                pararAConstrucao(producao, motivoDaFalta);
+                return;
+            }
+            producao.cicloComecou = true;
+        }
+
+        // Passo 3: o trabalho da hora entra uma vez só.
+        if (rodada == 0) {
+            producao.progressoDoCiclo += somarOTrabalhoDaHora(contexto, indiceDaConstrucao, receita);
+        }
+
+        // Passo 4: o ciclo terminou?
+        const int64_t progressoNecessario = progressoNecessarioDoCiclo(receita, contexto.ticksPorHoraDeJogo);
+        if (producao.progressoDoCiclo < progressoNecessario) {
+            return;
+        }
+        int quantidade = receita.loteProduzido;
+        int restoNovo = producao.restoDaProducaoBracal;
+        if (receita.trabalhoUsado == TrabalhoDaReceita::Bracal) {
+            // O lote × o fator da estação e da produtividade, com a fração guardada.
+            const int totalEmCentesimos = receita.loteProduzido * fatorDaProducaoBracalEmPorcento(contexto, producao, estacao) + producao.restoDaProducaoBracal;
+            quantidade = totalEmCentesimos / 100;
+            restoNovo = totalEmCentesimos % 100;
+        }
+        if (!contexto.inventario.tentarPor(receita.numeroDoProduto, donoDaConstrucao(contexto, indiceDaConstrucao), quantidade)) {
+            pararAConstrucao(producao, "o estoque encheu");
+            return;
+        }
+        producao.restoDaProducaoBracal = restoNovo;
+        producao.producaoDeHojePorItem[receita.numeroDoProduto] += quantidade;
+        if (ehDoJogador) {
+            // Uma ordem "fazer N" conta o que já fez e sai da lista quando chega a N.
+            for (std::size_t ordem = 0; ordem < producao.ordens.size(); ++ordem) {
+                OrdemDoJogador& ordemDoJogador = producao.ordens[ordem];
+                if (ordemDoJogador.tipo == TipoDeOrdem::FazerQuantidade && ordemDoJogador.numeroDoItem == receita.numeroDoProduto) {
+                    ordemDoJogador.quantidadeJaFeita += quantidade;
+                    if (ordemDoJogador.quantidadeJaFeita >= ordemDoJogador.quantidade) {
+                        producao.ordens.erase(producao.ordens.begin() + static_cast<std::ptrdiff_t>(ordem));
+                    }
+                    break;
+                }
+            }
+        }
+        producao.progressoDoCiclo -= progressoNecessario;
+        producao.cicloComecou = false;
+        producao.receitaDoCiclo = ehDoJogador ? -1 : producao.receitaEscolhidaParaOProximoCiclo;
+        atualizarOCampoDeTrabalho(contexto, indiceDaConstrucao);
+    }
+}
+
+// O consumo previsto de cada item num dia, em centésimos de unidade (regra 4.3, passo 2).
+std::vector<int64_t> preverOConsumoDoDiaEmCentesimos(const ContextoDaProducao& contexto)
+{
+    const CatalogoDeItens& itens = contexto.dados.catalogoDeItens;
+    const RegrasDaEconomia& economia = contexto.dados.regras.economia;
+    std::vector<int64_t> consumoEmCentesimos(itens.quantidadeDeItens(), 0);
+
+    // A cesta mínima: a comida e o Material Básico mais baratos (os que a vila come).
+    int comidaMaisBarata = -1;
+    int materialMaisBarato = -1;
+    for (const DefinicaoDeItem& item : itens.todosOsItens()) {
+        if (!item.ehComida() && !item.ehMaterialBasico()) {
+            continue;
+        }
+        int& maisBarato = item.ehComida() ? comidaMaisBarata : materialMaisBarato;
+        if (maisBarato < 0 || item.precoBaseEmDecimos < itens.itemPeloNumero(maisBarato).precoBaseEmDecimos) {
+            maisBarato = item.numeroInterno;
+        }
+    }
+    const int64_t civis = contexto.dinheiro.quantidadeDeCivis;
+    if (comidaMaisBarata >= 0) {
+        consumoEmCentesimos[comidaMaisBarata] += civis * economia.comidaPorDiaDoCivil * 100;
+    }
+    if (materialMaisBarato >= 0) {
+        consumoEmCentesimos[materialMaisBarato] += civis * 100 / economia.diasEntreMateriaisDoCivil;
+    }
+
+    // Os insumos das receitas atuais, num dia cheio (8 horas por empregado).
+    for (std::size_t construcao = 0; construcao < contexto.producaoDasConstrucoes.size(); ++construcao) {
+        const ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[construcao];
+        if (!producao.ehDeProducao) {
+            continue;
+        }
+        int receitaAtual = receitaAtualDaConstrucao(producao);
+        if (receitaAtual < 0 && construcaoEhDoJogador(contexto, static_cast<int>(construcao))) {
+            receitaAtual = escolherReceitaPelaFilaDeOrdens(contexto, static_cast<int>(construcao));
+        }
+        if (receitaAtual < 0) {
+            continue;
+        }
+        const DefinicaoDeReceita& receita = receitaPeloIndice(contexto, receitaAtual);
+        const int64_t empregados = static_cast<int64_t>(empregadosDaConstrucao(contexto, static_cast<int>(construcao)).size());
+        for (const InsumoDaReceita& insumo : receita.insumos) {
+            consumoEmCentesimos[insumo.numeroDoItem] += insumo.quantidade * empregados * horasDeUmDiaCheioDeTrabalho * 100 / receita.horasPorCiclo;
+        }
+    }
+    return consumoEmCentesimos;
+}
+
+}  // namespace
+
+int HabilidadesDoNpc::habilidadeNoTrabalho(TrabalhoDaReceita trabalho) const
+{
+    switch (trabalho) {
+    case TrabalhoDaReceita::Bracal: return bracal;
+    case TrabalhoDaReceita::Manufaturado: return manufaturado;
+    case TrabalhoDaReceita::Especialista: return 0;
+    }
+    return 0;
+}
+
+int64_t progressoNecessarioDoCiclo(const DefinicaoDeReceita& receita, int ticksPorHoraDeJogo)
+{
+    return static_cast<int64_t>(receita.horasPorCiclo) * ticksPorHoraDeJogo * 100;
+}
+
+int64_t calcularProgressoDoTrabalho(int ticksTrabalhados, int habilidade, int nivelDaConstrucao, int nivelMinimoDaReceita)
+{
+    const int64_t velocidadeEmPorcento = 50 + habilidade;
+    const int64_t bonusDeNivelEmPorcento = 100 + 10 * std::max(0, nivelDaConstrucao - nivelMinimoDaReceita);
+    return ticksTrabalhados * velocidadeEmPorcento * bonusDeNivelEmPorcento / 100;
+}
+
+int calcularDeficitDoItem(int estoque, int64_t estoqueAlvoEmCentesimos)
+{
+    if (estoqueAlvoEmCentesimos <= 0) {
+        return 0;
+    }
+    const int64_t deficit = 100 - static_cast<int64_t>(estoque) * 100 * 100 / estoqueAlvoEmCentesimos;
+    return static_cast<int>(std::clamp<int64_t>(deficit, 0, 100));
+}
+
+int64_t calcularNotaDaReceita(int precoDoProdutoEmDecimos, int custoDosInsumosEmDecimos, int deficitEmPorcento)
+{
+    return static_cast<int64_t>(precoDoProdutoEmDecimos - custoDosInsumosEmDecimos) * (100 + deficitEmPorcento);
+}
+
+int calcularPrecoDaLojaDaCidade(int precoEmDecimos, const RegrasDaEconomia& regras)
+{
+    return static_cast<int>(arredondarMetadeParaCima(static_cast<long long>(precoEmDecimos) * regras.lojaDaCidadeVendeEmPorcento, 100));
+}
+
+std::vector<PosicaoDeTile> montarTilesDeTrabalhoDaArea(const MapaLocal& mapa, const VilaDoJogo& vila, const AreaDeRecurso& area)
+{
+    std::vector<PosicaoDeTile> tilesLivres;
+    const RetanguloEmTiles& retangulo = area.areaEmTiles;
+    for (int tileY = retangulo.tileY; tileY < retangulo.tileY + retangulo.alturaEmTiles; ++tileY) {
+        for (int tileX = retangulo.tileX; tileX < retangulo.tileX + retangulo.larguraEmTiles; ++tileX) {
+            const bool ehPorta = std::any_of(vila.construcoes.begin(), vila.construcoes.end(), [&](const ConstrucaoDaVila& construcao) {
+                return construcao.tileDaPorta == PosicaoDeTile{tileX, tileY};
+            });
+            if (mapa.tileDaParaAndar(tileX, tileY) && !ehPorta) {
+                tilesLivres.push_back({tileX, tileY});
+            }
+        }
+    }
+    return tilesLivres;
+}
+
+std::vector<std::string> montarAProducaoDaVila(ContextoDaProducao& contexto, const std::vector<entt::entity>& npcsDaVila)
+{
+    std::vector<std::string> avisos;
+    const DadosDoJogo& dados = contexto.dados;
+    const VilaDoJogo& vila = dados.vilaInicial;
+    entt::registry& registro = contexto.registroDasEntidades;
+
+    // Os componentes do trabalho em cada NPC, na ordem da vila.
+    for (std::size_t numero = 0; numero < npcsDaVila.size() && numero < vila.npcsIniciais.size(); ++numero) {
+        const NpcDaVilaInicial& npcInicial = vila.npcsIniciais[numero];
+        registro.emplace_or_replace<HabilidadesDoNpc>(npcsDaVila[numero], HabilidadesDoNpc{npcInicial.habilidadeBracal, npcInicial.habilidadeManufaturado});
+        registro.emplace_or_replace<TrabalhoDoDia>(npcsDaVila[numero]);
+    }
+
+    // O inventário: a capacidade das construções e o estoque do primeiro dia.
+    contexto.inventario = InventarioDaCidade(dados.catalogoDeItens);
+    recalcularCapacidade(contexto.inventario, vila, dados.catalogoDeConstrucoes, dados.regras.construcoes);
+    for (const ItemDoEstoqueInicial& item : vila.estoqueInicial) {
+        if (!contexto.inventario.tentarPor(item.numeroDoItem, item.dono, item.quantidade)) {
+            avisos.push_back("o estoque inicial de " + nomeDoItem(contexto, item.numeroDoItem) + " não coube na capacidade da vila");
+        }
+    }
+
+    // O dinheiro do primeiro dia (FL6-4).
+    DinheiroDaVila dinheiro;
+    dinheiro.bancoDaCidade = vila.bancoDaCidadeEmDecimos;
+    dinheiro.dinheiroDoJogador = vila.dinheiroDoJogadorEmDecimos;
+    for (const NpcDaVilaInicial& npc : vila.npcsIniciais) {
+        dinheiro.quantidadeDeCivis += npc.classe == "civil" ? 1 : 0;
+    }
+    dinheiro.dinheiroDaClasseCivil = static_cast<int64_t>(dinheiro.quantidadeDeCivis) * vila.dinheiroInicialPorCivilEmDecimos;
+    contexto.dinheiro = dinheiro;
+
+    // A produção de cada construção.
+    contexto.producaoDasConstrucoes.assign(vila.construcoes.size(), ProducaoDaConstrucao{});
+    for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
+        ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indice];
+        for (const DefinicaoDeReceita& receita : dados.catalogoDeReceitas.todasAsReceitas()) {
+            producao.ehDeProducao = producao.ehDeProducao || receita.construcaoQueProduz == vila.construcoes[indice].tipo;
+        }
+        producao.ordens = vila.construcoes[indice].ordensDoJogador;
+    }
+
+    // A primeira escolha (regra 4.3: "ao montar a vila, a escolha roda uma vez").
+    escolherAsReceitasDaCidade(contexto);
+    for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
+        ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indice];
+        if (!producao.ehDeProducao) {
+            continue;
+        }
+        producao.receitaDoCiclo = construcaoEhDoJogador(contexto, static_cast<int>(indice))
+                                      ? escolherReceitaPelaFilaDeOrdens(contexto, static_cast<int>(indice))
+                                      : producao.receitaEscolhidaParaOProximoCiclo;
+        atualizarOCampoDeTrabalho(contexto, static_cast<int>(indice));
+    }
+    escolherOsGerentes(contexto);
+    return avisos;
+}
+
+bool npcEstaTrabalhandoAgora(const ContextoDaProducao& contexto, entt::entity npc)
+{
+    const entt::registry& registro = contexto.registroDasEntidades;
+    const int indiceDoTrabalho = registro.get<CasaETrabalhoDoNpc>(npc).indiceDoTrabalho;
+    const DecisaoDoNpc& decisao = registro.get<DecisaoDoNpc>(npc);
+    if (indiceDoTrabalho < 0 || (decisao.acaoAtual != AcaoDoNpc::Trabalhar && decisao.acaoAtual != AcaoDoNpc::Comer)) {
+        return false;
+    }
+    const std::vector<PosicaoDeTile>& tilesDoCampo = contexto.producaoDasConstrucoes[indiceDoTrabalho].tilesDeTrabalhoNoCampo;
+    if (tilesDoCampo.empty()) {
+        return decisao.indiceDaConstrucaoOndeEsta == indiceDoTrabalho;
+    }
+    // O Braçal: parado num tile do campo, sem estar a caminho.
+    const LugarDoNpc& lugar = registro.get<PosicaoDoNpc>(npc).lugarAtual;
+    return !decisao.estaDentroDeUmaConstrucao() && !decisao.estaACaminho && lugar.estaParado()
+        && std::find(tilesDoCampo.begin(), tilesDoCampo.end(), lugar.tileAtual) != tilesDoCampo.end();
+}
+
+void contarOsTicksTrabalhados(ContextoDaProducao& contexto)
+{
+    for (const auto [npc, trabalhoDoDia] : contexto.registroDasEntidades.view<TrabalhoDoDia>().each()) {
+        if (npcEstaTrabalhandoAgora(contexto, npc)) {
+            ++trabalhoDoDia.ticksTrabalhadosNestaHora;
+            ++trabalhoDoDia.ticksTrabalhadosHoje;
+        }
+    }
+}
+
+void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& relogio)
+{
+    for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
+        if (contexto.producaoDasConstrucoes[indice].ehDeProducao) {
+            rodarOCicloDeUmaConstrucao(contexto, static_cast<int>(indice), relogio.estacaoAtual());
+        }
+    }
+    // Depois zera o trabalho da hora de todos (regra 4.2, passo 3).
+    for (const auto [npc, trabalhoDoDia] : contexto.registroDasEntidades.view<TrabalhoDoDia>().each()) {
+        trabalhoDoDia.ticksTrabalhadosNestaHora = 0;
+    }
+}
+
+void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
+{
+    const CatalogoDeItens& itens = contexto.dados.catalogoDeItens;
+    const std::vector<DefinicaoDeReceita>& receitas = contexto.dados.catalogoDeReceitas.todasAsReceitas();
+    const std::vector<int64_t> consumoDoDiaEmCentesimos = preverOConsumoDoDiaEmCentesimos(contexto);
+
+    // Passo 3: a comida em perigo (menos de 3 dias da cesta mínima).
+    int comidaNoEstoque = 0;
+    for (const DefinicaoDeItem& item : itens.todosOsItens()) {
+        comidaNoEstoque += item.ehComida() ? contexto.inventario.quantidadeTotalDe(item.numeroInterno) : 0;
+    }
+    const int comidaDeTresDias = contexto.dinheiro.quantidadeDeCivis * contexto.dados.regras.economia.comidaPorDiaDoCivil * diasDaComidaEmPerigo;
+    const bool comidaEmPerigo = comidaNoEstoque < comidaDeTresDias;
+
+    for (std::size_t construcao = 0; construcao < contexto.producaoDasConstrucoes.size(); ++construcao) {
+        ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[construcao];
+        if (!producao.ehDeProducao || construcaoEhDoJogador(contexto, static_cast<int>(construcao))) {
+            continue;
+        }
+        int melhorReceita = -1;
+        bool melhorEhComida = false;
+        int64_t melhorNota = 0;
+        for (std::size_t indiceDaReceita = 0; indiceDaReceita < receitas.size(); ++indiceDaReceita) {
+            const DefinicaoDeReceita& receita = receitas[indiceDaReceita];
+            // Passo 1: as candidatas.
+            if (!receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita)) {
+                continue;
+            }
+            // Passo 2: a nota, com os preços base (o Mercado Local entra no marco 7).
+            int custoDosInsumos = 0;
+            for (const InsumoDaReceita& insumo : receita.insumos) {
+                custoDosInsumos += insumo.quantidade * itens.itemPeloNumero(insumo.numeroDoItem).precoBaseEmDecimos;
+            }
+            const int estoque = contexto.inventario.quantidadeTotalDe(receita.numeroDoProduto);
+            const int deficit = calcularDeficitDoItem(estoque, consumoDoDiaEmCentesimos[receita.numeroDoProduto] * diasDoEstoqueAlvo);
+            const int64_t nota = calcularNotaDaReceita(itens.itemPeloNumero(receita.numeroDoProduto).precoBaseEmDecimos, custoDosInsumos, deficit);
+            const bool ehComida = itens.itemPeloNumero(receita.numeroDoProduto).ehComida();
+            // Passos 3 e 4: com a comida em perigo, a comida ganha sempre; se
+            // não, a maior nota; no empate, a primeira do receitas.csv.
+            const bool ganha = melhorReceita < 0 || (comidaEmPerigo && ehComida && !melhorEhComida)
+                            || ((!comidaEmPerigo || ehComida == melhorEhComida) && nota > melhorNota);
+            if (ganha) {
+                melhorReceita = static_cast<int>(indiceDaReceita);
+                melhorEhComida = ehComida;
+                melhorNota = nota;
+            }
+        }
+        producao.receitaEscolhidaParaOProximoCiclo = melhorReceita;
+    }
+}
+
+int escolherReceitaPelaFilaDeOrdens(const ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    const ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indiceDaConstrucao];
+    for (const OrdemDoJogador& ordem : producao.ordens) {
+        // Passo 1: a ordem quer produzir agora?
+        bool querProduzir = true;
+        if (ordem.tipo == TipoDeOrdem::ManterEstoque) {
+            querProduzir = contexto.inventario.quantidadeDe(ordem.numeroDoItem, DonoDoItem::Jogador) < ordem.quantidade;
+        } else if (ordem.tipo == TipoDeOrdem::FazerQuantidade) {
+            querProduzir = ordem.quantidadeJaFeita < ordem.quantidade;
+        }
+        if (!querProduzir) {
+            continue;
+        }
+        // Passo 2: a receita está liberada, alguém sabe fazer, e os insumos existem.
+        const std::optional<int> receita = contexto.dados.catalogoDeReceitas.procurarReceitaDoProduto(ordem.numeroDoItem);
+        if (!receita.has_value()) {
+            continue;
+        }
+        const DefinicaoDeReceita& definicao = receitaPeloIndice(contexto, *receita);
+        if (receitaPodeRodarNaConstrucao(contexto, indiceDaConstrucao, definicao) && jogadorConsegueOsInsumos(contexto, definicao)) {
+            return *receita;  // passo 3: a primeira que passa
+        }
+    }
+    return -1;
+}
+
+TrabalhoDaReceita trabalhoDaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    const int receitaAtual = receitaAtualDaConstrucao(contexto.producaoDasConstrucoes[indiceDaConstrucao]);
+    if (receitaAtual >= 0) {
+        return receitaPeloIndice(contexto, receitaAtual).trabalhoUsado;
+    }
+    const std::string& tipo = contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].tipo;
+    const DefinicaoDeConstrucao* definicao = contexto.dados.catalogoDeConstrucoes.procurarConstrucao(tipo);
+    if (definicao != nullptr && definicao->trabalhoSemReceita.has_value()) {
+        return *definicao->trabalhoSemReceita;
+    }
+    // Uma construção de produção parada: o Trabalho da primeira receita dela.
+    for (const DefinicaoDeReceita& receita : contexto.dados.catalogoDeReceitas.todasAsReceitas()) {
+        if (receita.construcaoQueProduz == tipo) {
+            return receita.trabalhoUsado;
+        }
+    }
+    return TrabalhoDaReceita::Manufaturado;
+}
+
+void escolherOsGerentes(ContextoDaProducao& contexto)
+{
+    for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
+        const TrabalhoDaReceita trabalho = trabalhoDaConstrucao(contexto, static_cast<int>(indice));
+        std::vector<CandidatoAGerente> candidatos;
+        for (const entt::entity empregado : empregadosDaConstrucao(contexto, static_cast<int>(indice))) {
+            candidatos.push_back({contexto.registroDasEntidades.get<IdentidadeDoNpc>(empregado).numeroDoNpc,
+                                  contexto.registroDasEntidades.get<HabilidadesDoNpc>(empregado).habilidadeNoTrabalho(trabalho)});
+        }
+        contexto.producaoDasConstrucoes[indice].numeroDoGerente = escolherGerente(candidatos);
+    }
+}
+
+std::string montarTabelaDaProducao(const ContextoDaProducao& contexto)
+{
+    const DadosDoJogo& dados = contexto.dados;
+    std::string tabela = "Estoque (da Cidade / do jogador):\n";
+    for (const DefinicaoDeItem& item : dados.catalogoDeItens.todosOsItens()) {
+        tabela += "  " + nomeDoItem(contexto, item.numeroInterno) + ": " + std::to_string(contexto.inventario.quantidadeDe(item.numeroInterno, DonoDoItem::Cidade))
+            + " / " + std::to_string(contexto.inventario.quantidadeDe(item.numeroInterno, DonoDoItem::Jogador)) + "\n";
+    }
+    tabela += "Capacidade: matéria-prima " + std::to_string(contexto.inventario.quantidadeNaCategoria(CategoriaDoItem::MateriaPrima)) + " de "
+        + std::to_string(contexto.inventario.capacidadeDaCategoria(CategoriaDoItem::MateriaPrima)) + "; bem de consumo "
+        + std::to_string(contexto.inventario.quantidadeNaCategoria(CategoriaDoItem::BemDeConsumo)) + " de "
+        + std::to_string(contexto.inventario.capacidadeDaCategoria(CategoriaDoItem::BemDeConsumo)) + "\n";
+
+    tabela += "Construções:\n";
+    const VilaDoJogo& vila = dados.vilaInicial;
+    for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
+        const ConstrucaoDaVila& construcao = vila.construcoes[indice];
+        const ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indice];
+        const std::vector<entt::entity> empregados = empregadosDaConstrucao(contexto, static_cast<int>(indice));
+        if (construcao.ehCasa()) {
+            continue;
+        }
+        int trabalhandoAgora = 0;
+        std::string nomeDoGerente = "ninguém";
+        for (const entt::entity empregado : empregados) {
+            trabalhandoAgora += npcEstaTrabalhandoAgora(contexto, empregado) ? 1 : 0;
+            const IdentidadeDoNpc& identidade = contexto.registroDasEntidades.get<IdentidadeDoNpc>(empregado);
+            if (identidade.numeroDoNpc == producao.numeroDoGerente) {
+                nomeDoGerente = identidade.nome;
+            }
+        }
+        std::string linha = "  " + construcao.identificador + " (nível " + std::to_string(construcao.nivel) + ", "
+            + (construcao.donoEhOJogador ? "do jogador" : "da Cidade") + "): ";
+        if (!producao.ehDeProducao) {
+            linha += "sem receita (só salários)";
+        } else if (producao.receitaDoCiclo < 0) {
+            linha += "sem receita no ciclo";
+        } else {
+            const DefinicaoDeReceita& receita = receitaPeloIndice(contexto, producao.receitaDoCiclo);
+            const int64_t porcentagem = producao.progressoDoCiclo * 100 / progressoNecessarioDoCiclo(receita, contexto.ticksPorHoraDeJogo);
+            linha += nomeDoItem(contexto, receita.numeroDoProduto) + ", " + std::to_string(porcentagem) + "% do ciclo"
+                + (producao.cicloComecou ? "" : " (o ciclo não começou)");
+        }
+        if (producao.estaParada) {
+            linha += "; PARADA: " + producao.motivoDaParada;
+        }
+        linha += "; " + std::to_string(trabalhandoAgora) + " de " + std::to_string(empregados.size()) + " trabalhando agora; gerente: " + nomeDoGerente;
+        if (!producao.producaoDeHojePorItem.empty()) {
+            linha += "; hoje fez";
+            for (const auto& [item, quantidade] : producao.producaoDeHojePorItem) {
+                linha += " " + std::to_string(quantidade) + " " + nomeDoItem(contexto, item);
+            }
+        }
+        if (producao.diasDeSalarioAtrasado > 0) {
+            linha += "; salário atrasado há " + std::to_string(producao.diasDeSalarioAtrasado) + " dias";
+        }
+        tabela += linha + "\n";
+    }
+
+    const DinheiroDaVila& dinheiro = contexto.dinheiro;
+    const int64_t mediaDosCivis = dinheiro.quantidadeDeCivis > 0 ? dinheiro.dinheiroDaClasseCivil / dinheiro.quantidadeDeCivis : 0;
+    tabela += "Dinheiro: Banco da Cidade " + escreverDinheiroEmMoedas(static_cast<int>(dinheiro.bancoDaCidade)) + "; jogador "
+        + escreverDinheiroEmMoedas(static_cast<int>(dinheiro.dinheiroDoJogador)) + "; Civis "
+        + escreverDinheiroEmMoedas(static_cast<int>(dinheiro.dinheiroDaClasseCivil)) + " (" + escreverDinheiroEmMoedas(static_cast<int>(mediaDosCivis))
+        + " em média); salários do último dia " + escreverDinheiroEmMoedas(static_cast<int>(dinheiro.rendaDoDiaDaClasseCivil)) + "\n";
+    return tabela;
+}

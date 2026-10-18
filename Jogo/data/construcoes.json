@@ -1,9 +1,12 @@
 [
-  { "id": "construcao.fazenda" },
-  { "id": "construcao.posto_de_coleta" },
-  { "id": "construcao.cozinheiro" },
-  { "id": "construcao.carpinteiro" },
-  { "id": "construcao.mercado" },
-  { "id": "construcao.construtor" },
-  { "id": "construcao.casa" }
+  { "id": "construcao.fazenda", "porte": "pequeno", "guarda": ["materia_prima"], "funcao": "fazendeiro" },
+  { "id": "construcao.posto_de_coleta", "porte": "pequeno", "guarda": ["materia_prima"], "funcao": "coletor" },
+  { "id": "construcao.cozinheiro", "porte": "medio", "guarda": ["materia_prima", "bem_de_consumo"], "funcao": "cozinheiro" },
+  { "id": "construcao.carpinteiro", "porte": "medio", "guarda": ["materia_prima", "bem_de_consumo"], "funcao": "carpinteiro" },
+  { "id": "construcao.mercado", "porte": "medio", "guarda": ["bem_de_consumo"], "funcao": "lojista",
+    "trabalho_sem_receita": "manufaturado" },
+  { "id": "construcao.construtor", "porte": "pequeno", "guarda": ["materia_prima"], "funcao": "operario",
+    "trabalho_sem_receita": "bracal" },
+  { "id": "construcao.casa", "porte": "pequeno", "guarda": [], "moradores": 4 },
+  { "id": "construcao.pedreira", "porte": "medio", "guarda": ["materia_prima", "bem_de_consumo"], "funcao": "pedreiro" }
 ]

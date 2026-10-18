@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "Npc/MovimentoDosNpcs.h"
+#include "Producao/ProducaoDaVila.h"
 
 namespace {
 
@@ -54,6 +55,54 @@ void entrarNaConstrucao(const ContextoDaRotina& contexto, const RelogioDoMundo& 
     }
 }
 
+// Os tiles do campo do trabalho do NPC (marco 6), ou nullptr se ele trabalha dentro.
+const std::vector<PosicaoDeTile>* tilesDoCampoDoTrabalho(const ContextoDaRotina& contexto, const CasaETrabalhoDoNpc& casaETrabalho)
+{
+    if (contexto.producaoDasConstrucoes == nullptr || casaETrabalho.indiceDoTrabalho < 0) {
+        return nullptr;
+    }
+    const std::vector<PosicaoDeTile>& tiles = (*contexto.producaoDasConstrucoes)[casaETrabalho.indiceDoTrabalho].tilesDeTrabalhoNoCampo;
+    return tiles.empty() ? nullptr : &tiles;
+}
+
+// O tile do Braçal no campo (Produção, regra 4.1): o primeiro empregado fica
+// no primeiro tile livre, o segundo no segundo, e assim por diante.
+PosicaoDeTile tileDoNpcNoCampo(const ContextoDaRotina& contexto, entt::entity npc, const std::vector<PosicaoDeTile>& tilesDoCampo)
+{
+    const entt::registry& registro = contexto.registroDasEntidades;
+    const int indiceDoTrabalho = registro.get<CasaETrabalhoDoNpc>(npc).indiceDoTrabalho;
+    const int numeroDoNpc = registro.get<IdentidadeDoNpc>(npc).numeroDoNpc;
+    int colegasAntesDele = 0;
+    for (const auto [outro, identidade, casaETrabalho] : registro.view<IdentidadeDoNpc, CasaETrabalhoDoNpc>().each()) {
+        colegasAntesDele += casaETrabalho.indiceDoTrabalho == indiceDoTrabalho && identidade.numeroDoNpc < numeroDoNpc ? 1 : 0;
+    }
+    return tilesDoCampo[static_cast<std::size_t>(colegasAntesDele) % tilesDoCampo.size()];
+}
+
+// O Braçal já está parado no tile dele do campo?
+bool estaNoTileDoCampo(const ContextoDaRotina& contexto, entt::entity npc, const DecisaoDoNpc& decisao, const std::vector<PosicaoDeTile>& tilesDoCampo)
+{
+    const LugarDoNpc& lugar = contexto.registroDasEntidades.get<PosicaoDoNpc>(npc).lugarAtual;
+    return !decisao.estaDentroDeUmaConstrucao() && !decisao.estaACaminho && lugar.estaParado()
+        && lugar.tileAtual == tileDoNpcNoCampo(contexto, npc, tilesDoCampo);
+}
+
+// Marco 6: o Braçal sai da construção (se estiver dentro) e anda até o tile dele no campo.
+void irParaOCampo(ContextoDaRotina& contexto, const RelogioDoMundo& relogio, entt::entity npc, DecisaoDoNpc& decisao,
+                  const std::vector<PosicaoDeTile>& tilesDoCampo)
+{
+    const PosicaoDeTile tileDoCampo = tileDoNpcNoCampo(contexto, npc, tilesDoCampo);
+    const LugarDoNpc& lugar = contexto.registroDasEntidades.get<PosicaoDoNpc>(npc).lugarAtual;
+    decisao.indiceDaConstrucaoDoDestino = -1;
+    decisao.indiceDaConstrucaoOndeEsta = -1;
+    if (lugar.estaParado() && lugar.tileAtual == tileDoCampo) {
+        decisao.estaACaminho = false;
+        return;
+    }
+    pedirCaminhoParaONpc(contexto.registroDasEntidades, npc, tileDoCampo, relogio.tickAtual());
+    decisao.estaACaminho = true;
+}
+
 // Regra 4.3: vai até a construção de destino (ou passeia, se o destino é -1).
 void irParaODestino(ContextoDaRotina& contexto, const RelogioDoMundo& relogio, entt::entity npc, DecisaoDoNpc& decisao,
                     int indiceDoDestino, bool vaiPassear)
@@ -87,8 +136,20 @@ void reavaliarUmNpc(ContextoDaRotina& contexto, const RelogioDoMundo& relogio, e
 
     const SituacaoDoNpc situacao = montarSituacaoDoNpc(contexto, relogio, identidade, casaETrabalho, decisao);
     const AcaoDoNpc acaoNova = escolherAcaoPelaUtilidade(calcularNotasDasAcoes(situacao, contexto.regras.utilidade));
+    const std::vector<PosicaoDeTile>* tilesDoCampo = tilesDoCampoDoTrabalho(contexto, casaETrabalho);
     if (acaoNova == decisao.acaoAtual) {
-        return;  // passo 4: a mesma ação, o NPC continua o que fazia
+        // Passo 4: a mesma ação, o NPC continua o que fazia. No trabalho, o
+        // lugar pode ter mudado com a receita (marco 6): o Braçal vai para o
+        // campo novo, e quem perdeu o campo entra na construção.
+        if (acaoNova == AcaoDoNpc::Trabalhar && !decisao.estaACaminho) {
+            if (tilesDoCampo != nullptr && !estaNoTileDoCampo(contexto, npc, decisao, *tilesDoCampo)) {
+                irParaOCampo(contexto, relogio, npc, decisao, *tilesDoCampo);
+            } else if (tilesDoCampo == nullptr && contexto.producaoDasConstrucoes != nullptr
+                       && decisao.indiceDaConstrucaoOndeEsta != casaETrabalho.indiceDoTrabalho) {
+                irParaODestino(contexto, relogio, npc, decisao, casaETrabalho.indiceDoTrabalho, false);
+            }
+        }
+        return;
     }
     decisao.acaoAtual = acaoNova;
     decisao.tickEmQueAEsperaAcaba = -1;
@@ -98,12 +159,21 @@ void reavaliarUmNpc(ContextoDaRotina& contexto, const RelogioDoMundo& relogio, e
         irParaODestino(contexto, relogio, npc, decisao, casaETrabalho.indiceDaCasa, false);
         break;
     case AcaoDoNpc::Trabalhar:
-        irParaODestino(contexto, relogio, npc, decisao, casaETrabalho.indiceDoTrabalho, false);
+        if (tilesDoCampo != nullptr) {
+            irParaOCampo(contexto, relogio, npc, decisao, *tilesDoCampo);  // o Braçal trabalha no campo (marco 6)
+        } else {
+            irParaODestino(contexto, relogio, npc, decisao, casaETrabalho.indiceDoTrabalho, false);
+        }
         break;
     case AcaoDoNpc::Comprar:
         irParaODestino(contexto, relogio, npc, decisao, contexto.vila.indiceDoMercado(), false);
         break;
     case AcaoDoNpc::Comer: {
+        // FL6-7: o Braçal parado no tile dele almoça no campo.
+        if (tilesDoCampo != nullptr && estaNoTileDoCampo(contexto, npc, decisao, *tilesDoCampo)) {
+            decisao.indiceDaConstrucaoDoDestino = -1;
+            break;
+        }
         // FL5-4: dentro da casa ou do trabalho, come lá; na rua, vai para casa.
         const bool estaEmCasaOuNoTrabalho = decisao.estaDentroDeUmaConstrucao()
             && (decisao.indiceDaConstrucaoOndeEsta == casaETrabalho.indiceDaCasa
@@ -352,7 +422,10 @@ std::string montarTabelaDasAcoesDosNpcs(const ContextoDaRotina& contexto, const 
         const NotasDasAcoes notas = calcularNotasDasAcoes(montarSituacaoDoNpc(contexto, relogio, identidade, casaETrabalho, decisao),
                                                           contexto.regras.utilidade);
         std::string ondeEsta = "na rua";
-        if (decisao.estaDentroDeUmaConstrucao()) {
+        const std::vector<PosicaoDeTile>* tilesDoCampo = tilesDoCampoDoTrabalho(contexto, casaETrabalho);
+        if (tilesDoCampo != nullptr && estaNoTileDoCampo(contexto, npc, decisao, *tilesDoCampo)) {
+            ondeEsta = "no campo de " + contexto.vila.construcoes[casaETrabalho.indiceDoTrabalho].identificador;
+        } else if (decisao.estaDentroDeUmaConstrucao()) {
             ondeEsta = "dentro de " + contexto.vila.construcoes[decisao.indiceDaConstrucaoOndeEsta].identificador;
         } else if (decisao.estaACaminho) {
             ondeEsta = decisao.indiceDaConstrucaoDoDestino >= 0

@@ -9,10 +9,16 @@ add_library(regras_do_jogo STATIC
     Npc/MovimentoDosNpcs.cpp
     Npc/RotinaDosNpcs.cpp
     Vila/VilaInicial.cpp
+    Inventario/InventarioDaCidade.cpp
+    Construcao/ContasDasConstrucoes.cpp
+    Producao/ProducaoDaVila.cpp
+    Economia/ConsumoESalarios.cpp
+    Vila/SimulacaoDaVila.cpp
     Dados/ProblemasDosDados.cpp
     Dados/TabelaCsv.cpp
     Dados/TextosERegras.cpp
     Dados/Itens.cpp
+    Dados/Construcoes.cpp
     Dados/Recursos.cpp
     Dados/Receitas.cpp
     Dados/DadosDoJogo.cpp

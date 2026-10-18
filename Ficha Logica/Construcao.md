@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **os dados das construções** (porte, vagas, capacidade, quem trabalha) e o desenho delas. As **obras** (construir e subir de nível) e a **manutenção** ficam para depois do marco 6 [Proposta] (FL6-1). Os pontos marcados com FL6 estão na **rodada FL6** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **os dados das construções** (porte, vagas, capacidade, quem trabalha) e o desenho delas. As **obras** (construir e subir de nível) e a **manutenção** ficam para depois do marco 6 (FL6-1). Os pontos marcados com FL6 foram decididos na **rodada FL6** (2026-10-18, toda com "seguir sugestão").
 
 # Ficha Lógica: Construção
 
@@ -16,7 +16,7 @@ Documento do sistema: [[Sistema de Construção/Descrição|Construção]], com 
 
 ## 2. Dados
 
-### Definições: o `data/construcoes.json` completo [Proposta]
+### Definições: o `data/construcoes.json` completo
 
 No marco 3 (FL3-5), o arquivo era só a lista dos IDs. No marco 6 ele ganha os campos de cada tipo:
 
@@ -42,7 +42,7 @@ No marco 3 (FL3-5), o arquivo era só a lista dos IDs. No marco 6 ele ganha os c
 | `trabalho_sem_receita` | O Trabalho de quem trabalha numa construção sem receita (Lojista, Operário). Nas outras, o Trabalho é o da receita | `manufaturado` |
 | `moradores` | Só nas moradias: quantos moram em cada uma | 4 |
 
-**As 7 da fatia:**
+**As 8 da fatia** (7 na vila e a Pedreira, só nos dados, FL6-5):
 
 | Construção | Porte | Guarda | Função | Trabalho |
 |---|---|---|---|---|
@@ -52,9 +52,10 @@ No marco 3 (FL3-5), o arquivo era só a lista dos IDs. No marco 6 ele ganha os c
 | Carpinteiro | Médio | Matéria-prima e bem de consumo | Carpinteiro | Pela receita (Manufaturado) |
 | Mercado | Médio | Bem de consumo | Lojista | Manufaturado |
 | Construtor | Pequeno | Matéria-prima | Operário | Braçal |
+| Pedreira (fora da vila) | Médio | Matéria-prima e bem de consumo | Pedreiro | Pela receita (Manufaturado) |
 | Casa | Pequeno | — | (moradia, 4 moradores) | — |
 
-**No `data/regras.json`** [Proposta], os números iguais para todos os tipos:
+**No `data/regras.json`**, os números iguais para todos os tipos:
 
 ```json
 "vagas_por_nivel": [2, 3, 5, 7, 10],
@@ -80,7 +81,7 @@ Com o que a ficha da IA já tem (o tipo, o lote, a porta, o dono):
 | `indiceDoGerente` | o NPC, ou nenhum | Elisa | Não: recalculado |
 | `vagas` | inteiro | 2 | Não: sai do nível |
 
-O `vila_inicial.json` ganha o campo `"nivel"` em cada construção [Proposta].
+O `vila_inicial.json` ganha o campo `"nivel"` em cada construção.
 
 ## 3. Quando roda
 
@@ -102,7 +103,7 @@ O empregado de **maior habilidade** no Trabalho da construção. No empate, o de
 
 ### 4.3 Desenhar (no `Jogo/`)
 
-1. Se existir a imagem `data/imagens/construcoes/<tipo>_nivel_<n>.png` (por exemplo, `construcoes/casa_nivel_1.png`), desenhe-a com a linha de baixo na linha de baixo do lote, e o resto subindo para fora dele [Proposta] (FA1-5, o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]]).
+1. Se existir a imagem `data/imagens/construcoes/<tipo>_nivel_<n>.png` (por exemplo, `construcoes/casa_nivel_1.png`), desenhe-a com a linha de baixo na linha de baixo do lote, e o resto subindo para fora dele (FA1-5, o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]]).
 2. Se não existir, desenhe o retângulo de cor do marco 5 (FL5-1). Assim, cada construção que o autor desenhar aparece no jogo sem mexer no código.
 3. **Por cima de quem passa atrás:** a parte da imagem acima do lote (o telhado) é desenhada **depois** dos NPCs que estão mais acima na tela, como a copa das árvores. Por isso, as construções entram na mesma ordem de desenho dos NPCs (pela linha de baixo).
 
@@ -144,7 +145,7 @@ O empregado de **maior habilidade** no Trabalho da construção. No empate, o de
 |---|---|
 | Vagas no nível 1, 2 e 5 | 2, 3 e 10 |
 | Capacidade de uma construção média no nível 2 | 400 |
-| O `construcoes.json` da fatia | 7 tipos, sem erro |
+| O `construcoes.json` da fatia | 8 tipos, sem erro |
 | Um porte `enorme` | Erro |
 | O Mercado sem `trabalho_sem_receita` | Erro |
 | 3 empregados numa Fazenda nível 1 | Erro: 2 vagas |
@@ -154,7 +155,7 @@ O empregado de **maior habilidade** no Trabalho da construção. No empate, o de
 
 ## 9. Fora da fatia (e fora do marco 6)
 
-- **As obras** (construir num lote livre, subir de nível, as horas dos Operários, o Engenheiro) e a **manutenção por estação** [Proposta] (FL6-1). A **pedra** que elas pedem está na pergunta FL6-5.
+- **As obras** (construir num lote livre, subir de nível, as horas dos Operários, o Engenheiro) e a **manutenção por estação** (FL6-1). A **pedra** delas vem dos 150 Blocos de Pedra do estoque inicial (FL6-5).
 - A Vida das construções e a tempestade; a demolição; a compra e a venda; o leilão; a loja ilegal.
 - Os donos Facção e Rico (a fatia só tem a Cidade e o jogador).
 - A aparência nos níveis 3 e 5.

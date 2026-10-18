@@ -1,6 +1,6 @@
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Guia escrito em 2026-10-18, a pedido do autor, que vai **desenhar a arte da fatia à mão, no Pixelorama**, com a paleta **Resurrect 64**. Junta num lugar só o que o [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]], a [[Arquitetura/Descrição|Arquitetura]], o [[Sistema de Clima e Estações/Descrição|Clima e Estações]] e as fichas já decidiram. Os critérios novos estão marcados como [Proposta] e vão para a **rodada FA1** ([[Retomada]], seção 4).
+> Guia escrito em 2026-10-18, a pedido do autor, que vai **desenhar a arte da fatia à mão, no Pixelorama**, com a paleta **Resurrect 64**. Junta num lugar só o que o [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]], a [[Arquitetura/Descrição|Arquitetura]], o [[Sistema de Clima e Estações/Descrição|Clima e Estações]] e as fichas já decidiram. Os critérios novos foram decididos na **rodada FA1** (2026-10-18, toda com "seguir sugestão"). As rampas de cada material (5.2) e a arrumação do `terreno.png` (6.2) continuam como [Proposta]: são um ponto de partida, e o autor pode mudá-las enquanto desenha.
 
 # Guia da Arte
 
@@ -61,7 +61,7 @@ Os nomes dos menus podem mudar um pouco conforme a versão do Pixelorama.
 - **Nada de pixels meio transparentes**, a não ser a sombra no chão (parte 5.3). Um pixel é cheio ou vazio.
 - **Cores neutras de dia claro, entre a primavera e o verão.** O jogo pinta por cima o tom de cada estação (outono alaranjado, inverno azulado) e de cada fase do dia (noite escura). Se você desenhar com cor de outono, o outono do jogo fica laranja demais.
 
-### 4.2 Luz, sombra e contorno [Proposta] (FA1-2)
+### 4.2 Luz, sombra e contorno (FA1-2)
 
 - **A luz vem de cima, à esquerda.** O lado de cima e o da esquerda de cada objeto são os mais claros; o de baixo e o da direita, os mais escuros. Use a mesma luz em **todas** as peças, ou a cena fica estranha.
 - **Contorno colorido:** o contorno de cada objeto usa o tom mais escuro da rampa dele (a madeira tem contorno marrom-escuro; a folhagem, verde-escuro). A cor 01 (`#2e222f`) serve de contorno geral, quando nenhuma rampa tem um tom escuro o bastante. Nunca preto puro.
@@ -142,7 +142,7 @@ Um ponto de partida, da sombra à luz. Teste no Pixelorama e troque um tom se n�
 | Tecnocrata | Cobre e verde-oliva | 22 e 26 |
 | Escravista | Púrpura e areia | 59 e 24 |
 
-### 5.3 As cores a mais [Proposta] (FA1-3)
+### 5.3 As cores a mais (FA1-3)
 
 - **A sombra no chão** é a única cor transparente: a cor 01 (`#2e222f`) com **50% de transparência**. É a **cor 65**, a primeira a mais. Use-a nas sombras embaixo dos personagens, das árvores e das construções.
 - **Outras cores a mais:** no máximo **8** (cores 66 a 73), e só quando uma rampa precisar de um tom que a Resurrect 64 não tem. Cada uma é anotada na tabela abaixo, com o motivo, e acrescentada no fim do `resurrect-64.gpl`.
@@ -169,17 +169,17 @@ Tudo o que é pintado no Tiled fica **numa imagem só**: o `Jogo/data/imagens/te
 
 ### 6.2 A arrumação do `terreno.png` [Proposta]
 
-| Linha | Tiles |
-|---|---|
-| 0 | Grama lisa (4 variações) · grama seca (2) · terra batida lisa (2) · água funda (2) · terra arada · brotos · trigo maduro (2) · 2 livres |
-| 1 | Grama ↔ terra batida: as 16 bordas (parte 6.3) |
-| 2 | Grama ↔ água: as 16 bordas |
-| 3 | Detalhes, com fundo transparente: flores (3), grama alta (2), pedrinhas (2), cogumelo (1); objetos: pedra, arbusto, toco, feixe de trigo; 4 livres |
-| 4 | Cerca de madeira (6: reta deitada, reta em pé, 4 cantos) e poste solto · muro de pedra (6) · 3 livres |
-| 5 a 8 | As árvores (2 tipos, 3 × 4 tiles cada) e o poço (2 × 2) |
-| 9 | O tile de colisão (vermelho, só para o Tiled) |
+| Linha | Tiles                                                                                                                                              |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0     | Grama lisa (4 variações) · grama seca (2) · terra batida lisa (2) · água funda (2) · terra arada · brotos · trigo maduro (2) · 2 livres            |
+| 1     | Grama ↔ terra batida: as 16 bordas (parte 6.3)                                                                                                     |
+| 2     | Grama ↔ água: as 16 bordas                                                                                                                         |
+| 3     | Detalhes, com fundo transparente: flores (3), grama alta (2), pedrinhas (2), cogumelo (1); objetos: pedra, arbusto, toco, feixe de trigo; 4 livres |
+| 4     | Cerca de madeira (6: reta deitada, reta em pé, 4 cantos) e poste solto · muro de pedra (6) · 3 livres                                              |
+| 5 a 8 | As árvores (2 tipos, 3 × 4 tiles cada) e o poço (2 × 2)                                                                                            |
+| 9     | O tile de colisão (vermelho, só para o Tiled)                                                                                                      |
 
-### 6.3 As bordas entre dois chãos [Proposta] (FA1-4)
+### 6.3 As bordas entre dois chãos (FA1-4)
 
 Onde a grama encontra a terra (ou a água), o tile de borda mostra os dois chãos. Use o **conjunto de cantos de 16 tiles**: cada canto do tile é grama ou terra, e há 16 combinações. No Tiled, esse conjunto vira um **pincel de terreno** (terrain set do tipo "cantos"): pinta-se "terra" e ele escolhe sozinho a borda certa.
 
@@ -217,7 +217,7 @@ As 16 combinações (G = grama, T = terra; a ordem é canto de cima à esquerda,
 
 As construções **não são pintadas no Tiled**: o jogo as desenha nos lotes (hoje, como retângulos de cor; FL5-1). A fatia precisa das **7**, no **nível 1** (simples e modesto).
 
-### 7.1 O tamanho [Proposta] (FA1-5)
+### 7.1 O tamanho (FA1-5)
 
 A imagem tem a **largura do lote** e é **mais alta** que ele, porque o telhado sobe na vista 3/4:
 
@@ -253,7 +253,7 @@ Monte as construções com **peças que se repetem** (o mesmo telhado, a mesma j
 
 ## 8. O boneco (os NPCs)
 
-### 8.1 O quadro e as direções [Proposta] (FA1-1)
+### 8.1 O quadro e as direções (FA1-1)
 
 - **Quadro de 32 × 32**, com o boneco de **16 × 24** dentro: das colunas 8 a 23 e das linhas 5 a 28. **Os pés tocam a linha 28**, no meio (ponto **(16, 28)**). A sombra (cor 65) fica nas linhas 28 e 29, embaixo dos pés. A folga do quadro serve para os braços balançarem e, depois, para as ferramentas.
 - **4 linhas de direção** na folha, nesta ordem: **baixo, cima, direita, esquerda** (a ordem do jogo). A **esquerda é a direita espelhada**: desenhe a direita e, no Pixelorama, copie a linha e espelhe na horizontal (o Pipeline: "3 direções desenhadas e a esquerda espelhada"). O jogo não precisa saber disso.

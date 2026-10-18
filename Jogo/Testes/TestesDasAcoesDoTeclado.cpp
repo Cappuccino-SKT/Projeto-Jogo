@@ -16,6 +16,7 @@ void testarTabelaDeAcoesDoTeclado()
     conferir(tabela.acaoDaTeclaApertada(SDL_SCANCODE_F2) == AcaoDoJogador::MostrarCaminhosParaDepuracao
                  && tabela.acaoDaTeclaApertada(SDL_SCANCODE_F3) == AcaoDoJogador::MostrarAcoesDosNpcsParaDepuracao,
              "o F2 mostra os caminhos (FL4-6) e o F3, as ações dos NPCs (FL5-6)");
+    conferir(tabela.acaoDaTeclaApertada(SDL_SCANCODE_F4) == AcaoDoJogador::MostrarEstoqueEProducao, "o F4 mostra o estoque e a produção (FL6-8)");
     conferir(!tabela.acaoDaTeclaApertada(SDL_SCANCODE_N).has_value(), "o N do marco 4 saiu (FL5-6)");
 
     bool teclaEstaSegurada[SDL_SCANCODE_COUNT] = {};
