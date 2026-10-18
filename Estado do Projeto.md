@@ -1,8 +1,8 @@
-> Situação do projeto em poucas linhas. O detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]); o jeito de trabalhar e as regras do código, na [[Retomada]]. Atualizado em 2026-10-17.
+> Situação do projeto em poucas linhas. O detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]); o jeito de trabalhar e as regras do código, na [[Retomada]]. Atualizado em 2026-10-18.
 
 ## Fase atual
 
-**Código: marco 3.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco. As fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]) estão escritas, com a rodada FL1 aplicada; a da Interface (marco 2), com a rodada FL2 aplicada; as do marco 3 (Itens, Recursos e Receitas), com a rodada FL3 aplicada.
+**Código: marco 4.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco. As fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]) estão escritas, com a rodada FL1 aplicada; a da Interface (marco 2), com a rodada FL2 aplicada; as do marco 3 (Itens, Recursos e Receitas), com a rodada FL3 aplicada. As do marco 4 ([[Ficha Logica/NPC|NPC]] e a busca de caminho no Mapa) estão escritas e esperam a rodada FL4.
 
 ## O que está pronto
 
@@ -43,8 +43,9 @@
 2. **Marco 1:** relógio, leitura do mapa e o mapa desenhado. Pronto e confirmado pelo autor.
 3. **Marco 2:** câmera e zoom. Pronto e confirmado pelo autor, com a rodada FL2 aplicada.
 4. **Marco 3:** carregar os dados, o preço base e o `--validar`. Pronto e confirmado pelo autor.
-5. **Marcos 4 a 9** da fatia vertical, um por pull request.
-6. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
+5. **Marco 4:** um NPC andando pela busca de caminho. Fichas escritas; falta a rodada FL4.
+6. **Marcos 5 a 9** da fatia vertical, um por pull request.
+7. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 
 ## Histórico
 
