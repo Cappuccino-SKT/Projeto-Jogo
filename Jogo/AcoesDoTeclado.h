@@ -26,6 +26,8 @@ enum class AcaoDoJogador {
     MoverCameraParaEsquerda,
     MoverCameraParaDireita,
     CorrerComACamera,
+    CriarNpcDeTeste,               // N (marco 4, FL4-6): mais um NPC, até 50
+    MostrarCaminhosParaDepuracao,  // F2 (marco 4, FL4-6): o caminho de cada NPC em azul
 };
 
 // Uma linha da tabela: a ação, a tecla principal e uma alternativa (opcional).
@@ -37,7 +39,7 @@ struct TeclasDeUmaAcao {
 
 class TabelaDeAcoesDoTeclado {
 public:
-    // As teclas padrão: as provisórias dos marcos 1 e 2 (FL1-3 e FT1-4).
+    // As teclas padrão: as provisórias dos marcos 1, 2 e 4 (FL1-3, FT1-4 e FL4-6).
     static TabelaDeAcoesDoTeclado criarComAsTeclasPadrao();
 
     // A ação de uma tecla que acabou de ser apertada, ou vazio se a tecla não faz nada.
