@@ -75,7 +75,7 @@ Também ficam aqui:
 4. F11 entra e sai da tela cheia.
 5. Com a janela aberta, o processador fica perto de 0% no Gerenciador de Tarefas, porque o laço espera o monitor a cada quadro.
 
-### Marco 1: janela, loop, relógio fixo e mapa de tiles (2026-10-17)
+### Marco 1: janela, loop, relógio fixo e mapa de tiles (2026-10-17, confirmado pelo autor)
 
 **O que faz:** a janela mostra o **mapa da vila** (64 × 64 tiles, arte de teste de cor lisa) com zoom 3x, a partir do canto de cima à esquerda. O **relógio do mundo** anda: a partida começa às 6h do dia 1 da Primavera do Ano 412, e o título da janela mostra a data, a hora, a fase do dia e a velocidade. A cada hora e a cada dia, o console escreve uma linha.
 

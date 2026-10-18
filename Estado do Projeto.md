@@ -40,7 +40,7 @@
 ## Próximos passos
 
 1. **Marco 0:** o ambiente e um "olá, janela" com o SDL3. Pronto e confirmado pelo autor.
-2. **Marco 1:** relógio, leitura do mapa e o mapa desenhado. Escrito e testado; falta o autor confirmar.
+2. **Marco 1:** relógio, leitura do mapa e o mapa desenhado. Pronto e confirmado pelo autor.
 3. **Marcos 2 a 9** da fatia vertical, um por pull request.
 4. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 
