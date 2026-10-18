@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 2** (câmera e entrada). Cobre só **a câmera, o zoom e as teclas**. O HUD e os painéis entram nesta mesma ficha antes do marco 8. As propostas estão na rodada **FL2** ([[Retomada]], seção 4), e o código do marco 2 já segue as sugestões dela.
+> Ficha escrita em 2026-10-18 para o **marco 2** (câmera e entrada). Cobre só **a câmera, o zoom e as teclas**. O HUD e os painéis entram nesta mesma ficha antes do marco 8. As decisões da rodada **FL2** (2026-10-18, todas "seguir sugestão") já estão aplicadas, e o código do marco 2 as segue.
 
 # Ficha Lógica: Interface (câmera, zoom e teclas)
 
@@ -28,8 +28,8 @@ No marco 2, ficam numa estrutura do código. Quando o perfil do jogador existir 
 |---|---|---|---|
 | `niveisDeZoom` | lista de inteiros | multiplicador | 2, 3, 4 (FT1-4) |
 | `zoomInicial` | inteiro | multiplicador | 3 (FT1-4) |
-| `velocidadeNoTecladoEmPixelsDaTelaPorSegundo` | decimal | pixels da tela por segundo | 900 **[Proposta]** (FL2-1) |
-| `multiplicadorDaVelocidadeComShift` | decimal | — | 2 **[Proposta]** (FL2-1) |
+| `velocidadeNoTecladoEmPixelsDaTelaPorSegundo` | decimal | pixels da tela por segundo | 900 (FL2-1) |
+| `multiplicadorDaVelocidadeComShift` | decimal | — | 2 (FL2-1) |
 
 **Por que medir a velocidade em pixels da tela:** assim a câmera parece andar igual em qualquer zoom. A 3x, 900 pixels da tela por segundo são 300 pixels do mundo, ou seja, cerca de 19 tiles por segundo; o mapa de 64 tiles é atravessado em pouco mais de 3 segundos.
 
@@ -37,7 +37,7 @@ No marco 2, ficam numa estrutura do código. Quando o perfil do jogador existir 
 
 | Campo | Tipo | Unidade | Exemplo | Vai no save? |
 |---|---|---|---|---|
-| `posicaoXNoMundo`, `posicaoYNoMundo` | decimais | pixels do mundo | (245,3; 372,5): o canto de cima à esquerda da tela | Não **[Proposta]** (FL2-2) |
+| `posicaoXNoMundo`, `posicaoYNoMundo` | decimais | pixels do mundo | (245,3; 372,5): o canto de cima à esquerda da tela | Não (FL2-2) |
 | `zoom` | inteiro | 2, 3 ou 4 | 3 | Não |
 | `larguraDaTela`, `alturaDaTela` | inteiros | pixels da tela | 1600 × 837 | Não (vem da janela a cada quadro) |
 | `sobraDaRodaDoMouse` | decimal | passos da roda | 0,4 | Não (é só uma sobra) |
@@ -45,7 +45,7 @@ No marco 2, ficam numa estrutura do código. Quando o perfil do jogador existir 
 
 - **Pixels do mundo e pixels da tela:** um tile tem 16 pixels do mundo. Com zoom 3x, ele ocupa 48 pixels da tela.
 - **Por que a posição tem vírgula:** com 15 pixels da tela por quadro a 3x, a câmera anda 5 pixels do mundo; mas a 60 quadros por segundo com Shift e zoom 4x, anda 7,5. Sem a vírgula, a sobra se perderia e a câmera andaria aos trancos.
-- **A câmera não vai no save [Proposta] (FL2-2):** ao carregar, ela começa como numa partida nova (regra 4.5). Gravar a posição é fácil de fazer depois, se o autor quiser.
+- **A câmera não vai no save (FL2-2):** ao carregar, ela começa como numa partida nova (regra 4.5). Gravar a posição é fácil de fazer depois, se o autor quiser.
 
 ## 3. Quando roda
 
@@ -62,8 +62,8 @@ Tudo roda **a cada quadro da tela**, no `Jogo/`, antes de desenhar:
 
 1. Leia as teclas **seguradas** (não as apertadas): W ou ↑ para cima, S ou ↓ para baixo, A ou ← para a esquerda, D ou → para a direita. As letras valem pela **posição** no teclado, então funcionam em qualquer layout.
 2. Monte a direção: cima soma −1 no y, baixo +1, esquerda −1 no x, direita +1. Segurando as duas opostas, elas se anulam.
-3. **Diagonal [Proposta] (FL2-1):** se a direção tem x e y, multiplique os dois por 0,7071 (1 ÷ √2), para a diagonal não ser 41% mais rápida.
-4. Distância na tela = velocidade × segundos reais do quadro; com Shift, × 2 **[Proposta]**.
+3. **Diagonal (FL2-1):** se a direção tem x e y, multiplique os dois por 0,7071 (1 ÷ √2), para a diagonal não ser 41% mais rápida.
+4. Distância na tela = velocidade × segundos reais do quadro; com Shift, × 2 (FL2-1).
 5. Distância no mundo = distância na tela ÷ zoom. Some à posição.
 6. Rode a regra 4.4.
 
@@ -77,10 +77,10 @@ Tudo roda **a cada quadro da tela**, no `Jogo/`, antes de desenhar:
 
 1. Some à `sobraDaRodaDoMouse` o quanto a roda girou (para cima é positivo). A roda comum gira de 1 em 1; o touchpad manda pedaços, como 0,3.
 2. Enquanto a sobra for 1 ou mais: suba um nível (2x → 3x → 4x) e tire 1. Enquanto for −1 ou menos: desça um nível e some 1. No 4x não sobe, no 2x não desce, e a sobra do lado bloqueado é jogada fora.
-3. **O ponto embaixo do mouse fica parado [Proposta] (FL2-2):** antes de trocar, calcule o ponto do mundo embaixo do mouse; depois, ponha a câmera de modo que esse ponto continue embaixo do mouse (contas na parte 5).
+3. **O ponto embaixo do mouse fica parado (FL2-2):** antes de trocar, calcule o ponto do mundo embaixo do mouse; depois, ponha a câmera de modo que esse ponto continue embaixo do mouse (contas na parte 5).
 4. Rode a regra 4.4.
 
-### 4.4 Limitar a câmera ao mapa [Proposta] (FL2-2)
+### 4.4 Limitar a câmera ao mapa (FL2-2)
 
 Para cada eixo (x e y):
 
@@ -90,7 +90,7 @@ Para cada eixo (x e y):
 
 ### 4.5 Posição inicial
 
-Ao abrir o mapa, com o zoom 3x, a câmera fica com o **centro do mapa no centro da tela** **[Proposta] (FL2-2)**, e depois roda a regra 4.4. No marco 6, quando a Carpintaria do jogador existir, a câmera pode começar nela.
+Ao abrir o mapa, com o zoom 3x, a câmera fica com o **centro do mapa no centro da tela** (FL2-2), e depois roda a regra 4.4. No marco 6, quando a Carpintaria do jogador existir, a câmera pode começar nela.
 
 ### 4.6 Pixel inteiro no desenho
 
@@ -177,8 +177,8 @@ Num programa de testes do `Jogo/` (`testes_do_jogo`), rodado pelo mesmo `ctest`.
 
 ## 9. Fora da fatia (e fora do marco 2)
 
-- Mover a câmera pela **borda da tela** **[Em aberto]** (FL2-3).
-- **Atalhos remapeáveis** pelo jogador: no marco 2, as teclas continuam direto no código, e uma tabela de ações entra no marco 3, pronta para o perfil do jogador **[Proposta]** (FL2-4).
+- Mover a câmera pela **borda da tela**: uma opção futura nas configurações, desligada por padrão (FL2-3).
+- **Atalhos remapeáveis** pelo jogador: no marco 2, as teclas continuam direto no código, e uma tabela de ações entra no marco 3, pronta para o perfil do jogador (FL2-4). As letras valem pela posição no teclado.
 - O HUD, os painéis, as notificações e o modo de edição da interface (marco 8).
 - Clicar numa notificação para centralizar a câmera; seguir um NPC com a câmera.
 - O minimapa e as lentes do Mapa.
