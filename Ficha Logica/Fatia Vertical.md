@@ -328,7 +328,8 @@ Na fatia, só 4 fatores, dentro das faixas do [[Sistema de Felicidade e Estabili
 ### 4.10 Movimento (a cada tick)
 
 - Busca de caminho **A\*** numa grade de **8 direções** (diagonal custa 1,4), calculada uma vez por destino (FT1-3).
-- O NPC anda pelo caminho na velocidade de andar. Se um tile ficar bloqueado (uma obra nova), ele pede outro caminho.
+- O NPC anda pelo caminho na velocidade de andar: **128 tiles por hora de jogo** (FL4-1). Se um tile ficar bloqueado (uma obra nova), ele pede outro caminho.
+- O passo a passo está na [[Ficha Logica/NPC|ficha do NPC]] e na regra 4.4 da [[Ficha Logica/Mapa|ficha do Mapa]].
 - Na fatia, os NPCs **não colidem** entre si (passam um pelo outro), para simplificar.
 
 ### 4.11 Obra
@@ -405,6 +406,8 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 **Rodada FL1 (2026-10-17):** as fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]). O mapa é salvo em JSON (`vila.tmj`), lido pela nlohmann/json já no marco 1; a partida começa às **6h** (tick 4.800); o relógio usa no máximo 250 milissegundos por quadro e pausa quando a janela é minimizada; os testes rodam num programa próprio pelo `ctest`; as camadas do Tiled têm nomes sem acento; o marco 1 usa um conjunto de tiles de teste.
 
 **Rodada FL3 (2026-10-18):** as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]]. O marco 3 tem só os 6 itens da fatia; as receitas Braçais são 2 unidades em 1 hora; o salário por hora fica em centésimos só na conta do preço, com a metade arredondando para cima, item por item; o peso é uma unidade inteira com o Pão valendo 1; o `construcoes.json` do marco 3 é só a lista de IDs; os recursos ficam num `recursos.csv`, a estação no `regras.json` e a produtividade na área do Tiled.
+
+**Rodada FL4 (2026-10-18):** a ficha do [[Ficha Logica/NPC|NPC]] e a busca de caminho na do [[Ficha Logica/Mapa|Mapa]] (marco 4). O NPC anda 128 tiles por hora de jogo (160 milésimos de tile por tick); a diagonal só vale com os dois tiles retos do lado livres; sem caminho, o NPC vai ao tile mais perto do destino; o boneco provisório (Mana Seed, quadros de 64 × 64) é descrito num arquivo de dados e tem um boneco de teste de reserva no Git; o desenho fica entre a posição de um tick e a do seguinte; o marco 4 se testa com o botão direito, o F2 (caminhos) e o N (mais um NPC).
 
 **Rodada FL2 (2026-10-18):** a ficha da [[Ficha Logica/Interface|Interface]] (câmera do marco 2). A câmera anda 900 pixels da tela por segundo em qualquer zoom (Shift dobra, diagonal corrigida); o zoom deixa o ponto embaixo do mouse parado; a borda do mapa nunca sai da borda da tela; a câmera começa no centro do mapa e não vai no save; mover pela borda da tela fica como opção futura, desligada; uma tabela de ações para as teclas entra no marco 3.
 

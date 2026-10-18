@@ -61,7 +61,7 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 |---|---|
 | Tile | 16 × 16 px |
 | Vista | De cima, em 3/4 (como Stardew) |
-| Boneco | 16 × 24 px (1 tile de largura, 1,5 de altura) |
+| Boneco | 16 × 24 px (1 tile de largura, 1,5 de altura). O provisório da fatia (Mana Seed, fora do Git) tem cerca de 14 × 29 px em quadros de 64 × 64, 4 direções e 6 quadros de andar (rodada FL4-4; [[Ficha Logica/NPC\|ficha do NPC]]) |
 | Zoom padrão | 3x (rodada FT1-4): em 1600 × 900 aparecem 33 × 19 tiles (2x: 50 × 28; 4x: 25 × 14) |
 | Paleta | Paleta mestre de cerca de 48 cores + 2 cores de destaque por cultura |
 

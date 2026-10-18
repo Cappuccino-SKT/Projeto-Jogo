@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 4** (NPC andando). Cobre só **a posição, o caminho, o movimento e o desenho do boneco**. A rotina e a Utilidade entram nesta mesma ficha antes do marco 5. Os pontos marcados com FL4 estão na **rodada FL4** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 4** (NPC andando). Cobre só **a posição, o caminho, o movimento e o desenho do boneco**. A rotina e a Utilidade entram nesta mesma ficha antes do marco 5. As decisões da rodada **FL4** (2026-10-18, todas "seguir sugestão") já estão aplicadas.
 
 # Ficha Lógica: NPC (posição e movimento)
 
@@ -35,10 +35,10 @@ No `data/regras.json`:
 
 | Campo no arquivo | Nome no código | Unidade | Valor |
 |---|---|---|---|
-| `velocidade_de_andar_em_tiles_por_hora` | `velocidadeDeAndarEmMilesimosPorTick` (convertida ao carregar) | tiles por hora de jogo | 128 [Proposta] (FL4-1), ou seja, 160 milésimos por tick |
-| `caminhos_calculados_por_tick` | `caminhosCalculadosPorTick` | pedidos | 4 [Proposta] (FT1-3: "cálculo distribuído entre os ticks") |
+| `velocidade_de_andar_em_tiles_por_hora` | `velocidadeDeAndarEmMilesimosPorTick` (convertida ao carregar) | tiles por hora de jogo | 128 (FL4-1), ou seja, 160 milésimos por tick |
+| `caminhos_calculados_por_tick` | `caminhosCalculadosPorTick` | pedidos | 4 (FT1-3: "cálculo distribuído entre os ticks") |
 
-**O boneco** (FL4-4) [Proposta], num arquivo novo, o `data/personagens/boneco_provisorio.json`:
+**O boneco** (FL4-4), num arquivo novo, o `data/personagens/boneco_provisorio.json`:
 
 | Campo no arquivo | O que é | Valor da arte provisória |
 |---|---|---|
@@ -95,12 +95,12 @@ Pausado, nenhum tick roda: nada anda e nenhum caminho é calculado. A câmera co
 2. Se ele dá para andar, o NPC nasce nele. Se não, procure em quadrados cada vez maiores em volta (distância 1, depois 2...), linha por linha, de cima para baixo e da esquerda para a direita, e use o primeiro tile livre.
 3. O NPC nasce parado, olhando para baixo.
 
-**A tecla de teste N** [Proposta] (FL4-6) cria mais um NPC, até 50, pela mesma regra, começando do tile livre seguinte ao último usado. Serve para ver vários andando juntos e passando um pelo outro.
+**A tecla de teste N** (FL4-6) cria mais um NPC, até 50, pela mesma regra, começando do tile livre seguinte ao último usado. Serve para ver vários andando juntos e passando um pelo outro.
 
 ### 4.2 Dar um destino (botão direito do mouse)
 
 1. Converta a posição do mouse na tela em tile (parte 5). Se cair fora do mapa, ignore o clique.
-2. Para **cada NPC** [Proposta] (FL4-6), crie ou troque o `PedidoDeCaminho` dele, com esse tile e o tick atual. Se ele já tinha um pedido esperando, o novo substitui o antigo e vai para o fim da fila.
+2. Para **cada NPC** (FL4-6), crie ou troque o `PedidoDeCaminho` dele, com esse tile e o tick atual. Se ele já tinha um pedido esperando, o novo substitui o antigo e vai para o fim da fila.
 3. O caminho antigo continua valendo até o novo ser calculado, para o NPC não parar à toa.
 
 O botão direito "dá ordem", como manda o padrão de RTS da [[Interface/Descrição|Interface]] ("botão esquerdo seleciona, botão direito dá ordem"). Selecionar um NPC fica para depois da fatia; por isso, no marco 4, a ordem vale para todos.
@@ -114,7 +114,7 @@ O botão direito "dá ordem", como manda o padrão de RTS da [[Interface/Descri�
 3. Chame a busca de caminho (regra 4.4 do Mapa), do tile de saída ao destino.
 4. Conforme o resultado:
    - **chega no destino:** troque o `CaminhoDoNpc` pelo novo;
-   - **não chega** (destino bloqueado, como uma árvore, ou sem passagem): o caminho vai até o tile mais perto do destino a que dá para chegar [Proposta] (FL4-3), e o console mostra "o destino (50, 50) não tem caminho; o NPC vai até (56, 50)";
+   - **não chega** (destino bloqueado, como uma árvore, ou sem passagem): o caminho vai até o tile mais perto do destino a que dá para chegar (FL4-3), e o console mostra "o destino (50, 50) não tem caminho; o NPC vai até (56, 50)";
    - **o destino está fora do mapa:** não há caminho; o NPC continua o que fazia;
    - **o caminho está vazio** (já está lá): tire o `CaminhoDoNpc`.
 5. Apague o pedido.
@@ -151,7 +151,7 @@ Os **pés** do NPC ficam no **centro do tile**:
 
 ### 4.6 Desenhar os NPCs (no `Jogo/`, a cada quadro)
 
-1. **Posição suave** [Proposta] (FL4-5): calcule a posição do tick anterior e a do tick atual (regra 4.5) e desenhe entre as duas, pela fração do tick que já passou. *Por quê:* a 1x, o NPC só se move 20 vezes por segundo, e a tela mostra 60 quadros; sem isso, ele anda aos pulinhos de 2,6 pixels do mundo (7,7 pixels da tela a 3x).
+1. **Posição suave** (FL4-5): calcule a posição do tick anterior e a do tick atual (regra 4.5) e desenhe entre as duas, pela fração do tick que já passou. *Por quê:* a 1x, o NPC só se move 20 vezes por segundo, e a tela mostra 60 quadros; sem isso, ele anda aos pulinhos de 2,6 pixels do mundo (7,7 pixels da tela a 3x).
 2. **Ordem:** desenhe primeiro os NPCs com os pés mais acima na tela (menor y). No empate, o de menor x, e depois o de menor número de entidade. Assim, quem está mais embaixo cobre quem está atrás.
 3. **Quadro da animação:**
    - andando: linha = `linha_andando` + direção (baixo 0, cima 1, direita 2, esquerda 3); coluna = `distanciaNoCicloDeAndarEmMilesimos` ÷ 400;
@@ -159,7 +159,7 @@ Os **pés** do NPC ficam no **centro do tile**:
 4. **Recorte na folha:** x = coluna × 64; y = linha × 64; tamanho 64 × 64.
 5. **Onde desenhar:** o canto de cima à esquerda do quadro fica nos pés menos `pes_no_quadro` (32, 43). Depois, a mesma conta do mapa: (posição − câmera) × zoom, com o pixel inteiro da [[Ficha Logica/Interface|Interface]] (regra 4.6 de lá).
 6. Desenhe as camadas na ordem do arquivo (corpo, roupa, cabelo), no mesmo lugar.
-7. **Na depuração** [Proposta] (FL4-6): a tecla **F2** pinta o caminho de cada NPC em azul translúcido, como o F1 pinta a colisão.
+7. **Na depuração** (FL4-6): a tecla **F2** pinta o caminho de cada NPC em azul translúcido, como o F1 pinta a colisão.
 
 ### 4.7 Carregar o boneco (no `Jogo/`, ao abrir)
 
@@ -171,7 +171,7 @@ A `imagem_de_reserva` é feita pelo script da arte de teste, no mesmo formato de
 
 ## 5. Contas
 
-**A velocidade de andar** [Proposta] (FL4-1):
+**A velocidade de andar** (FL4-1):
 
 - 128 tiles por hora de jogo ÷ 800 ticks por hora = 0,16 tile por tick = **160 milésimos por tick**;
 - a 1x (20 ticks por segundo): 3,2 tiles por segundo, ou 154 pixels da tela por segundo a 3x;
@@ -208,7 +208,7 @@ Por causa da sobra (regra 4.4, passo 3), 2 tiles retos levam 13 ticks (2.000 ÷ 
 - tile x = arredondar para baixo ((mouse x ÷ zoom + câmera x) ÷ 16), e o mesmo para y;
 - *exemplo:* câmera em (0, 0), zoom 3x, mouse em (480, 150): (160 ÷ 16; 50 ÷ 16) = **(10, 3)**.
 
-**A posição suave** [Proposta] (FL4-5): com o relógio a meio caminho do próximo tick (25 milissegundos guardados de 50), o desenho fica na metade entre a posição do tick anterior e a do atual. A imagem fica no máximo 1 tick (50 milissegundos) atrasada, o que não se percebe.
+**A posição suave** (FL4-5): com o relógio a meio caminho do próximo tick (25 milissegundos guardados de 50), o desenho fica na metade entre a posição do tick anterior e a do atual. A imagem fica no máximo 1 tick (50 milissegundos) atrasada, o que não se percebe.
 
 ## 6. Conversa com outros sistemas
 
