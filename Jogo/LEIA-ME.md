@@ -234,7 +234,7 @@ Se o destino não tem caminho (um clique no meio do lago, por exemplo), o NPC va
 7. Durante a caminhada: **Espaço** pausa o NPC (a câmera continua andando), e **3** (4x) o deixa 4 vezes mais rápido.
 8. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
 
-### Marco 5: rotina (2026-10-18)
+### Marco 5: rotina (2026-10-18, confirmado pelo autor)
 
 **O que faz:** a vila ganha as 10 construções e os 15 NPCs Civis. Cada NPC escolhe o que fazer pela **Utilidade** (uma nota para cada ação; ganha a maior) e vai até o lugar dela: dorme em casa, trabalha na construção do emprego, come em casa ou no trabalho, vai ao Mercado no dia de compra e passeia no Período Livre. Numa construção, ele **entra** e some da tela até sair. Tudo segue a [[Ficha Logica/IA|ficha da IA]], com a rodada FL5.
 

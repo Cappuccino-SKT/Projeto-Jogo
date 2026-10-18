@@ -44,7 +44,7 @@
 3. **Marco 2:** câmera e zoom. Pronto e confirmado pelo autor, com a rodada FL2 aplicada.
 4. **Marco 3:** carregar os dados, o preço base e o `--validar`. Pronto e confirmado pelo autor.
 5. **Marco 4:** um NPC andando pela busca de caminho. Pronto e confirmado pelo autor.
-6. **Marco 5:** a rotina dos 15 NPCs. Escrito e testado; falta a confirmação do autor.
+6. **Marco 5:** a rotina dos 15 NPCs. Pronto e confirmado pelo autor.
 7. **Marcos 6 a 9** da fatia vertical, um por pull request.
 8. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 
