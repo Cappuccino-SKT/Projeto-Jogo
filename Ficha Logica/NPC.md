@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 4** (NPC andando). Cobre só **a posição, o caminho, o movimento e o desenho do boneco**. A rotina e a Utilidade entram nesta mesma ficha antes do marco 5. As decisões da rodada **FL4** (2026-10-18, todas "seguir sugestão") já estão aplicadas.
+> Ficha escrita em 2026-10-18 para o **marco 4** (NPC andando). Cobre só **a posição, o caminho, o movimento e o desenho do boneco**. A rotina, a Utilidade e a vila inicial (marco 5) ficaram numa ficha própria, a [[Ficha Logica/IA|ficha da IA]]. As decisões da rodada **FL4** (2026-10-18, todas "seguir sugestão") já estão aplicadas.
 
 # Ficha Lógica: NPC (posição e movimento)
 
@@ -12,7 +12,7 @@ tags: [ficha-logica]
 
 Um NPC **existe num tile do mapa**, recebe um **destino**, pede um **caminho** à busca de caminho e **anda tile a tile** até lá, na velocidade de andar. O `Jogo/` desenha o boneco no lugar certo, virado para o lado em que anda, com a animação de andar.
 
-No marco 4 há **um NPC** (mais os criados pela tecla de teste, FL4-6), e quem dá o destino é o jogador, com o botão direito do mouse. No marco 5, quem dá o destino passa a ser a rotina.
+No marco 4 há **um NPC** (mais os criados pela tecla de teste, FL4-6), e quem dá o destino é o jogador, com o botão direito do mouse. No marco 5, quem dá o destino passa a ser a rotina ([[Ficha Logica/IA|ficha da IA]]).
 
 Documentos do sistema: [[Sistema de NPC/Descrição|Sistema de NPC]] (atributos 12, "Posição atual", 21, "Velocidade", e 27, "Destino"), [[Sistema de IA/Descrição|IA]] e a regra 4.10 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]. A busca de caminho está na [[Ficha Logica/Mapa|ficha do Mapa]], regra 4.4.
 

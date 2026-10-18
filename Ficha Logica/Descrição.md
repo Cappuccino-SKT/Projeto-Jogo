@@ -21,7 +21,7 @@ O mapa geral da fatia (entidades, arquivos de dados, ordem do dia, marcos) está
 | 2. Câmera e entrada | [[Ficha Logica/Interface\|Interface]] (só câmera, zoom e teclas). Escrita em 2026-10-18 |
 | 3. Carregar os dados | [[Ficha Logica/Itens\|Itens]] (com a ordem de leitura e o `--validar`), [[Ficha Logica/Recursos\|Recursos]] e [[Ficha Logica/Receitas\|Receitas]] (com o preço base). Escritas em 2026-10-18 |
 | 4. NPC andando | [[Ficha Logica/Mapa\|Mapa]] (busca de caminho, regra 4.4); [[Ficha Logica/NPC\|NPC]] (só posição e movimento). Escritas em 2026-10-18 |
-| 5. Rotina | NPC e IA (Utilidade, horários) |
+| 5. Rotina | [[Ficha Logica/IA\|IA]] (a vila inicial, a rotina e a Utilidade). Escrita em 2026-10-18 |
 | 6. Produção, inventário e consumo | Produção, Inventário, Trabalho e Propriedade, Econômico (consumo e salários) |
 | 7. Simulação sem tela de 1 ano | Econômico (Mercado Local e estabilizador), Felicidade, Eventos |
 | 8. Interface básica | Interface (HUD e painéis) |
