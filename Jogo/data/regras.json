@@ -10,5 +10,22 @@
   },
   "produtividade_do_recurso_em_porcento": { "normal": 100, "destaque": 150 },
   "velocidade_de_andar_em_tiles_por_hora": 128,
-  "caminhos_calculados_por_tick": 4
+  "caminhos_calculados_por_tick": 4,
+  "rotinas": {
+    "civil": { "dormir": [22, 6], "trabalhar": [7, 15] }
+  },
+  "utilidade": {
+    "nota_da_acao_do_periodo": 100,
+    "bonus_de_comer": 150,
+    "horas_das_refeicoes": [7, 12, 19],
+    "minutos_da_refeicao": 30,
+    "bonus_de_comprar": 120,
+    "dias_entre_compras": 2,
+    "minutos_da_compra": 30,
+    "minutos_entre_reavaliacoes": 5
+  },
+  "passeio": {
+    "distancia_maxima_em_tiles": 12,
+    "minutos_de_espera": [15, 45]
+  }
 }

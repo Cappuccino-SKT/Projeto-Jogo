@@ -1,7 +1,8 @@
 #pragma once
 
 // Todos os dados do jogo, lidos na ordem da ficha dos Itens (parte 3):
-// textos, regras, itens, construções, recursos, receitas, preços e o mapa.
+// textos, regras, itens, construções, recursos, receitas, preços, o mapa e,
+// desde o marco 5, a vila inicial (ficha da IA).
 // Usado pelo jogo ao abrir e pelo "jogo --validar".
 
 #include <string>
@@ -12,6 +13,7 @@
 #include "Dados/Recursos.h"
 #include "Dados/TextosERegras.h"
 #include "Mapa/MapaLocal.h"
+#include "Vila/VilaInicial.h"
 
 struct DadosDoJogo {
     TabelaDeTextos tabelaDeTextos;
@@ -20,7 +22,8 @@ struct DadosDoJogo {
     CatalogoDeConstrucoes catalogoDeConstrucoes;
     CatalogoDeRecursos catalogoDeRecursos;
     CatalogoDeReceitas catalogoDeReceitas;
-    MapaLocal mapaDaVila;
+    MapaLocal mapaDaVila;  // com os lotes ocupados já bloqueados (FL5-1)
+    VilaDoJogo vilaInicial;
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }
@@ -30,7 +33,7 @@ struct DadosDoJogo {
 // erro: junta todos na listaDeProblemas.
 DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados);
 
-// "Dados conferidos: 6 itens, 3 recursos, 6 receitas, 1 mapa. 0 erros, 0 avisos."
+// "Dados conferidos: 6 itens, ..., 1 mapa, 1 vila (10 construções e 15 NPCs). 0 erros, 0 avisos."
 std::string montarResumoDosDados(const DadosDoJogo& dados);
 
 // Uma linha por item: "Pão: 1,7 moeda". Mostrada ao abrir e no --validar.

@@ -3,9 +3,12 @@
 
 add_library(regras_do_jogo STATIC
     Tempo/RelogioDoMundo.cpp
+    Tempo/SorteioComSemente.cpp
     Mapa/MapaLocal.cpp
     Mapa/BuscaDeCaminho.cpp
     Npc/MovimentoDosNpcs.cpp
+    Npc/RotinaDosNpcs.cpp
+    Vila/VilaInicial.cpp
     Dados/ProblemasDosDados.cpp
     Dados/TabelaCsv.cpp
     Dados/TextosERegras.cpp

@@ -69,6 +69,12 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     dados.mapaDaVila = std::move(leituraDoMapa.mapa);
     ligarAreasDoMapaAosRecursos(dados.mapaDaVila, nomeDoArquivoDoMapaDaVila, dados.catalogoDeRecursos, dados.regras, problemas);
 
+    // 9. A vila inicial (marco 5): as construções nos lotes e os NPCs. Os lotes
+    //    ocupados passam a bloquear a passagem (ficha da IA, regra 4.1).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "vila_inicial.json", problemas)) {
+        dados.vilaInicial = lerVilaInicial(*texto, dados.mapaDaVila, dados.catalogoDeConstrucoes, problemas);
+        bloquearOsLotesOcupados(dados.mapaDaVila, dados.vilaInicial);
+    }
     return dados;
 }
 
@@ -86,7 +92,9 @@ std::string montarResumoDosDados(const DadosDoJogo& dados)
     return "Dados conferidos: " + std::to_string(dados.catalogoDeItens.quantidadeDeItens()) + " itens, "
         + std::to_string(dados.catalogoDeConstrucoes.quantidadeDeConstrucoes()) + " construções, "
         + std::to_string(dados.catalogoDeRecursos.quantidadeDeRecursos()) + " recursos, "
-        + std::to_string(dados.catalogoDeReceitas.quantidadeDeReceitas()) + " receitas, 1 mapa. "
+        + std::to_string(dados.catalogoDeReceitas.quantidadeDeReceitas()) + " receitas, 1 mapa, 1 vila ("
+        + std::to_string(dados.vilaInicial.construcoes.size()) + " construções e "
+        + std::to_string(dados.vilaInicial.npcsIniciais.size()) + " NPCs). "
         + std::to_string(erros) + (erros == 1 ? " erro, " : " erros, ")
         + std::to_string(avisos) + (avisos == 1 ? " aviso." : " avisos.");
 }
