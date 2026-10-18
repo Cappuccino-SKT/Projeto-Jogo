@@ -148,7 +148,7 @@ As teclas do marco 1 (Espaço, 1, 2, 3, F1, F11, Esc) continuam iguais. A câmer
 6. Com o jogo pausado (Espaço), a câmera ainda anda.
 7. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
 
-### Marco 3: carregar os dados (2026-10-18)
+### Marco 3: carregar os dados (2026-10-18, confirmado pelo autor)
 
 **O que faz:** ao abrir, o jogo lê todos os dados da pasta `Jogo/data`, confere cada linha e calcula o **preço base** de cada item pela fórmula do Econômico. O console mostra o resumo e os preços. Se algum arquivo tiver erro, o jogo mostra **todos** os erros numa caixa de mensagem, com o arquivo e a linha, e não abre. Tudo segue as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]], com a rodada FL3.
 
