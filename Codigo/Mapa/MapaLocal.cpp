@@ -444,10 +444,12 @@ ResultadoDaLeituraDoMapa carregarMapaDoTextoDoTiled(const std::string& textoDoAr
             const std::string nomeDoRecurso = "a área de recurso " + std::to_string(identificador);
 
             AreaDeRecurso area;
+            // Os tipos conhecidos vêm do recursos.csv (FL3-6): quem confere é a
+            // ligação aos recursos, depois que os dados foram lidos.
             area.tipoDeRecurso = lerPropriedadeDeTexto(objetoDoRecurso, "tipo_de_recurso");
-            const bool tipoConhecido = area.tipoDeRecurso == "campo_de_grao" || area.tipoDeRecurso == "poco" || area.tipoDeRecurso == "bosque";
-            if (!tipoConhecido) {
-                erros.push_back(nomeDoRecurso + " tem o tipo \"" + area.tipoDeRecurso + "\"; os tipos conhecidos são campo_de_grao, poco e bosque");
+            area.textoDaProdutividade = lerPropriedadeDeTexto(objetoDoRecurso, "produtividade");
+            if (area.tipoDeRecurso.empty()) {
+                erros.push_back(nomeDoRecurso + " não tem a propriedade tipo_de_recurso");
                 continue;
             }
             double pixelX = 0, pixelY = 0, larguraEmPixels = 0, alturaEmPixels = 0;

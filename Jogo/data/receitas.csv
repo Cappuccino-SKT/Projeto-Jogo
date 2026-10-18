@@ -1,0 +1,9 @@
+id;produto;lote;insumos;construcao;nivel_min;trabalho;hab_min;horas;era
+# As Braçais: 2 unidades em 1 hora no Tier 0 (FL3-2).
+receita.grao;item.grao;2;;construcao.fazenda;1;bracal;10;1;1
+receita.agua;item.agua;2;;construcao.posto_de_coleta;1;bracal;10;1;1
+receita.tora;item.tora;2;;construcao.posto_de_coleta;1;bracal;10;1;1
+# As oficinas (IP3).
+receita.pao;item.pao;4;item.grao:2|item.agua:1;construcao.cozinheiro;1;manufaturado;10;4;1
+receita.tabua;item.tabua;4;item.tora:2;construcao.carpinteiro;1;manufaturado;10;4;1
+receita.moveis_madeira;item.moveis_madeira;2;item.tabua:3;construcao.carpinteiro;2;manufaturado;25;4;1

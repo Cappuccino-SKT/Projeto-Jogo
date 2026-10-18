@@ -1,0 +1,9 @@
+[
+  { "id": "construcao.fazenda" },
+  { "id": "construcao.posto_de_coleta" },
+  { "id": "construcao.cozinheiro" },
+  { "id": "construcao.carpinteiro" },
+  { "id": "construcao.mercado" },
+  { "id": "construcao.construtor" },
+  { "id": "construcao.casa" }
+]

@@ -1,0 +1,16 @@
+{
+  "item.grao": "Grão",
+  "item.agua": "Água",
+  "item.tora": "Tora",
+  "item.pao": "Pão",
+  "item.tabua": "Tábua",
+  "item.moveis_madeira": "Móveis de Madeira",
+
+  "construcao.fazenda": "Fazenda",
+  "construcao.posto_de_coleta": "Posto de Coleta",
+  "construcao.cozinheiro": "Cozinheiro",
+  "construcao.carpinteiro": "Carpinteiro",
+  "construcao.mercado": "Mercado",
+  "construcao.construtor": "Construtor",
+  "construcao.casa": "Casa"
+}
