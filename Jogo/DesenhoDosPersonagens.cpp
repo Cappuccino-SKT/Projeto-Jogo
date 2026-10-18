@@ -96,16 +96,21 @@ bool DesenhistaDosPersonagens::preparar(const DefinicaoDoBoneco& definicao, cons
     return true;
 }
 
-void DesenhistaDosPersonagens::desenharNpcs(const entt::registry& registroDasEntidades, double fracaoDoTick, int tamanhoDoTileEmPixels,
-                                            const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
+void DesenhistaDosPersonagens::juntarNpcsVisiveis(const entt::registry& registroDasEntidades, double fracaoDoTick, int tamanhoDoTileEmPixels)
 {
-    // Passos 1 e 3: a posição suave e o quadro de cada NPC.
+    // Passos 1 e 3: a posição suave e o quadro de cada NPC. Quem está dentro
+    // de uma construção não aparece (marco 5, regra 4.7 da ficha da IA).
     npcsParaDesenhar.clear();
     for (const auto [npc, posicao] : registroDasEntidades.view<PosicaoDoNpc>().each()) {
+        const DecisaoDoNpc* decisao = registroDasEntidades.try_get<DecisaoDoNpc>(npc);
+        if (decisao != nullptr && decisao->estaDentroDeUmaConstrucao()) {
+            continue;
+        }
         const PontoEmPixelsDoMundo pesNoTickAnterior = calcularPesEmPixelsDoMundo(posicao.lugarNoTickAnteriorParaDesenho, tamanhoDoTileEmPixels);
         const PontoEmPixelsDoMundo pesNoTickAtual = calcularPesEmPixelsDoMundo(posicao.lugarAtual, tamanhoDoTileEmPixels);
         npcsParaDesenhar.push_back({interpolarPesEntreOsTicks(pesNoTickAnterior, pesNoTickAtual, fracaoDoTick),
-                                    escolherQuadroDoBoneco(posicao, definicaoDoBoneco), entt::to_integral(npc)});
+                                    escolherQuadroDoBoneco(posicao, definicaoDoBoneco), entt::to_integral(npc),
+                                    decisao != nullptr ? decisao->acaoAtual : AcaoDoNpc::Nenhuma});
     }
 
     // Passo 2: quem está mais acima na tela é desenhado primeiro; no empate, o
@@ -114,6 +119,12 @@ void DesenhistaDosPersonagens::desenharNpcs(const entt::registry& registroDasEnt
         return std::tie(primeiro.pes.pixelY, primeiro.pes.pixelX, primeiro.numeroDaEntidade)
              < std::tie(segundo.pes.pixelY, segundo.pes.pixelX, segundo.numeroDaEntidade);
     });
+}
+
+void DesenhistaDosPersonagens::desenharNpcs(const entt::registry& registroDasEntidades, double fracaoDoTick, int tamanhoDoTileEmPixels,
+                                            const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
+{
+    juntarNpcsVisiveis(registroDasEntidades, fracaoDoTick, tamanhoDoTileEmPixels);
 
     // Passos 4 e 5: o recorte na folha e o lugar na tela.
     pincel.comecarDesenho(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
@@ -137,6 +148,36 @@ void DesenhistaDosPersonagens::desenharNpcs(const entt::registry& registroDasEnt
                                    npc.quadro.coluna * ladoDoQuadro, npc.quadro.linha * ladoDoQuadro, ladoDoQuadro, ladoDoQuadro);
     }
     pincel.mandarLoteParaAPlacaDeVideo();
+}
+
+void DesenhistaDosPersonagens::desenharMarcadoresDasAcoes(const entt::registry& registroDasEntidades, double fracaoDoTick,
+                                                          int tamanhoDoTileEmPixels, const CameraDoMapa& camera,
+                                                          int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
+{
+    juntarNpcsVisiveis(registroDasEntidades, fracaoDoTick, tamanhoDoTileEmPixels);
+    pincel.comecarDesenho(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+    const int zoom = camera.zoomAtual();
+    // O quadradinho fica 4 pixels do mundo acima do alto do boneco (o ponto dos pés menos o topo do quadro).
+    const double alturaDoMarcadorAcimaDosPes = definicaoDoBoneco.pesYNoQuadro - 10.0;
+    const double ladoDoMarcadorNoMundo = 4.0;
+    for (const NpcParaDesenhar& npc : npcsParaDesenhar) {
+        float cor[4] = {0.6f, 0.6f, 0.6f, 1.0f};  // Trabalhar e Dormir (a caminho): cinza
+        if (npc.acao == AcaoDoNpc::Comer) {
+            cor[0] = 0.95f; cor[1] = 0.55f; cor[2] = 0.15f;  // laranja
+        } else if (npc.acao == AcaoDoNpc::Comprar) {
+            cor[0] = 0.25f; cor[1] = 0.50f; cor[2] = 0.95f;  // azul
+        } else if (npc.acao == AcaoDoNpc::Passear) {
+            cor[0] = 0.30f; cor[1] = 0.85f; cor[2] = 0.30f;  // verde
+        }
+        const double esquerdaNoMundo = npc.pes.pixelX - ladoDoMarcadorNoMundo / 2.0;
+        const double topoNoMundo = npc.pes.pixelY - alturaDoMarcadorAcimaDosPes - ladoDoMarcadorNoMundo;
+        const float esquerda = static_cast<float>(std::lround(esquerdaNoMundo * zoom) - camera.deslocamentoXNaTela());
+        const float topo = static_cast<float>(std::lround(topoNoMundo * zoom) - camera.deslocamentoYNaTela());
+        const float lado = static_cast<float>(ladoDoMarcadorNoMundo * zoom);
+        pincel.comecarLoteComCorLisa(cor);
+        pincel.acrescentarQuadrado(esquerda, topo, esquerda + lado, topo + lado, 0, 0, 0, 0);
+        pincel.mandarLoteParaAPlacaDeVideo();
+    }
 }
 
 void DesenhistaDosPersonagens::liberar()

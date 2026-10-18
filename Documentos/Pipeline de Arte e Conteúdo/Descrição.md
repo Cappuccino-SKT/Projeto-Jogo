@@ -11,17 +11,19 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 ### Quem desenha
 
 - O **artista definitivo ainda não foi escolhido**. Por enquanto, quem desenha é o autor, que **não tem experiência com pixel art**.
-- **Fatia vertical e testes:** usar **pacotes de arte de terceiros** para agilizar, e rascunhos feitos pelo autor onde faltar alguma peça.
-- **Jogo final:** toda a arte é feita à mão pelo artista do projeto; os pacotes de terceiros saem.
+- **Fatia vertical (decisão do autor, 2026-10-18):** o autor **desenha a arte à mão, no Pixelorama**, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]], que junta todos os critérios num lugar só. Enquanto o boneco próprio não fica pronto, o jogo usa o boneco provisório do Mana Seed (fora do Git, rodada FL4-4).
+- **Arte gerada por IA: abandonada** (decisão do autor, 2026-10-18). O autor testou o Gemini, e o resultado não serviu.
+- **Pacotes de terceiros:** só onde ainda faltar uma peça, com a origem anotada em `assets/provisorio/LEIA-ME.txt`.
+- **Jogo final:** toda a arte é feita à mão pelo artista do projeto; o que for provisório sai.
 - Preferir pacotes com licença **CC0** (domínio público, uso livre) ou que permitam uso em protótipo, e anotar a origem de cada um num arquivo `assets/provisorio/LEIA-ME.txt`, para saber o que precisa ser trocado antes de qualquer versão pública. Procurar pacotes de **16 px em vista 3/4** (como Stardew), para os testes já usarem o tamanho final.
 
 ### Programas
 
-| Uso | Programa | Custo |
-|---|---|---|
-| Montar os mapas | **Tiled** | Grátis |
+| Uso                                   | Programa       | Custo  |
+| ------------------------------------- | -------------- | ------ |
+| Montar os mapas                       | **Tiled**      | Grátis |
 | Desenhar tiles, bonecos e construções | **Pixelorama** | Grátis |
-| Editar os dados | **VS Code** | Grátis |
+| Editar os dados                       | **VS Code**    | Grátis |
 
 **Por que o Pixelorama.** O autor pediu um programa **grátis**, **fácil** e com **bastante suporte**, para quem nunca fez pixel art. O Aseprite foi descartado por ser pago.
 
@@ -63,9 +65,9 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 | Vista | De cima, em 3/4 (como Stardew) |
 | Boneco | 16 × 24 px (1 tile de largura, 1,5 de altura). O provisório da fatia (Mana Seed, fora do Git) tem cerca de 14 × 29 px em quadros de 64 × 64, 4 direções e 6 quadros de andar (rodada FL4-4; [[Ficha Logica/NPC\|ficha do NPC]]) |
 | Zoom padrão | 3x (rodada FT1-4): em 1600 × 900 aparecem 33 × 19 tiles (2x: 50 × 28; 4x: 25 × 14) |
-| Paleta | Paleta mestre de cerca de 48 cores + 2 cores de destaque por cultura |
+| Paleta | **Resurrect 64** (64 cores, do Lospec), com algumas cores a mais se precisar (decisão do autor, 2026-10-18). As cores, as rampas por material e as regras das cores a mais estão no [[Pipeline de Arte e Conteúdo/Guia da Arte\|Guia da Arte]] |
 
-**Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). A paleta mestre parte de uma paleta pública do Lospec (Endesga 32 ou Resurrect 64), ajustada.
+**Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). As cores das culturas saem da paleta Resurrect 64 (o Guia da Arte diz quais).
 
 ### Variações por cultura
 
@@ -105,7 +107,7 @@ São desenhadas **3 direções** (cima, baixo, direita); a esquerda é a direita
 
 A arte é feita em camadas, igual à programação:
 
-1. **Fatia vertical:** 1 bioma (planície), 1 cultura (**Autoritária**), 1 Mapa Local, Fazenda, Cozinheiro, Mercado e Casa, 1 boneco com parado, andar e trabalhar. Com pacotes de terceiros e rascunhos.
+1. **Fatia vertical:** 1 bioma (planície), 1 cultura (**Autoritária**), 1 Mapa Local, as 7 construções da vila, 1 boneco com parado, andar e trabalhar. Desenhada pelo autor (a lista completa e a ordem estão no [[Pipeline de Arte e Conteúdo/Guia da Arte\|Guia da Arte]]).
 2. **Cidade completa** da mesma cultura.
 3. **A primeira região** inteira (8 mapas).
 4. As **outras culturas e biomas**.
@@ -197,8 +199,8 @@ data/
 
 ### Perguntas em aberto
 
-1. **Artista definitivo:** ainda não escolhido; decidir no início do código, junto com os pacotes provisórios e a ferramenta de atlas (rodada V3-13). O marco 1 usa um conjunto de tiles de teste, de quadrados de cor lisa, feito pelo assistente; depois, o autor escolhe um pacote CC0 e redesenha o mapa (rodada FL1-6).
-2. **Pacotes provisórios:** quais usar na fatia vertical (escolher na hora, conferindo a licença).
+1. **Artista definitivo:** ainda não escolhido (rodada V3-13). Na fatia, desenha o autor. O marco 1 usa um conjunto de tiles de teste, de quadrados de cor lisa, feito pelo assistente; depois, o autor redesenha o mapa com os tiles dele (rodada FL1-6).
+2. **Os critérios novos do Guia da Arte** (o quadro do boneco, a luz e o contorno, as cores a mais, as bordas do terreno e a altura das construções): rodada FA1, na [[Retomada]].
 3. **Ferramenta de atlas:** de terceiros ou própria, no início do código.
 4. **Teto de memória da arte:** 256 MB proposto; o PC alvo mínimo tem placa de vídeo de 2 GB (rodada V3-12).
 5. **Estações no futuro:** quando entram neve, rios congelados, folhas e flores (com o Clima e Estações).

@@ -234,4 +234,52 @@ Se o destino não tem caminho (um clique no meio do lago, por exemplo), o NPC va
 7. Durante a caminhada: **Espaço** pausa o NPC (a câmera continua andando), e **3** (4x) o deixa 4 vezes mais rápido.
 8. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
 
-**O que vem no marco 5:** a rotina dos 15 NPCs (dormir, trabalhar e passear nos horários), depois da parte da rotina e da Utilidade na ficha do NPC.
+### Marco 5: rotina (2026-10-18, confirmado pelo autor)
+
+**O que faz:** a vila ganha as 10 construções e os 15 NPCs Civis. Cada NPC escolhe o que fazer pela **Utilidade** (uma nota para cada ação; ganha a maior) e vai até o lugar dela: dorme em casa, trabalha na construção do emprego, come em casa ou no trabalho, vai ao Mercado no dia de compra e passeia no Período Livre. Numa construção, ele **entra** e some da tela até sair. Tudo segue a [[Ficha Logica/IA|ficha da IA]], com a rodada FL5.
+
+**A vila** (`data/vila_inicial.json`, FL5-1 e FL5-2): as construções aparecem como **retângulos de cor** nos lotes, com a porta mais escura embaixo, e os tiles do lote passam a bloquear. O lote 5 fica livre.
+
+| Cor | Construção | Quem |
+|---|---|---|
+| Amarela | Fazenda | Ana, Bento |
+| Verde | Posto de Coleta | Clara, Davi |
+| Laranja | Cozinheiro | Elisa, Fábio |
+| Azul | Mercado | Gil, Helena (Lojistas) |
+| Cinza | Construtor | Iago, Joana |
+| Castanha | Carpintaria do jogador | Lauro, Marta |
+| Marrom | As 4 Casas | os 15, de 4 em 4 (a última com Nuno, Olga e Pedro, os desempregados) |
+
+**O dia de um Civil:** dorme das 22h às 6h; das 6h às 7h, passeia (ou vai ao Mercado, no dia de compra); come às 7h, às 12h e às 19h, por meia hora; trabalha das 7h às 15h; das 15h às 22h, passeia. Cada um compra a cada 2 dias: metade da vila num dia, a outra metade no outro. Os números ficam no `regras.json` (`rotinas`, `utilidade`, `passeio`).
+
+**As teclas de teste** (FL5-6): o botão direito e o N do marco 4 saíram, porque quem manda agora é a rotina. O **F2** continua mostrando os caminhos. O **F3** liga um quadradinho em cima de cada NPC, com a cor da ação, e escreve no console a tabela dos 15 (a ação, onde está e as notas):
+
+| Cor do quadradinho | Ação |
+|---|---|
+| Verde | Passear |
+| Azul | Comprar (a caminho do Mercado) |
+| Laranja | Comer (a caminho de casa) |
+| Cinza | Trabalhar ou Dormir (a caminho) |
+
+**O sorteio:** o passeio usa um gerador próprio (o PCG32), ligado à `semente_da_partida` do `vila_inicial.json`. A mesma semente dá sempre a mesma partida.
+
+**Os arquivos novos:**
+
+- `Codigo/Vila/VilaInicial.cpp`: a leitura e a conferência do `vila_inicial.json` (o `--validar` também confere);
+- `Codigo/Npc/RotinaDosNpcs.cpp` e `RegrasDaRotina.h`: os períodos, as notas, os destinos, as chegadas e o passeio;
+- `Codigo/Tempo/SorteioComSemente.cpp`: o PCG32;
+- `data/vila_inicial.json` e as partes novas do `data/regras.json`;
+- os testes: 26 conferências novas no `Codigo/` (193 no total), entre elas **um dia inteiro sem tela** (às 10h, os 12 empregados estão no trabalho; às 3h, os 15 estão em casa; e o mesmo dia rodado duas vezes dá as mesmas posições), e 1 no `Jogo/` (37 no total).
+
+**O que testar:**
+
+1. `.\build\Jogo\jogo.exe --validar` diz "1 vila (10 construções e 15 NPCs). 0 erros, 0 avisos".
+2. Ao abrir (6h), as construções aparecem nos lotes, e os NPCs saem das casas: uns passeiam, e os do dia de compra vão ao Mercado.
+3. Apertar **F3**: os quadradinhos aparecem, e o console mostra a tabela dos 15.
+4. Apertar **3** (4x): perto das 7h, todos voltam para casa para comer; às 7h30, os 12 empregados vão para o trabalho e somem dentro dele; só os 3 desempregados ficam na rua.
+5. Às 12h, ninguém sai do trabalho (o almoço é lá dentro). Às 15h, os empregados saem e passeiam. Às 19h, todos voltam para casa para jantar.
+6. Às 22h, todos voltam para casa, e a vila fica vazia até as 6h.
+7. Apertar **F3** de novo em outro horário e conferir a tabela (por exemplo, às 10h: 12 "Trabalhar, dentro de...").
+8. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
+
+**O que vem no marco 6:** a produção, o inventário da cidade e o consumo (o Pão sai do Cozinheiro, entra no estoque e é comido), depois das fichas da Produção, do Inventário, do Trabalho e Propriedade, do Econômico (consumo e salários) e da Construção.

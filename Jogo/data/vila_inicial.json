@@ -1,0 +1,32 @@
+{
+  "semente_da_partida": 1,
+  "construcoes": [
+    { "id": "fazenda", "tipo": "construcao.fazenda", "lote": 1, "dono": "cidade" },
+    { "id": "posto_de_coleta", "tipo": "construcao.posto_de_coleta", "lote": 6, "dono": "cidade" },
+    { "id": "cozinheiro", "tipo": "construcao.cozinheiro", "lote": 10, "dono": "cidade" },
+    { "id": "mercado", "tipo": "construcao.mercado", "lote": 9, "dono": "cidade" },
+    { "id": "construtor", "tipo": "construcao.construtor", "lote": 3, "dono": "cidade" },
+    { "id": "carpintaria_do_jogador", "tipo": "construcao.carpinteiro", "lote": 11, "dono": "jogador" },
+    { "id": "casa_1", "tipo": "construcao.casa", "lote": 2, "dono": "cidade" },
+    { "id": "casa_2", "tipo": "construcao.casa", "lote": 7, "dono": "cidade" },
+    { "id": "casa_3", "tipo": "construcao.casa", "lote": 8, "dono": "cidade" },
+    { "id": "casa_4", "tipo": "construcao.casa", "lote": 4, "dono": "cidade" }
+  ],
+  "npcs": [
+    { "nome": "Ana", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda" },
+    { "nome": "Bento", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda" },
+    { "nome": "Clara", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta" },
+    { "nome": "Davi", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta" },
+    { "nome": "Elisa", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro" },
+    { "nome": "Fábio", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro" },
+    { "nome": "Gil", "classe": "civil", "casa": "casa_2", "trabalho": "mercado" },
+    { "nome": "Helena", "classe": "civil", "casa": "casa_2", "trabalho": "mercado" },
+    { "nome": "Iago", "classe": "civil", "casa": "casa_3", "trabalho": "construtor" },
+    { "nome": "Joana", "classe": "civil", "casa": "casa_3", "trabalho": "construtor" },
+    { "nome": "Lauro", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador" },
+    { "nome": "Marta", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador" },
+    { "nome": "Nuno", "classe": "civil", "casa": "casa_4", "trabalho": "" },
+    { "nome": "Olga", "classe": "civil", "casa": "casa_4", "trabalho": "" },
+    { "nome": "Pedro", "classe": "civil", "casa": "casa_4", "trabalho": "" }
+  ]
+}

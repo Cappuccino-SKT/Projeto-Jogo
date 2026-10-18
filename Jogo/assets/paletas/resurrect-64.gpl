@@ -1,0 +1,69 @@
+GIMP Palette
+Name: Resurrect 64 (Projeto Jogo)
+Columns: 8
+# Resurrect 64, de Kerrie Lake (lospec.com/palette-list/resurrect-64).
+# Numeradas de 1 a 64 como no Guia da Arte. As cores a mais do projeto entram no fim, a partir da 65.
+ 46  34  47	cor 01 #2e222f
+ 62  53  70	cor 02 #3e3546
+ 98  85 101	cor 03 #625565
+150 108 108	cor 04 #966c6c
+171 148 122	cor 05 #ab947a
+105  79  98	cor 06 #694f62
+127 112 138	cor 07 #7f708a
+155 171 178	cor 08 #9babb2
+199 220 208	cor 09 #c7dcd0
+255 255 255	cor 10 #ffffff
+110  39  39	cor 11 #6e2727
+179  56  49	cor 12 #b33831
+234  79  54	cor 13 #ea4f36
+245 125  74	cor 14 #f57d4a
+174  35  52	cor 15 #ae2334
+232  59  59	cor 16 #e83b3b
+251 107  29	cor 17 #fb6b1d
+247 150  23	cor 18 #f79617
+249 194  43	cor 19 #f9c22b
+122  48  69	cor 20 #7a3045
+158  69  57	cor 21 #9e4539
+205 104  61	cor 22 #cd683d
+230 144  78	cor 23 #e6904e
+251 185  84	cor 24 #fbb954
+ 76  62  36	cor 25 #4c3e24
+103 102  51	cor 26 #676633
+162 169  71	cor 27 #a2a947
+213 224  75	cor 28 #d5e04b
+251 255 134	cor 29 #fbff86
+ 22  90  76	cor 30 #165a4c
+ 35 144  99	cor 31 #239063
+ 30 188 115	cor 32 #1ebc73
+145 219 105	cor 33 #91db69
+205 223 108	cor 34 #cddf6c
+ 49  54  56	cor 35 #313638
+ 55  78  74	cor 36 #374e4a
+ 84 126 100	cor 37 #547e64
+146 169 132	cor 38 #92a984
+178 186 144	cor 39 #b2ba90
+ 11  94 101	cor 40 #0b5e65
+ 11 138 143	cor 41 #0b8a8f
+ 14 175 155	cor 42 #0eaf9b
+ 48 225 185	cor 43 #30e1b9
+143 248 226	cor 44 #8ff8e2
+ 50  51  83	cor 45 #323353
+ 72  74 119	cor 46 #484a77
+ 77 101 180	cor 47 #4d65b4
+ 77 155 230	cor 48 #4d9be6
+143 211 255	cor 49 #8fd3ff
+ 69  41  63	cor 50 #45293f
+107  62 117	cor 51 #6b3e75
+144  94 169	cor 52 #905ea9
+168 132 243	cor 53 #a884f3
+234 173 237	cor 54 #eaaded
+117  60  84	cor 55 #753c54
+162  75 111	cor 56 #a24b6f
+207 101 127	cor 57 #cf657f
+237 128 153	cor 58 #ed8099
+131  28  93	cor 59 #831c5d
+195  36  84	cor 60 #c32454
+240  79 120	cor 61 #f04f78
+246 129 129	cor 62 #f68181
+252 167 144	cor 63 #fca790
+253 203 176	cor 64 #fdcbb0

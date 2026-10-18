@@ -56,6 +56,7 @@ Isso se liga à agregação por cidade dos Não-Controlados: o LOD 2 é exatamen
   - **Fugir:** +3,0 com combate a menos de 10 tiles, o que passa por cima de tudo.
 - O NPC faz a ação de maior nota e reavalia a cada **5 minutos de jogo** (cerca de 3 s reais) ou quando algo muda.
 - **LOD 1:** a ação do período, sem as notas (Regras Fixas).
+- **Na fatia** (rodada FL5-3): a ação do Período Livre é o **Passear** (1,0), e o Comprar (1,2) ganha dela no dia de compra. O Lazer entra com a Taverna, com a nota revista (do jeito da V2-10, ele teria 1,25 e o Comprar nunca ganharia). O passo a passo está na [[Ficha Logica/IA|ficha da IA]].
 
 ### Necessidades dos Controlados
 

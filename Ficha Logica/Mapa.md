@@ -79,7 +79,7 @@ Documentos do sistema: [[Sistema de Mapa/Descrição|Sistema de Mapa]] e o padr�
 | `passagemPorTile` | lista de 4.096 sim/não | (5, 9) = não, por causa de uma árvore | Não: é recalculada da camada `colisao` e das construções |
 | Cada lote: `idDaConstrucaoQueOcupa` | ID ou "nenhuma" | a Carpintaria do jogador | Sim, a partir do marco 6 |
 
-No marco 1, a passagem vem só da camada `colisao`. A partir do marco 5 [Proposta] (FL5-1), as construções da vila inicial também bloqueiam os tiles dos lotes delas ([[Ficha Logica/IA|ficha da IA]], regra 4.1).
+No marco 1, a passagem vem só da camada `colisao`. A partir do marco 5 (FL5-1), as construções da vila inicial também bloqueiam os tiles dos lotes delas ([[Ficha Logica/IA|ficha da IA]], regra 4.1).
 
 ### A memória de trabalho da busca de caminho (marco 4)
 

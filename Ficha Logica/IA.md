@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 5** (rotina). Cobre **a vila inicial, a rotina e a Utilidade simples**: os 15 NPCs dormem, trabalham, comem, compram e passeiam nos horários. Os pontos marcados com FL5 estão na **rodada FL5** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 5** (rotina). Cobre **a vila inicial, a rotina e a Utilidade simples**: os 15 NPCs dormem, trabalham, comem, compram e passeiam nos horários. As decisões da rodada **FL5** (2026-10-18, todas "seguir sugestão") já estão aplicadas.
 
 # Ficha Lógica: IA (rotina e Utilidade)
 
@@ -24,7 +24,7 @@ Documentos do sistema: [[Sistema de IA/Descrição|IA]] (a rotina, as horas da V
 
 ### Definições (lidas dos dados, não mudam durante o jogo)
 
-**As rotinas e as notas,** no `data/regras.json` [Proposta] (FL5-3). As notas ficam em **centésimos** (1,0 = 100), inteiras, pelo mesmo motivo do milésimo de tile: a mesma partida dá sempre o mesmo resultado.
+**As rotinas e as notas,** no `data/regras.json` (FL5-3). As notas ficam em **centésimos** (1,0 = 100), inteiras, pelo mesmo motivo do milésimo de tile: a mesma partida dá sempre o mesmo resultado.
 
 ```json
 "rotinas": {
@@ -49,7 +49,7 @@ Documentos do sistema: [[Sistema de IA/Descrição|IA]] (a rotina, as horas da V
 - Cada período vai da hora de início (inclusive) até a de fim (exclusive): `[22, 6]` é das 22h às 6h, passando pela meia-noite. O que não é dormir nem trabalhar é **Livre** (para o Civil, das 6h às 7h e das 15h às 22h, como na V2-2).
 - As outras classes (Escravo, Rico, Nobreza, Guardas) entram depois da fatia, com uma linha cada.
 
-**A vila inicial,** num arquivo novo, o `data/vila_inicial.json` [Proposta] (FL5-1 e FL5-2). No marco 5, só as construções, os NPCs e a semente; o Banco, o estoque e as 100 moedas do jogador entram no marco 6.
+**A vila inicial,** num arquivo novo, o `data/vila_inicial.json` (FL5-1 e FL5-2). No marco 5, só as construções, os NPCs e a semente; o Banco, o estoque e as 100 moedas do jogador entram no marco 6.
 
 ```json
 {
@@ -66,7 +66,7 @@ Documentos do sistema: [[Sistema de IA/Descrição|IA]] (a rotina, as horas da V
 }
 ```
 
-**A vila da fatia** [Proposta] (FL5-1 e FL5-2), nos 11 lotes do mapa (8 pequenos e 3 médios), pelos portes do [[Sistema de Construção/Descrição|Construção]] (as oficinas e o Mercado são médios):
+**A vila da fatia** (FL5-1 e FL5-2), nos 11 lotes do mapa (8 pequenos e 3 médios), pelos portes do [[Sistema de Construção/Descrição|Construção]] (as oficinas e o Mercado são médios):
 
 | Lote | Tamanho | Construção (`id`) | Porta | Moradores ou empregados |
 |---|---|---|---|---|
@@ -105,6 +105,7 @@ Documentos do sistema: [[Sistema de IA/Descrição|IA]] (a rotina, as horas da V
 | `DecisaoDoNpc` | `acaoAtual` | Dormir, Trabalhar, Comer, Comprar ou Passear | Trabalhar | Sim |
 | | `indiceDaConstrucaoOndeEsta` | posição na lista, ou −1 (na rua) | 0 (dentro da Fazenda) | Sim |
 | | `indiceDaConstrucaoDoDestino` | posição na lista, ou −1 | 0 | Sim |
+| | `estaACaminho` | sim/não | pediu um caminho e ainda não chegou (acrescentado no código do marco 5) | Sim |
 | | `tickEmQueAEsperaAcaba` | tick, ou −1 | o fim da compra ou da parada do passeio | Sim |
 | | `diaDaUltimaCompra` | dia da partida, ou −1 | 0 | Sim |
 
@@ -130,7 +131,7 @@ Pausado, nada disso roda.
    - o `tipo` precisa existir no `construcoes.json`, e o `id` não pode repetir;
    - o `lote` precisa existir no mapa e estar livre (duas construções no mesmo lote é erro);
    - calcule a porta (parte 2). Erro se ela estiver fora do mapa ou bloqueada.
-3. **Bloqueie os tiles do lote** na passagem do mapa [Proposta] (FL5-1): é a regra 4.2 da [[Ficha Logica/Mapa|ficha do Mapa]], que viria no marco 6 e entra agora, porque o NPC precisa contornar as construções.
+3. **Bloqueie os tiles do lote** na passagem do mapa (FL5-1): é a regra 4.2 da [[Ficha Logica/Mapa|ficha do Mapa]], que viria no marco 6 e entra agora, porque o NPC precisa contornar as construções.
 4. Para cada NPC:
    - a `casa` precisa ser uma construção do tipo `construcao.casa`; cada Casa tem no máximo **4 moradores** (16 lugares nas 4 Casas, V2-12);
    - o `trabalho` precisa ser uma construção que não é Casa, ou vazio (desempregado). No marco 5 não há limite de vagas: ele entra com a Construção (marco 6).
@@ -146,7 +147,7 @@ Pausado, nada disso roda.
    |---|---|
    | Dormir | 100 no período Dormir |
    | Trabalhar | 100 no período Trabalhar, **se tem emprego** |
-   | Passear | 100 no período Livre; e no período Trabalhar, para quem não tem emprego [Proposta] (FL5-3) |
+   | Passear | 100 no período Livre; e no período Trabalhar, para quem não tem emprego (FL5-3) |
    | Comer | +150 da hora da refeição (7h, 12h, 19h) até 30 minutos depois |
    | Comprar | +120 no período Livre, se é o dia de compra dele e ainda não comprou hoje |
 
@@ -155,7 +156,7 @@ Pausado, nada disso roda.
 
 **O dia de compra** de cada NPC: o dia em que (dia da partida + número do NPC) resto 2 = 0. Assim, metade da vila compra num dia, e a outra metade no outro (uma vez a cada 2 dias, V2-10).
 
-**O Lazer e o Fugir ficam fora do marco 5** [Proposta] (FL5-3): o Lazer precisa da Taverna, que não está na fatia, e o Fugir precisa de combate. A nota deles entra com cada um.
+**O Lazer e o Fugir ficam fora do marco 5** (FL5-3): o Lazer precisa da Taverna, que não está na fatia, e o Fugir precisa de combate. A nota deles entra com cada um.
 
 ### 4.3 O destino de cada ação
 
@@ -163,9 +164,9 @@ Pausado, nada disso roda.
 |---|---|---|
 | Dormir | A porta da casa | Entra e fica |
 | Trabalhar | A porta do trabalho | Entra e fica |
-| Comer [Proposta] (FL5-4) | Se está **dentro** da casa ou do trabalho, fica lá. Se não, vai para casa | Come até o fim da meia hora da refeição |
+| Comer (FL5-4) | Se está **dentro** da casa ou do trabalho, fica lá. Se não, vai para casa | Come até o fim da meia hora da refeição |
 | Comprar | A porta do Mercado | Entra e fica 30 minutos; depois anota `diaDaUltimaCompra` = hoje |
-| Passear [Proposta] (FL5-5) | Um tile livre sorteado, a até 12 tiles de onde está (regra 4.6) | Fica de 15 a 45 minutos (sorteados) e sorteia outro |
+| Passear (FL5-5) | Um tile livre sorteado, a até 12 tiles de onde está (regra 4.6) | Fica de 15 a 45 minutos (sorteados) e sorteia outro |
 
 **Sair de uma construção:** se o NPC está dentro de uma e o destino novo é outro lugar, ele reaparece na porta e anda. Se o destino é a própria construção onde está, nada muda.
 
@@ -189,7 +190,7 @@ Quando o tick chega a `tickEmQueAEsperaAcaba`:
 
 O passeio precisa de números sorteados, e a mesma semente tem que dar a mesma partida (Arquitetura e [[Sistema de Eventos/Descrição|Eventos]]):
 
-1. **O gerador** [Proposta] (FL5-5): um gerador próprio pequeno, o **PCG32** (cerca de 15 linhas), e não o do C++. *Por quê:* as funções de sorteio do C++ (`std::uniform_int_distribution`) podem dar números diferentes em outro compilador; o PCG32 dá os mesmos em qualquer lugar.
+1. **O gerador** (FL5-5): um gerador próprio pequeno, o **PCG32** (cerca de 15 linhas), e não o do C++. *Por quê:* as funções de sorteio do C++ (`std::uniform_int_distribution`) podem dar números diferentes em outro compilador; o PCG32 dá os mesmos em qualquer lugar.
 2. **Um gerador por sistema:** o dos NPCs agora; o dos eventos (marco 7) é outro, ligado à mesma semente da partida. Assim, um NPC a mais não muda os eventos sorteados.
 3. **O tile do passeio:** sorteie x e y a até 12 tiles do tile atual. Aceite se dá para andar e não é a porta de uma construção. Se não, tente de novo, no máximo 20 vezes; sem sucesso, o NPC fica onde está até a próxima reavaliação.
 4. **A espera:** sorteie um número inteiro de 15 a 45 minutos.
@@ -198,10 +199,10 @@ Como os NPCs reavaliam sempre na mesma ordem (pelo tick e pelo número), a ordem
 
 ### 4.7 Desenhar (no `Jogo/`)
 
-1. **As construções** [Proposta] (FL5-1): cada lote ocupado vira um retângulo de cor lisa, uma cor por tipo (Casa marrom, Fazenda amarela, Posto de Coleta verde, Cozinheiro laranja, Carpintaria castanha, Mercado azul, Construtor cinza), com a porta pintada mais escura. A arte de verdade das construções entra depois, com o pacote de arte provisório.
+1. **As construções** (FL5-1): cada lote ocupado vira um retângulo de cor lisa, uma cor por tipo (Casa marrom, Fazenda amarela, Posto de Coleta verde, Cozinheiro laranja, Carpintaria castanha, Mercado azul, Construtor cinza), com a porta pintada mais escura. A arte de verdade das construções entra depois, com o pacote de arte provisório.
 2. **Os NPCs dentro de uma construção não são desenhados.** Os outros, como no marco 4.
-3. **A depuração** [Proposta] (FL5-6): a tecla **F3** liga um quadradinho colorido em cima da cabeça de cada NPC, com a cor da ação (Comer laranja, Comprar azul, Passear verde, Trabalhar e Dormir cinza, a caminho do trabalho ou da casa), e escreve no console uma tabela com cada NPC: nome, ação, onde está e as notas.
-4. **As teclas de teste do marco 4 saem** [Proposta] (FL5-6): o botão direito não manda mais os NPCs (quem manda é a rotina), e o N não cria NPCs fora da vila. O F2 (os caminhos) continua.
+3. **A depuração** (FL5-6): a tecla **F3** liga um quadradinho colorido em cima da cabeça de cada NPC, com a cor da ação (Comer laranja, Comprar azul, Passear verde, Trabalhar e Dormir cinza, a caminho do trabalho ou da casa), e escreve no console uma tabela com cada NPC: nome, ação, onde está e as notas.
+4. **As teclas de teste do marco 4 saem** (FL5-6): o botão direito não manda mais os NPCs (quem manda é a rotina), e o N não cria NPCs fora da vila. O F2 (os caminhos) continua.
 
 ## 5. Contas
 
@@ -213,19 +214,19 @@ Como os NPCs reavaliam sempre na mesma ordem (pelo tick e pelo número), a ordem
 
 | Hora | Notas que ganham | Ação | Onde |
 |---|---|---|---|
-| 6h00 | Passear 100 | Passear | Sai de casa e passeia perto |
+| 6h00 | Comprar 120 > Passear 100 | Comprar | É dia de compra e já é Período Livre: vai ao Mercado e fica 30 minutos |
+| 6h40 | Passear 100 | Passear | Já comprou: sai do Mercado e passeia |
 | 7h00 | Comer 150 > Trabalhar 100 | Comer | Volta para casa e come até 7h30 |
 | 7h30 | Trabalhar 100 | Trabalhar | Anda até a Fazenda: da porta (19, 25) à (14, 25), 5 tiles, cerca de 2,3 minutos de jogo |
-| 12h00 | Comer 250 > Trabalhar 100 | Comer | Come dentro da Fazenda |
-| 15h00 | Comprar 120 > Passear 100 | Comprar | Vai ao Mercado, porta (48, 25), e fica 30 minutos |
-| 15h30 | Passear 100 | Passear | Passeia |
-| 19h00 | Comer 250 > Passear 100 | Comer | Volta para casa e come até 19h30 |
+| 12h00 | Comer 150 > Trabalhar 100 | Comer | Come dentro da Fazenda |
+| 15h00 | Passear 100 | Passear | Passeia (a compra do dia já foi feita) |
+| 19h00 | Comer 150 > Passear 100 | Comer | Volta para casa e come até 19h30 |
 | 19h30 | Passear 100 | Passear | Passeia |
 | 22h00 | Dormir 100 | Dormir | Volta para casa |
 
 *Nota para o marco 6:* com o café da manhã às 7h, o empregado chega ao trabalho por volta das 7h35 e fica até as 15h: cerca de **7,4 horas** de trabalho, e não 8. A produção do marco 6 é por hora presente, então isso aparece no teste de 1 ano.
 
-**Quantos andam juntos:** às 15h, os 6 NPCs do dia de compra que trabalham vão ao Mercado quase juntos; os 2 Lojistas já estão lá dentro.
+**Quantos andam juntos:** às **6h** do dia de compra (o primeiro Período Livre do dia), os NPCs da vez vão ao Mercado quase juntos: no dia 0, os 8 de número par (visto no código do marco 5). Um Lojista que compra no próprio Mercado não sai: a espera começa lá dentro.
 
 ## 6. Conversa com outros sistemas
 
@@ -249,12 +250,15 @@ Em `Codigo/` (sem SDL nem OpenGL):
 | `Vila/VilaInicial.cpp`: `ConstrucaoDaVila`, `VilaDoJogo`, `lerVilaInicial(texto, mapa, catalogoDeConstrucoes, problemas)` | A regra 4.1 |
 | `bloquearOsLotesOcupados(mapa, vila)` | A regra 4.1, passo 3 |
 | `Npc/IdentidadeDoNpc`, `Npc/CasaETrabalhoDoNpc`, `Npc/DecisaoDoNpc` | Os componentes da parte 2 |
-| `AcaoDoNpc` | `Dormir`, `Trabalhar`, `Comer`, `Comprar`, `Passear` |
+| `AcaoDoNpc` | `Dormir`, `Trabalhar`, `Comer`, `Comprar`, `Passear`, e `Nenhuma` (ao nascer, ou quando o NPC não chegou e precisa decidir de novo) |
 | `PeriodoDaRotina` e `descobrirPeriodoDaRotina(horaDoDia, rotina)` | O passo 1 da regra 4.2 |
-| `RegrasDaRotina`, `RegrasDaUtilidade`, `RegrasDoPasseio` | Os números do `regras.json` |
+| `Npc/RegrasDaRotina.h`: `RegrasDaRotina`, `RegrasDaUtilidade`, `RegrasDoPasseio`, juntas em `RegrasDaVidaDosNpcs` | Os números do `regras.json` |
 | `NotasDasAcoes` e `calcularNotasDasAcoes(...)` | O passo 2 da regra 4.2 |
 | `escolherAcaoPelaUtilidade(notas)` | O passo 3 da regra 4.2 |
-| `Npc/RotinaDosNpcs.cpp`: `reavaliarOsNpcsDaVez(...)`, `terminarAsEsperas(...)`, `cuidarDasChegadas(...)` | As regras 4.2 a 4.5, a cada tick |
+| `Npc/RotinaDosNpcs.cpp`: `ContextoDaRotina` | O registro, o mapa, a vila, as regras e o sorteio, juntos |
+| `criarOsNpcsDaVila(contexto, relogio)` | A regra 4.1, passos 5 e 6 |
+| `rodarARotinaAntesDeAndar(contexto, relogio)` e `cuidarDasChegadas(contexto, relogio)` | As regras 4.2 a 4.5, a cada tick (antes e depois do movimento) |
+| `montarTabelaDasAcoesDosNpcs(contexto, relogio)` | A tabela da tecla F3 |
 | `Tempo/SorteioComSemente.h`: `SorteioComSemente`, `sortearNumeroInteiroEntre(minimo, maximo)` | O PCG32 da regra 4.6 |
 | `sortearTileDoPasseio(mapa, vila, tileAtual, regras, sorteio)` | A regra 4.6, passo 3 |
 
@@ -264,13 +268,14 @@ Em `Jogo/`:
 |---|---|
 | `DesenhistaDoMapa::desenharConstrucoesProvisorias(vila, ...)` | A regra 4.7, passo 1 |
 | `AcaoDoJogador::MostrarAcoesDosNpcsParaDepuracao` | A tecla F3 (FL5-6) |
+| `DesenhistaDosPersonagens::desenharMarcadoresDasAcoes(...)` | Os quadradinhos coloridos do F3 |
 
 ## 8. Testes
 
 | Entrada | Resultado esperado |
 |---|---|
 | Hora 23h, 3h, 6h, 7h, 14h, 15h e 22h, rotina Civil | Dormir, Dormir, Livre, Trabalhar, Trabalhar, Livre, Dormir |
-| Empregado às 12h10 | Comer (250) ganha de Trabalhar (100) |
+| Empregado às 12h10 | Comer (150) ganha de Trabalhar (100) |
 | Desempregado às 10h | Passear (100) |
 | Empregado às 15h, no dia de compra, sem ter comprado | Comprar (120) |
 | O mesmo, depois de comprar | Passear (100) |

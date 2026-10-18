@@ -11,6 +11,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <string>
 #include <vector>
 
 #include "Mapa/MapaLocal.h"
@@ -49,4 +50,35 @@ struct CaminhoDoNpc {
 struct PedidoDeCaminho {
     PosicaoDeTile tileDeDestino;
     int64_t tickDoPedido = 0;
+};
+
+// ---------------------------------------------------------------------------
+// Marco 5 (ficha da IA, parte 2): quem é o NPC, onde mora e trabalha, e o que
+// está fazendo.
+// ---------------------------------------------------------------------------
+
+// As ações da fatia (FL5-3). "Nenhuma" só existe ao nascer e quando o NPC
+// precisa decidir de novo do zero.
+enum class AcaoDoNpc { Nenhuma, Dormir, Trabalhar, Comer, Comprar, Passear };
+
+struct IdentidadeDoNpc {
+    std::string nome;
+    std::string classe;   // "civil" na fatia
+    int numeroDoNpc = 0;  // a posição na vila inicial: decide o turno da reavaliação e o dia de compra
+};
+
+struct CasaETrabalhoDoNpc {
+    int indiceDaCasa = -1;      // posição na lista de construções da vila
+    int indiceDoTrabalho = -1;  // -1 = desempregado
+};
+
+struct DecisaoDoNpc {
+    AcaoDoNpc acaoAtual = AcaoDoNpc::Nenhuma;
+    int indiceDaConstrucaoOndeEsta = -1;     // -1 = na rua (visível)
+    int indiceDaConstrucaoDoDestino = -1;    // -1 = um tile da rua (o passeio) ou nenhum
+    bool estaACaminho = false;               // pediu um caminho e ainda não chegou
+    int64_t tickEmQueAEsperaAcaba = -1;      // o fim da compra ou da parada do passeio
+    int64_t diaDaUltimaCompra = -1;
+
+    bool estaDentroDeUmaConstrucao() const { return indiceDaConstrucaoOndeEsta >= 0; }
 };

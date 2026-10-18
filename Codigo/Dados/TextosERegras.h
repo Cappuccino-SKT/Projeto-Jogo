@@ -9,6 +9,7 @@
 #include <string>
 
 #include "Dados/ProblemasDosDados.h"
+#include "Npc/RegrasDaRotina.h"
 
 // Os nomes da tela, pelo ID: "item.pao" -> "Pão".
 class TabelaDeTextos {
@@ -31,7 +32,7 @@ struct RegrasDoPreco {
     int margemDoDonoEmPorcento = 120;
 };
 
-// Os números do regras.json usados até o marco 4.
+// Os números do regras.json usados até o marco 5.
 struct RegrasDoJogo {
     RegrasDoPreco regrasDoPreco;
     // Grupo da estação -> produção na Primavera, Verão, Outono e Inverno, em % (FL3-6).
@@ -42,6 +43,8 @@ struct RegrasDoJogo {
     // (FL4-1) e quantos caminhos a busca calcula por tick (FT1-3).
     int velocidadeDeAndarEmTilesPorHora = 128;
     int caminhosCalculadosPorTick = 4;
+    // A rotina, as notas da Utilidade e o passeio (marco 5, ficha da IA, FL5-3).
+    RegrasDaVidaDosNpcs vidaDosNpcs;
 };
 
 TabelaDeTextos lerArquivoDeTextos(const std::string& textoDoArquivo, ListaDeProblemasDosDados& listaDeProblemas);

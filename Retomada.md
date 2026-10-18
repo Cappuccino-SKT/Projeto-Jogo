@@ -14,9 +14,11 @@
 - **Marco 3 (2026-10-18):** na branch `codigo/marco-3-dados` (feita do `main`, que já tem as fichas do marco 3); **confirmado pelo autor** (seção 3).
 - **Fichas do marco 4 (2026-10-18):** a [[Ficha Logica/NPC|ficha do NPC]] (posição, movimento e o desenho do boneco) e a busca de caminho na [[Ficha Logica/Mapa|ficha do Mapa]] (regra 4.4), na branch `docs/fichas-marco-4` (feita em cima da `codigo/marco-3-dados`). A **rodada FL4** foi aplicada (2026-10-18), toda com "seguir sugestão".
 - **Marco 4 (2026-10-18):** escrito na branch `codigo/marco-4-npc-andando` (feita do `main`, que já tem as fichas do marco 4); **confirmado pelo autor** (seção 3).
-- **Ficha do marco 5 (2026-10-18):** a [[Ficha Logica/IA|ficha da IA]] (a vila inicial, a rotina e a Utilidade), na branch `docs/fichas-marco-5` (feita em cima da `codigo/marco-4-npc-andando`). Abriu a **rodada FL5** (seção 4).
-- **Próximo passo:** o autor responde a FL5; depois, aplicar e começar o marco 5.
-- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até as fichas do marco 4 já entrou no `main`; faltam o `codigo/marco-4-npc-andando` e, depois dele, o `docs/fichas-marco-5`.
+- **Ficha do marco 5 (2026-10-18):** a [[Ficha Logica/IA|ficha da IA]] (a vila inicial, a rotina e a Utilidade), na branch `docs/fichas-marco-5` (feita em cima da `codigo/marco-4-npc-andando`). A **rodada FL5** foi aplicada (2026-10-18), toda com "seguir sugestão".
+- **Arte (2026-10-18):** o autor testou gerar a arte com o Gemini e **abandonou a ideia**; ele vai **desenhar à mão, no Pixelorama**, com a paleta **Resurrect 64** (mais algumas cores, se precisar). O [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] junta todos os critérios, na branch `docs/guia-da-arte` (feita em cima da `codigo/marco-5-rotina`), e abriu a **rodada FA1** (seção 4).
+- **Marco 5 (2026-10-18):** escrito na branch `codigo/marco-5-rotina` (feita do `main`, que já tem a ficha do marco 5); **confirmado pelo autor** (seção 3).
+- **Próximo passo:** as fichas do marco 6 (Produção, Inventário, Trabalho e Propriedade, Econômico e Construção).
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até a ficha do marco 5 já entrou no `main`; falta o `codigo/marco-5-rotina`.
 
 ## 2. Como trabalhamos
 
@@ -85,85 +87,75 @@
 - **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 - **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
 - **Marco 2 (pronto, confirmado pelo autor em 2026-10-18):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
+- **Marco 5 (pronto, confirmado pelo autor em 2026-10-18):** a vila inicial (`data/vila_inicial.json`: 10 construções em retângulos de cor, que bloqueiam o lote, e 15 Civis com casa e emprego) e a rotina com a Utilidade (`Codigo/Npc/RotinaDosNpcs.cpp`, `Codigo/Vila/`), com o sorteio PCG32 (`Codigo/Tempo/SorteioComSemente.cpp`); F3 mostra as ações. 193 testes no `Codigo/` (com um dia inteiro sem tela) e 37 no `Jogo/`.
 - **Marco 4 (pronto, confirmado pelo autor em 2026-10-18):** um NPC no centro da vila anda até o tile do botão direito pela busca A\* (`Codigo/Mapa/BuscaDeCaminho.cpp`, `Codigo/Npc/`), com a EnTT 3.16.0; o boneco do Mana Seed (ou o de teste, sem a pasta) é desenhado entre os ticks; N cria mais NPCs e F2 mostra os caminhos. 167 testes no `Codigo/` e 36 no `Jogo/`.
 - **Marco 3 (pronto, confirmado pelo autor em 2026-10-18):** os dados em `Jogo/data` (itens, receitas, recursos, construções, regras e textos), lidos e conferidos por `Codigo/Dados/`, com o preço base (Pão 1,7) e o `jogo --validar`; as teclas passam pela tabela de ações (FL2-4). 124 testes no `Codigo/` e 25 no `Jogo/`.
 
-## 4. Rodada pendente: FL5, a rotina (marco 5)
+## 4. Rodada pendente: FA1, os critérios da arte
 
-**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever a [[Ficha Logica/IA|ficha da IA]] (a vila inicial, a rotina e a Utilidade), apareceram 6 pontos que os documentos não decidem. A ficha já usa as sugestões, marcadas como [Proposta]. (A FL4 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
+**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]], apareceram 5 critérios que os documentos não decidem. O guia já usa as sugestões, marcadas como [Proposta], então dá para começar a desenhar (o chão, primeiro) enquanto a rodada não volta. (A FL5 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
 
-Responder no `Respostas.txt` pelos códigos (FL5-1, FL5-2...). "Seguir sugestão" aceita a proposta.
+Responder no `Respostas.txt` pelos códigos (FA1-1, FA1-2...). "Seguir sugestão" aceita a proposta.
 
-**FL5-1. As construções no marco 5.**
+**FA1-1. O quadro e as direções do boneco.**
 
-- *Contexto:* a rotina manda o NPC dormir em casa e trabalhar na construção do emprego. Mas as construções só "funcionam" no marco 6, com a ficha da Construção (custo, obra, vagas). O mapa tem 11 lotes vazios (8 pequenos e 3 médios), e a ficha do Mapa dizia que as construções bloqueiam os tiles do lote só a partir do marco 6.
-- *Pergunta:* onde o NPC dorme e trabalha no marco 5, e o que aparece na tela? *Exemplo:* às 22h, a Ana volta para casa. Para onde ela anda, e o que se vê?
+- *Contexto:* o boneco tem 16 × 24 px, e o Pipeline diz "3 direções desenhadas e a esquerda espelhada". O jogo lê o tamanho do quadro e o ponto dos pés do `boneco_provisorio.json` (FL4-4), mas só aceita quadros quadrados, e hoje desenha as 4 direções da folha, sem espelhar.
+- *Pergunta:* de que tamanho é cada quadro da folha, onde ficam os pés, e quem faz a esquerda? *Exemplo:* o NPC anda para a esquerda; de onde sai esse desenho?
 - *Opções:*
-  - (a) **um `vila_inicial.json` que já põe as 10 construções nos lotes** (4 Casas, Fazenda, Posto de Coleta, Cozinheiro, Mercado, Construtor e a Carpintaria do jogador; o lote 5 fica livre), cada uma desenhada como um **retângulo de cor lisa** por tipo, com a porta mais escura. Os tiles do lote passam a **bloquear** já no marco 5, e a **porta** é o tile logo abaixo do meio do lote. O NPC anda até a porta, entra e some da tela até sair. Ganha: a vila já fica com a cara final, e o marco 6 só acrescenta o que a construção faz. Perde: a regra do bloqueio, que era do marco 6, vem antes; e retângulos no lugar da arte;
-  - (b) sem construções: o NPC anda até o meio do lote vazio e fica parado lá. Ganha: o marco 5 fica menor. Perde: 4 NPCs parados em cima de cada lote de Casa, e o marco 6 refaz tudo;
-  - (c) esperar a ficha da Construção e fazer o marco 6 antes do 5. Ganha: as construções nascem completas. Perde: muda a ordem dos marcos da V4-6, e o marco 6 fica enorme.
-- *Sugestão:* (a), com a vila da tabela da ficha da IA (parte 2): as oficinas e o Mercado nos 3 lotes médios, o resto nos pequenos, a Fazenda e o Posto de Coleta do lado esquerdo, perto do campo de Grão e do bosque.
-- *Conflitos:* a regra 4.2 da ficha do Mapa (o lote ocupado bloqueia) passa do marco 6 para o marco 5. A arte das construções continua sem escolha ([[Estado do Projeto]], "O que falta").
+  - (a) **quadro de 32 × 32, boneco nas colunas 8 a 23 e nas linhas 5 a 28, pés em (16, 28); 4 linhas de direção na folha, e a da esquerda é a da direita copiada e espelhada no Pixelorama.** Ganha: a folga para os braços, a sombra e as ferramentas do "trabalhar"; o jogo não muda. Perde: a folha tem um pouco de espaço vazio, e a linha da esquerda é um arquivo a mais para manter igual à da direita;
+  - (b) quadro de 24 × 24, justo. Ganha: menos espaço vazio. Perde: as ferramentas e os braços abertos não cabem;
+  - (c) o jogo espelha a esquerda sozinho (3 linhas na folha). Ganha: um desenho a menos. Perde: muda o código, e um boneco com algo só de um lado (uma bolsa, um escudo) troca de lado ao virar.
+- *Sugestão:* (a). Se o espelhamento automático fizer falta mais tarde (com as armas e os escudos), ele vira pergunta junto com o combate.
+- *Conflitos:* nenhum. O Pipeline ("a esquerda é a direita espelhada") continua valendo: o espelho é feito no Pixelorama.
 
-**FL5-2. Os 15 NPCs da vila inicial.**
+**FA1-2. A luz, o contorno e o sombreado.**
 
-- *Contexto:* a fatia tem 15 Civis (V2-12), 4 Casas de 4 lugares, e as vagas do nível 1: Fazenda 2, Posto de Coleta 2, Cozinheiro 2, Mercado 2 Lojistas, Construtor 2 Operários, e a Carpintaria do jogador com 2 vagas (FT1-1). A FT1-1 diz que o jogador "pode contratar desempregados", mas não diz se a Carpintaria já começa com empregados.
-- *Pergunta:* quem mora onde, quem trabalha onde, e quantos ficam sem emprego? *Exemplo:* no primeiro dia, às 10h, quantos NPCs passeiam na rua?
+- *Contexto:* o Pipeline decide a vista 3/4 e a paleta, mas não a direção da luz nem o contorno. Sem uma regra única, cada peça sai com uma luz diferente, e a cena fica estranha.
+- *Pergunta:* de onde vem a luz, e como é o contorno? *Exemplo:* uma árvore ao lado de uma casa: de que lado fica a sombra das duas?
 - *Opções:*
-  - (a) **12 empregados e 3 desempregados**: as 10 vagas da cidade cheias e **a Carpintaria começa com 2 empregados**; 4, 4, 4 e 3 moradores nas Casas; nomes provisórios (Ana, Bento, Clara...). Ganha: os salários do dia dão cerca de 85, a conta da Arquitetura (V2-12), e 3 desempregados fazem o desemprego aparecer na Felicidade (20%: +6 no fator). Perde: o jogador não começa contratando;
-  - (b) 10 empregados e 5 desempregados (a Carpintaria vazia). Ganha: o jogador contrata os 2 primeiros, um bom começo de tutorial. Perde: os salários caem para cerca de 69 por dia, e o desemprego de 33% pesa na Felicidade desde o primeiro dia;
-  - (c) 15 empregados (mais vagas). Ganha: ninguém parado. Perde: precisa de vagas que o nível 1 não tem.
-- *Sugestão:* (a). Às 10h do primeiro dia, só os 3 desempregados passeiam. Os nomes de verdade esperam a história do mundo.
-- *Conflitos:* nenhum. A FT1-1 ("pode contratar desempregados") continua valendo: os 3 desempregados são os que o jogador pode contratar quando a Carpintaria subir de nível.
-
-**FL5-3. O Período Livre, o Comprar e onde ficam os números.**
-
-- *Contexto:* a Utilidade da V2-10 dá 1,0 à ação do período da rotina, +1,2 ao Comprar (uma vez a cada 2 dias, no Período Livre) e +0,5 × (1 − Felicidade ÷ 100) ao Lazer. Mas ela não diz **qual ação** é a do Período Livre. Se for o Lazer, ele tem 1,0 + 0,25 (com a Felicidade 50) = 1,25, e o Comprar, com 1,2, **nunca ganha**.
-- *Pergunta:* qual é a ação do Período Livre, para o Comprar acontecer? *Exemplo:* às 15h, a Ana sai do trabalho no dia de compra. Ela vai ao Mercado ou passeia?
-- *Opções:*
-  - (a) **uma ação nova, Passear, é a do Período Livre (1,0)**; o Comprar (1,2) ganha dela no dia de compra; o **Lazer fica fora da fatia** (ele precisa da Taverna, que a fatia não tem) e volta com a Taverna, com a nota revista. E o desempregado, no período de trabalho, também passeia. Ganha: o Comprar acontece, e cada ação tem um lugar claro. Perde: uma ação a mais na lista da V2-10;
-  - (b) o Lazer é a ação do Período Livre, e o Comprar sobe para +1,5. Ganha: fica perto da V2-10. Perde: o Lazer sem Taverna vira só um passeio com outro nome, e o número do Comprar muda;
-  - (c) o Comprar ganha sempre no dia de compra, fora das notas. Ganha: simples. Perde: uma exceção à Utilidade.
-- *Sugestão:* (a). E todos os números da rotina, das notas e do passeio vão para o `regras.json`, com as notas em centésimos (1,0 = 100), inteiras, como o resto. A reavaliação "a cada 5 minutos de jogo" vira a cada **67 ticks** (66,7 arredondado), um NPC por tick.
-- *Conflitos:* a lista de ações da Fatia Vertical (parte 1) ganha o Passear e perde o Lazer na fatia; o [[Sistema de IA/Descrição|IA]] ganha uma nota.
-
-**FL5-4. Onde o NPC come.**
-
-- *Contexto:* a V2-10 dá +1,5 ao Comer nas refeições (7h, 12h e 19h, por 30 minutos). O que se come entra no marco 6 (o consumo é da cidade); no marco 5, comer é só um lugar e um tempo.
-- *Pergunta:* para onde o NPC vai na hora de comer? *Exemplo:* às 19h, a Ana está passeando a 10 tiles de casa. E às 12h, ela está dentro da Fazenda.
-- *Opções:*
-  - (a) **quem está dentro da casa ou do trabalho come lá; quem está na rua vai para casa** e come até o fim da meia hora. No exemplo: às 12h ela come na Fazenda; às 19h, anda uns 5 minutos de jogo até em casa e come lá. Ganha: o almoço não tira ninguém do trabalho, e a tela mostra a vila voltando para casa no jantar. Perde: quem está longe come menos tempo;
-  - (b) come onde estiver, mesmo no meio da rua. Ganha: o mais simples. Perde: NPCs parados meia hora no meio do caminho, sem motivo visível;
-  - (c) todos comem no Mercado. Ganha: movimenta o Mercado. Perde: 15 NPCs no Mercado três vezes por dia, e o almoço tira todos do trabalho.
+  - (a) **luz de cima, à esquerda; contorno colorido (o tom mais escuro da rampa do material, ou a cor 01 quando faltar); chão sem contorno; sem dithering; de 3 a 4 tons por material.** Ganha: o estilo de Stardew, a referência da vista; as peças se destacam do chão sem ficarem "duras". Perde: escolher a cor do contorno peça por peça;
+  - (b) contorno preto puro. Ganha: simples. Perde: fica pesado em 16 px, e o preto puro nem está na Resurrect 64;
+  - (c) sem contorno. Ganha: visual mais suave. Perde: os bonecos somem em cima da grama de cor parecida.
 - *Sugestão:* (a).
-- *Conflitos:* com o café às 7h, o empregado chega ao trabalho por volta das 7h35 e trabalha cerca de **7,4 horas**, e não 8. A produção do marco 6 é por hora presente, então isso aparece no teste de 1 ano, e a rodada do marco 7 decide se ajusta.
+- *Conflitos:* nenhum.
 
-**FL5-5. O passeio e o sorteio.**
+**FA1-3. As cores a mais e a sombra no chão.**
 
-- *Contexto:* "passear" (o marco 5 é "dormem, trabalham e passeiam") precisa de lugares sorteados. A Arquitetura e o Eventos pedem números sorteados **com semente**: a mesma semente dá a mesma partida.
-- *Pergunta:* para onde o NPC passeia, por quanto tempo, e com que sorteio? *Exemplo:* às 15h30, depois de comprar, a Ana sai do Mercado para passear.
+- *Contexto:* o autor decidiu a Resurrect 64 "com algumas cores a mais se necessário". A Resurrect 64 não tem nenhuma cor transparente, e as sombras no chão (embaixo dos bonecos, das árvores e das construções) ficam melhores um pouco transparentes, mostrando a grama por baixo.
+- *Pergunta:* quantas cores a mais, e como fica a sombra? *Exemplo:* um NPC andando da grama para a terra: a sombra dele muda de cor?
 - *Opções:*
-  - (a) **um tile livre sorteado a até 12 tiles de onde ele está, com uma parada de 15 a 45 minutos sorteados, e depois outro**; o sorteio é um **gerador próprio pequeno, o PCG32**, ligado à semente da partida (a 1, no `vila_inicial.json`), com **um gerador para os NPCs** e outro, depois, para os eventos. Ganha: a vila parece viva; e o PCG32 dá os mesmos números em qualquer compilador, o que o sorteio do C++ não garante. Perde: cerca de 15 linhas de código a mais;
-  - (b) pontos de passeio marcados no Tiled (a praça, o poço). Ganha: os NPCs se juntam em lugares que fazem sentido. Perde: uma camada de objetos nova, e o mapa de teste ainda não tem praça;
-  - (c) sem passeio: no Período Livre, o NPC fica em casa. Ganha: simples. Perde: a vila fica vazia das 15h às 22h.
-- *Sugestão:* (a). Os pontos de passeio do Tiled (b) podem entrar depois, com a arte do mapa, junto da camada `pontos_de_interesse` que o Pipeline já prevê.
-- *Conflitos:* nenhum. O gerador separado por sistema é o que o [[Sistema de Eventos/Descrição|Eventos]] pede ("um gerador próprio").
+  - (a) **a sombra no chão é a cor 01 com 50% de transparência (a cor 65, a única transparente do jogo); e no máximo 8 cores a mais (66 a 73), cada uma anotada no guia com o motivo e acrescentada no fim do arquivo da paleta.** Ganha: a sombra escurece qualquer chão do jeito certo; o limite segura a paleta. Perde: uma regra a mais para lembrar;
+  - (b) sombras opacas, de cor escura. Ganha: nenhum pixel transparente. Perde: a sombra fica com a mesma cor em cima da grama, da terra e da água, e parece um buraco;
+  - (c) cores a mais livres. Ganha: liberdade. Perde: a paleta se perde aos poucos, e a troca de paleta por cultura (Pipeline) fica mais difícil.
+- *Sugestão:* (a).
+- *Conflitos:* nenhum. O jogo já desenha com transparência (marco 4).
 
-**FL5-6. Como testar o marco 5.**
+**FA1-4. As bordas entre dois chãos (grama e terra, grama e água).**
 
-- *Contexto:* o marco 5 está pronto quando "os 15 NPCs dormem, trabalham e passeiam nos horários". Ainda não há texto na tela (o HUD é do marco 8). As teclas do marco 4 (o botão direito manda os NPCs; o N cria mais) brigam com a rotina.
-- *Pergunta:* como o autor confere o que cada NPC está fazendo, e o que acontece com as teclas do marco 4? *Exemplo:* às 15h05, como saber se a Ana foi comprar ou passear?
+- *Contexto:* o Tiled tem os "terrenos" (Pipeline): pinta-se "terra", e ele escolhe a borda certa. Mas o número de tiles de borda depende do tipo de conjunto, e o projeto não espelha tiles (ficha do Mapa), então cada borda é desenhada.
+- *Pergunta:* quantos tiles de borda desenhar para cada par de chãos? *Exemplo:* a rua de terra da vila cruza a grama e faz uma curva.
 - *Opções:*
-  - (a) **a tecla F3 liga um quadradinho colorido em cima de cada NPC, com a cor da ação, e escreve no console a tabela dos 15** (nome, ação, onde está, as notas); **o botão direito e o N saem**, e o F2 (os caminhos) fica. Ganha: dá para ver a vila inteira de uma vez e conferir os números no console. Perde: as cores precisam de uma legenda (no LEIA-ME);
-  - (b) só o console, escrevendo cada troca de ação. Ganha: nada na tela. Perde: cerca de 100 linhas por dia de jogo no console, difícil de acompanhar;
-  - (c) manter o botão direito como uma ordem que vale até a próxima reavaliação. Ganha: o teste do marco 4 continua. Perde: a ordem dura no máximo 5 minutos de jogo e confunde o teste da rotina.
-- *Sugestão:* (a). Para ver um dia inteiro, a tecla 3 (4x) faz um dia passar em 4 minutos reais.
-- *Conflitos:* nenhum; as teclas de teste são provisórias (FL4-6).
+  - (a) **o conjunto de cantos de 16 tiles** (cada canto do tile é grama ou terra), que o Tiled usa direto no pincel de terreno. Ganha: o pincel funciona sozinho, inclusive nas diagonais; 16 tiles por par. Perde: os caminhos precisam de 2 tiles de largura, no mínimo (as ruas da vila já têm 2);
+  - (b) 13 tiles (3 × 3 de bordas e 4 cantos de dentro). Ganha: 3 tiles a menos. Perde: faltam as duas diagonais, e o pincel do Tiled não monta sozinho;
+  - (c) 47 tiles (o conjunto "blob"). Ganha: caminhos de 1 tile e curvas mais bonitas. Perde: quase 3 vezes mais desenho, muito para quem está começando.
+- *Sugestão:* (a), para os dois pares da fatia (grama e terra; grama e água): 32 tiles de borda no total.
+- *Conflitos:* nenhum.
+
+**FA1-5. O tamanho das construções.**
+
+- *Contexto:* a construção ocupa o lote no chão (pequeno 4 × 4 tiles, médio 6 × 6), mas, na vista 3/4, o telhado e a parede da frente "sobem" na tela. O jogo ainda não desenha imagens nos lotes (são os retângulos da FL5-1); isso entra com a ficha da Construção, no marco 6.
+- *Pergunta:* qual é o tamanho da imagem de cada construção, e como ela se encaixa no lote? *Exemplo:* a Casa no lote 2, com a porta em (19, 25).
+- *Opções:*
+  - (a) **a imagem tem a largura do lote e 32 px a mais de altura (pequena 64 × 96, média 96 × 128); a linha de baixo da imagem fica na linha de baixo do lote, e o telhado sobe para fora dele; a porta cobre a coluna do tile da porta.** Ganha: as construções têm altura e parecem de verdade, como em Stardew. Perde: o telhado cobre os tiles acima do lote (e quem passar por trás), o que o desenho do marco 6 precisa tratar;
+  - (b) a construção cabe inteira no chão do lote (64 × 64), vista mais de cima. Ganha: simples de encaixar. Perde: casas achatadas, sem parede da frente;
+  - (c) uma altura livre por construção, anotada nos dados. Ganha: torres e casas baixas. Perde: mais um número por construção, sem necessidade na fatia.
+- *Sugestão:* (a). A ordem de desenho (o telhado na frente de quem passa atrás) entra na ficha da Construção.
+- *Conflitos:* a ficha do Mapa já dizia que as construções são desenhadas "por cima" dos lotes a partir do marco 6; a altura extra é a novidade.
 
 Depois das respostas:
 
-- tirar as marcas [Proposta] das fichas da IA, do NPC e do Mapa, e anotar a rodada na parte 8 da Fatia Vertical (com o Passear na lista de ações, FL5-3);
-- começar o marco 5, na branch `codigo/marco-5-rotina`.
+- tirar as marcas [Proposta] do Guia da Arte e anotar a rodada no Pipeline;
+- as fichas do marco 6, na branch `docs/fichas-marco-6`.
 
 ## 5. Onde está cada coisa
 

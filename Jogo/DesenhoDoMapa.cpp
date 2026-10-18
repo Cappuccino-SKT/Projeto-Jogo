@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <initializer_list>
+#include <string>
 
 namespace {
 
@@ -11,6 +12,32 @@ constexpr float corDaColisaoParaDepuracao[4] = {0.9f, 0.1f, 0.1f, 0.35f};
 
 // Cor da depuração dos caminhos (F2, FL4-6): azul translúcido.
 constexpr float corDosCaminhosParaDepuracao[4] = {0.2f, 0.45f, 0.95f, 0.4f};
+
+// As cores provisórias das construções (ficha da IA, regra 4.7), de 0 a 1.
+struct CorDaConstrucao {
+    const char* tipo;
+    float cor[4];
+};
+constexpr CorDaConstrucao coresDasConstrucoes[] = {
+    {"construcao.casa", {0.55f, 0.33f, 0.18f, 1.0f}},           // marrom
+    {"construcao.fazenda", {0.85f, 0.75f, 0.25f, 1.0f}},        // amarela
+    {"construcao.posto_de_coleta", {0.30f, 0.55f, 0.30f, 1.0f}},// verde
+    {"construcao.cozinheiro", {0.90f, 0.55f, 0.20f, 1.0f}},     // laranja
+    {"construcao.carpinteiro", {0.62f, 0.45f, 0.30f, 1.0f}},    // castanha
+    {"construcao.mercado", {0.25f, 0.45f, 0.80f, 1.0f}},        // azul
+    {"construcao.construtor", {0.55f, 0.55f, 0.58f, 1.0f}},     // cinza
+};
+constexpr float corDeConstrucaoSemCor[4] = {0.8f, 0.2f, 0.8f, 1.0f};
+
+const float* corDoTipoDeConstrucao(const std::string& tipo)
+{
+    for (const CorDaConstrucao& corDaConstrucao : coresDasConstrucoes) {
+        if (tipo == corDaConstrucao.tipo) {
+            return corDaConstrucao.cor;
+        }
+    }
+    return corDeConstrucaoSemCor;
+}
 
 // Quais tiles aparecem na tela (com a câmera e o zoom), já presos ao mapa.
 struct FaixaDeTilesVisiveis {
@@ -144,6 +171,34 @@ void DesenhistaDoMapa::desenharTilesDosCaminhosParaDepuracao(const std::vector<P
         pincel.acrescentarQuadrado(esquerda, topo, esquerda + ladoNaTela, topo + ladoNaTela, 0, 0, 0, 0);
     }
     pincel.mandarLoteParaAPlacaDeVideo();
+}
+
+void DesenhistaDoMapa::desenharConstrucoesProvisorias(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
+                                                      int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
+{
+    pincel.comecarDesenho(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+    const float ladoDoTileNaTela = static_cast<float>(mapa.tamanhoDoTileEmPixels * camera.zoomAtual());
+    for (const ConstrucaoDaVila& construcao : vila.construcoes) {
+        const RetanguloEmTiles& area = construcao.areaDoLote;
+        const float esquerda = area.tileX * ladoDoTileNaTela - camera.deslocamentoXNaTela();
+        const float topo = area.tileY * ladoDoTileNaTela - camera.deslocamentoYNaTela();
+        const float direita = esquerda + area.larguraEmTiles * ladoDoTileNaTela;
+        const float baixo = topo + area.alturaEmTiles * ladoDoTileNaTela;
+
+        // O corpo da construção, na cor do tipo.
+        const float* cor = corDoTipoDeConstrucao(construcao.tipo);
+        pincel.comecarLoteComCorLisa(cor);
+        pincel.acrescentarQuadrado(esquerda, topo, direita, baixo, 0, 0, 0, 0);
+        pincel.mandarLoteParaAPlacaDeVideo();
+
+        // A porta: o tile da parede de baixo, logo acima do tile da porta, mais escuro.
+        const float corDaPorta[4] = {cor[0] * 0.45f, cor[1] * 0.45f, cor[2] * 0.45f, 1.0f};
+        const float esquerdaDaPorta = construcao.tileDaPorta.tileX * ladoDoTileNaTela - camera.deslocamentoXNaTela();
+        pincel.comecarLoteComCorLisa(corDaPorta);
+        pincel.acrescentarQuadrado(esquerdaDaPorta + ladoDoTileNaTela * 0.2f, baixo - ladoDoTileNaTela * 0.8f,
+                                   esquerdaDaPorta + ladoDoTileNaTela * 0.8f, baixo, 0, 0, 0, 0);
+        pincel.mandarLoteParaAPlacaDeVideo();
+    }
 }
 
 void DesenhistaDoMapa::liberar()
