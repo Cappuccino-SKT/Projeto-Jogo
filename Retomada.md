@@ -10,7 +10,8 @@
 - **Marco 1 (2026-10-17):** escrito na branch `codigo/marco-1-relogio-e-mapa` (feita em cima da `codigo/marco-0-ambiente`), em 5 passos; **confirmado pelo autor** (seção 3).
 - **Ficha da Interface e marco 2 (2026-10-18):** na branch `codigo/marco-2-camera-e-entrada` (feita em cima da `codigo/marco-1-relogio-e-mapa`). A [[Ficha Logica/Interface|ficha da Interface]] (câmera, zoom e teclas) abriu a **rodada FL2** (seção 4), e o código já segue as sugestões dela. O marco 2 foi **testado e confirmado pelo autor**, e a **FL2 foi aplicada** (2026-10-18).
 - **Arte provisória dos personagens (2026-10-18):** o autor baixou a versão grátis do pacote Mana Seed (pasta `Assents Temporarios/`, na raiz), só para os testes da fatia; a arte definitiva será própria. O repositório no GitHub é **público**, e o pacote proíbe, em geral, redistribuir os arquivos: por isso a pasta fica **fora do Git** (`.gitignore`). As folhas têm quadros de 64 × 64, e não o boneco de 16 × 24 da Arquitetura: isso vira pergunta na ficha do marco 4.
-- **Próximo passo:** as fichas de Itens, Recursos e Receitas, e depois o marco 3 (carregar os dados).
+- **Fichas do marco 3 (2026-10-18):** [[Ficha Logica/Itens|Itens]] (com a ordem de leitura dos dados e o `--validar`), [[Ficha Logica/Recursos|Recursos]] e [[Ficha Logica/Receitas|Receitas]] (com o preço base), na branch `docs/fichas-marco-3` (feita em cima da `codigo/marco-2-camera-e-entrada`, para levar ao `main` os dois commits do marco 2 que ficaram de fora). A **rodada FL3** foi enviada (seção 4).
+- **Próximo passo:** as respostas da FL3; depois, o marco 3 (carregar os dados).
 - **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. As fichas do marco 1 e o marco 0 já entraram; falta o `codigo/marco-1-relogio-e-mapa`, e depois o do marco 2.
 
 ## 2. Como trabalhamos
@@ -81,9 +82,80 @@
 - **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
 - **Marco 2 (pronto, confirmado pelo autor em 2026-10-18):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
 
-## 4. Rodada pendente
+## 4. Rodada pendente: FL3, os dados do marco 3
 
-Nenhuma. A **FL2** (câmera do marco 2) foi aplicada em 2026-10-18, com "seguir sugestão" em todas: as decisões estão na [[Ficha Logica/Interface|ficha da Interface]] e na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]. A FL1 foi aplicada em 2026-10-17.
+**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]], apareceram 6 pontos que os documentos não decidem. As fichas já usam as sugestões, marcadas como [Proposta]. (A FL2 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
+
+Responder no `Respostas.txt` pelos códigos (FL3-1, FL3-2...). "Seguir sugestão" aceita a proposta.
+
+**FL3-1. Quantos itens e receitas entram no marco 3.**
+
+- *Contexto:* a lista final tem cerca de 180 itens (IP2) e uma receita para cada um (IP3). A fatia usa 6: Grão, Água, Tora, Pão, Tábua e Móveis de Madeira. A Fatia Vertical diz que o `itens.csv` começa com os 6, "e depois os cerca de 180".
+- *Pergunta:* o marco 3 escreve os 6 itens ou os 180? *Exemplo:* com os 180, o teste confere a tabela inteira de preços de partida do Econômico (a Espada Curta de Ferro a 13,9, o Licor a 29,0); com os 6, confere só Pão, Tábua e Móveis.
+- *Opções:*
+  - (a) **os 6 da fatia agora**, e os outros numa tarefa de dados própria, depois da fatia. Ganha: o marco 3 fica pequeno e rápido de testar. Perde: os preços dos outros itens só são conferidos depois;
+  - (b) os 180 agora. Ganha: confere todo o design de uma vez. Perde: muito trabalho de digitação (os moldes de armas, os animais, o Açougue), e boa parte não é usada na fatia;
+  - (c) os 6, mais as cadeias de comida e de materiais básicos (cerca de 30). Ganha: um meio-termo. Perde: um corte arbitrário.
+- *Sugestão:* (a). O leitor e o validador já nascem prontos para os 180: só faltará escrever as linhas.
+- *Conflitos:* a obra de nível 1 pede **Bloco de Pedra** ([[Sistema de Construção/Descrição|Construção]]: 10 Tábua + 10 Bloco de Pedra), que não está nos 6 itens nem tem quem o faça na vila. Isso fica para a ficha da Construção, antes do marco 6.
+
+**FL3-2. O formato do `receitas.csv` e as receitas Braçais.**
+
+- *Contexto:* a extração tem a regra "1 unidade a cada 0,5 h" no Tier 0 (IP3-2). As horas da receita são inteiras em todo o resto (4 h, 8 h).
+- *Pergunta:* como escrever a Fazenda tirando Grão? *Exemplo:* um Fazendeiro trabalha das 7h às 15h e tira 16 Grão. Com 0,5 h por ciclo, a planilha tem uma hora com vírgula; com 2 unidades em 1 h, não.
+- *Opções:*
+  - (a) **2 unidades em 1 hora** no Tier 0 (1 em 1 h no Tier 1; 1 em 2 h no Tier 2). Ganha: só horas inteiras, e o ciclo fecha junto com a "hora nova" do relógio. Perde: o Grão entra no estoque de 2 em 2;
+  - (b) 1 unidade em 0,5 hora. Ganha: igual ao texto da IP3-2. Perde: horas com vírgula na planilha, e dois ciclos dentro da mesma hora;
+  - (c) 8 unidades em 4 horas, como o lote padrão. Ganha: igual às outras receitas. Perde: o estoque recebe Grão só de 4 em 4 horas, e um turno cortado no meio perde o ciclo inteiro.
+- *Sugestão:* (a). E o Trabalho escrito em minúsculas e sem acento (`bracal`, `manufaturado`, `especialista`), como os IDs.
+- *Conflitos:* o exemplo de `receitas.csv` da Fatia Vertical, que usava `Manufaturado`, passa a usar `manufaturado`.
+
+**FL3-3. O salário de 0,75 por hora e o arredondamento do preço.**
+
+- *Contexto:* o dinheiro é inteiro, em décimos de moeda (V2-1). O salário Braçal é 0,75 moeda por hora (V2-3), ou seja, 7,5 décimos, que não é inteiro. O preço do Pão dá 16,5 décimos, e a Fatia Vertical arredondou para 17.
+- *Pergunta:* como fazer a conta do preço só com inteiros? *Exemplo:* o Grão custa 4,5 décimos pela fórmula; ele vale 4 ou 5? E o Pão usa o Grão a 4,5 ou a 5?
+- *Opções:*
+  - (a) **o salário por hora em centésimos nas regras** (75, 100 e 150), só para a conta; **a metade sobe** (4,5 vira 5, 16,5 vira 17); **cada item é arredondado antes de entrar no seguinte**; e nenhum preço fica em 0 (o mínimo é 1 décimo). Ganha: os 6 preços batem com a tabela do Econômico. Perde: duas medidas (centésimos só na regra, décimos no dinheiro);
+  - (b) mudar o salário Braçal para 0,8 por hora. Ganha: tudo em décimos. Perde: mexe numa decisão da V2-3 e muda vários preços;
+  - (c) contas com vírgula e arredondar só no fim. Ganha: mais exato. Perde: vai contra a regra do dinheiro inteiro.
+- *Sugestão:* (a). O salário que se paga por dia (6, 8 e 12 moedas) continua inteiro em décimos.
+- *Conflitos:* o exemplo de `regras.json` da Fatia Vertical (`"Bracal": 7.5`) passa a ser `"salario_por_hora_em_centesimos": {"bracal": 75, ...}`.
+
+**FL3-4. O peso dos itens.**
+
+- *Contexto:* o item tem o atributo Peso (Itens), usado pela Capacidade de peso dos Controlados (Inventário). Nenhum documento dá os valores nem a unidade.
+- *Pergunta:* em que unidade, e quanto pesa cada item da fatia? *Exemplo:* o jogador compra 10 Pães e 2 Móveis de Madeira no Mercado; quanto isso pesa?
+- *Opções:*
+  - (a) **uma "unidade de peso" inteira, com o Pão valendo 1:** Grão 1, Água 1, Pão 1, Tábua 2, Tora 3, Móveis de Madeira 8 (no exemplo, 10 + 16 = 26). Ganha: simples, sem vírgula. Perde: não é um quilo de verdade;
+  - (b) quilos com vírgula (Pão 0,5 kg). Ganha: realista. Perde: números com vírgula, que o jogo evita;
+  - (c) peso em décimos de quilo (Pão 5). Ganha: realista e inteiro. Perde: números grandes e difíceis de ler na planilha.
+- *Sugestão:* (a). A Capacidade de peso por ponto de Força (Inventário, pergunta em aberto) usa a mesma unidade, e é decidida na ficha do Inventário (marco 6).
+- *Conflitos:* nenhum.
+
+**FL3-5. As construções no marco 3.**
+
+- *Contexto:* cada receita cita a construção que a faz (`construcao.cozinheiro`), e o `--validar` precisa saber se ela existe. A ficha da Construção só vem antes do marco 6, porque é lá que as construções funcionam.
+- *Pergunta:* o `construcoes.json` do marco 3 já tem tudo (porte, custo, vagas, capacidade) ou só a lista?
+- *Opções:*
+  - (a) **só a lista de IDs** das 7 construções da fatia (`construcao.fazenda`, `posto_de_coleta`, `cozinheiro`, `carpinteiro`, `mercado`, `construtor`, `casa`), e o resto entra com a ficha da Construção. Ganha: o marco 3 não decide nada da Construção antes da hora. Perde: o arquivo cresce em dois passos;
+  - (b) tudo agora. Ganha: o arquivo fica pronto. Perde: decidir porte, custo e capacidade sem a ficha.
+- *Sugestão:* (a), com os nomes no `textos/pt-BR.json`.
+- *Conflitos:* nenhum.
+
+**FL3-6. Onde ficam os recursos, a estação e a produtividade da vila.**
+
+- *Contexto:* o mapa da vila marca 3 áreas (`campo_de_grao`, `poco`, `bosque`; FL1-5). O Recursos diz que a lista de recursos de cada mapa fica num `mapas.json`, e a produção por estação num `clima.json`. A fatia não tem nenhum dos dois.
+- *Pergunta:* onde o jogo descobre que o `poco` é o recurso Água, que gera o item Água, e quanto ele rende? *Exemplo:* no inverno, quanto Grão a Fazenda tira?
+- *Opções:*
+  - (a) **um `data/recursos.csv`** (recurso, item gerado, construção, nome da área no Tiled, grupo da estação), a **produção por estação no `regras.json`** (os grupos fazenda, animais, madeira, minerais e água, com as 4 porcentagens), e a **produtividade como propriedade da área no Tiled** (`normal` ou `destaque`; vazia = normal). Os tipos de área deixam de ser uma lista no código. Ganha: um recurso novo não precisa de código, e a vila não precisa do `mapas.json`. Perde: no jogo completo, a produtividade sai do Tiled e vai para o `mapas.json`;
+  - (b) já criar o `mapas.json` e o `clima.json` com um mapa só. Ganha: o formato final desde já. Perde: dois arquivos quase vazios na fatia.
+- *Sugestão:* (a). O Grão normal no inverno rende 25%: 8 por dia em vez de 32, como diz a Arquitetura.
+- *Conflitos:* a regra 4.1 da [[Ficha Logica/Mapa|ficha do Mapa]] (passo 8) troca a lista fixa de tipos pela lista do `recursos.csv`.
+
+Depois das respostas:
+
+- tirar as marcas [Proposta] das três fichas e ajustar a Fatia Vertical (exemplos do `receitas.csv` e do `regras.json`) e a ficha do Mapa (FL3-6);
+- começar o marco 3, na branch `codigo/marco-3-dados`, com a tabela de ações das teclas (FL2-4).
 
 ## 5. Onde está cada coisa
 
