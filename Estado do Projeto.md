@@ -32,7 +32,7 @@
   - **C1:** tecnologias e marcos;
   - **C2:** feitiços e árvore arcana;
   - **C3:** contratos, missões, Ambições e eventos.
-- **No início do código:** escolher os pacotes de arte provisórios e a ferramenta de atlas. O artista definitivo também segue sem escolha.
+- **Arte da fatia:** o autor desenha à mão, no Pixelorama, com a paleta Resurrect 64, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] (rodada FA1 pendente). Falta escolher a ferramenta de atlas; o artista definitivo segue sem escolha.
 - **A história do mundo:** nomes, personagens e os nomes de fantasia dos itens.
 - **Cerca de 80 marcações** [Em aberto] e [Refinar depois] nos documentos: detalhes e ideias futuras, sem pressa.
 - **Ideias futuras:** vários núcleos (multithreading, ver [[Arquitetura/Descrição|Arquitetura]]), Títulos de Nobreza, outras raças, arte própria por cultura, arte extra das estações e os sistemas P2 (áudio, tutorial, configurações, localização, modding, conquistas).
