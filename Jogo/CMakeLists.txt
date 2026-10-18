@@ -5,10 +5,12 @@
 add_library(glad STATIC externo/glad/src/gl.c)
 target_include_directories(glad PUBLIC externo/glad/include)
 
-# A parte da interface que não abre janela (a câmera), separada para poder
-# ser testada pelo testes_do_jogo.
-add_library(interface_do_jogo STATIC CameraDoMapa.cpp)
+# A parte da interface que não abre janela (a câmera e a tabela de ações do
+# teclado), separada para poder ser testada pelo testes_do_jogo. Usa só os
+# cabeçalhos da SDL (os nomes das teclas), sem ligar a SDL.
+add_library(interface_do_jogo STATIC CameraDoMapa.cpp AcoesDoTeclado.cpp)
 target_include_directories(interface_do_jogo PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(interface_do_jogo PUBLIC SDL3::Headers)
 target_compile_options(interface_do_jogo PRIVATE -Wall -Wextra)
 
 add_executable(jogo
