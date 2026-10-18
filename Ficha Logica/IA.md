@@ -105,6 +105,7 @@ Documentos do sistema: [[Sistema de IA/Descrição|IA]] (a rotina, as horas da V
 | `DecisaoDoNpc` | `acaoAtual` | Dormir, Trabalhar, Comer, Comprar ou Passear | Trabalhar | Sim |
 | | `indiceDaConstrucaoOndeEsta` | posição na lista, ou −1 (na rua) | 0 (dentro da Fazenda) | Sim |
 | | `indiceDaConstrucaoDoDestino` | posição na lista, ou −1 | 0 | Sim |
+| | `estaACaminho` | sim/não | pediu um caminho e ainda não chegou (acrescentado no código do marco 5) | Sim |
 | | `tickEmQueAEsperaAcaba` | tick, ou −1 | o fim da compra ou da parada do passeio | Sim |
 | | `diaDaUltimaCompra` | dia da partida, ou −1 | 0 | Sim |
 
@@ -213,19 +214,19 @@ Como os NPCs reavaliam sempre na mesma ordem (pelo tick e pelo número), a ordem
 
 | Hora | Notas que ganham | Ação | Onde |
 |---|---|---|---|
-| 6h00 | Passear 100 | Passear | Sai de casa e passeia perto |
+| 6h00 | Comprar 120 > Passear 100 | Comprar | É dia de compra e já é Período Livre: vai ao Mercado e fica 30 minutos |
+| 6h40 | Passear 100 | Passear | Já comprou: sai do Mercado e passeia |
 | 7h00 | Comer 150 > Trabalhar 100 | Comer | Volta para casa e come até 7h30 |
 | 7h30 | Trabalhar 100 | Trabalhar | Anda até a Fazenda: da porta (19, 25) à (14, 25), 5 tiles, cerca de 2,3 minutos de jogo |
-| 12h00 | Comer 250 > Trabalhar 100 | Comer | Come dentro da Fazenda |
-| 15h00 | Comprar 120 > Passear 100 | Comprar | Vai ao Mercado, porta (48, 25), e fica 30 minutos |
-| 15h30 | Passear 100 | Passear | Passeia |
-| 19h00 | Comer 250 > Passear 100 | Comer | Volta para casa e come até 19h30 |
+| 12h00 | Comer 150 > Trabalhar 100 | Comer | Come dentro da Fazenda |
+| 15h00 | Passear 100 | Passear | Passeia (a compra do dia já foi feita) |
+| 19h00 | Comer 150 > Passear 100 | Comer | Volta para casa e come até 19h30 |
 | 19h30 | Passear 100 | Passear | Passeia |
 | 22h00 | Dormir 100 | Dormir | Volta para casa |
 
 *Nota para o marco 6:* com o café da manhã às 7h, o empregado chega ao trabalho por volta das 7h35 e fica até as 15h: cerca de **7,4 horas** de trabalho, e não 8. A produção do marco 6 é por hora presente, então isso aparece no teste de 1 ano.
 
-**Quantos andam juntos:** às 15h, os 6 NPCs do dia de compra que trabalham vão ao Mercado quase juntos; os 2 Lojistas já estão lá dentro.
+**Quantos andam juntos:** às **6h** do dia de compra (o primeiro Período Livre do dia), os NPCs da vez vão ao Mercado quase juntos: no dia 0, os 8 de número par (visto no código do marco 5). Um Lojista que compra no próprio Mercado não sai: a espera começa lá dentro.
 
 ## 6. Conversa com outros sistemas
 
@@ -249,12 +250,15 @@ Em `Codigo/` (sem SDL nem OpenGL):
 | `Vila/VilaInicial.cpp`: `ConstrucaoDaVila`, `VilaDoJogo`, `lerVilaInicial(texto, mapa, catalogoDeConstrucoes, problemas)` | A regra 4.1 |
 | `bloquearOsLotesOcupados(mapa, vila)` | A regra 4.1, passo 3 |
 | `Npc/IdentidadeDoNpc`, `Npc/CasaETrabalhoDoNpc`, `Npc/DecisaoDoNpc` | Os componentes da parte 2 |
-| `AcaoDoNpc` | `Dormir`, `Trabalhar`, `Comer`, `Comprar`, `Passear` |
+| `AcaoDoNpc` | `Dormir`, `Trabalhar`, `Comer`, `Comprar`, `Passear`, e `Nenhuma` (ao nascer, ou quando o NPC não chegou e precisa decidir de novo) |
 | `PeriodoDaRotina` e `descobrirPeriodoDaRotina(horaDoDia, rotina)` | O passo 1 da regra 4.2 |
-| `RegrasDaRotina`, `RegrasDaUtilidade`, `RegrasDoPasseio` | Os números do `regras.json` |
+| `Npc/RegrasDaRotina.h`: `RegrasDaRotina`, `RegrasDaUtilidade`, `RegrasDoPasseio`, juntas em `RegrasDaVidaDosNpcs` | Os números do `regras.json` |
 | `NotasDasAcoes` e `calcularNotasDasAcoes(...)` | O passo 2 da regra 4.2 |
 | `escolherAcaoPelaUtilidade(notas)` | O passo 3 da regra 4.2 |
-| `Npc/RotinaDosNpcs.cpp`: `reavaliarOsNpcsDaVez(...)`, `terminarAsEsperas(...)`, `cuidarDasChegadas(...)` | As regras 4.2 a 4.5, a cada tick |
+| `Npc/RotinaDosNpcs.cpp`: `ContextoDaRotina` | O registro, o mapa, a vila, as regras e o sorteio, juntos |
+| `criarOsNpcsDaVila(contexto, relogio)` | A regra 4.1, passos 5 e 6 |
+| `rodarARotinaAntesDeAndar(contexto, relogio)` e `cuidarDasChegadas(contexto, relogio)` | As regras 4.2 a 4.5, a cada tick (antes e depois do movimento) |
+| `montarTabelaDasAcoesDosNpcs(contexto, relogio)` | A tabela da tecla F3 |
 | `Tempo/SorteioComSemente.h`: `SorteioComSemente`, `sortearNumeroInteiroEntre(minimo, maximo)` | O PCG32 da regra 4.6 |
 | `sortearTileDoPasseio(mapa, vila, tileAtual, regras, sorteio)` | A regra 4.6, passo 3 |
 
@@ -264,13 +268,14 @@ Em `Jogo/`:
 |---|---|
 | `DesenhistaDoMapa::desenharConstrucoesProvisorias(vila, ...)` | A regra 4.7, passo 1 |
 | `AcaoDoJogador::MostrarAcoesDosNpcsParaDepuracao` | A tecla F3 (FL5-6) |
+| `DesenhistaDosPersonagens::desenharMarcadoresDasAcoes(...)` | Os quadradinhos coloridos do F3 |
 
 ## 8. Testes
 
 | Entrada | Resultado esperado |
 |---|---|
 | Hora 23h, 3h, 6h, 7h, 14h, 15h e 22h, rotina Civil | Dormir, Dormir, Livre, Trabalhar, Trabalhar, Livre, Dormir |
-| Empregado às 12h10 | Comer (250) ganha de Trabalhar (100) |
+| Empregado às 12h10 | Comer (150) ganha de Trabalhar (100) |
 | Desempregado às 10h | Passear (100) |
 | Empregado às 15h, no dia de compra, sem ter comprado | Comprar (120) |
 | O mesmo, depois de comprar | Passear (100) |
