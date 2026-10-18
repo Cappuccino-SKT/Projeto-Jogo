@@ -14,8 +14,9 @@
 - **Marco 3 (2026-10-18):** na branch `codigo/marco-3-dados` (feita do `main`, que já tem as fichas do marco 3); **confirmado pelo autor** (seção 3).
 - **Fichas do marco 4 (2026-10-18):** a [[Ficha Logica/NPC|ficha do NPC]] (posição, movimento e o desenho do boneco) e a busca de caminho na [[Ficha Logica/Mapa|ficha do Mapa]] (regra 4.4), na branch `docs/fichas-marco-4` (feita em cima da `codigo/marco-3-dados`). A **rodada FL4** foi aplicada (2026-10-18), toda com "seguir sugestão".
 - **Marco 4 (2026-10-18):** escrito na branch `codigo/marco-4-npc-andando` (feita do `main`, que já tem as fichas do marco 4); **confirmado pelo autor** (seção 3).
-- **Próximo passo:** a rotina e a Utilidade na ficha do NPC, e o marco 5.
-- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até as fichas do marco 4 já entrou no `main`; falta o `codigo/marco-4-npc-andando`.
+- **Ficha do marco 5 (2026-10-18):** a [[Ficha Logica/IA|ficha da IA]] (a vila inicial, a rotina e a Utilidade), na branch `docs/fichas-marco-5` (feita em cima da `codigo/marco-4-npc-andando`). Abriu a **rodada FL5** (seção 4).
+- **Próximo passo:** o autor responde a FL5; depois, aplicar e começar o marco 5.
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até as fichas do marco 4 já entrou no `main`; faltam o `codigo/marco-4-npc-andando` e, depois dele, o `docs/fichas-marco-5`.
 
 ## 2. Como trabalhamos
 
@@ -87,9 +88,82 @@
 - **Marco 4 (pronto, confirmado pelo autor em 2026-10-18):** um NPC no centro da vila anda até o tile do botão direito pela busca A\* (`Codigo/Mapa/BuscaDeCaminho.cpp`, `Codigo/Npc/`), com a EnTT 3.16.0; o boneco do Mana Seed (ou o de teste, sem a pasta) é desenhado entre os ticks; N cria mais NPCs e F2 mostra os caminhos. 167 testes no `Codigo/` e 36 no `Jogo/`.
 - **Marco 3 (pronto, confirmado pelo autor em 2026-10-18):** os dados em `Jogo/data` (itens, receitas, recursos, construções, regras e textos), lidos e conferidos por `Codigo/Dados/`, com o preço base (Pão 1,7) e o `jogo --validar`; as teclas passam pela tabela de ações (FL2-4). 124 testes no `Codigo/` e 25 no `Jogo/`.
 
-## 4. Rodada pendente
+## 4. Rodada pendente: FL5, a rotina (marco 5)
 
-Nenhuma. A **FL4** (o NPC andando, marco 4) foi aplicada em 2026-10-18, com "seguir sugestão" em todas: as decisões estão na [[Ficha Logica/NPC|ficha do NPC]], na regra 4.4 da [[Ficha Logica/Mapa|ficha do Mapa]] e na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]].
+**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever a [[Ficha Logica/IA|ficha da IA]] (a vila inicial, a rotina e a Utilidade), apareceram 6 pontos que os documentos não decidem. A ficha já usa as sugestões, marcadas como [Proposta]. (A FL4 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
+
+Responder no `Respostas.txt` pelos códigos (FL5-1, FL5-2...). "Seguir sugestão" aceita a proposta.
+
+**FL5-1. As construções no marco 5.**
+
+- *Contexto:* a rotina manda o NPC dormir em casa e trabalhar na construção do emprego. Mas as construções só "funcionam" no marco 6, com a ficha da Construção (custo, obra, vagas). O mapa tem 11 lotes vazios (8 pequenos e 3 médios), e a ficha do Mapa dizia que as construções bloqueiam os tiles do lote só a partir do marco 6.
+- *Pergunta:* onde o NPC dorme e trabalha no marco 5, e o que aparece na tela? *Exemplo:* às 22h, a Ana volta para casa. Para onde ela anda, e o que se vê?
+- *Opções:*
+  - (a) **um `vila_inicial.json` que já põe as 10 construções nos lotes** (4 Casas, Fazenda, Posto de Coleta, Cozinheiro, Mercado, Construtor e a Carpintaria do jogador; o lote 5 fica livre), cada uma desenhada como um **retângulo de cor lisa** por tipo, com a porta mais escura. Os tiles do lote passam a **bloquear** já no marco 5, e a **porta** é o tile logo abaixo do meio do lote. O NPC anda até a porta, entra e some da tela até sair. Ganha: a vila já fica com a cara final, e o marco 6 só acrescenta o que a construção faz. Perde: a regra do bloqueio, que era do marco 6, vem antes; e retângulos no lugar da arte;
+  - (b) sem construções: o NPC anda até o meio do lote vazio e fica parado lá. Ganha: o marco 5 fica menor. Perde: 4 NPCs parados em cima de cada lote de Casa, e o marco 6 refaz tudo;
+  - (c) esperar a ficha da Construção e fazer o marco 6 antes do 5. Ganha: as construções nascem completas. Perde: muda a ordem dos marcos da V4-6, e o marco 6 fica enorme.
+- *Sugestão:* (a), com a vila da tabela da ficha da IA (parte 2): as oficinas e o Mercado nos 3 lotes médios, o resto nos pequenos, a Fazenda e o Posto de Coleta do lado esquerdo, perto do campo de Grão e do bosque.
+- *Conflitos:* a regra 4.2 da ficha do Mapa (o lote ocupado bloqueia) passa do marco 6 para o marco 5. A arte das construções continua sem escolha ([[Estado do Projeto]], "O que falta").
+
+**FL5-2. Os 15 NPCs da vila inicial.**
+
+- *Contexto:* a fatia tem 15 Civis (V2-12), 4 Casas de 4 lugares, e as vagas do nível 1: Fazenda 2, Posto de Coleta 2, Cozinheiro 2, Mercado 2 Lojistas, Construtor 2 Operários, e a Carpintaria do jogador com 2 vagas (FT1-1). A FT1-1 diz que o jogador "pode contratar desempregados", mas não diz se a Carpintaria já começa com empregados.
+- *Pergunta:* quem mora onde, quem trabalha onde, e quantos ficam sem emprego? *Exemplo:* no primeiro dia, às 10h, quantos NPCs passeiam na rua?
+- *Opções:*
+  - (a) **12 empregados e 3 desempregados**: as 10 vagas da cidade cheias e **a Carpintaria começa com 2 empregados**; 4, 4, 4 e 3 moradores nas Casas; nomes provisórios (Ana, Bento, Clara...). Ganha: os salários do dia dão cerca de 85, a conta da Arquitetura (V2-12), e 3 desempregados fazem o desemprego aparecer na Felicidade (20%: +6 no fator). Perde: o jogador não começa contratando;
+  - (b) 10 empregados e 5 desempregados (a Carpintaria vazia). Ganha: o jogador contrata os 2 primeiros, um bom começo de tutorial. Perde: os salários caem para cerca de 69 por dia, e o desemprego de 33% pesa na Felicidade desde o primeiro dia;
+  - (c) 15 empregados (mais vagas). Ganha: ninguém parado. Perde: precisa de vagas que o nível 1 não tem.
+- *Sugestão:* (a). Às 10h do primeiro dia, só os 3 desempregados passeiam. Os nomes de verdade esperam a história do mundo.
+- *Conflitos:* nenhum. A FT1-1 ("pode contratar desempregados") continua valendo: os 3 desempregados são os que o jogador pode contratar quando a Carpintaria subir de nível.
+
+**FL5-3. O Período Livre, o Comprar e onde ficam os números.**
+
+- *Contexto:* a Utilidade da V2-10 dá 1,0 à ação do período da rotina, +1,2 ao Comprar (uma vez a cada 2 dias, no Período Livre) e +0,5 × (1 − Felicidade ÷ 100) ao Lazer. Mas ela não diz **qual ação** é a do Período Livre. Se for o Lazer, ele tem 1,0 + 0,25 (com a Felicidade 50) = 1,25, e o Comprar, com 1,2, **nunca ganha**.
+- *Pergunta:* qual é a ação do Período Livre, para o Comprar acontecer? *Exemplo:* às 15h, a Ana sai do trabalho no dia de compra. Ela vai ao Mercado ou passeia?
+- *Opções:*
+  - (a) **uma ação nova, Passear, é a do Período Livre (1,0)**; o Comprar (1,2) ganha dela no dia de compra; o **Lazer fica fora da fatia** (ele precisa da Taverna, que a fatia não tem) e volta com a Taverna, com a nota revista. E o desempregado, no período de trabalho, também passeia. Ganha: o Comprar acontece, e cada ação tem um lugar claro. Perde: uma ação a mais na lista da V2-10;
+  - (b) o Lazer é a ação do Período Livre, e o Comprar sobe para +1,5. Ganha: fica perto da V2-10. Perde: o Lazer sem Taverna vira só um passeio com outro nome, e o número do Comprar muda;
+  - (c) o Comprar ganha sempre no dia de compra, fora das notas. Ganha: simples. Perde: uma exceção à Utilidade.
+- *Sugestão:* (a). E todos os números da rotina, das notas e do passeio vão para o `regras.json`, com as notas em centésimos (1,0 = 100), inteiras, como o resto. A reavaliação "a cada 5 minutos de jogo" vira a cada **67 ticks** (66,7 arredondado), um NPC por tick.
+- *Conflitos:* a lista de ações da Fatia Vertical (parte 1) ganha o Passear e perde o Lazer na fatia; o [[Sistema de IA/Descrição|IA]] ganha uma nota.
+
+**FL5-4. Onde o NPC come.**
+
+- *Contexto:* a V2-10 dá +1,5 ao Comer nas refeições (7h, 12h e 19h, por 30 minutos). O que se come entra no marco 6 (o consumo é da cidade); no marco 5, comer é só um lugar e um tempo.
+- *Pergunta:* para onde o NPC vai na hora de comer? *Exemplo:* às 19h, a Ana está passeando a 10 tiles de casa. E às 12h, ela está dentro da Fazenda.
+- *Opções:*
+  - (a) **quem está dentro da casa ou do trabalho come lá; quem está na rua vai para casa** e come até o fim da meia hora. No exemplo: às 12h ela come na Fazenda; às 19h, anda uns 5 minutos de jogo até em casa e come lá. Ganha: o almoço não tira ninguém do trabalho, e a tela mostra a vila voltando para casa no jantar. Perde: quem está longe come menos tempo;
+  - (b) come onde estiver, mesmo no meio da rua. Ganha: o mais simples. Perde: NPCs parados meia hora no meio do caminho, sem motivo visível;
+  - (c) todos comem no Mercado. Ganha: movimenta o Mercado. Perde: 15 NPCs no Mercado três vezes por dia, e o almoço tira todos do trabalho.
+- *Sugestão:* (a).
+- *Conflitos:* com o café às 7h, o empregado chega ao trabalho por volta das 7h35 e trabalha cerca de **7,4 horas**, e não 8. A produção do marco 6 é por hora presente, então isso aparece no teste de 1 ano, e a rodada do marco 7 decide se ajusta.
+
+**FL5-5. O passeio e o sorteio.**
+
+- *Contexto:* "passear" (o marco 5 é "dormem, trabalham e passeiam") precisa de lugares sorteados. A Arquitetura e o Eventos pedem números sorteados **com semente**: a mesma semente dá a mesma partida.
+- *Pergunta:* para onde o NPC passeia, por quanto tempo, e com que sorteio? *Exemplo:* às 15h30, depois de comprar, a Ana sai do Mercado para passear.
+- *Opções:*
+  - (a) **um tile livre sorteado a até 12 tiles de onde ele está, com uma parada de 15 a 45 minutos sorteados, e depois outro**; o sorteio é um **gerador próprio pequeno, o PCG32**, ligado à semente da partida (a 1, no `vila_inicial.json`), com **um gerador para os NPCs** e outro, depois, para os eventos. Ganha: a vila parece viva; e o PCG32 dá os mesmos números em qualquer compilador, o que o sorteio do C++ não garante. Perde: cerca de 15 linhas de código a mais;
+  - (b) pontos de passeio marcados no Tiled (a praça, o poço). Ganha: os NPCs se juntam em lugares que fazem sentido. Perde: uma camada de objetos nova, e o mapa de teste ainda não tem praça;
+  - (c) sem passeio: no Período Livre, o NPC fica em casa. Ganha: simples. Perde: a vila fica vazia das 15h às 22h.
+- *Sugestão:* (a). Os pontos de passeio do Tiled (b) podem entrar depois, com a arte do mapa, junto da camada `pontos_de_interesse` que o Pipeline já prevê.
+- *Conflitos:* nenhum. O gerador separado por sistema é o que o [[Sistema de Eventos/Descrição|Eventos]] pede ("um gerador próprio").
+
+**FL5-6. Como testar o marco 5.**
+
+- *Contexto:* o marco 5 está pronto quando "os 15 NPCs dormem, trabalham e passeiam nos horários". Ainda não há texto na tela (o HUD é do marco 8). As teclas do marco 4 (o botão direito manda os NPCs; o N cria mais) brigam com a rotina.
+- *Pergunta:* como o autor confere o que cada NPC está fazendo, e o que acontece com as teclas do marco 4? *Exemplo:* às 15h05, como saber se a Ana foi comprar ou passear?
+- *Opções:*
+  - (a) **a tecla F3 liga um quadradinho colorido em cima de cada NPC, com a cor da ação, e escreve no console a tabela dos 15** (nome, ação, onde está, as notas); **o botão direito e o N saem**, e o F2 (os caminhos) fica. Ganha: dá para ver a vila inteira de uma vez e conferir os números no console. Perde: as cores precisam de uma legenda (no LEIA-ME);
+  - (b) só o console, escrevendo cada troca de ação. Ganha: nada na tela. Perde: cerca de 100 linhas por dia de jogo no console, difícil de acompanhar;
+  - (c) manter o botão direito como uma ordem que vale até a próxima reavaliação. Ganha: o teste do marco 4 continua. Perde: a ordem dura no máximo 5 minutos de jogo e confunde o teste da rotina.
+- *Sugestão:* (a). Para ver um dia inteiro, a tecla 3 (4x) faz um dia passar em 4 minutos reais.
+- *Conflitos:* nenhum; as teclas de teste são provisórias (FL4-6).
+
+Depois das respostas:
+
+- tirar as marcas [Proposta] das fichas da IA, do NPC e do Mapa, e anotar a rodada na parte 8 da Fatia Vertical (com o Passear na lista de ações, FL5-3);
+- começar o marco 5, na branch `codigo/marco-5-rotina`.
 
 ## 5. Onde está cada coisa
 
