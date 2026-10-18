@@ -13,6 +13,7 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 - O **artista definitivo ainda não foi escolhido**. Por enquanto, quem desenha é o autor, que **não tem experiência com pixel art**.
 - **Fatia vertical e testes:** usar **pacotes de arte de terceiros** para agilizar, e rascunhos feitos pelo autor onde faltar alguma peça.
 - **Jogo final:** toda a arte é feita à mão pelo artista do projeto; os pacotes de terceiros saem.
+- **Arte gerada por IA, só provisória** (pedido do autor, 2026-10-18): prompts prontos para o Gemini, com tudo o que a fatia precisa, estão em [[Pipeline de Arte e Conteúdo/Prompts da Arte Provisória|Prompts da Arte Provisória]]. Ela segue a mesma regra dos pacotes de terceiros: a origem fica anotada e ela sai antes de qualquer versão pública.
 - Preferir pacotes com licença **CC0** (domínio público, uso livre) ou que permitam uso em protótipo, e anotar a origem de cada um num arquivo `assets/provisorio/LEIA-ME.txt`, para saber o que precisa ser trocado antes de qualquer versão pública. Procurar pacotes de **16 px em vista 3/4** (como Stardew), para os testes já usarem o tamanho final.
 
 ### Programas
