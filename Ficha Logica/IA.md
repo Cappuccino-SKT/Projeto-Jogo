@@ -163,7 +163,7 @@ Pausado, nada disso roda.
 | Ação | Para onde vai | O que faz lá |
 |---|---|---|
 | Dormir | A porta da casa | Entra e fica |
-| Trabalhar | A porta do trabalho | Entra e fica |
+| Trabalhar | A porta do trabalho. **Marco 6:** os Braçais vão para um tile da área do recurso ([[Ficha Logica/Producao\|Produção]], regra 4.1) | Entra e fica (o Braçal fica no campo, visível) |
 | Comer (FL5-4) | Se está **dentro** da casa ou do trabalho, fica lá. Se não, vai para casa | Come até o fim da meia hora da refeição |
 | Comprar | A porta do Mercado | Entra e fica 30 minutos; depois anota `diaDaUltimaCompra` = hoje |
 | Passear (FL5-5) | Um tile livre sorteado, a até 12 tiles de onde está (regra 4.6) | Fica de 15 a 45 minutos (sorteados) e sorteia outro |
