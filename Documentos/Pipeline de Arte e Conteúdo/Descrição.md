@@ -11,6 +11,7 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 ### Quem desenha
 
 - O **artista definitivo ainda não foi escolhido**. Por enquanto, quem desenha é o autor, que **não tem experiência com pixel art**.
+- **Por enquanto, sem arte (decisão do autor, 2026-10-18, depois da FA1):** o jogo usa só a arte de teste feita pelo assistente (o terreno de quadrados de cor, o boneco de teste e os retângulos das construções). Quando o desenho voltar, vale o que está abaixo.
 - **Fatia vertical (decisão do autor, 2026-10-18):** o autor **desenha a arte à mão, no Pixelorama**, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]], que junta todos os critérios num lugar só. A **rodada FA1** (2026-10-18) decidiu os critérios novos: o quadro do boneco de 32 × 32 px, com os pés em (16, 28) e a esquerda espelhada no Pixelorama; a luz de cima, à esquerda, com contorno colorido; a sombra no chão como a cor 65 (a 01 com 50% de transparência) e no máximo 8 cores a mais; os conjuntos de cantos de 16 tiles para as bordas; e as construções com 32 px a mais de altura que o lote (64 × 96 e 96 × 128). Enquanto o boneco próprio não fica pronto, o jogo usa o boneco provisório do Mana Seed (fora do Git, rodada FL4-4).
 - **Arte gerada por IA: abandonada** (decisão do autor, 2026-10-18). O autor testou o Gemini, e o resultado não serviu.
 - **Pacotes de terceiros:** só onde ainda faltar uma peça, com a origem anotada em `assets/provisorio/LEIA-ME.txt`.

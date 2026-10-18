@@ -23,7 +23,7 @@ O mapa geral da fatia (entidades, arquivos de dados, ordem do dia, marcos) está
 | 4. NPC andando | [[Ficha Logica/Mapa\|Mapa]] (busca de caminho, regra 4.4); [[Ficha Logica/NPC\|NPC]] (só posição e movimento). Escritas em 2026-10-18 |
 | 5. Rotina | [[Ficha Logica/IA\|IA]] (a vila inicial, a rotina e a Utilidade). Escrita em 2026-10-18 |
 | 6. Produção, inventário e consumo | [[Ficha Logica/Producao\|Produção]], [[Ficha Logica/Inventario\|Inventário]], [[Ficha Logica/Economia\|Economia]] (consumo e salários, com o Trabalho e Propriedade) e [[Ficha Logica/Construcao\|Construção]] (os dados). Escritas em 2026-10-18 |
-| 7. Simulação sem tela de 1 ano | Economia (Mercado Local, estabilizador, gasto extra e imposto), Felicidade, Eventos |
+| 7. Simulação sem tela de 1 ano | [[Ficha Logica/Economia\|Economia]] (parte 10: Mercado Local, gasto extra, imposto e estabilizador), [[Ficha Logica/Producao\|Produção]] (parte 10: a previsão do consumo e a folga), [[Ficha Logica/Felicidade\|Felicidade]], [[Ficha Logica/Eventos\|Eventos]] e [[Ficha Logica/Simulacao\|Simulação sem tela]]. Escritas em 2026-10-18 |
 | 8. Interface básica | Interface (HUD e painéis) |
 | 9. Salvar e carregar | Save (a partir da Arquitetura) |
 

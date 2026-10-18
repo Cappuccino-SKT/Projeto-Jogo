@@ -32,7 +32,7 @@
   - **C1:** tecnologias e marcos;
   - **C2:** feitiços e árvore arcana;
   - **C3:** contratos, missões, Ambições e eventos.
-- **Arte da fatia:** o autor desenha à mão, no Pixelorama, com a paleta Resurrect 64, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] (rodada FA1 aplicada). Falta escolher a ferramenta de atlas; o artista definitivo segue sem escolha.
+- **Arte da fatia:** por enquanto, nenhuma (decisão do autor, 2026-10-18): o jogo usa só a arte de teste do assistente. Quando voltar, o autor desenha à mão, no Pixelorama, com a paleta Resurrect 64, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] (rodada FA1 aplicada). Falta escolher a ferramenta de atlas; o artista definitivo segue sem escolha.
 - **A história do mundo:** nomes, personagens e os nomes de fantasia dos itens.
 - **Cerca de 80 marcações** [Em aberto] e [Refinar depois] nos documentos: detalhes e ideias futuras, sem pressa.
 - **Ideias futuras:** vários núcleos (multithreading, ver [[Arquitetura/Descrição|Arquitetura]]), Títulos de Nobreza, outras raças, arte própria por cultura, arte extra das estações e os sistemas P2 (áudio, tutorial, configurações, localização, modding, conquistas).
@@ -45,9 +45,10 @@
 4. **Marco 3:** carregar os dados, o preço base e o `--validar`. Pronto e confirmado pelo autor.
 5. **Marco 4:** um NPC andando pela busca de caminho. Pronto e confirmado pelo autor.
 6. **Marco 5:** a rotina dos 15 NPCs. Pronto e confirmado pelo autor.
-7. **Marco 6:** produção, inventário e consumo. Fichas escritas ([[Ficha Logica/Producao|Produção]], [[Ficha Logica/Inventario|Inventário]], [[Ficha Logica/Economia|Economia]], [[Ficha Logica/Construcao|Construção]]), com a rodada FL6 aplicada. Escrito na branch `codigo/marco-6-producao`; falta o teste do autor.
-8. **Marcos 7 a 9** da fatia vertical, um por pull request.
-9. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
+7. **Marco 6:** produção, inventário e consumo. Fichas escritas ([[Ficha Logica/Producao|Produção]], [[Ficha Logica/Inventario|Inventário]], [[Ficha Logica/Economia|Economia]], [[Ficha Logica/Construcao|Construção]]), com a rodada FL6 aplicada. Pronto; o autor mandou seguir.
+8. **Marco 7:** a simulação sem tela de 1 ano. Fichas escritas (a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], [[Ficha Logica/Felicidade|Felicidade]], [[Ficha Logica/Eventos|Eventos]], [[Ficha Logica/Simulacao|Simulação sem tela]]); falta a rodada FL7.
+9. **Marcos 8 e 9** da fatia vertical, um por pull request.
+10. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 
 ## Histórico
 
