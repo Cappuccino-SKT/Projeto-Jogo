@@ -145,7 +145,7 @@ Tudo o que é conteúdo fica fora do código, na pasta `Jogo/` ([[Arquitetura/Mo
 
 | Arquivo | Formato | O que tem na fatia |
 |---|---|---|
-| `data/itens.csv` | CSV (planilha) | Os 6 itens da fatia, e depois os cerca de 180 |
+| `data/itens.csv` | CSV (planilha) | Os 6 itens da fatia (FL3-1); os cerca de 180, numa tarefa de dados depois da fatia |
 | `data/receitas.csv` | CSV | Pão, Tábua, Móveis de Madeira e as Braçais |
 | `data/construcoes.json` | JSON | As 7 construções da fatia |
 | `data/eventos.json` | JSON | Os 12 eventos da V3-6 |
@@ -158,7 +158,7 @@ Tudo o que é conteúdo fica fora do código, na pasta `Jogo/` ([[Arquitetura/Mo
 
 ```
 id;produto;lote;insumos;construcao;nivel_min;trabalho;hab_min;horas;era
-receita.pao;item.pao;4;item.grao:2|item.agua:1;construcao.cozinheiro;1;Manufaturado;10;4;1
+receita.pao;item.pao;4;item.grao:2|item.agua:1;construcao.cozinheiro;1;manufaturado;10;4;1
 ```
 
 *Exemplo de trecho do `regras.json`:*
@@ -166,14 +166,14 @@ receita.pao;item.pao;4;item.grao:2|item.agua:1;construcao.cozinheiro;1;Manufatur
 ```json
 {
   "ticks_por_segundo": 20,
-  "salario_por_hora": { "Bracal": 7.5, "Manufaturado": 10, "Especialista": 15 },
-  "margem_do_dono": 1.2,
+  "salario_por_hora_em_centesimos": { "bracal": 75, "manufaturado": 100, "especialista": 150 },
+  "margem_do_dono_em_porcento": 120,
   "cesta_minima_civil": { "comida_por_dia": 1, "materiais_a_cada_dias": 8 },
   "gasto_maximo_da_renda": 0.8
 }
 ```
 
-Os salários aparecem em décimos de moeda: 7,5 décimos = 0,75 moeda.
+Os salários por hora ficam em **centésimos** de moeda (75 = 0,75 moeda), só para a conta do preço (FL3-3); o dinheiro do jogo continua em décimos.
 
 ---
 
@@ -403,6 +403,8 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | FT1-7 Ambiente | VS Code com as extensões grátis "C/C++" e "CMake Tools"; depurador gdb (vem com o MinGW); primeiro código: um "olá, janela" com o SDL3, compilado pelo CMake; no mesmo repositório (depois organizado em `Codigo/` e `Jogo/`, ver [[Arquitetura/Descrição|Arquitetura]]) |
 
 **Rodada FL1 (2026-10-17):** as fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]). O mapa é salvo em JSON (`vila.tmj`), lido pela nlohmann/json já no marco 1; a partida começa às **6h** (tick 4.800); o relógio usa no máximo 250 milissegundos por quadro e pausa quando a janela é minimizada; os testes rodam num programa próprio pelo `ctest`; as camadas do Tiled têm nomes sem acento; o marco 1 usa um conjunto de tiles de teste.
+
+**Rodada FL3 (2026-10-18):** as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]]. O marco 3 tem só os 6 itens da fatia; as receitas Braçais são 2 unidades em 1 hora; o salário por hora fica em centésimos só na conta do preço, com a metade arredondando para cima, item por item; o peso é uma unidade inteira com o Pão valendo 1; o `construcoes.json` do marco 3 é só a lista de IDs; os recursos ficam num `recursos.csv`, a estação no `regras.json` e a produtividade na área do Tiled.
 
 **Rodada FL2 (2026-10-18):** a ficha da [[Ficha Logica/Interface|Interface]] (câmera do marco 2). A câmera anda 900 pixels da tela por segundo em qualquer zoom (Shift dobra, diagonal corrigida); o zoom deixa o ponto embaixo do mouse parado; a borda do mapa nunca sai da borda da tela; a câmera começa no centro do mapa e não vai no save; mover pela borda da tela fica como opção futura, desligada; uma tabela de ações para as teclas entra no marco 3.
 

@@ -1,0 +1,12 @@
+{
+  "salario_por_hora_em_centesimos": { "bracal": 75, "manufaturado": 100, "especialista": 150 },
+  "margem_do_dono_em_porcento": 120,
+  "producao_por_estacao_em_porcento": {
+    "fazenda":  [75, 100, 150, 25],
+    "animais":  [100, 100, 100, 75],
+    "madeira":  [100, 100, 100, 75],
+    "minerais": [100, 100, 100, 90],
+    "agua":     [100, 100, 100, 100]
+  },
+  "produtividade_do_recurso_em_porcento": { "normal": 100, "destaque": 150 }
+}

@@ -54,8 +54,13 @@ struct LoteDeConstrucao {
 };
 
 struct AreaDeRecurso {
-    std::string tipoDeRecurso;  // campo_de_grao, poco ou bosque
+    std::string tipoDeRecurso;  // o nome da área (campo_de_grao, poco, bosque), ligado a um recurso do recursos.csv
     RetanguloEmTiles areaEmTiles;
+    std::string textoDaProdutividade;  // a propriedade "produtividade" do Tiled: "", "normal" ou "destaque" (FL3-6)
+
+    // Preenchidos pela ligação aos recursos (ficha dos Recursos, regra 4.2).
+    int numeroDoRecurso = -1;
+    int produtividadeEmPorcento = 100;
 };
 
 // Onde recortar um tile dentro da imagem do conjunto, em pixels.

@@ -12,6 +12,7 @@
 // Cada arquivo de testes tem uma função que roda todos os testes dele.
 void testarRelogioDoMundo();
 void testarMapaLocal();
+void testarDadosDoJogo();
 
 int main()
 {
@@ -21,6 +22,7 @@ int main()
 
     testarRelogioDoMundo();
     testarMapaLocal();
+    testarDadosDoJogo();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {

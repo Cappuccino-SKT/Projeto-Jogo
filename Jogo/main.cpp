@@ -10,8 +10,11 @@
 #include <glad/gl.h>
 
 #include <algorithm>
+#include <optional>
 #include <string>
 
+#include "AcoesDoTeclado.h"
+#include "Dados/DadosDoJogo.h"
 #include "DesenhoDoMapa.h"
 #include "Mapa/MapaLocal.h"
 #include "Tempo/RelogioDoMundo.h"
@@ -29,8 +32,11 @@ constexpr int espacoDaBarraDeTituloEmPixels = 40;
 // Cor do fundo, atrás do mapa (de 0 a 1: vermelho, verde, azul).
 constexpr float corDoFundoAtrasDoMapa[3] = {0.05f, 0.07f, 0.05f};
 
-// O arquivo do mapa da vila (FL1-1). PASTA_DOS_DADOS_DO_JOGO vem do CMake.
-const std::string caminhoDoMapaDaVila = std::string(PASTA_DOS_DADOS_DO_JOGO) + "/mapas/vila.tmj";
+// A pasta dos dados (Jogo/data). PASTA_DOS_DADOS_DO_JOGO vem do CMake.
+const std::string pastaDosDadosDoJogo = PASTA_DOS_DADOS_DO_JOGO;
+
+// Quantos problemas cabem na caixa de mensagem; o resto fica só no console.
+constexpr int limiteDeProblemasNaCaixaDeMensagem = 25;
 
 // O tamanho com que a janela abre, e se ela já abre maximizada.
 struct TamanhoInicialDaJanela {
@@ -83,25 +89,49 @@ void mostrarErroGrave(const std::string& mensagem)
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Projeto Jogo", mensagem.c_str(), nullptr);
 }
 
-// Lê o mapa da vila. Se houver erros, mostra todos de uma vez e devolve false.
-bool lerMapaDaVila(MapaLocal& mapaDaVila)
+// Escreve no console cada erro e aviso dos dados, o resumo e os preços base.
+void escreverProblemasEResumoNoConsole(const DadosDoJogo& dadosDoJogo)
 {
-    ResultadoDaLeituraDoMapa resultado = carregarMapaDoArquivoDoTiled(caminhoDoMapaDaVila);
-    for (const std::string& aviso : resultado.listaDeAvisosDoMapa) {
-        SDL_Log("Aviso do mapa: %s", aviso.c_str());
+    for (const ProblemaDosDados& problema : dadosDoJogo.listaDeProblemas.todosOsProblemas()) {
+        SDL_Log("%s %s", problema.ehErro ? "ERRO: " : "Aviso:", problema.textoParaMostrar().c_str());
     }
-    if (!resultado.mapaEstaPronto()) {
-        std::string todosOsErros = "O mapa da vila tem erros:\n";
-        for (const std::string& erro : resultado.listaDeErrosDoMapa) {
-            todosOsErros += "- " + erro + "\n";
+    SDL_Log("%s", montarResumoDosDados(dadosDoJogo).c_str());
+    if (dadosDoJogo.dadosEstaoProntos()) {
+        SDL_Log("Preços base:\n%s", montarTabelaDePrecosBase(dadosDoJogo).c_str());
+    }
+}
+
+// Lê todos os dados (ficha dos Itens, parte 3). Se houver erros, mostra todos
+// de uma vez numa caixa de mensagem e devolve false.
+bool lerDadosDoJogo(DadosDoJogo& dadosDoJogo)
+{
+    dadosDoJogo = carregarDadosDoJogo(pastaDosDadosDoJogo);
+    escreverProblemasEResumoNoConsole(dadosDoJogo);
+    if (!dadosDoJogo.dadosEstaoProntos()) {
+        std::string todosOsErros = "Os dados do jogo têm erros:\n";
+        int errosMostrados = 0;
+        for (const ProblemaDosDados& problema : dadosDoJogo.listaDeProblemas.todosOsProblemas()) {
+            if (problema.ehErro && errosMostrados < limiteDeProblemasNaCaixaDeMensagem) {
+                todosOsErros += "- " + problema.textoParaMostrar() + "\n";
+                ++errosMostrados;
+            }
+        }
+        if (dadosDoJogo.listaDeProblemas.quantidadeDeErros() > errosMostrados) {
+            todosOsErros += "(e mais " + std::to_string(dadosDoJogo.listaDeProblemas.quantidadeDeErros() - errosMostrados) + "; veja o console)\n";
         }
         mostrarErroGrave(todosOsErros);
         return false;
     }
-    mapaDaVila = std::move(resultado.mapa);
-    SDL_Log("Mapa da vila lido: %d x %d tiles, %d lotes, %d áreas de recurso.", mapaDaVila.larguraEmTiles, mapaDaVila.alturaEmTiles,
-            static_cast<int>(mapaDaVila.lotesDeConstrucao.size()), static_cast<int>(mapaDaVila.areasDeRecurso.size()));
     return true;
+}
+
+// O modo "jogo --validar" (ficha dos Itens, regra 4.4): lê e confere todos os
+// dados, sem abrir janela, e termina com 0 (tudo certo) ou 1 (há erro).
+int validarDadosSemJanela()
+{
+    const DadosDoJogo dadosDoJogo = carregarDadosDoJogo(pastaDosDadosDoJogo);
+    escreverProblemasEResumoNoConsole(dadosDoJogo);
+    return dadosDoJogo.dadosEstaoProntos() ? 0 : 1;
 }
 
 // Escreve no console as viradas do tick que acabou de rodar (no marco 1,
@@ -132,36 +162,36 @@ struct DirecaoDasTeclasSeguradas {
     bool correndoComShift = false;
 };
 
-DirecaoDasTeclasSeguradas lerDirecaoDasTeclasSeguradas()
+DirecaoDasTeclasSeguradas lerDirecaoDasTeclasSeguradas(const TabelaDeAcoesDoTeclado& tabelaDeAcoes)
 {
     const bool* teclaEstaSegurada = SDL_GetKeyboardState(nullptr);
     DirecaoDasTeclasSeguradas direcao;
-    if (teclaEstaSegurada[SDL_SCANCODE_W] || teclaEstaSegurada[SDL_SCANCODE_UP]) {
+    if (tabelaDeAcoes.acaoEstaSegurada(AcaoDoJogador::MoverCameraParaCima, teclaEstaSegurada)) {
         direcao.direcaoY -= 1;
     }
-    if (teclaEstaSegurada[SDL_SCANCODE_S] || teclaEstaSegurada[SDL_SCANCODE_DOWN]) {
+    if (tabelaDeAcoes.acaoEstaSegurada(AcaoDoJogador::MoverCameraParaBaixo, teclaEstaSegurada)) {
         direcao.direcaoY += 1;
     }
-    if (teclaEstaSegurada[SDL_SCANCODE_A] || teclaEstaSegurada[SDL_SCANCODE_LEFT]) {
+    if (tabelaDeAcoes.acaoEstaSegurada(AcaoDoJogador::MoverCameraParaEsquerda, teclaEstaSegurada)) {
         direcao.direcaoX -= 1;
     }
-    if (teclaEstaSegurada[SDL_SCANCODE_D] || teclaEstaSegurada[SDL_SCANCODE_RIGHT]) {
+    if (tabelaDeAcoes.acaoEstaSegurada(AcaoDoJogador::MoverCameraParaDireita, teclaEstaSegurada)) {
         direcao.direcaoX += 1;
     }
-    direcao.correndoComShift = teclaEstaSegurada[SDL_SCANCODE_LSHIFT] || teclaEstaSegurada[SDL_SCANCODE_RSHIFT];
+    direcao.correndoComShift = tabelaDeAcoes.acaoEstaSegurada(AcaoDoJogador::CorrerComACamera, teclaEstaSegurada);
     return direcao;
 }
 
-// As teclas provisórias do marco 1 (FL1-3) que mexem no relógio.
-void tratarTeclaDoRelogio(SDL_Keycode teclaApertada, RelogioDoMundo& relogio)
+// As ações que mexem no relógio (pausa e velocidades).
+void tratarAcaoDoRelogio(AcaoDoJogador acao, RelogioDoMundo& relogio)
 {
-    if (teclaApertada == SDLK_SPACE) {
+    if (acao == AcaoDoJogador::PausarOuDespausar) {
         relogio.alternarPausa();
-    } else if (teclaApertada == SDLK_1) {
+    } else if (acao == AcaoDoJogador::Velocidade1x) {
         relogio.definirVelocidadeDoJogo(1);
-    } else if (teclaApertada == SDLK_2) {
+    } else if (acao == AcaoDoJogador::Velocidade2x) {
         relogio.definirVelocidadeDoJogo(2);
-    } else if (teclaApertada == SDLK_3) {
+    } else if (acao == AcaoDoJogador::Velocidade4x) {
         relogio.definirVelocidadeDoJogo(4);
     } else {
         return;
@@ -175,15 +205,19 @@ void tratarTeclaDoRelogio(SDL_Keycode teclaApertada, RelogioDoMundo& relogio)
 
 int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
 {
-    // Ainda não lê nada da linha de comando (o --simular vem no marco 7).
-    (void)quantidadeDeArgumentos;
-    (void)argumentosDaLinhaDeComando;
+    // 0. A linha de comando: "jogo --validar" só confere os dados (o --simular vem no marco 7).
+    for (int posicao = 1; posicao < quantidadeDeArgumentos; ++posicao) {
+        if (std::string(argumentosDaLinhaDeComando[posicao]) == "--validar") {
+            return validarDadosSemJanela();
+        }
+    }
 
-    // 1. Lê o mapa antes de abrir a janela: se ele tiver erro, nem abre.
-    MapaLocal mapaDaVila;
-    if (!lerMapaDaVila(mapaDaVila)) {
+    // 1. Lê todos os dados (e o mapa) antes de abrir a janela: se houver erro, nem abre.
+    DadosDoJogo dadosDoJogo;
+    if (!lerDadosDoJogo(dadosDoJogo)) {
         return 1;
     }
+    MapaLocal& mapaDaVila = dadosDoJogo.mapaDaVila;
 
     // 2. Liga a parte de vídeo da SDL e pede o OpenGL 3.3 "core" (sem as funções antigas).
     if (!SDL_Init(SDL_INIT_VIDEO)) {
@@ -247,6 +281,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                                       mapaDaVila.alturaEmTiles * mapaDaVila.tamanhoDoTileEmPixels);
     bool cameraJaFoiCentralizada = false;
     bool mostrarColisaoParaDepuracao = false;
+    const TabelaDeAcoesDoTeclado tabelaDeAcoes = TabelaDeAcoesDoTeclado::criarComAsTeclasPadrao();
 
     SDL_Log("Esc ou o X fecham; F11 liga a tela cheia; F1 mostra a colisão.");
     SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
@@ -267,19 +302,20 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             if (eventoRecebido.type == SDL_EVENT_QUIT || eventoRecebido.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
                 jogadorPediuParaFechar = true;
             }
+            // As teclas apertadas viram ações pela tabela (FL2-4).
             if (eventoRecebido.type == SDL_EVENT_KEY_DOWN && !eventoRecebido.key.repeat) {
-                const SDL_Keycode teclaApertada = eventoRecebido.key.key;
-                if (teclaApertada == SDLK_ESCAPE) {
+                const std::optional<AcaoDoJogador> acao = tabelaDeAcoes.acaoDaTeclaApertada(eventoRecebido.key.scancode);
+                if (acao == AcaoDoJogador::FecharOJogo) {
                     jogadorPediuParaFechar = true;
-                } else if (teclaApertada == SDLK_F11) {
-                    // Tecla provisória: tela cheia, sem bordas, do tamanho do monitor.
+                } else if (acao == AcaoDoJogador::AlternarTelaCheia) {
+                    // Tela cheia, sem bordas, do tamanho do monitor.
                     const bool janelaEstaEmTelaCheia = (SDL_GetWindowFlags(janelaDoJogo) & SDL_WINDOW_FULLSCREEN) != 0;
                     SDL_SetWindowFullscreen(janelaDoJogo, !janelaEstaEmTelaCheia);
-                } else if (teclaApertada == SDLK_F1) {
-                    // Tecla provisória (FL1-3): mostra os tiles bloqueados em vermelho.
+                } else if (acao == AcaoDoJogador::MostrarColisaoParaDepuracao) {
+                    // Mostra os tiles bloqueados em vermelho (FL1-3).
                     mostrarColisaoParaDepuracao = !mostrarColisaoParaDepuracao;
-                } else {
-                    tratarTeclaDoRelogio(teclaApertada, relogioDoMundo);
+                } else if (acao.has_value()) {
+                    tratarAcaoDoRelogio(*acao, relogioDoMundo);
                 }
             }
             // A câmera pelo mouse. A SDL mede o mouse em "pontos" da janela; a
@@ -346,7 +382,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             cameraJaFoiCentralizada = true;
         }
         const double segundosReaisDoQuadro = std::min(nanossegundosDesdeOQuadroAnterior, int64_t{250'000'000}) / 1e9;
-        const DirecaoDasTeclasSeguradas direcao = lerDirecaoDasTeclasSeguradas();
+        const DirecaoDasTeclasSeguradas direcao = lerDirecaoDasTeclasSeguradas(tabelaDeAcoes);
         cameraDoMapa.moverPeloTeclado(direcao.direcaoX, direcao.direcaoY, segundosReaisDoQuadro, direcao.correndoComShift);
         cameraDoMapa.limitarAoMapa();
 

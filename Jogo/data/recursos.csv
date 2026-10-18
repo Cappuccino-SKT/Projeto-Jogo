@@ -1,0 +1,4 @@
+id;item_gerado;construcao;area_no_tiled;grupo_da_estacao
+recurso.grao;item.grao;construcao.fazenda;campo_de_grao;fazenda
+recurso.agua;item.agua;construcao.posto_de_coleta;poco;agua
+recurso.madeira;item.tora;construcao.posto_de_coleta;bosque;madeira

@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 3** (carregar os dados). As propostas estão na rodada **FL3** ([[Retomada]], seção 4).
+> Ficha escrita em 2026-10-18 para o **marco 3** (carregar os dados). As decisões da rodada **FL3** (2026-10-18, todas "seguir sugestão") já estão aplicadas.
 
 # Ficha Lógica: Recursos
 
@@ -20,7 +20,7 @@ Documentos do sistema: [[Sistema de Recursos/Descrição|Sistema de Recursos]], 
 
 ## 2. Dados
 
-### O arquivo `data/recursos.csv` [Proposta] (FL3-6)
+### O arquivo `data/recursos.csv` (FL3-6)
 
 ```
 id;item_gerado;construcao;area_no_tiled;grupo_da_estacao
@@ -32,7 +32,7 @@ recurso.madeira;item.tora;construcao.posto_de_coleta;bosque;madeira
 - `area_no_tiled` é o valor da propriedade `tipo_de_recurso` das áreas no Tiled (FL1-5). Por isso o poço se chama `poco` no mapa e o recurso é a Água.
 - `grupo_da_estacao` diz que linha da tabela de estações vale para o recurso: o Posto de Coleta tira Madeira e Pedra, que rendem diferente no inverno, então a estação vai **por recurso**, e não por construção (Clima e Estações).
 
-### A produção por estação, no `data/regras.json` [Proposta] (FL3-6)
+### A produção por estação, no `data/regras.json` (FL3-6)
 
 ```json
 "producao_por_estacao_em_porcento": {
@@ -47,7 +47,7 @@ recurso.madeira;item.tora;construcao.posto_de_coleta;bosque;madeira
 
 A ordem das estações é sempre Primavera, Verão, Outono e Inverno. Os números são os da tabela base do [[Sistema de Clima e Estações/Descrição|Clima e Estações]] (bioma temperado) e da V2-9.
 
-### A produtividade da vila: no próprio mapa [Proposta] (FL3-6)
+### A produtividade da vila: no próprio mapa (FL3-6)
 
 Cada área de recurso do Tiled ganha uma propriedade opcional `produtividade`, com `normal` (o padrão, se faltar) ou `destaque`. Na vila, as três são normais. No jogo completo, ela virá do `mapas.json` ([[Sistema de Recursos/Descrição|Recursos]]).
 

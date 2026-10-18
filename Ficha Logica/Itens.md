@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 3** (carregar os dados). As propostas estão na rodada **FL3** ([[Retomada]], seção 4). Esta ficha também descreve **a ordem de leitura de todos os dados e o `jogo --validar`**, porque os itens são os primeiros a serem lidos.
+> Ficha escrita em 2026-10-18 para o **marco 3** (carregar os dados). As decisões da rodada **FL3** (2026-10-18, todas "seguir sugestão") já estão aplicadas. Esta ficha também descreve **a ordem de leitura de todos os dados e o `jogo --validar`**, porque os itens são os primeiros a serem lidos.
 
 # Ficha Lógica: Itens
 
@@ -16,11 +16,11 @@ Documento do sistema: [[Sistema de Itens/Descrição|Sistema de Itens]]. Formato
 
 **Por que um número interno:** comparar `item.pao` com `item.pao` é comparar 8 letras; comparar o número 3 com o 3 é uma conta só. No meio da simulação, o jogo faz isso milhões de vezes. O texto continua existindo para quem edita os dados e para as mensagens de erro.
 
-**Na fatia: 6 itens [Proposta] (FL3-1)**: Grão, Água, Tora, Pão, Tábua e Móveis de Madeira. Os outros cerca de 174 ficam para uma tarefa de dados depois da fatia.
+**Na fatia: 6 itens (FL3-1):** Grão, Água, Tora, Pão, Tábua e Móveis de Madeira. Os outros cerca de 174 ficam para uma tarefa de dados depois da fatia.
 
 ## 2. Dados
 
-### O arquivo `data/itens.csv` [Proposta] (FL3-1 e FL3-4)
+### O arquivo `data/itens.csv` (FL3-1 e FL3-4)
 
 Uma planilha salva em CSV, com **ponto e vírgula** separando as colunas (o padrão do Excel e do LibreOffice em português, porque a vírgula é a dos decimais). Nenhum número tem vírgula: tudo é inteiro.
 
@@ -48,7 +48,7 @@ item.moveis_madeira;bem_de_consumo;mobilia;2;;;8;100
 | `tipoDoItem` | lista fechada | — | `alimento` | Precisa combinar com a categoria (tabela abaixo) |
 | `tier` | inteiro ou vazio | 0 a 4 | 1 | Obrigatório em matéria-prima e bem de consumo; vazio no resto |
 | `rankMinimo`, `rankMaximo` | inteiros ou vazios | 0 a 5 | vazio | Só em armas, equipamentos e artefatos (fora da fatia) |
-| `pesoEmUnidades` | inteiro | unidades de peso | 1 | Maior que 0 **[Proposta]** (FL3-4) |
+| `pesoEmUnidades` | inteiro | unidades de peso | 1 | Maior que 0 (FL3-4) |
 | `multiplicadorDoPrecoEmPorcento` | inteiro | % | 100 | De 1 a 1.000; o Cavalo terá 300 (Econômico) |
 | `precoBaseEmDecimos` | dinheiro | décimos de moeda | 17 | **Calculado** pelas receitas, nunca escrito no arquivo |
 
@@ -74,7 +74,7 @@ Nenhum: a lista de itens não muda durante o jogo. As pilhas ("Pão × 12" no es
 1. `textos/pt-BR.json`: os nomes.
 2. `data/regras.json`: os números das rodadas (salários, margem, produção por estação).
 3. `data/itens.csv`: esta ficha.
-4. `data/construcoes.json`: no marco 3, só a lista de IDs **[Proposta]** (FL3-5).
+4. `data/construcoes.json`: no marco 3, só a lista de IDs (FL3-5).
 5. `data/recursos.csv`: a [[Ficha Logica/Recursos|ficha dos Recursos]].
 6. `data/receitas.csv`: a [[Ficha Logica/Receitas|ficha das Receitas]].
 7. **Preços base:** a regra 4.2 da ficha das Receitas.
@@ -119,7 +119,7 @@ Não há fórmula nos itens: o preço base está na ficha das Receitas. As únic
 - **Número interno:** a ordem das linhas válidas. *Exemplo:* com as 6 linhas do exemplo, `item.grao` = 0, `item.agua` = 1, `item.tora` = 2, `item.pao` = 3, `item.tabua` = 4, `item.moveis_madeira` = 5.
 - **Número da linha no erro:** conta a linha de cabeçalho como 1, como a planilha mostra. O Pão está na linha **5**.
 
-**Peso [Proposta] (FL3-4):** a "unidade de peso" tem o Pão como referência (1). O Grão e a Água pesam 1, a Tábua 2, a Tora 3 e os Móveis de Madeira 8. Na fatia, o peso só limita o que o personagem do jogador carrega (marco 6).
+**Peso (FL3-4):** a "unidade de peso" tem o Pão como referência (1). O Grão e a Água pesam 1, a Tábua 2, a Tora 3 e os Móveis de Madeira 8. Na fatia, o peso só limita o que o personagem do jogador carrega (marco 6).
 
 ## 6. Conversa com outros sistemas
 

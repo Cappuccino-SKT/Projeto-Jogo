@@ -1,4 +1,4 @@
-> Ponto de partida de cada sessão. Curto de propósito: o detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]), e a situação geral no [[Estado do Projeto]]. Atualizado em 2026-10-17.
+> Ponto de partida de cada sessão. Curto de propósito: o detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]), e a situação geral no [[Estado do Projeto]]. Atualizado em 2026-10-18.
 
 ## 1. Onde paramos
 
@@ -9,10 +9,12 @@
 - **Marco 0 (2026-10-17):** na branch `codigo/marco-0-ambiente` (feita em cima da `docs/fichas-marco-1`). No primeiro teste do autor, a janela de 1600 × 900 não cabia na tela dele (1600 × 900, com 1600 × 860 livres) e o X ficou escondido; corrigido e **confirmado pelo autor** (seção 3).
 - **Marco 1 (2026-10-17):** escrito na branch `codigo/marco-1-relogio-e-mapa` (feita em cima da `codigo/marco-0-ambiente`), em 5 passos; **confirmado pelo autor** (seção 3).
 - **Ficha da Interface e marco 2 (2026-10-18):** na branch `codigo/marco-2-camera-e-entrada` (feita em cima da `codigo/marco-1-relogio-e-mapa`). A [[Ficha Logica/Interface|ficha da Interface]] (câmera, zoom e teclas) abriu a **rodada FL2** (seção 4), e o código já segue as sugestões dela. O marco 2 foi **testado e confirmado pelo autor**, e a **FL2 foi aplicada** (2026-10-18).
-- **Arte provisória dos personagens (2026-10-18):** o autor baixou a versão grátis do pacote Mana Seed (pasta `Assents Temporarios/`, na raiz), só para os testes da fatia; a arte definitiva será própria. O repositório no GitHub é **público**, e o pacote proíbe, em geral, redistribuir os arquivos: por isso a pasta fica **fora do Git** (`.gitignore`). As folhas têm quadros de 64 × 64, e não o boneco de 16 × 24 da Arquitetura: isso vira pergunta na ficha do marco 4.
-- **Fichas do marco 3 (2026-10-18):** [[Ficha Logica/Itens|Itens]] (com a ordem de leitura dos dados e o `--validar`), [[Ficha Logica/Recursos|Recursos]] e [[Ficha Logica/Receitas|Receitas]] (com o preço base), na branch `docs/fichas-marco-3` (feita em cima da `codigo/marco-2-camera-e-entrada`, para levar ao `main` os dois commits do marco 2 que ficaram de fora). A **rodada FL3** foi enviada (seção 4).
-- **Próximo passo:** as respostas da FL3; depois, o marco 3 (carregar os dados).
-- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. As fichas do marco 1 e o marco 0 já entraram; falta o `codigo/marco-1-relogio-e-mapa`, e depois o do marco 2.
+- **Arte provisória dos personagens (2026-10-18):** o autor baixou a versão grátis do pacote Mana Seed (pasta `Assents Temporarios/`, na raiz), só para os testes da fatia; a arte definitiva será própria. O repositório no GitHub é **público**, e o pacote proíbe, em geral, redistribuir os arquivos: por isso a pasta fica **fora do Git** (`.gitignore`). As folhas têm quadros de 64 × 64, e não o boneco de 16 × 24 da Arquitetura: isso é a pergunta FL4-4.
+- **Fichas do marco 3 (2026-10-18):** [[Ficha Logica/Itens|Itens]] (com a ordem de leitura dos dados e o `--validar`), [[Ficha Logica/Recursos|Recursos]] e [[Ficha Logica/Receitas|Receitas]] (com o preço base), na branch `docs/fichas-marco-3` (feita em cima da `codigo/marco-2-camera-e-entrada`, para levar ao `main` os dois commits do marco 2 que ficaram de fora). A **rodada FL3** foi aplicada (2026-10-18).
+- **Marco 3 (2026-10-18):** na branch `codigo/marco-3-dados` (feita do `main`, que já tem as fichas do marco 3); **confirmado pelo autor** (seção 3).
+- **Fichas do marco 4 (2026-10-18):** a [[Ficha Logica/NPC|ficha do NPC]] (posição, movimento e o desenho do boneco) e a busca de caminho na [[Ficha Logica/Mapa|ficha do Mapa]] (regra 4.4), na branch `docs/fichas-marco-4` (feita em cima da `codigo/marco-3-dados`). Abriram a **rodada FL4** (seção 4).
+- **Próximo passo:** o autor responde a FL4; depois, aplicar e começar o marco 4.
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Os marcos 0 a 2 e as fichas até o marco 3 já entraram; faltam o `codigo/marco-3-dados` e, depois dele, o `docs/fichas-marco-4`.
 
 ## 2. Como trabalhamos
 
@@ -81,81 +83,84 @@
 - **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 - **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
 - **Marco 2 (pronto, confirmado pelo autor em 2026-10-18):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
+- **Marco 3 (pronto, confirmado pelo autor em 2026-10-18):** os dados em `Jogo/data` (itens, receitas, recursos, construções, regras e textos), lidos e conferidos por `Codigo/Dados/`, com o preço base (Pão 1,7) e o `jogo --validar`; as teclas passam pela tabela de ações (FL2-4). 124 testes no `Codigo/` e 25 no `Jogo/`.
 
-## 4. Rodada pendente: FL3, os dados do marco 3
+## 4. Rodada pendente: FL4, o NPC andando (marco 4)
 
-**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]], apareceram 6 pontos que os documentos não decidem. As fichas já usam as sugestões, marcadas como [Proposta]. (A FL2 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
+**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever a [[Ficha Logica/NPC|ficha do NPC]] (posição e movimento) e a busca de caminho na [[Ficha Logica/Mapa|ficha do Mapa]] (regra 4.4), apareceram 6 pontos que os documentos não decidem. As fichas já usam as sugestões, marcadas como [Proposta]. (A FL3 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
 
-Responder no `Respostas.txt` pelos códigos (FL3-1, FL3-2...). "Seguir sugestão" aceita a proposta.
+Responder no `Respostas.txt` pelos códigos (FL4-1, FL4-2...). "Seguir sugestão" aceita a proposta.
 
-**FL3-1. Quantos itens e receitas entram no marco 3.**
+**FL4-1. A velocidade de andar do NPC.**
 
-- *Contexto:* a lista final tem cerca de 180 itens (IP2) e uma receita para cada um (IP3). A fatia usa 6: Grão, Água, Tora, Pão, Tábua e Móveis de Madeira. A Fatia Vertical diz que o `itens.csv` começa com os 6, "e depois os cerca de 180".
-- *Pergunta:* o marco 3 escreve os 6 itens ou os 180? *Exemplo:* com os 180, o teste confere a tabela inteira de preços de partida do Econômico (a Espada Curta de Ferro a 13,9, o Licor a 29,0); com os 6, confere só Pão, Tábua e Móveis.
+- *Contexto:* a regra 4.10 da Fatia Vertical diz só "na velocidade de andar". A [[Sistema de Viagem/Descrição|Viagem]] diz que atravessar um Mapa Local a pé leva cerca de 1 hora de jogo, e o Mapa Local do jogo completo tem 128 tiles. O NPC anda pelos ticks: pausado ele para, e a 4x anda 4 vezes mais rápido.
+- *Pergunta:* quantos tiles o NPC anda por hora de jogo? *Exemplo:* um Civil sai de casa às 6h e vai à Fazenda, a 20 tiles. Quanto tempo de jogo ele gasta, e quanto tempo isso leva na tela?
 - *Opções:*
-  - (a) **os 6 da fatia agora**, e os outros numa tarefa de dados própria, depois da fatia. Ganha: o marco 3 fica pequeno e rápido de testar. Perde: os preços dos outros itens só são conferidos depois;
-  - (b) os 180 agora. Ganha: confere todo o design de uma vez. Perde: muito trabalho de digitação (os moldes de armas, os animais, o Açougue), e boa parte não é usada na fatia;
-  - (c) os 6, mais as cadeias de comida e de materiais básicos (cerca de 30). Ganha: um meio-termo. Perde: um corte arbitrário.
-- *Sugestão:* (a). O leitor e o validador já nascem prontos para os 180: só faltará escrever as linhas.
-- *Conflitos:* a obra de nível 1 pede **Bloco de Pedra** ([[Sistema de Construção/Descrição|Construção]]: 10 Tábua + 10 Bloco de Pedra), que não está nos 6 itens nem tem quem o faça na vila. Isso fica para a ficha da Construção, antes do marco 6.
+  - (a) **128 tiles por hora** (160 milésimos de tile por tick): 3,2 tiles por segundo a 1x; os 20 tiles levam 9 min de jogo, ou 6 s reais. Ganha: bate com a Viagem, e é um passo de caminhada fácil de ver. Perde: a 4x, são 12,8 tiles por segundo, rápido para seguir com os olhos;
+  - (b) 64 tiles por hora: 1,6 tiles por segundo; os 20 tiles levam 19 min de jogo, ou 12,5 s reais. Ganha: calmo e fácil de seguir. Perde: contradiz a Viagem (2 horas por mapa), e o trajeto come mais da hora livre do Civil entre acordar (6h) e trabalhar (7h);
+  - (c) 192 tiles por hora: 4,8 tiles por segundo; os 20 tiles levam 6 min de jogo. Ganha: ágil. Perde: numa vila de 64 tiles, os NPCs parecem correr, e o tempo de trajeto quase some.
+- *Sugestão:* (a), no `regras.json` como `velocidade_de_andar_em_tiles_por_hora: 128`, para os testes poderem mudar. A animação troca de quadro a cada 0,4 tile andado (125 milissegundos por quadro a 1x). A Agilidade mudando a velocidade fica para depois da fatia.
+- *Conflitos:* nenhum. A Viagem ("1 hora por mapa a pé") ganha o número exato.
 
-**FL3-2. O formato do `receitas.csv` e as receitas Braçais.**
+**FL4-2. A diagonal na quina de um obstáculo.**
 
-- *Contexto:* a extração tem a regra "1 unidade a cada 0,5 h" no Tier 0 (IP3-2). As horas da receita são inteiras em todo o resto (4 h, 8 h).
-- *Pergunta:* como escrever a Fazenda tirando Grão? *Exemplo:* um Fazendeiro trabalha das 7h às 15h e tira 16 Grão. Com 0,5 h por ciclo, a planilha tem uma hora com vírgula; com 2 unidades em 1 h, não.
+- *Contexto:* a FT1-3 decidiu a busca A\* em 8 direções, com a diagonal custando 1,4. Não decidiu se o NPC pode passar na diagonal rente a um tile bloqueado.
+- *Pergunta:* com o NPC em (4, 6) e uma pedra em (5, 6), ele pode ir direto para (5, 5), raspando a quina da pedra? *Exemplo:* o tronco de uma árvore na esquina de uma rua.
 - *Opções:*
-  - (a) **2 unidades em 1 hora** no Tier 0 (1 em 1 h no Tier 1; 1 em 2 h no Tier 2). Ganha: só horas inteiras, e o ciclo fecha junto com a "hora nova" do relógio. Perde: o Grão entra no estoque de 2 em 2;
-  - (b) 1 unidade em 0,5 hora. Ganha: igual ao texto da IP3-2. Perde: horas com vírgula na planilha, e dois ciclos dentro da mesma hora;
-  - (c) 8 unidades em 4 horas, como o lote padrão. Ganha: igual às outras receitas. Perde: o estoque recebe Grão só de 4 em 4 horas, e um turno cortado no meio perde o ciclo inteiro.
-- *Sugestão:* (a). E o Trabalho escrito em minúsculas e sem acento (`bracal`, `manufaturado`, `especialista`), como os IDs.
-- *Conflitos:* o exemplo de `receitas.csv` da Fatia Vertical, que usava `Manufaturado`, passa a usar `manufaturado`.
-
-**FL3-3. O salário de 0,75 por hora e o arredondamento do preço.**
-
-- *Contexto:* o dinheiro é inteiro, em décimos de moeda (V2-1). O salário Braçal é 0,75 moeda por hora (V2-3), ou seja, 7,5 décimos, que não é inteiro. O preço do Pão dá 16,5 décimos, e a Fatia Vertical arredondou para 17.
-- *Pergunta:* como fazer a conta do preço só com inteiros? *Exemplo:* o Grão custa 4,5 décimos pela fórmula; ele vale 4 ou 5? E o Pão usa o Grão a 4,5 ou a 5?
-- *Opções:*
-  - (a) **o salário por hora em centésimos nas regras** (75, 100 e 150), só para a conta; **a metade sobe** (4,5 vira 5, 16,5 vira 17); **cada item é arredondado antes de entrar no seguinte**; e nenhum preço fica em 0 (o mínimo é 1 décimo). Ganha: os 6 preços batem com a tabela do Econômico. Perde: duas medidas (centésimos só na regra, décimos no dinheiro);
-  - (b) mudar o salário Braçal para 0,8 por hora. Ganha: tudo em décimos. Perde: mexe numa decisão da V2-3 e muda vários preços;
-  - (c) contas com vírgula e arredondar só no fim. Ganha: mais exato. Perde: vai contra a regra do dinheiro inteiro.
-- *Sugestão:* (a). O salário que se paga por dia (6, 8 e 12 moedas) continua inteiro em décimos.
-- *Conflitos:* o exemplo de `regras.json` da Fatia Vertical (`"Bracal": 7.5`) passa a ser `"salario_por_hora_em_centesimos": {"bracal": 75, ...}`.
-
-**FL3-4. O peso dos itens.**
-
-- *Contexto:* o item tem o atributo Peso (Itens), usado pela Capacidade de peso dos Controlados (Inventário). Nenhum documento dá os valores nem a unidade.
-- *Pergunta:* em que unidade, e quanto pesa cada item da fatia? *Exemplo:* o jogador compra 10 Pães e 2 Móveis de Madeira no Mercado; quanto isso pesa?
-- *Opções:*
-  - (a) **uma "unidade de peso" inteira, com o Pão valendo 1:** Grão 1, Água 1, Pão 1, Tábua 2, Tora 3, Móveis de Madeira 8 (no exemplo, 10 + 16 = 26). Ganha: simples, sem vírgula. Perde: não é um quilo de verdade;
-  - (b) quilos com vírgula (Pão 0,5 kg). Ganha: realista. Perde: números com vírgula, que o jogo evita;
-  - (c) peso em décimos de quilo (Pão 5). Ganha: realista e inteiro. Perde: números grandes e difíceis de ler na planilha.
-- *Sugestão:* (a). A Capacidade de peso por ponto de Força (Inventário, pergunta em aberto) usa a mesma unidade, e é decidida na ficha do Inventário (marco 6).
+  - (a) **a diagonal só vale com os dois tiles retos do lado livres.** Ganha: o boneco nunca atravessa a quina de uma árvore ou de uma parede desenhada. Perde: caminhos um pouco mais longos perto dos obstáculos (no teste da ficha, custo 104 em vez de 98);
+  - (b) basta um dos dois tiles livre. Ganha: caminhos mais curtos. Perde: o boneco passa por cima de meio tronco ou da ponta da parede;
+  - (c) a diagonal sempre vale. Ganha: o caminho mais curto. Perde: o NPC passa entre duas árvores encostadas na diagonal, por um "buraco" que não existe na tela.
+- *Sugestão:* (a).
 - *Conflitos:* nenhum.
 
-**FL3-5. As construções no marco 3.**
+**FL4-3. O destino sem caminho.**
 
-- *Contexto:* cada receita cita a construção que a faz (`construcao.cozinheiro`), e o `--validar` precisa saber se ela existe. A ficha da Construção só vem antes do marco 6, porque é lá que as construções funcionam.
-- *Pergunta:* o `construcoes.json` do marco 3 já tem tudo (porte, custo, vagas, capacidade) ou só a lista?
+- *Contexto:* o jogador (no marco 4) ou a rotina (no marco 5) pode pedir um destino bloqueado: um tile de água, uma árvore ou, no marco 6, o meio de uma construção.
+- *Pergunta:* o que o NPC faz quando não há caminho até o destino? *Exemplo:* clicar no meio do lago da vila, em (50, 50).
 - *Opções:*
-  - (a) **só a lista de IDs** das 7 construções da fatia (`construcao.fazenda`, `posto_de_coleta`, `cozinheiro`, `carpinteiro`, `mercado`, `construtor`, `casa`), e o resto entra com a ficha da Construção. Ganha: o marco 3 não decide nada da Construção antes da hora. Perde: o arquivo cresce em dois passos;
-  - (b) tudo agora. Ganha: o arquivo fica pronto. Perde: decidir porte, custo e capacidade sem a ficha.
-- *Sugestão:* (a), com os nomes no `textos/pt-BR.json`.
+  - (a) **vai até o tile mais perto do destino a que dá para chegar**, e o console avisa. No exemplo, até (56, 50), a margem leste. Ganha: o NPC sempre reage, e "ir até a construção" funciona mesmo sem marcar a porta. Perde: uma busca sem caminho examina o mapa quase todo (3.886 tiles na vila, menos de 1 milissegundo); e "o mais perto" é em linha reta, então às vezes fica do outro lado do obstáculo, como no exemplo;
+  - (b) não vai: fica parado, com um aviso. Ganha: simples e claro. Perde: todo destino da rotina precisa ser um tile livre, escolhido com cuidado nos dados;
+  - (c) primeiro procura o tile livre mais perto do destino, e só então busca o caminho até ele. Ganha: a margem fica do lado certo mais vezes. Perde: duas buscas; e, se esse tile estiver numa ilha, continua sem caminho.
+- *Sugestão:* (a). No marco 6, cada construção pode ganhar um tile de entrada (a ficha da Construção decide), e a regra (a) fica como rede de segurança.
 - *Conflitos:* nenhum.
 
-**FL3-6. Onde ficam os recursos, a estação e a produtividade da vila.**
+**FL4-4. A arte do boneco no marco 4.**
 
-- *Contexto:* o mapa da vila marca 3 áreas (`campo_de_grao`, `poco`, `bosque`; FL1-5). O Recursos diz que a lista de recursos de cada mapa fica num `mapas.json`, e a produção por estação num `clima.json`. A fatia não tem nenhum dos dois.
-- *Pergunta:* onde o jogo descobre que o `poco` é o recurso Água, que gera o item Água, e quanto ele rende? *Exemplo:* no inverno, quanto Grão a Fazenda tira?
+- *Contexto:* a [[Arquitetura/Descrição|Arquitetura]] e o [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]] dizem: boneco de 16 × 24 (1 tile de largura e 1,5 de altura), 3 direções desenhadas e a esquerda espelhada, andar com 4 quadros. A arte provisória que o autor baixou (Mana Seed, grátis) é diferente: folhas de 512 × 512 com quadros de 64 × 64, o boneco com cerca de **14 × 29** pixels dentro do quadro (quase 1 × 2 tiles), 4 direções desenhadas, andar com 6 quadros e camadas separadas (corpo, roupa, cabelo). E ela não pode entrar no Git, porque o repositório é público.
+- *Pergunta:* o que o marco 4 desenha, e como o jogo acha os arquivos? *Exemplo:* alguém baixa o repositório em outro PC, sem a pasta `Assents Temporarios/`, e abre o jogo.
 - *Opções:*
-  - (a) **um `data/recursos.csv`** (recurso, item gerado, construção, nome da área no Tiled, grupo da estação), a **produção por estação no `regras.json`** (os grupos fazenda, animais, madeira, minerais e água, com as 4 porcentagens), e a **produtividade como propriedade da área no Tiled** (`normal` ou `destaque`; vazia = normal). Os tipos de área deixam de ser uma lista no código. Ganha: um recurso novo não precisa de código, e a vila não precisa do `mapas.json`. Perde: no jogo completo, a produtividade sai do Tiled e vai para o `mapas.json`;
-  - (b) já criar o `mapas.json` e o `clima.json` com um mapa só. Ganha: o formato final desde já. Perde: dois arquivos quase vazios na fatia.
-- *Sugestão:* (a). O Grão normal no inverno rende 25%: 8 por dia em vez de 32, como diz a Arquitetura.
-- *Conflitos:* a regra 4.1 da [[Ficha Logica/Mapa|ficha do Mapa]] (passo 8) troca a lista fixa de tipos pela lista do `recursos.csv`.
+  - (a) **o boneco descrito num arquivo de dados** (`data/personagens/boneco_provisorio.json`: quadro de 64, pés em (32, 43), a linha de cada animação, 6 quadros de andar e as 3 camadas), lido direto da pasta `Assents Temporarios/`. Se faltar alguma camada, o jogo usa um **boneco de teste** de cores lisas, no mesmo formato, feito pelo script da arte de teste e guardado no Git, e mostra um aviso. Ganha: o autor já vê o Mana Seed andando no marco 4; a arte própria de 16 × 24 só troca os números do arquivo; e o jogo abre em qualquer PC. Perde: o boneco provisório fica com quase 2 tiles de altura, maior que o da Arquitetura; e um arquivo de dados a mais;
+  - (b) só o boneco de teste no marco 4, e o Mana Seed num marco depois. Ganha: o marco 4 fica menor. Perde: o autor não vê a arte de verdade andando, que foi o motivo de baixar o pacote;
+  - (c) recortar o Mana Seed para 16 × 24. Ganha: bate com a Arquitetura. Perde: o boneco tem 29 pixels de altura e não cabe; cortaria a cabeça ou os pés.
+- *Sugestão:* (a). O provisório usa as 4 direções desenhadas (sem espelho); o espelhamento fica para a arte própria. Os quadros de 64 × 64 têm muito espaço vazio, mas isso só pesa na placa de vídeo: cada folha tem 1 MB, e 3 camadas, 3 MB.
+- *Conflitos:* o boneco de 16 × 24 da Arquitetura e do Pipeline continua valendo para a arte própria; os dois documentos ganham uma nota sobre o tamanho do provisório.
+
+**FL4-5. O movimento suave entre os ticks.**
+
+- *Contexto:* o relógio roda 20 ticks por segundo a 1x, e a tela mostra 60 quadros por segundo. O NPC anda 0,16 tile (2,6 pixels do mundo) por tick.
+- *Pergunta:* a tela mostra o NPC só onde ele estava no último tick, ou entre um tick e outro? *Exemplo:* a 3x, com o NPC andando para a direita e a câmera parada.
+- *Opções:*
+  - (a) **desenhar entre a posição do tick anterior e a do atual**, pela fração do tick que já passou (o relógio já guarda esse tempo, no acumulador). Ganha: o movimento fica liso, a 60 quadros. Perde: cada NPC guarda mais uma posição, e a imagem fica até 50 milissegundos atrás da simulação, o que não se percebe;
+  - (b) desenhar só a posição do tick. Ganha: mais simples. Perde: a 3x, o boneco pula 7,7 pixels da tela 20 vezes por segundo e parece tremido, pior ainda com a câmera andando;
+  - (c) subir para 60 ticks por segundo. Ganha: liso sem conta a mais. Perde: muda o "1 tick = 4,5 s" da Fatia Vertical e triplica o custo da simulação, contra a meta de 500 NPCs.
+- *Sugestão:* (a). Vale também, depois, para o personagem do jogador.
+- *Conflitos:* nenhum.
+
+**FL4-6. Como testar o marco 4.**
+
+- *Contexto:* o marco 4 está pronto quando "um NPC vai de um ponto a outro pela busca de caminho". Até a rotina (marco 5), alguém precisa dar o destino. A [[Interface/Descrição|Interface]] diz que o botão esquerdo seleciona e o direito dá ordem.
+- *Pergunta:* como o autor manda o NPC andar e confere o caminho? *Exemplo:* clicar do outro lado do lago e ver o NPC contornar a margem.
+- *Opções:*
+  - (a) **o botão direito manda o NPC ao tile clicado; o F2 pinta o caminho de azul; a tecla N cria mais um NPC** (até 50), e o botão direito manda todos. Ganha: testa o caminho, a quina, o lago e vários NPCs passando um pelo outro. Perde: duas teclas de teste a mais na tabela de ações, que saem depois;
+  - (b) só o botão direito, com 1 NPC. Ganha: o mínimo. Perde: não testa vários NPCs nem mostra o caminho;
+  - (c) o NPC anda sozinho entre pontos sorteados, sem clique. Ganha: nada a fazer. Perde: o autor não escolhe o caso a testar.
+- *Sugestão:* (a). Selecionar um NPC com o botão esquerdo fica para depois da fatia. A tecla N ainda serve, no marco 7, para encher a vila de NPCs no teste de desempenho.
+- *Conflitos:* nenhum. O N e o F2 são provisórios, como o F1.
 
 Depois das respostas:
 
-- tirar as marcas [Proposta] das três fichas e ajustar a Fatia Vertical (exemplos do `receitas.csv` e do `regras.json`) e a ficha do Mapa (FL3-6);
-- começar o marco 3, na branch `codigo/marco-3-dados`, com a tabela de ações das teclas (FL2-4).
+- tirar as marcas [Proposta] das fichas do NPC e do Mapa, anotar a rodada na parte 8 da Fatia Vertical e pôr a nota do boneco provisório na Arquitetura e no Pipeline (FL4-4);
+- começar o marco 4, na branch `codigo/marco-4-npc-andando`.
 
 ## 5. Onde está cada coisa
 

@@ -171,8 +171,9 @@ assets/            fontes (Pixelorama, Tiled)
 data/
   imagens/         PNG exportados
   mapas/           mapas do Tiled em JSON
-  tabelas/         CSV (itens, receitas, preços)
-  *.json           demais dados
+  textos/          pt-BR.json (os nomes da tela)
+  *.csv            tabelas da planilha (itens, receitas, recursos)
+  *.json           demais dados (regras, construções)
 ```
 
 - **Mundo ajustável:** o tamanho da malha do Mapa Mundial vem dos dados (`mapas.json`), não de números fixos no código, para o mundo poder crescer depois dos testes (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
