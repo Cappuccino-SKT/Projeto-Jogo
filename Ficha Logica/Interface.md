@@ -154,6 +154,15 @@ Em `Jogo/` (sem SDL nem OpenGL, para os testes):
 
 No `main.cpp`, a função `lerDirecaoDasTeclasSeguradas` monta a direção da regra 4.1 a partir do teclado da SDL.
 
+**A tabela de ações** (marco 3, FL2-4), em `Jogo/AcoesDoTeclado.cpp`:
+
+| Nome | O que é |
+|---|---|
+| `AcaoDoJogador` | As ações: fechar, tela cheia, mostrar a colisão, pausar, as 3 velocidades, as 4 direções da câmera e correr |
+| `TeclasDeUmaAcao` | Uma linha da tabela: a ação, a tecla principal e uma alternativa (pela posição no teclado) |
+| `TabelaDeAcoesDoTeclado`, `criarComAsTeclasPadrao()` | A tabela, com as teclas dos marcos 1 e 2 |
+| `acaoDaTeclaApertada(tecla)` e `acaoEstaSegurada(acao, estadoDoTeclado)` | O que o laço principal pergunta |
+
 ## 8. Testes
 
 Num programa de testes do `Jogo/` (`testes_do_jogo`), rodado pelo mesmo `ctest`. Tela de 1600 × 837 e mapa de 1.024 × 1.024, como na parte 5.

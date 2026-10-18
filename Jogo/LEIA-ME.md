@@ -29,7 +29,13 @@ Também ficam aqui:
    .\build\Jogo\jogo.exe
    ```
 
-4. Rodar os testes automáticos das regras (rodada FL1-4). Termina com "100% tests passed" se tudo passou:
+4. Conferir os dados sem abrir a janela (marco 3). Mostra cada erro com o arquivo e a linha, o resumo e os preços base, e termina com o código 0 (tudo certo) ou 1 (há erro). Bom para rodar depois de mexer numa planilha:
+
+   ```
+   .\build\Jogo\jogo.exe --validar
+   ```
+
+5. Rodar os testes automáticos das regras (rodada FL1-4). Termina com "100% tests passed" se tudo passou:
 
    ```
    ctest --test-dir build
@@ -142,4 +148,46 @@ As teclas do marco 1 (Espaço, 1, 2, 3, F1, F11, Esc) continuam iguais. A câmer
 6. Com o jogo pausado (Espaço), a câmera ainda anda.
 7. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
 
-**O que vem no marco 3:** carregar os dados (itens, receitas e construções) e calcular os preços base, depois das fichas de Itens, Recursos e Receitas.
+### Marco 3: carregar os dados (2026-10-18)
+
+**O que faz:** ao abrir, o jogo lê todos os dados da pasta `Jogo/data`, confere cada linha e calcula o **preço base** de cada item pela fórmula do Econômico. O console mostra o resumo e os preços. Se algum arquivo tiver erro, o jogo mostra **todos** os erros numa caixa de mensagem, com o arquivo e a linha, e não abre. Tudo segue as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]], com a rodada FL3.
+
+**Os arquivos de dados** (em `Jogo/data/`):
+
+| Arquivo | O que tem | Como editar |
+|---|---|---|
+| `itens.csv` | Os 6 itens da fatia: categoria, tipo, Tier, peso | Planilha, salvando em CSV com ponto e vírgula |
+| `receitas.csv` | Uma receita por item: lote, insumos, construção, horas | Planilha |
+| `recursos.csv` | Grão, Água e Madeira: o item gerado e a área do Tiled | Planilha |
+| `construcoes.json` | Só a lista das 7 construções (o resto vem antes do marco 6) | Editor de texto |
+| `regras.json` | Salários por hora em centésimos, margem, produção por estação | Editor de texto |
+| `textos/pt-BR.json` | O nome que aparece na tela de cada item e construção | Editor de texto |
+
+Uma linha que começa com `#` nas planilhas é comentário.
+
+**Os preços base da fatia** (iguais à tabela de preços de partida do Econômico):
+
+| Item | Preço |
+|---|---|
+| Grão, Água, Tora | 0,5 |
+| Tábua | 1,5 |
+| Pão | 1,7 |
+| Móveis de Madeira | 5,1 |
+
+**As teclas agora passam por uma tabela de ações** (FL2-4, `Jogo/AcoesDoTeclado.cpp`): trocar uma tecla é mudar uma linha da tabela. As teclas valem pela posição no teclado, e continuam as mesmas dos marcos 1 e 2.
+
+**Os arquivos novos:**
+
+- `Codigo/Dados/`: o leitor de CSV próprio, os textos, as regras, os itens, as construções, os recursos, as receitas, o preço base e o `carregarDadosDoJogo`, que junta tudo na ordem da ficha dos Itens;
+- `Codigo/Testes/TestesDosDados.cpp`: 61 conferências novas (124 no `Codigo/`), com os 6 preços, os laços na cadeia e cada tipo de erro;
+- `Jogo/AcoesDoTeclado.cpp` e o teste dele: 7 conferências novas (25 no `Jogo/`).
+
+**O que testar:**
+
+1. `.\build\Jogo\jogo.exe --validar` mostra "0 erros, 0 avisos" e os 6 preços.
+2. Estragar uma linha do `itens.csv` de propósito (por exemplo, trocar `alimento` por `comida`), rodar o `--validar` de novo e ver o erro com o arquivo e a linha. Depois, desfazer.
+3. O jogo abre como antes, e o console mostra o resumo e os preços base.
+4. Todas as teclas dos marcos 1 e 2 continuam funcionando.
+5. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
+
+**O que vem no marco 4:** um NPC andando pela busca de caminho, depois da ficha do NPC (posição e movimento) e da busca de caminho na ficha do Mapa.

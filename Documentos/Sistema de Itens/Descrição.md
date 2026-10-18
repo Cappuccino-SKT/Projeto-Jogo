@@ -289,7 +289,7 @@ Cerca de **180 itens**: 29 matérias-primas brutas (com os 5 animais), 14 manufa
 - **Instâncias:** materiais e bens de consumo são **pilhas** (item + quantidade + dono), sem instância individual; armas e equipamentos guardam também o Rank, a cultura e o encantamento (ver [[Sistema de Inventário/Descrição|Inventário]]).
 - **Interface:** o nome aparece no formato "Pão × 12", sem plural.
 - **Save:** só as pilhas e as instâncias que existem nos inventários; a lista de itens vem dos dados.
-- **Fatia vertical:** Grão, Água, Pão e Móveis de Madeira (ou Cerâmica).
+- **Fatia vertical:** Grão, Água, Tora, Pão, Tábua e Móveis de Madeira, com o leitor e o validador prontos para os cerca de 180 (rodada FL3-1; [[Ficha Logica/Itens|ficha dos Itens]]).
 
 ## Ligação com outros sistemas
 
