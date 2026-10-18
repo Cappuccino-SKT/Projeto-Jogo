@@ -54,6 +54,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(stb)
 
+# EnTT: guarda as entidades (cada NPC é um número) e os componentes presos a
+# elas (a posição, o caminho). Entra no marco 4 (FT2-2). Só cabeçalhos.
+# Versão 3.16.0 (2025-11-20). A 4.0 (2026-07) muda a interface; fica para
+# quando precisarmos dela.
+FetchContent_Declare(
+    EnTT
+    URL https://github.com/skypjack/entt/archive/refs/tags/v3.16.0.tar.gz
+    URL_HASH SHA256=7d7b4037b737992342049ffab14f22fa10243e01664f8c3a0657aa247ac52f71
+)
+FetchContent_MakeAvailable(EnTT)
+
 # ---------------------------------------------------------------------------
 # As nossas pastas
 # ---------------------------------------------------------------------------

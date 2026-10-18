@@ -306,6 +306,8 @@ void testarDadosDaFatia()
                  && dados.catalogoDeRecursos.quantidadeDeRecursos() == 3 && dados.catalogoDeConstrucoes.quantidadeDeConstrucoes() == 7,
              "a fatia tem 6 itens, 6 receitas, 3 recursos e 7 construções");
     conferir(precoDoItem(dados.catalogoDeItens, "item.pao") == 17, "nos dados da fatia, o Pão custa 1,7");
+    conferir(dados.regras.velocidadeDeAndarEmTilesPorHora == 128 && dados.regras.caminhosCalculadosPorTick == 4,
+             "o regras.json da fatia tem a velocidade de andar (128 tiles por hora) e 4 caminhos por tick");
     bool todasAsAreasLigadas = dados.mapaDaVila.areasDeRecurso.size() == 3;
     for (const AreaDeRecurso& area : dados.mapaDaVila.areasDeRecurso) {
         todasAsAreasLigadas = todasAsAreasLigadas && area.numeroDoRecurso >= 0 && area.produtividadeEmPorcento == 100;

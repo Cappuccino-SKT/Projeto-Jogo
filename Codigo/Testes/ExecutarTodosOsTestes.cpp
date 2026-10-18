@@ -13,6 +13,8 @@
 void testarRelogioDoMundo();
 void testarMapaLocal();
 void testarDadosDoJogo();
+void testarBuscaDeCaminho();
+void testarMovimentoDosNpcs();
 
 int main()
 {
@@ -23,6 +25,8 @@ int main()
     testarRelogioDoMundo();
     testarMapaLocal();
     testarDadosDoJogo();
+    testarBuscaDeCaminho();
+    testarMovimentoDosNpcs();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {

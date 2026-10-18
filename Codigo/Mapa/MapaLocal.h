@@ -31,6 +31,9 @@ struct ConjuntoDeTiles {
 struct PosicaoDeTile {
     int tileX = 0;
     int tileY = 0;
+
+    // Dois tiles são iguais quando x e y são iguais.
+    bool operator==(const PosicaoDeTile& outroTile) const = default;
 };
 
 // Um retângulo medido em tiles.
