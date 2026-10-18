@@ -190,7 +190,7 @@ Uma linha que começa com `#` nas planilhas é comentário.
 4. Todas as teclas dos marcos 1 e 2 continuam funcionando.
 5. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
 
-### Marco 4: NPC andando (2026-10-18)
+### Marco 4: NPC andando (2026-10-18, confirmado pelo autor)
 
 **O que faz:** um NPC nasce no centro da vila, em (32, 32). Com o **botão direito** num tile, ele calcula o caminho mais curto (a busca A\* em 8 direções) e anda até lá, contornando o que bloqueia, sem cortar a quina de árvores e paredes. O boneco vira para o lado em que anda e mexe as pernas. Tudo segue a [[Ficha Logica/NPC|ficha do NPC]] e a regra 4.4 da [[Ficha Logica/Mapa|ficha do Mapa]], com a rodada FL4.
 

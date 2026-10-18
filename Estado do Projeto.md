@@ -43,7 +43,7 @@
 2. **Marco 1:** relógio, leitura do mapa e o mapa desenhado. Pronto e confirmado pelo autor.
 3. **Marco 2:** câmera e zoom. Pronto e confirmado pelo autor, com a rodada FL2 aplicada.
 4. **Marco 3:** carregar os dados, o preço base e o `--validar`. Pronto e confirmado pelo autor.
-5. **Marco 4:** um NPC andando pela busca de caminho. Escrito e testado; falta a confirmação do autor.
+5. **Marco 4:** um NPC andando pela busca de caminho. Pronto e confirmado pelo autor.
 6. **Marcos 5 a 9** da fatia vertical, um por pull request.
 7. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 
