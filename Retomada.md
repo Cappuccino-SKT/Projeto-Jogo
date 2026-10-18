@@ -17,8 +17,9 @@
 - **Ficha do marco 5 (2026-10-18):** a [[Ficha Logica/IA|ficha da IA]] (a vila inicial, a rotina e a Utilidade), na branch `docs/fichas-marco-5` (feita em cima da `codigo/marco-4-npc-andando`). A **rodada FL5** foi aplicada (2026-10-18), toda com "seguir sugestão".
 - **Arte (2026-10-18):** o autor testou gerar a arte com o Gemini e **abandonou a ideia**; ele vai **desenhar à mão, no Pixelorama**, com a paleta **Resurrect 64** (mais algumas cores, se precisar). O [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] junta todos os critérios, na branch `docs/guia-da-arte` (feita em cima da `codigo/marco-5-rotina`), e abriu a **rodada FA1** (seção 4).
 - **Marco 5 (2026-10-18):** escrito na branch `codigo/marco-5-rotina` (feita do `main`, que já tem a ficha do marco 5); **confirmado pelo autor** (seção 3).
-- **Próximo passo:** as fichas do marco 6 (Produção, Inventário, Trabalho e Propriedade, Econômico e Construção).
-- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até a ficha do marco 5 já entrou no `main`; falta o `codigo/marco-5-rotina`.
+- **Fichas do marco 6 (2026-10-18):** a [[Ficha Logica/Producao|Produção]], o [[Ficha Logica/Inventario|Inventário]], a [[Ficha Logica/Economia|Economia]] (consumo e salários) e a [[Ficha Logica/Construcao|Construção]], na branch `docs/fichas-marco-6` (feita em cima da `docs/guia-da-arte`). Abriram a **rodada FL6** (seção 4b).
+- **Próximo passo:** o autor desenha e responde a FA1 e a FL6; depois, aplicar e começar o marco 6.
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até a ficha do marco 5 já entrou no `main`; faltam, nesta ordem, o `codigo/marco-5-rotina`, o `docs/guia-da-arte` e o `docs/fichas-marco-6`.
 
 ## 2. Como trabalhamos
 
@@ -156,6 +157,105 @@ Depois das respostas:
 
 - tirar as marcas [Proposta] do Guia da Arte e anotar a rodada no Pipeline;
 - as fichas do marco 6, na branch `docs/fichas-marco-6`.
+
+---
+
+## 4b. Rodada pendente: FL6, produção, inventário e consumo (marco 6)
+
+**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever as fichas da [[Ficha Logica/Producao|Produção]], do [[Ficha Logica/Inventario|Inventário]], da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Construcao|Construção]], apareceram 8 pontos. Três são conflitos entre decisões antigas (FL6-2, FL6-5 e FL6-7). As fichas já usam as sugestões, marcadas como [Proposta]. Esta rodada corre junto com a FA1 (a da arte): dá para responder as duas no mesmo `Respostas.txt`.
+
+**FL6-1. O que entra no marco 6.**
+
+- *Contexto:* o marco 6 está pronto quando "o Pão sai do Cozinheiro, entra no estoque e é comido". A Fatia Vertical tem, além disso, o Mercado Local, o estabilizador, o gasto extra, o imposto, a Felicidade, os eventos, as obras e a manutenção, e o jogador mexendo na Carpintaria dele (pela interface, do marco 8).
+- *Pergunta:* o que entra agora, e o que fica para depois? *Exemplo:* no marco 6, o preço do Pão muda quando o estoque cai?
+- *Opções:*
+  - (a) **no marco 6: o inventário, a capacidade, a produção (o ciclo, a escolha da receita, as ordens do jogador), o consumo da cesta mínima, os salários e os dias em déficit; os preços ficam no preço base (a loja da cidade vende a 110%); sem dinheiro, a comida sai igual e o dono deixa de receber (anotado); os multiplicadores da riqueza e do desemprego ficam em × 1. No marco 7: o Mercado Local, o estabilizador, o gasto extra, o imposto, a Felicidade, os eventos e a saída por salário atrasado. As obras e a manutenção, com a interface do jogador (marco 8).** Ganha: o marco 6 fica do tamanho de um marco, e o 7 é justamente o que fecha o ciclo do dinheiro e é medido pelo teste de 1 ano. Perde: no marco 6, o Banco da Cidade zera em uns 7 dias (o console mostra; ficha da Economia, parte 5);
+  - (b) o ciclo do dinheiro inteiro no marco 6 (com o Mercado Local, o estabilizador e o imposto). Ganha: o dinheiro já fecha. Perde: um marco enorme, e o 7 fica só com o teste;
+  - (c) o marco 6 sem dinheiro nenhum (só os itens). Ganha: menor ainda. Perde: os salários e o consumo pago, que são o coração da economia, ficam para depois.
+- *Sugestão:* (a).
+- *Conflitos:* nenhum. A Fatia Vertical já punha o "Mercado Local, estabilizador" na lista do teste de 1 ano.
+
+**FL6-2. Os Móveis de Madeira e a Carpintaria nível 1.**
+
+- *Contexto:* a FT1-1 diz que o jogador começa com uma Carpintaria **nível 1** (2 vagas) e que "os Móveis de Madeira dele são os Materiais Básicos da vila". Mas a receita dos Móveis (IP3, Tier 2) pede a Carpintaria **nível 2**: no nível 1, ela só faz Tábua. E subir de nível é uma obra, que pede Bloco de Pedra (FL6-5) e a interface (marco 8).
+- *Pergunta:* como os Móveis aparecem na vila? *Exemplo:* no dia 8, cada Civil já precisou de 1 Móvel; de onde ele veio?
+- *Opções:*
+  - (a) **a Carpintaria do jogador começa no nível 2** (3 vagas, com 2 empregados; a terceira vaga é para o jogador contratar). Ganha: os Móveis existem desde o primeiro dia, e o jogador tem o que vender à vila. Perde: muda o "nível 1" da FT1-1, e o custo de obra da Carpintaria (marco 8) começa mais alto;
+  - (b) nível 1 e um estoque inicial de Móveis para algumas semanas; o jogador sobe para o nível 2 quando as obras entrarem (marco 8). Ganha: igual à FT1-1, e subir de nível vira o primeiro objetivo do jogador. Perde: até o marco 8, quando o estoque acaba, a vila fica sem Materiais Básicos (−5 de Felicidade), e o teste de 1 ano do marco 7 roda sem Móveis;
+  - (c) uma exceção só na fatia: os Móveis no nível 1. Ganha: nada muda na FT1-1. Perde: quebra a escada de níveis (IP1-3), que vale para todas as construções.
+- *Sugestão:* (a).
+- *Conflitos:* a FT1-1 ("Carpintaria nível 1 própria, 2 vagas") passa a ser "nível 2, 3 vagas, 2 empregados no começo".
+
+**FL6-3. A Carpintaria do jogador antes da interface.**
+
+- *Contexto:* as construções do jogador seguem a fila de ordens (Fazer N, Manter estoque de N, Repetir sempre), dada pela interface, que só chega no marco 8. Até lá (e no teste de 1 ano, que roda sem ninguém jogando), alguém precisa decidir o que a Carpintaria faz. E ela precisa de Tora, que é da Cidade.
+- *Pergunta:* o que a Carpintaria faz sem o jogador, e de onde vem a Tora dela? *Exemplo:* o jogador tem 2 Móveis e 1 Tábua; o que sai no próximo ciclo?
+- *Opções:*
+  - (a) **ordens iniciais no `vila_inicial.json`: "manter 6 Móveis" e, depois, "manter 12 Tábuas"; o que falta de insumo, o jogador compra da Cidade, a 110% do preço, com o dinheiro dele.** No exemplo, faz Tábua (não há 3 para os Móveis). Ganha: a fila de ordens já funciona no marco 6, e o marco 8 só acrescenta a janela. Perde: um campo a mais no arquivo;
+  - (b) a Carpintaria repete sempre a receita de maior lucro, como a IA da cidade. Ganha: nada a escrever. Perde: o jogador nunca é assim no jogo de verdade, e a fila de ordens só entra no marco 8;
+  - (c) a Carpintaria fica parada até o marco 8. Ganha: simples. Perde: sem Móveis, de novo o problema da FL6-2.
+- *Sugestão:* (a).
+- *Conflitos:* nenhum. O Trabalho e Propriedade já dizia que a construção "compra os insumos do inventário compartilhado".
+
+**FL6-4. Os números do primeiro dia.**
+
+- *Contexto:* a Fatia Vertical dá o Banco (400 moedas) e o dinheiro do jogador (100). Não diz quanto dinheiro os Civis têm, o que há no estoque, nem se os itens do jogador ocupam a capacidade da cidade.
+- *Pergunta:* com que dinheiro e estoque a vila começa? *Exemplo:* no primeiro dia, às 0h, a vila come 15 Pães: eles existem?
+- *Opções:*
+  - (a) **Banco 400, jogador 100, 12 moedas por Civil (cerca de 5 dias da cesta mínima, o alvo do estabilizador); estoque: 45 Pães (3 dias), 32 Grãos, 16 Águas, 16 Toras, e do jogador 12 Tábuas e 6 Móveis; e a capacidade vale para os dois donos juntos.** Ganha: a vila começa no meio do caminho, sem fome nem sobra, e os números saem das regras (3 dias de comida, 5 dias de cesta). Perde: números a testar;
+  - (b) tudo zerado, e a produção começa do nada. Ganha: um teste duro. Perde: fome nos primeiros dias, antes do primeiro Pão;
+  - (c) estoques grandes (um mês de tudo). Ganha: folga. Perde: esconde os problemas que o teste de 1 ano quer achar.
+- *Sugestão:* (a), com o Bloco de Pedra da FL6-5.
+- *Conflitos:* nenhum.
+
+**FL6-5. A pedra das obras.**
+
+- *Contexto:* as obras pedem Tábua e **Bloco de Pedra** (V2-8: uma construção pequena, 10 de cada). O Bloco vem da Pedreira, com Pedra do Posto de Coleta, e nada disso está na fatia (FL3-1). A Pedra é um recurso de destaque da região Autoritária, a da vila. As obras entram com a interface (FL6-1), mas os custos já vão para o `regras.json` agora.
+- *Pergunta:* de onde vem a pedra das obras na fatia? *Exemplo:* o jogador quer subir a Carpintaria para o nível 3: 60 Tábuas e 90 Blocos.
+- *Opções:*
+  - (a) **os dados ganham a Pedra e o Bloco de Pedra (itens e receitas, e a Pedreira no `construcoes.json`), mas a vila começa sem Pedreira e com 150 Blocos no estoque.** Ganha: os custos ficam como a V2-8; a cadeia já existe nos dados para depois. Perde: quando os Blocos acabarem, só uma Pedreira nova (numa obra) traz mais;
+  - (b) a cadeia completa na vila: uma área de pedra no mapa, a Pedra no Posto de Coleta e uma Pedreira no lote 5. Ganha: a vila se sustenta sozinha. Perde: mais uma construção e mais 2 empregados, que a vila de 15 não tem;
+  - (c) na fatia, as obras só pedem Tábua (o dobro). Ganha: simples. Perde: um custo diferente do jogo de verdade.
+- *Sugestão:* (a). A Pedreira é média, como as oficinas.
+- *Conflitos:* a FL3-1 ("só os 6 itens da fatia") ganha 2 itens: 8.
+
+**FL6-6. As habilidades dos 15 NPCs.**
+
+- *Contexto:* a velocidade de quem trabalha é 0,5 + habilidade ÷ 100 (Produção). Os números da vila (32 Grãos e 16 Pães por dia, V2-12) contam com habilidade 50. A Geração de NPC (NPC) diz que as habilidades nascem numa faixa da cultura e da classe, mas a faixa não tem números.
+- *Pergunta:* com que habilidade cada NPC começa? *Exemplo:* a Elisa, Cozinheira: quantos Pães ela faz por dia?
+- *Opções:*
+  - (a) **todos com 50 em Trabalho Braçal e Manufaturado, escrito no `vila_inicial.json`**; a geração com faixas fica para depois da fatia. Ganha: os números da V2-12 batem exatos, e o teste de 1 ano mede a economia, não a sorte. Perde: todos iguais; o gerente sai pelo desempate (o primeiro da lista);
+  - (b) sorteadas de 30 a 70, com a semente. Ganha: NPCs diferentes. Perde: a produção muda com a semente, e um Cozinheiro fraco pode causar fome só por azar;
+  - (c) escritas uma a uma, variadas (de 40 a 60). Ganha: variedade controlada. Perde: os números da V2-12 deixam de bater exatos.
+- *Sugestão:* (a).
+- *Conflitos:* nenhum.
+
+**FL6-7. O dia de trabalho e o Pão de cada dia.**
+
+- *Contexto:* com o café às 7h (FL5-4), o empregado chega ao trabalho por volta das 7h35 e almoça meia hora (sem trabalhar), das 12h às 12h30: cerca de **6,9 horas** de trabalho. Com isso, os 2 Cozinheiros fazem **13,8 Pães por dia**, e a vila come 15: em umas 3 semanas, a vila passa fome. A FL5-4 já avisava.
+- *Pergunta:* como o dia de trabalho chega às horas que a economia precisa? *Exemplo:* a Elisa, das 6h às 15h.
+- *Opções:*
+  - (a) **o café passa para as 6h (antes do trabalho, no Período Livre), e a meia hora do almoço dentro do trabalho conta como trabalhada (uma pausa paga).** Ela trabalha das 7h05 às 15h: cerca de **7,9 horas**, e o Cozinheiro faz **15,8 Pães**. Ganha: a conta da V2-12 volta a fechar; a vila ainda mostra a ida para casa no café e no jantar. Perde: o almoço não tira ninguém do trabalho (é só uma pausa);
+  - (b) as refeições ficam como estão, e o Cozinheiro ganha uma terceira vaga ocupada. Ganha: as refeições como na FL5. Perde: tira um desempregado e muda as vagas do nível 1 (a tabela geral);
+  - (c) as refeições ficam como estão, e o Pão sobe de 4 para 5 por ciclo. Ganha: nada mais muda. Perde: muda a receita do Pão (IP3) e o preço dele.
+- *Sugestão:* (a). No `regras.json`, as refeições passam a `[6, 12, 19]`.
+- *Conflitos:* a FL5-4 e o dia de exemplo da ficha da IA (o café às 7h) mudam para as 6h.
+
+**FL6-8. Como testar o marco 6.**
+
+- *Contexto:* ainda não há texto na tela (o HUD é do marco 8). O autor precisa ver o estoque, o dinheiro e a produção.
+- *Pergunta:* como o autor confere a economia? *Exemplo:* depois de 3 dias a 4x, quantos Pães há no estoque?
+- *Opções:*
+  - (a) **na virada de cada dia, o console escreve uma linha de resumo** (Pães, Grãos, Águas, Toras, Tábuas, Móveis, o Banco, o dinheiro do jogador, a riqueza média, os dias em déficit), **e a tecla F4 escreve a tabela completa** (o estoque de cada dono, cada construção com a receita, o progresso e o motivo de estar parada). Os Braçais aparecem trabalhando nos campos, e o F3 continua mostrando as ações. Ganha: dá para acompanhar um dia inteiro a 4x olhando só o console. Perde: o console fica com mais linhas;
+  - (b) só o F4. Ganha: o console limpo. Perde: para ver a evolução, é preciso apertar o F4 todo dia;
+  - (c) um arquivo CSV com uma linha por dia (o começo do relatório do marco 7). Ganha: dá para abrir numa planilha. Perde: é o trabalho do marco 7, antes da hora.
+- *Sugestão:* (a).
+- *Conflitos:* nenhum.
+
+Depois das respostas:
+
+- tirar as marcas [Proposta] das 4 fichas, ajustar a ficha da IA (o destino dos Braçais e o café, FL6-7), a FT1-1 (FL6-2) e a FL3-1 (FL6-5), e anotar a rodada na parte 8 da Fatia Vertical;
+- começar o marco 6, na branch `codigo/marco-6-producao`.
 
 ## 5. Onde está cada coisa
 
