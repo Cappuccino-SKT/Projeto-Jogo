@@ -122,7 +122,7 @@ Cada NPC é uma entidade com estes componentes:
 | Posição | Tile (x, y) e a posição dentro do tile | |
 | Caminho | Lista de tiles até o destino | Calculado pela busca de caminho (FT1-3) |
 | Rotina | Horários da classe | Tabela da V2-2 |
-| Ação | Dormir, Trabalhar, Comer, Comprar, Lazer, Fugir ou Andar | Escolhida pela Utilidade (V2-10) |
+| Ação | Dormir, Trabalhar, Comer, Comprar ou Passear (FL5-3; o Lazer e o Fugir ficam fora da fatia) | Escolhida pela Utilidade (V2-10); passo a passo na [[Ficha Logica/IA\|ficha da IA]] |
 | Emprego | Construção e Função | Vazio = desempregado |
 | Moradia | A Casa onde mora | Vazio = dorme ao relento |
 
@@ -150,7 +150,7 @@ Tudo o que é conteúdo fica fora do código, na pasta `Jogo/` ([[Arquitetura/Mo
 | `data/construcoes.json` | JSON | As 7 construções da fatia |
 | `data/eventos.json` | JSON | Os 12 eventos da V3-6 |
 | `data/regras.json` | JSON | Todos os números das rodadas: salários, margem, cesta mínima, ticks, estações |
-| `data/vila_inicial.json` | JSON | O estado do primeiro dia: construções (a Carpintaria é do jogador), NPCs, Banco, estoque e as 100 moedas do jogador |
+| `data/vila_inicial.json` | JSON | O estado do primeiro dia: a semente, as construções nos lotes (a Carpintaria é do jogador) e os 15 NPCs com casa e emprego (marco 5, FL5-1 e FL5-2); o Banco, o estoque e as 100 moedas do jogador entram no marco 6 |
 | `data/mapas/vila.tmj` | JSON do Tiled (FL1-1) | O mapa, com as camadas, os lotes e as áreas de recurso ([[Ficha Logica/Mapa\|ficha do Mapa]]) |
 | `textos/pt-BR.json` | JSON | Todos os textos da tela (V3-12) |
 
@@ -406,6 +406,8 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 **Rodada FL1 (2026-10-17):** as fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]). O mapa é salvo em JSON (`vila.tmj`), lido pela nlohmann/json já no marco 1; a partida começa às **6h** (tick 4.800); o relógio usa no máximo 250 milissegundos por quadro e pausa quando a janela é minimizada; os testes rodam num programa próprio pelo `ctest`; as camadas do Tiled têm nomes sem acento; o marco 1 usa um conjunto de tiles de teste.
 
 **Rodada FL3 (2026-10-18):** as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]]. O marco 3 tem só os 6 itens da fatia; as receitas Braçais são 2 unidades em 1 hora; o salário por hora fica em centésimos só na conta do preço, com a metade arredondando para cima, item por item; o peso é uma unidade inteira com o Pão valendo 1; o `construcoes.json` do marco 3 é só a lista de IDs; os recursos ficam num `recursos.csv`, a estação no `regras.json` e a produtividade na área do Tiled.
+
+**Rodada FL5 (2026-10-18):** a ficha da [[Ficha Logica/IA|IA]] (marco 5). O `vila_inicial.json` põe as 10 construções nos lotes (retângulos de cor provisórios, que já bloqueiam o lote, com a porta embaixo); 15 Civis, 12 empregados (a Carpintaria começa com 2) e 3 desempregados; a ação do Período Livre é o **Passear**, o Comprar ganha dela no dia de compra, e o Lazer fica fora da fatia; os números da rotina e das notas (em centésimos) ficam no `regras.json`, com a reavaliação a cada 67 ticks; quem está dentro da casa ou do trabalho come lá, e quem está na rua vai para casa; o passeio é a um tile sorteado a até 12 tiles, com o gerador PCG32 e a semente da partida; o teste usa a tecla F3, e o botão direito e o N do marco 4 saem.
 
 **Rodada FL4 (2026-10-18):** a ficha do [[Ficha Logica/NPC|NPC]] e a busca de caminho na do [[Ficha Logica/Mapa|Mapa]] (marco 4). O NPC anda 128 tiles por hora de jogo (160 milésimos de tile por tick); a diagonal só vale com os dois tiles retos do lado livres; sem caminho, o NPC vai ao tile mais perto do destino; o boneco provisório (Mana Seed, quadros de 64 × 64) é descrito num arquivo de dados e tem um boneco de teste de reserva no Git; o desenho fica entre a posição de um tick e a do seguinte; o marco 4 se testa com o botão direito, o F2 (caminhos) e o N (mais um NPC).
 
