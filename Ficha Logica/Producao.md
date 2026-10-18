@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **o ciclo de produção, o trabalho de cada empregado, a escolha da receita da cidade e as ordens do jogador**. Os pontos marcados com FL6 estão na **rodada FL6** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **o ciclo de produção, o trabalho de cada empregado, a escolha da receita da cidade e as ordens do jogador**. Os pontos marcados com FL6 foram decididos na **rodada FL6** (2026-10-18, toda com "seguir sugestão").
 
 # Ficha Lógica: Produção
 
@@ -22,9 +22,9 @@ Documentos do sistema: [[Sistema de Produção/Descrição|Produção]] (a recei
 
 Já lidas (marco 3): as receitas (produto, lote, insumos, construção, nível mínimo, Trabalho, habilidade mínima, horas), os recursos (o item, a área do Tiled, o grupo da estação) e as porcentagens da estação. Nada novo no `receitas.csv`.
 
-**As habilidades** dos NPCs, no `vila_inicial.json` [Proposta] (FL6-6): `"habilidades": { "bracal": 50, "manufaturado": 50 }` em cada NPC.
+**As habilidades** dos NPCs, no `vila_inicial.json` (FL6-6): `"habilidades": { "bracal": 50, "manufaturado": 50 }` em cada NPC.
 
-**As ordens do jogador**, no `vila_inicial.json` [Proposta] (FL6-3), na Carpintaria dele (até a interface do marco 8):
+**As ordens do jogador**, no `vila_inicial.json` (FL6-3), na Carpintaria dele (até a interface do marco 8):
 
 ```json
 "ordens": [
@@ -72,9 +72,11 @@ Um empregado está trabalhando quando a ação dele é **Trabalhar** e:
 - nas construções **Braçais** (Fazenda, Posto de Coleta), ele está **parado num tile da área do recurso da receita** (o campo de Grão, o poço, o bosque). É o que a ficha do Mapa já dizia: "as áreas de recurso (onde os Braçais trabalham)". Ele fica visível no campo;
 - nas outras, ele está **dentro** da construção (marco 5).
 
+**O almoço conta como trabalho** (FL6-7): quem está no lugar de trabalho com a ação **Comer** (a refeição das 12h) também está trabalhando. O Braçal almoça no campo, sem voltar para casa.
+
 Se está trabalhando, some 1 a `ticksTrabalhadosNestaHora` e a `ticksTrabalhadosHoje`.
 
-**Para onde o Braçal vai** (muda a regra 4.3 da [[Ficha Logica/IA|ficha da IA]]): na ação Trabalhar, o destino é um tile livre da área do recurso da receita atual da construção dele; o primeiro empregado fica no primeiro tile livre da área (de cima para baixo, da esquerda para a direita), o segundo no segundo, e assim por diante, para não ficarem um em cima do outro. Se a construção não tem receita, ele vai para a porta e entra, como os outros.
+**Para onde o Braçal vai** (muda a regra 4.3 da [[Ficha Logica/IA|ficha da IA]]): na ação Trabalhar, o destino é um tile livre da área do recurso da receita atual da construção dele; o primeiro empregado fica no primeiro tile livre da área (de cima para baixo, da esquerda para a direita), o segundo no segundo, e assim por diante, para não ficarem um em cima do outro. Se a construção não tem receita, ele vai para a porta e entra, como os outros. Quando a receita muda de área (o Posto passa da Água para a Tora), o Braçal vê isso na reavaliação seguinte dele (a cada 5 minutos de jogo) e anda até o tile novo [Proposta].
 
 ### 4.2 O ciclo (a cada hora)
 
@@ -83,7 +85,7 @@ Para cada construção de produção da vila:
 1. **Sem receita** (`receitaDoCiclo` vazia): pegue a `receitaEscolhidaParaOProximoCiclo` (na do jogador, a regra 4.4 escolhe agora). Se não houver, a construção fica parada ("sem receita").
 2. **O ciclo não começou:** tente tirar os **insumos** do inventário (tudo ou nada, regra 4.2 do Inventário):
    - nas da Cidade, os itens da Cidade;
-   - nas do jogador, os itens do jogador; o que faltar, ele **compra** da Cidade, pelo preço de venda da cidade (ficha da Economia), se tiver dinheiro [Proposta] (FL6-3);
+   - nas do jogador, os itens do jogador; o que faltar, ele **compra** da Cidade, pelo preço de venda da cidade (ficha da Economia), se tiver dinheiro (FL6-3);
    - se faltar, a construção fica parada ("sem Grão") e tenta de novo na hora seguinte. As receitas Braçais não têm insumo.
 3. **Some ao progresso** o trabalho de cada empregado na última hora:
    > ticks trabalhados na hora × velocidade × bônus de nível
@@ -102,7 +104,7 @@ Para cada construção de produção da vila:
 
 Para cada construção de produção da **Cidade**:
 
-1. **As candidatas:** as receitas da construção com o nível mínimo atendido e que **pelo menos um empregado** consegue fazer (habilidade ≥ a mínima).
+1. **As candidatas:** as receitas da construção com o nível mínimo atendido e que **pelo menos um empregado** consegue fazer (habilidade ≥ a mínima). Uma receita Braçal só é candidata se o mapa tem a área do recurso dela [Proposta]: o Posto de Coleta da fatia tem a receita da Pedra (FL6-5), mas a vila não tem pedreira, então ele nunca a escolhe.
 2. **A nota de cada uma** (Produção, IA):
    > nota = (preço do produto − custo dos insumos) × (100 + déficit) ÷ 100
    - os preços são os **preços base** no marco 6 (o Mercado Local entra no marco 7);
@@ -132,7 +134,7 @@ As ordens valem na ordem da lista (a primeira tem a maior prioridade):
 
 *Exemplo:* uma Cozinheira com habilidade 60 num Cozinheiro nível 1 trabalha 1 hora inteira: 800 × 110 × 100 ÷ 100 = 88.000. Um Pão sai em 320.000 ÷ 88.000 = 3,6 horas.
 
-**O que a vila produz num dia**, com habilidade 50 [Proposta] (FL6-6) e cerca de **7,9 horas** de trabalho por empregado [Proposta] (FL6-7):
+**O que a vila produz num dia**, com habilidade 50 (FL6-6) e cerca de **7,9 horas** de trabalho por empregado (FL6-7):
 
 | Construção | Conta | Por dia | A vila gasta |
 |---|---|---|---|
@@ -141,7 +143,7 @@ As ordens valem na ordem da lista (a primeira tem a maior prioridade):
 | Posto de Coleta (2) | 2 × 7,9 h × 2 | 31,6 de Água **ou** Tora | 4 Águas e cerca de 6 Toras |
 | Carpintaria do jogador (2, nível 2) | Tábua: 4 por 4 h, com +10% de nível; Móveis: 2 por 4 h | Cerca de 2 Móveis (1,9 por dia é o consumo) e o resto em Tábuas | 1,9 Móveis |
 
-**Sem o café às 6h** (com o café às 7h da FL5-4), o empregado trabalha cerca de 6,9 horas, e o Cozinheiro faz **13,8 Pães por dia**, menos que os 15 que a vila come: em 3 semanas, a vila passaria fome. É a pergunta FL6-7.
+**Sem o café às 6h** (com o café às 7h da FL5-4), o empregado trabalha cerca de 6,9 horas, e o Cozinheiro faz **13,8 Pães por dia**, menos que os 15 que a vila come: em 3 semanas, a vila passaria fome. Por isso, a FL6-7 passou o café para as 6h e contou o almoço como trabalho.
 
 **O déficit e a nota** (a escolha do Posto de Coleta): Água e Tora valem 0,5 e não têm insumo. Com Água 16 e alvo 20 (4 por dia × 5), o déficit é 100 − 80 = 20%, e a nota é 0,5 × 1,2 = 0,6. Com Tora 4 e alvo 30, o déficit é 87%, e a nota 0,93: o Posto tira Tora.
 

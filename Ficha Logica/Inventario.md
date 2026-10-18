@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **o inventário da cidade** (as pilhas, o dono e a capacidade). O inventário do personagem do jogador entra com o personagem. Os pontos marcados com FL6 estão na **rodada FL6** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 6** (produção, inventário e consumo). Cobre **o inventário da cidade** (as pilhas, o dono e a capacidade). O inventário do personagem do jogador entra com o personagem. Os pontos marcados com FL6 foram decididos na **rodada FL6** (2026-10-18, toda com "seguir sugestão").
 
 # Ficha Lógica: Inventário
 
@@ -25,7 +25,7 @@ Documento do sistema: [[Sistema de Inventário/Descrição|Inventário]] (V1-5: 
 | `capacidadePorCategoria` | inteiro por categoria | matéria-prima: 900 | Não: soma das construções |
 
 - **Por que duas listas, e não uma tabela de pilhas** (item, dono, quantidade): a fatia só tem dois donos, e uma lista por dono é uma passada direta pela memória, como pede o Inventário ("um vetor por item"). Os Ricos e os itens com Rank (depois da fatia) ganham uma lista pequena à parte, como o documento prevê.
-- **A capacidade vale para os dois donos juntos** [Proposta] (FL6-4): os itens do jogador ocupam o mesmo espaço da cidade (o jogador guarda nas construções dele, que somam à capacidade).
+- **A capacidade vale para os dois donos juntos** (FL6-4): os itens do jogador ocupam o mesmo espaço da cidade (o jogador guarda nas construções dele, que somam à capacidade).
 
 ### Definições
 
@@ -33,7 +33,7 @@ A categoria de cada item vem do `itens.csv` (`materia_prima` ou `bem_de_consumo`
 
 ### O estoque do primeiro dia
 
-No `vila_inicial.json` [Proposta] (FL6-4):
+No `vila_inicial.json` (FL6-4):
 
 ```json
 "estoque_inicial": [

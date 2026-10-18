@@ -124,7 +124,7 @@ Para cada receita, compare com as regras da IP3-1 e avise se não bater (pode se
 4. **Cada item é arredondado antes de entrar no seguinte:** o Pão usa o Grão a 5 décimos, não a 4,5. É o que a Fatia Vertical já fazia no exemplo do Pão.
 5. Se o resultado der 0, o preço vira 1 décimo: nada é de graça.
 
-**Os 6 itens da fatia:**
+**Os 8 itens da fatia** (a Pedra e o Bloco de Pedra desde a FL6-5):
 
 | Item | Custo (centésimos) | Conta | Preço |
 |---|---|---|---|
@@ -134,8 +134,10 @@ Para cada receita, compare com as regras da IP3-1 e avise se não bater (pode se
 | Pão | (2 × 5 + 1 × 5) × 10 = 150; + 4 h × 100 = 550 | 550 × 1,2 ÷ 4 = 165 centésimos = 16,5 décimos | **17** (1,7) |
 | Tábua | 2 × 5 × 10 = 100; + 400 = 500 | 500 × 1,2 ÷ 4 = 150 centésimos | **15** (1,5) |
 | Móveis de Madeira | 3 × 15 × 10 = 450; + 400 = 850 | 850 × 1,2 ÷ 2 = 510 centésimos | **51** (5,1) |
+| Pedra | igual ao Grão (Posto de Coleta, 2 em 1 hora) | | **5** (0,5) |
+| Bloco de Pedra | 4 × 5 × 10 = 200; + 400 = 600 | 600 × 1,2 ÷ 4 = 180 centésimos (Pedreira, 4 Pedras em 4 horas: IP3-3) | **18** (1,8) |
 
-Os seis batem com a tabela de **preços de partida** do [[Sistema Econômico/Descrição|Econômico]] (0,5; 1,7; 1,5; 5,1). Isso vira teste: se alguém mudar a fórmula sem querer, o teste avisa.
+Os seis primeiros batem com a tabela de **preços de partida** do [[Sistema Econômico/Descrição|Econômico]] (0,5; 1,7; 1,5; 5,1). Isso vira teste: se alguém mudar a fórmula sem querer, o teste avisa.
 
 **Ordem das rodadas na fatia:** na 1ª rodada, Grão, Água e Tora; na 2ª, Pão e Tábua; na 3ª, Móveis de Madeira; a 4ª não muda nada, e o cálculo para.
 

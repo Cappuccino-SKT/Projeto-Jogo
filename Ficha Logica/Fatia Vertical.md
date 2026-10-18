@@ -145,12 +145,12 @@ Tudo o que é conteúdo fica fora do código, na pasta `Jogo/` ([[Arquitetura/Mo
 
 | Arquivo | Formato | O que tem na fatia |
 |---|---|---|
-| `data/itens.csv` | CSV (planilha) | Os 6 itens da fatia (FL3-1); os cerca de 180, numa tarefa de dados depois da fatia |
+| `data/itens.csv` | CSV (planilha) | Os 8 itens da fatia (FL3-1, e a Pedra e o Bloco de Pedra da FL6-5); os cerca de 180, numa tarefa de dados depois da fatia |
 | `data/receitas.csv` | CSV | Pão, Tábua, Móveis de Madeira e as Braçais |
 | `data/construcoes.json` | JSON | As 7 construções da fatia |
 | `data/eventos.json` | JSON | Os 12 eventos da V3-6 |
 | `data/regras.json` | JSON | Todos os números das rodadas: salários, margem, cesta mínima, ticks, estações |
-| `data/vila_inicial.json` | JSON | O estado do primeiro dia: a semente, as construções nos lotes (a Carpintaria é do jogador) e os 15 NPCs com casa e emprego (marco 5, FL5-1 e FL5-2); o Banco, o estoque e as 100 moedas do jogador entram no marco 6 |
+| `data/vila_inicial.json` | JSON | O estado do primeiro dia: a semente, as construções nos lotes (a Carpintaria é do jogador) e os 15 NPCs com casa e emprego (marco 5, FL5-1 e FL5-2); desde o marco 6, o dinheiro (o Banco, as 100 moedas do jogador e o dos Civis), o estoque inicial, o nível de cada construção, as habilidades e as ordens da Carpintaria (FL6) |
 | `data/mapas/vila.tmj` | JSON do Tiled (FL1-1) | O mapa, com as camadas, os lotes e as áreas de recurso ([[Ficha Logica/Mapa\|ficha do Mapa]]) |
 | `textos/pt-BR.json` | JSON | Todos os textos da tela (V3-12) |
 
@@ -395,7 +395,7 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 
 | Pergunta | Decisão |
 |---|---|
-| FT1-1 Papel do jogador | O jogador começa com **100 moedas** e uma **Carpintaria nível 1 própria** (2 vagas). Pode contratar desempregados, escolher o salário (Baixo, Normal, Alto), dar ordens (Fazer N, Manter estoque, Repetir), fixar o preço na faixa de ±30% e andar, comprar e vender no Mercado. Os Móveis de Madeira dele são os Materiais Básicos da vila |
+| FT1-1 Papel do jogador | O jogador começa com **100 moedas** e uma **Carpintaria nível 2 própria** (3 vagas, 2 ocupadas no começo; era nível 1, e a FL6-2 subiu para o 2, porque os Móveis pedem a Carpintaria nível 2). Pode contratar desempregados, escolher o salário (Baixo, Normal, Alto), dar ordens (Fazer N, Manter estoque, Repetir), fixar o preço na faixa de ±30% e andar, comprar e vender no Mercado. Os Móveis de Madeira dele são os Materiais Básicos da vila |
 | FT1-2 Felicidade | Os 4 fatores da regra 4.8 |
 | FT1-3 Movimento | A\* em 8 direções (diagonal custa 1,4); um caminho por destino, com o cálculo distribuído entre os ticks; os NPCs não colidem entre si |
 | FT1-4 Mapa e câmera | Mapa de **64 × 64 tiles**; zoom de 2x, 3x e 4x (padrão 3x, cerca de 33 × 19 tiles na tela); câmera com WASD ou setas, roda do mouse para o zoom, arrastar com o botão do meio; lotes de 4 × 4 (pequeno), 6 × 6 (médio) e 8 × 8 tiles (grande); um campo de Grão, um poço e um bosque |
@@ -408,6 +408,10 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 **Rodada FL3 (2026-10-18):** as fichas dos [[Ficha Logica/Itens|Itens]], dos [[Ficha Logica/Recursos|Recursos]] e das [[Ficha Logica/Receitas|Receitas]]. O marco 3 tem só os 6 itens da fatia; as receitas Braçais são 2 unidades em 1 hora; o salário por hora fica em centésimos só na conta do preço, com a metade arredondando para cima, item por item; o peso é uma unidade inteira com o Pão valendo 1; o `construcoes.json` do marco 3 é só a lista de IDs; os recursos ficam num `recursos.csv`, a estação no `regras.json` e a produtividade na área do Tiled.
 
 **Rodada FL5 (2026-10-18):** a ficha da [[Ficha Logica/IA|IA]] (marco 5). O `vila_inicial.json` põe as 10 construções nos lotes (retângulos de cor provisórios, que já bloqueiam o lote, com a porta embaixo); 15 Civis, 12 empregados (a Carpintaria começa com 2) e 3 desempregados; a ação do Período Livre é o **Passear**, o Comprar ganha dela no dia de compra, e o Lazer fica fora da fatia; os números da rotina e das notas (em centésimos) ficam no `regras.json`, com a reavaliação a cada 67 ticks; quem está dentro da casa ou do trabalho come lá, e quem está na rua vai para casa; o passeio é a um tile sorteado a até 12 tiles, com o gerador PCG32 e a semente da partida; o teste usa a tecla F3, e o botão direito e o N do marco 4 saem.
+
+**Rodada FL6 (2026-10-18):** as fichas da [[Ficha Logica/Producao|Produção]], do [[Ficha Logica/Inventario|Inventário]], da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Construcao|Construção]] (marco 6). O marco 6 tem o inventário, a produção, o consumo da cesta mínima e os salários, com os preços no preço base; o Mercado Local, o estabilizador, o gasto extra e o imposto ficam para o marco 7, e as obras, para o 8; a Carpintaria do jogador começa no **nível 2** (muda a FT1-1) e segue as ordens "manter 6 Móveis" e "manter 12 Tábuas", comprando da Cidade a Tora que faltar; a vila começa com o Banco em 400 moedas, o jogador com 100, 12 moedas por Civil e 3 dias de Pão; a Pedra, o Bloco de Pedra e a Pedreira entram nos dados, e a vila começa com 150 Blocos (a FL3-1 passa a 8 itens); todos os NPCs têm habilidade 50; o café passa para as **6h**, e o almoço conta como trabalho; o teste usa uma linha de resumo por dia no console e a tecla F4.
+
+**Rodada FA1 (2026-10-18):** os critérios da arte, no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]]: o quadro do boneco de 32 × 32, com os pés em (16, 28); a luz de cima, à esquerda, e o contorno colorido; a sombra no chão semitransparente (a cor 65) e no máximo 8 cores a mais; as bordas em conjuntos de cantos de 16 tiles; e as construções com 32 px a mais de altura que o lote.
 
 **Rodada FL4 (2026-10-18):** a ficha do [[Ficha Logica/NPC|NPC]] e a busca de caminho na do [[Ficha Logica/Mapa|Mapa]] (marco 4). O NPC anda 128 tiles por hora de jogo (160 milésimos de tile por tick); a diagonal só vale com os dois tiles retos do lado livres; sem caminho, o NPC vai ao tile mais perto do destino; o boneco provisório (Mana Seed, quadros de 64 × 64) é descrito num arquivo de dados e tem um boneco de teste de reserva no Git; o desenho fica entre a posição de um tick e a do seguinte; o marco 4 se testa com o botão direito, o F2 (caminhos) e o N (mais um NPC).
 
@@ -429,7 +433,7 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | IA | Rotina e Utilidade |
 | Construção e População | Obras, portes, moradias, lotes |
 | Eventos e Clima | 12 eventos; estações e clima do dia |
-| Inventário e Itens | Pilhas, capacidade, os 6 itens |
+| Inventário e Itens | Pilhas, capacidade, os 8 itens |
 
 ## Perguntas em aberto
 
