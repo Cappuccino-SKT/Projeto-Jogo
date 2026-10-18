@@ -2,7 +2,7 @@
 
 ## Fase atual
 
-**Código: marco 2.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco. As fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]) estão escritas, com a rodada FL1 aplicada; a da Interface (marco 2) abriu a rodada FL2.
+**Código: marco 2.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco. As fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]) estão escritas, com a rodada FL1 aplicada; a da Interface (marco 2), com a rodada FL2 aplicada; as do marco 3 (Itens, Recursos e Receitas) abriram a rodada FL3.
 
 ## O que está pronto
 
@@ -41,7 +41,7 @@
 
 1. **Marco 0:** o ambiente e um "olá, janela" com o SDL3. Pronto e confirmado pelo autor.
 2. **Marco 1:** relógio, leitura do mapa e o mapa desenhado. Pronto e confirmado pelo autor.
-3. **Marco 2:** câmera e zoom. Escrito e testado; falta a rodada FL2 e a confirmação do autor.
+3. **Marco 2:** câmera e zoom. Pronto e confirmado pelo autor, com a rodada FL2 aplicada.
 4. **Marcos 3 a 9** da fatia vertical, um por pull request.
 5. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 

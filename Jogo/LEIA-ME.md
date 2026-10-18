@@ -113,7 +113,7 @@ Minimizar a janela pausa o jogo sozinho; ao voltar, ele continua pausado.
 6. `ctest --test-dir build` termina com "100% tests passed".
 7. Abrir o `Jogo/data/mapas/vila.tmj` no Tiled (opcional): mudar um tile, salvar e abrir o jogo de novo.
 
-### Marco 2: câmera e entrada (2026-10-18)
+### Marco 2: câmera e entrada (2026-10-18, confirmado pelo autor)
 
 **O que faz:** a câmera começa com o centro do mapa no centro da tela, em 3x, e o jogador a move pelo mapa. Ela nunca mostra o vazio além da borda. Tudo segue a [[Ficha Logica/Interface|ficha da Interface]], com as sugestões da rodada FL2 (ainda sem resposta).
 

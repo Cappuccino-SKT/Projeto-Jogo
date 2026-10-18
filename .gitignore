@@ -11,3 +11,7 @@ desktop.ini
 
 # O que o compilador gera (CMake, Ninja, bibliotecas baixadas)
 build/
+
+# Arte de terceiros (pacote Mana Seed, versão grátis): só para os testes da fatia.
+# O repositório é público, e a licença do pacote não permite redistribuir os arquivos.
+Assents Temporarios/

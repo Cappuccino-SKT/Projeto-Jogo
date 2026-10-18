@@ -106,7 +106,7 @@ No marco 1, a passagem vem só da camada `colisao`. A partir do marco 6, as cons
    - converta de pixels para tiles (divida por 16). Erro se a posição ou o tamanho não forem múltiplos de 16;
    - descubra o porte pelo tamanho. Erro se não for 4 × 4, 6 × 6 ou 8 × 8 tiles;
    - erro se o lote sair do mapa, encostar em outro lote por cima ou tiver um tile bloqueado na `colisao` (FL1-5). Um lote precisa estar livre, porque a construção ainda vai nascer nele.
-8. **Leia as áreas de recurso** (camada `recursos`). Converta para tiles como os lotes. Erro se o tipo não for conhecido. Na fatia, os tipos são `campo_de_grao`, `poco` e `bosque`.
+8. **Leia as áreas de recurso** (camada `recursos`). Converta para tiles como os lotes. Erro se o tipo não for conhecido. Na fatia, os tipos são `campo_de_grao`, `poco` e `bosque`. **A partir do marco 3 [Proposta] (FL3-6):** os tipos conhecidos vêm do `recursos.csv`, e a área ganha a propriedade opcional `produtividade` ([[Ficha Logica/Recursos|ficha dos Recursos]], regra 4.2).
 9. Se a lista de erros estiver vazia, o mapa está pronto. Se não, devolva todos os erros de uma vez, não só o primeiro, para o autor corrigir tudo no Tiled numa passada.
 
 ### 4.2 Perguntar se dá para andar num tile

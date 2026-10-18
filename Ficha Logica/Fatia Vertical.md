@@ -404,6 +404,8 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 
 **Rodada FL1 (2026-10-17):** as fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]). O mapa é salvo em JSON (`vila.tmj`), lido pela nlohmann/json já no marco 1; a partida começa às **6h** (tick 4.800); o relógio usa no máximo 250 milissegundos por quadro e pausa quando a janela é minimizada; os testes rodam num programa próprio pelo `ctest`; as camadas do Tiled têm nomes sem acento; o marco 1 usa um conjunto de tiles de teste.
 
+**Rodada FL2 (2026-10-18):** a ficha da [[Ficha Logica/Interface|Interface]] (câmera do marco 2). A câmera anda 900 pixels da tela por segundo em qualquer zoom (Shift dobra, diagonal corrigida); o zoom deixa o ponto embaixo do mouse parado; a borda do mapa nunca sai da borda da tela; a câmera começa no centro do mapa e não vai no save; mover pela borda da tela fica como opção futura, desligada; uma tabela de ações para as teclas entra no marco 3.
+
 **Rodada FT2:** o código foi liberado marco a marco. As bibliotecas entram por marco, e os nomes são em português, sem acento e descritivos ([[Arquitetura/Descrição|Arquitetura]]).
 
 **Organização das pastas (2026-10-17):** esta ficha é o mapa geral da fatia. Cada sistema ganha a sua ficha nesta pasta, no modelo da [[Ficha Logica/Descrição|Ficha Lógica]], pouco antes do marco que o usa.
