@@ -8,7 +8,8 @@
 - **Fichas do marco 1 (2026-10-17):** [[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]] (tiles e camadas) escritas, com a **rodada FL1 aplicada**. O marco 0 não tem ficha.
 - **Marco 0 (2026-10-17):** na branch `codigo/marco-0-ambiente` (feita em cima da `docs/fichas-marco-1`). No primeiro teste do autor, a janela de 1600 × 900 não cabia na tela dele (1600 × 900, com 1600 × 860 livres) e o X ficou escondido; corrigido e **confirmado pelo autor** (seção 3).
 - **Marco 1 (2026-10-17):** escrito na branch `codigo/marco-1-relogio-e-mapa` (feita em cima da `codigo/marco-0-ambiente`), em 5 passos; **confirmado pelo autor** (seção 3).
-- **Próximo passo:** a ficha da Interface (câmera, zoom e teclas) e o marco 2, na branch `codigo/marco-2-camera-e-entrada`.
+- **Ficha da Interface e marco 2 (2026-10-18):** na branch `codigo/marco-2-camera-e-entrada` (feita em cima da `codigo/marco-1-relogio-e-mapa`). A [[Ficha Logica/Interface|ficha da Interface]] (câmera, zoom e teclas) abriu a **rodada FL2** (seção 4), e o código já segue as sugestões dela. Falta o autor responder a FL2 e testar o marco 2.
+- **Próximo passo:** as respostas da FL2 e o teste do marco 2; depois, as fichas de Itens, Recursos e Receitas e o marco 3.
 - **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. As fichas do marco 1 e o marco 0 já entraram; falta o `codigo/marco-1-relogio-e-mapa`, e depois o do marco 2.
 
 ## 2. Como trabalhamos
@@ -77,10 +78,63 @@
 - **Ambiente (FT1-7):** g++ 15.2 (MinGW), CMake, Ninja e Git, já instalados; VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; tudo neste repositório.
 - **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 - **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
+- **Marco 2 (escrito, falta o autor confirmar):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
 
-## 4. Rodada pendente
+## 4. Rodada pendente: FL2, a câmera do marco 2
 
-Nenhuma. A **FL1** (fichas do marco 1) foi aplicada em 2026-10-17, com "seguir sugestão" em todas: as decisões estão nas fichas do [[Ficha Logica/Tempo|Tempo]] e do [[Ficha Logica/Mapa|Mapa]] e na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]].
+**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever a [[Ficha Logica/Interface|ficha da Interface]] (câmera, zoom e teclas), apareceram 4 pontos que os documentos não decidem. A FT1-4 já decidiu o principal: WASD ou setas, a roda do mouse para o zoom em 2x, 3x e 4x (padrão 3x) e arrastar com o botão do meio. **O código do marco 2 já segue as sugestões abaixo**; se a resposta for outra, a mudança é pequena. (A FL1 foi aplicada em 2026-10-17, toda com "seguir sugestão".)
+
+Responder no `Respostas.txt` pelos códigos (FL2-1, FL2-2...). "Seguir sugestão" aceita a proposta.
+
+**FL2-1. A velocidade da câmera no teclado.**
+
+- *Contexto:* a câmera anda com WASD ou com as setas (FT1-4), mas a velocidade não foi decidida. O mapa da vila tem 64 tiles de lado.
+- *Pergunta:* quantos tiles por segundo a câmera anda, e o que muda no zoom, no Shift e na diagonal? *Exemplo:* a 3x, segurando D, quanto tempo leva para ir da Fazenda (à esquerda) até o lago (à direita), uns 40 tiles?
+- *Opções:*
+  - (a) **velocidade fixa na tela: 900 pixels da tela por segundo**, em qualquer zoom (a 3x, cerca de 19 tiles por segundo: 2 segundos da Fazenda ao lago; a 2x, 28 tiles por segundo). Shift dobra a velocidade. Na diagonal, a mesma velocidade das retas. Ganha: parece igual em todo zoom. Perde: no zoom 2x, os tiles passam mais rápido;
+  - (b) velocidade fixa no mundo (por exemplo, 20 tiles por segundo em qualquer zoom). Ganha: o mundo anda sempre igual. Perde: no 4x a tela parece correr, e no 2x parece lenta;
+  - (c) a câmera acelera devagar e freia devagar (com "inércia"). Ganha: movimento suave. Perde: menos preciso para quem quer parar num tile exato.
+- *Sugestão:* (a), com Shift × 2 e a diagonal corrigida (× 0,7071). Os números ficam numa tabela do código e, no futuro, no perfil do jogador, para o jogador ajustar.
+- *Conflitos:* nenhum.
+
+**FL2-2. O zoom, o limite do mapa e onde a câmera começa.**
+
+- *Contexto:* o zoom troca de nível pela roda (FT1-4). Falta decidir em que ponto ele se fixa, se a câmera pode sair do mapa e onde ela começa.
+- *Pergunta:* *exemplo:* o mouse está em cima do poço e o jogador gira a roda para o 4x. O poço continua embaixo do mouse, ou vai para outro lugar da tela? E se o jogador segura A por muito tempo, a câmera mostra o vazio além da borda?
+- *Opções do zoom:*
+  - (a) **o ponto embaixo do mouse fica parado**, como em Stardew Valley e RimWorld. Ganha: dá para "mergulhar" no que se quer ver. Perde: nada relevante;
+  - (b) o zoom é sempre no centro da tela. Ganha: mais simples. Perde: o jogador precisa mover a câmera depois de cada zoom.
+- *Opções do limite:*
+  - (a) **a borda do mapa nunca sai da borda da tela**; se o mapa ficar menor que a janela (janela enorme no 2x), ele fica centralizado. Ganha: nunca aparece fundo vazio. Perde: o tile da borda nunca fica no centro da tela;
+  - (b) a câmera pode passar da borda até meia tela. Ganha: dá para centralizar a borda. Perde: aparece o fundo preto.
+- *Sugestão:* zoom (a), limite (a), e a câmera **começa com o centro do mapa no centro da tela**, em 3x (no marco 6, pode começar na Carpintaria do jogador). A posição da câmera **não vai no save**: ao carregar, ela recomeça no centro. Gravar a posição é fácil depois, se o autor quiser.
+- *Conflitos:* nenhum.
+
+**FL2-3. Mover a câmera pela borda da tela.**
+
+- *Contexto:* a [[Interface/Descrição|Interface]] diz, na seção "Controles", "Câmera: WASD, bordas da tela ou arrastar com o botão do meio". A FT1-4, que veio depois, só cita WASD, setas e o botão do meio.
+- *Pergunta:* encostar o mouse na borda da tela move a câmera? *Exemplo:* o autor joga em janela, com outra janela ao lado. Levar o mouse até a outra janela passa pela borda direita do jogo, e a câmera anda sem ele querer.
+- *Opções:*
+  - (a) **não na fatia; no futuro, como opção nas configurações, desligada por padrão**. Ganha: nada acontece sem querer, em janela. Perde: quem gosta de jogar assim (estilo RTS clássico) espera um pouco;
+  - (b) sim, ligado, com uma faixa de 8 pixels. Ganha: o jeito RTS. Perde: em janela, a câmera foge toda hora;
+  - (c) sim, mas só em tela cheia (F11). Ganha: sem o problema da janela. Perde: um comportamento que muda sem o jogador saber por quê.
+- *Sugestão:* (a). A linha da Interface passa a dizer "WASD ou setas, ou arrastar com o botão do meio; mover pela borda da tela é uma opção futura, desligada por padrão".
+- *Conflitos:* a frase da Interface, corrigida como acima.
+
+**FL2-4. As teclas e os atalhos remapeáveis.**
+
+- *Contexto:* a Interface quer atalhos remapeáveis, guardados no perfil do jogador. O perfil só aparece no marco 8 ou depois. Até lá, as teclas provisórias do marco 1 (Espaço, 1, 2, 3, F1, F11) e as da câmera ficam no código.
+- *Pergunta:* como guardar as teclas até o perfil existir, sem ter que procurar tecla por tecla no código depois?
+- *Opções:*
+  - (a) **uma tabela de ações no código** (Pausar → Espaço; Velocidade 1x → 1; Mover para cima → W ou ↑; e assim por diante), e o laço principal pergunta "a ação Pausar foi apertada?", nunca "o Espaço foi apertado?". No perfil, a tabela passa a ser lida do arquivo. Ganha: trocar uma tecla é mudar uma linha, e o remapear futuro já tem onde se encaixar. Perde: um pouco mais de código agora;
+  - (b) as teclas direto no código, como no marco 1, e a tabela só no marco 8. Ganha: mais simples agora. Perde: refazer o laço principal depois.
+- *Sugestão:* (a), começando no **marco 3**: o marco 2 ainda usa as teclas direto, porque são poucas, e a tabela entra com o próximo grupo de teclas. As letras usam a posição no teclado (o W é a tecla do W em qualquer layout).
+- *Conflitos:* nenhum.
+
+Depois das respostas:
+
+- tirar as marcas [Proposta] da ficha da Interface e corrigir a seção "Controles" da Interface (FL2-3);
+- ajustar o código do marco 2 se alguma resposta for diferente da sugestão.
 
 ## 5. Onde está cada coisa
 

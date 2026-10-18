@@ -9,6 +9,7 @@
 
 #include <glad/gl.h>
 
+#include <algorithm>
 #include <string>
 
 #include "DesenhoDoMapa.h"
@@ -122,6 +123,35 @@ void escreverAsViradasNoConsole(const RelogioDoMundo& relogio)
     }
 }
 
+// A direção em que a câmera anda pelas teclas seguradas (ficha da Interface,
+// regra 4.1). Usa a posição da tecla (scancode): o W é a tecla do W em
+// qualquer layout de teclado.
+struct DirecaoDasTeclasSeguradas {
+    int direcaoX = 0;
+    int direcaoY = 0;
+    bool correndoComShift = false;
+};
+
+DirecaoDasTeclasSeguradas lerDirecaoDasTeclasSeguradas()
+{
+    const bool* teclaEstaSegurada = SDL_GetKeyboardState(nullptr);
+    DirecaoDasTeclasSeguradas direcao;
+    if (teclaEstaSegurada[SDL_SCANCODE_W] || teclaEstaSegurada[SDL_SCANCODE_UP]) {
+        direcao.direcaoY -= 1;
+    }
+    if (teclaEstaSegurada[SDL_SCANCODE_S] || teclaEstaSegurada[SDL_SCANCODE_DOWN]) {
+        direcao.direcaoY += 1;
+    }
+    if (teclaEstaSegurada[SDL_SCANCODE_A] || teclaEstaSegurada[SDL_SCANCODE_LEFT]) {
+        direcao.direcaoX -= 1;
+    }
+    if (teclaEstaSegurada[SDL_SCANCODE_D] || teclaEstaSegurada[SDL_SCANCODE_RIGHT]) {
+        direcao.direcaoX += 1;
+    }
+    direcao.correndoComShift = teclaEstaSegurada[SDL_SCANCODE_LSHIFT] || teclaEstaSegurada[SDL_SCANCODE_RSHIFT];
+    return direcao;
+}
+
 // As teclas provisórias do marco 1 (FL1-3) que mexem no relógio.
 void tratarTeclaDoRelogio(SDL_Keycode teclaApertada, RelogioDoMundo& relogio)
 {
@@ -210,11 +240,17 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         SDL_Quit();
         return 1;
     }
-    const CameraDoMapa cameraDoMapa;  // parada no canto de cima à esquerda, zoom 3x (marco 2: câmera que anda)
+    // A câmera (ficha da Interface): zoom 3x, centralizada no primeiro quadro,
+    // quando o tamanho da janela já é o certo.
+    CameraDoMapa cameraDoMapa;
+    cameraDoMapa.definirTamanhoDoMapa(mapaDaVila.larguraEmTiles * mapaDaVila.tamanhoDoTileEmPixels,
+                                      mapaDaVila.alturaEmTiles * mapaDaVila.tamanhoDoTileEmPixels);
+    bool cameraJaFoiCentralizada = false;
     bool mostrarColisaoParaDepuracao = false;
 
     SDL_Log("Esc ou o X fecham; F11 liga a tela cheia; F1 mostra a colisão.");
     SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
+    SDL_Log("Câmera: WASD ou setas (Shift corre), roda do mouse para o zoom, botão do meio para arrastar.");
 
     // 5. O relógio do mundo de uma partida nova (6h do dia 1 da Primavera).
     RelogioDoMundo relogioDoMundo = RelogioDoMundo::criarParaPartidaNova(RegrasDoTempo{});
@@ -246,6 +282,31 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                     tratarTeclaDoRelogio(teclaApertada, relogioDoMundo);
                 }
             }
+            // A câmera pelo mouse. A SDL mede o mouse em "pontos" da janela; a
+            // densidade converte para pixels da tela (é 1 num monitor comum).
+            const float densidadeDePixels = SDL_GetWindowPixelDensity(janelaDoJogo);
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_WHEEL) {
+                float quantoARodaGirou = eventoRecebido.wheel.y;
+                if (eventoRecebido.wheel.direction == SDL_MOUSEWHEEL_FLIPPED) {
+                    quantoARodaGirou = -quantoARodaGirou;
+                }
+                const bool zoomMudou = cameraDoMapa.mudarZoomPelaRoda(quantoARodaGirou,
+                                                                      eventoRecebido.wheel.mouse_x * densidadeDePixels,
+                                                                      eventoRecebido.wheel.mouse_y * densidadeDePixels);
+                if (zoomMudou) {
+                    SDL_Log("Zoom: %dx.", cameraDoMapa.zoomAtual());
+                }
+            }
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_MIDDLE) {
+                cameraDoMapa.comecarArrasto();
+            }
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_UP && eventoRecebido.button.button == SDL_BUTTON_MIDDLE) {
+                cameraDoMapa.terminarArrasto();
+            }
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_MOTION) {
+                cameraDoMapa.arrastarPeloMouse(eventoRecebido.motion.xrel * densidadeDePixels,
+                                               eventoRecebido.motion.yrel * densidadeDePixels);
+            }
             // Janela minimizada: pausa sozinho (FL1-3). Ao voltar, continua pausado.
             if (eventoRecebido.type == SDL_EVENT_WINDOW_MINIMIZED && !relogioDoMundo.jogoEstaPausado()) {
                 relogioDoMundo.alternarPausa();
@@ -273,10 +334,23 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             tituloMostradoNaJanela = tituloDesteQuadro;
         }
 
-        // 6d. Desenha o quadro: fundo, mapa (personagens no meio, a partir do marco 4) e depuração.
+        // 6d. A câmera: tamanho da tela, teclas seguradas e o limite ao mapa.
+        //     Ela anda pelo tempo real (também com o jogo pausado), com o mesmo
+        //     limite de 250 milissegundos do relógio para um quadro travado.
         int larguraDaTelaEmPixels = 0;
         int alturaDaTelaEmPixels = 0;
         SDL_GetWindowSizeInPixels(janelaDoJogo, &larguraDaTelaEmPixels, &alturaDaTelaEmPixels);
+        cameraDoMapa.atualizarTamanhoDaTela(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        if (!cameraJaFoiCentralizada) {
+            cameraDoMapa.centralizarNoMapa();
+            cameraJaFoiCentralizada = true;
+        }
+        const double segundosReaisDoQuadro = std::min(nanossegundosDesdeOQuadroAnterior, int64_t{250'000'000}) / 1e9;
+        const DirecaoDasTeclasSeguradas direcao = lerDirecaoDasTeclasSeguradas();
+        cameraDoMapa.moverPeloTeclado(direcao.direcaoX, direcao.direcaoY, segundosReaisDoQuadro, direcao.correndoComShift);
+        cameraDoMapa.limitarAoMapa();
+
+        // 6e. Desenha o quadro: fundo, mapa (personagens no meio, a partir do marco 4) e depuração.
         glViewport(0, 0, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         glClearColor(corDoFundoAtrasDoMapa[0], corDoFundoAtrasDoMapa[1], corDoFundoAtrasDoMapa[2], 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
