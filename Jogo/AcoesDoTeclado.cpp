@@ -16,8 +16,8 @@ TabelaDeAcoesDoTeclado TabelaDeAcoesDoTeclado::criarComAsTeclasPadrao()
         {AcaoDoJogador::MoverCameraParaEsquerda, SDL_SCANCODE_A, SDL_SCANCODE_LEFT},
         {AcaoDoJogador::MoverCameraParaDireita, SDL_SCANCODE_D, SDL_SCANCODE_RIGHT},
         {AcaoDoJogador::CorrerComACamera, SDL_SCANCODE_LSHIFT, SDL_SCANCODE_RSHIFT},
-        {AcaoDoJogador::CriarNpcDeTeste, SDL_SCANCODE_N},
         {AcaoDoJogador::MostrarCaminhosParaDepuracao, SDL_SCANCODE_F2},
+        {AcaoDoJogador::MostrarAcoesDosNpcsParaDepuracao, SDL_SCANCODE_F3},
     };
     return tabela;
 }

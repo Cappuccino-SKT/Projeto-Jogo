@@ -26,6 +26,10 @@ public:
     void desenharNpcs(const entt::registry& registroDasEntidades, double fracaoDoTick, int tamanhoDoTileEmPixels,
                       const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
 
+    // F3 (FL5-6): um quadradinho em cima da cabeça de cada NPC, com a cor da ação.
+    void desenharMarcadoresDasAcoes(const entt::registry& registroDasEntidades, double fracaoDoTick, int tamanhoDoTileEmPixels,
+                                    const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
+
     // Devolve à placa de vídeo tudo o que foi pedido.
     void liberar();
 
@@ -39,6 +43,10 @@ private:
         PontoEmPixelsDoMundo pes;
         QuadroNaFolha quadro;
         unsigned int numeroDaEntidade = 0;
+        AcaoDoNpc acao = AcaoDoNpc::Nenhuma;
     };
     std::vector<NpcParaDesenhar> npcsParaDesenhar;  // reaproveitada a cada quadro
+
+    // Passos 1 a 3 da regra 4.6: os NPCs visíveis (os que estão na rua), na ordem de desenho.
+    void juntarNpcsVisiveis(const entt::registry& registroDasEntidades, double fracaoDoTick, int tamanhoDoTileEmPixels);
 };

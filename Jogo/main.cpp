@@ -1,9 +1,10 @@
 // main.cpp: o começo do programa.
 //
 // Abre a janela com o OpenGL 3.3, lê os dados e o mapa da vila, cria o
-// relógio do mundo e o NPC (marco 4) e repete o laço principal até o jogador
-// fechar (no X ou com a tecla Esc). A cada quadro: lê as teclas e o mouse,
-// avança o relógio pelo tempo real (os NPCs andam a cada tick) e desenha.
+// relógio do mundo e os 15 NPCs da vila (marco 5) e repete o laço principal
+// até o jogador fechar (no X ou com a tecla Esc). A cada quadro: lê as teclas
+// e o mouse, avança o relógio pelo tempo real (a cada tick, os NPCs decidem o
+// que fazer e andam) e desenha.
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>  // deixa o main() funcionar como programa de janela no Windows
@@ -27,6 +28,8 @@
 #include "Mapa/BuscaDeCaminho.h"
 #include "Mapa/MapaLocal.h"
 #include "Npc/MovimentoDosNpcs.h"
+#include "Npc/RotinaDosNpcs.h"
+#include "Tempo/SorteioComSemente.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "TextoDaDataDoJogo.h"
 
@@ -50,9 +53,6 @@ constexpr int limiteDeProblemasNaCaixaDeMensagem = 25;
 
 // O boneco dos NPCs (ficha do NPC, FL4-4), dentro da pasta dos dados.
 const std::string caminhoDoArquivoDoBoneco = pastaDosDadosDoJogo + "/personagens/boneco_provisorio.json";
-
-// A tecla N cria NPCs de teste até este tanto (FL4-6).
-constexpr int limiteDeNpcsDeTeste = 50;
 
 // O tamanho com que a janela abre, e se ela já abre maximizada.
 struct TamanhoInicialDaJanela {
@@ -243,25 +243,6 @@ void tratarAcaoDoRelogio(AcaoDoJogador acao, RelogioDoMundo& relogio)
     }
 }
 
-// O tile do centro do mapa, onde os NPCs do marco 4 nascem (ficha do NPC, regra 4.1).
-PosicaoDeTile tileDoCentroDoMapa(const MapaLocal& mapa)
-{
-    return {mapa.larguraEmTiles / 2, mapa.alturaEmTiles / 2};
-}
-
-// Cria mais um NPC no tile livre seguinte ao último usado (regra 4.1 e tecla N).
-void criarMaisUmNpc(entt::registry& registroDasEntidades, const MapaLocal& mapa, int& quantidadeDeNpcsCriados)
-{
-    const std::optional<PosicaoDeTile> tileLivre = acharTileLivreEmVoltaDe(mapa, tileDoCentroDoMapa(mapa), quantidadeDeNpcsCriados);
-    if (!tileLivre.has_value()) {
-        SDL_Log("Não há tile livre para mais um NPC.");
-        return;
-    }
-    criarNpcNoTile(registroDasEntidades, *tileLivre);
-    ++quantidadeDeNpcsCriados;
-    SDL_Log("NPC %d criado em (%d, %d).", quantidadeDeNpcsCriados, tileLivre->tileX, tileLivre->tileY);
-}
-
 // Os tiles que faltam andar em todos os caminhos (para o F2).
 std::vector<PosicaoDeTile> juntarTilesDosCaminhos(const entt::registry& registroDasEntidades)
 {
@@ -375,19 +356,20 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     bool cameraJaFoiCentralizada = false;
     bool mostrarColisaoParaDepuracao = false;
     bool mostrarCaminhosParaDepuracao = false;
+    bool mostrarAcoesDosNpcsParaDepuracao = false;
     const TabelaDeAcoesDoTeclado tabelaDeAcoes = TabelaDeAcoesDoTeclado::criarComAsTeclasPadrao();
 
     SDL_Log("Esc ou o X fecham; F11 liga a tela cheia; F1 mostra a colisão.");
     SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
     SDL_Log("Câmera: WASD ou setas (Shift corre), roda do mouse para o zoom, botão do meio para arrastar.");
-    SDL_Log("NPCs: botão direito manda todos ao tile; N cria mais um (até %d); F2 mostra os caminhos.", limiteDeNpcsDeTeste);
+    SDL_Log("NPCs: F2 mostra os caminhos; F3 mostra a cor da ação de cada um e escreve a tabela no console.");
 
     // 5. O relógio do mundo de uma partida nova (6h do dia 1 da Primavera).
     const RegrasDoTempo regrasDoTempo;
     RelogioDoMundo relogioDoMundo = RelogioDoMundo::criarParaPartidaNova(regrasDoTempo);
 
-    // 5b. Os NPCs (marco 4, ficha do NPC): as regras do movimento, a busca de
-    //     caminho e o primeiro NPC, no centro do mapa.
+    // 5b. Os NPCs (marcos 4 e 5): as regras do movimento, a busca de caminho,
+    //     o sorteio com a semente da partida e os 15 NPCs da vila, dentro das casas.
     RegrasDoMovimento regrasDoMovimento;
     regrasDoMovimento.velocidadeDeAndarEmMilesimosPorTick =
         converterVelocidadeParaMilesimosPorTick(dadosDoJogo.regras.velocidadeDeAndarEmTilesPorHora, regrasDoTempo.ticksPorHoraDeJogo);
@@ -395,8 +377,12 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     regrasDoMovimento.distanciaDoCicloDeAndarEmMilesimos = definicaoDoBoneco.distanciaDoCicloDeAndarEmMilesimos();
     entt::registry registroDasEntidades;
     BuscadorDeCaminho buscadorDeCaminho;
-    int quantidadeDeNpcsCriados = 0;
-    criarMaisUmNpc(registroDasEntidades, mapaDaVila, quantidadeDeNpcsCriados);
+    SorteioComSemente sorteioDosNpcs(dadosDoJogo.vilaInicial.sementeDaPartida, sequenciaDoSorteioDosNpcs);
+    ContextoDaRotina contextoDaRotina{registroDasEntidades, mapaDaVila, dadosDoJogo.vilaInicial, dadosDoJogo.regras.vidaDosNpcs,
+                                      regrasDoTempo.ticksPorHoraDeJogo, sorteioDosNpcs};
+    criarOsNpcsDaVila(contextoDaRotina, relogioDoMundo);
+    SDL_Log("A vila: %d construções e %d NPCs.", static_cast<int>(dadosDoJogo.vilaInicial.construcoes.size()),
+            static_cast<int>(dadosDoJogo.vilaInicial.npcsIniciais.size()));
 
     std::string tituloMostradoNaJanela;
     Uint64 instanteDoQuadroAnteriorEmNanossegundos = SDL_GetTicksNS();
@@ -426,11 +412,12 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                 } else if (acao == AcaoDoJogador::MostrarCaminhosParaDepuracao) {
                     // Mostra os caminhos dos NPCs em azul (FL4-6).
                     mostrarCaminhosParaDepuracao = !mostrarCaminhosParaDepuracao;
-                } else if (acao == AcaoDoJogador::CriarNpcDeTeste) {
-                    if (quantidadeDeNpcsCriados < limiteDeNpcsDeTeste) {
-                        criarMaisUmNpc(registroDasEntidades, mapaDaVila, quantidadeDeNpcsCriados);
-                    } else {
-                        SDL_Log("Já há %d NPCs de teste (o limite).", limiteDeNpcsDeTeste);
+                } else if (acao == AcaoDoJogador::MostrarAcoesDosNpcsParaDepuracao) {
+                    // A cor da ação em cima de cada NPC e a tabela no console (FL5-6).
+                    mostrarAcoesDosNpcsParaDepuracao = !mostrarAcoesDosNpcsParaDepuracao;
+                    if (mostrarAcoesDosNpcsParaDepuracao) {
+                        SDL_Log("%s:\n%s", montarTextoDaHora(relogioDoMundo).c_str(),
+                                montarTabelaDasAcoesDosNpcs(contextoDaRotina, relogioDoMundo).c_str());
                     }
                 } else if (acao.has_value()) {
                     tratarAcaoDoRelogio(*acao, relogioDoMundo);
@@ -457,17 +444,6 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_UP && eventoRecebido.button.button == SDL_BUTTON_MIDDLE) {
                 cameraDoMapa.terminarArrasto();
             }
-            // O botão direito dá ordem (Interface): no marco 4, manda todos os NPCs ao tile (FL4-6).
-            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_RIGHT) {
-                const std::optional<PosicaoDeTile> tileClicado = cameraDoMapa.converterPontoDaTelaEmTile(
-                    eventoRecebido.button.x * densidadeDePixels, eventoRecebido.button.y * densidadeDePixels, mapaDaVila.tamanhoDoTileEmPixels);
-                if (tileClicado.has_value()) {
-                    for (const entt::entity npc : registroDasEntidades.view<PosicaoDoNpc>()) {
-                        pedirCaminhoParaONpc(registroDasEntidades, npc, *tileClicado, relogioDoMundo.tickAtual());
-                    }
-                    SDL_Log("Destino dos NPCs: (%d, %d).", tileClicado->tileX, tileClicado->tileY);
-                }
-            }
             if (eventoRecebido.type == SDL_EVENT_MOUSE_MOTION) {
                 cameraDoMapa.arrastarPeloMouse(eventoRecebido.motion.xrel * densidadeDePixels,
                                                eventoRecebido.motion.yrel * densidadeDePixels);
@@ -490,11 +466,14 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         for (int tick = 0; tick < ticksParaAvancar; ++tick) {
             relogioDoMundo.avancarUmTick();
             escreverAsViradasNoConsole(relogioDoMundo);
-            // A cada tick (ficha do NPC, parte 3): primeiro os caminhos pedidos, depois o andar.
+            // A cada tick (ficha da IA, parte 3): a rotina decide, os caminhos
+            // pedidos são calculados, os NPCs andam e, por fim, quem chegou entra.
+            rodarARotinaAntesDeAndar(contextoDaRotina, relogioDoMundo);
             for (const std::string& aviso : atenderPedidosDeCaminho(registroDasEntidades, mapaDaVila, buscadorDeCaminho, regrasDoMovimento)) {
                 SDL_Log("Aviso: %s.", aviso.c_str());
             }
             andarOsNpcsUmTick(registroDasEntidades, mapaDaVila, regrasDoMovimento, relogioDoMundo.tickAtual());
+            cuidarDasChegadas(contextoDaRotina, relogioDoMundo);
         }
 
         // 6c. A data no título da janela, trocada só quando o texto muda.
@@ -526,6 +505,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         glClear(GL_COLOR_BUFFER_BIT);
 
         desenhistaDoMapa.desenharCamadasAbaixoDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        desenhistaDoMapa.desenharConstrucoesProvisorias(dadosDoJogo.vilaInicial, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         desenhistaDosPersonagens.desenharNpcs(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(), mapaDaVila.tamanhoDoTileEmPixels,
                                               cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         desenhistaDoMapa.desenharCamadasAcimaDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
@@ -535,6 +515,11 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         if (mostrarCaminhosParaDepuracao) {
             desenhistaDoMapa.desenharTilesDosCaminhosParaDepuracao(juntarTilesDosCaminhos(registroDasEntidades), mapaDaVila, cameraDoMapa,
                                                                    larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        }
+        if (mostrarAcoesDosNpcsParaDepuracao) {
+            desenhistaDosPersonagens.desenharMarcadoresDasAcoes(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(),
+                                                                mapaDaVila.tamanhoDoTileEmPixels, cameraDoMapa, larguraDaTelaEmPixels,
+                                                                alturaDaTelaEmPixels);
         }
 
         SDL_GL_SwapWindow(janelaDoJogo);

@@ -10,6 +10,7 @@
 #include "CameraDoMapa.h"
 #include "DesenhoDeQuadrados.h"
 #include "Mapa/MapaLocal.h"
+#include "Vila/VilaInicial.h"
 
 class DesenhistaDoMapa {
 public:
@@ -26,6 +27,11 @@ public:
     // F2 (FL4-6): pinta de azul translúcido uma lista de tiles (os caminhos dos NPCs).
     void desenharTilesDosCaminhosParaDepuracao(const std::vector<PosicaoDeTile>& tilesDosCaminhos, const MapaLocal& mapa,
                                                const CameraDoMapa& camera, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
+
+    // Marco 5 (FL5-1): cada construção da vila vira um retângulo de cor lisa
+    // no lote, uma cor por tipo, com a parede da porta mais escura.
+    void desenharConstrucoesProvisorias(const VilaDoJogo& vila, const MapaLocal& mapa, const CameraDoMapa& camera,
+                                        int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
 
     // Devolve à placa de vídeo tudo o que foi pedido. Chamar antes de fechar o OpenGL.
     void liberar();
