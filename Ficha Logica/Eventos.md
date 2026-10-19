@@ -108,9 +108,9 @@ Na ordem do `eventos.json`, para cada ocasional:
 |---|---|
 | `producao_da_construcao` | Enquanto ativo, o lote das receitas daquele tipo de construção é multiplicado pela porcentagem (com o resto guardado, como a estação: [[Ficha Logica/Producao\|Produção]], regra 4.2). Dois ativos se multiplicam |
 | `felicidade` | Enquanto ativo, soma no fator "Eventos duradouros" ([[Ficha Logica/Felicidade\|Felicidade]]) |
-| `mudar_estoque` | Pontual: tira uma porcentagem ou põe uma quantidade de um item da Cidade |
+| `mudar_estoque` | Pontual: tira uma porcentagem ou põe uma quantidade de um item da Cidade. Quando põe, põe o que couber na capacidade [Proposta] |
 | `npcs_doentes` | Sorteia N Civis com emprego; cada um fica em casa (a ação Dormir ganha sempre) pelos dias do evento |
-| `mercador_compra` | Pontual: compra do item da Cidade com mais dias de estoque (estoque ÷ consumo previsto), a 90% do preço local; o dinheiro entra no Banco. É a única entrada de dinheiro de fora da vila |
+| `mercador_compra` | Pontual: compra do item da Cidade com mais dias de estoque (estoque ÷ consumo previsto), a 90% do preço local; o dinheiro entra no Banco. É a única entrada de dinheiro de fora da vila. Os itens sem consumo previsto ficam de fora (o Bloco de Pedra, que só as obras usam, não tem "dias de estoque") [Proposta] |
 
 ### 4.5 O aviso
 

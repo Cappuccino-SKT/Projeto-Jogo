@@ -216,7 +216,8 @@ Em `Codigo/Producao/`:
 
 1. **Gastou:** o que saiu do inventário para a cesta mínima, o gasto extra e os insumos dos ciclos.
 2. **Quis gastar e faltou:** em cada hora em que uma construção, com gente trabalhando, ficou parada por falta de um insumo, conta a parte de um ciclo daquela hora: quantidade do insumo × ticks trabalhados na hora × 100 ÷ (horas da receita × 800), em centésimos.
-3. **A fila do jogador:** quando nenhuma ordem passa, mas alguma **quer produzir** e só falta insumo, a construção fica parada "sem Tora" (e não "sem ordem"), e cada ordem que quer produzir conta, no passo 2, os insumos que faltam a ela.
+3. **A fila do jogador:** quando nenhuma ordem passa, mas alguma **quer produzir** e só falta insumo, a construção fica parada "sem Tora" (e não "sem ordem"), e cada ordem que quer produzir conta, no passo 2, os insumos que faltam a ela. Se os insumos existem na Cidade e só falta dinheiro ao jogador, a parada é "sem dinheiro para os insumos", sem demanda [Proposta].
+4. **A cesta que faltou** também é demanda: cada comida ou Material Básico que a cesta não achou conta 1 unidade do item mais barato do tipo (assim, na fome, o alvo do Pão não cai) [Proposta].
 
 O mesmo consumo previsto vale para o **Mercado Local** (o estoque-alvo do preço, ficha da [[Ficha Logica/Economia|Economia]], regra 10.4). No primeiro dia, os 5 dias guardados são a previsão do marco 6.
 
@@ -233,6 +234,8 @@ O mesmo consumo previsto vale para o **Mercado Local** (o estoque-alvo do preço
 3. Sem nenhuma candidata, a construção fica **de folga** no dia seguinte.
 4. A construção do jogador sem nenhuma ordem que queira produzir, na meia-noite, também fica de folga.
 5. **De folga, os empregados não vão trabalhar**: passeiam no Período de Trabalho, como os desempregados, e **não recebem** (o salário é pelas horas trabalhadas).
+6. **O ciclo que ainda não começou** já é o próximo: na Cidade, ele passa para a receita escolhida (ou para nenhuma, na folga); no jogador, a fila decide de novo na hora seguinte [Proposta].
+7. **Ao montar a vila**, ninguém começa de folga, e a primeira escolha roda duas vezes: a previsão do marco 6 precisa das receitas atuais, que só existem depois da primeira escolha [Proposta].
 
 *Exemplo:* o alvo do Pão é 75 (5 dias de 15). Com 94 Pães, o Cozinheiro folga; com 79, continua de folga (está acima do alvo); com 64, volta. O estoque de Pão fica entre cerca de 60 e 95, e o preço local, entre cerca de 1,3 e 2,0. A Fazenda, com alvo de 40 Grãos, trabalha cerca de 1 dia em cada 4.
 

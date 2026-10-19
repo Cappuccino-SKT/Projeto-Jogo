@@ -15,5 +15,17 @@
   "construcao.mercado": "Mercado",
   "construcao.construtor": "Construtor",
   "construcao.casa": "Casa",
-  "construcao.pedreira": "Pedreira"
+  "construcao.pedreira": "Pedreira",
+
+  "evento.chuva_boa": "Chuva boa",
+  "evento.seca": "Seca",
+  "evento.geada_precoce": "Geada precoce",
+  "evento.colheita_farta": "Colheita farta",
+  "evento.ratos_no_celeiro": "Ratos no celeiro",
+  "evento.achado_na_floresta": "Achado na floresta",
+  "evento.mercador_viajante": "Mercador viajante",
+  "evento.febre": "Febre",
+  "evento.fome": "Fome",
+  "evento.falta_de_moveis": "Falta de móveis",
+  "evento.festa_da_colheita": "Festa da Colheita"
 }

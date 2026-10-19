@@ -13,6 +13,12 @@ add_library(regras_do_jogo STATIC
     Construcao/ContasDasConstrucoes.cpp
     Producao/ProducaoDaVila.cpp
     Economia/ConsumoESalarios.cpp
+    Economia/MercadoLocal.cpp
+    Economia/FelicidadeDaClasse.cpp
+    Eventos/DefinicaoDosEventos.cpp
+    Eventos/EventosDaVila.cpp
+    Producao/ConsumoMedidoDaVila.cpp
+    Simulacao/RelatorioDaSimulacao.cpp
     Vila/SimulacaoDaVila.cpp
     Dados/ProblemasDosDados.cpp
     Dados/TabelaCsv.cpp
@@ -35,6 +41,13 @@ target_link_libraries(regras_do_jogo PRIVATE nlohmann_json::nlohmann_json)
 # Os NPCs usam a EnTT, e quem usa a biblioteca também a enxerga (PUBLIC): o
 # Jogo/ lê as posições para desenhar.
 target_link_libraries(regras_do_jogo PUBLIC EnTT::EnTT)
+
+# O Tracy (marco 7), só com -DUSAR_TRACY=ON: as linhas MEDIR_ESTE_TRECHO do
+# Desempenho/MedicaoDoDesempenho.h passam a medir.
+if(USAR_TRACY)
+    target_link_libraries(regras_do_jogo PUBLIC Tracy::TracyClient)
+    target_compile_definitions(regras_do_jogo PUBLIC USAR_TRACY)
+endif()
 
 # Os testes automáticos (rodada FL1-4).
 add_subdirectory(Testes)

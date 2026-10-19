@@ -157,6 +157,111 @@ void lerRegrasDasConstrucoes(const Json& documento, RegrasDasConstrucoes& constr
     }
 }
 
+// Lê um objeto obrigatório do regras.json; se faltar, anota o erro e devolve nullptr.
+const Json* lerObjetoObrigatorio(const Json& documento, const char* nomeDoCampo, ListaDeProblemasDosDados& listaDeProblemas)
+{
+    const auto campo = documento.find(nomeDoCampo);
+    if (campo == documento.end() || !campo->is_object()) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "falta \"" + std::string(nomeDoCampo) + "\"");
+        return nullptr;
+    }
+    return &*campo;
+}
+
+// O marco 7 (ficha da Economia, parte 10.2): o Mercado Local, o gasto da
+// classe, o imposto, o estabilizador, os multiplicadores e a saída por atraso.
+void lerRegrasDoMarco7DaEconomia(const Json& documento, RegrasDaEconomia& economia, ListaDeProblemasDosDados& listaDeProblemas)
+{
+    if (const Json* mercado = lerObjetoObrigatorio(documento, "mercado_local", listaDeProblemas)) {
+        const std::string onde = "mercado_local";
+        RegrasDoMercadoLocal& regras = economia.mercadoLocal;
+        lerInteiroObrigatorio(*mercado, "dias_do_estoque_alvo", regras.diasDoEstoqueAlvo, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*mercado, "fator_minimo_em_porcento", regras.fatorMinimoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*mercado, "fator_maximo_em_porcento", regras.fatorMaximoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*mercado, "passo_maximo_por_dia_em_porcento", regras.passoMaximoPorDiaEmPorcento, onde, listaDeProblemas);
+        if (regras.diasDoEstoqueAlvo < 1 || regras.fatorMinimoEmPorcento < 1 || regras.fatorMaximoEmPorcento < regras.fatorMinimoEmPorcento
+            || regras.passoMaximoPorDiaEmPorcento < 1) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"mercado_local\": os dias e as porcentagens precisam ser maiores que 0, e o fator máximo não pode ser menor que o mínimo");
+        }
+    }
+    if (lerInteiroObrigatorio(documento, "gasto_da_classe_em_porcento_da_renda", economia.gastoDaClasseEmPorcentoDaRenda, "regras.json", listaDeProblemas)
+        && (economia.gastoDaClasseEmPorcentoDaRenda < 0 || economia.gastoDaClasseEmPorcentoDaRenda > 100)) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"gasto_da_classe_em_porcento_da_renda\" vai de 0 a 100");
+    }
+    if (const Json* imposto = lerObjetoObrigatorio(documento, "imposto", listaDeProblemas)) {
+        lerInteiroObrigatorio(*imposto, "taxa_em_porcento", economia.imposto.taxaEmPorcento, "imposto", listaDeProblemas);
+        lerInteiroObrigatorio(*imposto, "parte_da_cidade_em_porcento", economia.imposto.parteDaCidadeEmPorcento, "imposto", listaDeProblemas);
+        if (economia.imposto.taxaEmPorcento < 0 || economia.imposto.taxaEmPorcento > 100 || economia.imposto.parteDaCidadeEmPorcento < 0
+            || economia.imposto.parteDaCidadeEmPorcento > 100) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"imposto\": as porcentagens vão de 0 a 100");
+        }
+    }
+    if (const Json* estabilizador = lerObjetoObrigatorio(documento, "estabilizador", listaDeProblemas)) {
+        const std::string onde = "estabilizador";
+        RegrasDoEstabilizador& regras = economia.estabilizador;
+        lerInteiroObrigatorio(*estabilizador, "ajuda_abaixo_de_dias_da_cesta", regras.ajudaAbaixoDeDiasDaCesta, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*estabilizador, "ajuda_ate_dias_da_cesta", regras.ajudaAteDiasDaCesta, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*estabilizador, "teto_por_estacao_em_porcento_do_banco", regras.tetoPorEstacaoEmPorcentoDoBanco, onde, listaDeProblemas);
+        if (regras.ajudaAbaixoDeDiasDaCesta < 0 || regras.ajudaAteDiasDaCesta < regras.ajudaAbaixoDeDiasDaCesta || regras.tetoPorEstacaoEmPorcentoDoBanco < 0) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"estabilizador\": a ajuda vai até um número de dias maior que o de baixo, e nada negativo");
+        }
+    }
+    if (const Json* multiplicadores = lerObjetoObrigatorio(documento, "multiplicadores_do_salario", listaDeProblemas)) {
+        const std::string onde = "multiplicadores_do_salario";
+        RegrasDosMultiplicadoresDoSalario& regras = economia.multiplicadoresDoSalario;
+        lerInteiroObrigatorio(*multiplicadores, "riqueza_minima_em_porcento", regras.riquezaMinimaEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*multiplicadores, "riqueza_maxima_em_porcento", regras.riquezaMaximaEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*multiplicadores, "dias_da_cesta_para_o_maximo", regras.diasDaCestaParaOMaximo, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*multiplicadores, "desemprego_minimo_em_porcento", regras.desempregoMinimoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*multiplicadores, "desemprego_maximo_em_porcento", regras.desempregoMaximoEmPorcento, onde, listaDeProblemas);
+        if (regras.riquezaMinimaEmPorcento < 1 || regras.riquezaMaximaEmPorcento < regras.riquezaMinimaEmPorcento || regras.diasDaCestaParaOMaximo < 1
+            || regras.desempregoMinimoEmPorcento < 1 || regras.desempregoMaximoEmPorcento < regras.desempregoMinimoEmPorcento) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"multiplicadores_do_salario\": os mínimos precisam ser maiores que 0 e não passar dos máximos");
+        }
+    }
+    if (lerInteiroObrigatorio(documento, "dias_de_atraso_ate_os_empregados_sairem", economia.diasDeAtrasoAteOsEmpregadosSairem, "regras.json",
+                              listaDeProblemas)
+        && economia.diasDeAtrasoAteOsEmpregadosSairem < 1) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"dias_de_atraso_ate_os_empregados_sairem\" precisa ser 1 ou mais");
+    }
+}
+
+// O marco 7 (ficha da Felicidade): o "felicidade" do regras.json.
+void lerRegrasDaFelicidade(const Json& documento, RegrasDaFelicidade& felicidade, ListaDeProblemasDosDados& listaDeProblemas)
+{
+    const Json* objeto = lerObjetoObrigatorio(documento, "felicidade", listaDeProblemas);
+    if (objeto == nullptr) {
+        return;
+    }
+    const std::string onde = "felicidade";
+    lerInteiroObrigatorio(*objeto, "inicial", felicidade.felicidadeInicial, onde, listaDeProblemas);
+    lerInteiroObrigatorio(*objeto, "base_do_alvo", felicidade.baseDoAlvo, onde, listaDeProblemas);
+    lerInteiroObrigatorio(*objeto, "passo_por_dia_em_porcento", felicidade.passoPorDiaEmPorcento, onde, listaDeProblemas);
+    if (felicidade.felicidadeInicial < 0 || felicidade.felicidadeInicial > 100 || felicidade.passoPorDiaEmPorcento < 1
+        || felicidade.passoPorDiaEmPorcento > 100) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"felicidade\": o valor inicial vai de 0 a 100, e o passo de 1 a 100");
+    }
+    const auto lerParte = [&](const char* nomeDaParte, const std::vector<std::pair<const char*, int*>>& campos) {
+        const auto parte = objeto->find(nomeDaParte);
+        if (parte == objeto->end() || !parte->is_object()) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "falta \"" + std::string(nomeDaParte) + "\" em felicidade");
+            return;
+        }
+        for (const auto& [nomeDoCampo, valor] : campos) {
+            lerInteiroObrigatorio(*parte, nomeDoCampo, *valor, "felicidade." + std::string(nomeDaParte), listaDeProblemas);
+        }
+    };
+    lerParte("consumo", {{"sem_comida", &felicidade.consumoSemComida},
+                         {"materiais_em_deficit", &felicidade.consumoComMateriaisEmDeficit},
+                         {"gasto_extra_maximo", &felicidade.consumoGastoExtraMaximo}});
+    lerParte("desemprego", {{"sem_desemprego", &felicidade.desempregoSemDesemprego},
+                            {"por_ponto_da_taxa", &felicidade.desempregoPorPontoDaTaxa},
+                            {"minimo", &felicidade.desempregoMinimo},
+                            {"maximo", &felicidade.desempregoMaximo}});
+    lerParte("moradia", {{"sem_casa", &felicidade.moradiaSemCasa}});
+    lerParte("eventos", {{"minimo", &felicidade.eventosMinimo}, {"maximo", &felicidade.eventosMaximo}});
+}
+
 // O marco 6 (ficha da Economia): a cesta mínima, a loja da cidade, os salários e a ordem do dia.
 void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, ListaDeProblemasDosDados& listaDeProblemas)
 {
@@ -172,11 +277,14 @@ void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, List
     }
     const std::string onde = "regras.json";
     lerInteiroObrigatorio(documento, "loja_da_cidade_vende_em_porcento", economia.lojaDaCidadeVendeEmPorcento, onde, listaDeProblemas);
+    lerInteiroObrigatorio(documento, "loja_da_cidade_compra_em_porcento", economia.lojaDaCidadeCompraEmPorcento, onde, listaDeProblemas);
     lerInteiroObrigatorio(documento, "bonus_do_salario_por_nivel_em_porcento", economia.bonusDoSalarioPorNivelEmPorcento, onde, listaDeProblemas);
     lerInteiroObrigatorio(documento, "salario_do_gerente_em_porcento", economia.salarioDoGerenteEmPorcento, onde, listaDeProblemas);
-    if (economia.lojaDaCidadeVendeEmPorcento < 1 || economia.bonusDoSalarioPorNivelEmPorcento < 0 || economia.salarioDoGerenteEmPorcento < 1) {
+    if (economia.lojaDaCidadeVendeEmPorcento < 1 || economia.lojaDaCidadeCompraEmPorcento < 1 || economia.bonusDoSalarioPorNivelEmPorcento < 0
+        || economia.salarioDoGerenteEmPorcento < 1) {
         listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "as porcentagens da loja, do bônus de nível e do gerente precisam ser positivas");
     }
+    lerRegrasDoMarco7DaEconomia(documento, economia, listaDeProblemas);
 
     // A ordem do dia (FT1-5): um nome desconhecido é erro.
     const auto ordem = documento.find("ordem_do_dia");
@@ -191,11 +299,19 @@ void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, List
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Consumo);
         } else if (nomeDoPasso == "salarios") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Salarios);
+        } else if (nomeDoPasso == "mercado_local") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::MercadoLocal);
+        } else if (nomeDoPasso == "estabilizador") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Estabilizador);
+        } else if (nomeDoPasso == "felicidade") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Felicidade);
+        } else if (nomeDoPasso == "eventos") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Eventos);
         } else if (nomeDoPasso == "escolha_das_receitas") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::EscolhaDasReceitas);
         } else {
             listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "o passo \"" + nomeDoPasso + "\" da \"ordem_do_dia\" não existe "
-                                        "(os do marco 6: consumo, salarios, escolha_das_receitas)");
+                                        "(consumo, salarios, mercado_local, estabilizador, felicidade, eventos, escolha_das_receitas)");
         }
     }
 }
@@ -301,5 +417,6 @@ RegrasDoJogo lerArquivoDeRegras(const std::string& textoDoArquivo, ListaDeProble
     lerRegrasDaVidaDosNpcs(documento, regras.vidaDosNpcs, listaDeProblemas);
     lerRegrasDasConstrucoes(documento, regras.construcoes, listaDeProblemas);
     lerRegrasDaEconomia(documento, regras.economia, listaDeProblemas);
+    lerRegrasDaFelicidade(documento, regras.felicidade, listaDeProblemas);
     return regras;
 }

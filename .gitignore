@@ -15,3 +15,6 @@ build/
 # Arte de terceiros (pacote Mana Seed, versão grátis): só para os testes da fatia.
 # O repositório é público, e a licença do pacote não permite redistribuir os arquivos.
 Assents Temporarios/
+
+# O relatório do teste de 1 ano (jogo --simular): sai na pasta de onde o jogo foi chamado.
+relatorio.csv

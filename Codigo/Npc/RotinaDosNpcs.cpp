@@ -18,7 +18,10 @@ SituacaoDoNpc montarSituacaoDoNpc(const ContextoDaRotina& contexto, const Relogi
     const RegrasDaUtilidade& utilidade = contexto.regras.utilidade;
     SituacaoDoNpc situacao;
     situacao.periodo = descobrirPeriodoDaRotina(relogio.horaDoDiaAtual(), contexto.regras.rotinaDoCivil);
-    situacao.temEmprego = casaETrabalho.indiceDoTrabalho >= 0;
+    // Marco 7 (Produção, regra 10.2): de folga, o empregado passeia como quem não tem emprego.
+    const bool trabalhoEstaDeFolga = contexto.producaoDasConstrucoes != nullptr && casaETrabalho.indiceDoTrabalho >= 0
+        && (*contexto.producaoDasConstrucoes)[casaETrabalho.indiceDoTrabalho].estaDeFolgaHoje;
+    situacao.temEmprego = casaETrabalho.indiceDoTrabalho >= 0 && !trabalhoEstaDeFolga;
     situacao.estaNaHoraDeComer = estaNaHoraDeComer(relogio.horaDoDiaAtual(), relogio.minutoDaHoraAtual(), utilidade);
     situacao.ehDiaDeCompra = ehDiaDeCompraDoNpc(relogio.diaDaPartida(), identidade.numeroDoNpc, utilidade.diasEntreCompras);
     situacao.jaComprouHoje = decisao.diaDaUltimaCompra == relogio.diaDaPartida();
@@ -135,7 +138,9 @@ void reavaliarUmNpc(ContextoDaRotina& contexto, const RelogioDoMundo& relogio, e
     DecisaoDoNpc& decisao = registro.get<DecisaoDoNpc>(npc);
 
     const SituacaoDoNpc situacao = montarSituacaoDoNpc(contexto, relogio, identidade, casaETrabalho, decisao);
-    const AcaoDoNpc acaoNova = escolherAcaoPelaUtilidade(calcularNotasDasAcoes(situacao, contexto.regras.utilidade));
+    // Marco 7 (ficha dos Eventos): o doente da Febre fica em casa; a ação Dormir ganha sempre.
+    const AcaoDoNpc acaoNova =
+        registro.all_of<DoencaDoNpc>(npc) ? AcaoDoNpc::Dormir : escolherAcaoPelaUtilidade(calcularNotasDasAcoes(situacao, contexto.regras.utilidade));
     const std::vector<PosicaoDeTile>* tilesDoCampo = tilesDoCampoDoTrabalho(contexto, casaETrabalho);
     if (acaoNova == decisao.acaoAtual) {
         // Passo 4: a mesma ação, o NPC continua o que fazia. No trabalho, o
@@ -423,7 +428,9 @@ std::string montarTabelaDasAcoesDosNpcs(const ContextoDaRotina& contexto, const 
                                                           contexto.regras.utilidade);
         std::string ondeEsta = "na rua";
         const std::vector<PosicaoDeTile>* tilesDoCampo = tilesDoCampoDoTrabalho(contexto, casaETrabalho);
-        if (tilesDoCampo != nullptr && estaNoTileDoCampo(contexto, npc, decisao, *tilesDoCampo)) {
+        if (registro.all_of<DoencaDoNpc>(npc)) {
+            ondeEsta = "doente em casa";
+        } else if (tilesDoCampo != nullptr && estaNoTileDoCampo(contexto, npc, decisao, *tilesDoCampo)) {
             ondeEsta = "no campo de " + contexto.vila.construcoes[casaETrabalho.indiceDoTrabalho].identificador;
         } else if (decisao.estaDentroDeUmaConstrucao()) {
             ondeEsta = "dentro de " + contexto.vila.construcoes[decisao.indiceDaConstrucaoOndeEsta].identificador;

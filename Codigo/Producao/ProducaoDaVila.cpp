@@ -4,14 +4,17 @@
 #include <utility>
 
 #include "Construcao/ContasDasConstrucoes.h"
+#include "Economia/FelicidadeDaClasse.h"
+#include "Economia/MercadoLocal.h"
+#include "Eventos/EventosDaVila.h"
 #include "Npc/ComponentesDoNpc.h"
 
 namespace {
 
 // No máximo 10 ciclos terminados por construção numa hora (regra 4.2, passo 4.4).
 constexpr int ciclosPorHoraNoMaximo = 10;
-// O estoque-alvo da escolha da cidade: 5 dias do consumo previsto (V2-5).
-constexpr int diasDoEstoqueAlvo = 5;
+// A folga (regra 10.2): com 125% do estoque-alvo, a receita deixa de ser candidata.
+constexpr int estoqueDeSobraEmPorcentoDoAlvo = 125;
 // A comida em perigo: menos de 3 dias da cesta mínima.
 constexpr int diasDaComidaEmPerigo = 3;
 // O consumo previsto das receitas conta um dia cheio: 8 horas por empregado.
@@ -131,8 +134,7 @@ int64_t custoDaCompraDosInsumosQueFaltam(const ContextoDaProducao& contexto, con
         if (falta > contexto.inventario.quantidadeDe(insumo.numeroDoItem, DonoDoItem::Cidade)) {
             return -1;
         }
-        const int preco = contexto.dados.catalogoDeItens.itemPeloNumero(insumo.numeroDoItem).precoBaseEmDecimos;
-        custo += static_cast<int64_t>(falta) * calcularPrecoDaLojaDaCidade(preco, contexto.dados.regras.economia);
+        custo += static_cast<int64_t>(falta) * calcularPrecoDaLojaDaCidade(precoLocalDoItem(contexto, insumo.numeroDoItem), contexto.dados.regras.economia);
     }
     return custo;
 }
@@ -159,6 +161,9 @@ std::string tentarTirarOsInsumos(ContextoDaProducao& contexto, int indiceDaConst
         contexto.dinheiro.gastoDoJogadorComInsumosHoje += custo;
     }
     if (contexto.inventario.tentarTirarVarios(receita.insumos, dono)) {
+        for (const InsumoDaReceita& insumo : receita.insumos) {
+            contexto.consumoMedido.anotarOQueSaiu(insumo.numeroDoItem, insumo.quantidade);  // regra 10.1, passo 1
+        }
         return "";
     }
     for (const InsumoDaReceita& insumo : receita.insumos) {
@@ -167,6 +172,71 @@ std::string tentarTirarOsInsumos(ContextoDaProducao& contexto, int indiceDaConst
         }
     }
     return "sem insumos";
+}
+
+// Os insumos que faltam de verdade para a receita (não só o dinheiro): na
+// Cidade, o que ela não tem; no jogador, o que nem ele nem a Cidade têm.
+std::vector<InsumoDaReceita> insumosQueFaltam(const ContextoDaProducao& contexto, int indiceDaConstrucao, const DefinicaoDeReceita& receita)
+{
+    const bool ehDoJogador = construcaoEhDoJogador(contexto, indiceDaConstrucao);
+    std::vector<InsumoDaReceita> faltam;
+    for (const InsumoDaReceita& insumo : receita.insumos) {
+        int quantidadeQueExiste = contexto.inventario.quantidadeDe(insumo.numeroDoItem, ehDoJogador ? DonoDoItem::Jogador : DonoDoItem::Cidade);
+        quantidadeQueExiste += ehDoJogador ? contexto.inventario.quantidadeDe(insumo.numeroDoItem, DonoDoItem::Cidade) : 0;
+        if (quantidadeQueExiste < insumo.quantidade) {
+            faltam.push_back(insumo);
+        }
+    }
+    return faltam;
+}
+
+// Regra 10.1, passo 2: a hora parada por falta de insumo, com gente
+// trabalhando, conta como demanda que faltou.
+void anotarADemandaDosInsumosQueFaltam(ContextoDaProducao& contexto, const std::vector<InsumoDaReceita>& faltam, const DefinicaoDeReceita& receita,
+                                       int ticksDaHora)
+{
+    for (const InsumoDaReceita& insumo : faltam) {
+        contexto.consumoMedido.anotarADemandaQueFaltou(
+            insumo.numeroDoItem, calcularDemandaQueFaltouNaHora(insumo.quantidade, ticksDaHora, receita.horasPorCiclo, contexto.ticksPorHoraDeJogo));
+    }
+}
+
+// A ordem do jogador quer produzir agora (regra 4.4, passo 1)?
+bool ordemQuerProduzir(const ContextoDaProducao& contexto, const OrdemDoJogador& ordem)
+{
+    if (ordem.tipo == TipoDeOrdem::ManterEstoque) {
+        return contexto.inventario.quantidadeDe(ordem.numeroDoItem, DonoDoItem::Jogador) < ordem.quantidade;
+    }
+    if (ordem.tipo == TipoDeOrdem::FazerQuantidade) {
+        return ordem.quantidadeJaFeita < ordem.quantidade;
+    }
+    return true;
+}
+
+// A fila do jogador não deu receita (regra 10.1, passo 3): se alguma ordem
+// quer produzir e só falta insumo, a parada é "sem Tábua" (a primeira dessas
+// ordens), e cada uma conta a demanda dos insumos que faltam a ela.
+std::string motivoDaFilaSemReceita(ContextoDaProducao& contexto, int indiceDaConstrucao, int ticksDaHora)
+{
+    std::string motivo = "sem ordem";
+    for (const OrdemDoJogador& ordem : contexto.producaoDasConstrucoes[indiceDaConstrucao].ordens) {
+        const std::optional<int> indiceDaReceita = contexto.dados.catalogoDeReceitas.procurarReceitaDoProduto(ordem.numeroDoItem);
+        if (!ordemQuerProduzir(contexto, ordem) || !indiceDaReceita.has_value()) {
+            continue;
+        }
+        const DefinicaoDeReceita& receita = receitaPeloIndice(contexto, *indiceDaReceita);
+        if (!receitaPodeRodarNaConstrucao(contexto, indiceDaConstrucao, receita)) {
+            continue;
+        }
+        const std::vector<InsumoDaReceita> faltam = insumosQueFaltam(contexto, indiceDaConstrucao, receita);
+        if (motivo == "sem ordem") {
+            motivo = faltam.empty() ? "sem dinheiro para os insumos" : "sem " + nomeDoItem(contexto, faltam.front().numeroDoItem);
+        }
+        if (ticksDaHora > 0) {
+            anotarADemandaDosInsumosQueFaltam(contexto, faltam, receita, ticksDaHora);
+        }
+    }
+    return motivo;
 }
 
 // O fator da estação e da produtividade da área, em % (ficha dos Recursos).
@@ -214,6 +284,12 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
         ticksDaHora += contexto.registroDasEntidades.get<TrabalhoDoDia>(empregado).ticksTrabalhadosNestaHora;
     }
 
+    // Regra 10.2: de folga, os empregados nem vêm.
+    if (producao.estaDeFolgaHoje) {
+        pararAConstrucao(producao, "de folga");
+        return;
+    }
+
     for (int rodada = 0; rodada < ciclosPorHoraNoMaximo; ++rodada) {
         // Passo 1: sem receita, pega a próxima (a do jogador, pela fila de ordens).
         if (producao.receitaDoCiclo < 0) {
@@ -221,7 +297,7 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
                                                   : producao.receitaEscolhidaParaOProximoCiclo;
             atualizarOCampoDeTrabalho(contexto, indiceDaConstrucao);
             if (producao.receitaDoCiclo < 0) {
-                pararAConstrucao(producao, ehDoJogador ? "sem ordem" : "sem receita");
+                pararAConstrucao(producao, ehDoJogador ? motivoDaFilaSemReceita(contexto, indiceDaConstrucao, ticksDaHora) : "sem receita");
                 return;
             }
         }
@@ -235,6 +311,7 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
             }
             const std::string motivoDaFalta = tentarTirarOsInsumos(contexto, indiceDaConstrucao, receita);
             if (!motivoDaFalta.empty()) {
+                anotarADemandaDosInsumosQueFaltam(contexto, insumosQueFaltam(contexto, indiceDaConstrucao, receita), receita, ticksDaHora);
                 pararAConstrucao(producao, motivoDaFalta);
                 return;
             }
@@ -253,9 +330,13 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
         }
         int quantidade = receita.loteProduzido;
         int restoNovo = producao.restoDaProducaoBracal;
-        if (receita.trabalhoUsado == TrabalhoDaReceita::Bracal) {
-            // O lote × o fator da estação e da produtividade, com a fração guardada.
-            const int totalEmCentesimos = receita.loteProduzido * fatorDaProducaoBracalEmPorcento(contexto, producao, estacao) + producao.restoDaProducaoBracal;
+        const int multiplicadorDosEventos =
+            multiplicadorDaProducaoPorEventos(contexto, contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].tipo);  // a Seca: 50%
+        if (receita.trabalhoUsado == TrabalhoDaReceita::Bracal || multiplicadorDosEventos != 100) {
+            // O lote × o fator da estação e da produtividade (só nas Braçais)
+            // × os eventos ativos, com a fração guardada.
+            const int fatorDoLote = receita.trabalhoUsado == TrabalhoDaReceita::Bracal ? fatorDaProducaoBracalEmPorcento(contexto, producao, estacao) : 100;
+            const int totalEmCentesimos = receita.loteProduzido * fatorDoLote * multiplicadorDosEventos / 100 + producao.restoDaProducaoBracal;
             quantidade = totalEmCentesimos / 100;
             restoNovo = totalEmCentesimos % 100;
         }
@@ -285,8 +366,9 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
     }
 }
 
-// O consumo previsto de cada item num dia, em centésimos de unidade (regra 4.3, passo 2).
-std::vector<int64_t> preverOConsumoDoDiaEmCentesimos(const ContextoDaProducao& contexto)
+}  // namespace
+
+std::vector<int64_t> preverOConsumoPelasReceitasAtuais(const ContextoDaProducao& contexto)
 {
     const CatalogoDeItens& itens = contexto.dados.catalogoDeItens;
     const RegrasDaEconomia& economia = contexto.dados.regras.economia;
@@ -334,8 +416,6 @@ std::vector<int64_t> preverOConsumoDoDiaEmCentesimos(const ContextoDaProducao& c
     return consumoEmCentesimos;
 }
 
-}  // namespace
-
 int HabilidadesDoNpc::habilidadeNoTrabalho(TrabalhoDaReceita trabalho) const
 {
     switch (trabalho) {
@@ -375,6 +455,25 @@ int64_t calcularNotaDaReceita(int precoDoProdutoEmDecimos, int custoDosInsumosEm
 int calcularPrecoDaLojaDaCidade(int precoEmDecimos, const RegrasDaEconomia& regras)
 {
     return static_cast<int>(arredondarMetadeParaCima(static_cast<long long>(precoEmDecimos) * regras.lojaDaCidadeVendeEmPorcento, 100));
+}
+
+int64_t calcularDemandaQueFaltouNaHora(int quantidadeDoInsumo, int ticksTrabalhadosNaHora, int horasDaReceita, int ticksPorHoraDeJogo)
+{
+    return static_cast<int64_t>(quantidadeDoInsumo) * ticksTrabalhadosNaHora * 100 / (static_cast<int64_t>(horasDaReceita) * ticksPorHoraDeJogo);
+}
+
+int precoLocalDoItem(const ContextoDaProducao& contexto, int numeroDoItem)
+{
+    const std::vector<int>& precos = contexto.mercadoLocal.precoLocalPorItemEmDecimos;
+    if (numeroDoItem >= 0 && numeroDoItem < static_cast<int>(precos.size())) {
+        return precos[numeroDoItem];
+    }
+    return contexto.dados.catalogoDeItens.itemPeloNumero(numeroDoItem).precoBaseEmDecimos;
+}
+
+int64_t estoqueAlvoDoItemEmCentesimos(const ContextoDaProducao& contexto, int numeroDoItem)
+{
+    return contexto.consumoMedido.consumoPrevistoDoDiaEmCentesimos(numeroDoItem) * contexto.dados.regras.economia.mercadoLocal.diasDoEstoqueAlvo;
 }
 
 std::vector<PosicaoDeTile> montarTilesDeTrabalhoDaArea(const MapaLocal& mapa, const VilaDoJogo& vila, const AreaDeRecurso& area)
@@ -420,6 +519,7 @@ std::vector<std::string> montarAProducaoDaVila(ContextoDaProducao& contexto, con
     // O dinheiro do primeiro dia (FL6-4).
     DinheiroDaVila dinheiro;
     dinheiro.bancoDaCidade = vila.bancoDaCidadeEmDecimos;
+    dinheiro.bancoNoComecoDaEstacao = vila.bancoDaCidadeEmDecimos;  // o estabilizador (marco 7)
     dinheiro.dinheiroDoJogador = vila.dinheiroDoJogadorEmDecimos;
     for (const NpcDaVilaInicial& npc : vila.npcsIniciais) {
         dinheiro.quantidadeDeCivis += npc.classe == "civil" ? 1 : 0;
@@ -437,17 +537,35 @@ std::vector<std::string> montarAProducaoDaVila(ContextoDaProducao& contexto, con
         producao.ordens = vila.construcoes[indice].ordensDoJogador;
     }
 
-    // A primeira escolha (regra 4.3: "ao montar a vila, a escolha roda uma vez").
-    escolherAsReceitasDaCidade(contexto);
-    for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
-        ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indice];
-        if (!producao.ehDeProducao) {
-            continue;
+    // O marco 7: os preços locais começam no base, a Felicidade no inicial,
+    // e os eventos sem nenhum ativo.
+    comecarOMercadoLocal(contexto);
+    contexto.felicidade = FelicidadeDaClasse{};
+    contexto.felicidade.felicidadeEmDecimos = 10 * dados.regras.felicidade.felicidadeInicial;
+    contexto.felicidade.alvoEmDecimos = contexto.felicidade.felicidadeEmDecimos;
+    comecarOsEventos(contexto);
+
+    // A primeira escolha (regra 4.3: "ao montar a vila, a escolha roda uma
+    // vez"). Os 5 dias guardados do consumo começam com a previsão do marco 6
+    // (regra 10.1), que precisa das receitas atuais: a escolha roda uma vez
+    // só com a cesta e a fila do jogador, a previsão é refeita com as
+    // receitas escolhidas, e a escolha roda de novo, valendo.
+    contexto.consumoMedido = ConsumoMedidoDaVila(dados.catalogoDeItens.quantidadeDeItens());
+    for (int rodadaDaPrimeiraEscolha = 0; rodadaDaPrimeiraEscolha < 2; ++rodadaDaPrimeiraEscolha) {
+        contexto.consumoMedido.preencherOsDiasGuardados(preverOConsumoPelasReceitasAtuais(contexto));
+        std::fill(contexto.consumoMedido.produtoEstaComEstoqueDeSobra.begin(), contexto.consumoMedido.produtoEstaComEstoqueDeSobra.end(), false);
+        escolherAsReceitasDaCidade(contexto);
+        for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
+            ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indice];
+            producao.estaDeFolgaHoje = false;  // o primeiro dia é de trabalho para todos
+            if (!producao.ehDeProducao) {
+                continue;
+            }
+            producao.receitaDoCiclo = construcaoEhDoJogador(contexto, static_cast<int>(indice))
+                                          ? escolherReceitaPelaFilaDeOrdens(contexto, static_cast<int>(indice))
+                                          : producao.receitaEscolhidaParaOProximoCiclo;
+            atualizarOCampoDeTrabalho(contexto, static_cast<int>(indice));
         }
-        producao.receitaDoCiclo = construcaoEhDoJogador(contexto, static_cast<int>(indice))
-                                      ? escolherReceitaPelaFilaDeOrdens(contexto, static_cast<int>(indice))
-                                      : producao.receitaEscolhidaParaOProximoCiclo;
-        atualizarOCampoDeTrabalho(contexto, static_cast<int>(indice));
     }
     escolherOsGerentes(contexto);
     return avisos;
@@ -498,7 +616,20 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
 {
     const CatalogoDeItens& itens = contexto.dados.catalogoDeItens;
     const std::vector<DefinicaoDeReceita>& receitas = contexto.dados.catalogoDeReceitas.todasAsReceitas();
-    const std::vector<int64_t> consumoDoDiaEmCentesimos = preverOConsumoDoDiaEmCentesimos(contexto);
+
+    // Regra 10.2: a histerese do estoque de sobra de cada item. Passou de
+    // 125% do alvo, sai; só volta quando o estoque cai abaixo do alvo.
+    std::vector<bool>& comSobra = contexto.consumoMedido.produtoEstaComEstoqueDeSobra;
+    comSobra.resize(itens.quantidadeDeItens(), false);
+    for (const DefinicaoDeItem& item : itens.todosOsItens()) {
+        const int64_t estoqueEmCentesimos = static_cast<int64_t>(contexto.inventario.quantidadeTotalDe(item.numeroInterno)) * 100;
+        const int64_t alvoEmCentesimos = estoqueAlvoDoItemEmCentesimos(contexto, item.numeroInterno);
+        if (comSobra[item.numeroInterno]) {
+            comSobra[item.numeroInterno] = estoqueEmCentesimos >= alvoEmCentesimos;
+        } else {
+            comSobra[item.numeroInterno] = estoqueEmCentesimos * 100 >= alvoEmCentesimos * estoqueDeSobraEmPorcentoDoAlvo;
+        }
+    }
 
     // Passo 3: a comida em perigo (menos de 3 dias da cesta mínima).
     int comidaNoEstoque = 0;
@@ -510,7 +641,17 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
 
     for (std::size_t construcao = 0; construcao < contexto.producaoDasConstrucoes.size(); ++construcao) {
         ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[construcao];
-        if (!producao.ehDeProducao || construcaoEhDoJogador(contexto, static_cast<int>(construcao))) {
+        if (!producao.ehDeProducao) {
+            continue;
+        }
+        if (construcaoEhDoJogador(contexto, static_cast<int>(construcao))) {
+            // Regra 10.2, passo 4: sem nenhuma ordem que queira produzir, folga.
+            // O ciclo que ainda não começou volta para a fila decidir de novo.
+            producao.estaDeFolgaHoje = std::none_of(producao.ordens.begin(), producao.ordens.end(),
+                                                    [&](const OrdemDoJogador& ordem) { return ordemQuerProduzir(contexto, ordem); });
+            if (!producao.cicloComecou) {
+                producao.receitaDoCiclo = -1;
+            }
             continue;
         }
         int melhorReceita = -1;
@@ -518,18 +659,18 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
         int64_t melhorNota = 0;
         for (std::size_t indiceDaReceita = 0; indiceDaReceita < receitas.size(); ++indiceDaReceita) {
             const DefinicaoDeReceita& receita = receitas[indiceDaReceita];
-            // Passo 1: as candidatas.
-            if (!receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita)) {
+            // Passo 1: as candidatas; com a regra 10.2, sem as de estoque de sobra.
+            if (!receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita) || comSobra[receita.numeroDoProduto]) {
                 continue;
             }
-            // Passo 2: a nota, com os preços base (o Mercado Local entra no marco 7).
+            // Passo 2: a nota, com os preços locais (marco 7).
             int custoDosInsumos = 0;
             for (const InsumoDaReceita& insumo : receita.insumos) {
-                custoDosInsumos += insumo.quantidade * itens.itemPeloNumero(insumo.numeroDoItem).precoBaseEmDecimos;
+                custoDosInsumos += insumo.quantidade * precoLocalDoItem(contexto, insumo.numeroDoItem);
             }
             const int estoque = contexto.inventario.quantidadeTotalDe(receita.numeroDoProduto);
-            const int deficit = calcularDeficitDoItem(estoque, consumoDoDiaEmCentesimos[receita.numeroDoProduto] * diasDoEstoqueAlvo);
-            const int64_t nota = calcularNotaDaReceita(itens.itemPeloNumero(receita.numeroDoProduto).precoBaseEmDecimos, custoDosInsumos, deficit);
+            const int deficit = calcularDeficitDoItem(estoque, estoqueAlvoDoItemEmCentesimos(contexto, receita.numeroDoProduto));
+            const int64_t nota = calcularNotaDaReceita(precoLocalDoItem(contexto, receita.numeroDoProduto), custoDosInsumos, deficit);
             const bool ehComida = itens.itemPeloNumero(receita.numeroDoProduto).ehComida();
             // Passos 3 e 4: com a comida em perigo, a comida ganha sempre; se
             // não, a maior nota; no empate, a primeira do receitas.csv.
@@ -542,6 +683,13 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
             }
         }
         producao.receitaEscolhidaParaOProximoCiclo = melhorReceita;
+        // Regra 10.2, passo 3: sem nenhuma candidata, folga no dia seguinte.
+        producao.estaDeFolgaHoje = melhorReceita < 0;
+        // O ciclo que ainda não começou já é o próximo: ele usa a escolha nova.
+        if (!producao.cicloComecou) {
+            producao.receitaDoCiclo = melhorReceita;
+            atualizarOCampoDeTrabalho(contexto, static_cast<int>(construcao));
+        }
     }
 }
 
@@ -550,13 +698,7 @@ int escolherReceitaPelaFilaDeOrdens(const ContextoDaProducao& contexto, int indi
     const ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indiceDaConstrucao];
     for (const OrdemDoJogador& ordem : producao.ordens) {
         // Passo 1: a ordem quer produzir agora?
-        bool querProduzir = true;
-        if (ordem.tipo == TipoDeOrdem::ManterEstoque) {
-            querProduzir = contexto.inventario.quantidadeDe(ordem.numeroDoItem, DonoDoItem::Jogador) < ordem.quantidade;
-        } else if (ordem.tipo == TipoDeOrdem::FazerQuantidade) {
-            querProduzir = ordem.quantidadeJaFeita < ordem.quantidade;
-        }
-        if (!querProduzir) {
+        if (!ordemQuerProduzir(contexto, ordem)) {
             continue;
         }
         // Passo 2: a receita está liberada, alguém sabe fazer, e os insumos existem.
@@ -608,10 +750,18 @@ void escolherOsGerentes(ContextoDaProducao& contexto)
 std::string montarTabelaDaProducao(const ContextoDaProducao& contexto)
 {
     const DadosDoJogo& dados = contexto.dados;
-    std::string tabela = "Estoque (da Cidade / do jogador):\n";
+    std::string tabela = "Estoque (da Cidade / do jogador), o preço local e o consumo previsto por dia:\n";
     for (const DefinicaoDeItem& item : dados.catalogoDeItens.todosOsItens()) {
+        const int64_t consumo = contexto.consumoMedido.consumoPrevistoDoDiaEmCentesimos(item.numeroInterno);
         tabela += "  " + nomeDoItem(contexto, item.numeroInterno) + ": " + std::to_string(contexto.inventario.quantidadeDe(item.numeroInterno, DonoDoItem::Cidade))
-            + " / " + std::to_string(contexto.inventario.quantidadeDe(item.numeroInterno, DonoDoItem::Jogador)) + "\n";
+            + " / " + std::to_string(contexto.inventario.quantidadeDe(item.numeroInterno, DonoDoItem::Jogador)) + "; preço "
+            + escreverDinheiroEmMoedas(precoLocalDoItem(contexto, item.numeroInterno)) + " (base " + escreverDinheiroEmMoedas(item.precoBaseEmDecimos)
+            + "); consome " + std::to_string(consumo / 100) + "," + std::to_string(consumo % 100 / 10) + " por dia"
+            + (contexto.consumoMedido.produtoEstaComEstoqueDeSobra.size() > static_cast<std::size_t>(item.numeroInterno)
+                       && contexto.consumoMedido.produtoEstaComEstoqueDeSobra[item.numeroInterno]
+                   ? " (estoque de sobra)"
+                   : "")
+            + "\n";
     }
     tabela += "Capacidade: matéria-prima " + std::to_string(contexto.inventario.quantidadeNaCategoria(CategoriaDoItem::MateriaPrima)) + " de "
         + std::to_string(contexto.inventario.capacidadeDaCategoria(CategoriaDoItem::MateriaPrima)) + "; bem de consumo "
@@ -648,7 +798,9 @@ std::string montarTabelaDaProducao(const ContextoDaProducao& contexto)
             linha += nomeDoItem(contexto, receita.numeroDoProduto) + ", " + std::to_string(porcentagem) + "% do ciclo"
                 + (producao.cicloComecou ? "" : " (o ciclo não começou)");
         }
-        if (producao.estaParada) {
+        if (producao.estaDeFolgaHoje) {
+            linha += "; DE FOLGA HOJE";
+        } else if (producao.estaParada) {
             linha += "; PARADA: " + producao.motivoDaParada;
         }
         linha += "; " + std::to_string(trabalhandoAgora) + " de " + std::to_string(empregados.size()) + " trabalhando agora; gerente: " + nomeDoGerente;

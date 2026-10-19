@@ -1,4 +1,4 @@
-> Situação do projeto em poucas linhas. O detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]); o jeito de trabalhar e as regras do código, na [[Retomada]]. Atualizado em 2026-10-18.
+> Situação do projeto em poucas linhas. O detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]); o jeito de trabalhar e as regras do código, na [[Retomada]]. Atualizado em 2026-10-19.
 
 ## Fase atual
 
@@ -46,7 +46,7 @@
 5. **Marco 4:** um NPC andando pela busca de caminho. Pronto e confirmado pelo autor.
 6. **Marco 5:** a rotina dos 15 NPCs. Pronto e confirmado pelo autor.
 7. **Marco 6:** produção, inventário e consumo. Fichas escritas ([[Ficha Logica/Producao|Produção]], [[Ficha Logica/Inventario|Inventário]], [[Ficha Logica/Economia|Economia]], [[Ficha Logica/Construcao|Construção]]), com a rodada FL6 aplicada. Pronto; o autor mandou seguir.
-8. **Marco 7:** a simulação sem tela de 1 ano. Fichas escritas (a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], [[Ficha Logica/Felicidade|Felicidade]], [[Ficha Logica/Eventos|Eventos]], [[Ficha Logica/Simulacao|Simulação sem tela]]); falta a rodada FL7.
+8. **Marco 7:** a simulação sem tela de 1 ano. Fichas escritas (a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], [[Ficha Logica/Felicidade|Felicidade]], [[Ficha Logica/Eventos|Eventos]], [[Ficha Logica/Simulacao|Simulação sem tela]]), com a rodada FL7 aplicada. Escrito na branch `codigo/marco-7-simulacao`: o teste de 1 ano passa com a semente 1; falta o teste do autor e a rodada FE1 (o equilíbrio: os Móveis caros e a Febre no Cozinheiro).
 9. **Marcos 8 e 9** da fatia vertical, um por pull request.
 10. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
 

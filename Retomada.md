@@ -1,4 +1,4 @@
-> Ponto de partida de cada sessão. Curto de propósito: o detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]), e a situação geral no [[Estado do Projeto]]. Atualizado em 2026-10-18.
+> Ponto de partida de cada sessão. Curto de propósito: o detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]), e a situação geral no [[Estado do Projeto]]. Atualizado em 2026-10-19.
 
 ## 1. Onde paramos
 
@@ -20,8 +20,9 @@
 - **Fichas do marco 6 (2026-10-18):** a [[Ficha Logica/Producao|Produção]], o [[Ficha Logica/Inventario|Inventário]], a [[Ficha Logica/Economia|Economia]] (consumo e salários) e a [[Ficha Logica/Construcao|Construção]], na branch `docs/fichas-marco-6` (feita em cima da `docs/guia-da-arte`). A **rodada FL6** foi aplicada (2026-10-18), toda com "seguir sugestão".
 - **Marco 6 (2026-10-18):** escrito na branch `codigo/marco-6-producao`, com a FA1 e a FL6 aplicadas, e já mesclado no `main`; o autor mandou seguir (seção 3).
 - **Fichas do marco 7 (2026-10-18):** a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], e as fichas da [[Ficha Logica/Felicidade|Felicidade]], dos [[Ficha Logica/Eventos|Eventos]] e da [[Ficha Logica/Simulacao|Simulação sem tela]], na branch `docs/fichas-marco-7` (feita do `main`, já mesclada). A **rodada FL7** foi aplicada (2026-10-18), toda com "seguir sugestão".
-- **Próximo passo:** o autor responde a FL7; depois, aplicar e começar o marco 7.
-- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até o marco 6 já entrou no `main`; falta o `docs/fichas-marco-7`.
+- **Marco 7 (2026-10-19):** escrito na branch `codigo/marco-7-simulacao` (feita do `main`), com a FL7 aplicada; o teste de 1 ano **passa** com a semente 1. Os testes com outras sementes e com 4 anos mostraram 2 problemas de equilíbrio: a **rodada FE1** (seção 4).
+- **Próximo passo:** o autor responde a FE1 e testa o marco 7 (o que olhar está no `Jogo/LEIA-ME.md`); depois, aplicar a FE1 e escrever as fichas do marco 8.
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até as fichas do marco 7 já entrou no `main`; falta o `codigo/marco-7-simulacao`.
 
 ## 2. Como trabalhamos
 
@@ -90,14 +91,45 @@
 - **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 - **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
 - **Marco 2 (pronto, confirmado pelo autor em 2026-10-18):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
+- **Marco 7 (escrito em 2026-10-19, falta o teste do autor):** o Mercado Local, o gasto extra, o imposto, os multiplicadores do salário, o estabilizador e a saída por atraso (`Codigo/Economia/`), o consumo medido e a folga (`Codigo/Producao/`), os 11 eventos (`Codigo/Eventos/`, `data/eventos.json`), a Felicidade e o `jogo --simular 64 --semente 1` com o `relatorio.csv` (`Codigo/Simulacao/`); o Tracy como opção do CMake, desligada. 290 testes no `Codigo/` (com 16 dias sem tela duas vezes) e 42 no `Jogo/`, mais o teste de 1 ano no `ctest`.
 - **Marco 6 (pronto em 2026-10-18; o autor mandou seguir):** o inventário da cidade, a produção (o ciclo, a escolha da receita, as ordens da Carpintaria, os Braçais no campo), o consumo da cesta mínima e os salários (`Codigo/Inventario/`, `Producao/`, `Economia/`, `Construcao/`), juntos na `Codigo/Vila/SimulacaoDaVila.cpp`; o resumo do dia no console e o F4; as imagens das construções, quando existirem. 239 testes no `Codigo/` (com 3 dias sem tela) e 42 no `Jogo/`.
 - **Marco 5 (pronto, confirmado pelo autor em 2026-10-18):** a vila inicial (`data/vila_inicial.json`: 10 construções em retângulos de cor, que bloqueiam o lote, e 15 Civis com casa e emprego) e a rotina com a Utilidade (`Codigo/Npc/RotinaDosNpcs.cpp`, `Codigo/Vila/`), com o sorteio PCG32 (`Codigo/Tempo/SorteioComSemente.cpp`); F3 mostra as ações. 193 testes no `Codigo/` (com um dia inteiro sem tela) e 37 no `Jogo/`.
 - **Marco 4 (pronto, confirmado pelo autor em 2026-10-18):** um NPC no centro da vila anda até o tile do botão direito pela busca A\* (`Codigo/Mapa/BuscaDeCaminho.cpp`, `Codigo/Npc/`), com a EnTT 3.16.0; o boneco do Mana Seed (ou o de teste, sem a pasta) é desenhado entre os ticks; N cria mais NPCs e F2 mostra os caminhos. 167 testes no `Codigo/` e 36 no `Jogo/`.
 - **Marco 3 (pronto, confirmado pelo autor em 2026-10-18):** os dados em `Jogo/data` (itens, receitas, recursos, construções, regras e textos), lidos e conferidos por `Codigo/Dados/`, com o preço base (Pão 1,7) e o `jogo --validar`; as teclas passam pela tabela de ações (FL2-4). 124 testes no `Codigo/` e 25 no `Jogo/`.
 
-## 4. Rodada pendente
+## 4. Rodada pendente: FE1, o equilíbrio do teste de 1 ano (marco 7)
 
-Nenhuma. A FL7 (o marco 7) foi aplicada em 2026-10-18, toda com "seguir sugestão"; as decisões estão na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]].
+**Perguntas enviadas em 2026-10-19, aguardando respostas.** O código do marco 7 rodou o teste de 1 ano com 10 sementes e por 4 anos (256 dias), numa cópia compilada sem depuração (64 dias em 1,5 segundo). Com a semente 1, ele **passa**, mas apareceram 2 problemas de equilíbrio. Os dois mudam números já decididos (a FL6-3 e a FL6-4), por isso viram perguntas; os dados continuam como estão até a resposta. (A FL7 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
+
+Responder no `Respostas.txt` pelos códigos (FE1-1, FE1-2). "Seguir sugestão" aceita a proposta.
+
+**FE1-1. Os Móveis caros (o dinheiro que vai do Banco para o jogador).**
+
+- *Contexto:* a FL6-3 deu à Carpintaria do jogador as ordens "manter 6 Móveis" e "manter 12 Tábuas": 6 Móveis eram 3 dias da cesta (1,875 por dia). No marco 7, o gasto extra compra mais Móveis (até o dobro: cerca de 3,75 por dia), e o consumo medido sobe: o estoque-alvo dos Móveis passa a cerca de 19, mas a ordem para em 6. O estoque fica entre 2 e 5, e o preço local vai a 8 ou 9,6 (o teto é 10,2, o dobro do base de 5,1). A classe paga ao jogador quase o dobro, o lucro do jogador ainda não paga imposto (FL7-2), e o dinheiro sai do Banco para o jogador. Com a semente 1, no dia 64: Banco 272, jogador 237. Em 4 anos, o Banco fica quase vazio por volta do dia 190 (jogador com 572). É pior no Inverno: a Fazenda produz 25%, nunca folga, e o Banco paga mais salários.
+- *Pergunta:* como segurar o preço dos Móveis? *Exemplo:* no dia 60, os Móveis estão a 9,5, com 2 no estoque, e a Carpintaria parada porque já tem os 6 que a ordem pede (ela tem Tábua e tempo para fazer mais).
+- *Opções* (medidas):
+  - (a) **as ordens passam a "manter 20 Móveis" e "manter 12 Tábuas".** Com a FE1-2 (a): em 10 sementes, o Banco fica entre 332 e 415 no dia 64; em 4 anos, nunca abaixo de 334; o jogador fica entre 56 e 160; os Móveis, entre 3,3 e 6,9. Ganha: o Mercado Local faz o trabalho dele, sem regra nova; no marco 8, quem escolhe as ordens é o jogador. Perde: o jogador lucra pouco, porque o preço base quase não cobre os salários da Carpintaria (o gerente ganha × 1,5);
+  - (b) cobrar o imposto também do lucro do jogador (a V2-7 fala em "salários e lucros"). Ganha: igual ao documento. Perde: precisa da conta do lucro do dia (vendas − salários − insumos), e os Móveis continuam faltando e caros;
+  - (c) limitar o preço dos itens do jogador a +30% do base (a faixa da FT1-1) até o marco 8. Medido: só atrasa; o Banco ainda fica quase vazio por volta do dia 190;
+  - (d) deixar como está. O teste de 1 ano passa com a semente 1, mas o Banco cai, e o segundo ano já falharia.
+- *Sugestão:* (a).
+- *Conflitos:* muda a FL6-3 (manter 6 → 20 Móveis). O "manter 12 Tábuas" continua.
+
+**FE1-2. O Pão no primeiro mês (a Febre no Cozinheiro).**
+
+- *Contexto:* o Cozinheiro tem 2 empregados e faz 16 Pães por dia; a vila come 15 (FL6-7). A vila começa com 45 Pães (3 dias, FL6-4), e o estoque-alvo é 75 (5 dias): o Pão começa caro (2,3 no dia 3), e o estoque sobe só 1 Pão por dia. Se a Febre pega um dos Cozinheiros no primeiro mês, faltam 8 Pães por dia, por 4 dias. Na semente 3, no dia 27, a Febre pega o Fábio: o estoque cai de 63 para 32, e o preço vai a 2,7 no dia 31 (o teste falha acima de 2,6). Em 10 sementes, 2 falham (a 3 e a 4), as duas assim.
+- *Pergunta:* como a vila aguenta uma Febre no Cozinheiro no começo do ano? *Exemplo:* a semente 3, acima.
+- *Opções* (medidas):
+  - (a) **a vila começa com 75 Pães (5 dias, o estoque-alvo), junto com a FE1-1 (a).** Em 10 sementes, todas passam; o Pão fica entre 1,3 e 2,1. Ganha: um número só; o preço já começa no base. Perde: sozinha, sem a FE1-1 (a), ela tira dinheiro do Banco (o Pão barato do começo: Banco entre 22 e 161 no dia 64), então as duas vão juntas. Uma Febre nos 2 Cozinheiros ao mesmo tempo ainda deixaria a vila sem Pão novo por 4 dias, mas os 75 Pães cobrem 5;
+  - (b) o Cozinheiro no nível 2, com 3 empregados (o Nuno sai dos desempregados). Com a FE1-1 (a), todas passam, mas o Pão desce até 1,2 (o limite do teste), e o jogador fica quase sem dinheiro (de 9 a 33). Ganha: uma Febre não para o Pão. Perde: muda a vila inicial (FL5-1: 12 empregados e 3 desempregados) e o desemprego (de 20% para 13%);
+  - (c) deixar como está: 2 em cada 10 sementes falham no primeiro ano.
+- *Sugestão:* (a).
+- *Conflitos:* muda a FL6-4 (3 → 5 dias de Pão: 45 → 75 no `vila_inicial.json`).
+
+Depois das respostas:
+
+- mudar o `vila_inicial.json`, rodar de novo as 10 sementes e anotar a rodada na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]] e na [[Ficha Logica/Economia|Economia]] (os números da FL6-3 e da FL6-4);
+- depois, as fichas do marco 8 (a interface do jogador, as obras e o Mercado).
 
 ## 5. Onde está cada coisa
 
