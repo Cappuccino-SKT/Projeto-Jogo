@@ -5,7 +5,7 @@ item.agua;materia_prima;bruto_mineral;0;;;1;100
 item.tora;materia_prima;bruto_vegetal;0;;;3;100
 item.pao;bem_de_consumo;alimento;1;;;1;100
 item.tabua;materia_prima;manufaturado;1;;;2;100
-item.moveis_madeira;bem_de_consumo;mobilia;2;;;8;100
+item.moveis_madeira;bem_de_consumo;mobilia;2;;;8;140
 # A pedra das obras (FL6-5): a vila não tem Pedreira e começa com 150 Blocos.
 item.pedra;materia_prima;bruto_mineral;0;;;3;100
 item.bloco_de_pedra;materia_prima;manufaturado;1;;;3;100

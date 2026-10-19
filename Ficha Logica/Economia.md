@@ -345,6 +345,10 @@ Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado
 
 *Exemplo:* os Móveis a 5,1 no local; o jogador põe +20%: 6,1. A cesta compra os 2 do dia por 6,1; o gasto extra queria 2 a mais e compra 2 × 10 ÷ 30 = 0,67 → 0. O jogador ganha 12,2 em vez de 20,4.
 
+**Ajuste da FE3 (2026-10-19):** o `multiplicador_do_preco` dos Móveis de Madeira passou de 100 para **140** (`itens.csv`), para o jogador ganhar cerca de +3,5 a +4,5 moedas por dia (antes, +0,45). Os exemplos desta ficha continuam com o preço antigo (5,1) porque só ilustram a conta. O custo é do Banco: o dinheiro do jogador sai dele, e o Banco termina o ano 1 entre 110 e 175 (antes, perto de 400); ele **não fecha o ano 2** sem uma fonte de fora. **[Refinar depois]** (FE3-2): o Construtor comprar as Tábuas do jogador; uma fonte de dinheiro para o Banco no jogo completo (o Mercador, as exportações).
+
+**O preço do jogador (FE3-3):** na vila de hoje ninguém mais vende o que o jogador faz, então o preço 0% é sempre o melhor (+15% dá 16,6 por dia; −15% dá 16,1; 0% dá 19,1). A interface avisa com uma dica. **[Refinar depois]** o preço passa a valer com concorrência (outra Carpintaria, o Mercador) ou procura que cresce com o preço baixo.
+
 ### 11.3 O nível de salário (FL8-7)
 
 | Nível | Salário | Velocidade dos empregados | Outro efeito |

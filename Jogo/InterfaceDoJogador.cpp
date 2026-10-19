@@ -713,6 +713,8 @@ void InterfaceDoJogador::desenharOPainelDaConstrucao(SimulacaoDaVila& simulacao,
                     ImGui::EndDisabled();
                     ImGui::PopID();
                 }
+                // FE3-3: na vila de hoje ninguém mais vende o que você faz.
+                ImGui::TextDisabled("Dica: ninguém mais vende o que você faz; mudar o preço reduz a venda.");
                 desenharAsOrdensDoJogador(simulacao, contexto, indice);
             }
 
