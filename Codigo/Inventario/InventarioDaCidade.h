@@ -41,6 +41,7 @@ public:
     void definirCapacidadeDaCategoria(CategoriaDoItem categoria, int capacidade) { capacidadePorCategoria[static_cast<int>(categoria)] = capacidade; }
 
 private:
+    friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura as quantidades (marco 9)
     std::vector<int> quantidadePorItemDaCidade;
     std::vector<int> quantidadePorItemDoJogador;
     std::vector<CategoriaDoItem> categoriaDeCadaItem;  // copiada do catálogo, para a conta da capacidade

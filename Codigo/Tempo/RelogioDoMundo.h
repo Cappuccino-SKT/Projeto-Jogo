@@ -63,6 +63,7 @@ public:
     FaseDoDia faseDoDiaAtual() const;
 
 private:
+    friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura o estado (marco 9)
     RegrasDoTempo regras;
 
     // O estado (ficha, parte 2). A data inteira sai do tickAtualDaPartida.

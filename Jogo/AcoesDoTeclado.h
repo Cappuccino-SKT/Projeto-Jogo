@@ -14,7 +14,7 @@
 #include <SDL3/SDL_scancode.h>
 
 enum class AcaoDoJogador {
-    FecharOJogo,
+    AbrirOMenuDoEsc,  // marco 9 (FL9-6): o Esc deixou de fechar o jogo
     AlternarTelaCheia,
     MostrarColisaoParaDepuracao,
     PausarOuDespausar,
@@ -29,6 +29,8 @@ enum class AcaoDoJogador {
     MostrarCaminhosParaDepuracao,  // F2 (marco 4, FL4-6): o caminho de cada NPC em azul
     MostrarAcoesDosNpcsParaDepuracao,  // F3 (marco 5, FL5-6): a cor da ação em cima de cada NPC e a tabela no console
     MostrarEstoqueEProducao,  // F4 (marco 6, FL6-8): a tabela do estoque, das construções e do dinheiro no console
+    SalvamentoRapido,      // F5 (marco 9, FL9-3): salva no último espaço manual usado
+    CarregamentoRapido,    // F9 (marco 9, FL9-3): carrega o save mais novo
 };
 
 // Uma linha da tabela: a ação, a tecla principal e uma alternativa (opcional).

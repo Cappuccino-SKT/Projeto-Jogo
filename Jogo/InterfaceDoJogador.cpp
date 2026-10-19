@@ -207,7 +207,31 @@ bool InterfaceDoJogador::fecharOQueEstiverAberto()
     return false;
 }
 
-void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels)
+void InterfaceDoJogador::aoTrocarDePartida()
+{
+    loteSelecionado = -1;
+    janelaDeGestaoAberta = false;
+    abaPedida = -1;
+    precosDeOntem.clear();
+    precosDeHoje.clear();
+    diaDosPrecosGuardados = -1;
+    quantidadeDoMercado.clear();
+}
+
+void InterfaceDoJogador::desenharUmQuadroSemPartida(const std::function<void()>& desenharPorCima)
+{
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplSDL3_NewFrame();
+    ImGui::NewFrame();
+    if (desenharPorCima) {
+        desenharPorCima();
+    }
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels,
+                                          const std::function<void()>& desenharPorCima)
 {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
@@ -234,6 +258,9 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     }
     if (loteSelecionado >= 0) {
         desenharOPainelDaConstrucao(simulacao, contexto, larguraDaTela, alturaDaTela);
+    }
+    if (desenharPorCima) {
+        desenharPorCima();
     }
 
     ImGui::Render();

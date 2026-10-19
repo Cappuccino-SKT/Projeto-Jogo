@@ -4,7 +4,7 @@ TabelaDeAcoesDoTeclado TabelaDeAcoesDoTeclado::criarComAsTeclasPadrao()
 {
     TabelaDeAcoesDoTeclado tabela;
     tabela.teclasDeCadaAcao = {
-        {AcaoDoJogador::FecharOJogo, SDL_SCANCODE_ESCAPE},
+        {AcaoDoJogador::AbrirOMenuDoEsc, SDL_SCANCODE_ESCAPE},
         {AcaoDoJogador::AlternarTelaCheia, SDL_SCANCODE_F11},
         {AcaoDoJogador::MostrarColisaoParaDepuracao, SDL_SCANCODE_F1},
         {AcaoDoJogador::PausarOuDespausar, SDL_SCANCODE_SPACE},
@@ -19,6 +19,8 @@ TabelaDeAcoesDoTeclado TabelaDeAcoesDoTeclado::criarComAsTeclasPadrao()
         {AcaoDoJogador::MostrarCaminhosParaDepuracao, SDL_SCANCODE_F2},
         {AcaoDoJogador::MostrarAcoesDosNpcsParaDepuracao, SDL_SCANCODE_F3},
         {AcaoDoJogador::MostrarEstoqueEProducao, SDL_SCANCODE_F4},
+        {AcaoDoJogador::SalvamentoRapido, SDL_SCANCODE_F5},
+        {AcaoDoJogador::CarregamentoRapido, SDL_SCANCODE_F9},
     };
     return tabela;
 }

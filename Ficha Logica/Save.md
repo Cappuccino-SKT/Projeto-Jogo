@@ -49,9 +49,9 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 | `eventos` | eventos ativos (ID, dias que faltam) e os cooldowns | `evento.febre, 2 dias` |
 | `decisoes` | preço, salário e escolhas do jogador em cada construção dele | |
 | `npcs` | cada NPC **na ordem da vila inicial**: identidade, casa e trabalho, lugar (tile, próximo tile, progresso), olhar, decisão, doença, fome, dinheiro, habilidades, caminho (a lista de tiles e o índice) e os pedidos de caminho que esperam o cálculo (FL9-2) | |
-| `jogador` | posição, Fome, dinheiro, inventário | |
-| `diario` | as 300 notificações do Diário **[Proposta]** | |
-| `camera` | centro e zoom **[Proposta]** | |
+| `jogador` | **[Refinar depois]** o personagem do jogador ainda não existe no código; o dinheiro e o estoque dele já vão em `dinheiro` e `inventario` | |
+| `diario` | as 300 notificações do Diário | |
+| `camera` | **[Refinar depois]** não foi gravada no marco 9: a câmera volta centralizada | |
 
 **Não vai no arquivo** (recalculado ao carregar): as definições e os preços base; o mapa bloqueado pelos lotes (sai da lista das construções); a capacidade das construções; os campos só de desenho (`lugarNoTickAnteriorParaDesenho`, `distanciaNoCicloDeAndarEmMilesimos`); os NPCs falsos do teste de desempenho; as notificações na tela e a fila de pedidos (já aplicada antes de salvar).
 
@@ -106,7 +106,7 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 
 ## 7. Nomes no código
 
-- Pasta `Codigo/Save/`: `ArquivoDeSave.h/.cpp` (ler e gravar os bytes), `GravarAPartida.h/.cpp`, `CarregarAPartida.h/.cpp`.
+- Pasta `Codigo/Save/` (como ficou no marco 9): `ArquivoDeSave.h/.cpp` (o ponto de entrada, os bytes, o `.tmp`, o cabeçalho), `GravarAPartida.cpp`, `CarregarAPartida.cpp` e `AcessoAoEstadoParaOSave.h` (a porta para os campos privados). As contas do dia (`consumoNaoPagoHoje` e as outras "de hoje") também vão no arquivo, para um save no meio do dia continuar igual.
 - Funções: `montarASecaoDosNpcs`, `gravarAPartidaNoArquivo(const SimulacaoDaVila&, caminhoDoArquivo)`, `carregarAPartidaDoArquivo(dados, regras, caminhoDoArquivo)` → devolve a partida nova ou o motivo da recusa (`ResultadoDoCarregamento`).
 - Constantes: `versaoDoFormatoDoSave`, `espacosDeSaveManual`.
 - `Jogo/`: `TelaInicial.h/.cpp`, `MenuDoEsc.h/.cpp`, `ListaDeSaves.h/.cpp`.

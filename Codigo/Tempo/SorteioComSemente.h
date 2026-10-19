@@ -22,6 +22,7 @@ public:
     int sortearNumeroInteiroEntre(int minimo, int maximo);
 
 private:
+    friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura o estado (marco 9)
     uint64_t estadoDoGerador = 0;
     uint64_t incrementoDaSequencia = 1;
 };

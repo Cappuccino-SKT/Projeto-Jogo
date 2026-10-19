@@ -4,6 +4,7 @@
 
 #include "Economia/FelicidadeDaClasse.h"
 #include "Npc/ComponentesDoNpc.h"
+#include "Save/ArquivoDeSave.h"
 #include "Vila/SimulacaoDaVila.h"
 
 namespace {
@@ -107,22 +108,23 @@ void conferirOsCriteriosDoDia(ConferenciaDoTesteDeUmAno& conferencia, const Linh
     conferencia.falhou = true;
 }
 
-ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int quantidadeDeDias, std::optional<uint64_t> semente, int npcsAMais)
+ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int quantidadeDeDias, std::optional<uint64_t> semente, int npcsAMais,
+                                                   std::optional<int> salvarECarregarNoDia)
 {
     ResultadoDaSimulacaoSemTela resultado;
-    SimulacaoDaVila simulacao(dados, RegrasDoTempo{}, 2400, semente);
-    resultado.linhasDoConsole = simulacao.avisosAoMontar;
+    auto partida = std::make_unique<SimulacaoDaVila>(dados, RegrasDoTempo{}, 2400, semente);
+    resultado.linhasDoConsole = partida->avisosAoMontar;
     if (npcsAMais > 0) {
-        simulacao.criarNpcsSoParaMedirODesempenho(npcsAMais);
+        partida->criarNpcsSoParaMedirODesempenho(npcsAMais);
     }
     resultado.textoDoRelatorio = escreverCabecalhoDoRelatorio(dados) + "\n";
 
     // Passo 3: tick a tick, sem esperar o tempo real, até a meia-noite do último dia.
     const auto comeco = std::chrono::steady_clock::now();
     while (static_cast<int>(resultado.linhas.size()) < quantidadeDeDias) {
-        const std::vector<std::string> linhasDoTick = simulacao.avancarUmTick();
+        const std::vector<std::string> linhasDoTick = partida->avancarUmTick();
         ++resultado.ticksRodados;
-        if (!simulacao.relogio.comecouUmDiaNovo()) {
+        if (!partida->relogio.comecouUmDiaNovo()) {
             resultado.linhasDoConsole.insert(resultado.linhasDoConsole.end(), linhasDoTick.begin(), linhasDoTick.end());
             continue;
         }
@@ -132,10 +134,22 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
                 resultado.linhasDoConsole.push_back("Dia " + std::to_string(resultado.linhas.size() + 1) + ": " + linha);
             }
         }
-        const LinhaDoRelatorio& linha = *simulacao.linhaDoRelatorioDoUltimoDia;
+        const LinhaDoRelatorio& linha = *partida->linhaDoRelatorioDoUltimoDia;
         resultado.linhas.push_back(linha);
         resultado.textoDoRelatorio += escreverLinhaDoRelatorio(linha) + "\n";
         conferirOsCriteriosDoDia(resultado.conferencia, linha);
+
+        // Marco 9 (FL9-7): salva, carrega e segue com a partida carregada.
+        if (salvarECarregarNoDia.has_value() && static_cast<int>(resultado.linhas.size()) == *salvarECarregarNoDia - 1) {
+            const std::vector<uint8_t> bytes = gravarAPartidaEmBytes(*partida, "Teste", "teste");
+            ResultadoDoCarregamento carregada = carregarAPartidaDeBytes(dados, RegrasDoTempo{}, 2400, bytes);
+            if (!carregada.deuCerto()) {
+                resultado.conferencia.falhou = true;
+                resultado.conferencia.motivoDaFalha = "o save do dia " + std::to_string(*salvarECarregarNoDia) + " não carregou: " + carregada.motivoDaRecusa;
+                break;
+            }
+            partida = std::move(carregada.partida);
+        }
     }
     const auto fim = std::chrono::steady_clock::now();
     resultado.segundosQueLevou = std::chrono::duration<double>(fim - comeco).count();

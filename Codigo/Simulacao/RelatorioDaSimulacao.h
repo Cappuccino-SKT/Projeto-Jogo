@@ -73,5 +73,7 @@ struct ResultadoDaSimulacaoSemTela {
 // Regra 4.1: monta a vila, roda os dias o mais rápido possível e confere os
 // critérios em cada meia-noite. A semente vazia usa a do vila_inicial.json.
 // Os NPCs a mais só servem ao teste de desempenho.
+// Com "salvarECarregarNoDia" (marco 9, FL9-7), na meia-noite que começa esse dia a partida
+// é salva, carregada de volta e segue: o relatório tem que sair igual ao de uma partida sem save.
 ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int quantidadeDeDias, std::optional<uint64_t> semente,
-                                                   int npcsAMais);
+                                                   int npcsAMais, std::optional<int> salvarECarregarNoDia = std::nullopt);
