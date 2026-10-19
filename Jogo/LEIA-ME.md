@@ -465,3 +465,7 @@ Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) fora
 6. Deixar passar uma meia-noite: o `automatico.save` aparece na lista de Carregar.
 7. `.\build\Jogo\jogo.exe --save-para-json "$env:APPDATA\Projeto-Jogo\saves\espaco1.save"` mostra o save em texto (procurar `item.pao`).
 8. `ctest --test-dir build` termina com "100% tests passed" (o `testes_do_codigo` agora leva cerca de 1 minuto a mais).
+
+### Rodada FE3: o ritmo do dinheiro do jogador (2026-10-19)
+
+O `multiplicador_do_preco` dos Móveis (`itens.csv`) foi de 100 para **140**, e o painel da construção do jogador ganhou a dica "ninguém mais vende o que você faz; mudar o preço reduz a venda". Medido com `jogo --simular 64 --semente N` (todas **PASSOU**): o jogador ganha **+3,4 por dia** na semente 1 (de 88,9 para 305,8) e **+4,4** na 2 (para 364,4), antes +0,45. O preço dos Móveis (Pão fica em 1,3 a 1,9) e a Felicidade (cerca de 58) quase não mudam. **Atenção:** o Banco perde o que o jogador ganha: termina o ano em 175 (semente 1) e 108 (semente 2), antes perto de 400, e não fecharia um segundo ano. Com 150 a semente 2 chegava a 45; por isso o valor ficou em 140 (o limite de cima da sugestão).
