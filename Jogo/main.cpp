@@ -12,8 +12,10 @@
 #include <glad/gl.h>
 
 #include <algorithm>
+#include <cstdio>
 #include <fstream>
 #include <iterator>
+#include <memory>
 #include <optional>
 #include <string>
 #include <vector>
@@ -32,6 +34,10 @@
 #include "Simulacao/RelatorioDaSimulacao.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "InterfaceDoJogador.h"
+#include "ListaDeSaves.h"
+#include "MenuDoEsc.h"
+#include "Save/ArquivoDeSave.h"
+#include "TelaInicial.h"
 #include "TextoDaDataDoJogo.h"
 #include "Vila/SimulacaoDaVila.h"
 
@@ -182,6 +188,9 @@ struct PedidoDaLinhaDeComando {
     std::optional<int> diasParaSimular;     // --simular 64
     std::optional<uint64_t> semente;        // --semente 1
     int npcsAMais = 0;                      // --npcs-a-mais 485
+    std::optional<int> salvarECarregarNoDia;  // --salvar-e-carregar-no-dia 20 (com --simular; marco 9, FL9-7)
+    std::string arquivoParaCarregar;        // --carregar arquivo.save (marco 9)
+    std::string arquivoParaConverterEmTexto;  // --save-para-json arquivo.save (marco 9, FL9-1)
     std::string erro;                       // um número que faltou ou não é número
 };
 
@@ -213,6 +222,16 @@ PedidoDaLinhaDeComando lerALinhaDeComando(int quantidadeDeArgumentos, char* argu
             if (const std::optional<long long> semente = lerNumeroDepois(posicao, opcao)) {
                 pedido.semente = static_cast<uint64_t>(*semente);
             }
+        } else if (opcao == "--salvar-e-carregar-no-dia") {
+            if (const std::optional<long long> dia = lerNumeroDepois(posicao, opcao)) {
+                pedido.salvarECarregarNoDia = static_cast<int>(std::min<long long>(*dia, 100'000));
+            }
+        } else if (opcao == "--carregar" || opcao == "--save-para-json") {
+            if (posicao + 1 >= quantidadeDeArgumentos) {
+                pedido.erro = opcao + " precisa do caminho de um arquivo .save depois (por exemplo, " + opcao + " espaco1.save)";
+            } else {
+                (opcao == "--carregar" ? pedido.arquivoParaCarregar : pedido.arquivoParaConverterEmTexto) = argumentosDaLinhaDeComando[++posicao];
+            }
         } else if (opcao == "--npcs-a-mais") {
             if (const std::optional<long long> npcs = lerNumeroDepois(posicao, opcao)) {
                 pedido.npcsAMais = static_cast<int>(std::min<long long>(*npcs, 100'000));
@@ -237,7 +256,7 @@ int simularSemJanela(const PedidoDaLinhaDeComando& pedido)
     SDL_Log("Simulando %d dias sem tela%s%s...", dias,
             pedido.semente.has_value() ? (", semente " + std::to_string(*pedido.semente)).c_str() : "",
             pedido.npcsAMais > 0 ? (", com " + std::to_string(pedido.npcsAMais) + " NPCs a mais").c_str() : "");
-    const ResultadoDaSimulacaoSemTela resultado = rodarASimulacaoSemTela(dadosDoJogo, dias, pedido.semente, pedido.npcsAMais);
+    const ResultadoDaSimulacaoSemTela resultado = rodarASimulacaoSemTela(dadosDoJogo, dias, pedido.semente, pedido.npcsAMais, pedido.salvarECarregarNoDia);
     for (const std::string& linha : resultado.linhasDoConsole) {
         SDL_Log("%s", linha.c_str());
     }
@@ -262,6 +281,26 @@ int simularSemJanela(const PedidoDaLinhaDeComando& pedido)
     }
     SDL_Log("PASSOU");
     return relatorio ? 0 : 1;
+}
+
+// O modo "jogo --save-para-json arquivo.save" (marco 9, FL9-1): escreve o save em texto
+// no console, para investigar um erro (por exemplo, "o Pão sumiu do estoque depois de carregar").
+int converterSaveEmTextoSemJanela(const std::string& caminhoDoArquivo)
+{
+    const std::optional<std::vector<uint8_t>> bytes = lerOsBytesDoArquivo(caminhoDoArquivo);
+    if (!bytes.has_value()) {
+        SDL_Log("ERRO: não foi possível abrir o arquivo %s.", caminhoDoArquivo.c_str());
+        return 1;
+    }
+    bool deuCerto = false;
+    const std::string texto = converterOSaveEmTexto(*bytes, deuCerto);
+    if (!deuCerto) {
+        SDL_Log("ERRO: %s", texto.c_str());
+        return 1;
+    }
+    std::fwrite(texto.data(), 1, texto.size(), stdout);
+    std::fputc(10, stdout);  // fim de linha
+    return 0;
 }
 
 // Escreve no console as viradas do tick que acabou de rodar (no marco 1,
@@ -359,6 +398,9 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     }
     if (pedido.diasParaSimular.has_value()) {
         return simularSemJanela(pedido);
+    }
+    if (!pedido.arquivoParaConverterEmTexto.empty()) {
+        return converterSaveEmTextoSemJanela(pedido.arquivoParaConverterEmTexto);
     }
 
     // 1. Lê todos os dados (e o mapa) antes de abrir a janela: se houver erro, nem abre.
@@ -475,30 +517,138 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     bool mostrarAcoesDosNpcsParaDepuracao = false;
     const TabelaDeAcoesDoTeclado tabelaDeAcoes = TabelaDeAcoesDoTeclado::criarComAsTeclasPadrao();
 
-    SDL_Log("Esc ou o X fecham; F11 liga a tela cheia; F1 mostra a colisão.");
+    SDL_Log("Esc abre o menu (Salvar, Carregar, Sair); F5 salva e F9 carrega o save mais novo; F11 liga a tela cheia; F1 mostra a colisão.");
     SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
     SDL_Log("Câmera: WASD ou setas (Shift corre), roda do mouse para o zoom, botão do meio para arrastar.");
     SDL_Log("NPCs: F2 mostra os caminhos; F3 mostra a cor da ação de cada um e escreve a tabela no console.");
     SDL_Log("Economia: F4 escreve o estoque, os preços, as construções e o dinheiro; o resumo de cada dia e os eventos saem sozinhos à meia-noite.");
 
-    // 5. A partida nova (marcos 1, 4, 5 e 6): o relógio às 6h do dia 1 da
-    //    Primavera, os 15 NPCs dentro das casas, o estoque e o dinheiro do primeiro dia.
+    // 5. A tela inicial ou a partida (marco 9, FL9-6). Sem partida, o jogo mostra a
+    //    tela inicial; a partida nova ou o save carregado entram pelo Novo jogo, Continuar e Carregar.
     const RegrasDoTempo regrasDoTempo;
-    SimulacaoDaVila simulacaoDaVila(dadosDoJogo, regrasDoTempo, definicaoDoBoneco.distanciaDoCicloDeAndarEmMilesimos());
-    RelogioDoMundo& relogioDoMundo = simulacaoDaVila.relogio;
-    const entt::registry& registroDasEntidades = simulacaoDaVila.registroDasEntidades;
-    for (const std::string& aviso : simulacaoDaVila.avisosAoMontar) {
-        SDL_Log("Aviso: %s.", aviso.c_str());
+    const int distanciaDoCicloDeAndarEmMilesimos = definicaoDoBoneco.distanciaDoCicloDeAndarEmMilesimos();
+    std::unique_ptr<SimulacaoDaVila> simulacaoDaVila;  // vazia = a tela inicial
+    const std::string pastaDosSaves = descobrirAPastaDosSaves();
+    SDL_Log("Os saves ficam em: %s", pastaDosSaves.empty() ? "(a SDL não achou a pasta; salvar não vai funcionar)" : pastaDosSaves.c_str());
+    TelaInicial telaInicial;
+    MenuDoEsc menuDoEsc;
+    std::string mensagemDaTela;  // o erro ou o aviso que a tela inicial e o menu mostram embaixo
+    int64_t tickDoUltimoSave = 0;
+    int ultimoEspacoManualUsado = 1;
+    bool jogadorPediuParaFechar = false;
+
+    // Quantas horas de jogo passaram desde o último save (0 se menos de 1 hora): decide a confirmação.
+    const auto horasDeJogoSemSalvar = [&]() -> int {
+        if (!simulacaoDaVila) {
+            return 0;
+        }
+        const int64_t ticksSemSalvar = simulacaoDaVila->relogio.tickAtual() - tickDoUltimoSave;
+        return ticksSemSalvar > regrasDoTempo.ticksPorHoraDeJogo ? static_cast<int>(ticksSemSalvar / regrasDoTempo.ticksPorHoraDeJogo) : 0;
+    };
+    // O aviso vai para o console, para a tela e, com partida, para as notificações.
+    const auto avisarOJogador = [&](const std::string& texto, NivelDaNotificacao nivel) {
+        SDL_Log("%s", texto.c_str());
+        mensagemDaTela = nivel == NivelDaNotificacao::Aviso ? texto : "";
+        if (simulacaoDaVila) {
+            simulacaoDaVila->notificacoes.acrescentar(nivel, texto, simulacaoDaVila->relogio.diaDaPartida(), simulacaoDaVila->relogio.tickAtual());
+        }
+    };
+    const auto aoComecarUmaPartida = [&]() {
+        tickDoUltimoSave = simulacaoDaVila->relogio.tickAtual();
+        cameraJaFoiCentralizada = false;
+        interfaceDoJogador.aoTrocarDePartida();
+        menuDoEsc.fechar();
+        mensagemDaTela.clear();
+        SDL_Log("A vila: %d construções e %d NPCs.", static_cast<int>(simulacaoDaVila->vila.construcoes.size()),
+                static_cast<int>(simulacaoDaVila->npcsDaVila.size()));
+    };
+    const auto comecarUmaPartidaNova = [&]() {
+        simulacaoDaVila = std::make_unique<SimulacaoDaVila>(dadosDoJogo, regrasDoTempo, distanciaDoCicloDeAndarEmMilesimos);
+        for (const std::string& aviso : simulacaoDaVila->avisosAoMontar) {
+            SDL_Log("Aviso: %s.", aviso.c_str());
+        }
+        aoComecarUmaPartida();
+    };
+    // Regra 4.2: se o save for recusado, a partida atual continua e o jogador lê o motivo.
+    const auto carregarDoArquivo = [&](const std::string& caminhoDoArquivo) {
+        ResultadoDoCarregamento carregamento = carregarAPartidaDoArquivo(dadosDoJogo, regrasDoTempo, distanciaDoCicloDeAndarEmMilesimos, caminhoDoArquivo);
+        if (!carregamento.deuCerto()) {
+            avisarOJogador(carregamento.motivoDaRecusa, NivelDaNotificacao::Aviso);
+            return;
+        }
+        simulacaoDaVila = std::move(carregamento.partida);
+        if (!simulacaoDaVila->relogio.jogoEstaPausado()) {
+            simulacaoDaVila->relogio.alternarPausa();  // a partida carregada começa pausada
+        }
+        aoComecarUmaPartida();
+        SDL_Log("Jogo carregado (%s). A partida começa pausada: o Espaço despausa.", escreverADataDoJogoParaOSave(simulacaoDaVila->relogio).c_str());
+    };
+    const auto salvarNoArquivo = [&](const std::string& caminhoDoArquivo, const std::string& nomeDoEspaco) -> bool {
+        simulacaoDaVila->aplicarOsPedidosPendentes();  // regra 4.1: a fila de pedidos entra antes de gravar
+        const std::string erro = gravarAPartidaNoArquivo(*simulacaoDaVila, caminhoDoArquivo, nomeDoEspaco, escreverADataRealDeAgora());
+        if (!erro.empty()) {
+            avisarOJogador(erro, NivelDaNotificacao::Aviso);
+            return false;
+        }
+        tickDoUltimoSave = simulacaoDaVila->relogio.tickAtual();
+        return true;
+    };
+    const auto salvarNoEspaco = [&](int espaco) {
+        if (pastaDosSaves.empty()) {
+            avisarOJogador("Não foi possível achar a pasta dos saves.", NivelDaNotificacao::Aviso);
+            return;
+        }
+        if (salvarNoArquivo(pastaDosSaves + nomeDoArquivoDoEspaco(espaco), "Espaço " + std::to_string(espaco))) {
+            ultimoEspacoManualUsado = espaco;
+            menuDoEsc.fechar();
+            avisarOJogador("Jogo salvo (" + escreverADataDoJogoParaOSave(simulacaoDaVila->relogio) + ").", NivelDaNotificacao::Info);
+        }
+    };
+    const auto tratarOPedidoDeSave = [&](const PedidoDeSave& pedido) {
+        switch (pedido.tipo) {
+        case TipoDePedidoDeSave::Nenhum:
+            break;
+        case TipoDePedidoDeSave::NovoJogo:
+            comecarUmaPartidaNova();
+            break;
+        case TipoDePedidoDeSave::Continuar: {
+            const std::optional<EspacoDeSave> maisNovo = acharOSaveMaisNovo(listarOsEspacosDeSave(pastaDosSaves));
+            if (maisNovo.has_value()) {
+                carregarDoArquivo(maisNovo->caminhoDoArquivo);
+            }
+            break;
+        }
+        case TipoDePedidoDeSave::CarregarEspaco:
+            carregarDoArquivo(pastaDosSaves + (pedido.espaco == 0 ? nomeDoArquivoDoSaveAutomatico : nomeDoArquivoDoEspaco(pedido.espaco)));
+            break;
+        case TipoDePedidoDeSave::SalvarNoEspaco:
+            if (simulacaoDaVila) {
+                salvarNoEspaco(pedido.espaco);
+            }
+            break;
+        case TipoDePedidoDeSave::SairParaATelaInicial:
+            simulacaoDaVila.reset();
+            menuDoEsc.fechar();
+            mensagemDaTela.clear();
+            telaInicial.abrir(pastaDosSaves);
+            SDL_SetWindowTitle(janelaDoJogo, "Projeto Jogo");
+            break;
+        case TipoDePedidoDeSave::FecharOJogo:
+            jogadorPediuParaFechar = true;
+            break;
+        }
+    };
+
+    telaInicial.abrir(pastaDosSaves);
+    if (!pedido.arquivoParaCarregar.empty()) {
+        carregarDoArquivo(pedido.arquivoParaCarregar);  // jogo --carregar arquivo.save
     }
-    SDL_Log("A vila: %d construções e %d NPCs.", static_cast<int>(simulacaoDaVila.vila.construcoes.size()),
-            static_cast<int>(simulacaoDaVila.vila.npcsIniciais.size()));
     SDL_Log("Interface: Tab abre a gestão da vila; clique num lote para ver a construção; os botões de cima mudam a velocidade.");
 
     std::string tituloMostradoNaJanela;
     Uint64 instanteDoQuadroAnteriorEmNanossegundos = SDL_GetTicksNS();
 
     // 6. O laço principal: roda uma vez por quadro, até o jogador fechar.
-    bool jogadorPediuParaFechar = false;
     while (!jogadorPediuParaFechar) {
         // 6a. Lê tudo o que aconteceu desde o último quadro (teclas, mouse, janela).
         SDL_Event eventoRecebido;
@@ -506,28 +656,51 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             interfaceDoJogador.processarEvento(eventoRecebido);
             const bool interfaceQuerOTeclado = interfaceDoJogador.querOTeclado();
             const bool interfaceQuerOMouse = interfaceDoJogador.querOMouse();
-            // O X da janela (ou "Fechar janela" na barra de tarefas).
+            // Com a tela inicial ou o menu do Esc na frente, o mapa não recebe teclas nem mouse.
+            const bool mapaRecebeEntrada = simulacaoDaVila != nullptr && !menuDoEsc.estaAberto();
+            // O X da janela (ou "Fechar janela" na barra de tarefas): com mais de 1 hora sem salvar, pergunta.
             if (eventoRecebido.type == SDL_EVENT_QUIT || eventoRecebido.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
-                jogadorPediuParaFechar = true;
+                if (horasDeJogoSemSalvar() >= 1) {
+                    menuDoEsc.abrirPerguntandoPor(pastaDosSaves, PedidoDeSave{TipoDePedidoDeSave::FecharOJogo, 0});
+                } else {
+                    jogadorPediuParaFechar = true;
+                }
             }
             // As teclas apertadas viram ações pela tabela (FL2-4).
             if (eventoRecebido.type == SDL_EVENT_KEY_DOWN && !eventoRecebido.key.repeat) {
                 std::optional<AcaoDoJogador> acao = tabelaDeAcoes.acaoDaTeclaApertada(eventoRecebido.key.scancode);
-                if (acao != AcaoDoJogador::FecharOJogo && interfaceQuerOTeclado) {
+                if (acao != AcaoDoJogador::AbrirOMenuDoEsc && interfaceQuerOTeclado) {
                     acao.reset();  // digitando num campo da interface: as teclas do jogo esperam
                 }
-                if (eventoRecebido.key.scancode == SDL_SCANCODE_TAB && !interfaceQuerOTeclado) {
+                if (eventoRecebido.key.scancode == SDL_SCANCODE_TAB && !interfaceQuerOTeclado && mapaRecebeEntrada) {
                     interfaceDoJogador.alternarAJanelaDeGestao();
                 }
-                if (acao == AcaoDoJogador::FecharOJogo) {
-                    // O Esc fecha primeiro o painel e a gestão; só sem nada aberto, fecha o jogo.
-                    if (!interfaceDoJogador.fecharOQueEstiverAberto()) {
-                        jogadorPediuParaFechar = true;
+                if (acao == AcaoDoJogador::AbrirOMenuDoEsc) {
+                    // O Esc fecha primeiro o painel e a gestão; sem nada aberto, abre o menu (ou fecha o menu).
+                    if (simulacaoDaVila && menuDoEsc.estaAberto()) {
+                        menuDoEsc.fechar();
+                    } else if (simulacaoDaVila && !interfaceDoJogador.fecharOQueEstiverAberto()) {
+                        mensagemDaTela.clear();
+                        menuDoEsc.abrir(pastaDosSaves);
                     }
                 } else if (acao == AcaoDoJogador::AlternarTelaCheia) {
                     // Tela cheia, sem bordas, do tamanho do monitor.
                     const bool janelaEstaEmTelaCheia = (SDL_GetWindowFlags(janelaDoJogo) & SDL_WINDOW_FULLSCREEN) != 0;
                     SDL_SetWindowFullscreen(janelaDoJogo, !janelaEstaEmTelaCheia);
+                } else if (acao == AcaoDoJogador::SalvamentoRapido && mapaRecebeEntrada) {
+                    salvarNoEspaco(ultimoEspacoManualUsado);  // F5: no último espaço manual usado
+                } else if (acao == AcaoDoJogador::CarregamentoRapido && simulacaoDaVila) {
+                    // F9: o save mais novo; com mais de 1 hora sem salvar, o menu pergunta antes.
+                    const std::optional<EspacoDeSave> maisNovo = acharOSaveMaisNovo(listarOsEspacosDeSave(pastaDosSaves));
+                    if (!maisNovo.has_value()) {
+                        avisarOJogador("Não há nenhum save para carregar.", NivelDaNotificacao::Aviso);
+                    } else if (horasDeJogoSemSalvar() >= 1) {
+                        menuDoEsc.abrirPerguntandoPor(pastaDosSaves, PedidoDeSave{TipoDePedidoDeSave::CarregarEspaco, maisNovo->espaco});
+                    } else {
+                        carregarDoArquivo(maisNovo->caminhoDoArquivo);
+                    }
+                } else if (!mapaRecebeEntrada || !acao.has_value()) {
+                    // sem partida (ou com o menu aberto), as outras teclas não fazem nada
                 } else if (acao == AcaoDoJogador::MostrarColisaoParaDepuracao) {
                     // Mostra os tiles bloqueados em vermelho (FL1-3).
                     mostrarColisaoParaDepuracao = !mostrarColisaoParaDepuracao;
@@ -538,21 +711,21 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                     // A cor da ação em cima de cada NPC e a tabela no console (FL5-6).
                     mostrarAcoesDosNpcsParaDepuracao = !mostrarAcoesDosNpcsParaDepuracao;
                     if (mostrarAcoesDosNpcsParaDepuracao) {
-                        SDL_Log("%s:\n%s", montarTextoDaHora(relogioDoMundo).c_str(),
-                                montarTabelaDasAcoesDosNpcs(simulacaoDaVila.contextoDaRotina(), relogioDoMundo).c_str());
+                        SDL_Log("%s:\n%s", montarTextoDaHora(simulacaoDaVila->relogio).c_str(),
+                                montarTabelaDasAcoesDosNpcs(simulacaoDaVila->contextoDaRotina(), simulacaoDaVila->relogio).c_str());
                     }
                 } else if (acao == AcaoDoJogador::MostrarEstoqueEProducao) {
                     // O estoque, as construções e o dinheiro (FL6-8).
-                    SDL_Log("%s:\n%s", montarTextoDaHora(relogioDoMundo).c_str(),
-                            montarTabelaDaProducao(simulacaoDaVila.contextoDaProducao()).c_str());
-                } else if (acao.has_value()) {
-                    tratarAcaoDoRelogio(*acao, relogioDoMundo);
+                    SDL_Log("%s:\n%s", montarTextoDaHora(simulacaoDaVila->relogio).c_str(),
+                            montarTabelaDaProducao(simulacaoDaVila->contextoDaProducao()).c_str());
+                } else {
+                    tratarAcaoDoRelogio(*acao, simulacaoDaVila->relogio);
                 }
             }
             // A câmera pelo mouse. A SDL mede o mouse em "pontos" da janela; a
             // densidade converte para pixels da tela (é 1 num monitor comum).
             const float densidadeDePixels = SDL_GetWindowPixelDensity(janelaDoJogo);
-            if (eventoRecebido.type == SDL_EVENT_MOUSE_WHEEL && !interfaceQuerOMouse) {
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_WHEEL && !interfaceQuerOMouse && mapaRecebeEntrada) {
                 float quantoARodaGirou = eventoRecebido.wheel.y;
                 if (eventoRecebido.wheel.direction == SDL_MOUSEWHEEL_FLIPPED) {
                     quantoARodaGirou = -quantoARodaGirou;
@@ -565,13 +738,13 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                 }
             }
             // O botão esquerdo num lote do mapa abre o painel da construção (ficha da Interface, regra 10.6).
-            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_LEFT && !interfaceQuerOMouse) {
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_LEFT && !interfaceQuerOMouse && mapaRecebeEntrada) {
                 const std::optional<PosicaoDeTile> tileClicado = cameraDoMapa.converterPontoDaTelaEmTile(
-                    eventoRecebido.button.x * densidadeDePixels, eventoRecebido.button.y * densidadeDePixels, simulacaoDaVila.mapa.tamanhoDoTileEmPixels);
-                const LoteDeConstrucao* loteClicado = tileClicado.has_value() ? simulacaoDaVila.mapa.loteNoTile(tileClicado->tileX, tileClicado->tileY) : nullptr;
+                    eventoRecebido.button.x * densidadeDePixels, eventoRecebido.button.y * densidadeDePixels, simulacaoDaVila->mapa.tamanhoDoTileEmPixels);
+                const LoteDeConstrucao* loteClicado = tileClicado.has_value() ? simulacaoDaVila->mapa.loteNoTile(tileClicado->tileX, tileClicado->tileY) : nullptr;
                 interfaceDoJogador.selecionarOLote(loteClicado != nullptr ? loteClicado->identificadorDoLote : -1);
             }
-            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_MIDDLE) {
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_MIDDLE && mapaRecebeEntrada) {
                 cameraDoMapa.comecarArrasto();
             }
             if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_UP && eventoRecebido.button.button == SDL_BUTTON_MIDDLE) {
@@ -582,38 +755,49 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                                                eventoRecebido.motion.yrel * densidadeDePixels);
             }
             // Janela minimizada: pausa sozinho (FL1-3). Ao voltar, continua pausado.
-            if (eventoRecebido.type == SDL_EVENT_WINDOW_MINIMIZED && !relogioDoMundo.jogoEstaPausado()) {
-                relogioDoMundo.alternarPausa();
+            if (eventoRecebido.type == SDL_EVENT_WINDOW_MINIMIZED && simulacaoDaVila && !simulacaoDaVila->relogio.jogoEstaPausado()) {
+                simulacaoDaVila->relogio.alternarPausa();
                 SDL_Log("Jogo pausado porque a janela foi minimizada.");
             }
         }
 
         // 6b. Avança a vila pelo tempo real que passou, um tick por vez,
-        //     conferindo as viradas depois de cada tick.
+        //     conferindo as viradas depois de cada tick. Com o menu do Esc aberto, o tempo para.
         const Uint64 instanteDesteQuadroEmNanossegundos = SDL_GetTicksNS();
         const int64_t nanossegundosDesdeOQuadroAnterior =
             static_cast<int64_t>(instanteDesteQuadroEmNanossegundos - instanteDoQuadroAnteriorEmNanossegundos);
         instanteDoQuadroAnteriorEmNanossegundos = instanteDesteQuadroEmNanossegundos;
 
-        // Os pedidos do jogador valem na hora, mesmo com o jogo pausado (ficha da Interface, regra 10.8).
-        for (const std::string& linha : simulacaoDaVila.aplicarOsPedidosPendentes()) {
-            SDL_Log("%s", linha.c_str());
-        }
-        const int ticksParaAvancar = relogioDoMundo.calcularTicksParaAvancarPeloTempoReal(nanossegundosDesdeOQuadroAnterior);
-        for (int tick = 0; tick < ticksParaAvancar; ++tick) {
-            // A ordem de cada tick está na SimulacaoDaVila (a mesma do teste sem
-            // tela). O resumo do dia sai antes do "Começou o dia".
-            for (const std::string& linha : simulacaoDaVila.avancarUmTick()) {
+        if (simulacaoDaVila && !menuDoEsc.estaAberto()) {
+            RelogioDoMundo& relogioDoMundo = simulacaoDaVila->relogio;
+            // Os pedidos do jogador valem na hora, mesmo com o jogo pausado (ficha da Interface, regra 10.8).
+            for (const std::string& linha : simulacaoDaVila->aplicarOsPedidosPendentes()) {
                 SDL_Log("%s", linha.c_str());
             }
-            escreverAsViradasNoConsole(relogioDoMundo);
+            const int ticksParaAvancar = relogioDoMundo.calcularTicksParaAvancarPeloTempoReal(nanossegundosDesdeOQuadroAnterior);
+            for (int tick = 0; tick < ticksParaAvancar; ++tick) {
+                // A ordem de cada tick está na SimulacaoDaVila (a mesma do teste sem
+                // tela). O resumo do dia sai antes do "Começou o dia".
+                for (const std::string& linha : simulacaoDaVila->avancarUmTick()) {
+                    SDL_Log("%s", linha.c_str());
+                }
+                escreverAsViradasNoConsole(relogioDoMundo);
+                // O save automático (FL9-3): todo dia às 0h, depois da ordem do dia e da linha do relatório.
+                if (relogioDoMundo.comecouUmDiaNovo() && !pastaDosSaves.empty()) {
+                    salvarNoArquivo(pastaDosSaves + nomeDoArquivoDoSaveAutomatico, "Automático");
+                }
+            }
         }
 
         // 6c. A data no título da janela, trocada só quando o texto muda.
-        const std::string tituloDesteQuadro = montarTextoDoTituloDaJanela(relogioDoMundo);
-        if (tituloDesteQuadro != tituloMostradoNaJanela) {
-            SDL_SetWindowTitle(janelaDoJogo, tituloDesteQuadro.c_str());
-            tituloMostradoNaJanela = tituloDesteQuadro;
+        if (simulacaoDaVila) {
+            const std::string tituloDesteQuadro = montarTextoDoTituloDaJanela(simulacaoDaVila->relogio);
+            if (tituloDesteQuadro != tituloMostradoNaJanela) {
+                SDL_SetWindowTitle(janelaDoJogo, tituloDesteQuadro.c_str());
+                tituloMostradoNaJanela = tituloDesteQuadro;
+            }
+        } else {
+            tituloMostradoNaJanela.clear();
         }
 
         // 6d. A câmera: tamanho da tela, teclas seguradas e o limite ao mapa.
@@ -622,45 +806,68 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         int larguraDaTelaEmPixels = 0;
         int alturaDaTelaEmPixels = 0;
         SDL_GetWindowSizeInPixels(janelaDoJogo, &larguraDaTelaEmPixels, &alturaDaTelaEmPixels);
-        cameraDoMapa.atualizarTamanhoDaTela(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        if (!cameraJaFoiCentralizada) {
-            cameraDoMapa.centralizarNoMapa();
-            cameraJaFoiCentralizada = true;
+        if (simulacaoDaVila) {
+            cameraDoMapa.atualizarTamanhoDaTela(larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            if (!cameraJaFoiCentralizada) {
+                cameraDoMapa.centralizarNoMapa();
+                cameraJaFoiCentralizada = true;
+            }
+            if (!menuDoEsc.estaAberto()) {
+                const double segundosReaisDoQuadro = std::min(nanossegundosDesdeOQuadroAnterior, int64_t{250'000'000}) / 1e9;
+                const DirecaoDasTeclasSeguradas direcao = lerDirecaoDasTeclasSeguradas(tabelaDeAcoes);
+                cameraDoMapa.moverPeloTeclado(direcao.direcaoX, direcao.direcaoY, segundosReaisDoQuadro, direcao.correndoComShift);
+            }
+            cameraDoMapa.limitarAoMapa();
         }
-        const double segundosReaisDoQuadro = std::min(nanossegundosDesdeOQuadroAnterior, int64_t{250'000'000}) / 1e9;
-        const DirecaoDasTeclasSeguradas direcao = lerDirecaoDasTeclasSeguradas(tabelaDeAcoes);
-        cameraDoMapa.moverPeloTeclado(direcao.direcaoX, direcao.direcaoY, segundosReaisDoQuadro, direcao.correndoComShift);
-        cameraDoMapa.limitarAoMapa();
 
         // 6e. Desenha o quadro: fundo, mapa (os NPCs no meio das camadas) e depuração.
         glViewport(0, 0, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         glClearColor(corDoFundoAtrasDoMapa[0], corDoFundoAtrasDoMapa[1], corDoFundoAtrasDoMapa[2], 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        const MapaLocal& mapaDaVila = simulacaoDaVila.mapa;
-        desenhistaDoMapa.desenharCamadasAbaixoDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        desenhistaDoMapa.desenharConstrucoes(simulacaoDaVila.vila, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        desenhistaDosPersonagens.desenharNpcs(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(), mapaDaVila.tamanhoDoTileEmPixels,
-                                              cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        desenhistaDoMapa.desenharTelhadosDasConstrucoes(simulacaoDaVila.vila, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        desenhistaDoMapa.desenharCamadasAcimaDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        if (mostrarColisaoParaDepuracao) {
-            desenhistaDoMapa.desenharTilesBloqueadosParaDepuracao(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        }
-        if (mostrarCaminhosParaDepuracao) {
-            desenhistaDoMapa.desenharTilesDosCaminhosParaDepuracao(juntarTilesDosCaminhos(registroDasEntidades), mapaDaVila, cameraDoMapa,
-                                                                   larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        }
-        if (mostrarAcoesDosNpcsParaDepuracao) {
-            desenhistaDosPersonagens.desenharMarcadoresDasAcoes(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(),
-                                                                mapaDaVila.tamanhoDoTileEmPixels, cameraDoMapa, larguraDaTelaEmPixels,
-                                                                alturaDaTelaEmPixels);
-        }
+        PedidoDeSave pedidoDaTela;  // o que a tela inicial ou o menu pediu neste quadro
+        const float larguraDaTelaEmFloat = static_cast<float>(larguraDaTelaEmPixels);
+        const float alturaDaTelaEmFloat = static_cast<float>(alturaDaTelaEmPixels);
+        if (simulacaoDaVila) {
+            const MapaLocal& mapaDaVila = simulacaoDaVila->mapa;
+            const entt::registry& registroDasEntidades = simulacaoDaVila->registroDasEntidades;
+            const RelogioDoMundo& relogioDoMundo = simulacaoDaVila->relogio;
+            desenhistaDoMapa.desenharCamadasAbaixoDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            desenhistaDoMapa.desenharConstrucoes(simulacaoDaVila->vila, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            desenhistaDosPersonagens.desenharNpcs(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(), mapaDaVila.tamanhoDoTileEmPixels,
+                                                  cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            desenhistaDoMapa.desenharTelhadosDasConstrucoes(simulacaoDaVila->vila, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            desenhistaDoMapa.desenharCamadasAcimaDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            if (mostrarColisaoParaDepuracao) {
+                desenhistaDoMapa.desenharTilesBloqueadosParaDepuracao(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            }
+            if (mostrarCaminhosParaDepuracao) {
+                desenhistaDoMapa.desenharTilesDosCaminhosParaDepuracao(juntarTilesDosCaminhos(registroDasEntidades), mapaDaVila, cameraDoMapa,
+                                                                       larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            }
+            if (mostrarAcoesDosNpcsParaDepuracao) {
+                desenhistaDosPersonagens.desenharMarcadoresDasAcoes(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(),
+                                                                    mapaDaVila.tamanhoDoTileEmPixels, cameraDoMapa, larguraDaTelaEmPixels,
+                                                                    alturaDaTelaEmPixels);
+            }
 
-        // 6f. A interface do jogador por cima de tudo.
-        interfaceDoJogador.desenharUmQuadro(simulacaoDaVila, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+            // 6f. A interface do jogador por cima de tudo, e o menu do Esc por cima dela.
+            interfaceDoJogador.desenharUmQuadro(*simulacaoDaVila, larguraDaTelaEmPixels, alturaDaTelaEmPixels, [&]() {
+                pedidoDaTela = menuDoEsc.desenhar(larguraDaTelaEmFloat, alturaDaTelaEmFloat, horasDeJogoSemSalvar(), mensagemDaTela);
+            });
+        } else {
+            interfaceDoJogador.desenharUmQuadroSemPartida([&]() {
+                if (menuDoEsc.estaAberto()) {
+                    menuDoEsc.fechar();
+                }
+                pedidoDaTela = telaInicial.desenhar(larguraDaTelaEmFloat, alturaDaTelaEmFloat, mensagemDaTela);
+            });
+        }
 
         SDL_GL_SwapWindow(janelaDoJogo);
+
+        // 6g. O pedido da tela inicial ou do menu só é tratado depois do quadro: ele pode trocar a partida.
+        tratarOPedidoDeSave(pedidoDaTela);
     }
 
     SDL_Log("Janela fechada. Até a próxima!");

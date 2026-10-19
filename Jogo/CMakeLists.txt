@@ -31,6 +31,9 @@ target_compile_options(imgui_do_jogo PRIVATE -w)
 add_executable(jogo
     main.cpp
     InterfaceDoJogador.cpp
+    ListaDeSaves.cpp
+    MenuDoEsc.cpp
+    TelaInicial.cpp
     TextoDaDataDoJogo.cpp
     DesenhoDeQuadrados.cpp
     DesenhoDoMapa.cpp

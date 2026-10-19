@@ -40,6 +40,7 @@ public:
     std::vector<bool> produtoEstaComEstoqueDeSobra;
 
 private:
+    friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura o estado (marco 9)
     std::vector<std::array<int64_t, diasGuardadosDoConsumo>> consumoDosUltimosDiasPorItem;
     std::vector<int64_t> consumoDeHojePorItem;
     int posicaoDoDiaMaisAntigo = 0;  // os 5 dias são uma roda: o mais antigo sai primeiro

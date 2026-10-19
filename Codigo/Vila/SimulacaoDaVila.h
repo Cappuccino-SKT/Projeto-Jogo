@@ -95,6 +95,7 @@ public:
     std::optional<LinhaDoRelatorio> linhaDoRelatorioDoUltimoDia;
 
 private:
+    friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura os sorteios (marco 9)
     // Cada linha do console que merece vira notificação (e entra no Diário).
     void registrarNasNotificacoes(const std::vector<std::string>& linhas, std::size_t aPartirDaLinha);
     int ticksPorHoraDeJogo = 800;

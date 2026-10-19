@@ -8,6 +8,7 @@
 
 #include <SDL3/SDL.h>
 
+#include <functional>
 #include <map>
 #include <string>
 #include <vector>
@@ -27,7 +28,13 @@ public:
     bool querOTeclado() const;
 
     // Monta e desenha o quadro da interface, por cima do mapa.
-    void desenharUmQuadro(SimulacaoDaVila& simulacao, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels);
+    // "desenharPorCima" (opcional) roda dentro do mesmo quadro, depois das janelas do jogo: o menu do Esc (marco 9).
+    void desenharUmQuadro(SimulacaoDaVila& simulacao, int larguraDaTelaEmPixels, int alturaDaTelaEmPixels,
+                          const std::function<void()>& desenharPorCima = {});
+    // Sem partida (a tela inicial): só o que "desenharPorCima" desenha.
+    void desenharUmQuadroSemPartida(const std::function<void()>& desenharPorCima);
+    // Uma partida nova foi carregada ou começada: esquece a seleção, a janela aberta e os preços guardados.
+    void aoTrocarDePartida();
 
     // O jogador clicou num lote do mapa (-1 limpa a seleção).
     void selecionarOLote(int numeroDoLote) { loteSelecionado = numeroDoLote; }

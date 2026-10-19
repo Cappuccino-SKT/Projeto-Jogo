@@ -24,6 +24,9 @@ add_library(regras_do_jogo STATIC
     Jogador/PedidosDoJogador.cpp
     Jogador/NotificacoesEAlertas.cpp
     Vila/SimulacaoDaVila.cpp
+    Save/ArquivoDeSave.cpp
+    Save/GravarAPartida.cpp
+    Save/CarregarAPartida.cpp
     Dados/ProblemasDosDados.cpp
     Dados/TabelaCsv.cpp
     Dados/TextosERegras.cpp

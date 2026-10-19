@@ -422,9 +422,46 @@ Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) fora
 
 **O que testar:**
 
-1. Abrir o jogo: a barra de cima aparece; **Tab** abre a gestão; **Esc** fecha o painel, depois a gestão, e só então o jogo.
+1. Abrir o jogo: a barra de cima aparece; **Tab** abre a gestão; **Esc** fecha o painel, depois a gestão, e só então abre o menu (marco 9).
 2. Clicar nos prédios até achar a "carpintaria_do_jogador": o painel mostra os 2 empregados, os 3 desempregados, o salário, os preços e a fila de ordens. Trocar o preço dos Móveis para +30% e ver o preço novo no painel; pôr uma ordem "Fazer 5 Móveis".
 3. Aba **Mercado**: vender 10 Tábuas; o dinheiro do jogador sobe e as Tábuas passam para a Cidade.
 4. Clicar no lote 5 (livre): escolher uma Fazenda e encomendar. O lote vira um retângulo marrom (a obra); em cerca de 3 dias de jogo ele vira a Fazenda, com a notificação "Obra pronta".
 5. Deixar correr 16 dias: a manutenção entra no começo do Verão e as notificações "Obra pronta: manutenção de ..." aparecem.
 6. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 3".
+
+### Marco 9: salvar e carregar (2026-10-19, falta o teste do autor)
+
+**O que faz:** o jogo grava a partida num arquivo e a reconstrói igual (mesmo tick, mesmo sorteio, NPCs no meio do mesmo passo). Abre numa **tela inicial** (Continuar, Novo jogo, Carregar, Sair); o **Esc** agora abre o menu (Voltar, Salvar, Carregar, Sair para a tela inicial) e **deixou de fechar o jogo**. A partida carregada começa **pausada**. Com o menu aberto, o tempo para.
+
+**Teclas:** **F5** salva no último espaço usado (o 1, se nenhum foi); **F9** carrega o save mais novo (com mais de 1 hora de jogo sem salvar, o menu pergunta antes). Sair, carregar ou fechar a janela pedem confirmação se houver mais de 1 hora de jogo sem salvar.
+
+**Os saves:** 3 espaços manuais (`espaco1.save` a `espaco3.save`) e 1 automático (`automatico.save`, gravado toda meia-noite do jogo). Ficam em `C:\Users\<usuário>\AppData\Roaming\Projeto-Jogo\saves\` (o caminho também sai no console ao abrir o jogo). O formato é MessagePack pela nlohmann/json (FL9-1). Um save de outra versão, ou com um item, receita, evento ou construção que não existe mais, é **recusado com uma mensagem** e a partida atual continua (FL9-5).
+
+**Os arquivos novos:**
+
+- `Codigo/Save/`: `ArquivoDeSave` (o ponto de entrada, o arquivo temporário `.tmp` e o cabeçalho), `GravarAPartida`, `CarregarAPartida` e `AcessoAoEstadoParaOSave.h` (a única porta para os campos privados);
+- `Jogo/`: `TelaInicial`, `MenuDoEsc` e `ListaDeSaves` (a pasta, a lista e o desenho da lista);
+- `Codigo/Testes/TestesDoSave.cpp`: os testes novos.
+
+**Linha de comando:**
+
+| Comando | O que faz |
+|---|---|
+| `jogo --carregar arquivo.save` | abre o jogo já com esse save (pausado) |
+| `jogo --save-para-json arquivo.save` | escreve o save em texto no console, para investigar um erro |
+| `jogo --simular 64 --semente 1 --salvar-e-carregar-no-dia 20` | salva às 0h do dia 20, carrega e segue; o relatório tem que sair igual ao de `--simular 64 --semente 1` |
+
+**Não vai no save (ficou para depois):** a câmera (volta centralizada), a seleção da interface, as janelas abertas e os NPCs falsos do teste de desempenho. O personagem do jogador ainda não existe no código (só o dinheiro e o estoque dele, que vão no save).
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (salvar, carregar e salvar dá o mesmo arquivo; uma obra do jogador em andamento volta e a partida segue igual por 12 dias; versão errada, `item.vinho`, arquivo cortado e `.tmp` conferidos); `jogo --simular 64 --semente 1` com e sem `--salvar-e-carregar-no-dia 20` dá **o mesmo `relatorio.csv`, byte a byte**. As telas (tela inicial, menu, F5 e F9) ainda não foram vistas na janela.
+
+**O que testar:**
+
+1. Abrir o jogo: aparece a tela inicial; "Continuar" e "Carregar" estão desligados (ainda não há save). **Novo jogo** abre a vila.
+2. Deixar correr uns minutos, apertar **F5** (notificação "Jogo salvo (...)"), deixar correr mais, apertar **F9**: a vila volta ao momento do F5, **pausada**; o Espaço despausa.
+3. **Esc** → Salvar → Espaço 2; depois Esc → Carregar mostra o Espaço 1 e o 2 com a data do jogo e a hora real.
+4. Fechar o jogo e abrir de novo: **Continuar** abre o save mais novo.
+5. Com mais de 1 hora de jogo sem salvar (40 segundos reais a 1x), Esc → "Sair para a tela inicial" pergunta antes; o X da janela também.
+6. Deixar passar uma meia-noite: o `automatico.save` aparece na lista de Carregar.
+7. `.\build\Jogo\jogo.exe --save-para-json "$env:APPDATA\Projeto-Jogo\saves\espaco1.save"` mostra o save em texto (procurar `item.pao`).
+8. `ctest --test-dir build` termina com "100% tests passed" (o `testes_do_codigo` agora leva cerca de 1 minuto a mais).
