@@ -29,7 +29,10 @@ Leia as partes 2 a 5 uma vez: elas valem para **tudo** o que for desenhado. Depo
 
 - **Pixel art:** cada pixel é colocado à mão. Nada de pincel macio, borrado ou degradê automático.
 - **Tile:** um quadrado de 16 × 16 pixels que se repete para formar o chão. Um tile bom **emenda sem marca** com ele mesmo e com os vizinhos.
-- **Vista 3/4:** a câmera olha de cima, um pouco inclinada. Do chão e dos objetos baixos, vê-se o **topo**; das construções e das pessoas, vê-se o **topo e a frente** (a parede de baixo, virada para o jogador). Por isso uma casa ocupa o lote no chão, e o telhado "sobe" na tela.
+- **Vista quase de cima (regra da inclinação, decisão do autor de 2026-10-19):** a câmera olha o mundo **de cima, com só uma pequena inclinação**; não é a vista 3/4 de Stardew, que mostra os objetos "de pé". Toda a arte de ambiente respeita essa regra. Exemplo: de uma **árvore**, vê-se a **copa por cima** e o **começo dela no chão** (a base e as raízes); o **tronco não aparece**, escondido pela copa. Do chão e dos objetos baixos, vê-se o **topo**; das construções e das pessoas, vê-se **o topo e um pouco da frente** (a parede de baixo, virada para o jogador). Por isso uma casa ocupa o lote no chão, e o telhado "sobe" na tela.
+  - [Proposta] **Quanto da frente aparece:** a face da frente fica achatada, com cerca de **1/3 da altura real** (uma parede de 2 tiles de altura aparece com uns 10 a 11 px). O topo é sempre a maior parte do desenho.
+  - [Proposta] **Árvores e objetos altos:** a copa é desenhada como uma forma redonda vista de cima, com luz vinda de cima e sombra na borda de baixo; na base, só um pedaço das raízes e a sombra no chão aparecem abaixo da copa.
+  - [Proposta] **Sombras:** curtas e logo abaixo do objeto, porque a luz vem quase de cima.
 - **Rampa de cor:** a sequência de tons de um material, do mais escuro ao mais claro (por exemplo, 3 ou 4 verdes para a grama). Desenha-se cada material só com a rampa dele.
 - **Contorno:** a linha de 1 pixel em volta de um objeto, que o separa do fundo.
 - **Folha de sprites:** uma imagem com todos os quadros de uma animação, em grade.

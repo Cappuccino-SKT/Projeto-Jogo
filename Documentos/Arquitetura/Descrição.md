@@ -80,7 +80,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Desenho
 
-- **Tile de 16 px**, ampliado na tela em escala inteira; vista de cima em 3/4 (como Stardew); boneco de 16 × 24 px; zoom de 2x, 3x e 4x, com padrão 3x (rodada FT1-4; ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]). O boneco **provisório** da fatia (Mana Seed) é maior, com cerca de 14 × 29 px em quadros de 64 × 64; o tamanho do quadro e o ponto dos pés vêm de um arquivo de dados, então a arte própria só troca os números (rodada FL4-4).
+- **Tile de 16 px**, ampliado na tela em escala inteira; vista quase de cima, com pequena inclinação (regra no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]]); boneco de 16 × 24 px; zoom de 2x, 3x e 4x, com padrão 3x (rodada FT1-4; ver [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]). O boneco **provisório** da fatia (Mana Seed) é maior, com cerca de 14 × 29 px em quadros de 64 × 64; o tamanho do quadro e o ponto dos pés vêm de um arquivo de dados, então a arte própria só troca os números (rodada FL4-4).
 - Atlas de texturas e desenho em lote, para poucas chamadas de desenho.
 - Desenhar só o que está na câmera (culling).
 - Como cada cultura tem arte própria de construção, as partes (paredes, telhados, portas) devem ser peças reaproveitáveis.
