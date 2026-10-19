@@ -10,6 +10,7 @@
 
 #include "Construcao/RegrasDasConstrucoes.h"
 #include "Dados/ProblemasDosDados.h"
+#include "Economia/FelicidadeDaClasse.h"
 #include "Economia/RegrasDaEconomia.h"
 #include "Npc/RegrasDaRotina.h"
 
@@ -34,7 +35,7 @@ struct RegrasDoPreco {
     int margemDoDonoEmPorcento = 120;
 };
 
-// Os números do regras.json usados até o marco 6.
+// Os números do regras.json usados até o marco 7.
 struct RegrasDoJogo {
     RegrasDoPreco regrasDoPreco;
     // Grupo da estação -> produção na Primavera, Verão, Outono e Inverno, em % (FL3-6).
@@ -49,8 +50,12 @@ struct RegrasDoJogo {
     RegrasDaVidaDosNpcs vidaDosNpcs;
     // As vagas, a capacidade e as obras (marco 6, ficha da Construção).
     RegrasDasConstrucoes construcoes;
-    // A cesta mínima, a loja da cidade, os salários e a ordem do dia (marco 6, ficha da Economia).
+    // A cesta mínima, a loja da cidade, os salários e a ordem do dia (marco 6,
+    // ficha da Economia), e o Mercado Local, o gasto extra, o imposto e o
+    // estabilizador (marco 7).
     RegrasDaEconomia economia;
+    // A Felicidade dos Civis (marco 7, ficha da Felicidade).
+    RegrasDaFelicidade felicidade;
 };
 
 TabelaDeTextos lerArquivoDeTextos(const std::string& textoDoArquivo, ListaDeProblemasDosDados& listaDeProblemas);

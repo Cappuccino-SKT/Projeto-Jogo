@@ -45,3 +45,7 @@ endif()
 
 # Os testes da câmera.
 add_subdirectory(Testes)
+
+# O teste de 1 ano (marco 7, FL7-8): "jogo --simular 64 --semente 1", rodado
+# pelo ctest como um teste à parte. Ele grava o relatorio.csv na pasta build/.
+add_test(NAME teste_de_um_ano COMMAND jogo --simular 64 --semente 1 WORKING_DIRECTORY ${CMAKE_BINARY_DIR})

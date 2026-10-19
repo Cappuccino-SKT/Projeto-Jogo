@@ -82,3 +82,9 @@ struct DecisaoDoNpc {
 
     bool estaDentroDeUmaConstrucao() const { return indiceDaConstrucaoOndeEsta >= 0; }
 };
+
+// Marco 7 (ficha dos Eventos): o NPC doente da Febre fica em casa (a ação
+// Dormir ganha sempre) e não trabalha. Sai quando os dias acabam.
+struct DoencaDoNpc {
+    int diasQueFaltam = 0;
+};

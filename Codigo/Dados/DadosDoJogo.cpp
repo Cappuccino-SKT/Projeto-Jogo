@@ -77,6 +77,12 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
         dados.vilaInicial = lerVilaInicial(*texto, dados.mapaDaVila, catalogos, problemas);
         bloquearOsLotesOcupados(dados.mapaDaVila, dados.vilaInicial);
     }
+
+    // 10. Os eventos (marco 7, ficha dos Eventos), que citam os itens e as construções.
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "eventos.json", problemas)) {
+        const CatalogosParaOsEventos catalogos{dados.tabelaDeTextos, dados.catalogoDeItens, dados.catalogoDeConstrucoes};
+        dados.catalogoDeEventos = lerArquivoDeEventos(*texto, catalogos, problemas);
+    }
     return dados;
 }
 
@@ -96,7 +102,8 @@ std::string montarResumoDosDados(const DadosDoJogo& dados)
         + std::to_string(dados.catalogoDeRecursos.quantidadeDeRecursos()) + " recursos, "
         + std::to_string(dados.catalogoDeReceitas.quantidadeDeReceitas()) + " receitas, 1 mapa, 1 vila ("
         + std::to_string(dados.vilaInicial.construcoes.size()) + " construções e "
-        + std::to_string(dados.vilaInicial.npcsIniciais.size()) + " NPCs). "
+        + std::to_string(dados.vilaInicial.npcsIniciais.size()) + " NPCs), "
+        + std::to_string(dados.catalogoDeEventos.quantidadeDeEventos()) + " eventos. "
         + std::to_string(erros) + (erros == 1 ? " erro, " : " erros, ")
         + std::to_string(avisos) + (avisos == 1 ? " aviso." : " avisos.");
 }

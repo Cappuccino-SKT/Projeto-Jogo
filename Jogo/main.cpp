@@ -29,6 +29,7 @@
 #include "Npc/MovimentoDosNpcs.h"
 #include "Npc/RotinaDosNpcs.h"
 #include "Producao/ProducaoDaVila.h"
+#include "Simulacao/RelatorioDaSimulacao.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "TextoDaDataDoJogo.h"
 #include "Vila/SimulacaoDaVila.h"
@@ -174,6 +175,94 @@ int validarDadosSemJanela()
     return dadosDoJogo.dadosEstaoProntos() && bonecoEstaCerto ? 0 : 1;
 }
 
+// O que a linha de comando pediu (ficha da Simulação, parte 2).
+struct PedidoDaLinhaDeComando {
+    bool validar = false;
+    std::optional<int> diasParaSimular;     // --simular 64
+    std::optional<uint64_t> semente;        // --semente 1
+    int npcsAMais = 0;                      // --npcs-a-mais 485
+    std::string erro;                       // um número que faltou ou não é número
+};
+
+PedidoDaLinhaDeComando lerALinhaDeComando(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
+{
+    PedidoDaLinhaDeComando pedido;
+    // O número logo depois de uma opção ("--simular 64").
+    const auto lerNumeroDepois = [&](int& posicao, const std::string& opcao) -> std::optional<long long> {
+        if (posicao + 1 >= quantidadeDeArgumentos) {
+            pedido.erro = opcao + " precisa de um número depois (por exemplo, " + opcao + " 64)";
+            return std::nullopt;
+        }
+        const std::string texto = argumentosDaLinhaDeComando[++posicao];
+        if (texto.empty() || texto.find_first_not_of("0123456789") != std::string::npos) {
+            pedido.erro = opcao + " precisa de um número inteiro positivo, e não \"" + texto + "\"";
+            return std::nullopt;
+        }
+        return std::stoll(texto);
+    };
+    for (int posicao = 1; posicao < quantidadeDeArgumentos && pedido.erro.empty(); ++posicao) {
+        const std::string opcao = argumentosDaLinhaDeComando[posicao];
+        if (opcao == "--validar") {
+            pedido.validar = true;
+        } else if (opcao == "--simular") {
+            if (const std::optional<long long> dias = lerNumeroDepois(posicao, opcao)) {
+                pedido.diasParaSimular = static_cast<int>(std::min<long long>(*dias, 100'000));
+            }
+        } else if (opcao == "--semente") {
+            if (const std::optional<long long> semente = lerNumeroDepois(posicao, opcao)) {
+                pedido.semente = static_cast<uint64_t>(*semente);
+            }
+        } else if (opcao == "--npcs-a-mais") {
+            if (const std::optional<long long> npcs = lerNumeroDepois(posicao, opcao)) {
+                pedido.npcsAMais = static_cast<int>(std::min<long long>(*npcs, 100'000));
+            }
+        }
+    }
+    return pedido;
+}
+
+// O modo "jogo --simular 64 --semente 1" (ficha da Simulação, regra 4.1): roda
+// os dias sem janela, grava o relatorio.csv na pasta de onde o jogo foi
+// chamado e termina com 0 (PASSOU) ou 1 (FALHOU, ou erro nos dados). Com
+// --npcs-a-mais, só mede o tempo, sem os critérios.
+int simularSemJanela(const PedidoDaLinhaDeComando& pedido)
+{
+    const DadosDoJogo dadosDoJogo = carregarDadosDoJogo(pastaDosDadosDoJogo);
+    if (!dadosDoJogo.dadosEstaoProntos()) {
+        escreverProblemasEResumoNoConsole(dadosDoJogo);
+        return 1;
+    }
+    const int dias = *pedido.diasParaSimular;
+    SDL_Log("Simulando %d dias sem tela%s%s...", dias,
+            pedido.semente.has_value() ? (", semente " + std::to_string(*pedido.semente)).c_str() : "",
+            pedido.npcsAMais > 0 ? (", com " + std::to_string(pedido.npcsAMais) + " NPCs a mais").c_str() : "");
+    const ResultadoDaSimulacaoSemTela resultado = rodarASimulacaoSemTela(dadosDoJogo, dias, pedido.semente, pedido.npcsAMais);
+    for (const std::string& linha : resultado.linhasDoConsole) {
+        SDL_Log("%s", linha.c_str());
+    }
+
+    // O relatório, com a marca do UTF-8 no começo: assim o Excel mostra os acentos.
+    const char* const nomeDoRelatorio = "relatorio.csv";
+    std::ofstream relatorio(nomeDoRelatorio, std::ios::binary);
+    relatorio << "\xEF\xBB\xBF" << resultado.textoDoRelatorio;
+    if (!relatorio) {
+        SDL_Log("ERRO: não foi possível gravar o %s nesta pasta.", nomeDoRelatorio);
+    } else {
+        SDL_Log("Relatório gravado em %s (%d linhas).", nomeDoRelatorio, static_cast<int>(resultado.linhas.size()));
+    }
+    SDL_Log("Levou %.1f segundos: %lld ticks, %.1f microssegundos por tick em média.", resultado.segundosQueLevou,
+            static_cast<long long>(resultado.ticksRodados), resultado.microssegundosPorTick);
+    if (pedido.npcsAMais > 0) {
+        return 0;  // o teste de desempenho só mede o tempo
+    }
+    if (resultado.conferencia.falhou) {
+        SDL_Log("FALHOU: %s", resultado.conferencia.motivoDaFalha.c_str());
+        return 1;
+    }
+    SDL_Log("PASSOU");
+    return relatorio ? 0 : 1;
+}
+
 // Escreve no console as viradas do tick que acabou de rodar (no marco 1,
 // é só isso que acontece nas viradas; as regras se penduram aqui depois).
 void escreverAsViradasNoConsole(const RelogioDoMundo& relogio)
@@ -257,11 +346,18 @@ std::vector<PosicaoDeTile> juntarTilesDosCaminhos(const entt::registry& registro
 
 int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
 {
-    // 0. A linha de comando: "jogo --validar" só confere os dados (o --simular vem no marco 7).
-    for (int posicao = 1; posicao < quantidadeDeArgumentos; ++posicao) {
-        if (std::string(argumentosDaLinhaDeComando[posicao]) == "--validar") {
-            return validarDadosSemJanela();
-        }
+    // 0. A linha de comando: "jogo --validar" só confere os dados, e
+    //    "jogo --simular 64" roda o teste de 1 ano sem janela (marco 7).
+    const PedidoDaLinhaDeComando pedido = lerALinhaDeComando(quantidadeDeArgumentos, argumentosDaLinhaDeComando);
+    if (!pedido.erro.empty()) {
+        SDL_Log("ERRO: %s.", pedido.erro.c_str());
+        return 1;
+    }
+    if (pedido.validar) {
+        return validarDadosSemJanela();
+    }
+    if (pedido.diasParaSimular.has_value()) {
+        return simularSemJanela(pedido);
     }
 
     // 1. Lê todos os dados (e o mapa) antes de abrir a janela: se houver erro, nem abre.
@@ -369,7 +465,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     SDL_Log("Espaço pausa e despausa; 1, 2 e 3 escolhem 1x, 2x e 4x.");
     SDL_Log("Câmera: WASD ou setas (Shift corre), roda do mouse para o zoom, botão do meio para arrastar.");
     SDL_Log("NPCs: F2 mostra os caminhos; F3 mostra a cor da ação de cada um e escreve a tabela no console.");
-    SDL_Log("Economia: F4 escreve o estoque, as construções e o dinheiro; o resumo de cada dia sai sozinho à meia-noite.");
+    SDL_Log("Economia: F4 escreve o estoque, os preços, as construções e o dinheiro; o resumo de cada dia e os eventos saem sozinhos à meia-noite.");
 
     // 5. A partida nova (marcos 1, 4, 5 e 6): o relógio às 6h do dia 1 da
     //    Primavera, os 15 NPCs dentro das casas, o estoque e o dinheiro do primeiro dia.

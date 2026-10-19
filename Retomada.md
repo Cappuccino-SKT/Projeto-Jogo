@@ -1,4 +1,4 @@
-> Ponto de partida de cada sessão. Curto de propósito: o detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]), e a situação geral no [[Estado do Projeto]]. Atualizado em 2026-10-18.
+> Ponto de partida de cada sessão. Curto de propósito: o detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]), e a situação geral no [[Estado do Projeto]]. Atualizado em 2026-10-19.
 
 ## 1. Onde paramos
 
@@ -19,9 +19,10 @@
 - **Marco 5 (2026-10-18):** escrito na branch `codigo/marco-5-rotina` (feita do `main`, que já tem a ficha do marco 5); **confirmado pelo autor** (seção 3).
 - **Fichas do marco 6 (2026-10-18):** a [[Ficha Logica/Producao|Produção]], o [[Ficha Logica/Inventario|Inventário]], a [[Ficha Logica/Economia|Economia]] (consumo e salários) e a [[Ficha Logica/Construcao|Construção]], na branch `docs/fichas-marco-6` (feita em cima da `docs/guia-da-arte`). A **rodada FL6** foi aplicada (2026-10-18), toda com "seguir sugestão".
 - **Marco 6 (2026-10-18):** escrito na branch `codigo/marco-6-producao`, com a FA1 e a FL6 aplicadas, e já mesclado no `main`; o autor mandou seguir (seção 3).
-- **Fichas do marco 7 (2026-10-18):** a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], e as fichas da [[Ficha Logica/Felicidade|Felicidade]], dos [[Ficha Logica/Eventos|Eventos]] e da [[Ficha Logica/Simulacao|Simulação sem tela]], na branch `docs/fichas-marco-7` (feita do `main`). Abriram a **rodada FL7** (seção 4).
-- **Próximo passo:** o autor responde a FL7; depois, aplicar e começar o marco 7.
-- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até o marco 6 já entrou no `main`; falta o `docs/fichas-marco-7`.
+- **Fichas do marco 7 (2026-10-18):** a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], e as fichas da [[Ficha Logica/Felicidade|Felicidade]], dos [[Ficha Logica/Eventos|Eventos]] e da [[Ficha Logica/Simulacao|Simulação sem tela]], na branch `docs/fichas-marco-7` (feita do `main`, já mesclada). A **rodada FL7** foi aplicada (2026-10-18), toda com "seguir sugestão".
+- **Marco 7 (2026-10-19):** escrito na branch `codigo/marco-7-simulacao` (feita do `main`), com a FL7 aplicada; o teste de 1 ano **passa** com a semente 1. Os testes com outras sementes e com 4 anos mostraram 2 problemas de equilíbrio: a **rodada FE1** (seção 4).
+- **Próximo passo:** o autor responde a FE1 e testa o marco 7 (o que olhar está no `Jogo/LEIA-ME.md`); depois, aplicar a FE1 e escrever as fichas do marco 8.
+- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até as fichas do marco 7 já entrou no `main`; falta o `codigo/marco-7-simulacao`.
 
 ## 2. Como trabalhamos
 
@@ -90,109 +91,45 @@
 - **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
 - **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
 - **Marco 2 (pronto, confirmado pelo autor em 2026-10-18):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
+- **Marco 7 (escrito em 2026-10-19, falta o teste do autor):** o Mercado Local, o gasto extra, o imposto, os multiplicadores do salário, o estabilizador e a saída por atraso (`Codigo/Economia/`), o consumo medido e a folga (`Codigo/Producao/`), os 11 eventos (`Codigo/Eventos/`, `data/eventos.json`), a Felicidade e o `jogo --simular 64 --semente 1` com o `relatorio.csv` (`Codigo/Simulacao/`); o Tracy como opção do CMake, desligada. 290 testes no `Codigo/` (com 16 dias sem tela duas vezes) e 42 no `Jogo/`, mais o teste de 1 ano no `ctest`.
 - **Marco 6 (pronto em 2026-10-18; o autor mandou seguir):** o inventário da cidade, a produção (o ciclo, a escolha da receita, as ordens da Carpintaria, os Braçais no campo), o consumo da cesta mínima e os salários (`Codigo/Inventario/`, `Producao/`, `Economia/`, `Construcao/`), juntos na `Codigo/Vila/SimulacaoDaVila.cpp`; o resumo do dia no console e o F4; as imagens das construções, quando existirem. 239 testes no `Codigo/` (com 3 dias sem tela) e 42 no `Jogo/`.
 - **Marco 5 (pronto, confirmado pelo autor em 2026-10-18):** a vila inicial (`data/vila_inicial.json`: 10 construções em retângulos de cor, que bloqueiam o lote, e 15 Civis com casa e emprego) e a rotina com a Utilidade (`Codigo/Npc/RotinaDosNpcs.cpp`, `Codigo/Vila/`), com o sorteio PCG32 (`Codigo/Tempo/SorteioComSemente.cpp`); F3 mostra as ações. 193 testes no `Codigo/` (com um dia inteiro sem tela) e 37 no `Jogo/`.
 - **Marco 4 (pronto, confirmado pelo autor em 2026-10-18):** um NPC no centro da vila anda até o tile do botão direito pela busca A\* (`Codigo/Mapa/BuscaDeCaminho.cpp`, `Codigo/Npc/`), com a EnTT 3.16.0; o boneco do Mana Seed (ou o de teste, sem a pasta) é desenhado entre os ticks; N cria mais NPCs e F2 mostra os caminhos. 167 testes no `Codigo/` e 36 no `Jogo/`.
 - **Marco 3 (pronto, confirmado pelo autor em 2026-10-18):** os dados em `Jogo/data` (itens, receitas, recursos, construções, regras e textos), lidos e conferidos por `Codigo/Dados/`, com o preço base (Pão 1,7) e o `jogo --validar`; as teclas passam pela tabela de ações (FL2-4). 124 testes no `Codigo/` e 25 no `Jogo/`.
 
-## 4. Rodada pendente: FL7, a simulação de 1 ano (marco 7)
+## 4. Rodada pendente: FE1, o equilíbrio do teste de 1 ano (marco 7)
 
-**Perguntas enviadas em 2026-10-18, aguardando respostas.** Ao escrever a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]] e as fichas da [[Ficha Logica/Felicidade|Felicidade]], dos [[Ficha Logica/Eventos|Eventos]] e da [[Ficha Logica/Simulacao|Simulação sem tela]], apareceram 8 pontos. A FL7-1 é a mais importante: decide se o Banco sobrevive ao ano. As fichas já usam as sugestões, marcadas como [Proposta]. (A FA1 e a FL6 foram aplicadas em 2026-10-18, todas com "seguir sugestão".)
+**Perguntas enviadas em 2026-10-19, aguardando respostas.** O código do marco 7 rodou o teste de 1 ano com 10 sementes e por 4 anos (256 dias), numa cópia compilada sem depuração (64 dias em 1,5 segundo). Com a semente 1, ele **passa**, mas apareceram 2 problemas de equilíbrio. Os dois mudam números já decididos (a FL6-3 e a FL6-4), por isso viram perguntas; os dados continuam como estão até a resposta. (A FL7 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
 
-Responder no `Respostas.txt` pelos códigos (FL7-1, FL7-2...). "Seguir sugestão" aceita a proposta.
+Responder no `Respostas.txt` pelos códigos (FE1-1, FE1-2). "Seguir sugestão" aceita a proposta.
 
-**FL7-1. Para onde vai o gasto extra (como o dinheiro fecha).**
+**FE1-1. Os Móveis caros (o dinheiro que vai do Banco para o jogador).**
 
-- *Contexto:* no marco 6, o Banco perde cerca de 54 moedas por dia: ele paga 84 de salários e só recebe o Pão (28,5). A Classe Social diz que cada classe gasta até 80% da renda: primeiro a cesta, e o resto "sobe o Tier da comida, compra mais materiais e paga a Bebida". Mas a fatia não tem comida de Tier 2 nem Bebida: hoje, a classe guarda o resto, e o dinheiro some do ciclo (os Civis chegam a 43 moedas cada no dia 30, e o Banco a 0).
-- *Pergunta:* o que a classe compra com o que sobra da renda? *Exemplo:* os Civis ganharam 85 moedas ontem; a cesta custou 41,7; para onde vão os outros 26,3 do teto de 68?
-- *Opções* (com um modelo de 64 dias, ficha da Economia, 10.10):
-  - (a) **primeiro, Materiais a mais (até o mesmo número da cesta do dia, pagos ao dono); o resto vai para a loja da cidade, para o Banco, como a comida de Tier 2, a Bebida e os serviços que a fatia ainda não tem (nenhum item sai do estoque).** Ganha: o dinheiro fecha (o Banco fica perto de 400 o ano todo, o menor é 398), o jogador vende o dobro de Móveis, e a regra do gasto continua a mesma quando os itens de verdade entrarem (eles só substituem a "loja"). Perde: uma compra sem item, só na fatia;
-  - (b) só os Materiais a mais; o resto vira poupança. Ganha: só compras de verdade. Perde: o Banco zera, e o teste de 1 ano falha (no modelo, o Banco termina com 30);
-  - (c) pôr na fatia uma comida de Tier 2 e a Bebida (por exemplo, a Cerveja, com a Taverna). Ganha: o gasto de verdade. Perde: itens, receitas, uma construção e empregados novos, que a vila de 15 não tem, num marco que já é grande.
+- *Contexto:* a FL6-3 deu à Carpintaria do jogador as ordens "manter 6 Móveis" e "manter 12 Tábuas": 6 Móveis eram 3 dias da cesta (1,875 por dia). No marco 7, o gasto extra compra mais Móveis (até o dobro: cerca de 3,75 por dia), e o consumo medido sobe: o estoque-alvo dos Móveis passa a cerca de 19, mas a ordem para em 6. O estoque fica entre 2 e 5, e o preço local vai a 8 ou 9,6 (o teto é 10,2, o dobro do base de 5,1). A classe paga ao jogador quase o dobro, o lucro do jogador ainda não paga imposto (FL7-2), e o dinheiro sai do Banco para o jogador. Com a semente 1, no dia 64: Banco 272, jogador 237. Em 4 anos, o Banco fica quase vazio por volta do dia 190 (jogador com 572). É pior no Inverno: a Fazenda produz 25%, nunca folga, e o Banco paga mais salários.
+- *Pergunta:* como segurar o preço dos Móveis? *Exemplo:* no dia 60, os Móveis estão a 9,5, com 2 no estoque, e a Carpintaria parada porque já tem os 6 que a ordem pede (ela tem Tábua e tempo para fazer mais).
+- *Opções* (medidas):
+  - (a) **as ordens passam a "manter 20 Móveis" e "manter 12 Tábuas".** Com a FE1-2 (a): em 10 sementes, o Banco fica entre 332 e 415 no dia 64; em 4 anos, nunca abaixo de 334; o jogador fica entre 56 e 160; os Móveis, entre 3,3 e 6,9. Ganha: o Mercado Local faz o trabalho dele, sem regra nova; no marco 8, quem escolhe as ordens é o jogador. Perde: o jogador lucra pouco, porque o preço base quase não cobre os salários da Carpintaria (o gerente ganha × 1,5);
+  - (b) cobrar o imposto também do lucro do jogador (a V2-7 fala em "salários e lucros"). Ganha: igual ao documento. Perde: precisa da conta do lucro do dia (vendas − salários − insumos), e os Móveis continuam faltando e caros;
+  - (c) limitar o preço dos itens do jogador a +30% do base (a faixa da FT1-1) até o marco 8. Medido: só atrasa; o Banco ainda fica quase vazio por volta do dia 190;
+  - (d) deixar como está. O teste de 1 ano passa com a semente 1, mas o Banco cai, e o segundo ano já falharia.
 - *Sugestão:* (a).
-- *Conflitos:* a Classe Social fala em itens; a "loja da cidade" vale só enquanto a fatia não tiver os itens de Tier 2 e a Bebida.
+- *Conflitos:* muda a FL6-3 (manter 6 → 20 Móveis). O "manter 12 Tábuas" continua.
 
-**FL7-2. O imposto na fatia.**
+**FE1-2. O Pão no primeiro mês (a Febre no Cozinheiro).**
 
-- *Contexto:* a V2-7 diz que o imposto é de 10%, 20% ou 30% (Baixo, Normal, Alto) sobre os salários e os lucros, cobrado por estação, e que a cidade fica com 30% (o resto vai para o Banco da Facção). A fatia não tem facção. No modelo da FL7-1, o dinheiro só fecha se a classe gastar toda a renda: 80% de gasto mais 20% de imposto.
-- *Pergunta:* qual taxa, quando ela é cobrada e com quem ela fica? *Exemplo:* o Cozinheiro recebe 7,0 moedas no dia; quanto vai para o Banco, e quando?
-- *Opções:*
-  - (a) **20% (Normal), retido no próprio salário a cada dia, todo para o Banco da Cidade (na fatia, sem facção); o lucro do jogador ainda não paga (entra com a interface).** O Cozinheiro recebe 5,6, e 1,4 vai para o Banco na hora. Ganha: o dinheiro fecha (o modelo da FL7-1); sem um "dia do imposto" que tira um bloco de dinheiro de uma vez. Perde: diferente da V2-7 em dois pontos (a cada dia, e 100% da cidade);
-  - (b) como a V2-7: por estação, 30% para a cidade, e os 70% somem (o Banco da Facção não existe). Ganha: igual ao documento. Perde: o Banco zera (no modelo, termina com 22);
-  - (c) 10% (Baixo). Ganha: os Civis juntam dinheiro. Perde: o Banco zera (no modelo, termina com 24).
+- *Contexto:* o Cozinheiro tem 2 empregados e faz 16 Pães por dia; a vila come 15 (FL6-7). A vila começa com 45 Pães (3 dias, FL6-4), e o estoque-alvo é 75 (5 dias): o Pão começa caro (2,3 no dia 3), e o estoque sobe só 1 Pão por dia. Se a Febre pega um dos Cozinheiros no primeiro mês, faltam 8 Pães por dia, por 4 dias. Na semente 3, no dia 27, a Febre pega o Fábio: o estoque cai de 63 para 32, e o preço vai a 2,7 no dia 31 (o teste falha acima de 2,6). Em 10 sementes, 2 falham (a 3 e a 4), as duas assim.
+- *Pergunta:* como a vila aguenta uma Febre no Cozinheiro no começo do ano? *Exemplo:* a semente 3, acima.
+- *Opções* (medidas):
+  - (a) **a vila começa com 75 Pães (5 dias, o estoque-alvo), junto com a FE1-1 (a).** Em 10 sementes, todas passam; o Pão fica entre 1,3 e 2,1. Ganha: um número só; o preço já começa no base. Perde: sozinha, sem a FE1-1 (a), ela tira dinheiro do Banco (o Pão barato do começo: Banco entre 22 e 161 no dia 64), então as duas vão juntas. Uma Febre nos 2 Cozinheiros ao mesmo tempo ainda deixaria a vila sem Pão novo por 4 dias, mas os 75 Pães cobrem 5;
+  - (b) o Cozinheiro no nível 2, com 3 empregados (o Nuno sai dos desempregados). Com a FE1-1 (a), todas passam, mas o Pão desce até 1,2 (o limite do teste), e o jogador fica quase sem dinheiro (de 9 a 33). Ganha: uma Febre não para o Pão. Perde: muda a vila inicial (FL5-1: 12 empregados e 3 desempregados) e o desemprego (de 20% para 13%);
+  - (c) deixar como está: 2 em cada 10 sementes falham no primeiro ano.
 - *Sugestão:* (a).
-- *Conflitos:* a V2-7 (por estação; a cidade com 30%) vale para o jogo completo, com facções; na fatia, sem facção, a cidade fica com tudo. O "imposto Normal dá −5 de Felicidade" não entra: a fatia tem só 4 fatores (FT1-2).
-
-**FL7-3. Os multiplicadores do salário (riqueza e desemprego).**
-
-- *Contexto:* o Trabalho e Propriedade dá as faixas (a riqueza da cidade de × 0,8 a × 1,2; o desemprego de × 0,9, com muito desemprego, a × 1,1, com falta de gente), mas não a conta. No marco 6, os dois ficaram em × 1 (FL6-1).
-- *Pergunta:* como sai cada multiplicador? *Exemplo:* a riqueza média é 12 moedas, e 3 dos 15 Civis estão sem emprego; quanto ganha o Cozinheiro que ganharia 7,9?
-- *Opções:*
-  - (a) **riqueza = 0,8 + 0,4 × riqueza média ÷ (10 dias da cesta), presa entre 0,8 e 1,2 (5 dias da cesta dão × 1); desemprego = 1,1 − a taxa de desemprego, presa entre 0,9 e 1,1.** No exemplo: 0,98 × 0,90, e o Cozinheiro ganha 7,0. Ganha: os salários sobem quando a vila está rica e descem com o desemprego, sem saltos. Perde: na fatia, com 20% de desemprego, todos ganham 10% menos;
-  - (b) faixas em degraus (por exemplo, riqueza abaixo de 3 dias × 0,8; de 3 a 7 × 1; acima × 1,2). Ganha: fácil de ler. Perde: o salário salta quando a riqueza cruza um degrau;
-  - (c) deixar em × 1 até depois da fatia. Ganha: menos conta. Perde: o teste de 1 ano não mede o efeito dos multiplicadores.
-- *Sugestão:* (a).
-- *Conflitos:* nenhum.
-
-**FL7-4. A previsão do consumo (a Tora que acaba).**
-
-- *Contexto:* os 30 dias sem tela do marco 6 mostraram que a Tora acaba no dia 12: o estoque-alvo só conta os insumos das receitas atuais, a Carpintaria passa quase todo o tempo nos Móveis (que gastam Tábua), e o Posto de Coleta fica na Água. Sem Tábua, os Móveis acabam no dia 19. O mesmo estoque-alvo vai servir ao Mercado Local, que precisa do "consumo da cidade" (V2-5).
-- *Pergunta:* como a vila prevê o consumo de cada item? *Exemplo:* a Carpintaria fica 8 horas parada "sem Tora"; o Posto de Coleta percebe que falta Tora?
-- *Opções:*
-  - (a) **a média dos 5 últimos dias do que a vila gastou ou quis gastar: o que saiu do estoque (a cesta, o gasto extra e os insumos) mais a demanda que faltou (cada hora parada por falta de um insumo, com gente trabalhando, conta a parte de um ciclo). A fila do jogador fica parada "sem Tora" (e não "sem ordem") quando alguma ordem quer produzir e só falta insumo.** No exemplo: 8 Toras de demanda no dia, e o Posto escolhe a Tora no dia seguinte. Ganha: vale para qualquer item e qualquer cadeia; a mesma conta serve ao Mercado Local. Perde: 5 números guardados por item;
-  - (b) a receita atual, e, na Carpintaria do jogador, também as receitas de todas as ordens. Ganha: pouca mudança. Perde: só conserta este caso; outra cadeia pode travar do mesmo jeito;
-  - (c) o Posto de Coleta alterna a Água e a Tora a cada dia. Ganha: simples. Perde: ignora o estoque e não serve ao Mercado Local.
-- *Sugestão:* (a).
-- *Conflitos:* muda o estoque-alvo da regra 4.3 da Produção (marco 6), que usava as receitas atuais.
-
-**FL7-5. A folga (o estoque que enche e o Pão barato).**
-
-- *Contexto:* com déficit 0, a nota da escolha continua positiva, e os Braçais nunca param: a Fazenda faz cerca de 31,6 Grãos por dia, e a vila gasta 8. Nos 30 dias do marco 6, o Grão e a Água enchem os 900 de matéria-prima no dia 17, e a produção trava ("o estoque encheu"), a Carpintaria por último. O Pão também sobe (15,8 feitos e 15 comidos por dia): no modelo, o preço local dele chega a 1,22 no dia 64 e passaria de 1,2, o limite do teste de 1 ano.
-- *Pergunta:* o que uma construção da Cidade faz quando já tem estoque de sobra? *Exemplo:* a Fazenda com 250 Grãos e alvo 40.
-- *Opções:*
-  - (a) **uma receita deixa de ser candidata quando o produto tem 125% do estoque-alvo (6 dias e 6 horas) e só volta abaixo do alvo; sem candidata, a construção fica de folga no dia seguinte; a Carpintaria do jogador sem ordem também folga; de folga, os empregados passeiam e não recebem.** No exemplo: a Fazenda trabalha cerca de 1 dia em cada 4; o Pão fica entre cerca de 60 e 95 Pães, e o preço, entre cerca de 1,3 e 2,0. Ganha: a matéria-prima nunca enche, e o preço do Pão fica na faixa do teste. Perde: os empregados de folga ganham menos (a renda da classe cai um pouco);
-  - (b) a construção continua produzindo, e a Cidade vende a sobra a um comprador de fora a 90%. Ganha: os empregados trabalham sempre; entra dinheiro. Perde: um comprador sem fim é dinheiro aparecendo do nada, e o Pão continua barato;
-  - (c) deixar travar com "o estoque encheu". Ganha: nada a fazer. Perde: a Carpintaria para, os Móveis acabam, e o preço do Pão sai da faixa.
-- *Sugestão:* (a).
-- *Conflitos:* os números da V2-12 (32 Grãos por dia) viram a capacidade da Fazenda, não a produção de todo dia.
-
-**FL7-6. Os eventos da fatia.**
-
-- *Contexto:* a V3-6 escolheu 12 eventos para a fatia. Alguns precisam de coisas que a fatia não tem: a Tempestade forte danifica a Vida de uma construção (que entra com as obras, no marco 8); a Febre usa a mortalidade e o Remédio; o Mercador viajante vende itens de fora; o Achado dá Pedra de Mana; a Fome causa migração; a Festa gasta Cerveja. O Narrador regula a tensão do jogador, que ainda não age no teste de 1 ano.
-- *Pergunta:* quais eventos entram, como, e com que chance? *Exemplo:* no Verão, quantas vezes vem a Seca?
-- *Opções:*
-  - (a) **11 dos 12, sem a Tempestade; 4 adaptados (a Febre deixa 2 Civis doentes em casa por 4 dias; o Mercador compra 20 unidades do item com mais dias de estoque, a 90%, e o dinheiro vai para o Banco; o Achado dá 20 Toras; a Fome e a Festa mexem só na Felicidade); as chances em por mil por dia (a Seca com 4% no Verão: cerca de 0,6 vez por verão); no máximo 2 negativos ativos; sem o Narrador.** A tabela completa está na ficha dos Eventos. Ganha: quase a lista toda, e cada evento mexe em algo que existe. Perde: 4 eventos diferentes do documento, até a fatia ter o que falta;
-  - (b) só os 7 que entram sem adaptação. Ganha: igual ao documento. Perde: menos variedade no teste de 1 ano;
-  - (c) os 12, pondo a Vida das construções, a mortalidade e a Pedra de Mana agora. Ganha: completo. Perde: 3 sistemas novos no marco 7.
-- *Sugestão:* (a), com os eventos num `data/eventos.json` e um sorteio próprio (o PCG32 na sequência 2).
-- *Conflitos:* a lista da V3-6 fica com 11 na fatia; a Tempestade volta com as obras.
-
-**FL7-7. A Felicidade na fatia.**
-
-- *Contexto:* os 4 fatores e o passo de 10% por dia já estão decididos (FT1-2). Faltam o valor inicial, a conta do bônus do gasto extra ("até +5") e se as faixas (Contente, Inquieta, Protesto...) já mudam alguma coisa.
-- *Pergunta:* com quanto a Felicidade começa, e o que ela muda no marco 7? *Exemplo:* depois de uma semana de fome, a Felicidade chega a 38 (Inquieta); a produção cai?
-- *Opções:*
-  - (a) **começa em 50; o bônus é +5 × (gasto extra ÷ gasto da cesta), no máximo +5; guardada em décimos; no marco 7, ela só é medida e mostrada (no resumo do dia e no relatório) e serve de condição aos eventos; os efeitos das faixas ficam para depois da fatia.** Ganha: o teste de 1 ano mede a Felicidade sem que ela mude a economia que está sendo testada. Perde: a Felicidade ainda não tem consequência;
-  - (b) as faixas já mudam a produtividade (Contente +5%, Inquieta −10%, Protesto −25%). Ganha: a Felicidade pesa. Perde: mais uma coisa mexendo na economia antes de ela estar equilibrada;
-  - (c) começa no alvo do primeiro dia (56). Ganha: sem a subida dos primeiros dias. Perde: nada de importante; é só o ponto de partida.
-- *Sugestão:* (a). Num dia comum, o alvo fica em cerca de 58,7 (Estável).
-- *Conflitos:* nenhum.
-
-**FL7-8. O teste de 1 ano e o desempenho.**
-
-- *Contexto:* a FT1-6 decidiu o comando (`jogo --simular 64 --semente 1`), o relatório e o PASSOU/FALHOU; a parte 6 da Fatia Vertical dá os critérios (fome por mais de 3 dias seguidos, o Banco zerado, o Pão fora de 1,2 a 2,6) e pede medir o desempenho com o Tracy e 500 NPCs (V2-11). Faltam o formato do relatório, o que o `ctest` roda e a meta de tempo.
-- *Pergunta:* como o relatório sai e como medir o desempenho? *Exemplo:* depois de rodar, como o autor vê o preço do Pão do dia 40?
-- *Opções:*
-  - (a) **o `relatorio.csv` na pasta de onde o jogo foi chamado, com ponto e vírgula e vírgula decimal (abre direto no Excel ou no LibreOffice), uma linha por dia com o estoque de cada item, o preço do Pão, o Banco, o jogador, a riqueza média, a Felicidade, os empregados, os dias em déficit, o consumo não pago e os eventos do dia; o `ctest` confere a repetição com 2 rodadas de 16 dias e roda os 64 dias como um teste à parte (cerca de 30 segundos); o tempo médio de um tick sai sempre no fim; o Tracy entra como uma opção do CMake, desligada por padrão; e o `--npcs-a-mais 485` mede os 500 NPCs, com a meta de 3 milissegundos por tick.** Ganha: o autor abre o relatório numa planilha e faz gráficos; o `ctest` continua rápido. Perde: o teste de 64 dias deixa o `ctest` cerca de 30 segundos mais lento;
-  - (b) um relatório só no console. Ganha: nada a abrir. Perde: 64 linhas largas, ruins de ler;
-  - (c) o Tracy sempre ligado. Ganha: medição a qualquer hora. Perde: o jogo fica um pouco mais lento e manda dados pela rede, mesmo sem o programa do Tracy aberto.
-- *Sugestão:* (a).
-- *Conflitos:* nenhum.
+- *Conflitos:* muda a FL6-4 (3 → 5 dias de Pão: 45 → 75 no `vila_inicial.json`).
 
 Depois das respostas:
 
-- tirar as marcas [Proposta] da parte 10 da Economia e da Produção e das fichas da Felicidade, dos Eventos e da Simulação, e anotar a rodada na parte 8 da Fatia Vertical (e a mudança da V2-7 no Econômico, se a FL7-2 for aceita);
-- começar o marco 7, na branch `codigo/marco-7-simulacao`.
+- mudar o `vila_inicial.json`, rodar de novo as 10 sementes e anotar a rodada na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]] e na [[Ficha Logica/Economia|Economia]] (os números da FL6-3 e da FL6-4);
+- depois, as fichas do marco 8 (a interface do jogador, as obras e o Mercado).
 
 ## 5. Onde está cada coisa
 

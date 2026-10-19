@@ -65,6 +65,21 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(EnTT)
 
+# Tracy: mede quanto tempo cada trecho do jogo gasta (marco 7, FL7-8). Fica
+# DESLIGADO por padrão: ligado, o jogo manda as medições pela rede para o
+# programa do Tracy, baixado à parte. Para ligar:
+#   cmake --preset padrao -DUSAR_TRACY=ON
+# Versão 0.11.1 (2024-08).
+option(USAR_TRACY "Liga as medições do Tracy (ficha da Simulação, regra 4.4)" OFF)
+if(USAR_TRACY)
+    FetchContent_Declare(
+        tracy
+        URL https://github.com/wolfpld/tracy/archive/refs/tags/v0.11.1.tar.gz
+        URL_HASH SHA256=2c11ca816f2b756be2730f86b0092920419f3dabc7a7173829ffd897d91888a1
+    )
+    FetchContent_MakeAvailable(tracy)
+endif()
+
 # ---------------------------------------------------------------------------
 # As nossas pastas
 # ---------------------------------------------------------------------------

@@ -108,6 +108,7 @@ O Valor Global de cada item, no Mercado Mundial, sai de uma **fórmula** aplicad
 | Alto | 30% | −10 |
 
   A cidade fica com 30% do imposto, e o Banco da Facção com 70%.
+  **Na fatia vertical** (sem facção, rodada FL7-2): o imposto é o Normal, de 20%, retido a cada dia no próprio salário, e fica **todo** com a cidade; o lucro do jogador ainda não paga. Sem isso, o Banco da Cidade zera no teste de 1 ano ([[Ficha Logica/Economia|Economia]], parte 10).
 - **Cunhagem:** a Casa da Moeda transforma **1 Barra de Ouro em 25 moedas** (a barra vale 11). Ela cunha até 4 × o nível da Casa barras por estação. Uma Casa nível 2 põe 200 moedas novas por estação no mundo.
 
 ### Atributos exigidos nos itens

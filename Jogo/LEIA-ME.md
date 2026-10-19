@@ -41,7 +41,13 @@ Também ficam aqui:
    ctest --test-dir build
    ```
 
-   Para ver cada conferência que falhou, rode o programa de testes direto: `.\build\Codigo\Testes\testes_do_codigo.exe`.
+   Para ver cada conferência que falhou, rode o programa de testes direto: `.\build\Codigo\Testes\testes_do_codigo.exe`. Desde o marco 7, o `ctest` leva cerca de 1 minuto e meio: o teste de 1 ano sozinho leva uns 45 segundos.
+
+6. Rodar o teste de 1 ano sem abrir a janela (marco 7). Grava o `relatorio.csv` na pasta onde o comando foi dado e termina com **PASSOU** ou **FALHOU** e o motivo:
+
+   ```
+   .\build\Jogo\jogo.exe --simular 64 --semente 1
+   ```
 
 **Pelo VS Code**, com as extensões "C/C++" e "CMake Tools":
 
@@ -284,7 +290,7 @@ Se o destino não tem caminho (um clique no meio do lago, por exemplo), o NPC va
 
 **O que vem no marco 6:** a produção, o inventário da cidade e o consumo (o Pão sai do Cozinheiro, entra no estoque e é comido), depois das fichas da Produção, do Inventário, do Trabalho e Propriedade, do Econômico (consumo e salários) e da Construção.
 
-### Marco 6: produção, inventário e consumo (2026-10-18)
+### Marco 6: produção, inventário e consumo (2026-10-18, o autor mandou seguir)
 
 **O que faz:** a vila passa a **produzir, guardar, comer e pagar**. Os empregados que estão trabalhando somam horas; a cada hora, o trabalho vira progresso do ciclo de cada construção, e o ciclo terminado põe o lote no **inventário da cidade**. À meia-noite, a vila **come** (cada Civil, 1 Pão; a cada 8 dias, 1 Móvel) e paga ao dono do item, e os empregados **recebem** pelas horas do dia. Tudo segue as fichas da [[Ficha Logica/Producao|Produção]], do [[Ficha Logica/Inventario|Inventário]], da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Construcao|Construção]], com a rodada FL6.
 
@@ -330,3 +336,70 @@ Se o destino não tem caminho (um clique no meio do lago, por exemplo), o NPC va
 5. À meia-noite, o console escreve o "Resumo do dia 1". Deixar correr uns 3 dias e comparar: o Pão fica perto de 45, o Banco cai cerca de 54 moedas por dia, os dias em déficit ficam em 0.
 6. Apertar **F4** no dia 2: a Carpintaria passa a fazer Móveis (a vila comeu 1 Móvel na primeira meia-noite).
 7. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 2".
+
+### Marco 7: a simulação sem tela de 1 ano (2026-10-19)
+
+**O que faz:** o dinheiro da vila passa a **fechar o ciclo**, e a vila ganha os eventos e a Felicidade. Tudo segue a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]] e as fichas da [[Ficha Logica/Felicidade|Felicidade]], dos [[Ficha Logica/Eventos|Eventos]] e da [[Ficha Logica/Simulacao|Simulação sem tela]], com a rodada FL7.
+
+- **O Mercado Local:** o preço de cada item anda até 10% por dia na direção do que o estoque pede (pouco estoque, mais caro; muito, mais barato), entre 50% e 200% do preço base.
+- **O gasto extra:** depois da cesta, a classe gasta até 80% da renda de ontem: primeiro em Móveis a mais, e o resto na loja da cidade (o Banco).
+- **O imposto:** 20% de cada salário vai para o Banco na hora.
+- **Os salários** sobem com a riqueza da vila e descem com o desemprego (na fatia, × 0,9: 3 desempregados em 15).
+- **O estabilizador:** o Banco ajuda a classe quando ela fica com menos de 3 dias da cesta.
+- **16 dias sem salário:** os empregados saem.
+- **A previsão do consumo, medida:** a média dos 5 últimos dias do que a vila gastou ou quis gastar. A Carpintaria parada por falta de Tora agora fica "sem Tora" (e não "sem ordem"), e o Posto de Coleta percebe.
+- **A folga:** uma construção da Cidade com estoque de sobra (125% do alvo) fica de folga no dia seguinte; os empregados passeiam e não recebem. A Carpintaria do jogador sem nenhuma ordem que queira produzir também.
+- **Os 11 eventos** do `data/eventos.json` (a Seca, a Chuva boa, a Febre, o Mercador...), sorteados à meia-noite.
+- **A Felicidade dos Civis** (começa em 50), só medida e mostrada.
+- **O boneco:** o `boneco_provisorio.json` aponta direto para o boneco de teste (a decisão de usar só a arte de teste): o aviso do Mana Seed some.
+
+**O console:**
+
+- o **resumo do dia** ganhou os preços locais do Pão e dos Móveis, o imposto, o gasto da cesta, o gasto extra, a ajuda do Banco (quando há) e a Felicidade com a faixa ("58,1 (Estável)");
+- cada evento que começa ou termina vira uma linha ("Evento: Seca (a Fazenda produz 50% por 8 dias).");
+- o **F4** mostra o preço local, o preço base e o consumo previsto de cada item, e "DE FOLGA HOJE" nas construções de folga; o **F3** mostra "doente em casa".
+
+**O teste de 1 ano** (`jogo --simular 64 --semente 1`): roda os 64 dias o mais rápido possível e grava o `relatorio.csv`, uma linha por dia, com ponto e vírgula e vírgula decimal (abre direto no Excel ou no LibreOffice). Ele falha com fome por 4 dias seguidos, com o Banco em 0 ou com o Pão fora de 1,2 a 2,6. Outras opções:
+
+- `--semente 2` (ou outro número) troca a semente do `vila_inicial.json`: mudam os passeios e os eventos;
+- `--npcs-a-mais 485` cria 485 visitantes que só passeiam (500 NPCs no total), para medir o tempo, sem os critérios.
+
+**O que esperar** (medido em 2026-10-18):
+
+| Teste | Resultado |
+|---|---|
+| `--simular 64 --semente 1` | **PASSOU**. O Banco fica entre 375 e 450 até o dia 48 e cai para 272 no Inverno; o jogador termina com 237; o Pão fica entre 1,4 e 2,4; a Felicidade, perto de 58 (Estável). Eventos: Chuva boa, Febre, Seca, Mercador, Ratos, Colheita farta, Festa e Achado |
+| As sementes de 1 a 10 | 8 passam; a **3** e a **4** falham ("o preço do Pão foi a 2,7"): a Febre pega um dos 2 Cozinheiros no primeiro mês |
+| 256 dias (4 anos) | O dinheiro vai do Banco para o jogador, e o Banco fica quase vazio por volta do dia 190 |
+| Tempo (com depuração) | 64 dias em cerca de 45 segundos (36 microssegundos por tick); com 500 NPCs, 0,95 milissegundo por tick, abaixo da meta de 3 |
+
+Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) estão na **rodada FE1** (Retomada, seção 4).
+
+**O Tracy** (opcional, desligado): para ver quanto tempo cada parte do tick gasta, configure com `cmake --preset padrao -DUSAR_TRACY=ON`, compile, abra o programa do Tracy (baixado à parte, do site do autor do Tracy) e rode o jogo. Para desligar: `cmake --preset padrao -DUSAR_TRACY=OFF`.
+
+**Os dados novos:**
+
+| Arquivo | O que mudou |
+|---|---|
+| `regras.json` | O Mercado Local, a loja que compra a 90%, o gasto da classe (80%), o imposto, o estabilizador, os multiplicadores do salário, os 16 dias de atraso, a Felicidade e a ordem do dia com os 7 passos |
+| `eventos.json` (novo) | Os 11 eventos da fatia |
+| `textos/pt-BR.json` | Os nomes dos eventos |
+| `personagens/boneco_provisorio.json` | A camada é o boneco de teste |
+
+**Os arquivos novos:**
+
+- `Codigo/Economia/MercadoLocal.cpp` e `FelicidadeDaClasse.cpp`; o gasto extra, o imposto, os multiplicadores, o estabilizador e a saída por atraso no `ConsumoESalarios.cpp`;
+- `Codigo/Producao/ConsumoMedidoDaVila.cpp`: os 5 dias do consumo medido; a folga e a parada "sem Tora" no `ProducaoDaVila.cpp`;
+- `Codigo/Eventos/`: a leitura do `eventos.json` e as regras dos eventos;
+- `Codigo/Simulacao/RelatorioDaSimulacao.cpp`: o relatório, os critérios e o `--simular`;
+- `Codigo/Desempenho/MedicaoDoDesempenho.h`: as medições do Tracy;
+- os testes: 51 conferências novas no `Codigo/` (290 no total), entre elas **16 dias sem tela duas vezes** (os mesmos relatórios); e o **teste de 1 ano** como o terceiro teste do `ctest`.
+
+**O que testar:**
+
+1. `.\build\Jogo\jogo.exe --validar` diz "... 1 vila (10 construções e 15 NPCs), 11 eventos. 0 erros, 0 avisos".
+2. `.\build\Jogo\jogo.exe --simular 64 --semente 1` escreve os eventos, "Relatório gravado em relatorio.csv (64 linhas)", o tempo e **PASSOU**. Abrir o `relatorio.csv` no Excel: uma linha por dia; o Pão do dia 40 está na coluna `preco_do_pao`.
+3. `.\build\Jogo\jogo.exe --simular 64 --semente 3` termina com "FALHOU: o preço do Pão foi a 2,7 no dia 31" (é a pergunta FE1-2).
+4. Abrir o jogo: o boneco de teste aparece sem o aviso do Mana Seed. Deixar correr uns 3 dias a 4x e ler o resumo do dia: o Pão sobe de 1,9 para 2,3 nos primeiros dias (a vila começa com só 3 dias de Pão), e o gasto extra aparece a partir do dia 2.
+5. Apertar **F4** depois de alguns dias: o preço local e o consumo previsto de cada item; em algum dia, uma construção "DE FOLGA HOJE".
+6. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 3".

@@ -37,7 +37,25 @@
   },
   "cesta_minima_civil": { "comida_por_dia": 1, "materiais_a_cada_dias": 8 },
   "loja_da_cidade_vende_em_porcento": 110,
+  "loja_da_cidade_compra_em_porcento": 90,
   "bonus_do_salario_por_nivel_em_porcento": 10,
   "salario_do_gerente_em_porcento": 150,
-  "ordem_do_dia": ["consumo", "salarios", "escolha_das_receitas"]
+  "mercado_local": { "dias_do_estoque_alvo": 5, "fator_minimo_em_porcento": 50, "fator_maximo_em_porcento": 200,
+                     "passo_maximo_por_dia_em_porcento": 10 },
+  "gasto_da_classe_em_porcento_da_renda": 80,
+  "imposto": { "taxa_em_porcento": 20, "parte_da_cidade_em_porcento": 100 },
+  "estabilizador": { "ajuda_abaixo_de_dias_da_cesta": 3, "ajuda_ate_dias_da_cesta": 5, "teto_por_estacao_em_porcento_do_banco": 10 },
+  "multiplicadores_do_salario": { "riqueza_minima_em_porcento": 80, "riqueza_maxima_em_porcento": 120, "dias_da_cesta_para_o_maximo": 10,
+                                  "desemprego_minimo_em_porcento": 90, "desemprego_maximo_em_porcento": 110 },
+  "dias_de_atraso_ate_os_empregados_sairem": 16,
+  "felicidade": {
+    "inicial": 50,
+    "base_do_alvo": 50,
+    "passo_por_dia_em_porcento": 10,
+    "consumo": { "sem_comida": -25, "materiais_em_deficit": -5, "gasto_extra_maximo": 5 },
+    "desemprego": { "sem_desemprego": 10, "por_ponto_da_taxa": -20, "minimo": -10, "maximo": 10 },
+    "moradia": { "sem_casa": -10 },
+    "eventos": { "minimo": -20, "maximo": 20 }
+  },
+  "ordem_do_dia": ["consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "eventos", "escolha_das_receitas"]
 }

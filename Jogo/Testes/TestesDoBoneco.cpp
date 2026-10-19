@@ -50,8 +50,9 @@ void testarArquivoDoBoneco()
     std::vector<std::string> erros;
     const DefinicaoDoBoneco definicao = lerDefinicaoDoBoneco(texto, erros);
     conferir(erros.empty() && definicao.tamanhoDoQuadroEmPixels == 64 && definicao.pesXNoQuadro == 32 && definicao.pesYNoQuadro == 43
-                 && definicao.caminhosDasCamadas.size() == 3 && definicao.caminhoDaImagemDeReserva == "imagens/boneco_de_teste.png",
-             "o boneco_provisorio.json da fatia: quadro de 64, pés em (32, 43), 3 camadas e a reserva");
+                 && definicao.caminhosDasCamadas.size() == 1 && definicao.caminhosDasCamadas[0] == "imagens/boneco_de_teste.png"
+                 && definicao.caminhoDaImagemDeReserva == "imagens/boneco_de_teste.png",
+             "o boneco_provisorio.json da fatia (marco 7, só a arte de teste): quadro de 64, pés em (32, 43), a camada e a reserva no boneco de teste");
     conferir(definicao.distanciaDoCicloDeAndarEmMilesimos() == 2400, "o ciclo do andar mede 6 × 400 = 2.400 milésimos");
 
     std::vector<std::string> errosDoQuebrado;

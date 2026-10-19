@@ -206,9 +206,9 @@ Em `Codigo/Producao/`:
 
 ## 10. Marco 7: a previsão do consumo e a folga
 
-> Parte escrita em 2026-10-18 para o **marco 7**, com os 2 problemas que os 30 dias sem tela do marco 6 mostraram (a Tora que acaba no dia 12 e o estoque de matéria-prima cheio no dia 17). Os pontos marcados com FL7 estão na **rodada FL7** ([[Retomada]], seção 4), ainda sem resposta: esta parte já usa as sugestões, marcadas como [Proposta].
+> Parte escrita em 2026-10-18 para o **marco 7**, com os 2 problemas que os 30 dias sem tela do marco 6 mostraram (a Tora que acaba no dia 12 e o estoque de matéria-prima cheio no dia 17). Os pontos marcados com FL7 vêm da **rodada FL7**, aplicada em 2026-10-18, toda com "seguir sugestão".
 
-### 10.1 A previsão do consumo, medida [Proposta] (FL7-4)
+### 10.1 A previsão do consumo, medida (FL7-4)
 
 **O problema:** no marco 6, o estoque-alvo da regra 4.3 conta só os insumos das receitas **atuais**. A Carpintaria do jogador passa a maior parte do tempo nos Móveis (que gastam Tábua), então a previsão de Tora quase sempre é 0, o Posto de Coleta fica na Água, e a Tora acaba.
 
@@ -216,13 +216,14 @@ Em `Codigo/Producao/`:
 
 1. **Gastou:** o que saiu do inventário para a cesta mínima, o gasto extra e os insumos dos ciclos.
 2. **Quis gastar e faltou:** em cada hora em que uma construção, com gente trabalhando, ficou parada por falta de um insumo, conta a parte de um ciclo daquela hora: quantidade do insumo × ticks trabalhados na hora × 100 ÷ (horas da receita × 800), em centésimos.
-3. **A fila do jogador:** quando nenhuma ordem passa, mas alguma **quer produzir** e só falta insumo, a construção fica parada "sem Tora" (e não "sem ordem"), e cada ordem que quer produzir conta, no passo 2, os insumos que faltam a ela.
+3. **A fila do jogador:** quando nenhuma ordem passa, mas alguma **quer produzir** e só falta insumo, a construção fica parada "sem Tora" (e não "sem ordem"), e cada ordem que quer produzir conta, no passo 2, os insumos que faltam a ela. Se os insumos existem na Cidade e só falta dinheiro ao jogador, a parada é "sem dinheiro para os insumos", sem demanda [Proposta].
+4. **A cesta que faltou** também é demanda: cada comida ou Material Básico que a cesta não achou conta 1 unidade do item mais barato do tipo (assim, na fome, o alvo do Pão não cai) [Proposta].
 
 O mesmo consumo previsto vale para o **Mercado Local** (o estoque-alvo do preço, ficha da [[Ficha Logica/Economia|Economia]], regra 10.4). No primeiro dia, os 5 dias guardados são a previsão do marco 6.
 
 *Exemplo:* sem Tora, a Carpintaria passa 8 horas parada "sem Tora" com 2 empregados (1.600 ticks por hora no total): por hora, 2 Toras × 1.600 × 100 ÷ (4 × 800) = 100 centésimos (1 Tora); no dia, 8 Toras de demanda que faltou. O alvo da Tora sobe, e o Posto de Coleta escolhe a Tora no dia seguinte.
 
-### 10.2 A folga [Proposta] (FL7-5)
+### 10.2 A folga (FL7-5)
 
 **O problema:** com déficit 0, a nota da regra 4.3 continua positiva, então os Braçais nunca param. A Fazenda faz cerca de 31,6 Grãos por dia, e a vila gasta 8. O Grão e a Água enchem os 900 de matéria-prima por volta do dia 17, e a produção trava com "o estoque encheu". O Pão também sobe sem parar (15,8 feitos e 15 comidos por dia), e o preço local dele cairia para menos de 1,2, o que falha o teste de 1 ano.
 
@@ -233,6 +234,8 @@ O mesmo consumo previsto vale para o **Mercado Local** (o estoque-alvo do preço
 3. Sem nenhuma candidata, a construção fica **de folga** no dia seguinte.
 4. A construção do jogador sem nenhuma ordem que queira produzir, na meia-noite, também fica de folga.
 5. **De folga, os empregados não vão trabalhar**: passeiam no Período de Trabalho, como os desempregados, e **não recebem** (o salário é pelas horas trabalhadas).
+6. **O ciclo que ainda não começou** já é o próximo: na Cidade, ele passa para a receita escolhida (ou para nenhuma, na folga); no jogador, a fila decide de novo na hora seguinte [Proposta].
+7. **Ao montar a vila**, ninguém começa de folga, e a primeira escolha roda duas vezes: a previsão do marco 6 precisa das receitas atuais, que só existem depois da primeira escolha [Proposta].
 
 *Exemplo:* o alvo do Pão é 75 (5 dias de 15). Com 94 Pães, o Cozinheiro folga; com 79, continua de folga (está acima do alvo); com 64, volta. O estoque de Pão fica entre cerca de 60 e 95, e o preço local, entre cerca de 1,3 e 2,0. A Fazenda, com alvo de 40 Grãos, trabalha cerca de 1 dia em cada 4.
 

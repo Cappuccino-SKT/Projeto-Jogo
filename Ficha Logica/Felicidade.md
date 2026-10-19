@@ -4,13 +4,13 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Os pontos marcados com FL7 estão na **rodada FL7** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Os pontos marcados com FL7 vêm da **rodada FL7**, aplicada em 2026-10-18, toda com "seguir sugestão" (as decisões estão na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]).
 
 # Ficha Lógica: Felicidade
 
 ## 1. O que faz
 
-Todo dia, a vila calcula a **Felicidade dos Civis** (de 0 a 100): um alvo, que sai de 4 fatores, e um passo de 10% em direção a ele. No marco 7, a Felicidade é **medida e mostrada** (no resumo do dia e no relatório do teste de 1 ano) e entra nos eventos condicionais; ela ainda não muda a produção [Proposta] (FL7-7).
+Todo dia, a vila calcula a **Felicidade dos Civis** (de 0 a 100): um alvo, que sai de 4 fatores, e um passo de 10% em direção a ele. No marco 7, a Felicidade é **medida e mostrada** (no resumo do dia e no relatório do teste de 1 ano) e entra nos eventos condicionais; ela ainda não muda a produção (FL7-7).
 
 Documento do sistema: [[Sistema de Felicidade e Estabilidade/Descrição|Felicidade e Estabilidade]] (os fatores, a inércia, as faixas). Na fatia, só 4 fatores (FT1-2), com as contas da regra 4.8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]. Sem revolta nem Controle.
 
@@ -20,7 +20,7 @@ Documento do sistema: [[Sistema de Felicidade e Estabilidade/Descrição|Felicid
 
 ### Definições
 
-No `regras.json` [Proposta]:
+No `regras.json`:
 
 ```json
 "felicidade": {
@@ -52,7 +52,7 @@ No `regras.json` [Proposta]:
 
 ### 4.1 Os 4 fatores
 
-1. **Consumo atendido** = −25 × (Civis que ficaram sem comida hoje ÷ Civis) − 5 se os Materiais Básicos estão em déficit + 5 × (gasto extra de hoje ÷ gasto da cesta de hoje), com o último pedaço no máximo +5 [Proposta].
+1. **Consumo atendido** = −25 × (Civis que ficaram sem comida hoje ÷ Civis) − 5 se os Materiais Básicos estão em déficit + 5 × (gasto extra de hoje ÷ gasto da cesta de hoje), com o último pedaço no máximo +5.
 2. **Desemprego e renda** = +10 − 20 × a taxa de desemprego (de 0 a 1), preso entre −10 e +10.
 3. **Moradia** = −10 × (Civis sem casa ÷ Civis). Na fatia, os 15 têm casa: 0.
 4. **Eventos duradouros** = a soma dos modificadores de Felicidade dos eventos ativos ([[Ficha Logica/Eventos|ficha dos Eventos]]), presa entre −20 e +20.
@@ -60,7 +60,7 @@ No `regras.json` [Proposta]:
 ### 4.2 O alvo e o passo
 
 1. **Alvo** = 50 + a soma dos 4 fatores, preso entre 0 e 100.
-2. **Felicidade nova** = Felicidade + 10% × (alvo − Felicidade), em décimos, arredondando na direção do alvo (assim ela sempre chega ao alvo, e não para a 0,1 dele) [Proposta].
+2. **Felicidade nova** = Felicidade + 10% × (alvo − Felicidade), em décimos, arredondando na direção do alvo (assim ela sempre chega ao alvo, e não para a 0,1 dele).
 
 ### 4.3 As faixas (só para mostrar, no marco 7)
 
@@ -72,7 +72,7 @@ No `regras.json` [Proposta]:
 | Protesto | 10 a 25 | Escrita no resumo do dia |
 | Revolta | abaixo de 10 | Escrita no resumo do dia |
 
-Os efeitos das faixas (a produtividade, os migrantes, as greves, a revolta) ficam para depois da fatia [Proposta] (FL7-7).
+Os efeitos das faixas (a produtividade, os migrantes, as greves, a revolta) ficam para depois da fatia (FL7-7).
 
 ## 5. Contas
 

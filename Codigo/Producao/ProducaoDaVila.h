@@ -5,6 +5,10 @@
 // trabalho vira progresso do ciclo, e o ciclo terminado põe o lote no
 // inventário. A Cidade escolhe a receita todo dia; o jogador, pela fila de
 // ordens. Nada aqui abre janela: o teste sem tela roda isto.
+//
+// O marco 7 (parte 10) muda três coisas: o consumo previsto passa a ser
+// medido (ConsumoMedidoDaVila), os preços são os do Mercado Local, e a
+// construção com estoque de sobra fica de folga.
 
 #include <cstdint>
 #include <map>
@@ -16,8 +20,15 @@
 #include "Dados/DadosDoJogo.h"
 #include "Economia/DinheiroDaVila.h"
 #include "Inventario/InventarioDaCidade.h"
+#include "Producao/ConsumoMedidoDaVila.h"
 #include "Producao/OrdemDoJogador.h"
 #include "Tempo/RelogioDoMundo.h"
+#include "Tempo/SorteioComSemente.h"
+
+// O estado do marco 7 que mora em outros arquivos (Economia/ e Eventos/).
+struct MercadoLocalDaVila;
+struct FelicidadeDaClasse;
+struct EstadoDosEventos;
 
 // ---------------------------------------------------------------------------
 // Os componentes do NPC (parte 2).
@@ -50,7 +61,8 @@ struct ProducaoDaConstrucao {
     int64_t progressoDoCiclo = 0;                 // em ticks × porcentagem (parte 5)
     int restoDaProducaoBracal = 0;                // de 0 a 99: a fração de unidade guardada
     bool estaParada = false;
-    std::string motivoDaParada;                   // "sem Água", "o estoque encheu"...
+    std::string motivoDaParada;                   // "sem Água", "o estoque encheu", "de folga"...
+    bool estaDeFolgaHoje = false;                 // regra 10.2: decidido à meia-noite
     std::vector<OrdemDoJogador> ordens;           // só nas do jogador (regra 4.4)
 
     int numeroDoGerente = -1;                     // ficha da Construção, regra 4.2
@@ -73,6 +85,12 @@ struct ContextoDaProducao {
     InventarioDaCidade& inventario;
     DinheiroDaVila& dinheiro;
     std::vector<ProducaoDaConstrucao>& producaoDasConstrucoes;
+    // Marco 7.
+    ConsumoMedidoDaVila& consumoMedido;
+    MercadoLocalDaVila& mercadoLocal;
+    FelicidadeDaClasse& felicidade;
+    EstadoDosEventos& eventos;
+    SorteioComSemente& sorteioDosEventos;
     int ticksPorHoraDeJogo = 800;
 };
 
@@ -99,6 +117,21 @@ int64_t calcularNotaDaReceita(int precoDoProdutoEmDecimos, int custoDosInsumosEm
 // O preço de venda da loja da cidade: 110% do preço, com a metade subindo (1,7 vira 1,9).
 int calcularPrecoDaLojaDaCidade(int precoEmDecimos, const RegrasDaEconomia& regras);
 
+// Regra 10.1, passo 2: a parte de um ciclo que faltou numa hora parada, em
+// centésimos: quantidade × ticks × 100 ÷ (horas × 800). 2 Toras, 1.600 ticks,
+// receita de 4 horas: 100 (1 Tora).
+int64_t calcularDemandaQueFaltouNaHora(int quantidadeDoInsumo, int ticksTrabalhadosNaHora, int horasDaReceita, int ticksPorHoraDeJogo);
+
+// O preço local do item (Economia, regra 10.4); o preço base antes do Mercado Local.
+int precoLocalDoItem(const ContextoDaProducao& contexto, int numeroDoItem);
+
+// O estoque-alvo: 5 dias do consumo previsto (a média medida, regra 10.1), em centésimos.
+int64_t estoqueAlvoDoItemEmCentesimos(const ContextoDaProducao& contexto, int numeroDoItem);
+
+// A previsão do marco 6 (a cesta e os insumos das receitas atuais num dia
+// cheio), em centésimos. No marco 7, só enche os 5 dias guardados do começo.
+std::vector<int64_t> preverOConsumoPelasReceitasAtuais(const ContextoDaProducao& contexto);
+
 // Os tiles livres de uma área de recurso (os que dão para andar e não são
 // porta), de cima para baixo e da esquerda para a direita.
 std::vector<PosicaoDeTile> montarTilesDeTrabalhoDaArea(const MapaLocal& mapa, const VilaDoJogo& vila, const AreaDeRecurso& area);
@@ -123,7 +156,10 @@ void contarOsTicksTrabalhados(ContextoDaProducao& contexto);
 // Regra 4.2, a cada hora: o ciclo de cada construção.
 void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& relogio);
 
-// Regra 4.3, a cada dia (e ao montar a vila): a receita de cada construção da Cidade.
+// Regra 4.3, a cada dia (e ao montar a vila): a receita de cada construção
+// da Cidade. Com a regra 10.2: a receita com estoque de sobra não é
+// candidata, e a construção sem candidata (ou a do jogador sem ordem que
+// queira produzir) fica de folga no dia seguinte.
 void escolherAsReceitasDaCidade(ContextoDaProducao& contexto);
 
 // Regra 4.4: a receita que a fila de ordens do jogador pede agora, ou -1. Não

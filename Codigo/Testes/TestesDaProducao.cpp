@@ -239,16 +239,21 @@ void testarRegrasDaProducao(const DadosDoJogo& dadosLidos)
                  "sem Tora, a Carpintaria do jogador compra 2 Toras da Cidade por 2 × 0,6 e começa a Tábua");
     }
     {
-        // A escolha da cidade: o Posto de Coleta tira Tora quando falta Tora; com a comida em perigo, o Cozinheiro faz Pão.
+        // A escolha da cidade (marco 7, regra 10.1): o Posto de Coleta tira
+        // Tora quando falta Tora e a demanda medida é de 8 por dia.
         VilaDeTeste vila(dadosLidos);
         SimulacaoDaVila& simulacao = vila.simulacao;
         const int posto = indiceDaConstrucaoNaVila(vila.dados, "posto_de_coleta");
         tirarTudoDoItem(simulacao, tora);
+        std::vector<int64_t> consumoDeUmDia;
+        for (int item = 0; item < vila.dados.catalogoDeItens.quantidadeDeItens(); ++item) {
+            consumoDeUmDia.push_back(item == tora ? 800 : simulacao.consumoMedido.consumoPrevistoDoDiaEmCentesimos(item));
+        }
+        simulacao.consumoMedido.preencherOsDiasGuardados(consumoDeUmDia);
         ContextoDaProducao contexto = simulacao.contextoDaProducao();
-        simulacao.producaoDasConstrucoes[indiceDaConstrucaoNaVila(vila.dados, "carpintaria_do_jogador")].receitaDoCiclo = receitaDaTabua;
         escolherAsReceitasDaCidade(contexto);
         conferir(simulacao.producaoDasConstrucoes[posto].receitaEscolhidaParaOProximoCiclo == receitaDaTora,
-                 "sem Tora e com a Carpintaria fazendo Tábua, o Posto de Coleta escolhe a Tora");
+                 "Tora com 0 de estoque e demanda medida de 8 por dia: o Posto de Coleta escolhe a Tora");
         const int receitaDaPedra = *vila.dados.catalogoDeReceitas.procurarReceitaDoProduto(numeroDoItem(vila.dados, "item.pedra"));
         conferir(simulacao.producaoDasConstrucoes[posto].receitaEscolhidaParaOProximoCiclo != receitaDaPedra,
                  "o Posto nunca escolhe a Pedra: a vila não tem a área da pedreira (FL6-5)");
@@ -309,8 +314,10 @@ void testarContasDaEconomia(const DadosDoJogo& dadosLidos)
         const int cozinheiro = indiceDaConstrucaoNaVila(vila.dados, "cozinheiro");
         const int carpintaria = indiceDaConstrucaoNaVila(vila.dados, "carpintaria_do_jogador");
         conferir(simulacao.producaoDasConstrucoes[cozinheiro].diasDeSalarioAtrasado == 1 && simulacao.producaoDasConstrucoes[carpintaria].diasDeSalarioAtrasado == 0
-                     && simulacao.dinheiro.dinheiroDaClasseCivil - civisAntes == simulacao.dinheiro.rendaDoDiaDaClasseCivil,
-                 "o Banco sem dinheiro: os empregados da Cidade não recebem (1 dia de atraso), e os do jogador recebem");
+                     && simulacao.dinheiro.rendaDoDiaDaClasseCivil > 0
+                     && simulacao.dinheiro.dinheiroDaClasseCivil - civisAntes == simulacao.dinheiro.rendaDoDiaDaClasseCivil - simulacao.dinheiro.impostoDeHoje
+                     && simulacao.dinheiro.bancoDaCidade == simulacao.dinheiro.impostoDeHoje,
+                 "o Banco sem dinheiro: os empregados da Cidade não recebem (1 dia de atraso), e os do jogador recebem (menos o imposto, que vai para o Banco)");
     }
     {
         ListaDeProblemasDosDados problemas;
@@ -326,7 +333,7 @@ struct ResultadoDeDiasSemTela {
     int menorEstoqueDePao = 1'000'000;
     int bracaisNoCampoAs10h = 0;
     int empregadosTrabalhandoAs10h = 0;
-    bool dinheiroTotalNuncaMudou = true;
+    bool dinheiroTotalSoMudouPeloMercador = true;
     int64_t bancoNoFim = 0;
     int estoqueDePaoNoFim = 0;
 };
@@ -347,7 +354,8 @@ ResultadoDeDiasSemTela simularDiasSemTela(int quantidadeDeDias)
             }
         }
         resultado.menorEstoqueDePao = std::min(resultado.menorEstoqueDePao, simulacao.inventario.quantidadeTotalDe(pao));
-        resultado.dinheiroTotalNuncaMudou = resultado.dinheiroTotalNuncaMudou && simulacao.dinheiro.dinheiroTotal() == dinheiroDoComeco;
+        resultado.dinheiroTotalSoMudouPeloMercador = resultado.dinheiroTotalSoMudouPeloMercador
+            && simulacao.dinheiro.dinheiroTotal() - simulacao.dinheiro.dinheiroQueEntrouDeFora == dinheiroDoComeco;
         if ((simulacao.relogio.tickAtual() + 1) % 19'200 == 0) {  // o último tick do dia (23h59)
             const std::map<int, int>& feitosHoje = simulacao.producaoDasConstrucoes[cozinheiro].producaoDeHojePorItem;
             resultado.paesFeitosEmCadaDia.push_back(feitosHoje.count(pao) > 0 ? feitosHoje.at(pao) : 0);
@@ -383,10 +391,9 @@ void testarDiasSemTela()
     conferir(resultado.paesFeitosEmCadaDia.at(1) + resultado.paesFeitosEmCadaDia.at(2) >= 30,
              "nos dias 2 e 3, o Cozinheiro faz pelo menos 15 Pães por dia (15,8 em média, FL6-7)");
     conferir(resultado.menorEstoqueDePao > 0, "a vila nunca fica sem Pão");
-    conferir(resultado.dinheiroTotalNuncaMudou, "o dinheiro total (Banco, jogador e Civis) nunca muda: nada some e nada aparece do nada");
-
-    const ResultadoDeDiasSemTela outraRodada = simularDiasSemTela(3);
-    conferir(outraRodada.resumos == resultado.resumos, "os mesmos 3 dias duas vezes dão os mesmos resumos");
+    conferir(resultado.dinheiroTotalSoMudouPeloMercador,
+             "o dinheiro total (Banco, jogador e Civis) só muda pelo Mercador viajante: nada some e nada aparece do nada");
+    // A repetição (a mesma semente, o mesmo resultado) é conferida com 16 dias nos testes da simulação (marco 7).
 }
 
 }  // namespace
