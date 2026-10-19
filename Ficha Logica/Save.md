@@ -2,9 +2,9 @@
 tags: [ficha-logica]
 ---
 
-> Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
+> O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-19 para o **marco 9** (salvar e carregar). As perguntas estão na rodada **FL9** ([[Rodada Pendente]]).
+> Ficha escrita em 2026-10-19 para o **marco 9** (salvar e carregar). A rodada **FL9** foi respondida em 2026-10-19: todas as sugestões foram aceitas (a FL9-2 com o aviso da parte 9).
 
 # Ficha Lógica: Save
 
@@ -23,11 +23,12 @@ Documento do sistema: [[Arquitetura/Descrição|Arquitetura]] ("Salvar e carrega
 | Campo | Tipo | Unidade | Valor |
 |---|---|---|---|
 | `versaoDoFormatoDoSave` | inteiro | — | 1 (sobe a cada mudança no que é gravado) |
-| `formatoDoArquivo` | — | — | MessagePack pela nlohmann/json **[Em aberto: FL9-1]** |
+| `formatoDoArquivo` | — | — | MessagePack pela nlohmann/json (FL9-1); o comando `jogo --save-para-json arquivo.save` mostra o save em texto para investigar |
 | `extensaoDoArquivo` | texto | — | `.save` |
-| `pastaDosSaves` | texto | — | a pasta do usuário do SDL (`SDL_GetPrefPath`) **[Em aberto: FL9-4]** |
-| `espacosDeSaveManual` | inteiro | espaços | 3 **[Em aberto: FL9-3]** |
-| Save automático | — | — | 1 espaço, todo dia às 0h, depois da ordem do dia **[Em aberto: FL9-3]** |
+| `pastaDosSaves` | texto | — | `SDL_GetPrefPath` do jogo + `saves/` (no Windows, `C:\Users\<usuário>\AppData\Roaming\Projeto-Jogo\saves\`); o `Jogo/LEIA-ME.md` diz o caminho (FL9-4) |
+| `espacosDeSaveManual` | inteiro | espaços | 3 (`espaco1.save` a `espaco3.save`) (FL9-3) |
+| Save automático | — | — | 1 espaço (`automatico.save`), todo dia às 0h (a cada 20 minutos reais a 1x), depois da ordem do dia (FL9-3) |
+| `horasSemSalvarParaConfirmar` | inteiro | horas de jogo | 1 **[Proposta]** (FL9-6) |
 
 ### Estado (o que vai no arquivo)
 
@@ -47,7 +48,7 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 | `felicidade` | valor e os fatores guardados | |
 | `eventos` | eventos ativos (ID, dias que faltam) e os cooldowns | `evento.febre, 2 dias` |
 | `decisoes` | preço, salário e escolhas do jogador em cada construção dele | |
-| `npcs` | cada NPC **na ordem da vila inicial**: identidade, casa e trabalho, lugar (tile, próximo tile, progresso), olhar, decisão, doença, fome, dinheiro, habilidades, caminho **[Em aberto: FL9-2]** | |
+| `npcs` | cada NPC **na ordem da vila inicial**: identidade, casa e trabalho, lugar (tile, próximo tile, progresso), olhar, decisão, doença, fome, dinheiro, habilidades, caminho (a lista de tiles e o índice) e os pedidos de caminho que esperam o cálculo (FL9-2) | |
 | `jogador` | posição, Fome, dinheiro, inventário | |
 | `diario` | as 300 notificações do Diário **[Proposta]** | |
 | `camera` | centro e zoom **[Proposta]** | |
@@ -57,9 +58,9 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 ## 3. Quando roda
 
 - **Salvar:** só **entre dois ticks**, nunca no meio de um. Antes, aplica a fila de pedidos (`aplicarOsPedidosPendentes`).
-  - pelo menu (Esc → Salvar) ou pelo salvamento rápido (**F5**, no último espaço usado) **[Proposta]**;
-  - automático todo dia às 0h, depois da ordem do dia e da linha do relatório **[Em aberto: FL9-3]**.
-- **Carregar:** pela tela inicial (Continuar, Carregar), pelo menu (Esc → Carregar), pelo carregamento rápido (**F9**) **[Proposta]**, ou pela linha de comando (`jogo --carregar arquivo.save`). A partida carregada começa **pausada** **[Proposta]**.
+  - pelo menu (Esc → Salvar) ou pelo salvamento rápido (**F5**, no último espaço manual usado; se nenhum foi usado, no espaço 1);
+  - automático todo dia às 0h, depois da ordem do dia e da linha do relatório (FL9-3).
+- **Carregar:** pela tela inicial (Continuar, Carregar), pelo menu (Esc → Carregar), pelo carregamento rápido (**F9**, o save mais novo, manual ou automático), ou pela linha de comando (`jogo --carregar arquivo.save`). A partida carregada começa **pausada** (FL9-6).
 
 ## 4. Regras passo a passo
 
@@ -67,15 +68,15 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 
 1. Aplique a fila de pedidos do jogador.
 2. Monte a árvore: cabeçalho, depois cada seção da tabela da parte 2, **sempre na mesma ordem**. Listas sempre na mesma ordem (construções e NPCs pela posição; inventário pelo ID em texto, em ordem alfabética).
-3. Converta a árvore em bytes (MessagePack) **[Em aberto: FL9-1]**.
+3. Converta a árvore em bytes (MessagePack).
 4. Grave num arquivo temporário (`espaco1.save.tmp`); só depois de gravado por inteiro, troque pelo arquivo de verdade. Assim, se o jogo fechar no meio, o save antigo continua inteiro.
 5. Mostre a notificação "Jogo salvo (Dia 12 do Verão, 14h)".
 
 ### 4.2 Carregar
 
 1. Leia o arquivo. Se não existir ou estiver quebrado: mensagem "Não foi possível ler o save" e nada muda.
-2. Confira a versão do formato. Diferente da atual: recuse com "Este save é de outra versão do jogo (versão 1; o jogo usa a 2)" **[Em aberto: FL9-5]**.
-3. Confira cada ID em texto contra os dados carregados. Um ID que não existe mais (por exemplo, `item.vinho` foi apagado do `itens.json`): recuse com o ID na mensagem **[Em aberto: FL9-5]**.
+2. Confira a versão do formato. Diferente da atual: recuse com "Este save é de outra versão do jogo (versão 1; o jogo usa a 2)" e mantenha a partida atual (FL9-5).
+3. Confira cada ID em texto contra os dados carregados. Um ID que não existe mais (por exemplo, `item.vinho` foi apagado do `itens.json`): recuse com o ID na mensagem e mantenha a partida atual (FL9-5).
 4. Monte uma `SimulacaoDaVila` nova e vazia, com os mesmos dados e regras.
 5. Preencha cada parte pela seção dela, na mesma ordem do salvamento. Os NPCs são criados no registro da EnTT **na ordem gravada**, para ganharem os mesmos números de entidade.
 6. Recalcule o que não foi gravado (parte 2): o mapa bloqueado pelos lotes, as capacidades, o lugar de desenho igual ao lugar atual.
@@ -83,9 +84,9 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 
 ### 4.3 Saves na tela
 
-- **Tela inicial** **[Em aberto: FL9-6]**: Continuar (o save mais novo, manual ou automático), Novo jogo, Carregar, Sair.
+- **Tela inicial** (FL9-6): Continuar (o save mais novo, manual ou automático), Novo jogo, Carregar, Sair.
 - **Lista de saves:** uma linha por espaço: nome, data do jogo, data real. Espaço vazio aparece como "(vazio)".
-- **Menu do Esc** **[Em aberto: FL9-6]**: Voltar, Salvar, Carregar, Sair para a tela inicial. Sair ou carregar com progresso não salvo pede confirmação.
+- **Menu do Esc** (FL9-6): Voltar, Salvar, Carregar, Sair para a tela inicial. Sair ou carregar pede confirmação se houver mais de 1 hora de jogo sem salvar. O Esc deixa de fechar o jogo (marco 1); fechar é pelo "Sair" da tela inicial ou pelo X da janela, que também pede a confirmação.
 
 ## 5. Contas
 
@@ -113,7 +114,7 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 ## 8. Testes
 
 1. **Ida e volta** (Fatia Vertical, parte 5): partida nova, 10 dias; salvar → carregar → salvar de novo → **os dois arquivos são iguais, byte a byte**.
-2. **Continuar igual** **[Em aberto: FL9-7]**: `jogo --simular 64 --semente 1` dá um relatório; `jogo --simular 64 --semente 1 --salvar-e-carregar-no-dia 20` (salva às 0h do dia 20, carrega, segue) dá **o mesmo relatório, linha por linha**.
+2. **Continuar igual** (FL9-7, depende da FL9-2): `jogo --simular 64 --semente 1` dá um relatório; `jogo --simular 64 --semente 1 --salvar-e-carregar-no-dia 20` (salva às 0h do dia 20, carrega, segue) dá **o mesmo relatório, linha por linha**.
 3. **Versão errada:** um save com a versão 0 é recusado com a mensagem, e a partida antiga continua.
 4. **ID que sumiu:** um save com `item.vinho` é recusado com "item.vinho" na mensagem.
 5. **Arquivo quebrado:** um save cortado pela metade é recusado, sem travar.
@@ -123,5 +124,6 @@ O arquivo é uma árvore de seções com nome. Cada seção corresponde a uma pa
 
 - Salvar por **Mapa Local** e os mapas em LOD 2 só com os dados agregados (Arquitetura).
 - Facções, diplomacia e relações em seções próprias.
-- Conversores de saves antigos para a versão nova **[Refinar depois]**.
+- Conversores de saves antigos para a versão nova **[Refinar depois]**: até o lançamento, um save de outra versão é recusado (FL9-5).
+- **[Refinar depois]** O caminho dos NPCs no save (FL9-2): na fatia são 15 NPCs (cerca de 2 KB). No jogo completo, com centenas de NPCs, gravar o caminho de todos pesa: só os NPCs importantes gravariam o caminho e os demais o recalculariam ao carregar (quem é importante vem dos dados; o autor define). Nesse caso, o teste "continuar igual" passaria a valer só para os importantes.
 - Nomear o save, apagar save pela tela, miniatura da tela no save.
