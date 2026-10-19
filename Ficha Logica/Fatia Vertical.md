@@ -423,6 +423,8 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 
 **Rodada FL2 (2026-10-18):** a ficha da [[Ficha Logica/Interface|Interface]] (câmera do marco 2). A câmera anda 900 pixels da tela por segundo em qualquer zoom (Shift dobra, diagonal corrigida); o zoom deixa o ponto embaixo do mouse parado; a borda do mapa nunca sai da borda da tela; a câmera começa no centro do mapa e não vai no save; mover pela borda da tela fica como opção futura, desligada; uma tabela de ações para as teclas entra no marco 3.
 
+**Rodada FE2 (2026-10-19):** os Blocos de Pedra acabavam no 4º ano (manutenção da FL8-5 sem Pedreira na vila). Decisão FE2-1 (a): a vila começa com **300 Blocos** (era 150, FL6-5), só no `vila_inicial.json`; a Pedreira fica para as rodadas de conteúdo. Conferido: as sementes de 1 a 10 (64 dias) passam; nas sementes 1 e 2 de 256 dias (4 anos) a vila passa, o Pão não passa de 40 a 50 unidades no mínimo, o preço dele chega a 2,5 no máximo e sobram 76 a 79 Blocos no dia 256.
+
 **Rodada FT2:** o código foi liberado marco a marco. As bibliotecas entram por marco, e os nomes são em português, sem acento e descritivos ([[Arquitetura/Descrição|Arquitetura]]).
 
 **Organização das pastas (2026-10-17):** esta ficha é o mapa geral da fatia. Cada sistema ganha a sua ficha nesta pasta, no modelo da [[Ficha Logica/Descrição|Ficha Lógica]], pouco antes do marco que o usa.
