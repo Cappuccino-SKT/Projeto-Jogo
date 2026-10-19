@@ -100,12 +100,27 @@ void conferirOsCriteriosDoDia(ConferenciaDoTesteDeUmAno& conferencia, const Linh
         conferencia.motivoDaFalha = "fome por " + std::to_string(linha.diasEmDeficitDeComida) + " dias seguidos" + noDia;
     } else if (linha.bancoDaCidade <= 0) {
         conferencia.motivoDaFalha = "o Banco zerou" + noDia;
+    } else if (linha.bancoDaCidade < menorBancoQuePassaEmDecimos) {
+        conferencia.motivoDaFalha = "o Banco caiu para " + escreverDecimos(linha.bancoDaCidade) + noDia;
     } else if (linha.precoDoPaoEmDecimos < menorPrecoDoPaoQuePassaEmDecimos || linha.precoDoPaoEmDecimos > maiorPrecoDoPaoQuePassaEmDecimos) {
         conferencia.motivoDaFalha = "o preço do Pão foi a " + escreverDecimos(linha.precoDoPaoEmDecimos) + noDia;
     } else {
         return;
     }
     conferencia.falhou = true;
+}
+
+void conferirOBancoNoFimDoAno(ConferenciaDoTesteDeUmAno& conferencia, const std::vector<LinhaDoRelatorio>& linhas)
+{
+    if (conferencia.falhou || static_cast<int>(linhas.size()) < diasDeUmAno) {
+        return;
+    }
+    const int64_t bancoDoDia1 = linhas.front().bancoDaCidade;
+    const int64_t bancoNoFimDoAno = linhas[diasDeUmAno - 1].bancoDaCidade;
+    if (bancoNoFimDoAno < bancoDoDia1 - maiorQuedaDoBancoNoAnoEmDecimos) {
+        conferencia.falhou = true;
+        conferencia.motivoDaFalha = "o Banco caiu de " + escreverDecimos(bancoDoDia1) + " para " + escreverDecimos(bancoNoFimDoAno) + " no ano";
+    }
 }
 
 ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int quantidadeDeDias, std::optional<uint64_t> semente, int npcsAMais,
@@ -151,6 +166,7 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
             partida = std::move(carregada.partida);
         }
     }
+    conferirOBancoNoFimDoAno(resultado.conferencia, resultado.linhas);
     const auto fim = std::chrono::steady_clock::now();
     resultado.segundosQueLevou = std::chrono::duration<double>(fim - comeco).count();
     resultado.microssegundosPorTick = resultado.ticksRodados > 0 ? resultado.segundosQueLevou * 1e6 / static_cast<double>(resultado.ticksRodados) : 0;

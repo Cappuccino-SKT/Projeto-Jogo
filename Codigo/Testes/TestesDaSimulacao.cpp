@@ -225,8 +225,8 @@ void testarEstabilizador(const DadosDoJogo& dadosLidos)
     conferir(simulacao.dinheiro.ajudaDoEstabilizadorHoje == 0, "no dia seguinte, com o teto da estação gasto, o Banco não paga mais nada");
     simulacao.dinheiro.dinheiroDaClasseCivil = 900;
     rodarOEstabilizador(contexto, relogioNoComecoDoDia(16));  // o dia 1 do Verão: o teto recomeça
-    conferir(simulacao.dinheiro.bancoNoComecoDaEstacao == 3'600 && simulacao.dinheiro.ajudaDoEstabilizadorHoje == 360,
-             "no dia 1 da estação seguinte, o teto recomeça: 10% de 360 = 36");
+    conferir(simulacao.dinheiro.bancoNoComecoDaEstacao == 4'350 && simulacao.dinheiro.ajudaDoEstabilizadorHoje == 435,
+             "no dia 1 da estação seguinte, entra a verba da Coroa (360 + 75 = 435) e o teto recomeça: 10% de 435 = 43,5 (FE4-1)");
 }
 
 void testarFelicidade(const DadosDoJogo& dados)
@@ -531,6 +531,23 @@ void testarRelatorio(const DadosDoJogo& dados)
     conferirOsCriteriosDoDia(precoNoLimite, paoNoLimite);
     conferir(precoAlto.motivoDaFalha == "o preço do Pão foi a 2,7 no dia 37" && !precoNoLimite.falhou,
              "o Pão a 2,7: FALHOU; a 2,6 (o limite), passa");
+
+    // FE4-3: o Banco abaixo de 250, e a queda no ano.
+    ConferenciaDoTesteDeUmAno bancoBaixo;
+    LinhaDoRelatorio bancoEm249 = linha;
+    bancoEm249.bancoDaCidade = 2'499;
+    conferirOsCriteriosDoDia(bancoBaixo, bancoEm249);
+    conferir(bancoBaixo.motivoDaFalha == "o Banco caiu para 249,9 no dia 37", "o Banco em 249,9: FALHOU (FE4-3)");
+    std::vector<LinhaDoRelatorio> umAno(64, linha);
+    umAno.front().bancoDaCidade = 4'000;
+    umAno.back().bancoDaCidade = 3'500;
+    ConferenciaDoTesteDeUmAno quedaNoLimite;
+    conferirOBancoNoFimDoAno(quedaNoLimite, umAno);
+    umAno.back().bancoDaCidade = 3'499;
+    ConferenciaDoTesteDeUmAno quedaDemais;
+    conferirOBancoNoFimDoAno(quedaDemais, umAno);
+    conferir(!quedaNoLimite.falhou && quedaDemais.motivoDaFalha == "o Banco caiu de 400,0 para 349,9 no ano",
+             "o Banco 50 abaixo do dia 1 no fim do ano passa; 50,1 abaixo, FALHOU (FE4-3)");
 }
 
 void testarSimulacaoSemTela()

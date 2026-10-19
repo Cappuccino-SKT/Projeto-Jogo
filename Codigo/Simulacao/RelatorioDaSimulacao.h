@@ -20,6 +20,10 @@ constexpr int diasSeguidosDeFomeQueFalham = 4;
 constexpr int menorPrecoDoPaoQuePassaEmDecimos = 12;
 constexpr int maiorPrecoDoPaoQuePassaEmDecimos = 26;
 constexpr const char* identificadorDoPao = "item.pao";
+// FE4-3: o Banco nunca abaixo de 250, e no fim do ano (dia 64) no máximo 50 abaixo do dia 1.
+constexpr int64_t menorBancoQuePassaEmDecimos = 2'500;
+constexpr int64_t maiorQuedaDoBancoNoAnoEmDecimos = 500;
+constexpr int diasDeUmAno = 64;
 
 struct LinhaDoRelatorio {
     int64_t dia = 1;  // o dia que acabou, contando do 1
@@ -58,6 +62,8 @@ struct ConferenciaDoTesteDeUmAno {
 };
 
 void conferirOsCriteriosDoDia(ConferenciaDoTesteDeUmAno& conferencia, const LinhaDoRelatorio& linha);
+// FE4-3: depois de 64 dias, o Banco do dia 64 não pode estar mais de 50 abaixo do dia 1.
+void conferirOBancoNoFimDoAno(ConferenciaDoTesteDeUmAno& conferencia, const std::vector<LinhaDoRelatorio>& linhas);
 
 // O resultado do --simular (regra 4.1).
 struct ResultadoDaSimulacaoSemTela {

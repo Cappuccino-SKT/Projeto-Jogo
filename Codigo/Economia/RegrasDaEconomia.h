@@ -68,6 +68,8 @@ struct RegrasDaEconomia {
     int gastoDaClasseEmPorcentoDaRenda = 80;  // o teto do gasto do dia (Classe Social)
     RegrasDoImposto imposto;
     RegrasDoEstabilizador estabilizador;
+    // FE4-1 e FE4-2: a verba da Coroa, fixa, entra de fora no Banco no dia 1 de cada estação.
+    int verbaDaCoroaPorEstacaoEmDecimos = 750;
     RegrasDosMultiplicadoresDoSalario multiplicadoresDoSalario;
     RegrasDasDecisoesDoJogador decisoesDoJogador;
     int diasDeAtrasoAteOsEmpregadosSairem = 16;  // uma estação (Fatia Vertical, 4.5)

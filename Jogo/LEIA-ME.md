@@ -469,3 +469,17 @@ Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) fora
 ### Rodada FE3: o ritmo do dinheiro do jogador (2026-10-19)
 
 O `multiplicador_do_preco` dos Móveis (`itens.csv`) foi de 100 para **140**, e o painel da construção do jogador ganhou a dica "ninguém mais vende o que você faz; mudar o preço reduz a venda". Medido com `jogo --simular 64 --semente N` (todas **PASSOU**): o jogador ganha **+3,4 por dia** na semente 1 (de 88,9 para 305,8) e **+4,4** na 2 (para 364,4), antes +0,45. O preço dos Móveis (Pão fica em 1,3 a 1,9) e a Felicidade (cerca de 58) quase não mudam. **Atenção:** o Banco perde o que o jogador ganha: termina o ano em 175 (semente 1) e 108 (semente 2), antes perto de 400, e não fecharia um segundo ano. Com 150 a semente 2 chegava a 45; por isso o valor ficou em 140 (o limite de cima da sugestão).
+
+### Rodada FE4: o dinheiro do Banco da Cidade (2026-10-19)
+
+A **verba da Coroa**: no dia 1 de cada estação entram de fora **75 moedas** no Banco (`verba_da_coroa_por_estacao_em_decimos`: 750 no `regras.json`). Medido com `--simular 64`: o Banco termina o ano em **475** (semente 1) e **408** (semente 2), nunca abaixo de 295 (antes da FE4: 175 e 108); o jogador continua com +3,4 e +4,4 por dia.
+
+O teste de 1 ano ficou mais exigente (FE4-3): agora **FALHA** se o Banco ficar abaixo de 250 em algum dia, ou se no dia 64 estiver mais de 50 abaixo do dia 1. **Depois de mexer na economia**, rode também os 2 anos à mão (cerca de 90 segundos):
+
+```
+.\build\Jogo\jogo.exe --simular 128 --semente 1
+```
+
+**Os 2 anos (semente 1, 2026-10-19):** PASSOU, mas com uma tendência a olhar: no ano 2 o Banco **sobe** de 475 para 867, e o dinheiro do jogador **cai** de 305 para 260. A verba fixa sobra quando o jogador deixa de lucrar; a causa da queda do jogador no ano 2 foi medida (abaixo).
+
+**Por que o jogador cai no ano 2 (medido, semente 1, por dia; registro temporário, não ficou no código):** só a Carpintaria vende e paga salário. Ano 1 → ano 2: venda de Móveis **22,7 → 17,2** (214 → 190 vendas; preço médio **6,8 → 5,8**); salários **18,3 → 17,5**; insumos (Tábuas e Tora) 1,2 → 0,9; horas de obra 0,56 e loja 0,38 iguais; recebido pelas obras 1,24 → 1,20. Saldo: **+3,4 → −0,9** por dia. Não é a Pedra (restam 202 Blocos no dia 128, e o jogador não comprou nada fora dos insumos), nem o salário (caiu junto) nem evento. O estoque de Móveis ficou em 16 a 19 o ano todo. A queda vem dos dias 81 a 112: o Pão fica escasso (92 → 43, preço de 1,3 → 2,4; Água baixa e a Febre do dia 85), a riqueza média cai de 14 para 10,5 e o dinheiro da classe civil de 145 para 110. Sobra menos para o gasto extra, a procura de Móveis cai (3,3 → 2,7 vendas/dia) e o preço local, que depende do estoque contra o alvo de 5 dias de consumo, cai para 4,3 (o do dia 1 era 7,1). Os custos do jogador (salários) são fixos e a receita não: com pouca procura, ele perde. Nos dias 113 a 128 a venda volta a 3,1/dia a 5,8, e o jogador já para de cair (+0,2/dia). **Decisão de design pendente (rodada, Opus):** o lucro do jogador deve aguentar uma crise de comida da vila? Se sim, como (piso para o preço dos Móveis, salário que acompanha a venda, ou aceitar que a crise dá prejuízo)?

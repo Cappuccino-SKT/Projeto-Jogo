@@ -45,6 +45,7 @@
   "gasto_da_classe_em_porcento_da_renda": 80,
   "imposto": { "taxa_em_porcento": 20, "parte_da_cidade_em_porcento": 100 },
   "estabilizador": { "ajuda_abaixo_de_dias_da_cesta": 3, "ajuda_ate_dias_da_cesta": 5, "teto_por_estacao_em_porcento_do_banco": 10 },
+  "verba_da_coroa_por_estacao_em_decimos": 750,
   "multiplicadores_do_salario": { "riqueza_minima_em_porcento": 80, "riqueza_maxima_em_porcento": 120, "dias_da_cesta_para_o_maximo": 10,
                                   "desemprego_minimo_em_porcento": 90, "desemprego_maximo_em_porcento": 110 },
   "dias_de_atraso_ate_os_empregados_sairem": 16,
