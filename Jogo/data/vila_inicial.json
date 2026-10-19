@@ -4,7 +4,7 @@
   "dinheiro_do_jogador": 1000,
   "dinheiro_inicial_por_civil": 120,
   "estoque_inicial": [
-    { "item": "item.pao", "dono": "cidade", "quantidade": 45 },
+    { "item": "item.pao", "dono": "cidade", "quantidade": 75 },
     { "item": "item.grao", "dono": "cidade", "quantidade": 32 },
     { "item": "item.agua", "dono": "cidade", "quantidade": 16 },
     { "item": "item.tora", "dono": "cidade", "quantidade": 16 },
@@ -20,7 +20,7 @@
     { "id": "construtor", "tipo": "construcao.construtor", "lote": 3, "dono": "cidade", "nivel": 1 },
     { "id": "carpintaria_do_jogador", "tipo": "construcao.carpinteiro", "lote": 11, "dono": "jogador", "nivel": 2,
       "ordens": [
-        { "tipo": "manter_estoque", "item": "item.moveis_madeira", "quantidade": 6 },
+        { "tipo": "manter_estoque", "item": "item.moveis_madeira", "quantidade": 20 },
         { "tipo": "manter_estoque", "item": "item.tabua", "quantidade": 12 }
       ] },
     { "id": "casa_1", "tipo": "construcao.casa", "lote": 2, "dono": "cidade", "nivel": 1 },

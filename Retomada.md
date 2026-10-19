@@ -3,9 +3,9 @@
 ## 1. Onde paramos
 
 - **Marcos 0 a 6:** prontos e no `main`.
-- **Marco 7** (a simulação sem tela de 1 ano): escrito na branch `codigo/marco-7-simulacao`, com a FL7 aplicada; o teste `jogo --simular 64 --semente 1` passa. Falta o teste do autor e a **rodada FE1** ([[Rodada Pendente]]).
+- **Marco 7** (a simulação sem tela de 1 ano): escrito na branch `codigo/marco-7-simulacao`, com a FL7 e a FE1 aplicadas; as sementes de 1 a 10 passam. Falta o teste do autor e o pull request.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
-- **Próximo passo:** o autor responde a FE1; aplicar no `vila_inicial.json` e conferir 10 sementes; depois, as fichas do marco 8 (a interface do jogador, as obras e o Mercado).
+- **Próximo passo:** as fichas do marco 8 (a interface do jogador, as obras e o Mercado).
 
 ## 2. Como trabalhamos
 
