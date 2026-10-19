@@ -223,6 +223,8 @@ O mesmo consumo previsto vale para o **Mercado Local** (o estoque-alvo do preço
 
 *Exemplo:* sem Tora, a Carpintaria passa 8 horas parada "sem Tora" com 2 empregados (1.600 ticks por hora no total): por hora, 2 Toras × 1.600 × 100 ÷ (4 × 800) = 100 centésimos (1 Tora); no dia, 8 Toras de demanda que faltou. O alvo da Tora sobe, e o Posto de Coleta escolhe a Tora no dia seguinte.
 
+**No fim do Outono** (rodada CL1), o alvo da Tora e do Grão cresce nos últimos 4 dias: regra 4.6 da [[Ficha Logica/Clima|ficha do Clima]].
+
 ### 10.2 A folga (FL7-5)
 
 **O problema:** com déficit 0, a nota da regra 4.3 continua positiva, então os Braçais nunca param. A Fazenda faz cerca de 31,6 Grãos por dia, e a vila gasta 8. O Grão e a Água enchem os 900 de matéria-prima por volta do dia 17, e a produção trava com "o estoque encheu". O Pão também sobe sem parar (15,8 feitos e 15 comidos por dia), e o preço local dele cairia para menos de 1,2, o que falha o teste de 1 ano.

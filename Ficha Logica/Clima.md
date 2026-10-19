@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-19, a primeira depois da fatia (fase A1 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]]). É a primeira com a **parte 10: Simulação de mesa**. Os pontos marcados com CL1 dependem da [[Rodada Pendente|rodada CL1]].
+> Ficha escrita em 2026-10-19, a primeira depois da fatia (fase A1 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]]). É a primeira com a **parte 10: Simulação de mesa**. Os pontos marcados com CL1 vêm da **rodada CL1**, aplicada em 2026-10-19, toda com "seguir sugestão".
 
 # Ficha Lógica: Clima e Estações
 
@@ -97,8 +97,8 @@ No save, entra uma seção nova, `clima`, com os três campos e o gerador (ficha
 
 ### 4.2 Os efeitos do clima no dia
 
-1. **Tempestade, trabalho ao ar livre:** nas construções Braçais (Fazenda e Posto de Coleta), o lote do ciclo é multiplicado por 50%, **por cima** do fator da estação e dos eventos (regra 4.6).
-2. **Tempestade, Período Livre em casa:** no período Livre, o **Passear** e o **Comprar** valem 0. **[Proposta, CL1-1]** quem está na rua volta para casa, e o Passear ganha o destino "a própria casa" até o clima mudar. O Comprar só é a caminhada até o Mercado (a cesta já sai do estoque à 0h), então perdê-lo não muda o dinheiro.
+1. **Tempestade, trabalho ao ar livre:** nas construções Braçais (Fazenda e Posto de Coleta), o lote do ciclo é multiplicado por 50%, **por cima** do fator da estação e dos eventos (regra 4.7).
+2. **Tempestade, Período Livre em casa:** no período Livre, o **Passear** e o **Comprar** valem 0. **(CL1-1)** Quem está na rua volta para casa: o Passear ganha o destino "a própria casa" até o clima mudar, e o NPC fica lá dentro. Nenhuma ação nova. O Comprar só é a caminhada até o Mercado (a cesta já sai do estoque à 0h), então perdê-lo não muda o dinheiro.
 3. **Neve:** a lenha do dia × 150% (regra 4.3).
 4. **Calor forte:** −2 de Felicidade **hoje**, no fator dos eventos (regra 4.4).
 5. **Chuva, Nublado, Limpo, Névoa:** nada na vila. A névoa só mexe no crime e no combate (parte 9).
@@ -134,12 +134,23 @@ Um evento novo no `eventos.json`, que já cuida do sorteio, do limite de 2 negat
   "efeitos": [ { "producao_do_inverno_dividida_em_porcento": 150 }, { "lenha_em_porcento": 200 } ] }
 ```
 
-- **[Proposta, CL1-3]** 25% no dia 1 de cada Inverno, com cooldown de 64 dias: o inverno seguinte nunca é rigoroso, e a média fica em 1 a cada 5 anos (1 ano de pausa + 4 anos de espera, em média).
-- **Produção do inverno ÷ 1,5:** o percentual de inverno de cada grupo é dividido por 1,5, arredondado para baixo. **[Proposta, CL1-3]** só a Fazenda e os animais: Fazenda 25% → **16%**; animais 75% → 50%. A madeira e os minerais ficam como estão.
+- **[Proposta]** 25% no dia 1 de cada Inverno, com cooldown de 64 dias: o inverno seguinte nunca é rigoroso, e a média fica em 1 a cada 5 anos (1 ano de pausa + 4 anos de espera, em média).
+- **Produção do inverno ÷ 1,5:** o percentual de inverno de cada grupo é dividido por 1,5, arredondado para baixo. **(CL1-3)** Só a Fazenda e os animais: Fazenda 25% → **16%**; animais 75% → 50%. A madeira e os minerais ficam como estão.
 - **Lenha × 2** (regra 4.3).
 - A mortalidade dos velhos fica para a [[Sistema de População/Descrição|População]] (fase A3).
 
-### 4.6 A ordem dos multiplicadores na produção Braçal
+### 4.6 Estocar para o inverno (CL1-2 e CL1-3)
+
+Nos **últimos 4 dias do Outono** (dias 13 a 16), na escolha das receitas (ficha da [[Ficha Logica/Producao|Produção]], regra 4.3 e parte 10), o estoque-alvo de dois itens cresce:
+
+1. **Tora:** soma a lenha de 5 dias de inverno comum: moradores × 25 × 5 ÷ 100 (15 Civis: 18 Toras, arredondado para baixo).
+2. **Grão:** soma 5 dias do consumo previsto do próprio Grão (a vila gasta cerca de 8 por dia: +40).
+
+- Com o alvo maior, a folga (125% do alvo) sobe junto, e o Posto e a Fazenda trabalham mais. A Fazenda, a 150% no Outono, faz cerca de 47 Grãos num dia: 1 dia já cobre os 40 a mais. Mesmo com a Geada precoce (dias 13 e 14), sobram 2 dias.
+- No dia 1 do Inverno, o alvo volta ao normal. O estoque fica acima de 125%, e a construção folga até cair abaixo do alvo (a regra da folga como está).
+- O **Mercado Local** usa o mesmo alvo: nos 4 dias, o preço da Tora e do Grão sobe um pouco (o estoque fica abaixo do alvo maior). É o "estocar para o inverno" aparecendo no preço.
+
+### 4.7 A ordem dos multiplicadores na produção Braçal
 
 O lote de um ciclo Braçal (ficha da [[Ficha Logica/Producao|Produção]], regra 4.2, passo 1) passa a ser:
 
@@ -204,7 +215,9 @@ O lote de um ciclo Braçal (ficha da [[Ficha Logica/Producao|Produção]], regra
 | Tempestade, um NPC passeando às 19h | Volta para casa |
 | Calor forte | Fator dos eventos −2 |
 | 100 Invernos sorteados (só o rigoroso) | Cerca de 1 a cada 5 anos (entre 12 e 28), nunca dois seguidos |
-| Teste de 1 ano, 10 sementes | Continua passando (ver a parte 10 e a CL1-3) |
+| Dia 13 do Outono, 15 Civis, consumo de Grão 8 por dia | Alvo da Tora + 18; alvo do Grão + 40 |
+| Dia 1 do Inverno | Os alvos voltam ao normal |
+| Teste de 1 ano, 10 sementes | Continua passando, com e sem Inverno rigoroso |
 
 ## 9. Fora desta versão
 
@@ -248,7 +261,7 @@ Hipóteses tiradas das fichas:
 ### 10.3 Inverno rigoroso
 
 - **Lenha:** 375 × 2 = 750 por dia (7 a 8 Toras), 1.124 nos dias de neve: 11 × 750 + 5 × 1.124 = 13.870: cerca de **139 Toras** no inverno (8,7 por dia).
-- **Tora:** com a madeira em 75% (proposta CL1-3), o Posto faz 23 num dia de Tora. A demanda é 8,7 (lenha) + 6 (Carpintaria) = 14,7 por dia: Tora em 64% dos dias e Água em 13%. **Cabe.**
+- **Tora:** com a madeira em 75% (CL1-3), o Posto faz 23 num dia de Tora. A demanda é 8,7 (lenha) + 6 (Carpintaria) = 14,7 por dia: Tora em 64% dos dias e Água em 13%. **Cabe.**
   - Se a madeira também caísse para 50% (16 por dia de Tora): Tora em 92% dos dias + Água 13% = **105%. Não cabe**: falta lenha ou Água quase todo dia. Por isso a proposta deixa a madeira de fora.
 - **Comida:** a Fazenda cai de 8 para cerca de 5 Grãos por dia: cerca de **46 Grãos a menos** no inverno. No teste, o inverno comum termina com Grão 32 e Pão 83. No rigoroso, o Grão acaba perto do dia 60; a Padaria para, e os 15 Civis comem o Pão do estoque nos últimos 4 a 5 dias. O inverno termina com cerca de **20 Pães**, acima do limite da fome (10% do alvo de 75 = 7 Pães).
   - Na semente 1, **passa raspando**. Com um Ratos no celeiro no inverno, ou uma Seca no verão que deixe menos Grão no outono, a fome chega e o teste de 1 ano dá **FALHOU** (fome de 4 dias seguidos). A IA da produção não guarda comida a mais no outono. É a pergunta CL1-3.
@@ -277,8 +290,8 @@ Hipóteses tiradas das fichas:
 | 0 moradores | 0 de lenha. Nada a dividir |
 | Carregar um save no meio do inverno | A dívida e o clima voltam do save; o gerador continua do mesmo ponto |
 
-### 10.6 O que achou (vira pergunta na rodada CL1)
+### 10.6 O que achou e como foi resolvido (rodada CL1)
 
-1. **CL1-1:** o que o NPC faz em casa na tempestade (a IA não tem "ficar em casa").
-2. **CL1-2:** o primeiro dia frio do inverno pode faltar lenha, porque a previsão do Posto só olha para trás.
-3. **CL1-3:** o Inverno rigoroso: o quanto ele corta e se o teste de 1 ano deve aguentar a fome que ele causa.
+1. **CL1-1:** a IA não tinha "ficar em casa" na tempestade → o Passear vai para a própria casa (regra 4.2).
+2. **CL1-2:** faltava lenha no primeiro dia frio → o Posto estoca Tora nos últimos 4 dias do Outono (regra 4.6). Refeita a parte 10.2: entrando no inverno com cerca de 30 Toras ou mais em vez de 10, o dia 50 tira as 6 Toras da neve e não falta.
+3. **CL1-3:** o Inverno rigoroso corta só a comida (Fazenda 16%, animais 50%), e a vila estoca 40 Grãos a mais no Outono (regra 4.6). Refeita a parte 10.3: o inverno rigoroso começa com cerca de 100 Grãos, perde cerca de 77 e termina com cerca de 20 Grãos e o Pão do estoque: sem fome, mesmo com um Ratos no celeiro (−10% do Grão). São estimativas de mesa: o teste de 1 ano confirma quando for programado.

@@ -94,7 +94,8 @@ O clima é sorteado **1 vez por dia por região** (6 sorteios por dia, baratos e
 
 - São **eventos ocasionais** da categoria Clima, com a chance base e os modificadores no JSON de eventos. O Narrador continua regulando os que afetam o jogador ([[Sistema de Eventos/Descrição|Eventos]]).
 - O inverno rigoroso tem escopo **Mundo**; os outros, escopo **Cidade/Mapa Local** ou região.
-- "Efeitos do inverno × 1,5" multiplica as perdas: a Fazenda temperada cai de 25% para cerca de 17%, e o multiplicador de viagem do inverno sobe 50%.
+- "Efeitos do inverno × 1,5" divide por 1,5 o percentual de inverno **só da comida** (Fazenda e animais): a Fazenda temperada cai de 25% para 16%; a madeira e os minerais não mudam, para a lenha em dobro caber (rodada CL1-3). O multiplicador de viagem do inverno sobe 50%.
+- **Estocar para o inverno:** nos últimos 4 dias do Outono, a vila aumenta o estoque-alvo da Tora e do Grão (rodada CL1-2; regra 4.6 da [[Ficha Logica/Clima|ficha do Clima]]).
 
 ## Inverno e aquecimento
 
