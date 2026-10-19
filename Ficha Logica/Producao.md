@@ -201,3 +201,49 @@ Em `Codigo/Producao/`:
 - A produção em LOD 2 (por estação).
 - As receitas de Ricos e as Funções de Especialista e Mago de Ofício.
 - A animação de trabalhar (o boneco parado no campo, por enquanto).
+
+---
+
+## 10. Marco 7: a previsão do consumo e a folga
+
+> Parte escrita em 2026-10-18 para o **marco 7**, com os 2 problemas que os 30 dias sem tela do marco 6 mostraram (a Tora que acaba no dia 12 e o estoque de matéria-prima cheio no dia 17). Os pontos marcados com FL7 estão na **rodada FL7** ([[Retomada]], seção 4), ainda sem resposta: esta parte já usa as sugestões, marcadas como [Proposta].
+
+### 10.1 A previsão do consumo, medida [Proposta] (FL7-4)
+
+**O problema:** no marco 6, o estoque-alvo da regra 4.3 conta só os insumos das receitas **atuais**. A Carpintaria do jogador passa a maior parte do tempo nos Móveis (que gastam Tábua), então a previsão de Tora quase sempre é 0, o Posto de Coleta fica na Água, e a Tora acaba.
+
+**A regra nova:** o consumo previsto de cada item é a **média dos 5 últimos dias** do que a vila **gastou ou quis gastar**:
+
+1. **Gastou:** o que saiu do inventário para a cesta mínima, o gasto extra e os insumos dos ciclos.
+2. **Quis gastar e faltou:** em cada hora em que uma construção, com gente trabalhando, ficou parada por falta de um insumo, conta a parte de um ciclo daquela hora: quantidade do insumo × ticks trabalhados na hora × 100 ÷ (horas da receita × 800), em centésimos.
+3. **A fila do jogador:** quando nenhuma ordem passa, mas alguma **quer produzir** e só falta insumo, a construção fica parada "sem Tora" (e não "sem ordem"), e cada ordem que quer produzir conta, no passo 2, os insumos que faltam a ela.
+
+O mesmo consumo previsto vale para o **Mercado Local** (o estoque-alvo do preço, ficha da [[Ficha Logica/Economia|Economia]], regra 10.4). No primeiro dia, os 5 dias guardados são a previsão do marco 6.
+
+*Exemplo:* sem Tora, a Carpintaria passa 8 horas parada "sem Tora" com 2 empregados (1.600 ticks por hora no total): por hora, 2 Toras × 1.600 × 100 ÷ (4 × 800) = 100 centésimos (1 Tora); no dia, 8 Toras de demanda que faltou. O alvo da Tora sobe, e o Posto de Coleta escolhe a Tora no dia seguinte.
+
+### 10.2 A folga [Proposta] (FL7-5)
+
+**O problema:** com déficit 0, a nota da regra 4.3 continua positiva, então os Braçais nunca param. A Fazenda faz cerca de 31,6 Grãos por dia, e a vila gasta 8. O Grão e a Água enchem os 900 de matéria-prima por volta do dia 17, e a produção trava com "o estoque encheu". O Pão também sobe sem parar (15,8 feitos e 15 comidos por dia), e o preço local dele cairia para menos de 1,2, o que falha o teste de 1 ano.
+
+**A regra nova**, na escolha das receitas da cidade (regra 4.3, passo 1):
+
+1. Uma receita **não é candidata** se o produto já tem **125% do estoque-alvo** ou mais (6 dias e 6 horas de consumo).
+2. Depois de sair, ela só volta a ser candidata quando o estoque cai **abaixo do alvo** (a histerese, para não ligar e desligar todo dia).
+3. Sem nenhuma candidata, a construção fica **de folga** no dia seguinte.
+4. A construção do jogador sem nenhuma ordem que queira produzir, na meia-noite, também fica de folga.
+5. **De folga, os empregados não vão trabalhar**: passeiam no Período de Trabalho, como os desempregados, e **não recebem** (o salário é pelas horas trabalhadas).
+
+*Exemplo:* o alvo do Pão é 75 (5 dias de 15). Com 94 Pães, o Cozinheiro folga; com 79, continua de folga (está acima do alvo); com 64, volta. O estoque de Pão fica entre cerca de 60 e 95, e o preço local, entre cerca de 1,3 e 2,0. A Fazenda, com alvo de 40 Grãos, trabalha cerca de 1 dia em cada 4.
+
+### 10.3 Testes
+
+| Entrada | Resultado esperado |
+|---|---|
+| A Carpintaria 8 horas parada "sem Tora" com 2 empregados | 8 Toras de demanda que faltou no dia |
+| Tora com 0 de estoque e demanda medida de 8 por dia | O Posto de Coleta escolhe a Tora |
+| A fila do jogador sem Tora nem Tábua | Parada "sem Tábua" (a primeira ordem que quer produzir), e não "sem ordem" |
+| Pão com 94 (alvo 75) | O Cozinheiro fica de folga; os 2 empregados passeiam e não recebem |
+| Pão com 79, depois de folgar | Continua de folga |
+| Pão com 64 | Volta a produzir |
+| 64 dias sem tela | A matéria-prima nunca enche; o preço do Pão fica entre 1,2 e 2,6 |
