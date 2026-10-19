@@ -25,7 +25,7 @@ São os sistemas que mais se ligam ao que já existe e menos dependem do que fal
 | # | Ficha | Por que agora | Precisa de |
 |---|---|---|---|
 | A1 | **[[Ficha Logica/Clima\|Clima e Estações]]** (escrita em 2026-10-19; rodada CL1) | O Tempo já conta as estações; o clima mexe na Produção, nos Recursos (colheita) e na Felicidade, que já têm ficha | Tempo, Produção, Recursos, Felicidade |
-| A2 | **Trabalho e Propriedade** (completo) | A Economia já usa parte dele (salário e emprego); falta contratar, demitir, dono de lote e aluguel | Economia, Produção, NPC |
+| A2 | **[[Ficha Logica/Trabalho\|Trabalho e Propriedade]]** (escrita em 2026-10-19; rodada TP1) | A Economia já usa parte dele (salário e emprego); falta contratar, demitir, dono de lote e aluguel | Economia, Produção, NPC |
 | A3 | **População** | Nascer, morrer, migrar e onde morar: a vila deixa de ter 15 pessoas fixas | Construção, Trabalho (A2), Clima (A1) |
 | A4 | **Classe Social** | Moradia, salário e consumo por classe; liga a População ao dinheiro | População (A3), Trabalho (A2), Felicidade |
 | A5 | **Cidade** | Níveis da cidade e as condições para subir; fecha a vila como um todo | População (A3), Classe (A4), Construção |

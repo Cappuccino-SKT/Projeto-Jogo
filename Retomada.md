@@ -5,7 +5,7 @@
 - **Marcos 0 a 7:** prontos e no `main`.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
 - **Marcos 8 e 9** (interface; salvar e carregar): prontos, testados e no `main`. A fatia vertical está completa. O que cada um trouxe e como testar: `Jogo/LEIA-ME.md`.
-- **Próximo passo:** as rodadas FE3, FE4 e FE5 estão aplicadas (o jogador ganha +3,4 a +4,4 por dia; a verba da Coroa segura o Banco; a crise de comida dá prejuízo ao jogador de propósito). Fase nova: só fichas lógicas, sem código, na ordem do [[Ficha Logica/Plano das Fichas|Plano das Fichas]], cada uma com a Simulação de mesa. A ficha do [[Ficha Logica/Clima|Clima]] está pronta (rodada CL1 aplicada). Próxima: Trabalho e Propriedade (A2).
+- **Próximo passo:** as rodadas FE3, FE4 e FE5 estão aplicadas (o jogador ganha +3,4 a +4,4 por dia; a verba da Coroa segura o Banco; a crise de comida dá prejuízo ao jogador de propósito). Fase nova: só fichas lógicas, sem código, na ordem do [[Ficha Logica/Plano das Fichas|Plano das Fichas]], cada uma com a Simulação de mesa. Prontas: [[Ficha Logica/Clima|Clima]] (A1). Escrita: [[Ficha Logica/Trabalho|Trabalho e Propriedade]] (A2); a **rodada TP1** espera as respostas. Depois: População (A3).
 
 ## 2. Como trabalhamos
 
