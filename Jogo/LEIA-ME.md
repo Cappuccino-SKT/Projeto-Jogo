@@ -373,7 +373,7 @@ Se o destino não tem caminho (um clique no meio do lago, por exemplo), o NPC va
 | 256 dias (4 anos) | O dinheiro vai do Banco para o jogador, e o Banco fica quase vazio por volta do dia 190 |
 | Tempo (com depuração) | 64 dias em cerca de 45 segundos (36 microssegundos por tick); com 500 NPCs, 0,95 milissegundo por tick, abaixo da meta de 3 |
 
-Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) estão na **rodada FE1** (Retomada, seção 4).
+Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) estão na **rodada FE1** ([[Rodada Pendente]]).
 
 **O Tracy** (opcional, desligado): para ver quanto tempo cada parte do tick gasta, configure com `cmake --preset padrao -DUSAR_TRACY=ON`, compile, abra o programa do Tracy (baixado à parte, do site do autor do Tracy) e rode o jogo. Para desligar: `cmake --preset padrao -DUSAR_TRACY=OFF`.
 

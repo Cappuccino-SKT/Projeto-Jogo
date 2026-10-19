@@ -2,28 +2,29 @@
 
 ## Antes de tudo
 
-1. Ler a [[Retomada]]: onde paramos, como trabalhamos e as regras do código. É curta de propósito.
+1. Ler a [[Retomada]] (onde paramos, como trabalhamos, as regras do código).
 2. Rodar `git fetch` e conferir se o último pull request já está no `main`.
-3. Para programar, ler a [[Ficha Logica/Fatia Vertical|Ficha Lógica]], o marco da vez e a ficha de cada sistema que ele usa.
-4. O [[Estado do Projeto]] tem a situação geral e os números-chave. Não ler a pasta `Documentos/Histórico/` sem necessidade.
+3. Para programar, ler só a ficha do marco da vez e as partes das fichas que ele usa (procurar com grep e ler o trecho, não o arquivo inteiro).
+4. Não ler o [[Estado do Projeto]], a [[Rodada Pendente]] nem a pasta `Documentos/` sem necessidade.
+
+## Economia de tokens (pedido do autor, 2026-10-19)
+
+As sessões estavam caras. Obrigações:
+
+- **Fazer só o que é importante para o desenvolvimento.** O que não ajuda o marco ou a rodada da vez fica para depois, sem perguntar.
+- **Ler pouco:** grep e trechos, nunca o mesmo arquivo duas vezes; nada de varrer pastas ou documentos "para garantir".
+- **Comandos com saída curta:** filtrar com `tail`, `grep` ou `head`; compilar e testar só o necessário, e o `ctest` completo só no fim do marco.
+- **Sem experimentos extras** (várias sementes, anos a mais, builds paralelos) a não ser para responder uma dúvida que impeça o trabalho; se for grande, perguntar antes.
+- **Sem subagentes.**
+- **Documentar uma vez:** cada fato num lugar só (a ficha ou o `Jogo/LEIA-ME.md`); a Retomada só ganha uma linha de estado, e o que já foi resolvido sai dela.
+- **Respostas curtas:** o resumo final em poucas linhas; sem repetir o que o autor já sabe.
+- **Uma sessão nova por etapa** (uma rodada ou um marco): uma conversa longa reenvia todo o histórico a cada mensagem.
 
 ## Regras
 
 - Sempre em **português do Brasil**, em linguagem simples: o autor tem pouca experiência em C++.
-- **Documentação primeiro, código marco a marco** (rodada FT2-1). Um problema de design achado no código vira pergunta numa rodada, e os documentos são atualizados.
-- **Nomes no código:** português sem acento e **sempre descritivos**. O nome diz o motivo da variável, da função ou da classe; nada abstrato demais (pedido do autor, FT2-4).
-- **Pastas:** `Documentos/` (o design) → `Ficha Logica/` (o design virado lógica de programação) → `Codigo/` (as regras em C++, sem janela) → `Jogo/` (o programa: janela, desenho, entrada). Um sistema vira ficha pouco antes do marco que o usa, não todos de uma vez.
+- **Documentação primeiro, código marco a marco** (FT2-1). Um problema de design achado no código vira pergunta numa rodada, e os documentos são atualizados.
+- **Nomes no código:** português sem acento e **sempre descritivos** (FT2-4).
+- **Pastas:** `Documentos/` → `Ficha Logica/` → `Codigo/` (sem janela) → `Jogo/` (programa). Um sistema vira ficha pouco antes do marco que o usa.
 - Cada rodada ou marco vira **uma branch e um pull request**.
-- Manter a Retomada e o Estado **enxutos** (pedido do autor): o detalhe fica no documento de cada sistema, e o que já foi resolvido não volta para os arquivos de contexto.
-
-## Padrão das perguntas
-
-Pedido do autor: perguntas e sugestões **detalhadas, concretas e completas**, nunca abstratas. Cada pergunta traz:
-
-- contexto;
-- uma pergunta concreta, com números e um exemplo de jogo;
-- opções com prós e contras;
-- uma sugestão completa e pronta para usar;
-- os conflitos com decisões anteriores.
-
-O detalhe está na seção 2 da [[Retomada]].
+- Perguntas **concretas e completas**, no padrão da seção 2 da [[Retomada]], escritas na [[Rodada Pendente]].

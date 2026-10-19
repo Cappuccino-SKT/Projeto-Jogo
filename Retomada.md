@@ -1,162 +1,41 @@
-> Ponto de partida de cada sessão. Curto de propósito: o detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]), e a situação geral no [[Estado do Projeto]]. Atualizado em 2026-10-19.
+> Ponto de partida de cada sessão. Curta de propósito: só o que muda o trabalho de hoje. O detalhe fica nos documentos e no Git. Atualizado em 2026-10-19.
 
 ## 1. Onde paramos
 
-- **Design completo:** todos os sistemas estão escritos, a revisão completa terminou, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta.
-- **Rodada FT2 (2026-10-17):** o autor **liberou o código, marco a marco**.
-- **Pastas reorganizadas (2026-10-17):** `Documentos/`, `Ficha Logica/`, `Codigo/` e `Jogo/` (seção 3).
-- **Fichas do marco 1 (2026-10-17):** [[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]] (tiles e camadas) escritas, com a **rodada FL1 aplicada**. O marco 0 não tem ficha.
-- **Marco 0 (2026-10-17):** na branch `codigo/marco-0-ambiente` (feita em cima da `docs/fichas-marco-1`). No primeiro teste do autor, a janela de 1600 × 900 não cabia na tela dele (1600 × 900, com 1600 × 860 livres) e o X ficou escondido; corrigido e **confirmado pelo autor** (seção 3).
-- **Marco 1 (2026-10-17):** escrito na branch `codigo/marco-1-relogio-e-mapa` (feita em cima da `codigo/marco-0-ambiente`), em 5 passos; **confirmado pelo autor** (seção 3).
-- **Ficha da Interface e marco 2 (2026-10-18):** na branch `codigo/marco-2-camera-e-entrada` (feita em cima da `codigo/marco-1-relogio-e-mapa`). A [[Ficha Logica/Interface|ficha da Interface]] (câmera, zoom e teclas) abriu a **rodada FL2** (seção 4), e o código já segue as sugestões dela. O marco 2 foi **testado e confirmado pelo autor**, e a **FL2 foi aplicada** (2026-10-18).
-- **Arte provisória dos personagens (2026-10-18):** o autor baixou a versão grátis do pacote Mana Seed (pasta `Assents Temporarios/`, na raiz), só para os testes da fatia; a arte definitiva será própria. O repositório no GitHub é **público**, e o pacote proíbe, em geral, redistribuir os arquivos: por isso a pasta fica **fora do Git** (`.gitignore`). As folhas têm quadros de 64 × 64, e não o boneco de 16 × 24 da Arquitetura: isso é a pergunta FL4-4.
-- **Fichas do marco 3 (2026-10-18):** [[Ficha Logica/Itens|Itens]] (com a ordem de leitura dos dados e o `--validar`), [[Ficha Logica/Recursos|Recursos]] e [[Ficha Logica/Receitas|Receitas]] (com o preço base), na branch `docs/fichas-marco-3` (feita em cima da `codigo/marco-2-camera-e-entrada`, para levar ao `main` os dois commits do marco 2 que ficaram de fora). A **rodada FL3** foi aplicada (2026-10-18).
-- **Marco 3 (2026-10-18):** na branch `codigo/marco-3-dados` (feita do `main`, que já tem as fichas do marco 3); **confirmado pelo autor** (seção 3).
-- **Fichas do marco 4 (2026-10-18):** a [[Ficha Logica/NPC|ficha do NPC]] (posição, movimento e o desenho do boneco) e a busca de caminho na [[Ficha Logica/Mapa|ficha do Mapa]] (regra 4.4), na branch `docs/fichas-marco-4` (feita em cima da `codigo/marco-3-dados`). A **rodada FL4** foi aplicada (2026-10-18), toda com "seguir sugestão".
-- **Marco 4 (2026-10-18):** escrito na branch `codigo/marco-4-npc-andando` (feita do `main`, que já tem as fichas do marco 4); **confirmado pelo autor** (seção 3).
-- **Ficha do marco 5 (2026-10-18):** a [[Ficha Logica/IA|ficha da IA]] (a vila inicial, a rotina e a Utilidade), na branch `docs/fichas-marco-5` (feita em cima da `codigo/marco-4-npc-andando`). A **rodada FL5** foi aplicada (2026-10-18), toda com "seguir sugestão".
-- **Arte (2026-10-18):** o autor testou gerar a arte com o Gemini e **abandonou a ideia**; ele vai **desenhar à mão, no Pixelorama**, com a paleta **Resurrect 64** (mais algumas cores, se precisar). O [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] junta todos os critérios, na branch `docs/guia-da-arte` (feita em cima da `codigo/marco-5-rotina`), e abriu a **rodada FA1**, aplicada em 2026-10-18, toda com "seguir sugestão". Logo depois, o autor decidiu **não usar nenhuma arte por enquanto**: o jogo fica só com a arte de teste feita pelo assistente (o terreno de quadrados, o boneco de teste e os retângulos das construções). O guia fica pronto para quando o desenho voltar.
-- **Marco 5 (2026-10-18):** escrito na branch `codigo/marco-5-rotina` (feita do `main`, que já tem a ficha do marco 5); **confirmado pelo autor** (seção 3).
-- **Fichas do marco 6 (2026-10-18):** a [[Ficha Logica/Producao|Produção]], o [[Ficha Logica/Inventario|Inventário]], a [[Ficha Logica/Economia|Economia]] (consumo e salários) e a [[Ficha Logica/Construcao|Construção]], na branch `docs/fichas-marco-6` (feita em cima da `docs/guia-da-arte`). A **rodada FL6** foi aplicada (2026-10-18), toda com "seguir sugestão".
-- **Marco 6 (2026-10-18):** escrito na branch `codigo/marco-6-producao`, com a FA1 e a FL6 aplicadas, e já mesclado no `main`; o autor mandou seguir (seção 3).
-- **Fichas do marco 7 (2026-10-18):** a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], e as fichas da [[Ficha Logica/Felicidade|Felicidade]], dos [[Ficha Logica/Eventos|Eventos]] e da [[Ficha Logica/Simulacao|Simulação sem tela]], na branch `docs/fichas-marco-7` (feita do `main`, já mesclada). A **rodada FL7** foi aplicada (2026-10-18), toda com "seguir sugestão".
-- **Marco 7 (2026-10-19):** escrito na branch `codigo/marco-7-simulacao` (feita do `main`), com a FL7 aplicada; o teste de 1 ano **passa** com a semente 1. Os testes com outras sementes e com 4 anos mostraram 2 problemas de equilíbrio: a **rodada FE1** (seção 4).
-- **Próximo passo:** o autor responde a FE1 e testa o marco 7 (o que olhar está no `Jogo/LEIA-ME.md`); depois, aplicar a FE1 e escrever as fichas do marco 8.
-- **Ao retomar:** rodar `git fetch` e conferir se os pull requests foram mesclados no `main`. Tudo até as fichas do marco 7 já entrou no `main`; falta o `codigo/marco-7-simulacao`.
+- **Marcos 0 a 6:** prontos e no `main`.
+- **Marco 7** (a simulação sem tela de 1 ano): escrito na branch `codigo/marco-7-simulacao`, com a FL7 aplicada; o teste `jogo --simular 64 --semente 1` passa. Falta o teste do autor e a **rodada FE1** ([[Rodada Pendente]]).
+- **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
+- **Próximo passo:** o autor responde a FE1; aplicar no `vila_inicial.json` e conferir 10 sementes; depois, as fichas do marco 8 (a interface do jogador, as obras e o Mercado).
 
 ## 2. Como trabalhamos
 
-- **Idioma e tom:** português do Brasil, em linguagem simples.
-- **Rodadas de perguntas** quando há decisão a tomar:
-  - códigos (FT2-1, FT2-2...); o autor responde em `C:\Users\Felipe\Desktop\Respostas.txt` (anexado com @);
-  - "Seguir sugestão" aceita a proposta; a ideia própria do autor sempre prevalece;
-  - antes de aplicar, conferir se o arquivo é mesmo da rodada atual.
-- **Padrão de cada pergunta** (pedido do autor). Nada abstrato, como "Tom?" ou "Equilíbrio?" soltos.
-  1. **Contexto:** o que já está decidido e o que a pergunta destrava.
-  2. **Pergunta concreta:** com números, nomes e um exemplo de situação de jogo.
-  3. **Opções:** de 2 a 4, com o que cada uma ganha e perde.
-  4. **Sugestão completa e pronta para usar:** valores iniciais, exemplo, impacto nos outros sistemas, custo e o que fica para testar.
-  5. **Conflitos:** o que bate com decisões anteriores, e a saída.
-- **Marcações nos documentos:**
-  - sem marca: decisão do autor;
-  - **[Proposta]**: sugestão ainda não decidida;
-  - **[Em aberto]**: pergunta que precisa de decisão;
-  - **[Refinar depois]**: ideia aceita, com detalhes para depois.
+- Português do Brasil, linguagem simples; o autor tem pouca experiência em C++.
+- **Rodadas de perguntas:** códigos (FE1-1...), escritas em [[Rodada Pendente]]; o autor responde em `C:\Users\Felipe\Desktop\Respostas.txt` (anexado com @). "Seguir sugestão" aceita; a ideia do autor prevalece. Quando um "seguir sugestão" deixa algo vago, o documento detalha com valores marcados [Proposta].
+- **Cada pergunta traz:** contexto; pergunta concreta com números e um exemplo de jogo; 2 a 4 opções com o que ganham e perdem; uma sugestão completa; os conflitos com decisões anteriores.
+- **Marcações:** sem marca = decisão do autor; [Proposta]; [Em aberto]; [Refinar depois].
+- **Git:** cada rodada ou marco = uma branch e um pull request, aberto pelo autor pelo link `https://github.com/FelipeSKT/Projeto-Jogo/pull/new/NOME-DA-BRANCH`. Se o anterior não foi mesclado, a branch nova sai dele.
 
-  Quando um "seguir sugestão" deixa algo vago, o documento detalha com valores marcados como [Proposta].
-- **Git:**
-  - cada rodada ou marco é uma branch e um pull request;
-  - sem o `gh`, o autor abre o pull request pelo link `https://github.com/FelipeSKT/Projeto-Jogo/pull/new/NOME-DA-BRANCH`;
-  - se o pull request anterior ainda não foi mesclado, a branch nova sai da anterior, e o autor é avisado da ordem para aceitar.
-- **Formato dos documentos:**
-  - um por sistema (`Sistema de X/Descrição.md`), com legenda, descrição, seções, Parte técnica, Ligação com outros sistemas e Perguntas em aberto;
-  - sem seção de "atualizações recentes": o histórico fica no Git.
-- **Preferências do autor:**
-  - interface personalizável (ele joga em 1600 × 900, que é o tamanho do monitor dele: só 1600 × 860 ficam livres acima da barra de tarefas);
-  - fontes legíveis;
-  - arte toda à mão (por enquanto, só a arte de teste do assistente, decisão de 2026-10-18);
-  - só teclado e mouse;
-  - "por quê?" em tudo;
-  - a simulação vem primeiro, e o evento explica.
+## 3. Código
 
-## 3. Código (rodada FT2)
+- **Pastas:** `Documentos/` (design) → `Ficha Logica/` (a lógica de cada sistema, escrita pouco antes do marco) → `Codigo/` (as regras em C++, nunca abre janela) → `Jogo/` (janela, desenho, `data/`, `assets/`).
+- **Marcos:** de 0 a 9, na parte 7 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]. O que cada marco trouxe e como testar: `Jogo/LEIA-ME.md`.
+- **Nomes:** português sem acento e sempre descritivos (`horasTrabalhadasNoCiclo`, não `h`).
+- **Ferramentas:** g++ 15.2 (MinGW), CMake (preset `padrao`, Debug, pasta `build/`), Ninja, Python 3.11. Bibliotecas pelo `FetchContent` com versão e `URL_HASH` fixos: SDL3, nlohmann/json, stb, EnTT 3.16; glad em `Jogo/externo/`; Tracy só com `-DUSAR_TRACY=ON`; Dear ImGui no marco 8.
+- **Testes:** `ctest --test-dir build` (cerca de 1 min e meio: o teste de 1 ano leva 45 s).
 
-- **Pastas (organização de 2026-10-17):**
-  - `Documentos/`: todo o design (os sistemas, o Glossário, o índice e o `Histórico/`);
-  - `Ficha Logica/`: cada sistema virado lógica de programação (dados, regras passo a passo, testes). O modelo está na [[Ficha Logica/Descrição|Ficha Lógica]]. Um sistema é convertido **pouco antes do marco que o usa**, não todos de uma vez;
-  - `Codigo/`: as regras em C++ (tempo, economia, produção, NPCs). **Nunca abre janela nem desenha**, para o teste sem tela rodar;
-  - `Jogo/`: o programa de verdade (janela, desenho, mouse e teclado), que chama o `Codigo/`. Os dados (`data/`) e a arte (`assets/`) ficam aqui;
-  - na raiz: `CLAUDE.md`, esta Retomada, o Estado e o `CMakeLists.txt` principal. A pasta `build/` (o que o compilador gera) fica fora do Git.
-- **Marcos:** de 0 a 9, na ficha (parte 7). Cada marco tem uma branch própria (`codigo/marco-N-nome`) e um pull request.
-- **Jeito de trabalhar (FT2-3):**
-  - o assistente escreve em passos pequenos, e cada passo compila e roda;
-  - ele dá os comandos prontos;
-  - o autor compila, roda e conta o que viu;
-  - cada marco termina com um resumo simples em `Jogo/LEIA-ME.md`.
-- **Nomes (FT2-4):** português sem acento (`Cidade`, `Construcao`, `precoBase`), com comentários em português.
-  - **Ideia do autor:** nada abstrato demais. Todo nome de variável, função ou classe diz o motivo dele: `horasTrabalhadasNoCiclo`, não `h` nem `valor`.
-  - As palavras do C++ (`int`, `vector`, `for`) e os nomes das bibliotecas continuam como são.
-- **Bibliotecas (FT2-2):** aprovadas. Cada uma entra no marco em que é usada e é baixada pelo CMake (`FetchContent`), em versão fixa. A exceção é o glad, gerado uma vez e guardado em `Jogo/externo/glad/` ([[Arquitetura/Descrição|Arquitetura]]):
+## 4. Cuidados técnicos
 
-| Marco | Bibliotecas |
-|---|---|
-| 0 e 1 | SDL3, glad (OpenGL 3.3), stb_image |
-| 1 | nlohmann/json, antecipada do marco 3 para ler o mapa do Tiled (FL1-1); o CSV é lido por código próprio |
-| 4 e 5 | EnTT |
-| 7 | Tracy |
-| 8 | Dear ImGui |
-| Depois da fatia | miniaudio |
-
-- **Ambiente (FT1-7):** g++ 15.2 (MinGW), CMake, Ninja e Git, já instalados; VS Code com as extensões "C/C++" e "CMake Tools"; depurador gdb; tudo neste repositório.
-- **Marco 0 (pronto, confirmado pelo autor em 2026-10-17):** as extensões do VS Code já estavam instaladas; o `CMakeLists.txt` da raiz, o `CMakePresets.json` (configuração "padrao") e o `Jogo/main.cpp` abrem uma janela vazia com a SDL3 3.4.18, baixada pelo CMake e embutida no `jogo.exe`. Se 1600 × 900 não cabe na tela com a barra de título, a janela abre maximizada; F11 liga a tela cheia. Os comandos e o que testar estão no `Jogo/LEIA-ME.md`.
-- **Marco 1 (pronto, confirmado pelo autor em 2026-10-18):** o relógio do mundo e a leitura do mapa no `Codigo/`, com 63 testes no `ctest`; o mapa de teste desenhado com o OpenGL; data, fase e velocidade no título da janela; teclas provisórias (Espaço, 1, 2, 3, F1, F11). O resumo está no `Jogo/LEIA-ME.md`.
-- **Marco 2 (pronto, confirmado pelo autor em 2026-10-18):** a câmera em `Jogo/CameraDoMapa.cpp` (WASD ou setas, Shift, roda do mouse para o zoom com o ponto embaixo do mouse parado, arrastar com o botão do meio, limite ao mapa), com 18 testes num segundo programa, o `testes_do_jogo`.
-- **Marco 7 (escrito em 2026-10-19, falta o teste do autor):** o Mercado Local, o gasto extra, o imposto, os multiplicadores do salário, o estabilizador e a saída por atraso (`Codigo/Economia/`), o consumo medido e a folga (`Codigo/Producao/`), os 11 eventos (`Codigo/Eventos/`, `data/eventos.json`), a Felicidade e o `jogo --simular 64 --semente 1` com o `relatorio.csv` (`Codigo/Simulacao/`); o Tracy como opção do CMake, desligada. 290 testes no `Codigo/` (com 16 dias sem tela duas vezes) e 42 no `Jogo/`, mais o teste de 1 ano no `ctest`.
-- **Marco 6 (pronto em 2026-10-18; o autor mandou seguir):** o inventário da cidade, a produção (o ciclo, a escolha da receita, as ordens da Carpintaria, os Braçais no campo), o consumo da cesta mínima e os salários (`Codigo/Inventario/`, `Producao/`, `Economia/`, `Construcao/`), juntos na `Codigo/Vila/SimulacaoDaVila.cpp`; o resumo do dia no console e o F4; as imagens das construções, quando existirem. 239 testes no `Codigo/` (com 3 dias sem tela) e 42 no `Jogo/`.
-- **Marco 5 (pronto, confirmado pelo autor em 2026-10-18):** a vila inicial (`data/vila_inicial.json`: 10 construções em retângulos de cor, que bloqueiam o lote, e 15 Civis com casa e emprego) e a rotina com a Utilidade (`Codigo/Npc/RotinaDosNpcs.cpp`, `Codigo/Vila/`), com o sorteio PCG32 (`Codigo/Tempo/SorteioComSemente.cpp`); F3 mostra as ações. 193 testes no `Codigo/` (com um dia inteiro sem tela) e 37 no `Jogo/`.
-- **Marco 4 (pronto, confirmado pelo autor em 2026-10-18):** um NPC no centro da vila anda até o tile do botão direito pela busca A\* (`Codigo/Mapa/BuscaDeCaminho.cpp`, `Codigo/Npc/`), com a EnTT 3.16.0; o boneco do Mana Seed (ou o de teste, sem a pasta) é desenhado entre os ticks; N cria mais NPCs e F2 mostra os caminhos. 167 testes no `Codigo/` e 36 no `Jogo/`.
-- **Marco 3 (pronto, confirmado pelo autor em 2026-10-18):** os dados em `Jogo/data` (itens, receitas, recursos, construções, regras e textos), lidos e conferidos por `Codigo/Dados/`, com o preço base (Pão 1,7) e o `jogo --validar`; as teclas passam pela tabela de ações (FL2-4). 124 testes no `Codigo/` e 25 no `Jogo/`.
-
-## 4. Rodada pendente: FE1, o equilíbrio do teste de 1 ano (marco 7)
-
-**Perguntas enviadas em 2026-10-19, aguardando respostas.** O código do marco 7 rodou o teste de 1 ano com 10 sementes e por 4 anos (256 dias), numa cópia compilada sem depuração (64 dias em 1,5 segundo). Com a semente 1, ele **passa**, mas apareceram 2 problemas de equilíbrio. Os dois mudam números já decididos (a FL6-3 e a FL6-4), por isso viram perguntas; os dados continuam como estão até a resposta. (A FL7 foi aplicada em 2026-10-18, toda com "seguir sugestão".)
-
-Responder no `Respostas.txt` pelos códigos (FE1-1, FE1-2). "Seguir sugestão" aceita a proposta.
-
-**FE1-1. Os Móveis caros (o dinheiro que vai do Banco para o jogador).**
-
-- *Contexto:* a FL6-3 deu à Carpintaria do jogador as ordens "manter 6 Móveis" e "manter 12 Tábuas": 6 Móveis eram 3 dias da cesta (1,875 por dia). No marco 7, o gasto extra compra mais Móveis (até o dobro: cerca de 3,75 por dia), e o consumo medido sobe: o estoque-alvo dos Móveis passa a cerca de 19, mas a ordem para em 6. O estoque fica entre 2 e 5, e o preço local vai a 8 ou 9,6 (o teto é 10,2, o dobro do base de 5,1). A classe paga ao jogador quase o dobro, o lucro do jogador ainda não paga imposto (FL7-2), e o dinheiro sai do Banco para o jogador. Com a semente 1, no dia 64: Banco 272, jogador 237. Em 4 anos, o Banco fica quase vazio por volta do dia 190 (jogador com 572). É pior no Inverno: a Fazenda produz 25%, nunca folga, e o Banco paga mais salários.
-- *Pergunta:* como segurar o preço dos Móveis? *Exemplo:* no dia 60, os Móveis estão a 9,5, com 2 no estoque, e a Carpintaria parada porque já tem os 6 que a ordem pede (ela tem Tábua e tempo para fazer mais).
-- *Opções* (medidas):
-  - (a) **as ordens passam a "manter 20 Móveis" e "manter 12 Tábuas".** Com a FE1-2 (a): em 10 sementes, o Banco fica entre 332 e 415 no dia 64; em 4 anos, nunca abaixo de 334; o jogador fica entre 56 e 160; os Móveis, entre 3,3 e 6,9. Ganha: o Mercado Local faz o trabalho dele, sem regra nova; no marco 8, quem escolhe as ordens é o jogador. Perde: o jogador lucra pouco, porque o preço base quase não cobre os salários da Carpintaria (o gerente ganha × 1,5);
-  - (b) cobrar o imposto também do lucro do jogador (a V2-7 fala em "salários e lucros"). Ganha: igual ao documento. Perde: precisa da conta do lucro do dia (vendas − salários − insumos), e os Móveis continuam faltando e caros;
-  - (c) limitar o preço dos itens do jogador a +30% do base (a faixa da FT1-1) até o marco 8. Medido: só atrasa; o Banco ainda fica quase vazio por volta do dia 190;
-  - (d) deixar como está. O teste de 1 ano passa com a semente 1, mas o Banco cai, e o segundo ano já falharia.
-- *Sugestão:* (a).
-- *Conflitos:* muda a FL6-3 (manter 6 → 20 Móveis). O "manter 12 Tábuas" continua.
-
-**FE1-2. O Pão no primeiro mês (a Febre no Cozinheiro).**
-
-- *Contexto:* o Cozinheiro tem 2 empregados e faz 16 Pães por dia; a vila come 15 (FL6-7). A vila começa com 45 Pães (3 dias, FL6-4), e o estoque-alvo é 75 (5 dias): o Pão começa caro (2,3 no dia 3), e o estoque sobe só 1 Pão por dia. Se a Febre pega um dos Cozinheiros no primeiro mês, faltam 8 Pães por dia, por 4 dias. Na semente 3, no dia 27, a Febre pega o Fábio: o estoque cai de 63 para 32, e o preço vai a 2,7 no dia 31 (o teste falha acima de 2,6). Em 10 sementes, 2 falham (a 3 e a 4), as duas assim.
-- *Pergunta:* como a vila aguenta uma Febre no Cozinheiro no começo do ano? *Exemplo:* a semente 3, acima.
-- *Opções* (medidas):
-  - (a) **a vila começa com 75 Pães (5 dias, o estoque-alvo), junto com a FE1-1 (a).** Em 10 sementes, todas passam; o Pão fica entre 1,3 e 2,1. Ganha: um número só; o preço já começa no base. Perde: sozinha, sem a FE1-1 (a), ela tira dinheiro do Banco (o Pão barato do começo: Banco entre 22 e 161 no dia 64), então as duas vão juntas. Uma Febre nos 2 Cozinheiros ao mesmo tempo ainda deixaria a vila sem Pão novo por 4 dias, mas os 75 Pães cobrem 5;
-  - (b) o Cozinheiro no nível 2, com 3 empregados (o Nuno sai dos desempregados). Com a FE1-1 (a), todas passam, mas o Pão desce até 1,2 (o limite do teste), e o jogador fica quase sem dinheiro (de 9 a 33). Ganha: uma Febre não para o Pão. Perde: muda a vila inicial (FL5-1: 12 empregados e 3 desempregados) e o desemprego (de 20% para 13%);
-  - (c) deixar como está: 2 em cada 10 sementes falham no primeiro ano.
-- *Sugestão:* (a).
-- *Conflitos:* muda a FL6-4 (3 → 5 dias de Pão: 45 → 75 no `vila_inicial.json`).
-
-Depois das respostas:
-
-- mudar o `vila_inicial.json`, rodar de novo as 10 sementes e anotar a rodada na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]] e na [[Ficha Logica/Economia|Economia]] (os números da FL6-3 e da FL6-4);
-- depois, as fichas do marco 8 (a interface do jogador, as obras e o Mercado).
+- No Git Bash, um heredoc com acentos quebra: escrever o script com a ferramenta de arquivo e rodar `python -I`.
+- Preservar CRLF ou LF de cada arquivo; nenhum link do Obsidian quebrado (nas tabelas, `\|`).
+- Não commitar `.obsidian/appearance.json` nem `.obsidian/core-plugins.json`; `Assents Temporarios/` fica fora do Git (licença do Mana Seed).
+- O navegador interno não está logado no GitHub, e o assistente nunca digita senhas.
 
 ## 5. Onde está cada coisa
 
 | Preciso de | Onde |
 |---|---|
+| O que programar | [[Ficha Logica/Fatia Vertical\|Fatia Vertical]] e a ficha do sistema em `Ficha Logica/` |
 | Índice dos sistemas | [[Descrição do Projeto]] |
-| O que programar e como | [[Ficha Logica/Fatia Vertical\|Ficha Lógica: Fatia Vertical]] e as fichas de cada sistema em `Ficha Logica/` |
-| Decisões técnicas, bibliotecas, marcos | [[Arquitetura/Descrição\|Arquitetura]] |
-| Itens, receitas, preços | [[Sistema de Itens/Descrição\|Itens]], [[Sistema de Produção/Receitas\|Receitas]], [[Sistema Econômico/Descrição\|Econômico]] |
-| Moldes de conteúdo | [[Arquitetura/Moldes de Conteúdo\|Moldes de Conteúdo]] |
-| Termos | [[Glossário]] |
-| Situação, números-chave e o que falta | [[Estado do Projeto]] |
-| Histórico das revisões (não precisa ler) | `Documentos/Histórico/` |
-
-## 6. Cuidados técnicos (para quem edita)
-
-- **Ferramentas:** Python 3.11, sempre chamado com `-I`. Não há `gh` nem Visual Studio.
-- **Edição em lote:**
-  - um script Python troca trechos exatos e confere que cada trecho existe uma vez só;
-  - rodar antes no modo de teste (`--dry`);
-  - preservar as quebras de linha (CRLF ou LF) e o BOM de cada arquivo. Vários documentos estão em CRLF: num trecho de várias linhas, trocar o `
-` pela quebra do arquivo antes de procurar.
-- **Links:** nenhum link interno do Obsidian pode ficar quebrado. Nas tabelas, o separador do texto do link é escapado (`\|`).
-- **Console do Windows:** os acentos aparecem corrompidos só na tela; os arquivos estão em UTF-8.
-- **Git:**
-  - mensagem de commit com `git commit -F arquivo`;
-  - `git fetch` antes de editar;
-  - não commitar `.obsidian/appearance.json` nem `.obsidian/core-plugins.json`.
-- **GitHub:** o navegador interno não está logado no GitHub, e o assistente nunca digita senhas.
-- **Sessões na nuvem:** o `Respostas.txt` chega como anexo; trabalhar na branch indicada pela sessão.
+| Bibliotecas e decisões técnicas | [[Arquitetura/Descrição\|Arquitetura]] |
+| Números-chave e o que falta | [[Estado do Projeto]] |
+| Histórico (não ler sem necessidade) | `Documentos/Histórico/` e o Git |
