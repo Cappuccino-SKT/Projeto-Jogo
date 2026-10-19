@@ -40,7 +40,7 @@ São os sistemas que mais se ligam ao que já existe e menos dependem do que fal
 | B2 | **[[Ficha Logica/Comercio\|Comércio]]** (escrita em 2026-10-19; rodada CO1 automática) | Economia, Viagem (B1), Outras cidades (B1b) |
 | B3 | **[[Ficha Logica/Noticias\|Notícias]]** (escrita em 2026-10-19; rodada NO1 automática) | Eventos, Viagem (B1) |
 | B4 | **[[Ficha Logica/Reputacao\|Reputação]]** (escrita em 2026-10-19; rodada RE1 automática) | Comércio (B2), Crime (C1) em parte |
-| B5 | **Tecnologia** | Produção, Construção |
+| B5 | **[[Ficha Logica/Tecnologia\|Tecnologia]]** (escrita em 2026-10-19; rodada TE1 automática) | Produção, Construção |
 
 ### Fase C — sociedade (prioridade média e baixa)
 
