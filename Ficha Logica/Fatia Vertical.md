@@ -386,7 +386,7 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | 5. Rotina | Os 15 NPCs dormem, trabalham e passeiam nos horários |
 | 6. Produção, inventário e consumo | O Pão sai do Cozinheiro, entra no estoque e é comido |
 | 7. Simulação sem tela de 1 ano | O teste da parte 6 passa |
-| 8. Interface básica | HUD com data, velocidade, dinheiro; painel da cidade e do inventário |
+| 8. Interface básica | HUD com data, velocidade, dinheiro; painel da cidade e do inventário; as obras e a manutenção; o preço, o salário, a contratação e a compra e venda do jogador (rodada FL8) |
 | 9. Salvar e carregar | O teste do save passa |
 
 ---

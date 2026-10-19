@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 2** (câmera e entrada). Cobre só **a câmera, o zoom e as teclas**. O HUD e os painéis entram nesta mesma ficha antes do marco 8. As decisões da rodada **FL2** (2026-10-18, todas "seguir sugestão") já estão aplicadas, e o código do marco 2 as segue.
+> Ficha escrita em 2026-10-18 para o **marco 2** (câmera e entrada). Cobre só **a câmera, o zoom e as teclas**. A **parte 10** traz o **marco 8**: o HUD, os painéis e os pedidos do jogador (rodada FL8). As decisões da rodada **FL2** (2026-10-18, todas "seguir sugestão") já estão aplicadas, e o código do marco 2 as segue.
 
 # Ficha Lógica: Interface (câmera, zoom e teclas)
 
@@ -191,3 +191,133 @@ Num programa de testes do `Jogo/` (`testes_do_jogo`), rodado pelo mesmo `ctest`.
 - O HUD, os painéis, as notificações e o modo de edição da interface (marco 8).
 - Clicar numa notificação para centralizar a câmera; seguir um NPC com a câmera.
 - O minimapa e as lentes do Mapa.
+
+---
+
+## 10. Marco 8: o HUD, os painéis e os pedidos do jogador
+
+> Escrita em 2026-10-19. Depende da rodada **FL8** ([[Rodada Pendente]]); os valores sem decisão estão marcados [Proposta]. As obras estão na parte 10 da [[Ficha Logica/Construcao|Construção]], e o preço, o salário, a contratação e a compra e venda, na parte 11 da [[Ficha Logica/Economia|Economia]].
+
+### 10.1 O que o marco 8 traz
+
+| Item | No marco 8 |
+|---|---|
+| Como desenha | O **Dear ImGui**, só na fatia, com um tema de cores do jogo (FL8-1) [Proposta] |
+| Fonte | **Noto Sans**, 18 px, em `Jogo/assets/fontes/` com a licença (FL8-2) [Proposta]; a escala fica em 100% até o perfil do jogador |
+| HUD | A barra de cima, as notificações e a barra de alertas |
+| Gestão | Uma janela por vez, com as abas **Cidade, Construções, Inventário, Mercado e Diário** |
+| Seleção | O botão esquerdo num lote abre o painel da construção (ou do lote livre) |
+| Pedidos | Tudo o que o jogador decide vira um **pedido**, aplicado no começo do próximo tick (regra 10.8) |
+
+### 10.2 A barra de cima (sempre na tela)
+
+Da esquerda para a direita, numa faixa de 32 px [Proposta]:
+
+1. A data e a hora: "Ano 1, Primavera, dia 3 · 07:40 · Manhã" (o mesmo texto do título da janela de hoje).
+2. A velocidade: 4 botões (⏸, 1x, 2x, 4x), com o atual destacado. As teclas Espaço, 1, 2 e 3 continuam valendo.
+3. O dinheiro: "Jogador 104,5" e "Banco 3.950,0", com o "Por quê?" (regra 10.7): o que entrou e saiu ontem.
+4. O botão "Gestão (Tab)", que abre e fecha a janela de gestão.
+
+### 10.3 As notificações e o Diário (FL8-9) [Proposta]
+
+- Entram: o começo e o fim de cada evento, uma obra ou manutenção pronta, um empregado que sai (o salário atrasado ou o salário Baixo).
+- **Info** para as boas e **Aviso** para as ruins (a fatia não tem Crítico).
+- À direita, abaixo da barra de cima: no máximo 5 na tela, a mais nova em cima; cada uma some depois de 20 segundos reais (contados a 1x; parados na pausa).
+- A aba **Diário** guarda as 300 últimas, com a data. O console continua com as mesmas linhas.
+
+### 10.4 A barra de alertas [Proposta]
+
+Uma faixa abaixo da barra de cima, com os alertas que valem agora, conferidos a cada hora de jogo:
+
+| Alerta | Quando |
+|---|---|
+| "Pão para menos de 2 dias" | O estoque de Pão < 2 × o consumo previsto do dia |
+| "Banco baixo" | O Banco < 10% do que tinha no começo da estação |
+| "<Construção> parada: falta <item>" | Uma construção do jogador parada por falta de insumo |
+| "Manutenção atrasada: <construção>" | Parte 10 da [[Ficha Logica/Construcao\|Construção]] |
+
+Clicar num alerta abre a aba que mostra o problema.
+
+### 10.5 A janela de gestão (tecla Tab)
+
+Uma janela no centro, com abas, uma por vez (o documento da [[Interface/Descrição|Interface]]). Enquanto ela está aberta, o jogo continua na velocidade escolhida.
+
+| Aba | O que mostra |
+|---|---|
+| **Cidade** | A população (15: empregados, desempregados e a taxa de desemprego); a Felicidade da classe (o valor e a faixa, com os 4 fatores no "Por quê?"); o Banco, o dinheiro do jogador e o da classe (a média por Civil e quantos dias da cesta ela paga); o imposto de ontem; o estabilizador pago na estação e o teto; os 2 multiplicadores do salário |
+| **Construções** | Uma linha por construção: nome, dono, nível, empregados / vagas, a receita atual e o progresso (%), o motivo da parada ou da folga, a manutenção (em dia ou atrasada), a obra em andamento. Clicar numa linha abre o painel da construção |
+| **Inventário** | Uma linha por item e dono: quantidade, estoque-alvo, preço base, preço local (com ↑ ou ↓ desde ontem), consumo médio dos 5 dias |
+| **Mercado** | Comprar e vender na loja da cidade (parte 11 da [[Ficha Logica/Economia\|Economia]]): o item, a quantidade, o preço de compra (110%) e o de venda (90%), e os botões "Comprar" e "Vender" |
+| **Diário** | As notificações guardadas (regra 10.3) |
+
+### 10.6 O painel da construção (à direita, ao selecionar)
+
+Clicar com o botão esquerdo dentro de um lote seleciona o que está nele (o clique na janela do ImGui não chega ao mapa). Esc ou um clique fora de um lote fecha o painel; o Esc com o painel fechado continua fechando o jogo.
+
+**Toda construção:** o nome, o dono, o nível, a receita e o progresso, o estoque que ela guarda, os empregados (nome e Função) e a manutenção.
+
+**Construção do jogador**, também:
+
+- **A fila de ordens** (regra 4.4 da [[Ficha Logica/Producao|Produção]]): cada linha com o tipo, o item e o N; os botões ↑ e ↓ (a prioridade) e ×; e uma linha nova com o tipo (Fazer N, Manter estoque, Repetir sempre), o item (só os das receitas que a construção pode fazer no nível dela) e o N (de 1 a 999).
+- **O nível de salário:** 3 botões, Baixo, Normal e Alto.
+- **Os empregados**, cada um com "Demitir", e a lista dos desempregados, cada um com "Contratar" (enquanto houver vaga).
+- **O preço** de cada produto: de −30% a +30%, de 5 em 5 pontos, mostrando o preço que sai.
+- **"Subir para o nível N"**, com o custo e o tempo (desligado se faltar dinheiro, se a obra passar do nível que o Engenheiro permite ou se já houver uma obra nela).
+
+**Lote livre:** a lista dos tipos que cabem no porte dele, cada um com o custo, o tempo e as vagas, e o botão "Encomendar obra".
+
+### 10.7 O "Por quê?"
+
+Passar o mouse sobre o dinheiro, um preço ou a Felicidade abre um quadro com as parcelas: o dinheiro (as entradas e saídas de ontem por tipo: salários, vendas, imposto, obras), o preço (o base, o fator do estoque e o passo de hoje) e a Felicidade (os 4 fatores). Fixar o quadro fica para depois.
+
+### 10.8 Os pedidos do jogador
+
+O ImGui **só desenha e lê os cliques**. Cada decisão vira um **pedido**, guardado numa fila e aplicado **no começo do próximo tick**, antes de qualquer regra. Assim a simulação continua determinística, e os testes do `Codigo/` fazem os mesmos pedidos sem janela.
+
+| Pedido | O que leva |
+|---|---|
+| Trocar a fila de ordens | A construção e a fila nova inteira |
+| Fixar o preço | A construção, o item e a porcentagem |
+| Trocar o nível de salário | A construção e o nível |
+| Contratar / Demitir | A construção e o NPC |
+| Encomendar uma obra | O lote (ou a construção, para subir de nível) e o tipo |
+| Comprar / Vender na loja da cidade | O item e a quantidade |
+
+1. Confira o pedido de novo no momento de aplicar (o estado pode ter mudado no tick anterior). Um pedido que não vale mais é descartado com uma notificação ("Sem dinheiro para a obra").
+2. Aplique na ordem em que chegaram.
+3. A velocidade e a pausa **não** são pedidos: continuam como no marco 1.
+
+### 10.9 Contas
+
+| Conta | Como | Exemplo |
+|---|---|---|
+| Dinheiro na tela | Décimos ÷ 10, com vírgula e ponto de milhar | 39500 décimos → "3.950,0" |
+| Preço do jogador | Parte 11 da [[Ficha Logica/Economia\|Economia]] | Local 5,1, +20% → 6,1 |
+| Lote clicado | Pixel da tela → tile do mundo (regra 5 desta ficha) → o lote que contém o tile | Tile (43, 31) → lote 11 |
+
+### 10.10 Nomes no código
+
+| Nome | O que é |
+|---|---|
+| `PedidoDoJogador` | Um pedido (um `std::variant` com um tipo por linha da tabela 10.8) |
+| `FilaDePedidosDoJogador` | A fila, aplicada por `aplicarOsPedidosDoJogador` no começo do tick |
+| `TextoDoDinheiro` | Décimos → "3.950,0" (no `Codigo/`, testado) |
+| `NotificacoesDaVila` | As 5 da tela e as 300 do Diário (no `Codigo/`) |
+| `AlertasDaVila` | Os alertas da regra 10.4 (no `Codigo/`) |
+| `InterfaceDoJogador` | No `Jogo/`: desenha a barra, os alertas, a janela de gestão e o painel com o ImGui |
+| `loteNoTile` | O lote que contém um tile, ou nenhum |
+
+### 10.11 Testes
+
+| Situação | Resultado esperado |
+|---|---|
+| 39500 décimos; 5 décimos; 0 | "3.950,0"; "0,5"; "0,0" |
+| Um pedido "comprar 10 Blocos" sem dinheiro | Descartado, com a notificação; nada muda |
+| A mesma semente, com e sem uma fila de pedidos vazia | O mesmo relatório |
+| A mesma semente e os mesmos pedidos, nos mesmos ticks, duas vezes | O mesmo relatório |
+| Clique no tile (43, 31) | O lote 11 (a Carpintaria) |
+| Clique fora de todos os lotes | Nenhum; o painel fecha |
+| 6 notificações seguidas | 5 na tela (a mais velha sai), 6 no Diário |
+| O Pão abaixo de 2 dias do previsto | O alerta aparece; volta acima, some |
+
+No `Jogo/`, à mão: abrir e fechar a gestão com Tab; cada aba mostra os números do F4; trocar a fila de ordens da Carpintaria e ver a receita mudar no próximo ciclo; o clique numa janela não move a câmera nem seleciona o lote embaixo.

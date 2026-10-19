@@ -151,7 +151,7 @@ Em `Codigo/Economia/`:
 ## 9. Fora da fatia (e fora do marco 6)
 
 - **No marco 7:** tudo na parte 10.
-- **No marco 8:** o preço do jogador (±30%), o nível de salário (Baixo, Normal, Alto), a contratação.
+- **No marco 8:** tudo na parte 11 (o preço do jogador, o nível de salário, a contratação, a compra e a venda).
 - As outras classes e a cesta delas; a Bebida e a Taverna; a Tora como lenha no inverno; os Mercados da Facção e Mundial; os Ricos.
 
 ---
@@ -309,3 +309,102 @@ Quando uma construção chega a **16 dias seguidos** de salário atrasado (uma e
 | Uma construção com 16 dias de atraso | Os empregados viram desempregados |
 | Uma ordem do dia com "mercado_local" antes de "consumo" | Roda nessa ordem (a ordem é do arquivo) |
 | 64 dias sem tela | O Banco nunca zera; o dinheiro total só muda pelo Mercador viajante (o único que traz dinheiro de fora) |
+
+---
+
+## 11. Marco 8: as decisões do jogador
+
+> Escrita em 2026-10-19. Depende da rodada **FL8** ([[Rodada Pendente]]): FL8-6 (o preço), FL8-7 (o salário e a contratação) e FL8-8 (a compra e a venda). Os valores sem decisão estão marcados [Proposta]. Os botões estão na parte 10 da [[Ficha Logica/Interface|Interface]]; o pagamento das obras, na parte 10 da [[Ficha Logica/Construcao|Construção]]. Todas as decisões chegam como **pedidos** (Interface, regra 10.8).
+
+### 11.1 Dados
+
+Novos no `regras.json` [Proposta]:
+
+```json
+"decisoes_do_jogador": {
+  "faixa_do_preco_em_porcento": 30,
+  "passo_do_preco_em_porcento": 5,
+  "salario_baixo_em_porcento": 75, "salario_alto_em_porcento": 125,
+  "velocidade_com_salario_baixo_em_porcento": 90, "velocidade_com_salario_alto_em_porcento": 110,
+  "dias_de_salario_baixo_para_um_empregado_sair": 8,
+  "loja_da_cidade_compra_em_porcento": 90
+}
+```
+
+**Estado novo** em cada construção do jogador (vai no save, marco 9): `porcentagemDoPrecoDeCadaItem` (de −30 a +30, começa em 0), `nivelDeSalario` (Baixo, Normal, Alto; começa em Normal), `diasSeguidosComSalarioBaixo`.
+
+Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado do marco 7, a não ser pela manutenção.
+
+### 11.2 O preço do jogador (FL8-6) [Proposta]
+
+1. **O preço** de um item do jogador = o preço local × (100 + p) ÷ 100, arredondado para décimos (meio para cima), com p de −30 a +30, de 5 em 5.
+2. **A cesta mínima** compra sempre, por esse preço (é o mínimo).
+3. **O gasto extra em Materiais** (regra 10.5) compra uma fração do que compraria: com p ≤ 0, tudo; com p > 0, (30 − p) ÷ 30 (arredondado para baixo, em itens inteiros). O dinheiro que sobra vai para a loja da cidade, como o resto do gasto extra.
+4. **A Cidade**, na manutenção, compra as Tábuas por esse preço, sem fração (Construção, regra 10.6).
+5. O preço local continua andando pelo estoque (regra 10.4), igual para todos os donos.
+
+*Exemplo:* os Móveis a 5,1 no local; o jogador põe +20%: 6,1. A cesta compra os 2 do dia por 6,1; o gasto extra queria 2 a mais e compra 2 × 10 ÷ 30 = 0,67 → 0. O jogador ganha 12,2 em vez de 20,4.
+
+### 11.3 O nível de salário (FL8-7) [Proposta]
+
+| Nível | Salário | Velocidade dos empregados | Outro efeito |
+|---|---|---|---|
+| Baixo | × 0,75 | × 0,9 | Depois de 8 dias seguidos em Baixo, o empregado com menos dias na construção sai (vira desempregado), e a contagem recomeça |
+| Normal | × 1 | × 1 | — |
+| Alto | × 1,25 | × 1,1 | — |
+
+- O multiplicador entra **junto** com os outros do salário (o bônus de nível, o gerente × 1,5, a riqueza e o desemprego), antes do arredondamento.
+- A velocidade multiplica a do ciclo da produção (regra 4.2 da [[Ficha Logica/Producao|Produção]]).
+- Trocar o nível vale a partir do próximo pagamento; trocar para Normal ou Alto zera a contagem dos dias.
+
+### 11.4 Contratar e demitir (FL8-7) [Proposta]
+
+1. **Contratar:** só um desempregado, e só se houver vaga no nível da construção. Ele passa a ser empregado na hora, e a rotina dele leva ao trabalho a partir do próximo horário de trabalho.
+2. **Demitir:** o empregado vira desempregado na hora, sem indenização; o salário do dia é pago pelas horas que ele já trabalhou.
+3. O **gerente** (V3-8) continua sendo o primeiro da lista de empregados; se ele sai, o próximo vira gerente.
+4. O desemprego da vila muda na hora (e com ele o multiplicador do salário do dia seguinte).
+
+### 11.5 Comprar e vender na loja da cidade (FL8-8) [Proposta]
+
+Pela aba Mercado, sem o personagem andar.
+
+1. **Comprar:** o preço de cada item = o local × 110% (meio para cima, em décimos); o total = o preço × a quantidade. Pode se a Cidade tiver o item e o jogador tiver o dinheiro. O item passa da Cidade para o jogador, e o dinheiro, do jogador para o Banco.
+2. **Vender:** o preço = o local × 90%; pode se o jogador tiver o item e a capacidade da Cidade couber. O item passa do jogador para a Cidade, e o dinheiro, do Banco para o jogador. Se o Banco não tiver o dinheiro, a venda é recusada.
+3. Os itens que a Cidade compra entram no estoque dela e mudam o preço local no próximo dia, como qualquer estoque.
+
+*Exemplo:* o jogador vende 10 Tábuas com o local em 1,5: 1,5 × 90% = 1,35 → 1,4; recebe 14,0.
+
+### 11.6 Contas
+
+| Conta | Valor |
+|---|---|
+| Móveis a 5,1, p = −30, −15, 0, +15, +30 | 3,6; 4,3; 5,1; 5,9; 6,6 (meio para cima) |
+| Fração do gasto extra com p = +5, +15, +25 | 25/30, 15/30, 5/30 |
+| Manufaturado da Carpintaria nível 2, Baixo / Alto | 1,0 × 1,1 (o bônus do nível) × 0,75 = 0,825 / × 1,25 = 1,375 por hora |
+| Comprar 10 Blocos com o local em 1,8 | 1,8 × 110% = 1,98 → 2,0; total 20,0 |
+
+### 11.7 Nomes no código
+
+| Nome | O que é |
+|---|---|
+| `DecisoesDoJogador` | O estado da regra 11.1 em cada construção do jogador |
+| `NivelDeSalario` (`Baixo`, `Normal`, `Alto`) | O nível |
+| `precoDoItemDoJogador(precoLocal, porcentagem)` | Regra 11.2, passo 1 |
+| `fracaoDoGastoExtraComOPreco(porcentagem)` | Regra 11.2, passo 3, em trigésimos |
+| `comprarDaLojaDaCidade`, `venderParaALojaDaCidade` | Regra 11.5 |
+| `RegrasDasDecisoesDoJogador` | O bloco `"decisoes_do_jogador"` do `regras.json` |
+
+### 11.8 Testes
+
+| Situação | Resultado esperado |
+|---|---|
+| `precoDoItemDoJogador(51, 20)` | 61 décimos |
+| `precoDoItemDoJogador(51, -30)` | 36 décimos |
+| A porcentagem +7 | Recusada (só de 5 em 5) |
+| Os Móveis a +30% num dia com gasto extra | A cesta compra; o gasto extra não compra Móveis e vai todo para a loja da cidade |
+| 8 dias em Baixo com 2 empregados | No dia 8, o mais novo vira desempregado |
+| Contratar com as vagas cheias | Recusado |
+| Demitir o gerente | O outro empregado vira gerente |
+| Vender 10 Tábuas a 1,5 | +14,0 para o jogador, −14,0 do Banco, +10 Tábuas da Cidade |
+| Comprar 200 Blocos com 150 na Cidade | Recusado |
+| O dinheiro total depois de cada pedido | Igual |

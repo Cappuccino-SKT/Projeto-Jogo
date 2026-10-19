@@ -24,11 +24,11 @@ Já lidas (marco 3): as receitas (produto, lote, insumos, construção, nível m
 
 **As habilidades** dos NPCs, no `vila_inicial.json` (FL6-6): `"habilidades": { "bracal": 50, "manufaturado": 50 }` em cada NPC.
 
-**As ordens do jogador**, no `vila_inicial.json` (FL6-3), na Carpintaria dele (até a interface do marco 8):
+**As ordens do jogador**, no `vila_inicial.json` (FL6-3; a FE1-1 mudou de 6 para 20 Móveis), na Carpintaria dele (no marco 8, o jogador troca a fila pelo painel):
 
 ```json
 "ordens": [
-  { "tipo": "manter_estoque", "item": "item.moveis_madeira", "quantidade": 6 },
+  { "tipo": "manter_estoque", "item": "item.moveis_madeira", "quantidade": 20 },
   { "tipo": "manter_estoque", "item": "item.tabua", "quantidade": 12 }
 ]
 ```
