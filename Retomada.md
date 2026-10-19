@@ -3,10 +3,10 @@
 ## 1. Onde paramos
 
 - **Marcos 0 a 6:** prontos e no `main`.
-- **Marco 7** (a simulação sem tela de 1 ano): no `main` (PR #35), com a FL7; a FE1 (as sementes de 1 a 10 passam) e a limpeza dos arquivos de contexto vão no PR da `docs/fichas-marco-8`.
+- **Marco 7** (a simulação sem tela de 1 ano): no `main`, com a FL7 e a FE1 (as sementes de 1 a 10 passam).
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
-- **Marco 8:** fichas escritas na branch `docs/fichas-marco-8` (Interface parte 10, Construção parte 10, Economia parte 11); falta a **rodada FL8** ([[Rodada Pendente]]).
-- **Próximo passo:** o autor responde a FL8; aplicar nas fichas e programar o marco 8.
+- **Marco 8:** fichas prontas e decididas (FL8 aplicada): Interface parte 10, Construção parte 10, Economia parte 11. Falta programar.
+- **Próximo passo:** programar o marco 8 (Sonnet, esforço médio); depois o marco 9 (salvar e carregar).
 
 ## 2. Como trabalhamos
 

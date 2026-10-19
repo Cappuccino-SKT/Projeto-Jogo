@@ -196,14 +196,14 @@ Num programa de testes do `Jogo/` (`testes_do_jogo`), rodado pelo mesmo `ctest`.
 
 ## 10. Marco 8: o HUD, os painéis e os pedidos do jogador
 
-> Escrita em 2026-10-19. Depende da rodada **FL8** ([[Rodada Pendente]]); os valores sem decisão estão marcados [Proposta]. As obras estão na parte 10 da [[Ficha Logica/Construcao|Construção]], e o preço, o salário, a contratação e a compra e venda, na parte 11 da [[Ficha Logica/Economia|Economia]].
+> Escrita em 2026-10-19. Decidida na rodada **FL8** (2026-10-19, toda com "seguir sugestão"; ver a parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]). As obras estão na parte 10 da [[Ficha Logica/Construcao|Construção]], e o preço, o salário, a contratação e a compra e venda, na parte 11 da [[Ficha Logica/Economia|Economia]].
 
 ### 10.1 O que o marco 8 traz
 
 | Item | No marco 8 |
 |---|---|
-| Como desenha | O **Dear ImGui**, só na fatia, com um tema de cores do jogo (FL8-1) [Proposta] |
-| Fonte | **Noto Sans**, 18 px, em `Jogo/assets/fontes/` com a licença (FL8-2) [Proposta]; a escala fica em 100% até o perfil do jogador |
+| Como desenha | O **Dear ImGui**, só na fatia, com um tema de cores do jogo (FL8-1) |
+| Fonte | **Noto Sans**, 18 px, em `Jogo/assets/fontes/` com a licença (FL8-2); a escala fica em 100% até o perfil do jogador |
 | HUD | A barra de cima, as notificações e a barra de alertas |
 | Gestão | Uma janela por vez, com as abas **Cidade, Construções, Inventário, Mercado e Diário** |
 | Seleção | O botão esquerdo num lote abre o painel da construção (ou do lote livre) |
@@ -211,21 +211,21 @@ Num programa de testes do `Jogo/` (`testes_do_jogo`), rodado pelo mesmo `ctest`.
 
 ### 10.2 A barra de cima (sempre na tela)
 
-Da esquerda para a direita, numa faixa de 32 px [Proposta]:
+Da esquerda para a direita, numa faixa de 32 px:
 
 1. A data e a hora: "Ano 1, Primavera, dia 3 · 07:40 · Manhã" (o mesmo texto do título da janela de hoje).
 2. A velocidade: 4 botões (⏸, 1x, 2x, 4x), com o atual destacado. As teclas Espaço, 1, 2 e 3 continuam valendo.
 3. O dinheiro: "Jogador 104,5" e "Banco 3.950,0", com o "Por quê?" (regra 10.7): o que entrou e saiu ontem.
 4. O botão "Gestão (Tab)", que abre e fecha a janela de gestão.
 
-### 10.3 As notificações e o Diário (FL8-9) [Proposta]
+### 10.3 As notificações e o Diário (FL8-9)
 
 - Entram: o começo e o fim de cada evento, uma obra ou manutenção pronta, um empregado que sai (o salário atrasado ou o salário Baixo).
 - **Info** para as boas e **Aviso** para as ruins (a fatia não tem Crítico).
 - À direita, abaixo da barra de cima: no máximo 5 na tela, a mais nova em cima; cada uma some depois de 20 segundos reais (contados a 1x; parados na pausa).
 - A aba **Diário** guarda as 300 últimas, com a data. O console continua com as mesmas linhas.
 
-### 10.4 A barra de alertas [Proposta]
+### 10.4 A barra de alertas
 
 Uma faixa abaixo da barra de cima, com os alertas que valem agora, conferidos a cada hora de jogo:
 

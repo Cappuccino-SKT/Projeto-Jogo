@@ -314,11 +314,11 @@ Quando uma construção chega a **16 dias seguidos** de salário atrasado (uma e
 
 ## 11. Marco 8: as decisões do jogador
 
-> Escrita em 2026-10-19. Depende da rodada **FL8** ([[Rodada Pendente]]): FL8-6 (o preço), FL8-7 (o salário e a contratação) e FL8-8 (a compra e a venda). Os valores sem decisão estão marcados [Proposta]. Os botões estão na parte 10 da [[Ficha Logica/Interface|Interface]]; o pagamento das obras, na parte 10 da [[Ficha Logica/Construcao|Construção]]. Todas as decisões chegam como **pedidos** (Interface, regra 10.8).
+> Escrita em 2026-10-19. Decidida na rodada **FL8** (2026-10-19, toda com "seguir sugestão"; ver a parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]). Os botões estão na parte 10 da [[Ficha Logica/Interface|Interface]]; o pagamento das obras, na parte 10 da [[Ficha Logica/Construcao|Construção]]. Todas as decisões chegam como **pedidos** (Interface, regra 10.8).
 
 ### 11.1 Dados
 
-Novos no `regras.json` [Proposta]:
+Novos no `regras.json`:
 
 ```json
 "decisoes_do_jogador": {
@@ -335,7 +335,7 @@ Novos no `regras.json` [Proposta]:
 
 Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado do marco 7, a não ser pela manutenção.
 
-### 11.2 O preço do jogador (FL8-6) [Proposta]
+### 11.2 O preço do jogador (FL8-6)
 
 1. **O preço** de um item do jogador = o preço local × (100 + p) ÷ 100, arredondado para décimos (meio para cima), com p de −30 a +30, de 5 em 5.
 2. **A cesta mínima** compra sempre, por esse preço (é o mínimo).
@@ -345,7 +345,7 @@ Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado
 
 *Exemplo:* os Móveis a 5,1 no local; o jogador põe +20%: 6,1. A cesta compra os 2 do dia por 6,1; o gasto extra queria 2 a mais e compra 2 × 10 ÷ 30 = 0,67 → 0. O jogador ganha 12,2 em vez de 20,4.
 
-### 11.3 O nível de salário (FL8-7) [Proposta]
+### 11.3 O nível de salário (FL8-7)
 
 | Nível | Salário | Velocidade dos empregados | Outro efeito |
 |---|---|---|---|
@@ -357,14 +357,14 @@ Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado
 - A velocidade multiplica a do ciclo da produção (regra 4.2 da [[Ficha Logica/Producao|Produção]]).
 - Trocar o nível vale a partir do próximo pagamento; trocar para Normal ou Alto zera a contagem dos dias.
 
-### 11.4 Contratar e demitir (FL8-7) [Proposta]
+### 11.4 Contratar e demitir (FL8-7)
 
 1. **Contratar:** só um desempregado, e só se houver vaga no nível da construção. Ele passa a ser empregado na hora, e a rotina dele leva ao trabalho a partir do próximo horário de trabalho.
 2. **Demitir:** o empregado vira desempregado na hora, sem indenização; o salário do dia é pago pelas horas que ele já trabalhou.
 3. O **gerente** (V3-8) continua sendo o primeiro da lista de empregados; se ele sai, o próximo vira gerente.
 4. O desemprego da vila muda na hora (e com ele o multiplicador do salário do dia seguinte).
 
-### 11.5 Comprar e vender na loja da cidade (FL8-8) [Proposta]
+### 11.5 Comprar e vender na loja da cidade (FL8-8)
 
 Pela aba Mercado, sem o personagem andar.
 
