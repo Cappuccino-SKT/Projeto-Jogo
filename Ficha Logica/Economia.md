@@ -349,6 +349,8 @@ Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado
 
 **A verba da Coroa (FE4-1 e FE4-2, 2026-10-19):** no dia 1 de cada estação, no passo "estabilizador" da ordem do dia e antes de o teto recomeçar, entram de fora no Banco **75 moedas** (`verba_da_coroa_por_estacao_em_decimos`: 750 no `regras.json`), fixas, contadas em `dinheiroQueEntrouDeFora`. Elas cobrem o que o jogador ganha (FE3): medido no `--simular 64`, o Banco termina o ano em 475 (semente 1) e 408 (semente 2), nunca abaixo de 295, e o jogador segue com +3,4 e +4,4 por dia. **[Refinar depois]** a exportação da sobra pelo Mercado (FE4-1 b) quando houver mais itens; a verba pela Felicidade (FE4-2 c); no jogo completo, a verba e a parte da Facção no imposto (V2-7) pensadas juntas.
 
+**O lucro do jogador numa crise de comida (FE5-1, 2026-10-19):** sem regra nova. Na crise, os Civis ficam sem dinheiro para o gasto extra, a venda e o preço dos Móveis caem, e o salário da Carpintaria não: o jogador perde (medido no ano 2 da semente 1: de +3,4 para −0,9 por dia, uns 30 moedas em 32 dias). Ele reage com o salário baixo (até 7 dias, regra 11.3) ou parando os Móveis pelas ordens; a crise da vila pesa no bolso dele de propósito. **[Refinar depois]** um alerta "a venda de Móveis caiu" quando a interface tiver o histórico de vendas.
+
 **O preço do jogador (FE3-3):** na vila de hoje ninguém mais vende o que o jogador faz, então o preço 0% é sempre o melhor (+15% dá 16,6 por dia; −15% dá 16,1; 0% dá 19,1). A interface avisa com uma dica. **[Refinar depois]** o preço passa a valer com concorrência (outra Carpintaria, o Mercador) ou procura que cresce com o preço baixo.
 
 ### 11.3 O nível de salário (FL8-7)
