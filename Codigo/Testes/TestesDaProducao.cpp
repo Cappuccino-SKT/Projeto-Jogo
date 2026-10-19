@@ -103,9 +103,9 @@ void testarInventario(const DadosDoJogo& dados)
              "tirar 2 Grãos e 1 Água sem Água: faltou, e os 2 Grãos continuam lá");
 
     SimulacaoDaVila simulacao(dados, RegrasDoTempo{});
-    conferir(simulacao.avisosAoMontar.empty() && simulacao.inventario.quantidadeDe(pao, DonoDoItem::Cidade) == 45
+    conferir(simulacao.avisosAoMontar.empty() && simulacao.inventario.quantidadeDe(pao, DonoDoItem::Cidade) == 75
                  && simulacao.inventario.quantidadeDe(tabua, DonoDoItem::Jogador) == 12,
-             "o estoque inicial da fatia: 45 Pães da Cidade e 12 Tábuas do jogador");
+             "o estoque inicial da fatia: 75 Pães da Cidade e 12 Tábuas do jogador");
 }
 
 void testarContasDaProducao(const DadosDoJogo& dados)
@@ -274,8 +274,8 @@ void testarContasDaEconomia(const DadosDoJogo& dadosLidos)
         ContextoDaProducao contexto = simulacao.contextoDaProducao();
         const int64_t bancoAntes = simulacao.dinheiro.bancoDaCidade;
         consumirACestaDoDia(contexto);
-        conferir(simulacao.inventario.quantidadeDe(pao, DonoDoItem::Cidade) == 30 && simulacao.dinheiro.bancoDaCidade - bancoAntes == 15 * 19,
-                 "15 Civis e 45 Pães da Cidade: sobram 30, e a classe paga 15 × 1,9 ao Banco");
+        conferir(simulacao.inventario.quantidadeDe(pao, DonoDoItem::Cidade) == 60 && simulacao.dinheiro.bancoDaCidade - bancoAntes == 15 * 19,
+                 "15 Civis e 75 Pães da Cidade: sobram 60, e a classe paga 15 × 1,9 ao Banco");
         tirarTudoDoItem(simulacao, pao);
         simulacao.inventario.tentarPor(pao, DonoDoItem::Cidade, 10);
         consumirACestaDoDia(contexto);

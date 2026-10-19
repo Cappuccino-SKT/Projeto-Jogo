@@ -25,5 +25,9 @@ struct RegrasDasConstrucoes {
     // Pequeno, médio e grande.
     std::array<CustoDaObra, 3> obraDeCadaPorte = {};
 
+    // FL8-4 e FL8-5 (Construção, parte 10): o Engenheiro, a manutenção por estação.
+    int nivelMaximoComOEngenheiro = 3;
+    int manutencaoEmPorcento = 5;
+    int producaoComManutencaoAtrasadaEmPorcento = 75;
     int nivelMaximo() const { return static_cast<int>(vagasPorNivel.size()); }
 };

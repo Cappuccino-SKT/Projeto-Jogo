@@ -1,0 +1,68 @@
+#pragma once
+
+// Os pedidos do jogador (Ficha Lógica: Interface, regra 10.8, marco 8). A
+// interface só desenha e lê os cliques: cada decisão vira um pedido, guardado
+// numa fila e aplicado no começo do próximo tick (ou na hora, com o jogo
+// pausado). Assim a simulação continua determinística, e os testes fazem os
+// mesmos pedidos sem janela.
+
+#include <string>
+#include <variant>
+#include <vector>
+
+#include "Producao/OrdemDoJogador.h"
+#include "Producao/ProducaoDaVila.h"
+
+struct PedidoTrocarAFilaDeOrdens {
+    int indiceDaConstrucao = 0;
+    std::vector<OrdemDoJogador> ordens;
+};
+struct PedidoFixarOPreco {
+    int numeroDoItem = 0;
+    int porcentagem = 0;
+};
+struct PedidoTrocarONivelDeSalario {
+    int indiceDaConstrucao = 0;
+    NivelDeSalario nivel = NivelDeSalario::Normal;
+};
+struct PedidoContratar {
+    int indiceDaConstrucao = 0;
+    int numeroDoNpc = 0;
+};
+struct PedidoDemitir {
+    int numeroDoNpc = 0;
+};
+struct PedidoEncomendarConstrucaoNova {
+    int numeroDoLote = 0;
+    std::string tipoDeConstrucao;
+};
+struct PedidoSubirDeNivel {
+    int indiceDaConstrucao = 0;
+};
+struct PedidoComprarDaLoja {
+    int numeroDoItem = 0;
+    int quantidade = 0;
+};
+struct PedidoVenderParaALoja {
+    int numeroDoItem = 0;
+    int quantidade = 0;
+};
+
+using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
+                                     PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja>;
+
+class FilaDePedidosDoJogador {
+public:
+    void acrescentar(PedidoDoJogador pedido) { pedidos.push_back(std::move(pedido)); }
+    bool estaVazia() const { return pedidos.empty(); }
+    // Entrega todos, na ordem em que chegaram, e esvazia a fila.
+    std::vector<PedidoDoJogador> tomarTodos();
+
+private:
+    std::vector<PedidoDoJogador> pedidos;
+};
+
+// Regra 10.8: confere cada pedido de novo e o aplica. Devolve as linhas do
+// console: "Aviso: Pedido recusado (...)" quando não vale mais, e uma linha
+// "Obra encomendada: ..." quando uma obra entra na fila.
+std::vector<std::string> aplicarOsPedidosDoJogador(ContextoDaProducao& contexto, FilaDePedidosDoJogador& fila);

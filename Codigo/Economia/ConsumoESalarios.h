@@ -21,7 +21,8 @@
 // 6.320 ticks de Manufaturado (100), nível 1, sem ser gerente, riqueza 98 e
 // desemprego 90: 70 décimos (69,7).
 int64_t calcularSalarioEmDecimos(int ticksTrabalhados, int centesimosPorHora, int bonusDeNivelEmPorcento, int gerenteEmPorcento,
-                                 int ticksPorHoraDeJogo, int riquezaEmPorcento = 100, int desempregoEmPorcento = 100);
+                                 int ticksPorHoraDeJogo, int riquezaEmPorcento = 100, int desempregoEmPorcento = 100,
+                                 int nivelDeSalarioEmPorcento = 100);
 
 // Regra 10.6: a riqueza da cidade = 80 + 40 × riqueza média ÷ (10 dias da
 // cesta), presa entre 80 e 120, arredondada para baixo. A cesta vem em

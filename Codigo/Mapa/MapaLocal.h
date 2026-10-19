@@ -94,6 +94,8 @@ struct MapaLocal {
 
     // Regra 4.2: fora do mapa, a resposta é "não".
     bool tileDaParaAndar(int tileX, int tileY) const;
+    // O lote que contém o tile (4 x 4, 6 x 6 ou 8 x 8 tiles, pelo porte), ou nullptr (Interface, regra 10.9).
+    const LoteDeConstrucao* loteNoTile(int tileX, int tileY) const;
 
     // Devolve nullptr se a camada não existe.
     const CamadaDeTiles* procurarCamadaPeloNome(const std::string& nomeDaCamada) const;

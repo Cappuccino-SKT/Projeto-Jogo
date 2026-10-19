@@ -399,7 +399,32 @@ Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) fora
 
 1. `.\build\Jogo\jogo.exe --validar` diz "... 1 vila (10 construções e 15 NPCs), 11 eventos. 0 erros, 0 avisos".
 2. `.\build\Jogo\jogo.exe --simular 64 --semente 1` escreve os eventos, "Relatório gravado em relatorio.csv (64 linhas)", o tempo e **PASSOU**. Abrir o `relatorio.csv` no Excel: uma linha por dia; o Pão do dia 40 está na coluna `preco_do_pao`.
-3. `.\build\Jogo\jogo.exe --simular 64 --semente 3` termina com "FALHOU: o preço do Pão foi a 2,7 no dia 31" (é a pergunta FE1-2).
-4. Abrir o jogo: o boneco de teste aparece sem o aviso do Mana Seed. Deixar correr uns 3 dias a 4x e ler o resumo do dia: o Pão sobe de 1,9 para 2,3 nos primeiros dias (a vila começa com só 3 dias de Pão), e o gasto extra aparece a partir do dia 2.
+3. `.\build\Jogo\jogo.exe --simular 64 --semente 3` também termina em **PASSOU** (depois da rodada FE1, as sementes de 1 a 10 passam).
+4. Abrir o jogo: o boneco de teste aparece sem o aviso do Mana Seed. Deixar correr uns 3 dias a 4x e ler o resumo do dia: o Pão fica perto do preço base (a vila começa com 5 dias de Pão), e o gasto extra aparece no resumo.
 5. Apertar **F4** depois de alguns dias: o preço local e o consumo previsto de cada item; em algum dia, uma construção "DE FOLGA HOJE".
+6. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 3".
+
+### Marco 8: a interface do jogador, as obras e as decisões (2026-10-19, falta o teste do autor)
+
+**O que faz:** a vila agora se joga pelo mouse. Uma barra de cima com a data, a velocidade (Pausa, 1x, 2x, 4x), o dinheiro e o botão "Gestão (Tab)"; uma faixa de alertas; notificações à direita; a janela de gestão (tecla **Tab**) com as abas Cidade, Construções, Inventário, Mercado e Diário; e, ao clicar num lote do mapa, o painel da construção. O jogador pode: trocar a fila de ordens da Carpintaria; fixar o preço de cada produto (de −30% a +30%); escolher o salário (Baixo, Normal, Alto); contratar e demitir; comprar e vender na loja da cidade; encomendar uma construção no lote livre (o 5) ou subir de nível (até o 3). A manutenção de cada construção entra no começo de cada estação.
+
+**A interface** usa a **Dear ImGui** (v1.91.9, baixada pelo CMake) só na fatia, e a fonte **Noto Sans** (`Jogo/assets/fontes/`, licença OFL junto). Ela só desenha e lê os cliques: cada decisão vira um **pedido** (`Codigo/Jogador/PedidosDoJogador.h`), aplicado no começo do próximo tick (ou na hora, com o jogo pausado). Por isso o teste sem tela faz os mesmos pedidos e a simulação continua igual.
+
+**Os arquivos novos:**
+
+- `Codigo/Jogador/`: `PedidosDoJogador` (a fila de pedidos), `DecisoesDoJogador` (o preço, o salário, contratar, demitir, a loja), `ObrasDaVila` (as obras e a manutenção), `NotificacoesEAlertas` (as notificações, o Diário, os alertas e o texto do dinheiro);
+- `Codigo/Producao/EstadoDoJogador.h`: o estado dessas decisões;
+- `Jogo/InterfaceDoJogador.cpp`: a barra, os alertas, a gestão e o painel (a única parte que usa a ImGui);
+- `Codigo/Testes/TestesDoMarco8.cpp`: os testes novos;
+- a `SimulacaoDaVila` agora guarda a **cópia da vila e do mapa** (as obras acrescentam construções e bloqueiam lotes), e o `Jogo/` desenha a partir dela.
+
+**Os dados novos:** no `regras.json`, `decisoes_do_jogador` (a faixa do preço, o salário e a velocidade de cada nível, os 8 dias), `obras` (o nível máximo do Engenheiro, os 5% da manutenção, os 75% da produção atrasada) e o passo `manutencao` no começo da `ordem_do_dia`.
+
+**O que testar:**
+
+1. Abrir o jogo: a barra de cima aparece; **Tab** abre a gestão; **Esc** fecha o painel, depois a gestão, e só então o jogo.
+2. Clicar nos prédios até achar a "carpintaria_do_jogador": o painel mostra os 2 empregados, os 3 desempregados, o salário, os preços e a fila de ordens. Trocar o preço dos Móveis para +30% e ver o preço novo no painel; pôr uma ordem "Fazer 5 Móveis".
+3. Aba **Mercado**: vender 10 Tábuas; o dinheiro do jogador sobe e as Tábuas passam para a Cidade.
+4. Clicar no lote 5 (livre): escolher uma Fazenda e encomendar. O lote vira um retângulo marrom (a obra); em cerca de 3 dias de jogo ele vira a Fazenda, com a notificação "Obra pronta".
+5. Deixar correr 16 dias: a manutenção entra no começo do Verão e as notificações "Obra pronta: manutenção de ..." aparecem.
 6. `ctest --test-dir build` termina com "100% tests passed, 0 tests failed out of 3".

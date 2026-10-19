@@ -219,10 +219,44 @@ void lerRegrasDoMarco7DaEconomia(const Json& documento, RegrasDaEconomia& econom
             listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"multiplicadores_do_salario\": os mínimos precisam ser maiores que 0 e não passar dos máximos");
         }
     }
+    if (const Json* decisoes = lerObjetoObrigatorio(documento, "decisoes_do_jogador", listaDeProblemas)) {
+        const std::string onde = "decisoes_do_jogador";
+        RegrasDasDecisoesDoJogador& regras = economia.decisoesDoJogador;
+        lerInteiroObrigatorio(*decisoes, "faixa_do_preco_em_porcento", regras.faixaDoPrecoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*decisoes, "passo_do_preco_em_porcento", regras.passoDoPrecoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*decisoes, "salario_baixo_em_porcento", regras.salarioBaixoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*decisoes, "salario_alto_em_porcento", regras.salarioAltoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*decisoes, "velocidade_com_salario_baixo_em_porcento", regras.velocidadeComSalarioBaixoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*decisoes, "velocidade_com_salario_alto_em_porcento", regras.velocidadeComSalarioAltoEmPorcento, onde, listaDeProblemas);
+        lerInteiroObrigatorio(*decisoes, "dias_de_salario_baixo_para_um_empregado_sair", regras.diasDeSalarioBaixoParaUmEmpregadoSair, onde, listaDeProblemas);
+        if (regras.faixaDoPrecoEmPorcento < 0 || regras.faixaDoPrecoEmPorcento > 90 || regras.passoDoPrecoEmPorcento < 1
+            || regras.salarioBaixoEmPorcento < 1 || regras.salarioAltoEmPorcento < regras.salarioBaixoEmPorcento
+            || regras.velocidadeComSalarioBaixoEmPorcento < 1 || regras.velocidadeComSalarioAltoEmPorcento < 1
+            || regras.diasDeSalarioBaixoParaUmEmpregadoSair < 1) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"decisoes_do_jogador\": faixa de 0 a 90, passo de 1 ou mais, salários e velocidades maiores que 0");
+        }
+    }
     if (lerInteiroObrigatorio(documento, "dias_de_atraso_ate_os_empregados_sairem", economia.diasDeAtrasoAteOsEmpregadosSairem, "regras.json",
                               listaDeProblemas)
         && economia.diasDeAtrasoAteOsEmpregadosSairem < 1) {
         listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"dias_de_atraso_ate_os_empregados_sairem\" precisa ser 1 ou mais");
+    }
+}
+
+// O marco 8 (ficha da Construção, parte 10): o Engenheiro e a manutenção.
+void lerRegrasDasObras(const Json& documento, RegrasDasConstrucoes& construcoes, ListaDeProblemasDosDados& listaDeProblemas)
+{
+    const Json* obras = lerObjetoObrigatorio(documento, "obras", listaDeProblemas);
+    if (obras == nullptr) {
+        return;
+    }
+    lerInteiroObrigatorio(*obras, "nivel_maximo_com_o_engenheiro", construcoes.nivelMaximoComOEngenheiro, "obras", listaDeProblemas);
+    lerInteiroObrigatorio(*obras, "manutencao_em_porcento", construcoes.manutencaoEmPorcento, "obras", listaDeProblemas);
+    lerInteiroObrigatorio(*obras, "producao_com_manutencao_atrasada_em_porcento", construcoes.producaoComManutencaoAtrasadaEmPorcento, "obras",
+                          listaDeProblemas);
+    if (construcoes.nivelMaximoComOEngenheiro < 1 || construcoes.manutencaoEmPorcento < 1 || construcoes.producaoComManutencaoAtrasadaEmPorcento < 1
+        || construcoes.producaoComManutencaoAtrasadaEmPorcento > 100) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"obras\": o nível e a manutenção precisam ser 1 ou mais, e a produção atrasada vai de 1 a 100");
     }
 }
 
@@ -295,7 +329,9 @@ void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, List
     economia.ordemDoDia.clear();
     for (const Json& passo : *ordem) {
         const std::string nomeDoPasso = passo.is_string() ? passo.get<std::string>() : passo.dump();
-        if (nomeDoPasso == "consumo") {
+        if (nomeDoPasso == "manutencao") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Manutencao);
+        } else if (nomeDoPasso == "consumo") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Consumo);
         } else if (nomeDoPasso == "salarios") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Salarios);
@@ -311,7 +347,7 @@ void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, List
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::EscolhaDasReceitas);
         } else {
             listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "o passo \"" + nomeDoPasso + "\" da \"ordem_do_dia\" não existe "
-                                        "(consumo, salarios, mercado_local, estabilizador, felicidade, eventos, escolha_das_receitas)");
+                                        "(manutencao, consumo, salarios, mercado_local, estabilizador, felicidade, eventos, escolha_das_receitas)");
         }
     }
 }
@@ -416,6 +452,7 @@ RegrasDoJogo lerArquivoDeRegras(const std::string& textoDoArquivo, ListaDeProble
 
     lerRegrasDaVidaDosNpcs(documento, regras.vidaDosNpcs, listaDeProblemas);
     lerRegrasDasConstrucoes(documento, regras.construcoes, listaDeProblemas);
+    lerRegrasDasObras(documento, regras.construcoes, listaDeProblemas);
     lerRegrasDaEconomia(documento, regras.economia, listaDeProblemas);
     lerRegrasDaFelicidade(documento, regras.felicidade, listaDeProblemas);
     return regras;

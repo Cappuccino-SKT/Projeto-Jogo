@@ -18,9 +18,12 @@
 #include <entt/entity/registry.hpp>
 
 #include "Dados/DadosDoJogo.h"
+#include "Mapa/MapaLocal.h"
+#include "Vila/VilaInicial.h"
 #include "Economia/DinheiroDaVila.h"
 #include "Inventario/InventarioDaCidade.h"
 #include "Producao/ConsumoMedidoDaVila.h"
+#include "Producao/EstadoDoJogador.h"
 #include "Producao/OrdemDoJogador.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "Tempo/SorteioComSemente.h"
@@ -65,6 +68,12 @@ struct ProducaoDaConstrucao {
     bool estaDeFolgaHoje = false;                 // regra 10.2: decidido à meia-noite
     std::vector<OrdemDoJogador> ordens;           // só nas do jogador (regra 4.4)
 
+    // Marco 8 (só nas do jogador, exceto manutencaoAtrasada e emObra).
+    NivelDeSalario nivelDeSalario = NivelDeSalario::Normal;
+    int diasSeguidosComSalarioBaixo = 0;
+    bool manutencaoAtrasada = false;              // produz 75% (Construção, regra 10.6)
+    bool emObra = false;                          // a construção nova ainda não ficou pronta
+
     int numeroDoGerente = -1;                     // ficha da Construção, regra 4.2
     int diasDeSalarioAtrasado = 0;                // ficha da Economia, regra 4.2
 
@@ -91,6 +100,12 @@ struct ContextoDaProducao {
     FelicidadeDaClasse& felicidade;
     EstadoDosEventos& eventos;
     SorteioComSemente& sorteioDosEventos;
+    // Marco 8: a vila e o mapa que mudam com as obras (cópias da simulação),
+    // as decisões do jogador e a fila de obras.
+    VilaDoJogo& vila;
+    MapaLocal& mapa;
+    DecisoesDoJogador& decisoes;
+    ObrasDaVila& obras;
     int ticksPorHoraDeJogo = 800;
 };
 

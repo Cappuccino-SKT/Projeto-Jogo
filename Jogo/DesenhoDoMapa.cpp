@@ -240,7 +240,8 @@ void DesenhistaDoMapa::desenharConstrucoes(const VilaDoJogo& vila, const MapaLoc
         }
 
         // O corpo da construção, na cor do tipo.
-        const float* cor = corDoTipoDeConstrucao(construcao.tipo);
+        static const float corDaObraEmAndamento[4] = {0.45f, 0.33f, 0.2f, 1.0f};  // marco 8: a obra ainda não ficou pronta
+        const float* cor = construcao.emObra ? corDaObraEmAndamento : corDoTipoDeConstrucao(construcao.tipo);
         pincel.comecarLoteComCorLisa(cor);
         pincel.acrescentarQuadrado(esquerda, topo, direita, baixo, 0, 0, 0, 0);
         pincel.mandarLoteParaAPlacaDeVideo();

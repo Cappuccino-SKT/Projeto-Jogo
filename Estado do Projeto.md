@@ -3,7 +3,7 @@
 ## Situação
 
 - **Design:** completo e revisado (cerca de 45 documentos; índice em [[Descrição do Projeto]]).
-- **Código:** marcos 0 a 6 prontos; marco 7 escrito e equilibrado (FE1 aplicada), falta o teste do autor. Marco 8 com as fichas prontas; falta programá-lo e fazer o marco 9.
+- **Código:** marcos 0 a 7 prontos; marco 8 (interface, obras e decisões) escrito, falta o teste do autor. Falta o marco 9 (salvar e carregar).
 - **Fatia vertical:** uma vila de 15 Civis; o jogador com uma Carpintaria; o teste de 1 ano sem tela.
 
 ## Números-chave

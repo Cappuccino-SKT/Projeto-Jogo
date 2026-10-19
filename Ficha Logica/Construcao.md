@@ -220,7 +220,7 @@ Uma obra não se cancela na fatia.
 ### 10.5 A obra (a cada hora)
 
 1. **A obra da vez** é a primeira da fila. Manutenções vêm antes das obras novas e das subidas (FL8-5).
-2. **Os Operários** em horário de trabalho vão à porta da construção da obra (ou ao meio do lote livre) em vez de ir ao Construtor (a rotina da [[Ficha Logica/IA|IA]] troca só o destino). Com a fila vazia, ficam no Construtor, como hoje.
+2. **Os Operários** trabalham no Construtor, como hoje, e as horas deles valem para a obra da vez (no marco 8 eles **não andam até o lote**; ir à obra fica para quando houver arte e animação de obra).
 3. Cada Operário **presente** soma 1 hora × a velocidade dele (a mesma da produção, regra 4.2 da [[Ficha Logica/Producao|Produção]]). O gerente do Construtor (um dos 2) é o Engenheiro e também soma horas.
 4. Com `horasDeObraQueFaltam` ≤ 0, a obra fica **pronta**:
    - nova: a construção nasce no lote, do jogador, no nível 1, sem empregados e sem ordens; a passagem é atualizada;

@@ -31,6 +31,7 @@
 #include "Producao/ProducaoDaVila.h"
 #include "Simulacao/RelatorioDaSimulacao.h"
 #include "Tempo/RelogioDoMundo.h"
+#include "InterfaceDoJogador.h"
 #include "TextoDaDataDoJogo.h"
 #include "Vila/SimulacaoDaVila.h"
 
@@ -413,6 +414,19 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     SDL_Log("OpenGL %d.%d ligado (%s).", GLAD_VERSION_MAJOR(versaoDoOpenGL), GLAD_VERSION_MINOR(versaoDoOpenGL),
             reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 
+    // A interface do jogador (marco 8, FL8-1): a Dear ImGui na janela e no OpenGL.
+    InterfaceDoJogador interfaceDoJogador;
+    {
+        std::string erroDaInterface;
+        if (!interfaceDoJogador.preparar(janelaDoJogo, ligacaoComOOpenGL, PASTA_DOS_ASSETS_DO_JOGO, erroDaInterface)) {
+            mostrarErroGrave("Não foi possível preparar a interface: " + erroDaInterface);
+            SDL_GL_DestroyContext(ligacaoComOOpenGL);
+            SDL_DestroyWindow(janelaDoJogo);
+            SDL_Quit();
+            return 1;
+        }
+    }
+
     // Espera o monitor terminar cada imagem antes de desenhar a próxima
     // (sincronia vertical). Sem isso, o laço abaixo usaria 100% do processador.
     SDL_GL_SetSwapInterval(1);
@@ -476,8 +490,9 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
     for (const std::string& aviso : simulacaoDaVila.avisosAoMontar) {
         SDL_Log("Aviso: %s.", aviso.c_str());
     }
-    SDL_Log("A vila: %d construções e %d NPCs.", static_cast<int>(dadosDoJogo.vilaInicial.construcoes.size()),
-            static_cast<int>(dadosDoJogo.vilaInicial.npcsIniciais.size()));
+    SDL_Log("A vila: %d construções e %d NPCs.", static_cast<int>(simulacaoDaVila.vila.construcoes.size()),
+            static_cast<int>(simulacaoDaVila.vila.npcsIniciais.size()));
+    SDL_Log("Interface: Tab abre a gestão da vila; clique num lote para ver a construção; os botões de cima mudam a velocidade.");
 
     std::string tituloMostradoNaJanela;
     Uint64 instanteDoQuadroAnteriorEmNanossegundos = SDL_GetTicksNS();
@@ -488,15 +503,27 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         // 6a. Lê tudo o que aconteceu desde o último quadro (teclas, mouse, janela).
         SDL_Event eventoRecebido;
         while (SDL_PollEvent(&eventoRecebido)) {
+            interfaceDoJogador.processarEvento(eventoRecebido);
+            const bool interfaceQuerOTeclado = interfaceDoJogador.querOTeclado();
+            const bool interfaceQuerOMouse = interfaceDoJogador.querOMouse();
             // O X da janela (ou "Fechar janela" na barra de tarefas).
             if (eventoRecebido.type == SDL_EVENT_QUIT || eventoRecebido.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED) {
                 jogadorPediuParaFechar = true;
             }
             // As teclas apertadas viram ações pela tabela (FL2-4).
             if (eventoRecebido.type == SDL_EVENT_KEY_DOWN && !eventoRecebido.key.repeat) {
-                const std::optional<AcaoDoJogador> acao = tabelaDeAcoes.acaoDaTeclaApertada(eventoRecebido.key.scancode);
+                std::optional<AcaoDoJogador> acao = tabelaDeAcoes.acaoDaTeclaApertada(eventoRecebido.key.scancode);
+                if (acao != AcaoDoJogador::FecharOJogo && interfaceQuerOTeclado) {
+                    acao.reset();  // digitando num campo da interface: as teclas do jogo esperam
+                }
+                if (eventoRecebido.key.scancode == SDL_SCANCODE_TAB && !interfaceQuerOTeclado) {
+                    interfaceDoJogador.alternarAJanelaDeGestao();
+                }
                 if (acao == AcaoDoJogador::FecharOJogo) {
-                    jogadorPediuParaFechar = true;
+                    // O Esc fecha primeiro o painel e a gestão; só sem nada aberto, fecha o jogo.
+                    if (!interfaceDoJogador.fecharOQueEstiverAberto()) {
+                        jogadorPediuParaFechar = true;
+                    }
                 } else if (acao == AcaoDoJogador::AlternarTelaCheia) {
                     // Tela cheia, sem bordas, do tamanho do monitor.
                     const bool janelaEstaEmTelaCheia = (SDL_GetWindowFlags(janelaDoJogo) & SDL_WINDOW_FULLSCREEN) != 0;
@@ -525,7 +552,7 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             // A câmera pelo mouse. A SDL mede o mouse em "pontos" da janela; a
             // densidade converte para pixels da tela (é 1 num monitor comum).
             const float densidadeDePixels = SDL_GetWindowPixelDensity(janelaDoJogo);
-            if (eventoRecebido.type == SDL_EVENT_MOUSE_WHEEL) {
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_WHEEL && !interfaceQuerOMouse) {
                 float quantoARodaGirou = eventoRecebido.wheel.y;
                 if (eventoRecebido.wheel.direction == SDL_MOUSEWHEEL_FLIPPED) {
                     quantoARodaGirou = -quantoARodaGirou;
@@ -536,6 +563,13 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                 if (zoomMudou) {
                     SDL_Log("Zoom: %dx.", cameraDoMapa.zoomAtual());
                 }
+            }
+            // O botão esquerdo num lote do mapa abre o painel da construção (ficha da Interface, regra 10.6).
+            if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_LEFT && !interfaceQuerOMouse) {
+                const std::optional<PosicaoDeTile> tileClicado = cameraDoMapa.converterPontoDaTelaEmTile(
+                    eventoRecebido.button.x * densidadeDePixels, eventoRecebido.button.y * densidadeDePixels, simulacaoDaVila.mapa.tamanhoDoTileEmPixels);
+                const LoteDeConstrucao* loteClicado = tileClicado.has_value() ? simulacaoDaVila.mapa.loteNoTile(tileClicado->tileX, tileClicado->tileY) : nullptr;
+                interfaceDoJogador.selecionarOLote(loteClicado != nullptr ? loteClicado->identificadorDoLote : -1);
             }
             if (eventoRecebido.type == SDL_EVENT_MOUSE_BUTTON_DOWN && eventoRecebido.button.button == SDL_BUTTON_MIDDLE) {
                 cameraDoMapa.comecarArrasto();
@@ -561,6 +595,10 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
             static_cast<int64_t>(instanteDesteQuadroEmNanossegundos - instanteDoQuadroAnteriorEmNanossegundos);
         instanteDoQuadroAnteriorEmNanossegundos = instanteDesteQuadroEmNanossegundos;
 
+        // Os pedidos do jogador valem na hora, mesmo com o jogo pausado (ficha da Interface, regra 10.8).
+        for (const std::string& linha : simulacaoDaVila.aplicarOsPedidosPendentes()) {
+            SDL_Log("%s", linha.c_str());
+        }
         const int ticksParaAvancar = relogioDoMundo.calcularTicksParaAvancarPeloTempoReal(nanossegundosDesdeOQuadroAnterior);
         for (int tick = 0; tick < ticksParaAvancar; ++tick) {
             // A ordem de cada tick está na SimulacaoDaVila (a mesma do teste sem
@@ -599,11 +637,12 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
         glClearColor(corDoFundoAtrasDoMapa[0], corDoFundoAtrasDoMapa[1], corDoFundoAtrasDoMapa[2], 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        const MapaLocal& mapaDaVila = simulacaoDaVila.mapa;
         desenhistaDoMapa.desenharCamadasAbaixoDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        desenhistaDoMapa.desenharConstrucoes(dadosDoJogo.vilaInicial, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        desenhistaDoMapa.desenharConstrucoes(simulacaoDaVila.vila, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         desenhistaDosPersonagens.desenharNpcs(registroDasEntidades, relogioDoMundo.fracaoJaPassadaDoProximoTick(), mapaDaVila.tamanhoDoTileEmPixels,
                                               cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
-        desenhistaDoMapa.desenharTelhadosDasConstrucoes(dadosDoJogo.vilaInicial, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+        desenhistaDoMapa.desenharTelhadosDasConstrucoes(simulacaoDaVila.vila, mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         desenhistaDoMapa.desenharCamadasAcimaDosPersonagens(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
         if (mostrarColisaoParaDepuracao) {
             desenhistaDoMapa.desenharTilesBloqueadosParaDepuracao(mapaDaVila, cameraDoMapa, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
@@ -618,12 +657,16 @@ int main(int quantidadeDeArgumentos, char* argumentosDaLinhaDeComando[])
                                                                 alturaDaTelaEmPixels);
         }
 
+        // 6f. A interface do jogador por cima de tudo.
+        interfaceDoJogador.desenharUmQuadro(simulacaoDaVila, larguraDaTelaEmPixels, alturaDaTelaEmPixels);
+
         SDL_GL_SwapWindow(janelaDoJogo);
     }
 
     SDL_Log("Janela fechada. Até a próxima!");
 
     // 7. Devolve ao sistema tudo o que foi pedido, na ordem contrária.
+    interfaceDoJogador.liberar();
     desenhistaDosPersonagens.liberar();
     desenhistaDoMapa.liberar();
     SDL_GL_DestroyContext(ligacaoComOOpenGL);

@@ -19,6 +19,10 @@ add_library(regras_do_jogo STATIC
     Eventos/EventosDaVila.cpp
     Producao/ConsumoMedidoDaVila.cpp
     Simulacao/RelatorioDaSimulacao.cpp
+    Jogador/DecisoesDoJogador.cpp
+    Jogador/ObrasDaVila.cpp
+    Jogador/PedidosDoJogador.cpp
+    Jogador/NotificacoesEAlertas.cpp
     Vila/SimulacaoDaVila.cpp
     Dados/ProblemasDosDados.cpp
     Dados/TabelaCsv.cpp

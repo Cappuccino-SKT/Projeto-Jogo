@@ -18,6 +18,7 @@ void testarMovimentoDosNpcs();
 void testarRotinaDosNpcs();
 void testarProducaoEEconomia();
 void testarSimulacaoDeUmAno();
+void testarMarco8();
 
 int main()
 {
@@ -33,6 +34,7 @@ int main()
     testarRotinaDosNpcs();
     testarProducaoEEconomia();
     testarSimulacaoDeUmAno();
+    testarMarco8();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {
