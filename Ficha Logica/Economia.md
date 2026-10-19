@@ -308,7 +308,7 @@ Quando uma construção chega a **16 dias seguidos** de salário atrasado (uma e
 | A riqueza média em 6,0 (abaixo de 3 dias) | O Banco paga até o teto da estação (10% do Banco do começo dela) |
 | Uma construção com 16 dias de atraso | Os empregados viram desempregados |
 | Uma ordem do dia com "mercado_local" antes de "consumo" | Roda nessa ordem (a ordem é do arquivo) |
-| 64 dias sem tela | O Banco nunca zera; o dinheiro total só muda pelo Mercador viajante (o único que traz dinheiro de fora) |
+| 64 dias sem tela | O Banco nunca fica abaixo de 250 e, no dia 64, no máximo 50 abaixo do dia 1 (FE4-3); o dinheiro total só muda pelo Mercador viajante e pela verba da Coroa (as entradas de fora) |
 
 ---
 
@@ -346,6 +346,8 @@ Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado
 *Exemplo:* os Móveis a 5,1 no local; o jogador põe +20%: 6,1. A cesta compra os 2 do dia por 6,1; o gasto extra queria 2 a mais e compra 2 × 10 ÷ 30 = 0,67 → 0. O jogador ganha 12,2 em vez de 20,4.
 
 **Ajuste da FE3 (2026-10-19):** o `multiplicador_do_preco` dos Móveis de Madeira passou de 100 para **140** (`itens.csv`), para o jogador ganhar cerca de +3,5 a +4,5 moedas por dia (antes, +0,45). Os exemplos desta ficha continuam com o preço antigo (5,1) porque só ilustram a conta. O custo é do Banco: o dinheiro do jogador sai dele, e o Banco termina o ano 1 entre 110 e 175 (antes, perto de 400); ele **não fecha o ano 2** sem uma fonte de fora. **[Refinar depois]** (FE3-2): o Construtor comprar as Tábuas do jogador; uma fonte de dinheiro para o Banco no jogo completo (o Mercador, as exportações).
+
+**A verba da Coroa (FE4-1 e FE4-2, 2026-10-19):** no dia 1 de cada estação, no passo "estabilizador" da ordem do dia e antes de o teto recomeçar, entram de fora no Banco **75 moedas** (`verba_da_coroa_por_estacao_em_decimos`: 750 no `regras.json`), fixas, contadas em `dinheiroQueEntrouDeFora`. Elas cobrem o que o jogador ganha (FE3): medido no `--simular 64`, o Banco termina o ano em 475 (semente 1) e 408 (semente 2), nunca abaixo de 295, e o jogador segue com +3,4 e +4,4 por dia. **[Refinar depois]** a exportação da sobra pelo Mercado (FE4-1 b) quando houver mais itens; a verba pela Felicidade (FE4-2 c); no jogo completo, a verba e a parte da Facção no imposto (V2-7) pensadas juntas.
 
 **O preço do jogador (FE3-3):** na vila de hoje ninguém mais vende o que o jogador faz, então o preço 0% é sempre o melhor (+15% dá 16,6 por dia; −15% dá 16,1; 0% dá 19,1). A interface avisa com uma dica. **[Refinar depois]** o preço passa a valer com concorrência (outra Carpintaria, o Mercador) ou procura que cresce com o preço baixo.
 

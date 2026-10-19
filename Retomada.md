@@ -5,7 +5,7 @@
 - **Marcos 0 a 7:** prontos e no `main`.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
 - **Marcos 8 e 9** (interface; salvar e carregar): prontos, testados e no `main`. A fatia vertical está completa. O que cada um trouxe e como testar: `Jogo/LEIA-ME.md`.
-- **Próximo passo:** o autor responde a rodada FE4 (o dinheiro do Banco da Cidade), na [[Rodada Pendente]] (branch `docs/rodada-fe4`, que sai da `docs/aplica-fe3`).
+- **Próximo passo:** as rodadas FE3 e FE4 estão aplicadas (o jogador ganha +3,4 a +4,4 por dia e a verba da Coroa segura o Banco; branch `codigo/aplica-fe4`). O autor decide o próximo passo: mais ajustes, arte ou conteúdo C1 a C3. Não há rodada pendente.
 
 ## 2. Como trabalhamos
 

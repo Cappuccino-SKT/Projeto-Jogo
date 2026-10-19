@@ -206,6 +206,11 @@ void lerRegrasDoMarco7DaEconomia(const Json& documento, RegrasDaEconomia& econom
             listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"estabilizador\": a ajuda vai até um número de dias maior que o de baixo, e nada negativo");
         }
     }
+    // FE4-1: a verba da Coroa por estação.
+    lerInteiroObrigatorio(documento, "verba_da_coroa_por_estacao_em_decimos", economia.verbaDaCoroaPorEstacaoEmDecimos, "regras", listaDeProblemas);
+    if (economia.verbaDaCoroaPorEstacaoEmDecimos < 0) {
+        listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"verba_da_coroa_por_estacao_em_decimos\": não pode ser negativa");
+    }
     if (const Json* multiplicadores = lerObjetoObrigatorio(documento, "multiplicadores_do_salario", listaDeProblemas)) {
         const std::string onde = "multiplicadores_do_salario";
         RegrasDosMultiplicadoresDoSalario& regras = economia.multiplicadoresDoSalario;

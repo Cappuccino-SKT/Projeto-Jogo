@@ -469,3 +469,15 @@ Os dois problemas de equilíbrio (a Febre no Cozinheiro e os Móveis caros) fora
 ### Rodada FE3: o ritmo do dinheiro do jogador (2026-10-19)
 
 O `multiplicador_do_preco` dos Móveis (`itens.csv`) foi de 100 para **140**, e o painel da construção do jogador ganhou a dica "ninguém mais vende o que você faz; mudar o preço reduz a venda". Medido com `jogo --simular 64 --semente N` (todas **PASSOU**): o jogador ganha **+3,4 por dia** na semente 1 (de 88,9 para 305,8) e **+4,4** na 2 (para 364,4), antes +0,45. O preço dos Móveis (Pão fica em 1,3 a 1,9) e a Felicidade (cerca de 58) quase não mudam. **Atenção:** o Banco perde o que o jogador ganha: termina o ano em 175 (semente 1) e 108 (semente 2), antes perto de 400, e não fecharia um segundo ano. Com 150 a semente 2 chegava a 45; por isso o valor ficou em 140 (o limite de cima da sugestão).
+
+### Rodada FE4: o dinheiro do Banco da Cidade (2026-10-19)
+
+A **verba da Coroa**: no dia 1 de cada estação entram de fora **75 moedas** no Banco (`verba_da_coroa_por_estacao_em_decimos`: 750 no `regras.json`). Medido com `--simular 64`: o Banco termina o ano em **475** (semente 1) e **408** (semente 2), nunca abaixo de 295 (antes da FE4: 175 e 108); o jogador continua com +3,4 e +4,4 por dia.
+
+O teste de 1 ano ficou mais exigente (FE4-3): agora **FALHA** se o Banco ficar abaixo de 250 em algum dia, ou se no dia 64 estiver mais de 50 abaixo do dia 1. **Depois de mexer na economia**, rode também os 2 anos à mão (cerca de 90 segundos):
+
+```
+.\build\Jogo\jogo.exe --simular 128 --semente 1
+```
+
+**Os 2 anos (semente 1, 2026-10-19):** PASSOU, mas com uma tendência a olhar: no ano 2 o Banco **sobe** de 475 para 867, e o dinheiro do jogador **cai** de 305 para 260. A verba fixa sobra quando o jogador deixa de lucrar; a causa da queda do jogador no ano 2 ainda não foi investigada.

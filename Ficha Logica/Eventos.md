@@ -110,7 +110,7 @@ Na ordem do `eventos.json`, para cada ocasional:
 | `felicidade` | Enquanto ativo, soma no fator "Eventos duradouros" ([[Ficha Logica/Felicidade\|Felicidade]]) |
 | `mudar_estoque` | Pontual: tira uma porcentagem ou põe uma quantidade de um item da Cidade. Quando põe, põe o que couber na capacidade [Proposta] |
 | `npcs_doentes` | Sorteia N Civis com emprego; cada um fica em casa (a ação Dormir ganha sempre) pelos dias do evento |
-| `mercador_compra` | Pontual: compra do item da Cidade com mais dias de estoque (estoque ÷ consumo previsto), a 90% do preço local; o dinheiro entra no Banco. É a única entrada de dinheiro de fora da vila. Os itens sem consumo previsto ficam de fora (o Bloco de Pedra, que só as obras usam, não tem "dias de estoque") [Proposta] |
+| `mercador_compra` | Pontual: compra do item da Cidade com mais dias de estoque (estoque ÷ consumo previsto), a 90% do preço local; o dinheiro entra no Banco. Com a verba da Coroa (FE4-1, ficha da Economia, regra 10.9), é uma das duas entradas de dinheiro de fora. |
 
 ### 4.5 O aviso
 

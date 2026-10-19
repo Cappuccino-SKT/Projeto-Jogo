@@ -365,7 +365,7 @@ O formato é um arquivo binário (MessagePack) com número de versão ([[Arquite
 - **Teste de 1 ano sem tela** (V2-12):
   - **comando:** `jogo --simular 64 --semente 1` (FT1-6), que roda 64 dias na velocidade máxima, sem desenhar nada;
   - **relatório:** grava um CSV com uma linha por dia: estoque de cada item, preço do Pão, Banco, riqueza média, Felicidade, empregados, eventos do dia.
-  - **Passa se:** ninguém passa fome por mais de 3 dias seguidos, o Banco nunca zera, e o preço do Pão fica entre 1,2 e 2,6.
+  - **Passa se:** ninguém passa fome por mais de 3 dias seguidos, o Banco nunca fica abaixo de 250 e no dia 64 está no máximo 50 abaixo do dia 1 (FE4-3), e o preço do Pão fica entre 1,2 e 2,6. Depois de mexer na economia, rodar também `jogo --simular 128` à mão (2 anos).
 - **Repetição:** a mesma semente tem que dar o mesmo relatório, linha por linha. Isso pega erros que aparecem "às vezes".
 - **Testes das fórmulas:** pequenos testes automáticos de cada regra da parte 4. Exemplo: "Pão com os preços de partida custa 17".
 - **Desempenho:** medir com o Tracy o tempo de um tick com 15 NPCs, e depois com 500 NPCs falsos, a meta da V2-11.

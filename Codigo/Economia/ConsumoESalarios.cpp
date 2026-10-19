@@ -365,8 +365,11 @@ void rodarOEstabilizador(ContextoDaProducao& contexto, const RelogioDoMundo& rel
     const RegrasDoEstabilizador& regras = economia.estabilizador;
     dinheiro.ajudaDoEstabilizadorHoje = 0;
 
-    // 1. No dia 1 de cada estação, o teto recomeça.
+    // 1. No dia 1 de cada estação, entra a verba da Coroa (FE4-1: o único dinheiro de
+    //    fora além do Mercador) e o teto recomeça.
     if (relogio.diaDaEstacaoAtual() == 1) {
+        dinheiro.bancoDaCidade += economia.verbaDaCoroaPorEstacaoEmDecimos;
+        dinheiro.dinheiroQueEntrouDeFora += economia.verbaDaCoroaPorEstacaoEmDecimos;
         dinheiro.bancoNoComecoDaEstacao = dinheiro.bancoDaCidade;
         dinheiro.ajudaDoEstabilizadorNaEstacao = 0;
     }
