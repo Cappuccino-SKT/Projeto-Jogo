@@ -20,6 +20,16 @@ As sessões estavam caras. Obrigações:
 - **Respostas curtas:** o resumo final em poucas linhas; sem repetir o que o autor já sabe.
 - **Uma sessão nova por etapa** (uma rodada ou um marco): uma conversa longa reenvia todo o histórico a cada mensagem.
 
+## Modelo e esforço (pedido do autor, 2026-10-19)
+
+| Tarefa | Modelo e esforço |
+|---|---|
+| Programar um marco pelas fichas, corrigir testes, aplicar as respostas de uma rodada | **Sonnet, esforço médio** |
+| Escrever fichas e rodadas de design; um erro difícil que o Sonnet não resolveu | **Opus, esforço médio** |
+| Esforço alto | Só quando o autor pedir |
+
+**Obrigação:** na primeira mensagem de cada sessão, antes de qualquer outra coisa, conferir o modelo em uso (está nas instruções do sistema) e a tarefa pedida. Se não bater com a tabela, **avisar o autor em uma linha** ("Esta tarefa pede o Sonnet com esforço médio; troque no seletor de modelo do app e me mande de novo.") e **parar até ele responder**. Se ele mandar seguir assim mesmo, seguir. O esforço não aparece nas instruções: lembrar a tabela só quando o modelo estiver errado.
+
 ## Regras
 
 - Sempre em **português do Brasil**, em linguagem simples: o autor tem pouca experiência em C++.
