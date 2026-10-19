@@ -6,6 +6,8 @@
 #include "Economia/FelicidadeDaClasse.h"
 #include "Economia/MercadoLocal.h"
 #include "Eventos/EventosDaVila.h"
+#include "Jogador/DecisoesDoJogador.h"
+#include "Jogador/ObrasDaVila.h"
 #include "Npc/ComponentesDoNpc.h"
 
 namespace {
@@ -22,11 +24,12 @@ bool itemEhDoTipoPedido(const DefinicaoDeItem& item, bool procurarComida)
 }
 
 // O preço que a classe paga: à Cidade, o da loja (110% do preço local); ao
-// jogador, o preço local (até o marco 8, quando ele fixa a faixa de ±30%).
+// jogador, o preço local mais a porcentagem que ele fixou (FL8-6, de -30% a +30%).
 int precoQueAClassePaga(const ContextoDaProducao& contexto, const PilhaDoInventario& pilha)
 {
     const int precoLocal = precoLocalDoItem(contexto, pilha.numeroDoItem);
-    return pilha.dono == DonoDoItem::Cidade ? calcularPrecoDaLojaDaCidade(precoLocal, contexto.dados.regras.economia) : precoLocal;
+    return pilha.dono == DonoDoItem::Cidade ? calcularPrecoDaLojaDaCidade(precoLocal, contexto.dados.regras.economia)
+                                            : calcularPrecoDoItemDoJogador(precoLocal, contexto.decisoes.porcentagemDoPrecoDe(pilha.numeroDoItem));
 }
 
 // O item mais barato do tipo pedido (comida ou Material Básico) que existe
@@ -119,11 +122,19 @@ void fazerOGastoExtra(ContextoDaProducao& contexto, int materiaisQueACestaTirou)
         return;
     }
     // 3. Materiais a mais: até o mesmo número que a cesta tirou hoje.
+    int comprasDoJogador = 0;
     for (int material = 0; material < materiaisQueACestaTirou; ++material) {
         const std::optional<PilhaDoInventario> pilha = procurarOMaisBarato(contexto, false);
         if (!pilha.has_value() || precoQueAClassePaga(contexto, *pilha) > paraGastar) {
             break;
         }
+        // FL8-6: com o preço do jogador acima do local, o gasto extra compra uma fração.
+        if (pilha->dono == DonoDoItem::Jogador
+            && comprasDoJogador >= calcularQuantidadeDoGastoExtraComOPreco(materiaisQueACestaTirou, contexto.decisoes.porcentagemDoPrecoDe(pilha->numeroDoItem),
+                                                                           economia.decisoesDoJogador)) {
+            break;
+        }
+        comprasDoJogador += pilha->dono == DonoDoItem::Jogador ? 1 : 0;
         contexto.inventario.tentarTirar(pilha->numeroDoItem, pilha->dono, 1);
         contexto.consumoMedido.anotarOQueSaiu(pilha->numeroDoItem, 1);
         const int64_t preco = pagarOItemConsumido(contexto, *pilha);
@@ -155,11 +166,11 @@ std::string escreverDinheiro(int64_t valorEmDecimos)
 }  // namespace
 
 int64_t calcularSalarioEmDecimos(int ticksTrabalhados, int centesimosPorHora, int bonusDeNivelEmPorcento, int gerenteEmPorcento,
-                                 int ticksPorHoraDeJogo, int riquezaEmPorcento, int desempregoEmPorcento)
+                                 int ticksPorHoraDeJogo, int riquezaEmPorcento, int desempregoEmPorcento, int nivelDeSalarioEmPorcento)
 {
     const long long numerador = static_cast<long long>(ticksTrabalhados) * centesimosPorHora * bonusDeNivelEmPorcento * gerenteEmPorcento
-        * riquezaEmPorcento * desempregoEmPorcento;
-    const long long denominador = static_cast<long long>(ticksPorHoraDeJogo) * 10 * 100 * 100 * 100 * 100;
+        * riquezaEmPorcento * desempregoEmPorcento * nivelDeSalarioEmPorcento;
+    const long long denominador = static_cast<long long>(ticksPorHoraDeJogo) * 10 * 100 * 100 * 100 * 100 * 100;
     return arredondarMetadeParaCima(numerador, denominador);
 }
 
@@ -260,7 +271,7 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
     entt::registry& registro = contexto.registroDasEntidades;
     DinheiroDaVila& dinheiro = contexto.dinheiro;
     const RegrasDaEconomia& economia = contexto.dados.regras.economia;
-    const VilaDoJogo& vila = contexto.dados.vilaInicial;
+    const VilaDoJogo& vila = contexto.vila;
 
     // Os multiplicadores do dia (regra 10.6), iguais para todos.
     const int riqueza = calcularMultiplicadorDaRiqueza(dinheiro.dinheiroDaClasseCivil, dinheiro.quantidadeDeCivis,
@@ -287,6 +298,7 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
         int64_t& dinheiroDeQuemPaga = construcao.donoEhOJogador ? dinheiro.dinheiroDoJogador : dinheiro.bancoDaCidade;
         const int centesimosPorHora = salarioPorHoraDoTrabalho(trabalhoDaConstrucao(contexto, static_cast<int>(indice)), contexto.dados.regras.regrasDoPreco);
         const int bonusDeNivel = 100 + economia.bonusDoSalarioPorNivelEmPorcento * (construcao.nivel - 1);
+        const int nivelDeSalario = construcao.donoEhOJogador ? salarioDoNivelEmPorcento(producao.nivelDeSalario, economia.decisoesDoJogador) : 100;
         bool alguemFicouSemReceber = false;
         for (const auto& [numeroDoNpc, npc] : empregados) {
             const int ticksDoDia = registro.get<TrabalhoDoDia>(npc).ticksTrabalhadosHoje;
@@ -295,7 +307,7 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
             }
             const int gerente = numeroDoNpc == producao.numeroDoGerente ? economia.salarioDoGerenteEmPorcento : 100;
             const int64_t salario =
-                calcularSalarioEmDecimos(ticksDoDia, centesimosPorHora, bonusDeNivel, gerente, contexto.ticksPorHoraDeJogo, riqueza, desemprego);
+                calcularSalarioEmDecimos(ticksDoDia, centesimosPorHora, bonusDeNivel, gerente, contexto.ticksPorHoraDeJogo, riqueza, desemprego, nivelDeSalario);
             // Passo 3: sem dinheiro para o salário inteiro, não recebe nada.
             if (dinheiroDeQuemPaga < salario) {
                 alguemFicouSemReceber = true;
@@ -311,6 +323,20 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
             rendaDoDia += salario;
         }
         producao.diasDeSalarioAtrasado = alguemFicouSemReceber ? producao.diasDeSalarioAtrasado + 1 : 0;
+
+        // FL8-7: depois de 8 dias seguidos em salário Baixo, o empregado mais novo sai.
+        if (construcao.donoEhOJogador && producao.nivelDeSalario == NivelDeSalario::Baixo) {
+            ++producao.diasSeguidosComSalarioBaixo;
+            if (producao.diasSeguidosComSalarioBaixo >= economia.decisoesDoJogador.diasDeSalarioBaixoParaUmEmpregadoSair && !empregados.empty()) {
+                registro.get<CasaETrabalhoDoNpc>(empregados.back().second).indiceDoTrabalho = -1;
+                linhasParaOConsole.push_back("Aviso: um empregado de " + construcao.identificador + " saiu depois de "
+                                             + std::to_string(producao.diasSeguidosComSalarioBaixo) + " dias com o salário Baixo.");
+                empregados.pop_back();
+                producao.diasSeguidosComSalarioBaixo = 0;
+            }
+        } else {
+            producao.diasSeguidosComSalarioBaixo = 0;
+        }
 
         // Regra 10.8: com 16 dias seguidos de atraso, os empregados saem.
         if (producao.diasDeSalarioAtrasado >= economia.diasDeAtrasoAteOsEmpregadosSairem) {
@@ -394,6 +420,9 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
     contexto.eventos.linhasParaOConsole.clear();
     for (const PassoDaOrdemDoDia passo : contexto.dados.regras.economia.ordemDoDia) {
         switch (passo) {
+        case PassoDaOrdemDoDia::Manutencao:
+            rodarAManutencaoDoDia(contexto, relogio);
+            break;
         case PassoDaOrdemDoDia::Consumo:
             consumirACestaDoDia(contexto);
             break;

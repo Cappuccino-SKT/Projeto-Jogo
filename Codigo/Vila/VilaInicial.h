@@ -27,6 +27,7 @@ struct ConstrucaoDaVila {
     bool donoEhOJogador = false;
     RetanguloEmTiles areaDoLote;  // os tiles que a construção ocupa (e bloqueia)
     PosicaoDeTile tileDaPorta;    // logo abaixo do meio do lote
+    bool emObra = false;          // marco 8: a construção nova ainda está sendo feita
     int nivel = 1;                // de 1 a 5 (marco 6; a Carpintaria do jogador começa no 2, FL6-2)
     std::vector<OrdemDoJogador> ordensDoJogador;  // só nas do jogador (FL6-3)
 

@@ -1,5 +1,8 @@
 #include "Producao/ProducaoDaVila.h"
 
+#include "Jogador/DecisoesDoJogador.h"
+#include "Jogador/ObrasDaVila.h"
+
 #include <algorithm>
 #include <utility>
 
@@ -32,7 +35,7 @@ std::string nomeDoItem(const ContextoDaProducao& contexto, int numeroDoItem)
 
 bool construcaoEhDoJogador(const ContextoDaProducao& contexto, int indiceDaConstrucao)
 {
-    return contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].donoEhOJogador;
+    return contexto.vila.construcoes[indiceDaConstrucao].donoEhOJogador;
 }
 
 DonoDoItem donoDaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao)
@@ -72,7 +75,7 @@ int areaDoRecursoDaReceita(const ContextoDaProducao& contexto, const DefinicaoDe
         return -1;
     }
     const std::vector<DefinicaoDeRecurso>& recursos = contexto.dados.catalogoDeRecursos.todosOsRecursos();
-    const std::vector<AreaDeRecurso>& areas = contexto.dados.mapaDaVila.areasDeRecurso;
+    const std::vector<AreaDeRecurso>& areas = contexto.mapa.areasDeRecurso;
     for (std::size_t recurso = 0; recurso < recursos.size(); ++recurso) {
         if (recursos[recurso].numeroDoItemGerado != receita.numeroDoProduto || recursos[recurso].construcaoQueExtrai != receita.construcaoQueProduz) {
             continue;
@@ -99,7 +102,7 @@ void atualizarOCampoDeTrabalho(ContextoDaProducao& contexto, int indiceDaConstru
     producao.tilesDeTrabalhoNoCampo.clear();
     if (areaNova >= 0) {
         producao.tilesDeTrabalhoNoCampo =
-            montarTilesDeTrabalhoDaArea(contexto.dados.mapaDaVila, contexto.dados.vilaInicial, contexto.dados.mapaDaVila.areasDeRecurso[areaNova]);
+            montarTilesDeTrabalhoDaArea(contexto.mapa, contexto.vila, contexto.mapa.areasDeRecurso[areaNova]);
     }
 }
 
@@ -118,7 +121,7 @@ bool algumEmpregadoConsegueFazer(const ContextoDaProducao& contexto, int indiceD
 // e, se for Braçal, o mapa tem a área do recurso.
 bool receitaPodeRodarNaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao, const DefinicaoDeReceita& receita)
 {
-    const ConstrucaoDaVila& construcao = contexto.dados.vilaInicial.construcoes[indiceDaConstrucao];
+    const ConstrucaoDaVila& construcao = contexto.vila.construcoes[indiceDaConstrucao];
     return receita.construcaoQueProduz == construcao.tipo && construcao.nivel >= receita.nivelMinimoDaConstrucao
         && algumEmpregadoConsegueFazer(contexto, indiceDaConstrucao, receita)
         && (receita.trabalhoUsado != TrabalhoDaReceita::Bracal || areaDoRecursoDaReceita(contexto, receita) >= 0);
@@ -245,7 +248,7 @@ int fatorDaProducaoBracalEmPorcento(const ContextoDaProducao& contexto, const Pr
     if (producao.areaDoCampoNoMapa < 0) {
         return 100;
     }
-    const AreaDeRecurso& area = contexto.dados.mapaDaVila.areasDeRecurso[producao.areaDoCampoNoMapa];
+    const AreaDeRecurso& area = contexto.mapa.areasDeRecurso[producao.areaDoCampoNoMapa];
     const DefinicaoDeRecurso& recurso = contexto.dados.catalogoDeRecursos.todosOsRecursos()[area.numeroDoRecurso];
     const auto grupo = contexto.dados.regras.producaoPorEstacaoEmPorcento.find(recurso.grupoDaEstacao);
     const int producaoDaEstacao = grupo == contexto.dados.regras.producaoPorEstacaoEmPorcento.end() ? 100 : grupo->second[static_cast<int>(estacao)];
@@ -255,14 +258,19 @@ int fatorDaProducaoBracalEmPorcento(const ContextoDaProducao& contexto, const Pr
 // O trabalho de todos os empregados na última hora (regra 4.2, passo 3).
 int64_t somarOTrabalhoDaHora(const ContextoDaProducao& contexto, int indiceDaConstrucao, const DefinicaoDeReceita& receita)
 {
-    const int nivel = contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].nivel;
+    const int nivel = contexto.vila.construcoes[indiceDaConstrucao].nivel;
     int64_t trabalhoDaHora = 0;
     for (const entt::entity empregado : empregadosDaConstrucao(contexto, indiceDaConstrucao)) {
         const int ticks = contexto.registroDasEntidades.get<TrabalhoDoDia>(empregado).ticksTrabalhadosNestaHora;
         const int habilidade = contexto.registroDasEntidades.get<HabilidadesDoNpc>(empregado).habilidadeNoTrabalho(receita.trabalhoUsado);
         trabalhoDaHora += calcularProgressoDoTrabalho(ticks, habilidade, nivel, receita.nivelMinimoDaConstrucao);
     }
-    return trabalhoDaHora;
+    // Marco 8: o nível de salário (FL8-7) e a manutenção atrasada (FL8-5) mudam a velocidade.
+    const ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indiceDaConstrucao];
+    const int velocidadeDoSalario = contexto.vila.construcoes[indiceDaConstrucao].donoEhOJogador
+        ? velocidadeDoNivelEmPorcento(producao.nivelDeSalario, contexto.dados.regras.economia.decisoesDoJogador) : 100;
+    const int velocidadeDaManutencao = producao.manutencaoAtrasada ? contexto.dados.regras.construcoes.producaoComManutencaoAtrasadaEmPorcento : 100;
+    return trabalhoDaHora * velocidadeDoSalario * velocidadeDaManutencao / 10000;
 }
 
 void pararAConstrucao(ProducaoDaConstrucao& producao, const std::string& motivo)
@@ -331,7 +339,7 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
         int quantidade = receita.loteProduzido;
         int restoNovo = producao.restoDaProducaoBracal;
         const int multiplicadorDosEventos =
-            multiplicadorDaProducaoPorEventos(contexto, contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].tipo);  // a Seca: 50%
+            multiplicadorDaProducaoPorEventos(contexto, contexto.vila.construcoes[indiceDaConstrucao].tipo);  // a Seca: 50%
         if (receita.trabalhoUsado == TrabalhoDaReceita::Bracal || multiplicadorDosEventos != 100) {
             // O lote × o fator da estação e da produtividade (só nas Braçais)
             // × os eventos ativos, com a fração guardada.
@@ -497,7 +505,7 @@ std::vector<std::string> montarAProducaoDaVila(ContextoDaProducao& contexto, con
 {
     std::vector<std::string> avisos;
     const DadosDoJogo& dados = contexto.dados;
-    const VilaDoJogo& vila = dados.vilaInicial;
+    const VilaDoJogo& vila = contexto.vila;
     entt::registry& registro = contexto.registroDasEntidades;
 
     // Os componentes do trabalho em cada NPC, na ordem da vila.
@@ -601,6 +609,7 @@ void contarOsTicksTrabalhados(ContextoDaProducao& contexto)
 
 void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& relogio)
 {
+    andarAsObrasDaHora(contexto);
     for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
         if (contexto.producaoDasConstrucoes[indice].ehDeProducao) {
             rodarOCicloDeUmaConstrucao(contexto, static_cast<int>(indice), relogio.estacaoAtual());
@@ -720,7 +729,7 @@ TrabalhoDaReceita trabalhoDaConstrucao(const ContextoDaProducao& contexto, int i
     if (receitaAtual >= 0) {
         return receitaPeloIndice(contexto, receitaAtual).trabalhoUsado;
     }
-    const std::string& tipo = contexto.dados.vilaInicial.construcoes[indiceDaConstrucao].tipo;
+    const std::string& tipo = contexto.vila.construcoes[indiceDaConstrucao].tipo;
     const DefinicaoDeConstrucao* definicao = contexto.dados.catalogoDeConstrucoes.procurarConstrucao(tipo);
     if (definicao != nullptr && definicao->trabalhoSemReceita.has_value()) {
         return *definicao->trabalhoSemReceita;
@@ -769,7 +778,7 @@ std::string montarTabelaDaProducao(const ContextoDaProducao& contexto)
         + std::to_string(contexto.inventario.capacidadeDaCategoria(CategoriaDoItem::BemDeConsumo)) + "\n";
 
     tabela += "Construções:\n";
-    const VilaDoJogo& vila = dados.vilaInicial;
+    const VilaDoJogo& vila = contexto.vila;
     for (std::size_t indice = 0; indice < vila.construcoes.size(); ++indice) {
         const ConstrucaoDaVila& construcao = vila.construcoes[indice];
         const ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indice];

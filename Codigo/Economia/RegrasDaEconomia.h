@@ -7,7 +7,7 @@
 #include <vector>
 
 // Os passos da virada do dia, na ordem do "ordem_do_dia" (FT1-5).
-enum class PassoDaOrdemDoDia { Consumo, Salarios, MercadoLocal, Estabilizador, Felicidade, Eventos, EscolhaDasReceitas };
+enum class PassoDaOrdemDoDia { Manutencao, Consumo, Salarios, MercadoLocal, Estabilizador, Felicidade, Eventos, EscolhaDasReceitas };
 
 // O preço que anda com o estoque (V2-5, regra 10.4).
 struct RegrasDoMercadoLocal {
@@ -40,6 +40,17 @@ struct RegrasDosMultiplicadoresDoSalario {
     int desempregoMaximoEmPorcento = 110;
 };
 
+// FL8-6 e FL8-7: as decisões do jogador (Ficha Lógica: Economia, parte 11).
+struct RegrasDasDecisoesDoJogador {
+    int faixaDoPrecoEmPorcento = 30;
+    int passoDoPrecoEmPorcento = 5;
+    int salarioBaixoEmPorcento = 75;
+    int salarioAltoEmPorcento = 125;
+    int velocidadeComSalarioBaixoEmPorcento = 90;
+    int velocidadeComSalarioAltoEmPorcento = 110;
+    int diasDeSalarioBaixoParaUmEmpregadoSair = 8;
+};
+
 struct RegrasDaEconomia {
     // A cesta mínima do Civil: 1 comida por dia e 1 Material Básico a cada 8 dias.
     int comidaPorDiaDoCivil = 1;
@@ -58,6 +69,7 @@ struct RegrasDaEconomia {
     RegrasDoImposto imposto;
     RegrasDoEstabilizador estabilizador;
     RegrasDosMultiplicadoresDoSalario multiplicadoresDoSalario;
+    RegrasDasDecisoesDoJogador decisoesDoJogador;
     int diasDeAtrasoAteOsEmpregadosSairem = 16;  // uma estação (Fatia Vertical, 4.5)
 
     std::vector<PassoDaOrdemDoDia> ordemDoDia = {PassoDaOrdemDoDia::Consumo,       PassoDaOrdemDoDia::Salarios,

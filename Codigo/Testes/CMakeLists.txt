@@ -10,6 +10,7 @@ add_executable(testes_do_codigo
     TestesDaRotina.cpp
     TestesDaProducao.cpp
     TestesDaSimulacao.cpp
+    TestesDoMarco8.cpp
 )
 
 # Os testes do mapa usam a nlohmann/json para montar mapas com defeito.

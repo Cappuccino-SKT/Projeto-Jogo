@@ -79,6 +79,9 @@ void recalcularCapacidade(InventarioDaCidade& inventario, const VilaDoJogo& vila
 {
     std::array<int, 6> capacidadeSomada = {};
     for (const ConstrucaoDaVila& construcao : vila.construcoes) {
+        if (construcao.emObra) {
+            continue;
+        }
         const DefinicaoDeConstrucao* definicao = catalogoDeConstrucoes.procurarConstrucao(construcao.tipo);
         if (definicao == nullptr) {
             continue;

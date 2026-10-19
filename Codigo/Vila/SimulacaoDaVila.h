@@ -18,6 +18,8 @@
 #include "Economia/MercadoLocal.h"
 #include "Eventos/EventosDaVila.h"
 #include "Inventario/InventarioDaCidade.h"
+#include "Jogador/NotificacoesEAlertas.h"
+#include "Jogador/PedidosDoJogador.h"
 #include "Mapa/BuscaDeCaminho.h"
 #include "Npc/MovimentoDosNpcs.h"
 #include "Npc/RotinaDosNpcs.h"
@@ -54,6 +56,12 @@ public:
     // Devolve as linhas para o console (os avisos, os eventos e o resumo do dia).
     std::vector<std::string> avancarUmTick();
 
+    // Marco 8 (Interface, regra 10.8): aplica os pedidos do jogador que estão
+    // na fila. O avancarUmTick() faz isso no começo; o laço do jogo também
+    // chama com o jogo pausado, para o jogador ver o efeito na hora.
+    // Devolve as linhas do console (já viraram notificações).
+    std::vector<std::string> aplicarOsPedidosPendentes();
+
     // O teste de desempenho (ficha da Simulação, regra 4.4): Civis a mais,
     // sem casa nem emprego, que só passeiam. Eles não entram na economia.
     void criarNpcsSoParaMedirODesempenho(int quantidade);
@@ -63,6 +71,10 @@ public:
 
     const DadosDoJogo& dados;
     RelogioDoMundo relogio;
+    // Marco 8: a vila e o mapa são cópias, porque as obras acrescentam construções
+    // e bloqueiam lotes. O Jogo/ desenha a partir daqui, não dos dados.
+    VilaDoJogo vila;
+    MapaLocal mapa;
     entt::registry registroDasEntidades;
     RegrasDoMovimento regrasDoMovimento;
     InventarioDaCidade inventario;
@@ -72,6 +84,10 @@ public:
     MercadoLocalDaVila mercadoLocal;
     FelicidadeDaClasse felicidade;
     EstadoDosEventos eventos;
+    DecisoesDoJogador decisoes;
+    ObrasDaVila obras;
+    FilaDePedidosDoJogador pedidos;
+    NotificacoesDaVila notificacoes;
     std::vector<entt::entity> npcsDaVila;  // na ordem da vila inicial
     std::vector<std::string> avisosAoMontar;
     // A linha do relatório do último dia que acabou (montada na meia-noite,
@@ -79,6 +95,8 @@ public:
     std::optional<LinhaDoRelatorio> linhaDoRelatorioDoUltimoDia;
 
 private:
+    // Cada linha do console que merece vira notificação (e entra no Diário).
+    void registrarNasNotificacoes(const std::vector<std::string>& linhas, std::size_t aPartirDaLinha);
     int ticksPorHoraDeJogo = 800;
     BuscadorDeCaminho buscadorDeCaminho;
     SorteioComSemente sorteioDosNpcs;
