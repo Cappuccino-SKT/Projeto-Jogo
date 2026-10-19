@@ -331,7 +331,7 @@ Novos no `regras.json`:
 }
 ```
 
-**Estado novo** em cada construção do jogador (vai no save, marco 9): `porcentagemDoPrecoDeCadaItem` (de −30 a +30, começa em 0), `nivelDeSalario` (Baixo, Normal, Alto; começa em Normal), `diasSeguidosComSalarioBaixo`.
+**Estado novo** (vai no save, marco 9): na vila, `porcentagemDoPrecoPorItem` (de −30 a +30, começa em 0; vale para o item em todas as construções do jogador); em cada construção do jogador, `nivelDeSalario` (Baixo, Normal, Alto; começa em Normal) e `diasSeguidosComSalarioBaixo`.
 
 Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado do marco 7, a não ser pela manutenção.
 
@@ -349,7 +349,7 @@ Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado
 
 | Nível | Salário | Velocidade dos empregados | Outro efeito |
 |---|---|---|---|
-| Baixo | × 0,75 | × 0,9 | Depois de 8 dias seguidos em Baixo, o empregado com menos dias na construção sai (vira desempregado), e a contagem recomeça |
+| Baixo | × 0,75 | × 0,9 | Depois de 8 dias seguidos em Baixo, o último empregado da lista (o de maior número na vila) sai (vira desempregado), e a contagem recomeça |
 | Normal | × 1 | × 1 | — |
 | Alto | × 1,25 | × 1,1 | — |
 
@@ -360,7 +360,7 @@ Com tudo no padrão (0% e Normal) e sem pedidos, o marco 8 dá o mesmo resultado
 ### 11.4 Contratar e demitir (FL8-7)
 
 1. **Contratar:** só um desempregado, e só se houver vaga no nível da construção. Ele passa a ser empregado na hora, e a rotina dele leva ao trabalho a partir do próximo horário de trabalho.
-2. **Demitir:** o empregado vira desempregado na hora, sem indenização; o salário do dia é pago pelas horas que ele já trabalhou.
+2. **Demitir:** o empregado vira desempregado na hora, sem indenização; as horas que ele já trabalhou no dia não são pagas.
 3. O **gerente** (V3-8) continua sendo o primeiro da lista de empregados; se ele sai, o próximo vira gerente.
 4. O desemprego da vila muda na hora (e com ele o multiplicador do salário do dia seguinte).
 
@@ -402,7 +402,7 @@ Pela aba Mercado, sem o personagem andar.
 | `precoDoItemDoJogador(51, -30)` | 36 décimos |
 | A porcentagem +7 | Recusada (só de 5 em 5) |
 | Os Móveis a +30% num dia com gasto extra | A cesta compra; o gasto extra não compra Móveis e vai todo para a loja da cidade |
-| 8 dias em Baixo com 2 empregados | No dia 8, o mais novo vira desempregado |
+| 8 dias em Baixo com 2 empregados | No dia 8, o último da lista vira desempregado |
 | Contratar com as vagas cheias | Recusado |
 | Demitir o gerente | O outro empregado vira gerente |
 | Vender 10 Tábuas a 1,5 | +14,0 para o jogador, −14,0 do Banco, +10 Tábuas da Cidade |

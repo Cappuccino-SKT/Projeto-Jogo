@@ -21,6 +21,7 @@ Aqui ficam **as regras do jogo em C++**: tempo, economia, produção, NPCs. Cada
 | `Inventario/` | O inventário da cidade: quanto há de cada item, de quem é (Cidade ou jogador) e quanto cabe (marco 6) | [[Ficha Logica/Inventario\|Inventário]] |
 | `Producao/` | O ciclo de produção, a escolha da receita da cidade, a fila de ordens do jogador e o campo dos Braçais (marco 6); o consumo medido e a folga (marco 7) | [[Ficha Logica/Producao\|Produção]] |
 | `Economia/` | O dinheiro, o consumo da cesta mínima, os salários e a ordem do dia (marco 6); o Mercado Local, o gasto extra, o imposto, o estabilizador e a Felicidade (marco 7) | [[Ficha Logica/Economia\|Economia]], [[Ficha Logica/Felicidade\|Felicidade]] |
+| `Jogador/` | Os pedidos do jogador, o preço, o salário, contratar, demitir, a loja da cidade, as obras, a manutenção, as notificações e os alertas (marco 8) | [[Ficha Logica/Interface\|Interface]], [[Ficha Logica/Construcao\|Construção]], [[Ficha Logica/Economia\|Economia]] |
 | `Eventos/` | A leitura do `eventos.json` e os eventos de cada dia: os ativos, os condicionais e o sorteio dos ocasionais (marco 7) | [[Ficha Logica/Eventos\|Eventos]] |
 | `Simulacao/` | O teste de 1 ano: o relatório (`relatorio.csv`), os critérios do PASSOU ou FALHOU e o `--simular` (marco 7) | [[Ficha Logica/Simulacao\|Simulação sem tela]] |
 | `Desempenho/` | As medições do Tracy, que só valem com `-DUSAR_TRACY=ON` (marco 7) | [[Ficha Logica/Simulacao\|Simulação sem tela]] |

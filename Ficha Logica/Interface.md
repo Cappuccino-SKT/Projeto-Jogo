@@ -214,7 +214,7 @@ Num programa de testes do `Jogo/` (`testes_do_jogo`), rodado pelo mesmo `ctest`.
 Da esquerda para a direita, numa faixa de 32 px:
 
 1. A data e a hora: "Ano 1, Primavera, dia 3 · 07:40 · Manhã" (o mesmo texto do título da janela de hoje).
-2. A velocidade: 4 botões (⏸, 1x, 2x, 4x), com o atual destacado. As teclas Espaço, 1, 2 e 3 continuam valendo.
+2. A velocidade: 4 botões (Pausa, 1x, 2x, 4x), com o atual destacado. As teclas Espaço, 1, 2 e 3 continuam valendo.
 3. O dinheiro: "Jogador 104,5" e "Banco 3.950,0", com o "Por quê?" (regra 10.7): o que entrou e saiu ontem.
 4. O botão "Gestão (Tab)", que abre e fecha a janela de gestão.
 
@@ -246,7 +246,7 @@ Uma janela no centro, com abas, uma por vez (o documento da [[Interface/Descriç
 |---|---|
 | **Cidade** | A população (15: empregados, desempregados e a taxa de desemprego); a Felicidade da classe (o valor e a faixa, com os 4 fatores no "Por quê?"); o Banco, o dinheiro do jogador e o da classe (a média por Civil e quantos dias da cesta ela paga); o imposto de ontem; o estabilizador pago na estação e o teto; os 2 multiplicadores do salário |
 | **Construções** | Uma linha por construção: nome, dono, nível, empregados / vagas, a receita atual e o progresso (%), o motivo da parada ou da folga, a manutenção (em dia ou atrasada), a obra em andamento. Clicar numa linha abre o painel da construção |
-| **Inventário** | Uma linha por item e dono: quantidade, estoque-alvo, preço base, preço local (com ↑ ou ↓ desde ontem), consumo médio dos 5 dias |
+| **Inventário** | Uma linha por item e dono: quantidade, estoque-alvo, preço base, preço local (com "sobe" ou "desce" desde ontem), consumo médio dos 5 dias |
 | **Mercado** | Comprar e vender na loja da cidade (parte 11 da [[Ficha Logica/Economia\|Economia]]): o item, a quantidade, o preço de compra (110%) e o de venda (90%), e os botões "Comprar" e "Vender" |
 | **Diário** | As notificações guardadas (regra 10.3) |
 
@@ -258,7 +258,7 @@ Clicar com o botão esquerdo dentro de um lote seleciona o que está nele (o cli
 
 **Construção do jogador**, também:
 
-- **A fila de ordens** (regra 4.4 da [[Ficha Logica/Producao|Produção]]): cada linha com o tipo, o item e o N; os botões ↑ e ↓ (a prioridade) e ×; e uma linha nova com o tipo (Fazer N, Manter estoque, Repetir sempre), o item (só os das receitas que a construção pode fazer no nível dela) e o N (de 1 a 999).
+- **A fila de ordens** (regra 4.4 da [[Ficha Logica/Producao|Produção]]): cada linha com o tipo, o item e o N; os botões "Sobe" e "Desce" (a prioridade) e "X"; e uma linha nova com o tipo (Fazer N, Manter estoque, Repetir sempre), o item (só os das receitas que a construção pode fazer no nível dela) e o N (de 1 a 999).
 - **O nível de salário:** 3 botões, Baixo, Normal e Alto.
 - **Os empregados**, cada um com "Demitir", e a lista dos desempregados, cada um com "Contratar" (enquanto houver vaga).
 - **O preço** de cada produto: de −30% a +30%, de 5 em 5 pontos, mostrando o preço que sai.

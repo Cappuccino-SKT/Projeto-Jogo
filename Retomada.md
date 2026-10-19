@@ -2,11 +2,10 @@
 
 ## 1. Onde paramos
 
-- **Marcos 0 a 6:** prontos e no `main`.
-- **Marco 7** (a simulação sem tela de 1 ano): no `main`, com a FL7 e a FE1 (as sementes de 1 a 10 passam).
+- **Marcos 0 a 7:** prontos e no `main`.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
-- **Marco 8:** fichas prontas e decididas (FL8 aplicada): Interface parte 10, Construção parte 10, Economia parte 11. Falta programar.
-- **Próximo passo:** programar o marco 8 (Sonnet, esforço médio); depois o marco 9 (salvar e carregar).
+- **Marco 8** (a interface do jogador, as obras e as decisões): escrito na branch `codigo/marco-8-interface`, com a FL8 aplicada (ver `Jogo/LEIA-ME.md`, "Marco 8", o que testar). Falta o teste do autor.
+- **Próximo passo:** as fichas do marco 9 (salvar e carregar) e a rodada FL9 (Opus, esforço médio); depois, programar o marco 9.
 
 ## 2. Como trabalhamos
 
@@ -21,7 +20,7 @@
 - **Pastas:** `Documentos/` (design) → `Ficha Logica/` (a lógica de cada sistema, escrita pouco antes do marco) → `Codigo/` (as regras em C++, nunca abre janela) → `Jogo/` (janela, desenho, `data/`, `assets/`).
 - **Marcos:** de 0 a 9, na parte 7 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]. O que cada marco trouxe e como testar: `Jogo/LEIA-ME.md`.
 - **Nomes:** português sem acento e sempre descritivos (`horasTrabalhadasNoCiclo`, não `h`).
-- **Ferramentas:** g++ 15.2 (MinGW), CMake (preset `padrao`, Debug, pasta `build/`), Ninja, Python 3.11. Bibliotecas pelo `FetchContent` com versão e `URL_HASH` fixos: SDL3, nlohmann/json, stb, EnTT 3.16; glad em `Jogo/externo/`; Tracy só com `-DUSAR_TRACY=ON`; Dear ImGui no marco 8.
+- **Ferramentas:** g++ 15.2 (MinGW), CMake (preset `padrao`, Debug, pasta `build/`), Ninja, Python 3.11. Bibliotecas pelo `FetchContent` com versão e `URL_HASH` fixos: SDL3, nlohmann/json, stb, EnTT 3.16; glad em `Jogo/externo/`; Tracy só com `-DUSAR_TRACY=ON`; Dear ImGui 1.91.9 (só a interface da fatia, marco 8).
 - **Testes:** `ctest --test-dir build` (cerca de 1 min e meio: o teste de 1 ano leva 45 s).
 
 ## 4. Cuidados técnicos

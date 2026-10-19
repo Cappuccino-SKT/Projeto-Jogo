@@ -469,3 +469,15 @@ ResultadoDaLeituraDoMapa carregarMapaDoTextoDoTiled(const std::string& textoDoAr
     // Passo 9: com a lista de erros vazia, o mapa está pronto.
     return resultado;
 }
+
+const LoteDeConstrucao* MapaLocal::loteNoTile(int tileX, int tileY) const
+{
+    for (const LoteDeConstrucao& lote : lotesDeConstrucao) {
+        const int lado = lote.porteDoLote == PorteDoLote::Pequeno ? 4 : (lote.porteDoLote == PorteDoLote::Medio ? 6 : 8);
+        if (tileX >= lote.tileDoCantoSuperiorEsquerdo.tileX && tileX < lote.tileDoCantoSuperiorEsquerdo.tileX + lado
+            && tileY >= lote.tileDoCantoSuperiorEsquerdo.tileY && tileY < lote.tileDoCantoSuperiorEsquerdo.tileY + lado) {
+            return &lote;
+        }
+    }
+    return nullptr;
+}

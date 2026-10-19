@@ -65,6 +65,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(EnTT)
 
+# Dear ImGui: a interface do jogador na fatia (marco 8, FL8-1): a barra de
+# cima, os alertas, a janela de gestão e o painel da construção. Só desenha e
+# lê os cliques; as contas e os textos ficam no Codigo/. Versão 1.91.9
+# (2025-03). Sem CMakeLists: o Jogo/ monta a biblioteca com os arquivos dele.
+FetchContent_Declare(
+    imgui
+    URL https://github.com/ocornut/imgui/archive/refs/tags/v1.91.9.tar.gz
+    URL_HASH SHA256=3872a5f90df78fced023c1945f4466b654fd74573370b77b17742149763a7a7c
+)
+FetchContent_MakeAvailable(imgui)
+
 # Tracy: mede quanto tempo cada trecho do jogo gasta (marco 7, FL7-8). Fica
 # DESLIGADO por padrão: ligado, o jogo manda as medições pela rede para o
 # programa do Tracy, baixado à parte. Para ligar:

@@ -295,6 +295,11 @@ void testarNotificacoesEAlertas(const DadosDoJogo& dados)
     conferir(notificacoes.doDiario().size() == 300, "o Diário guarda só as 300 últimas");
 
     VilaDeTeste vila(dados);
+    const LoteDeConstrucao* loteDaCarpintaria = vila.simulacao.mapa.loteNoTile(43, 31);
+    const LoteDeConstrucao* loteLivre = vila.simulacao.mapa.loteNoTile(40, 21);
+    conferir(loteDaCarpintaria != nullptr && loteDaCarpintaria->identificadorDoLote == 11 && loteLivre != nullptr && loteLivre->identificadorDoLote == 5
+                 && vila.simulacao.mapa.loteNoTile(0, 0) == nullptr && vila.simulacao.mapa.loteNoTile(46, 35) == nullptr,
+             "o clique no tile (43, 31) acha o lote 11; o tile (40, 21), o lote 5; o tile (0, 0), nenhum");
     ContextoDaProducao contexto = vila.contexto();
     NivelDaNotificacao nivel = NivelDaNotificacao::Info;
     conferir(classificarALinhaDoConsole(contexto, "Aviso: algo.", nivel) && nivel == NivelDaNotificacao::Aviso
