@@ -25,7 +25,7 @@ O mapa geral da fatia (entidades, arquivos de dados, ordem do dia, marcos) está
 | 6. Produção, inventário e consumo | [[Ficha Logica/Producao\|Produção]], [[Ficha Logica/Inventario\|Inventário]], [[Ficha Logica/Economia\|Economia]] (consumo e salários, com o Trabalho e Propriedade) e [[Ficha Logica/Construcao\|Construção]] (os dados). Escritas em 2026-10-18 |
 | 7. Simulação sem tela de 1 ano | [[Ficha Logica/Economia\|Economia]] (parte 10: Mercado Local, gasto extra, imposto e estabilizador), [[Ficha Logica/Producao\|Produção]] (parte 10: a previsão do consumo e a folga), [[Ficha Logica/Felicidade\|Felicidade]], [[Ficha Logica/Eventos\|Eventos]] e [[Ficha Logica/Simulacao\|Simulação sem tela]]. Escritas em 2026-10-18 |
 | 8. Interface básica | Interface (HUD e painéis) |
-| 9. Salvar e carregar | Save (a partir da Arquitetura) |
+| 9. Salvar e carregar | [[Ficha Logica/Save\|Save]] (a partir da Arquitetura). Escrita em 2026-10-19 |
 
 ## Modelo de cada ficha
 

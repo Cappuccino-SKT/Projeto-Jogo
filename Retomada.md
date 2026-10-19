@@ -5,7 +5,8 @@
 - **Marcos 0 a 7:** prontos e no `main`.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
 - **Marco 8** (a interface do jogador, as obras e as decisões): escrito na branch `codigo/marco-8-interface`, com a FL8 aplicada (ver `Jogo/LEIA-ME.md`, "Marco 8", o que testar). Falta o teste do autor. A rodada FE2 (Blocos de Pedra) está aplicada: a vila começa com 300 Blocos.
-- **Próximo passo:** o autor testa o marco 8; depois, as fichas do marco 9 (salvar e carregar) e a rodada FL9 (Opus, esforço médio).
+- **Marco 9:** a ficha [[Ficha Logica/Save|Save]] está escrita (branch `docs/fichas-marco-9`), com a rodada **FL9** (7 perguntas) na [[Rodada Pendente]].
+- **Próximo passo:** o autor testa o marco 8 e responde a FL9; depois, aplicar a FL9 e programar o marco 9 (Sonnet, esforço médio).
 
 ## 2. Como trabalhamos
 
