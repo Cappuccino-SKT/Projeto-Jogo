@@ -109,7 +109,7 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 1. **Onde mora:** a Casa com mais camas livres (no empate, a primeira na ordem da vila). Sem cama livre, ele **não chega**: o acumulado fica em +100 (ou o migrante não vem).
 2. **Quem é:** um Civil adulto com o número `proximoNumeroDeNpc` (que soma 1), nome tirado da lista de nomes (`textos`), idade 4 (nascido ou reposição) ou sorteada (migrante), habilidades 50 (o migrante: sorteadas na faixa da classe, 20 a 60 no Civil, PO1-3 e a [[Ficha Logica/ClasseSocial|ficha da Classe Social]]).
 3. **Emprego:** chega **desempregado**. A regra 4.1 do [[Ficha Logica/Trabalho|Trabalho]] o contrata no dia seguinte, se houver vaga na Cidade.
-4. **Onde aparece:** o nascido e a reposição, na porta da casa; o migrante, no tile de **entrada da vila** (a borda do mapa no fim da estrada; o Mapa ganha o ponto `entrada_da_vila` no Tiled).
+4. **Onde aparece:** o nascido e a reposição, na porta da casa; o migrante, no tile de **entrada da vila** (a borda do mapa no fim da estrada; o Mapa ganha o ponto `entrada_do_mapa` no Tiled).
 5. Escreva no Diário ("Rita chegou à vila", "Nasceu um novo morador: Tiago").
 
 ### 4.6 Sai ou morre um NPC
@@ -144,7 +144,7 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 | Trabalho | As vagas livres; o desemprego | O emprego que vira vaga; o novo desempregado |
 | Construção | As Casas e as camas | — |
 | NPC e IA | — | O NPC novo (rotina, casa, dia de compra pelo número); o que sai anda até a borda |
-| Mapa | O ponto `entrada_da_vila` | — |
+| Mapa | O ponto `entrada_do_mapa` | — |
 | Save | — | Os campos da parte 2; a lista de NPCs muda de tamanho |
 | Simulação sem tela | — | Colunas novas: `npcs`, `populacao`, `acumulado`, `nascimentos`, `mortes`, `migracao` |
 
