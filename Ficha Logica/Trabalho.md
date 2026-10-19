@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-19 (fase A2 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]]), com a **parte 10: Simulação de mesa**. Os pontos marcados com TP1 dependem da [[Rodada Pendente|rodada TP1]].
+> Ficha escrita em 2026-10-19 (fase A2 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]]), com a **parte 10: Simulação de mesa**. Os pontos marcados com TP1 vêm da **rodada TP1**, aplicada em 2026-10-19, toda com "seguir sugestão".
 
 # Ficha Lógica: Trabalho e Propriedade
 
@@ -52,6 +52,7 @@ Documento do sistema: [[Sistema de Trabalho e Propriedade/Descrição|Trabalho e
 | `saiuPorAtrasoDe` | cada NPC: a construção que ele deixou por salário atrasado nesta estação, ou nenhuma | Posto de Coleta | Sim |
 | `diasSemEmpregados` | cada construção | 0 | Sim |
 | `modoAutomatico` | cada construção do jogador: verdadeiro ou falso | verdadeiro | Sim |
+| `salarioDevidoEmDecimos` | cada construção: a soma dos salários brutos não pagos (regra 4.4) | 0 | Sim |
 | `leilao` | a construção em leilão, os dias que faltam, o maior lance e quem deu | Carpintaria, 2 dias, 0 | Sim |
 
 ## 3. Quando roda
@@ -65,7 +66,7 @@ Documento do sistema: [[Sistema de Trabalho e Propriedade/Descrição|Trabalho e
 
 ## 4. Regras passo a passo
 
-### 4.1 A Cidade preenche as vagas vazias (todo dia) [Proposta, TP1-1]
+### 4.1 A Cidade preenche as vagas vazias (todo dia, TP1-1)
 
 Para cada construção **da Cidade**, na ordem da vila, enquanto houver vaga vazia:
 
@@ -77,19 +78,19 @@ Para cada construção **da Cidade**, na ordem da vila, enquanto houver vaga vaz
 
 **As construções do jogador** não são preenchidas sozinhas: quem contrata é o jogador.
 
-### 4.2 A redistribuição (dia 1 de cada estação) [Proposta, TP1-2]
+### 4.2 A redistribuição (dia 1 de cada estação, TP1-2)
 
 Só entre **empregados da Cidade**. Os do jogador nunca são movidos.
 
 1. Para cada par de empregados da Cidade (A e B) em construções de **Trabalhos diferentes**, na ordem da vila: some a habilidade de A no Trabalho de B e a de B no Trabalho de A.
 2. Se a soma **depois** da troca for **10 ou mais** maior que a soma de agora, A e B trocam de emprego.
 3. Repita até nenhum par trocar (no máximo uma volta por NPC, para nunca ficar em laço).
-4. **Os desempregados entram também:** se um desempregado tem, no Trabalho de uma vaga da Cidade, 10 ou mais acima de quem está nela, eles trocam: o empregado vira desempregado. **[Proposta, TP1-2]** isso é desligado (ninguém perde o emprego para outro); ver a rodada.
+4. **Os desempregados não entram (TP1-2):** a redistribuição nunca tira o emprego de alguém. Um desempregado melhor espera uma vaga (regra 4.1).
 5. Escolha os gerentes de novo e escreva as trocas no Diário.
 
 *Na fatia, todos têm habilidade 50 em tudo:* nada muda. A regra só faz diferença quando as habilidades variarem (vila inicial nova ou a educação).
 
-### 4.3 Comprar e vender construções [Proposta, TP1-3]
+### 4.3 Comprar e vender construções (TP1-3)
 
 **O valor de uma construção** = o custo da obra do porte dela ([[Ficha Logica/Construcao|Construção]], `obra_por_porte`) a preço de hoje × o nível:
 
@@ -102,11 +103,12 @@ Só entre **empregados da Cidade**. Os do jogador nunca são movidos.
 
 ### 4.4 Falência e leilão (V3-8)
 
+0. **A dívida:** cada dia em que o salário não é pago (Economia, regra 4.2, passo 3), o salário bruto de cada empregado soma ao `salarioDevidoEmDecimos` da construção. Ela só zera quando paga (no leilão) ou quando a construção muda de dono.
 1. **Parada:** uma construção **sem nenhum empregado** soma 1 a `diasSemEmpregados` por dia; com algum empregado, zera.
 2. **Ao chegar a 32 dias** (2 estações), abre o leilão por 3 dias e escreve no Diário. Só construções **do jogador** vão a leilão; uma da Cidade parada fica esperando a regra 4.1.
 3. **Lance:** quem pode dar lance são os Ricos da cidade (não existem ainda: Classe Social, fase A4) e o jogador. O lance mínimo é 50% do valor (regra 4.3). O dinheiro do lance fica preso até o fim.
 4. **No fim:**
-   - **Com lance:** a construção vai para quem deu o maior lance; **[Proposta, TP1-4]** o dinheiro paga primeiro os salários atrasados (para a classe dos empregados), e o resto vai para o jogador.
+   - **Com lance (TP1-4):** a construção vai para quem deu o maior lance. O dinheiro paga primeiro o `salarioDevidoEmDecimos` à classe dos empregados (na vila, os Civis), e o resto vai para o jogador. Se o lance não cobre a dívida, paga o que dá, e o resto da dívida some.
    - **Sem lance:** a construção volta para a Cidade, sem pagamento. A regra 4.1 a preenche no dia seguinte.
 5. **O jogador dono** pode, durante a parada (antes do leilão), contratar e voltar a produzir: a contagem zera.
 
@@ -164,6 +166,8 @@ Só entre **empregados da Cidade**. Os do jogador nunca são movidos.
 | Vender a Carpintaria com o Banco em 200 (preço 247,5) | Recusado |
 | Carpintaria sem empregados por 32 dias | Abre o leilão |
 | Leilão sem lance | Volta para a Cidade; no dia seguinte, os desempregados são contratados |
+| Lance de 165; dívida de salários de 64 | 64 para os Civis; 101 para o jogador |
+| Lance de 165; dívida de 200 | 165 para os Civis; a dívida zera |
 | Teste de 1 ano, 10 sementes, sem o jogador mexer | O mesmo resultado de hoje (a fatia não tem vaga vazia na Cidade) |
 
 ## 9. Fora desta versão
@@ -219,7 +223,7 @@ O jogador fica sem dinheiro e não paga a Carpintaria:
 **O que mostra:**
 
 1. A vila **se recupera sozinha**, mas passa cerca de 35 dias sem Móveis.
-2. **O jogador perdeu tudo** sem nenhuma volta: nem os 330 da Carpintaria. Na vida real, o leilão pagaria as dívidas e devolveria o resto. Com um Rico dando lance (fase A4), a proposta TP1-4 paga os salários atrasados e devolve o resto ao jogador.
+2. **O jogador perdeu tudo** sem nenhuma volta: nem os 330 da Carpintaria. Na vida real, o leilão pagaria as dívidas e devolveria o resto. Com um Rico dando lance (fase A4), o leilão paga os salários atrasados e devolve o resto ao jogador (TP1-4).
 
 ### 10.4 Caso C: o Banco fica sem dinheiro (o "sai e volta")
 
@@ -250,9 +254,9 @@ Sem a verba da Coroa (só em teste), o Banco chega a 0, e as construções da Ci
 | O jogador vende a Carpintaria e compra de volta no mesmo dia | Perde 25% (vende a 75%, compra a 100%). Não dá para lucrar com isso |
 | O preço da Tábua sobe muito | O valor das construções sobe junto (o valor usa o preço de hoje) |
 
-### 10.7 O que achou (vira pergunta na rodada TP1)
+### 10.7 O que achou e como foi resolvido (rodada TP1)
 
-1. **TP1-1:** a Cidade preenche as vagas todo dia ou só no dia 1 da estação, e com que trava (o "sai e volta").
-2. **TP1-2:** a redistribuição pode tirar o emprego de alguém para dar a um desempregado melhor?
-3. **TP1-3:** o valor das construções, e se a construção comprada começa no modo automático.
-4. **TP1-4:** no leilão, o dinheiro do lance vai para o Banco ou para o jogador que perdeu a construção?
+1. **TP1-1:** a Cidade preenche as vagas todo dia, com as travas do Banco e do "sai e volta" (regra 4.1).
+2. **TP1-2:** a redistribuição só troca empregados; ninguém perde o emprego (regra 4.2).
+3. **TP1-3:** o valor é o custo da obra × o nível, a venda à Cidade é a 75%, e a construção comprada começa no modo automático (regra 4.3).
+4. **TP1-4:** o lance paga primeiro os salários atrasados, e o resto vai para o jogador (regra 4.4).
