@@ -1,3 +1,3 @@
 # Rodada pendente
 
-**Nenhuma.** A rodada FE5 (o lucro do jogador numa crise de comida) foi respondida em 2026-10-19 em modo automático (seguir sugestão) e aplicada: sem regra nova; a decisão está na [[Ficha Logica/Economia|ficha da Economia]].
+**Nenhuma.** As rodadas CL1 e TP1 foram respondidas pelo autor com "seguir sugestão". As rodadas PO1, CS1, CI1 e CU1 (fase A) foram decididas em **modo automático** em 2026-10-19, a pedido do autor; as decisões estão na parte 10.7 de cada ficha ([[Ficha Logica/Populacao|População]], [[Ficha Logica/ClasseSocial|Classe Social]], [[Ficha Logica/Cidade|Cidade]], [[Ficha Logica/Cura|Cura]]).

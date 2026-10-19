@@ -70,7 +70,7 @@ Novo atributo **Dono** nas construções, com quatro valores:
 
 ### Comprar, vender e transferir
 
-- O jogador pode **comprar** construções da Cidade ou de Ricos a um preço de mercado e **vender** as dele.
+- O jogador pode **comprar** construções da Cidade ou de Ricos a um preço de mercado e **vender** as dele. O preço é o custo da obra a preço de hoje × o nível; a Cidade compra de volta a 75%. A construção comprada começa no **modo automático** (a IA da Cidade escolhe a receita) até o jogador desligar (rodada TP1-3; [[Ficha Logica/Trabalho|ficha do Trabalho]]).
 - A **conquista** de uma cidade transfere as construções da Cidade e da Facção. As dos Ricos **continuam deles**.
 
 ---
@@ -177,7 +177,8 @@ A **Universidade** é uma construção da **Facção**, presente no canvas civil
 ### Gerente e leilão (rodada V3-8)
 
 - **Gerente das construções da Cidade (LOD 0):** o empregado de maior habilidade vira gerente, com salário × 1,5, sem precisar de outro NPC.
-- **Leilão:** uma construção parada por 2 estações vai a leilão por 3 dias. O lance mínimo é 50% do custo de obra, e podem dar lance os Ricos da cidade e o jogador.
+- **Leilão:** uma construção parada por 2 estações vai a leilão por 3 dias. O lance mínimo é 50% do custo de obra, e podem dar lance os Ricos da cidade e o jogador. O lance paga primeiro os salários atrasados, e o resto vai para o antigo dono; sem lance, a construção volta para a Cidade (rodada TP1-4).
+- **Vagas da Cidade** (rodada TP1-1 e TP1-2): preenchidas todo dia pelo desempregado de maior habilidade, se o Banco tiver 3 dias do salário; quem saiu por atraso não volta na mesma estação. A redistribuição da estação só troca empregados entre si: ninguém perde o emprego.
 
 ---
 

@@ -27,6 +27,8 @@ O mapa geral da fatia (entidades, arquivos de dados, ordem do dia, marcos) está
 | 8. Interface básica | Interface (HUD e painéis) |
 | 9. Salvar e carregar | [[Ficha Logica/Save\|Save]] (a partir da Arquitetura). Escrita em 2026-10-19 |
 
+Depois da fatia, a ordem está no [[Ficha Logica/Plano das Fichas|Plano das Fichas]], e cada ficha nova ganha a parte **10. Simulação de mesa**.
+
 ## Modelo de cada ficha
 
 Cada ficha se chama pelo sistema (`Ficha Logica/Tempo.md`, `Ficha Logica/Producao.md`...) e tem estas partes, nesta ordem:
