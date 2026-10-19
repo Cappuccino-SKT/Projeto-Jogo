@@ -89,7 +89,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 ### Salvar e carregar
 
-- Arquivo binário com número de versão.
+- Arquivo binário com número de versão: MessagePack pela nlohmann/json (FL9-1), que um comando do jogo converte em texto para investigar. Detalhes na [[Ficha Logica/Save|ficha do Save]].
 - Salvar por Mapa Local. Mapas em LOD 2 guardam só os dados agregados (população, estoques, Criminalidade).
 - Estado de facções, diplomacia e relações em seções próprias.
 

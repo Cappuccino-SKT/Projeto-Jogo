@@ -352,11 +352,11 @@ Na fatia, só 4 fatores, dentro das faixas do [[Sistema de Felicidade e Estabili
 |---|---|
 | Relógio, semente e estado do sorteio | Definições de itens, receitas, construções e eventos (vêm dos dados) |
 | Cidade: Banco, inventário, riqueza, Felicidade, preços locais, dias em déficit, eventos ativos | Preços base |
-| Construções: tipo, nível, dono, Vida, empregados, caixa, receita, progresso, ordens, obra | Caminhos dos NPCs |
-| NPCs: todos os componentes, menos o caminho | Capacidade (soma das construções) |
-| Personagem do jogador: posição, Fome, dinheiro, inventário | |
+| Construções: tipo, nível, dono, Vida, empregados, caixa, receita, progresso, ordens, obra | Campos só de desenho |
+| NPCs: todos os componentes, **inclusive o caminho** (a lista de tiles e o índice) e os pedidos de caminho que esperam o cálculo (FL9-2) | Capacidade (soma das construções) |
+| Personagem do jogador: posição, Fome, dinheiro, inventário | O mapa bloqueado pelos lotes (sai da lista das construções) |
 
-O formato é um arquivo binário com número de versão ([[Arquitetura/Descrição|Arquitetura]]). Teste obrigatório: salvar, carregar e salvar de novo tem que dar o mesmo arquivo.
+O formato é um arquivo binário (MessagePack) com número de versão ([[Arquitetura/Descrição|Arquitetura]]; detalhes na [[Ficha Logica/Save|ficha do Save]]). Testes obrigatórios: salvar, carregar e salvar de novo tem que dar o mesmo arquivo, e a partida carregada tem que continuar igual (mesmo relatório). **[Refinar depois]** No jogo completo, gravar o caminho de centenas de NPCs pesa: lá, só os NPCs importantes gravam o caminho e os demais o recalculam (o teste "continuar igual" passaria a valer só para os importantes).
 
 ---
 
@@ -387,7 +387,7 @@ A ordem da [[Arquitetura/Descrição|Arquitetura]] (V4-6), com o que fica pronto
 | 6. Produção, inventário e consumo | O Pão sai do Cozinheiro, entra no estoque e é comido |
 | 7. Simulação sem tela de 1 ano | O teste da parte 6 passa |
 | 8. Interface básica | HUD com data, velocidade, dinheiro; painel da cidade e do inventário; as obras e a manutenção; o preço, o salário, a contratação e a compra e venda do jogador (rodada FL8) |
-| 9. Salvar e carregar | O teste do save passa |
+| 9. Salvar e carregar | Os testes do save passam: salvar, carregar e salvar dá o mesmo arquivo, e a partida carregada continua igual (FL9); a tela inicial e o menu do Esc funcionam |
 
 ---
 
