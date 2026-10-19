@@ -156,7 +156,7 @@ O empregado de **maior habilidade** no Trabalho da construção. No empate, o de
 ## 9. Fora da fatia (e fora do marco 6)
 
 - **No marco 8 (parte 10):** as obras e a manutenção.
-- Antes da parte 10: **as obras** (construir num lote livre, subir de nível, as horas dos Operários, o Engenheiro) e a **manutenção por estação** (FL6-1). A **pedra** delas vem dos 150 Blocos de Pedra do estoque inicial (FL6-5).
+- Antes da parte 10: **as obras** (construir num lote livre, subir de nível, as horas dos Operários, o Engenheiro) e a **manutenção por estação** (FL6-1). A **pedra** delas vem dos 300 Blocos de Pedra do estoque inicial (FL6-5, ajustada pela FE2-1).
 - A Vida das construções e a tempestade; a demolição; a compra e a venda; o leilão; a loja ilegal.
 - Os donos Facção e Rico (a fatia só tem a Cidade e o jogador).
 - A aparência nos níveis 3 e 5.
@@ -174,7 +174,7 @@ O empregado de **maior habilidade** no Trabalho da construção. No empate, o de
 | Os 2 Operários do Construtor | Recebem e ficam na construção | Fazem a manutenção e as obras |
 | O lote 5 (pequeno, o único livre) | Vazio | O jogador pode encomendar uma construção nele |
 | Subir de nível | — | Só as construções do jogador, até o nível 3 (FL8-4) |
-| Os 150 Blocos de Pedra | Parados no estoque | Gastos pela manutenção e pelas obras |
+| Os 300 Blocos de Pedra | Parados no estoque | Gastos pela manutenção e pelas obras |
 
 **Quem encomenda** (FL8-3): só o jogador. A Cidade não faz obras novas na fatia (a população não cresce, então nunca falta moradia); ela só faz a manutenção.
 
@@ -245,7 +245,7 @@ Uma obra não se cancela na fatia.
 | Manutenção de uma construção pequena (nível 1) | 1 Tábua + 1 Bloco (5% de 10 = 0,5, para cima) + 2 h |
 | Manutenção de uma média (nível 1) | 1 Tábua + 2 Blocos + 6 h |
 | Manutenção da Carpintaria (média, nível 2) | 2 Tábuas + 3 Blocos + 12 h, pagas pelo jogador (9,0 moedas das horas) |
-| A Cidade, por estação | 7 pequenas + 2 médias: **9 Tábuas, 11 Blocos e 26 h** (1,6 dia dos Operários). Os 150 Blocos duram cerca de 13 estações (3 anos) |
+| A Cidade, por estação | 7 pequenas + 2 médias: **9 Tábuas, 11 Blocos e 26 h** (1,6 dia dos Operários). Os 300 Blocos duram cerca de 21 estações (5 anos), contando os 3 Blocos da Carpintaria do jogador (FE2-1) |
 
 ### 10.8 Nomes no código
 

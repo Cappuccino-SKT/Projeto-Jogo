@@ -4,8 +4,8 @@
 
 - **Marcos 0 a 7:** prontos e no `main`.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
-- **Marco 8** (a interface do jogador, as obras e as decisões): escrito na branch `codigo/marco-8-interface`, com a FL8 aplicada (ver `Jogo/LEIA-ME.md`, "Marco 8", o que testar). Falta o teste do autor e a **rodada FE2** ([[Rodada Pendente]]: os Blocos de Pedra acabam no 4º ano).
-- **Próximo passo:** o autor responde a FE2 (aplicar: Sonnet, esforço médio); depois, as fichas do marco 9 (salvar e carregar) e a rodada FL9 (Opus, esforço médio).
+- **Marco 8** (a interface do jogador, as obras e as decisões): escrito na branch `codigo/marco-8-interface`, com a FL8 aplicada (ver `Jogo/LEIA-ME.md`, "Marco 8", o que testar). Falta o teste do autor. A rodada FE2 (Blocos de Pedra) está aplicada: a vila começa com 300 Blocos.
+- **Próximo passo:** o autor testa o marco 8; depois, as fichas do marco 9 (salvar e carregar) e a rodada FL9 (Opus, esforço médio).
 
 ## 2. Como trabalhamos
 

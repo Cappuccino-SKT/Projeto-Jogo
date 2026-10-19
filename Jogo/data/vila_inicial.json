@@ -10,7 +10,7 @@
     { "item": "item.tora", "dono": "cidade", "quantidade": 16 },
     { "item": "item.tabua", "dono": "jogador", "quantidade": 12 },
     { "item": "item.moveis_madeira", "dono": "jogador", "quantidade": 6 },
-    { "item": "item.bloco_de_pedra", "dono": "cidade", "quantidade": 150 }
+    { "item": "item.bloco_de_pedra", "dono": "cidade", "quantidade": 300 }
   ],
   "construcoes": [
     { "id": "fazenda", "tipo": "construcao.fazenda", "lote": 1, "dono": "cidade", "nivel": 1 },
