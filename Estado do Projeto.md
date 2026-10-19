@@ -1,58 +1,22 @@
-> Situação do projeto em poucas linhas. O detalhe de cada sistema está no documento dele (índice em [[Descrição do Projeto]]); o jeito de trabalhar e as regras do código, na [[Retomada]]. Atualizado em 2026-10-19.
+> A situação geral em poucas linhas. Onde paramos e como trabalhamos: [[Retomada]]. Atualizado em 2026-10-19.
 
-## Fase atual
+## Situação
 
-**Código: marco 5.** O design está completo e revisado, e a [[Ficha Logica/Fatia Vertical|Ficha Lógica: Fatia Vertical]] está pronta. O autor liberou o código na rodada FT2, marco a marco. As fichas do marco 1 ([[Ficha Logica/Tempo|Tempo]] e [[Ficha Logica/Mapa|Mapa]]) estão escritas, com a rodada FL1 aplicada; a da Interface (marco 2), com a rodada FL2 aplicada; as do marco 3 (Itens, Recursos e Receitas), com a rodada FL3 aplicada. As do marco 4 ([[Ficha Logica/NPC|NPC]] e a busca de caminho no Mapa), com a rodada FL4 aplicada. A do marco 5 ([[Ficha Logica/IA|IA]]: a vila inicial, a rotina e a Utilidade) está escrita, com a rodada FL5 aplicada.
-
-## O que está pronto
-
-| Área | Situação |
-|---|---|
-| Design | Cerca de 45 documentos de sistema, todos escritos e revisados. Todas as propostas foram confirmadas pelo autor |
-| Itens e produção | Cerca de 180 itens ([[Sistema de Itens/Descrição\|Itens]]); receitas de todos ([[Sistema de Produção/Receitas\|Receitas]]); [[Sistema de Produção/Funções e Construções\|Funções e Construções]] nível por nível |
-| Economia | Moeda, preços pela receita, salários, consumo por classe, Mercado Local, imposto ([[Sistema Econômico/Descrição\|Econômico]]) |
-| Conteúdo | Moldes prontos para copiar e modificar ([[Arquitetura/Moldes de Conteúdo\|Moldes de Conteúdo]]); as listas completas ficam para depois |
-| Fatia vertical | Vila de 15 Civis; o jogador com 100 moedas e uma Carpintaria; 10 marcos (0 a 9); teste de 1 ano sem tela |
+- **Design:** completo e revisado (cerca de 45 documentos; índice em [[Descrição do Projeto]]).
+- **Código:** marcos 0 a 6 prontos; marco 7 escrito e equilibrado (FE1 aplicada), falta o teste do autor. Faltam os marcos 8 e 9 da fatia vertical.
+- **Fatia vertical:** uma vila de 15 Civis; o jogador com uma Carpintaria; o teste de 1 ano sem tela.
 
 ## Números-chave
 
 | Tema | Valor |
 |---|---|
-| Tempo | 1 hora de jogo = 40 s reais a 1x; 1 dia = 16 min; estação = 16 dias; ano = 64 dias; 20 ticks por segundo; 1 tick = 4,5 s de jogo |
-| Escala | 1 NPC real = 1 trabalhador e 1 consumidor; o Fator de Escala (100) só muda a população exibida |
-| Cidades | NPCs reais por nível: 15, 40, 100 e 300 |
-| Dinheiro | Inteiro em décimos de moeda; preço = (insumos + horas × salário) ÷ lote × 1,2 |
-| Salário por hora | Braçal 0,75; Manufaturado 1,0; Especialista 1,5; Mago de Ofício 2,5 |
-| Arte e mapa | Tile de 16 × 16 px; boneco de 16 × 24; mapa da fatia com 64 × 64 tiles; zoom de 2x, 3x e 4x |
+| Tempo | 20 ticks por segundo; 800 ticks por hora de jogo (40 s reais a 1x); dia = 16 min; estação = 16 dias; ano = 64 dias |
+| Dinheiro | Inteiro, em décimos de moeda; preço = (insumos + horas × salário) ÷ lote × 1,2 |
+| Salário por hora | Braçal 0,75; Manufaturado 1,0; Especialista 1,5 |
+| Mapa | Tile de 16 × 16 px; mapa da fatia de 64 × 64 tiles; zoom de 2x, 3x e 4x |
 
 ## O que falta
 
-- **Valores a testar:** quase todos os números, primeiro no teste sem tela da fatia vertical.
-- **Rodadas de conteúdo, mais para frente:**
-  - **C1:** tecnologias e marcos;
-  - **C2:** feitiços e árvore arcana;
-  - **C3:** contratos, missões, Ambições e eventos.
-- **Arte da fatia:** por enquanto, nenhuma (decisão do autor, 2026-10-18): o jogo usa só a arte de teste do assistente. Quando voltar, o autor desenha à mão, no Pixelorama, com a paleta Resurrect 64, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] (rodada FA1 aplicada). Falta escolher a ferramenta de atlas; o artista definitivo segue sem escolha.
-- **A história do mundo:** nomes, personagens e os nomes de fantasia dos itens.
-- **Cerca de 80 marcações** [Em aberto] e [Refinar depois] nos documentos: detalhes e ideias futuras, sem pressa.
-- **Ideias futuras:** vários núcleos (multithreading, ver [[Arquitetura/Descrição|Arquitetura]]), Títulos de Nobreza, outras raças, arte própria por cultura, arte extra das estações e os sistemas P2 (áudio, tutorial, configurações, localização, modding, conquistas).
-
-## Próximos passos
-
-1. **Marco 0:** o ambiente e um "olá, janela" com o SDL3. Pronto e confirmado pelo autor.
-2. **Marco 1:** relógio, leitura do mapa e o mapa desenhado. Pronto e confirmado pelo autor.
-3. **Marco 2:** câmera e zoom. Pronto e confirmado pelo autor, com a rodada FL2 aplicada.
-4. **Marco 3:** carregar os dados, o preço base e o `--validar`. Pronto e confirmado pelo autor.
-5. **Marco 4:** um NPC andando pela busca de caminho. Pronto e confirmado pelo autor.
-6. **Marco 5:** a rotina dos 15 NPCs. Pronto e confirmado pelo autor.
-7. **Marco 6:** produção, inventário e consumo. Fichas escritas ([[Ficha Logica/Producao|Produção]], [[Ficha Logica/Inventario|Inventário]], [[Ficha Logica/Economia|Economia]], [[Ficha Logica/Construcao|Construção]]), com a rodada FL6 aplicada. Pronto; o autor mandou seguir.
-8. **Marco 7:** a simulação sem tela de 1 ano. Fichas escritas (a parte 10 da [[Ficha Logica/Economia|Economia]] e da [[Ficha Logica/Producao|Produção]], [[Ficha Logica/Felicidade|Felicidade]], [[Ficha Logica/Eventos|Eventos]], [[Ficha Logica/Simulacao|Simulação sem tela]]), com a rodada FL7 aplicada. Escrito na branch `codigo/marco-7-simulacao`: o teste de 1 ano passa com a semente 1; falta o teste do autor e a rodada FE1 (o equilíbrio: os Móveis caros e a Febre no Cozinheiro).
-9. **Marcos 8 e 9** da fatia vertical, um por pull request.
-10. **Depois da fatia:** ajustar os números pelo teste, as rodadas de conteúdo e o resto do jogo.
-
-## Histórico
-
-As revisões ficam na pasta `Documentos/Histórico/`, e cada rodada está no Git:
-
-- [[Revisão do Projeto]] (2026-10-14);
-- [[Revisão Completa]] (2026-10-17, rodadas V1 a V5 e IP1 a IP3).
+- Os marcos 8 e 9; depois, ajustar os números pelo teste de 1 ano.
+- A arte (por enquanto, só a de teste), a história do mundo e as rodadas de conteúdo C1 a C3.
+- Cerca de 80 marcações [Em aberto] e [Refinar depois], sem pressa.

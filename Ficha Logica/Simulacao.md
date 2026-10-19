@@ -82,7 +82,7 @@ A mesma semente dá o mesmo relatório, linha por linha. O `ctest` confere isso 
 
 **Medido no marco 7 (2026-10-18):** com a configuração "padrao" (com depuração), 64 dias levam cerca de **45 segundos** (36 microssegundos por tick), e o `ctest` inteiro, cerca de 1 minuto e meio. Compilado sem depuração (Release), os mesmos 64 dias levam 1,5 segundo (1,2 microssegundo por tick). Com 500 NPCs (`--npcs-a-mais 485`), um tick leva **0,95 milissegundo** com depuração e 27 microssegundos sem: a meta de 3 milissegundos está cumprida com folga.
 
-**O resultado do teste de 1 ano no marco 7:** com a semente 1, **PASSOU**. Com as sementes de 1 a 10, 8 passam; a 3 e a 4 falham com o Pão a 2,7 (a Febre num dos 2 Cozinheiros, no primeiro mês). Em 256 dias, o dinheiro vai do Banco para o jogador. Os dois pontos estão na rodada FE1 ([[Retomada]], seção 4).
+**O resultado do teste de 1 ano no marco 7:** com a semente 1, **PASSOU**. Antes da rodada FE1, a 3 e a 4 falhavam (a Febre num Cozinheiro no primeiro mês) e o dinheiro drenava do Banco para o jogador. Com a FE1 aplicada (75 Pães no começo; "manter 20 Móveis"), as sementes de 1 a 10 passam e, em 4 anos, o Banco não fica abaixo de 334.
 
 **A meta dos 500 NPCs:** a 4x, um segundo real tem 80 ticks. A 60 quadros por segundo, um quadro tem 16,7 milissegundos e cerca de 1,3 tick. Com 3 milissegundos por tick, a simulação usa cerca de 4 milissegundos por quadro, e o resto fica para o desenho.
 

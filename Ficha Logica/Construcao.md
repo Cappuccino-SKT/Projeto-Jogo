@@ -155,7 +155,121 @@ O empregado de **maior habilidade** no Trabalho da construção. No empate, o de
 
 ## 9. Fora da fatia (e fora do marco 6)
 
-- **As obras** (construir num lote livre, subir de nível, as horas dos Operários, o Engenheiro) e a **manutenção por estação** (FL6-1). A **pedra** delas vem dos 150 Blocos de Pedra do estoque inicial (FL6-5).
+- **No marco 8 (parte 10):** as obras e a manutenção.
+- Antes da parte 10: **as obras** (construir num lote livre, subir de nível, as horas dos Operários, o Engenheiro) e a **manutenção por estação** (FL6-1). A **pedra** delas vem dos 150 Blocos de Pedra do estoque inicial (FL6-5).
 - A Vida das construções e a tempestade; a demolição; a compra e a venda; o leilão; a loja ilegal.
 - Os donos Facção e Rico (a fatia só tem a Cidade e o jogador).
 - A aparência nos níveis 3 e 5.
+
+---
+
+## 10. Marco 8: as obras e a manutenção
+
+> Escrita em 2026-10-19. Depende da rodada **FL8** ([[Rodada Pendente]]): FL8-3 (quem encomenda e paga), FL8-4 (o Engenheiro) e FL8-5 (a manutenção). Os valores sem decisão estão marcados [Proposta]. O painel e o botão estão na parte 10 da [[Ficha Logica/Interface|Interface]].
+
+### 10.1 O que muda
+
+| | Até o marco 7 | No marco 8 |
+|---|---|---|
+| Os 2 Operários do Construtor | Recebem e ficam na construção | Fazem a manutenção e as obras |
+| O lote 5 (pequeno, o único livre) | Vazio | O jogador pode encomendar uma construção nele |
+| Subir de nível | — | Só as construções do jogador, até o nível 3 (FL8-4) [Proposta] |
+| Os 150 Blocos de Pedra | Parados no estoque | Gastos pela manutenção e pelas obras |
+
+**Quem encomenda** (FL8-3) [Proposta]: só o jogador. A Cidade não faz obras novas na fatia (a população não cresce, então nunca falta moradia); ela só faz a manutenção.
+
+### 10.2 Dados
+
+Nada novo nos arquivos: a `obra_por_porte` do `regras.json` (marco 6) já tem as Tábuas, os Blocos, o Ferro e as horas. Novos no `regras.json` [Proposta]:
+
+```json
+"obras": {
+  "nivel_maximo_com_o_engenheiro": 3,
+  "manutencao_em_porcento": 5,
+  "producao_com_manutencao_atrasada_em_porcento": 75
+}
+```
+
+A hora de obra custa o salário Braçal do `salario_por_hora_em_centesimos` (75 centésimos = 0,75); o total é arredondado para décimos (meio para cima), como os salários.
+
+**Estado novo** (vai no save, marco 9):
+
+| Campo | Onde | Exemplo |
+|---|---|---|
+| `filaDeObras` | Na vila | A manutenção do Cozinheiro, depois a Fazenda do lote 5 |
+| Cada obra: o tipo (nova, subir de nível, manutenção), o lote, o tipo de construção, o nível de destino | Na fila | Nova, lote 5, Fazenda, nível 1 |
+| Cada obra: `horasDeObraQueFaltam` (em centésimos de hora, para a velocidade não arredondar) | Na fila | 4000 = 40 h |
+| `manutencaoAtrasada` | Em cada construção | Sim / não |
+
+### 10.3 Quando roda
+
+- **A cada hora** (junto com o ciclo da produção): os Operários presentes na obra da vez fazem horas (regra 10.5).
+- **No primeiro dia de cada estação, à meia-noite** (um passo novo na ordem do dia, `"manutencao"`, antes do `"consumo"`): entra a manutenção de cada construção (regra 10.6).
+- **Ao aplicar o pedido "Encomendar uma obra"** (parte 10.8 da Interface): a regra 10.4.
+
+### 10.4 Encomendar uma obra (o jogador)
+
+1. **Quanto custa** (V2-8): o custo do porte no nível 1 × o nível de destino. Uma construção nova nasce no nível 1.
+2. **Pode?** O lote está livre (ou a construção é do jogador e não tem obra na fila); o nível de destino ≤ o máximo do Engenheiro (FL8-4: o gerente do Construtor conta com Inteligência 50, até o nível 3) [Proposta]; o jogador tem o dinheiro.
+3. **Os materiais:** saem do estoque do jogador; o que faltar, ele compra da loja da cidade a 110% do preço local (parte 11 da [[Ficha Logica/Economia|Economia]]). Tudo sai do inventário na hora (Fatia Vertical, regra 4.11).
+4. **As horas:** o jogador paga ao Banco as horas de obra × o salário da hora de obra, na hora (os Operários já recebem do Banco).
+5. A obra entra no **fim da fila**. No lote livre, aparece a obra (a imagem de teste: um quadrado marrom com o contorno do lote), e ele já bloqueia a passagem (regra 4.2 do [[Ficha Logica/Mapa|Mapa]]).
+
+Uma obra não se cancela na fatia [Proposta].
+
+### 10.5 A obra (a cada hora)
+
+1. **A obra da vez** é a primeira da fila. Manutenções vêm antes das obras novas e das subidas (FL8-5) [Proposta].
+2. **Os Operários** em horário de trabalho vão à porta da construção da obra (ou ao meio do lote livre) em vez de ir ao Construtor (a rotina da [[Ficha Logica/IA|IA]] troca só o destino). Com a fila vazia, ficam no Construtor, como hoje.
+3. Cada Operário **presente** soma 1 hora × a velocidade dele (a mesma da produção, regra 4.2 da [[Ficha Logica/Producao|Produção]]). O gerente do Construtor (um dos 2) é o Engenheiro e também soma horas.
+4. Com `horasDeObraQueFaltam` ≤ 0, a obra fica **pronta**:
+   - nova: a construção nasce no lote, do jogador, no nível 1, sem empregados e sem ordens; a passagem é atualizada;
+   - subir de nível: o nível sobe, e com ele as vagas e a capacidade; a construção produziu normalmente durante a obra [Proposta];
+   - manutenção: `manutencaoAtrasada` volta a não.
+5. Uma notificação: "Obra pronta: Fazenda (lote 5)."
+
+### 10.6 A manutenção (no começo de cada estação) (FL8-5) [Proposta]
+
+1. Para cada construção, a manutenção é **5% dos materiais do nível atual** (o nível 1 × o nível; cada material arredondado para cima, e no mínimo 1 Tábua) e **5% das horas** (arredondado para cima).
+2. **Se a anterior não ficou pronta**, a construção fica com `manutencaoAtrasada` = sim, e a nova não entra (a velha continua na fila).
+3. **Da Cidade:** os Blocos saem do estoque da Cidade; as Tábuas, a Cidade compra do estoque do jogador pelo preço do jogador (o dinheiro sai do Banco para o jogador). Se o jogador não tiver Tábuas suficientes, a manutenção entra na fila **esperando material** e tenta de novo a cada dia, à meia-noite; enquanto espera, os Operários passam para a próxima obra.
+4. **Do jogador:** os materiais saem do estoque dele (o que faltar, ele compra a 110%), e ele paga as horas ao Banco, como numa obra. Sem dinheiro, ela espera como no passo 3.
+5. **Com a manutenção atrasada**, a construção produz **75%** (o ciclo da produção dura 4/3 das horas) até a manutenção ficar pronta. Uma Casa atrasada não muda nada na fatia.
+
+### 10.7 Contas
+
+| Conta | Valor |
+|---|---|
+| Fazenda no lote 5 (pequeno, nível 1) | 10 Tábuas + 10 Blocos + 40 h. Com as Tábuas do jogador, 10 Blocos a 2,0 (o local de 1,8 × 110%) = 20,0 e 40 h × 0,75 = 30,0: **50 moedas**. Com os 2 Operários do Construtor (um deles é o gerente), 2 × 8 h por dia, velocidade 1: 40 ÷ 16 = **2,5 dias** |
+| Carpintaria do nível 2 para o 3 (média) | 60 Tábuas + 90 Blocos + 360 h. Comprando os Blocos: 180,0 + 270,0 = **450 moedas** e as 60 Tábuas; 360 ÷ 16 = **22,5 dias** |
+| Manutenção de uma construção pequena (nível 1) | 1 Tábua + 1 Bloco (5% de 10 = 0,5, para cima) + 2 h |
+| Manutenção de uma média (nível 1) | 1 Tábua + 2 Blocos + 6 h |
+| Manutenção da Carpintaria (média, nível 2) | 2 Tábuas + 3 Blocos + 12 h, pagas pelo jogador (9,0 moedas das horas) |
+| A Cidade, por estação | 7 pequenas + 2 médias: **9 Tábuas, 11 Blocos e 26 h** (1,6 dia dos Operários). Os 150 Blocos duram cerca de 13 estações (3 anos) |
+
+### 10.8 Nomes no código
+
+| Nome | O que é |
+|---|---|
+| `ObraNaFila`, `TipoDeObra` (`ConstrucaoNova`, `SubirDeNivel`, `Manutencao`) | Uma obra da fila |
+| `ObrasDaVila` | A fila e as regras 10.4 a 10.6 |
+| `custoDaObra(porte, nivelDeDestino)` | Os materiais e as horas (regra 10.4, passo 1) |
+| `custoDaManutencao(porte, nivelAtual)` | Regra 10.6, passo 1 |
+| `RegrasDasObras` | O bloco `"obras"` do `regras.json` |
+
+### 10.9 Testes
+
+| Situação | Resultado esperado |
+|---|---|
+| `custoDaObra(medio, 3)` | 60 Tábuas, 90 Blocos, 360 h |
+| `custoDaManutencao(pequeno, 1)` | 1 Tábua, 1 Bloco, 2 h |
+| `custoDaManutencao(medio, 2)` | 2 Tábuas, 3 Blocos, 12 h |
+| Encomendar a Fazenda no lote 5 com 50 moedas e 10 Tábuas | Paga; a obra entra na fila; o lote fica ocupado |
+| A mesma obra com 49,9 moedas | Descartada; nada muda |
+| Subir a Carpintaria para o nível 4 | Recusado (o Engenheiro só vai até o 3) |
+| 2 Operários presentes por 8 horas, velocidade 1, numa obra de 40 h | Faltam 24 h |
+| A obra chega a 0 h | A construção nasce, a passagem do lote muda, a notificação sai |
+| O começo do Verão com o jogador sem Tábuas | A manutenção da Cidade espera material; as obras do jogador andam |
+| Uma estação inteira sem a manutenção pronta | `manutencaoAtrasada`; o ciclo da construção dura 4/3 |
+| 64 dias sem tela, sem nenhum pedido | Passa nas 10 sementes (a manutenção muda o equilíbrio: conferir de novo) |
+| O dinheiro total num dia com obra | Igual: o que o jogador paga, o Banco recebe |
