@@ -5,7 +5,7 @@
 - **Marcos 0 a 7:** prontos e no `main`.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
 - **Marcos 8 e 9** (interface; salvar e carregar): prontos, testados e no `main`. A fatia vertical está completa. O que cada um trouxe e como testar: `Jogo/LEIA-ME.md`.
-- **Próximo passo:** o autor decide o que vem depois da fatia (ajustar os números pelo teste de 1 ano, arte, conteúdo C1 a C3, ou o jogo completo). Não há rodada pendente.
+- **Próximo passo:** o autor responde a rodada **FE3** (o ritmo do dinheiro do jogador, 3 perguntas) na [[Rodada Pendente]]; depois, aplicar e conferir com o `--simular` (Sonnet, esforço médio).
 
 ## 2. Como trabalhamos
 
