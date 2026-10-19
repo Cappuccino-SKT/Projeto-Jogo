@@ -4,9 +4,8 @@
 
 - **Marcos 0 a 7:** prontos e no `main`.
 - **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
-- **Marco 8** (a interface do jogador, as obras e as decisões): escrito na branch `codigo/marco-8-interface`, com a FL8 aplicada (ver `Jogo/LEIA-ME.md`, "Marco 8", o que testar). Falta o teste do autor. A rodada FE2 (Blocos de Pedra) está aplicada: a vila começa com 300 Blocos.
-- **Marco 9** (salvar e carregar): ficha [[Ficha Logica/Save|Save]] e rodada FL9 aplicadas (branch `docs/aplica-fl9`); código na branch `codigo/marco-9-save` (ver `Jogo/LEIA-ME.md`, "Marco 9", o que testar). Falta o teste do autor, principalmente das telas. Não há rodada pendente.
-- **Próximo passo:** o autor testa os marcos 8 e 9. A parte 7 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]] termina no marco 9: depois do teste, o autor decide o que vem a seguir.
+- **Marcos 8 e 9** (interface; salvar e carregar): prontos, testados e no `main`. A fatia vertical está completa. O que cada um trouxe e como testar: `Jogo/LEIA-ME.md`.
+- **Próximo passo:** o autor decide o que vem depois da fatia (ajustar os números pelo teste de 1 ano, arte, conteúdo C1 a C3, ou o jogo completo). Não há rodada pendente.
 
 ## 2. Como trabalhamos
 

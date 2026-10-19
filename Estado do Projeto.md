@@ -3,7 +3,7 @@
 ## Situação
 
 - **Design:** completo e revisado (cerca de 45 documentos; índice em [[Descrição do Projeto]]).
-- **Código:** marcos 0 a 7 prontos; marco 8 (interface, obras e decisões) escrito, falta o teste do autor. Falta o marco 9 (salvar e carregar).
+- **Código:** marcos 0 a 9 prontos e testados pelo autor: a fatia vertical está completa (2026-10-19).
 - **Fatia vertical:** uma vila de 15 Civis; o jogador com uma Carpintaria; o teste de 1 ano sem tela.
 
 ## Números-chave
@@ -17,6 +17,6 @@
 
 ## O que falta
 
-- Os marcos 8 e 9; depois, ajustar os números pelo teste de 1 ano.
+- Ajustar os números pelo teste de 1 ano; decidir o que vem depois da fatia.
 - A arte (por enquanto, só a de teste), a história do mundo e as rodadas de conteúdo C1 a C3.
 - Cerca de 80 marcações [Em aberto] e [Refinar depois], sem pressa.
