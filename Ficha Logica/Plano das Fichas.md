@@ -39,7 +39,7 @@ São os sistemas que mais se ligam ao que já existe e menos dependem do que fal
 | B1b | **[[Ficha Logica/OutrasCidades\|Outras cidades (LOD 1 e 2)]]** (nova, achada na Viagem, VI1-7; escrita em 2026-10-19; rodada OC1 automática) | Simulação, Economia, Cidade (A5) |
 | B2 | **[[Ficha Logica/Comercio\|Comércio]]** (escrita em 2026-10-19; rodada CO1 automática) | Economia, Viagem (B1), Outras cidades (B1b) |
 | B3 | **[[Ficha Logica/Noticias\|Notícias]]** (escrita em 2026-10-19; rodada NO1 automática) | Eventos, Viagem (B1) |
-| B4 | **Reputação** | Comércio (B2), Crime (C1) em parte |
+| B4 | **[[Ficha Logica/Reputacao\|Reputação]]** (escrita em 2026-10-19; rodada RE1 automática) | Comércio (B2), Crime (C1) em parte |
 | B5 | **Tecnologia** | Produção, Construção |
 
 ### Fase C — sociedade (prioridade média e baixa)

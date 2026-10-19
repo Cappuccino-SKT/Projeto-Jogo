@@ -121,8 +121,10 @@ Põe a carga no estoque de C, devolve o `dinheiroLevado` ao Banco de C, paga o s
 1. **A loja vende** a 110% do preço local (Economia).
 2. **A loja compra** a 90% do preço local **até completar o estoque-alvo**. Cada unidade **além do alvo** é paga a **45% do preço base** (CO1-3). O preço do dia não muda com a venda; ele anda no passo 3 do dia seguinte, como sempre.
 3. A loja paga do **Banco da cidade** e só enquanto o Banco tem acima da reserva de 250; depois disso, não compra mais nesse dia.
+4. **A reserva da loja (RE1-4, da [[Ficha Logica/Reputacao|Reputação]]):** a loja não vende ao jogador o que deixaria o estoque abaixo de **2 dias do consumo previsto**. Sem isso, o jogador compra o estoque inteiro, a cidade passa fome e ele revende mais caro.
+5. Para o jogador, o preço da compra e da venda ainda passa pela faixa da reputação (Reputação, 4.4). Cada preço por unidade é arredondado em décimos, a metade para cima.
 
-*Exemplo:* a loja tem 0 Tábuas, alvo 20, preço local 3,0. O jogador vende 40: 20 × 2,7 = 54 e 20 × 0,675 (45% de 1,5) = 13,5. Total **67,5 moedas**, não 108.
+*Exemplo:* a loja tem 0 Tábuas, alvo 20, preço local 3,0. O jogador vende 40: 20 × 2,7 = 54 e 20 × 0,7 (45% de 1,5 = 0,675, arredondado) = 14. Total **68 moedas**, não 108.
 
 ### 4.8 O que o jogador sabe
 
@@ -174,7 +176,7 @@ Põe a carga no estoque de C, devolve o `dinheiroLevado` ao Banco de C, paga o s
 
 ## 8. Testes
 
-1. **A venda de 40 Tábuas** do exemplo 4.7 paga 67,5 moedas.
+1. **A venda de 40 Tábuas** do exemplo 4.7 paga 68 moedas.
 2. **A loja para** de comprar quando o Banco chega a 250.
 3. **Duas caravanas no mesmo dia** para a mesma cidade: a segunda vê a falta já descontada pelo `aCaminhoPorItem` e escolhe outro destino.
 4. **O dinheiro do mundo:** a soma de todos os Bancos, classes e do jogador só muda pela verba da Coroa, pelo Mercador viajante dos Eventos e pelas perdas para bandidos. Rodar 1 ano com as 22 cidades.
@@ -231,7 +233,7 @@ D2 ganha (78,1 > 20% de 61,6 = 12,3). A **caravana 1** sai para D2 com 80 Tábua
 |---|---|
 | O dinheiro do mundo se conserva? | **Sim:** a venda passa de um Banco a outro; o salário fica na cidade dona; só a comida da viagem some (é consumo) |
 | Duas caravanas mandam o mesmo para o mesmo lugar? | **Não:** o `aCaminhoPorItem` desconta a falta (D2, caravana 2) |
-| O jogador pode "despejar" carga e lucrar demais? | **Não:** acima do alvo, a loja paga 45% do base (exemplo 4.7: 67,5 em vez de 108). **Achado:** sem esse limite, o preço do dia ficava parado até a meia-noite e o jogador vendia 200 Tábuas a 2,7 |
+| O jogador pode "despejar" carga e lucrar demais? | **Não:** acima do alvo, a loja paga 45% do base (exemplo 4.7: 68 em vez de 108). **Achado:** sem esse limite, o preço do dia ficava parado até a meia-noite e o jogador vendia 200 Tábuas a 2,7 |
 | O vilarejo pequeno recebe Tábuas? | **Quase nunca** das caravanas: a falta dele (20) não paga a viagem (D1: −22,3). Só quando a falta passa de cerca de 43 Tábuas (parte 5). **Achado e decisão (CO1-4):** é um espaço para o jogador, que viaja barato (sozinho, sem salário) e ganha cerca de 36 numa ida a D1 (20 × (2,7 − 0,88), comprando na loja de C a 110%). As caravanas das cidades servem as cidades grandes |
 | A caravana deixa C sem Tábuas? | **Não:** só leva a sobra (180 − 60 = 120; levou 80) |
 | O risco da conta bate com o da Viagem? | Aproximado: 6 mapas × 3,75% de bandidos ≈ 21% de viagens com encontro; a caravana de força 8 perde para bandos de 5 ou mais (força 10+). A conta usa 60% × 60% (**medir**, teste 7) |
