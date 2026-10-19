@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Os pontos marcados com FL7 estão na **rodada FL7** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Os pontos marcados com FL7 vêm da **rodada FL7**, aplicada em 2026-10-18, toda com "seguir sugestão" (as decisões estão na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]).
 
 # Ficha Lógica: Eventos
 
@@ -14,13 +14,13 @@ Todo dia, a vila sorteia os **eventos ocasionais** (a seca, a colheita farta, os
 
 Documento do sistema: [[Sistema de Eventos/Descrição|Eventos e Narrador]] (os tipos, a lista fechada de efeitos, o cooldown, a histerese e os 12 eventos da fatia, V3-6). A regra 4.12 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]] dá a ordem.
 
-**Na fatia, sem o Narrador** [Proposta] (FL7-6): ele regula a tensão do jogador, e o jogador ainda não age no marco 7 (o teste de 1 ano roda sozinho). Fica o sorteio simples, que o documento já prevê para "o resto do mundo".
+**Na fatia, sem o Narrador** (FL7-6): ele regula a tensão do jogador, e o jogador ainda não age no marco 7 (o teste de 1 ano roda sozinho). Fica o sorteio simples, que o documento já prevê para "o resto do mundo".
 
 **A divisão das pastas:** `Codigo/Eventos/`, sem janela.
 
 ## 2. Dados
 
-### Definições: o `data/eventos.json` [Proposta]
+### Definições: o `data/eventos.json`
 
 Um arquivo novo, lido depois do `vila_inicial.json`, conferido pelo `--validar` (um item, uma construção ou uma estação que não existe é erro). O nome de cada evento fica no `textos/pt-BR.json` (`"evento.seca": "Seca"`).
 
@@ -45,7 +45,7 @@ Um arquivo novo, lido depois do `vila_inicial.json`, conferido pelo `--validar` 
 | `duracao_dias` | 0 = pontual (o efeito acontece uma vez) |
 | `efeitos` | Da lista da parte 4.4 |
 
-### Os 11 eventos da fatia [Proposta] (FL7-6)
+### Os 11 eventos da fatia (FL7-6)
 
 Dos 12 da V3-6, a **Tempestade forte** fica de fora: ela danifica a Vida de uma construção, que só existe com as obras e a manutenção (marco 8). Quatro são adaptados ao que a fatia tem:
 
@@ -109,7 +109,7 @@ Na ordem do `eventos.json`, para cada ocasional:
 | `producao_da_construcao` | Enquanto ativo, o lote das receitas daquele tipo de construção é multiplicado pela porcentagem (com o resto guardado, como a estação: [[Ficha Logica/Producao\|Produção]], regra 4.2). Dois ativos se multiplicam |
 | `felicidade` | Enquanto ativo, soma no fator "Eventos duradouros" ([[Ficha Logica/Felicidade\|Felicidade]]) |
 | `mudar_estoque` | Pontual: tira uma porcentagem ou põe uma quantidade de um item da Cidade |
-| `npcs_doentes` | Sorteia N Civis com emprego; cada um fica em casa (a ação Dormir ganha sempre) pelos dias do evento [Proposta] |
+| `npcs_doentes` | Sorteia N Civis com emprego; cada um fica em casa (a ação Dormir ganha sempre) pelos dias do evento |
 | `mercador_compra` | Pontual: compra do item da Cidade com mais dias de estoque (estoque ÷ consumo previsto), a 90% do preço local; o dinheiro entra no Banco. É a única entrada de dinheiro de fora da vila |
 
 ### 4.5 O aviso

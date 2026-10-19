@@ -206,9 +206,9 @@ Em `Codigo/Producao/`:
 
 ## 10. Marco 7: a previsão do consumo e a folga
 
-> Parte escrita em 2026-10-18 para o **marco 7**, com os 2 problemas que os 30 dias sem tela do marco 6 mostraram (a Tora que acaba no dia 12 e o estoque de matéria-prima cheio no dia 17). Os pontos marcados com FL7 estão na **rodada FL7** ([[Retomada]], seção 4), ainda sem resposta: esta parte já usa as sugestões, marcadas como [Proposta].
+> Parte escrita em 2026-10-18 para o **marco 7**, com os 2 problemas que os 30 dias sem tela do marco 6 mostraram (a Tora que acaba no dia 12 e o estoque de matéria-prima cheio no dia 17). Os pontos marcados com FL7 vêm da **rodada FL7**, aplicada em 2026-10-18, toda com "seguir sugestão".
 
-### 10.1 A previsão do consumo, medida [Proposta] (FL7-4)
+### 10.1 A previsão do consumo, medida (FL7-4)
 
 **O problema:** no marco 6, o estoque-alvo da regra 4.3 conta só os insumos das receitas **atuais**. A Carpintaria do jogador passa a maior parte do tempo nos Móveis (que gastam Tábua), então a previsão de Tora quase sempre é 0, o Posto de Coleta fica na Água, e a Tora acaba.
 
@@ -222,7 +222,7 @@ O mesmo consumo previsto vale para o **Mercado Local** (o estoque-alvo do preço
 
 *Exemplo:* sem Tora, a Carpintaria passa 8 horas parada "sem Tora" com 2 empregados (1.600 ticks por hora no total): por hora, 2 Toras × 1.600 × 100 ÷ (4 × 800) = 100 centésimos (1 Tora); no dia, 8 Toras de demanda que faltou. O alvo da Tora sobe, e o Posto de Coleta escolhe a Tora no dia seguinte.
 
-### 10.2 A folga [Proposta] (FL7-5)
+### 10.2 A folga (FL7-5)
 
 **O problema:** com déficit 0, a nota da regra 4.3 continua positiva, então os Braçais nunca param. A Fazenda faz cerca de 31,6 Grãos por dia, e a vila gasta 8. O Grão e a Água enchem os 900 de matéria-prima por volta do dia 17, e a produção trava com "o estoque encheu". O Pão também sobe sem parar (15,8 feitos e 15 comidos por dia), e o preço local dele cairia para menos de 1,2, o que falha o teste de 1 ano.
 

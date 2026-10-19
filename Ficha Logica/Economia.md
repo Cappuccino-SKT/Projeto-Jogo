@@ -158,7 +158,7 @@ Em `Codigo/Economia/`:
 
 ## 10. Marco 7: o Mercado Local, o gasto extra, o imposto e o estabilizador
 
-> Parte escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Ela fecha o ciclo do dinheiro que o marco 6 deixou aberto: no marco 6, o Banco perde cerca de 54 moedas por dia (parte 5). Os pontos marcados com FL7 estão na **rodada FL7** ([[Retomada]], seção 4), ainda sem resposta: esta parte já usa as sugestões, marcadas como [Proposta].
+> Parte escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Ela fecha o ciclo do dinheiro que o marco 6 deixou aberto: no marco 6, o Banco perde cerca de 54 moedas por dia (parte 5). Os pontos marcados com FL7 vêm da **rodada FL7**, aplicada em 2026-10-18, toda com "seguir sugestão".
 
 ### 10.1 O que muda
 
@@ -166,17 +166,17 @@ Em `Codigo/Economia/`:
 |---|---|---|
 | Preço de cada item | O preço base | O **preço local**, que anda com o estoque (Mercado Local, V2-5) |
 | O que a classe gasta | Só a cesta mínima | A cesta e o **gasto extra**, até 80% da renda (Classe Social) |
-| Para onde vai o gasto extra | — | Os Materiais a mais e, o resto, a loja da cidade, para o Banco [Proposta] (FL7-1) |
-| Imposto | Nenhum | 20% dos salários, retido a cada dia, todo para o Banco [Proposta] (FL7-2) |
+| Para onde vai o gasto extra | — | Os Materiais a mais e, o resto, a loja da cidade, para o Banco (FL7-1) |
+| Imposto | Nenhum | 20% dos salários, retido a cada dia, todo para o Banco (FL7-2) |
 | Estabilizador | Nenhum | O Banco ajuda a classe pobre (V2-7) |
-| Salário | Nível e gerente | E a riqueza da cidade e o desemprego [Proposta] (FL7-3) |
+| Salário | Nível e gerente | E a riqueza da cidade e o desemprego (FL7-3) |
 | Salário atrasado | Só conta os dias | Depois de 16 dias, os empregados saem (Fatia Vertical, 4.5) |
 
 **Por que o dinheiro fecha assim** (o modelo de 64 dias da FL7-1): com o imposto de 20% e o gasto de 80%, a classe gasta **toda** a renda bruta, e tudo o que ela gasta, menos os Móveis, volta ao Banco. A conta do Banco num dia fica: + o Pão + o gasto extra + o imposto − os salários da Cidade ≈ 0. O Banco fica perto de 400 moedas nos 64 dias, o jogador perde cerca de 0,4 moeda por dia, e a riqueza média dos Civis fica em 12.
 
 ### 10.2 Dados
 
-**No `regras.json`** (novos) [Proposta]:
+**No `regras.json`** (novos):
 
 ```json
 "mercado_local": { "dias_do_estoque_alvo": 5, "fator_minimo_em_porcento": 50, "fator_maximo_em_porcento": 200,
@@ -204,7 +204,7 @@ A `ordem_do_dia` ganha os 4 passos que faltavam (FT1-5), na ordem da Fatia Verti
 | `gastoExtraDeHoje`, `gastoDaCestaDeHoje` | dinheiro | 240, 440 | Não: só para a Felicidade e o relatório |
 | `impostoDeHoje` | dinheiro | 210 | Não |
 
-No primeiro dia, o preço local de cada item é o preço base, e os 5 dias de consumo são a previsão do marco 6 (as receitas atuais) [Proposta].
+No primeiro dia, o preço local de cada item é o preço base, e os 5 dias de consumo são a previsão do marco 6 (as receitas atuais).
 
 ### 10.3 Quando roda
 
@@ -223,7 +223,7 @@ No primeiro dia, o preço local de cada item é o preço base, e os 5 dias de co
 Para cada item:
 
 1. **O estoque-alvo** = 5 × o consumo previsto de um dia (a média dos 5 últimos dias, FL7-4), em centésimos.
-2. **O fator**, em porcentagem = 100 + (alvo − estoque) × 100 ÷ alvo, preso entre 50 e 200. O estoque conta os dois donos. Com alvo 0 (ninguém usa o item, como a Pedra), o fator é 100 [Proposta].
+2. **O fator**, em porcentagem = 100 + (alvo − estoque) × 100 ÷ alvo, preso entre 50 e 200. O estoque conta os dois donos. Com alvo 0 (ninguém usa o item, como a Pedra), o fator é 100.
 3. **O preço desejado** = preço base × fator ÷ 100.
 4. **O passo:** o preço local anda na direção do desejado, no máximo 10% do preço local do dia (arredondado, a metade subindo, e no mínimo 1 décimo), sem passar do desejado.
 
@@ -242,15 +242,15 @@ Depois da cesta mínima (regra 4.1):
 
 1. **O teto do dia** = 80% da renda do dia da classe (os salários brutos do dia anterior, antes do imposto).
 2. **O que sobra para gastar** = o teto − o que a cesta custou hoje, sem passar do dinheiro da classe. Se der zero ou menos, não há gasto extra.
-3. **Materiais a mais:** a classe compra até **o mesmo número de Materiais Básicos que a cesta tirou hoje** (o mais barato; no empate, o da Cidade), pagando ao dono, enquanto houver dinheiro para gastar [Proposta] (FL7-1).
-4. **O resto vai para a loja da cidade** (o Banco): é o que a classe gastaria com a comida de Tier 2, a Bebida e os serviços que a fatia ainda não tem. Nenhum item sai do inventário [Proposta] (FL7-1).
+3. **Materiais a mais:** a classe compra até **o mesmo número de Materiais Básicos que a cesta tirou hoje** (o mais barato; no empate, o da Cidade), pagando ao dono, enquanto houver dinheiro para gastar (FL7-1).
+4. **O resto vai para a loja da cidade** (o Banco): é o que a classe gastaria com a comida de Tier 2, a Bebida e os serviços que a fatia ainda não tem. Nenhum item sai do inventário (FL7-1).
 5. Guarde o `gastoExtraDeHoje` (a soma dos passos 3 e 4) e o `gastoDaCestaDeHoje`, para a Felicidade (até +5).
 
 *Exemplo:* a renda de ontem foi 85 moedas: o teto é 68. A cesta custou 15 Pães × 2,1 + 2 Móveis × 5,1 = 41,7. Sobram 26,3: 2 Móveis a mais (10,2, para o jogador) e 16,1 para o Banco.
 
 ### 10.6 Os multiplicadores do salário (no passo dos salários)
 
-Os dois entram na conta da parte 5, como mais duas porcentagens [Proposta] (FL7-3):
+Os dois entram na conta da parte 5, como mais duas porcentagens (FL7-3):
 
 - **riqueza da cidade** = 80 + 40 × riqueza média ÷ (10 dias da cesta de um Civil), presa entre 80 e 120. A cesta de um dia é o Pão na loja da cidade mais um oitavo do Móvel, nos preços locais. Riqueza de 5 dias da cesta dá 100;
 - **desemprego** = 110 − a taxa de desemprego (em %), presa entre 90 e 110. Na fatia, 3 desempregados em 15 dão 20%, e o multiplicador é 90.
@@ -259,13 +259,13 @@ Os dois entram na conta da parte 5, como mais duas porcentagens [Proposta] (FL7-
 
 ### 10.7 O imposto (no passo dos salários)
 
-Cada salário pago tem 20% retido na hora, e esse dinheiro vai para o Banco da Cidade (na fatia, sem o Banco da Facção, a cidade fica com tudo) [Proposta] (FL7-2). O imposto é arredondado por salário, a metade subindo. O empregado recebe o resto. O lucro do jogador ainda não paga imposto (entra com a interface do marco 8) [Proposta].
+Cada salário pago tem 20% retido na hora, e esse dinheiro vai para o Banco da Cidade (na fatia, sem o Banco da Facção, a cidade fica com tudo) (FL7-2). O imposto é arredondado por salário, a metade subindo. O empregado recebe o resto. O lucro do jogador ainda não paga imposto (entra com a interface do marco 8).
 
 *Exemplo:* os 70 décimos do Cozinheiro: 14 de imposto para o Banco, 56 para a classe. A renda do dia (o teto do gasto extra) conta os 70.
 
 ### 10.8 A saída por salário atrasado (no passo dos salários)
 
-Quando uma construção chega a **16 dias seguidos** de salário atrasado (uma estação), os empregados dela saem: viram desempregados, e o `diasDeSalarioAtrasado` volta a 0 (Fatia Vertical, 4.5). Na fatia, ninguém é contratado de novo até a interface do marco 8 [Proposta].
+Quando uma construção chega a **16 dias seguidos** de salário atrasado (uma estação), os empregados dela saem: viram desempregados, e o `diasDeSalarioAtrasado` volta a 0 (Fatia Vertical, 4.5). Na fatia, ninguém é contratado de novo até a interface do marco 8.
 
 ### 10.9 O estabilizador (a cada dia)
 

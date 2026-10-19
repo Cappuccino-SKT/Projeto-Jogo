@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > Rascunho em construção. O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Os pontos marcados com FL7 estão na **rodada FL7** ([[Retomada]], seção 4), ainda sem resposta: a ficha já usa as sugestões, marcadas como [Proposta].
+> Ficha escrita em 2026-10-18 para o **marco 7** (a simulação sem tela de 1 ano). Os pontos marcados com FL7 vêm da **rodada FL7**, aplicada em 2026-10-18, toda com "seguir sugestão" (as decisões estão na parte 8 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]]).
 
 # Ficha Lógica: Simulação sem tela (o teste de 1 ano)
 
@@ -24,9 +24,9 @@ Documentos: a parte 6 da [[Ficha Logica/Fatia Vertical|Fatia Vertical]] (o teste
 |---|---|
 | `jogo --simular 64 --semente 1` | 64 dias com a semente 1 (no lugar da `semente_da_partida` do `vila_inicial.json`) |
 | `jogo --simular 64` | 64 dias com a semente do arquivo |
-| `jogo --simular 8 --npcs-a-mais 485` | O teste de desempenho: 8 dias com 500 NPCs; só mede o tempo, sem os critérios [Proposta] (FL7-8) |
+| `jogo --simular 8 --npcs-a-mais 485` | O teste de desempenho: 8 dias com 500 NPCs; só mede o tempo, sem os critérios (FL7-8) |
 
-### O relatório: `relatorio.csv` [Proposta] (FL7-8)
+### O relatório: `relatorio.csv` (FL7-8)
 
 Gravado na pasta de onde o jogo foi chamado, com ponto e vírgula entre as colunas e vírgula nos decimais (abre direto no Excel e no LibreOffice em português). Uma linha por dia, escrita na meia-noite, depois da ordem do dia:
 
@@ -66,13 +66,13 @@ Só pela linha de comando. O jogo com janela não muda.
 
 ### 4.3 A repetição
 
-A mesma semente dá o mesmo relatório, linha por linha. O `ctest` confere isso com 2 rodadas de 16 dias [Proposta] (FL7-8), e roda o teste de 64 dias uma vez, como um teste à parte.
+A mesma semente dá o mesmo relatório, linha por linha. O `ctest` confere isso com 2 rodadas de 16 dias (FL7-8), e roda o teste de 64 dias uma vez, como um teste à parte.
 
 ### 4.4 O desempenho
 
-1. **O tempo médio de um tick**, medido pelo relógio do C++ (`std::chrono`), sai sempre no fim do `--simular` [Proposta].
-2. **O Tracy** entra como uma opção do CMake, `USAR_TRACY`, desligada por padrão: ligada, o jogo manda as medições para o programa do Tracy (baixado à parte), que mostra quanto tempo cada regra gasta [Proposta] (FL7-8).
-3. **Os 500 NPCs** (a meta da V2-11): o `--npcs-a-mais 485` cria 485 Civis a mais, sem casa nem emprego, que só passeiam. A meta: a 4x (80 ticks por segundo), cada tick gasta no máximo **3 milissegundos** em média, para sobrar tempo para o desenho a 60 quadros por segundo [Proposta] (FL7-8).
+1. **O tempo médio de um tick**, medido pelo relógio do C++ (`std::chrono`), sai sempre no fim do `--simular`.
+2. **O Tracy** entra como uma opção do CMake, `USAR_TRACY`, desligada por padrão: ligada, o jogo manda as medições para o programa do Tracy (baixado à parte), que mostra quanto tempo cada regra gasta (FL7-8).
+3. **Os 500 NPCs** (a meta da V2-11): o `--npcs-a-mais 485` cria 485 Civis a mais, sem casa nem emprego, que só passeiam. A meta: a 4x (80 ticks por segundo), cada tick gasta no máximo **3 milissegundos** em média, para sobrar tempo para o desenho a 60 quadros por segundo (FL7-8).
 
 ## 5. Contas
 
