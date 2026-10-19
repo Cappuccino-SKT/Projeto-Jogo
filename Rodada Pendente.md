@@ -1,3 +1,3 @@
 # Rodada pendente
 
-**Nenhuma.** A rodada TP1 (o Trabalho e Propriedade) foi respondida em 2026-10-19 com "seguir sugestão" em todas e aplicada na [[Ficha Logica/Trabalho|ficha do Trabalho]].
+**Nenhuma.** As rodadas CL1 e TP1 foram respondidas pelo autor com "seguir sugestão". As rodadas PO1, CS1, CI1 e CU1 (fase A) foram decididas em **modo automático** em 2026-10-19, a pedido do autor; as decisões estão na parte 10.7 de cada ficha ([[Ficha Logica/Populacao|População]], [[Ficha Logica/ClasseSocial|Classe Social]], [[Ficha Logica/Cidade|Cidade]], [[Ficha Logica/Cura|Cura]]).
