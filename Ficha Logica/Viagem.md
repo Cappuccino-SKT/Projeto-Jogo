@@ -67,7 +67,7 @@ Documento do sistema: [[Sistema de Viagem/Descrição|Viagem e Mundo]]; a malha,
 | `numero_do_mapa` | (linha − 1) × 8 + coluna | Ordem fixa para desempates |
 | `regiao`, `bioma` | 1, `"temperado"` | Clima do dia e estação |
 | `terreno`, `infraestrutura` | `"floresta"`, `"trilha"` | Tempo do trecho |
-| `estado_do_territorio` | `"territorio"`, `"em_disputa"`, `"sem_dono"` | Chance de encontro |
+| (derivado) estado do território | território, em disputa, sem dono | Chance de encontro. **Não fica no `mapas.json`:** vem das cidades vizinhas ([[Ficha Logica/Faccao|Facção]], 4.1; FA1-6) |
 | `arquivo_tiled` | `"vila_inicial.tmj"` ou `""` | Vazio = sem desenho: só se atravessa pelo Mapa Mundial (VI1-8) |
 | `capital` | `true` / `false` | Conhecida desde o início |
 
@@ -140,7 +140,7 @@ Um trecho vai do **centro de um mapa ao centro do vizinho** e usa os valores do 
 
 ### 4.5 Sortear o encontro (ao entrar no trecho)
 
-1. Chance = a do `estado_do_territorio` do mapa de chegada (50, 150 ou 200 por mil) + a ameaça bandida da região (0 nesta versão; Eventos) × 150% se for marcha forçada.
+1. Chance = a do estado do território (Facção, 4.1) do mapa de chegada (50, 150 ou 200 por mil) + a ameaça bandida da região (0 nesta versão; Eventos) × 150% se for marcha forçada.
 2. Sorteia de 0 a 999. Se o número for **menor** que a chance, há encontro.
 3. Sorteia o tipo pelos pesos: 75 bandidos, 25 mercador viajante.
 4. **Bandidos:** o bando tem 3 + sorteio de 0 a 9 bandidos.

@@ -46,6 +46,15 @@ São os sistemas que mais se ligam ao que já existe e menos dependem do que fal
 
 Crime e Justiça; Religião; Cultura; Facção. São documentos bem completos, mas cada um se liga a cinco ou mais sistemas sem ficha. Ficam depois das fases A e B.
 
+**Ordem (2026-10-19, modo automático):** a Facção primeiro, porque as outras três usam as leis, o Banco da Facção e o território.
+
+| # | Ficha | Precisa de |
+|---|---|---|
+| C1 | **[[Ficha Logica/Faccao\|Facção]]** (escrita em 2026-10-19; rodada FA1 automática) | Outras cidades (B1b), Economia, Cultura (desejos) |
+| C2 | **Cultura** | Facção (C1), NPC, Felicidade |
+| C3 | **Crime e Justiça** | Facção (C1), Reputação (B4), Viagem (B1) |
+| C4 | **Religião** | Cultura (C2), Facção (C1) |
+
 ### Fase D — conflito (prioridade baixa)
 
 Combate; Batalha; Guerra; Diplomacia; Magia; Escravidão; Companheiros e Diálogo. São os mais longos e os que mais dependem dos outros (Guerra se liga a 18 sistemas).

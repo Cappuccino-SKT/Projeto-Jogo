@@ -240,7 +240,7 @@ Para cada item:
 
 Depois da cesta mínima (regra 4.1):
 
-1. **O teto do dia** = 80% da renda do dia da classe (os salários brutos do dia anterior, antes do imposto).
+1. **O teto do dia** = 80% da renda do dia da classe (os salários brutos do dia anterior, antes do imposto). **Com as facções (FA1-2, [[Ficha Logica/Faccao|Facção]]):** o teto passa a ser (100 − taxa do imposto)% da renda; com 20%, continua 80%.
 2. **O que sobra para gastar** = o teto − o que a cesta custou hoje, sem passar do dinheiro da classe. Se der zero ou menos, não há gasto extra.
 3. **Materiais a mais:** a classe compra até **o mesmo número de Materiais Básicos que a cesta tirou hoje** (o mais barato; no empate, o da Cidade), pagando ao dono, enquanto houver dinheiro para gastar (FL7-1).
 4. **O resto vai para a loja da cidade** (o Banco): é o que a classe gastaria com a comida de Tier 2, a Bebida e os serviços que a fatia ainda não tem. Nenhum item sai do inventário (FL7-1).
