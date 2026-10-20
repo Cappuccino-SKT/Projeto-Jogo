@@ -97,7 +97,7 @@ Recalculado só quando uma cidade muda de dono. **Muda a Viagem (FA1-6):** o `es
 
 1. A taxa vem da lei **Imposto** da facção da cidade (10, 20 ou 30%); a cidade sem facção usa 20%.
 2. A taxa é retida de cada salário, como hoje (Economia, 10.7).
-3. **Todo o imposto fica com o Banco da cidade** nesta versão (FA1-1). O documento manda 70% para o Banco da Facção; isso entra com a Guerra, quando a facção tiver o que gastar (soldo). Antes disso, a facção só guardaria dinheiro, e as cidades secariam (parte 10.3).
+3. **[Mudado pela [[Ficha Logica/Guerra|Guerra]], GU1-1 e GU1-2:** com a Guerra, os 70% vão para o Banco da Facção, o soldo volta à classe Civil das cidades, e o Banco da Facção acima de 25% do PIB volta às cidades a cada estação.] **Todo o imposto fica com o Banco da cidade** nesta versão (FA1-1). O documento manda 70% para o Banco da Facção; isso entra com a Guerra, quando a facção tiver o que gastar (soldo). Antes disso, a facção só guardaria dinheiro, e as cidades secariam (parte 10.3).
 4. **O teto do gasto extra muda (FA1-2):** passa a ser **(100 − taxa)% da renda** do dia da classe, não 80% fixo. Com 20%, nada muda.
 5. A Felicidade da lei (0, −5, −10) entra na Felicidade da cidade (Felicidade).
 
