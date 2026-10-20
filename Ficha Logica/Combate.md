@@ -132,7 +132,7 @@ A cada 10 ticks: Medo = (100 − Vida%) × 0,5 + 10 por aliado caído neste comb
 - **O jogador morre:** outro Controlado assume (a dinastia vem com os Companheiros, D2).
 - **Todo o grupo Inconsciente:**
   - pelos **guardas**: prisão (Crime, 4.6);
-  - por **bandidos**: perdem 75% do dinheiro e dos itens carregados (não o equipamento) e acordam no lugar. A escravidão vem com a Escravidão (D3);
+  - por **bandidos** (com a [[Ficha Logica/Escravidao|Escravidão]], ES1-4: 50% captura e venda; 50% este roubo): perdem 75% do dinheiro e dos itens carregados (não o equipamento) e acordam no lugar. A escravidão vem com a Escravidão (D3);
   - por **Criaturas**: perdem o que carregam (não o equipamento) e acordam no lugar.
 - Game Over só se ninguém puder ser capturado (sem Controlados vivos).
 
