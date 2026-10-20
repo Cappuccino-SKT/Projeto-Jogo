@@ -67,7 +67,7 @@ Combate; Batalha; Guerra; Diplomacia; Magia; Escravidão; Companheiros e Diálog
 | D2 | **[[Ficha Logica/Companheiros\|Companheiros e Diálogo]]** (escrita em 2026-10-19; rodada CP1 automática) | Combate (D1), Reputação, Facção |
 | D3 | **[[Ficha Logica/Escravidao\|Escravidão]]** (escrita em 2026-10-19; rodada ES1 automática) | Classe Social, Facção, Crime, Combate |
 | D4 | **[[Ficha Logica/Magia\|Magia]]** (escrita em 2026-10-19; rodada MG1 automática) | Combate (D1), Tecnologia |
-| D5 | **Diplomacia** | Facção, Cultura, Reputação |
+| D5 | **[[Ficha Logica/Diplomacia\|Diplomacia]]** (escrita em 2026-10-19; rodada DP1 automática) | Facção, Cultura, Reputação |
 | D6 | **Batalha** | Combate (D1), Facção |
 | D7 | **Guerra** | Batalha (D6), Diplomacia (D5), Viagem, Comércio |
 
