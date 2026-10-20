@@ -64,7 +64,7 @@ Combate; Batalha; Guerra; Diplomacia; Magia; Escravidão; Companheiros e Diálog
 | # | Ficha | Precisa de |
 |---|---|---|
 | D1 | **[[Ficha Logica/Combate\|Combate]]** (escrita em 2026-10-19; rodada CB1 automática) | Cura, Itens, Viagem |
-| D2 | **Companheiros e Diálogo** | Combate (D1), Reputação, Facção |
+| D2 | **[[Ficha Logica/Companheiros\|Companheiros e Diálogo]]** (escrita em 2026-10-19; rodada CP1 automática) | Combate (D1), Reputação, Facção |
 | D3 | **Escravidão** | Classe Social, Facção, Crime, Combate |
 | D4 | **Magia** | Combate (D1), Tecnologia |
 | D5 | **Diplomacia** | Facção, Cultura, Reputação |

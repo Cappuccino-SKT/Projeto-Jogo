@@ -137,7 +137,7 @@ Recalculado só quando uma cidade muda de dono. **Muda a Viagem (FA1-6):** o `es
 
 ### 4.6 O líder (nesta versão)
 
-Ao criar o mundo, cada facção ganha um líder: idade 30 a 50, Agressividade e Sociabilidade de 20 a 80. **Não morre nesta versão** (a sucessão vem com a dinastia, fase D).
+Ao criar o mundo, cada facção ganha um líder: Agressividade e Sociabilidade de 20 a 80. **Mudado pela [[Ficha Logica/Companheiros|Companheiros]] (CP1-4, CP1-5):** o líder tem de 8 a 18 anos (no jogo, adulto é de 4 a 20; a idade de 30 a 50 que estava aqui o faria morrer logo), tem dinastia, envelhece, morre e tem sucessão (Companheiros, 4.6 e 4.7).
 
 ### 4.7 As leis com efeito nesta versão
 
