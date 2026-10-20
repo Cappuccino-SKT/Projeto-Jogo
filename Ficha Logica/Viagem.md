@@ -316,7 +316,7 @@ Caravana de 15 pessoas, estrada na planície, inverno no bioma temperado, dia de
 1. **VI1-1:** os encontros são sorteados ao entrar no trecho; os bandos que rondam o mapa entram com a Facção.
 2. **VI1-2:** Lutar, até o Combate, é o cálculo rápido (força ÷ soma). Perder a luta tira 75%; render-se tira 50%.
 3. **VI1-3:** o trecho usa os valores do mapa de chegada e o tempo fica fixo desde a entrada.
-4. **VI1-4:** a força simples por pessoa (jogador 3, civil 1, guarda 3, soldado 4, bandido 2) fica no `viagem.json`.
+4. **VI1-4:** a força simples por pessoa (jogador 3, civil 1, guarda 3, soldado 4, bandido 2) fica no `viagem.json`. **Substituída pela CB1-1** do [[Ficha Logica/Combate|Combate]]: o cálculo rápido com os kits e a mesma fórmula do combate visto.
 5. **VI1-5:** suborno de 25 moedas por bandido × (150 − Carisma) ÷ 100; fuga de 50% ajustada pela velocidade, entre 10% e 90%.
 6. **VI1-6:** o clima é por região, e a região da vila sorteia primeiro.
 7. **VI1-7:** a vila continua rodando sem tela enquanto o jogador viaja; a ficha nova B1b (Outras cidades, LOD 1 e 2) vem antes do Comércio.

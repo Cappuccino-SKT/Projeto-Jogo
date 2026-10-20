@@ -97,7 +97,7 @@ Recalculado só quando uma cidade muda de dono. **Muda a Viagem (FA1-6):** o `es
 
 1. A taxa vem da lei **Imposto** da facção da cidade (10, 20 ou 30%); a cidade sem facção usa 20%.
 2. A taxa é retida de cada salário, como hoje (Economia, 10.7).
-3. **Todo o imposto fica com o Banco da cidade** nesta versão (FA1-1). O documento manda 70% para o Banco da Facção; isso entra com a Guerra, quando a facção tiver o que gastar (soldo). Antes disso, a facção só guardaria dinheiro, e as cidades secariam (parte 10.3).
+3. **[Mudado pela [[Ficha Logica/Guerra|Guerra]], GU1-1 e GU1-2:** com a Guerra, os 70% vão para o Banco da Facção, o soldo volta à classe Civil das cidades, e o Banco da Facção acima de 25% do PIB volta às cidades a cada estação.] **Todo o imposto fica com o Banco da cidade** nesta versão (FA1-1). O documento manda 70% para o Banco da Facção; isso entra com a Guerra, quando a facção tiver o que gastar (soldo). Antes disso, a facção só guardaria dinheiro, e as cidades secariam (parte 10.3).
 4. **O teto do gasto extra muda (FA1-2):** passa a ser **(100 − taxa)% da renda** do dia da classe, não 80% fixo. Com 20%, nada muda.
 5. A Felicidade da lei (0, −5, −10) entra na Felicidade da cidade (Felicidade).
 
@@ -137,7 +137,7 @@ Recalculado só quando uma cidade muda de dono. **Muda a Viagem (FA1-6):** o `es
 
 ### 4.6 O líder (nesta versão)
 
-Ao criar o mundo, cada facção ganha um líder: idade 30 a 50, Agressividade e Sociabilidade de 20 a 80. **Não morre nesta versão** (a sucessão vem com a dinastia, fase D).
+Ao criar o mundo, cada facção ganha um líder: Agressividade e Sociabilidade de 20 a 80. **Mudado pela [[Ficha Logica/Companheiros|Companheiros]] (CP1-4, CP1-5):** o líder tem de 8 a 18 anos (no jogo, adulto é de 4 a 20; a idade de 30 a 50 que estava aqui o faria morrer logo), tem dinastia, envelhece, morre e tem sucessão (Companheiros, 4.6 e 4.7).
 
 ### 4.7 As leis com efeito nesta versão
 

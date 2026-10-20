@@ -23,6 +23,8 @@ Documento do sistema: [[Sistema de Classe Social/Descrição|Classe Social]]; os
 
 ## 2. Dados
 
+> **A classe Escravo** (fase D3) está na [[Ficha Logica/Escravidao|Escravidão]]: cesta de 1 comida básica paga pelo dono, sem salário, sem dinheiro, Senzala, Felicidade base 30.
+
 ### Definições (no `data/regras.json`, o bloco `"cesta_minima_civil"` vira `"classes"`)
 
 ```json
