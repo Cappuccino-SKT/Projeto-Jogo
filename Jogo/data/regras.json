@@ -65,5 +65,5 @@
     "dias_de_salario_baixo_para_um_empregado_sair": 8
   },
   "obras": { "nivel_maximo_com_o_engenheiro": 3, "manutencao_em_porcento": 5, "producao_com_manutencao_atrasada_em_porcento": 75 },
-  "ordem_do_dia": ["manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "eventos", "escolha_das_receitas"]
+  "ordem_do_dia": ["clima", "manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "eventos", "escolha_das_receitas"]
 }

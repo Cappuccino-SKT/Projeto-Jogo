@@ -47,4 +47,6 @@ struct AcessoAoEstadoParaOSave {
     static auto& sorteioDosNpcs(Simulacao& simulacao) { return simulacao.sorteioDosNpcs; }
     template <class Simulacao>
     static auto& sorteioDosEventos(Simulacao& simulacao) { return simulacao.sorteioDosEventos; }
+    template <class Simulacao>
+    static auto& sorteioDoClima(Simulacao& simulacao) { return simulacao.sorteioDoClima; }
 };

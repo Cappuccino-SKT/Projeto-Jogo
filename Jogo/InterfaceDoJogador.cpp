@@ -276,7 +276,8 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
 
     // 1. A data e a hora.
     const std::string data = "Ano " + std::to_string(relogio.anoAtual()) + ", " + nomeDaEstacaoParaMostrar(relogio.estacaoAtual()) + ", dia "
-        + std::to_string(relogio.diaDaEstacaoAtual()) + " | " + montarTextoDaHora(relogio) + " | " + nomeDaFaseDoDiaParaMostrar(relogio.faseDoDiaAtual());
+        + std::to_string(relogio.diaDaEstacaoAtual()) + " | " + montarTextoDaHora(relogio) + " | " + nomeDaFaseDoDiaParaMostrar(relogio.faseDoDiaAtual())
+        + " | " + simulacao.dados.tabelaDeTextos.textoDe(identificadorDeTextoDoClima(simulacao.clima.climaDeHoje));
     ImGui::AlignTextToFramePadding();
     ImGui::TextUnformatted(data.c_str());
     ImGui::SameLine(0, 24);

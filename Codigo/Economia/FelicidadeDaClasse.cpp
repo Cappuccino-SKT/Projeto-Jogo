@@ -17,6 +17,7 @@ FatoresDaFelicidade calcularFatoresDaFelicidade(const SituacaoDoDiaParaAFelicida
         const long long bonusMaximo = 10LL * regras.consumoGastoExtraMaximo;
         consumo += std::min(bonusMaximo, bonusMaximo * situacao.gastoExtraDeHoje / situacao.gastoDaCestaDeHoje);
     }
+    consumo += 10LL * situacao.pontosDoClimaNoConsumo;
     fatores.consumoAtendido = static_cast<int>(consumo);
 
     // 2. Desemprego e renda: +10 − 20 × a taxa, preso entre −10 e +10.

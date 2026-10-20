@@ -1,5 +1,6 @@
 #include "Producao/ProducaoDaVila.h"
 
+#include "Clima/ClimaDaVila.h"
 #include "Jogador/DecisoesDoJogador.h"
 #include "Jogador/ObrasDaVila.h"
 
@@ -344,7 +345,11 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
             // O lote × o fator da estação e da produtividade (só nas Braçais)
             // × os eventos ativos, com a fração guardada.
             const int fatorDoLote = receita.trabalhoUsado == TrabalhoDaReceita::Bracal ? fatorDaProducaoBracalEmPorcento(contexto, producao, estacao) : 100;
-            const int totalEmCentesimos = receita.loteProduzido * fatorDoLote * multiplicadorDosEventos / 100 + producao.restoDaProducaoBracal;
+            // Ficha do Clima, regra 4.7: × o clima do dia (a tempestade: 50% ao ar livre).
+            const int climaDoDia = receita.trabalhoUsado == TrabalhoDaReceita::Bracal
+                ? porcentagemDoTrabalhoAoArLivre(contexto.clima.climaDeHoje, contexto.dados.regrasDoClima) : 100;
+            const int totalEmCentesimos =
+                receita.loteProduzido * fatorDoLote * multiplicadorDosEventos / 100 * climaDoDia / 100 + producao.restoDaProducaoBracal;
             quantidade = totalEmCentesimos / 100;
             restoNovo = totalEmCentesimos % 100;
         }
@@ -481,7 +486,9 @@ int precoLocalDoItem(const ContextoDaProducao& contexto, int numeroDoItem)
 
 int64_t estoqueAlvoDoItemEmCentesimos(const ContextoDaProducao& contexto, int numeroDoItem)
 {
-    return contexto.consumoMedido.consumoPrevistoDoDiaEmCentesimos(numeroDoItem) * contexto.dados.regras.economia.mercadoLocal.diasDoEstoqueAlvo;
+    // Ficha do Clima, regra 4.6: nos últimos dias do Outono, a Tora e o Grão ganham mais alvo.
+    return contexto.consumoMedido.consumoPrevistoDoDiaEmCentesimos(numeroDoItem) * contexto.dados.regras.economia.mercadoLocal.diasDoEstoqueAlvo
+        + bonusDoEstoqueParaOInvernoEmCentesimos(contexto, numeroDoItem);
 }
 
 std::vector<PosicaoDeTile> montarTilesDeTrabalhoDaArea(const MapaLocal& mapa, const VilaDoJogo& vila, const AreaDeRecurso& area)

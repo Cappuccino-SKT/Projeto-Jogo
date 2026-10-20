@@ -39,7 +39,8 @@ struct SituacaoDoDiaParaAFelicidade {
     long long gastoDaCestaDeHoje = 0;   // em décimos de moeda
     int civisDesempregados = 0;
     int civisSemCasa = 0;
-    int felicidadeDosEventosEmPontos = 0;  // a soma dos eventos ativos (ficha dos Eventos)
+    int felicidadeDosEventosEmPontos = 0;  // a soma dos eventos ativos (ficha dos Eventos) e o calor forte (Clima)
+    int pontosDoClimaNoConsumo = 0;        // ficha do Clima, regra 4.4: −10 se faltou lenha hoje
 };
 
 // Os 4 fatores do dia, em décimos de ponto.

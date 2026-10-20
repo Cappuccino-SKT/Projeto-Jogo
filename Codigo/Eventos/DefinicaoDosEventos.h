@@ -18,13 +18,13 @@
 enum class TipoDeEvento { Ocasional, Condicional, DataFixa };
 
 // A lista fechada de efeitos da fatia (regra 4.4).
-enum class TipoDeEfeito { ProducaoDaConstrucao, Felicidade, MudarEstoque, NpcsDoentes, MercadorCompra };
+enum class TipoDeEfeito { ProducaoDaConstrucao, Felicidade, MudarEstoque, NpcsDoentes, MercadorCompra, Lenha };
 
 struct EfeitoDoEvento {
     TipoDeEfeito tipo = TipoDeEfeito::Felicidade;
     std::string tipoDaConstrucao;   // ProducaoDaConstrucao: "construcao.fazenda"
     int numeroDoItem = -1;          // MudarEstoque
-    int porcentagem = 100;          // ProducaoDaConstrucao (50 = metade) e MudarEstoque (−10 = tira 10%)
+    int porcentagem = 100;          // ProducaoDaConstrucao (50 = metade), MudarEstoque (−10 = tira 10%) e Lenha (200 = o dobro)
     int quantidade = 0;             // MudarEstoque (+20 Toras), NpcsDoentes (2) e MercadorCompra (20)
     int pontosDeFelicidade = 0;     // Felicidade
 };

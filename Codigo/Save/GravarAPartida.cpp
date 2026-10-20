@@ -303,7 +303,13 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["relogio"] = json{{"tick", Acesso::tickAtualDaPartida(simulacao.relogio)},
                              {"velocidade", Acesso::velocidadeDoJogo(simulacao.relogio)},
                              {"velocidadeAntesDaPausa", Acesso::velocidadeAntesDaPausa(simulacao.relogio)}};
-    arvore["sorteios"] = json{{"npcs", escreverOSorteio(Acesso::sorteioDosNpcs(simulacao))}, {"eventos", escreverOSorteio(Acesso::sorteioDosEventos(simulacao))}};
+    arvore["sorteios"] = json{{"npcs", escreverOSorteio(Acesso::sorteioDosNpcs(simulacao))}, {"eventos", escreverOSorteio(Acesso::sorteioDosEventos(simulacao))},
+                              {"clima", escreverOSorteio(Acesso::sorteioDoClima(simulacao))}};
+    // Fase A1 (ficha do Clima): o clima de hoje, a lenha devida e os dias em déficit.
+    arvore["clima"] = json{{"climaDeHoje", nomeDoClimaNoArquivo(simulacao.clima.climaDeHoje)},
+                           {"climaDeOntem", nomeDoClimaNoArquivo(simulacao.clima.climaDeOntem)},
+                           {"lenhaDevidaEmCentesimos", simulacao.clima.lenhaDevidaEmCentesimos},
+                           {"diasEmDeficitDeLenha", simulacao.clima.diasEmDeficitDeLenha}};
     arvore["vila"] = escreverAVila(simulacao);
     arvore["producao"] = escreverAProducao(simulacao);
     arvore["obras"] = escreverAsObras(simulacao);

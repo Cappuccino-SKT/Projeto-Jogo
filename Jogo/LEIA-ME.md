@@ -483,3 +483,21 @@ O teste de 1 ano ficou mais exigente (FE4-3): agora **FALHA** se o Banco ficar a
 **Os 2 anos (semente 1, 2026-10-19):** PASSOU, mas com uma tendência a olhar: no ano 2 o Banco **sobe** de 475 para 867, e o dinheiro do jogador **cai** de 305 para 260. A verba fixa sobra quando o jogador deixa de lucrar; a causa da queda do jogador no ano 2 foi medida (abaixo).
 
 **Por que o jogador cai no ano 2 (medido, semente 1, por dia; registro temporário, não ficou no código):** só a Carpintaria vende e paga salário. Ano 1 → ano 2: venda de Móveis **22,7 → 17,2** (214 → 190 vendas; preço médio **6,8 → 5,8**); salários **18,3 → 17,5**; insumos (Tábuas e Tora) 1,2 → 0,9; horas de obra 0,56 e loja 0,38 iguais; recebido pelas obras 1,24 → 1,20. Saldo: **+3,4 → −0,9** por dia. Não é a Pedra (restam 202 Blocos no dia 128, e o jogador não comprou nada fora dos insumos), nem o salário (caiu junto) nem evento. O estoque de Móveis ficou em 16 a 19 o ano todo. A queda vem dos dias 81 a 112: o Pão fica escasso (92 → 43, preço de 1,3 → 2,4; Água baixa e a Febre do dia 85), a riqueza média cai de 14 para 10,5 e o dinheiro da classe civil de 145 para 110. Sobra menos para o gasto extra, a procura de Móveis cai (3,3 → 2,7 vendas/dia) e o preço local, que depende do estoque contra o alvo de 5 dias de consumo, cai para 4,3 (o do dia 1 era 7,1). Os custos do jogador (salários) são fixos e a receita não: com pouca procura, ele perde. Nos dias 113 a 128 a venda volta a 3,1/dia a 5,8, e o jogador já para de cair (+0,2/dia). **Decidido na FE5-1:** aceitar o prejuízo na crise, sem regra nova (ver a ficha da Economia).
+
+### Marco A1: o clima e as estações (2026-10-19, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Clima|ficha do Clima]]):
+
+- **O clima do dia**, sorteado à 0h (o passo novo "clima", o primeiro do `ordem_do_dia`), com a sequência 3 do sorteio: 60% de repetir o de ontem, ou a tabela da estação do `data/clima.json`. O dia 1 é sempre Limpo. A barra de cima do jogo mostra o clima de hoje.
+- **Tempestade:** as receitas Braçais produzem 50%; no Período Livre, os NPCs ficam em casa (o Passear vai para a própria casa) e ninguém vai comprar.
+- **A lenha do inverno:** cada Civil gasta 25 centésimos de Tora por dia (150% na neve), tirados da Tora da Cidade depois da cesta; a classe paga o preço da loja. Sem Tora, faltou lenha: −10 na Felicidade (fator Consumo) e mais 1 dia em déficit. A dívida zera no dia 1 da Primavera.
+- **Calor forte:** −2 na Felicidade, no fator dos eventos.
+- **Estocar para o inverno:** nos últimos 4 dias do Outono, o estoque-alvo da Tora ganha 18 (15 Civis × 25 × 5 ÷ 100) e o do Grão, 5 dias do consumo.
+- **Inverno rigoroso:** um evento novo do `eventos.json` (25% no dia 1 do Inverno, cooldown de 64 dias): a Fazenda a 67% (o "÷ 1,5" da ficha: 25% vira cerca de 16%) e a lenha a 200% (um efeito novo, `lenha_em_porcento`).
+- **Save:** a seção `clima` e o sorteio do clima; o formato passou para a **versão 2** (os saves da versão 1 são recusados).
+- **Relatório:** as colunas `clima` (o do dia que acabou), `lenha_do_dia` (as Toras tiradas à 0h) e `deficit_lenha`.
+
+Arquivos novos: `Codigo/Clima/Clima.h` e `.cpp` (o sorteio, a lenha, a leitura do `clima.json`), `Codigo/Clima/ClimaDaVila.h` e `.cpp` (a ligação com a vila), `Codigo/Testes/TestesDoClima.cpp`, `Jogo/data/clima.json`.
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (397 conferências, a tabela da parte 8 da ficha); `jogo --simular 64` **passa nas sementes de 1 a 10**. Na semente 10: 17 dias nublados, 16 limpos, 10 de chuva, 10 de tempestade, 6 de neve e 5 de névoa; o inverno gastou **71 Toras de lenha** (a ficha previa cerca de 69); a vila entrou no inverno com 37 a 48 Toras e **nenhum dia ficou sem lenha** (o estoque do fim do Outono funcionou). O Inverno rigoroso não saiu nessas sementes (25% de chance). Com `--salvar-e-carregar-no-dia 50` (no meio do inverno, com lenha devida), o `relatorio.csv` sai **igual, byte a byte**. **Falta o teste do autor** na janela (o clima na barra de cima; os NPCs em casa na tempestade).
+

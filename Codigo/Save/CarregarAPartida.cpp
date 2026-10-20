@@ -132,6 +132,25 @@ void restaurarORelogio(SimulacaoDaVila& simulacao, const json& relogio)
     Acesso::velocidadeAntesDaPausa(simulacao.relogio) = velocidadeAntesDaPausa;
 }
 
+// Fase A1 (ficha do Clima): um clima que não existe recusa o save.
+TipoDeClima lerOClimaDoSave(const json& nome)
+{
+    const std::optional<TipoDeClima> clima = climaPeloNome(nome.get<std::string>());
+    if (!clima) {
+        throw RecusaDoSave("O save tem um clima que o jogo não conhece (" + nome.get<std::string>() + ").");
+    }
+    return *clima;
+}
+
+void restaurarOClima(SimulacaoDaVila& partida, const json& secao)
+{
+    partida.clima.climaDeHoje = lerOClimaDoSave(secao.at("climaDeHoje"));
+    partida.clima.climaDeOntem = lerOClimaDoSave(secao.at("climaDeOntem"));
+    partida.clima.lenhaDevidaEmCentesimos = secao.at("lenhaDevidaEmCentesimos").get<int>();
+    partida.clima.diasEmDeficitDeLenha = secao.at("diasEmDeficitDeLenha").get<int>();
+    guardarODiaDeHojeNoClima(partida.clima, partida.relogio);
+}
+
 void restaurarOSorteio(SorteioComSemente& sorteio, const json& dadosDoSorteio)
 {
     Acesso::estadoDoGerador(sorteio) = dadosDoSorteio.at("estado").get<uint64_t>();
@@ -475,6 +494,8 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarORelogio(*partida, arvore.at("relogio"));
         restaurarOSorteio(Acesso::sorteioDosNpcs(*partida), arvore.at("sorteios").at("npcs"));
         restaurarOSorteio(Acesso::sorteioDosEventos(*partida), arvore.at("sorteios").at("eventos"));
+        restaurarOSorteio(Acesso::sorteioDoClima(*partida), arvore.at("sorteios").at("clima"));
+        restaurarOClima(*partida, arvore.at("clima"));
         restaurarAVila(*partida, arvore.at("vila"));
         restaurarAProducao(*partida, arvore.at("producao"));
         restaurarAsObras(*partida, arvore.at("obras"));

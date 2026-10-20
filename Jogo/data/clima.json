@@ -1,0 +1,21 @@
+{
+  "chance_de_repetir_o_clima_em_por_mil": 600,
+  "chances_por_estacao_em_por_mil": {
+    "primavera": { "limpo": 350, "nublado": 250, "chuva": 300, "tempestade": 50, "nevoa": 50 },
+    "verao":     { "limpo": 500, "nublado": 200, "chuva": 150, "tempestade": 50, "calor_forte": 100 },
+    "outono":    { "limpo": 300, "nublado": 300, "chuva": 250, "tempestade": 50, "nevoa": 100 },
+    "inverno":   { "limpo": 250, "nublado": 300, "tempestade": 50, "neve": 300, "nevoa": 100 }
+  },
+  "efeitos_do_clima": {
+    "tempestade":  { "trabalho_ao_ar_livre_em_porcento": 50, "periodo_livre_em_casa": true },
+    "neve":        { "lenha_em_porcento": 150 },
+    "calor_forte": { "felicidade": -2 }
+  },
+  "aquecimento": {
+    "lenha_por_morador_por_dia_em_centesimos": 25,
+    "lenha_do_bioma_em_porcento": 100,
+    "felicidade_sem_lenha": -10
+  },
+  "estocar_para_o_inverno": { "ultimos_dias_do_outono": 4, "dias_de_lenha": 5, "dias_de_grao": 5 },
+  "clima_do_primeiro_dia": "limpo"
+}

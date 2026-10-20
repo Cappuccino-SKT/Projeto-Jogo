@@ -72,11 +72,15 @@ std::optional<EfeitoDoEvento> lerEfeito(const Json& objeto, const CatalogosParaO
     } else if (objeto.contains("npcs_doentes")) {
         efeito.tipo = TipoDeEfeito::NpcsDoentes;
         lerInteiroOpcional(objeto, "npcs_doentes", 1, 1000, efeito.quantidade, anotarErroDoEfeito);
+    } else if (objeto.contains("lenha_em_porcento")) {
+        // Ficha do Clima, regra 4.5: o Inverno rigoroso dobra a lenha.
+        efeito.tipo = TipoDeEfeito::Lenha;
+        lerInteiroOpcional(objeto, "lenha_em_porcento", 0, 1000, efeito.porcentagem, anotarErroDoEfeito);
     } else if (objeto.contains("mercador_compra")) {
         efeito.tipo = TipoDeEfeito::MercadorCompra;
         lerInteiroOpcional(objeto, "mercador_compra", 1, 10'000, efeito.quantidade, anotarErroDoEfeito);
     } else {
-        anotarErro("o efeito " + objeto.dump() + " não é da lista (producao_da_construcao, felicidade, mudar_estoque, npcs_doentes, mercador_compra)");
+        anotarErro("o efeito " + objeto.dump() + " não é da lista (producao_da_construcao, felicidade, mudar_estoque, npcs_doentes, mercador_compra, lenha_em_porcento)");
         return std::nullopt;
     }
     if (temErro) {

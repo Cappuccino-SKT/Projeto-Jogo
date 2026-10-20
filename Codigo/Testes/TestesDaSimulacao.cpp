@@ -267,7 +267,7 @@ void testarFelicidade(const DadosDoJogo& dados)
 
 void testarEventos(const DadosDoJogo& dadosLidos)
 {
-    conferir(dadosLidos.catalogoDeEventos.quantidadeDeEventos() == 11 && !dadosLidos.listaDeProblemas.temErro(), "o eventos.json da fatia: 11 eventos, sem erro");
+    conferir(dadosLidos.catalogoDeEventos.quantidadeDeEventos() == 12 && !dadosLidos.listaDeProblemas.temErro(), "o eventos.json: 12 eventos (com o Inverno rigoroso), sem erro");
     {
         ListaDeProblemasDosDados problemas;
         const CatalogosParaOsEventos catalogos{dadosLidos.tabelaDeTextos, dadosLidos.catalogoDeItens, dadosLidos.catalogoDeConstrucoes};
@@ -506,7 +506,7 @@ void testarRelatorio(const DadosDoJogo& dados)
     linha.empregados = 12;
     linha.desempregados = 3;
     linha.eventosDoDia = {"Seca começou", "Ratos no celeiro"};
-    conferir(escreverLinhaDoRelatorio(linha) == "37;Outono;5;240;52;1,9;402,3;81,0;12,1;58,4;12;3;0;0;0,0;\"Seca começou, Ratos no celeiro\"",
+    conferir(escreverLinhaDoRelatorio(linha) == "37;Outono;5;240;52;1,9;402,3;81,0;12,1;58,4;12;3;0;0;0,0;limpo;0;0;\"Seca começou, Ratos no celeiro\"",
              "uma linha do relatório: ponto e vírgula entre as colunas e vírgula nos decimais");
 
     ConferenciaDoTesteDeUmAno fome;

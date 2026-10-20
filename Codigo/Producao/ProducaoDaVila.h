@@ -106,6 +106,9 @@ struct ContextoDaProducao {
     MapaLocal& mapa;
     DecisoesDoJogador& decisoes;
     ObrasDaVila& obras;
+    // Fase A1 (ficha do Clima): o clima de hoje e o sorteio dele (sequência 3).
+    EstadoDoClima& clima;
+    SorteioComSemente& sorteioDoClima;
     int ticksPorHoraDeJogo = 800;
 };
 

@@ -41,6 +41,10 @@ struct LinhaDoRelatorio {
     int diasEmDeficitDeMateriais = 0;
     int64_t consumoNaoPago = 0;
     std::vector<std::string> eventosDoDia;  // "Seca começou"
+    // Fase A1 (ficha do Clima): o clima do dia que acabou, a lenha tirada à 0h e os dias sem lenha.
+    std::string clima = "limpo";
+    int lenhaDoDia = 0;
+    int diasEmDeficitDeLenha = 0;
 
     bool operator==(const LinhaDoRelatorio&) const = default;
 };

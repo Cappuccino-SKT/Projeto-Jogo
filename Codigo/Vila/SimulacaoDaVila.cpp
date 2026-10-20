@@ -8,8 +8,13 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
                                  std::optional<uint64_t> sementeNoLugarDaDoArquivo)
     : dados(dadosDoJogo), relogio(RelogioDoMundo::criarParaPartidaNova(regrasDoTempo)), vila(dadosDoJogo.vilaInicial), mapa(dadosDoJogo.mapaDaVila), ticksPorHoraDeJogo(regrasDoTempo.ticksPorHoraDeJogo),
       sorteioDosNpcs(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDosNpcs),
-      sorteioDosEventos(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDosEventos)
+      sorteioDosEventos(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDosEventos),
+      sorteioDoClima(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDoClima)
 {
+    // O clima do dia 1 (ficha do Clima, regra 4.1, passo 1): não sorteia.
+    clima.climaDeHoje = dados.regrasDoClima.climaDoPrimeiroDia;
+    clima.climaDeOntem = clima.climaDeHoje;
+    guardarODiaDeHojeNoClima(clima, relogio);
     regrasDoMovimento.velocidadeDeAndarEmMilesimosPorTick =
         converterVelocidadeParaMilesimosPorTick(dados.regras.velocidadeDeAndarEmTilesPorHora, ticksPorHoraDeJogo);
     regrasDoMovimento.caminhosCalculadosPorTick = dados.regras.caminhosCalculadosPorTick;
@@ -29,13 +34,15 @@ ContextoDaRotina SimulacaoDaVila::contextoDaRotina()
 {
     ContextoDaRotina contexto{registroDasEntidades, mapa, vila, dados.regras.vidaDosNpcs, ticksPorHoraDeJogo, sorteioDosNpcs};
     contexto.producaoDasConstrucoes = &producaoDasConstrucoes;
+    contexto.periodoLivreEmCasa = periodoLivreEmCasaHoje(clima, dados.regrasDoClima);  // a tempestade (ficha do Clima)
     return contexto;
 }
 
 ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
 {
     return ContextoDaProducao{registroDasEntidades, dados,    inventario, dinheiro,          producaoDasConstrucoes,
-                              consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, ticksPorHoraDeJogo};
+                              consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, clima, sorteioDoClima,
+                              ticksPorHoraDeJogo};
 }
 
 void SimulacaoDaVila::criarNpcsSoParaMedirODesempenho(int quantidade)
