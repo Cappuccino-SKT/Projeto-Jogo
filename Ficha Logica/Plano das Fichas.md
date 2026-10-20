@@ -59,6 +59,18 @@ Crime e Justiça; Religião; Cultura; Facção. São documentos bem completos, m
 
 Combate; Batalha; Guerra; Diplomacia; Magia; Escravidão; Companheiros e Diálogo. São os mais longos e os que mais dependem dos outros (Guerra se liga a 18 sistemas).
 
+**Ordem (2026-10-19, modo automático):** do que menos depende para o que mais depende.
+
+| # | Ficha | Precisa de |
+|---|---|---|
+| D1 | **[[Ficha Logica/Combate\|Combate]]** (escrita em 2026-10-19; rodada CB1 automática) | Cura, Itens, Viagem |
+| D2 | **Companheiros e Diálogo** | Combate (D1), Reputação, Facção |
+| D3 | **Escravidão** | Classe Social, Facção, Crime, Combate |
+| D4 | **Magia** | Combate (D1), Tecnologia |
+| D5 | **Diplomacia** | Facção, Cultura, Reputação |
+| D6 | **Batalha** | Combate (D1), Facção |
+| D7 | **Guerra** | Batalha (D6), Diplomacia (D5), Viagem, Comércio |
+
 ### Fase E — a partida completa (por último)
 
 Mundo e Estado Inicial; Início de Jogo; Objetivo e Progressão. Juntam tudo, então só fazem sentido no fim.
