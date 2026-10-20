@@ -18,7 +18,9 @@
 enum class TipoDeEvento { Ocasional, Condicional, DataFixa };
 
 // A lista fechada de efeitos da fatia (regra 4.4).
-enum class TipoDeEfeito { ProducaoDaConstrucao, Felicidade, MudarEstoque, NpcsDoentes, MercadorCompra, Lenha };
+// Fase A6 (ficha da Cura): os doentes em porcento, as mortes da Epidemia e o Remédio.
+enum class TipoDeEfeito { ProducaoDaConstrucao, Felicidade, MudarEstoque, NpcsDoentes, MercadorCompra, Lenha,
+                          NpcsDoentesEmPorcento, MortesDaPopulacao, Remedio };
 
 struct EfeitoDoEvento {
     TipoDeEfeito tipo = TipoDeEfeito::Felicidade;
@@ -27,6 +29,18 @@ struct EfeitoDoEvento {
     int porcentagem = 100;          // ProducaoDaConstrucao (50 = metade), MudarEstoque (−10 = tira 10%) e Lenha (200 = o dobro)
     int quantidade = 0;             // MudarEstoque (+20 Toras), NpcsDoentes (2) e MercadorCompra (20)
     int pontosDeFelicidade = 0;     // Felicidade
+    // Fase A6: NpcsDoentesEmPorcento usa a porcentagem (20 = 20% dos Civis); MortesDaPopulacao,
+    // a quantidade (10 por mil da população por dia); Remedio, a quantidade (1 a cada 10 NPCs)
+    // e a porcentagem das mortes com ele (50).
+};
+
+// Fase A6 (ficha da Cura, CU1-1): um modificador da chance de um ocasional.
+enum class TipoDeModificadorDaChance { OcupacaoMinima, ComidaEmDeficit, ExisteConstrucao };
+struct ModificadorDaChance {
+    TipoDeModificadorDaChance tipo = TipoDeModificadorDaChance::ComidaEmDeficit;
+    int ocupacaoMinimaEmPorcento = 0;
+    std::vector<std::string> construcoes;  // ExisteConstrucao: basta uma delas na vila
+    int porcentagem = 100;
 };
 
 // A condição de um evento condicional. A fatia tem duas.
@@ -52,6 +66,7 @@ struct DefinicaoDeEvento {
     Estacao estacaoDaDataFixa = Estacao::Primavera;  // só nos de data fixa
     int diaDaDataFixa = 1;
     std::vector<EfeitoDoEvento> efeitos;
+    std::vector<ModificadorDaChance> modificadoresDaChance;  // fase A6: multiplicam a chance, um depois do outro
 
     bool ehPontual() const { return tipo != TipoDeEvento::Condicional && duracaoEmDias == 0; }
 };

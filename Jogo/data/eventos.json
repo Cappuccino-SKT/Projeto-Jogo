@@ -34,5 +34,14 @@
     "efeitos": [ { "felicidade": -5 } ] },
   { "id": "evento.festa_da_colheita", "tipo": "data_fixa", "categoria": "social", "negativo": false,
     "estacao": "outono", "dia_da_estacao": 12, "duracao_dias": 4,
-    "efeitos": [ { "felicidade": 10 } ] }
+    "efeitos": [ { "felicidade": 10 } ] },
+  { "id": "evento.epidemia", "tipo": "ocasional", "categoria": "saude", "negativo": true,
+    "chance_por_dia_em_por_mil": 5, "cooldown_dias": 64, "duracao_dias": 8,
+    "modificadores_da_chance": [
+      { "ocupacao_minima_em_porcento": 90, "porcentagem": 200 },
+      { "comida_em_deficit": true, "porcentagem": 200 },
+      { "existe_construcao": ["construcao.boticario", "construcao.hospital"], "porcentagem": 50 } ],
+    "efeitos": [ { "npcs_doentes_em_porcento_dos_civis": 20 }, { "felicidade": -10 },
+                 { "mortes_por_dia_em_por_mil_da_populacao": 10 },
+                 { "remedio_por_dia_a_cada_npcs": 10, "mortes_com_remedio_em_porcento": 50 } ] }
 ]

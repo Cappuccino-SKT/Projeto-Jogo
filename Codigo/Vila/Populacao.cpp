@@ -98,13 +98,20 @@ int idadeDoNpc(ContextoDaProducao& contexto, entt::entity npc)
     return idade == nullptr ? 0 : idade->anos;
 }
 
-// Regra 4.6, passo 1: o mais velho (no empate, o de maior número).
+// Regra 4.6, passo 1: o mais velho (no empate, o de maior número). Com uma
+// doença que mata (a Epidemia, CU1-4), o mais velho entre os doentes.
 entt::entity npcMaisVelho(ContextoDaProducao& contexto)
 {
     entt::entity escolhido = entt::null;
     int maiorIdade = -1;
     int maiorNumero = -1;
+    const bool soOsDoentes = algumaDoencaMataHoje(contexto) && std::any_of(contexto.npcsDaVila.begin(), contexto.npcsDaVila.end(), [&](entt::entity npc) {
+        return contexto.registroDasEntidades.all_of<DoencaDoNpc>(npc);
+    });
     for (const entt::entity npc : contexto.npcsDaVila) {
+        if (soOsDoentes && !contexto.registroDasEntidades.all_of<DoencaDoNpc>(npc)) {
+            continue;
+        }
         const int idade = idadeDoNpc(contexto, npc);
         const int numero = contexto.registroDasEntidades.get<IdentidadeDoNpc>(npc).numeroDoNpc;
         if (idade > maiorIdade || (idade == maiorIdade && numero > maiorNumero)) {
@@ -286,6 +293,8 @@ std::vector<std::string> rodarAPopulacaoDoDia(ContextoDaProducao& contexto, cons
         populacao.acumuladoDeCrescimentoEmPessoas -=
             populacaoTotal * regras.mortalidadePorEstacaoEmPorMil / 1000 / relogio.diasPorEstacao() * (regras.mortalidadeSemLenhaEmPorcento - 100) / 100;
     }
+    // Fase A6 (ficha da Cura, regra 4.2): as mortes da Epidemia, com ou sem o Remédio.
+    populacao.acumuladoDeCrescimentoEmPessoas -= mortesDasDoencasHojeEmPessoas(contexto);
     if (dinheiro.diasEmDeficitDeComida > 0) {
         ++populacao.diasDeFomeNaEstacao;
     }

@@ -1,5 +1,6 @@
 #include "Economia/ConsumoESalarios.h"
 
+#include "Eventos/EventosDaVila.h"
 #include "Vila/Populacao.h"
 #include "Vila/Trabalho.h"
 #include "Clima/ClimaDaVila.h"
@@ -263,6 +264,8 @@ void consumirACestaDoDia(ContextoDaProducao& contexto)
 
     // Ficha do Clima, regra 4.3: a lenha do inverno, depois da cesta e antes do gasto extra.
     consumirALenhaDoDia(contexto);
+    // Fase A6 (ficha da Cura, regra 4.2, passo 1): o Remédio da Epidemia.
+    gastarORemedioDaEpidemia(contexto);
 
     // Regra 10.5: o gasto extra.
     fazerOGastoExtra(contexto, materiaisQueACestaTirou);

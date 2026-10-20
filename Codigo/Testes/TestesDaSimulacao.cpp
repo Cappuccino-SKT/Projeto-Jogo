@@ -267,7 +267,7 @@ void testarFelicidade(const DadosDoJogo& dados)
 
 void testarEventos(const DadosDoJogo& dadosLidos)
 {
-    conferir(dadosLidos.catalogoDeEventos.quantidadeDeEventos() == 12 && !dadosLidos.listaDeProblemas.temErro(), "o eventos.json: 12 eventos (com o Inverno rigoroso), sem erro");
+    conferir(dadosLidos.catalogoDeEventos.quantidadeDeEventos() == 13 && !dadosLidos.listaDeProblemas.temErro(), "o eventos.json: 13 eventos (com o Inverno rigoroso e a Epidemia), sem erro");
     {
         ListaDeProblemasDosDados problemas;
         const CatalogosParaOsEventos catalogos{dadosLidos.tabelaDeTextos, dadosLidos.catalogoDeItens, dadosLidos.catalogoDeConstrucoes};

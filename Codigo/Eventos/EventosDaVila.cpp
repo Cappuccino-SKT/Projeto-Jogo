@@ -1,5 +1,6 @@
 #include "Eventos/EventosDaVila.h"
 
+#include "Vila/Populacao.h"
 #include <algorithm>
 #include <utility>
 
@@ -106,6 +107,30 @@ std::string deixarNpcsDoentes(ContextoDaProducao& contexto, const EfeitoDoEvento
     return nomes.empty() ? "ninguém ficou doente" : nomes + " doentes em casa";
 }
 
+// Fase A6 (ficha da Cura, regra 4.1, passo 3): a porcentagem dos Civis, de
+// qualquer emprego ou sem emprego, arredondada para cima.
+std::string deixarCivisDoentesEmPorcento(ContextoDaProducao& contexto, const EfeitoDoEvento& efeito, int diasDoEvento)
+{
+    entt::registry& registro = contexto.registroDasEntidades;
+    std::vector<std::pair<int, entt::entity>> candidatos;
+    int civis = 0;
+    for (const auto [npc, identidade, casaETrabalho, trabalhoDoDia] : registro.view<IdentidadeDoNpc, CasaETrabalhoDoNpc, TrabalhoDoDia>().each()) {
+        civis += identidade.classe == "civil" ? 1 : 0;
+        if (identidade.classe == "civil" && !registro.all_of<DoencaDoNpc>(npc)) {
+            candidatos.emplace_back(identidade.numeroDoNpc, npc);
+        }
+    }
+    std::sort(candidatos.begin(), candidatos.end(), [](const auto& primeiro, const auto& segundo) { return primeiro.first < segundo.first; });
+    const int quantidade = (civis * efeito.porcentagem + 99) / 100;
+    int doentes = 0;
+    for (; doentes < quantidade && !candidatos.empty(); ++doentes) {
+        const int sorteado = contexto.sorteioDosEventos.sortearNumeroInteiroEntre(0, static_cast<int>(candidatos.size()) - 1);
+        registro.emplace<DoencaDoNpc>(candidatos[sorteado].second, DoencaDoNpc{std::max(diasDoEvento, 1)});
+        candidatos.erase(candidatos.begin() + sorteado);
+    }
+    return std::to_string(doentes) + " doentes em casa";
+}
+
 // O texto de um efeito que dura (a produção e a Felicidade).
 std::string descreverEfeitoQueDura(const ContextoDaProducao& contexto, const EfeitoDoEvento& efeito)
 {
@@ -114,6 +139,12 @@ std::string descreverEfeitoQueDura(const ContextoDaProducao& contexto, const Efe
     }
     if (efeito.tipo == TipoDeEfeito::Lenha) {
         return "a lenha do inverno a " + std::to_string(efeito.porcentagem) + "%";
+    }
+    if (efeito.tipo == TipoDeEfeito::MortesDaPopulacao) {
+        return std::to_string(efeito.quantidade) + " mortes por mil por dia";
+    }
+    if (efeito.tipo == TipoDeEfeito::Remedio) {
+        return "o Remédio corta as mortes para " + std::to_string(efeito.porcentagem) + "%";
     }
     return "Felicidade " + escreverComSinal(efeito.pontosDeFelicidade);
 }
@@ -131,6 +162,9 @@ void comecarOEvento(ContextoDaProducao& contexto, int indiceDoEvento, int64_t ho
         case TipoDeEfeito::MudarEstoque: parte = mudarOEstoque(contexto, efeito); break;
         case TipoDeEfeito::MercadorCompra: parte = venderAoMercador(contexto, efeito); break;
         case TipoDeEfeito::NpcsDoentes: parte = deixarNpcsDoentes(contexto, efeito, evento.duracaoEmDias); break;
+        case TipoDeEfeito::NpcsDoentesEmPorcento: parte = deixarCivisDoentesEmPorcento(contexto, efeito, evento.duracaoEmDias); break;
+        case TipoDeEfeito::MortesDaPopulacao:
+        case TipoDeEfeito::Remedio:
         case TipoDeEfeito::ProducaoDaConstrucao:
         case TipoDeEfeito::Lenha:
         case TipoDeEfeito::Felicidade: parte = descreverEfeitoQueDura(contexto, efeito); break;
@@ -270,7 +304,7 @@ void rodarOsEventosDoDia(ContextoDaProducao& contexto, const RelogioDoMundo& rel
             continue;
         }
         const int numeroSorteado = contexto.sorteioDosEventos.sortearNumeroInteiroEntre(1, 1000);
-        if (numeroSorteado <= eventos[indice].chancePorDiaEmPorMil) {
+        if (numeroSorteado <= chanceDoEventoHoje(contexto, eventos[indice])) {
             comecarOEvento(contexto, indiceDoEvento, hoje);
         }
     }
@@ -327,4 +361,92 @@ int multiplicadorDaLenhaPorEventos(const ContextoDaProducao& contexto)
         }
     }
     return multiplicador;
+}
+
+int chanceDoEventoHoje(const ContextoDaProducao& contexto, const DefinicaoDeEvento& evento)
+{
+    int chance = evento.chancePorDiaEmPorMil;
+    for (const ModificadorDaChance& modificador : evento.modificadoresDaChance) {
+        bool vale = false;
+        switch (modificador.tipo) {
+        case TipoDeModificadorDaChance::OcupacaoMinima:
+            vale = static_cast<int>(contexto.npcsDaVila.size()) * 100 >= modificador.ocupacaoMinimaEmPorcento * capacidadeDaVila(contexto);
+            break;
+        case TipoDeModificadorDaChance::ComidaEmDeficit:
+            vale = contexto.dinheiro.comidaQueFaltouHoje > 0;
+            break;
+        case TipoDeModificadorDaChance::ExisteConstrucao:
+            vale = std::any_of(contexto.vila.construcoes.begin(), contexto.vila.construcoes.end(), [&](const ConstrucaoDaVila& construcao) {
+                return !construcao.emObra
+                    && std::find(modificador.construcoes.begin(), modificador.construcoes.end(), construcao.tipo) != modificador.construcoes.end();
+            });
+            break;
+        }
+        if (vale) {
+            chance = chance * modificador.porcentagem / 100;
+        }
+    }
+    return chance;
+}
+
+void gastarORemedioDaEpidemia(ContextoDaProducao& contexto)
+{
+    contexto.eventos.remedioTomadoHoje = false;
+    const std::optional<int> remedio = contexto.dados.catalogoDeItens.procurarNumeroDoItem("item.remedio");
+    for (const EventoAtivo& ativo : contexto.eventos.eventosAtivos) {
+        for (const EfeitoDoEvento& efeito : contexto.dados.catalogoDeEventos.todosOsEventos()[ativo.indiceDoEvento].efeitos) {
+            if (efeito.tipo != TipoDeEfeito::Remedio || !remedio) {
+                continue;
+            }
+            // CU1-3: a dose inteira (1 a cada 10 NPCs, para cima), ou nada.
+            const int dose = (static_cast<int>(contexto.npcsDaVila.size()) + efeito.quantidade - 1) / efeito.quantidade;
+            if (dose > 0 && contexto.inventario.quantidadeTotalDe(*remedio) >= dose) {
+                int falta = dose;
+                for (const DonoDoItem dono : {DonoDoItem::Cidade, DonoDoItem::Jogador}) {
+                    const int daqui = std::min(falta, contexto.inventario.quantidadeDe(*remedio, dono));
+                    contexto.inventario.tentarTirar(*remedio, dono, daqui);
+                    const int64_t preco = static_cast<int64_t>(daqui) * precoLocalDoItem(contexto, *remedio);
+                    const int64_t pago = std::min(preco, std::max<int64_t>(contexto.dinheiro.dinheiroDaClasseCivil, 0));
+                    contexto.dinheiro.dinheiroDaClasseCivil -= pago;
+                    (dono == DonoDoItem::Cidade ? contexto.dinheiro.bancoDaCidade : contexto.dinheiro.dinheiroDoJogador) += pago;
+                    falta -= daqui;
+                }
+                contexto.consumoMedido.anotarOQueSaiu(*remedio, dose);
+                contexto.eventos.remedioTomadoHoje = true;
+            }
+        }
+    }
+}
+
+int mortesDasDoencasHojeEmPessoas(const ContextoDaProducao& contexto)
+{
+    int mortes = 0;
+    const int populacaoTotal = static_cast<int>(contexto.npcsDaVila.size()) * contexto.dados.regras.populacao.fatorDeEscala;
+    for (const EventoAtivo& ativo : contexto.eventos.eventosAtivos) {
+        const std::vector<EfeitoDoEvento>& efeitos = contexto.dados.catalogoDeEventos.todosOsEventos()[ativo.indiceDoEvento].efeitos;
+        int porcentagemComRemedio = 100;
+        for (const EfeitoDoEvento& efeito : efeitos) {
+            if (efeito.tipo == TipoDeEfeito::Remedio && contexto.eventos.remedioTomadoHoje) {
+                porcentagemComRemedio = efeito.porcentagem;
+            }
+        }
+        for (const EfeitoDoEvento& efeito : efeitos) {
+            if (efeito.tipo == TipoDeEfeito::MortesDaPopulacao) {
+                mortes += populacaoTotal * efeito.quantidade / 1000 * porcentagemComRemedio / 100;
+            }
+        }
+    }
+    return mortes;
+}
+
+bool algumaDoencaMataHoje(const ContextoDaProducao& contexto)
+{
+    for (const EventoAtivo& ativo : contexto.eventos.eventosAtivos) {
+        for (const EfeitoDoEvento& efeito : contexto.dados.catalogoDeEventos.todosOsEventos()[ativo.indiceDoEvento].efeitos) {
+            if (efeito.tipo == TipoDeEfeito::MortesDaPopulacao) {
+                return true;
+            }
+        }
+    }
+    return false;
 }

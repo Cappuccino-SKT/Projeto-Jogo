@@ -28,6 +28,8 @@ struct EstadoDosEventos {
     std::vector<std::string> mudancasDeHoje;
     // As linhas do console de hoje: "Evento: Seca (a Fazenda produz 50% por 8 dias)."
     std::vector<std::string> linhasParaOConsole;
+    // Fase A6 (ficha da Cura): a dose inteira do Remédio foi tomada hoje (não vai no save: é do dia).
+    bool remedioTomadoHoje = false;
 
     bool eventoEstaAtivo(int indiceDoEvento) const;
 };
@@ -47,6 +49,14 @@ int multiplicadorDaProducaoPorEventos(const ContextoDaProducao& contexto, const 
 // O que a lenha do inverno pergunta (ficha do Clima, regra 4.3): o produto das
 // porcentagens dos efeitos "lenha_em_porcento" ativos (100 sem nenhum).
 int multiplicadorDaLenhaPorEventos(const ContextoDaProducao& contexto);
+
+// Fase A6 (ficha da Cura, regra 4.1): a chance de hoje de um ocasional, com os modificadores.
+int chanceDoEventoHoje(const ContextoDaProducao& contexto, const DefinicaoDeEvento& evento);
+
+// Fase A6 (regra 4.2): o Remédio do dia (no consumo) e as mortes de hoje, em pessoas (na População).
+void gastarORemedioDaEpidemia(ContextoDaProducao& contexto);
+int mortesDasDoencasHojeEmPessoas(const ContextoDaProducao& contexto);
+bool algumaDoencaMataHoje(const ContextoDaProducao& contexto);
 
 // O que a Felicidade pergunta: a soma dos pontos dos eventos ativos.
 int felicidadeDosEventosAtivos(const ContextoDaProducao& contexto);
