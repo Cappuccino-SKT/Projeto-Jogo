@@ -42,6 +42,7 @@ struct NpcDaVilaInicial {
     // As habilidades, de 0 a 100 (FL6-6: 50 para todos na fatia).
     int habilidadeBracal = 50;
     int habilidadeManufaturado = 50;
+    int idade = 10;  // fase A3 (ficha da População, PO1-1): de 5 a 19 na vila inicial
 };
 
 // Uma linha do "estoque_inicial" (FL6-4).

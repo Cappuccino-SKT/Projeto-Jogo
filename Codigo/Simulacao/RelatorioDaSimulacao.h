@@ -47,6 +47,13 @@ struct LinhaDoRelatorio {
     int diasEmDeficitDeLenha = 0;
     // Fase A2 (ficha do Trabalho): as contratações e as trocas do dia, e a construção em leilão.
     int contratacoes = 0;
+    // Fase A3 (ficha da População).
+    int npcs = 0;
+    int populacaoTotal = 0;
+    int acumulado = 0;
+    int nascimentos = 0;
+    int mortes = 0;
+    int migracao = 0;
     int trocas = 0;
     std::string leilao;
 

@@ -74,5 +74,19 @@
     "dias_de_leilao": 3,
     "lance_minimo_em_porcento_do_valor": 50
   },
-  "ordem_do_dia": ["clima", "manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "eventos", "escolha_das_receitas"]
+  "populacao": {
+    "fator_de_escala": 100,
+    "capacidade_por_nivel_da_cidade": [15, 40, 100, 300],
+    "idade_adulto": 4, "idade_velho": 21,
+    "chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_acima_de_20": 10,
+    "natalidade_por_estacao_em_por_mil": 40,
+    "mortalidade_por_estacao_em_por_mil": 10,
+    "mortalidade_sem_lenha_em_porcento": 150,
+    "velhice_no_inverno_rigoroso_em_porcento": 150,
+    "fome_mata_por_dia_em_porcento_de_quem_ficou_sem_comida": 2,
+    "dias_de_fome_antes_de_matar": 3,
+    "migracao": { "chega_com_felicidade_minima": 50, "sai_com_felicidade_abaixo_de": 30, "sai_com_desemprego_em_porcento": 30 },
+    "nomes_dos_novos_npcs": ["Rita", "Tiago", "Úrsula", "Vítor", "Wanda", "Xavier", "Yara", "Zeca", "Alice", "Bruno", "Cecília", "Diego"]
+  },
+  "ordem_do_dia": ["clima", "manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "populacao", "eventos", "escolha_das_receitas"]
 }

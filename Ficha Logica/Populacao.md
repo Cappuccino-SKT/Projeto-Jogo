@@ -102,6 +102,8 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 
 1. **Chega 1 migrante** se tudo isto vale: há cama livre; há vaga livre de emprego (na Cidade ou na construção do jogador); a Felicidade é 50 ou mais; não houve fome na estação; os NPCs reais estão abaixo da capacidade. Ele chega como na regra 4.5, com idade sorteada de 4 a 12.
 2. **Sai 1 NPC** se a Felicidade está abaixo de 30, **ou** o desemprego é de 30% ou mais: vai embora o desempregado de menor habilidade (no empate, o de maior número). Sem desempregados, vai o empregado da Cidade de menor habilidade. Ele anda até a borda do mapa e some (regra 4.6, sem morrer).
+- **Ajuste do código (marco A3, 2026-10-20):** a saída do passo 2 é decidida **antes** da velhice e dos nascimentos do dia, com a vila da estação que terminou. Sem isso, uma reposição grande (vários velhos morrem juntos) enchia a vila de desempregados por um dia (a Cidade só contrata no dia seguinte) e expulsava alguém na hora.
+- **Ajuste do código:** enquanto o mapa não tiver o ponto `entrada_do_mapa`, o migrante aparece na porta da casa dele, como o nascido.
 3. No máximo 1 chega e 1 sai por estação; chega **mais 1** se a ocupação está abaixo de 50% da capacidade (ficha da [[Ficha Logica/Cidade|Cidade]], CI1-5). **Na vila**, o migrante vem de "fora do mapa"; quando houver outras cidades, de uma delas (Viagem, fase B).
 
 ### 4.5 Chega um NPC

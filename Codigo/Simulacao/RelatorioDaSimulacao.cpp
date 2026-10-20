@@ -64,6 +64,12 @@ LinhaDoRelatorio montarLinhaDoRelatorio(const ContextoDaProducao& contexto, int6
     linha.lenhaDoDia = contexto.clima.lenhaTiradaHoje;
     linha.diasEmDeficitDeLenha = contexto.clima.diasEmDeficitDeLenha;
     linha.contratacoes = contexto.trabalho.contratacoesDeHoje;
+    linha.npcs = static_cast<int>(contexto.npcsDaVila.size());
+    linha.populacaoTotal = linha.npcs * contexto.dados.regras.populacao.fatorDeEscala;
+    linha.acumulado = contexto.populacao.acumuladoDeCrescimentoEmPessoas;
+    linha.nascimentos = contexto.populacao.nascimentosDeHoje;
+    linha.mortes = contexto.populacao.mortesDeHoje;
+    linha.migracao = contexto.populacao.migracaoDeHoje;
     linha.trocas = contexto.trabalho.trocasDeHoje;
     if (contexto.trabalho.leilao.estaAberto()) {
         linha.leilao = contexto.vila.construcoes[contexto.trabalho.leilao.indiceDaConstrucao].identificador;
@@ -78,7 +84,7 @@ std::string escreverCabecalhoDoRelatorio(const DadosDoJogo& dados)
         cabecalho += ";" + nomeDaColunaDoItem(item.identificadorDeTexto);
     }
     cabecalho += ";preco_do_pao;banco;jogador;riqueza_media;felicidade;empregados;desempregados;deficit_comida;deficit_materiais;"
-                 "consumo_nao_pago;clima;lenha_do_dia;deficit_lenha;contratacoes;trocas;leilao;eventos_do_dia";
+                 "consumo_nao_pago;clima;lenha_do_dia;deficit_lenha;contratacoes;trocas;leilao;npcs;populacao;acumulado;nascimentos;mortes;migracao;eventos_do_dia";
     return cabecalho;
 }
 
@@ -93,7 +99,9 @@ std::string escreverLinhaDoRelatorio(const LinhaDoRelatorio& linha)
         + ";" + std::to_string(linha.desempregados) + ";" + std::to_string(linha.diasEmDeficitDeComida) + ";"
         + std::to_string(linha.diasEmDeficitDeMateriais) + ";" + escreverDecimos(linha.consumoNaoPago) + ";" + linha.clima + ";"
         + std::to_string(linha.lenhaDoDia) + ";" + std::to_string(linha.diasEmDeficitDeLenha) + ";" + std::to_string(linha.contratacoes) + ";"
-        + std::to_string(linha.trocas) + ";" + linha.leilao + ";\"";
+        + std::to_string(linha.trocas) + ";" + linha.leilao + ";" + std::to_string(linha.npcs) + ";" + std::to_string(linha.populacaoTotal) + ";"
+        + std::to_string(linha.acumulado) + ";" + std::to_string(linha.nascimentos) + ";" + std::to_string(linha.mortes) + ";"
+        + std::to_string(linha.migracao) + ";\"";
     for (std::size_t evento = 0; evento < linha.eventosDoDia.size(); ++evento) {
         texto += (evento > 0 ? ", " : "") + linha.eventosDoDia[evento];
     }

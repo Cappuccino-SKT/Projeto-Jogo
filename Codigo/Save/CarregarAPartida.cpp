@@ -430,6 +430,9 @@ void restaurarOsNpcs(SimulacaoDaVila& simulacao, const json& lista)
         if (linha.contains("habilidades")) {
             registro.emplace<HabilidadesDoNpc>(npc, HabilidadesDoNpc{linha.at("habilidades").at(0).get<int>(), linha.at("habilidades").at(1).get<int>()});
         }
+        if (linha.contains("idade")) {
+            registro.emplace<IdadeDoNpc>(npc, IdadeDoNpc{linha.at("idade").get<int>()});
+        }
         if (linha.contains("trabalhoDoDia")) {
             registro.emplace<TrabalhoDoDia>(npc, TrabalhoDoDia{linha.at("trabalhoDoDia").at(0).get<int>(), linha.at("trabalhoDoDia").at(1).get<int>()});
         }
@@ -498,6 +501,10 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarOSorteio(Acesso::sorteioDosNpcs(*partida), arvore.at("sorteios").at("npcs"));
         restaurarOSorteio(Acesso::sorteioDosEventos(*partida), arvore.at("sorteios").at("eventos"));
         restaurarOSorteio(Acesso::sorteioDoClima(*partida), arvore.at("sorteios").at("clima"));
+        restaurarOSorteio(Acesso::sorteioDaPopulacao(*partida), arvore.at("sorteios").at("populacao"));
+        partida->populacao.acumuladoDeCrescimentoEmPessoas = arvore.at("populacao").at("acumulado").get<int>();
+        partida->populacao.proximoNumeroDeNpc = arvore.at("populacao").at("proximoNumeroDeNpc").get<int>();
+        partida->populacao.diasDeFomeNaEstacao = arvore.at("populacao").at("diasDeFomeNaEstacao").get<int>();
         restaurarOClima(*partida, arvore.at("clima"));
         {
             const json& leilao = arvore.at("leilao");

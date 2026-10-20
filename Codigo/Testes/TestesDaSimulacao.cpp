@@ -506,7 +506,7 @@ void testarRelatorio(const DadosDoJogo& dados)
     linha.empregados = 12;
     linha.desempregados = 3;
     linha.eventosDoDia = {"Seca começou", "Ratos no celeiro"};
-    conferir(escreverLinhaDoRelatorio(linha) == "37;Outono;5;240;52;1,9;402,3;81,0;12,1;58,4;12;3;0;0;0,0;limpo;0;0;0;0;;\"Seca começou, Ratos no celeiro\"",
+    conferir(escreverLinhaDoRelatorio(linha) == "37;Outono;5;240;52;1,9;402,3;81,0;12,1;58,4;12;3;0;0;0,0;limpo;0;0;0;0;;0;0;0;0;0;0;\"Seca começou, Ratos no celeiro\"",
              "uma linha do relatório: ponto e vírgula entre as colunas e vírgula nos decimais");
 
     ConferenciaDoTesteDeUmAno fome;

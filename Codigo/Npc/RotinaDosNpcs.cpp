@@ -346,6 +346,7 @@ std::vector<entt::entity> criarOsNpcsDaVila(ContextoDaRotina& contexto, const Re
         DecisaoDoNpc decisao;
         decisao.indiceDaConstrucaoOndeEsta = npcInicial.indiceDaCasa;
         registro.emplace<DecisaoDoNpc>(npc, decisao);
+        registro.emplace<IdadeDoNpc>(npc, IdadeDoNpc{npcInicial.idade});
         npcsCriados.push_back(npc);
     }
     // Cada um já escolhe a ação, na ordem da vila.

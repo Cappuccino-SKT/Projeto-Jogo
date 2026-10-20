@@ -253,6 +253,9 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
         if (const HabilidadesDoNpc* habilidades = registro.try_get<HabilidadesDoNpc>(npc)) {
             registroDoNpc["habilidades"] = json::array({habilidades->bracal, habilidades->manufaturado});
         }
+        if (const IdadeDoNpc* idade = registro.try_get<IdadeDoNpc>(npc)) {
+            registroDoNpc["idade"] = idade->anos;
+        }
         if (const TrabalhoDoDia* trabalho = registro.try_get<TrabalhoDoDia>(npc)) {
             registroDoNpc["trabalhoDoDia"] = json::array({trabalho->ticksTrabalhadosNestaHora, trabalho->ticksTrabalhadosHoje});
         }
@@ -308,7 +311,11 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
                              {"velocidade", Acesso::velocidadeDoJogo(simulacao.relogio)},
                              {"velocidadeAntesDaPausa", Acesso::velocidadeAntesDaPausa(simulacao.relogio)}};
     arvore["sorteios"] = json{{"npcs", escreverOSorteio(Acesso::sorteioDosNpcs(simulacao))}, {"eventos", escreverOSorteio(Acesso::sorteioDosEventos(simulacao))},
-                              {"clima", escreverOSorteio(Acesso::sorteioDoClima(simulacao))}};
+                              {"clima", escreverOSorteio(Acesso::sorteioDoClima(simulacao))},
+                              {"populacao", escreverOSorteio(Acesso::sorteioDaPopulacao(simulacao))}};
+    arvore["populacao"] = json{{"acumulado", simulacao.populacao.acumuladoDeCrescimentoEmPessoas},
+                               {"proximoNumeroDeNpc", simulacao.populacao.proximoNumeroDeNpc},
+                               {"diasDeFomeNaEstacao", simulacao.populacao.diasDeFomeNaEstacao}};
     // Fase A1 (ficha do Clima): o clima de hoje, a lenha devida e os dias em déficit.
     arvore["leilao"] = json{{"construcao", simulacao.trabalho.leilao.indiceDaConstrucao},
                             {"diasQueFaltam", simulacao.trabalho.leilao.diasQueFaltam},

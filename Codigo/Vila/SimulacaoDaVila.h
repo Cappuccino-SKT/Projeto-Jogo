@@ -87,6 +87,7 @@ public:
     EstadoDosEventos eventos;
     EstadoDoClima clima;  // fase A1 (ficha do Clima)
     EstadoDoTrabalho trabalho;  // fase A2 (ficha do Trabalho): o leilão
+    EstadoDaPopulacao populacao;  // fase A3 (ficha da População)
     DecisoesDoJogador decisoes;
     ObrasDaVila obras;
     FilaDePedidosDoJogador pedidos;
@@ -106,4 +107,5 @@ private:
     SorteioComSemente sorteioDosNpcs;
     SorteioComSemente sorteioDosEventos;
     SorteioComSemente sorteioDoClima;  // a sequência 3
+    SorteioComSemente sorteioDaPopulacao;  // a sequência 4
 };
