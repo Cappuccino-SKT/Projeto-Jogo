@@ -25,11 +25,11 @@ Documento do sistema: [[Sistema de Facção/Descrição|Facção]]; as leis dese
   "leis": {
     "imposto":     { "opcoes": ["baixo", "normal", "alto"], "valores_em_porcento": [10, 20, 30], "felicidade": [0, -5, -10] },
     "tarifa":      { "opcoes": ["baixa", "media", "alta"], "valores_em_porcento": [5, 10, 20] },
-    "magia":       { "opcoes": ["livre", "restrita", "privilegio_dos_magos", "proibida"] },
-    "escravidao":  { "opcoes": ["proibida", "so_prisioneiros", "como_pena", "ampla"] },
-    "poder_do_lider": { "opcoes": ["fraco", "moderado", "autoritario"] },
-    "sistema_de_votacao": { "opcoes": ["maioria_simples", "dois_tercos", "por_populacao", "por_nivel", "conselho"] },
-    "tolerancia_religiosa": { "opcoes": ["tolerancia", "fe_oficial", "perseguicao"] },
+    "magia":       { "opcoes": ["so_magos_governam", "privilegio_dos_magos", "livre", "restrita", "proibida", "magos_banidos"] },
+    "escravidao":  { "opcoes": ["proibida", "so_prisioneiros", "como_pena", "ampla", "qualquer_um_e_propriedade"] },
+    "poder_do_lider": { "opcoes": ["fraco", "moderado", "autoritario", "pedir_lei_e_crime"] },
+    "sistema_de_votacao": { "opcoes": ["por_populacao", "maioria_simples", "por_nivel", "dois_tercos", "conselho"] },
+    "tolerancia_religiosa": { "opcoes": ["tolerancia", "fe_oficial", "perseguicao", "heresia_e_crime_capital"] },
     "livro_sagrado_obrigatorio": { "opcoes": ["nao", "sim"] }
   },
   "faccoes": [
@@ -133,7 +133,7 @@ Recalculado só quando uma cidade muda de dono. **Muda a Viagem (FA1-6):** o `es
    - **fraco**: não veta.
    Cada veto: legitimidade −5.
 6. **Efeito:** a lei muda **no dia seguinte**; as cidades que votaram e perderam têm Felicidade −5 por 1 estação. Nasce a notícia **Regional** "A Arcana mudou a lei X".
-7. A vila do jogador vinculada vota **como o jogador escolher** (a tela mostra a pauta; sem escolha, vota pela cultura dele).
+7. A vila do jogador vinculada **propõe e vota como o jogador escolher** (a tela mostra a pauta; sem escolha, pela cultura dos NPCs dela, que é a da região; [[Ficha Logica/Cultura|Cultura]], CT1-3). As opções de cada lei estão **em fila** (CT1-1): a distância é contada em passos nessa ordem.
 
 ### 4.6 O líder (nesta versão)
 
@@ -247,11 +247,11 @@ Uma cidade com renda bruta de **70 moedas por dia** (os salários):
 
 ### 10.4 Uma assembleia
 
-A Arcana tem 3 cidades (capital nível 4, cidade nível 3, vilarejo nível 2), todas da cultura Arcana, e a vila do jogador (Tecnocrata, nível 1). Votação: **Conselho (só Magos)**, que nesta versão é **só a capital** (FA1-4).
+A Arcana tem 3 cidades (capital nível 4, cidade nível 3, vilarejo nível 2), todas da cultura Arcana, e a vila do jogador (nível 1; os NPCs são Arcanos, da região, e o jogador é Tecnocrata). Votação: **Conselho (só Magos)**, que nesta versão é **só a capital** (FA1-4).
 
 | Passo | O que acontece |
 |---|---|
-| Propostas | As 3 Arcanas têm as leis iguais ao desejo (distância 0): não propõem. A vila Tecnocrata: a maior distância é **Magia** (atual "privilégio dos magos", desejo "proibida", 1 passo × peso 5 = 5): propõe "privilégio → proibida" |
+| Propostas | As 3 Arcanas têm as leis iguais ao desejo (distância 0): não propõem. O jogador propõe pela cultura dele: a maior distância é **Magia** (atual "privilégio dos magos", desejo Tecnocrata "proibida", 3 passos × peso 4 = 12): propõe **um passo**, "privilégio → livre" |
 | Pauta | 1 lei: Magia |
 | Votos | Capital Arcana: não (afasta do desejo). Só ela vota no Conselho |
 | Resultado | **Não passa**. A vila perdeu: Felicidade −5 por 1 estação |
