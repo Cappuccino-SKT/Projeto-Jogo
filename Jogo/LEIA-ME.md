@@ -530,3 +530,20 @@ Arquivos novos: `Codigo/Vila/Populacao.h` e `.cpp`, `Codigo/Vila/RegrasDaPopulac
 
 **Achado para o autor (equilíbrio, não é erro da População):** nos 10 anos, o teste dá **FALHOU no dia 400** ("o preço do Pão foi a 2,7"; o limite do teste de 1 ano é 2,6). O dia 384 é o fim de um **Inverno rigoroso**: a vila sai dele com pouco Grão (9), e na Primavera o Pão cai de 83 para 31 em 16 dias. Ninguém passa fome. É a pergunta da ficha do Clima (o rigoroso passa raspando); fica para uma rodada de equilíbrio.
 
+### Marco A6: a Epidemia (2026-10-20, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Cura|ficha da Cura]]):
+
+- **A Epidemia**, um evento novo do `eventos.json` (no **fim** da lista, para mudar o mínimo os sorteios dos outros): 5 por mil por dia, × 2 com a vila 90% cheia, × 2 com fome hoje, × 0,5 com Boticário ou Hospital (os **modificadores da chance**, um campo novo dos eventos); 20% dos Civis doentes por 8 dias; Felicidade −10; 1% da população por dia sai do acumulado da População, e, quando alguém morre, é o **doente mais velho** (CU1-4).
+- **O Remédio:** a regra está pronta (1 a cada 10 NPCs por dia, a dose inteira ou nada; com ele, as mortes pela metade), mas o item `item.remedio` ainda não existe no conteúdo: até lá, a Epidemia roda sem Remédio.
+- A Vida e a regeneração ficam para o Combate (fase D).
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (436 conferências: a chance de 10, 20 e 5 por mil, as 15 e 7 pessoas por dia, o doente mais velho que morre). **`jogo --simular 64`: 8 das 10 sementes passam; a 5 e a 8 falham** pelo preço do Pão, **sem fome**:
+
+| Semente | O que aconteceu |
+|---|---|
+| 5 | Inverno rigoroso (dia 48) e uma Febre (dia 50): o Pão vai a **2,8** no dia 55 |
+| 8 | Epidemia no dia 45 (3 doentes, um Cozinheiro entre eles): o Pão vai a **2,7** no dia 51 |
+
+É o mesmo achado do marco A3 (os 10 anos): as crises novas levam o Pão acima do limite de 2,6 do teste de 1 ano. **Está na [[Rodada Pendente]] (EQ1)** para o autor decidir.
+

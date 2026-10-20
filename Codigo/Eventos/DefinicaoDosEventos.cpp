@@ -72,6 +72,17 @@ std::optional<EfeitoDoEvento> lerEfeito(const Json& objeto, const CatalogosParaO
     } else if (objeto.contains("npcs_doentes")) {
         efeito.tipo = TipoDeEfeito::NpcsDoentes;
         lerInteiroOpcional(objeto, "npcs_doentes", 1, 1000, efeito.quantidade, anotarErroDoEfeito);
+    } else if (objeto.contains("npcs_doentes_em_porcento_dos_civis")) {
+        efeito.tipo = TipoDeEfeito::NpcsDoentesEmPorcento;
+        lerInteiroOpcional(objeto, "npcs_doentes_em_porcento_dos_civis", 1, 100, efeito.porcentagem, anotarErroDoEfeito);
+    } else if (objeto.contains("mortes_por_dia_em_por_mil_da_populacao")) {
+        efeito.tipo = TipoDeEfeito::MortesDaPopulacao;
+        lerInteiroOpcional(objeto, "mortes_por_dia_em_por_mil_da_populacao", 0, 1000, efeito.quantidade, anotarErroDoEfeito);
+    } else if (objeto.contains("remedio_por_dia_a_cada_npcs")) {
+        efeito.tipo = TipoDeEfeito::Remedio;
+        lerInteiroOpcional(objeto, "remedio_por_dia_a_cada_npcs", 1, 1000, efeito.quantidade, anotarErroDoEfeito);
+        efeito.porcentagem = 50;
+        lerInteiroOpcional(objeto, "mortes_com_remedio_em_porcento", 0, 100, efeito.porcentagem, anotarErroDoEfeito);
     } else if (objeto.contains("lenha_em_porcento")) {
         // Ficha do Clima, regra 4.5: o Inverno rigoroso dobra a lenha.
         efeito.tipo = TipoDeEfeito::Lenha;
@@ -80,7 +91,7 @@ std::optional<EfeitoDoEvento> lerEfeito(const Json& objeto, const CatalogosParaO
         efeito.tipo = TipoDeEfeito::MercadorCompra;
         lerInteiroOpcional(objeto, "mercador_compra", 1, 10'000, efeito.quantidade, anotarErroDoEfeito);
     } else {
-        anotarErro("o efeito " + objeto.dump() + " não é da lista (producao_da_construcao, felicidade, mudar_estoque, npcs_doentes, mercador_compra, lenha_em_porcento)");
+        anotarErro("o efeito " + objeto.dump() + " não é da lista (producao_da_construcao, felicidade, mudar_estoque, npcs_doentes, mercador_compra, lenha_em_porcento, npcs_doentes_em_porcento_dos_civis, mortes_por_dia_em_por_mil_da_populacao, remedio_por_dia_a_cada_npcs)");
         return std::nullopt;
     }
     if (temErro) {
@@ -156,6 +167,35 @@ void lerCamposDoEvento(const Json& objeto, DefinicaoDeEvento& evento, const Cata
     lerInteiroOpcional(objeto, "chance_por_dia_em_por_mil", 0, 1000, evento.chancePorDiaEmPorMil, anotarErro);
     lerInteiroOpcional(objeto, "cooldown_dias", 0, 10'000, evento.cooldownEmDias, anotarErro);
     lerInteiroOpcional(objeto, "duracao_dias", 0, 10'000, evento.duracaoEmDias, anotarErro);
+    // Fase A6 (ficha da Cura): os modificadores da chance.
+    if (const auto modificadores = objeto.find("modificadores_da_chance"); modificadores != objeto.end() && modificadores->is_array()) {
+        for (const Json& item : *modificadores) {
+            ModificadorDaChance modificador;
+            if (!item.is_object() || !item.contains("porcentagem") || !item["porcentagem"].is_number_integer()) {
+                anotarErro("cada modificador da chance precisa de uma \"porcentagem\"");
+                continue;
+            }
+            modificador.porcentagem = item["porcentagem"].get<int>();
+            if (item.contains("ocupacao_minima_em_porcento") && item["ocupacao_minima_em_porcento"].is_number_integer()) {
+                modificador.tipo = TipoDeModificadorDaChance::OcupacaoMinima;
+                modificador.ocupacaoMinimaEmPorcento = item["ocupacao_minima_em_porcento"].get<int>();
+            } else if (item.contains("comida_em_deficit")) {
+                modificador.tipo = TipoDeModificadorDaChance::ComidaEmDeficit;
+            } else if (item.contains("existe_construcao") && item["existe_construcao"].is_array()) {
+                // As construções podem ainda não existir no construcoes.json (o Boticário vem com o conteúdo).
+                modificador.tipo = TipoDeModificadorDaChance::ExisteConstrucao;
+                for (const Json& construcao : item["existe_construcao"]) {
+                    if (construcao.is_string()) {
+                        modificador.construcoes.push_back(construcao.get<std::string>());
+                    }
+                }
+            } else {
+                anotarErro("o modificador da chance não é da lista (ocupacao_minima_em_porcento, comida_em_deficit, existe_construcao)");
+                continue;
+            }
+            evento.modificadoresDaChance.push_back(modificador);
+        }
+    }
 
     if (evento.tipo == TipoDeEvento::Condicional) {
         if (!objeto.contains("condicao")) {
