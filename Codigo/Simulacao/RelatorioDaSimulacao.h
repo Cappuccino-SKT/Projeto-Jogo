@@ -19,6 +19,8 @@
 constexpr int diasSeguidosDeFomeQueFalham = 4;
 constexpr int menorPrecoDoPaoQuePassaEmDecimos = 12;
 constexpr int maiorPrecoDoPaoQuePassaEmDecimos = 26;
+// EQ1-1: o Pão acima de 2,6 só falha se durar 8 dias seguidos (a crise curta é parte do jogo).
+constexpr int diasSeguidosComOPaoCaroQueFalham = 8;
 constexpr const char* identificadorDoPao = "item.pao";
 // FE4-3: o Banco nunca abaixo de 250, e no fim do ano (dia 64) no máximo 50 abaixo do dia 1.
 constexpr int64_t menorBancoQuePassaEmDecimos = 2'500;
@@ -74,6 +76,7 @@ std::string escreverLinhaDoRelatorio(const LinhaDoRelatorio& linha);
 struct ConferenciaDoTesteDeUmAno {
     bool falhou = false;
     std::string motivoDaFalha;  // "fome por 4 dias seguidos no dia 37"
+    int diasSeguidosComOPaoCaro = 0;
 };
 
 void conferirOsCriteriosDoDia(ConferenciaDoTesteDeUmAno& conferencia, const LinhaDoRelatorio& linha);

@@ -40,7 +40,7 @@
   "loja_da_cidade_compra_em_porcento": 90,
   "bonus_do_salario_por_nivel_em_porcento": 10,
   "salario_do_gerente_em_porcento": 150,
-  "mercado_local": { "dias_do_estoque_alvo": 5, "fator_minimo_em_porcento": 50, "fator_maximo_em_porcento": 200,
+  "mercado_local": { "dias_do_estoque_alvo": 7, "fator_minimo_em_porcento": 50, "fator_maximo_em_porcento": 200,
                      "passo_maximo_por_dia_em_porcento": 10 },
   "gasto_da_classe_em_porcento_da_renda": 80,
   "imposto": { "taxa_em_porcento": 20, "parte_da_cidade_em_porcento": 100 },

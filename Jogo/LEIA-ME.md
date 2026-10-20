@@ -547,3 +547,4 @@ O que entrou ([[Ficha Logica/Cura|ficha da Cura]]):
 
 É o mesmo achado do marco A3 (os 10 anos): as crises novas levam o Pão acima do limite de 2,6 do teste de 1 ano. **Está na [[Rodada Pendente]] (EQ1)** para o autor decidir.
 
+**Rodada EQ1 (2026-10-20, modo automático, sugestão A):** o teste de 1 ano só falha pelo Pão caro se ele ficar acima de 2,6 por **8 dias seguidos** (`diasSeguidosComOPaoCaroQueFalham`); abaixo de 1,2, a fome e o Banco continuam como antes. Junto com a **sugestão B** (o estoque-alvo do Pão no `regras.json` passou de 5 para **7 dias**), porque só a A ainda deixava as sementes 5 e 8 falharem (Pão a 3,0). **Resultado: 9 das 10 sementes passam.** A semente 10 (Seca, Epidemia e Ratos no celeiro juntos) e os 10 anos da semente 1 falham pelo Pão a 2,8 por mais de 8 dias, **sem fome**: depois da crise, o estoque do Pão sobe só 1 por dia, com Grão e Água de sobra. Isso está na rodada EQ2.
