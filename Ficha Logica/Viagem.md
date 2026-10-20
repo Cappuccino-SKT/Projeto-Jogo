@@ -140,7 +140,7 @@ Um trecho vai do **centro de um mapa ao centro do vizinho** e usa os valores do 
 
 ### 4.5 Sortear o encontro (ao entrar no trecho)
 
-1. Chance = a do estado do território (Facção, 4.1) do mapa de chegada (50, 150 ou 200 por mil) + a ameaça bandida da região (0 nesta versão; Eventos) × 150% se for marcha forçada.
+1. Chance = a do estado do território (Facção, 4.1) do mapa de chegada (50, 150 ou 200 por mil) + a ameaça bandida da região ([[Ficha Logica/Crime|Crime]], 4.3: 3 por mil por ponto da Criminalidade média acima de 10; mais o encontro de Caçadores do Crime, 4.7, com Recompensa ≥ 500) × 150% se for marcha forçada.
 2. Sorteia de 0 a 999. Se o número for **menor** que a chance, há encontro.
 3. Sorteia o tipo pelos pesos: 75 bandidos, 25 mercador viajante.
 4. **Bandidos:** o bando tem 3 + sorteio de 0 a 9 bandidos.

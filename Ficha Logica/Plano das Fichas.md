@@ -52,7 +52,7 @@ Crime e Justiça; Religião; Cultura; Facção. São documentos bem completos, m
 |---|---|---|
 | C1 | **[[Ficha Logica/Faccao\|Facção]]** (escrita em 2026-10-19; rodada FA1 automática) | Outras cidades (B1b), Economia, Cultura (desejos) |
 | C2 | **[[Ficha Logica/Cultura\|Cultura]]** (escrita em 2026-10-19; rodada CT1 automática) | Facção (C1), NPC, Felicidade |
-| C3 | **Crime e Justiça** | Facção (C1), Reputação (B4), Viagem (B1) |
+| C3 | **[[Ficha Logica/Crime\|Crime e Justiça]]** (escrita em 2026-10-19; rodada CJ1 automática) | Facção (C1), Reputação (B4), Viagem (B1) |
 | C4 | **Religião** | Cultura (C2), Facção (C1) |
 
 ### Fase D — conflito (prioridade baixa)
