@@ -112,6 +112,9 @@ std::string descreverEfeitoQueDura(const ContextoDaProducao& contexto, const Efe
     if (efeito.tipo == TipoDeEfeito::ProducaoDaConstrucao) {
         return "a " + contexto.dados.tabelaDeTextos.textoDe(efeito.tipoDaConstrucao) + " produz " + std::to_string(efeito.porcentagem) + "%";
     }
+    if (efeito.tipo == TipoDeEfeito::Lenha) {
+        return "a lenha do inverno a " + std::to_string(efeito.porcentagem) + "%";
+    }
     return "Felicidade " + escreverComSinal(efeito.pontosDeFelicidade);
 }
 
@@ -129,6 +132,7 @@ void comecarOEvento(ContextoDaProducao& contexto, int indiceDoEvento, int64_t ho
         case TipoDeEfeito::MercadorCompra: parte = venderAoMercador(contexto, efeito); break;
         case TipoDeEfeito::NpcsDoentes: parte = deixarNpcsDoentes(contexto, efeito, evento.duracaoEmDias); break;
         case TipoDeEfeito::ProducaoDaConstrucao:
+        case TipoDeEfeito::Lenha:
         case TipoDeEfeito::Felicidade: parte = descreverEfeitoQueDura(contexto, efeito); break;
         }
         descricao += (descricao.empty() ? "" : ", ") + parte;
@@ -310,4 +314,17 @@ int comidaEmPorcentoDoAlvo(const ContextoDaProducao& contexto)
         return 100;
     }
     return static_cast<int>(comidaNoEstoque * 100 * 100 / alvoDaComidaEmCentesimos);
+}
+
+int multiplicadorDaLenhaPorEventos(const ContextoDaProducao& contexto)
+{
+    int multiplicador = 100;
+    for (const EventoAtivo& ativo : contexto.eventos.eventosAtivos) {
+        for (const EfeitoDoEvento& efeito : contexto.dados.catalogoDeEventos.todosOsEventos()[ativo.indiceDoEvento].efeitos) {
+            if (efeito.tipo == TipoDeEfeito::Lenha) {
+                multiplicador = multiplicador * efeito.porcentagem / 100;
+            }
+        }
+    }
+    return multiplicador;
 }

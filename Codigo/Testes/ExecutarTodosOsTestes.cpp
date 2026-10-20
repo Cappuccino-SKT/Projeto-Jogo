@@ -20,6 +20,7 @@ void testarProducaoEEconomia();
 void testarSimulacaoDeUmAno();
 void testarMarco8();
 void testarSave();
+void testarClima();
 
 int main()
 {
@@ -37,6 +38,7 @@ int main()
     testarSimulacaoDeUmAno();
     testarMarco8();
     testarSave();
+    testarClima();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {

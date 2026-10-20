@@ -20,7 +20,7 @@
 #include "Vila/SimulacaoDaVila.h"
 
 // Sobe a cada mudança no que é gravado (a Felicidade ganha um fator, um campo novo...).
-constexpr int versaoDoFormatoDoSave = 1;
+constexpr int versaoDoFormatoDoSave = 2;  // 2: o clima (fase A1)
 constexpr const char* versaoDoJogoNoSave = "0.9";
 constexpr int espacosDeSaveManual = 3;
 constexpr const char* extensaoDoArquivoDeSave = ".save";

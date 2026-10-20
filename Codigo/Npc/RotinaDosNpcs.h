@@ -43,6 +43,7 @@ struct SituacaoDoNpc {
     bool ehDiaDeCompra = false;
     bool jaComprouHoje = false;
     bool vilaTemMercado = true;
+    bool periodoLivreEmCasa = false;  // a tempestade (ficha do Clima, CL1-1): não compra
 };
 
 // As notas, em centésimos (1,0 = 100).
@@ -79,6 +80,9 @@ struct ContextoDaRotina {
     // Marco 6: o campo de cada construção (Produção, regra 4.1). Sem ele
     // (nullptr, como nos testes do marco 5), todos trabalham dentro.
     const std::vector<ProducaoDaConstrucao>* producaoDasConstrucoes = nullptr;
+    // Fase A1 (ficha do Clima, CL1-1): na tempestade, o Passear vai para a
+    // própria casa e o Comprar vale 0.
+    bool periodoLivreEmCasa = false;
 };
 
 // Regra 4.1, passos 5 e 6: cria os NPCs da vila dentro das casas, e cada um já

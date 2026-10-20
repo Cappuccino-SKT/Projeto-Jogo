@@ -334,7 +334,9 @@ void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, List
     economia.ordemDoDia.clear();
     for (const Json& passo : *ordem) {
         const std::string nomeDoPasso = passo.is_string() ? passo.get<std::string>() : passo.dump();
-        if (nomeDoPasso == "manutencao") {
+        if (nomeDoPasso == "clima") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Clima);
+        } else if (nomeDoPasso == "manutencao") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Manutencao);
         } else if (nomeDoPasso == "consumo") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Consumo);

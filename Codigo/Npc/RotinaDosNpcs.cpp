@@ -26,6 +26,7 @@ SituacaoDoNpc montarSituacaoDoNpc(const ContextoDaRotina& contexto, const Relogi
     situacao.ehDiaDeCompra = ehDiaDeCompraDoNpc(relogio.diaDaPartida(), identidade.numeroDoNpc, utilidade.diasEntreCompras);
     situacao.jaComprouHoje = decisao.diaDaUltimaCompra == relogio.diaDaPartida();
     situacao.vilaTemMercado = contexto.vila.indiceDoMercado() >= 0;
+    situacao.periodoLivreEmCasa = contexto.periodoLivreEmCasa;
     return situacao;
 }
 
@@ -143,6 +144,12 @@ void reavaliarUmNpc(ContextoDaRotina& contexto, const RelogioDoMundo& relogio, e
         registro.all_of<DoencaDoNpc>(npc) ? AcaoDoNpc::Dormir : escolherAcaoPelaUtilidade(calcularNotasDasAcoes(situacao, contexto.regras.utilidade));
     const std::vector<PosicaoDeTile>* tilesDoCampo = tilesDoCampoDoTrabalho(contexto, casaETrabalho);
     if (acaoNova == decisao.acaoAtual) {
+        // Ficha do Clima (CL1-1): a tempestade começou no meio do passeio: volta para casa.
+        if (acaoNova == AcaoDoNpc::Passear && contexto.periodoLivreEmCasa && casaETrabalho.indiceDaCasa >= 0
+            && decisao.indiceDaConstrucaoDoDestino != casaETrabalho.indiceDaCasa && decisao.indiceDaConstrucaoOndeEsta != casaETrabalho.indiceDaCasa) {
+            irParaODestino(contexto, relogio, npc, decisao, casaETrabalho.indiceDaCasa, false);
+            return;
+        }
         // Passo 4: a mesma ação, o NPC continua o que fazia. No trabalho, o
         // lugar pode ter mudado com a receita (marco 6): o Braçal vai para o
         // campo novo, e quem perdeu o campo entra na construção.
@@ -189,6 +196,11 @@ void reavaliarUmNpc(ContextoDaRotina& contexto, const RelogioDoMundo& relogio, e
     }
     case AcaoDoNpc::Passear:
     case AcaoDoNpc::Nenhuma:
+        // Ficha do Clima (CL1-1): na tempestade, o passeio é a própria casa.
+        if (acaoNova == AcaoDoNpc::Passear && contexto.periodoLivreEmCasa && casaETrabalho.indiceDaCasa >= 0) {
+            irParaODestino(contexto, relogio, npc, decisao, casaETrabalho.indiceDaCasa, false);
+            break;
+        }
         irParaODestino(contexto, relogio, npc, decisao, -1, true);
         break;
     }
@@ -270,7 +282,8 @@ NotasDasAcoes calcularNotasDasAcoes(const SituacaoDoNpc& situacao, const RegrasD
     if (situacao.estaNaHoraDeComer) {
         notas.comer += utilidade.bonusDeComer;
     }
-    if (situacao.periodo == PeriodoDaRotina::Livre && situacao.ehDiaDeCompra && !situacao.jaComprouHoje && situacao.vilaTemMercado) {
+    if (situacao.periodo == PeriodoDaRotina::Livre && situacao.ehDiaDeCompra && !situacao.jaComprouHoje && situacao.vilaTemMercado
+        && !situacao.periodoLivreEmCasa) {
         notas.comprar += utilidade.bonusDeComprar;
     }
     return notas;
@@ -367,7 +380,12 @@ void rodarARotinaAntesDeAndar(ContextoDaRotina& contexto, const RelogioDoMundo& 
             decisao.diaDaUltimaCompra = relogio.diaDaPartida();
             reavaliarUmNpc(contexto, relogio, npc);
         } else if (decisao.acaoAtual == AcaoDoNpc::Passear) {
-            comecarUmPasseio(contexto, relogio, npc, decisao);
+            const int indiceDaCasa = registro.get<CasaETrabalhoDoNpc>(npc).indiceDaCasa;
+            if (contexto.periodoLivreEmCasa && indiceDaCasa >= 0) {
+                irParaODestino(contexto, relogio, npc, decisao, indiceDaCasa, false);  // a tempestade (CL1-1)
+            } else {
+                comecarUmPasseio(contexto, relogio, npc, decisao);
+            }
         }
     }
 }

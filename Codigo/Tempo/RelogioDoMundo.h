@@ -60,6 +60,7 @@ public:
     int diaDaEstacaoAtual() const;         // de 1 a 16
     int anoAtual() const;                  // 412, 413...
     Estacao estacaoAtual() const;
+    int diasPorEstacao() const { return regras.diasPorEstacao; }
     FaseDoDia faseDoDiaAtual() const;
 
 private:

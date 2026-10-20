@@ -1,5 +1,6 @@
 #include "Economia/ConsumoESalarios.h"
 
+#include "Clima/ClimaDaVila.h"
 #include <algorithm>
 #include <optional>
 
@@ -258,6 +259,9 @@ void consumirACestaDoDia(ContextoDaProducao& contexto)
         contexto.consumoMedido.anotarADemandaQueFaltou(materialDaCesta, static_cast<int64_t>(materiaisQueFaltaram) * 100);
     }
 
+    // Ficha do Clima, regra 4.3: a lenha do inverno, depois da cesta e antes do gasto extra.
+    consumirALenhaDoDia(contexto);
+
     // Regra 10.5: o gasto extra.
     fazerOGastoExtra(contexto, materiaisQueACestaTirou);
 
@@ -408,7 +412,8 @@ void rodarAFelicidadeDoDia(ContextoDaProducao& contexto)
          contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc, TrabalhoDoDia>().each()) {
         situacao.civisSemCasa += identidade.classe == "civil" && casaETrabalho.indiceDaCasa < 0 ? 1 : 0;
     }
-    situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto);
+    situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto);
+    situacao.pontosDoClimaNoConsumo = pontosDoClimaNoConsumoAtendido(contexto);
 
     FelicidadeDaClasse& felicidade = contexto.felicidade;
     felicidade.fatoresDoDia = calcularFatoresDaFelicidade(situacao, regras);
@@ -423,6 +428,11 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
     contexto.eventos.linhasParaOConsole.clear();
     for (const PassoDaOrdemDoDia passo : contexto.dados.regras.economia.ordemDoDia) {
         switch (passo) {
+        case PassoDaOrdemDoDia::Clima: {
+            const std::vector<std::string> linhasDoClima = rodarOClimaDoDia(contexto, relogio);
+            linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDoClima.begin(), linhasDoClima.end());
+            break;
+        }
         case PassoDaOrdemDoDia::Manutencao:
             rodarAManutencaoDoDia(contexto, relogio);
             break;

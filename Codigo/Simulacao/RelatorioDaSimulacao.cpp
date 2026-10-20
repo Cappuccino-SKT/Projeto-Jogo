@@ -60,6 +60,9 @@ LinhaDoRelatorio montarLinhaDoRelatorio(const ContextoDaProducao& contexto, int6
     linha.diasEmDeficitDeMateriais = dinheiro.diasEmDeficitDeMateriais;
     linha.consumoNaoPago = dinheiro.consumoNaoPagoHoje;
     linha.eventosDoDia = contexto.eventos.mudancasDeHoje;
+    linha.clima = nomeDoClimaNoArquivo(contexto.clima.climaDeOntem);
+    linha.lenhaDoDia = contexto.clima.lenhaTiradaHoje;
+    linha.diasEmDeficitDeLenha = contexto.clima.diasEmDeficitDeLenha;
     return linha;
 }
 
@@ -70,7 +73,7 @@ std::string escreverCabecalhoDoRelatorio(const DadosDoJogo& dados)
         cabecalho += ";" + nomeDaColunaDoItem(item.identificadorDeTexto);
     }
     cabecalho += ";preco_do_pao;banco;jogador;riqueza_media;felicidade;empregados;desempregados;deficit_comida;deficit_materiais;"
-                 "consumo_nao_pago;eventos_do_dia";
+                 "consumo_nao_pago;clima;lenha_do_dia;deficit_lenha;eventos_do_dia";
     return cabecalho;
 }
 
@@ -83,7 +86,8 @@ std::string escreverLinhaDoRelatorio(const LinhaDoRelatorio& linha)
     texto += ";" + escreverDecimos(linha.precoDoPaoEmDecimos) + ";" + escreverDecimos(linha.bancoDaCidade) + ";" + escreverDecimos(linha.dinheiroDoJogador)
         + ";" + escreverDecimos(linha.riquezaMediaDosCivis) + ";" + escreverDecimos(linha.felicidadeEmDecimos) + ";" + std::to_string(linha.empregados)
         + ";" + std::to_string(linha.desempregados) + ";" + std::to_string(linha.diasEmDeficitDeComida) + ";"
-        + std::to_string(linha.diasEmDeficitDeMateriais) + ";" + escreverDecimos(linha.consumoNaoPago) + ";\"";
+        + std::to_string(linha.diasEmDeficitDeMateriais) + ";" + escreverDecimos(linha.consumoNaoPago) + ";" + linha.clima + ";"
+        + std::to_string(linha.lenhaDoDia) + ";" + std::to_string(linha.diasEmDeficitDeLenha) + ";\"";
     for (std::size_t evento = 0; evento < linha.eventosDoDia.size(); ++evento) {
         texto += (evento > 0 ? ", " : "") + linha.eventosDoDia[evento];
     }

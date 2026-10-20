@@ -83,6 +83,11 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
         const CatalogosParaOsEventos catalogos{dados.tabelaDeTextos, dados.catalogoDeItens, dados.catalogoDeConstrucoes};
         dados.catalogoDeEventos = lerArquivoDeEventos(*texto, catalogos, problemas);
     }
+
+    // 11. O clima (fase A1, ficha do Clima e Estações).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "clima.json", problemas)) {
+        dados.regrasDoClima = lerArquivoDoClima(*texto, problemas);
+    }
     return dados;
 }
 

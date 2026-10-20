@@ -8,6 +8,7 @@
 
 #include <string>
 
+#include "Clima/Clima.h"
 #include "Dados/Itens.h"
 #include "Dados/ProblemasDosDados.h"
 #include "Dados/Receitas.h"
@@ -27,6 +28,7 @@ struct DadosDoJogo {
     MapaLocal mapaDaVila;  // com os lotes ocupados já bloqueados (FL5-1)
     VilaDoJogo vilaInicial;
     CatalogoDeEventos catalogoDeEventos;
+    RegrasDoClima regrasDoClima;  // fase A1 (ficha do Clima)
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }

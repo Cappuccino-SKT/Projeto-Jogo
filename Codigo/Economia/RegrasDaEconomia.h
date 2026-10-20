@@ -7,7 +7,7 @@
 #include <vector>
 
 // Os passos da virada do dia, na ordem do "ordem_do_dia" (FT1-5).
-enum class PassoDaOrdemDoDia { Manutencao, Consumo, Salarios, MercadoLocal, Estabilizador, Felicidade, Eventos, EscolhaDasReceitas };
+enum class PassoDaOrdemDoDia { Manutencao, Consumo, Salarios, MercadoLocal, Estabilizador, Felicidade, Eventos, EscolhaDasReceitas, Clima };
 
 // O preço que anda com o estoque (V2-5, regra 10.4).
 struct RegrasDoMercadoLocal {

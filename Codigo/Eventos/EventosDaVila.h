@@ -44,6 +44,10 @@ void rodarOsEventosDoDia(ContextoDaProducao& contexto, const RelogioDoMundo& rel
 // Chuva boa juntas: 50% × 120% = 60).
 int multiplicadorDaProducaoPorEventos(const ContextoDaProducao& contexto, const std::string& tipoDaConstrucao);
 
+// O que a lenha do inverno pergunta (ficha do Clima, regra 4.3): o produto das
+// porcentagens dos efeitos "lenha_em_porcento" ativos (100 sem nenhum).
+int multiplicadorDaLenhaPorEventos(const ContextoDaProducao& contexto);
+
 // O que a Felicidade pergunta: a soma dos pontos dos eventos ativos.
 int felicidadeDosEventosAtivos(const ContextoDaProducao& contexto);
 
