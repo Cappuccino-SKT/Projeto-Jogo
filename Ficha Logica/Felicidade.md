@@ -55,6 +55,7 @@ No `regras.json`:
 1. **Consumo atendido** = −25 × (Civis que ficaram sem comida hoje ÷ Civis) − 5 se os Materiais Básicos estão em déficit + 5 × (gasto extra de hoje ÷ gasto da cesta de hoje), com o último pedaço no máximo +5.
 2. **Desemprego e renda** = +10 − 20 × a taxa de desemprego (de 0 a 1), preso entre −10 e +10.
 3. **Moradia** = −10 × (Civis sem casa ÷ Civis). Na fatia, os 15 têm casa: 0.
+4. **Religião** (6º fator, com as facções): de −5 a +10, pela [[Ficha Logica/Religiao|Religião]] (regra 4.2). Na vila sem facção, 0.
 4. **Leis × cultura** (5º fator, com as facções): de −30 a +10, pela [[Ficha Logica/Cultura|Cultura]] (regras 4.2 e 4.3). Na vila sem facção, 0.
 5. **Eventos duradouros** = a soma dos modificadores de Felicidade dos eventos ativos ([[Ficha Logica/Eventos|ficha dos Eventos]]), presa entre −20 e +20.
 
