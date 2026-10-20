@@ -1,5 +1,6 @@
 #include "Jogador/PedidosDoJogador.h"
 
+#include "Vila/Trabalho.h"
 #include "Jogador/DecisoesDoJogador.h"
 #include "Jogador/ObrasDaVila.h"
 
@@ -71,6 +72,26 @@ std::string aplicarUmPedido(ContextoDaProducao& contexto, const PedidoDoJogador&
                              + std::to_string(contexto.vila.construcoes[subir->indiceDaConstrucao].nivel + 1) + ".");
         }
         return motivo;
+    }
+    if (const auto* comprarConstrucao = std::get_if<PedidoComprarConstrucao>(&pedido)) {
+        const std::string motivo = comprarConstrucaoDaCidade(contexto, comprarConstrucao->indiceDaConstrucao);
+        if (motivo.empty()) {
+            linhas.push_back("Compra: o jogador comprou " + contexto.vila.construcoes[comprarConstrucao->indiceDaConstrucao].identificador + " (modo automático ligado).");
+        }
+        return motivo;
+    }
+    if (const auto* venderConstrucao = std::get_if<PedidoVenderConstrucao>(&pedido)) {
+        const std::string motivo = venderConstrucaoParaACidade(contexto, venderConstrucao->indiceDaConstrucao);
+        if (motivo.empty()) {
+            linhas.push_back("Venda: o jogador vendeu " + contexto.vila.construcoes[venderConstrucao->indiceDaConstrucao].identificador + " para a Cidade.");
+        }
+        return motivo;
+    }
+    if (const auto* modo = std::get_if<PedidoTrocarOModoAutomatico>(&pedido)) {
+        return trocarOModoAutomatico(contexto, modo->indiceDaConstrucao, modo->ligado);
+    }
+    if (const auto* lance = std::get_if<PedidoDarLance>(&pedido)) {
+        return darLanceNoLeilao(contexto, lance->lanceEmDecimos);
     }
     if (const auto* comprar = std::get_if<PedidoComprarDaLoja>(&pedido)) {
         return comprarDaLojaDaCidade(contexto, comprar->numeroDoItem, comprar->quantidade);

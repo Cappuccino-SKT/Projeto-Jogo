@@ -48,8 +48,24 @@ struct PedidoVenderParaALoja {
     int quantidade = 0;
 };
 
+// Fase A2 (ficha do Trabalho e Propriedade, regras 4.3 e 4.4).
+struct PedidoComprarConstrucao {
+    int indiceDaConstrucao = 0;
+};
+struct PedidoVenderConstrucao {
+    int indiceDaConstrucao = 0;
+};
+struct PedidoTrocarOModoAutomatico {
+    int indiceDaConstrucao = 0;
+    bool ligado = true;
+};
+struct PedidoDarLance {
+    int64_t lanceEmDecimos = 0;
+};
+
 using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
-                                     PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja>;
+                                     PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
+                                     PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance>;
 
 class FilaDePedidosDoJogador {
 public:

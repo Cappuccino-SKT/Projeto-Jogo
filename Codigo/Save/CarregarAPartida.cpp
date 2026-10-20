@@ -223,6 +223,9 @@ void restaurarAProducao(SimulacaoDaVila& simulacao, const json& lista)
         producao.emObra = linha.at("emObra").get<bool>();
         producao.numeroDoGerente = linha.at("gerente").get<int>();
         producao.diasDeSalarioAtrasado = linha.at("diasDeSalarioAtrasado").get<int>();
+        producao.diasSemEmpregados = linha.at("diasSemEmpregados").get<int>();
+        producao.modoAutomatico = linha.at("modoAutomatico").get<bool>();
+        producao.salarioDevidoEmDecimos = linha.at("salarioDevido").get<int64_t>();
         producao.areaDoCampoNoMapa = linha.at("areaDoCampo").get<int>();
         const json& tilesDoCampo = linha.at("tilesDoCampo");
         for (std::size_t posicao = 0; posicao + 1 < tilesDoCampo.size(); posicao += 2) {
@@ -392,7 +395,7 @@ void restaurarOsNpcs(SimulacaoDaVila& simulacao, const json& lista)
         }
         registro.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{linha.at("nome").get<std::string>(), linha.at("classe").get<std::string>(),
                                                                  linha.at("numero").get<int>()});
-        CasaETrabalhoDoNpc casaETrabalho{linha.at("casa").get<int>(), linha.at("trabalho").get<int>()};
+        CasaETrabalhoDoNpc casaETrabalho{linha.at("casa").get<int>(), linha.at("trabalho").get<int>(), linha.at("saiuPorAtrasoDe").get<int>()};
         conferirOIndiceDaConstrucao(casaETrabalho.indiceDaCasa, quantidadeDeConstrucoes, "casa");
         conferirOIndiceDaConstrucao(casaETrabalho.indiceDoTrabalho, quantidadeDeConstrucoes, "trabalho");
         registro.emplace<CasaETrabalhoDoNpc>(npc, casaETrabalho);
@@ -496,6 +499,11 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarOSorteio(Acesso::sorteioDosEventos(*partida), arvore.at("sorteios").at("eventos"));
         restaurarOSorteio(Acesso::sorteioDoClima(*partida), arvore.at("sorteios").at("clima"));
         restaurarOClima(*partida, arvore.at("clima"));
+        {
+            const json& leilao = arvore.at("leilao");
+            partida->trabalho.leilao = LeilaoDeConstrucao{leilao.at("construcao").get<int>(), leilao.at("diasQueFaltam").get<int>(),
+                                                          leilao.at("maiorLance").get<int64_t>(), leilao.at("lanceEhDoJogador").get<bool>()};
+        }
         restaurarAVila(*partida, arvore.at("vila"));
         restaurarAProducao(*partida, arvore.at("producao"));
         restaurarAsObras(*partida, arvore.at("obras"));

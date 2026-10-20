@@ -1,5 +1,6 @@
 #include "Producao/ProducaoDaVila.h"
 
+#include "Vila/Trabalho.h"
 #include "Clima/ClimaDaVila.h"
 #include "Jogador/DecisoesDoJogador.h"
 #include "Jogador/ObrasDaVila.h"
@@ -302,11 +303,11 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
     for (int rodada = 0; rodada < ciclosPorHoraNoMaximo; ++rodada) {
         // Passo 1: sem receita, pega a próxima (a do jogador, pela fila de ordens).
         if (producao.receitaDoCiclo < 0) {
-            producao.receitaDoCiclo = ehDoJogador ? escolherReceitaPelaFilaDeOrdens(contexto, indiceDaConstrucao)
+            producao.receitaDoCiclo = construcaoSegueAFilaDoJogador(contexto, indiceDaConstrucao) ? escolherReceitaPelaFilaDeOrdens(contexto, indiceDaConstrucao)
                                                   : producao.receitaEscolhidaParaOProximoCiclo;
             atualizarOCampoDeTrabalho(contexto, indiceDaConstrucao);
             if (producao.receitaDoCiclo < 0) {
-                pararAConstrucao(producao, ehDoJogador ? motivoDaFilaSemReceita(contexto, indiceDaConstrucao, ticksDaHora) : "sem receita");
+                pararAConstrucao(producao, construcaoSegueAFilaDoJogador(contexto, indiceDaConstrucao) ? motivoDaFilaSemReceita(contexto, indiceDaConstrucao, ticksDaHora) : "sem receita");
                 return;
             }
         }
@@ -374,7 +375,7 @@ void rodarOCicloDeUmaConstrucao(ContextoDaProducao& contexto, int indiceDaConstr
         }
         producao.progressoDoCiclo -= progressoNecessario;
         producao.cicloComecou = false;
-        producao.receitaDoCiclo = ehDoJogador ? -1 : producao.receitaEscolhidaParaOProximoCiclo;
+        producao.receitaDoCiclo = construcaoSegueAFilaDoJogador(contexto, indiceDaConstrucao) ? -1 : producao.receitaEscolhidaParaOProximoCiclo;
         atualizarOCampoDeTrabalho(contexto, indiceDaConstrucao);
     }
 }
@@ -660,7 +661,7 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
         if (!producao.ehDeProducao) {
             continue;
         }
-        if (construcaoEhDoJogador(contexto, static_cast<int>(construcao))) {
+        if (construcaoSegueAFilaDoJogador(contexto, static_cast<int>(construcao))) {
             // Regra 10.2, passo 4: sem nenhuma ordem que queira produzir, folga.
             // O ciclo que ainda não começou volta para a fila decidir de novo.
             producao.estaDeFolgaHoje = std::none_of(producao.ordens.begin(), producao.ordens.end(),

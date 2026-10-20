@@ -1,5 +1,6 @@
 #include "Economia/ConsumoESalarios.h"
 
+#include "Vila/Trabalho.h"
 #include "Clima/ClimaDaVila.h"
 #include <algorithm>
 #include <optional>
@@ -315,6 +316,7 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
             // Passo 3: sem dinheiro para o salário inteiro, não recebe nada.
             if (dinheiroDeQuemPaga < salario) {
                 alguemFicouSemReceber = true;
+                producao.salarioDevidoEmDecimos += salario;  // fase A2 (Trabalho, regra 4.4, passo 0)
                 continue;
             }
             // Passo 4, com o imposto retido na hora (regra 10.7): a parte da
@@ -346,6 +348,7 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
         if (producao.diasDeSalarioAtrasado >= economia.diasDeAtrasoAteOsEmpregadosSairem) {
             for (const auto& [numeroDoNpc, npc] : empregados) {
                 registro.get<CasaETrabalhoDoNpc>(npc).indiceDoTrabalho = -1;
+                registro.get<CasaETrabalhoDoNpc>(npc).saiuPorAtrasoDe = static_cast<int>(indice);  // Trabalho, regra 4.1, passo 3
             }
             producao.diasDeSalarioAtrasado = 0;
             linhasParaOConsole.push_back("Aviso: os " + std::to_string(empregados.size()) + " empregados de " + construcao.identificador
@@ -426,6 +429,8 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
     std::vector<std::string> linhasParaOConsole;
     contexto.eventos.mudancasDeHoje.clear();
     contexto.eventos.linhasParaOConsole.clear();
+    contexto.trabalho.contratacoesDeHoje = 0;
+    contexto.trabalho.trocasDeHoje = 0;
     for (const PassoDaOrdemDoDia passo : contexto.dados.regras.economia.ordemDoDia) {
         switch (passo) {
         case PassoDaOrdemDoDia::Clima: {
@@ -444,6 +449,19 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
             escolherOsGerentes(contexto);
             const std::vector<std::string> saidas = pagarOsSalariosDoDia(contexto);
             linhasParaOConsole.insert(linhasParaOConsole.end(), saidas.begin(), saidas.end());
+            // Fase A2 (ficha do Trabalho): no dia 1 da estação, a redistribuição;
+            // todo dia, as vagas da Cidade e os dias sem empregados.
+            if (relogio.diaDaEstacaoAtual() == 1) {
+                for (const auto [npc, casaETrabalho] : contexto.registroDasEntidades.view<CasaETrabalhoDoNpc>().each()) {
+                    casaETrabalho.saiuPorAtrasoDe = -1;
+                }
+                const std::vector<std::string> trocas = redistribuirEmpregosDaCidade(contexto);
+                linhasParaOConsole.insert(linhasParaOConsole.end(), trocas.begin(), trocas.end());
+            }
+            const std::vector<std::string> contratacoes = preencherVagasDaCidade(contexto);
+            linhasParaOConsole.insert(linhasParaOConsole.end(), contratacoes.begin(), contratacoes.end());
+            const std::vector<std::string> leilao = contarOsDiasSemEmpregados(contexto, relogio.diasPorEstacao());
+            linhasParaOConsole.insert(linhasParaOConsole.end(), leilao.begin(), leilao.end());
             break;
         }
         case PassoDaOrdemDoDia::MercadoLocal:
@@ -458,6 +476,11 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
         case PassoDaOrdemDoDia::Eventos:
             rodarOsEventosDoDia(contexto, relogio);
             linhasParaOConsole.insert(linhasParaOConsole.end(), contexto.eventos.linhasParaOConsole.begin(), contexto.eventos.linhasParaOConsole.end());
+            {
+                // Fase A2 (Trabalho, regra 4.4): o leilão anda no passo dos eventos.
+                const std::vector<std::string> leilao = avancarOLeilaoDoDia(contexto);
+                linhasParaOConsole.insert(linhasParaOConsole.end(), leilao.begin(), leilao.end());
+            }
             break;
         case PassoDaOrdemDoDia::EscolhaDasReceitas:
             escolherAsReceitasDaCidade(contexto);

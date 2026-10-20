@@ -25,6 +25,7 @@ add_library(regras_do_jogo STATIC
     Jogador/NotificacoesEAlertas.cpp
     Clima/Clima.cpp
     Clima/ClimaDaVila.cpp
+    Vila/Trabalho.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

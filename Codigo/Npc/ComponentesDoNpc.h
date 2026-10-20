@@ -70,6 +70,9 @@ struct IdentidadeDoNpc {
 struct CasaETrabalhoDoNpc {
     int indiceDaCasa = -1;      // posição na lista de construções da vila
     int indiceDoTrabalho = -1;  // -1 = desempregado
+    // Fase A2 (Trabalho, regra 4.1, passo 3): a construção que ele deixou por
+    // salário atrasado nesta estação (a Cidade não o contrata de volta), ou -1.
+    int saiuPorAtrasoDe = -1;
 };
 
 struct DecisaoDoNpc {

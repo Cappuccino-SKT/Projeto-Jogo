@@ -501,3 +501,17 @@ Arquivos novos: `Codigo/Clima/Clima.h` e `.cpp` (o sorteio, a lenha, a leitura d
 
 **Verificado pelo assistente:** `testes_do_codigo` passa (397 conferências, a tabela da parte 8 da ficha); `jogo --simular 64` **passa nas sementes de 1 a 10**. Na semente 10: 17 dias nublados, 16 limpos, 10 de chuva, 10 de tempestade, 6 de neve e 5 de névoa; o inverno gastou **71 Toras de lenha** (a ficha previa cerca de 69); a vila entrou no inverno com 37 a 48 Toras e **nenhum dia ficou sem lenha** (o estoque do fim do Outono funcionou). O Inverno rigoroso não saiu nessas sementes (25% de chance). Com `--salvar-e-carregar-no-dia 50` (no meio do inverno, com lenha devida), o `relatorio.csv` sai **igual, byte a byte**. **Falta o teste do autor** na janela (o clima na barra de cima; os NPCs em casa na tempestade).
 
+### Marco A2: o trabalho e a propriedade (2026-10-19, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Trabalho|ficha do Trabalho e Propriedade]]):
+
+- **A Cidade contrata sozinha:** depois dos salários, cada vaga vazia de uma construção da Cidade recebe o desempregado de maior habilidade no Trabalho dela, se o Banco tem 3 dias do salário da vaga. Quem saiu de uma construção por salário atrasado não volta para ela na mesma estação.
+- **A redistribuição** (dia 1 de cada estação): dois empregados da Cidade de Trabalhos diferentes trocam de emprego se a soma das habilidades usadas sobe 10 ou mais. Ninguém perde o emprego.
+- **Comprar e vender construções** (painel da construção): o valor é o custo da obra do porte a preço de hoje × o nível; a Cidade compra de volta por 75%. A construção comprada começa no **modo automático** (a IA da Cidade escolhe a receita); o jogador pode desligar e usar a fila de ordens.
+- **O leilão:** a construção do jogador sem empregados por 32 dias vai a leilão por 3 dias (lance mínimo de 50% do valor). Com lance, os salários atrasados são pagos primeiro aos Civis e o resto volta ao jogador; sem lance, ela volta para a Cidade.
+- **Save:** versão 3 (os campos novos dos NPCs e das construções e o leilão). **Relatório:** as colunas `contratacoes`, `trocas` e `leilao`.
+
+Arquivos novos: `Codigo/Vila/Trabalho.h` e `.cpp`, `Codigo/Vila/RegrasDoTrabalho.h`, `Codigo/Testes/TestesDoTrabalho.cpp`; o bloco `"trabalho"` no `regras.json`.
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (414 conferências: os exemplos da parte 8 da ficha, como o Bruno e a Carla que trocam, o leilão com a dívida de 64 e a compra do Posto). `jogo --simular 64` passa nas **sementes de 1 a 10**, com **0 contratações e 0 trocas**: a fatia não tem vaga vazia na Cidade, e todos têm habilidade 50 (a ficha previa isso). **Falta o teste do autor** na janela: comprar o Posto de Coleta, ver o modo automático, vender a Carpintaria.
+
