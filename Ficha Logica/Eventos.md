@@ -61,7 +61,7 @@ Dos 12 da V3-6, a **Tempestade forte** fica de fora: ela danifica a Vida de uma 
 | Febre | Ocasional (negativo) | Sempre | 1,5% | 2 Civis sorteados ficam doentes em casa e não trabalham. *Adaptado:* sem mortalidade nem Remédio, que não existem na fatia | 4 dias | 32 |
 | Fome | Condicional (negativo) | A comida abaixo de 10% do estoque-alvo por 3 dias seguidos | — | Felicidade −10. *Adaptado:* sem migração (a população é fixa na fatia). Sai com a comida acima de 30% do alvo | Enquanto valer | — |
 | Falta de móveis | Condicional (negativo) | Materiais Básicos em déficit por 8 dias seguidos | — | Felicidade −5. Sai quando o déficit volta a 0 | Enquanto valer | — |
-| Festa da Colheita | Data fixa | Dia 12 do Outono | — | Felicidade +10. *Adaptado:* sem o consumo de Cerveja, que não existe | 4 dias | — |
+| Festa da Colheita | Data fixa | Dia 12 do Outono (só na vila sem facção; nas cidades de facção, vira o festival do calendário da [[Ficha Logica/Religiao|Religião]], RL1-3) | — | Felicidade +10. *Adaptado:* sem o consumo de Cerveja, que não existe | 4 dias | — |
 
 **Por que essas chances:** 6% por dia numa estação de 16 dias dá cerca de 1 vez por estação (0,96); 2% dá cerca de 1,3 vez por ano; a Geada, com 20% em 2 dias, sai em cerca de 1 ano a cada 3.
 

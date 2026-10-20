@@ -40,7 +40,7 @@ A **Febre** da fatia (2 Civis em casa por 4 dias, ficha dos [[Ficha Logica/Event
 | `modificadores_da_chance` | Multiplicam a chance base, um depois do outro (CU1-1) |
 | `npcs_doentes_em_porcento_dos_civis` | Como o `npcs_doentes` da Febre, mas em porcento (arredondado para cima) e sorteando **qualquer** Civil |
 | `mortes_por_dia_em_por_mil_da_populacao` | 10 = 1% da população por dia, tirado do acumulado da População |
-| `remedio_por_dia_a_cada_npcs` | 1 Remédio por 10 NPCs reais por dia (arredondado para cima); com ele, as mortes × 50% |
+| `remedio_por_dia_a_cada_npcs` | 1 Remédio por 10 NPCs reais por dia (arredondado para cima); com ele, as mortes × 50%. Na cidade Religiosa com Templo, mais × 75% ([[Ficha Logica/Religiao|Religião]], 4.7) |
 
 ### A Vida (para o Combate; no `data/regras.json`, bloco `"cura"`)
 
