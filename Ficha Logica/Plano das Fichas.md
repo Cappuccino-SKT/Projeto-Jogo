@@ -78,7 +78,7 @@ Mundo e Estado Inicial; Início de Jogo; Objetivo e Progressão. Juntam tudo, en
 | # | Ficha | Precisa de |
 |---|---|---|
 | E1 | **[[Ficha Logica/Mundo\|Mundo e Estado Inicial]]** (escrita em 2026-10-19; rodada MU1 automática) | Todas as das fases B a D |
-| E2 | **Início de Jogo** | Mundo (E1), Reputação, Companheiros |
+| E2 | **[[Ficha Logica/Inicio\|Início de Jogo]]** (escrita em 2026-10-19; rodada IN1 automática) | Mundo (E1), Reputação, Companheiros |
 | E3 | **Objetivo e Progressão** | Início (E2), Companheiros, Combate |
 
 ### Fora das fichas

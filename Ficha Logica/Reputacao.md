@@ -72,7 +72,7 @@ As cidades usam o valor da facção dona. A **vila do jogador** não tem reputa�
 
 ### 4.1 A base (começo da partida)
 
-Base de cada facção = a afinidade da cultura do personagem com ela + o bônus do estilo de início (Início de Jogo). **Até o Início de Jogo ter ficha, a base é 0 para todas** (RE1-6). As Vilas Livres começam em 0. O valor começa igual à base.
+Base de cada facção = a afinidade da cultura do personagem com ela + o bônus do estilo de início ([[Ficha Logica/Inicio|Início de Jogo]], 4.2: mesma cultura +20, afim +10, neutra 0, hostil −15; Membro +30, Nobre exilado +20 e −20, Escravo −20). Sem estilo (o teste da fatia), a base é 0 (RE1-6). As Vilas Livres começam em 0. O valor começa igual à base.
 
 ### 4.2 Mudar o valor
 
