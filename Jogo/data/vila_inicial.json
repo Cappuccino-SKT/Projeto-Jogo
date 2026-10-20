@@ -29,20 +29,20 @@
     { "id": "casa_4", "tipo": "construcao.casa", "lote": 4, "dono": "cidade", "nivel": 1 }
   ],
   "npcs": [
-    { "nome": "Ana", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Bento", "classe": "civil", "casa": "casa_1", "trabalho": "fazenda", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Clara", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Davi", "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Elisa", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Fábio", "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Gil", "classe": "civil", "casa": "casa_2", "trabalho": "mercado", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Helena", "classe": "civil", "casa": "casa_2", "trabalho": "mercado", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Iago", "classe": "civil", "casa": "casa_3", "trabalho": "construtor", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Joana", "classe": "civil", "casa": "casa_3", "trabalho": "construtor", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Lauro", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Marta", "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Nuno", "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Olga", "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } },
-    { "nome": "Pedro", "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } }
+    { "nome": "Ana", "idade": 5, "classe": "civil", "casa": "casa_1", "trabalho": "fazenda", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Bento", "idade": 6, "classe": "civil", "casa": "casa_1", "trabalho": "fazenda", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Clara", "idade": 7, "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Davi", "idade": 8, "classe": "civil", "casa": "casa_1", "trabalho": "posto_de_coleta", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Elisa", "idade": 9, "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Fábio", "idade": 10, "classe": "civil", "casa": "casa_2", "trabalho": "cozinheiro", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Gil", "idade": 11, "classe": "civil", "casa": "casa_2", "trabalho": "mercado", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Helena", "idade": 12, "classe": "civil", "casa": "casa_2", "trabalho": "mercado", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Iago", "idade": 13, "classe": "civil", "casa": "casa_3", "trabalho": "construtor", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Joana", "idade": 14, "classe": "civil", "casa": "casa_3", "trabalho": "construtor", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Lauro", "idade": 15, "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Marta", "idade": 16, "classe": "civil", "casa": "casa_3", "trabalho": "carpintaria_do_jogador", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Nuno", "idade": 17, "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Olga", "idade": 18, "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } },
+    { "nome": "Pedro", "idade": 19, "classe": "civil", "casa": "casa_4", "trabalho": "", "habilidades": { "bracal": 50, "manufaturado": 50 } }
   ]
 }

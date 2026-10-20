@@ -28,6 +28,7 @@
 #include "Tempo/RelogioDoMundo.h"
 #include "Tempo/SorteioComSemente.h"
 #include "Vila/RegrasDoTrabalho.h"
+#include "Vila/RegrasDaPopulacao.h"
 
 // O estado do marco 7 que mora em outros arquivos (Economia/ e Eventos/).
 struct MercadoLocalDaVila;
@@ -116,6 +117,10 @@ struct ContextoDaProducao {
     SorteioComSemente& sorteioDoClima;
     // Fase A2 (ficha do Trabalho): o leilão e as contas do dia.
     EstadoDoTrabalho& trabalho;
+    // Fase A3 (ficha da População): o acumulado, o sorteio (sequência 4) e a lista dos NPCs da vila.
+    EstadoDaPopulacao& populacao;
+    SorteioComSemente& sorteioDaPopulacao;
+    std::vector<entt::entity>& npcsDaVila;
     int ticksPorHoraDeJogo = 800;
 };
 

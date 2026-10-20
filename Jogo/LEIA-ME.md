@@ -515,3 +515,18 @@ Arquivos novos: `Codigo/Vila/Trabalho.h` e `.cpp`, `Codigo/Vila/RegrasDoTrabalho
 
 **Verificado pelo assistente:** `testes_do_codigo` passa (414 conferências: os exemplos da parte 8 da ficha, como o Bruno e a Carla que trocam, o leilão com a dívida de 64 e a compra do Posto). `jogo --simular 64` passa nas **sementes de 1 a 10**, com **0 contratações e 0 trocas**: a fatia não tem vaga vazia na Cidade, e todos têm habilidade 50 (a ficha previa isso). **Falta o teste do autor** na janela: comprar o Posto de Coleta, ver o modo automático, vender a Carpintaria.
 
+### Marco A3: a população (2026-10-20, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Populacao|ficha da População]]):
+
+- **A idade:** cada NPC tem idade (a vila inicial vai de 5 a 19 anos, no `vila_inicial.json`) e faz 1 ano no dia 1 da Primavera. A partir dos 21, no dia 1 de cada estação, morre de velhice com 10% por ano acima de 20 (× 150% no Inverno rigoroso), e um jovem de 4 anos ocupa a cama dele na hora (a reposição).
+- **O acumulado em pessoas** (1 NPC = 100 pessoas): no dia 1 de cada estação entram os nascimentos (4%, × a Felicidade × 2, pela metade se houve fome) e saem as mortes (1%); do 4º dia seguido de fome, 2% de quem ficou sem comida por dia; e um pouco quando falta lenha. A +100 chega um NPC (se cabe e há cama); a −100 morre o mais velho. Abaixo da capacidade, o acumulado negativo volta a 0 (PO1-4).
+- **A migração:** chega 1 migrante (idade de 4 a 12, habilidades de 20 a 60) se há cama, vaga, Felicidade 50 ou mais e nenhuma fome; vai embora 1 se a Felicidade está abaixo de 30 ou o desemprego passa de 30%. A saída é decidida com a vila da estação que terminou (ajuste do código, anotado na ficha).
+- O passo novo **"populacao"** na ordem do dia (depois da Felicidade); a sequência 4 do sorteio; o **save na versão 4**; as colunas `npcs`, `populacao`, `acumulado`, `nascimentos`, `mortes` e `migracao` no relatório.
+
+Arquivos novos: `Codigo/Vila/Populacao.h` e `.cpp`, `Codigo/Vila/RegrasDaPopulacao.h`, `Codigo/Testes/TestesDaPopulacao.cpp`; o bloco `"populacao"` no `regras.json`.
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (429 conferências); `jogo --simular 64` passa nas **sementes de 1 a 10**, com a vila em 15 e nenhuma morte (ninguém chega a 21 no ano 1, como a ficha previa); `--salvar-e-carregar-no-dia 40` dá o mesmo relatório. **10 anos com a semente 1** (`--simular 640`): 8 mortes de velhice aos 21 ou 22 anos (cerca de 0,8 por ano, como a ficha previa), cada uma com reposição; a vila fica entre 14 e 15 NPCs.
+
+**Achado para o autor (equilíbrio, não é erro da População):** nos 10 anos, o teste dá **FALHOU no dia 400** ("o preço do Pão foi a 2,7"; o limite do teste de 1 ano é 2,6). O dia 384 é o fim de um **Inverno rigoroso**: a vila sai dele com pouco Grão (9), e na Primavera o Pão cai de 83 para 31 em 16 dias. Ninguém passa fome. É a pergunta da ficha do Clima (o rigoroso passa raspando); fica para uma rodada de equilíbrio.
+

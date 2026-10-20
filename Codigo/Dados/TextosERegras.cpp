@@ -334,7 +334,9 @@ void lerRegrasDaEconomia(const Json& documento, RegrasDaEconomia& economia, List
     economia.ordemDoDia.clear();
     for (const Json& passo : *ordem) {
         const std::string nomeDoPasso = passo.is_string() ? passo.get<std::string>() : passo.dump();
-        if (nomeDoPasso == "clima") {
+        if (nomeDoPasso == "populacao") {
+            economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Populacao);
+        } else if (nomeDoPasso == "clima") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Clima);
         } else if (nomeDoPasso == "manutencao") {
             economia.ordemDoDia.push_back(PassoDaOrdemDoDia::Manutencao);
@@ -476,6 +478,44 @@ RegrasDoJogo lerArquivoDeRegras(const std::string& textoDoArquivo, ListaDeProble
         };
         for (const auto& [nomeDoCampo, valor] : campos) {
             lerInteiroObrigatorio(*trabalho, nomeDoCampo, *valor, "\"trabalho\"", listaDeProblemas);
+        }
+    }
+    // Fase A3 (ficha da População): o bloco "populacao", opcional.
+    if (const auto populacao = documento.find("populacao"); populacao != documento.end() && populacao->is_object()) {
+        RegrasDaPopulacao& regrasDaPopulacao = regras.populacao;
+        const std::pair<const char*, int*> campos[] = {
+            {"fator_de_escala", &regrasDaPopulacao.fatorDeEscala},
+            {"idade_adulto", &regrasDaPopulacao.idadeAdulto},
+            {"idade_velho", &regrasDaPopulacao.idadeVelho},
+            {"chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_acima_de_20", &regrasDaPopulacao.chanceDeMorrerDeVelhicePorAnoAcimaDe20EmPorcento},
+            {"natalidade_por_estacao_em_por_mil", &regrasDaPopulacao.natalidadePorEstacaoEmPorMil},
+            {"mortalidade_por_estacao_em_por_mil", &regrasDaPopulacao.mortalidadePorEstacaoEmPorMil},
+            {"mortalidade_sem_lenha_em_porcento", &regrasDaPopulacao.mortalidadeSemLenhaEmPorcento},
+            {"velhice_no_inverno_rigoroso_em_porcento", &regrasDaPopulacao.velhiceNoInvernoRigorosoEmPorcento},
+            {"fome_mata_por_dia_em_porcento_de_quem_ficou_sem_comida", &regrasDaPopulacao.fomeMataPorDiaEmPorcentoDeQuemFicouSemComida},
+            {"dias_de_fome_antes_de_matar", &regrasDaPopulacao.diasDeFomeAntesDeMatar},
+        };
+        for (const auto& [nomeDoCampo, valor] : campos) {
+            lerInteiroObrigatorio(*populacao, nomeDoCampo, *valor, "\"populacao\"", listaDeProblemas);
+        }
+        if (const auto capacidades = populacao->find("capacidade_por_nivel_da_cidade"); capacidades != populacao->end() && capacidades->is_array()) {
+            regrasDaPopulacao.capacidadePorNivelDaCidade.clear();
+            for (const Json& capacidade : *capacidades) {
+                regrasDaPopulacao.capacidadePorNivelDaCidade.push_back(capacidade.is_number_integer() ? capacidade.get<int>() : 0);
+            }
+        }
+        if (const auto migracao = populacao->find("migracao"); migracao != populacao->end() && migracao->is_object()) {
+            lerInteiroObrigatorio(*migracao, "chega_com_felicidade_minima", regrasDaPopulacao.migranteChegaComFelicidadeMinima, "\"migracao\"", listaDeProblemas);
+            lerInteiroObrigatorio(*migracao, "sai_com_felicidade_abaixo_de", regrasDaPopulacao.migranteSaiComFelicidadeAbaixoDe, "\"migracao\"", listaDeProblemas);
+            lerInteiroObrigatorio(*migracao, "sai_com_desemprego_em_porcento", regrasDaPopulacao.migranteSaiComDesempregoEmPorcento, "\"migracao\"", listaDeProblemas);
+        }
+        if (const auto nomes = populacao->find("nomes_dos_novos_npcs"); nomes != populacao->end() && nomes->is_array() && !nomes->empty()) {
+            regrasDaPopulacao.nomesDosNovosNpcs.clear();
+            for (const Json& nome : *nomes) {
+                if (nome.is_string()) {
+                    regrasDaPopulacao.nomesDosNovosNpcs.push_back(nome.get<std::string>());
+                }
+            }
         }
     }
     return regras;

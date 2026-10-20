@@ -5,6 +5,7 @@
 //   regras.json       -> os números das rodadas (salários, margem, estações).
 
 #include <array>
+#include "Vila/RegrasDaPopulacao.h"
 #include "Vila/RegrasDoTrabalho.h"
 #include <map>
 #include <string>
@@ -59,6 +60,8 @@ struct RegrasDoJogo {
     RegrasDaFelicidade felicidade;
     // Fase A2 (ficha do Trabalho e Propriedade): o bloco "trabalho".
     RegrasDoTrabalho trabalho;
+    // Fase A3 (ficha da População): o bloco "populacao".
+    RegrasDaPopulacao populacao;
 };
 
 TabelaDeTextos lerArquivoDeTextos(const std::string& textoDoArquivo, ListaDeProblemasDosDados& listaDeProblemas);

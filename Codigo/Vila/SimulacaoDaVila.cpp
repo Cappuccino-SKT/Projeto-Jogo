@@ -9,7 +9,8 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     : dados(dadosDoJogo), relogio(RelogioDoMundo::criarParaPartidaNova(regrasDoTempo)), vila(dadosDoJogo.vilaInicial), mapa(dadosDoJogo.mapaDaVila), ticksPorHoraDeJogo(regrasDoTempo.ticksPorHoraDeJogo),
       sorteioDosNpcs(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDosNpcs),
       sorteioDosEventos(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDosEventos),
-      sorteioDoClima(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDoClima)
+      sorteioDoClima(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDoClima),
+      sorteioDaPopulacao(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDaPopulacao)
 {
     // O clima do dia 1 (ficha do Clima, regra 4.1, passo 1): não sorteia.
     clima.climaDeHoje = dados.regrasDoClima.climaDoPrimeiroDia;
@@ -26,6 +27,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     ContextoDaRotina rotinaSemProducao{registroDasEntidades, mapa, vila, dados.regras.vidaDosNpcs, ticksPorHoraDeJogo,
                                        sorteioDosNpcs};
     npcsDaVila = criarOsNpcsDaVila(rotinaSemProducao, relogio);
+    populacao.proximoNumeroDeNpc = static_cast<int>(npcsDaVila.size());  // os números nunca se repetem
     ContextoDaProducao producao = contextoDaProducao();
     avisosAoMontar = montarAProducaoDaVila(producao, npcsDaVila);
 }
@@ -41,7 +43,7 @@ ContextoDaRotina SimulacaoDaVila::contextoDaRotina()
 ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
 {
     return ContextoDaProducao{registroDasEntidades, dados,    inventario, dinheiro,          producaoDasConstrucoes,
-                              consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, clima, sorteioDoClima, trabalho,
+                              consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, clima, sorteioDoClima, trabalho, populacao, sorteioDaPopulacao, npcsDaVila,
                               ticksPorHoraDeJogo};
 }
 

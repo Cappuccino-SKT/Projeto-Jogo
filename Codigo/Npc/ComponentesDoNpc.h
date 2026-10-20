@@ -75,6 +75,11 @@ struct CasaETrabalhoDoNpc {
     int saiuPorAtrasoDe = -1;
 };
 
+// Fase A3 (ficha da População): a idade em anos (adulto aos 4, velho aos 21).
+struct IdadeDoNpc {
+    int anos = 10;
+};
+
 struct DecisaoDoNpc {
     AcaoDoNpc acaoAtual = AcaoDoNpc::Nenhuma;
     int indiceDaConstrucaoOndeEsta = -1;     // -1 = na rua (visível)

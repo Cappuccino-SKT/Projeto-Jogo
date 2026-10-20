@@ -1,5 +1,6 @@
 #include "Economia/ConsumoESalarios.h"
 
+#include "Vila/Populacao.h"
 #include "Vila/Trabalho.h"
 #include "Clima/ClimaDaVila.h"
 #include <algorithm>
@@ -433,6 +434,11 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
     contexto.trabalho.trocasDeHoje = 0;
     for (const PassoDaOrdemDoDia passo : contexto.dados.regras.economia.ordemDoDia) {
         switch (passo) {
+        case PassoDaOrdemDoDia::Populacao: {
+            const std::vector<std::string> linhasDaPopulacao = rodarAPopulacaoDoDia(contexto, relogio);
+            linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaPopulacao.begin(), linhasDaPopulacao.end());
+            break;
+        }
         case PassoDaOrdemDoDia::Clima: {
             const std::vector<std::string> linhasDoClima = rodarOClimaDoDia(contexto, relogio);
             linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDoClima.begin(), linhasDoClima.end());

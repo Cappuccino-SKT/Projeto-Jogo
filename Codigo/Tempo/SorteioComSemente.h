@@ -10,6 +10,8 @@
 #include <cstdint>
 
 constexpr uint64_t sequenciaDoSorteioDosNpcs = 1;
+// Fase A3 (ficha da População): a velhice e os migrantes sorteiam com a sequência 4.
+constexpr uint64_t sequenciaDoSorteioDaPopulacao = 4;
 
 class SorteioComSemente {
 public:

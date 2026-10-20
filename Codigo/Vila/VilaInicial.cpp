@@ -267,6 +267,15 @@ void lerNpcs(const Json& documento, const CatalogosParaAVila& catalogos, VilaDoJ
             }
         }
 
+        // A idade (fase A3, PO1-1). Sem o campo, 10.
+        if (const auto idade = objeto.find("idade"); idade != objeto.end()) {
+            if (!idade->is_number_integer() || idade->get<int>() < 0 || idade->get<int>() > 100) {
+                listaDeProblemas.anotarErro(nomeDoArquivoDaVila, 0, nome + ": \"idade\" precisa ser um inteiro de 0 a 100");
+            } else {
+                npc.idade = idade->get<int>();
+            }
+        }
+
         // As habilidades (FL6-6). Sem o campo, ficam em 50.
         const auto habilidades = objeto.find("habilidades");
         if (habilidades != objeto.end()) {
