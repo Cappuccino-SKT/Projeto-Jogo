@@ -27,6 +27,7 @@
 #include "Producao/OrdemDoJogador.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "Tempo/SorteioComSemente.h"
+#include "Vila/RegrasDoTrabalho.h"
 
 // O estado do marco 7 que mora em outros arquivos (Economia/ e Eventos/).
 struct MercadoLocalDaVila;
@@ -76,6 +77,10 @@ struct ProducaoDaConstrucao {
 
     int numeroDoGerente = -1;                     // ficha da Construção, regra 4.2
     int diasDeSalarioAtrasado = 0;                // ficha da Economia, regra 4.2
+    // Fase A2 (ficha do Trabalho e Propriedade).
+    int diasSemEmpregados = 0;                    // regra 4.4: 32 dias, e a do jogador vai a leilão
+    bool modoAutomatico = false;                  // regra 4.3: a do jogador segue a IA da Cidade
+    int64_t salarioDevidoEmDecimos = 0;           // regra 4.4, passo 0: os salários não pagos
 
     // O campo dos Braçais (regra 4.1): os tiles livres da área do recurso da
     // receita atual, de cima para baixo e da esquerda para a direita. Vazio =
@@ -109,6 +114,8 @@ struct ContextoDaProducao {
     // Fase A1 (ficha do Clima): o clima de hoje e o sorteio dele (sequência 3).
     EstadoDoClima& clima;
     SorteioComSemente& sorteioDoClima;
+    // Fase A2 (ficha do Trabalho): o leilão e as contas do dia.
+    EstadoDoTrabalho& trabalho;
     int ticksPorHoraDeJogo = 800;
 };
 

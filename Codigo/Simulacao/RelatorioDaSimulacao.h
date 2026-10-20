@@ -45,6 +45,10 @@ struct LinhaDoRelatorio {
     std::string clima = "limpo";
     int lenhaDoDia = 0;
     int diasEmDeficitDeLenha = 0;
+    // Fase A2 (ficha do Trabalho): as contratações e as trocas do dia, e a construção em leilão.
+    int contratacoes = 0;
+    int trocas = 0;
+    std::string leilao;
 
     bool operator==(const LinhaDoRelatorio&) const = default;
 };

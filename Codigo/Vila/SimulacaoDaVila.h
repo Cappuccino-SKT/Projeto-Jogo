@@ -86,6 +86,7 @@ public:
     FelicidadeDaClasse felicidade;
     EstadoDosEventos eventos;
     EstadoDoClima clima;  // fase A1 (ficha do Clima)
+    EstadoDoTrabalho trabalho;  // fase A2 (ficha do Trabalho): o leilão
     DecisoesDoJogador decisoes;
     ObrasDaVila obras;
     FilaDePedidosDoJogador pedidos;

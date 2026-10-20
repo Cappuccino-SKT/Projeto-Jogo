@@ -462,5 +462,21 @@ RegrasDoJogo lerArquivoDeRegras(const std::string& textoDoArquivo, ListaDeProble
     lerRegrasDasObras(documento, regras.construcoes, listaDeProblemas);
     lerRegrasDaEconomia(documento, regras.economia, listaDeProblemas);
     lerRegrasDaFelicidade(documento, regras.felicidade, listaDeProblemas);
+    // Fase A2 (ficha do Trabalho e Propriedade): o bloco "trabalho", opcional (sem ele, os valores da ficha).
+    if (const auto trabalho = documento.find("trabalho"); trabalho != documento.end() && trabalho->is_object()) {
+        RegrasDoTrabalho& regrasDoTrabalho = regras.trabalho;
+        const std::pair<const char*, int*> campos[] = {
+            {"contratar_se_o_banco_tem_dias_de_salario", &regrasDoTrabalho.contratarSeOBancoTemDiasDeSalario},
+            {"diferenca_minima_para_trocar", &regrasDoTrabalho.diferencaMinimaParaTrocar},
+            {"valor_da_construcao_em_porcento_da_obra", &regrasDoTrabalho.valorDaConstrucaoEmPorcentoDaObra},
+            {"cidade_compra_de_volta_em_porcento", &regrasDoTrabalho.cidadeCompraDeVoltaEmPorcento},
+            {"estacoes_parada_para_o_leilao", &regrasDoTrabalho.estacoesParadaParaOLeilao},
+            {"dias_de_leilao", &regrasDoTrabalho.diasDeLeilao},
+            {"lance_minimo_em_porcento_do_valor", &regrasDoTrabalho.lanceMinimoEmPorcentoDoValor},
+        };
+        for (const auto& [nomeDoCampo, valor] : campos) {
+            lerInteiroObrigatorio(*trabalho, nomeDoCampo, *valor, "\"trabalho\"", listaDeProblemas);
+        }
+    }
     return regras;
 }

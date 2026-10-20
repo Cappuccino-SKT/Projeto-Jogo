@@ -41,7 +41,7 @@ ContextoDaRotina SimulacaoDaVila::contextoDaRotina()
 ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
 {
     return ContextoDaProducao{registroDasEntidades, dados,    inventario, dinheiro,          producaoDasConstrucoes,
-                              consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, clima, sorteioDoClima,
+                              consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, clima, sorteioDoClima, trabalho,
                               ticksPorHoraDeJogo};
 }
 

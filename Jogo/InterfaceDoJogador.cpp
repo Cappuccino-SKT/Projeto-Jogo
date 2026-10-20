@@ -1,5 +1,6 @@
 #include "InterfaceDoJogador.h"
 
+#include "Vila/Trabalho.h"
 #include <algorithm>
 #include <cstdio>
 
@@ -642,6 +643,43 @@ void InterfaceDoJogador::desenharOPainelDaConstrucao(SimulacaoDaVila& simulacao,
         for (const ObraNaFila& obra : simulacao.obras.fila) {
             if (obra.indiceDaConstrucao == indice) {
                 ImGui::Text("Obra na fila: faltam %.1f h%s", static_cast<double>(obra.centesimosDeHoraQueFaltam) / 100.0, obra.esperaMaterial ? " (espera material)" : "");
+            }
+        }
+
+        // Fase A2 (ficha do Trabalho e Propriedade, regras 4.3 e 4.4): comprar,
+        // vender, o modo automático e o leilão.
+        const RegrasDoTrabalho& regrasDoTrabalho = dados.regras.trabalho;
+        const int64_t valorDaConstrucao = calcularValorDaConstrucao(contexto, indice);
+        const bool estaEmLeilao = simulacao.trabalho.leilao.indiceDaConstrucao == indice;
+        if (!construcao.donoEhOJogador && producao.ehDeProducao && !construcao.emObra) {
+            ImGui::BeginDisabled(simulacao.dinheiro.dinheiroDoJogador < valorDaConstrucao || estaEmLeilao);
+            if (ImGui::Button(("Comprar da Cidade por " + dinheiro(valorDaConstrucao)).c_str())) {
+                simulacao.pedidos.acrescentar(PedidoComprarConstrucao{indice});
+            }
+            ImGui::EndDisabled();
+        }
+        if (construcao.donoEhOJogador && !construcao.emObra) {
+            bool modoAutomatico = producao.modoAutomatico;
+            if (ImGui::Checkbox("Modo automático (a IA da Cidade escolhe a receita)", &modoAutomatico)) {
+                simulacao.pedidos.acrescentar(PedidoTrocarOModoAutomatico{indice, modoAutomatico});
+            }
+            const int64_t precoDeVenda = valorDaConstrucao * regrasDoTrabalho.cidadeCompraDeVoltaEmPorcento / 100;
+            ImGui::BeginDisabled(estaEmLeilao);
+            if (ImGui::Button(("Vender para a Cidade por " + dinheiro(precoDeVenda)).c_str())) {
+                simulacao.pedidos.acrescentar(PedidoVenderConstrucao{indice});
+            }
+            ImGui::EndDisabled();
+            if (producao.diasSemEmpregados > 0) {
+                ImGui::TextColored(corDoAviso, "Sem empregados há %d dias (leilão com %d).", producao.diasSemEmpregados,
+                                   regrasDoTrabalho.estacoesParadaParaOLeilao * simulacao.relogio.diasPorEstacao());
+            }
+        }
+        if (estaEmLeilao) {
+            const LeilaoDeConstrucao& leilao = simulacao.trabalho.leilao;
+            const int64_t lanceMinimo = std::max(valorDaConstrucao * regrasDoTrabalho.lanceMinimoEmPorcentoDoValor / 100, leilao.maiorLanceEmDecimos + 1);
+            ImGui::TextColored(corDoAviso, "Em leilão: faltam %d dias; maior lance %s.", leilao.diasQueFaltam, dinheiro(leilao.maiorLanceEmDecimos).c_str());
+            if (ImGui::Button(("Dar o lance de " + dinheiro(lanceMinimo)).c_str())) {
+                simulacao.pedidos.acrescentar(PedidoDarLance{lanceMinimo});
             }
         }
 

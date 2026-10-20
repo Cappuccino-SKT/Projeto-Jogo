@@ -100,6 +100,9 @@ json escreverAProducao(const SimulacaoDaVila& simulacao)
                              {"emObra", producao.emObra},
                              {"gerente", producao.numeroDoGerente},
                              {"diasDeSalarioAtrasado", producao.diasDeSalarioAtrasado},
+                             {"diasSemEmpregados", producao.diasSemEmpregados},
+                             {"modoAutomatico", producao.modoAutomatico},
+                             {"salarioDevido", producao.salarioDevidoEmDecimos},
                              {"areaDoCampo", producao.areaDoCampoNoMapa},
                              {"tilesDoCampo", tilesDoCampo},
                              {"producaoDeHoje", producaoDeHoje}});
@@ -238,6 +241,7 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
                                   {"numero", identidade.numeroDoNpc},
                                   {"casa", casaETrabalho.indiceDaCasa},
                                   {"trabalho", casaETrabalho.indiceDoTrabalho},
+                                  {"saiuPorAtrasoDe", casaETrabalho.saiuPorAtrasoDe},
                                   {"lugar", escreverOLugar(posicao.lugarAtual)},
                                   {"olhar", static_cast<int>(posicao.direcaoDoOlhar)},
                                   {"acao", static_cast<int>(decisao.acaoAtual)},
@@ -306,6 +310,10 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["sorteios"] = json{{"npcs", escreverOSorteio(Acesso::sorteioDosNpcs(simulacao))}, {"eventos", escreverOSorteio(Acesso::sorteioDosEventos(simulacao))},
                               {"clima", escreverOSorteio(Acesso::sorteioDoClima(simulacao))}};
     // Fase A1 (ficha do Clima): o clima de hoje, a lenha devida e os dias em déficit.
+    arvore["leilao"] = json{{"construcao", simulacao.trabalho.leilao.indiceDaConstrucao},
+                            {"diasQueFaltam", simulacao.trabalho.leilao.diasQueFaltam},
+                            {"maiorLance", simulacao.trabalho.leilao.maiorLanceEmDecimos},
+                            {"lanceEhDoJogador", simulacao.trabalho.leilao.lanceEhDoJogador}};
     arvore["clima"] = json{{"climaDeHoje", nomeDoClimaNoArquivo(simulacao.clima.climaDeHoje)},
                            {"climaDeOntem", nomeDoClimaNoArquivo(simulacao.clima.climaDeOntem)},
                            {"lenhaDevidaEmCentesimos", simulacao.clima.lenhaDevidaEmCentesimos},
