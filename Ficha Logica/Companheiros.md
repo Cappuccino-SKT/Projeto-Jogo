@@ -18,7 +18,7 @@ Três partes:
 
 Documento do sistema: [[Sistema de Companheiros e Diálogo/Descrição|Companheiros, Relações familiares e Diálogo]].
 
-**Esta versão** traz também o que os outros sistemas esperavam: a **Personalidade** (Coragem, Ganância, Agressividade, Sociabilidade, Lealdade) e o **Carisma** para os Importantes e os Controlados (CP1-1). O **Renome** fica em 0 até o Objetivo e Progressão (fase E) (CP1-2).
+**Esta versão** traz também o que os outros sistemas esperavam: a **Personalidade** (Coragem, Ganância, Agressividade, Sociabilidade, Lealdade) e o **Carisma** para os Importantes e os Controlados (CP1-1). O **Renome** vem do [[Ficha Logica/Objetivo|Objetivo e Progressão]] (4.1); sem ele (o teste da fatia), 0 (CP1-2).
 
 ## 2. Dados
 
