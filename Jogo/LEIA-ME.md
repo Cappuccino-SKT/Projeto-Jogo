@@ -550,3 +550,19 @@ O que entrou ([[Ficha Logica/Cura|ficha da Cura]]):
 **Rodada EQ1 (2026-10-20, modo automático, sugestão A):** o teste de 1 ano só falha pelo Pão caro se ele ficar acima de 2,6 por **8 dias seguidos** (`diasSeguidosComOPaoCaroQueFalham`); abaixo de 1,2, a fome e o Banco continuam como antes. Junto com a **sugestão B** (o estoque-alvo do Pão no `regras.json` passou de 5 para **7 dias**), porque só a A ainda deixava as sementes 5 e 8 falharem (Pão a 3,0). **Resultado: 9 das 10 sementes passam.** A semente 10 (Seca, Epidemia e Ratos no celeiro juntos) e os 10 anos da semente 1 falham pelo Pão a 2,8 por mais de 8 dias, **sem fome**: depois da crise, o estoque do Pão sobe só 1 por dia, com Grão e Água de sobra. Isso está na rodada EQ2.
 
 **Rodada EQ2 (2026-10-20, opção A do autor):** a Padaria começa no **nível 2** no `vila_inicial.json` (3 vagas; a Cidade põe um desempregado nela) e o estoque-alvo do Pão **voltou para 5 dias** (com 7, o Pão ficava barato e o Banco caía abaixo de 250 no dia 14). A capacidade da vila passou para 1100 de matéria-prima e 1000 de bem de consumo. **Verificado pelo assistente:** `testes_do_codigo` passa (436 conferências); **as 10 sementes passam**; os 10 anos da semente 1 passam; o salvar e carregar no dia 30 (semente 3) dá o relatório igual.
+
+### Marco B1: a Viagem (2026-10-20, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Viagem|ficha da Viagem]]; os ajustes estão na parte 10.8 dela):
+
+- **O Mapa Mundial:** `data/mundo/mapas.json` (os 48 mapas da malha 8 × 6, com região, bioma, terreno e infraestrutura) e `data/mundo/cidades_iniciais.json` (as 22 cidades do documento do Mundo; a vila da fatia é a Vila Livre do Centro, em (4,3)). O estado do território sai das cidades vizinhas (Facção, 4.1): 22 mapas com cidade, 16 de território, 6 em disputa e 4 sem dono, como no documento. **Provisório, para o autor conferir:** o terreno e a infraestrutura de cada mapa saíram do bioma da região (montanha e colinas na Guerreira, floresta na Arcana, planície na Autoritária, colinas na Religiosa, árido na Tecnocrata, litoral na Escravista) e do estado (estrada nos mapas com cidade, trilha no território, selvagem no resto).
+- **`data/viagem.json`:** os números da ficha.
+- **A viagem do grupo do jogador:** a rota mais rápida (Dijkstra, desempate pelo menor número), o tempo de cada trecho (fixo desde a entrada), acampar das 22 h às 6 h, a marcha forçada, 1 Pão por pessoa por dia, os encontros na metade do trecho (bandidos ou mercador viajante) e as 4 escolhas contra os bandidos (subornar, fugir, lutar pelo cálculo rápido, render-se). O grupo sai da vila com os Pães e as moedas do jogador e devolve tudo ao voltar. A vila continua rodando igual enquanto ele viaja.
+- **A névoa** e o **clima por região** (a região da vila usa o clima da vila; as outras sorteiam com a sequência 9).
+- **Na janela:** o botão **Mapa Mundial** na barra de cima (a malha com a névoa, o destino, os Pães e as moedas para levar, a marcha forçada e o botão Partir) e a janela **Encontro na estrada**, que pausa o jogo.
+- **Save versão 5** (a seção `viagem` e os sorteios 5 e 9).
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (467 conferências: os 4 exemplos da parte 5, a caravana no inverno, a rota e o desempate, o encontro, o suborno, a fuga de 54%, as perdas, a partida e a volta à vila, o encontro na metade com o jogo pausado, o save no meio do trecho, o acampamento até as 7 h 21). **As 10 sementes passam**, e o salvar e carregar no dia 30 dá o relatório igual.
+
+**Para o autor testar na janela:** abrir o Mapa Mundial, escolher (5,3), levar 3 Pães (comprados na loja) e partir; ver o grupo chegar, voltar para a vila e conferir que os Pães e as moedas voltaram.
+

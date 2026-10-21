@@ -88,6 +88,16 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "clima.json", problemas)) {
         dados.regrasDoClima = lerArquivoDoClima(*texto, problemas);
     }
+
+    // 12. O Mapa Mundial e a Viagem (fase B1, fichas do Mundo e da Viagem).
+    const auto textoDosMapas = lerArquivoInteiro(pastaDosDados, "mundo/mapas.json", problemas);
+    const auto textoDasCidades = lerArquivoInteiro(pastaDosDados, "mundo/cidades_iniciais.json", problemas);
+    if (textoDosMapas && textoDasCidades) {
+        dados.mundo = lerArquivosDoMundo(*textoDosMapas, *textoDasCidades, problemas);
+    }
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "viagem.json", problemas)) {
+        dados.regrasDaViagem = lerArquivoDaViagem(*texto, problemas);
+    }
     return dados;
 }
 

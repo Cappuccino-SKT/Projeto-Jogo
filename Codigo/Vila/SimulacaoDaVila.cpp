@@ -10,12 +10,15 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
       sorteioDosNpcs(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDosNpcs),
       sorteioDosEventos(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDosEventos),
       sorteioDoClima(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDoClima),
-      sorteioDaPopulacao(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDaPopulacao)
+      sorteioDaPopulacao(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDaPopulacao),
+      sorteioDaViagem(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDaViagem),
+      sorteioDoClimaDasOutrasRegioes(sementeNoLugarDaDoArquivo.value_or(dadosDoJogo.vilaInicial.sementeDaPartida), sequenciaDoSorteioDoClimaDasOutrasRegioes)
 {
     // O clima do dia 1 (ficha do Clima, regra 4.1, passo 1): não sorteia.
     clima.climaDeHoje = dados.regrasDoClima.climaDoPrimeiroDia;
     clima.climaDeOntem = clima.climaDeHoje;
     guardarODiaDeHojeNoClima(clima, relogio);
+    montarAViagemDaPartidaNova(viagem, dados, clima);
     regrasDoMovimento.velocidadeDeAndarEmMilesimosPorTick =
         converterVelocidadeParaMilesimosPorTick(dados.regras.velocidadeDeAndarEmTilesPorHora, ticksPorHoraDeJogo);
     regrasDoMovimento.caminhosCalculadosPorTick = dados.regras.caminhosCalculadosPorTick;
@@ -42,9 +45,14 @@ ContextoDaRotina SimulacaoDaVila::contextoDaRotina()
 
 ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
 {
-    return ContextoDaProducao{registroDasEntidades, dados,    inventario, dinheiro,          producaoDasConstrucoes,
-                              consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, clima, sorteioDoClima, trabalho, populacao, sorteioDaPopulacao, npcsDaVila,
-                              ticksPorHoraDeJogo};
+    ContextoDaProducao contexto{registroDasEntidades, dados,    inventario, dinheiro,          producaoDasConstrucoes,
+                                consumoMedido,        mercadoLocal, felicidade, eventos, sorteioDosEventos, vila, mapa, decisoes, obras, clima, sorteioDoClima, trabalho, populacao, sorteioDaPopulacao, npcsDaVila,
+                                ticksPorHoraDeJogo};
+    contexto.viagem = &viagem;
+    contexto.sorteioDaViagem = &sorteioDaViagem;
+    contexto.sorteioDoClimaDasOutrasRegioes = &sorteioDoClimaDasOutrasRegioes;
+    contexto.relogio = &relogio;
+    return contexto;
 }
 
 void SimulacaoDaVila::criarNpcsSoParaMedirODesempenho(int quantidade)
@@ -117,6 +125,10 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         MEDIR_ESTE_TRECHO("ordem do dia");
         const std::vector<std::string> linhasDaOrdemDoDia = rodarAOrdemDoDia(producao, relogio);
         linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaOrdemDoDia.begin(), linhasDaOrdemDoDia.end());
+        // A viagem (fase B1): o clima das outras regiões e a comida do grupo. Usa os
+        // seus próprios sorteios, então a vila não muda.
+        const std::vector<std::string> linhasDaViagem = rodarAViagemDoDia(producao);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaViagem.begin(), linhasDaViagem.end());
         linhasParaOConsole.push_back(montarResumoDoDia(producao, diaAntesDoTick));
         linhaDoRelatorioDoUltimoDia = montarLinhaDoRelatorio(producao, diaAntesDoTick, estacaoAntesDoTick, diaDaEstacaoAntesDoTick);
         dinheiro.consumoNaoPagoHoje = 0;
@@ -124,6 +136,18 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         dinheiro.gastoDoJogadorComInsumosHoje = 0;
         for (ProducaoDaConstrucao& producaoDaConstrucao : producaoDasConstrucoes) {
             producaoDaConstrucao.producaoDeHojePorItem.clear();
+        }
+    }
+
+    // O grupo do jogador em viagem (fase B1): o encontro pausa o jogo; a chegada volta a 1x.
+    {
+        const ResultadoDoTickDaViagem tickDaViagem = avancarAViagemUmTick(producao, relogio);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), tickDaViagem.linhasParaOConsole.begin(), tickDaViagem.linhasParaOConsole.end());
+        if (tickDaViagem.encontroComecou || tickDaViagem.chegouAoDestino) {
+            relogio.definirVelocidadeDoJogo(1);
+        }
+        if (tickDaViagem.encontroComecou) {
+            relogio.alternarPausa();
         }
     }
 

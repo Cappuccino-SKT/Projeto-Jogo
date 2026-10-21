@@ -12,6 +12,7 @@
 
 #include "Producao/OrdemDoJogador.h"
 #include "Producao/ProducaoDaVila.h"
+#include "Viagem/Viagem.h"
 
 struct PedidoTrocarAFilaDeOrdens {
     int indiceDaConstrucao = 0;
@@ -63,9 +64,21 @@ struct PedidoDarLance {
     int64_t lanceEmDecimos = 0;
 };
 
+// Fase B1 (ficha da Viagem, regras 4.1 e 4.6).
+struct PedidoPartirEmViagem {
+    int destino = 0;  // o número do mapa
+    int paesLevados = 0;
+    int64_t dinheiroLevadoEmDecimos = 0;
+    bool marchaForcada = false;
+};
+struct PedidoResolverEncontro {
+    EscolhaNoEncontro escolha = EscolhaNoEncontro::Render;
+};
+
 using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
                                      PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
-                                     PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance>;
+                                     PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance,
+                                     PedidoPartirEmViagem, PedidoResolverEncontro>;
 
 class FilaDePedidosDoJogador {
 public:

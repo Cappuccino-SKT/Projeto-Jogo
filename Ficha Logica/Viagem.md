@@ -322,3 +322,13 @@ Caravana de 15 pessoas, estrada na planície, inverno no bioma temperado, dia de
 7. **VI1-7:** a vila continua rodando sem tela enquanto o jogador viaja; a ficha nova B1b (Outras cidades, LOD 1 e 2) vem antes do Comércio.
 8. **VI1-8:** um mapa sem arquivo do Tiled só se atravessa pelo Mapa Mundial.
 9. **VI1-9:** um ponto só, `entrada_do_mapa`, para a chegada da viagem e dos migrantes (a População chamava de `entrada_da_vila`).
+
+### 10.8 Ajustes do código (marco B1, 2026-10-20)
+
+1. **O clima das outras regiões sorteia com a sequência 9**, não com a 3. Com um gerador só, o sorteio da vila no dia 2 já seria outro número, e o teste de 1 ano mudaria (a regra 4.8 pedia que não mudasse).
+2. **O `clima_em_porcento` usa os nomes do `clima.json`** (`limpo` no lugar de `sol`; a `nevoa` vale 100). Os biomas frios ficam numa lista nova, `biomas_frios`.
+3. **O Carisma do jogador** é o campo novo `carisma_do_jogador_ate_os_atributos` (40), até o Combate dar os atributos.
+4. **O mercador viajante** só aparece no console; a troca entra com o Comércio (B2).
+5. **A velocidade 8x** não existe no relógio (vai até 4x): o encontro pausa e a chegada volta a 1x, como a regra pede.
+6. **A névoa** marca o mapa em que o grupo entra e os 4 vizinhos (a visão atual da regra 4.10, passo 2).
+

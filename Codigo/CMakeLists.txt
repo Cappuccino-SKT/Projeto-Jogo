@@ -27,6 +27,10 @@ add_library(regras_do_jogo STATIC
     Clima/ClimaDaVila.cpp
     Vila/Trabalho.cpp
     Vila/Populacao.cpp
+    Viagem/MundoDoJogo.cpp
+    Viagem/RegrasDaViagem.cpp
+    Viagem/Viagem.cpp
+    Viagem/ViagemDaVila.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

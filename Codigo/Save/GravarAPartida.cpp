@@ -280,6 +280,50 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
     return lista;
 }
 
+const char* nomeDoEncontro(TipoDeEncontro tipo)
+{
+    return tipo == TipoDeEncontro::Bandidos ? "bandidos" : tipo == TipoDeEncontro::MercadorViajante ? "mercador_viajante" : "nenhum";
+}
+
+// Fase B1 (ficha da Viagem): o grupo do jogador, a névoa e o clima de cada região.
+json escreverAViagem(const SimulacaoDaVila& simulacao)
+{
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    json itens = json::object();
+    for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(grupo.quantidadePorItem.size()); ++numeroDoItem) {
+        itens[textoDoItem(simulacao.dados, numeroDoItem)] = grupo.quantidadePorItem[numeroDoItem];
+    }
+    json nevoa = json::array();
+    for (const RegistroDaNevoa& registro : simulacao.viagem.nevoa) {
+        nevoa.push_back(json::array({registro.diaEmQueFoiVisto, registro.dono, registro.nivelDaCidade, static_cast<int>(registro.estado)}));
+    }
+    json climas = json::array();
+    for (const TipoDeClima clima : simulacao.viagem.climaDeHojePorRegiao) {
+        climas.push_back(nomeDoClimaNoArquivo(clima));
+    }
+    return json{{"grupo", json{{"tipoDeEntidade", grupo.tipoDeEntidade},
+                               {"emTransito", grupo.emTransito},
+                               {"mapaAtual", grupo.mapaAtual},
+                               {"proximoMapa", grupo.proximoMapa},
+                               {"rota", grupo.rota},
+                               {"ticksDoTrecho", grupo.ticksDoTrecho},
+                               {"ticksAndadosNoTrecho", grupo.ticksAndadosNoTrecho},
+                               {"pessoas", grupo.pessoas},
+                               {"montados", grupo.montados},
+                               {"cargaAcimaDoLimite", grupo.cargaAcimaDoLimite},
+                               {"marchaForcada", grupo.marchaForcada},
+                               {"noitesSemDormir", grupo.noitesSemDormir},
+                               {"ticksSemDormir", grupo.ticksSemDormir},
+                               {"encontroMarcado", nomeDoEncontro(grupo.encontroMarcado.tipo)},
+                               {"bandidos", grupo.encontroMarcado.bandidos},
+                               {"encontroAcontecendo", grupo.encontroAcontecendo},
+                               {"ticksParadoNaLuta", grupo.ticksParadoNaLuta},
+                               {"itens", itens},
+                               {"dinheiro", grupo.dinheiroEmDecimos}}},
+                {"nevoa", nevoa},
+                {"climaDeHojePorRegiao", climas}};
+}
+
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
 {
     json lista = json::array();
@@ -312,7 +356,9 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
                              {"velocidadeAntesDaPausa", Acesso::velocidadeAntesDaPausa(simulacao.relogio)}};
     arvore["sorteios"] = json{{"npcs", escreverOSorteio(Acesso::sorteioDosNpcs(simulacao))}, {"eventos", escreverOSorteio(Acesso::sorteioDosEventos(simulacao))},
                               {"clima", escreverOSorteio(Acesso::sorteioDoClima(simulacao))},
-                              {"populacao", escreverOSorteio(Acesso::sorteioDaPopulacao(simulacao))}};
+                              {"populacao", escreverOSorteio(Acesso::sorteioDaPopulacao(simulacao))},
+                              {"viagem", escreverOSorteio(Acesso::sorteioDaViagem(simulacao))},
+                              {"climaDasOutrasRegioes", escreverOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(simulacao))}};
     arvore["populacao"] = json{{"acumulado", simulacao.populacao.acumuladoDeCrescimentoEmPessoas},
                                {"proximoNumeroDeNpc", simulacao.populacao.proximoNumeroDeNpc},
                                {"diasDeFomeNaEstacao", simulacao.populacao.diasDeFomeNaEstacao}};
@@ -337,5 +383,6 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["decisoes"] = escreverAsDecisoes(simulacao);
     arvore["npcs"] = escreverOsNpcs(simulacao);
     arvore["diario"] = escreverOsDiario(simulacao);
+    arvore["viagem"] = escreverAViagem(simulacao);
     return json::to_msgpack(arvore);
 }

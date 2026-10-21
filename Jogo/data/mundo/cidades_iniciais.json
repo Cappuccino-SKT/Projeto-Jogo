@@ -1,0 +1,26 @@
+{
+  "cidades": [
+    {"nome": "Capital Guerreira", "coluna": 1, "linha": 1, "nivel": 4, "faccao": "guerreira"},
+    {"nome": "Cidade mineira", "coluna": 2, "linha": 2, "nivel": 3, "faccao": "guerreira"},
+    {"nome": "Fronteira leste", "coluna": 3, "linha": 2, "nivel": 2, "faccao": "guerreira"},
+    {"nome": "Cidade das torres", "coluna": 8, "linha": 1, "nivel": 4, "faccao": "arcana"},
+    {"nome": "Cidade da floresta", "coluna": 7, "linha": 2, "nivel": 3, "faccao": "arcana"},
+    {"nome": "Posto da Flor Espiritual", "coluna": 6, "linha": 2, "nivel": 2, "faccao": "arcana"},
+    {"nome": "Sede do império", "coluna": 1, "linha": 4, "nivel": 4, "faccao": "autoritaria"},
+    {"nome": "Cidade-fortaleza", "coluna": 2, "linha": 3, "nivel": 3, "faccao": "autoritaria"},
+    {"nome": "Celeiro", "coluna": 1, "linha": 3, "nivel": 2, "faccao": "autoritaria"},
+    {"nome": "Cidade santa", "coluna": 8, "linha": 4, "nivel": 4, "faccao": "religiosa"},
+    {"nome": "Cidade de peregrinação", "coluna": 7, "linha": 3, "nivel": 3, "faccao": "religiosa"},
+    {"nome": "Vilarejo dos vinhedos", "coluna": 7, "linha": 4, "nivel": 2, "faccao": "religiosa"},
+    {"nome": "Cidade das oficinas", "coluna": 2, "linha": 6, "nivel": 4, "faccao": "tecnocrata"},
+    {"nome": "Cidade das minas de cobre", "coluna": 3, "linha": 6, "nivel": 3, "faccao": "tecnocrata"},
+    {"nome": "Entreposto do leste", "coluna": 4, "linha": 5, "nivel": 2, "faccao": "tecnocrata"},
+    {"nome": "Grande porto", "coluna": 8, "linha": 6, "nivel": 4, "faccao": "escravista"},
+    {"nome": "Cidade dos mercados", "coluna": 7, "linha": 5, "nivel": 3, "faccao": "escravista"},
+    {"nome": "Plantação de algodão", "coluna": 6, "linha": 5, "nivel": 2, "faccao": "escravista"},
+    {"nome": "Porto de pesca", "coluna": 6, "linha": 6, "nivel": 2, "faccao": "escravista"},
+    {"nome": "Vila Livre do Norte", "coluna": 4, "linha": 1, "nivel": 2, "faccao": ""},
+    {"nome": "Vila Livre do Centro", "coluna": 4, "linha": 3, "nivel": 1, "faccao": "", "vila_do_jogador": true},
+    {"nome": "Vila Livre do Sul", "coluna": 5, "linha": 6, "nivel": 1, "faccao": ""}
+  ]
+}

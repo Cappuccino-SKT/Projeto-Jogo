@@ -29,6 +29,7 @@
 #include "Tempo/RelogioDoMundo.h"
 #include "Tempo/SorteioComSemente.h"
 #include "Clima/ClimaDaVila.h"
+#include "Viagem/ViagemDaVila.h"
 
 // Os eventos sorteiam com a sequência 2 (ficha dos Eventos): um NPC a mais não muda os eventos.
 constexpr uint64_t sequenciaDoSorteioDosEventos = 2;
@@ -88,6 +89,7 @@ public:
     EstadoDoClima clima;  // fase A1 (ficha do Clima)
     EstadoDoTrabalho trabalho;  // fase A2 (ficha do Trabalho): o leilão
     EstadoDaPopulacao populacao;  // fase A3 (ficha da População)
+    EstadoDaViagem viagem;  // fase B1 (ficha da Viagem)
     DecisoesDoJogador decisoes;
     ObrasDaVila obras;
     FilaDePedidosDoJogador pedidos;
@@ -108,4 +110,6 @@ private:
     SorteioComSemente sorteioDosEventos;
     SorteioComSemente sorteioDoClima;  // a sequência 3
     SorteioComSemente sorteioDaPopulacao;  // a sequência 4
+    SorteioComSemente sorteioDaViagem;  // a sequência 5
+    SorteioComSemente sorteioDoClimaDasOutrasRegioes;  // a sequência 9
 };

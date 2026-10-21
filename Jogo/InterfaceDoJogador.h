@@ -39,6 +39,7 @@ public:
     // O jogador clicou num lote do mapa (-1 limpa a seleção).
     void selecionarOLote(int numeroDoLote) { loteSelecionado = numeroDoLote; }
     void alternarAJanelaDeGestao() { janelaDeGestaoAberta = !janelaDeGestaoAberta; }
+    void alternarOMapaMundial() { mapaMundialAberto = !mapaMundialAberto; }
     // O Esc: fecha o painel, depois a gestão. Devolve false se não havia nada aberto (aí o Esc fecha o jogo).
     bool fecharOQueEstiverAberto();
 
@@ -57,6 +58,9 @@ private:
 
     void desenharAsOrdensDoJogador(SimulacaoDaVila& simulacao, ContextoDaProducao& contexto, int indiceDaConstrucao);
     void desenharOLoteLivre(SimulacaoDaVila& simulacao, ContextoDaProducao& contexto, int numeroDoLote);
+    // Fase B1 (ficha da Viagem): o Mapa Mundial e a janela do encontro.
+    void desenharOMapaMundial(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    void desenharOEncontro(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
 
     bool prontaParaDesenhar = false;
     bool janelaDeGestaoAberta = false;
@@ -71,4 +75,10 @@ private:
     int tipoDaNovaOrdem = 0;
     int itemDaNovaOrdem = 0;
     int quantidadeDaNovaOrdem = 10;
+    // O Mapa Mundial: o destino escolhido e o que o grupo leva.
+    bool mapaMundialAberto = false;
+    int destinoEscolhido = 0;
+    int paesParaLevar = 3;
+    int moedasParaLevar = 50;
+    bool marchaForcadaEscolhida = false;
 };

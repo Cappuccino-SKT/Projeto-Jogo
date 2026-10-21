@@ -34,6 +34,7 @@
 struct MercadoLocalDaVila;
 struct FelicidadeDaClasse;
 struct EstadoDosEventos;
+struct EstadoDaViagem;
 
 // ---------------------------------------------------------------------------
 // Os componentes do NPC (parte 2).
@@ -122,6 +123,11 @@ struct ContextoDaProducao {
     SorteioComSemente& sorteioDaPopulacao;
     std::vector<entt::entity>& npcsDaVila;
     int ticksPorHoraDeJogo = 800;
+    // Fase B1 (ficha da Viagem): o grupo do jogador, os sorteios das sequências 5 e 9 e o relógio.
+    EstadoDaViagem* viagem = nullptr;
+    SorteioComSemente* sorteioDaViagem = nullptr;
+    SorteioComSemente* sorteioDoClimaDasOutrasRegioes = nullptr;
+    const RelogioDoMundo* relogio = nullptr;
 };
 
 // ---------------------------------------------------------------------------

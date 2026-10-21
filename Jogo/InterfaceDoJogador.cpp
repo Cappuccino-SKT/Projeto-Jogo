@@ -15,6 +15,7 @@
 #include "Jogador/ObrasDaVila.h"
 #include "Npc/ComponentesDoNpc.h"
 #include "TextoDaDataDoJogo.h"
+#include "Viagem/ViagemDaVila.h"
 
 namespace {
 
@@ -201,6 +202,10 @@ bool InterfaceDoJogador::fecharOQueEstiverAberto()
         loteSelecionado = -1;
         return true;
     }
+    if (mapaMundialAberto) {
+        mapaMundialAberto = false;
+        return true;
+    }
     if (janelaDeGestaoAberta) {
         janelaDeGestaoAberta = false;
         return true;
@@ -212,6 +217,8 @@ void InterfaceDoJogador::aoTrocarDePartida()
 {
     loteSelecionado = -1;
     janelaDeGestaoAberta = false;
+    mapaMundialAberto = false;
+    destinoEscolhido = 0;
     abaPedida = -1;
     precosDeOntem.clear();
     precosDeHoje.clear();
@@ -259,6 +266,12 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     }
     if (loteSelecionado >= 0) {
         desenharOPainelDaConstrucao(simulacao, contexto, larguraDaTela, alturaDaTela);
+    }
+    if (mapaMundialAberto) {
+        desenharOMapaMundial(simulacao, larguraDaTela, alturaDaTela);
+    }
+    if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
+        desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
     if (desenharPorCima) {
         desenharPorCima();
@@ -328,6 +341,20 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     // 4. A janela de gestão.
     if (ImGui::Button("Gestão (Tab)")) {
         alternarAJanelaDeGestao();
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Mapa Mundial")) {
+        alternarOMapaMundial();
+    }
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    if (grupo.emTransito) {
+        ImGui::SameLine(0, 16);
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("Viajando para %s", simulacao.dados.mundo.nomeDoMapa(grupo.destino()).c_str());
+    } else if (!grupoEstaNaVila(simulacao.viagem, simulacao.dados)) {
+        ImGui::SameLine(0, 16);
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("O grupo está em %s", simulacao.dados.mundo.nomeDoMapa(grupo.mapaAtual).c_str());
     }
     (void)contexto;
     ImGui::End();
@@ -885,4 +912,165 @@ void InterfaceDoJogador::desenharOLoteLivre(SimulacaoDaVila& simulacao, Contexto
         }
         ImGui::PopID();
     }
+}
+
+// ---------------------------------------------------------------------------
+// Fase B1 (ficha da Viagem): o Mapa Mundial, com a névoa, e a janela do encontro.
+
+namespace {
+
+const char* nomeDoEstadoDoTerritorio(EstadoDoTerritorio estado)
+{
+    switch (estado) {
+    case EstadoDoTerritorio::ComCidade: return "com cidade";
+    case EstadoDoTerritorio::Territorio: return "território de facção";
+    case EstadoDoTerritorio::EmDisputa: return "em disputa";
+    case EstadoDoTerritorio::SemDono: return "sem dono";
+    }
+    return "";
+}
+
+ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
+{
+    switch (estado) {
+    case EstadoDoTerritorio::ComCidade: return ImVec4(0.55f, 0.45f, 0.20f, 1.0f);
+    case EstadoDoTerritorio::Territorio: return ImVec4(0.25f, 0.40f, 0.25f, 1.0f);
+    case EstadoDoTerritorio::EmDisputa: return ImVec4(0.55f, 0.25f, 0.20f, 1.0f);
+    case EstadoDoTerritorio::SemDono: return ImVec4(0.30f, 0.30f, 0.35f, 1.0f);
+    }
+    return ImVec4(0.2f, 0.2f, 0.2f, 1.0f);
+}
+
+}  // namespace
+
+void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const MundoDoJogo& mundo = simulacao.dados.mundo;
+    const RegrasDaViagem& regras = simulacao.dados.regrasDaViagem;
+    const EstadoDaViagem& viagem = simulacao.viagem;
+    const EntidadeEmTransito& grupo = viagem.grupoDoJogador;
+    ImGui::SetNextWindowSize(ImVec2(760, 560), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Mapa Mundial", &mapaMundialAberto)) {
+        ImGui::End();
+        return;
+    }
+    if (mundo.mapas.empty()) {
+        ImGui::TextUnformatted("O mundo não foi lido (data/mundo/).");
+        ImGui::End();
+        return;
+    }
+    // A malha: cada mapa é um botão. "?" = nunca visto (a névoa, regra 4.10).
+    const int mapaDoGrupo = grupo.emTransito ? grupo.proximoMapa : grupo.mapaAtual;
+    for (int linha = 1; linha <= mundo.linhas; ++linha) {
+        for (int coluna = 1; coluna <= mundo.colunas; ++coluna) {
+            const int numero = mundo.numeroDoMapaNa(coluna, linha);
+            const RegistroDaNevoa& registro = viagem.nevoa[numero - 1];
+            const bool visto = registro.diaEmQueFoiVisto >= 0;
+            std::string rotulo = visto ? (registro.nivelDaCidade > 0 ? "Cidade " + std::to_string(registro.nivelDaCidade) : mundo.mapa(numero).terreno) : "?";
+            if (numero == mapaDoGrupo) {
+                rotulo = "[Grupo] " + rotulo;
+            }
+            rotulo += "##mapa" + std::to_string(numero);
+            ImGui::PushStyleColor(ImGuiCol_Button, visto ? corDoEstadoDoTerritorio(registro.estado) : ImVec4(0.12f, 0.12f, 0.14f, 1.0f));
+            if (numero == destinoEscolhido) {
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 2.0f);
+            }
+            if (ImGui::Button(rotulo.c_str(), ImVec2(86, 52))) {
+                destinoEscolhido = numero;
+            }
+            if (numero == destinoEscolhido) {
+                ImGui::PopStyleVar();
+            }
+            ImGui::PopStyleColor();
+            if (ImGui::IsItemHovered()) {
+                ImGui::BeginTooltip();
+                ImGui::Text("%s, região %d", mundo.nomeDoMapa(numero).c_str(), mundo.mapa(numero).regiao);
+                if (visto) {
+                    ImGui::Text("%s, %s, %s", mundo.mapa(numero).terreno.c_str(), infraestruturaDoMapa(mundo, numero).c_str(), nomeDoEstadoDoTerritorio(registro.estado));
+                    ImGui::Text("Visto no dia %lld", static_cast<long long>(registro.diaEmQueFoiVisto + 1));
+                } else {
+                    ImGui::TextUnformatted("Nunca visto");
+                }
+                ImGui::EndTooltip();
+            }
+            if (coluna < mundo.colunas) {
+                ImGui::SameLine();
+            }
+        }
+    }
+    ImGui::Separator();
+
+    // O grupo e a partida (regra 4.1).
+    if (grupo.emTransito) {
+        ImGui::Text("Viajando para %s: trecho até %s, %d de %d ticks%s.", mundo.nomeDoMapa(grupo.destino()).c_str(), mundo.nomeDoMapa(grupo.proximoMapa).c_str(),
+                    grupo.ticksAndadosNoTrecho, grupo.ticksDoTrecho, grupo.ticksParadoNaLuta > 0 ? " (parado depois da luta)" : "");
+        ImGui::Text("O grupo leva %s moedas.%s", dinheiro(grupo.dinheiroEmDecimos).c_str(), viagem.grupoSemComida ? " Está sem comida." : "");
+        ImGui::End();
+        return;
+    }
+    ImGui::Text("O grupo está em %s.", mundo.nomeDoMapa(grupo.mapaAtual).c_str());
+    if (destinoEscolhido == 0 || destinoEscolhido == grupo.mapaAtual) {
+        ImGui::TextUnformatted("Clique num mapa para escolher o destino.");
+        ImGui::End();
+        return;
+    }
+    EntidadeEmTransito comoVai = grupo;
+    comoVai.marchaForcada = marchaForcadaEscolhida;
+    const std::vector<int> rota = buscarRotaMaisRapida(grupo.mapaAtual, destinoEscolhido, comoVai, mundo, regras);
+    int ticksDaRota = 0;
+    for (const int mapa : rota) {
+        ticksDaRota += calcularTicksDoTrecho(comoVai, mundo, mapa, 100, regras);
+    }
+    ImGui::Text("Destino: %s, %d mapas, cerca de %d h andando (sem o clima e as noites).", mundo.nomeDoMapa(destinoEscolhido).c_str(), static_cast<int>(rota.size()),
+                ticksDaRota / 800);
+    const bool saiDaVila = grupoEstaNaVila(viagem, simulacao.dados);
+    if (saiDaVila) {
+        ImGui::SetNextItemWidth(120);
+        ImGui::InputInt("Pães para levar", &paesParaLevar);
+        ImGui::SetNextItemWidth(120);
+        ImGui::InputInt("Moedas para levar", &moedasParaLevar);
+        paesParaLevar = std::max(0, paesParaLevar);
+        moedasParaLevar = std::max(0, moedasParaLevar);
+    }
+    ImGui::Checkbox("Marcha forçada (não acampa; mais encontros)", &marchaForcadaEscolhida);
+    if (ImGui::Button("Partir")) {
+        simulacao.pedidos.acrescentar(PedidoPartirEmViagem{destinoEscolhido, saiDaVila ? paesParaLevar : 0,
+                                                           saiDaVila ? static_cast<int64_t>(moedasParaLevar) * 10 : 0, marchaForcadaEscolhida});
+    }
+    ImGui::End();
+}
+
+void InterfaceDoJogador::desenharOEncontro(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const RegrasDaViagem& regras = simulacao.dados.regrasDaViagem;
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    const int bandidos = grupo.encontroMarcado.bandidos;
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.4f), ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::Begin("Encontro na estrada", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse);
+    ImGui::Text("Um bando de %d bandidos cerca o grupo (força %d contra %d).", bandidos, forcaDoBando(bandidos, regras), forcaDoGrupo(grupo, regras));
+    const auto escolher = [&](EscolhaNoEncontro escolha) {
+        simulacao.pedidos.acrescentar(PedidoResolverEncontro{escolha});
+        if (simulacao.relogio.jogoEstaPausado()) {
+            simulacao.relogio.alternarPausa();  // o encontro pausou; a escolha volta a andar
+        }
+    };
+    const int64_t suborno = precoDoSubornoEmDecimos(bandidos, regras.carismaDoJogadorAteOsAtributos, regras);
+    if (grupo.dinheiroEmDecimos >= suborno) {  // só aparece se o grupo tiver o dinheiro
+        if (ImGui::Button(("Subornar (" + dinheiro(suborno) + " moedas)").c_str())) {
+            escolher(EscolhaNoEncontro::Subornar);
+        }
+    }
+    if (ImGui::Button(("Fugir (" + std::to_string(chanceDeFugirEmPorcento(grupo, bandidos, regras)) + "%; se falhar, luta)").c_str())) {
+        escolher(EscolhaNoEncontro::Fugir);
+    }
+    const int forca = forcaDoGrupo(grupo, regras);
+    const int chanceDeVencer = forca * 100 / std::max(1, forca + forcaDoBando(bandidos, regras));
+    if (ImGui::Button(("Lutar (" + std::to_string(chanceDeVencer) + "% de vencer; perder tira " + std::to_string(regras.perdaAoPerderALutaEmPorcento) + "%)").c_str())) {
+        escolher(EscolhaNoEncontro::Lutar);
+    }
+    if (ImGui::Button(("Render-se (perde " + std::to_string(regras.perdaAoSeRenderEmPorcento) + "% do que leva)").c_str())) {
+        escolher(EscolhaNoEncontro::Render);
+    }
+    ImGui::End();
 }

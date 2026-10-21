@@ -151,6 +151,64 @@ void restaurarOClima(SimulacaoDaVila& partida, const json& secao)
     guardarODiaDeHojeNoClima(partida.clima, partida.relogio);
 }
 
+TipoDeEncontro lerOEncontroDoSave(const json& nome)
+{
+    const std::string texto = nome.get<std::string>();
+    if (texto == "bandidos") {
+        return TipoDeEncontro::Bandidos;
+    }
+    if (texto == "mercador_viajante") {
+        return TipoDeEncontro::MercadorViajante;
+    }
+    if (texto != "nenhum") {
+        throw RecusaDoSave("O save tem um encontro que o jogo não conhece (" + texto + ").");
+    }
+    return TipoDeEncontro::Nenhum;
+}
+
+// Fase B1 (ficha da Viagem).
+void restaurarAViagem(SimulacaoDaVila& partida, const json& secao)
+{
+    const DadosDoJogo& dados = partida.dados;
+    const json& entrada = secao.at("grupo");
+    EntidadeEmTransito& grupo = partida.viagem.grupoDoJogador;
+    grupo.tipoDeEntidade = entrada.at("tipoDeEntidade").get<std::string>();
+    grupo.emTransito = entrada.at("emTransito").get<bool>();
+    grupo.mapaAtual = entrada.at("mapaAtual").get<int>();
+    grupo.proximoMapa = entrada.at("proximoMapa").get<int>();
+    grupo.rota = entrada.at("rota").get<std::vector<int>>();
+    grupo.ticksDoTrecho = entrada.at("ticksDoTrecho").get<int>();
+    grupo.ticksAndadosNoTrecho = entrada.at("ticksAndadosNoTrecho").get<int>();
+    grupo.pessoas = entrada.at("pessoas").get<int>();
+    grupo.montados = entrada.at("montados").get<bool>();
+    grupo.cargaAcimaDoLimite = entrada.at("cargaAcimaDoLimite").get<bool>();
+    grupo.marchaForcada = entrada.at("marchaForcada").get<bool>();
+    grupo.noitesSemDormir = entrada.at("noitesSemDormir").get<int>();
+    grupo.ticksSemDormir = entrada.at("ticksSemDormir").get<int>();
+    grupo.encontroMarcado = EncontroMarcado{lerOEncontroDoSave(entrada.at("encontroMarcado")), entrada.at("bandidos").get<int>()};
+    grupo.encontroAcontecendo = entrada.at("encontroAcontecendo").get<bool>();
+    grupo.ticksParadoNaLuta = entrada.at("ticksParadoNaLuta").get<int>();
+    grupo.dinheiroEmDecimos = entrada.at("dinheiro").get<int64_t>();
+    exigirTodosOsItens(dados, entrada.at("itens"), "viagem");
+    grupo.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    paraCadaItem(dados, entrada.at("itens"), [&](int numeroDoItem, const json& quantidade) {
+        grupo.quantidadePorItem[static_cast<std::size_t>(numeroDoItem)] = quantidade.get<int>();
+    });
+    const json& nevoa = secao.at("nevoa");
+    if (nevoa.size() != partida.viagem.nevoa.size()) {
+        throw RecusaDoSave("O save tem uma névoa de " + std::to_string(nevoa.size()) + " mapas, e o mundo tem " + std::to_string(partida.viagem.nevoa.size()) + ".");
+    }
+    for (std::size_t mapa = 0; mapa < nevoa.size(); ++mapa) {
+        partida.viagem.nevoa[mapa] = RegistroDaNevoa{nevoa[mapa].at(0).get<int64_t>(), nevoa[mapa].at(1).get<std::string>(), nevoa[mapa].at(2).get<int>(),
+                                                     static_cast<EstadoDoTerritorio>(nevoa[mapa].at(3).get<int>())};
+    }
+    const json& climas = secao.at("climaDeHojePorRegiao");
+    partida.viagem.climaDeHojePorRegiao.clear();
+    for (const json& clima : climas) {
+        partida.viagem.climaDeHojePorRegiao.push_back(lerOClimaDoSave(clima));
+    }
+}
+
 void restaurarOSorteio(SorteioComSemente& sorteio, const json& dadosDoSorteio)
 {
     Acesso::estadoDoGerador(sorteio) = dadosDoSorteio.at("estado").get<uint64_t>();
@@ -506,6 +564,9 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         partida->populacao.proximoNumeroDeNpc = arvore.at("populacao").at("proximoNumeroDeNpc").get<int>();
         partida->populacao.diasDeFomeNaEstacao = arvore.at("populacao").at("diasDeFomeNaEstacao").get<int>();
         restaurarOClima(*partida, arvore.at("clima"));
+        restaurarOSorteio(Acesso::sorteioDaViagem(*partida), arvore.at("sorteios").at("viagem"));
+        restaurarOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(*partida), arvore.at("sorteios").at("climaDasOutrasRegioes"));
+        restaurarAViagem(*partida, arvore.at("viagem"));
         {
             const json& leilao = arvore.at("leilao");
             partida->trabalho.leilao = LeilaoDeConstrucao{leilao.at("construcao").get<int>(), leilao.at("diasQueFaltam").get<int>(),

@@ -3,6 +3,7 @@
 #include "Vila/Trabalho.h"
 #include "Jogador/DecisoesDoJogador.h"
 #include "Jogador/ObrasDaVila.h"
+#include "Viagem/ViagemDaVila.h"
 
 std::vector<PedidoDoJogador> FilaDePedidosDoJogador::tomarTodos()
 {
@@ -92,6 +93,20 @@ std::string aplicarUmPedido(ContextoDaProducao& contexto, const PedidoDoJogador&
     }
     if (const auto* lance = std::get_if<PedidoDarLance>(&pedido)) {
         return darLanceNoLeilao(contexto, lance->lanceEmDecimos);
+    }
+    if (const auto* partir = std::get_if<PedidoPartirEmViagem>(&pedido)) {
+        if (contexto.viagem == nullptr || contexto.relogio == nullptr) {
+            return "a viagem não está montada";
+        }
+        const std::string motivo = partirEmViagem(contexto, *contexto.relogio, partir->destino, partir->paesLevados, partir->dinheiroLevadoEmDecimos,
+                                                  partir->marchaForcada);
+        if (motivo.empty()) {
+            linhas.push_back("Viagem: o grupo partiu para " + contexto.dados.mundo.nomeDoMapa(partir->destino) + ".");
+        }
+        return motivo;
+    }
+    if (const auto* encontro = std::get_if<PedidoResolverEncontro>(&pedido)) {
+        return contexto.viagem == nullptr ? "a viagem não está montada" : resolverOEncontroDoGrupo(contexto, encontro->escolha, linhas);
     }
     if (const auto* comprar = std::get_if<PedidoComprarDaLoja>(&pedido)) {
         return comprarDaLojaDaCidade(contexto, comprar->numeroDoItem, comprar->quantidade);
