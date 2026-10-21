@@ -524,13 +524,18 @@ void testarRelatorio(const DadosDoJogo& dados)
     ConferenciaDoTesteDeUmAno precoAlto;
     LinhaDoRelatorio paoCaro = linha;
     paoCaro.precoDoPaoEmDecimos = 27;
+    for (int dia = 0; dia < 7; ++dia) {
+        conferirOsCriteriosDoDia(precoAlto, paoCaro);
+    }
+    const bool seteDiasPassam = !precoAlto.falhou;
     conferirOsCriteriosDoDia(precoAlto, paoCaro);
     ConferenciaDoTesteDeUmAno precoNoLimite;
     LinhaDoRelatorio paoNoLimite = linha;
     paoNoLimite.precoDoPaoEmDecimos = 26;
     conferirOsCriteriosDoDia(precoNoLimite, paoNoLimite);
-    conferir(precoAlto.motivoDaFalha == "o preço do Pão foi a 2,7 no dia 37" && !precoNoLimite.falhou,
-             "o Pão a 2,7: FALHOU; a 2,6 (o limite), passa");
+    conferir(seteDiasPassam && precoAlto.motivoDaFalha == "o preço do Pão ficou acima de 2,6 por 8 dias seguidos (2,7 no dia 37)"
+                 && !precoNoLimite.falhou,
+             "EQ1-1: o Pão a 2,7 por 7 dias passa, por 8 dias FALHOU; a 2,6 (o limite), passa");
 
     // FE4-3: o Banco abaixo de 250, e a queda no ano.
     ConferenciaDoTesteDeUmAno bancoBaixo;

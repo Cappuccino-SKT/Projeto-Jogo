@@ -71,8 +71,8 @@ void testarConstrucoes(const DadosDoJogo& dados)
 
     InventarioDaCidade inventario(dados.catalogoDeItens);
     recalcularCapacidade(inventario, dados.vilaInicial, dados.catalogoDeConstrucoes, dados.regras.construcoes);
-    conferir(inventario.capacidadeDaCategoria(CategoriaDoItem::MateriaPrima) == 900 && inventario.capacidadeDaCategoria(CategoriaDoItem::BemDeConsumo) == 800,
-             "a capacidade da vila da fatia: 900 de matéria-prima e 800 de bem de consumo");
+    conferir(inventario.capacidadeDaCategoria(CategoriaDoItem::MateriaPrima) == 1100 && inventario.capacidadeDaCategoria(CategoriaDoItem::BemDeConsumo) == 1000,
+             "a capacidade da vila da fatia: 1100 de matéria-prima e 1000 de bem de consumo (a Padaria no nível 2, EQ2-1)");
 }
 
 void testarInventario(const DadosDoJogo& dados)

@@ -114,14 +114,19 @@ void conferirOsCriteriosDoDia(ConferenciaDoTesteDeUmAno& conferencia, const Linh
         return;  // fica o primeiro problema
     }
     const std::string noDia = " no dia " + std::to_string(linha.dia);
+    const bool paoCaro = linha.precoDoPaoEmDecimos > maiorPrecoDoPaoQuePassaEmDecimos;
+    conferencia.diasSeguidosComOPaoCaro = paoCaro ? conferencia.diasSeguidosComOPaoCaro + 1 : 0;
     if (linha.diasEmDeficitDeComida >= diasSeguidosDeFomeQueFalham) {
         conferencia.motivoDaFalha = "fome por " + std::to_string(linha.diasEmDeficitDeComida) + " dias seguidos" + noDia;
     } else if (linha.bancoDaCidade <= 0) {
         conferencia.motivoDaFalha = "o Banco zerou" + noDia;
     } else if (linha.bancoDaCidade < menorBancoQuePassaEmDecimos) {
         conferencia.motivoDaFalha = "o Banco caiu para " + escreverDecimos(linha.bancoDaCidade) + noDia;
-    } else if (linha.precoDoPaoEmDecimos < menorPrecoDoPaoQuePassaEmDecimos || linha.precoDoPaoEmDecimos > maiorPrecoDoPaoQuePassaEmDecimos) {
+    } else if (linha.precoDoPaoEmDecimos < menorPrecoDoPaoQuePassaEmDecimos) {
         conferencia.motivoDaFalha = "o preço do Pão foi a " + escreverDecimos(linha.precoDoPaoEmDecimos) + noDia;
+    } else if (conferencia.diasSeguidosComOPaoCaro >= diasSeguidosComOPaoCaroQueFalham) {
+        conferencia.motivoDaFalha = "o preço do Pão ficou acima de 2,6 por " + std::to_string(conferencia.diasSeguidosComOPaoCaro)
+                                    + " dias seguidos (" + escreverDecimos(linha.precoDoPaoEmDecimos) + noDia + ")";
     } else {
         return;
     }
