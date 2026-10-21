@@ -579,3 +579,18 @@ O que entrou ([[Ficha Logica/OutrasCidades|ficha das Outras cidades]]; os ajuste
 
 **Verificado pelo assistente:** `testes_do_codigo` passa (481 conferências: as contas da parte 10.2, as 21 cidades e os 2.750 NPCs, a capital com 20 Padarias e 40 Fazendas, 16 dias sem fome em nenhuma cidade, a vila igual com e sem as cidades dia a dia, o save com as 21 cidades, a vila em LOD 2 contra LOD 0). **As 10 sementes passam**, e o salvar e carregar no dia 30 dá o relatório igual.
 
+### Marco B2: o comércio (2026-10-21, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Comercio|ficha do Comércio]]; os ajustes estão na parte 10.8 dela):
+
+- **A loja com limite (4.7)**, para todos: paga 90% do preço local até o estoque-alvo e 45% do preço base além dele, só enquanto o Banco fica acima de 250; ao jogador, não vende abaixo de 2 dias do consumo.
+- **As 14 caravanas das cidades** (2 por Posto Comercial): a sobra e a falta (4.2), a conta da viagem com os dias, o custo, o risco da rota e o lucro (4.3), a decisão de sair (4.4), a venda e a volta no destino (4.5), o salário pago à classe Civil em casa (4.6) e o ataque pelo cálculo rápido (Viagem, 4.11).
+- **O jogador comercia nas outras cidades:** com o grupo parado numa cidade, o Mapa Mundial mostra a loja dela (comprar e vender 1 ou 10). O Mapa Mundial também mostra os **preços que o jogador viu** e há quantos dias (4.8).
+- **Os recursos (CO1-1):** a Tecnocrata não tem floresta, e a Escravista não tem pedreira.
+- **O fim do `--simular`** mostra o resumo do comércio e confere o dinheiro do mundo.
+- **Save versão 6** (as caravanas, o `aCaminhoPorItem` e os preços conhecidos).
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (490 conferências: a venda de 40 Tábuas por 68 moedas, a loja que para na reserva do Banco, a força 8 da caravana, as 14 caravanas, a falta que desconta o que vai a caminho, o custo da viagem, o grupo comprando e vendendo numa outra cidade). **As 10 sementes passam**, o dinheiro do mundo se conserva em todas, e o salvar e carregar no dia 30 dá o relatório igual. As caravanas fazem de 4 a 11 viagens por ano; a perda para bandidos fica entre 0% e 9% do valor levado (média de 1,6%; a ficha previa 8%).
+
+**Achado (rodada CO2):** em 1 ano, as 14 caravanas fazem só de 4 a 11 viagens: as cidades são autossuficientes e os preços ficam parecidos. Ver a [[Rodada Pendente]].
+

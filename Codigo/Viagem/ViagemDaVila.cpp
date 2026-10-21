@@ -8,22 +8,11 @@ namespace {
 
 const char* const identificadorDoPaoDaViagem = "item.pao";
 
-TipoDeClima climaDaRegiaoDoMapa(const EstadoDaViagem& viagem, const MundoDoJogo& mundo, int numeroDoMapa)
-{
-    const int regiao = mundo.mapa(numeroDoMapa).regiao;
-    return regiao >= 1 && regiao <= static_cast<int>(viagem.climaDeHojePorRegiao.size()) ? viagem.climaDeHojePorRegiao[regiao - 1] : TipoDeClima::Limpo;
-}
-
-// Regra 4.3, passo 3 (e 4.1, passo 3): o grupo entra no trecho até o próximo mapa da rota.
+// Regra 4.1, passo 3: o grupo entra no primeiro trecho da rota.
 void entrarNoTrecho(ContextoDaProducao& contexto, EntidadeEmTransito& grupo, int proximoMapa, Estacao estacao)
 {
-    const MundoDoJogo& mundo = contexto.dados.mundo;
-    const RegrasDaViagem& regras = contexto.dados.regrasDaViagem;
-    grupo.proximoMapa = proximoMapa;
-    const int climaEEstacao = multiplicadorDeClimaEEstacao(climaDaRegiaoDoMapa(*contexto.viagem, mundo, proximoMapa), estacao, mundo, proximoMapa, regras);
-    grupo.ticksDoTrecho = calcularTicksDoTrecho(grupo, mundo, proximoMapa, climaEEstacao, regras);
-    grupo.ticksAndadosNoTrecho = 0;
-    grupo.encontroMarcado = sortearEncontroAoEntrarNoTrecho(grupo, mundo, proximoMapa, regras, *contexto.sorteioDaViagem);
+    entrarNoTrecho(grupo, proximoMapa, contexto.dados.mundo, contexto.dados.regrasDaViagem, contexto.viagem->climaDeHojePorRegiao, estacao,
+                   *contexto.sorteioDaViagem);
 }
 
 // O grupo volta à vila: o que ele leva volta para o jogador.
@@ -52,6 +41,7 @@ void montarAViagemDaPartidaNova(EstadoDaViagem& viagem, const DadosDoJogo& dados
     viagem.grupoDoJogador.mapaAtual = mundo.mapaDaVila;
     viagem.grupoDoJogador.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
     viagem.nevoa.assign(mundo.mapas.size(), RegistroDaNevoa{});
+    viagem.precosConhecidos.assign(mundo.mapas.size(), PrecosConhecidos{});
     std::fill(viagem.climaDeHojePorRegiao.begin(), viagem.climaDeHojePorRegiao.end(), climaDaVila.climaDeHoje);
     if (!mundo.mapaExiste(mundo.mapaDaVila)) {
         return;
@@ -138,35 +128,12 @@ ResultadoDoTickDaViagem avancarAViagemUmTick(ContextoDaProducao& contexto, const
     EntidadeEmTransito& grupo = viagem.grupoDoJogador;
     const MundoDoJogo& mundo = contexto.dados.mundo;
     const RegrasDaViagem& regras = contexto.dados.regrasDaViagem;
-    if (!grupo.emTransito || grupo.encontroAcontecendo) {
-        return resultado;
-    }
-    if (grupo.ticksParadoNaLuta > 0) {
-        --grupo.ticksParadoNaLuta;  // a luta rápida leva 1 hora (regra 4.6)
-        return resultado;
-    }
-    // Regra 4.4: acampa das 22 h às 6 h; com marcha forçada, segue e conta as noites sem dormir.
-    const int hora = relogio.horaDoDiaAtual();
-    if (hora >= regras.horaDeAcampar || hora < regras.horaDeRetomar) {
-        if (!grupo.marchaForcada) {
-            return resultado;
-        }
-        ++grupo.ticksSemDormir;
-        if (grupo.ticksSemDormir % (6 * contexto.ticksPorHoraDeJogo) == 0) {
-            ++grupo.noitesSemDormir;
-        }
-    }
-    // Regra 4.3, passo 4: a caravana não anda na Tempestade.
-    if (grupo.ehCaravana() && climaDaRegiaoDoMapa(viagem, mundo, grupo.proximoMapa) == TipoDeClima::Tempestade) {
-        return resultado;
-    }
-    ++grupo.ticksAndadosNoTrecho;
-
-    // Regra 4.3, passo 2: o encontro na metade do trecho.
-    if (grupo.encontroMarcado.tipo != TipoDeEncontro::Nenhum && grupo.ticksAndadosNoTrecho == grupo.ticksDoTrecho / 2) {
+    const PassoDaEntidade passo = andarUmTick(grupo, mundo, regras, viagem.climaDeHojePorRegiao, relogio.horaDoDiaAtual(), relogio.estacaoAtual(),
+                                              contexto.ticksPorHoraDeJogo, *contexto.sorteioDaViagem);
+    if (passo == PassoDaEntidade::EncontroNaMetade) {
         const int bandidos = grupo.encontroMarcado.bandidos;
         if (grupo.encontroMarcado.tipo == TipoDeEncontro::MercadorViajante) {
-            // A troca com os preços de outra região entra com o Comércio (B2).
+            // A troca com os preços de outra região: o grupo pode comerciar nas cidades (B2); o mercador fica para depois.
             resultado.linhasParaOConsole.push_back("Viagem: um mercador viajante cruza o caminho do grupo.");
             grupo.encontroMarcado = {};
         } else if (!bandidosAtacam(forcaDoGrupo(grupo, regras), bandidos, regras)) {
@@ -177,27 +144,17 @@ ResultadoDoTickDaViagem avancarAViagemUmTick(ContextoDaProducao& contexto, const
             resultado.encontroComecou = true;
             resultado.linhasParaOConsole.push_back("Encontro: um bando de " + std::to_string(bandidos) + " bandidos cerca o grupo em "
                                                    + mundo.nomeDoMapa(grupo.proximoMapa) + ".");
-            return resultado;
         }
-    }
-
-    // Regra 4.3, passo 3: chegou ao centro do próximo mapa.
-    if (grupo.ticksAndadosNoTrecho < grupo.ticksDoTrecho) {
         return resultado;
     }
-    grupo.mapaAtual = grupo.proximoMapa;
+    if (passo != PassoDaEntidade::ChegouAoProximoMapa && passo != PassoDaEntidade::ChegouAoDestino) {
+        return resultado;
+    }
     marcarMapaComoVisto(viagem, mundo, grupo.mapaAtual, relogio.diaDaPartida());
-    if (!grupo.rota.empty()) {
-        const int proximo = grupo.rota.front();
-        grupo.rota.erase(grupo.rota.begin());
-        entrarNoTrecho(contexto, grupo, proximo, relogio.estacaoAtual());
+    resultado.mapaOndeChegou = grupo.mapaAtual;
+    if (passo == PassoDaEntidade::ChegouAoProximoMapa) {
         return resultado;
     }
-    // Regra 4.7: a viagem acabou.
-    grupo.emTransito = false;
-    grupo.ticksDoTrecho = 0;
-    grupo.ticksAndadosNoTrecho = 0;
-    grupo.encontroMarcado = {};
     resultado.chegouAoDestino = true;
     resultado.linhasParaOConsole.push_back("Viagem: o grupo chegou a " + mundo.nomeDoMapa(grupo.mapaAtual) + ".");
     if (grupo.mapaAtual == mundo.mapaDaVila) {

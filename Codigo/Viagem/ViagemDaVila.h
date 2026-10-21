@@ -22,12 +22,21 @@ struct RegistroDaNevoa {
     bool operator==(const RegistroDaNevoa&) const = default;
 };
 
+// Comércio, 4.8: os preços que o jogador viu numa cidade, e quando.
+struct PrecosConhecidos {
+    int64_t diaEmQueFoiVisto = -1;  // −1 = nunca
+    std::vector<int> precoPorItemEmDecimos;
+
+    bool operator==(const PrecosConhecidos&) const = default;
+};
+
 struct EstadoDaViagem {
     // O grupo do jogador. Parado na vila, ele não leva nada (o inventário é o do jogador).
     EntidadeEmTransito grupoDoJogador;
     std::vector<RegistroDaNevoa> nevoa;  // nevoa[numero do mapa − 1]
     std::vector<TipoDeClima> climaDeHojePorRegiao = std::vector<TipoDeClima>(6, TipoDeClima::Limpo);  // regra 4.8
     bool grupoSemComida = false;  // só do dia
+    std::vector<PrecosConhecidos> precosConhecidos;  // precosConhecidos[numero do mapa − 1] (fase B2)
 };
 
 // O que um tick da viagem fez: as linhas do console e se o jogo deve voltar a 1x ou pausar.
@@ -35,6 +44,7 @@ struct ResultadoDoTickDaViagem {
     std::vector<std::string> linhasParaOConsole;
     bool encontroComecou = false;  // pausa (regra 4.6, passo 1)
     bool chegouAoDestino = false;  // volta a 1x (regra 4.7)
+    int mapaOndeChegou = 0;        // o mapa a que o grupo chegou neste tick, ou 0 (Comércio, 4.8)
 };
 
 // A partida nova: o grupo na vila; a névoa com as capitais e os vizinhos da vila (regra 4.10, passo 3).

@@ -170,6 +170,8 @@ MundoDoJogo lerArquivosDoMundo(const std::string& textoDosMapas, const std::stri
             cidade.faccao = lerTexto(entrada, "faccao", "");
             const auto vilaDoJogador = entrada.find("vila_do_jogador");
             cidade.ehAVilaDoJogador = vilaDoJogador != entrada.end() && vilaDoJogador->is_boolean() && vilaDoJogador->get<bool>();
+            const auto posto = entrada.find("posto_comercial");
+            cidade.temPostoComercial = posto != entrada.end() && posto->is_boolean() && posto->get<bool>();
             if (cidade.ehAVilaDoJogador) {
                 mundo.mapaDaVila = cidade.numeroDoMapa;
             }

@@ -31,6 +31,7 @@
 #include "Tempo/SorteioComSemente.h"
 #include "Clima/ClimaDaVila.h"
 #include "Viagem/ViagemDaVila.h"
+#include "Comercio/CaravanaDaCidade.h"
 
 // Os eventos sorteiam com a sequência 2 (ficha dos Eventos): um NPC a mais não muda os eventos.
 constexpr uint64_t sequenciaDoSorteioDosEventos = 2;
@@ -114,6 +115,17 @@ public:
     int lodDoMapa = 0;
     int numeroDoMapaDaCidade = 0;
     std::vector<std::unique_ptr<SimulacaoDaVila>> outrasCidades;
+    // Fase B2 (Comércio): as caravanas desta cidade, o que as caravanas já levam para cá
+    // (por item) e, só na vila, as contas do comércio do mundo.
+    std::vector<CaravanaDaCidade> caravanas;
+    std::vector<int> aCaminhoPorItem;
+    EstatisticasDoComercio estatisticasDoComercio;
+    // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
+    int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
+    // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).
+    const std::vector<TipoDeClima>& climasDoMundo() const { return viagem.climaDeHojePorRegiao; }
+    // As caravanas sorteiam com a sequência da viagem desta cidade.
+    SorteioComSemente& sorteioDasCaravanas() { return sorteioDaViagem; }
 
 private:
     friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura os sorteios (marco 9)

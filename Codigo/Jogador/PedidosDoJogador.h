@@ -74,11 +74,17 @@ struct PedidoPartirEmViagem {
 struct PedidoResolverEncontro {
     EscolhaNoEncontro escolha = EscolhaNoEncontro::Render;
 };
+// Fase B2 (Comércio, 4.7): comprar ou vender na loja da cidade onde o grupo está, com o que ele leva.
+struct PedidoComercioNaCidade {
+    int numeroDoItem = 0;
+    int quantidade = 0;
+    bool comprar = true;
+};
 
 using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
                                      PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
                                      PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance,
-                                     PedidoPartirEmViagem, PedidoResolverEncontro>;
+                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade>;
 
 class FilaDePedidosDoJogador {
 public:

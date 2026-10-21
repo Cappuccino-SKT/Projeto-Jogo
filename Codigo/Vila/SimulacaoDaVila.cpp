@@ -6,6 +6,7 @@
 #include "Economia/ConsumoESalarios.h"
 #include "Jogador/PedidosDoJogador.h"
 #include "Cidades/OutrasCidades.h"
+#include "Comercio/Comercio.h"
 #include "Vila/Trabalho.h"
 #include "Npc/ComponentesDoNpc.h"
 
@@ -24,6 +25,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     clima.climaDeOntem = clima.climaDeHoje;
     guardarODiaDeHojeNoClima(clima, relogio);
     montarAViagemDaPartidaNova(viagem, dados, clima);
+    aCaminhoPorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
     regrasDoMovimento.velocidadeDeAndarEmMilesimosPorTick =
         converterVelocidadeParaMilesimosPorTick(dados.regras.velocidadeDeAndarEmTilesPorHora, ticksPorHoraDeJogo);
     regrasDoMovimento.caminhosCalculadosPorTick = dados.regras.caminhosCalculadosPorTick;
@@ -67,6 +69,19 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     numeroDoMapaDaCidade = cidade.numeroDoMapa;
     // A cidade não tem grupo de viagem; o inventário vazio dele vai no save como o da vila.
     viagem.grupoDoJogador.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    aCaminhoPorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    // Comércio, 4.1: 2 caravanas por Posto Comercial (4 pessoas, 4 Cavalos abstratos).
+    if (vila.temPostoComercial) {
+        for (int numero = 0; numero < dados.regrasDoComercio.caravanasPorPostoComercial; ++numero) {
+            CaravanaDaCidade caravana;
+            caravana.entidade.tipoDeEntidade = "caravana";
+            caravana.entidade.pessoas = dados.regrasDoComercio.pessoasDaCaravana();
+            caravana.entidade.mapaAtual = cidade.numeroDoMapa;
+            caravana.entidade.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+            caravana.marcadoNoDestino.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+            caravanas.push_back(caravana);
+        }
+    }
     clima.climaDeHoje = dados.regrasDoClima.climaDoPrimeiroDia;
     clima.climaDeOntem = clima.climaDeHoje;
     guardarODiaDeHojeNoClima(clima, relogio);
@@ -174,8 +189,22 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
     if (pedidos.estaVazia()) {
         return {};
     }
+    // Fase B2: o comércio do grupo numa outra cidade precisa das outras cidades; é tratado aqui.
+    std::vector<std::string> linhas;
+    FilaDePedidosDoJogador outrosPedidos;
+    for (PedidoDoJogador& pedido : pedidos.tomarTodos()) {
+        if (const auto* comercio = std::get_if<PedidoComercioNaCidade>(&pedido)) {
+            const std::string motivo = comerciarNaCidadeDoGrupo(*this, comercio->numeroDoItem, comercio->quantidade, comercio->comprar, linhas);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            }
+        } else {
+            outrosPedidos.acrescentar(std::move(pedido));
+        }
+    }
     ContextoDaProducao producao = contextoDaProducao();
-    const std::vector<std::string> linhas = aplicarOsPedidosDoJogador(producao, pedidos);
+    const std::vector<std::string> linhasDosOutros = aplicarOsPedidosDoJogador(producao, outrosPedidos);
+    linhas.insert(linhas.end(), linhasDosOutros.begin(), linhasDosOutros.end());
     registrarNasNotificacoes(linhas, 0);
     return linhas;
 }
@@ -226,6 +255,9 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         if (tickDaViagem.encontroComecou) {
             relogio.alternarPausa();
         }
+        if (tickDaViagem.mapaOndeChegou != 0) {
+            anotarOsPrecosDaCidade(*this, tickDaViagem.mapaOndeChegou);  // Comércio, 4.8
+        }
     }
 
     // 4. Os NPCs (marcos 4 e 5): a rotina decide, os caminhos pedidos são
@@ -256,8 +288,21 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         for (const std::unique_ptr<SimulacaoDaVila>& cidade : outrasCidades) {
             const int regiao = dados.mundo.mapa(cidade->numeroDoMapaDaCidade).regiao;
             cidade->clima.climaDeHojeVindoDaRegiao = viagem.climaDeHojePorRegiao[static_cast<std::size_t>(regiao - 1)];
+            if (relogio.comecouUmDiaNovo()) {
+                cidade->viagem.climaDeHojePorRegiao = viagem.climaDeHojePorRegiao;  // para a conta das caravanas dela
+            }
             cidade->avancarUmTickEmLod2();
         }
+    }
+
+    // 7. O comércio (fase B2): no dia novo, depois de todas as cidades, cada caravana em casa
+    //    decide se sai (o passo 3b); a cada tick, as caravanas andam.
+    if (lodDoMapa == 0 && !outrasCidades.empty()) {
+        MEDIR_ESTE_TRECHO("caravanas");
+        if (relogio.comecouUmDiaNovo()) {
+            decidirAsViagensDasCaravanas(*this);
+        }
+        avancarAsCaravanasUmTick(*this);
     }
     registrarNasNotificacoes(linhasParaOConsole, linhasJaNasNotificacoes);
     MARCAR_O_FIM_DE_UM_TICK();

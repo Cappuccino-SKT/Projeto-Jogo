@@ -179,6 +179,73 @@ void aplicarAPerdaDoGrupo(EntidadeEmTransito& entidade, int porcentagem)
     }
 }
 
+TipoDeClima climaDaRegiaoDoMapa(const std::vector<TipoDeClima>& climaDeHojePorRegiao, const MundoDoJogo& mundo, int numeroDoMapa)
+{
+    const int regiao = mundo.mapa(numeroDoMapa).regiao;
+    return regiao >= 1 && regiao <= static_cast<int>(climaDeHojePorRegiao.size()) ? climaDeHojePorRegiao[static_cast<std::size_t>(regiao - 1)]
+                                                                                    : TipoDeClima::Limpo;
+}
+
+void entrarNoTrecho(EntidadeEmTransito& entidade, int proximoMapa, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
+                    const std::vector<TipoDeClima>& climaDeHojePorRegiao, Estacao estacao, SorteioComSemente& sorteio)
+{
+    entidade.proximoMapa = proximoMapa;
+    const int climaEEstacao = multiplicadorDeClimaEEstacao(climaDaRegiaoDoMapa(climaDeHojePorRegiao, mundo, proximoMapa), estacao, mundo, proximoMapa, regras);
+    entidade.ticksDoTrecho = calcularTicksDoTrecho(entidade, mundo, proximoMapa, climaEEstacao, regras);
+    entidade.ticksAndadosNoTrecho = 0;
+    entidade.encontroMarcado = sortearEncontroAoEntrarNoTrecho(entidade, mundo, proximoMapa, regras, sorteio);
+}
+
+PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
+                            const std::vector<TipoDeClima>& climaDeHojePorRegiao, int horaDoDia, Estacao estacao, int ticksPorHoraDeJogo,
+                            SorteioComSemente& sorteio)
+{
+    if (!entidade.emTransito || entidade.encontroAcontecendo) {
+        return PassoDaEntidade::Parada;
+    }
+    if (entidade.ticksParadoNaLuta > 0) {
+        --entidade.ticksParadoNaLuta;  // a luta rápida leva 1 hora (regra 4.6)
+        return PassoDaEntidade::Parada;
+    }
+    // Regra 4.4: acampa das 22 h às 6 h; com marcha forçada, segue e conta as noites sem dormir.
+    if (horaDoDia >= regras.horaDeAcampar || horaDoDia < regras.horaDeRetomar) {
+        if (!entidade.marchaForcada) {
+            return PassoDaEntidade::Parada;
+        }
+        ++entidade.ticksSemDormir;
+        if (entidade.ticksSemDormir % (6 * ticksPorHoraDeJogo) == 0) {
+            ++entidade.noitesSemDormir;
+        }
+    }
+    // Regra 4.3, passo 4: a caravana não anda na Tempestade.
+    if (entidade.ehCaravana() && climaDaRegiaoDoMapa(climaDeHojePorRegiao, mundo, entidade.proximoMapa) == TipoDeClima::Tempestade) {
+        return PassoDaEntidade::Parada;
+    }
+    ++entidade.ticksAndadosNoTrecho;
+
+    // Regra 4.3, passo 2: o encontro na metade do trecho.
+    if (entidade.encontroMarcado.tipo != TipoDeEncontro::Nenhum && entidade.ticksAndadosNoTrecho == entidade.ticksDoTrecho / 2) {
+        return PassoDaEntidade::EncontroNaMetade;
+    }
+    // Regra 4.3, passo 3: chegou ao centro do próximo mapa.
+    if (entidade.ticksAndadosNoTrecho < entidade.ticksDoTrecho) {
+        return PassoDaEntidade::Andou;
+    }
+    entidade.mapaAtual = entidade.proximoMapa;
+    if (!entidade.rota.empty()) {
+        const int proximo = entidade.rota.front();
+        entidade.rota.erase(entidade.rota.begin());
+        entrarNoTrecho(entidade, proximo, mundo, regras, climaDeHojePorRegiao, estacao, sorteio);
+        return PassoDaEntidade::ChegouAoProximoMapa;
+    }
+    // Regra 4.7: a viagem acabou.
+    entidade.emTransito = false;
+    entidade.ticksDoTrecho = 0;
+    entidade.ticksAndadosNoTrecho = 0;
+    entidade.encontroMarcado = {};
+    return PassoDaEntidade::ChegouAoDestino;
+}
+
 std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras,
                                         SorteioComSemente& sorteio)
 {

@@ -286,13 +286,47 @@ const char* nomeDoEncontro(TipoDeEncontro tipo)
 }
 
 // Fase B1 (ficha da Viagem): o grupo do jogador, a névoa e o clima de cada região.
+// Uma entidade em trânsito (o grupo do jogador, fase B1; as caravanas, fase B2).
+json escreverAEntidade(const DadosDoJogo& dados, const EntidadeEmTransito& entidade)
+{
+    json itens = json::object();
+    for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(entidade.quantidadePorItem.size()); ++numeroDoItem) {
+        itens[textoDoItem(dados, numeroDoItem)] = entidade.quantidadePorItem[numeroDoItem];
+    }
+    return json{{"tipoDeEntidade", entidade.tipoDeEntidade},
+                {"emTransito", entidade.emTransito},
+                {"mapaAtual", entidade.mapaAtual},
+                {"proximoMapa", entidade.proximoMapa},
+                {"rota", entidade.rota},
+                {"ticksDoTrecho", entidade.ticksDoTrecho},
+                {"ticksAndadosNoTrecho", entidade.ticksAndadosNoTrecho},
+                {"pessoas", entidade.pessoas},
+                {"montados", entidade.montados},
+                {"cargaAcimaDoLimite", entidade.cargaAcimaDoLimite},
+                {"marchaForcada", entidade.marchaForcada},
+                {"noitesSemDormir", entidade.noitesSemDormir},
+                {"ticksSemDormir", entidade.ticksSemDormir},
+                {"encontroMarcado", nomeDoEncontro(entidade.encontroMarcado.tipo)},
+                {"bandidos", entidade.encontroMarcado.bandidos},
+                {"encontroAcontecendo", entidade.encontroAcontecendo},
+                {"ticksParadoNaLuta", entidade.ticksParadoNaLuta},
+                {"itens", itens},
+                {"dinheiro", entidade.dinheiroEmDecimos}};
+}
+
+json escreverOsItens(const DadosDoJogo& dados, const std::vector<int>& quantidadePorItem)
+{
+    json itens = json::object();
+    for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(quantidadePorItem.size()); ++numeroDoItem) {
+        itens[textoDoItem(dados, numeroDoItem)] = quantidadePorItem[numeroDoItem];
+    }
+    return itens;
+}
+
+// Fase B1 (ficha da Viagem): o grupo do jogador, a névoa e o clima de cada região; fase B2:
+// os preços que o jogador conhece.
 json escreverAViagem(const SimulacaoDaVila& simulacao)
 {
-    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
-    json itens = json::object();
-    for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(grupo.quantidadePorItem.size()); ++numeroDoItem) {
-        itens[textoDoItem(simulacao.dados, numeroDoItem)] = grupo.quantidadePorItem[numeroDoItem];
-    }
     json nevoa = json::array();
     for (const RegistroDaNevoa& registro : simulacao.viagem.nevoa) {
         nevoa.push_back(json::array({registro.diaEmQueFoiVisto, registro.dono, registro.nivelDaCidade, static_cast<int>(registro.estado)}));
@@ -301,27 +335,28 @@ json escreverAViagem(const SimulacaoDaVila& simulacao)
     for (const TipoDeClima clima : simulacao.viagem.climaDeHojePorRegiao) {
         climas.push_back(nomeDoClimaNoArquivo(clima));
     }
-    return json{{"grupo", json{{"tipoDeEntidade", grupo.tipoDeEntidade},
-                               {"emTransito", grupo.emTransito},
-                               {"mapaAtual", grupo.mapaAtual},
-                               {"proximoMapa", grupo.proximoMapa},
-                               {"rota", grupo.rota},
-                               {"ticksDoTrecho", grupo.ticksDoTrecho},
-                               {"ticksAndadosNoTrecho", grupo.ticksAndadosNoTrecho},
-                               {"pessoas", grupo.pessoas},
-                               {"montados", grupo.montados},
-                               {"cargaAcimaDoLimite", grupo.cargaAcimaDoLimite},
-                               {"marchaForcada", grupo.marchaForcada},
-                               {"noitesSemDormir", grupo.noitesSemDormir},
-                               {"ticksSemDormir", grupo.ticksSemDormir},
-                               {"encontroMarcado", nomeDoEncontro(grupo.encontroMarcado.tipo)},
-                               {"bandidos", grupo.encontroMarcado.bandidos},
-                               {"encontroAcontecendo", grupo.encontroAcontecendo},
-                               {"ticksParadoNaLuta", grupo.ticksParadoNaLuta},
-                               {"itens", itens},
-                               {"dinheiro", grupo.dinheiroEmDecimos}}},
+    json precos = json::array();
+    for (const PrecosConhecidos& daCidade : simulacao.viagem.precosConhecidos) {
+        precos.push_back(json::array({daCidade.diaEmQueFoiVisto, daCidade.precoPorItemEmDecimos}));
+    }
+    return json{{"grupo", escreverAEntidade(simulacao.dados, simulacao.viagem.grupoDoJogador)},
                 {"nevoa", nevoa},
-                {"climaDeHojePorRegiao", climas}};
+                {"climaDeHojePorRegiao", climas},
+                {"precosConhecidos", precos}};
+}
+
+// Fase B2 (ficha do Comércio): as caravanas da cidade e o que já vai a caminho dela.
+json escreverOComercio(const SimulacaoDaVila& simulacao)
+{
+    json caravanas = json::array();
+    for (const CaravanaDaCidade& caravana : simulacao.caravanas) {
+        caravanas.push_back(json{{"entidade", escreverAEntidade(simulacao.dados, caravana.entidade)},
+                                 {"situacao", static_cast<int>(caravana.situacao)},
+                                 {"destino", caravana.mapaDeDestino},
+                                 {"marcadoNoDestino", escreverOsItens(simulacao.dados, caravana.marcadoNoDestino)},
+                                 {"tickDaPartida", caravana.tickDaPartida}});
+    }
+    return json{{"aCaminhoPorItem", escreverOsItens(simulacao.dados, simulacao.aCaminhoPorItem)}, {"caravanas", caravanas}};
 }
 
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
@@ -377,6 +412,7 @@ json escreverASimulacao(const SimulacaoDaVila& simulacao)
     arvore["npcs"] = escreverOsNpcs(simulacao);
     arvore["diario"] = escreverOsDiario(simulacao);
     arvore["viagem"] = escreverAViagem(simulacao);
+    arvore["comercio"] = escreverOComercio(simulacao);
     return arvore;
 }
 

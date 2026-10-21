@@ -32,6 +32,7 @@ struct CidadeDoMundo {
     int nivel = 1;
     std::string faccao;  // vazio = sem facção (as Vilas Livres)
     bool ehAVilaDoJogador = false;
+    bool temPostoComercial = false;  // fase B2 (Comércio, 4.1): manda caravanas
 };
 
 struct MundoDoJogo {

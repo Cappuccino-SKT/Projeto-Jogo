@@ -122,6 +122,7 @@ VilaDoJogo gerarAVilaDaCidade(const CidadeDoMundo& cidade, const DadosDoJogo& da
     VilaDoJogo vila;
     vila.sementeDaPartida = sementeDaPartida;
     vila.nivelDaCidade = cidade.nivel;
+    vila.temPostoComercial = cidade.temPostoComercial;
     const int npcs = valorDoNivel(regras.npcsReaisPorNivel, cidade.nivel, 15);
     const int blocos = (npcs + regras.construcoesDeProducaoACadaNpcs - 1) / regras.construcoesDeProducaoACadaNpcs;
 

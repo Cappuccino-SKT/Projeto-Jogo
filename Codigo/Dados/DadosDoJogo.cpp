@@ -101,6 +101,7 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     // 13. As outras cidades (fase B1b): o bloco "outras_cidades" do regras.json.
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "regras.json", problemas)) {
         dados.regrasDasOutrasCidades = lerRegrasDasOutrasCidades(*texto, problemas);
+        dados.regrasDoComercio = lerRegrasDoComercio(*texto, problemas);  // fase B2: o bloco "comercio"
     }
     return dados;
 }

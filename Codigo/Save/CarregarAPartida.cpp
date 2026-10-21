@@ -166,34 +166,63 @@ TipoDeEncontro lerOEncontroDoSave(const json& nome)
     return TipoDeEncontro::Nenhum;
 }
 
+// Uma entidade em trânsito (o grupo do jogador e as caravanas).
+void restaurarAEntidade(const DadosDoJogo& dados, EntidadeEmTransito& entidade, const json& entrada)
+{
+    entidade.tipoDeEntidade = entrada.at("tipoDeEntidade").get<std::string>();
+    entidade.emTransito = entrada.at("emTransito").get<bool>();
+    entidade.mapaAtual = entrada.at("mapaAtual").get<int>();
+    entidade.proximoMapa = entrada.at("proximoMapa").get<int>();
+    entidade.rota = entrada.at("rota").get<std::vector<int>>();
+    entidade.ticksDoTrecho = entrada.at("ticksDoTrecho").get<int>();
+    entidade.ticksAndadosNoTrecho = entrada.at("ticksAndadosNoTrecho").get<int>();
+    entidade.pessoas = entrada.at("pessoas").get<int>();
+    entidade.montados = entrada.at("montados").get<bool>();
+    entidade.cargaAcimaDoLimite = entrada.at("cargaAcimaDoLimite").get<bool>();
+    entidade.marchaForcada = entrada.at("marchaForcada").get<bool>();
+    entidade.noitesSemDormir = entrada.at("noitesSemDormir").get<int>();
+    entidade.ticksSemDormir = entrada.at("ticksSemDormir").get<int>();
+    entidade.encontroMarcado = EncontroMarcado{lerOEncontroDoSave(entrada.at("encontroMarcado")), entrada.at("bandidos").get<int>()};
+    entidade.encontroAcontecendo = entrada.at("encontroAcontecendo").get<bool>();
+    entidade.ticksParadoNaLuta = entrada.at("ticksParadoNaLuta").get<int>();
+    entidade.dinheiroEmDecimos = entrada.at("dinheiro").get<int64_t>();
+    exigirTodosOsItens(dados, entrada.at("itens"), "viagem");
+    entidade.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    paraCadaItem(dados, entrada.at("itens"), [&](int numeroDoItem, const json& quantidade) {
+        entidade.quantidadePorItem[static_cast<std::size_t>(numeroDoItem)] = quantidade.get<int>();
+    });
+}
+
+std::vector<int> lerOsItens(const DadosDoJogo& dados, const json& objeto, const char* secao)
+{
+    exigirTodosOsItens(dados, objeto, secao);
+    std::vector<int> quantidades(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    paraCadaItem(dados, objeto, [&](int numeroDoItem, const json& quantidade) { quantidades[static_cast<std::size_t>(numeroDoItem)] = quantidade.get<int>(); });
+    return quantidades;
+}
+
+// Fase B2 (ficha do Comércio).
+void restaurarOComercio(SimulacaoDaVila& partida, const json& secao)
+{
+    partida.aCaminhoPorItem = lerOsItens(partida.dados, secao.at("aCaminhoPorItem"), "comercio");
+    const json& caravanas = secao.at("caravanas");
+    if (caravanas.size() != partida.caravanas.size()) {
+        throw RecusaDoSave("O save tem outra quantidade de caravanas.");
+    }
+    for (std::size_t numero = 0; numero < caravanas.size(); ++numero) {
+        CaravanaDaCidade& caravana = partida.caravanas[numero];
+        restaurarAEntidade(partida.dados, caravana.entidade, caravanas[numero].at("entidade"));
+        caravana.situacao = static_cast<SituacaoDaCaravana>(caravanas[numero].at("situacao").get<int>());
+        caravana.mapaDeDestino = caravanas[numero].at("destino").get<int>();
+        caravana.marcadoNoDestino = lerOsItens(partida.dados, caravanas[numero].at("marcadoNoDestino"), "comercio");
+        caravana.tickDaPartida = caravanas[numero].at("tickDaPartida").get<int64_t>();
+    }
+}
+
 // Fase B1 (ficha da Viagem).
 void restaurarAViagem(SimulacaoDaVila& partida, const json& secao)
 {
-    const DadosDoJogo& dados = partida.dados;
-    const json& entrada = secao.at("grupo");
-    EntidadeEmTransito& grupo = partida.viagem.grupoDoJogador;
-    grupo.tipoDeEntidade = entrada.at("tipoDeEntidade").get<std::string>();
-    grupo.emTransito = entrada.at("emTransito").get<bool>();
-    grupo.mapaAtual = entrada.at("mapaAtual").get<int>();
-    grupo.proximoMapa = entrada.at("proximoMapa").get<int>();
-    grupo.rota = entrada.at("rota").get<std::vector<int>>();
-    grupo.ticksDoTrecho = entrada.at("ticksDoTrecho").get<int>();
-    grupo.ticksAndadosNoTrecho = entrada.at("ticksAndadosNoTrecho").get<int>();
-    grupo.pessoas = entrada.at("pessoas").get<int>();
-    grupo.montados = entrada.at("montados").get<bool>();
-    grupo.cargaAcimaDoLimite = entrada.at("cargaAcimaDoLimite").get<bool>();
-    grupo.marchaForcada = entrada.at("marchaForcada").get<bool>();
-    grupo.noitesSemDormir = entrada.at("noitesSemDormir").get<int>();
-    grupo.ticksSemDormir = entrada.at("ticksSemDormir").get<int>();
-    grupo.encontroMarcado = EncontroMarcado{lerOEncontroDoSave(entrada.at("encontroMarcado")), entrada.at("bandidos").get<int>()};
-    grupo.encontroAcontecendo = entrada.at("encontroAcontecendo").get<bool>();
-    grupo.ticksParadoNaLuta = entrada.at("ticksParadoNaLuta").get<int>();
-    grupo.dinheiroEmDecimos = entrada.at("dinheiro").get<int64_t>();
-    exigirTodosOsItens(dados, entrada.at("itens"), "viagem");
-    grupo.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
-    paraCadaItem(dados, entrada.at("itens"), [&](int numeroDoItem, const json& quantidade) {
-        grupo.quantidadePorItem[static_cast<std::size_t>(numeroDoItem)] = quantidade.get<int>();
-    });
+    restaurarAEntidade(partida.dados, partida.viagem.grupoDoJogador, secao.at("grupo"));
     const json& nevoa = secao.at("nevoa");
     if (nevoa.size() != partida.viagem.nevoa.size()) {
         throw RecusaDoSave("O save tem uma névoa de " + std::to_string(nevoa.size()) + " mapas, e o mundo tem " + std::to_string(partida.viagem.nevoa.size()) + ".");
@@ -201,6 +230,13 @@ void restaurarAViagem(SimulacaoDaVila& partida, const json& secao)
     for (std::size_t mapa = 0; mapa < nevoa.size(); ++mapa) {
         partida.viagem.nevoa[mapa] = RegistroDaNevoa{nevoa[mapa].at(0).get<int64_t>(), nevoa[mapa].at(1).get<std::string>(), nevoa[mapa].at(2).get<int>(),
                                                      static_cast<EstadoDoTerritorio>(nevoa[mapa].at(3).get<int>())};
+    }
+    const json& precos = secao.at("precosConhecidos");
+    if (precos.size() != partida.viagem.precosConhecidos.size()) {
+        throw RecusaDoSave("O save tem os preços de outra quantidade de mapas.");
+    }
+    for (std::size_t mapa = 0; mapa < precos.size(); ++mapa) {
+        partida.viagem.precosConhecidos[mapa] = PrecosConhecidos{precos[mapa].at(0).get<int64_t>(), precos[mapa].at(1).get<std::vector<int>>()};
     }
     const json& climas = secao.at("climaDeHojePorRegiao");
     partida.viagem.climaDeHojePorRegiao.clear();
@@ -547,6 +583,7 @@ void restaurarASimulacao(SimulacaoDaVila& partida, const json& arvore)
     restaurarOSorteio(Acesso::sorteioDaViagem(partida), arvore.at("sorteios").at("viagem"));
     restaurarOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(partida), arvore.at("sorteios").at("climaDasOutrasRegioes"));
     restaurarAViagem(partida, arvore.at("viagem"));
+    restaurarOComercio(partida, arvore.at("comercio"));
     {
         const json& leilao = arvore.at("leilao");
         partida.trabalho.leilao = LeilaoDeConstrucao{leilao.at("construcao").get<int>(), leilao.at("diasQueFaltam").get<int>(),

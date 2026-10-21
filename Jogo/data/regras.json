@@ -95,5 +95,20 @@
     "dinheiro_inicial_do_banco_por_nivel": [400, 1500, 6000, 20000],
     "verba_da_coroa_por_npc_por_estacao_em_decimos": 50,
     "construcoes_de_producao_a_cada_npcs": 15
+  },
+  "comercio": {
+    "caravanas_por_posto_comercial": 2,
+    "caravana_da_cidade": { "condutores": 2, "guardas": 2, "cavalos": 4 },
+    "capacidade_por_cavalo": 100,
+    "salario_por_dia_da_caravana_em_decimos": 60,
+    "loja_compra_em_porcento": 90,
+    "loja_vende_em_porcento": 110,
+    "acima_do_alvo_a_loja_paga_em_porcento_do_base": 45,
+    "reserva_do_banco_em_decimos": 2500,
+    "reserva_da_loja_em_dias_de_consumo": 2,
+    "lucro_minimo_em_porcento_do_custo": 20,
+    "risco_chance_de_perder_em_porcento": 60,
+    "risco_perda_media_em_porcento": 60,
+    "paes_por_pessoa_por_dia": 1
   }
 }

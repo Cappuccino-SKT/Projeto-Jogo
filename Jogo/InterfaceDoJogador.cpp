@@ -16,6 +16,7 @@
 #include "Npc/ComponentesDoNpc.h"
 #include "TextoDaDataDoJogo.h"
 #include "Viagem/ViagemDaVila.h"
+#include "Comercio/Comercio.h"
 
 namespace {
 
@@ -989,6 +990,18 @@ void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float 
                 if (visto) {
                     ImGui::Text("%s, %s, %s", mundo.mapa(numero).terreno.c_str(), infraestruturaDoMapa(mundo, numero).c_str(), nomeDoEstadoDoTerritorio(registro.estado));
                     ImGui::Text("Visto no dia %lld", static_cast<long long>(registro.diaEmQueFoiVisto + 1));
+                    // Comércio, 4.8: os preços que o jogador viu, e há quantos dias.
+                    const PrecosConhecidos& precos = viagem.precosConhecidos[static_cast<std::size_t>(numero - 1)];
+                    if (precos.diaEmQueFoiVisto >= 0) {
+                        std::string texto = "Preços (há " + std::to_string(simulacao.relogio.diaDaPartida() - precos.diaEmQueFoiVisto) + " dias):";
+                        for (std::size_t item = 0; item < precos.precoPorItemEmDecimos.size(); ++item) {
+                            texto += " " + simulacao.dados.tabelaDeTextos.textoDe(simulacao.dados.catalogoDeItens.itemPeloNumero(static_cast<int>(item)).identificadorDeTexto)
+                                + " " + dinheiro(precos.precoPorItemEmDecimos[item]) + ";";
+                        }
+                        ImGui::PushTextWrapPos(360);
+                        ImGui::TextUnformatted(texto.c_str());
+                        ImGui::PopTextWrapPos();
+                    }
                 } else {
                     ImGui::TextUnformatted("Nunca visto");
                 }
@@ -1010,6 +1023,54 @@ void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float 
         return;
     }
     ImGui::Text("O grupo está em %s.", mundo.nomeDoMapa(grupo.mapaAtual).c_str());
+    // Comércio (4.7): numa outra cidade, o grupo compra e vende na loja dela com o que leva.
+    if (!grupoEstaNaVila(viagem, simulacao.dados)) {
+        SimulacaoDaVila* cidade = nullptr;
+        for (const auto& outra : simulacao.outrasCidades) {
+            cidade = outra->numeroDoMapaDaCidade == grupo.mapaAtual ? outra.get() : cidade;
+        }
+        if (cidade != nullptr && ImGui::CollapsingHeader("Loja desta cidade", ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::Text("O grupo leva %s moedas.", dinheiro(grupo.dinheiroEmDecimos).c_str());
+            const ContextoDaProducao loja = cidade->contextoDaProducao();
+            const RegrasDoComercio& regras = simulacao.dados.regrasDoComercio;
+            if (ImGui::BeginTable("##loja_da_cidade", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+                ImGui::TableSetupColumn("Item");
+                ImGui::TableSetupColumn("A loja vende");
+                ImGui::TableSetupColumn("A loja paga");
+                ImGui::TableSetupColumn("O grupo tem");
+                ImGui::TableSetupColumn("");
+                ImGui::TableHeadersRow();
+                for (int item = 0; item < simulacao.dados.catalogoDeItens.quantidadeDeItens(); ++item) {
+                    const int precoLocal = precoLocalDoItem(loja, item);
+                    ImGui::PushID(item);
+                    ImGui::TableNextRow();
+                    ImGui::TableNextColumn();
+                    ImGui::TextUnformatted(simulacao.dados.tabelaDeTextos.textoDe(simulacao.dados.catalogoDeItens.itemPeloNumero(item).identificadorDeTexto).c_str());
+                    ImGui::TableNextColumn();
+                    ImGui::TextUnformatted(dinheiro(precoLocal * regras.lojaVendeEmPorcento / 100).c_str());
+                    ImGui::TableNextColumn();
+                    ImGui::TextUnformatted(dinheiro(calcularAVendaParaALoja(loja, item, 1).valorEmDecimos).c_str());
+                    ImGui::TableNextColumn();
+                    ImGui::Text("%d", grupo.quantidadePorItem[static_cast<std::size_t>(item)]);
+                    ImGui::TableNextColumn();
+                    for (const int quantidade : {1, 10}) {
+                        if (ImGui::SmallButton(("Comprar " + std::to_string(quantidade)).c_str())) {
+                            simulacao.pedidos.acrescentar(PedidoComercioNaCidade{item, quantidade, true});
+                        }
+                        ImGui::SameLine();
+                    }
+                    for (const int quantidade : {1, 10}) {
+                        if (ImGui::SmallButton(("Vender " + std::to_string(quantidade)).c_str())) {
+                            simulacao.pedidos.acrescentar(PedidoComercioNaCidade{item, quantidade, false});
+                        }
+                        ImGui::SameLine();
+                    }
+                    ImGui::PopID();
+                }
+                ImGui::EndTable();
+            }
+        }
+    }
     if (destinoEscolhido == 0 || destinoEscolhido == grupo.mapaAtual) {
         ImGui::TextUnformatted("Clique num mapa para escolher o destino.");
         ImGui::End();

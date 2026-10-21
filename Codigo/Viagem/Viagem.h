@@ -100,6 +100,24 @@ bool resolverPorCalculoRapidoDeForcas(int forcaA, int forcaB, int numeroDe0A999)
 // Perde a porcentagem do dinheiro e de cada item, cada perda arredondada para baixo.
 void aplicarAPerdaDoGrupo(EntidadeEmTransito& entidade, int porcentagem);
 
+// O clima de hoje da região de um mapa (Limpo se a lista não tem a região).
+TipoDeClima climaDaRegiaoDoMapa(const std::vector<TipoDeClima>& climaDeHojePorRegiao, const MundoDoJogo& mundo, int numeroDoMapa);
+
+// Regras 4.2 e 4.5: a entidade entra no trecho até o próximo mapa (o tempo fixo e o encontro).
+void entrarNoTrecho(EntidadeEmTransito& entidade, int proximoMapa, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
+                    const std::vector<TipoDeClima>& climaDeHojePorRegiao, Estacao estacao, SorteioComSemente& sorteio);
+
+// O que aconteceu num tick de uma entidade em trânsito.
+enum class PassoDaEntidade { Parada, Andou, EncontroNaMetade, ChegouAoProximoMapa, ChegouAoDestino };
+
+// Regras 4.3 e 4.4 para qualquer entidade (o grupo do jogador e as caravanas, B2): parada
+// na luta, acampada das 22 h às 6 h (com marcha forçada, conta as noites sem dormir), a
+// caravana parada na Tempestade, o encontro na metade do trecho e a chegada. Ao chegar a um
+// mapa que não é o destino, já entra no trecho seguinte. Quem chama cuida do encontro.
+PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
+                            const std::vector<TipoDeClima>& climaDeHojePorRegiao, int horaDoDia, Estacao estacao, int ticksPorHoraDeJogo,
+                            SorteioComSemente& sorteio);
+
 // Regra 4.6: aplica a escolha. Devolve a linha do console; vazio se a escolha não vale
 // (o suborno sem o dinheiro). Fugir que falha vira Lutar.
 std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras,

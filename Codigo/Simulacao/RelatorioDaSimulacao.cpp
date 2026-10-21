@@ -5,6 +5,7 @@
 #include "Economia/FelicidadeDaClasse.h"
 #include "Npc/ComponentesDoNpc.h"
 #include "Save/ArquivoDeSave.h"
+#include "Comercio/Comercio.h"
 #include "Vila/SimulacaoDaVila.h"
 
 namespace {
@@ -157,6 +158,16 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
     }
     resultado.textoDoRelatorio = escreverCabecalhoDoRelatorio(dados) + "\n";
 
+    // Fase B2 (Comércio, teste 4): o dinheiro do mundo só muda pelo que entra de fora e pelo que os bandidos levam.
+    const auto entrouDeFora = [](const SimulacaoDaVila& vila) {
+        int64_t total = vila.dinheiro.dinheiroQueEntrouDeFora;
+        for (const auto& cidade : vila.outrasCidades) {
+            total += cidade->dinheiro.dinheiroQueEntrouDeFora;
+        }
+        return total;
+    };
+    const int64_t dinheiroDoMundoNoComeco = dinheiroDoMundo(*partida) - entrouDeFora(*partida);
+
     // Passo 3: tick a tick, sem esperar o tempo real, até a meia-noite do último dia.
     const auto comeco = std::chrono::steady_clock::now();
     while (static_cast<int>(resultado.linhas.size()) < quantidadeDeDias) {
@@ -190,6 +201,12 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
         }
     }
     conferirOBancoNoFimDoAno(resultado.conferencia, resultado.linhas);
+    if (!partida->outrasCidades.empty()) {
+        resultado.linhasDoConsole.push_back(resumoDoComercio(*partida));
+        const int64_t diferenca = dinheiroDoMundo(*partida) - entrouDeFora(*partida) + partida->estatisticasDoComercio.dinheiroPerdido - dinheiroDoMundoNoComeco;
+        resultado.linhasDoConsole.push_back("Dinheiro do mundo: " + std::string(diferenca == 0 ? "conservado" : "MUDOU " + std::to_string(diferenca) + " décimos")
+                                            + " (fora o que entrou de fora e o que os bandidos levaram).");
+    }
     const auto fim = std::chrono::steady_clock::now();
     resultado.segundosQueLevou = std::chrono::duration<double>(fim - comeco).count();
     resultado.microssegundosPorTick = resultado.ticksRodados > 0 ? resultado.segundosQueLevou * 1e6 / static_cast<double>(resultado.ticksRodados) : 0;
