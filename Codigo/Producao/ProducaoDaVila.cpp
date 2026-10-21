@@ -51,9 +51,47 @@ int receitaAtualDaConstrucao(const ProducaoDaConstrucao& producao)
     return producao.receitaDoCiclo >= 0 ? producao.receitaDoCiclo : producao.receitaEscolhidaParaOProximoCiclo;
 }
 
+// Os empregados de cada construção, montados uma vez no começo de um passo que não muda
+// os empregos (a hora, a escolha das receitas, os gerentes). Sem isso, cada pergunta
+// percorria todos os NPCs: nas outras cidades (fase B1b), com 300 NPCs e 200 construções,
+// era a maior parte do tempo.
+const std::vector<std::vector<entt::entity>>* empregadosJaMontados = nullptr;
+
+class ListaDosEmpregadosDoPasso {
+public:
+    explicit ListaDosEmpregadosDoPasso(const ContextoDaProducao& contexto) : listaDeAntes(empregadosJaMontados)
+    {
+        std::vector<std::vector<std::pair<int, entt::entity>>> comNumero(contexto.vila.construcoes.size());
+        for (const auto [npc, identidade, casaETrabalho] : contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc>().each()) {
+            if (casaETrabalho.indiceDoTrabalho >= 0 && casaETrabalho.indiceDoTrabalho < static_cast<int>(comNumero.size())) {
+                comNumero[static_cast<std::size_t>(casaETrabalho.indiceDoTrabalho)].emplace_back(identidade.numeroDoNpc, npc);
+            }
+        }
+        empregadosPorConstrucao.resize(comNumero.size());
+        for (std::size_t construcao = 0; construcao < comNumero.size(); ++construcao) {
+            std::sort(comNumero[construcao].begin(), comNumero[construcao].end(),
+                      [](const auto& primeiro, const auto& segundo) { return primeiro.first < segundo.first; });
+            for (const auto& [numero, npc] : comNumero[construcao]) {
+                empregadosPorConstrucao[construcao].push_back(npc);
+            }
+        }
+        empregadosJaMontados = &empregadosPorConstrucao;
+    }
+    ~ListaDosEmpregadosDoPasso() { empregadosJaMontados = listaDeAntes; }
+    ListaDosEmpregadosDoPasso(const ListaDosEmpregadosDoPasso&) = delete;
+    ListaDosEmpregadosDoPasso& operator=(const ListaDosEmpregadosDoPasso&) = delete;
+
+private:
+    std::vector<std::vector<entt::entity>> empregadosPorConstrucao;
+    const std::vector<std::vector<entt::entity>>* listaDeAntes;
+};
+
 // Os empregados de uma construção, em ordem pelo número na vila.
 std::vector<entt::entity> empregadosDaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao)
 {
+    if (empregadosJaMontados != nullptr && indiceDaConstrucao >= 0 && indiceDaConstrucao < static_cast<int>(empregadosJaMontados->size())) {
+        return (*empregadosJaMontados)[static_cast<std::size_t>(indiceDaConstrucao)];
+    }
     std::vector<std::pair<int, entt::entity>> empregadosComNumero;
     for (const auto [npc, identidade, casaETrabalho] : contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc>().each()) {
         if (casaETrabalho.indiceDoTrabalho == indiceDaConstrucao) {
@@ -618,6 +656,7 @@ void contarOsTicksTrabalhados(ContextoDaProducao& contexto)
 void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& relogio)
 {
     andarAsObrasDaHora(contexto);
+    const ListaDosEmpregadosDoPasso empregadosDoPasso(contexto);
     for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
         if (contexto.producaoDasConstrucoes[indice].ehDeProducao) {
             rodarOCicloDeUmaConstrucao(contexto, static_cast<int>(indice), relogio.estacaoAtual());
@@ -631,6 +670,7 @@ void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& rel
 
 void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
 {
+    const ListaDosEmpregadosDoPasso empregadosDoPasso(contexto);
     const CatalogoDeItens& itens = contexto.dados.catalogoDeItens;
     const std::vector<DefinicaoDeReceita>& receitas = contexto.dados.catalogoDeReceitas.todasAsReceitas();
 
@@ -753,6 +793,7 @@ TrabalhoDaReceita trabalhoDaConstrucao(const ContextoDaProducao& contexto, int i
 
 void escolherOsGerentes(ContextoDaProducao& contexto)
 {
+    const ListaDosEmpregadosDoPasso empregadosDoPasso(contexto);
     for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
         const TrabalhoDaReceita trabalho = trabalhoDaConstrucao(contexto, static_cast<int>(indice));
         std::vector<CandidatoAGerente> candidatos;

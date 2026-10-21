@@ -25,6 +25,7 @@ void testarTrabalho();
 void testarPopulacao();
 void testarCura();
 void testarViagem();
+void testarOutrasCidades();
 
 int main()
 {
@@ -47,6 +48,7 @@ int main()
     testarPopulacao();
     testarCura();
     testarViagem();
+    testarOutrasCidades();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {

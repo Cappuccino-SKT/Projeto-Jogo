@@ -1,8 +1,13 @@
 #include "Vila/SimulacaoDaVila.h"
 
+#include <algorithm>
+
 #include "Desempenho/MedicaoDoDesempenho.h"
 #include "Economia/ConsumoESalarios.h"
 #include "Jogador/PedidosDoJogador.h"
+#include "Cidades/OutrasCidades.h"
+#include "Vila/Trabalho.h"
+#include "Npc/ComponentesDoNpc.h"
 
 SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoTempo& regrasDoTempo, int distanciaDoCicloDeAndarEmMilesimos,
                                  std::optional<uint64_t> sementeNoLugarDaDoArquivo)
@@ -33,6 +38,83 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     populacao.proximoNumeroDeNpc = static_cast<int>(npcsDaVila.size());  // os números nunca se repetem
     ContextoDaProducao producao = contextoDaProducao();
     avisosAoMontar = montarAProducaoDaVila(producao, npcsDaVila);
+
+    // Fase B1b (Outras cidades, regra 4.1): as outras cidades do mundo, em LOD 2, na
+    // ordem do número do mapa. Elas sorteiam com as suas sequências: a vila não muda.
+    std::vector<const CidadeDoMundo*> cidades;
+    for (const CidadeDoMundo& cidade : dados.mundo.cidades) {
+        if (!cidade.ehAVilaDoJogador && dados.mundo.mapaExiste(cidade.numeroDoMapa)) {
+            cidades.push_back(&cidade);
+        }
+    }
+    std::sort(cidades.begin(), cidades.end(), [](const CidadeDoMundo* uma, const CidadeDoMundo* outra) { return uma->numeroDoMapa < outra->numeroDoMapa; });
+    for (const CidadeDoMundo* cidade : cidades) {
+        outrasCidades.push_back(std::make_unique<SimulacaoDaVila>(dados, regrasDoTempo, *cidade, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida)));
+    }
+}
+
+SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoTempo& regrasDoTempo, const CidadeDoMundo& cidade, uint64_t sementeDaPartida)
+    : dados(dadosDoJogo), relogio(RelogioDoMundo::criarParaPartidaNova(regrasDoTempo)), vila(gerarAVilaDaCidade(cidade, dadosDoJogo, sementeDaPartida)),
+      mapa(montarOMapaDaCidadeEmLod2(dadosDoJogo.mundo.mapa(cidade.numeroDoMapa), dadosDoJogo)), ticksPorHoraDeJogo(regrasDoTempo.ticksPorHoraDeJogo),
+      sorteioDosNpcs(sementeDaPartida, sequenciaDoSorteioDaCidade(cidade.numeroDoMapa, 1)),
+      sorteioDosEventos(sementeDaPartida, sequenciaDoSorteioDaCidade(cidade.numeroDoMapa, 2)),
+      sorteioDoClima(sementeDaPartida, sequenciaDoSorteioDaCidade(cidade.numeroDoMapa, 3)),
+      sorteioDaPopulacao(sementeDaPartida, sequenciaDoSorteioDaCidade(cidade.numeroDoMapa, 4)),
+      sorteioDaViagem(sementeDaPartida, sequenciaDoSorteioDaCidade(cidade.numeroDoMapa, 5)),
+      sorteioDoClimaDasOutrasRegioes(sementeDaPartida, sequenciaDoSorteioDaCidade(cidade.numeroDoMapa, 9))
+{
+    lodDoMapa = 2;
+    numeroDoMapaDaCidade = cidade.numeroDoMapa;
+    // A cidade não tem grupo de viagem; o inventário vazio dele vai no save como o da vila.
+    viagem.grupoDoJogador.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    clima.climaDeHoje = dados.regrasDoClima.climaDoPrimeiroDia;
+    clima.climaDeOntem = clima.climaDeHoje;
+    guardarODiaDeHojeNoClima(clima, relogio);
+
+    // Os NPCs sem posição (OC1-2): o registro existe, no tile 0 do mapa sem desenho.
+    for (std::size_t numero = 0; numero < vila.npcsIniciais.size(); ++numero) {
+        const NpcDaVilaInicial& npcInicial = vila.npcsIniciais[numero];
+        const entt::entity npc = criarNpcNoTile(registroDasEntidades, PosicaoDeTile{0, 0});
+        registroDasEntidades.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{npcInicial.nome, npcInicial.classe, static_cast<int>(numero)});
+        registroDasEntidades.emplace<CasaETrabalhoDoNpc>(npc, CasaETrabalhoDoNpc{npcInicial.indiceDaCasa, npcInicial.indiceDoTrabalho});
+        DecisaoDoNpc decisao;
+        decisao.indiceDaConstrucaoOndeEsta = npcInicial.indiceDaCasa;
+        registroDasEntidades.emplace<DecisaoDoNpc>(npc, decisao);
+        registroDasEntidades.emplace<IdadeDoNpc>(npc, IdadeDoNpc{npcInicial.idade});
+        npcsDaVila.push_back(npc);
+    }
+    populacao.proximoNumeroDeNpc = static_cast<int>(npcsDaVila.size());
+    ContextoDaProducao producao = contextoDaProducao();
+    avisosAoMontar = montarAProducaoDaVila(producao, npcsDaVila);
+    // Passos 4 e 7: a contratação da Cidade e a escolha das receitas rodam uma vez.
+    preencherVagasDaCidade(producao);
+    escolherOsGerentes(producao);
+    escolherAsReceitasDaCidade(producao);
+}
+
+void SimulacaoDaVila::zerarAsContasDoDia()
+{
+    dinheiro.consumoNaoPagoHoje = 0;
+    dinheiro.comidaQueFaltouHoje = 0;
+    dinheiro.gastoDoJogadorComInsumosHoje = 0;
+    for (ProducaoDaConstrucao& producaoDaConstrucao : producaoDasConstrucoes) {
+        producaoDaConstrucao.producaoDeHojePorItem.clear();
+    }
+}
+
+void SimulacaoDaVila::avancarUmTickEmLod2()
+{
+    ContextoDaProducao producao = contextoDaProducao();
+    relogio.avancarUmTick();
+    if (relogio.comecouUmaHoraNova()) {
+        presumirOTrabalhoDaHora(producao, (relogio.horaDoDiaAtual() + 23) % 24);
+        rodarOsCiclosDaHora(producao, relogio);
+        obras.linhasParaOConsole.clear();
+    }
+    if (relogio.comecouUmDiaNovo()) {
+        rodarAOrdemDoDia(producao, relogio);
+        zerarAsContasDoDia();
+    }
 }
 
 ContextoDaRotina SimulacaoDaVila::contextoDaRotina()
@@ -131,12 +213,7 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaViagem.begin(), linhasDaViagem.end());
         linhasParaOConsole.push_back(montarResumoDoDia(producao, diaAntesDoTick));
         linhaDoRelatorioDoUltimoDia = montarLinhaDoRelatorio(producao, diaAntesDoTick, estacaoAntesDoTick, diaDaEstacaoAntesDoTick);
-        dinheiro.consumoNaoPagoHoje = 0;
-        dinheiro.comidaQueFaltouHoje = 0;
-        dinheiro.gastoDoJogadorComInsumosHoje = 0;
-        for (ProducaoDaConstrucao& producaoDaConstrucao : producaoDasConstrucoes) {
-            producaoDaConstrucao.producaoDeHojePorItem.clear();
-        }
+        zerarAsContasDoDia();
     }
 
     // O grupo do jogador em viagem (fase B1): o encontro pausa o jogo; a chegada volta a 1x.
@@ -171,6 +248,17 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
 
     // 5. Quem está trabalhando agora soma 1 tick (Produção, regra 4.1).
     contarOsTicksTrabalhados(producao);
+
+    // 6. As outras cidades (fase B1b), depois da vila e na ordem do número do mapa. Cada
+    //    uma usa o clima da sua região, que a viagem já sorteou na virada do dia.
+    {
+        MEDIR_ESTE_TRECHO("outras cidades");
+        for (const std::unique_ptr<SimulacaoDaVila>& cidade : outrasCidades) {
+            const int regiao = dados.mundo.mapa(cidade->numeroDoMapaDaCidade).regiao;
+            cidade->clima.climaDeHojeVindoDaRegiao = viagem.climaDeHojePorRegiao[static_cast<std::size_t>(regiao - 1)];
+            cidade->avancarUmTickEmLod2();
+        }
+    }
     registrarNasNotificacoes(linhasParaOConsole, linhasJaNasNotificacoes);
     MARCAR_O_FIM_DE_UM_TICK();
     return linhasParaOConsole;

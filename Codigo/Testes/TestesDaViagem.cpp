@@ -163,6 +163,10 @@ void testarAViagemNaPartida(const DadosDoJogo& dados)
     conferir(carregado.partida != nullptr && carregado.partida->viagem.grupoDoJogador.encontroAcontecendo
                  && carregado.partida->viagem.grupoDoJogador.ticksAndadosNoTrecho == 2200 && carregado.partida->viagem.nevoa == simulacao.viagem.nevoa,
              "salvar e carregar no meio do trecho: o mesmo tick do trecho, o encontro e a névoa");
+    if (carregado.partida == nullptr) {
+        std::printf("    motivo: %s\n", carregado.motivoDaRecusa.c_str());
+        return;
+    }
     for (SimulacaoDaVila* partida : {&simulacao, carregado.partida.get()}) {
         partida->pedidos.acrescentar(PedidoResolverEncontro{EscolhaNoEncontro::Fugir});
         for (int tick = 0; tick < 2000; ++tick) {

@@ -342,18 +342,11 @@ std::string escreverADataDoJogoParaOSave(const RelogioDoMundo& relogio)
            std::to_string(relogio.anoAtual()) + ", " + std::to_string(relogio.horaDoDiaAtual()) + "h";
 }
 
-std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, const std::string& nomeDoEspaco, const std::string& dataReal)
+// Tudo o que uma simulação guarda, menos o cabeçalho e o relógio: a vila e, desde a
+// fase B1b, cada uma das outras cidades (Outras cidades, parte 2).
+json escreverASimulacao(const SimulacaoDaVila& simulacao)
 {
     json arvore = json::object();
-    arvore["cabecalho"] = json{{"versaoDoFormato", versaoDoFormatoDoSave},
-                               {"versaoDoJogo", versaoDoJogoNoSave},
-                               {"dataReal", dataReal},
-                               {"dataDoJogo", escreverADataDoJogoParaOSave(simulacao.relogio)},
-                               {"nomeDoEspaco", nomeDoEspaco},
-                               {"tick", simulacao.relogio.tickAtual()}};
-    arvore["relogio"] = json{{"tick", Acesso::tickAtualDaPartida(simulacao.relogio)},
-                             {"velocidade", Acesso::velocidadeDoJogo(simulacao.relogio)},
-                             {"velocidadeAntesDaPausa", Acesso::velocidadeAntesDaPausa(simulacao.relogio)}};
     arvore["sorteios"] = json{{"npcs", escreverOSorteio(Acesso::sorteioDosNpcs(simulacao))}, {"eventos", escreverOSorteio(Acesso::sorteioDosEventos(simulacao))},
                               {"clima", escreverOSorteio(Acesso::sorteioDoClima(simulacao))},
                               {"populacao", escreverOSorteio(Acesso::sorteioDaPopulacao(simulacao))},
@@ -384,5 +377,27 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["npcs"] = escreverOsNpcs(simulacao);
     arvore["diario"] = escreverOsDiario(simulacao);
     arvore["viagem"] = escreverAViagem(simulacao);
+    return arvore;
+}
+
+std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, const std::string& nomeDoEspaco, const std::string& dataReal)
+{
+    json arvore = escreverASimulacao(simulacao);
+    arvore["cabecalho"] = json{{"versaoDoFormato", versaoDoFormatoDoSave},
+                               {"versaoDoJogo", versaoDoJogoNoSave},
+                               {"dataReal", dataReal},
+                               {"dataDoJogo", escreverADataDoJogoParaOSave(simulacao.relogio)},
+                               {"nomeDoEspaco", nomeDoEspaco},
+                               {"tick", simulacao.relogio.tickAtual()}};
+    arvore["relogio"] = json{{"tick", Acesso::tickAtualDaPartida(simulacao.relogio)},
+                             {"velocidade", Acesso::velocidadeDoJogo(simulacao.relogio)},
+                             {"velocidadeAntesDaPausa", Acesso::velocidadeAntesDaPausa(simulacao.relogio)}};
+    json cidades = json::array();
+    for (const auto& cidade : simulacao.outrasCidades) {
+        json secao = escreverASimulacao(*cidade);
+        secao["numeroDoMapa"] = cidade->numeroDoMapaDaCidade;
+        cidades.push_back(std::move(secao));
+    }
+    arvore["outrasCidades"] = std::move(cidades);
     return json::to_msgpack(arvore);
 }

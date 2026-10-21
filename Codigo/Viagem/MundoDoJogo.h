@@ -5,6 +5,7 @@
 // primeiro dia, do data/mundo/cidades_iniciais.json. O estado do território
 // não fica no arquivo: sai das cidades vizinhas (Facção, regra 4.1; FA1-6).
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -21,6 +22,8 @@ struct MapaDoMundo {
     std::string terreno = "planicie";
     std::string infraestrutura = "selvagem";
     std::string arquivoTiled;  // vazio = sem desenho: só se atravessa pelo Mapa Mundial (VI1-8)
+    // Fase B1b (Outras cidades; Mundo, MU1-1): a produtividade de cada recurso, em % (destaque 150, normal 100, escasso 50).
+    std::map<std::string, int> produtividadeDosRecursos;
 };
 
 struct CidadeDoMundo {

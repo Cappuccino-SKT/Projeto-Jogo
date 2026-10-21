@@ -61,6 +61,10 @@ struct VilaDoJogo {
     int dinheiroDoJogadorEmDecimos = 0;
     int dinheiroInicialPorCivilEmDecimos = 0;
     std::vector<ItemDoEstoqueInicial> estoqueInicial;
+    // Fase B1b (Outras cidades): o nível da cidade (a vila é de nível 1 até a ficha da
+    // Cidade) e a verba da Coroa por estação; −1 = a do regras.json (a da vila).
+    int nivelDaCidade = 1;
+    int64_t verbaDaCoroaPorEstacaoEmDecimos = -1;
 
     // A primeira construção do tipo Mercado, ou -1 se a vila não tem Mercado.
     int indiceDoMercado() const;

@@ -566,3 +566,16 @@ O que entrou ([[Ficha Logica/Viagem|ficha da Viagem]]; os ajustes estão na part
 
 **Para o autor testar na janela:** abrir o Mapa Mundial, escolher (5,3), levar 3 Pães (comprados na loja) e partir; ver o grupo chegar, voltar para a vila e conferir que os Pães e as moedas voltaram.
 
+### Marco B1b: as outras cidades (2026-10-21, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/OutrasCidades|ficha das Outras cidades]]; os ajustes estão na parte 10.8 dela):
+
+- **As 21 outras cidades do mundo** (as 22 do `cidades_iniciais.json` menos a vila), cada uma uma simulação em **LOD 2**: as mesmas regras do dia da vila e a mesma produção por hora, com o **trabalho presumido** (73% de cada hora do turno, medido). Os NPCs existem (2.750 no mundo), mas não andam.
+- **A criação de cada cidade:** o conjunto de produção da vila inicial a cada 15 NPCs, as Fazendas × 100 ÷ a produtividade do Grão no mapa, as casas, os NPCs (idade de 5 a 19, habilidades de 20 a 60), o estoque, o Banco pelo nível e a verba da Coroa de 5 moedas por NPC por estação.
+- **`mundo/mapas.json`** ganhou os recursos de cada mapa (destaque 150, normal 100, escasso 50, pela região: Grão alto na Autoritária e baixo na Guerreira e na Tecnocrata, Madeira alta na Arcana, Pedra alta na Autoritária...). **Provisório, para o autor conferir.**
+- **`regras.json`** ganhou o bloco `outras_cidades`.
+- **O save** leva as 21 cidades (a seção `outrasCidades`).
+- **Mais rápido:** os empregados de cada construção são montados uma vez por passo, e isso deixou a vila mais rápida também.
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (481 conferências: as contas da parte 10.2, as 21 cidades e os 2.750 NPCs, a capital com 20 Padarias e 40 Fazendas, 16 dias sem fome em nenhuma cidade, a vila igual com e sem as cidades dia a dia, o save com as 21 cidades, a vila em LOD 2 contra LOD 0). **As 10 sementes passam**, e o salvar e carregar no dia 30 dá o relatório igual.
+

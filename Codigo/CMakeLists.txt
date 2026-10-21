@@ -31,6 +31,7 @@ add_library(regras_do_jogo STATIC
     Viagem/RegrasDaViagem.cpp
     Viagem/Viagem.cpp
     Viagem/ViagemDaVila.cpp
+    Cidades/OutrasCidades.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

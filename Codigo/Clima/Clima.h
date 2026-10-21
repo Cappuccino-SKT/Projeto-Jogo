@@ -55,6 +55,8 @@ struct EstadoDoClima {
     Estacao estacaoDeHoje = Estacao::Primavera;
     int diaDaEstacaoDeHoje = 1;
     int diasPorEstacao = 16;
+    // Fase B1b (Outras cidades): a cidade fora da vila usa o clima da região dela, sem sortear.
+    std::optional<TipoDeClima> climaDeHojeVindoDaRegiao;
     // Só do dia (não vão no save; o relatório e a Felicidade usam).
     int lenhaTiradaHoje = 0;
     bool faltouLenhaHoje = false;

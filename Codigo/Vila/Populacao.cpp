@@ -203,9 +203,12 @@ void resolverOAcumulado(ContextoDaProducao& contexto, std::vector<std::string>& 
 
 int capacidadeDaVila(const ContextoDaProducao& contexto)
 {
-    // A vila é de nível 1 até a ficha da Cidade (fase A5).
+    // A vila é de nível 1 até a ficha da Cidade (fase A5); as outras cidades têm o nível delas (B1b).
     const std::vector<int>& capacidades = contexto.dados.regras.populacao.capacidadePorNivelDaCidade;
-    return capacidades.empty() ? 15 : capacidades.front();
+    if (capacidades.empty()) {
+        return 15;
+    }
+    return capacidades[static_cast<std::size_t>(std::clamp(contexto.vila.nivelDaCidade, 1, static_cast<int>(capacidades.size())) - 1)];
 }
 
 int calcularCrescimentoDaEstacao(int npcsReais, int felicidadeEmDecimos, bool houveFome, const RegrasDaPopulacao& regras)

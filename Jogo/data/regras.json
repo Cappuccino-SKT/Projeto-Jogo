@@ -88,5 +88,12 @@
     "migracao": { "chega_com_felicidade_minima": 50, "sai_com_felicidade_abaixo_de": 30, "sai_com_desemprego_em_porcento": 30 },
     "nomes_dos_novos_npcs": ["Rita", "Tiago", "Úrsula", "Vítor", "Wanda", "Xavier", "Yara", "Zeca", "Alice", "Bruno", "Cecília", "Diego"]
   },
-  "ordem_do_dia": ["clima", "manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "populacao", "eventos", "escolha_das_receitas"]
+  "ordem_do_dia": ["clima", "manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "populacao", "eventos", "escolha_das_receitas"],
+  "outras_cidades": {
+    "trabalho_presumido_em_porcento": 73,
+    "npcs_reais_por_nivel": [15, 40, 100, 300],
+    "dinheiro_inicial_do_banco_por_nivel": [400, 1500, 6000, 20000],
+    "verba_da_coroa_por_npc_por_estacao_em_decimos": 50,
+    "construcoes_de_producao_a_cada_npcs": 15
+  }
 }

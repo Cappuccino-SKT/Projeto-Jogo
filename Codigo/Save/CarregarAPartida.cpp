@@ -227,7 +227,7 @@ void restaurarAVila(SimulacaoDaVila& simulacao, const json& lista)
             throw RecusaDoSave("O save usa a " + construcao.tipo + ", que não existe mais.");
         }
         construcao.numeroDoLote = linha.at("lote").get<int>();
-        bool loteExiste = false;
+        bool loteExiste = construcao.numeroDoLote < 0 && simulacao.lodDoMapa == 2;  // as outras cidades não têm lotes (B1b)
         for (const LoteDeConstrucao& lote : simulacao.mapa.lotesDeConstrucao) {
             loteExiste = loteExiste || lote.identificadorDoLote == construcao.numeroDoLote;
         }
@@ -533,6 +533,39 @@ void restaurarODiario(SimulacaoDaVila& simulacao, const json& lista)
 
 }  // namespace
 
+// Tudo o que uma simulação guarda, menos o relógio (a vila e cada uma das outras cidades).
+void restaurarASimulacao(SimulacaoDaVila& partida, const json& arvore)
+{
+    restaurarOSorteio(Acesso::sorteioDosNpcs(partida), arvore.at("sorteios").at("npcs"));
+    restaurarOSorteio(Acesso::sorteioDosEventos(partida), arvore.at("sorteios").at("eventos"));
+    restaurarOSorteio(Acesso::sorteioDoClima(partida), arvore.at("sorteios").at("clima"));
+    restaurarOSorteio(Acesso::sorteioDaPopulacao(partida), arvore.at("sorteios").at("populacao"));
+    partida.populacao.acumuladoDeCrescimentoEmPessoas = arvore.at("populacao").at("acumulado").get<int>();
+    partida.populacao.proximoNumeroDeNpc = arvore.at("populacao").at("proximoNumeroDeNpc").get<int>();
+    partida.populacao.diasDeFomeNaEstacao = arvore.at("populacao").at("diasDeFomeNaEstacao").get<int>();
+    restaurarOClima(partida, arvore.at("clima"));
+    restaurarOSorteio(Acesso::sorteioDaViagem(partida), arvore.at("sorteios").at("viagem"));
+    restaurarOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(partida), arvore.at("sorteios").at("climaDasOutrasRegioes"));
+    restaurarAViagem(partida, arvore.at("viagem"));
+    {
+        const json& leilao = arvore.at("leilao");
+        partida.trabalho.leilao = LeilaoDeConstrucao{leilao.at("construcao").get<int>(), leilao.at("diasQueFaltam").get<int>(),
+                                                      leilao.at("maiorLance").get<int64_t>(), leilao.at("lanceEhDoJogador").get<bool>()};
+    }
+    restaurarAVila(partida, arvore.at("vila"));
+    restaurarAProducao(partida, arvore.at("producao"));
+    restaurarAsObras(partida, arvore.at("obras"));
+    restaurarOInventario(partida, arvore.at("inventario"));
+    restaurarODinheiro(partida.dinheiro, arvore.at("dinheiro"));
+    restaurarOMercado(partida, arvore.at("mercado"));
+    restaurarOConsumoMedido(partida, arvore.at("consumoMedido"));
+    restaurarAFelicidade(partida.felicidade, arvore.at("felicidade"));
+    restaurarOsEventos(partida, arvore.at("eventos"));
+    restaurarAsDecisoes(partida, arvore.at("decisoes"));
+    restaurarOsNpcs(partida, arvore.at("npcs"));
+    restaurarODiario(partida, arvore.at("diario"));
+}
+
 ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const RegrasDoTempo& regrasDoTempo,
                                                 int distanciaDoCicloDeAndarEmMilesimos, const std::vector<uint8_t>& bytes)
 {
@@ -556,34 +589,20 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
 
         // Passo 5: cada parte pela seção dela, na ordem do salvamento.
         restaurarORelogio(*partida, arvore.at("relogio"));
-        restaurarOSorteio(Acesso::sorteioDosNpcs(*partida), arvore.at("sorteios").at("npcs"));
-        restaurarOSorteio(Acesso::sorteioDosEventos(*partida), arvore.at("sorteios").at("eventos"));
-        restaurarOSorteio(Acesso::sorteioDoClima(*partida), arvore.at("sorteios").at("clima"));
-        restaurarOSorteio(Acesso::sorteioDaPopulacao(*partida), arvore.at("sorteios").at("populacao"));
-        partida->populacao.acumuladoDeCrescimentoEmPessoas = arvore.at("populacao").at("acumulado").get<int>();
-        partida->populacao.proximoNumeroDeNpc = arvore.at("populacao").at("proximoNumeroDeNpc").get<int>();
-        partida->populacao.diasDeFomeNaEstacao = arvore.at("populacao").at("diasDeFomeNaEstacao").get<int>();
-        restaurarOClima(*partida, arvore.at("clima"));
-        restaurarOSorteio(Acesso::sorteioDaViagem(*partida), arvore.at("sorteios").at("viagem"));
-        restaurarOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(*partida), arvore.at("sorteios").at("climaDasOutrasRegioes"));
-        restaurarAViagem(*partida, arvore.at("viagem"));
-        {
-            const json& leilao = arvore.at("leilao");
-            partida->trabalho.leilao = LeilaoDeConstrucao{leilao.at("construcao").get<int>(), leilao.at("diasQueFaltam").get<int>(),
-                                                          leilao.at("maiorLance").get<int64_t>(), leilao.at("lanceEhDoJogador").get<bool>()};
+        restaurarASimulacao(*partida, arvore);
+        // Fase B1b: as outras cidades, pelo número do mapa, com o mesmo relógio.
+        const json& cidades = arvore.at("outrasCidades");
+        if (cidades.size() != partida->outrasCidades.size()) {
+            throw RecusaDoSave("O save tem " + std::to_string(cidades.size()) + " outras cidades, e o mundo tem " + std::to_string(partida->outrasCidades.size()) + ".");
         }
-        restaurarAVila(*partida, arvore.at("vila"));
-        restaurarAProducao(*partida, arvore.at("producao"));
-        restaurarAsObras(*partida, arvore.at("obras"));
-        restaurarOInventario(*partida, arvore.at("inventario"));
-        restaurarODinheiro(partida->dinheiro, arvore.at("dinheiro"));
-        restaurarOMercado(*partida, arvore.at("mercado"));
-        restaurarOConsumoMedido(*partida, arvore.at("consumoMedido"));
-        restaurarAFelicidade(partida->felicidade, arvore.at("felicidade"));
-        restaurarOsEventos(*partida, arvore.at("eventos"));
-        restaurarAsDecisoes(*partida, arvore.at("decisoes"));
-        restaurarOsNpcs(*partida, arvore.at("npcs"));
-        restaurarODiario(*partida, arvore.at("diario"));
+        for (std::size_t cidade = 0; cidade < cidades.size(); ++cidade) {
+            SimulacaoDaVila& outra = *partida->outrasCidades[cidade];
+            if (cidades[cidade].at("numeroDoMapa").get<int>() != outra.numeroDoMapaDaCidade) {
+                throw RecusaDoSave("O save tem as outras cidades em outros mapas.");
+            }
+            restaurarORelogio(outra, arvore.at("relogio"));
+            restaurarASimulacao(outra, cidades[cidade]);
+        }
 
         // Passo 6: o resto já foi recalculado (o mapa bloqueado e a capacidade).
         partida->avisosAoMontar.clear();

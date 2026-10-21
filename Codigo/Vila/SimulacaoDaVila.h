@@ -6,6 +6,7 @@
 // chamam a mesma avancarUmTick(), então os dois rodam exatamente a mesma partida.
 
 #include <cstdint>
+#include <memory>
 #include <optional>
 #include <string>
 #include <vector>
@@ -43,6 +44,10 @@ public:
     SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoTempo& regrasDoTempo, int distanciaDoCicloDeAndarEmMilesimos = 2400,
                     std::optional<uint64_t> sementeNoLugarDaDoArquivo = std::nullopt);
 
+    // Fase B1b (Outras cidades, regra 4.1): uma das outras cidades do mundo, em LOD 2. A
+    // semente é a da partida; as sequências são as da cidade (OC1-3).
+    SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoTempo& regrasDoTempo, const CidadeDoMundo& cidade, uint64_t sementeDaPartida);
+
     // Uma cópia levaria junto as referências da vila; não faz sentido.
     SimulacaoDaVila(const SimulacaoDaVila&) = delete;
     SimulacaoDaVila& operator=(const SimulacaoDaVila&) = delete;
@@ -57,6 +62,11 @@ public:
     //   5. quem está trabalhando soma 1 tick.
     // Devolve as linhas para o console (os avisos, os eventos e o resumo do dia).
     std::vector<std::string> avancarUmTick();
+
+    // Fase B1b (Outras cidades, regras 4.3 e 4.4): 1 tick de uma cidade em LOD 2. Os NPCs
+    // não andam; na virada da hora, o trabalho presumido e o ciclo de cada construção; na
+    // virada do dia, a ordem do dia inteira.
+    void avancarUmTickEmLod2();
 
     // Marco 8 (Interface, regra 10.8): aplica os pedidos do jogador que estão
     // na fila. O avancarUmTick() faz isso no começo; o laço do jogo também
@@ -99,11 +109,18 @@ public:
     // A linha do relatório do último dia que acabou (montada na meia-noite,
     // antes de as contas do dia voltarem a zero). Vazia antes da primeira.
     std::optional<LinhaDoRelatorio> linhaDoRelatorioDoUltimoDia;
+    // Fase B1b (Outras cidades): 0 a vila com tela; 2 uma outra cidade. O número do mapa
+    // dela (0 na vila) e, só na vila, as outras cidades, na ordem do número do mapa.
+    int lodDoMapa = 0;
+    int numeroDoMapaDaCidade = 0;
+    std::vector<std::unique_ptr<SimulacaoDaVila>> outrasCidades;
 
 private:
     friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura os sorteios (marco 9)
     // Cada linha do console que merece vira notificação (e entra no Diário).
     void registrarNasNotificacoes(const std::vector<std::string>& linhas, std::size_t aPartirDaLinha);
+    // Zera as contas do dia depois da ordem do dia (as duas formas de avançar).
+    void zerarAsContasDoDia();
     int ticksPorHoraDeJogo = 800;
     BuscadorDeCaminho buscadorDeCaminho;
     SorteioComSemente sorteioDosNpcs;

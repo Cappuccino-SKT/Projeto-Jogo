@@ -379,8 +379,10 @@ void rodarOEstabilizador(ContextoDaProducao& contexto, const RelogioDoMundo& rel
     // 1. No dia 1 de cada estação, entra a verba da Coroa (FE4-1: o único dinheiro de
     //    fora além do Mercador) e o teto recomeça.
     if (relogio.diaDaEstacaoAtual() == 1) {
-        dinheiro.bancoDaCidade += economia.verbaDaCoroaPorEstacaoEmDecimos;
-        dinheiro.dinheiroQueEntrouDeFora += economia.verbaDaCoroaPorEstacaoEmDecimos;
+        // As outras cidades têm a verba delas (Outras cidades, 4.7).
+        const int64_t verba = contexto.vila.verbaDaCoroaPorEstacaoEmDecimos >= 0 ? contexto.vila.verbaDaCoroaPorEstacaoEmDecimos : economia.verbaDaCoroaPorEstacaoEmDecimos;
+        dinheiro.bancoDaCidade += verba;
+        dinheiro.dinheiroQueEntrouDeFora += verba;
         dinheiro.bancoNoComecoDaEstacao = dinheiro.bancoDaCidade;
         dinheiro.ajudaDoEstabilizadorNaEstacao = 0;
     }

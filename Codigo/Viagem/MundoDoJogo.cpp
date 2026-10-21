@@ -128,6 +128,15 @@ MundoDoJogo lerArquivosDoMundo(const std::string& textoDosMapas, const std::stri
                 mapa.terreno = lerTexto(entrada, "terreno", mapa.terreno);
                 mapa.infraestrutura = lerTexto(entrada, "infraestrutura", mapa.infraestrutura);
                 mapa.arquivoTiled = lerTexto(entrada, "arquivo_tiled", "");
+                if (const auto recursos = entrada.find("recursos"); recursos != entrada.end() && recursos->is_object()) {
+                    for (const auto& [recurso, produtividade] : recursos->items()) {
+                        if (produtividade.is_number_integer() && produtividade.get<int>() > 0) {
+                            mapa.produtividadeDosRecursos[recurso] = produtividade.get<int>();
+                        } else {
+                            listaDeProblemas.anotarErro(nomeDoArquivoDosMapas, 0, "a produtividade de \"" + recurso + "\" precisa ser um inteiro maior que 0");
+                        }
+                    }
+                }
                 lido[mapa.numeroDoMapa - 1] = true;
             }
         }

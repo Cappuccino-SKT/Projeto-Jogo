@@ -19,6 +19,7 @@
 #include "Vila/VilaInicial.h"
 #include "Viagem/MundoDoJogo.h"
 #include "Viagem/RegrasDaViagem.h"
+#include "Cidades/RegrasDasOutrasCidades.h"
 
 struct DadosDoJogo {
     TabelaDeTextos tabelaDeTextos;
@@ -33,6 +34,7 @@ struct DadosDoJogo {
     RegrasDoClima regrasDoClima;  // fase A1 (ficha do Clima)
     MundoDoJogo mundo;            // fase B1 (fichas do Mundo e da Viagem)
     RegrasDaViagem regrasDaViagem;
+    RegrasDasOutrasCidades regrasDasOutrasCidades;  // fase B1b
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }
