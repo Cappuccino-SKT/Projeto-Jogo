@@ -170,3 +170,5 @@ A região Guerreira tem o Grão **escasso**. A vila alimenta 15 NPCs com as Faze
 3. **MU1-3:** os Esquadrões do primeiro dia são Infantaria Leve, kit Rank 1, de guarnição na capital.
 4. **MU1-4:** a sequência 8 ("mundo") para os preços iniciais, as tecnologias extras e o Loot.
 5. **MU1-5:** a ordem da criação é a da parte 4, sempre a mesma.
+
+> **Mudança da rodada CO2 (2026-10-21):** a MU1-2 (as Braçais de comida × 100 ÷ produtividade) deixava toda cidade autossuficiente, e o comércio quase não acontecia. Agora, onde o recurso de comida é escasso, as Braçais cobrem só **75%** do consumo; onde é normal ou de destaque, a cidade fica com o conjunto inteiro. Ver a ficha do [[Ficha Logica/Comercio|Comércio]], parte 10.8.

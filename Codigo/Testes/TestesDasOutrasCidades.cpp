@@ -52,8 +52,8 @@ void testarACriacao(const DadosDoJogo& dados)
 
     const SimulacaoDaVila& capital = *vila.outrasCidades.front();  // (1,1), a capital Guerreira: Grão escasso (50%)
     conferir(capital.numeroDoMapaDaCidade == 1 && capital.npcsDaVila.size() == 300 && capital.lodDoMapa == 2, "a primeira é a capital Guerreira, com 300 NPCs, em LOD 2");
-    conferir(construcoesDoTipo(capital.vila, "construcao.cozinheiro") == 20 && construcoesDoTipo(capital.vila, "construcao.fazenda") == 40,
-             "a capital: 20 vezes a Padaria da vila; com o Grão a 50%, 40 Fazendas");
+    conferir(construcoesDoTipo(capital.vila, "construcao.cozinheiro") == 20 && construcoesDoTipo(capital.vila, "construcao.fazenda") == 30,
+             "a capital: 20 vezes a Padaria da vila; com o Grão a 50%, 30 Fazendas (75% do consumo, CO2-1)");
     int empregados = 0;
     for (const entt::entity npc : capital.npcsDaVila) {
         empregados += capital.registroDasEntidades.get<CasaETrabalhoDoNpc>(npc).indiceDoTrabalho >= 0 ? 1 : 0;

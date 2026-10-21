@@ -203,6 +203,20 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
     conferirOBancoNoFimDoAno(resultado.conferencia, resultado.linhas);
     if (!partida->outrasCidades.empty()) {
         resultado.linhasDoConsole.push_back(resumoDoComercio(*partida));
+        // As outras cidades no fim: quantas passam fome (CO2-1: as de comida escassa dependem das caravanas).
+        int cidadesComFome = 0;
+        int piorMapa = 0;
+        int piorDias = 0;
+        for (const auto& cidade : partida->outrasCidades) {
+            const int dias = cidade->dinheiro.diasEmDeficitDeComida;
+            cidadesComFome += dias > 0 ? 1 : 0;
+            if (dias > piorDias) {
+                piorDias = dias;
+                piorMapa = cidade->numeroDoMapaDaCidade;
+            }
+        }
+        resultado.linhasDoConsole.push_back("Outras cidades: " + std::to_string(cidadesComFome) + " com fome no último dia"
+                                            + (piorDias > 0 ? " (a pior, o mapa " + std::to_string(piorMapa) + ", há " + std::to_string(piorDias) + " dias)" : "") + ".");
         const int64_t diferenca = dinheiroDoMundo(*partida) - entrouDeFora(*partida) + partida->estatisticasDoComercio.dinheiroPerdido - dinheiroDoMundoNoComeco;
         resultado.linhasDoConsole.push_back("Dinheiro do mundo: " + std::string(diferenca == 0 ? "conservado" : "MUDOU " + std::to_string(diferenca) + " décimos")
                                             + " (fora o que entrou de fora e o que os bandidos levaram).");

@@ -13,6 +13,7 @@ struct RegrasDasOutrasCidades {
     std::vector<int> dinheiroInicialDoBancoPorNivel = {400, 1500, 6000, 20000};  // em moedas
     int verbaDaCoroaPorNpcPorEstacaoEmDecimos = 50;
     int construcoesDeProducaoACadaNpcs = 15;
+    int coberturaDaComidaEscassaEmPorcento = 75;  // CO2-1: as Braçais de comida onde o recurso é escasso
 };
 
 // Lê o bloco do regras.json inteiro; sem o bloco, ficam os valores da ficha.

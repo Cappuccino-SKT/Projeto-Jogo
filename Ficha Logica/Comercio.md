@@ -275,5 +275,5 @@ D2 ganha (78,1 > 20% de 61,6 = 12,3). A **caravana 1** sai para D2 com 80 Tábua
 4. **A faixa da Reputação** (4.7, passo 5) entra com a Reputação.
 5. **A loja da vila** passou a seguir a regra 4.7 também (CO1-3 é para todos): a compra tem a reserva de 2 dias (RE1-4); a venda paga 90% até o alvo e 45% do base além dele.
 6. **O mercador viajante** continua só no console.
-7. **Achado: o comércio quase não acontece** (de 4 a 11 viagens em 1 ano). Está na rodada CO2.
+7. **Achado: o comércio quase não acontecia** (de 4 a 11 viagens em 1 ano): toda cidade era autossuficiente. **Rodada CO2, opção A do autor:** onde o recurso de comida é escasso, as Braçais cobrem só 75% do consumo; onde é normal ou de destaque, a cidade fica com o conjunto inteiro (`cobertura_da_comida_escassa_em_porcento` no bloco `outras_cidades`). Muda a MU1-2 do [[Ficha Logica/Mundo|Mundo]].
 

@@ -94,7 +94,8 @@
     "npcs_reais_por_nivel": [15, 40, 100, 300],
     "dinheiro_inicial_do_banco_por_nivel": [400, 1500, 6000, 20000],
     "verba_da_coroa_por_npc_por_estacao_em_decimos": 50,
-    "construcoes_de_producao_a_cada_npcs": 15
+    "construcoes_de_producao_a_cada_npcs": 15,
+    "cobertura_da_comida_escassa_em_porcento": 75
   },
   "comercio": {
     "caravanas_por_posto_comercial": 2,

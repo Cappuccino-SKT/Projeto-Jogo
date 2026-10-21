@@ -594,3 +594,4 @@ O que entrou ([[Ficha Logica/Comercio|ficha do Comércio]]; os ajustes estão na
 
 **Achado (rodada CO2):** em 1 ano, as 14 caravanas fazem só de 4 a 11 viagens: as cidades são autossuficientes e os preços ficam parecidos. Ver a [[Rodada Pendente]].
 
+**Rodada CO2 (2026-10-21, opção A do autor):** onde o Grão é escasso (Guerreira e Tecnocrata), as Fazendas cobrem só 75% do consumo; onde é normal ou de destaque, a cidade fica com o conjunto inteiro (a capital Guerreira passou de 40 para 30 Fazendas). **Verificado pelo assistente:** `testes_do_codigo` passa (490 conferências); **as 10 sementes passam**, o dinheiro do mundo se conserva, nenhuma das 21 cidades está com fome no fim do ano, e o salvar e carregar dá o relatório igual. As caravanas passaram de 4 a 11 para **6 a 15 viagens por ano**; o comércio ainda é pequeno, e a opção B da rodada (a caravana mais barata) continua disponível se o autor quiser mais.

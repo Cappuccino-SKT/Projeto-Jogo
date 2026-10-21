@@ -100,6 +100,7 @@ RegrasDasOutrasCidades lerRegrasDasOutrasCidades(const std::string& textoDoRegra
     lerLista("dinheiro_inicial_do_banco_por_nivel", regras.dinheiroInicialDoBancoPorNivel);
     lerInteiro("verba_da_coroa_por_npc_por_estacao_em_decimos", regras.verbaDaCoroaPorNpcPorEstacaoEmDecimos);
     lerInteiro("construcoes_de_producao_a_cada_npcs", regras.construcoesDeProducaoACadaNpcs);
+    lerInteiro("cobertura_da_comida_escassa_em_porcento", regras.coberturaDaComidaEscassaEmPorcento);
     if (regras.construcoesDeProducaoACadaNpcs < 1) {
         listaDeProblemas.anotarErro(nomeDoArquivoDeRegras, 0, "\"outras_cidades\": \"construcoes_de_producao_a_cada_npcs\" precisa ser 1 ou mais");
         regras.construcoesDeProducaoACadaNpcs = 15;
@@ -137,7 +138,12 @@ VilaDoJogo gerarAVilaDaCidade(const CidadeDoMundo& cidade, const DadosDoJogo& da
         if (produtividade == 0) {
             continue;  // uma Braçal de um recurso que o mapa não tem
         }
-        const int copias = (blocos * 100 + produtividade - 1) / produtividade;
+        // CO2-1 (opção A): onde o recurso de comida é escasso, as Braçais cobrem só 75% do
+        // consumo (a cidade compra o resto); onde é normal ou de destaque, o conjunto inteiro
+        // (com 150%, sobra para vender). Antes (MU1-2), × 100 ÷ produtividade deixava toda
+        // cidade autossuficiente, e o comércio quase não acontecia.
+        const int coberturaDoEscasso = dados.regrasDasOutrasCidades.coberturaDaComidaEscassaEmPorcento;
+        const int copias = produtividade < 100 ? (blocos * coberturaDoEscasso + produtividade - 1) / produtividade : blocos;
         for (int copia = 0; copia < copias; ++copia) {
             ConstrucaoDaVila construcao = modelo;
             construcao.identificador = modelo.identificador + "_" + std::to_string(copia + 1);
