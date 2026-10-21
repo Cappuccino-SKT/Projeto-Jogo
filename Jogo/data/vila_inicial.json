@@ -15,7 +15,7 @@
   "construcoes": [
     { "id": "fazenda", "tipo": "construcao.fazenda", "lote": 1, "dono": "cidade", "nivel": 1 },
     { "id": "posto_de_coleta", "tipo": "construcao.posto_de_coleta", "lote": 6, "dono": "cidade", "nivel": 1 },
-    { "id": "cozinheiro", "tipo": "construcao.cozinheiro", "lote": 10, "dono": "cidade", "nivel": 1 },
+    { "id": "cozinheiro", "tipo": "construcao.cozinheiro", "lote": 10, "dono": "cidade", "nivel": 2 },
     { "id": "mercado", "tipo": "construcao.mercado", "lote": 9, "dono": "cidade", "nivel": 1 },
     { "id": "construtor", "tipo": "construcao.construtor", "lote": 3, "dono": "cidade", "nivel": 1 },
     { "id": "carpintaria_do_jogador", "tipo": "construcao.carpinteiro", "lote": 11, "dono": "jogador", "nivel": 2,
