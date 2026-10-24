@@ -120,6 +120,8 @@ public:
     std::vector<CaravanaDaCidade> caravanas;
     std::vector<int> aCaminhoPorItem;
     EstatisticasDoComercio estatisticasDoComercio;
+    // Fase B3 (Notícias): só na vila, as notícias do mundo e o que o jogador sabe.
+    EstadoDasNoticias noticias;
     // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
     int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
     // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).

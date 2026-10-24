@@ -304,6 +304,20 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         }
         avancarAsCaravanasUmTick(*this);
     }
+
+    // 8. As notícias (fase B3): no dia novo, os acontecimentos de hoje e as notícias de preço
+    //    (o passo 3c); a cada tick, o que chegou ao jogador.
+    if (lodDoMapa == 0) {
+        MEDIR_ESTE_TRECHO("noticias");
+        if (relogio.comecouUmDiaNovo()) {
+            recolherOsAcontecimentosDoDia(*this);
+            if (!outrasCidades.empty()) {
+                criarNoticiasDePreco(*this);
+            }
+        }
+        const std::vector<std::string> linhasDasNoticias = avancarAsNoticiasUmTick(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDasNoticias.begin(), linhasDasNoticias.end());
+    }
     registrarNasNotificacoes(linhasParaOConsole, linhasJaNasNotificacoes);
     MARCAR_O_FIM_DE_UM_TICK();
     return linhasParaOConsole;

@@ -28,6 +28,9 @@ struct EstadoDosEventos {
     std::vector<std::string> mudancasDeHoje;
     // As linhas do console de hoje: "Evento: Seca (a Fazenda produz 50% por 8 dias)."
     std::vector<std::string> linhasParaOConsole;
+    // Fase B3 (ficha das Notícias): os eventos de hoje que viram notícia (a vila recolhe no
+    // mesmo tick; não vai no save).
+    std::vector<AcontecimentoParaNoticia> acontecimentosDeHoje;
     // Fase A6 (ficha da Cura): a dose inteira do Remédio foi tomada hoje (não vai no save: é do dia).
     bool remedioTomadoHoje = false;
 

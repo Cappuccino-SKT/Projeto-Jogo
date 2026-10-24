@@ -257,3 +257,15 @@ O jogador em (5,3) a 2 mapas de D2 recebe "Tábua cara em D2" (Local, sem notifi
 4. **NO1-4:** a média do preço é a da **região** até a Facção existir.
 5. **NO1-5:** a importância de cada acontecimento é a da tabela da parte 2; os eventos pequenos (Febre, Ratos, Mercador viajante) não viram notícia.
 6. **NO1-6:** a distância é contada na malha (passos), e a chegada não é guardada: é calculada pela origem.
+
+### 10.8 Ajustes do código (marco B3, 2026-10-24)
+
+1. **A rede do jogador** é só o mapa do grupo: as caravanas do jogador ainda não existem (Comércio, 10.8).
+2. **O quadro da Taverna** fica para quando houver Taverna. No lugar dele, o botão **Notícias** da barra de cima abre uma janela com as notícias que o jogador sabe (todas, também as Locais) e a aba **Crônica do mundo**.
+3. **Subiu ou caiu de nível** fica para o marco A5 (as cidades ainda não mudam de nível).
+4. **Caravana atacada e bandidos na estrada** viram uma notícia só: "Bandidos atacaram a caravana de X em (c,l)", com "perdeu N% da carga" ou "os guardas venceram". O ataque ao grupo do jogador não vira notícia (ele estava lá).
+5. **O Inverno rigoroso** é sorteado em cada cidade: vira uma notícia Mundial em cada cidade onde acontece.
+6. **Os eventos da própria vila** entram na lista e na Crônica, mas não avisam de novo (o console dos eventos já avisou).
+7. **Os números:** a Epidemia leva os doentes da cidade e a Fome a população, em pessoas; os outros eventos vão sem número. O "Por quê?" só aparece nas notícias de preço e de ataque.
+8. **A notícia de preço** ("Tábua em X: 3,0 (+69% da média da região)") só troca o preço daquele item no `precosConhecidos` se a cidade já foi vista e a visita é mais velha que a notícia; a data da visita não muda.
+

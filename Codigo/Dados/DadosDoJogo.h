@@ -21,6 +21,7 @@
 #include "Viagem/RegrasDaViagem.h"
 #include "Cidades/RegrasDasOutrasCidades.h"
 #include "Comercio/RegrasDoComercio.h"
+#include "Noticias/Noticias.h"
 
 struct DadosDoJogo {
     TabelaDeTextos tabelaDeTextos;
@@ -37,6 +38,7 @@ struct DadosDoJogo {
     RegrasDaViagem regrasDaViagem;
     RegrasDasOutrasCidades regrasDasOutrasCidades;  // fase B1b
     RegrasDoComercio regrasDoComercio;              // fase B2
+    RegrasDasNoticias regrasDasNoticias;            // fase B3
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }

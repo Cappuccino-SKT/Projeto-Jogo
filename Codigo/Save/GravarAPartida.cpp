@@ -359,6 +359,52 @@ json escreverOComercio(const SimulacaoDaVila& simulacao)
     return json{{"aCaminhoPorItem", escreverOsItens(simulacao.dados, simulacao.aCaminhoPorItem)}, {"caravanas", caravanas}};
 }
 
+// Fase B3 (ficha das Notícias): as notícias ativas, o que o jogador sabe e a Crônica.
+json escreverAsNoticias(const SimulacaoDaVila& simulacao)
+{
+    const EstadoDasNoticias& noticias = simulacao.noticias;
+    json ativas = json::array();
+    for (const Noticia& noticia : noticias.ativas) {
+        ativas.push_back(json{{"numero", noticia.numeroDaNoticia},
+                              {"tipo", noticia.tipo},
+                              {"importancia", static_cast<int>(noticia.importancia)},
+                              {"mapaDeOrigem", noticia.mapaDeOrigem},
+                              {"tickDeOrigem", noticia.tickDeOrigem},
+                              {"diaDeOrigem", noticia.diaDeOrigem},
+                              {"titulo", noticia.titulo},
+                              {"numeroDoAcontecimento", noticia.numero},
+                              {"rotuloDoNumero", noticia.rotuloDoNumero},
+                              {"porQue", noticia.porQue},
+                              {"diaEmQueSaiDoQuadro", noticia.diaEmQueSaiDoQuadro},
+                              {"item", noticia.numeroDoItem >= 0 ? json(textoDoItem(simulacao.dados, noticia.numeroDoItem)) : json()},
+                              {"preco", noticia.precoEmDecimos}});
+    }
+    json sabidas = json::array();
+    for (const NoticiaQueOJogadorSabe& sabida : noticias.noticiasQueOJogadorSabe) {
+        sabidas.push_back(json::array({sabida.numeroDaNoticia, sabida.diaEmQueSoube, sabida.distancia}));
+    }
+    json cronica = json::array();
+    for (const LinhaDaCronica& linha : noticias.cronicaDoMundo) {
+        cronica.push_back(json::array({linha.numeroDaNoticia, linha.diaDoAcontecimento, linha.diaEmQueSoube, linha.texto}));
+    }
+    json precos = json::array();
+    for (const std::vector<int64_t>& doMapa : noticias.diaDaUltimaNoticiaDePreco) {
+        json porItem = json::object();
+        for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(doMapa.size()); ++numeroDoItem) {
+            if (doMapa[static_cast<std::size_t>(numeroDoItem)] >= 0) {
+                porItem[textoDoItem(simulacao.dados, numeroDoItem)] = doMapa[static_cast<std::size_t>(numeroDoItem)];
+            }
+        }
+        precos.push_back(std::move(porItem));
+    }
+    return json{{"ativas", ativas},
+                {"proximoNumero", noticias.proximoNumeroDaNoticia},
+                {"sabidas", sabidas},
+                {"cronica", cronica},
+                {"diaDaUltimaNoticiaDePreco", precos},
+                {"mapaDoJogadorNaUltimaConferencia", noticias.mapaDoJogadorNaUltimaConferencia}};
+}
+
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
 {
     json lista = json::array();
@@ -435,5 +481,6 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
         cidades.push_back(std::move(secao));
     }
     arvore["outrasCidades"] = std::move(cidades);
+    arvore["noticias"] = escreverAsNoticias(simulacao);
     return json::to_msgpack(arvore);
 }

@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 
+#include "Noticias/Noticias.h"
 #include "Dados/Construcoes.h"
 #include "Dados/Itens.h"
 #include "Dados/ProblemasDosDados.h"
@@ -57,6 +58,7 @@ struct DefinicaoDeEvento {
     std::string identificadorDeTexto;  // "evento.seca"; o nome está no textos/pt-BR.json
     TipoDeEvento tipo = TipoDeEvento::Ocasional;
     bool negativo = false;             // conta no limite de 2 negativos ativos
+    ImportanciaDaNoticia importanciaDaNoticia = ImportanciaDaNoticia::Nenhuma;  // fase B3: "noticia"
     std::vector<Estacao> estacoes;     // vazio = qualquer estação
     std::vector<int> diasDaEstacao;    // vazio = qualquer dia (de 1 a 16)
     int chancePorDiaEmPorMil = 0;      // 40 = 4% por dia

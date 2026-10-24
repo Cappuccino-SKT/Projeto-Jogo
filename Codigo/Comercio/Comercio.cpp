@@ -35,18 +35,6 @@ int pesoDoItem(const DadosDoJogo& dados, int numeroDoItem)
 }
 
 // As cidades do mundo na ordem do número do mapa: a vila entra no lugar dela.
-std::vector<SimulacaoDaVila*> cidadesDoMundo(SimulacaoDaVila& vila)
-{
-    std::vector<SimulacaoDaVila*> cidades;
-    for (const std::unique_ptr<SimulacaoDaVila>& cidade : vila.outrasCidades) {
-        cidades.push_back(cidade.get());
-    }
-    cidades.push_back(&vila);
-    std::sort(cidades.begin(), cidades.end(), [&](const SimulacaoDaVila* uma, const SimulacaoDaVila* outra) {
-        return uma->numeroDoMapaNoMundo() < outra->numeroDoMapaNoMundo();
-    });
-    return cidades;
-}
 
 SimulacaoDaVila* cidadeNoMapa(SimulacaoDaVila& vila, int numeroDoMapa)
 {
@@ -204,6 +192,23 @@ void chegarEmCasa(SimulacaoDaVila& vila, SimulacaoDaVila& casa, CaravanaDaCidade
     entidade.mapaAtual = casa.numeroDoMapaNoMundo();
 }
 
+// Fase B3 (ficha das Notícias): a caravana atacada vira uma notícia Local, no mapa do ataque.
+void criarANoticiaDoAtaque(SimulacaoDaVila& vila, const SimulacaoDaVila& casa, const CaravanaDaCidade& caravana, const std::string& resultado)
+{
+    const MundoDoJogo& mundo = vila.dados.mundo;
+    const CidadeDoMundo* cidade = mundo.cidadeNoMapa(casa.numeroDoMapaNoMundo());
+    Noticia noticia;
+    noticia.tipo = "comercio.caravana_atacada";
+    noticia.importancia = ImportanciaDaNoticia::Local;
+    noticia.mapaDeOrigem = caravana.entidade.mapaAtual;
+    noticia.tickDeOrigem = vila.relogio.tickAtual();
+    noticia.diaDeOrigem = vila.relogio.diaDaPartida();
+    noticia.titulo = "Bandidos atacaram a caravana de " + (cidade != nullptr ? cidade->nome : mundo.nomeDoMapa(casa.numeroDoMapaNoMundo())) + " em "
+        + mundo.nomeDoMapa(caravana.entidade.mapaAtual);
+    noticia.porQue = resultado;
+    criarNoticia(vila, std::move(noticia));
+}
+
 // Regra 4.11: a caravana atacada longe do jogador, pelo cálculo rápido.
 void resolverOEncontroDaCaravana(SimulacaoDaVila& vila, SimulacaoDaVila& casa, CaravanaDaCidade& caravana)
 {
@@ -219,6 +224,7 @@ void resolverOEncontroDaCaravana(SimulacaoDaVila& vila, SimulacaoDaVila& casa, C
     entidade.ticksParadoNaLuta = regras.lutaRapidaDuraTicks;
     ++vila.estatisticasDoComercio.atacadas;
     if (resolverPorCalculoRapidoDeForcas(forca, forcaDoBandoAtacante, casa.sorteioDasCaravanas().sortearNumeroInteiroEntre(0, 999))) {
+        criarANoticiaDoAtaque(vila, casa, caravana, "os guardas venceram");
         return;
     }
     // Perde 30% + 70% × (força do vencedor − força do perdedor) ÷ força do vencedor.
@@ -229,9 +235,23 @@ void resolverOEncontroDaCaravana(SimulacaoDaVila& vila, SimulacaoDaVila& casa, C
     aplicarAPerdaDoGrupo(entidade, perda);
     vila.estatisticasDoComercio.dinheiroPerdido += dinheiroAntes - entidade.dinheiroEmDecimos;
     ++vila.estatisticasDoComercio.perdidas;
+    criarANoticiaDoAtaque(vila, casa, caravana, "perdeu " + std::to_string(perda) + "% da carga");
 }
 
 }  // namespace
+
+std::vector<SimulacaoDaVila*> cidadesDoMundo(SimulacaoDaVila& vila)
+{
+    std::vector<SimulacaoDaVila*> cidades;
+    for (const std::unique_ptr<SimulacaoDaVila>& cidade : vila.outrasCidades) {
+        cidades.push_back(cidade.get());
+    }
+    cidades.push_back(&vila);
+    std::sort(cidades.begin(), cidades.end(), [&](const SimulacaoDaVila* uma, const SimulacaoDaVila* outra) {
+        return uma->numeroDoMapaNoMundo() < outra->numeroDoMapaNoMundo();
+    });
+    return cidades;
+}
 
 RegrasDoComercio lerRegrasDoComercio(const std::string& textoDoRegras, ListaDeProblemasDosDados& listaDeProblemas)
 {

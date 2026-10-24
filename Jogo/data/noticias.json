@@ -1,0 +1,14 @@
+{
+  "horas_por_mapa": 3,
+  "importancias": {
+    "local":    { "alcance_em_mapas": 2,  "dias_no_quadro": 8 },
+    "regional": { "alcance_em_mapas": 5,  "dias_no_quadro": 16 },
+    "mundial":  { "alcance_em_mapas": 99, "dias_no_quadro": 64 }
+  },
+  "precisao_exata_ate_mapas": 2,
+  "precisao_arredondada_ate_mapas": 5,
+  "preco_fora_da_media_em_porcento": 30,
+  "preco_mesma_noticia_depois_de_dias": 8,
+  "preco_noticias_por_cidade_por_dia": 1,
+  "limite_de_noticias_ativas": 500
+}

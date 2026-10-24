@@ -595,3 +595,16 @@ O que entrou ([[Ficha Logica/Comercio|ficha do Comércio]]; os ajustes estão na
 **Achado (rodada CO2):** em 1 ano, as 14 caravanas fazem só de 4 a 11 viagens: as cidades são autossuficientes e os preços ficam parecidos. Ver a [[Rodada Pendente]].
 
 **Rodada CO2 (2026-10-21, opção A do autor):** onde o Grão é escasso (Guerreira e Tecnocrata), as Fazendas cobrem só 75% do consumo; onde é normal ou de destaque, a cidade fica com o conjunto inteiro (a capital Guerreira passou de 40 para 30 Fazendas). **Verificado pelo assistente:** `testes_do_codigo` passa (490 conferências); **as 10 sementes passam**, o dinheiro do mundo se conserva, nenhuma das 21 cidades está com fome no fim do ano, e o salvar e carregar dá o relatório igual. As caravanas passaram de 4 a 11 para **6 a 15 viagens por ano**; o comércio ainda é pequeno, e a opção B da rodada (a caravana mais barata) continua disponível se o autor quiser mais.
+
+### Marco B3: as notícias (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Noticias|ficha das Notícias]]; os ajustes estão na parte 10.8 dela):
+
+- **As notícias nascem** dos eventos das 22 cidades (Seca, Fome e Epidemia são Regionais; Geada, Colheita farta e Festa da Colheita, Locais; Inverno rigoroso, Mundial), das caravanas atacadas e dos preços fora da média da região (no máximo 1 por cidade por dia). O arquivo novo é o `data/noticias.json`; a importância de cada evento está no `eventos.json` (`"noticia"`).
+- **Elas andam 3 horas por mapa** até o alcance da importância, e o jogador sabe quando chegam ao mapa do grupo, com a precisão da distância ("1.880", "cerca de 2.000", "milhares de").
+- **Na tela:** as Regionais e Mundiais viram notificação; o botão **Notícias** mostra as que o jogador sabe e a **Crônica do mundo**; o Mapa Mundial mostra as notícias de cada mapa e há quantos dias o jogador soube.
+- **O fim do `--simular`** mostra quantas notícias nasceram.
+- **Save versão 7** (as notícias, o que o jogador sabe e a Crônica).
+
+**Verificado pelo assistente:** os testes passam (502 conferências); as 10 sementes passam com as mesmas viagens de caravana de antes (as Notícias não mudam o jogo); de 255 a 289 notícias por ano, de 18 a 27 na Crônica do jogador; salvar e carregar no dia 30 dá o mesmo relatório.
+

@@ -182,6 +182,19 @@ void comecarOEvento(ContextoDaProducao& contexto, int indiceDoEvento, int64_t ho
     }
     estado.linhasParaOConsole.push_back("Evento: " + nomeDoEvento(contexto, evento) + " (" + descricao + ").");
     estado.mudancasDeHoje.push_back(nomeDoEvento(contexto, evento) + (evento.ehPontual() ? "" : " começou"));
+    // Fase B3 (ficha das Notícias, parte 2): os números da notícia são pessoas.
+    if (evento.importanciaDaNoticia != ImportanciaDaNoticia::Nenhuma) {
+        AcontecimentoParaNoticia acontecimento{evento.identificadorDeTexto, nomeDoEvento(contexto, evento), evento.importanciaDaNoticia};
+        const int fatorDeEscala = contexto.dados.regras.populacao.fatorDeEscala;
+        if (evento.identificadorDeTexto == "evento.epidemia") {
+            acontecimento.numero = static_cast<int64_t>(contexto.registroDasEntidades.view<DoencaDoNpc>().size()) * fatorDeEscala;
+            acontecimento.rotuloDoNumero = "doentes";
+        } else if (evento.identificadorDeTexto == "evento.fome") {
+            acontecimento.numero = static_cast<int64_t>(contexto.npcsDaVila.size()) * fatorDeEscala;
+            acontecimento.rotuloDoNumero = "pessoas sem comida bastante";
+        }
+        estado.acontecimentosDeHoje.push_back(std::move(acontecimento));
+    }
 }
 
 void terminarOEvento(ContextoDaProducao& contexto, std::size_t posicaoNosAtivos, int64_t hoje)
@@ -247,6 +260,7 @@ void rodarOsEventosDoDia(ContextoDaProducao& contexto, const RelogioDoMundo& rel
     EstadoDosEventos& estado = contexto.eventos;
     const std::vector<DefinicaoDeEvento>& eventos = contexto.dados.catalogoDeEventos.todosOsEventos();
     const int64_t hoje = relogio.diaDaPartida();
+    estado.acontecimentosDeHoje.clear();
 
     // 4.1. Os ativos descontam 1 dia (os condicionais, não: duram enquanto valer).
     for (std::size_t posicao = estado.eventosAtivos.size(); posicao-- > 0;) {

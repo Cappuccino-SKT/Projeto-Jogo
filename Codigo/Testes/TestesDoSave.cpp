@@ -137,7 +137,7 @@ void testarRecusas(const DadosDoJogo& dados)
     arvore["cabecalho"]["versaoDoFormato"] = 0;
     ResultadoDoCarregamento outraVersao = carregar(dados, nlohmann::json::to_msgpack(arvore));
     conferir(!outraVersao.deuCerto(), "um save de outra versão é recusado");
-    conferir(mensagemTem(outraVersao.motivoDaRecusa, "outra versão do jogo (versão 0; o jogo usa a 6)"), "a mensagem diz as duas versões");
+    conferir(mensagemTem(outraVersao.motivoDaRecusa, "outra versão do jogo (versão 0; o jogo usa a 7)"), "a mensagem diz as duas versões");
 
     // Teste 4: ID que sumiu dos dados.
     arvore = nlohmann::json::from_msgpack(bytes);

@@ -61,6 +61,8 @@ private:
     // Fase B1 (ficha da Viagem): o Mapa Mundial e a janela do encontro.
     void desenharOMapaMundial(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
     void desenharOEncontro(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase B3 (ficha das Notícias): as notícias que o jogador sabe e a Crônica do mundo.
+    void desenharAsNoticias(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
 
     bool prontaParaDesenhar = false;
     bool janelaDeGestaoAberta = false;
@@ -81,4 +83,5 @@ private:
     int paesParaLevar = 3;
     int moedasParaLevar = 50;
     bool marchaForcadaEscolhida = false;
+    bool janelaDasNoticiasAberta = false;
 };

@@ -219,6 +219,50 @@ void restaurarOComercio(SimulacaoDaVila& partida, const json& secao)
     }
 }
 
+// Fase B3 (ficha das Notícias).
+void restaurarAsNoticias(SimulacaoDaVila& partida, const json& secao)
+{
+    EstadoDasNoticias& noticias = partida.noticias;
+    noticias = EstadoDasNoticias{};
+    for (const json& entrada : secao.at("ativas")) {
+        Noticia noticia;
+        noticia.numeroDaNoticia = entrada.at("numero").get<int64_t>();
+        noticia.tipo = entrada.at("tipo").get<std::string>();
+        noticia.importancia = static_cast<ImportanciaDaNoticia>(entrada.at("importancia").get<int>());
+        noticia.mapaDeOrigem = entrada.at("mapaDeOrigem").get<int>();
+        noticia.tickDeOrigem = entrada.at("tickDeOrigem").get<int64_t>();
+        noticia.diaDeOrigem = entrada.at("diaDeOrigem").get<int64_t>();
+        noticia.titulo = entrada.at("titulo").get<std::string>();
+        noticia.numero = entrada.at("numeroDoAcontecimento").get<int64_t>();
+        noticia.rotuloDoNumero = entrada.at("rotuloDoNumero").get<std::string>();
+        noticia.porQue = entrada.at("porQue").get<std::string>();
+        noticia.diaEmQueSaiDoQuadro = entrada.at("diaEmQueSaiDoQuadro").get<int64_t>();
+        if (!entrada.at("item").is_null()) {
+            const auto numeroDoItem = partida.dados.catalogoDeItens.procurarNumeroDoItem(entrada.at("item").get<std::string>());
+            if (!numeroDoItem) {
+                throw RecusaDoSave("Uma notícia de preço fala de um item que o jogo não conhece.");
+            }
+            noticia.numeroDoItem = *numeroDoItem;
+        }
+        noticia.precoEmDecimos = entrada.at("preco").get<int>();
+        noticias.ativas.push_back(std::move(noticia));
+    }
+    noticias.proximoNumeroDaNoticia = secao.at("proximoNumero").get<int64_t>();
+    for (const json& sabida : secao.at("sabidas")) {
+        noticias.noticiasQueOJogadorSabe.push_back({sabida.at(0).get<int64_t>(), sabida.at(1).get<int64_t>(), sabida.at(2).get<int>()});
+    }
+    for (const json& linha : secao.at("cronica")) {
+        noticias.cronicaDoMundo.push_back({linha.at(0).get<int64_t>(), linha.at(1).get<int64_t>(), linha.at(2).get<int64_t>(), linha.at(3).get<std::string>()});
+    }
+    const int quantidadeDeItens = partida.dados.catalogoDeItens.quantidadeDeItens();
+    for (const json& doMapa : secao.at("diaDaUltimaNoticiaDePreco")) {
+        std::vector<int64_t> dias(static_cast<std::size_t>(quantidadeDeItens), -1);
+        paraCadaItem(partida.dados, doMapa, [&](int numeroDoItem, const json& dia) { dias[static_cast<std::size_t>(numeroDoItem)] = dia.get<int64_t>(); });
+        noticias.diaDaUltimaNoticiaDePreco.push_back(std::move(dias));
+    }
+    noticias.mapaDoJogadorNaUltimaConferencia = secao.at("mapaDoJogadorNaUltimaConferencia").get<int>();
+}
+
 // Fase B1 (ficha da Viagem).
 void restaurarAViagem(SimulacaoDaVila& partida, const json& secao)
 {
@@ -640,6 +684,8 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
             restaurarORelogio(outra, arvore.at("relogio"));
             restaurarASimulacao(outra, cidades[cidade]);
         }
+
+        restaurarAsNoticias(*partida, arvore.at("noticias"));  // fase B3
 
         // Passo 6: o resto já foi recalculado (o mapa bloqueado e a capacidade).
         partida->avisosAoMontar.clear();

@@ -17,6 +17,7 @@
 #include "TextoDaDataDoJogo.h"
 #include "Viagem/ViagemDaVila.h"
 #include "Comercio/Comercio.h"
+#include "Noticias/Noticias.h"
 
 namespace {
 
@@ -271,6 +272,9 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     if (mapaMundialAberto) {
         desenharOMapaMundial(simulacao, larguraDaTela, alturaDaTela);
     }
+    if (janelaDasNoticiasAberta) {
+        desenharAsNoticias(simulacao, larguraDaTela, alturaDaTela);
+    }
     if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
         desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
@@ -346,6 +350,10 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     ImGui::SameLine();
     if (ImGui::Button("Mapa Mundial")) {
         alternarOMapaMundial();
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Notícias")) {
+        janelaDasNoticiasAberta = !janelaDasNoticiasAberta;
     }
     const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
     if (grupo.emTransito) {
@@ -944,6 +952,57 @@ ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
 
 }  // namespace
 
+void InterfaceDoJogador::desenharAsNoticias(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const EstadoDasNoticias& noticias = simulacao.noticias;
+    const RegrasDasNoticias& regras = simulacao.dados.regrasDasNoticias;
+    const int64_t hoje = simulacao.relogio.diaDaPartida();
+    ImGui::SetNextWindowSize(ImVec2(620, 420), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Notícias", &janelaDasNoticiasAberta)) {
+        ImGui::End();
+        return;
+    }
+    if (ImGui::BeginTabBar("abasDasNoticias")) {
+        // As notícias que já chegaram ao jogador e ainda estão no prazo, da mais nova para a mais velha.
+        if (ImGui::BeginTabItem("Que você sabe")) {
+            bool alguma = false;
+            for (auto noticia = noticias.ativas.rbegin(); noticia != noticias.ativas.rend(); ++noticia) {
+                const NoticiaQueOJogadorSabe* sabida = oQueOJogadorSabe(noticias, noticia->numeroDaNoticia);
+                if (sabida == nullptr) {
+                    continue;
+                }
+                alguma = true;
+                const char* importancia = noticia->importancia == ImportanciaDaNoticia::Mundial ? "Mundial" : noticia->importancia == ImportanciaDaNoticia::Regional ? "Regional" : "Local";
+                ImGui::TextDisabled("Dia %lld, soube há %lld dias, %s", static_cast<long long>(noticia->diaDeOrigem + 1), static_cast<long long>(hoje - sabida->diaEmQueSoube), importancia);
+                ImGui::PushTextWrapPos(0);
+                ImGui::TextUnformatted(textoComPrecisao(*noticia, sabida->distancia, regras).c_str());
+                ImGui::PopTextWrapPos();
+            }
+            if (!alguma) {
+                ImGui::TextUnformatted("Nenhuma notícia chegou até você ainda.");
+            }
+            ImGui::EndTabItem();
+        }
+        // As Regionais e Mundiais que o jogador soube, para sempre.
+        if (ImGui::BeginTabItem("Crônica do mundo")) {
+            if (noticias.cronicaDoMundo.empty()) {
+                ImGui::TextUnformatted("A Crônica ainda está vazia.");
+            }
+            for (auto linha = noticias.cronicaDoMundo.rbegin(); linha != noticias.cronicaDoMundo.rend(); ++linha) {
+                ImGui::TextDisabled("Aconteceu no dia %lld; você soube no dia %lld", static_cast<long long>(linha->diaDoAcontecimento + 1),
+                                    static_cast<long long>(linha->diaEmQueSoube + 1));
+                ImGui::PushTextWrapPos(0);
+                ImGui::TextUnformatted(linha->texto.c_str());
+                ImGui::PopTextWrapPos();
+            }
+            ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
+    }
+    ImGui::End();
+}
+
 void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
 {
     const MundoDoJogo& mundo = simulacao.dados.mundo;
@@ -1004,6 +1063,17 @@ void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float 
                     }
                 } else {
                     ImGui::TextUnformatted("Nunca visto");
+                }
+                // Notícias, 4.5: as notícias daqui que o jogador sabe, e há quantos dias.
+                for (const Noticia& noticia : simulacao.noticias.ativas) {
+                    const NoticiaQueOJogadorSabe* sabida = oQueOJogadorSabe(simulacao.noticias, noticia.numeroDaNoticia);
+                    if (noticia.mapaDeOrigem == numero && sabida != nullptr) {
+                        const std::string texto = textoComPrecisao(noticia, sabida->distancia, simulacao.dados.regrasDasNoticias) + " (soube há "
+                            + std::to_string(simulacao.relogio.diaDaPartida() - sabida->diaEmQueSoube) + " dias)";
+                        ImGui::PushTextWrapPos(360);
+                        ImGui::TextUnformatted(texto.c_str());
+                        ImGui::PopTextWrapPos();
+                    }
                 }
                 ImGui::EndTooltip();
             }

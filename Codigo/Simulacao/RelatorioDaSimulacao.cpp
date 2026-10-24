@@ -203,6 +203,10 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
     conferirOBancoNoFimDoAno(resultado.conferencia, resultado.linhas);
     if (!partida->outrasCidades.empty()) {
         resultado.linhasDoConsole.push_back(resumoDoComercio(*partida));
+        // Fase B3: as notícias do mundo.
+        resultado.linhasDoConsole.push_back("Notícias: " + std::to_string(partida->noticias.proximoNumeroDaNoticia - 1) + " criadas, "
+                                            + std::to_string(partida->noticias.ativas.size()) + " ativas no último dia, "
+                                            + std::to_string(partida->noticias.cronicaDoMundo.size()) + " na Crônica do jogador");
         // As outras cidades no fim: quantas passam fome (CO2-1: as de comida escassa dependem das caravanas).
         int cidadesComFome = 0;
         int piorMapa = 0;

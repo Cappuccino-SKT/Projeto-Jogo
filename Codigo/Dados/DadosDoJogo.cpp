@@ -103,6 +103,10 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
         dados.regrasDasOutrasCidades = lerRegrasDasOutrasCidades(*texto, problemas);
         dados.regrasDoComercio = lerRegrasDoComercio(*texto, problemas);  // fase B2: o bloco "comercio"
     }
+    // 14. As Notícias (fase B3).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "noticias.json", problemas)) {
+        dados.regrasDasNoticias = lerArquivoDasNoticias(*texto, problemas);
+    }
     return dados;
 }
 

@@ -66,6 +66,9 @@ std::vector<std::string> decidirAsViagensDasCaravanas(SimulacaoDaVila& vila);
 // A cada tick: as caravanas andam (Viagem), são atacadas (4.11), chegam ao destino (4.5) e em casa (4.6).
 void avancarAsCaravanasUmTick(SimulacaoDaVila& vila);
 
+// As cidades do mundo (a vila e as outras), na ordem do número do mapa.
+std::vector<SimulacaoDaVila*> cidadesDoMundo(SimulacaoDaVila& vila);
+
 // O dinheiro de todas as cidades, do jogador, do grupo e das caravanas (teste 4).
 int64_t dinheiroDoMundo(const SimulacaoDaVila& vila);
 
