@@ -405,6 +405,24 @@ json escreverAsNoticias(const SimulacaoDaVila& simulacao)
                 {"mapaDoJogadorNaUltimaConferencia", noticias.mapaDoJogadorNaUltimaConferencia}};
 }
 
+// Fase B4 (ficha da Reputação): um registro por dono, com o nome dele.
+json escreverAReputacao(const SimulacaoDaVila& simulacao)
+{
+    const std::vector<std::string> donos = donosDaReputacao(simulacao.dados.mundo);
+    json porDono = json::array();
+    for (std::size_t dono = 0; dono < simulacao.reputacao.reputacaoPorFaccao.size(); ++dono) {
+        json mudancas = json::array();
+        for (const MudancaDaReputacao& mudanca : simulacao.reputacao.ultimasMudancas[dono]) {
+            mudancas.push_back(json::array({mudanca.valor, mudanca.motivo, mudanca.dia}));
+        }
+        porDono.push_back(json{{"dono", dono < donos.size() ? donos[dono] : std::string()},
+                               {"valor", simulacao.reputacao.reputacaoPorFaccao[dono]},
+                               {"base", simulacao.reputacao.basePorFaccao[dono]},
+                               {"ultimasMudancas", mudancas}});
+    }
+    return porDono;
+}
+
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
 {
     json lista = json::array();
@@ -482,5 +500,6 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     }
     arvore["outrasCidades"] = std::move(cidades);
     arvore["noticias"] = escreverAsNoticias(simulacao);
+    arvore["reputacao"] = escreverAReputacao(simulacao);
     return json::to_msgpack(arvore);
 }

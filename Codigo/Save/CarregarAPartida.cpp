@@ -219,6 +219,28 @@ void restaurarOComercio(SimulacaoDaVila& partida, const json& secao)
     }
 }
 
+// Fase B4 (ficha da Reputação).
+void restaurarAReputacao(SimulacaoDaVila& partida, const json& secao)
+{
+    const std::vector<std::string> donos = donosDaReputacao(partida.dados.mundo);
+    if (secao.size() != donos.size()) {
+        throw RecusaDoSave("O save tem a reputação de outra quantidade de facções.");
+    }
+    EstadoDaReputacao& reputacao = partida.reputacao;
+    for (std::size_t dono = 0; dono < donos.size(); ++dono) {
+        const json& entrada = secao[dono];
+        if (entrada.at("dono").get<std::string>() != donos[dono]) {
+            throw RecusaDoSave("O save tem a reputação de outras facções.");
+        }
+        reputacao.reputacaoPorFaccao[dono] = entrada.at("valor").get<int>();
+        reputacao.basePorFaccao[dono] = entrada.at("base").get<int>();
+        reputacao.ultimasMudancas[dono].clear();
+        for (const json& mudanca : entrada.at("ultimasMudancas")) {
+            reputacao.ultimasMudancas[dono].push_back({mudanca.at(0).get<int>(), mudanca.at(1).get<std::string>(), mudanca.at(2).get<int64_t>()});
+        }
+    }
+}
+
 // Fase B3 (ficha das Notícias).
 void restaurarAsNoticias(SimulacaoDaVila& partida, const json& secao)
 {
@@ -686,6 +708,7 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         }
 
         restaurarAsNoticias(*partida, arvore.at("noticias"));  // fase B3
+        restaurarAReputacao(*partida, arvore.at("reputacao"));  // fase B4
 
         // Passo 6: o resto já foi recalculado (o mapa bloqueado e a capacidade).
         partida->avisosAoMontar.clear();

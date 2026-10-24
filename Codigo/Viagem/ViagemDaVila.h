@@ -67,4 +67,4 @@ ResultadoDoTickDaViagem avancarAViagemUmTick(ContextoDaProducao& contexto, const
 std::vector<std::string> rodarAViagemDoDia(ContextoDaProducao& contexto);
 
 // Regra 4.6: a escolha do jogador no encontro com os bandidos. Devolve o motivo da recusa, ou vazio.
-std::string resolverOEncontroDoGrupo(ContextoDaProducao& contexto, EscolhaNoEncontro escolha, std::vector<std::string>& linhas);
+std::string resolverOEncontroDoGrupo(ContextoDaProducao& contexto, EscolhaNoEncontro escolha, std::vector<std::string>& linhas, bool* venceuALuta = nullptr);

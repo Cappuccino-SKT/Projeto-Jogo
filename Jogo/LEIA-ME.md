@@ -608,3 +608,16 @@ O que entrou ([[Ficha Logica/Noticias|ficha das Notícias]]; os ajustes estão n
 
 **Verificado pelo assistente:** os testes passam (502 conferências); as 10 sementes passam com as mesmas viagens de caravana de antes (as Notícias não mudam o jogo); de 255 a 289 notícias por ano, de 18 a 27 na Crônica do jogador; salvar e carregar no dia 30 dá o mesmo relatório.
 
+### Marco B4: a reputação (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Reputacao|ficha da Reputação]]; os ajustes estão na parte 10.8 dela):
+
+- **A reputação com as 6 facções e as Vilas Livres**, de −100 a +100, com as 5 faixas (Inimigo a Aliado) do arquivo novo `data/reputacao.json`. Começa em 0 (a base, até o Início de Jogo).
+- **Os preços das lojas das outras cidades** mudam pela faixa (Hostil compra a 115% e vende a 85%; Aliado, 90% e 110%); o Inimigo não negocia.
+- **Duas ações:** vencer um bando no território de uma facção (+1) e **doar** numa cidade (+1 a cada 100 moedas, até a base + 20; o dinheiro vai ao Banco dela).
+- **A volta:** no dia 1 de cada estação, cada valor anda 2 pontos para a base.
+- **Na tela:** o botão **Reputação** mostra o valor, a base e a faixa de cada um, com o "Por quê?" ao passar o mouse; a loja da cidade mostra a faixa e tem os botões de doar.
+- **Save versão 8** (os valores, as bases e as últimas mudanças).
+
+**Verificado pelo assistente:** os testes passam (512 conferências); as 10 sementes passam com o relatório igual ao do B3 (a reputação não muda nada sem o jogador agir); salvar e carregar no dia 30 dá o mesmo relatório.
+

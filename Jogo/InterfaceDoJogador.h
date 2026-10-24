@@ -63,6 +63,8 @@ private:
     void desenharOEncontro(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
     // Fase B3 (ficha das Notícias): as notícias que o jogador sabe e a Crônica do mundo.
     void desenharAsNoticias(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase B4 (ficha da Reputação): o valor e a faixa de cada facção e Vila Livre, com o "Por quê?".
+    void desenharAReputacao(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
 
     bool prontaParaDesenhar = false;
     bool janelaDeGestaoAberta = false;
@@ -84,4 +86,5 @@ private:
     int moedasParaLevar = 50;
     bool marchaForcadaEscolhida = false;
     bool janelaDasNoticiasAberta = false;
+    bool janelaDaReputacaoAberta = false;
 };

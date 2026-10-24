@@ -25,6 +25,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     clima.climaDeOntem = clima.climaDeHoje;
     guardarODiaDeHojeNoClima(clima, relogio);
     montarAViagemDaPartidaNova(viagem, dados, clima);
+    montarAReputacaoDaPartidaNova(reputacao, dados.mundo);  // fase B4
     aCaminhoPorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
     regrasDoMovimento.velocidadeDeAndarEmMilesimosPorTick =
         converterVelocidadeParaMilesimosPorTick(dados.regras.velocidadeDeAndarEmTilesPorHora, ticksPorHoraDeJogo);
@@ -193,7 +194,25 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
     std::vector<std::string> linhas;
     FilaDePedidosDoJogador outrosPedidos;
     for (PedidoDoJogador& pedido : pedidos.tomarTodos()) {
-        if (const auto* comercio = std::get_if<PedidoComercioNaCidade>(&pedido)) {
+        if (const auto* doacao = std::get_if<PedidoDoarNaCidade>(&pedido)) {
+            const std::string motivo = doarParaAFaccao(*this, doacao->moedas, linhas);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            }
+        } else if (const auto* encontro = std::get_if<PedidoResolverEncontro>(&pedido); encontro != nullptr && lodDoMapa == 0) {
+            // Fase B4: vencer o bando no território de uma facção sobe a reputação com ela.
+            ContextoDaProducao contexto = contextoDaProducao();
+            bool venceuALuta = false;
+            const std::string motivo = resolverOEncontroDoGrupo(contexto, encontro->escolha, linhas, &venceuALuta);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            } else if (venceuALuta) {
+                const std::string faixa = anotarOBandoVencido(*this);
+                if (!faixa.empty()) {
+                    linhas.push_back(faixa);
+                }
+            }
+        } else if (const auto* comercio = std::get_if<PedidoComercioNaCidade>(&pedido)) {
             const std::string motivo = comerciarNaCidadeDoGrupo(*this, comercio->numeroDoItem, comercio->quantidade, comercio->comprar, linhas);
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
@@ -303,6 +322,12 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
             decidirAsViagensDasCaravanas(*this);
         }
         avancarAsCaravanasUmTick(*this);
+    }
+
+    // 9. A reputação (fase B4): no dia 1 de cada estação, a volta para a base.
+    if (lodDoMapa == 0 && relogio.comecouUmaEstacaoNova()) {
+        const std::vector<std::string> linhasDaReputacao = voltarReputacaoParaABase(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaReputacao.begin(), linhasDaReputacao.end());
     }
 
     // 8. As notícias (fase B3): no dia novo, os acontecimentos de hoje e as notícias de preço

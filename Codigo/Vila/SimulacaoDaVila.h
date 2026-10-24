@@ -122,6 +122,8 @@ public:
     EstatisticasDoComercio estatisticasDoComercio;
     // Fase B3 (Notícias): só na vila, as notícias do mundo e o que o jogador sabe.
     EstadoDasNoticias noticias;
+    // Fase B4 (Reputação): só na vila, o que cada facção e Vila Livre pensa do jogador.
+    EstadoDaReputacao reputacao;
     // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
     int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
     // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).

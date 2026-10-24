@@ -247,7 +247,7 @@ PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mun
 }
 
 std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras,
-                                        SorteioComSemente& sorteio)
+                                        SorteioComSemente& sorteio, bool* venceuALuta)
 {
     const int bandidos = entidade.encontroMarcado.bandidos;
     std::string linha;
@@ -273,6 +273,9 @@ std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoE
         entidade.ticksParadoNaLuta = regras.lutaRapidaDuraTicks;
         if (resolverPorCalculoRapidoDeForcas(forcaDoNossoGrupo, forcaDoBando(bandidos, regras), sorteio.sortearNumeroInteiroEntre(0, 999))) {
             linha += "Viagem: o grupo venceu a luta contra " + std::to_string(bandidos) + " bandidos.";
+            if (venceuALuta != nullptr) {
+                *venceuALuta = true;
+            }
         } else {
             aplicarAPerdaDoGrupo(entidade, regras.perdaAoPerderALutaEmPorcento);
             linha += "Viagem: o grupo perdeu a luta e " + std::to_string(regras.perdaAoPerderALutaEmPorcento) + "% do que levava.";

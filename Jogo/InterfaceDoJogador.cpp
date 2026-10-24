@@ -18,6 +18,7 @@
 #include "Viagem/ViagemDaVila.h"
 #include "Comercio/Comercio.h"
 #include "Noticias/Noticias.h"
+#include "Reputacao/Reputacao.h"
 
 namespace {
 
@@ -275,6 +276,9 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     if (janelaDasNoticiasAberta) {
         desenharAsNoticias(simulacao, larguraDaTela, alturaDaTela);
     }
+    if (janelaDaReputacaoAberta) {
+        desenharAReputacao(simulacao, larguraDaTela, alturaDaTela);
+    }
     if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
         desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
@@ -354,6 +358,10 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     ImGui::SameLine();
     if (ImGui::Button("Notícias")) {
         janelaDasNoticiasAberta = !janelaDasNoticiasAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reputação")) {
+        janelaDaReputacaoAberta = !janelaDaReputacaoAberta;
     }
     const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
     if (grupo.emTransito) {
@@ -952,6 +960,54 @@ ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
 
 }  // namespace
 
+void InterfaceDoJogador::desenharAReputacao(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const RegrasDaReputacao& regras = simulacao.dados.regrasDaReputacao;
+    const EstadoDaReputacao& reputacao = simulacao.reputacao;
+    const std::vector<std::string> donos = donosDaReputacao(simulacao.dados.mundo);
+    ImGui::SetNextWindowSize(ImVec2(460, 330), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Reputação", &janelaDaReputacaoAberta)) {
+        ImGui::End();
+        return;
+    }
+    ImGui::TextWrapped("A faixa muda os preços das lojas das outras cidades. A sua vila é sempre Neutro. Passe o mouse para ver o \"Por quê?\".");
+    if (ImGui::BeginTable("##reputacao", 4, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+        ImGui::TableSetupColumn("Quem");
+        ImGui::TableSetupColumn("Valor");
+        ImGui::TableSetupColumn("Base");
+        ImGui::TableSetupColumn("Faixa");
+        ImGui::TableHeadersRow();
+        for (std::size_t dono = 0; dono < reputacao.reputacaoPorFaccao.size() && dono < donos.size(); ++dono) {
+            if (simulacao.dados.mundo.cidadeNoMapa(simulacao.dados.mundo.mapaDaVila) != nullptr
+                && simulacao.dados.mundo.cidadeNoMapa(simulacao.dados.mundo.mapaDaVila)->nome == donos[dono]) {
+                continue;  // RE1-5: a vila do jogador não tem reputação
+            }
+            const int valor = reputacao.reputacaoPorFaccao[dono];
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(nomeDoDonoDaReputacao(regras, donos[dono]).c_str());
+            if (ImGui::IsItemHovered() && !reputacao.ultimasMudancas[dono].empty()) {
+                ImGui::BeginTooltip();
+                for (auto mudanca = reputacao.ultimasMudancas[dono].rbegin(); mudanca != reputacao.ultimasMudancas[dono].rend(); ++mudanca) {
+                    ImGui::Text("%s%d: %s, dia %lld", mudanca->valor > 0 ? "+" : "", mudanca->valor, mudanca->motivo.c_str(), static_cast<long long>(mudanca->dia + 1));
+                }
+                ImGui::EndTooltip();
+            }
+            ImGui::TableNextColumn();
+            ImGui::Text("%+d", valor);
+            ImGui::TableNextColumn();
+            ImGui::Text("%+d", reputacao.basePorFaccao[dono]);
+            ImGui::TableNextColumn();
+            if (!regras.faixas.empty()) {
+                ImGui::TextUnformatted(regras.faixas[static_cast<std::size_t>(faixaDaReputacao(regras, valor))].texto.c_str());
+            }
+        }
+        ImGui::EndTable();
+    }
+    ImGui::End();
+}
+
 void InterfaceDoJogador::desenharAsNoticias(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
 {
     const EstadoDasNoticias& noticias = simulacao.noticias;
@@ -1101,6 +1157,22 @@ void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float 
         }
         if (cidade != nullptr && ImGui::CollapsingHeader("Loja desta cidade", ImGuiTreeNodeFlags_DefaultOpen)) {
             ImGui::Text("O grupo leva %s moedas.", dinheiro(grupo.dinheiroEmDecimos).c_str());
+            // Fase B4 (Reputação): a faixa muda os preços; doar sobe a reputação.
+            const FaixaDaReputacao& faixa = faixaDoJogadorNaCidade(simulacao, grupo.mapaAtual);
+            if (faixa.compraEmPorcento < 0) {
+                ImGui::Text("Sua reputação aqui: %s. A loja se recusa a negociar com você.", faixa.texto.c_str());
+            } else {
+                ImGui::Text("Sua reputação aqui: %s (compra a %d%%, venda a %d%%).", faixa.texto.c_str(), faixa.compraEmPorcento, faixa.vendaEmPorcento);
+            }
+            for (const int moedas : {100, 500}) {
+                if (ImGui::SmallButton(("Doar " + std::to_string(moedas)).c_str())) {
+                    simulacao.pedidos.acrescentar(PedidoDoarNaCidade{moedas});
+                }
+                ImGui::SameLine();
+            }
+            ImGui::NewLine();
+            const int faixaDaCompra = std::max(0, faixa.compraEmPorcento);
+            const int faixaDaVenda = std::max(0, faixa.vendaEmPorcento);
             const ContextoDaProducao loja = cidade->contextoDaProducao();
             const RegrasDoComercio& regras = simulacao.dados.regrasDoComercio;
             if (ImGui::BeginTable("##loja_da_cidade", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
@@ -1117,9 +1189,9 @@ void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float 
                     ImGui::TableNextColumn();
                     ImGui::TextUnformatted(simulacao.dados.tabelaDeTextos.textoDe(simulacao.dados.catalogoDeItens.itemPeloNumero(item).identificadorDeTexto).c_str());
                     ImGui::TableNextColumn();
-                    ImGui::TextUnformatted(dinheiro(precoLocal * regras.lojaVendeEmPorcento / 100).c_str());
+                    ImGui::TextUnformatted(dinheiro(static_cast<int>(precoComAFaixa(precoLocal * regras.lojaVendeEmPorcento / 100, faixaDaCompra))).c_str());
                     ImGui::TableNextColumn();
-                    ImGui::TextUnformatted(dinheiro(calcularAVendaParaALoja(loja, item, 1).valorEmDecimos).c_str());
+                    ImGui::TextUnformatted(dinheiro(calcularAVendaParaALoja(loja, item, 1, faixaDaVenda).valorEmDecimos).c_str());
                     ImGui::TableNextColumn();
                     ImGui::Text("%d", grupo.quantidadePorItem[static_cast<std::size_t>(item)]);
                     ImGui::TableNextColumn();

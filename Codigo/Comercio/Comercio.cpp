@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 
 #include "Comercio/RegrasDoComercio.h"
+#include "Reputacao/Reputacao.h"
 #include "Dados/Receitas.h"
 
 using Json = nlohmann::json;
@@ -313,24 +314,25 @@ int faltaDoItem(const ContextoDaProducao& cidade, const std::vector<int>& aCamin
     return std::max(0, estoqueAlvoDoItem(cidade, numeroDoItem) - cidade.inventario.quantidadeDe(numeroDoItem, DonoDoItem::Cidade) - aCaminho);
 }
 
-ResultadoDaLoja calcularAVendaParaALoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade)
+ResultadoDaLoja calcularAVendaParaALoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade, int faixaEmPorcento)
 {
     const RegrasDoComercio& regras = loja.dados.regrasDoComercio;
     return calcularAVendaComOsNumeros(quantidade,
                                       std::max(0, estoqueAlvoDoItem(loja, numeroDoItem) - loja.inventario.quantidadeDe(numeroDoItem, DonoDoItem::Cidade)),
                                       precoLocalDoItem(loja, numeroDoItem), loja.dados.catalogoDeItens.itemPeloNumero(numeroDoItem).precoBaseEmDecimos,
-                                      std::max<int64_t>(0, loja.dinheiro.bancoDaCidade - regras.reservaDoBancoEmDecimos), regras);
+                                      std::max<int64_t>(0, loja.dinheiro.bancoDaCidade - regras.reservaDoBancoEmDecimos), regras, faixaEmPorcento);
 }
 
 ResultadoDaLoja calcularAVendaComOsNumeros(int quantidade, int ateOAlvo, int precoLocalEmDecimos, int precoBaseEmDecimos, int64_t dinheiroAcimaDaReserva,
-                                           const RegrasDoComercio& regras)
+                                           const RegrasDoComercio& regras, int faixaEmPorcento)
 {
     ResultadoDaLoja resultado;
     if (quantidade <= 0) {
         return resultado;
     }
     int64_t dinheiroDaLoja = dinheiroAcimaDaReserva;
-    const int64_t precos[2] = {precoQueALojaPagaAteOAlvo(precoLocalEmDecimos, regras), precoQueALojaPagaAcimaDoAlvo(precoBaseEmDecimos, regras)};
+    const int64_t precos[2] = {precoComAFaixa(precoQueALojaPagaAteOAlvo(precoLocalEmDecimos, regras), faixaEmPorcento),
+                               precoComAFaixa(precoQueALojaPagaAcimaDoAlvo(precoBaseEmDecimos, regras), faixaEmPorcento)};
     const int quantidades[2] = {std::min(quantidade, ateOAlvo), quantidade - std::min(quantidade, ateOAlvo)};
     for (int faixa = 0; faixa < 2; ++faixa) {
         int nestaFaixa = quantidades[faixa];
@@ -347,11 +349,11 @@ ResultadoDaLoja calcularAVendaComOsNumeros(int quantidade, int ateOAlvo, int pre
     return resultado;
 }
 
-ResultadoDaLoja venderNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade)
+ResultadoDaLoja venderNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade, int faixaEmPorcento)
 {
     // O que não cabe no armazém da Cidade não é comprado.
     for (int tentativa = quantidade; tentativa > 0; --tentativa) {
-        const ResultadoDaLoja resultado = calcularAVendaParaALoja(loja, numeroDoItem, tentativa);
+        const ResultadoDaLoja resultado = calcularAVendaParaALoja(loja, numeroDoItem, tentativa, faixaEmPorcento);
         if (resultado.quantidade == 0) {
             return {};
         }
@@ -364,7 +366,8 @@ ResultadoDaLoja venderNaLoja(ContextoDaProducao& loja, int numeroDoItem, int qua
     return {};
 }
 
-ResultadoDaLoja calcularACompraNaLoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador)
+ResultadoDaLoja calcularACompraNaLoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador,
+                                     int faixaEmPorcento)
 {
     const RegrasDoComercio& regras = loja.dados.regrasDoComercio;
     ResultadoDaLoja resultado;
@@ -373,7 +376,7 @@ ResultadoDaLoja calcularACompraNaLoja(const ContextoDaProducao& loja, int numero
         const int64_t reserva = loja.consumoMedido.consumoPrevistoDoDiaEmCentesimos(numeroDoItem) * regras.reservaDaLojaEmDiasDeConsumo / 100;
         disponivel = static_cast<int>(std::max<int64_t>(0, disponivel - reserva));
     }
-    const int64_t preco = precoQueALojaCobra(precoLocalDoItem(loja, numeroDoItem), regras);
+    const int64_t preco = precoComAFaixa(precoQueALojaCobra(precoLocalDoItem(loja, numeroDoItem), regras), faixaEmPorcento);
     int compra = std::min(std::max(0, quantidade), disponivel);
     if (preco > 0) {
         compra = static_cast<int>(std::min<int64_t>(compra, std::max<int64_t>(0, dinheiroEmDecimos) / preco));
@@ -383,9 +386,9 @@ ResultadoDaLoja calcularACompraNaLoja(const ContextoDaProducao& loja, int numero
     return resultado;
 }
 
-ResultadoDaLoja comprarNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador)
+ResultadoDaLoja comprarNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador, int faixaEmPorcento)
 {
-    const ResultadoDaLoja resultado = calcularACompraNaLoja(loja, numeroDoItem, quantidade, dinheiroEmDecimos, ehOJogador);
+    const ResultadoDaLoja resultado = calcularACompraNaLoja(loja, numeroDoItem, quantidade, dinheiroEmDecimos, ehOJogador, faixaEmPorcento);
     if (resultado.quantidade > 0 && loja.inventario.tentarTirar(numeroDoItem, DonoDoItem::Cidade, resultado.quantidade)) {
         loja.dinheiro.bancoDaCidade += resultado.valorEmDecimos;
         return resultado;
@@ -583,16 +586,21 @@ std::string comerciarNaCidadeDoGrupo(SimulacaoDaVila& vila, int numeroDoItem, in
     if (numeroDoItem < 0 || numeroDoItem >= vila.dados.catalogoDeItens.quantidadeDeItens() || quantidade <= 0) {
         return "a quantidade ou o item não vale";
     }
+    // Fase B4 (Reputação, 4.4): a faixa do jogador com o dono da cidade.
+    const FaixaDaReputacao& faixa = faixaDoJogadorNaCidade(vila, grupo.mapaAtual);
+    if (faixa.compraEmPorcento < 0 || faixa.vendaEmPorcento < 0) {
+        return "a loja se recusa a negociar com você";
+    }
     ContextoDaProducao loja = cidade->contextoDaProducao();
     const std::string nome = vila.dados.tabelaDeTextos.textoDe(vila.dados.catalogoDeItens.itemPeloNumero(numeroDoItem).identificadorDeTexto);
     ResultadoDaLoja resultado;
     if (comprar) {
-        resultado = comprarNaLoja(loja, numeroDoItem, quantidade, grupo.dinheiroEmDecimos, true);
+        resultado = comprarNaLoja(loja, numeroDoItem, quantidade, grupo.dinheiroEmDecimos, true, faixa.compraEmPorcento);
         grupo.quantidadePorItem[static_cast<std::size_t>(numeroDoItem)] += resultado.quantidade;
         grupo.dinheiroEmDecimos -= resultado.valorEmDecimos;
     } else {
         const int temNoGrupo = std::min(quantidade, grupo.quantidadePorItem[static_cast<std::size_t>(numeroDoItem)]);
-        resultado = venderNaLoja(loja, numeroDoItem, temNoGrupo);
+        resultado = venderNaLoja(loja, numeroDoItem, temNoGrupo, faixa.vendaEmPorcento);
         grupo.quantidadePorItem[static_cast<std::size_t>(numeroDoItem)] -= resultado.quantidade;
         grupo.dinheiroEmDecimos += resultado.valorEmDecimos;
     }

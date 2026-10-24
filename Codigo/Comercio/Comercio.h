@@ -27,19 +27,22 @@ int faltaDoItem(const ContextoDaProducao& cidade, const std::vector<int>& aCamin
 
 // Regra 4.7, passos 2 e 3: quantas unidades a loja compra e quanto paga. 90% do preço local
 // até o estoque-alvo, 45% do preço base além dele, e só enquanto o Banco fica acima da reserva.
-ResultadoDaLoja calcularAVendaParaALoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade);
+// Fase B4 (Reputação, 4.4): "faixaEmPorcento" é a venda_em_porcento da faixa do jogador (100 para os outros).
+ResultadoDaLoja calcularAVendaParaALoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade, int faixaEmPorcento = 100);
 // A mesma conta só com os números (para os testes): 40 Tábuas, 20 até o alvo, preço local 3,0,
 // base 1,5: 20 × 2,7 + 20 × 0,7 = 68 moedas.
 ResultadoDaLoja calcularAVendaComOsNumeros(int quantidade, int ateOAlvo, int precoLocalEmDecimos, int precoBaseEmDecimos, int64_t dinheiroAcimaDaReserva,
-                                           const RegrasDoComercio& regras);
+                                           const RegrasDoComercio& regras, int faixaEmPorcento = 100);
 // A mesma conta, aplicada: os itens entram no estoque da Cidade e o dinheiro sai do Banco.
-ResultadoDaLoja venderNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade);
+ResultadoDaLoja venderNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade, int faixaEmPorcento = 100);
 
 // Regra 4.7, passos 1 e 4: a loja vende a 110% do preço local, até o dinheiro de quem compra;
 // ao jogador, nunca abaixo de 2 dias do consumo previsto (RE1-4).
-ResultadoDaLoja calcularACompraNaLoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador);
+// Fase B4 (Reputação, 4.4): "faixaEmPorcento" é a compra_em_porcento da faixa do jogador.
+ResultadoDaLoja calcularACompraNaLoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador,
+                                     int faixaEmPorcento = 100);
 // A mesma conta, aplicada: os itens saem do estoque da Cidade e o dinheiro entra no Banco.
-ResultadoDaLoja comprarNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador);
+ResultadoDaLoja comprarNaLoja(ContextoDaProducao& loja, int numeroDoItem, int quantidade, int64_t dinheiroEmDecimos, bool ehOJogador, int faixaEmPorcento = 100);
 
 // A força da caravana: condutores como Civis (1) e guardas (3): 2 + 6 = 8.
 int forcaDaCaravana(const DadosDoJogo& dados);

@@ -80,11 +80,15 @@ struct PedidoComercioNaCidade {
     int quantidade = 0;
     bool comprar = true;
 };
+// Fase B4 (Reputação, 4.2): doar moedas na cidade onde o grupo está.
+struct PedidoDoarNaCidade {
+    int moedas = 0;
+};
 
 using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
                                      PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
                                      PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance,
-                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade>;
+                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade, PedidoDoarNaCidade>;
 
 class FilaDePedidosDoJogador {
 public:

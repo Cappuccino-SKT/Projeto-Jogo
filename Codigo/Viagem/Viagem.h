@@ -120,5 +120,6 @@ PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mun
 
 // Regra 4.6: aplica a escolha. Devolve a linha do console; vazio se a escolha não vale
 // (o suborno sem o dinheiro). Fugir que falha vira Lutar.
+// Fase B4: "venceuALuta", se não for nulo, diz se o grupo venceu a luta.
 std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras,
-                                        SorteioComSemente& sorteio);
+                                        SorteioComSemente& sorteio, bool* venceuALuta = nullptr);

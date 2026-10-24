@@ -107,6 +107,10 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "noticias.json", problemas)) {
         dados.regrasDasNoticias = lerArquivoDasNoticias(*texto, problemas);
     }
+    // 15. A Reputação (fase B4).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "reputacao.json", problemas)) {
+        dados.regrasDaReputacao = lerArquivoDaReputacao(*texto, problemas);
+    }
     return dados;
 }
 

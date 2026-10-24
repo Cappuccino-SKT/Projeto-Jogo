@@ -216,13 +216,13 @@ std::vector<std::string> rodarAViagemDoDia(ContextoDaProducao& contexto)
     return linhas;
 }
 
-std::string resolverOEncontroDoGrupo(ContextoDaProducao& contexto, EscolhaNoEncontro escolha, std::vector<std::string>& linhas)
+std::string resolverOEncontroDoGrupo(ContextoDaProducao& contexto, EscolhaNoEncontro escolha, std::vector<std::string>& linhas, bool* venceuALuta)
 {
     EntidadeEmTransito& grupo = contexto.viagem->grupoDoJogador;
     if (!grupo.encontroAcontecendo) {
         return "não há encontro agora";
     }
-    const std::string linha = resolverEncontroComBandidos(grupo, escolha, contexto.dados.regrasDaViagem, *contexto.sorteioDaViagem);
+    const std::string linha = resolverEncontroComBandidos(grupo, escolha, contexto.dados.regrasDaViagem, *contexto.sorteioDaViagem, venceuALuta);
     if (linha.empty()) {
         return "o grupo não tem o dinheiro do suborno";
     }

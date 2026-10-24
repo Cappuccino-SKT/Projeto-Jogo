@@ -34,6 +34,7 @@ add_library(regras_do_jogo STATIC
     Cidades/OutrasCidades.cpp
     Comercio/Comercio.cpp
     Noticias/Noticias.cpp
+    Reputacao/Reputacao.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp
