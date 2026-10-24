@@ -313,6 +313,28 @@ int64_t somarOTrabalhoDaHora(const ContextoDaProducao& contexto, int indiceDaCon
     return trabalhoDaHora * velocidadeDoSalario * velocidadeDaManutencao / 10000;
 }
 
+// Fase B5 (Tecnologia, TE1-2): o Laboratório trabalha como uma receita de 8 horas, lote 1,
+// sem insumo, e cada ciclo completo vira 1 Ponto de Pesquisa (não vai ao inventário).
+void juntarOsPontosDePesquisaDaHora(ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    const ConstrucaoDaVila& construcao = contexto.vila.construcoes[indiceDaConstrucao];
+    const DefinicaoDeConstrucao* definicao = contexto.dados.catalogoDeConstrucoes.procurarConstrucao(construcao.tipo);
+    ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indiceDaConstrucao];
+    if (definicao == nullptr || !definicao->produzPontosDePesquisa || construcao.emObra || producao.estaDeFolgaHoje) {
+        return;
+    }
+    for (const entt::entity empregado : empregadosDaConstrucao(contexto, indiceDaConstrucao)) {
+        const int ticks = contexto.registroDasEntidades.get<TrabalhoDoDia>(empregado).ticksTrabalhadosNestaHora;
+        const int habilidade = contexto.registroDasEntidades.get<HabilidadesDoNpc>(empregado).habilidadeNoTrabalho(*definicao->trabalhoSemReceita);
+        producao.progressoDoCiclo += calcularProgressoDoTrabalho(ticks, habilidade, construcao.nivel, 1);
+    }
+    const int64_t porPonto = static_cast<int64_t>(contexto.dados.tecnologia.regras.horasPorPonto) * contexto.ticksPorHoraDeJogo * 100;
+    if (porPonto > 0 && producao.progressoDoCiclo >= porPonto) {
+        producao.pontosDePesquisaGuardados += static_cast<int>(producao.progressoDoCiclo / porPonto);
+        producao.progressoDoCiclo %= porPonto;
+    }
+}
+
 void pararAConstrucao(ProducaoDaConstrucao& producao, const std::string& motivo)
 {
     producao.estaParada = true;
@@ -473,7 +495,7 @@ int HabilidadesDoNpc::habilidadeNoTrabalho(TrabalhoDaReceita trabalho) const
     switch (trabalho) {
     case TrabalhoDaReceita::Bracal: return bracal;
     case TrabalhoDaReceita::Manufaturado: return manufaturado;
-    case TrabalhoDaReceita::Especialista: return 0;
+    case TrabalhoDaReceita::Especialista: return manufaturado;  // TE2-1, provisório
     }
     return 0;
 }
@@ -660,6 +682,8 @@ void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& rel
     for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
         if (contexto.producaoDasConstrucoes[indice].ehDeProducao) {
             rodarOCicloDeUmaConstrucao(contexto, static_cast<int>(indice), relogio.estacaoAtual());
+        } else {
+            juntarOsPontosDePesquisaDaHora(contexto, static_cast<int>(indice));
         }
     }
     // Depois zera o trabalho da hora de todos (regra 4.2, passo 3).
@@ -717,7 +741,8 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
         for (std::size_t indiceDaReceita = 0; indiceDaReceita < receitas.size(); ++indiceDaReceita) {
             const DefinicaoDeReceita& receita = receitas[indiceDaReceita];
             // Passo 1: as candidatas; com a regra 10.2, sem as de estoque de sobra.
-            if (!receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita) || comSobra[receita.numeroDoProduto]) {
+            const bool travada = contexto.receitasLiberadas != nullptr && indiceDaReceita < contexto.receitasLiberadas->size() && !(*contexto.receitasLiberadas)[indiceDaReceita];
+            if (travada || !receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita) || comSobra[receita.numeroDoProduto]) {
                 continue;
             }
             // Passo 2: a nota, com os preços locais (marco 7).

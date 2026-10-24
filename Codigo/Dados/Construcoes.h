@@ -28,6 +28,7 @@ struct DefinicaoDeConstrucao {
     std::string funcao;                              // o nome da Função das vagas: "cozinheiro"
     std::optional<TrabalhoDaReceita> trabalhoSemReceita;  // só nas construções sem receita
     int moradores = 0;                               // só nas moradias: quantos moram em cada uma
+    bool produzPontosDePesquisa = false;             // fase B5: o Laboratório ("pontos_de_pesquisa": true)
 
     bool ehMoradia() const { return moradores > 0; }
 };

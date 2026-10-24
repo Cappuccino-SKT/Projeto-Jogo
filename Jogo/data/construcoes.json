@@ -8,5 +8,7 @@
   { "id": "construcao.construtor", "porte": "pequeno", "guarda": ["materia_prima"], "funcao": "operario",
     "trabalho_sem_receita": "bracal" },
   { "id": "construcao.casa", "porte": "pequeno", "guarda": [], "moradores": 4 },
-  { "id": "construcao.pedreira", "porte": "medio", "guarda": ["materia_prima", "bem_de_consumo"], "funcao": "pedreiro" }
+  { "id": "construcao.pedreira", "porte": "medio", "guarda": ["materia_prima", "bem_de_consumo"], "funcao": "pedreiro" },
+  { "id": "construcao.laboratorio", "porte": "grande", "guarda": [], "funcao": "pesquisador",
+    "trabalho_sem_receita": "especialista", "pontos_de_pesquisa": true }
 ]

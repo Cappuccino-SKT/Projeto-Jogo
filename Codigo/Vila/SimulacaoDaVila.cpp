@@ -54,6 +54,9 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     for (const CidadeDoMundo* cidade : cidades) {
         outrasCidades.push_back(std::make_unique<SimulacaoDaVila>(dados, regrasDoTempo, *cidade, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida)));
     }
+    // Fase B5: a pesquisa do mundo (os marcos sorteados uma vez) e as travas de cada cidade.
+    montarATecnologiaDaPartidaNova(tecnologia, dados, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
+    atualizarAsTravasDasCidades(*this);
 }
 
 SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoTempo& regrasDoTempo, const CidadeDoMundo& cidade, uint64_t sementeDaPartida)
@@ -150,6 +153,7 @@ ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
     contexto.sorteioDaViagem = &sorteioDaViagem;
     contexto.sorteioDoClimaDasOutrasRegioes = &sorteioDoClimaDasOutrasRegioes;
     contexto.relogio = &relogio;
+    contexto.receitasLiberadas = receitasLiberadas.empty() ? nullptr : &receitasLiberadas;
     return contexto;
 }
 
@@ -322,6 +326,13 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
             decidirAsViagensDasCaravanas(*this);
         }
         avancarAsCaravanasUmTick(*this);
+    }
+
+    // 7b. A tecnologia (fase B5): no dia novo, depois do dia de todas as cidades, os pontos,
+    //     as tecnologias completas, os projetos e os marcos.
+    if (lodDoMapa == 0 && relogio.comecouUmDiaNovo()) {
+        const std::vector<std::string> linhasDaTecnologia = somarPontosEConcluirTecnologias(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaTecnologia.begin(), linhasDaTecnologia.end());
     }
 
     // 9. A reputação (fase B4): no dia 1 de cada estação, a volta para a base.

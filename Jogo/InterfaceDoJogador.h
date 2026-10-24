@@ -65,6 +65,8 @@ private:
     void desenharAsNoticias(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
     // Fase B4 (ficha da Reputação): o valor e a faixa de cada facção e Vila Livre, com o "Por quê?".
     void desenharAReputacao(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase B5 (ficha da Tecnologia): a era, o projeto e os pontos de cada facção, e os marcos.
+    void desenharATecnologia(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
 
     bool prontaParaDesenhar = false;
     bool janelaDeGestaoAberta = false;
@@ -87,4 +89,5 @@ private:
     bool marchaForcadaEscolhida = false;
     bool janelaDasNoticiasAberta = false;
     bool janelaDaReputacaoAberta = false;
+    bool janelaDaTecnologiaAberta = false;
 };

@@ -44,7 +44,7 @@ struct HabilidadesDoNpc {
     int bracal = 50;
     int manufaturado = 50;
 
-    // A habilidade usada num Trabalho. A fatia não tem Especialistas: 0.
+    // A habilidade usada num Trabalho. TE2-1: até os Ricos chegarem (marco A4), a Especialista é a Manufaturado.
     int habilidadeNoTrabalho(TrabalhoDaReceita trabalho) const;
 };
 
@@ -65,6 +65,7 @@ struct ProducaoDaConstrucao {
     int receitaEscolhidaParaOProximoCiclo = -1;   // a escolha do dia, nas da Cidade
     bool cicloComecou = false;                    // os insumos já saíram
     int64_t progressoDoCiclo = 0;                 // em ticks × porcentagem (parte 5)
+    int pontosDePesquisaGuardados = 0;            // fase B5: os pontos do Laboratório que o passo 7b ainda não somou
     int restoDaProducaoBracal = 0;                // de 0 a 99: a fração de unidade guardada
     bool estaParada = false;
     std::string motivoDaParada;                   // "sem Água", "o estoque encheu", "de folga"...
@@ -128,6 +129,8 @@ struct ContextoDaProducao {
     SorteioComSemente* sorteioDaViagem = nullptr;
     SorteioComSemente* sorteioDoClimaDasOutrasRegioes = nullptr;
     const RelogioDoMundo* relogio = nullptr;
+    // Fase B5 (Tecnologia, 4.5): as receitas que esta cidade pode usar (nulo = todas).
+    const std::vector<bool>* receitasLiberadas = nullptr;
 };
 
 // ---------------------------------------------------------------------------

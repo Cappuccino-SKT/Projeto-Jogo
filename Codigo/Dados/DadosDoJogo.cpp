@@ -111,6 +111,13 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "reputacao.json", problemas)) {
         dados.regrasDaReputacao = lerArquivoDaReputacao(*texto, problemas);
     }
+    // 16. A Tecnologia (fase B5): as listas provisórias e o bloco "tecnologia" do regras.json.
+    const auto textoDasTecnologias = lerArquivoInteiro(pastaDosDados, "tecnologias.json", problemas);
+    const auto textoDosMarcos = lerArquivoInteiro(pastaDosDados, "marcos.json", problemas);
+    const auto textoDoRegras = lerArquivoInteiro(pastaDosDados, "regras.json", problemas);
+    if (textoDasTecnologias && textoDosMarcos && textoDoRegras) {
+        dados.tecnologia = lerArquivosDaTecnologia(*textoDasTecnologias, *textoDosMarcos, *textoDoRegras, dados, problemas);
+    }
     return dados;
 }
 

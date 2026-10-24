@@ -621,3 +621,17 @@ O que entrou ([[Ficha Logica/Reputacao|ficha da Reputação]]; os ajustes estão
 
 **Verificado pelo assistente:** os testes passam (512 conferências); as 10 sementes passam com o relatório igual ao do B3 (a reputação não muda nada sem o jogador agir); salvar e carregar no dia 30 dá o mesmo relatório.
 
+### Marco B5: a tecnologia (2026-10-24, programado com o Opus a pedido do autor; rodada TE2, opção A)
+
+O que entrou ([[Ficha Logica/Tecnologia|ficha da Tecnologia]]; os ajustes estão na parte 10.8 dela):
+
+- **O Laboratório** nas 6 capitais e na Cidade das minas de cobre (3,6), com 5 pesquisadores cada. Os pontos vão para a facção dona.
+- **A pesquisa:** cada facção escolhe o projeto pela cultura, paga o custo com a difusão (−10% por facção que já tem) e, ao completar, gera uma notícia Regional.
+- **Os marcos mundiais:** o dia é sorteado na janela ao criar o mundo (sequência 6) e fica mais cedo com as facções que já têm as tecnologias ligadas; ao chegar, abre a era e gera uma notícia Mundial.
+- **As travas** nas receitas das cidades, pela facção dona.
+- **Conteúdo provisório** (`data/tecnologias.json` e `data/marcos.json`): 3 tecnologias e 1 marco de exemplo, que não liberam nada. As listas de verdade vêm na rodada de conteúdo C1. Até os Ricos (A4), a habilidade Especialista é a Manufaturado.
+- **Na tela:** o botão **Tecnologia** mostra a era, o projeto, os pontos e as tecnologias de cada facção, e os marcos. O fim do `--simular` mostra o resumo.
+- **Save versão 9.**
+
+**Verificado pelo assistente:** os testes passam (527 conferências); as 10 sementes passam com o relatório da vila igual ao do B4; no fim do ano, as 6 facções têm as 3 tecnologias de exemplo (18), nenhuma cidade com fome e o dinheiro do mundo conservado; o comércio mudou um pouco (de 4 a 21 viagens), porque as capitais pagam 5 pesquisadores; salvar e carregar no dia 30 dá o mesmo relatório.
+

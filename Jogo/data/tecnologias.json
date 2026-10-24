@@ -1,0 +1,5 @@
+[
+  { "id": "tec.contabilidade", "ramo": "economia", "era": 1, "custo": 100, "pre_requisitos": [], "libera": [], "culturas_que_comecam_com": [] },
+  { "id": "tec.ferramentas_melhores", "ramo": "producao", "era": 1, "custo": 100, "pre_requisitos": [], "libera": [], "culturas_que_comecam_com": [] },
+  { "id": "tec.andaimes", "ramo": "construcao", "era": 1, "custo": 100, "pre_requisitos": ["tec.ferramentas_melhores"], "libera": [], "culturas_que_comecam_com": [] }
+]

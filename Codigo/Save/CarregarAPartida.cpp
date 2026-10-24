@@ -219,6 +219,46 @@ void restaurarOComercio(SimulacaoDaVila& partida, const json& secao)
     }
 }
 
+// Fase B5 (ficha da Tecnologia).
+void restaurarATecnologia(SimulacaoDaVila& partida, const json& secao)
+{
+    EstadoDaTecnologia& estado = partida.tecnologia;
+    const CatalogoDaTecnologia& catalogo = partida.dados.tecnologia;
+    const auto posicaoDaTecnologia = [&](const std::string& id) {
+        for (std::size_t posicao = 0; posicao < catalogo.tecnologias.size(); ++posicao) {
+            if (catalogo.tecnologias[posicao].identificadorDeTexto == id) {
+                return static_cast<int>(posicao);
+            }
+        }
+        throw RecusaDoSave("O save tem a tecnologia " + id + ", que o jogo não conhece.");
+    };
+    const json& pesquisadores = secao.at("pesquisadores");
+    if (pesquisadores.size() != estado.temATecnologia.size()) {
+        throw RecusaDoSave("O save tem a tecnologia de outra quantidade de facções.");
+    }
+    for (std::size_t pesquisador = 0; pesquisador < pesquisadores.size(); ++pesquisador) {
+        const json& entrada = pesquisadores[pesquisador];
+        std::fill(estado.temATecnologia[pesquisador].begin(), estado.temATecnologia[pesquisador].end(), false);
+        for (const json& id : entrada.at("tecnologias")) {
+            estado.temATecnologia[pesquisador][static_cast<std::size_t>(posicaoDaTecnologia(id.get<std::string>()))] = true;
+        }
+        estado.projetoAtual[pesquisador] = entrada.at("projeto").is_null() ? -1 : posicaoDaTecnologia(entrada.at("projeto").get<std::string>());
+        estado.pontosAcumulados[pesquisador] = entrada.at("pontos").get<int64_t>();
+    }
+    const json& marcos = secao.at("marcos");
+    if (marcos.size() != catalogo.marcos.size()) {
+        throw RecusaDoSave("O save tem outra quantidade de marcos.");
+    }
+    for (std::size_t marco = 0; marco < marcos.size(); ++marco) {
+        if (marcos[marco].at("id").get<std::string>() != catalogo.marcos[marco].identificadorDeTexto) {
+            throw RecusaDoSave("O save tem outros marcos.");
+        }
+        estado.diaSorteadoPorMarco[marco] = marcos[marco].at("diaSorteado").get<int64_t>();
+        estado.marcoChegou[marco] = marcos[marco].at("chegou").get<bool>();
+    }
+    estado.eraAtualDoMundo = secao.at("eraAtualDoMundo").get<int>();
+}
+
 // Fase B4 (ficha da Reputação).
 void restaurarAReputacao(SimulacaoDaVila& partida, const json& secao)
 {
@@ -368,6 +408,7 @@ void restaurarAProducao(SimulacaoDaVila& simulacao, const json& lista)
         producao.receitaEscolhidaParaOProximoCiclo = indiceDaReceitaPeloTexto(dados, linha.at("receitaEscolhida"));
         producao.cicloComecou = linha.at("cicloComecou").get<bool>();
         producao.progressoDoCiclo = linha.at("progressoDoCiclo").get<int64_t>();
+        producao.pontosDePesquisaGuardados = linha.at("pontosDePesquisaGuardados").get<int>();
         producao.restoDaProducaoBracal = linha.at("restoDaProducaoBracal").get<int>();
         producao.estaParada = linha.at("estaParada").get<bool>();
         producao.motivoDaParada = linha.at("motivoDaParada").get<std::string>();
@@ -709,6 +750,8 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
 
         restaurarAsNoticias(*partida, arvore.at("noticias"));  // fase B3
         restaurarAReputacao(*partida, arvore.at("reputacao"));  // fase B4
+        restaurarATecnologia(*partida, arvore.at("tecnologia"));  // fase B5
+        atualizarAsTravasDasCidades(*partida);
 
         // Passo 6: o resto já foi recalculado (o mapa bloqueado e a capacidade).
         partida->avisosAoMontar.clear();

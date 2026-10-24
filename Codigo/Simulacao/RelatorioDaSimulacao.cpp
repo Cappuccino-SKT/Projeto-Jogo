@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Simulacao/RelatorioDaSimulacao.h"
 
 #include <chrono>
@@ -207,6 +208,17 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
         resultado.linhasDoConsole.push_back("Notícias: " + std::to_string(partida->noticias.proximoNumeroDaNoticia - 1) + " criadas, "
                                             + std::to_string(partida->noticias.ativas.size()) + " ativas no último dia, "
                                             + std::to_string(partida->noticias.cronicaDoMundo.size()) + " na Crônica do jogador");
+        // Fase B5: a pesquisa do mundo.
+        int descobertas = 0;
+        for (const std::vector<bool>& tem : partida->tecnologia.temATecnologia) {
+            descobertas += static_cast<int>(std::count(tem.begin(), tem.end(), true));
+        }
+        int pontosNoAno = 0;
+        for (const int64_t pontos : partida->tecnologia.pontosAcumulados) {
+            pontosNoAno += static_cast<int>(pontos);
+        }
+        resultado.linhasDoConsole.push_back("Tecnologia: era " + std::to_string(partida->tecnologia.eraAtualDoMundo) + ", " + std::to_string(descobertas)
+                                            + " tecnologias das facções, " + std::to_string(pontosNoAno) + " pontos guardados");
         // As outras cidades no fim: quantas passam fome (CO2-1: as de comida escassa dependem das caravanas).
         int cidadesComFome = 0;
         int piorMapa = 0;

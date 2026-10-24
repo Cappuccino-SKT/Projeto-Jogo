@@ -111,5 +111,23 @@
     "risco_chance_de_perder_em_porcento": 60,
     "risco_perda_media_em_porcento": 60,
     "paes_por_pessoa_por_dia": 1
+  },
+  "tecnologia": {
+    "custo_por_era": [100, 200, 400, 800],
+    "difusao_por_faccao_em_porcento": 10,
+    "difusao_maxima_em_porcento": 50,
+    "vila_sem_faccao_custo_em_porcento": 150,
+    "horas_por_ponto": 8,
+    "tecnologias_por_dia_no_maximo": 3,
+    "nivel_do_laboratorio": 3,
+    "outras_cidades_com_laboratorio": [[3, 6]],
+    "prioridade_dos_ramos_por_cultura": {
+      "guerreira":   ["militar", "construcao", "producao", "administracao", "economia"],
+      "arcana":      ["administracao", "producao", "construcao", "economia", "militar"],
+      "autoritaria": ["administracao", "militar", "producao", "construcao", "economia"],
+      "religiosa":   ["administracao", "producao", "construcao", "economia", "militar"],
+      "tecnocrata":  ["producao", "construcao", "economia", "administracao", "militar"],
+      "escravista":  ["economia", "producao", "militar", "administracao", "construcao"]
+    }
   }
 }

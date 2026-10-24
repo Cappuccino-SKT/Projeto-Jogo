@@ -74,6 +74,13 @@ void lerCamposDaConstrucao(const Json& objeto, DefinicaoDeConstrucao& definicao,
             anotarErro("o \"trabalho_sem_receita\" precisa ser \"bracal\", \"manufaturado\" ou \"especialista\"");
         }
     }
+    // Fase B5 (Tecnologia, TE1-2): o trabalho de cada hora vira Pontos de Pesquisa, não itens.
+    if (const auto pesquisa = objeto.find("pontos_de_pesquisa"); pesquisa != objeto.end()) {
+        definicao.produzPontosDePesquisa = pesquisa->is_boolean() && pesquisa->get<bool>();
+        if (definicao.produzPontosDePesquisa && !definicao.trabalhoSemReceita.has_value()) {
+            anotarErro("uma construção de \"pontos_de_pesquisa\" precisa do \"trabalho_sem_receita\"");
+        }
+    }
 }
 
 }  // namespace

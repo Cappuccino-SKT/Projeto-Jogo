@@ -155,6 +155,21 @@ VilaDoJogo gerarAVilaDaCidade(const CidadeDoMundo& cidade, const DadosDoJogo& da
             vila.construcoes.push_back(construcao);
         }
     }
+    // Fase B5 (Tecnologia, TE1-1): o Laboratório em todas as capitais e nas cidades da lista.
+    const RegrasDaTecnologia& tecnologia = dados.tecnologia.regras;
+    const bool temLaboratorio = cidade.nivel == 4
+        || std::find(tecnologia.outrasCidadesComLaboratorio.begin(), tecnologia.outrasCidadesComLaboratorio.end(), std::make_pair(mapaDoMundo.coluna, mapaDoMundo.linha))
+               != tecnologia.outrasCidadesComLaboratorio.end();
+    if (temLaboratorio && dados.catalogoDeConstrucoes.existeConstrucao("construcao.laboratorio")) {
+        ConstrucaoDaVila laboratorio;
+        laboratorio.identificador = "laboratorio_1";
+        laboratorio.tipo = "construcao.laboratorio";
+        laboratorio.nivel = tecnologia.nivelDoLaboratorio;
+        laboratorio.numeroDoLote = -1;
+        // Primeiro na lista: a contratação da Cidade preenche as vagas na ordem das construções, e
+        // nas cidades sem desempregados o Laboratório ficaria vazio.
+        vila.construcoes.insert(vila.construcoes.begin(), laboratorio);
+    }
     // 3. As casas: na mesma proporção da vila inicial (4 para 15).
     const int npcsDaVila = std::max<int>(1, static_cast<int>(vilaInicial.npcsIniciais.size()));
     const int casas = std::max(1, (npcs * casasDaVila + npcsDaVila - 1) / npcsDaVila);

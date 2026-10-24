@@ -38,7 +38,7 @@ void testarConstrucoes(const DadosDoJogo& dados)
     const RegrasDasConstrucoes& regras = dados.regras.construcoes;
     conferir(calcularVagas(1, regras) == 2 && calcularVagas(2, regras) == 3 && calcularVagas(5, regras) == 10, "vagas nos níveis 1, 2 e 5: 2, 3 e 10");
     conferir(calcularCapacidade(PorteDoLote::Medio, 2, regras) == 400, "uma construção média no nível 2 guarda 400");
-    conferir(dados.catalogoDeConstrucoes.quantidadeDeConstrucoes() == 8, "o construcoes.json da fatia tem 8 tipos, sem erro");
+    conferir(dados.catalogoDeConstrucoes.quantidadeDeConstrucoes() == 9, "o construcoes.json tem 9 tipos (com o Laboratório da fase B5), sem erro");
     const DefinicaoDeConstrucao* mercado = dados.catalogoDeConstrucoes.procurarConstrucao("construcao.mercado");
     conferir(mercado != nullptr && mercado->porte == PorteDoLote::Medio && mercado->trabalhoSemReceita == TrabalhoDaReceita::Manufaturado,
              "o Mercado é médio, e o Lojista é Manufaturado");

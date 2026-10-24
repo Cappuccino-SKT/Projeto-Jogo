@@ -89,6 +89,7 @@ json escreverAProducao(const SimulacaoDaVila& simulacao)
                              {"receitaEscolhida", textoDaReceita(dados, producao.receitaEscolhidaParaOProximoCiclo)},
                              {"cicloComecou", producao.cicloComecou},
                              {"progressoDoCiclo", producao.progressoDoCiclo},
+                             {"pontosDePesquisaGuardados", producao.pontosDePesquisaGuardados},
                              {"restoDaProducaoBracal", producao.restoDaProducaoBracal},
                              {"estaParada", producao.estaParada},
                              {"motivoDaParada", producao.motivoDaParada},
@@ -423,6 +424,31 @@ json escreverAReputacao(const SimulacaoDaVila& simulacao)
     return porDono;
 }
 
+// Fase B5 (ficha da Tecnologia): por pesquisador, as tecnologias pelo id; os marcos pelo id.
+json escreverATecnologia(const SimulacaoDaVila& simulacao)
+{
+    const EstadoDaTecnologia& estado = simulacao.tecnologia;
+    const CatalogoDaTecnologia& catalogo = simulacao.dados.tecnologia;
+    json pesquisadores = json::array();
+    for (std::size_t pesquisador = 0; pesquisador < estado.temATecnologia.size(); ++pesquisador) {
+        json tem = json::array();
+        for (std::size_t tecnologia = 0; tecnologia < catalogo.tecnologias.size(); ++tecnologia) {
+            if (estado.temATecnologia[pesquisador][tecnologia]) {
+                tem.push_back(catalogo.tecnologias[tecnologia].identificadorDeTexto);
+            }
+        }
+        const int projeto = estado.projetoAtual[pesquisador];
+        pesquisadores.push_back(json{{"tecnologias", tem},
+                                     {"projeto", projeto >= 0 ? json(catalogo.tecnologias[static_cast<std::size_t>(projeto)].identificadorDeTexto) : json()},
+                                     {"pontos", estado.pontosAcumulados[pesquisador]}});
+    }
+    json marcos = json::array();
+    for (std::size_t marco = 0; marco < catalogo.marcos.size(); ++marco) {
+        marcos.push_back(json{{"id", catalogo.marcos[marco].identificadorDeTexto}, {"diaSorteado", estado.diaSorteadoPorMarco[marco]}, {"chegou", static_cast<bool>(estado.marcoChegou[marco])}});
+    }
+    return json{{"pesquisadores", pesquisadores}, {"marcos", marcos}, {"eraAtualDoMundo", estado.eraAtualDoMundo}};
+}
+
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
 {
     json lista = json::array();
@@ -501,5 +527,6 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["outrasCidades"] = std::move(cidades);
     arvore["noticias"] = escreverAsNoticias(simulacao);
     arvore["reputacao"] = escreverAReputacao(simulacao);
+    arvore["tecnologia"] = escreverATecnologia(simulacao);
     return json::to_msgpack(arvore);
 }

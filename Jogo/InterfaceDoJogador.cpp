@@ -19,6 +19,7 @@
 #include "Comercio/Comercio.h"
 #include "Noticias/Noticias.h"
 #include "Reputacao/Reputacao.h"
+#include "Tecnologia/Tecnologia.h"
 
 namespace {
 
@@ -279,6 +280,9 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     if (janelaDaReputacaoAberta) {
         desenharAReputacao(simulacao, larguraDaTela, alturaDaTela);
     }
+    if (janelaDaTecnologiaAberta) {
+        desenharATecnologia(simulacao, larguraDaTela, alturaDaTela);
+    }
     if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
         desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
@@ -362,6 +366,10 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     ImGui::SameLine();
     if (ImGui::Button("Reputação")) {
         janelaDaReputacaoAberta = !janelaDaReputacaoAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Tecnologia")) {
+        janelaDaTecnologiaAberta = !janelaDaTecnologiaAberta;
     }
     const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
     if (grupo.emTransito) {
@@ -959,6 +967,62 @@ ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
 }
 
 }  // namespace
+
+void InterfaceDoJogador::desenharATecnologia(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const DadosDoJogo& dados = simulacao.dados;
+    const EstadoDaTecnologia& estado = simulacao.tecnologia;
+    const std::vector<std::string> faccoes = faccoesQuePesquisam(dados);
+    ImGui::SetNextWindowSize(ImVec2(620, 360), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Tecnologia", &janelaDaTecnologiaAberta)) {
+        ImGui::End();
+        return;
+    }
+    ImGui::Text("Era do mundo: %d. As tecnologias e os marcos são de exemplo até a rodada de conteúdo.", estado.eraAtualDoMundo);
+    if (ImGui::BeginTable("##tecnologia", 4, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+        ImGui::TableSetupColumn("Quem");
+        ImGui::TableSetupColumn("Pesquisando");
+        ImGui::TableSetupColumn("Pontos");
+        ImGui::TableSetupColumn("Tecnologias");
+        ImGui::TableHeadersRow();
+        for (std::size_t pesquisador = 0; pesquisador < estado.temATecnologia.size(); ++pesquisador) {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(pesquisador < faccoes.size() ? nomeDoDonoDaReputacao(dados.regrasDaReputacao, faccoes[pesquisador]).c_str() : "Sua vila");
+            ImGui::TableNextColumn();
+            const int projeto = estado.projetoAtual[pesquisador];
+            if (projeto >= 0) {
+                ImGui::TextUnformatted(dados.tabelaDeTextos.textoDe(dados.tecnologia.tecnologias[static_cast<std::size_t>(projeto)].identificadorDeTexto).c_str());
+            } else {
+                ImGui::TextDisabled(pesquisador < faccoes.size() ? "nada disponível" : "sem Laboratório");
+            }
+            ImGui::TableNextColumn();
+            if (projeto >= 0) {
+                ImGui::Text("%lld de %d", static_cast<long long>(estado.pontosAcumulados[pesquisador]),
+                            custoAtualDaTecnologia(estado, dados, static_cast<int>(pesquisador), projeto));
+            } else {
+                ImGui::Text("%lld", static_cast<long long>(estado.pontosAcumulados[pesquisador]));
+            }
+            ImGui::TableNextColumn();
+            std::string tem;
+            for (std::size_t tecnologia = 0; tecnologia < estado.temATecnologia[pesquisador].size(); ++tecnologia) {
+                if (estado.temATecnologia[pesquisador][tecnologia]) {
+                    tem += (tem.empty() ? "" : ", ") + dados.tabelaDeTextos.textoDe(dados.tecnologia.tecnologias[tecnologia].identificadorDeTexto);
+                }
+            }
+            ImGui::TextUnformatted(tem.empty() ? "nenhuma" : tem.c_str());
+        }
+        ImGui::EndTable();
+    }
+    ImGui::Separator();
+    for (std::size_t marco = 0; marco < dados.tecnologia.marcos.size(); ++marco) {
+        const DefinicaoDeMarco& definicao = dados.tecnologia.marcos[marco];
+        ImGui::Text("Marco: %s (anos %d a %d): %s", dados.tabelaDeTextos.textoDe(definicao.identificadorDeTexto).c_str(), definicao.primeiroAno, definicao.ultimoAno,
+                    estado.marcoChegou[marco] ? "já chegou" : "ainda não chegou");
+    }
+    ImGui::End();
+}
 
 void InterfaceDoJogador::desenharAReputacao(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
 {

@@ -23,6 +23,7 @@
 #include "Comercio/RegrasDoComercio.h"
 #include "Noticias/Noticias.h"
 #include "Reputacao/Reputacao.h"
+#include "Tecnologia/Tecnologia.h"
 
 struct DadosDoJogo {
     TabelaDeTextos tabelaDeTextos;
@@ -41,6 +42,7 @@ struct DadosDoJogo {
     RegrasDoComercio regrasDoComercio;              // fase B2
     RegrasDasNoticias regrasDasNoticias;            // fase B3
     RegrasDaReputacao regrasDaReputacao;            // fase B4
+    CatalogoDaTecnologia tecnologia;                // fase B5
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }
