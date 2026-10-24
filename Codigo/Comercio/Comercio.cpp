@@ -6,6 +6,7 @@
 
 #include "Comercio/RegrasDoComercio.h"
 #include "Reputacao/Reputacao.h"
+#include "Faccao/Faccao.h"
 #include "Dados/Receitas.h"
 
 using Json = nlohmann::json;
@@ -160,7 +161,11 @@ void chegarAoDestino(SimulacaoDaVila& vila, SimulacaoDaVila& casa, CaravanaDaCid
         const PlanoDaViagemDaCaravana volta = calcularLucroEsperadoDaViagem(casa, caravana, *destino);
         for (int item = 0; item < static_cast<int>(volta.volta.size()); ++item) {
             if (volta.volta[item] > 0) {
-                const ResultadoDaLoja compra = comprarNaLoja(loja, item, volta.volta[item], entidade.dinheiroEmDecimos, false);
+                // Fase C1 (FA1-7): na cidade da mesma facção, o ajuste de preço dela.
+                const int faccaoDeCasa = faccaoDaCidade(casa.dados, casa.numeroDoMapaNoMundo());
+                const int ajuste = faccaoDeCasa >= 0 && faccaoDeCasa == faccaoDaCidade(casa.dados, destino->numeroDoMapaNoMundo())
+                    ? ajusteDePrecoDaFaccaoEmPorcento(casa.dados, faccaoDeCasa, item) : 0;
+                const ResultadoDaLoja compra = comprarNaLoja(loja, item, volta.volta[item], entidade.dinheiroEmDecimos, false, 100 + ajuste);
                 entidade.quantidadePorItem[item] += compra.quantidade;
                 entidade.dinheiroEmDecimos -= compra.valorEmDecimos;
             }
@@ -317,6 +322,9 @@ int faltaDoItem(const ContextoDaProducao& cidade, const std::vector<int>& aCamin
 ResultadoDaLoja calcularAVendaParaALoja(const ContextoDaProducao& loja, int numeroDoItem, int quantidade, int faixaEmPorcento)
 {
     const RegrasDoComercio& regras = loja.dados.regrasDoComercio;
+    if (loja.itensProibidos != nullptr && (*loja.itensProibidos)[static_cast<std::size_t>(numeroDoItem)]) {
+        return {};  // fase C1: a loja legal não compra o item proibido
+    }
     return calcularAVendaComOsNumeros(quantidade,
                                       std::max(0, estoqueAlvoDoItem(loja, numeroDoItem) - loja.inventario.quantidadeDe(numeroDoItem, DonoDoItem::Cidade)),
                                       precoLocalDoItem(loja, numeroDoItem), loja.dados.catalogoDeItens.itemPeloNumero(numeroDoItem).precoBaseEmDecimos,
@@ -372,6 +380,9 @@ ResultadoDaLoja calcularACompraNaLoja(const ContextoDaProducao& loja, int numero
     const RegrasDoComercio& regras = loja.dados.regrasDoComercio;
     ResultadoDaLoja resultado;
     int disponivel = loja.inventario.quantidadeDe(numeroDoItem, DonoDoItem::Cidade);
+    if (loja.itensProibidos != nullptr && (*loja.itensProibidos)[static_cast<std::size_t>(numeroDoItem)]) {
+        return resultado;  // fase C1: a loja legal não vende o item proibido
+    }
     if (ehOJogador) {
         const int64_t reserva = loja.consumoMedido.consumoPrevistoDoDiaEmCentesimos(numeroDoItem) * regras.reservaDaLojaEmDiasDeConsumo / 100;
         disponivel = static_cast<int>(std::max<int64_t>(0, disponivel - reserva));
@@ -399,6 +410,22 @@ ResultadoDaLoja comprarNaLoja(ContextoDaProducao& loja, int numeroDoItem, int qu
 int forcaDaCaravana(const DadosDoJogo& dados)
 {
     return dados.regrasDoComercio.condutores * dados.regrasDaViagem.forcaDe("civil") + dados.regrasDoComercio.guardas * dados.regrasDaViagem.forcaDe("guarda");
+}
+
+// Fase C1 (Facção, 4.3): a soma das tarifas de uma rota, com a carga de um valor só.
+int64_t tarifasDaRota(const SimulacaoDaVila& casa, int mapaDeSaida, const std::vector<int>& rota, int64_t valorDaCarga)
+{
+    const int daCaravana = faccaoDaCidade(casa.dados, casa.numeroDoMapaNoMundo());
+    int64_t total = 0;
+    int anterior = mapaDeSaida;
+    for (const int mapa : rota) {
+        const int dona = faccaoDoMapa(casa.dados, mapa);
+        if (dona >= 0 && dona != daCaravana && faccaoDoMapa(casa.dados, anterior) != dona && dona < static_cast<int>(casa.tarifaDasFaccoesEmPorcento.size())) {
+            total += tarifaComOsNumeros(valorDaCarga, casa.tarifaDasFaccoesEmPorcento[static_cast<std::size_t>(dona)]);
+        }
+        anterior = mapa;
+    }
+    return total;
 }
 
 PlanoDaViagemDaCaravana calcularLucroEsperadoDaViagem(SimulacaoDaVila& casa, const CaravanaDaCidade& caravana, SimulacaoDaVila& destino)
@@ -442,6 +469,14 @@ PlanoDaViagemDaCaravana calcularLucroEsperadoDaViagem(SimulacaoDaVila& casa, con
     const std::optional<int> pao = dados.catalogoDeItens.procurarNumeroDoItem(identificadorDoPaoDoComercio);
     const int precoDoPao = pao ? precoLocalDoItem(origem, *pao) : 0;
     plano.custo = static_cast<int64_t>(plano.dias) * regras.pessoasDaCaravana() * (regras.salarioPorDiaDaCaravanaEmDecimos + precoDoPao);
+    // Fase C1 (Facção, 4.3, passo 4): as tarifas da rota entram no custo.
+    int64_t valorDaIda = 0;
+    int64_t valorDaVolta = 0;
+    for (int item = 0; item < itens; ++item) {
+        valorDaIda += plano.ida[static_cast<std::size_t>(item)] * precoLocalDoItem(origem, item);
+        valorDaVolta += plano.volta[static_cast<std::size_t>(item)] * precoLocalDoItem(lojaDoDestino, item);
+    }
+    plano.custo += tarifasDaRota(casa, mapaDeCasa, rotaDeIda, valorDaIda) + tarifasDaRota(casa, plano.destino, rotaDeVolta, valorDaVolta);
     std::vector<int> rotaToda = rotaDeIda;
     rotaToda.insert(rotaToda.end(), rotaDeVolta.begin(), rotaDeVolta.end());
     plano.riscoPorMil = riscoDaRota(rotaToda, caravana.entidade, dados);
@@ -517,8 +552,12 @@ void avancarAsCaravanasUmTick(SimulacaoDaVila& vila)
             if (caravana.situacao == SituacaoDaCaravana::EmCasa) {
                 continue;
             }
+            const int mapaAntes = caravana.entidade.mapaAtual;
             const PassoDaEntidade passo = andarUmTick(caravana.entidade, casa->dados.mundo, casa->dados.regrasDaViagem, vila.viagem.climaDeHojePorRegiao, hora,
                                                       estacao, casa->contextoDaProducao().ticksPorHoraDeJogo, casa->sorteioDasCaravanas());
+            if (caravana.entidade.mapaAtual != mapaAntes) {
+                cobrarTarifa(vila, *casa, caravana, mapaAntes, caravana.entidade.mapaAtual);  // fase C1 (Facção, 4.3)
+            }
             if (passo == PassoDaEntidade::EncontroNaMetade) {
                 resolverOEncontroDaCaravana(vila, *casa, caravana);
             } else if (passo == PassoDaEntidade::ChegouAoDestino) {
@@ -542,6 +581,9 @@ int64_t dinheiroDoMundo(const SimulacaoDaVila& vila)
         return total;
     };
     int64_t total = daCidade(vila) + vila.viagem.grupoDoJogador.dinheiroEmDecimos;
+    for (const int64_t banco : vila.faccoes.bancoDaFaccao) {
+        total += banco;  // fase C1: o Banco da Facção
+    }
     for (const std::unique_ptr<SimulacaoDaVila>& cidade : vila.outrasCidades) {
         total += daCidade(*cidade);
     }

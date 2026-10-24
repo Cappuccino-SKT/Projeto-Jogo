@@ -120,7 +120,9 @@ void fazerOGastoExtra(ContextoDaProducao& contexto, int materiaisQueACestaTirou)
     dinheiro.gastoExtraDeHoje = 0;
 
     // 1 e 2. O teto do dia (80% da renda de ontem) menos a cesta, sem passar do dinheiro da classe.
-    const int64_t tetoDoDia = dinheiro.rendaDoDiaDaClasseCivil * economia.gastoDaClasseEmPorcentoDaRenda / 100;
+    //    Fase C1 (Facção, FA1-2): com a lei de imposto, o teto é 100% menos a taxa.
+    const int tetoEmPorcento = contexto.impostoDaCidadeEmPorcento >= 0 ? 100 - contexto.impostoDaCidadeEmPorcento : economia.gastoDaClasseEmPorcentoDaRenda;
+    const int64_t tetoDoDia = dinheiro.rendaDoDiaDaClasseCivil * tetoEmPorcento / 100;
     int64_t paraGastar = std::min(tetoDoDia - dinheiro.gastoDaCestaDeHoje, dinheiro.dinheiroDaClasseCivil);
     if (paraGastar <= 0) {
         return;
@@ -325,7 +327,11 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
             }
             // Passo 4, com o imposto retido na hora (regra 10.7): a parte da
             // cidade vai para o Banco, e o empregado recebe o resto.
-            const int64_t imposto = calcularImpostoDoSalario(salario, economia.imposto);
+            RegrasDoImposto impostoDaCidade = economia.imposto;
+            if (contexto.impostoDaCidadeEmPorcento >= 0) {
+                impostoDaCidade.taxaEmPorcento = contexto.impostoDaCidadeEmPorcento;  // fase C1: a lei da facção
+            }
+            const int64_t imposto = calcularImpostoDoSalario(salario, impostoDaCidade);
             dinheiroDeQuemPaga -= salario;
             dinheiro.bancoDaCidade += imposto * economia.imposto.parteDaCidadeEmPorcento / 100;
             dinheiro.dinheiroDaClasseCivil += salario - imposto;
@@ -421,7 +427,7 @@ void rodarAFelicidadeDoDia(ContextoDaProducao& contexto)
          contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc, TrabalhoDoDia>().each()) {
         situacao.civisSemCasa += identidade.classe == "civil" && casaETrabalho.indiceDaCasa < 0 ? 1 : 0;
     }
-    situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto);
+    situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto) + contexto.felicidadeDaFaccaoEmPontos;
     situacao.pontosDoClimaNoConsumo = pontosDoClimaNoConsumoAtendido(contexto);
 
     FelicidadeDaClasse& felicidade = contexto.felicidade;

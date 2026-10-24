@@ -127,6 +127,12 @@ public:
     // Fase B5 (Tecnologia): só na vila, a pesquisa do mundo; em cada cidade, as receitas liberadas.
     EstadoDaTecnologia tecnologia;
     std::vector<bool> receitasLiberadas;
+    // Fase C1 (Facção): só na vila, as facções do mundo; em cada cidade, o que vem das leis.
+    EstadoDasFaccoes faccoes;
+    int impostoDaCidadeEmPorcento = -1;
+    int felicidadeDaFaccaoEmPontos = 0;
+    std::vector<int> tarifaDasFaccoesEmPorcento;
+    std::vector<bool> itensProibidos;
     // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
     int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
     // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).

@@ -741,7 +741,8 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
         for (std::size_t indiceDaReceita = 0; indiceDaReceita < receitas.size(); ++indiceDaReceita) {
             const DefinicaoDeReceita& receita = receitas[indiceDaReceita];
             // Passo 1: as candidatas; com a regra 10.2, sem as de estoque de sobra.
-            const bool travada = contexto.receitasLiberadas != nullptr && indiceDaReceita < contexto.receitasLiberadas->size() && !(*contexto.receitasLiberadas)[indiceDaReceita];
+            const bool travada = (contexto.receitasLiberadas != nullptr && indiceDaReceita < contexto.receitasLiberadas->size() && !(*contexto.receitasLiberadas)[indiceDaReceita])
+                || (contexto.itensProibidos != nullptr && (*contexto.itensProibidos)[static_cast<std::size_t>(receita.numeroDoProduto)]);
             if (travada || !receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita) || comSobra[receita.numeroDoProduto]) {
                 continue;
             }

@@ -54,6 +54,8 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     for (const CidadeDoMundo* cidade : cidades) {
         outrasCidades.push_back(std::make_unique<SimulacaoDaVila>(dados, regrasDoTempo, *cidade, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida)));
     }
+    // Fase C1: as facções (as leis, o Banco da Facção e o líder).
+    montarAsFaccoesDaPartidaNova(*this, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     // Fase B5: a pesquisa do mundo (os marcos sorteados uma vez) e as travas de cada cidade.
     montarATecnologiaDaPartidaNova(tecnologia, dados, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     atualizarAsTravasDasCidades(*this);
@@ -154,6 +156,9 @@ ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
     contexto.sorteioDoClimaDasOutrasRegioes = &sorteioDoClimaDasOutrasRegioes;
     contexto.relogio = &relogio;
     contexto.receitasLiberadas = receitasLiberadas.empty() ? nullptr : &receitasLiberadas;
+    contexto.impostoDaCidadeEmPorcento = impostoDaCidadeEmPorcento;
+    contexto.felicidadeDaFaccaoEmPontos = felicidadeDaFaccaoEmPontos;
+    contexto.itensProibidos = itensProibidos.empty() ? nullptr : &itensProibidos;
     return contexto;
 }
 
@@ -303,6 +308,13 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
 
     // 5. Quem está trabalhando agora soma 1 tick (Produção, regra 4.1).
     contarOsTicksTrabalhados(producao);
+
+    // 5b. As facções (fase C1): no dia novo, antes do dia das outras cidades, as leis, a
+    //     cunhagem, a verba (no dia 1 da estação) e a assembleia (no dia 1 do ano).
+    if (lodDoMapa == 0 && relogio.comecouUmDiaNovo() && !outrasCidades.empty()) {
+        const std::vector<std::string> linhasDasFaccoes = rodarAsFaccoesNoDiaNovo(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDasFaccoes.begin(), linhasDasFaccoes.end());
+    }
 
     // 6. As outras cidades (fase B1b), depois da vila e na ordem do número do mapa. Cada
     //    uma usa o clima da sua região, que a viagem já sorteou na virada do dia.

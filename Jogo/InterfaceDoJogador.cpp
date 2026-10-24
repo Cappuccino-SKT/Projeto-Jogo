@@ -20,6 +20,7 @@
 #include "Noticias/Noticias.h"
 #include "Reputacao/Reputacao.h"
 #include "Tecnologia/Tecnologia.h"
+#include "Faccao/Faccao.h"
 
 namespace {
 
@@ -283,6 +284,9 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     if (janelaDaTecnologiaAberta) {
         desenharATecnologia(simulacao, larguraDaTela, alturaDaTela);
     }
+    if (janelaDasFaccoesAberta) {
+        desenharAsFaccoes(simulacao, larguraDaTela, alturaDaTela);
+    }
     if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
         desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
@@ -370,6 +374,10 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     ImGui::SameLine();
     if (ImGui::Button("Tecnologia")) {
         janelaDaTecnologiaAberta = !janelaDaTecnologiaAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Facções")) {
+        janelaDasFaccoesAberta = !janelaDasFaccoesAberta;
     }
     const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
     if (grupo.emTransito) {
@@ -967,6 +975,46 @@ ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
 }
 
 }  // namespace
+
+void InterfaceDoJogador::desenharAsFaccoes(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const DadosDoJogo& dados = simulacao.dados;
+    const CatalogoDasFaccoes& catalogo = dados.faccoes;
+    const EstadoDasFaccoes& estado = simulacao.faccoes;
+    ImGui::SetNextWindowSize(ImVec2(760, 360), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Facções", &janelaDasFaccoesAberta)) {
+        ImGui::End();
+        return;
+    }
+    ImGui::TextWrapped("A sua vila é livre: não tem facção, paga 20%% de imposto e recebe a verba de fora.");
+    if (ImGui::BeginTable("##faccoes", 2 + static_cast<int>(catalogo.leis.size()), ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_ScrollX)) {
+        ImGui::TableSetupColumn("Facção");
+        ImGui::TableSetupColumn("Banco");
+        for (const DefinicaoDaLei& lei : catalogo.leis) {
+            ImGui::TableSetupColumn(lei.id.c_str());
+        }
+        ImGui::TableHeadersRow();
+        for (std::size_t faccao = 0; faccao < estado.leisAtuais.size(); ++faccao) {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(nomeDaFaccao(dados, static_cast<int>(faccao)).c_str());
+            if (ImGui::IsItemHovered()) {
+                const LiderDaFaccao& lider = estado.lideres[faccao];
+                ImGui::SetTooltip("Líder: %d anos, Agressividade %d, Sociabilidade %d, legitimidade %d", lider.idade, lider.agressividade, lider.sociabilidade,
+                                  lider.legitimidade);
+            }
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(dinheiro(estado.bancoDaFaccao[faccao]).c_str());
+            for (std::size_t lei = 0; lei < catalogo.leis.size(); ++lei) {
+                ImGui::TableNextColumn();
+                ImGui::TextUnformatted(catalogo.leis[lei].opcoes[static_cast<std::size_t>(estado.leisAtuais[faccao][lei])].c_str());
+            }
+        }
+        ImGui::EndTable();
+    }
+    ImGui::End();
+}
 
 void InterfaceDoJogador::desenharATecnologia(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
 {

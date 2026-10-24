@@ -131,6 +131,11 @@ struct ContextoDaProducao {
     const RelogioDoMundo* relogio = nullptr;
     // Fase B5 (Tecnologia, 4.5): as receitas que esta cidade pode usar (nulo = todas).
     const std::vector<bool>* receitasLiberadas = nullptr;
+    // Fase C1 (Facção): o imposto da lei (−1 = o do regras.json), a Felicidade das leis e os
+    // itens proibidos (nulo = nenhum).
+    int impostoDaCidadeEmPorcento = -1;
+    int felicidadeDaFaccaoEmPontos = 0;
+    const std::vector<bool>* itensProibidos = nullptr;
 };
 
 // ---------------------------------------------------------------------------

@@ -449,6 +449,30 @@ json escreverATecnologia(const SimulacaoDaVila& simulacao)
     return json{{"pesquisadores", pesquisadores}, {"marcos", marcos}, {"eraAtualDoMundo", estado.eraAtualDoMundo}};
 }
 
+// Fase C1 (ficha da Facção): as leis pelo nome da opção, o Banco, o líder e a votação perdida.
+json escreverAsFaccoes(const SimulacaoDaVila& simulacao)
+{
+    const CatalogoDasFaccoes& catalogo = simulacao.dados.faccoes;
+    const EstadoDasFaccoes& estado = simulacao.faccoes;
+    json faccoes = json::array();
+    for (std::size_t faccao = 0; faccao < estado.leisAtuais.size(); ++faccao) {
+        json leis = json::object();
+        for (std::size_t lei = 0; lei < catalogo.leis.size(); ++lei) {
+            leis[catalogo.leis[lei].id] = catalogo.leis[lei].opcoes[static_cast<std::size_t>(estado.leisAtuais[faccao][lei])];
+        }
+        const LiderDaFaccao& lider = estado.lideres[faccao];
+        faccoes.push_back(json{{"id", catalogo.faccoes[faccao].id},
+                               {"leis", leis},
+                               {"banco", estado.bancoDaFaccao[faccao]},
+                               {"lider", json::array({lider.idade, lider.agressividade, lider.sociabilidade, lider.legitimidade})}});
+    }
+    json mudancas = json::array();
+    for (const MudancaDeLei& mudanca : estado.mudancasParaAmanha) {
+        mudancas.push_back(json::array({mudanca.faccao, mudanca.lei, mudanca.valor}));
+    }
+    return json{{"faccoes", faccoes}, {"mudancasParaAmanha", mudancas}, {"perdeuAVotacaoAte", estado.perdeuAVotacaoAte}, {"cunhagemTotal", estado.cunhagemTotal}};
+}
+
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
 {
     json lista = json::array();
@@ -528,5 +552,6 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["noticias"] = escreverAsNoticias(simulacao);
     arvore["reputacao"] = escreverAReputacao(simulacao);
     arvore["tecnologia"] = escreverATecnologia(simulacao);
+    arvore["faccoes"] = escreverAsFaccoes(simulacao);
     return json::to_msgpack(arvore);
 }

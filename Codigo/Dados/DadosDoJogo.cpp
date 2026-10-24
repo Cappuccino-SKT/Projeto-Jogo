@@ -118,6 +118,12 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (textoDasTecnologias && textoDosMarcos && textoDoRegras) {
         dados.tecnologia = lerArquivosDaTecnologia(*textoDasTecnologias, *textoDosMarcos, *textoDoRegras, dados, problemas);
     }
+    // 17. As facções (fase C1) e o que cada cultura deseja das leis.
+    const auto textoDasFaccoes = lerArquivoInteiro(pastaDosDados, "faccoes.json", problemas);
+    const auto textoDasCulturas = lerArquivoInteiro(pastaDosDados, "culturas.json", problemas);
+    if (textoDasFaccoes && textoDasCulturas) {
+        dados.faccoes = lerArquivosDasFaccoes(*textoDasFaccoes, *textoDasCulturas, problemas);
+    }
     return dados;
 }
 

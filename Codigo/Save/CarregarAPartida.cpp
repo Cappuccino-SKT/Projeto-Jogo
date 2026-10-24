@@ -219,6 +219,40 @@ void restaurarOComercio(SimulacaoDaVila& partida, const json& secao)
     }
 }
 
+// Fase C1 (ficha da Facção).
+void restaurarAsFaccoes(SimulacaoDaVila& partida, const json& secao)
+{
+    const CatalogoDasFaccoes& catalogo = partida.dados.faccoes;
+    EstadoDasFaccoes& estado = partida.faccoes;
+    const json& faccoes = secao.at("faccoes");
+    if (faccoes.size() != catalogo.faccoes.size()) {
+        throw RecusaDoSave("O save tem outra quantidade de facções.");
+    }
+    for (std::size_t faccao = 0; faccao < faccoes.size(); ++faccao) {
+        const json& entrada = faccoes[faccao];
+        if (entrada.at("id").get<std::string>() != catalogo.faccoes[faccao].id) {
+            throw RecusaDoSave("O save tem outras facções.");
+        }
+        for (std::size_t lei = 0; lei < catalogo.leis.size(); ++lei) {
+            const std::vector<std::string>& opcoes = catalogo.leis[lei].opcoes;
+            const auto opcao = std::find(opcoes.begin(), opcoes.end(), entrada.at("leis").at(catalogo.leis[lei].id).get<std::string>());
+            if (opcao == opcoes.end()) {
+                throw RecusaDoSave("O save tem uma lei com uma opção que o jogo não conhece.");
+            }
+            estado.leisAtuais[faccao][lei] = static_cast<int>(opcao - opcoes.begin());
+        }
+        estado.bancoDaFaccao[faccao] = entrada.at("banco").get<int64_t>();
+        const json& lider = entrada.at("lider");
+        estado.lideres[faccao] = LiderDaFaccao{lider.at(0).get<int>(), lider.at(1).get<int>(), lider.at(2).get<int>(), lider.at(3).get<int>()};
+    }
+    estado.mudancasParaAmanha.clear();
+    for (const json& mudanca : secao.at("mudancasParaAmanha")) {
+        estado.mudancasParaAmanha.push_back({mudanca.at(0).get<int>(), mudanca.at(1).get<int>(), mudanca.at(2).get<int>()});
+    }
+    estado.perdeuAVotacaoAte = secao.at("perdeuAVotacaoAte").get<std::vector<int64_t>>();
+    estado.cunhagemTotal = secao.at("cunhagemTotal").get<int64_t>();
+}
+
 // Fase B5 (ficha da Tecnologia).
 void restaurarATecnologia(SimulacaoDaVila& partida, const json& secao)
 {
@@ -751,6 +785,8 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarAsNoticias(*partida, arvore.at("noticias"));  // fase B3
         restaurarAReputacao(*partida, arvore.at("reputacao"));  // fase B4
         restaurarATecnologia(*partida, arvore.at("tecnologia"));  // fase B5
+        restaurarAsFaccoes(*partida, arvore.at("faccoes"));  // fase C1
+        atualizarAsCidadesPelasLeis(*partida);
         atualizarAsTravasDasCidades(*partida);
 
         // Passo 6: o resto já foi recalculado (o mapa bloqueado e a capacidade).

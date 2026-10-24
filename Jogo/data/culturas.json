@@ -1,0 +1,200 @@
+[
+  {
+    "id": "cultura.guerreira",
+    "leis_desejadas": {
+      "imposto": {
+        "valor": "baixo",
+        "peso": 2
+      },
+      "magia": {
+        "valor": "restrita",
+        "peso": 3
+      },
+      "escravidao": {
+        "valor": "so_prisioneiros",
+        "peso": 4
+      },
+      "poder_do_lider": {
+        "valor": "moderado",
+        "peso": 3
+      },
+      "sistema_de_votacao": {
+        "valor": "maioria_simples",
+        "peso": 2
+      },
+      "tolerancia_religiosa": {
+        "valor": "tolerancia",
+        "peso": 2
+      },
+      "livro_sagrado_obrigatorio": {
+        "valor": "nao",
+        "peso": 1
+      }
+    }
+  },
+  {
+    "id": "cultura.arcana",
+    "leis_desejadas": {
+      "imposto": {
+        "valor": "normal",
+        "peso": 2
+      },
+      "magia": {
+        "valor": "privilegio_dos_magos",
+        "peso": 4
+      },
+      "escravidao": {
+        "valor": "proibida",
+        "peso": 3
+      },
+      "poder_do_lider": {
+        "valor": "moderado",
+        "peso": 3
+      },
+      "sistema_de_votacao": {
+        "valor": "conselho",
+        "peso": 2
+      },
+      "tolerancia_religiosa": {
+        "valor": "fe_oficial",
+        "peso": 2
+      },
+      "livro_sagrado_obrigatorio": {
+        "valor": "nao",
+        "peso": 1
+      }
+    }
+  },
+  {
+    "id": "cultura.autoritaria",
+    "leis_desejadas": {
+      "imposto": {
+        "valor": "normal",
+        "peso": 2
+      },
+      "magia": {
+        "valor": "restrita",
+        "peso": 3
+      },
+      "escravidao": {
+        "valor": "como_pena",
+        "peso": 3
+      },
+      "poder_do_lider": {
+        "valor": "autoritario",
+        "peso": 4
+      },
+      "sistema_de_votacao": {
+        "valor": "conselho",
+        "peso": 2
+      },
+      "tolerancia_religiosa": {
+        "valor": "fe_oficial",
+        "peso": 2
+      },
+      "livro_sagrado_obrigatorio": {
+        "valor": "nao",
+        "peso": 1
+      }
+    }
+  },
+  {
+    "id": "cultura.religiosa",
+    "leis_desejadas": {
+      "imposto": {
+        "valor": "normal",
+        "peso": 2
+      },
+      "magia": {
+        "valor": "restrita",
+        "peso": 3
+      },
+      "escravidao": {
+        "valor": "proibida",
+        "peso": 3
+      },
+      "poder_do_lider": {
+        "valor": "moderado",
+        "peso": 3
+      },
+      "sistema_de_votacao": {
+        "valor": "dois_tercos",
+        "peso": 2
+      },
+      "tolerancia_religiosa": {
+        "valor": "perseguicao",
+        "peso": 4
+      },
+      "livro_sagrado_obrigatorio": {
+        "valor": "sim",
+        "peso": 1
+      }
+    }
+  },
+  {
+    "id": "cultura.tecnocrata",
+    "leis_desejadas": {
+      "imposto": {
+        "valor": "normal",
+        "peso": 2
+      },
+      "magia": {
+        "valor": "proibida",
+        "peso": 4
+      },
+      "escravidao": {
+        "valor": "proibida",
+        "peso": 3
+      },
+      "poder_do_lider": {
+        "valor": "fraco",
+        "peso": 3
+      },
+      "sistema_de_votacao": {
+        "valor": "por_populacao",
+        "peso": 2
+      },
+      "tolerancia_religiosa": {
+        "valor": "tolerancia",
+        "peso": 2
+      },
+      "livro_sagrado_obrigatorio": {
+        "valor": "nao",
+        "peso": 1
+      }
+    }
+  },
+  {
+    "id": "cultura.escravista",
+    "leis_desejadas": {
+      "imposto": {
+        "valor": "alto",
+        "peso": 2
+      },
+      "magia": {
+        "valor": "livre",
+        "peso": 3
+      },
+      "escravidao": {
+        "valor": "ampla",
+        "peso": 4
+      },
+      "poder_do_lider": {
+        "valor": "fraco",
+        "peso": 3
+      },
+      "sistema_de_votacao": {
+        "valor": "por_nivel",
+        "peso": 2
+      },
+      "tolerancia_religiosa": {
+        "valor": "tolerancia",
+        "peso": 2
+      },
+      "livro_sagrado_obrigatorio": {
+        "valor": "nao",
+        "peso": 1
+      }
+    }
+  }
+]

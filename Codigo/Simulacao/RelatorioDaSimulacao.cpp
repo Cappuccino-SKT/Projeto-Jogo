@@ -161,7 +161,7 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
 
     // Fase B2 (Comércio, teste 4): o dinheiro do mundo só muda pelo que entra de fora e pelo que os bandidos levam.
     const auto entrouDeFora = [](const SimulacaoDaVila& vila) {
-        int64_t total = vila.dinheiro.dinheiroQueEntrouDeFora;
+        int64_t total = vila.dinheiro.dinheiroQueEntrouDeFora + vila.faccoes.cunhagemTotal;  // fase C1: a cunhagem é dinheiro novo
         for (const auto& cidade : vila.outrasCidades) {
             total += cidade->dinheiro.dinheiroQueEntrouDeFora;
         }
@@ -219,6 +219,12 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
         }
         resultado.linhasDoConsole.push_back("Tecnologia: era " + std::to_string(partida->tecnologia.eraAtualDoMundo) + ", " + std::to_string(descobertas)
                                             + " tecnologias das facções, " + std::to_string(pontosNoAno) + " pontos guardados");
+        // Fase C1: o Banco de cada facção no último dia.
+        std::string bancos = "Facções (Banco):";
+        for (std::size_t faccao = 0; faccao < partida->faccoes.bancoDaFaccao.size(); ++faccao) {
+            bancos += " " + nomeDaFaccao(dados, static_cast<int>(faccao)) + " " + escreverDinheiroEmMoedas(static_cast<int>(partida->faccoes.bancoDaFaccao[faccao])) + ";";
+        }
+        resultado.linhasDoConsole.push_back(bancos);
         // As outras cidades no fim: quantas passam fome (CO2-1: as de comida escassa dependem das caravanas).
         int cidadesComFome = 0;
         int piorMapa = 0;

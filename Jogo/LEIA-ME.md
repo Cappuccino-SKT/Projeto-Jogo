@@ -635,3 +635,18 @@ O que entrou ([[Ficha Logica/Tecnologia|ficha da Tecnologia]]; os ajustes estão
 
 **Verificado pelo assistente:** os testes passam (527 conferências); as 10 sementes passam com o relatório da vila igual ao do B4; no fim do ano, as 6 facções têm as 3 tecnologias de exemplo (18), nenhuma cidade com fome e o dinheiro do mundo conservado; o comércio mudou um pouco (de 4 a 21 viagens), porque as capitais pagam 5 pesquisadores; salvar e carregar no dia 30 dá o mesmo relatório.
 
+### Marco C1: as facções (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Faccao|ficha da Facção]]; os ajustes estão na parte 10.8 dela):
+
+- **As 6 facções** com as leis iniciais da tabela do documento (arquivo novo `data/faccoes.json`) e um líder sorteado (sequência 7).
+- **O imposto pela lei** (Baixo 10%, Normal 20%, Alto 30%) e a Felicidade dela (0, −5, −10); o teto do gasto da classe passa a ser 100% menos a taxa (FA1-2).
+- **O Banco da Facção:** começa com 25% do PIB, recebe a cunhagem (140 moedas por dia por capital) e as tarifas, e paga a verba de 5 moedas por NPC às cidades dela no dia 1 de cada estação. As Vilas Livres e a vila do jogador continuam com a verba "de fora".
+- **A tarifa** das caravanas que entram no território de outra facção, também na conta do lucro esperado.
+- **Os itens proibidos e o ajuste de preço** da facção; **a assembleia** no dia 1 de cada ano, com a pauta, o voto, o sistema de votação, o veto do líder e a notícia Regional.
+- **O desejo das leis de cada cultura** num `data/culturas.json` provisório (a Cultura, C2, completa).
+- **Na tela:** o botão **Facções** mostra as leis, o Banco e o líder de cada uma. O fim do `--simular` mostra o Banco de cada facção.
+- **Save versão 10.**
+
+**Verificado pelo assistente:** os testes passam (541 conferências); as 10 sementes passam com o relatório da vila igual ao do B5; nenhuma cidade com fome e o dinheiro do mundo conservado (a cunhagem conta como dinheiro de fora); os Bancos das facções terminam o ano entre 8.000 e 8.600 moedas; o comércio caiu um pouco com as tarifas (de 3 a 13 viagens por ano); salvar e carregar no dia 30 dá o mesmo relatório.
+

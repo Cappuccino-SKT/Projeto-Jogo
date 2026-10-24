@@ -1,0 +1,247 @@
+{
+  "leis": {
+    "imposto": {
+      "opcoes": [
+        "baixo",
+        "normal",
+        "alto"
+      ],
+      "valores_em_porcento": [
+        10,
+        20,
+        30
+      ],
+      "felicidade": [
+        0,
+        -5,
+        -10
+      ]
+    },
+    "tarifa": {
+      "opcoes": [
+        "baixa",
+        "media",
+        "alta"
+      ],
+      "valores_em_porcento": [
+        5,
+        10,
+        20
+      ]
+    },
+    "magia": {
+      "opcoes": [
+        "so_magos_governam",
+        "privilegio_dos_magos",
+        "livre",
+        "restrita",
+        "proibida",
+        "magos_banidos"
+      ]
+    },
+    "escravidao": {
+      "opcoes": [
+        "proibida",
+        "so_prisioneiros",
+        "como_pena",
+        "ampla",
+        "qualquer_um_e_propriedade"
+      ]
+    },
+    "poder_do_lider": {
+      "opcoes": [
+        "fraco",
+        "moderado",
+        "autoritario",
+        "pedir_lei_e_crime"
+      ]
+    },
+    "sistema_de_votacao": {
+      "opcoes": [
+        "por_populacao",
+        "maioria_simples",
+        "por_nivel",
+        "dois_tercos",
+        "conselho"
+      ]
+    },
+    "tolerancia_religiosa": {
+      "opcoes": [
+        "tolerancia",
+        "fe_oficial",
+        "perseguicao",
+        "heresia_e_crime_capital"
+      ]
+    },
+    "livro_sagrado_obrigatorio": {
+      "opcoes": [
+        "nao",
+        "sim"
+      ]
+    }
+  },
+  "ordem_das_leis": [
+    "imposto",
+    "tarifa",
+    "magia",
+    "escravidao",
+    "poder_do_lider",
+    "sistema_de_votacao",
+    "tolerancia_religiosa",
+    "livro_sagrado_obrigatorio"
+  ],
+  "faccoes": [
+    {
+      "id": "faccao.guerreira",
+      "cultura": "guerreira",
+      "capital": [
+        1,
+        1
+      ],
+      "leis": {
+        "imposto": "baixo",
+        "tarifa": "media",
+        "magia": "restrita",
+        "escravidao": "so_prisioneiros",
+        "poder_do_lider": "moderado",
+        "sistema_de_votacao": "maioria_simples",
+        "tolerancia_religiosa": "tolerancia",
+        "livro_sagrado_obrigatorio": "nao"
+      },
+      "itens_proibidos": [
+        "narcotico"
+      ],
+      "ajuste_de_preco": {
+        "arma": -20
+      }
+    },
+    {
+      "id": "faccao.arcana",
+      "cultura": "arcana",
+      "capital": [
+        8,
+        1
+      ],
+      "leis": {
+        "imposto": "normal",
+        "tarifa": "media",
+        "magia": "privilegio_dos_magos",
+        "escravidao": "proibida",
+        "poder_do_lider": "moderado",
+        "sistema_de_votacao": "conselho",
+        "tolerancia_religiosa": "fe_oficial",
+        "livro_sagrado_obrigatorio": "nao"
+      },
+      "itens_proibidos": [
+        "narcotico"
+      ],
+      "ajuste_de_preco": {
+        "item_de_mana": -20
+      }
+    },
+    {
+      "id": "faccao.autoritaria",
+      "cultura": "autoritaria",
+      "capital": [
+        1,
+        4
+      ],
+      "leis": {
+        "imposto": "normal",
+        "tarifa": "alta",
+        "magia": "restrita",
+        "escravidao": "como_pena",
+        "poder_do_lider": "autoritario",
+        "sistema_de_votacao": "conselho",
+        "tolerancia_religiosa": "fe_oficial",
+        "livro_sagrado_obrigatorio": "nao"
+      },
+      "itens_proibidos": [
+        "narcotico"
+      ],
+      "ajuste_de_preco": {
+        "alimento": -20
+      }
+    },
+    {
+      "id": "faccao.religiosa",
+      "cultura": "religiosa",
+      "capital": [
+        8,
+        4
+      ],
+      "leis": {
+        "imposto": "normal",
+        "tarifa": "media",
+        "magia": "restrita",
+        "escravidao": "proibida",
+        "poder_do_lider": "moderado",
+        "sistema_de_votacao": "dois_tercos",
+        "tolerancia_religiosa": "perseguicao",
+        "livro_sagrado_obrigatorio": "sim"
+      },
+      "itens_proibidos": [
+        "narcotico"
+      ],
+      "ajuste_de_preco": {
+        "remedio": -20,
+        "curativo": -20
+      }
+    },
+    {
+      "id": "faccao.tecnocrata",
+      "cultura": "tecnocrata",
+      "capital": [
+        2,
+        6
+      ],
+      "leis": {
+        "imposto": "normal",
+        "tarifa": "media",
+        "magia": "proibida",
+        "escravidao": "proibida",
+        "poder_do_lider": "fraco",
+        "sistema_de_votacao": "por_populacao",
+        "tolerancia_religiosa": "tolerancia",
+        "livro_sagrado_obrigatorio": "nao"
+      },
+      "itens_proibidos": [
+        "narcotico",
+        "cajado",
+        "cetro",
+        "joia_de_mana"
+      ],
+      "ajuste_de_preco": {
+        "arma_de_fogo": -20,
+        "polvora": -20
+      }
+    },
+    {
+      "id": "faccao.escravista",
+      "cultura": "escravista",
+      "capital": [
+        8,
+        6
+      ],
+      "leis": {
+        "imposto": "alto",
+        "tarifa": "baixa",
+        "magia": "livre",
+        "escravidao": "ampla",
+        "poder_do_lider": "fraco",
+        "sistema_de_votacao": "por_nivel",
+        "tolerancia_religiosa": "tolerancia",
+        "livro_sagrado_obrigatorio": "nao"
+      },
+      "itens_proibidos": [],
+      "ajuste_de_preco": {}
+    }
+  ],
+  "cunhagem_por_casa_da_moeda_por_dia_em_decimos": 1400,
+  "verba_por_npc_por_estacao_em_decimos": 50,
+  "banco_inicial_em_porcento_do_pib": 25,
+  "legitimidade_inicial": 70,
+  "veto_custa_legitimidade": 5,
+  "leis_por_assembleia": 3,
+  "felicidade_de_quem_perdeu_a_votacao": -5
+}

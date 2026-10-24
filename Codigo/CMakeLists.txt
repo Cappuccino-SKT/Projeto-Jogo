@@ -36,6 +36,7 @@ add_library(regras_do_jogo STATIC
     Noticias/Noticias.cpp
     Reputacao/Reputacao.cpp
     Tecnologia/Tecnologia.cpp
+    Faccao/Faccao.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

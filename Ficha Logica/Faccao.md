@@ -287,3 +287,16 @@ Com **maioria simples**, seriam 3 não contra 1 sim: também não passaria. Com 
 5. **FA1-5:** o pensamento extremo não entra no desejo da assembleia; ele chega por evento.
 6. **FA1-6:** o estado do território é derivado das cidades vizinhas e sai do `mapas.json` (muda a Viagem).
 7. **FA1-7:** o ajuste de preço da facção vale para o jogador membro e as caravanas da facção.
+
+### 10.8 Ajustes do código (marco C1, 2026-10-24)
+
+1. **A Casa da Moeda** ainda não existe como construção: cada capital conta como 1 Casa da Moeda (140 moedas por dia).
+2. **O `culturas.json` é provisório:** só tem o desejo das leis de cada cultura, igual às leis iniciais da facção dela. Os pesos são 2 (imposto, votação, tolerância), 3 (magia, escravidão, poder do líder) e 1 (Livro Sagrado), e 4 na lei principal da cultura. A Cultura (C2) completa o arquivo.
+3. **A ordem das leis** (o desempate da pauta) vem da lista `ordem_das_leis` do `faccoes.json`, porque o leitor de JSON ordena as chaves.
+4. **As facções rodam no dia novo antes do dia das outras cidades** (passo 5b): assim a verba entra antes do estabilizador delas.
+5. **O veto** sorteia com a sequência 7 a partir da semente, do ano e da facção; não precisa de nada a mais no save.
+6. **Os itens proibidos e o ajuste de preço** casam pelo id ou pelo tipo do item ("alimento", "narcotico"). Hoje só o ajuste da Autoritária (comida −20%) tem item no jogo: ele vale para as caravanas das cidades dela comprando numa cidade dela.
+7. **A tarifa** é cobrada das caravanas das cidades. O grupo do jogador não paga (o jogador ainda não tem caravana).
+8. **A vila do jogador é livre:** imposto de 20% e a verba "de fora", como antes; o teste de 1 ano não muda.
+9. **A assembleia** começa no dia 1 do segundo ano. Quem vota e perde fica com −5 de Felicidade até o fim daquela estação. A notícia da lei mudada nasce na capital.
+

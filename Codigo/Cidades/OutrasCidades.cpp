@@ -206,7 +206,8 @@ VilaDoJogo gerarAVilaDaCidade(const CidadeDoMundo& cidade, const DadosDoJogo& da
     vila.bancoDaCidadeEmDecimos = valorDoNivel(regras.dinheiroInicialDoBancoPorNivel, cidade.nivel, 400) * 10;
     vila.dinheiroDoJogadorEmDecimos = 0;
     vila.dinheiroInicialPorCivilEmDecimos = vilaInicial.dinheiroInicialPorCivilEmDecimos;
-    vila.verbaDaCoroaPorEstacaoEmDecimos = static_cast<int64_t>(regras.verbaDaCoroaPorNpcPorEstacaoEmDecimos) * npcs;
+    // Fase C1 (FA1-3): as cidades de facção recebem a verba do Banco da Facção; as Vilas Livres, "de fora".
+    vila.verbaDaCoroaPorEstacaoEmDecimos = cidade.faccao.empty() ? static_cast<int64_t>(regras.verbaDaCoroaPorNpcPorEstacaoEmDecimos) * npcs : 0;
     return vila;
 }
 
