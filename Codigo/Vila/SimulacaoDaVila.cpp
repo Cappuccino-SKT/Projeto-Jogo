@@ -63,6 +63,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
             identidade.cultura = culturaBaseDaCidade(dados, numeroDoMapaNoMundo());
         }
     }
+    montarOCrimeDaPartidaNova(*this);  // fase C3
     // Fase C1: as facções (as leis, o Banco da Facção e o líder).
     montarAsFaccoesDaPartidaNova(*this, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     // Fase B5: a pesquisa do mundo (os marcos sorteados uma vez) e as travas de cada cidade.
@@ -215,7 +216,22 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
     std::vector<std::string> linhas;
     FilaDePedidosDoJogador outrosPedidos;
     for (PedidoDoJogador& pedido : pedidos.tomarTodos()) {
-        if (const auto* doacao = std::get_if<PedidoDoarNaCidade>(&pedido)) {
+        const bool preso = crimeDoJogador.estaPreso(relogio.diaDaPartida());
+        const bool bloqueado = preso || crimeDoJogador.revista.ativa;
+        if (bloqueado && (std::holds_alternative<PedidoPartirEmViagem>(pedido) || std::holds_alternative<PedidoComercioNaCidade>(pedido)
+                          || std::holds_alternative<PedidoDoarNaCidade>(pedido))) {
+            linhas.push_back(std::string("Aviso: pedido recusado (") + (preso ? "o grupo está preso" : "o grupo espera a revista") + ").");
+        } else if (const auto* revista = std::get_if<PedidoResolverRevista>(&pedido)) {
+            const std::string motivo = resolverARevista(*this, static_cast<EscolhaNaRevista>(revista->escolha), revista->ofertaEmDecimos, linhas);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            }
+        } else if (std::holds_alternative<PedidoPagarFianca>(pedido)) {
+            const std::string motivo = pagarAFianca(*this, linhas);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            }
+        } else if (const auto* doacao = std::get_if<PedidoDoarNaCidade>(&pedido)) {
             const std::string motivo = doarParaAFaccao(*this, doacao->moedas, linhas);
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
@@ -224,7 +240,9 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
             // Fase B4: vencer o bando no território de uma facção sobe a reputação com ela.
             ContextoDaProducao contexto = contextoDaProducao();
             bool venceuALuta = false;
-            const std::string motivo = resolverOEncontroDoGrupo(contexto, encontro->escolha, linhas, &venceuALuta);
+            const std::string motivo = viagem.grupoDoJogador.encontroMarcado.tipo == TipoDeEncontro::Cacadores
+                ? resolverOsCacadores(*this, encontro->escolha, linhas)  // fase C3 (Crime, 4.7)
+                : resolverOEncontroDoGrupo(contexto, encontro->escolha, linhas, &venceuALuta);
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
             } else if (venceuALuta) {
@@ -286,7 +304,9 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
     }
 
     // O grupo do jogador em viagem (fase B1): o encontro pausa o jogo; a chegada volta a 1x.
-    {
+    // Fase C3: preso ou na revista, o grupo não anda.
+    if (lodDoMapa == 0 && !crimeDoJogador.estaPreso(relogio.diaDaPartida()) && !crimeDoJogador.revista.ativa) {
+        const int mapaAntesDoTick = viagem.grupoDoJogador.mapaAtual;
         const ResultadoDoTickDaViagem tickDaViagem = avancarAViagemUmTick(producao, relogio);
         linhasParaOConsole.insert(linhasParaOConsole.end(), tickDaViagem.linhasParaOConsole.begin(), tickDaViagem.linhasParaOConsole.end());
         if (tickDaViagem.encontroComecou || tickDaViagem.chegouAoDestino) {
@@ -297,7 +317,16 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         }
         if (tickDaViagem.mapaOndeChegou != 0) {
             anotarOsPrecosDaCidade(*this, tickDaViagem.mapaOndeChegou);  // Comércio, 4.8
+            // Fase C3 (Crime, 4.4): a revista na entrada da cidade de facção pausa o jogo.
+            if (revistarJogador(*this, tickDaViagem.mapaOndeChegou, mapaAntesDoTick, linhasParaOConsole)) {
+                relogio.definirVelocidadeDoJogo(1);
+                if (!relogio.jogoEstaPausado()) {
+                    relogio.alternarPausa();
+                }
+            }
         }
+        const std::vector<std::string> linhasDosCacadores = conferirOsCacadores(*this);  // fase C3 (4.7)
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDosCacadores.begin(), linhasDosCacadores.end());
     }
 
     // 4. Os NPCs (marcos 4 e 5): a rotina decide, os caminhos pedidos são
@@ -326,6 +355,10 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
     if (lodDoMapa == 0 && relogio.comecouUmDiaNovo() && !outrasCidades.empty()) {
         const std::vector<std::string> linhasDasFaccoes = rodarAsFaccoesNoDiaNovo(*this);
         linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDasFaccoes.begin(), linhasDasFaccoes.end());
+        // Fase C3 (Crime): a soltura, a queda da Recompensa e a ameaça bandida de cada região.
+        const std::vector<std::string> linhasDoCrime = rodarOCrimeDoJogadorNoDiaNovo(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDoCrime.begin(), linhasDoCrime.end());
+        atualizarAAmeacaBandida(*this);
     }
 
     // 6. As outras cidades (fase B1b), depois da vila e na ordem do número do mapa. Cada
@@ -337,6 +370,7 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
             cidade->clima.climaDeHojeVindoDaRegiao = viagem.climaDeHojePorRegiao[static_cast<std::size_t>(regiao - 1)];
             if (relogio.comecouUmDiaNovo()) {
                 cidade->viagem.climaDeHojePorRegiao = viagem.climaDeHojePorRegiao;  // para a conta das caravanas dela
+                cidade->viagem.ameacaBandidaPorRegiao = viagem.ameacaBandidaPorRegiao;  // fase C3
             }
             cidade->avancarUmTickEmLod2();
         }

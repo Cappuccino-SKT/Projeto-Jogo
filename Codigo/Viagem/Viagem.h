@@ -20,7 +20,8 @@ constexpr uint64_t sequenciaDoSorteioDaViagem = 5;
 // só da vila, e o teste de 1 ano não muda (regra 4.8; ver o Jogo/LEIA-ME.md).
 constexpr uint64_t sequenciaDoSorteioDoClimaDasOutrasRegioes = 9;
 
-enum class TipoDeEncontro { Nenhum, Bandidos, MercadorViajante };
+// Fase C3 (Crime, 4.7): os Caçadores de Recompensa; o "bandidos" do encontro marcado é a força deles.
+enum class TipoDeEncontro { Nenhum, Bandidos, MercadorViajante, Cacadores };
 
 struct EncontroMarcado {
     TipoDeEncontro tipo = TipoDeEncontro::Nenhum;
@@ -77,14 +78,16 @@ std::vector<int> buscarRotaMaisRapida(int origem, int destino, const EntidadeEmT
                                       const RegrasDaViagem& regras);
 
 // Regra 4.5, passo 1: a chance do mapa de chegada, × 150% na marcha forçada.
-int chanceDeEncontroPorMil(const EntidadeEmTransito& entidade, const MundoDoJogo& mundo, int mapaDeChegada, const RegrasDaViagem& regras);
+// Fase C3 (Crime, 4.3): mais a ameaça bandida da região do mapa, em por mil (vazio = 0).
+int chanceDeEncontroPorMil(const EntidadeEmTransito& entidade, const MundoDoJogo& mundo, int mapaDeChegada, const RegrasDaViagem& regras,
+                           const std::vector<int>& ameacaBandidaPorRegiao = {});
 
 // Regra 4.5, passos 2 a 4, com os três números já sorteados (de 0 a 999, de 0 a 999 e de 0 a 9).
 EncontroMarcado escolherOEncontro(int chancePorMil, int numeroDoEncontro, int numeroDoTipo, int numeroDoBando, const RegrasDaViagem& regras);
 
 // A mesma regra, sorteando. Sempre tira os três números, para o sorteio andar igual.
 EncontroMarcado sortearEncontroAoEntrarNoTrecho(const EntidadeEmTransito& entidade, const MundoDoJogo& mundo, int mapaDeChegada,
-                                                const RegrasDaViagem& regras, SorteioComSemente& sorteio);
+                                                const RegrasDaViagem& regras, SorteioComSemente& sorteio, const std::vector<int>& ameacaBandidaPorRegiao = {});
 
 // A força simples (VI1-4): o jogador e, a partir dos companheiros, os outros como Civis.
 int forcaDoGrupo(const EntidadeEmTransito& entidade, const RegrasDaViagem& regras);
@@ -105,7 +108,7 @@ TipoDeClima climaDaRegiaoDoMapa(const std::vector<TipoDeClima>& climaDeHojePorRe
 
 // Regras 4.2 e 4.5: a entidade entra no trecho até o próximo mapa (o tempo fixo e o encontro).
 void entrarNoTrecho(EntidadeEmTransito& entidade, int proximoMapa, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
-                    const std::vector<TipoDeClima>& climaDeHojePorRegiao, Estacao estacao, SorteioComSemente& sorteio);
+                    const std::vector<TipoDeClima>& climaDeHojePorRegiao, Estacao estacao, SorteioComSemente& sorteio, const std::vector<int>& ameacaBandidaPorRegiao = {});
 
 // O que aconteceu num tick de uma entidade em trânsito.
 enum class PassoDaEntidade { Parada, Andou, EncontroNaMetade, ChegouAoProximoMapa, ChegouAoDestino };
@@ -116,7 +119,7 @@ enum class PassoDaEntidade { Parada, Andou, EncontroNaMetade, ChegouAoProximoMap
 // mapa que não é o destino, já entra no trecho seguinte. Quem chama cuida do encontro.
 PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
                             const std::vector<TipoDeClima>& climaDeHojePorRegiao, int horaDoDia, Estacao estacao, int ticksPorHoraDeJogo,
-                            SorteioComSemente& sorteio);
+                            SorteioComSemente& sorteio, const std::vector<int>& ameacaBandidaPorRegiao = {});
 
 // Regra 4.6: aplica a escolha. Devolve a linha do console; vazio se a escolha não vale
 // (o suborno sem o dinheiro). Fugir que falha vira Lutar.

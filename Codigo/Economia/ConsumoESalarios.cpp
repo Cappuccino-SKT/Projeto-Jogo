@@ -1,5 +1,7 @@
 #include "Economia/ConsumoESalarios.h"
 
+#include "Crime/Crime.h"
+
 #include "Eventos/EventosDaVila.h"
 #include "Vila/Populacao.h"
 #include "Vila/Trabalho.h"
@@ -429,6 +431,7 @@ void rodarAFelicidadeDoDia(ContextoDaProducao& contexto)
     }
     situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto) + contexto.felicidadeDaFaccaoEmPontos;
     situacao.fatorLeisECulturaEmDecimos = contexto.fatorLeisECulturaEmDecimos;
+    situacao.felicidadeDaCriminalidadeEmDecimos = felicidadeDaCriminalidadeEmDecimos(contexto.felicidade.criminalidadeEmDecimos, contexto.dados.regrasDoCrime);
     situacao.pontosDoClimaNoConsumo = pontosDoClimaNoConsumoAtendido(contexto);
 
     FelicidadeDaClasse& felicidade = contexto.felicidade;
@@ -488,9 +491,16 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
         case PassoDaOrdemDoDia::Estabilizador:
             rodarOEstabilizador(contexto, relogio);
             break;
-        case PassoDaOrdemDoDia::Felicidade:
+        case PassoDaOrdemDoDia::Felicidade: {
             rodarAFelicidadeDoDia(contexto);
+            // Fase C3 (Crime, passo 5b): a Criminalidade, com a Felicidade de hoje.
+            const int civis = contexto.dinheiro.quantidadeDeCivis;
+            const int64_t doisDiasDaCesta = 2 * calcularCestaDeUmCivilEmDecimos(contexto) * civis / std::max(1, contexto.dados.regras.economia.diasEntreMateriaisDoCivil);
+            const std::vector<std::string> linhasDoCrime =
+                rodarACriminalidadeDoDia(contexto, civis, contarOsDesempregados(contexto), contexto.dinheiro.dinheiroDaClasseCivil < doisDiasDaCesta);
+            linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDoCrime.begin(), linhasDoCrime.end());
             break;
+        }
         case PassoDaOrdemDoDia::Eventos:
             rodarOsEventosDoDia(contexto, relogio);
             linhasParaOConsole.insert(linhasParaOConsole.end(), contexto.eventos.linhasParaOConsole.begin(), contexto.eventos.linhasParaOConsole.end());

@@ -103,13 +103,18 @@ std::vector<int> buscarRotaMaisRapida(int origem, int destino, const EntidadeEmT
     return caminho[destino];
 }
 
-int chanceDeEncontroPorMil(const EntidadeEmTransito& entidade, const MundoDoJogo& mundo, int mapaDeChegada, const RegrasDaViagem& regras)
+int chanceDeEncontroPorMil(const EntidadeEmTransito& entidade, const MundoDoJogo& mundo, int mapaDeChegada, const RegrasDaViagem& regras,
+                           const std::vector<int>& ameacaBandidaPorRegiao)
 {
     int chance = regras.encontroNoTerritorioPorMil;
     switch (mundo.estadoDoTerritorio(mapaDeChegada)) {
     case EstadoDoTerritorio::EmDisputa: chance = regras.encontroEmDisputaPorMil; break;
     case EstadoDoTerritorio::SemDono: chance = regras.encontroSemDonoPorMil; break;
     default: break;
+    }
+    const int regiao = mundo.mapaExiste(mapaDeChegada) ? mundo.mapa(mapaDeChegada).regiao : 0;
+    if (regiao >= 1 && regiao <= static_cast<int>(ameacaBandidaPorRegiao.size())) {
+        chance += ameacaBandidaPorRegiao[static_cast<std::size_t>(regiao - 1)];  // fase C3 (Crime, 4.3)
     }
     return entidade.marchaForcada ? chance * regras.marchaForcadaEncontroEmPorcento / 100 : chance;
 }
@@ -127,12 +132,12 @@ EncontroMarcado escolherOEncontro(int chancePorMil, int numeroDoEncontro, int nu
 }
 
 EncontroMarcado sortearEncontroAoEntrarNoTrecho(const EntidadeEmTransito& entidade, const MundoDoJogo& mundo, int mapaDeChegada,
-                                                const RegrasDaViagem& regras, SorteioComSemente& sorteio)
+                                                const RegrasDaViagem& regras, SorteioComSemente& sorteio, const std::vector<int>& ameacaBandidaPorRegiao)
 {
     const int numeroDoEncontro = sorteio.sortearNumeroInteiroEntre(0, 999);
     const int numeroDoTipo = sorteio.sortearNumeroInteiroEntre(0, 999);
     const int numeroDoBando = sorteio.sortearNumeroInteiroEntre(0, regras.bandoDeBandidosSorteioAte);
-    return escolherOEncontro(chanceDeEncontroPorMil(entidade, mundo, mapaDeChegada, regras), numeroDoEncontro, numeroDoTipo, numeroDoBando, regras);
+    return escolherOEncontro(chanceDeEncontroPorMil(entidade, mundo, mapaDeChegada, regras, ameacaBandidaPorRegiao), numeroDoEncontro, numeroDoTipo, numeroDoBando, regras);
 }
 
 int forcaDoGrupo(const EntidadeEmTransito& entidade, const RegrasDaViagem& regras)
@@ -187,18 +192,18 @@ TipoDeClima climaDaRegiaoDoMapa(const std::vector<TipoDeClima>& climaDeHojePorRe
 }
 
 void entrarNoTrecho(EntidadeEmTransito& entidade, int proximoMapa, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
-                    const std::vector<TipoDeClima>& climaDeHojePorRegiao, Estacao estacao, SorteioComSemente& sorteio)
+                    const std::vector<TipoDeClima>& climaDeHojePorRegiao, Estacao estacao, SorteioComSemente& sorteio, const std::vector<int>& ameacaBandidaPorRegiao)
 {
     entidade.proximoMapa = proximoMapa;
     const int climaEEstacao = multiplicadorDeClimaEEstacao(climaDaRegiaoDoMapa(climaDeHojePorRegiao, mundo, proximoMapa), estacao, mundo, proximoMapa, regras);
     entidade.ticksDoTrecho = calcularTicksDoTrecho(entidade, mundo, proximoMapa, climaEEstacao, regras);
     entidade.ticksAndadosNoTrecho = 0;
-    entidade.encontroMarcado = sortearEncontroAoEntrarNoTrecho(entidade, mundo, proximoMapa, regras, sorteio);
+    entidade.encontroMarcado = sortearEncontroAoEntrarNoTrecho(entidade, mundo, proximoMapa, regras, sorteio, ameacaBandidaPorRegiao);
 }
 
 PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mundo, const RegrasDaViagem& regras,
                             const std::vector<TipoDeClima>& climaDeHojePorRegiao, int horaDoDia, Estacao estacao, int ticksPorHoraDeJogo,
-                            SorteioComSemente& sorteio)
+                            SorteioComSemente& sorteio, const std::vector<int>& ameacaBandidaPorRegiao)
 {
     if (!entidade.emTransito || entidade.encontroAcontecendo) {
         return PassoDaEntidade::Parada;
@@ -235,7 +240,7 @@ PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mun
     if (!entidade.rota.empty()) {
         const int proximo = entidade.rota.front();
         entidade.rota.erase(entidade.rota.begin());
-        entrarNoTrecho(entidade, proximo, mundo, regras, climaDeHojePorRegiao, estacao, sorteio);
+        entrarNoTrecho(entidade, proximo, mundo, regras, climaDeHojePorRegiao, estacao, sorteio, ameacaBandidaPorRegiao);
         return PassoDaEntidade::ChegouAoProximoMapa;
     }
     // Regra 4.7: a viagem acabou.

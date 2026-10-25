@@ -12,7 +12,7 @@ const char* const identificadorDoPaoDaViagem = "item.pao";
 void entrarNoTrecho(ContextoDaProducao& contexto, EntidadeEmTransito& grupo, int proximoMapa, Estacao estacao)
 {
     entrarNoTrecho(grupo, proximoMapa, contexto.dados.mundo, contexto.dados.regrasDaViagem, contexto.viagem->climaDeHojePorRegiao, estacao,
-                   *contexto.sorteioDaViagem);
+                   *contexto.sorteioDaViagem, contexto.viagem->ameacaBandidaPorRegiao);
 }
 
 // O grupo volta à vila: o que ele leva volta para o jogador.
@@ -129,10 +129,16 @@ ResultadoDoTickDaViagem avancarAViagemUmTick(ContextoDaProducao& contexto, const
     const MundoDoJogo& mundo = contexto.dados.mundo;
     const RegrasDaViagem& regras = contexto.dados.regrasDaViagem;
     const PassoDaEntidade passo = andarUmTick(grupo, mundo, regras, viagem.climaDeHojePorRegiao, relogio.horaDoDiaAtual(), relogio.estacaoAtual(),
-                                              contexto.ticksPorHoraDeJogo, *contexto.sorteioDaViagem);
+                                              contexto.ticksPorHoraDeJogo, *contexto.sorteioDaViagem, viagem.ameacaBandidaPorRegiao);
     if (passo == PassoDaEntidade::EncontroNaMetade) {
         const int bandidos = grupo.encontroMarcado.bandidos;
-        if (grupo.encontroMarcado.tipo == TipoDeEncontro::MercadorViajante) {
+        if (grupo.encontroMarcado.tipo == TipoDeEncontro::Cacadores) {
+            // Fase C3 (Crime, 4.7): os Caçadores sempre atacam.
+            grupo.encontroAcontecendo = true;
+            resultado.encontroComecou = true;
+            resultado.linhasParaOConsole.push_back("Encontro: Caçadores de Recompensa (força " + std::to_string(bandidos) + ") cercam o grupo em "
+                                                   + mundo.nomeDoMapa(grupo.proximoMapa) + ".");
+        } else if (grupo.encontroMarcado.tipo == TipoDeEncontro::MercadorViajante) {
             // A troca com os preços de outra região: o grupo pode comerciar nas cidades (B2); o mercador fica para depois.
             resultado.linhasParaOConsole.push_back("Viagem: um mercador viajante cruza o caminho do grupo.");
             grupo.encontroMarcado = {};

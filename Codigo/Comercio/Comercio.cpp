@@ -103,14 +103,14 @@ int64_t ticksDaRota(int origem, const std::vector<int>& rota, const EntidadeEmTr
 }
 
 // A chance de perder dinheiro numa rota, em por mil (regra 4.3, passo 5).
-int riscoDaRota(const std::vector<int>& rota, const EntidadeEmTransito& entidade, const DadosDoJogo& dados)
+int riscoDaRota(const std::vector<int>& rota, const EntidadeEmTransito& entidade, const DadosDoJogo& dados, const std::vector<int>& ameacaBandidaPorRegiao)
 {
     const RegrasDaViagem& viagem = dados.regrasDaViagem;
     const RegrasDoComercio& comercio = dados.regrasDoComercio;
     const int pesos = std::max(1, viagem.pesoDosBandidos + viagem.pesoDoMercadorViajante);
     int64_t risco = 0;
     for (const int mapa : rota) {
-        risco += static_cast<int64_t>(chanceDeEncontroPorMil(entidade, dados.mundo, mapa, viagem)) * viagem.pesoDosBandidos / pesos
+        risco += static_cast<int64_t>(chanceDeEncontroPorMil(entidade, dados.mundo, mapa, viagem, ameacaBandidaPorRegiao)) * viagem.pesoDosBandidos / pesos
             * comercio.riscoChanceDePerderEmPorcento / 100 * comercio.riscoPerdaMediaEmPorcento / 100;
     }
     return static_cast<int>(std::min<int64_t>(risco, 1000));
@@ -138,7 +138,7 @@ void partirPelaRota(CaravanaDaCidade& caravana, int origem, int destino, Simulac
     const int primeiro = rota.front();
     entidade.rota.assign(rota.begin() + 1, rota.end());
     entrarNoTrecho(entidade, primeiro, dados.mundo, dados.regrasDaViagem, vila.viagem.climaDeHojePorRegiao, vila.relogio.estacaoAtual(),
-                   casa.sorteioDasCaravanas());
+                   casa.sorteioDasCaravanas(), vila.viagem.ameacaBandidaPorRegiao);
 }
 
 // Regra 4.5: vende a carga, compra a volta e parte de casa.
@@ -479,7 +479,7 @@ PlanoDaViagemDaCaravana calcularLucroEsperadoDaViagem(SimulacaoDaVila& casa, con
     plano.custo += tarifasDaRota(casa, mapaDeCasa, rotaDeIda, valorDaIda) + tarifasDaRota(casa, plano.destino, rotaDeVolta, valorDaVolta);
     std::vector<int> rotaToda = rotaDeIda;
     rotaToda.insert(rotaToda.end(), rotaDeVolta.begin(), rotaDeVolta.end());
-    plano.riscoPorMil = riscoDaRota(rotaToda, caravana.entidade, dados);
+    plano.riscoPorMil = riscoDaRota(rotaToda, caravana.entidade, dados, casa.viagem.ameacaBandidaPorRegiao);
     plano.lucroEsperado = (plano.ganhoDaIda + plano.ganhoDaVolta) * (1000 - plano.riscoPorMil) / 1000 - plano.custo;
     return plano;
 }
@@ -554,7 +554,7 @@ void avancarAsCaravanasUmTick(SimulacaoDaVila& vila)
             }
             const int mapaAntes = caravana.entidade.mapaAtual;
             const PassoDaEntidade passo = andarUmTick(caravana.entidade, casa->dados.mundo, casa->dados.regrasDaViagem, vila.viagem.climaDeHojePorRegiao, hora,
-                                                      estacao, casa->contextoDaProducao().ticksPorHoraDeJogo, casa->sorteioDasCaravanas());
+                                                      estacao, casa->contextoDaProducao().ticksPorHoraDeJogo, casa->sorteioDasCaravanas(), vila.viagem.ameacaBandidaPorRegiao);
             if (caravana.entidade.mapaAtual != mapaAntes) {
                 cobrarTarifa(vila, *casa, caravana, mapaAntes, caravana.entidade.mapaAtual);  // fase C1 (Facção, 4.3)
             }

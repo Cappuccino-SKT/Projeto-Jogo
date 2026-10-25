@@ -38,6 +38,7 @@ add_library(regras_do_jogo STATIC
     Tecnologia/Tecnologia.cpp
     Faccao/Faccao.cpp
     Cultura/Cultura.cpp
+    Crime/Crime.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

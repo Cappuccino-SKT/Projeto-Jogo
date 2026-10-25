@@ -21,6 +21,7 @@
 #include "Reputacao/Reputacao.h"
 #include "Tecnologia/Tecnologia.h"
 #include "Faccao/Faccao.h"
+#include "Crime/Crime.h"
 
 namespace {
 
@@ -290,6 +291,9 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
         desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
+    if (simulacao.crimeDoJogador.revista.ativa) {
+        desenharARevista(simulacao, larguraDaTela, alturaDaTela);
+    }
     if (desenharPorCima) {
         desenharPorCima();
     }
@@ -380,6 +384,17 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
         janelaDasFaccoesAberta = !janelaDasFaccoesAberta;
     }
     const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    // Fase C3 (Crime, 4.6): preso, o grupo espera ou paga a fiança.
+    const EstadoDoCrimeDoJogador& crime = simulacao.crimeDoJogador;
+    if (crime.estaPreso(simulacao.relogio.diaDaPartida()) && crime.faccaoDaPrisao >= 0) {
+        ImGui::SameLine(0, 16);
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("Preso até o dia %lld", static_cast<long long>(crime.presoAteODia + 1));
+        ImGui::SameLine();
+        if (ImGui::Button(("Pagar a fiança (" + std::to_string(crime.fiancaNaFicha[static_cast<std::size_t>(crime.faccaoDaPrisao)]) + ")").c_str())) {
+            simulacao.pedidos.acrescentar(PedidoPagarFianca{});
+        }
+    }
     if (grupo.emTransito) {
         ImGui::SameLine(0, 16);
         ImGui::AlignTextToFramePadding();
@@ -1085,11 +1100,12 @@ void InterfaceDoJogador::desenharAReputacao(const SimulacaoDaVila& simulacao, fl
         return;
     }
     ImGui::TextWrapped("A faixa muda os preços das lojas das outras cidades. A sua vila é sempre Neutro. Passe o mouse para ver o \"Por quê?\".");
-    if (ImGui::BeginTable("##reputacao", 4, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+    if (ImGui::BeginTable("##reputacao", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
         ImGui::TableSetupColumn("Quem");
         ImGui::TableSetupColumn("Valor");
         ImGui::TableSetupColumn("Base");
         ImGui::TableSetupColumn("Faixa");
+        ImGui::TableSetupColumn("Recompensa");
         ImGui::TableHeadersRow();
         for (std::size_t dono = 0; dono < reputacao.reputacaoPorFaccao.size() && dono < donos.size(); ++dono) {
             if (simulacao.dados.mundo.cidadeNoMapa(simulacao.dados.mundo.mapaDaVila) != nullptr
@@ -1115,6 +1131,15 @@ void InterfaceDoJogador::desenharAReputacao(const SimulacaoDaVila& simulacao, fl
             if (!regras.faixas.empty()) {
                 ImGui::TextUnformatted(regras.faixas[static_cast<std::size_t>(faixaDaReputacao(regras, valor))].texto.c_str());
             }
+            // Fase C3 (Crime, 4.5): a Recompensa da facção pela cabeça do jogador.
+            ImGui::TableNextColumn();
+            int recompensa = 0;
+            for (std::size_t faccao = 0; faccao < simulacao.dados.faccoes.faccoes.size(); ++faccao) {
+                if (simulacao.dados.faccoes.faccoes[faccao].cultura == donos[dono] && faccao < simulacao.crimeDoJogador.recompensaPorFaccao.size()) {
+                    recompensa = simulacao.crimeDoJogador.recompensaPorFaccao[faccao];
+                }
+            }
+            ImGui::Text("%d", recompensa);
         }
         ImGui::EndTable();
     }
@@ -1357,6 +1382,44 @@ void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float 
     ImGui::End();
 }
 
+void InterfaceDoJogador::desenharARevista(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const RevistaPendente& revista = simulacao.crimeDoJogador.revista;
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    const RegrasDoCrime& regras = simulacao.dados.regrasDoCrime;
+    const int recompensa = simulacao.crimeDoJogador.recompensaPorFaccao[static_cast<std::size_t>(revista.faccao)];
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.4f), ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::Begin("Revista", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse);
+    ImGui::Text("Os guardas da %s revistaram o grupo em %s.", nomeDaFaccao(simulacao.dados, revista.faccao).c_str(), simulacao.dados.mundo.nomeDoMapa(revista.mapa).c_str());
+    for (const std::string& crime : revista.crimes) {
+        ImGui::BulletText("%s", crime == "crime.contrabando" ? "Contrabando (itens proibidos)" : crime == "crime.heresia_sem_livro" ? "Heresia: sem o Livro Sagrado" : crime.c_str());
+    }
+    const auto escolher = [&](EscolhaNaRevista escolha, int64_t oferta) {
+        simulacao.pedidos.acrescentar(PedidoResolverRevista{static_cast<int>(escolha), oferta});
+        if (simulacao.relogio.jogoEstaPausado()) {
+            simulacao.relogio.alternarPausa();
+        }
+    };
+    const int64_t valor = static_cast<int64_t>(recompensa + revista.multa) * 10;
+    if (grupo.dinheiroEmDecimos >= valor) {  // sem dinheiro, "Pagar" não aparece
+        if (ImGui::Button(("Pagar " + dinheiro(valor) + " moedas" + (recompensa > 0 ? " (com a Recompensa)" : "") + " e entregar os itens proibidos").c_str())) {
+            escolher(EscolhaNaRevista::Pagar, 0);
+        }
+    }
+    ImGui::SetNextItemWidth(100);
+    ImGui::InputInt("moedas", &ofertaDoSuborno);
+    ofertaDoSuborno = std::max(1, ofertaDoSuborno);
+    ImGui::SameLine();
+    const int chance = chanceDoSubornoEmPorcento(static_cast<int64_t>(ofertaDoSuborno) * 10, revista.multa, regras);
+    if (ImGui::Button(("Subornar (" + std::to_string(chance) + "%; se falhar, prisão)").c_str())) {
+        escolher(EscolhaNaRevista::Subornar, static_cast<int64_t>(ofertaDoSuborno) * 10);
+    }
+    if (ImGui::Button(("Fugir (a Recompensa sobe " + std::to_string(regras.recompensaVezesAMulta * revista.multa) + ")").c_str())) {
+        escolher(EscolhaNaRevista::Fugir, 0);
+    }
+    ImGui::End();
+}
+
 void InterfaceDoJogador::desenharOEncontro(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
 {
     const RegrasDaViagem& regras = simulacao.dados.regrasDaViagem;
@@ -1364,13 +1427,26 @@ void InterfaceDoJogador::desenharOEncontro(SimulacaoDaVila& simulacao, float lar
     const int bandidos = grupo.encontroMarcado.bandidos;
     ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.4f), ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
     ImGui::Begin("Encontro na estrada", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse);
-    ImGui::Text("Um bando de %d bandidos cerca o grupo (força %d contra %d).", bandidos, forcaDoBando(bandidos, regras), forcaDoGrupo(grupo, regras));
     const auto escolher = [&](EscolhaNoEncontro escolha) {
         simulacao.pedidos.acrescentar(PedidoResolverEncontro{escolha});
         if (simulacao.relogio.jogoEstaPausado()) {
             simulacao.relogio.alternarPausa();  // o encontro pausou; a escolha volta a andar
         }
     };
+    // Fase C3 (Crime, 4.7): com os Caçadores, só lutar ou ser preso.
+    if (grupo.encontroMarcado.tipo == TipoDeEncontro::Cacadores) {
+        const int forca = forcaDoGrupo(grupo, regras);
+        ImGui::Text("Caçadores de Recompensa cercam o grupo (força %d contra %d).", bandidos, forca);
+        if (ImGui::Button(("Lutar (" + std::to_string(forca * 100 / std::max(1, forca + bandidos)) + "% de vencer; perder é a prisão)").c_str())) {
+            escolher(EscolhaNoEncontro::Lutar);
+        }
+        if (ImGui::Button("Render-se (prisão)")) {
+            escolher(EscolhaNoEncontro::Render);
+        }
+        ImGui::End();
+        return;
+    }
+    ImGui::Text("Um bando de %d bandidos cerca o grupo (força %d contra %d).", bandidos, forcaDoBando(bandidos, regras), forcaDoGrupo(grupo, regras));
     const int64_t suborno = precoDoSubornoEmDecimos(bandidos, regras.carismaDoJogadorAteOsAtributos, regras);
     if (grupo.dinheiroEmDecimos >= suborno) {  // só aparece se o grupo tiver o dinheiro
         if (ImGui::Button(("Subornar (" + dinheiro(suborno) + " moedas)").c_str())) {

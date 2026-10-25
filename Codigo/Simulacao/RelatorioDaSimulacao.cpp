@@ -225,6 +225,16 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
             bancos += " " + nomeDaFaccao(dados, static_cast<int>(faccao)) + " " + escreverDinheiroEmMoedas(static_cast<int>(partida->faccoes.bancoDaFaccao[faccao])) + ";";
         }
         resultado.linhasDoConsole.push_back(bancos);
+        // Fase C3: a Criminalidade do mundo no último dia.
+        int maior = partida->felicidade.criminalidadeEmDecimos;
+        int64_t soma = maior;
+        for (const auto& cidade : partida->outrasCidades) {
+            soma += cidade->felicidade.criminalidadeEmDecimos;
+            maior = std::max(maior, cidade->felicidade.criminalidadeEmDecimos);
+        }
+        const int64_t media = soma / static_cast<int64_t>(partida->outrasCidades.size() + 1);
+        resultado.linhasDoConsole.push_back("Criminalidade: vila " + std::to_string(partida->felicidade.criminalidadeEmDecimos / 10) + "," + std::to_string(partida->felicidade.criminalidadeEmDecimos % 10)
+                                            + "; média do mundo " + std::to_string(media / 10) + "," + std::to_string(media % 10) + "; a maior " + std::to_string(maior / 10) + "," + std::to_string(maior % 10));
         // As outras cidades no fim: quantas passam fome (CO2-1: as de comida escassa dependem das caravanas).
         int cidadesComFome = 0;
         int piorMapa = 0;

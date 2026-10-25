@@ -7,6 +7,7 @@
 // Tudo em décimos de ponto (587 = 58,7), para o passo de 10% de uma
 // diferença pequena não se perder.
 
+#include <cstdint>
 #include <string>
 
 // Os números do "felicidade" do regras.json, em pontos (como no arquivo).
@@ -40,7 +41,8 @@ struct SituacaoDoDiaParaAFelicidade {
     int civisDesempregados = 0;
     int civisSemCasa = 0;
     int felicidadeDosEventosEmPontos = 0;
-    int fatorLeisECulturaEmDecimos = 0;  // fase C2: já calculado com as leis da facção  // a soma dos eventos ativos (ficha dos Eventos) e o calor forte (Clima)
+    int fatorLeisECulturaEmDecimos = 0;  // fase C2: já calculado com as leis da facção
+    int felicidadeDaCriminalidadeEmDecimos = 0;  // fase C3 (Crime, 4.1, passo 3): entra nos eventos  // a soma dos eventos ativos (ficha dos Eventos) e o calor forte (Clima)
     int pontosDoClimaNoConsumo = 0;        // ficha do Clima, regra 4.4: −10 se faltou lenha hoje
 };
 
@@ -59,6 +61,10 @@ struct FelicidadeDaClasse {
     int felicidadeEmDecimos = 500;
     int alvoEmDecimos = 500;      // não vai no save: recalculado
     FatoresDaFelicidade fatoresDoDia;  // só para o resumo e o relatório
+    // Fase C3 (Crime e Justiça, 4.1 e 4.2): a Criminalidade da cidade, em décimos (11,0 no começo),
+    // e o primeiro dia em que pode haver outro furto no armazém.
+    int criminalidadeEmDecimos = 110;
+    int64_t diaDoProximoFurtoPossivel = 0;
 };
 
 // Regra 4.1.

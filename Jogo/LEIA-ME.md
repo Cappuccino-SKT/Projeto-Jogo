@@ -663,3 +663,16 @@ O que entrou ([[Ficha Logica/Cultura|ficha da Cultura]]; os ajustes estão na pa
 
 **Verificado pelo assistente:** os testes passam (551 conferências); as 10 sementes passam com o relatório da vila igual ao do C1; nenhuma cidade com fome e o dinheiro do mundo conservado; o comércio fica entre 4 e 11 viagens por ano; salvar e carregar no dia 30 dá o mesmo relatório.
 
+### Marco C3: o crime e a justiça (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Crime|ficha do Crime e Justiça]]; os ajustes estão na parte 10.8 dela):
+
+- **A Criminalidade de cada cidade** (de 0 a 100; arquivo novo `data/crimes.json`): sobe com a infelicidade, o desemprego e a pobreza; acima de 20 tira Felicidade; com 25 ou mais, pode haver furto no armazém; e põe mais bandidos nas estradas da região.
+- **A revista** na entrada das cidades de facção (a chance vem da faixa da Reputação): acha os itens proibidos e a falta do Livro Sagrado. O jogador **paga** a multa, **suborna** ou **foge**; cada crime tira reputação.
+- **A Recompensa** por facção (cai 10% por estação), a **prisão** (os dias ou a fiança) e os **Caçadores de Recompensa** a partir de 500 moedas.
+- **Na tela:** a janela da revista, a prisão com o botão da fiança na barra de cima, os Caçadores no encontro, e a Recompensa na janela da Reputação. O fim do `--simular` mostra a Criminalidade do mundo.
+- **Save versão 12.**
+- **Ficou para depois:** a loja ilegal do jogador (nenhum item é proibido ainda).
+
+**Verificado pelo assistente:** os testes passam (563 conferências); as 10 sementes passam com o relatório da vila igual ao do C2 (a Criminalidade da vila fica em 12,6: abaixo de 20 e de 25); no mundo, a média fica em cerca de 12 e a maior em 16 a 18; nenhuma cidade com fome e o dinheiro do mundo conservado; salvar e carregar no dia 30 dá o mesmo relatório. A revista, a prisão e os Caçadores estão testados nos testes do código, não na janela.
+

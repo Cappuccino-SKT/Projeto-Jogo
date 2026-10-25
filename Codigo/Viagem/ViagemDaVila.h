@@ -37,6 +37,7 @@ struct EstadoDaViagem {
     std::vector<TipoDeClima> climaDeHojePorRegiao = std::vector<TipoDeClima>(6, TipoDeClima::Limpo);  // regra 4.8
     bool grupoSemComida = false;  // só do dia
     std::vector<PrecosConhecidos> precosConhecidos;  // precosConhecidos[numero do mapa − 1] (fase B2)
+    std::vector<int> ameacaBandidaPorRegiao = std::vector<int>(6, 0);  // fase C3 (Crime, 4.3), em por mil
 };
 
 // O que um tick da viagem fez: as linhas do console e se o jogo deve voltar a 1x ou pausar.

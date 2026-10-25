@@ -160,6 +160,9 @@ TipoDeEncontro lerOEncontroDoSave(const json& nome)
     if (texto == "mercador_viajante") {
         return TipoDeEncontro::MercadorViajante;
     }
+    if (texto == "cacadores") {
+        return TipoDeEncontro::Cacadores;
+    }
     if (texto != "nenhum") {
         throw RecusaDoSave("O save tem um encontro que o jogo não conhece (" + texto + ").");
     }
@@ -217,6 +220,26 @@ void restaurarOComercio(SimulacaoDaVila& partida, const json& secao)
         caravana.marcadoNoDestino = lerOsItens(partida.dados, caravanas[numero].at("marcadoNoDestino"), "comercio");
         caravana.tickDaPartida = caravanas[numero].at("tickDaPartida").get<int64_t>();
     }
+}
+
+// Fase C3 (ficha do Crime e Justiça).
+void restaurarOCrime(SimulacaoDaVila& partida, const json& secao)
+{
+    EstadoDoCrimeDoJogador& crime = partida.crimeDoJogador;
+    crime.recompensaPorFaccao = secao.at("recompensaPorFaccao").get<std::vector<int>>();
+    crime.gravidadesNaFicha = secao.at("gravidadesNaFicha").get<std::vector<int>>();
+    crime.fiancaNaFicha = secao.at("fiancaNaFicha").get<std::vector<int>>();
+    crime.estacaoDaUltimaHeresia = secao.at("estacaoDaUltimaHeresia").get<std::vector<int>>();
+    if (crime.recompensaPorFaccao.size() != partida.dados.faccoes.faccoes.size()) {
+        throw RecusaDoSave("O save tem o crime de outra quantidade de facções.");
+    }
+    crime.presoAteODia = secao.at("presoAteODia").get<int64_t>();
+    crime.faccaoDaPrisao = secao.at("faccaoDaPrisao").get<int>();
+    crime.faccaoDosCacadores = secao.at("faccaoDosCacadores").get<int>();
+    crime.proximoMapaNaUltimaConferencia = secao.at("proximoMapaNaUltimaConferencia").get<int>();
+    const json& revista = secao.at("revista");
+    crime.revista = RevistaPendente{revista.at("ativa").get<bool>(), revista.at("faccao").get<int>(), revista.at("mapa").get<int>(), revista.at("mapaAnterior").get<int>(),
+                                    revista.at("crimes").get<std::vector<std::string>>(), revista.at("gravidade").get<int>(), revista.at("multa").get<int>()};
 }
 
 // Fase C1 (ficha da Facção).
@@ -371,6 +394,7 @@ void restaurarAViagem(SimulacaoDaVila& partida, const json& secao)
         partida.viagem.nevoa[mapa] = RegistroDaNevoa{nevoa[mapa].at(0).get<int64_t>(), nevoa[mapa].at(1).get<std::string>(), nevoa[mapa].at(2).get<int>(),
                                                      static_cast<EstadoDoTerritorio>(nevoa[mapa].at(3).get<int>())};
     }
+    partida.viagem.ameacaBandidaPorRegiao = secao.at("ameacaBandidaPorRegiao").get<std::vector<int>>();
     const json& precos = secao.at("precosConhecidos");
     if (precos.size() != partida.viagem.precosConhecidos.size()) {
         throw RecusaDoSave("O save tem os preços de outra quantidade de mapas.");
@@ -574,6 +598,8 @@ void restaurarAFelicidade(FelicidadeDaClasse& felicidade, const json& linha)
     felicidade.fatoresDoDia.moradia = linha.at("moradia").get<int>();
     felicidade.fatoresDoDia.eventosDuradouros = linha.at("eventosDuradouros").get<int>();
     felicidade.fatoresDoDia.leisECultura = linha.at("leisECultura").get<int>();
+    felicidade.criminalidadeEmDecimos = linha.at("criminalidade").get<int>();
+    felicidade.diaDoProximoFurtoPossivel = linha.at("diaDoProximoFurtoPossivel").get<int64_t>();
 }
 
 void restaurarOsEventos(SimulacaoDaVila& simulacao, const json& eventos)
@@ -787,6 +813,7 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarAReputacao(*partida, arvore.at("reputacao"));  // fase B4
         restaurarATecnologia(*partida, arvore.at("tecnologia"));  // fase B5
         restaurarAsFaccoes(*partida, arvore.at("faccoes"));  // fase C1
+        restaurarOCrime(*partida, arvore.at("crime"));  // fase C3
         atualizarAsCidadesPelasLeis(*partida);
         atualizarAsTravasDasCidades(*partida);
 

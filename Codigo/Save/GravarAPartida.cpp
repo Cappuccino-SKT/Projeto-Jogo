@@ -196,7 +196,9 @@ json escreverAFelicidade(const FelicidadeDaClasse& felicidade)
                 {"desempregoERenda", felicidade.fatoresDoDia.desempregoERenda},
                 {"moradia", felicidade.fatoresDoDia.moradia},
                 {"eventosDuradouros", felicidade.fatoresDoDia.eventosDuradouros},
-                {"leisECultura", felicidade.fatoresDoDia.leisECultura}};
+                {"leisECultura", felicidade.fatoresDoDia.leisECultura},
+                {"criminalidade", felicidade.criminalidadeEmDecimos},
+                {"diaDoProximoFurtoPossivel", felicidade.diaDoProximoFurtoPossivel}};
 }
 
 json escreverOsEventos(const SimulacaoDaVila& simulacao)
@@ -285,7 +287,7 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
 
 const char* nomeDoEncontro(TipoDeEncontro tipo)
 {
-    return tipo == TipoDeEncontro::Bandidos ? "bandidos" : tipo == TipoDeEncontro::MercadorViajante ? "mercador_viajante" : "nenhum";
+    return tipo == TipoDeEncontro::Bandidos ? "bandidos" : tipo == TipoDeEncontro::MercadorViajante ? "mercador_viajante" : tipo == TipoDeEncontro::Cacadores ? "cacadores" : "nenhum";
 }
 
 // Fase B1 (ficha da Viagem): o grupo do jogador, a névoa e o clima de cada região.
@@ -345,6 +347,7 @@ json escreverAViagem(const SimulacaoDaVila& simulacao)
     return json{{"grupo", escreverAEntidade(simulacao.dados, simulacao.viagem.grupoDoJogador)},
                 {"nevoa", nevoa},
                 {"climaDeHojePorRegiao", climas},
+                {"ameacaBandidaPorRegiao", simulacao.viagem.ameacaBandidaPorRegiao},
                 {"precosConhecidos", precos}};
 }
 
@@ -475,6 +478,23 @@ json escreverAsFaccoes(const SimulacaoDaVila& simulacao)
     return json{{"faccoes", faccoes}, {"mudancasParaAmanha", mudancas}, {"perdeuAVotacaoAte", estado.perdeuAVotacaoAte}, {"cunhagemTotal", estado.cunhagemTotal}};
 }
 
+// Fase C3 (ficha do Crime e Justiça): o crime do jogador.
+json escreverOCrime(const SimulacaoDaVila& simulacao)
+{
+    const EstadoDoCrimeDoJogador& crime = simulacao.crimeDoJogador;
+    const RevistaPendente& revista = crime.revista;
+    return json{{"recompensaPorFaccao", crime.recompensaPorFaccao},
+                {"gravidadesNaFicha", crime.gravidadesNaFicha},
+                {"fiancaNaFicha", crime.fiancaNaFicha},
+                {"estacaoDaUltimaHeresia", crime.estacaoDaUltimaHeresia},
+                {"presoAteODia", crime.presoAteODia},
+                {"faccaoDaPrisao", crime.faccaoDaPrisao},
+                {"faccaoDosCacadores", crime.faccaoDosCacadores},
+                {"proximoMapaNaUltimaConferencia", crime.proximoMapaNaUltimaConferencia},
+                {"revista", json{{"ativa", revista.ativa}, {"faccao", revista.faccao}, {"mapa", revista.mapa}, {"mapaAnterior", revista.mapaAnterior},
+                                 {"crimes", revista.crimes}, {"gravidade", revista.gravidade}, {"multa", revista.multa}}}};
+}
+
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
 {
     json lista = json::array();
@@ -555,5 +575,6 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["reputacao"] = escreverAReputacao(simulacao);
     arvore["tecnologia"] = escreverATecnologia(simulacao);
     arvore["faccoes"] = escreverAsFaccoes(simulacao);
+    arvore["crime"] = escreverOCrime(simulacao);
     return json::to_msgpack(arvore);
 }

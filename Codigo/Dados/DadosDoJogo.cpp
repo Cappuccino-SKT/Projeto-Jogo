@@ -125,6 +125,10 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
         dados.faccoes = lerArquivosDasFaccoes(*textoDasFaccoes, *textoDasCulturas, problemas);
         dados.culturas = lerArquivoDasCulturas(*textoDasCulturas, dados.faccoes, problemas);  // fase C2
     }
+    // 18. O Crime e a Justiça (fase C3).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "crimes.json", problemas)) {
+        dados.regrasDoCrime = lerArquivoDosCrimes(*texto, problemas);
+    }
     return dados;
 }
 
