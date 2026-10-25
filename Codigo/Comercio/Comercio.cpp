@@ -220,23 +220,33 @@ void resolverOEncontroDaCaravana(SimulacaoDaVila& vila, SimulacaoDaVila& casa, C
 {
     EntidadeEmTransito& entidade = caravana.entidade;
     const RegrasDaViagem& regras = casa.dados.regrasDaViagem;
+    const RegrasDoCombate& combate = casa.dados.regrasDoCombate;
     const EncontroMarcado encontro = entidade.encontroMarcado;
     entidade.encontroMarcado = {};
-    const int forca = forcaDaCaravana(casa.dados);
-    if (encontro.tipo != TipoDeEncontro::Bandidos || !bandidosAtacam(forca, encontro.bandidos, regras)) {
+    // Fase D1 (Combate, 4.8): 2 guardas e 2 condutores (Civis) contra o bando, com a Vida da caravana.
+    std::vector<Combatente> daCaravana = ladoDoKit(combate, "guarda", casa.dados.regrasDoComercio.guardas, entidade.vidaEmPorcento);
+    const std::vector<Combatente> condutores = ladoDoKit(combate, "civil", casa.dados.regrasDoComercio.condutores, entidade.vidaEmPorcento);
+    daCaravana.insert(daCaravana.end(), condutores.begin(), condutores.end());
+    if (encontro.tipo != TipoDeEncontro::Bandidos || !bandidosAtacamOLado(combate, regras, daCaravana, encontro.bandidos)) {
         return;
     }
-    const int forcaDoBandoAtacante = forcaDoBando(encontro.bandidos, regras);
+    const std::vector<Combatente> bando = ladoDoKit(combate, "bandido", encontro.bandidos);
     entidade.ticksParadoNaLuta = regras.lutaRapidaDuraTicks;
     ++vila.estatisticasDoComercio.atacadas;
-    if (resolverPorCalculoRapidoDeForcas(forca, forcaDoBandoAtacante, casa.sorteioDasCaravanas().sortearNumeroInteiroEntre(0, 999))) {
+    const ResultadoDoCalculoRapido luta = resolverPorCalculoRapido(combate, daCaravana, bando, casa.sorteioDasCaravanas().sortearNumeroInteiroEntre(0, 999));
+    if (luta.venceuOLadoA) {
+        entidade.vidaEmPorcento = std::max(1, entidade.vidaEmPorcento - luta.perdaDeVidaDoVencedorEmPorcento);
         criarANoticiaDoAtaque(vila, casa, caravana, "os guardas venceram");
         return;
     }
-    // Perde 30% + 70% × (força do vencedor − força do perdedor) ÷ força do vencedor.
-    const int perda = std::clamp(regras.perdaDeCargaDaCaravanaMinimaEmPorcento
-                                     + (100 - regras.perdaDeCargaDaCaravanaMinimaEmPorcento) * std::max(0, forcaDoBandoAtacante - forca) / std::max(1, forcaDoBandoAtacante),
-                                 0, 100);
+    // Perde 30% + 70% × (poder do vencedor − poder do perdedor) ÷ poder do vencedor.
+    const int64_t poderDoBando = poderDoLado(combate, bando, daCaravana);
+    const int64_t poderDaCaravana = poderDoLado(combate, daCaravana, bando);
+    const int perda = static_cast<int>(std::clamp<int64_t>(regras.perdaDeCargaDaCaravanaMinimaEmPorcento
+                                                               + (100 - regras.perdaDeCargaDaCaravanaMinimaEmPorcento) * std::max<int64_t>(0, poderDoBando - poderDaCaravana)
+                                                                     / std::max<int64_t>(1, poderDoBando),
+                                                           0, 100));
+    entidade.vidaEmPorcento = 10;
     const int64_t dinheiroAntes = entidade.dinheiroEmDecimos;
     aplicarAPerdaDoGrupo(entidade, perda);
     vila.estatisticasDoComercio.dinheiroPerdido += dinheiroAntes - entidade.dinheiroEmDecimos;
@@ -551,6 +561,9 @@ void avancarAsCaravanasUmTick(SimulacaoDaVila& vila)
         for (CaravanaDaCidade& caravana : casa->caravanas) {
             if (caravana.situacao == SituacaoDaCaravana::EmCasa) {
                 continue;
+            }
+            if (vila.relogio.comecouUmaHoraNova()) {
+                recuperarAVidaDaHora(caravana.entidade, hora, casa->dados.regrasDaViagem);  // fase D1
             }
             const int mapaAntes = caravana.entidade.mapaAtual;
             const PassoDaEntidade passo = andarUmTick(caravana.entidade, casa->dados.mundo, casa->dados.regrasDaViagem, vila.viagem.climaDeHojePorRegiao, hora,

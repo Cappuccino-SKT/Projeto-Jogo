@@ -142,7 +142,7 @@ ResultadoDoTickDaViagem avancarAViagemUmTick(ContextoDaProducao& contexto, const
             // A troca com os preços de outra região: o grupo pode comerciar nas cidades (B2); o mercador fica para depois.
             resultado.linhasParaOConsole.push_back("Viagem: um mercador viajante cruza o caminho do grupo.");
             grupo.encontroMarcado = {};
-        } else if (!bandidosAtacam(forcaDoGrupo(grupo, regras), bandidos, regras)) {
+        } else if (!bandidosAtacamOLado(contexto.dados.regrasDoCombate, regras, ladoDoGrupo(contexto.dados.regrasDoCombate, grupo), bandidos)) {
             resultado.linhasParaOConsole.push_back("Viagem: um bando de " + std::to_string(bandidos) + " bandidos observa vocês de longe e vai embora.");
             grupo.encontroMarcado = {};
         } else {
@@ -228,7 +228,7 @@ std::string resolverOEncontroDoGrupo(ContextoDaProducao& contexto, EscolhaNoEnco
     if (!grupo.encontroAcontecendo) {
         return "não há encontro agora";
     }
-    const std::string linha = resolverEncontroComBandidos(grupo, escolha, contexto.dados.regrasDaViagem, *contexto.sorteioDaViagem, venceuALuta);
+    const std::string linha = resolverEncontroComBandidos(grupo, escolha, contexto.dados.regrasDaViagem, contexto.dados.regrasDoCombate, *contexto.sorteioDaViagem, venceuALuta);
     if (linha.empty()) {
         return "o grupo não tem o dinheiro do suborno";
     }

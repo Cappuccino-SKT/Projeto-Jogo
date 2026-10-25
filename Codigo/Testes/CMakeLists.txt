@@ -26,6 +26,7 @@ add_executable(testes_do_codigo
     TestesDaCultura.cpp
     TestesDoCrime.cpp
     TestesDaReligiao.cpp
+    TestesDoCombate.cpp
 )
 
 # Os testes do mapa usam a nlohmann/json para montar mapas com defeito.

@@ -133,6 +133,10 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "religiao.json", problemas)) {
         dados.regrasDaReligiao = lerArquivoDaReligiao(*texto, problemas);
     }
+    // 20. O Combate (fase D1).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "combate.json", problemas)) {
+        dados.regrasDoCombate = lerArquivoDoCombate(*texto, problemas);
+    }
     return dados;
 }
 

@@ -103,7 +103,7 @@ void testarOEncontro(const RegrasDaViagem& regras)
     SorteioComSemente sorteio(1, sequenciaDoSorteioDaViagem);
     sozinho.encontroMarcado = {TipoDeEncontro::Bandidos, 6};
     sozinho.encontroAcontecendo = true;
-    conferir(resolverEncontroComBandidos(sozinho, EscolhaNoEncontro::Subornar, regras, sorteio).empty() && sozinho.encontroAcontecendo,
+    conferir(resolverEncontroComBandidos(sozinho, EscolhaNoEncontro::Subornar, regras, RegrasDoCombate{}, sorteio).empty() && sozinho.encontroAcontecendo,
              "suborno de 165 moedas com 37,5: recusado, o encontro continua");
 }
 

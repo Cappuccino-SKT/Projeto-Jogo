@@ -316,6 +316,9 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
     // Fase C3: preso ou na revista, o grupo não anda.
     if (lodDoMapa == 0 && !crimeDoJogador.estaPreso(relogio.diaDaPartida()) && !crimeDoJogador.revista.ativa) {
         const int mapaAntesDoTick = viagem.grupoDoJogador.mapaAtual;
+        if (relogio.comecouUmaHoraNova()) {
+            recuperarAVidaDaHora(viagem.grupoDoJogador, relogio.horaDoDiaAtual(), dados.regrasDaViagem);  // fase D1
+        }
         const ResultadoDoTickDaViagem tickDaViagem = avancarAViagemUmTick(producao, relogio);
         linhasParaOConsole.insert(linhasParaOConsole.end(), tickDaViagem.linhasParaOConsole.begin(), tickDaViagem.linhasParaOConsole.end());
         if (tickDaViagem.encontroComecou || tickDaViagem.chegouAoDestino) {

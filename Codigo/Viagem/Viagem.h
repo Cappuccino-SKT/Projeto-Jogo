@@ -11,6 +11,7 @@
 #include "Clima/Clima.h"
 #include "Tempo/RelogioDoMundo.h"
 #include "Tempo/SorteioComSemente.h"
+#include "Combate/Combate.h"
 #include "Viagem/MundoDoJogo.h"
 #include "Viagem/RegrasDaViagem.h"
 
@@ -52,6 +53,7 @@ struct EntidadeEmTransito {
     int ticksParadoNaLuta = 0;
     std::vector<int> quantidadePorItem;  // o inventário do grupo, na ordem do itens.csv
     int64_t dinheiroEmDecimos = 0;
+    int vidaEmPorcento = 100;  // fase D1 (Combate): a Vida de cada membro, em % (o vencedor perde; volta 1% por hora)
 
     bool ehCaravana() const { return tipoDeEntidade == "caravana"; }
     int destino() const { return rota.empty() ? proximoMapa : rota.back(); }
@@ -89,6 +91,13 @@ EncontroMarcado escolherOEncontro(int chancePorMil, int numeroDoEncontro, int nu
 EncontroMarcado sortearEncontroAoEntrarNoTrecho(const EntidadeEmTransito& entidade, const MundoDoJogo& mundo, int mapaDeChegada,
                                                 const RegrasDaViagem& regras, SorteioComSemente& sorteio, const std::vector<int>& ameacaBandidaPorRegiao = {});
 
+// Fase D1 (Combate, 4.8): o grupo do jogador como lado do cálculo rápido (o jogador e os outros
+// como Civis, com a Vida do grupo) e o bando; os bandidos atacam se o grupo não for 2 vezes mais forte.
+std::vector<Combatente> ladoDoGrupo(const RegrasDoCombate& combate, const EntidadeEmTransito& entidade);
+bool bandidosAtacamOLado(const RegrasDoCombate& combate, const RegrasDaViagem& regras, const std::vector<Combatente>& alvo, int bandidos);
+// A Vida volta 1% por hora (Cura, CU1-2), o dobro acampado; nada durante a luta.
+void recuperarAVidaDaHora(EntidadeEmTransito& entidade, int horaDoDia, const RegrasDaViagem& regras);
+
 // A força simples (VI1-4): o jogador e, a partir dos companheiros, os outros como Civis.
 int forcaDoGrupo(const EntidadeEmTransito& entidade, const RegrasDaViagem& regras);
 int forcaDoBando(int bandidos, const RegrasDaViagem& regras);
@@ -124,5 +133,5 @@ PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mun
 // Regra 4.6: aplica a escolha. Devolve a linha do console; vazio se a escolha não vale
 // (o suborno sem o dinheiro). Fugir que falha vira Lutar.
 // Fase B4: "venceuALuta", se não for nulo, diz se o grupo venceu a luta.
-std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras,
+std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras, const RegrasDoCombate& combate,
                                         SorteioComSemente& sorteio, bool* venceuALuta = nullptr);

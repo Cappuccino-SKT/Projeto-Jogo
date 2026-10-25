@@ -189,6 +189,7 @@ void restaurarAEntidade(const DadosDoJogo& dados, EntidadeEmTransito& entidade, 
     entidade.encontroAcontecendo = entrada.at("encontroAcontecendo").get<bool>();
     entidade.ticksParadoNaLuta = entrada.at("ticksParadoNaLuta").get<int>();
     entidade.dinheiroEmDecimos = entrada.at("dinheiro").get<int64_t>();
+    entidade.vidaEmPorcento = entrada.at("vida").get<int>();
     exigirTodosOsItens(dados, entrada.at("itens"), "viagem");
     entidade.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
     paraCadaItem(dados, entrada.at("itens"), [&](int numeroDoItem, const json& quantidade) {

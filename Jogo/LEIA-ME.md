@@ -689,3 +689,18 @@ O que entrou ([[Ficha Logica/Religiao|ficha da Religião]]; os ajustes estão na
 
 **Verificado pelo assistente:** os testes passam (575 conferências); as 10 sementes passam com o relatório da vila igual ao do C3; o dinheiro do mundo se conserva; salvar e carregar no dia 30 dá o mesmo relatório. **Achado:** em 2 das 10 sementes, uma cidade termina o ano com fome curta (de 1 a 3 dias): a Vila Livre do Sul (5,6) ou o Entreposto do leste (4,5), as duas sem Templo e numa região com pouco Grão. Sem a comida extra do festival ou sem o turno pela metade, a semente 1 continua igual; a causa provável é indireta (as cidades de fé mais felizes crescem e sobra menos comida para as caravanas). Vale olhar numa rodada se aparecer de novo.
 
+### Marco D1: o combate (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Combate|ficha do Combate]]; os ajustes estão na parte 10.9 dela):
+
+- **A fórmula do golpe** (o dano da arma × o Rank × a habilidade, a vantagem contra a armadura, a Defesa, o mínimo de 1), **o acerto a distância**, **o Medo** e **a evolução**, com as armas, as armaduras e os kits no arquivo novo `data/combate.json`.
+- **O duelo simulado** (sem o mapa) e **o cálculo rápido**, que substitui a força simples na estrada, nas caravanas e nos Caçadores.
+- **A Vida do grupo e das caravanas** (o vencedor perde Vida; ela volta 1% por hora).
+- **Na tela:** o encontro mostra a Vida do grupo e a chance de vencer pelo cálculo rápido.
+- **Save versão 14.**
+- **Ficou para depois:** o combate ao vivo no Mapa Local (não há hostis nem personagens controlados nos mapas ainda).
+
+**Verificado pelo assistente:** os testes passam (592 conferências); as 10 sementes passam com o relatório da vila igual ao do C4; o dinheiro do mundo se conserva; salvar e carregar no dia 30 dá o mesmo relatório. As caravanas perdem mais lutas agora (de 0 a 3 por ano). A fome curta do C4 continua em 2 sementes.
+
+**Achado (rodada CB2):** o cálculo rápido só bate com o combate visto quando os lados são parecidos (1 jogador contra 2 bandidos: 97% na luta vista, 46% no cálculo rápido). Ver a [[Rodada Pendente]].
+

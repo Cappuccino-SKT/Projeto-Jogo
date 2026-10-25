@@ -40,6 +40,7 @@ add_library(regras_do_jogo STATIC
     Cultura/Cultura.cpp
     Crime/Crime.cpp
     Religiao/Religiao.cpp
+    Combate/Combate.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

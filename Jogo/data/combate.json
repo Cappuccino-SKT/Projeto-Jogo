@@ -1,0 +1,167 @@
+{
+  "vida_maxima": 100,
+  "armas": {
+    "soco": {
+      "dano": [
+        2,
+        4
+      ],
+      "intervalo_em_ticks": 20,
+      "alcance_em_tiles": 1,
+      "habilidade": "corpo_a_corpo"
+    },
+    "espada": {
+      "dano": [
+        8,
+        12
+      ],
+      "intervalo_em_ticks": 20,
+      "alcance_em_tiles": 1,
+      "habilidade": "corpo_a_corpo",
+      "classe": "corte"
+    },
+    "lanca": {
+      "dano": [
+        7,
+        11
+      ],
+      "intervalo_em_ticks": 20,
+      "alcance_em_tiles": 2,
+      "habilidade": "corpo_a_corpo",
+      "classe": "corte"
+    },
+    "machado": {
+      "dano": [
+        12,
+        18
+      ],
+      "intervalo_em_ticks": 30,
+      "alcance_em_tiles": 1,
+      "habilidade": "corpo_a_corpo",
+      "classe": "impacto"
+    },
+    "clava": {
+      "dano": [
+        11,
+        17
+      ],
+      "intervalo_em_ticks": 30,
+      "alcance_em_tiles": 1,
+      "habilidade": "corpo_a_corpo",
+      "classe": "impacto"
+    },
+    "arco": {
+      "dano": [
+        6,
+        10
+      ],
+      "intervalo_em_ticks": 30,
+      "alcance_em_tiles": 12,
+      "habilidade": "longo_alcance",
+      "classe": "arco"
+    },
+    "besta": {
+      "dano": [
+        12,
+        16
+      ],
+      "intervalo_em_ticks": 50,
+      "alcance_em_tiles": 14,
+      "habilidade": "longo_alcance",
+      "classe": "perfurante"
+    }
+  },
+  "dano_por_rank_em_porcento": 25,
+  "defesa_por_peca_rank_1": {
+    "leve": 1,
+    "media": 2,
+    "pesada": 3
+  },
+  "vantagem_em_porcento": {
+    "corte": {
+      "leve": 25,
+      "media": 0,
+      "pesada": -25
+    },
+    "impacto": {
+      "leve": -25,
+      "media": 0,
+      "pesada": 25
+    },
+    "arco": {
+      "leve": 0,
+      "media": 0,
+      "pesada": 0
+    },
+    "perfurante": {
+      "leve": 0,
+      "media": 0,
+      "pesada": 25
+    }
+  },
+  "acerto_a_distancia": {
+    "base": 90,
+    "por_tile_acima_de_3": -5,
+    "por_ponto_de_habilidade_acima_de_50_em_decimos": 5,
+    "limites": [
+      10,
+      95
+    ],
+    "chuva": -10,
+    "tempestade": -20,
+    "noite_alcance_em_porcento": 70
+  },
+  "medo": {
+    "por_vida_perdida_em_decimos": 5,
+    "por_aliado_caido": 10,
+    "inimigo_2_vezes_mais_forte": 20,
+    "coragem_padrao": 60,
+    "rendicao_acima_da_coragem": 30
+  },
+  "evolucao_por_golpe_em_centesimos": 10,
+  "perda_do_grupo_derrotado_em_porcento": 75,
+  "vida_maxima_perdida_pelo_vencedor_em_porcento": 90,
+  "raio_de_alerta_em_tiles": 10,
+  "ticks_para_sair_de_combate": 100,
+  "reavaliar_alvo_a_cada_ticks": 10,
+  "limite_de_combatentes": 40,
+  "kits": {
+    "jogador": {
+      "arma": "espada",
+      "armadura": [
+        "leve",
+        "leve",
+        "leve"
+      ],
+      "habilidade": 50
+    },
+    "civil": {
+      "arma": "soco",
+      "armadura": [],
+      "habilidade": 30
+    },
+    "bandido": {
+      "arma": "clava",
+      "armadura": [],
+      "habilidade": 40
+    },
+    "guarda": {
+      "arma": "lanca",
+      "armadura": [
+        "media",
+        "media",
+        "leve"
+      ],
+      "habilidade": 50
+    },
+    "soldado": {
+      "arma": "espada",
+      "armadura": [
+        "media",
+        "media",
+        "media"
+      ],
+      "habilidade": 55
+    }
+  }
+}

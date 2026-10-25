@@ -251,7 +251,29 @@ PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mun
     return PassoDaEntidade::ChegouAoDestino;
 }
 
-std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras,
+std::vector<Combatente> ladoDoGrupo(const RegrasDoCombate& combate, const EntidadeEmTransito& entidade)
+{
+    std::vector<Combatente> lado = ladoDoKit(combate, "civil", std::max(0, entidade.pessoas - 1), entidade.vidaEmPorcento);
+    lado.insert(lado.begin(), combatenteDoKit(combate, "jogador", entidade.vidaEmPorcento));
+    return lado;
+}
+
+bool bandidosAtacamOLado(const RegrasDoCombate& combate, const RegrasDaViagem& regras, const std::vector<Combatente>& alvo, int bandidos)
+{
+    const std::vector<Combatente> bando = ladoDoKit(combate, "bandido", bandidos);
+    return poderDoLado(combate, alvo, bando) <= regras.bandidosNaoAtacamSeOGrupoForVezesMaisForte * poderDoLado(combate, bando, alvo);
+}
+
+void recuperarAVidaDaHora(EntidadeEmTransito& entidade, int horaDoDia, const RegrasDaViagem& regras)
+{
+    if (entidade.encontroAcontecendo || entidade.ticksParadoNaLuta > 0) {
+        return;
+    }
+    const bool acampado = horaDoDia >= regras.horaDeAcampar || horaDoDia < regras.horaDeRetomar;
+    entidade.vidaEmPorcento = std::min(100, entidade.vidaEmPorcento + (acampado ? 2 : 1));
+}
+
+std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoEncontro escolha, const RegrasDaViagem& regras, const RegrasDoCombate& combate,
                                         SorteioComSemente& sorteio, bool* venceuALuta)
 {
     const int bandidos = entidade.encontroMarcado.bandidos;
@@ -274,16 +296,21 @@ std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoE
         }
     }
     if (escolha == EscolhaNoEncontro::Lutar) {
-        const int forcaDoNossoGrupo = forcaDoGrupo(entidade, regras);
+        // Fase D1 (Combate, 4.8): o cálculo rápido no lugar da força simples.
         entidade.ticksParadoNaLuta = regras.lutaRapidaDuraTicks;
-        if (resolverPorCalculoRapidoDeForcas(forcaDoNossoGrupo, forcaDoBando(bandidos, regras), sorteio.sortearNumeroInteiroEntre(0, 999))) {
-            linha += "Viagem: o grupo venceu a luta contra " + std::to_string(bandidos) + " bandidos.";
+        const ResultadoDoCalculoRapido luta = resolverPorCalculoRapido(combate, ladoDoGrupo(combate, entidade), ladoDoKit(combate, "bandido", bandidos),
+                                                                       sorteio.sortearNumeroInteiroEntre(0, 999));
+        if (luta.venceuOLadoA) {
+            entidade.vidaEmPorcento = std::max(1, entidade.vidaEmPorcento - luta.perdaDeVidaDoVencedorEmPorcento);
+            linha += "Viagem: o grupo venceu a luta contra " + std::to_string(bandidos) + " bandidos (Vida " + std::to_string(entidade.vidaEmPorcento) + "%).";
             if (venceuALuta != nullptr) {
                 *venceuALuta = true;
             }
         } else {
-            aplicarAPerdaDoGrupo(entidade, regras.perdaAoPerderALutaEmPorcento);
-            linha += "Viagem: o grupo perdeu a luta e " + std::to_string(regras.perdaAoPerderALutaEmPorcento) + "% do que levava.";
+            // 4.7: o grupo todo Inconsciente perde 75% para os bandidos e acorda no lugar, com 10% (Cura).
+            aplicarAPerdaDoGrupo(entidade, combate.perdaDoGrupoDerrotadoEmPorcento);
+            entidade.vidaEmPorcento = 10;
+            linha += "Viagem: o grupo perdeu a luta e " + std::to_string(combate.perdaDoGrupoDerrotadoEmPorcento) + "% do que levava.";
         }
     }
     if (escolha == EscolhaNoEncontro::Render) {

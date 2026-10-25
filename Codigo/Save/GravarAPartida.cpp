@@ -317,7 +317,8 @@ json escreverAEntidade(const DadosDoJogo& dados, const EntidadeEmTransito& entid
                 {"encontroAcontecendo", entidade.encontroAcontecendo},
                 {"ticksParadoNaLuta", entidade.ticksParadoNaLuta},
                 {"itens", itens},
-                {"dinheiro", entidade.dinheiroEmDecimos}};
+                {"dinheiro", entidade.dinheiroEmDecimos},
+                {"vida", entidade.vidaEmPorcento}};
 }
 
 json escreverOsItens(const DadosDoJogo& dados, const std::vector<int>& quantidadePorItem)

@@ -28,6 +28,7 @@
 #include "Cultura/Cultura.h"
 #include "Crime/Crime.h"
 #include "Religiao/Religiao.h"
+#include "Combate/Combate.h"
 
 struct DadosDoJogo {
     TabelaDeTextos tabelaDeTextos;
@@ -51,6 +52,7 @@ struct DadosDoJogo {
     CatalogoDasCulturas culturas;                   // fase C2
     RegrasDoCrime regrasDoCrime;                    // fase C3
     RegrasDaReligiao regrasDaReligiao;              // fase C4
+    RegrasDoCombate regrasDoCombate;                // fase D1
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }

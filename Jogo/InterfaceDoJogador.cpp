@@ -1440,9 +1440,10 @@ void InterfaceDoJogador::desenharOEncontro(SimulacaoDaVila& simulacao, float lar
     };
     // Fase C3 (Crime, 4.7): com os Caçadores, só lutar ou ser preso.
     if (grupo.encontroMarcado.tipo == TipoDeEncontro::Cacadores) {
-        const int forca = forcaDoGrupo(grupo, regras);
-        ImGui::Text("Caçadores de Recompensa cercam o grupo (força %d contra %d).", bandidos, forca);
-        if (ImGui::Button(("Lutar (" + std::to_string(forca * 100 / std::max(1, forca + bandidos)) + "% de vencer; perder é a prisão)").c_str())) {
+        const RegrasDoCombate& combate = simulacao.dados.regrasDoCombate;
+        const int chance = resolverPorCalculoRapido(combate, ladoDoGrupo(combate, grupo), ladoDoKit(combate, "guarda", std::max(1, bandidos / 3)), 0).chanceDoLadoAEmPorMil / 10;
+        ImGui::Text("%d Caçadores de Recompensa cercam o grupo (Vida do grupo: %d%%).", std::max(1, bandidos / 3), grupo.vidaEmPorcento);
+        if (ImGui::Button(("Lutar (" + std::to_string(chance) + "% de vencer; perder é a prisão)").c_str())) {
             escolher(EscolhaNoEncontro::Lutar);
         }
         if (ImGui::Button("Render-se (prisão)")) {
@@ -1451,7 +1452,7 @@ void InterfaceDoJogador::desenharOEncontro(SimulacaoDaVila& simulacao, float lar
         ImGui::End();
         return;
     }
-    ImGui::Text("Um bando de %d bandidos cerca o grupo (força %d contra %d).", bandidos, forcaDoBando(bandidos, regras), forcaDoGrupo(grupo, regras));
+    ImGui::Text("Um bando de %d bandidos cerca o grupo (Vida do grupo: %d%%).", bandidos, grupo.vidaEmPorcento);
     const int64_t suborno = precoDoSubornoEmDecimos(bandidos, regras.carismaDoJogadorAteOsAtributos, regras);
     if (grupo.dinheiroEmDecimos >= suborno) {  // só aparece se o grupo tiver o dinheiro
         if (ImGui::Button(("Subornar (" + dinheiro(suborno) + " moedas)").c_str())) {
@@ -1461,8 +1462,9 @@ void InterfaceDoJogador::desenharOEncontro(SimulacaoDaVila& simulacao, float lar
     if (ImGui::Button(("Fugir (" + std::to_string(chanceDeFugirEmPorcento(grupo, bandidos, regras)) + "%; se falhar, luta)").c_str())) {
         escolher(EscolhaNoEncontro::Fugir);
     }
-    const int forca = forcaDoGrupo(grupo, regras);
-    const int chanceDeVencer = forca * 100 / std::max(1, forca + forcaDoBando(bandidos, regras));
+    // Fase D1 (Combate, 4.8): a chance pelo cálculo rápido.
+    const RegrasDoCombate& combate = simulacao.dados.regrasDoCombate;
+    const int chanceDeVencer = resolverPorCalculoRapido(combate, ladoDoGrupo(combate, grupo), ladoDoKit(combate, "bandido", bandidos), 0).chanceDoLadoAEmPorMil / 10;
     if (ImGui::Button(("Lutar (" + std::to_string(chanceDeVencer) + "% de vencer; perder tira " + std::to_string(regras.perdaAoPerderALutaEmPorcento) + "%)").c_str())) {
         escolher(EscolhaNoEncontro::Lutar);
     }
