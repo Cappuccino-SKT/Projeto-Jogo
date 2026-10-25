@@ -1,5 +1,7 @@
 #include "Vila/SimulacaoDaVila.h"
 
+#include "Cultura/Cultura.h"
+
 #include <algorithm>
 
 #include "Desempenho/MedicaoDoDesempenho.h"
@@ -54,6 +56,13 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     for (const CidadeDoMundo* cidade : cidades) {
         outrasCidades.push_back(std::make_unique<SimulacaoDaVila>(dados, regrasDoTempo, *cidade, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida)));
     }
+    // Fase C2 (Cultura, CT1-3): os NPCs da vila inicial têm a cultura da região dela.
+    for (const entt::entity npc : npcsDaVila) {
+        IdentidadeDoNpc& identidade = registroDasEntidades.get<IdentidadeDoNpc>(npc);
+        if (identidade.cultura.empty()) {
+            identidade.cultura = culturaBaseDaCidade(dados, numeroDoMapaNoMundo());
+        }
+    }
     // Fase C1: as facções (as leis, o Banco da Facção e o líder).
     montarAsFaccoesDaPartidaNova(*this, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     // Fase B5: a pesquisa do mundo (os marcos sorteados uma vez) e as travas de cada cidade.
@@ -96,7 +105,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     for (std::size_t numero = 0; numero < vila.npcsIniciais.size(); ++numero) {
         const NpcDaVilaInicial& npcInicial = vila.npcsIniciais[numero];
         const entt::entity npc = criarNpcNoTile(registroDasEntidades, PosicaoDeTile{0, 0});
-        registroDasEntidades.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{npcInicial.nome, npcInicial.classe, static_cast<int>(numero)});
+        registroDasEntidades.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{npcInicial.nome, npcInicial.classe, static_cast<int>(numero), npcInicial.cultura});
         registroDasEntidades.emplace<CasaETrabalhoDoNpc>(npc, CasaETrabalhoDoNpc{npcInicial.indiceDaCasa, npcInicial.indiceDoTrabalho});
         DecisaoDoNpc decisao;
         decisao.indiceDaConstrucaoOndeEsta = npcInicial.indiceDaCasa;
@@ -159,6 +168,9 @@ ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
     contexto.impostoDaCidadeEmPorcento = impostoDaCidadeEmPorcento;
     contexto.felicidadeDaFaccaoEmPontos = felicidadeDaFaccaoEmPontos;
     contexto.itensProibidos = itensProibidos.empty() ? nullptr : &itensProibidos;
+    contexto.fatorLeisECulturaEmDecimos = fatorLeisECulturaEmDecimos;
+    contexto.numeroDoMapaNoMundo = numeroDoMapaNoMundo();
+    contexto.lodDoMapa = lodDoMapa;
     return contexto;
 }
 

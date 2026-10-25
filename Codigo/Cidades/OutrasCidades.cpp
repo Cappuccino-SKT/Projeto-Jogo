@@ -1,5 +1,7 @@
 #include "Cidades/OutrasCidades.h"
 
+#include "Cultura/Cultura.h"
+
 #include <algorithm>
 
 #include <nlohmann/json.hpp>
@@ -194,6 +196,10 @@ VilaDoJogo gerarAVilaDaCidade(const CidadeDoMundo& cidade, const DadosDoJogo& da
         npc.idade = sorteio.sortearNumeroInteiroEntre(5, 19);
         npc.habilidadeBracal = sorteio.sortearNumeroInteiroEntre(populacao.habilidadeDoMigranteMinima, populacao.habilidadeDoMigranteMaxima);
         npc.habilidadeManufaturado = sorteio.sortearNumeroInteiroEntre(populacao.habilidadeDoMigranteMinima, populacao.habilidadeDoMigranteMaxima);
+        // Fase C2 (Cultura, 4.1 e 4.4): a cultura base da cidade e os pontos de habilidade dela.
+        npc.cultura = culturaBaseDaCidade(dados, cidade.numeroDoMapa);
+        npc.habilidadeBracal = habilidadeComACultura(dados, npc.cultura, "bracal", npc.habilidadeBracal);
+        npc.habilidadeManufaturado = habilidadeComACultura(dados, npc.cultura, "manufaturado", npc.habilidadeManufaturado);
         vila.npcsIniciais.push_back(npc);
     }
 

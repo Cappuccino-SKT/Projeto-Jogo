@@ -136,6 +136,11 @@ struct ContextoDaProducao {
     int impostoDaCidadeEmPorcento = -1;
     int felicidadeDaFaccaoEmPontos = 0;
     const std::vector<bool>* itensProibidos = nullptr;
+    // Fase C2 (Cultura): o fator Leis × cultura, o mapa da cidade e o LOD (os pontos de habilidade
+    // da cultura só nas outras cidades: a vila do teste de 1 ano não muda).
+    int fatorLeisECulturaEmDecimos = 0;
+    int numeroDoMapaNoMundo = 0;
+    int lodDoMapa = 0;
 };
 
 // ---------------------------------------------------------------------------

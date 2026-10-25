@@ -987,7 +987,8 @@ void InterfaceDoJogador::desenharAsFaccoes(const SimulacaoDaVila& simulacao, flo
         ImGui::End();
         return;
     }
-    ImGui::TextWrapped("A sua vila é livre: não tem facção, paga 20%% de imposto e recebe a verba de fora.");
+    ImGui::TextWrapped("A sua vila é livre: não tem facção, paga 20%% de imposto e recebe a verba de fora. Os moradores são da cultura %s, a da região.",
+                       nomeDoDonoDaReputacao(dados.regrasDaReputacao, culturaBaseDaCidade(dados, dados.mundo.mapaDaVila)).c_str());
     if (ImGui::BeginTable("##faccoes", 2 + static_cast<int>(catalogo.leis.size()), ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_ScrollX)) {
         ImGui::TableSetupColumn("Facção");
         ImGui::TableSetupColumn("Banco");

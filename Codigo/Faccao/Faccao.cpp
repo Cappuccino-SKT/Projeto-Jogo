@@ -6,6 +6,7 @@
 #include <nlohmann/json.hpp>
 
 #include "Comercio/Comercio.h"
+#include "Cultura/Cultura.h"
 #include "Dados/DadosDoJogo.h"
 #include "Dados/ProblemasDosDados.h"
 #include "Noticias/Noticias.h"
@@ -355,6 +356,7 @@ void atualizarAsCidadesPelasLeis(SimulacaoDaVila& vila)
             && vila.faccoes.perdeuAVotacaoAte[static_cast<std::size_t>(mapa - 1)] >= hoje;
         cidade->felicidadeDaFaccaoEmPontos = felicidadeDaLeiDoImposto(vila, mapa) + (perdeu ? dados.faccoes.felicidadeDeQuemPerdeuAVotacao : 0);
         cidade->tarifaDasFaccoesEmPorcento = tarifas;
+        cidade->fatorLeisECulturaEmDecimos = fatorLeisECulturaDaCidadeEmDecimos(vila, *cidade);  // fase C2
         cidade->itensProibidos.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), false);
         for (int item = 0; item < dados.catalogoDeItens.quantidadeDeItens(); ++item) {
             cidade->itensProibidos[static_cast<std::size_t>(item)] = itemEhProibidoNaFaccao(dados, faccao, item);

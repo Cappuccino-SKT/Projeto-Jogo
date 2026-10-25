@@ -195,7 +195,8 @@ json escreverAFelicidade(const FelicidadeDaClasse& felicidade)
                 {"consumoAtendido", felicidade.fatoresDoDia.consumoAtendido},
                 {"desempregoERenda", felicidade.fatoresDoDia.desempregoERenda},
                 {"moradia", felicidade.fatoresDoDia.moradia},
-                {"eventosDuradouros", felicidade.fatoresDoDia.eventosDuradouros}};
+                {"eventosDuradouros", felicidade.fatoresDoDia.eventosDuradouros},
+                {"leisECultura", felicidade.fatoresDoDia.leisECultura}};
 }
 
 json escreverOsEventos(const SimulacaoDaVila& simulacao)
@@ -239,6 +240,7 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
         json registroDoNpc = json{{"entidade", static_cast<uint32_t>(entt::to_integral(npc))},
                                   {"nome", identidade.nome},
                                   {"classe", identidade.classe},
+                                  {"cultura", identidade.cultura},
                                   {"numero", identidade.numeroDoNpc},
                                   {"casa", casaETrabalho.indiceDaCasa},
                                   {"trabalho", casaETrabalho.indiceDoTrabalho},

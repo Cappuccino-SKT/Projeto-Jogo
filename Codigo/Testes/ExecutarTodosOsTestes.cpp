@@ -31,6 +31,7 @@ void testarNoticias();
 void testarReputacao();
 void testarTecnologia();
 void testarFaccao();
+void testarCultura();
 
 int main()
 {
@@ -59,6 +60,7 @@ int main()
     testarReputacao();
     testarTecnologia();
     testarFaccao();
+    testarCultura();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {

@@ -27,7 +27,8 @@ int chanceDeMorrerDeVelhice(int idade, bool invernoRigoroso, const RegrasDaPopul
 
 // Regra 4.5: cria um NPC Civil na casa com mais camas livres. Sem cama, não
 // cria e devolve entt::null.
-entt::entity criarNpcNaVila(ContextoDaProducao& contexto, int idade, int habilidadeBracal, int habilidadeManufaturado);
+// Fase C2: o nascido tem a cultura base da cidade; o migrante, a da região (75%) ou a de uma vizinha.
+entt::entity criarNpcNaVila(ContextoDaProducao& contexto, int idade, int habilidadeBracal, int habilidadeManufaturado, bool ehMigrante = false);
 
 // Regra 4.6: tira o NPC da vila (a vaga e a cama ficam livres; o número não volta).
 void tirarNpcDaVila(ContextoDaProducao& contexto, entt::entity npc);

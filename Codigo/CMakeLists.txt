@@ -37,6 +37,7 @@ add_library(regras_do_jogo STATIC
     Reputacao/Reputacao.cpp
     Tecnologia/Tecnologia.cpp
     Faccao/Faccao.cpp
+    Cultura/Cultura.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

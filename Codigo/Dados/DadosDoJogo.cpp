@@ -123,6 +123,7 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     const auto textoDasCulturas = lerArquivoInteiro(pastaDosDados, "culturas.json", problemas);
     if (textoDasFaccoes && textoDasCulturas) {
         dados.faccoes = lerArquivosDasFaccoes(*textoDasFaccoes, *textoDasCulturas, problemas);
+        dados.culturas = lerArquivoDasCulturas(*textoDasCulturas, dados.faccoes, problemas);  // fase C2
     }
     return dados;
 }

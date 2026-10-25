@@ -29,6 +29,9 @@ FatoresDaFelicidade calcularFatoresDaFelicidade(const SituacaoDoDiaParaAFelicida
 
     // 4. Eventos duradouros, presos entre −20 e +20.
     fatores.eventosDuradouros = std::clamp(10 * situacao.felicidadeDosEventosEmPontos, 10 * regras.eventosMinimo, 10 * regras.eventosMaximo);
+
+    // 5. Leis × cultura (fase C2), de −30 a +10.
+    fatores.leisECultura = std::clamp(situacao.fatorLeisECulturaEmDecimos, -300, 100);
     return fatores;
 }
 

@@ -573,6 +573,7 @@ void restaurarAFelicidade(FelicidadeDaClasse& felicidade, const json& linha)
     felicidade.fatoresDoDia.desempregoERenda = linha.at("desempregoERenda").get<int>();
     felicidade.fatoresDoDia.moradia = linha.at("moradia").get<int>();
     felicidade.fatoresDoDia.eventosDuradouros = linha.at("eventosDuradouros").get<int>();
+    felicidade.fatoresDoDia.leisECultura = linha.at("leisECultura").get<int>();
 }
 
 void restaurarOsEventos(SimulacaoDaVila& simulacao, const json& eventos)
@@ -629,7 +630,7 @@ void restaurarOsNpcs(SimulacaoDaVila& simulacao, const json& lista)
             throw RecusaDoSave("O save tem dois NPCs com o mesmo número.");
         }
         registro.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{linha.at("nome").get<std::string>(), linha.at("classe").get<std::string>(),
-                                                                 linha.at("numero").get<int>()});
+                                                                 linha.at("numero").get<int>(), linha.at("cultura").get<std::string>()});
         CasaETrabalhoDoNpc casaETrabalho{linha.at("casa").get<int>(), linha.at("trabalho").get<int>(), linha.at("saiuPorAtrasoDe").get<int>()};
         conferirOIndiceDaConstrucao(casaETrabalho.indiceDaCasa, quantidadeDeConstrucoes, "casa");
         conferirOIndiceDaConstrucao(casaETrabalho.indiceDoTrabalho, quantidadeDeConstrucoes, "trabalho");

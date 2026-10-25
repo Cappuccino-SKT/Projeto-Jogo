@@ -428,6 +428,7 @@ void rodarAFelicidadeDoDia(ContextoDaProducao& contexto)
         situacao.civisSemCasa += identidade.classe == "civil" && casaETrabalho.indiceDaCasa < 0 ? 1 : 0;
     }
     situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto) + contexto.felicidadeDaFaccaoEmPontos;
+    situacao.fatorLeisECulturaEmDecimos = contexto.fatorLeisECulturaEmDecimos;
     situacao.pontosDoClimaNoConsumo = pontosDoClimaNoConsumoAtendido(contexto);
 
     FelicidadeDaClasse& felicidade = contexto.felicidade;

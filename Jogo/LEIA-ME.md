@@ -650,3 +650,16 @@ O que entrou ([[Ficha Logica/Faccao|ficha da Facção]]; os ajustes estão na pa
 
 **Verificado pelo assistente:** os testes passam (541 conferências); as 10 sementes passam com o relatório da vila igual ao do B5; nenhuma cidade com fome e o dinheiro do mundo conservado (a cunhagem conta como dinheiro de fora); os Bancos das facções terminam o ano entre 8.000 e 8.600 moedas; o comércio caiu um pouco com as tarifas (de 3 a 13 viagens por ano); salvar e carregar no dia 30 dá o mesmo relatório.
 
+### Marco C2: a cultura (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Cultura|ficha da Cultura]]; os ajustes estão na parte 10.7 dela):
+
+- **As 6 culturas** completas no `data/culturas.json` (alguns números são provisórios, para revisar).
+- **A cultura de cada NPC:** a da cidade no começo e no nascimento; o migrante vem da região (75%) ou de uma região vizinha (25%). A vila do jogador é da cultura da região (Autoritária).
+- **O 5º fator da Felicidade, Leis × cultura** (de −30 a +10), com o extremo e as minorias hostis. No começo, é 0 em todas as cidades.
+- **Os pontos de habilidade** da cultura nos NPCs das outras cidades.
+- **Na tela:** a janela **Facções** diz a cultura dos moradores da vila.
+- **Save versão 11** (a cultura de cada NPC).
+
+**Verificado pelo assistente:** os testes passam (551 conferências); as 10 sementes passam com o relatório da vila igual ao do C1; nenhuma cidade com fome e o dinheiro do mundo conservado; o comércio fica entre 4 e 11 viagens por ano; salvar e carregar no dia 30 dá o mesmo relatório.
+

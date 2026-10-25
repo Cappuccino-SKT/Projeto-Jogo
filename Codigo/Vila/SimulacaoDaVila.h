@@ -133,6 +133,8 @@ public:
     int felicidadeDaFaccaoEmPontos = 0;
     std::vector<int> tarifaDasFaccoesEmPorcento;
     std::vector<bool> itensProibidos;
+    // Fase C2 (Cultura): o 5º fator da Felicidade, em décimos (calculado com as leis, todo dia).
+    int fatorLeisECulturaEmDecimos = 0;
     // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
     int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
     // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).

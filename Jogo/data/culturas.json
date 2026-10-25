@@ -1,6 +1,7 @@
 [
   {
     "id": "cultura.guerreira",
+    "regiao": 1,
     "leis_desejadas": {
       "imposto": {
         "valor": "baixo",
@@ -8,7 +9,7 @@
       },
       "magia": {
         "valor": "restrita",
-        "peso": 3
+        "peso": 2
       },
       "escravidao": {
         "valor": "so_prisioneiros",
@@ -24,16 +25,30 @@
       },
       "tolerancia_religiosa": {
         "valor": "tolerancia",
-        "peso": 2
+        "peso": 1
       },
       "livro_sagrado_obrigatorio": {
         "valor": "nao",
         "peso": 1
       }
-    }
+    },
+    "afinidades": {
+      "arcana": "neutra",
+      "autoritaria": "hostil",
+      "religiosa": "neutra",
+      "tecnocrata": "neutra",
+      "escravista": "afim"
+    },
+    "habilidades_em_pontos": {
+      "bracal": 10,
+      "manufaturado": -5
+    },
+    "rito_de_admissao": "combate",
+    "sucessao": "duelo"
   },
   {
     "id": "cultura.arcana",
+    "regiao": 2,
     "leis_desejadas": {
       "imposto": {
         "valor": "normal",
@@ -45,15 +60,15 @@
       },
       "escravidao": {
         "valor": "proibida",
-        "peso": 3
+        "peso": 2
       },
       "poder_do_lider": {
         "valor": "moderado",
-        "peso": 3
+        "peso": 2
       },
       "sistema_de_votacao": {
         "valor": "conselho",
-        "peso": 2
+        "peso": 3
       },
       "tolerancia_religiosa": {
         "valor": "fe_oficial",
@@ -63,10 +78,28 @@
         "valor": "nao",
         "peso": 1
       }
-    }
+    },
+    "extremo": {
+      "lei": "magia",
+      "valor": "so_magos_governam"
+    },
+    "afinidades": {
+      "guerreira": "neutra",
+      "autoritaria": "neutra",
+      "religiosa": "hostil",
+      "tecnocrata": "hostil",
+      "escravista": "neutra"
+    },
+    "habilidades_em_pontos": {
+      "especialista": 10,
+      "bracal": -5
+    },
+    "rito_de_admissao": "teste_de_magia",
+    "sucessao": "merito"
   },
   {
     "id": "cultura.autoritaria",
+    "regiao": 3,
     "leis_desejadas": {
       "imposto": {
         "valor": "normal",
@@ -74,7 +107,7 @@
       },
       "magia": {
         "valor": "restrita",
-        "peso": 3
+        "peso": 2
       },
       "escravidao": {
         "valor": "como_pena",
@@ -86,7 +119,7 @@
       },
       "sistema_de_votacao": {
         "valor": "conselho",
-        "peso": 2
+        "peso": 3
       },
       "tolerancia_religiosa": {
         "valor": "fe_oficial",
@@ -96,10 +129,27 @@
         "valor": "nao",
         "peso": 1
       }
-    }
+    },
+    "extremo": {
+      "lei": "poder_do_lider",
+      "valor": "pedir_lei_e_crime"
+    },
+    "afinidades": {
+      "guerreira": "hostil",
+      "arcana": "neutra",
+      "religiosa": "neutra",
+      "tecnocrata": "afim",
+      "escravista": "afim"
+    },
+    "habilidades_em_pontos": {
+      "manufaturado": 5
+    },
+    "rito_de_admissao": "juramento",
+    "sucessao": "hereditaria"
   },
   {
     "id": "cultura.religiosa",
+    "regiao": 4,
     "leis_desejadas": {
       "imposto": {
         "valor": "normal",
@@ -111,28 +161,45 @@
       },
       "escravidao": {
         "valor": "proibida",
-        "peso": 3
+        "peso": 2
       },
       "poder_do_lider": {
         "valor": "moderado",
-        "peso": 3
+        "peso": 2
       },
       "sistema_de_votacao": {
         "valor": "dois_tercos",
-        "peso": 2
+        "peso": 1
       },
       "tolerancia_religiosa": {
         "valor": "perseguicao",
-        "peso": 4
+        "peso": 3
       },
       "livro_sagrado_obrigatorio": {
         "valor": "sim",
-        "peso": 1
+        "peso": 4
       }
-    }
+    },
+    "extremo": {
+      "lei": "tolerancia_religiosa",
+      "valor": "heresia_e_crime_capital"
+    },
+    "afinidades": {
+      "guerreira": "neutra",
+      "arcana": "hostil",
+      "autoritaria": "neutra",
+      "tecnocrata": "neutra",
+      "escravista": "hostil"
+    },
+    "habilidades_em_pontos": {
+      "manufaturado": 5
+    },
+    "rito_de_admissao": "batismo",
+    "sucessao": "eleicao_do_clero"
   },
   {
     "id": "cultura.tecnocrata",
+    "regiao": 5,
     "leis_desejadas": {
       "imposto": {
         "valor": "normal",
@@ -141,10 +208,6 @@
       "magia": {
         "valor": "proibida",
         "peso": 4
-      },
-      "escravidao": {
-        "valor": "proibida",
-        "peso": 3
       },
       "poder_do_lider": {
         "valor": "fraco",
@@ -156,16 +219,30 @@
       },
       "tolerancia_religiosa": {
         "valor": "tolerancia",
-        "peso": 2
-      },
-      "livro_sagrado_obrigatorio": {
-        "valor": "nao",
         "peso": 1
       }
-    }
+    },
+    "extremo": {
+      "lei": "magia",
+      "valor": "magos_banidos"
+    },
+    "afinidades": {
+      "guerreira": "neutra",
+      "arcana": "hostil",
+      "autoritaria": "afim",
+      "religiosa": "neutra",
+      "escravista": "neutra"
+    },
+    "habilidades_em_pontos": {
+      "especialista": 10,
+      "bracal": -5
+    },
+    "rito_de_admissao": "servico",
+    "sucessao": "merito"
   },
   {
     "id": "cultura.escravista",
+    "regiao": 6,
     "leis_desejadas": {
       "imposto": {
         "valor": "alto",
@@ -173,7 +250,7 @@
       },
       "magia": {
         "valor": "livre",
-        "peso": 3
+        "peso": 1
       },
       "escravidao": {
         "valor": "ampla",
@@ -181,7 +258,7 @@
       },
       "poder_do_lider": {
         "valor": "fraco",
-        "peso": 3
+        "peso": 2
       },
       "sistema_de_votacao": {
         "valor": "por_nivel",
@@ -189,12 +266,28 @@
       },
       "tolerancia_religiosa": {
         "valor": "tolerancia",
-        "peso": 2
+        "peso": 1
       },
       "livro_sagrado_obrigatorio": {
         "valor": "nao",
         "peso": 1
       }
-    }
+    },
+    "extremo": {
+      "lei": "escravidao",
+      "valor": "qualquer_um_e_propriedade"
+    },
+    "afinidades": {
+      "guerreira": "afim",
+      "arcana": "neutra",
+      "autoritaria": "afim",
+      "religiosa": "hostil",
+      "tecnocrata": "neutra"
+    },
+    "habilidades_em_pontos": {
+      "bracal": 5
+    },
+    "rito_de_admissao": "compra",
+    "sucessao": "hereditaria"
   }
 ]

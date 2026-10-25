@@ -37,6 +37,7 @@ struct ConstrucaoDaVila {
 struct NpcDaVilaInicial {
     std::string nome;
     std::string classe;        // "civil" na fatia
+    std::string cultura;       // fase C2: a cultura base da cidade (vazio na vila inicial: a da região)
     int indiceDaCasa = -1;     // posição na lista de construções
     int indiceDoTrabalho = -1; // -1 = desempregado
     // As habilidades, de 0 a 100 (FL6-6: 50 para todos na fatia).

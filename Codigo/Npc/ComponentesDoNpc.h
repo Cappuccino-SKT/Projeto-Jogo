@@ -65,6 +65,7 @@ struct IdentidadeDoNpc {
     std::string nome;
     std::string classe;   // "civil" na fatia
     int numeroDoNpc = 0;  // a posição na vila inicial: decide o turno da reavaliação e o dia de compra
+    std::string cultura;  // fase C2 (Cultura): "arcana"
 };
 
 struct CasaETrabalhoDoNpc {
