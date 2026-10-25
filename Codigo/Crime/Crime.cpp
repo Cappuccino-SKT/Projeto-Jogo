@@ -506,7 +506,7 @@ std::string resolverOsCacadores(SimulacaoDaVila& vila, EscolhaNoEncontro escolha
         // Fase D1 (Combate, 4.8): os Caçadores com o kit de guarda, um a cada 3 de força.
         const RegrasDoCombate& combate = vila.dados.regrasDoCombate;
         const ResultadoDoCalculoRapido luta = resolverPorCalculoRapido(combate, ladoDoGrupo(combate, grupo), ladoDoKit(combate, "guarda", std::max(1, forca / 3)),
-                                                                       vila.sorteioDasCaravanas().sortearNumeroInteiroEntre(0, 999));
+                                                                       vila.sorteioDasCaravanas().proximoNumero());
         if (luta.venceuOLadoA) {
             grupo.vidaEmPorcento = std::max(1, grupo.vidaEmPorcento - luta.perdaDeVidaDoVencedorEmPorcento);
             linhas.push_back("Viagem: o grupo venceu os Caçadores de Recompensa.");

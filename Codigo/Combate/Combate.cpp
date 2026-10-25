@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 
 #include "Dados/ProblemasDosDados.h"
+#include "Tempo/SorteioComSemente.h"
 
 using Json = nlohmann::json;
 
@@ -256,21 +257,39 @@ int64_t poderDoLado(const RegrasDoCombate& regras, const std::vector<Combatente>
 }
 
 ResultadoDoCalculoRapido resolverPorCalculoRapido(const RegrasDoCombate& regras, const std::vector<Combatente>& ladoA, const std::vector<Combatente>& ladoB,
-                                                  int numeroDe0A999)
+                                                  uint32_t sementeDaLuta)
 {
     ResultadoDoCalculoRapido resultado;
-    const int64_t poderA = poderDoLado(regras, ladoA, ladoB);
-    const int64_t poderB = poderDoLado(regras, ladoB, ladoA);
-    if (poderA + poderB <= 0) {
+    if (ladoA.empty() || ladoB.empty()) {
         resultado.venceuOLadoA = !ladoA.empty();
         return resultado;
     }
-    resultado.chanceDoLadoAEmPorMil = static_cast<int>(poderA * 1000 / (poderA + poderB));
-    resultado.venceuOLadoA = numeroDe0A999 < resultado.chanceDoLadoAEmPorMil;
-    const int64_t vencedor = resultado.venceuOLadoA ? poderA : poderB;
-    const int64_t perdedor = resultado.venceuOLadoA ? poderB : poderA;
-    resultado.perdaDeVidaDoVencedorEmPorcento = vencedor > 0 ? static_cast<int>(std::min<int64_t>(regras.vidaMaximaPerdidaPeloVencedorEmPorcento, 100 * perdedor / vencedor)) : 0;
+    SorteioComSemente sorteio(sementeDaLuta, 1);
+    const auto sortear = [&](int minimo, int maximo) { return sorteio.sortearNumeroInteiroEntre(minimo, maximo); };
+    const ResultadoDoDuelo duelo = simularOCombate(regras, ladoA, ladoB, true, sortear);
+    resultado.venceuOLadoA = duelo.venceuOLadoA;
+    // A perda do vencedor: a Vida que o lado tinha menos a que sobrou, em % da Vida máxima de cada membro.
+    const std::vector<Combatente>& antes = duelo.venceuOLadoA ? ladoA : ladoB;
+    const std::vector<int>& depois = duelo.venceuOLadoA ? duelo.vidaDoLadoA : duelo.vidaDoLadoB;
+    int64_t vidaPerdida = 0;
+    for (std::size_t posicao = 0; posicao < antes.size(); ++posicao) {
+        vidaPerdida += antes[posicao].vida - depois[posicao];
+    }
+    const int64_t perdaEmPorcento = vidaPerdida * 100 / (static_cast<int64_t>(regras.vidaMaxima) * static_cast<int64_t>(antes.size()));
+    resultado.perdaDeVidaDoVencedorEmPorcento = static_cast<int>(std::clamp<int64_t>(perdaEmPorcento, 0, regras.vidaMaximaPerdidaPeloVencedorEmPorcento));
     return resultado;
+}
+
+int chanceDeVencerEmPorMil(const RegrasDoCombate& regras, const std::vector<Combatente>& ladoA, const std::vector<Combatente>& ladoB, int lutas)
+{
+    if (lutas <= 0) {
+        return 0;
+    }
+    int vitorias = 0;
+    for (int luta = 0; luta < lutas; ++luta) {
+        vitorias += resolverPorCalculoRapido(regras, ladoA, ladoB, static_cast<uint32_t>(luta)).venceuOLadoA ? 1 : 0;
+    }
+    return vitorias * 1000 / lutas;
 }
 
 ResultadoDoDuelo simularOCombate(const RegrasDoCombate& regras, std::vector<Combatente> ladoA, std::vector<Combatente> ladoB, bool comMedo,

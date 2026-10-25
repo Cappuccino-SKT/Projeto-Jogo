@@ -94,12 +94,13 @@ int64_t poderDoLado(const RegrasDoCombate& regras, const std::vector<Combatente>
 
 struct ResultadoDoCalculoRapido {
     bool venceuOLadoA = false;
-    int chanceDoLadoAEmPorMil = 0;
-    int perdaDeVidaDoVencedorEmPorcento = 0;  // passo 4: 100 × poder do perdedor ÷ poder do vencedor, até 90%
+    int perdaDeVidaDoVencedorEmPorcento = 0;  // a Vida média que o lado vencedor perdeu na luta, até 90%
 };
-// Regra 4.8, passos 3 e 4 (CB1-1), com o número já sorteado (de 0 a 999).
+// Regra 4.8 (rodada CB2, opção C): roda o combate simulado, com o Medo, sorteando o dano pela semente da luta.
 ResultadoDoCalculoRapido resolverPorCalculoRapido(const RegrasDoCombate& regras, const std::vector<Combatente>& ladoA, const std::vector<Combatente>& ladoB,
-                                                  int numeroDe0A999);
+                                                  uint32_t sementeDaLuta);
+// A chance de o lado A vencer, em por mil: "lutas" combates simulados com sementes fixas (para mostrar ao jogador).
+int chanceDeVencerEmPorMil(const RegrasDoCombate& regras, const std::vector<Combatente>& ladoA, const std::vector<Combatente>& ladoB, int lutas = 100);
 
 // O combate visto (4.1 a 4.4), sem o mapa: todos no alcance, a tick, até um lado ficar fora (caído,
 // fugido ou rendido). "sortear(min, max)" sorteia o dano; "comMedo" liga a fuga pelo Medo.

@@ -233,7 +233,7 @@ void resolverOEncontroDaCaravana(SimulacaoDaVila& vila, SimulacaoDaVila& casa, C
     const std::vector<Combatente> bando = ladoDoKit(combate, "bandido", encontro.bandidos);
     entidade.ticksParadoNaLuta = regras.lutaRapidaDuraTicks;
     ++vila.estatisticasDoComercio.atacadas;
-    const ResultadoDoCalculoRapido luta = resolverPorCalculoRapido(combate, daCaravana, bando, casa.sorteioDasCaravanas().sortearNumeroInteiroEntre(0, 999));
+    const ResultadoDoCalculoRapido luta = resolverPorCalculoRapido(combate, daCaravana, bando, casa.sorteioDasCaravanas().proximoNumero());
     if (luta.venceuOLadoA) {
         entidade.vidaEmPorcento = std::max(1, entidade.vidaEmPorcento - luta.perdaDeVidaDoVencedorEmPorcento);
         criarANoticiaDoAtaque(vila, casa, caravana, "os guardas venceram");

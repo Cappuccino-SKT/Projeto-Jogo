@@ -52,22 +52,31 @@ void testarAsContas(const RegrasDoCombate& regras)
 
 void testarOCalculoRapido(const RegrasDoCombate& regras)
 {
-    // Teste 3 (parte 10.3): o duelo pelo cálculo rápido: cerca de 78% e 29% de Vida.
+    // Rodada CB2 (opção C): o cálculo rápido roda o combate simulado, então bate com o combate visto.
     const std::vector<Combatente> jogador = ladoDoKit(regras, "jogador", 1);
-    const std::vector<Combatente> bandido = ladoDoKit(regras, "bandido", 1);
-    const ResultadoDoCalculoRapido duelo = resolverPorCalculoRapido(regras, jogador, bandido, 0);
-    conferir(poderDoLado(regras, jogador, bandido) == 62500 && poderDoLado(regras, bandido, jogador) == 18000 && duelo.chanceDoLadoAEmPorMil == 776
-                 && duelo.perdaDeVidaDoVencedorEmPorcento == 28,
-             "o cálculo rápido do duelo: 77,6% e 28% de Vida perdida");
-    // Parte 10.4: sozinho contra 6 bandidos, 8,8%.
-    conferir(resolverPorCalculoRapido(regras, jogador, ladoDoKit(regras, "bandido", 6), 0).chanceDoLadoAEmPorMil == 87, "o jogador sozinho contra 6 bandidos: 8,8%");
-    // Parte 10.5: a caravana (2 guardas e 2 civis) contra 6 bandidos: cerca de 34%.
+    // O poder do lado (4.8, passos 1 e 2) segue para o Medo e para a decisão dos bandidos.
+    conferir(poderDoLado(regras, jogador, ladoDoKit(regras, "bandido", 1)) == 62500 && poderDoLado(regras, ladoDoKit(regras, "bandido", 1), jogador) == 18000,
+             "o poder do duelo: 62.500 e 18.000");
+    const ResultadoDoCalculoRapido duelo = resolverPorCalculoRapido(regras, jogador, ladoDoKit(regras, "bandido", 1), 0);
+    std::printf("    o duelo rápido: venceu %d, perdeu %d%% de Vida\n", duelo.venceuOLadoA ? 1 : 0, duelo.perdaDeVidaDoVencedorEmPorcento);
+    conferir(duelo.venceuOLadoA && duelo.perdaDeVidaDoVencedorEmPorcento >= 10 && duelo.perdaDeVidaDoVencedorEmPorcento <= 45,
+             "o duelo rápido: o jogador vence e perde cerca de 27% de Vida, como no visto");
+    conferir(resolverPorCalculoRapido(regras, jogador, ladoDoKit(regras, "bandido", 1), 0).perdaDeVidaDoVencedorEmPorcento == duelo.perdaDeVidaDoVencedorEmPorcento,
+             "a mesma semente dá a mesma luta");
+    const int contraUm = chanceDeVencerEmPorMil(regras, jogador, ladoDoKit(regras, "bandido", 1));
+    const int contraDois = chanceDeVencerEmPorMil(regras, jogador, ladoDoKit(regras, "bandido", 2));
+    const int contraSeis = chanceDeVencerEmPorMil(regras, jogador, ladoDoKit(regras, "bandido", 6));
+    const int iguais = chanceDeVencerEmPorMil(regras, ladoDoKit(regras, "guarda", 2), ladoDoKit(regras, "guarda", 2), 400);
     std::vector<Combatente> caravana = ladoDoKit(regras, "guarda", 2);
     const std::vector<Combatente> civis = ladoDoKit(regras, "civil", 2);
     caravana.insert(caravana.end(), civis.begin(), civis.end());
-    const int chanceDaCaravana = resolverPorCalculoRapido(regras, caravana, ladoDoKit(regras, "bandido", 6), 0).chanceDoLadoAEmPorMil;
-    std::printf("    a caravana contra 6 bandidos: %d por mil\n", chanceDaCaravana);
-    conferir(chanceDaCaravana >= 320 && chanceDaCaravana <= 360, "a caravana contra 6 bandidos: cerca de 34%");
+    const int daCaravana = chanceDeVencerEmPorMil(regras, caravana, ladoDoKit(regras, "bandido", 6));
+    std::printf("    por mil: contra 1 bandido %d, contra 2 %d, contra 6 %d; 2 guardas contra 2 guardas %d; a caravana contra 6 bandidos %d\n", contraUm, contraDois,
+                contraSeis, iguais, daCaravana);
+    conferir(contraUm >= 950, "o jogador contra 1 bandido: quase sempre vence");
+    conferir(contraDois >= 850, "o jogador contra 2 bandidos: perto dos 97% do combate visto (o rápido antigo dava 46%)");
+    conferir(contraSeis < contraDois, "contra 6 bandidos, a chance cai");
+    conferir(iguais >= 380 && iguais <= 620, "os lados iguais: cerca de metade");
 }
 
 void testarOCombateVisto(const RegrasDoCombate& regras)
@@ -78,21 +87,6 @@ void testarOCombateVisto(const RegrasDoCombate& regras)
     const ResultadoDoDuelo duelo = simularOCombate(regras, ladoDoKit(regras, "jogador", 1), ladoDoKit(regras, "bandido", 1), true, sortear);
     std::printf("    o duelo visto: %d golpes do jogador em %d ticks; Vida %d\n", duelo.golpesDoLadoA, duelo.ticks, duelo.vidaDoLadoA.front());
     conferir(duelo.venceuOLadoA && duelo.golpesDoLadoA >= 5 && duelo.golpesDoLadoA <= 10 && duelo.vidaDoLadoA.front() >= 55, "o duelo visto: o jogador vence com cerca de 73 de Vida");
-    // Teste 4: a coerência com os lados iguais (2 guardas contra 2 guardas, sem o Medo).
-    int vitorias = 0;
-    for (int combate = 0; combate < 1000; ++combate) {
-        vitorias += simularOCombate(regras, ladoDoKit(regras, "guarda", 2), ladoDoKit(regras, "guarda", 2), false, sortear).venceuOLadoA ? 1 : 0;
-    }
-    const int rapido = resolverPorCalculoRapido(regras, ladoDoKit(regras, "guarda", 2), ladoDoKit(regras, "guarda", 2), 0).chanceDoLadoAEmPorMil;
-    std::printf("    2 guardas contra 2 guardas: visto %d por mil, rápido %d por mil\n", vitorias, rapido);
-    conferir(std::abs(vitorias - rapido) <= 100, "a coerência com os lados iguais: o visto e o rápido diferem em até 10 pontos");
-    // Achado (rodada CB2): com os lados diferentes, o rápido pesa demais o grupo maior.
-    int vitoriasContraDois = 0;
-    for (int combate = 0; combate < 1000; ++combate) {
-        vitoriasContraDois += simularOCombate(regras, ladoDoKit(regras, "jogador", 1), ladoDoKit(regras, "bandido", 2), false, sortear).venceuOLadoA ? 1 : 0;
-    }
-    std::printf("    achado: 1 jogador contra 2 bandidos: visto %d por mil, rápido %d por mil\n", vitoriasContraDois,
-                resolverPorCalculoRapido(regras, ladoDoKit(regras, "jogador", 1), ladoDoKit(regras, "bandido", 2), 0).chanceDoLadoAEmPorMil);
 }
 
 }  // namespace

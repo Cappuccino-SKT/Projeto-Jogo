@@ -299,7 +299,7 @@ std::string resolverEncontroComBandidos(EntidadeEmTransito& entidade, EscolhaNoE
         // Fase D1 (Combate, 4.8): o cálculo rápido no lugar da força simples.
         entidade.ticksParadoNaLuta = regras.lutaRapidaDuraTicks;
         const ResultadoDoCalculoRapido luta = resolverPorCalculoRapido(combate, ladoDoGrupo(combate, entidade), ladoDoKit(combate, "bandido", bandidos),
-                                                                       sorteio.sortearNumeroInteiroEntre(0, 999));
+                                                                       sorteio.proximoNumero());
         if (luta.venceuOLadoA) {
             entidade.vidaEmPorcento = std::max(1, entidade.vidaEmPorcento - luta.perdaDeVidaDoVencedorEmPorcento);
             linha += "Viagem: o grupo venceu a luta contra " + std::to_string(bandidos) + " bandidos (Vida " + std::to_string(entidade.vidaEmPorcento) + "%).";

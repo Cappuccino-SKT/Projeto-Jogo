@@ -702,5 +702,7 @@ O que entrou ([[Ficha Logica/Combate|ficha do Combate]]; os ajustes estão na pa
 
 **Verificado pelo assistente:** os testes passam (592 conferências); as 10 sementes passam com o relatório da vila igual ao do C4; o dinheiro do mundo se conserva; salvar e carregar no dia 30 dá o mesmo relatório. As caravanas perdem mais lutas agora (de 0 a 3 por ano). A fome curta do C4 continua em 2 sementes.
 
-**Achado (rodada CB2):** o cálculo rápido só bate com o combate visto quando os lados são parecidos (1 jogador contra 2 bandidos: 97% na luta vista, 46% no cálculo rápido). Ver a [[Rodada Pendente]].
+**Rodada CB2 (opção C, 2026-10-25):** o cálculo rápido agora **roda o combate simulado**, com o Medo (regra 4.8 do [[Ficha Logica/Combate|Combate]]). O botão Lutar mostra a chance de 100 lutas simuladas. Nos testes: 1 jogador contra 2 bandidos vence 97% (antes 46%); contra 6 bandidos, o jogador e a caravana perdem sempre. A rodada HI3-3 deixou a Tecnocrata hostil à Guerreira e à Religiosa (`culturas.json`).
+
+Como testar: `testes_do_codigo` imprime a linha "por mil: contra 1 bandido ..." na parte do Combate.
 

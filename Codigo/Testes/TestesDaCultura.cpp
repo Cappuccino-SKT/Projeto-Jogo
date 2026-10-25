@@ -45,6 +45,8 @@ void testarOFator(const DadosDoJogo& dados)
     conferir(fatorDaCulturaContraAsLeis(dados, arcanas, "tecnocrata") == -30, "o teto: os Tecnocratas nas leis Arcanas ficam em −30");
     conferir(dados.culturas.afinidade("arcana", "religiosa") == AfinidadeEntreCulturas::Hostil && dados.culturas.afinidade("autoritaria", "tecnocrata") == AfinidadeEntreCulturas::Afim,
              "as afinidades do Mundo: Arcana e Religiosa hostis; Autoritária e Tecnocrata afins");
+    conferir(dados.culturas.afinidade("tecnocrata", "guerreira") == AfinidadeEntreCulturas::Hostil && dados.culturas.afinidade("religiosa", "tecnocrata") == AfinidadeEntreCulturas::Hostil,
+             "a rodada HI3-3: a Tecnocrata é hostil à Guerreira e à Religiosa");
 }
 
 void testarOMundo(const DadosDoJogo& dados)

@@ -36,7 +36,7 @@
       "arcana": "neutra",
       "autoritaria": "hostil",
       "religiosa": "neutra",
-      "tecnocrata": "neutra",
+      "tecnocrata": "hostil",
       "escravista": "afim"
     },
     "habilidades_em_pontos": {
@@ -188,7 +188,7 @@
       "guerreira": "neutra",
       "arcana": "hostil",
       "autoritaria": "neutra",
-      "tecnocrata": "neutra",
+      "tecnocrata": "hostil",
       "escravista": "hostil"
     },
     "habilidades_em_pontos": {
@@ -227,10 +227,10 @@
       "valor": "magos_banidos"
     },
     "afinidades": {
-      "guerreira": "neutra",
+      "guerreira": "hostil",
       "arcana": "hostil",
       "autoritaria": "afim",
-      "religiosa": "neutra",
+      "religiosa": "hostil",
       "escravista": "neutra"
     },
     "habilidades_em_pontos": {
