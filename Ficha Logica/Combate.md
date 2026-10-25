@@ -138,12 +138,13 @@ A cada 10 ticks: Medo = (100 − Vida%) × 0,5 + 10 por aliado caído neste comb
 
 ### 4.8 O cálculo rápido (fora da tela)
 
-Para cada lado, com os kits ou o equipamento de verdade:
+**Rodada CB2 (opção C, 2026-10-25):** o cálculo rápido **roda o combate simulado** (o duelo da parte 10.2, sem o mapa, com o Medo). Assim ele bate com o combate visto por construção.
 
-1. **Dano por tick** de um combatente contra o lado oposto = (dano médio da arma × Rank × habilidade ÷ 50 × vantagem contra a armadura **mais comum** do outro lado − a Defesa média do outro lado, mínimo 1) ÷ intervalo.
-2. **Poder do lado** = (soma do dano por tick) × (soma da Vida) (CB1-1).
-3. **Chance de A vencer** = poder A ÷ (poder A + poder B). Sorteio de 0 a 999.
-4. **O vencedor** perde, em cada membro, Vida = 100 × poder do perdedor ÷ poder do vencedor por cento, até 90%. **O perdedor** fica todo Inconsciente (e segue a 4.7).
+1. Cada lado entra com os kits ou o equipamento de verdade, e com a Vida que tem.
+2. **A semente da luta** sai do gerador de quem chama (um número); o dano de cada golpe é sorteado por ela. A mesma semente dá a mesma luta.
+3. **O vencedor** é o lado que fica na luta. Ele perde, em cada membro, a Vida média que o lado perdeu na luta, em %, até 90%. **O perdedor** fica todo Inconsciente (e segue a 4.7).
+4. **A chance mostrada ao jogador** (o botão Lutar) é a de 100 lutas simuladas com as sementes 0 a 99.
+5. **O poder do lado** (dano por tick × Vida, a antiga CB1-1) continua só para o Medo ("inimigo 2 vezes mais forte") e para os bandidos decidirem se atacam.
 
 É o que a Viagem (4.6 e 4.11), o Comércio (caravana × bandidos) e o Crime (Caçadores) usam no lugar da força simples (**muda a VI1-4**).
 
@@ -288,5 +289,5 @@ O jogador vence com **73 de Vida** em 8 golpes. Evolução: 8 acertos × 5 cent�
 4. **O kit "jogador"** (a Espada, 3 peças Leves, habilidade 50, da parte 10.1) entrou no `combate.json`. Os números do Medo e do acerto que eram frações viraram décimos (`..._em_decimos`).
 5. **O soco não tem classe** no arquivo: o civil tira 1,8, não os 2,25 da tabela da parte 5 (que contava a vantagem do corte).
 6. **No duelo simulado, os golpes do mesmo tick valem juntos:** quem cai naquele tick ainda golpeia. Assim nenhum lado ganha por golpear primeiro (com "na ordem do número", o lado A vencia 66% de uma luta igual).
-7. **Achado (rodada CB2):** o cálculo rápido (CB1-1) só bate com o combate visto quando os lados são parecidos. Um jogador contra 2 bandidos vence 97% das lutas vistas, mas 46% no cálculo rápido.
+7. **Rodada CB2 (opção C):** o cálculo rápido roda o combate simulado (regra 4.8). Com isso, o jogador contra 2 bandidos vence 97% (o cálculo antigo dava 46%), e 2 guardas contra 2 guardas, 46%. **Achado:** contra 6 bandidos, o jogador sozinho e a caravana (2 guardas e 2 civis) perdem sempre (antes: 9% e 34%). O bando grande derruba um por um; é o que o combate visto faz. Se as caravanas perderem demais no ano simulado, o ajuste vai para uma rodada.
 
