@@ -1,0 +1,109 @@
+{
+  "fes": {
+    "religiosa": {
+      "devocao": "alta",
+      "culto": "templo"
+    },
+    "autoritaria": {
+      "devocao": "media",
+      "culto": "templo"
+    },
+    "guerreira": {
+      "devocao": "media",
+      "culto": "templo"
+    },
+    "escravista": {
+      "devocao": "baixa",
+      "culto": "templo"
+    },
+    "arcana": {
+      "devocao": "baixa",
+      "culto": "torre_arcana"
+    },
+    "tecnocrata": {
+      "devocao": "nenhuma",
+      "culto": "laboratorio"
+    }
+  },
+  "npcs_por_sacerdote": 20,
+  "felicidade_por_devocao": {
+    "alta": [
+      10,
+      -5,
+      50
+    ],
+    "media": [
+      7
+    ],
+    "baixa": [
+      4
+    ],
+    "nenhuma": [
+      0
+    ]
+  },
+  "oferenda_em_porcento_da_renda": 2,
+  "festival": {
+    "felicidade": 8,
+    "dias_do_bonus": 8,
+    "comida_extra_em_porcento": 50,
+    "producao_no_primeiro_dia_em_porcento": 50,
+    "custo_em_porcento_do_banco": 2,
+    "patrocinio_felicidade_a_mais": 4,
+    "cancelar_na_devocao_alta": -5
+  },
+  "festivais": [
+    {
+      "cultura": "todas",
+      "nome": "Festa da Colheita",
+      "estacao": "outono",
+      "dias": [
+        1,
+        2
+      ]
+    },
+    {
+      "cultura": "religiosa",
+      "nome": "Festa da Cidade Santa",
+      "estacao": "primavera",
+      "dias": [
+        8,
+        9
+      ]
+    },
+    {
+      "cultura": "religiosa",
+      "nome": "Dia santo",
+      "estacao": "verao",
+      "dias": [
+        8
+      ],
+      "metade": true
+    }
+  ],
+  "tolerancia": {
+    "fe_oficial": {
+      "imposto_a_mais_das_minorias_em_porcento": 5,
+      "assimilacao_por_estacao_em_porcento": 2
+    },
+    "tolerancia": {
+      "assimilacao_por_estacao_em_porcento": 1
+    },
+    "perseguicao": {
+      "felicidade_das_minorias": -15,
+      "migracao_das_minorias_vezes": 2,
+      "controle": 5,
+      "assimilacao_por_estacao_em_porcento": 4
+    }
+  },
+  "templo_da_religiosa_mortes_na_epidemia_em_porcento": 75,
+  "peregrinacao": {
+    "oferenda_minima": 50,
+    "reputacao": 10,
+    "vezes_por_ano": 1
+  },
+  "bencao": {
+    "reputacao_minima": 40,
+    "reputacao": 10
+  }
+}

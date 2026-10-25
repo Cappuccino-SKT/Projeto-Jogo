@@ -51,9 +51,47 @@ int receitaAtualDaConstrucao(const ProducaoDaConstrucao& producao)
     return producao.receitaDoCiclo >= 0 ? producao.receitaDoCiclo : producao.receitaEscolhidaParaOProximoCiclo;
 }
 
+// Os empregados de cada construção, montados uma vez no começo de um passo que não muda
+// os empregos (a hora, a escolha das receitas, os gerentes). Sem isso, cada pergunta
+// percorria todos os NPCs: nas outras cidades (fase B1b), com 300 NPCs e 200 construções,
+// era a maior parte do tempo.
+const std::vector<std::vector<entt::entity>>* empregadosJaMontados = nullptr;
+
+class ListaDosEmpregadosDoPasso {
+public:
+    explicit ListaDosEmpregadosDoPasso(const ContextoDaProducao& contexto) : listaDeAntes(empregadosJaMontados)
+    {
+        std::vector<std::vector<std::pair<int, entt::entity>>> comNumero(contexto.vila.construcoes.size());
+        for (const auto [npc, identidade, casaETrabalho] : contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc>().each()) {
+            if (casaETrabalho.indiceDoTrabalho >= 0 && casaETrabalho.indiceDoTrabalho < static_cast<int>(comNumero.size())) {
+                comNumero[static_cast<std::size_t>(casaETrabalho.indiceDoTrabalho)].emplace_back(identidade.numeroDoNpc, npc);
+            }
+        }
+        empregadosPorConstrucao.resize(comNumero.size());
+        for (std::size_t construcao = 0; construcao < comNumero.size(); ++construcao) {
+            std::sort(comNumero[construcao].begin(), comNumero[construcao].end(),
+                      [](const auto& primeiro, const auto& segundo) { return primeiro.first < segundo.first; });
+            for (const auto& [numero, npc] : comNumero[construcao]) {
+                empregadosPorConstrucao[construcao].push_back(npc);
+            }
+        }
+        empregadosJaMontados = &empregadosPorConstrucao;
+    }
+    ~ListaDosEmpregadosDoPasso() { empregadosJaMontados = listaDeAntes; }
+    ListaDosEmpregadosDoPasso(const ListaDosEmpregadosDoPasso&) = delete;
+    ListaDosEmpregadosDoPasso& operator=(const ListaDosEmpregadosDoPasso&) = delete;
+
+private:
+    std::vector<std::vector<entt::entity>> empregadosPorConstrucao;
+    const std::vector<std::vector<entt::entity>>* listaDeAntes;
+};
+
 // Os empregados de uma construção, em ordem pelo número na vila.
 std::vector<entt::entity> empregadosDaConstrucao(const ContextoDaProducao& contexto, int indiceDaConstrucao)
 {
+    if (empregadosJaMontados != nullptr && indiceDaConstrucao >= 0 && indiceDaConstrucao < static_cast<int>(empregadosJaMontados->size())) {
+        return (*empregadosJaMontados)[static_cast<std::size_t>(indiceDaConstrucao)];
+    }
     std::vector<std::pair<int, entt::entity>> empregadosComNumero;
     for (const auto [npc, identidade, casaETrabalho] : contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc>().each()) {
         if (casaETrabalho.indiceDoTrabalho == indiceDaConstrucao) {
@@ -275,6 +313,28 @@ int64_t somarOTrabalhoDaHora(const ContextoDaProducao& contexto, int indiceDaCon
     return trabalhoDaHora * velocidadeDoSalario * velocidadeDaManutencao / 10000;
 }
 
+// Fase B5 (Tecnologia, TE1-2): o Laboratório trabalha como uma receita de 8 horas, lote 1,
+// sem insumo, e cada ciclo completo vira 1 Ponto de Pesquisa (não vai ao inventário).
+void juntarOsPontosDePesquisaDaHora(ContextoDaProducao& contexto, int indiceDaConstrucao)
+{
+    const ConstrucaoDaVila& construcao = contexto.vila.construcoes[indiceDaConstrucao];
+    const DefinicaoDeConstrucao* definicao = contexto.dados.catalogoDeConstrucoes.procurarConstrucao(construcao.tipo);
+    ProducaoDaConstrucao& producao = contexto.producaoDasConstrucoes[indiceDaConstrucao];
+    if (definicao == nullptr || !definicao->produzPontosDePesquisa || construcao.emObra || producao.estaDeFolgaHoje) {
+        return;
+    }
+    for (const entt::entity empregado : empregadosDaConstrucao(contexto, indiceDaConstrucao)) {
+        const int ticks = contexto.registroDasEntidades.get<TrabalhoDoDia>(empregado).ticksTrabalhadosNestaHora;
+        const int habilidade = contexto.registroDasEntidades.get<HabilidadesDoNpc>(empregado).habilidadeNoTrabalho(*definicao->trabalhoSemReceita);
+        producao.progressoDoCiclo += calcularProgressoDoTrabalho(ticks, habilidade, construcao.nivel, 1);
+    }
+    const int64_t porPonto = static_cast<int64_t>(contexto.dados.tecnologia.regras.horasPorPonto) * contexto.ticksPorHoraDeJogo * 100;
+    if (porPonto > 0 && producao.progressoDoCiclo >= porPonto) {
+        producao.pontosDePesquisaGuardados += static_cast<int>(producao.progressoDoCiclo / porPonto);
+        producao.progressoDoCiclo %= porPonto;
+    }
+}
+
 void pararAConstrucao(ProducaoDaConstrucao& producao, const std::string& motivo)
 {
     producao.estaParada = true;
@@ -435,7 +495,7 @@ int HabilidadesDoNpc::habilidadeNoTrabalho(TrabalhoDaReceita trabalho) const
     switch (trabalho) {
     case TrabalhoDaReceita::Bracal: return bracal;
     case TrabalhoDaReceita::Manufaturado: return manufaturado;
-    case TrabalhoDaReceita::Especialista: return 0;
+    case TrabalhoDaReceita::Especialista: return manufaturado;  // TE2-1, provisório
     }
     return 0;
 }
@@ -618,9 +678,12 @@ void contarOsTicksTrabalhados(ContextoDaProducao& contexto)
 void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& relogio)
 {
     andarAsObrasDaHora(contexto);
+    const ListaDosEmpregadosDoPasso empregadosDoPasso(contexto);
     for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
         if (contexto.producaoDasConstrucoes[indice].ehDeProducao) {
             rodarOCicloDeUmaConstrucao(contexto, static_cast<int>(indice), relogio.estacaoAtual());
+        } else {
+            juntarOsPontosDePesquisaDaHora(contexto, static_cast<int>(indice));
         }
     }
     // Depois zera o trabalho da hora de todos (regra 4.2, passo 3).
@@ -631,6 +694,7 @@ void rodarOsCiclosDaHora(ContextoDaProducao& contexto, const RelogioDoMundo& rel
 
 void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
 {
+    const ListaDosEmpregadosDoPasso empregadosDoPasso(contexto);
     const CatalogoDeItens& itens = contexto.dados.catalogoDeItens;
     const std::vector<DefinicaoDeReceita>& receitas = contexto.dados.catalogoDeReceitas.todasAsReceitas();
 
@@ -677,7 +741,9 @@ void escolherAsReceitasDaCidade(ContextoDaProducao& contexto)
         for (std::size_t indiceDaReceita = 0; indiceDaReceita < receitas.size(); ++indiceDaReceita) {
             const DefinicaoDeReceita& receita = receitas[indiceDaReceita];
             // Passo 1: as candidatas; com a regra 10.2, sem as de estoque de sobra.
-            if (!receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita) || comSobra[receita.numeroDoProduto]) {
+            const bool travada = (contexto.receitasLiberadas != nullptr && indiceDaReceita < contexto.receitasLiberadas->size() && !(*contexto.receitasLiberadas)[indiceDaReceita])
+                || (contexto.itensProibidos != nullptr && (*contexto.itensProibidos)[static_cast<std::size_t>(receita.numeroDoProduto)]);
+            if (travada || !receitaPodeRodarNaConstrucao(contexto, static_cast<int>(construcao), receita) || comSobra[receita.numeroDoProduto]) {
                 continue;
             }
             // Passo 2: a nota, com os preços locais (marco 7).
@@ -753,6 +819,7 @@ TrabalhoDaReceita trabalhoDaConstrucao(const ContextoDaProducao& contexto, int i
 
 void escolherOsGerentes(ContextoDaProducao& contexto)
 {
+    const ListaDosEmpregadosDoPasso empregadosDoPasso(contexto);
     for (std::size_t indice = 0; indice < contexto.producaoDasConstrucoes.size(); ++indice) {
         const TrabalhoDaReceita trabalho = trabalhoDaConstrucao(contexto, static_cast<int>(indice));
         std::vector<CandidatoAGerente> candidatos;

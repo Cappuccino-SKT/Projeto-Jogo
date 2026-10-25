@@ -39,6 +39,7 @@ public:
     // O jogador clicou num lote do mapa (-1 limpa a seleção).
     void selecionarOLote(int numeroDoLote) { loteSelecionado = numeroDoLote; }
     void alternarAJanelaDeGestao() { janelaDeGestaoAberta = !janelaDeGestaoAberta; }
+    void alternarOMapaMundial() { mapaMundialAberto = !mapaMundialAberto; }
     // O Esc: fecha o painel, depois a gestão. Devolve false se não havia nada aberto (aí o Esc fecha o jogo).
     bool fecharOQueEstiverAberto();
 
@@ -57,6 +58,19 @@ private:
 
     void desenharAsOrdensDoJogador(SimulacaoDaVila& simulacao, ContextoDaProducao& contexto, int indiceDaConstrucao);
     void desenharOLoteLivre(SimulacaoDaVila& simulacao, ContextoDaProducao& contexto, int numeroDoLote);
+    // Fase B1 (ficha da Viagem): o Mapa Mundial e a janela do encontro.
+    void desenharOMapaMundial(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    void desenharOEncontro(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase B3 (ficha das Notícias): as notícias que o jogador sabe e a Crônica do mundo.
+    void desenharAsNoticias(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase B4 (ficha da Reputação): o valor e a faixa de cada facção e Vila Livre, com o "Por quê?".
+    void desenharAReputacao(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase B5 (ficha da Tecnologia): a era, o projeto e os pontos de cada facção, e os marcos.
+    void desenharATecnologia(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase C1 (ficha da Facção): as leis, o Banco e o líder de cada facção.
+    void desenharAsFaccoes(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
+    // Fase C3 (ficha do Crime e Justiça): a revista na entrada da cidade.
+    void desenharARevista(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
 
     bool prontaParaDesenhar = false;
     bool janelaDeGestaoAberta = false;
@@ -71,4 +85,15 @@ private:
     int tipoDaNovaOrdem = 0;
     int itemDaNovaOrdem = 0;
     int quantidadeDaNovaOrdem = 10;
+    // O Mapa Mundial: o destino escolhido e o que o grupo leva.
+    bool mapaMundialAberto = false;
+    int destinoEscolhido = 0;
+    int paesParaLevar = 3;
+    int moedasParaLevar = 50;
+    bool marchaForcadaEscolhida = false;
+    bool janelaDasNoticiasAberta = false;
+    bool janelaDaReputacaoAberta = false;
+    bool janelaDaTecnologiaAberta = false;
+    bool janelaDasFaccoesAberta = false;
+    int ofertaDoSuborno = 50;  // em moedas
 };

@@ -88,5 +88,46 @@
     "migracao": { "chega_com_felicidade_minima": 50, "sai_com_felicidade_abaixo_de": 30, "sai_com_desemprego_em_porcento": 30 },
     "nomes_dos_novos_npcs": ["Rita", "Tiago", "Úrsula", "Vítor", "Wanda", "Xavier", "Yara", "Zeca", "Alice", "Bruno", "Cecília", "Diego"]
   },
-  "ordem_do_dia": ["clima", "manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "populacao", "eventos", "escolha_das_receitas"]
+  "ordem_do_dia": ["clima", "manutencao", "consumo", "salarios", "mercado_local", "estabilizador", "felicidade", "populacao", "eventos", "escolha_das_receitas"],
+  "outras_cidades": {
+    "trabalho_presumido_em_porcento": 73,
+    "npcs_reais_por_nivel": [15, 40, 100, 300],
+    "dinheiro_inicial_do_banco_por_nivel": [400, 1500, 6000, 20000],
+    "verba_da_coroa_por_npc_por_estacao_em_decimos": 50,
+    "construcoes_de_producao_a_cada_npcs": 15,
+    "cobertura_da_comida_escassa_em_porcento": 75
+  },
+  "comercio": {
+    "caravanas_por_posto_comercial": 2,
+    "caravana_da_cidade": { "condutores": 2, "guardas": 2, "cavalos": 4 },
+    "capacidade_por_cavalo": 100,
+    "salario_por_dia_da_caravana_em_decimos": 60,
+    "loja_compra_em_porcento": 90,
+    "loja_vende_em_porcento": 110,
+    "acima_do_alvo_a_loja_paga_em_porcento_do_base": 45,
+    "reserva_do_banco_em_decimos": 2500,
+    "reserva_da_loja_em_dias_de_consumo": 2,
+    "lucro_minimo_em_porcento_do_custo": 20,
+    "risco_chance_de_perder_em_porcento": 60,
+    "risco_perda_media_em_porcento": 60,
+    "paes_por_pessoa_por_dia": 1
+  },
+  "tecnologia": {
+    "custo_por_era": [100, 200, 400, 800],
+    "difusao_por_faccao_em_porcento": 10,
+    "difusao_maxima_em_porcento": 50,
+    "vila_sem_faccao_custo_em_porcento": 150,
+    "horas_por_ponto": 8,
+    "tecnologias_por_dia_no_maximo": 3,
+    "nivel_do_laboratorio": 3,
+    "outras_cidades_com_laboratorio": [[3, 6]],
+    "prioridade_dos_ramos_por_cultura": {
+      "guerreira":   ["militar", "construcao", "producao", "administracao", "economia"],
+      "arcana":      ["administracao", "producao", "construcao", "economia", "militar"],
+      "autoritaria": ["administracao", "militar", "producao", "construcao", "economia"],
+      "religiosa":   ["administracao", "producao", "construcao", "economia", "militar"],
+      "tecnocrata":  ["producao", "construcao", "economia", "administracao", "militar"],
+      "escravista":  ["economia", "producao", "militar", "administracao", "construcao"]
+    }
+  }
 }

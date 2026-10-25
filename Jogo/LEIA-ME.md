@@ -550,3 +550,157 @@ O que entrou ([[Ficha Logica/Cura|ficha da Cura]]):
 **Rodada EQ1 (2026-10-20, modo automático, sugestão A):** o teste de 1 ano só falha pelo Pão caro se ele ficar acima de 2,6 por **8 dias seguidos** (`diasSeguidosComOPaoCaroQueFalham`); abaixo de 1,2, a fome e o Banco continuam como antes. Junto com a **sugestão B** (o estoque-alvo do Pão no `regras.json` passou de 5 para **7 dias**), porque só a A ainda deixava as sementes 5 e 8 falharem (Pão a 3,0). **Resultado: 9 das 10 sementes passam.** A semente 10 (Seca, Epidemia e Ratos no celeiro juntos) e os 10 anos da semente 1 falham pelo Pão a 2,8 por mais de 8 dias, **sem fome**: depois da crise, o estoque do Pão sobe só 1 por dia, com Grão e Água de sobra. Isso está na rodada EQ2.
 
 **Rodada EQ2 (2026-10-20, opção A do autor):** a Padaria começa no **nível 2** no `vila_inicial.json` (3 vagas; a Cidade põe um desempregado nela) e o estoque-alvo do Pão **voltou para 5 dias** (com 7, o Pão ficava barato e o Banco caía abaixo de 250 no dia 14). A capacidade da vila passou para 1100 de matéria-prima e 1000 de bem de consumo. **Verificado pelo assistente:** `testes_do_codigo` passa (436 conferências); **as 10 sementes passam**; os 10 anos da semente 1 passam; o salvar e carregar no dia 30 (semente 3) dá o relatório igual.
+
+### Marco B1: a Viagem (2026-10-20, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Viagem|ficha da Viagem]]; os ajustes estão na parte 10.8 dela):
+
+- **O Mapa Mundial:** `data/mundo/mapas.json` (os 48 mapas da malha 8 × 6, com região, bioma, terreno e infraestrutura) e `data/mundo/cidades_iniciais.json` (as 22 cidades do documento do Mundo; a vila da fatia é a Vila Livre do Centro, em (4,3)). O estado do território sai das cidades vizinhas (Facção, 4.1): 22 mapas com cidade, 16 de território, 6 em disputa e 4 sem dono, como no documento. **Provisório, para o autor conferir:** o terreno e a infraestrutura de cada mapa saíram do bioma da região (montanha e colinas na Guerreira, floresta na Arcana, planície na Autoritária, colinas na Religiosa, árido na Tecnocrata, litoral na Escravista) e do estado (estrada nos mapas com cidade, trilha no território, selvagem no resto).
+- **`data/viagem.json`:** os números da ficha.
+- **A viagem do grupo do jogador:** a rota mais rápida (Dijkstra, desempate pelo menor número), o tempo de cada trecho (fixo desde a entrada), acampar das 22 h às 6 h, a marcha forçada, 1 Pão por pessoa por dia, os encontros na metade do trecho (bandidos ou mercador viajante) e as 4 escolhas contra os bandidos (subornar, fugir, lutar pelo cálculo rápido, render-se). O grupo sai da vila com os Pães e as moedas do jogador e devolve tudo ao voltar. A vila continua rodando igual enquanto ele viaja.
+- **A névoa** e o **clima por região** (a região da vila usa o clima da vila; as outras sorteiam com a sequência 9).
+- **Na janela:** o botão **Mapa Mundial** na barra de cima (a malha com a névoa, o destino, os Pães e as moedas para levar, a marcha forçada e o botão Partir) e a janela **Encontro na estrada**, que pausa o jogo.
+- **Save versão 5** (a seção `viagem` e os sorteios 5 e 9).
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (467 conferências: os 4 exemplos da parte 5, a caravana no inverno, a rota e o desempate, o encontro, o suborno, a fuga de 54%, as perdas, a partida e a volta à vila, o encontro na metade com o jogo pausado, o save no meio do trecho, o acampamento até as 7 h 21). **As 10 sementes passam**, e o salvar e carregar no dia 30 dá o relatório igual.
+
+**Para o autor testar na janela:** abrir o Mapa Mundial, escolher (5,3), levar 3 Pães (comprados na loja) e partir; ver o grupo chegar, voltar para a vila e conferir que os Pães e as moedas voltaram.
+
+### Marco B1b: as outras cidades (2026-10-21, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/OutrasCidades|ficha das Outras cidades]]; os ajustes estão na parte 10.8 dela):
+
+- **As 21 outras cidades do mundo** (as 22 do `cidades_iniciais.json` menos a vila), cada uma uma simulação em **LOD 2**: as mesmas regras do dia da vila e a mesma produção por hora, com o **trabalho presumido** (73% de cada hora do turno, medido). Os NPCs existem (2.750 no mundo), mas não andam.
+- **A criação de cada cidade:** o conjunto de produção da vila inicial a cada 15 NPCs, as Fazendas × 100 ÷ a produtividade do Grão no mapa, as casas, os NPCs (idade de 5 a 19, habilidades de 20 a 60), o estoque, o Banco pelo nível e a verba da Coroa de 5 moedas por NPC por estação.
+- **`mundo/mapas.json`** ganhou os recursos de cada mapa (destaque 150, normal 100, escasso 50, pela região: Grão alto na Autoritária e baixo na Guerreira e na Tecnocrata, Madeira alta na Arcana, Pedra alta na Autoritária...). **Provisório, para o autor conferir.**
+- **`regras.json`** ganhou o bloco `outras_cidades`.
+- **O save** leva as 21 cidades (a seção `outrasCidades`).
+- **Mais rápido:** os empregados de cada construção são montados uma vez por passo, e isso deixou a vila mais rápida também.
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (481 conferências: as contas da parte 10.2, as 21 cidades e os 2.750 NPCs, a capital com 20 Padarias e 40 Fazendas, 16 dias sem fome em nenhuma cidade, a vila igual com e sem as cidades dia a dia, o save com as 21 cidades, a vila em LOD 2 contra LOD 0). **As 10 sementes passam**, e o salvar e carregar no dia 30 dá o relatório igual.
+
+### Marco B2: o comércio (2026-10-21, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Comercio|ficha do Comércio]]; os ajustes estão na parte 10.8 dela):
+
+- **A loja com limite (4.7)**, para todos: paga 90% do preço local até o estoque-alvo e 45% do preço base além dele, só enquanto o Banco fica acima de 250; ao jogador, não vende abaixo de 2 dias do consumo.
+- **As 14 caravanas das cidades** (2 por Posto Comercial): a sobra e a falta (4.2), a conta da viagem com os dias, o custo, o risco da rota e o lucro (4.3), a decisão de sair (4.4), a venda e a volta no destino (4.5), o salário pago à classe Civil em casa (4.6) e o ataque pelo cálculo rápido (Viagem, 4.11).
+- **O jogador comercia nas outras cidades:** com o grupo parado numa cidade, o Mapa Mundial mostra a loja dela (comprar e vender 1 ou 10). O Mapa Mundial também mostra os **preços que o jogador viu** e há quantos dias (4.8).
+- **Os recursos (CO1-1):** a Tecnocrata não tem floresta, e a Escravista não tem pedreira.
+- **O fim do `--simular`** mostra o resumo do comércio e confere o dinheiro do mundo.
+- **Save versão 6** (as caravanas, o `aCaminhoPorItem` e os preços conhecidos).
+
+**Verificado pelo assistente:** `testes_do_codigo` passa (490 conferências: a venda de 40 Tábuas por 68 moedas, a loja que para na reserva do Banco, a força 8 da caravana, as 14 caravanas, a falta que desconta o que vai a caminho, o custo da viagem, o grupo comprando e vendendo numa outra cidade). **As 10 sementes passam**, o dinheiro do mundo se conserva em todas, e o salvar e carregar no dia 30 dá o relatório igual. As caravanas fazem de 4 a 11 viagens por ano; a perda para bandidos fica entre 0% e 9% do valor levado (média de 1,6%; a ficha previa 8%).
+
+**Achado (rodada CO2):** em 1 ano, as 14 caravanas fazem só de 4 a 11 viagens: as cidades são autossuficientes e os preços ficam parecidos. Ver a [[Rodada Pendente]].
+
+**Rodada CO2 (2026-10-21, opção A do autor):** onde o Grão é escasso (Guerreira e Tecnocrata), as Fazendas cobrem só 75% do consumo; onde é normal ou de destaque, a cidade fica com o conjunto inteiro (a capital Guerreira passou de 40 para 30 Fazendas). **Verificado pelo assistente:** `testes_do_codigo` passa (490 conferências); **as 10 sementes passam**, o dinheiro do mundo se conserva, nenhuma das 21 cidades está com fome no fim do ano, e o salvar e carregar dá o relatório igual. As caravanas passaram de 4 a 11 para **6 a 15 viagens por ano**; o comércio ainda é pequeno, e a opção B da rodada (a caravana mais barata) continua disponível se o autor quiser mais.
+
+### Marco B3: as notícias (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Noticias|ficha das Notícias]]; os ajustes estão na parte 10.8 dela):
+
+- **As notícias nascem** dos eventos das 22 cidades (Seca, Fome e Epidemia são Regionais; Geada, Colheita farta e Festa da Colheita, Locais; Inverno rigoroso, Mundial), das caravanas atacadas e dos preços fora da média da região (no máximo 1 por cidade por dia). O arquivo novo é o `data/noticias.json`; a importância de cada evento está no `eventos.json` (`"noticia"`).
+- **Elas andam 3 horas por mapa** até o alcance da importância, e o jogador sabe quando chegam ao mapa do grupo, com a precisão da distância ("1.880", "cerca de 2.000", "milhares de").
+- **Na tela:** as Regionais e Mundiais viram notificação; o botão **Notícias** mostra as que o jogador sabe e a **Crônica do mundo**; o Mapa Mundial mostra as notícias de cada mapa e há quantos dias o jogador soube.
+- **O fim do `--simular`** mostra quantas notícias nasceram.
+- **Save versão 7** (as notícias, o que o jogador sabe e a Crônica).
+
+**Verificado pelo assistente:** os testes passam (502 conferências); as 10 sementes passam com as mesmas viagens de caravana de antes (as Notícias não mudam o jogo); de 255 a 289 notícias por ano, de 18 a 27 na Crônica do jogador; salvar e carregar no dia 30 dá o mesmo relatório.
+
+### Marco B4: a reputação (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Reputacao|ficha da Reputação]]; os ajustes estão na parte 10.8 dela):
+
+- **A reputação com as 6 facções e as Vilas Livres**, de −100 a +100, com as 5 faixas (Inimigo a Aliado) do arquivo novo `data/reputacao.json`. Começa em 0 (a base, até o Início de Jogo).
+- **Os preços das lojas das outras cidades** mudam pela faixa (Hostil compra a 115% e vende a 85%; Aliado, 90% e 110%); o Inimigo não negocia.
+- **Duas ações:** vencer um bando no território de uma facção (+1) e **doar** numa cidade (+1 a cada 100 moedas, até a base + 20; o dinheiro vai ao Banco dela).
+- **A volta:** no dia 1 de cada estação, cada valor anda 2 pontos para a base.
+- **Na tela:** o botão **Reputação** mostra o valor, a base e a faixa de cada um, com o "Por quê?" ao passar o mouse; a loja da cidade mostra a faixa e tem os botões de doar.
+- **Save versão 8** (os valores, as bases e as últimas mudanças).
+
+**Verificado pelo assistente:** os testes passam (512 conferências); as 10 sementes passam com o relatório igual ao do B3 (a reputação não muda nada sem o jogador agir); salvar e carregar no dia 30 dá o mesmo relatório.
+
+### Marco B5: a tecnologia (2026-10-24, programado com o Opus a pedido do autor; rodada TE2, opção A)
+
+O que entrou ([[Ficha Logica/Tecnologia|ficha da Tecnologia]]; os ajustes estão na parte 10.8 dela):
+
+- **O Laboratório** nas 6 capitais e na Cidade das minas de cobre (3,6), com 5 pesquisadores cada. Os pontos vão para a facção dona.
+- **A pesquisa:** cada facção escolhe o projeto pela cultura, paga o custo com a difusão (−10% por facção que já tem) e, ao completar, gera uma notícia Regional.
+- **Os marcos mundiais:** o dia é sorteado na janela ao criar o mundo (sequência 6) e fica mais cedo com as facções que já têm as tecnologias ligadas; ao chegar, abre a era e gera uma notícia Mundial.
+- **As travas** nas receitas das cidades, pela facção dona.
+- **Conteúdo provisório** (`data/tecnologias.json` e `data/marcos.json`): 3 tecnologias e 1 marco de exemplo, que não liberam nada. As listas de verdade vêm na rodada de conteúdo C1. Até os Ricos (A4), a habilidade Especialista é a Manufaturado.
+- **Na tela:** o botão **Tecnologia** mostra a era, o projeto, os pontos e as tecnologias de cada facção, e os marcos. O fim do `--simular` mostra o resumo.
+- **Save versão 9.**
+
+**Verificado pelo assistente:** os testes passam (527 conferências); as 10 sementes passam com o relatório da vila igual ao do B4; no fim do ano, as 6 facções têm as 3 tecnologias de exemplo (18), nenhuma cidade com fome e o dinheiro do mundo conservado; o comércio mudou um pouco (de 4 a 21 viagens), porque as capitais pagam 5 pesquisadores; salvar e carregar no dia 30 dá o mesmo relatório.
+
+### Marco C1: as facções (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Faccao|ficha da Facção]]; os ajustes estão na parte 10.8 dela):
+
+- **As 6 facções** com as leis iniciais da tabela do documento (arquivo novo `data/faccoes.json`) e um líder sorteado (sequência 7).
+- **O imposto pela lei** (Baixo 10%, Normal 20%, Alto 30%) e a Felicidade dela (0, −5, −10); o teto do gasto da classe passa a ser 100% menos a taxa (FA1-2).
+- **O Banco da Facção:** começa com 25% do PIB, recebe a cunhagem (140 moedas por dia por capital) e as tarifas, e paga a verba de 5 moedas por NPC às cidades dela no dia 1 de cada estação. As Vilas Livres e a vila do jogador continuam com a verba "de fora".
+- **A tarifa** das caravanas que entram no território de outra facção, também na conta do lucro esperado.
+- **Os itens proibidos e o ajuste de preço** da facção; **a assembleia** no dia 1 de cada ano, com a pauta, o voto, o sistema de votação, o veto do líder e a notícia Regional.
+- **O desejo das leis de cada cultura** num `data/culturas.json` provisório (a Cultura, C2, completa).
+- **Na tela:** o botão **Facções** mostra as leis, o Banco e o líder de cada uma. O fim do `--simular` mostra o Banco de cada facção.
+- **Save versão 10.**
+
+**Verificado pelo assistente:** os testes passam (541 conferências); as 10 sementes passam com o relatório da vila igual ao do B5; nenhuma cidade com fome e o dinheiro do mundo conservado (a cunhagem conta como dinheiro de fora); os Bancos das facções terminam o ano entre 8.000 e 8.600 moedas; o comércio caiu um pouco com as tarifas (de 3 a 13 viagens por ano); salvar e carregar no dia 30 dá o mesmo relatório.
+
+### Marco C2: a cultura (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Cultura|ficha da Cultura]]; os ajustes estão na parte 10.7 dela):
+
+- **As 6 culturas** completas no `data/culturas.json` (alguns números são provisórios, para revisar).
+- **A cultura de cada NPC:** a da cidade no começo e no nascimento; o migrante vem da região (75%) ou de uma região vizinha (25%). A vila do jogador é da cultura da região (Autoritária).
+- **O 5º fator da Felicidade, Leis × cultura** (de −30 a +10), com o extremo e as minorias hostis. No começo, é 0 em todas as cidades.
+- **Os pontos de habilidade** da cultura nos NPCs das outras cidades.
+- **Na tela:** a janela **Facções** diz a cultura dos moradores da vila.
+- **Save versão 11** (a cultura de cada NPC).
+
+**Verificado pelo assistente:** os testes passam (551 conferências); as 10 sementes passam com o relatório da vila igual ao do C1; nenhuma cidade com fome e o dinheiro do mundo conservado; o comércio fica entre 4 e 11 viagens por ano; salvar e carregar no dia 30 dá o mesmo relatório.
+
+### Marco C3: o crime e a justiça (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Crime|ficha do Crime e Justiça]]; os ajustes estão na parte 10.8 dela):
+
+- **A Criminalidade de cada cidade** (de 0 a 100; arquivo novo `data/crimes.json`): sobe com a infelicidade, o desemprego e a pobreza; acima de 20 tira Felicidade; com 25 ou mais, pode haver furto no armazém; e põe mais bandidos nas estradas da região.
+- **A revista** na entrada das cidades de facção (a chance vem da faixa da Reputação): acha os itens proibidos e a falta do Livro Sagrado. O jogador **paga** a multa, **suborna** ou **foge**; cada crime tira reputação.
+- **A Recompensa** por facção (cai 10% por estação), a **prisão** (os dias ou a fiança) e os **Caçadores de Recompensa** a partir de 500 moedas.
+- **Na tela:** a janela da revista, a prisão com o botão da fiança na barra de cima, os Caçadores no encontro, e a Recompensa na janela da Reputação. O fim do `--simular` mostra a Criminalidade do mundo.
+- **Save versão 12.**
+- **Ficou para depois:** a loja ilegal do jogador (nenhum item é proibido ainda).
+
+**Verificado pelo assistente:** os testes passam (563 conferências); as 10 sementes passam com o relatório da vila igual ao do C2 (a Criminalidade da vila fica em 12,6: abaixo de 20 e de 25); no mundo, a média fica em cerca de 12 e a maior em 16 a 18; nenhuma cidade com fome e o dinheiro do mundo conservado; salvar e carregar no dia 30 dá o mesmo relatório. A revista, a prisão e os Caçadores estão testados nos testes do código, não na janela.
+
+### Marco C4: a religião (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Religiao|ficha da Religião]]; os ajustes estão na parte 10.8 dela):
+
+- **A fé de cada cultura** (arquivo novo `data/religiao.json`) e **os Templos** (a Torre Arcana na Arcana) nas cidades de facção, com a cobertura de 60% ou mais (RL1-1).
+- **O 6º fator da Felicidade, Religião** (de −5 a +10), com a minoria sem culto e a Perseguição.
+- **As oferendas** (2% da renda vão ao Banco), **os festivais** do calendário (+8 por 8 dias; o turno pela metade no primeiro dia; a comida extra só da sobra; notícia Local), **a Tolerância** (o imposto a mais das minorias na Fé oficial) e **a assimilação** das minorias.
+- **O Templo da Religiosa na Epidemia** (as mortes × 75%), **a peregrinação** do jogador na Capital Religiosa (+10 de reputação, uma vez por ano) e **a Bênção** do Sumo Sacerdote.
+- **Na tela:** o botão da peregrinação no painel da loja, na Capital Religiosa.
+- **Save versão 13.**
+
+**Verificado pelo assistente:** os testes passam (575 conferências); as 10 sementes passam com o relatório da vila igual ao do C3; o dinheiro do mundo se conserva; salvar e carregar no dia 30 dá o mesmo relatório. **Achado:** em 2 das 10 sementes, uma cidade termina o ano com fome curta (de 1 a 3 dias): a Vila Livre do Sul (5,6) ou o Entreposto do leste (4,5), as duas sem Templo e numa região com pouco Grão. Sem a comida extra do festival ou sem o turno pela metade, a semente 1 continua igual; a causa provável é indireta (as cidades de fé mais felizes crescem e sobra menos comida para as caravanas). Vale olhar numa rodada se aparecer de novo.
+
+### Marco D1: o combate (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Combate|ficha do Combate]]; os ajustes estão na parte 10.9 dela):
+
+- **A fórmula do golpe** (o dano da arma × o Rank × a habilidade, a vantagem contra a armadura, a Defesa, o mínimo de 1), **o acerto a distância**, **o Medo** e **a evolução**, com as armas, as armaduras e os kits no arquivo novo `data/combate.json`.
+- **O duelo simulado** (sem o mapa) e **o cálculo rápido**, que substitui a força simples na estrada, nas caravanas e nos Caçadores.
+- **A Vida do grupo e das caravanas** (o vencedor perde Vida; ela volta 1% por hora).
+- **Na tela:** o encontro mostra a Vida do grupo e a chance de vencer pelo cálculo rápido.
+- **Save versão 14.**
+- **Ficou para depois:** o combate ao vivo no Mapa Local (não há hostis nem personagens controlados nos mapas ainda).
+
+**Verificado pelo assistente:** os testes passam (592 conferências); as 10 sementes passam com o relatório da vila igual ao do C4; o dinheiro do mundo se conserva; salvar e carregar no dia 30 dá o mesmo relatório. As caravanas perdem mais lutas agora (de 0 a 3 por ano). A fome curta do C4 continua em 2 sementes.
+
+**Achado (rodada CB2):** o cálculo rápido só bate com o combate visto quando os lados são parecidos (1 jogador contra 2 bandidos: 97% na luta vista, 46% no cálculo rápido). Ver a [[Rodada Pendente]].
+

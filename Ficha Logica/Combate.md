@@ -279,3 +279,14 @@ O jogador vence com **73 de Vida** em 8 golpes. Evolução: 8 acertos × 5 cent�
 4. **CB1-4:** a testemunha é qualquer NPC acordado a 10 tiles, com 70% à noite, até o NPC ter Percepção.
 5. **CB1-5:** a Coragem padrão é 60 até a Personalidade existir.
 6. **CB1-6:** os números das armas e armaduras são uma proposta em dados (`combate.json`), a ajustar com o conteúdo.
+
+### 10.9 Ajustes do código (marco D1, 2026-10-24)
+
+1. **O combate ao vivo no Mapa Local** (entrar em combate pelo raio, os alvos, a fuga pelo mapa, as ordens, a pausa ativa, as barras de Vida, o crime de atacar com testemunhas) fica para quando houver quem lute no mapa: hoje não há hostis nos mapas locais nem personagens controlados (eles chegam com os Companheiros, D2). A fórmula, o Medo, a evolução e o duelo **simulado** (sem o mapa) já estão prontos e testados.
+2. **O cálculo rápido** substitui a força simples na estrada (o grupo do jogador), nas caravanas das cidades e nos Caçadores (um guarda a cada 3 de força). Os bandidos atacam se o grupo não tiver mais de 2 vezes o poder do bando.
+3. **A Vida do grupo e da caravana** é uma só, em %, para todos os membros: o vencedor perde a Vida da regra 4.8; o grupo derrotado acorda com 10% e perde 75% do que leva; a Vida volta 1% por hora (o dobro acampado; Cura, CU1-2). Ela vai no save (versão 14).
+4. **O kit "jogador"** (a Espada, 3 peças Leves, habilidade 50, da parte 10.1) entrou no `combate.json`. Os números do Medo e do acerto que eram frações viraram décimos (`..._em_decimos`).
+5. **O soco não tem classe** no arquivo: o civil tira 1,8, não os 2,25 da tabela da parte 5 (que contava a vantagem do corte).
+6. **No duelo simulado, os golpes do mesmo tick valem juntos:** quem cai naquele tick ainda golpeia. Assim nenhum lado ganha por golpear primeiro (com "na ordem do número", o lado A vencia 66% de uma luta igual).
+7. **Achado (rodada CB2):** o cálculo rápido (CB1-1) só bate com o combate visto quando os lados são parecidos. Um jogador contra 2 bandidos vence 97% das lutas vistas, mas 46% no cálculo rápido.
+

@@ -1,5 +1,7 @@
 #include "Jogador/DecisoesDoJogador.h"
 
+#include "Comercio/Comercio.h"
+
 #include <algorithm>
 
 #include "Construcao/ContasDasConstrucoes.h"
@@ -119,20 +121,17 @@ std::string comprarDaLojaDaCidade(ContextoDaProducao& contexto, int numeroDoItem
     if (quantidade <= 0 || numeroDoItem < 0 || numeroDoItem >= contexto.dados.catalogoDeItens.quantidadeDeItens()) {
         return "a quantidade ou o item não vale";
     }
-    if (contexto.inventario.quantidadeDe(numeroDoItem, DonoDoItem::Cidade) < quantidade) {
-        return "a Cidade não tem tanto";
+    // Comércio, 4.7: a 110% do preço local, sem deixar a Cidade abaixo de 2 dias do consumo (RE1-4).
+    const ResultadoDaLoja compra = calcularACompraNaLoja(contexto, numeroDoItem, quantidade, contexto.dinheiro.dinheiroDoJogador, true);
+    if (compra.quantidade < quantidade) {
+        return contexto.inventario.quantidadeDe(numeroDoItem, DonoDoItem::Cidade) < quantidade ? "a Cidade não tem tanto"
+                                                                                               : "falta dinheiro, ou a Cidade guarda a reserva de 2 dias";
     }
-    const int64_t total = static_cast<int64_t>(quantidade) * calcularPrecoDaLojaDaCidade(precoLocalDoItem(contexto, numeroDoItem), contexto.dados.regras.economia);
-    if (contexto.dinheiro.dinheiroDoJogador < total) {
-        return "falta dinheiro";
-    }
-    contexto.inventario.tentarTirar(numeroDoItem, DonoDoItem::Cidade, quantidade);
     if (!contexto.inventario.tentarPor(numeroDoItem, DonoDoItem::Jogador, quantidade)) {
-        contexto.inventario.tentarPor(numeroDoItem, DonoDoItem::Cidade, quantidade);
         return "não cabe no inventário";
     }
-    contexto.dinheiro.dinheiroDoJogador -= total;
-    contexto.dinheiro.bancoDaCidade += total;
+    comprarNaLoja(contexto, numeroDoItem, quantidade, contexto.dinheiro.dinheiroDoJogador, true);
+    contexto.dinheiro.dinheiroDoJogador -= compra.valorEmDecimos;
     return "";
 }
 
@@ -144,16 +143,16 @@ std::string venderParaALojaDaCidade(ContextoDaProducao& contexto, int numeroDoIt
     if (contexto.inventario.quantidadeDe(numeroDoItem, DonoDoItem::Jogador) < quantidade) {
         return "o jogador não tem tanto";
     }
-    const int64_t total = static_cast<int64_t>(quantidade) * calcularPrecoQueALojaDaCidadePaga(precoLocalDoItem(contexto, numeroDoItem), contexto.dados.regras.economia);
-    if (contexto.dinheiro.bancoDaCidade < total) {
-        return "o Banco não tem o dinheiro";
-    }
+    // Comércio, 4.7 (CO1-3): 90% do preço local até o estoque-alvo, 45% do preço base além
+    // dele, e só enquanto o Banco fica acima da reserva; o que a loja não compra fica com o jogador.
     contexto.inventario.tentarTirar(numeroDoItem, DonoDoItem::Jogador, quantidade);
-    if (!contexto.inventario.tentarPor(numeroDoItem, DonoDoItem::Cidade, quantidade)) {
-        contexto.inventario.tentarPor(numeroDoItem, DonoDoItem::Jogador, quantidade);
-        return "não cabe no inventário da Cidade";
+    const ResultadoDaLoja venda = venderNaLoja(contexto, numeroDoItem, quantidade);
+    if (venda.quantidade < quantidade) {
+        contexto.inventario.tentarPor(numeroDoItem, DonoDoItem::Jogador, quantidade - venda.quantidade);
     }
-    contexto.dinheiro.bancoDaCidade -= total;
-    contexto.dinheiro.dinheiroDoJogador += total;
+    if (venda.quantidade == 0) {
+        return "o Banco está na reserva, ou não cabe no inventário da Cidade";
+    }
+    contexto.dinheiro.dinheiroDoJogador += venda.valorEmDecimos;
     return "";
 }

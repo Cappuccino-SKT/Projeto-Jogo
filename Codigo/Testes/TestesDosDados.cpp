@@ -305,8 +305,8 @@ void testarDadosDaFatia()
     }
     conferir(dados.dadosEstaoProntos() && dados.listaDeProblemas.quantidadeDeAvisos() == 0, "os dados da fatia (Jogo/data) não têm erro nem aviso");
     conferir(dados.catalogoDeItens.quantidadeDeItens() == 8 && dados.catalogoDeReceitas.quantidadeDeReceitas() == 8
-                 && dados.catalogoDeRecursos.quantidadeDeRecursos() == 4 && dados.catalogoDeConstrucoes.quantidadeDeConstrucoes() == 8,
-             "a fatia tem 8 itens, 8 receitas, 4 recursos e 8 construções (com a Pedra, o Bloco e a Pedreira da FL6-5)");
+                 && dados.catalogoDeRecursos.quantidadeDeRecursos() == 4 && dados.catalogoDeConstrucoes.quantidadeDeConstrucoes() == 11,
+             "a fatia tem 8 itens, 8 receitas, 4 recursos e 11 construções (com a Pedreira da FL6-5, o Laboratório, o Templo e a Torre Arcana)");
     conferir(precoDoItem(dados.catalogoDeItens, "item.pao") == 17, "nos dados da fatia, o Pão custa 1,7");
     conferir(dados.regras.velocidadeDeAndarEmTilesPorHora == 128 && dados.regras.caminhosCalculadosPorTick == 4,
              "o regras.json da fatia tem a velocidade de andar (128 tiles por hora) e 4 caminhos por tick");

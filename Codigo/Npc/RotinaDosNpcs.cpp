@@ -341,7 +341,7 @@ std::vector<entt::entity> criarOsNpcsDaVila(ContextoDaRotina& contexto, const Re
         const PosicaoDeTile tileOndeNasce = temCasa ? contexto.vila.construcoes[npcInicial.indiceDaCasa].tileDaPorta
                                                     : PosicaoDeTile{contexto.mapa.larguraEmTiles / 2, contexto.mapa.alturaEmTiles / 2};
         const entt::entity npc = criarNpcNoTile(registro, tileOndeNasce);
-        registro.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{npcInicial.nome, npcInicial.classe, static_cast<int>(numero)});
+        registro.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{npcInicial.nome, npcInicial.classe, static_cast<int>(numero), npcInicial.cultura});
         registro.emplace<CasaETrabalhoDoNpc>(npc, CasaETrabalhoDoNpc{npcInicial.indiceDaCasa, npcInicial.indiceDoTrabalho});
         DecisaoDoNpc decisao;
         decisao.indiceDaConstrucaoOndeEsta = npcInicial.indiceDaCasa;

@@ -37,6 +37,7 @@ struct ConstrucaoDaVila {
 struct NpcDaVilaInicial {
     std::string nome;
     std::string classe;        // "civil" na fatia
+    std::string cultura;       // fase C2: a cultura base da cidade (vazio na vila inicial: a da região)
     int indiceDaCasa = -1;     // posição na lista de construções
     int indiceDoTrabalho = -1; // -1 = desempregado
     // As habilidades, de 0 a 100 (FL6-6: 50 para todos na fatia).
@@ -61,6 +62,11 @@ struct VilaDoJogo {
     int dinheiroDoJogadorEmDecimos = 0;
     int dinheiroInicialPorCivilEmDecimos = 0;
     std::vector<ItemDoEstoqueInicial> estoqueInicial;
+    // Fase B1b (Outras cidades): o nível da cidade (a vila é de nível 1 até a ficha da
+    // Cidade) e a verba da Coroa por estação; −1 = a do regras.json (a da vila).
+    int nivelDaCidade = 1;
+    int64_t verbaDaCoroaPorEstacaoEmDecimos = -1;
+    bool temPostoComercial = false;  // fase B2: manda caravanas (Comércio, 4.1)
 
     // A primeira construção do tipo Mercado, ou -1 se a vila não tem Mercado.
     int indiceDoMercado() const;

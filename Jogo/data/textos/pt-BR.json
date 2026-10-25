@@ -36,5 +36,12 @@
   "evento.febre": "Febre",
   "evento.fome": "Fome",
   "evento.falta_de_moveis": "Falta de móveis",
-  "evento.festa_da_colheita": "Festa da Colheita"
+  "evento.festa_da_colheita": "Festa da Colheita",
+  "construcao.laboratorio": "Laboratório",
+  "tec.contabilidade": "Contabilidade",
+  "tec.ferramentas_melhores": "Ferramentas melhores",
+  "tec.andaimes": "Andaimes",
+  "marco.era_2": "A era das guildas",
+  "construcao.templo": "Templo",
+  "construcao.torre_arcana": "Torre Arcana"
 }

@@ -265,3 +265,16 @@ A Felicidade cai mais (−6,2), o alvo do crime sobe mais 6,2, e a conta se esta
 5. **CJ1-5:** a revista oferece Pagar, Subornar e Fugir; a fuga sempre dá certo nesta versão (sem combate) e aumenta a Recompensa.
 6. **CJ1-6:** com Recompensa na facção, a revista é certa; os Caçadores aparecem a partir de 500.
 7. **CJ1-7:** prisão de 2 dias por ponto de gravidade, ou fiança de 2 multas.
+
+### 10.8 Ajustes do código (marco C3, 2026-10-24)
+
+1. **A loja ilegal do jogador (4.8)** fica para quando houver itens proibidos no conteúdo: hoje nenhum item do jogo é proibido (os "narcóticos", cajados e outros ainda não existem).
+2. **O Livro Sagrado ainda não é um item:** numa cidade da Religiosa (a facção com a lei do Livro), a revista sempre acha a Heresia sem o Livro, uma vez por estação. O item vem com a Religião (C4).
+3. **A revista acontece em cada cidade de facção em que o grupo entra**, também no meio da rota. Ao fugir, o grupo volta ao mapa de onde veio, e a viagem para ali.
+4. **Preso,** o grupo para; se estava na estrada (Caçadores), é levado à capital da facção. Ele não parte, não comercia e não doa. O tempo segue na velocidade escolhida (sem o 8x automático).
+5. **Cada revista conta só o crime de maior gravidade**: ele dá a multa, a Recompensa (2 × a multa), a gravidade da ficha (os dias de prisão) e a fiança, como na parte 10.2.
+6. **A multa, o suborno e a fiança** vão para o Banco da cidade onde aconteceram.
+7. **A Criminalidade** começa em 11,0 em todas as cidades e anda na ordem do dia, logo depois da Felicidade. O furto usa o sorteio dos eventos da cidade, só com 25 ou mais.
+8. **A ameaça bandida** é a média das cidades da região (as Vilas Livres contam) e entra também no risco da rota das caravanas.
+9. **A notícia "Procura-se"** fica para depois.
+

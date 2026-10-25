@@ -24,6 +24,17 @@ void testarClima();
 void testarTrabalho();
 void testarPopulacao();
 void testarCura();
+void testarViagem();
+void testarOutrasCidades();
+void testarComercio();
+void testarNoticias();
+void testarReputacao();
+void testarTecnologia();
+void testarFaccao();
+void testarCultura();
+void testarCrime();
+void testarReligiao();
+void testarCombate();
 
 int main()
 {
@@ -45,6 +56,17 @@ int main()
     testarTrabalho();
     testarPopulacao();
     testarCura();
+    testarViagem();
+    testarOutrasCidades();
+    testarComercio();
+    testarNoticias();
+    testarReputacao();
+    testarTecnologia();
+    testarFaccao();
+    testarCultura();
+    testarCrime();
+    testarReligiao();
+    testarCombate();
 
     std::printf("\n%d conferências, %d falharam.\n", quantidadeDeConferenciasFeitas, quantidadeDeConferenciasQueFalharam);
     if (quantidadeDeConferenciasQueFalharam > 0) {

@@ -38,7 +38,8 @@ std::vector<std::string> rodarOClimaDoDia(ContextoDaProducao& contexto, const Re
 
     const TipoDeClima climaDeOntem = clima.climaDeHoje;
     clima.climaDeOntem = climaDeOntem;
-    clima.climaDeHoje = sortearClimaDoDia(climaDeOntem, clima.estacaoDeHoje, regras, contexto.sorteioDoClima);
+    clima.climaDeHoje = clima.climaDeHojeVindoDaRegiao ? *clima.climaDeHojeVindoDaRegiao
+                                                       : sortearClimaDoDia(climaDeOntem, clima.estacaoDeHoje, regras, contexto.sorteioDoClima);
     clima.climaMudouHoje = clima.climaDeHoje != climaDeOntem;
     if (!clima.climaMudouHoje) {
         return {};

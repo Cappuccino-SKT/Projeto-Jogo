@@ -232,3 +232,15 @@ Com 2 facções completas, o marco da era 2 chega no dia **229** (ano 4), em vez
 5. **TE1-5:** os pontos contam todo dia (o documento dizia "por estação"); a pesquisa usa a mesma produção por hora das Outras cidades.
 6. **TE1-6:** a data do marco desce na proporção das facções que têm todas as ligadas (÷ 6), nunca antes do primeiro dia da janela.
 7. **TE1-7:** o que não aparece em nenhum `libera` é livre desde o começo.
+
+### 10.8 Ajustes do código (marco B5, 2026-10-24; rodada TE2, opção A)
+
+1. **TE2-1 (provisório):** até os Ricos chegarem (marco A4), a habilidade Especialista de um NPC é a Manufaturado dele.
+2. **O Laboratório é uma construção sem receita** (`"trabalho_sem_receita": "especialista"` e `"pontos_de_pesquisa": true` no `construcoes.json`). O trabalho de cada hora soma como numa receita de 8 horas, lote 1, e cada ciclo completo vira 1 ponto. O ponto não é um item: assim ele não aparece nas lojas, no inventário nem no relatório.
+3. **O Laboratório começa no nível 3** (5 vagas; a tabela `vagas_por_nivel` não tem 6). Dá cerca de 4,5 pontos por dia. Ele é o primeiro da fila da contratação: nas capitais Guerreira e Tecnocrata não há desempregados no começo, e ele ficaria vazio.
+4. **As listas são provisórias** (até a rodada de conteúdo C1): as 3 tecnologias da parte 10 (Contabilidade, Ferramentas melhores e Andaimes) e o marco "A era das guildas" (era 2, anos 3 a 5). Nenhuma libera nada.
+5. **As travas** entram nas receitas das cidades (a Produção não escolhe uma receita travada). A lista de construções da vila e os níveis de cidade ganham a trava quando alguma coisa desse tipo estiver num `libera`.
+6. **A escolha do jogador** na tela da Tecnologia fica para quando a vila puder ter um Laboratório (o lote grande). Até lá, a janela **Tecnologia** só mostra o que cada facção pesquisa e os marcos.
+7. **A notícia do marco** nasce no mapa do grupo do jogador, para chegar a todos na hora.
+8. **Os dias contam do 0 no código:** a janela dos anos 3 a 5 vai do dia 128 ao 319 (129 a 320 na ficha).
+

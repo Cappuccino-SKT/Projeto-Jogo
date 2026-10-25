@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Simulacao/RelatorioDaSimulacao.h"
 
 #include <chrono>
@@ -5,6 +6,7 @@
 #include "Economia/FelicidadeDaClasse.h"
 #include "Npc/ComponentesDoNpc.h"
 #include "Save/ArquivoDeSave.h"
+#include "Comercio/Comercio.h"
 #include "Vila/SimulacaoDaVila.h"
 
 namespace {
@@ -157,6 +159,16 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
     }
     resultado.textoDoRelatorio = escreverCabecalhoDoRelatorio(dados) + "\n";
 
+    // Fase B2 (Comércio, teste 4): o dinheiro do mundo só muda pelo que entra de fora e pelo que os bandidos levam.
+    const auto entrouDeFora = [](const SimulacaoDaVila& vila) {
+        int64_t total = vila.dinheiro.dinheiroQueEntrouDeFora + vila.faccoes.cunhagemTotal;  // fase C1: a cunhagem é dinheiro novo
+        for (const auto& cidade : vila.outrasCidades) {
+            total += cidade->dinheiro.dinheiroQueEntrouDeFora;
+        }
+        return total;
+    };
+    const int64_t dinheiroDoMundoNoComeco = dinheiroDoMundo(*partida) - entrouDeFora(*partida);
+
     // Passo 3: tick a tick, sem esperar o tempo real, até a meia-noite do último dia.
     const auto comeco = std::chrono::steady_clock::now();
     while (static_cast<int>(resultado.linhas.size()) < quantidadeDeDias) {
@@ -190,6 +202,57 @@ ResultadoDaSimulacaoSemTela rodarASimulacaoSemTela(const DadosDoJogo& dados, int
         }
     }
     conferirOBancoNoFimDoAno(resultado.conferencia, resultado.linhas);
+    if (!partida->outrasCidades.empty()) {
+        resultado.linhasDoConsole.push_back(resumoDoComercio(*partida));
+        // Fase B3: as notícias do mundo.
+        resultado.linhasDoConsole.push_back("Notícias: " + std::to_string(partida->noticias.proximoNumeroDaNoticia - 1) + " criadas, "
+                                            + std::to_string(partida->noticias.ativas.size()) + " ativas no último dia, "
+                                            + std::to_string(partida->noticias.cronicaDoMundo.size()) + " na Crônica do jogador");
+        // Fase B5: a pesquisa do mundo.
+        int descobertas = 0;
+        for (const std::vector<bool>& tem : partida->tecnologia.temATecnologia) {
+            descobertas += static_cast<int>(std::count(tem.begin(), tem.end(), true));
+        }
+        int pontosNoAno = 0;
+        for (const int64_t pontos : partida->tecnologia.pontosAcumulados) {
+            pontosNoAno += static_cast<int>(pontos);
+        }
+        resultado.linhasDoConsole.push_back("Tecnologia: era " + std::to_string(partida->tecnologia.eraAtualDoMundo) + ", " + std::to_string(descobertas)
+                                            + " tecnologias das facções, " + std::to_string(pontosNoAno) + " pontos guardados");
+        // Fase C1: o Banco de cada facção no último dia.
+        std::string bancos = "Facções (Banco):";
+        for (std::size_t faccao = 0; faccao < partida->faccoes.bancoDaFaccao.size(); ++faccao) {
+            bancos += " " + nomeDaFaccao(dados, static_cast<int>(faccao)) + " " + escreverDinheiroEmMoedas(static_cast<int>(partida->faccoes.bancoDaFaccao[faccao])) + ";";
+        }
+        resultado.linhasDoConsole.push_back(bancos);
+        // Fase C3: a Criminalidade do mundo no último dia.
+        int maior = partida->felicidade.criminalidadeEmDecimos;
+        int64_t soma = maior;
+        for (const auto& cidade : partida->outrasCidades) {
+            soma += cidade->felicidade.criminalidadeEmDecimos;
+            maior = std::max(maior, cidade->felicidade.criminalidadeEmDecimos);
+        }
+        const int64_t media = soma / static_cast<int64_t>(partida->outrasCidades.size() + 1);
+        resultado.linhasDoConsole.push_back("Criminalidade: vila " + std::to_string(partida->felicidade.criminalidadeEmDecimos / 10) + "," + std::to_string(partida->felicidade.criminalidadeEmDecimos % 10)
+                                            + "; média do mundo " + std::to_string(media / 10) + "," + std::to_string(media % 10) + "; a maior " + std::to_string(maior / 10) + "," + std::to_string(maior % 10));
+        // As outras cidades no fim: quantas passam fome (CO2-1: as de comida escassa dependem das caravanas).
+        int cidadesComFome = 0;
+        int piorMapa = 0;
+        int piorDias = 0;
+        for (const auto& cidade : partida->outrasCidades) {
+            const int dias = cidade->dinheiro.diasEmDeficitDeComida;
+            cidadesComFome += dias > 0 ? 1 : 0;
+            if (dias > piorDias) {
+                piorDias = dias;
+                piorMapa = cidade->numeroDoMapaDaCidade;
+            }
+        }
+        resultado.linhasDoConsole.push_back("Outras cidades: " + std::to_string(cidadesComFome) + " com fome no último dia"
+                                            + (piorDias > 0 ? " (a pior, o mapa " + std::to_string(piorMapa) + ", há " + std::to_string(piorDias) + " dias)" : "") + ".");
+        const int64_t diferenca = dinheiroDoMundo(*partida) - entrouDeFora(*partida) + partida->estatisticasDoComercio.dinheiroPerdido - dinheiroDoMundoNoComeco;
+        resultado.linhasDoConsole.push_back("Dinheiro do mundo: " + std::string(diferenca == 0 ? "conservado" : "MUDOU " + std::to_string(diferenca) + " décimos")
+                                            + " (fora o que entrou de fora e o que os bandidos levaram).");
+    }
     const auto fim = std::chrono::steady_clock::now();
     resultado.segundosQueLevou = std::chrono::duration<double>(fim - comeco).count();
     resultado.microssegundosPorTick = resultado.ticksRodados > 0 ? resultado.segundosQueLevou * 1e6 / static_cast<double>(resultado.ticksRodados) : 0;

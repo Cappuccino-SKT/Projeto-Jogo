@@ -12,6 +12,7 @@
 
 #include "Producao/OrdemDoJogador.h"
 #include "Producao/ProducaoDaVila.h"
+#include "Viagem/Viagem.h"
 
 struct PedidoTrocarAFilaDeOrdens {
     int indiceDaConstrucao = 0;
@@ -63,9 +64,41 @@ struct PedidoDarLance {
     int64_t lanceEmDecimos = 0;
 };
 
+// Fase B1 (ficha da Viagem, regras 4.1 e 4.6).
+struct PedidoPartirEmViagem {
+    int destino = 0;  // o número do mapa
+    int paesLevados = 0;
+    int64_t dinheiroLevadoEmDecimos = 0;
+    bool marchaForcada = false;
+};
+struct PedidoResolverEncontro {
+    EscolhaNoEncontro escolha = EscolhaNoEncontro::Render;
+};
+// Fase B2 (Comércio, 4.7): comprar ou vender na loja da cidade onde o grupo está, com o que ele leva.
+struct PedidoComercioNaCidade {
+    int numeroDoItem = 0;
+    int quantidade = 0;
+    bool comprar = true;
+};
+// Fase C3 (Crime, 4.4 e 4.6): a escolha na revista e a fiança.
+struct PedidoResolverRevista {
+    int escolha = 0;  // 0 pagar, 1 subornar, 2 fugir (EscolhaNaRevista)
+    int64_t ofertaEmDecimos = 0;
+};
+struct PedidoPagarFianca {};
+// Fase C4 (Religião, 4.9): a oferenda no Templo da Capital Religiosa.
+struct PedidoPeregrinacao {
+    int moedas = 0;
+};
+// Fase B4 (Reputação, 4.2): doar moedas na cidade onde o grupo está.
+struct PedidoDoarNaCidade {
+    int moedas = 0;
+};
+
 using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
                                      PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
-                                     PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance>;
+                                     PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance,
+                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade, PedidoDoarNaCidade, PedidoResolverRevista, PedidoPagarFianca, PedidoPeregrinacao>;
 
 class FilaDePedidosDoJogador {
 public:

@@ -27,6 +27,20 @@ add_library(regras_do_jogo STATIC
     Clima/ClimaDaVila.cpp
     Vila/Trabalho.cpp
     Vila/Populacao.cpp
+    Viagem/MundoDoJogo.cpp
+    Viagem/RegrasDaViagem.cpp
+    Viagem/Viagem.cpp
+    Viagem/ViagemDaVila.cpp
+    Cidades/OutrasCidades.cpp
+    Comercio/Comercio.cpp
+    Noticias/Noticias.cpp
+    Reputacao/Reputacao.cpp
+    Tecnologia/Tecnologia.cpp
+    Faccao/Faccao.cpp
+    Cultura/Cultura.cpp
+    Crime/Crime.cpp
+    Religiao/Religiao.cpp
+    Combate/Combate.cpp
     Vila/SimulacaoDaVila.cpp
     Save/ArquivoDeSave.cpp
     Save/GravarAPartida.cpp

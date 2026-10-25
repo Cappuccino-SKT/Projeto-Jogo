@@ -144,6 +144,12 @@ void lerCamposDoEvento(const Json& objeto, DefinicaoDeEvento& evento, const Cata
         anotarErro("o \"tipo\" precisa ser \"ocasional\", \"condicional\" ou \"data_fixa\"");
     }
     evento.negativo = objeto.contains("negativo") && objeto["negativo"].is_boolean() && objeto["negativo"].get<bool>();
+    if (const auto noticia = objeto.find("noticia"); noticia != objeto.end()) {
+        evento.importanciaDaNoticia = noticia->is_string() ? lerImportanciaDaNoticia(noticia->get<std::string>()) : ImportanciaDaNoticia::Nenhuma;
+        if (evento.importanciaDaNoticia == ImportanciaDaNoticia::Nenhuma) {
+            anotarErro("a \"noticia\" precisa ser \"local\", \"regional\" ou \"mundial\"");
+        }
+    }
 
     if (const auto estacoes = objeto.find("estacoes"); estacoes != objeto.end()) {
         for (const Json& estacao : estacoes->is_array() ? *estacoes : Json::array({*estacoes})) {

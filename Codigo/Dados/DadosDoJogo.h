@@ -17,6 +17,18 @@
 #include "Eventos/DefinicaoDosEventos.h"
 #include "Mapa/MapaLocal.h"
 #include "Vila/VilaInicial.h"
+#include "Viagem/MundoDoJogo.h"
+#include "Viagem/RegrasDaViagem.h"
+#include "Cidades/RegrasDasOutrasCidades.h"
+#include "Comercio/RegrasDoComercio.h"
+#include "Noticias/Noticias.h"
+#include "Reputacao/Reputacao.h"
+#include "Tecnologia/Tecnologia.h"
+#include "Faccao/Faccao.h"
+#include "Cultura/Cultura.h"
+#include "Crime/Crime.h"
+#include "Religiao/Religiao.h"
+#include "Combate/Combate.h"
 
 struct DadosDoJogo {
     TabelaDeTextos tabelaDeTextos;
@@ -29,6 +41,18 @@ struct DadosDoJogo {
     VilaDoJogo vilaInicial;
     CatalogoDeEventos catalogoDeEventos;
     RegrasDoClima regrasDoClima;  // fase A1 (ficha do Clima)
+    MundoDoJogo mundo;            // fase B1 (fichas do Mundo e da Viagem)
+    RegrasDaViagem regrasDaViagem;
+    RegrasDasOutrasCidades regrasDasOutrasCidades;  // fase B1b
+    RegrasDoComercio regrasDoComercio;              // fase B2
+    RegrasDasNoticias regrasDasNoticias;            // fase B3
+    RegrasDaReputacao regrasDaReputacao;            // fase B4
+    CatalogoDaTecnologia tecnologia;                // fase B5
+    CatalogoDasFaccoes faccoes;                     // fase C1
+    CatalogoDasCulturas culturas;                   // fase C2
+    RegrasDoCrime regrasDoCrime;                    // fase C3
+    RegrasDaReligiao regrasDaReligiao;              // fase C4
+    RegrasDoCombate regrasDoCombate;                // fase D1
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }

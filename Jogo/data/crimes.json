@@ -1,0 +1,76 @@
+{
+  "crimes": [
+    {
+      "id": "crime.desacato",
+      "gravidade": 1
+    },
+    {
+      "id": "crime.furto",
+      "gravidade": 2
+    },
+    {
+      "id": "crime.contrabando",
+      "gravidade": 2
+    },
+    {
+      "id": "crime.heresia_sem_livro",
+      "gravidade": 2
+    },
+    {
+      "id": "crime.invasao",
+      "gravidade": 3
+    },
+    {
+      "id": "crime.agressao",
+      "gravidade": 3
+    },
+    {
+      "id": "crime.sedicao",
+      "gravidade": 3
+    },
+    {
+      "id": "crime.heresia",
+      "gravidade": 3
+    },
+    {
+      "id": "crime.assassinato",
+      "gravidade": 5
+    },
+    {
+      "id": "crime.traicao",
+      "gravidade": 5
+    }
+  ],
+  "multa_por_gravidade_ao_quadrado": 25,
+  "recompensa_vezes_a_multa": 2,
+  "recompensa_cai_por_estacao_em_porcento": 10,
+  "cacadores_a_partir_de": 500,
+  "cacadores_chance_por_mil": 100,
+  "revista_por_faixa_em_porcento": {
+    "inimigo": 100,
+    "hostil": 50,
+    "neutro": 10,
+    "amigavel": 5,
+    "aliado": 0
+  },
+  "suborno_base_em_porcento": 20,
+  "suborno_por_multa_oferecida_em_porcento": 40,
+  "suborno_maximo_em_porcento": 90,
+  "dias_de_prisao_por_gravidade": 2,
+  "fianca_vezes_a_multa": 2,
+  "criminalidade": {
+    "base": 10,
+    "por_ponto_de_felicidade_abaixo_de_50": 1,
+    "por_ponto_da_taxa_de_desemprego": 20,
+    "sem_dinheiro_para_2_dias_da_cesta": 15,
+    "passo_por_dia_em_porcento": 10,
+    "felicidade_a_partir_de": 20,
+    "felicidade_por_ponto_acima_em_decimos": -2,
+    "furto_a_partir_de": 25,
+    "furto_por_mil_por_ponto": 1,
+    "furto_tira_em_porcento": 10,
+    "furto_cooldown_em_dias": 8,
+    "ameaca_bandida_a_partir_de": 10,
+    "ameaca_bandida_por_mil_por_ponto": 3
+  }
+}

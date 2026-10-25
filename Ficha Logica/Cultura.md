@@ -210,3 +210,13 @@ O alvo da Felicidade da classe Civil cai de, por exemplo, 58 para **53,2**. A Fe
 4. **CT1-4:** o extremo dá +10 quando a lei está no valor extremo e −15 quando ela está do outro lado do desejo, a 2 passos ou mais dele.
 5. **CT1-5:** a minoria hostil tira 10 × a proporção dela na classe.
 6. **CT1-6:** o migrante tem 75% de chance de ser da região e 25% de uma região vizinha.
+
+### 10.7 Ajustes do código (marco C2, 2026-10-24)
+
+1. **O `culturas.json`** tem as 6 culturas com a região (1 Guerreira, 2 Arcana, 3 Autoritária, 4 Religiosa, 5 Tecnocrata, 6 Escravista), o desejo das leis, o extremo, as afinidades (a tabela do Mundo e Estado Inicial), os pontos de habilidade, o rito e a sucessão. Os pesos da Religiosa e da Tecnocrata seguem as partes 2 e 10.2; os das outras, os pontos de habilidade, o rito e a sucessão são **provisórios**, para o autor revisar. A Guerreira ainda não tem extremo (a Conscrição entra com a Guerra).
+2. **Os pontos de Especialista** ficam guardados: o NPC ainda não tem essa habilidade (TE2-1). Os de Braçal e Manufaturado valem.
+3. **Os pontos de habilidade só valem nas outras cidades:** a vila do jogador fica como no teste de 1 ano (4.1, passo 4).
+4. **O sorteio da cultura do migrante** usa a sequência 8, a partir da semente, do mapa e do número do NPC; não muda os sorteios da População e não precisa de nada a mais no save.
+5. **A vila do jogador** fica na região 3: os moradores são Autoritários. O fator dela é 0 (sem facção).
+6. **O fator é calculado todo dia** com as leis de agora, antes do dia das cidades (junto das leis da Facção), e só para a classe Civil (a única desta versão).
+

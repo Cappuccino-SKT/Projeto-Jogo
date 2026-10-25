@@ -89,6 +89,7 @@ json escreverAProducao(const SimulacaoDaVila& simulacao)
                              {"receitaEscolhida", textoDaReceita(dados, producao.receitaEscolhidaParaOProximoCiclo)},
                              {"cicloComecou", producao.cicloComecou},
                              {"progressoDoCiclo", producao.progressoDoCiclo},
+                             {"pontosDePesquisaGuardados", producao.pontosDePesquisaGuardados},
                              {"restoDaProducaoBracal", producao.restoDaProducaoBracal},
                              {"estaParada", producao.estaParada},
                              {"motivoDaParada", producao.motivoDaParada},
@@ -194,7 +195,11 @@ json escreverAFelicidade(const FelicidadeDaClasse& felicidade)
                 {"consumoAtendido", felicidade.fatoresDoDia.consumoAtendido},
                 {"desempregoERenda", felicidade.fatoresDoDia.desempregoERenda},
                 {"moradia", felicidade.fatoresDoDia.moradia},
-                {"eventosDuradouros", felicidade.fatoresDoDia.eventosDuradouros}};
+                {"eventosDuradouros", felicidade.fatoresDoDia.eventosDuradouros},
+                {"leisECultura", felicidade.fatoresDoDia.leisECultura},
+                {"religiao", felicidade.fatoresDoDia.religiao},
+                {"criminalidade", felicidade.criminalidadeEmDecimos},
+                {"diaDoProximoFurtoPossivel", felicidade.diaDoProximoFurtoPossivel}};
 }
 
 json escreverOsEventos(const SimulacaoDaVila& simulacao)
@@ -238,6 +243,7 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
         json registroDoNpc = json{{"entidade", static_cast<uint32_t>(entt::to_integral(npc))},
                                   {"nome", identidade.nome},
                                   {"classe", identidade.classe},
+                                  {"cultura", identidade.cultura},
                                   {"numero", identidade.numeroDoNpc},
                                   {"casa", casaETrabalho.indiceDaCasa},
                                   {"trabalho", casaETrabalho.indiceDoTrabalho},
@@ -280,6 +286,217 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
     return lista;
 }
 
+const char* nomeDoEncontro(TipoDeEncontro tipo)
+{
+    return tipo == TipoDeEncontro::Bandidos ? "bandidos" : tipo == TipoDeEncontro::MercadorViajante ? "mercador_viajante" : tipo == TipoDeEncontro::Cacadores ? "cacadores" : "nenhum";
+}
+
+// Fase B1 (ficha da Viagem): o grupo do jogador, a névoa e o clima de cada região.
+// Uma entidade em trânsito (o grupo do jogador, fase B1; as caravanas, fase B2).
+json escreverAEntidade(const DadosDoJogo& dados, const EntidadeEmTransito& entidade)
+{
+    json itens = json::object();
+    for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(entidade.quantidadePorItem.size()); ++numeroDoItem) {
+        itens[textoDoItem(dados, numeroDoItem)] = entidade.quantidadePorItem[numeroDoItem];
+    }
+    return json{{"tipoDeEntidade", entidade.tipoDeEntidade},
+                {"emTransito", entidade.emTransito},
+                {"mapaAtual", entidade.mapaAtual},
+                {"proximoMapa", entidade.proximoMapa},
+                {"rota", entidade.rota},
+                {"ticksDoTrecho", entidade.ticksDoTrecho},
+                {"ticksAndadosNoTrecho", entidade.ticksAndadosNoTrecho},
+                {"pessoas", entidade.pessoas},
+                {"montados", entidade.montados},
+                {"cargaAcimaDoLimite", entidade.cargaAcimaDoLimite},
+                {"marchaForcada", entidade.marchaForcada},
+                {"noitesSemDormir", entidade.noitesSemDormir},
+                {"ticksSemDormir", entidade.ticksSemDormir},
+                {"encontroMarcado", nomeDoEncontro(entidade.encontroMarcado.tipo)},
+                {"bandidos", entidade.encontroMarcado.bandidos},
+                {"encontroAcontecendo", entidade.encontroAcontecendo},
+                {"ticksParadoNaLuta", entidade.ticksParadoNaLuta},
+                {"itens", itens},
+                {"dinheiro", entidade.dinheiroEmDecimos},
+                {"vida", entidade.vidaEmPorcento}};
+}
+
+json escreverOsItens(const DadosDoJogo& dados, const std::vector<int>& quantidadePorItem)
+{
+    json itens = json::object();
+    for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(quantidadePorItem.size()); ++numeroDoItem) {
+        itens[textoDoItem(dados, numeroDoItem)] = quantidadePorItem[numeroDoItem];
+    }
+    return itens;
+}
+
+// Fase B1 (ficha da Viagem): o grupo do jogador, a névoa e o clima de cada região; fase B2:
+// os preços que o jogador conhece.
+json escreverAViagem(const SimulacaoDaVila& simulacao)
+{
+    json nevoa = json::array();
+    for (const RegistroDaNevoa& registro : simulacao.viagem.nevoa) {
+        nevoa.push_back(json::array({registro.diaEmQueFoiVisto, registro.dono, registro.nivelDaCidade, static_cast<int>(registro.estado)}));
+    }
+    json climas = json::array();
+    for (const TipoDeClima clima : simulacao.viagem.climaDeHojePorRegiao) {
+        climas.push_back(nomeDoClimaNoArquivo(clima));
+    }
+    json precos = json::array();
+    for (const PrecosConhecidos& daCidade : simulacao.viagem.precosConhecidos) {
+        precos.push_back(json::array({daCidade.diaEmQueFoiVisto, daCidade.precoPorItemEmDecimos}));
+    }
+    return json{{"grupo", escreverAEntidade(simulacao.dados, simulacao.viagem.grupoDoJogador)},
+                {"nevoa", nevoa},
+                {"climaDeHojePorRegiao", climas},
+                {"ameacaBandidaPorRegiao", simulacao.viagem.ameacaBandidaPorRegiao},
+                {"precosConhecidos", precos}};
+}
+
+// Fase B2 (ficha do Comércio): as caravanas da cidade e o que já vai a caminho dela.
+json escreverOComercio(const SimulacaoDaVila& simulacao)
+{
+    json caravanas = json::array();
+    for (const CaravanaDaCidade& caravana : simulacao.caravanas) {
+        caravanas.push_back(json{{"entidade", escreverAEntidade(simulacao.dados, caravana.entidade)},
+                                 {"situacao", static_cast<int>(caravana.situacao)},
+                                 {"destino", caravana.mapaDeDestino},
+                                 {"marcadoNoDestino", escreverOsItens(simulacao.dados, caravana.marcadoNoDestino)},
+                                 {"tickDaPartida", caravana.tickDaPartida}});
+    }
+    return json{{"aCaminhoPorItem", escreverOsItens(simulacao.dados, simulacao.aCaminhoPorItem)}, {"caravanas", caravanas}};
+}
+
+// Fase B3 (ficha das Notícias): as notícias ativas, o que o jogador sabe e a Crônica.
+json escreverAsNoticias(const SimulacaoDaVila& simulacao)
+{
+    const EstadoDasNoticias& noticias = simulacao.noticias;
+    json ativas = json::array();
+    for (const Noticia& noticia : noticias.ativas) {
+        ativas.push_back(json{{"numero", noticia.numeroDaNoticia},
+                              {"tipo", noticia.tipo},
+                              {"importancia", static_cast<int>(noticia.importancia)},
+                              {"mapaDeOrigem", noticia.mapaDeOrigem},
+                              {"tickDeOrigem", noticia.tickDeOrigem},
+                              {"diaDeOrigem", noticia.diaDeOrigem},
+                              {"titulo", noticia.titulo},
+                              {"numeroDoAcontecimento", noticia.numero},
+                              {"rotuloDoNumero", noticia.rotuloDoNumero},
+                              {"porQue", noticia.porQue},
+                              {"diaEmQueSaiDoQuadro", noticia.diaEmQueSaiDoQuadro},
+                              {"item", noticia.numeroDoItem >= 0 ? json(textoDoItem(simulacao.dados, noticia.numeroDoItem)) : json()},
+                              {"preco", noticia.precoEmDecimos}});
+    }
+    json sabidas = json::array();
+    for (const NoticiaQueOJogadorSabe& sabida : noticias.noticiasQueOJogadorSabe) {
+        sabidas.push_back(json::array({sabida.numeroDaNoticia, sabida.diaEmQueSoube, sabida.distancia}));
+    }
+    json cronica = json::array();
+    for (const LinhaDaCronica& linha : noticias.cronicaDoMundo) {
+        cronica.push_back(json::array({linha.numeroDaNoticia, linha.diaDoAcontecimento, linha.diaEmQueSoube, linha.texto}));
+    }
+    json precos = json::array();
+    for (const std::vector<int64_t>& doMapa : noticias.diaDaUltimaNoticiaDePreco) {
+        json porItem = json::object();
+        for (int numeroDoItem = 0; numeroDoItem < static_cast<int>(doMapa.size()); ++numeroDoItem) {
+            if (doMapa[static_cast<std::size_t>(numeroDoItem)] >= 0) {
+                porItem[textoDoItem(simulacao.dados, numeroDoItem)] = doMapa[static_cast<std::size_t>(numeroDoItem)];
+            }
+        }
+        precos.push_back(std::move(porItem));
+    }
+    return json{{"ativas", ativas},
+                {"proximoNumero", noticias.proximoNumeroDaNoticia},
+                {"sabidas", sabidas},
+                {"cronica", cronica},
+                {"diaDaUltimaNoticiaDePreco", precos},
+                {"mapaDoJogadorNaUltimaConferencia", noticias.mapaDoJogadorNaUltimaConferencia}};
+}
+
+// Fase B4 (ficha da Reputação): um registro por dono, com o nome dele.
+json escreverAReputacao(const SimulacaoDaVila& simulacao)
+{
+    const std::vector<std::string> donos = donosDaReputacao(simulacao.dados.mundo);
+    json porDono = json::array();
+    for (std::size_t dono = 0; dono < simulacao.reputacao.reputacaoPorFaccao.size(); ++dono) {
+        json mudancas = json::array();
+        for (const MudancaDaReputacao& mudanca : simulacao.reputacao.ultimasMudancas[dono]) {
+            mudancas.push_back(json::array({mudanca.valor, mudanca.motivo, mudanca.dia}));
+        }
+        porDono.push_back(json{{"dono", dono < donos.size() ? donos[dono] : std::string()},
+                               {"valor", simulacao.reputacao.reputacaoPorFaccao[dono]},
+                               {"base", simulacao.reputacao.basePorFaccao[dono]},
+                               {"ultimasMudancas", mudancas}});
+    }
+    return porDono;
+}
+
+// Fase B5 (ficha da Tecnologia): por pesquisador, as tecnologias pelo id; os marcos pelo id.
+json escreverATecnologia(const SimulacaoDaVila& simulacao)
+{
+    const EstadoDaTecnologia& estado = simulacao.tecnologia;
+    const CatalogoDaTecnologia& catalogo = simulacao.dados.tecnologia;
+    json pesquisadores = json::array();
+    for (std::size_t pesquisador = 0; pesquisador < estado.temATecnologia.size(); ++pesquisador) {
+        json tem = json::array();
+        for (std::size_t tecnologia = 0; tecnologia < catalogo.tecnologias.size(); ++tecnologia) {
+            if (estado.temATecnologia[pesquisador][tecnologia]) {
+                tem.push_back(catalogo.tecnologias[tecnologia].identificadorDeTexto);
+            }
+        }
+        const int projeto = estado.projetoAtual[pesquisador];
+        pesquisadores.push_back(json{{"tecnologias", tem},
+                                     {"projeto", projeto >= 0 ? json(catalogo.tecnologias[static_cast<std::size_t>(projeto)].identificadorDeTexto) : json()},
+                                     {"pontos", estado.pontosAcumulados[pesquisador]}});
+    }
+    json marcos = json::array();
+    for (std::size_t marco = 0; marco < catalogo.marcos.size(); ++marco) {
+        marcos.push_back(json{{"id", catalogo.marcos[marco].identificadorDeTexto}, {"diaSorteado", estado.diaSorteadoPorMarco[marco]}, {"chegou", static_cast<bool>(estado.marcoChegou[marco])}});
+    }
+    return json{{"pesquisadores", pesquisadores}, {"marcos", marcos}, {"eraAtualDoMundo", estado.eraAtualDoMundo}};
+}
+
+// Fase C1 (ficha da Facção): as leis pelo nome da opção, o Banco, o líder e a votação perdida.
+json escreverAsFaccoes(const SimulacaoDaVila& simulacao)
+{
+    const CatalogoDasFaccoes& catalogo = simulacao.dados.faccoes;
+    const EstadoDasFaccoes& estado = simulacao.faccoes;
+    json faccoes = json::array();
+    for (std::size_t faccao = 0; faccao < estado.leisAtuais.size(); ++faccao) {
+        json leis = json::object();
+        for (std::size_t lei = 0; lei < catalogo.leis.size(); ++lei) {
+            leis[catalogo.leis[lei].id] = catalogo.leis[lei].opcoes[static_cast<std::size_t>(estado.leisAtuais[faccao][lei])];
+        }
+        const LiderDaFaccao& lider = estado.lideres[faccao];
+        faccoes.push_back(json{{"id", catalogo.faccoes[faccao].id},
+                               {"leis", leis},
+                               {"banco", estado.bancoDaFaccao[faccao]},
+                               {"lider", json::array({lider.idade, lider.agressividade, lider.sociabilidade, lider.legitimidade})}});
+    }
+    json mudancas = json::array();
+    for (const MudancaDeLei& mudanca : estado.mudancasParaAmanha) {
+        mudancas.push_back(json::array({mudanca.faccao, mudanca.lei, mudanca.valor}));
+    }
+    return json{{"faccoes", faccoes}, {"mudancasParaAmanha", mudancas}, {"perdeuAVotacaoAte", estado.perdeuAVotacaoAte}, {"cunhagemTotal", estado.cunhagemTotal}};
+}
+
+// Fase C3 (ficha do Crime e Justiça): o crime do jogador.
+json escreverOCrime(const SimulacaoDaVila& simulacao)
+{
+    const EstadoDoCrimeDoJogador& crime = simulacao.crimeDoJogador;
+    const RevistaPendente& revista = crime.revista;
+    return json{{"recompensaPorFaccao", crime.recompensaPorFaccao},
+                {"gravidadesNaFicha", crime.gravidadesNaFicha},
+                {"fiancaNaFicha", crime.fiancaNaFicha},
+                {"estacaoDaUltimaHeresia", crime.estacaoDaUltimaHeresia},
+                {"presoAteODia", crime.presoAteODia},
+                {"faccaoDaPrisao", crime.faccaoDaPrisao},
+                {"faccaoDosCacadores", crime.faccaoDosCacadores},
+                {"proximoMapaNaUltimaConferencia", crime.proximoMapaNaUltimaConferencia},
+                {"revista", json{{"ativa", revista.ativa}, {"faccao", revista.faccao}, {"mapa", revista.mapa}, {"mapaAnterior", revista.mapaAnterior},
+                                 {"crimes", revista.crimes}, {"gravidade", revista.gravidade}, {"multa", revista.multa}}}};
+}
+
 json escreverOsDiario(const SimulacaoDaVila& simulacao)
 {
     json lista = json::array();
@@ -298,21 +515,16 @@ std::string escreverADataDoJogoParaOSave(const RelogioDoMundo& relogio)
            std::to_string(relogio.anoAtual()) + ", " + std::to_string(relogio.horaDoDiaAtual()) + "h";
 }
 
-std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, const std::string& nomeDoEspaco, const std::string& dataReal)
+// Tudo o que uma simulação guarda, menos o cabeçalho e o relógio: a vila e, desde a
+// fase B1b, cada uma das outras cidades (Outras cidades, parte 2).
+json escreverASimulacao(const SimulacaoDaVila& simulacao)
 {
     json arvore = json::object();
-    arvore["cabecalho"] = json{{"versaoDoFormato", versaoDoFormatoDoSave},
-                               {"versaoDoJogo", versaoDoJogoNoSave},
-                               {"dataReal", dataReal},
-                               {"dataDoJogo", escreverADataDoJogoParaOSave(simulacao.relogio)},
-                               {"nomeDoEspaco", nomeDoEspaco},
-                               {"tick", simulacao.relogio.tickAtual()}};
-    arvore["relogio"] = json{{"tick", Acesso::tickAtualDaPartida(simulacao.relogio)},
-                             {"velocidade", Acesso::velocidadeDoJogo(simulacao.relogio)},
-                             {"velocidadeAntesDaPausa", Acesso::velocidadeAntesDaPausa(simulacao.relogio)}};
     arvore["sorteios"] = json{{"npcs", escreverOSorteio(Acesso::sorteioDosNpcs(simulacao))}, {"eventos", escreverOSorteio(Acesso::sorteioDosEventos(simulacao))},
                               {"clima", escreverOSorteio(Acesso::sorteioDoClima(simulacao))},
-                              {"populacao", escreverOSorteio(Acesso::sorteioDaPopulacao(simulacao))}};
+                              {"populacao", escreverOSorteio(Acesso::sorteioDaPopulacao(simulacao))},
+                              {"viagem", escreverOSorteio(Acesso::sorteioDaViagem(simulacao))},
+                              {"climaDasOutrasRegioes", escreverOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(simulacao))}};
     arvore["populacao"] = json{{"acumulado", simulacao.populacao.acumuladoDeCrescimentoEmPessoas},
                                {"proximoNumeroDeNpc", simulacao.populacao.proximoNumeroDeNpc},
                                {"diasDeFomeNaEstacao", simulacao.populacao.diasDeFomeNaEstacao}};
@@ -337,5 +549,42 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["decisoes"] = escreverAsDecisoes(simulacao);
     arvore["npcs"] = escreverOsNpcs(simulacao);
     arvore["diario"] = escreverOsDiario(simulacao);
+    arvore["viagem"] = escreverAViagem(simulacao);
+    // Fase C4 (Religião): o festival e a assimilação da cidade.
+    arvore["religiao"] = json{{"diasDoFestival", simulacao.religiao.diasDoFestival},
+                              {"pontosDoFestival", simulacao.religiao.pontosDoFestival},
+                              {"primeiroDiaDoFestival", simulacao.religiao.primeiroDiaDoFestival},
+                              {"diaDeFestival", simulacao.religiao.diaDeFestival},
+                              {"fracaoDeAssimilacao", simulacao.religiao.fracaoDeAssimilacaoEmPessoas}};
+    arvore["comercio"] = escreverOComercio(simulacao);
+    return arvore;
+}
+
+std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, const std::string& nomeDoEspaco, const std::string& dataReal)
+{
+    json arvore = escreverASimulacao(simulacao);
+    arvore["cabecalho"] = json{{"versaoDoFormato", versaoDoFormatoDoSave},
+                               {"versaoDoJogo", versaoDoJogoNoSave},
+                               {"dataReal", dataReal},
+                               {"dataDoJogo", escreverADataDoJogoParaOSave(simulacao.relogio)},
+                               {"nomeDoEspaco", nomeDoEspaco},
+                               {"tick", simulacao.relogio.tickAtual()}};
+    arvore["relogio"] = json{{"tick", Acesso::tickAtualDaPartida(simulacao.relogio)},
+                             {"velocidade", Acesso::velocidadeDoJogo(simulacao.relogio)},
+                             {"velocidadeAntesDaPausa", Acesso::velocidadeAntesDaPausa(simulacao.relogio)}};
+    json cidades = json::array();
+    for (const auto& cidade : simulacao.outrasCidades) {
+        json secao = escreverASimulacao(*cidade);
+        secao["numeroDoMapa"] = cidade->numeroDoMapaDaCidade;
+        cidades.push_back(std::move(secao));
+    }
+    arvore["outrasCidades"] = std::move(cidades);
+    arvore["noticias"] = escreverAsNoticias(simulacao);
+    arvore["reputacao"] = escreverAReputacao(simulacao);
+    arvore["tecnologia"] = escreverATecnologia(simulacao);
+    arvore["faccoes"] = escreverAsFaccoes(simulacao);
+    arvore["crime"] = escreverOCrime(simulacao);
+    arvore["religiaoDoJogador"] = json::array({simulacao.religiaoDoJogador.anoDaUltimaPeregrinacao, simulacao.religiaoDoJogador.estacaoDaUltimaBencao,
+                                               simulacao.religiaoDoJogador.estacaoDoUltimoAtoDeFe});
     return json::to_msgpack(arvore);
 }

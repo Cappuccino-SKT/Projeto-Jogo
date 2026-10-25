@@ -34,6 +34,7 @@
 struct MercadoLocalDaVila;
 struct FelicidadeDaClasse;
 struct EstadoDosEventos;
+struct EstadoDaViagem;
 
 // ---------------------------------------------------------------------------
 // Os componentes do NPC (parte 2).
@@ -43,7 +44,7 @@ struct HabilidadesDoNpc {
     int bracal = 50;
     int manufaturado = 50;
 
-    // A habilidade usada num Trabalho. A fatia não tem Especialistas: 0.
+    // A habilidade usada num Trabalho. TE2-1: até os Ricos chegarem (marco A4), a Especialista é a Manufaturado.
     int habilidadeNoTrabalho(TrabalhoDaReceita trabalho) const;
 };
 
@@ -64,6 +65,7 @@ struct ProducaoDaConstrucao {
     int receitaEscolhidaParaOProximoCiclo = -1;   // a escolha do dia, nas da Cidade
     bool cicloComecou = false;                    // os insumos já saíram
     int64_t progressoDoCiclo = 0;                 // em ticks × porcentagem (parte 5)
+    int pontosDePesquisaGuardados = 0;            // fase B5: os pontos do Laboratório que o passo 7b ainda não somou
     int restoDaProducaoBracal = 0;                // de 0 a 99: a fração de unidade guardada
     bool estaParada = false;
     std::string motivoDaParada;                   // "sem Água", "o estoque encheu", "de folga"...
@@ -94,6 +96,8 @@ struct ProducaoDaConstrucao {
 };
 
 // Tudo o que as regras da produção e da economia usam, junto.
+struct EfeitosDaReligiaoNaCidade;
+
 struct ContextoDaProducao {
     entt::registry& registroDasEntidades;
     const DadosDoJogo& dados;
@@ -122,6 +126,25 @@ struct ContextoDaProducao {
     SorteioComSemente& sorteioDaPopulacao;
     std::vector<entt::entity>& npcsDaVila;
     int ticksPorHoraDeJogo = 800;
+    // Fase B1 (ficha da Viagem): o grupo do jogador, os sorteios das sequências 5 e 9 e o relógio.
+    EstadoDaViagem* viagem = nullptr;
+    SorteioComSemente* sorteioDaViagem = nullptr;
+    SorteioComSemente* sorteioDoClimaDasOutrasRegioes = nullptr;
+    const RelogioDoMundo* relogio = nullptr;
+    // Fase B5 (Tecnologia, 4.5): as receitas que esta cidade pode usar (nulo = todas).
+    const std::vector<bool>* receitasLiberadas = nullptr;
+    // Fase C1 (Facção): o imposto da lei (−1 = o do regras.json), a Felicidade das leis e os
+    // itens proibidos (nulo = nenhum).
+    int impostoDaCidadeEmPorcento = -1;
+    int felicidadeDaFaccaoEmPontos = 0;
+    const std::vector<bool>* itensProibidos = nullptr;
+    // Fase C2 (Cultura): o fator Leis × cultura, o mapa da cidade e o LOD (os pontos de habilidade
+    // da cultura só nas outras cidades: a vila do teste de 1 ano não muda).
+    int fatorLeisECulturaEmDecimos = 0;
+    int numeroDoMapaNoMundo = 0;
+    int lodDoMapa = 0;
+    // Fase C4 (Religião): o que a fé muda nesta cidade (nulo = nada).
+    const EfeitosDaReligiaoNaCidade* efeitosDaReligiao = nullptr;
 };
 
 // ---------------------------------------------------------------------------

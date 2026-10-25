@@ -1,5 +1,7 @@
 #include "Eventos/EventosDaVila.h"
 
+#include "Religiao/Religiao.h"
+
 #include "Vila/Populacao.h"
 #include <algorithm>
 #include <utility>
@@ -182,6 +184,19 @@ void comecarOEvento(ContextoDaProducao& contexto, int indiceDoEvento, int64_t ho
     }
     estado.linhasParaOConsole.push_back("Evento: " + nomeDoEvento(contexto, evento) + " (" + descricao + ").");
     estado.mudancasDeHoje.push_back(nomeDoEvento(contexto, evento) + (evento.ehPontual() ? "" : " começou"));
+    // Fase B3 (ficha das Notícias, parte 2): os números da notícia são pessoas.
+    if (evento.importanciaDaNoticia != ImportanciaDaNoticia::Nenhuma) {
+        AcontecimentoParaNoticia acontecimento{evento.identificadorDeTexto, nomeDoEvento(contexto, evento), evento.importanciaDaNoticia};
+        const int fatorDeEscala = contexto.dados.regras.populacao.fatorDeEscala;
+        if (evento.identificadorDeTexto == "evento.epidemia") {
+            acontecimento.numero = static_cast<int64_t>(contexto.registroDasEntidades.view<DoencaDoNpc>().size()) * fatorDeEscala;
+            acontecimento.rotuloDoNumero = "doentes";
+        } else if (evento.identificadorDeTexto == "evento.fome") {
+            acontecimento.numero = static_cast<int64_t>(contexto.npcsDaVila.size()) * fatorDeEscala;
+            acontecimento.rotuloDoNumero = "pessoas sem comida bastante";
+        }
+        estado.acontecimentosDeHoje.push_back(std::move(acontecimento));
+    }
 }
 
 void terminarOEvento(ContextoDaProducao& contexto, std::size_t posicaoNosAtivos, int64_t hoje)
@@ -247,6 +262,7 @@ void rodarOsEventosDoDia(ContextoDaProducao& contexto, const RelogioDoMundo& rel
     EstadoDosEventos& estado = contexto.eventos;
     const std::vector<DefinicaoDeEvento>& eventos = contexto.dados.catalogoDeEventos.todosOsEventos();
     const int64_t hoje = relogio.diaDaPartida();
+    estado.acontecimentosDeHoje.clear();
 
     // 4.1. Os ativos descontam 1 dia (os condicionais, não: duram enquanto valer).
     for (std::size_t posicao = estado.eventosAtivos.size(); posicao-- > 0;) {
@@ -289,7 +305,9 @@ void rodarOsEventosDoDia(ContextoDaProducao& contexto, const RelogioDoMundo& rel
                 comecarOEvento(contexto, indiceDoEvento, hoje);
             }
         } else if (evento.tipo == TipoDeEvento::DataFixa) {
-            if (relogio.estacaoAtual() == evento.estacaoDaDataFixa && relogio.diaDaEstacaoAtual() == evento.diaDaDataFixa
+            const bool festaDoCalendario = contexto.efeitosDaReligiao != nullptr && contexto.efeitosDaReligiao->semAFestaDaColheitaDaFatia
+                && evento.identificadorDeTexto == "evento.festa_da_colheita";  // fase C4 (RL1-3)
+            if (!festaDoCalendario && relogio.estacaoAtual() == evento.estacaoDaDataFixa && relogio.diaDaEstacaoAtual() == evento.diaDaDataFixa
                 && !estado.eventoEstaAtivo(indiceDoEvento)) {
                 comecarOEvento(contexto, indiceDoEvento, hoje);
             }
@@ -436,7 +454,8 @@ int mortesDasDoencasHojeEmPessoas(const ContextoDaProducao& contexto)
             }
         }
     }
-    return mortes;
+    // Fase C4 (Religião, 4.7): o Templo da Religiosa.
+    return contexto.efeitosDaReligiao != nullptr ? mortes * contexto.efeitosDaReligiao->mortesDaEpidemiaEmPorcento / 100 : mortes;
 }
 
 bool algumaDoencaMataHoje(const ContextoDaProducao& contexto)

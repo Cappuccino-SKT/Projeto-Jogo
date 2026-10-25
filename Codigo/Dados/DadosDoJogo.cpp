@@ -88,6 +88,55 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "clima.json", problemas)) {
         dados.regrasDoClima = lerArquivoDoClima(*texto, problemas);
     }
+
+    // 12. O Mapa Mundial e a Viagem (fase B1, fichas do Mundo e da Viagem).
+    const auto textoDosMapas = lerArquivoInteiro(pastaDosDados, "mundo/mapas.json", problemas);
+    const auto textoDasCidades = lerArquivoInteiro(pastaDosDados, "mundo/cidades_iniciais.json", problemas);
+    if (textoDosMapas && textoDasCidades) {
+        dados.mundo = lerArquivosDoMundo(*textoDosMapas, *textoDasCidades, problemas);
+    }
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "viagem.json", problemas)) {
+        dados.regrasDaViagem = lerArquivoDaViagem(*texto, problemas);
+    }
+    // 13. As outras cidades (fase B1b): o bloco "outras_cidades" do regras.json.
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "regras.json", problemas)) {
+        dados.regrasDasOutrasCidades = lerRegrasDasOutrasCidades(*texto, problemas);
+        dados.regrasDoComercio = lerRegrasDoComercio(*texto, problemas);  // fase B2: o bloco "comercio"
+    }
+    // 14. As Notícias (fase B3).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "noticias.json", problemas)) {
+        dados.regrasDasNoticias = lerArquivoDasNoticias(*texto, problemas);
+    }
+    // 15. A Reputação (fase B4).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "reputacao.json", problemas)) {
+        dados.regrasDaReputacao = lerArquivoDaReputacao(*texto, problemas);
+    }
+    // 16. A Tecnologia (fase B5): as listas provisórias e o bloco "tecnologia" do regras.json.
+    const auto textoDasTecnologias = lerArquivoInteiro(pastaDosDados, "tecnologias.json", problemas);
+    const auto textoDosMarcos = lerArquivoInteiro(pastaDosDados, "marcos.json", problemas);
+    const auto textoDoRegras = lerArquivoInteiro(pastaDosDados, "regras.json", problemas);
+    if (textoDasTecnologias && textoDosMarcos && textoDoRegras) {
+        dados.tecnologia = lerArquivosDaTecnologia(*textoDasTecnologias, *textoDosMarcos, *textoDoRegras, dados, problemas);
+    }
+    // 17. As facções (fase C1) e o que cada cultura deseja das leis.
+    const auto textoDasFaccoes = lerArquivoInteiro(pastaDosDados, "faccoes.json", problemas);
+    const auto textoDasCulturas = lerArquivoInteiro(pastaDosDados, "culturas.json", problemas);
+    if (textoDasFaccoes && textoDasCulturas) {
+        dados.faccoes = lerArquivosDasFaccoes(*textoDasFaccoes, *textoDasCulturas, problemas);
+        dados.culturas = lerArquivoDasCulturas(*textoDasCulturas, dados.faccoes, problemas);  // fase C2
+    }
+    // 18. O Crime e a Justiça (fase C3).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "crimes.json", problemas)) {
+        dados.regrasDoCrime = lerArquivoDosCrimes(*texto, problemas);
+    }
+    // 19. A Religião (fase C4).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "religiao.json", problemas)) {
+        dados.regrasDaReligiao = lerArquivoDaReligiao(*texto, problemas);
+    }
+    // 20. O Combate (fase D1).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "combate.json", problemas)) {
+        dados.regrasDoCombate = lerArquivoDoCombate(*texto, problemas);
+    }
     return dados;
 }
 

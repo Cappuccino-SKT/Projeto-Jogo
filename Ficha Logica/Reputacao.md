@@ -212,3 +212,13 @@ A vila tem 75 Pães (o alvo) a 1,7. Um jogador Aliado compra todos a 99% (1,683,
 4. **RE1-4:** a loja não vende ao jogador abaixo de 2 dias do consumo previsto (vale também para o Comércio).
 5. **RE1-5:** a vila do jogador não tem reputação; é sempre Neutro.
 6. **RE1-6:** até o Início de Jogo, a base é 0 para todas as facções.
+
+### 10.8 Ajustes do código (marco B4, 2026-10-24)
+
+1. **Os 9 donos** são as 6 facções e as 3 Vilas Livres, na ordem do `cidades_iniciais.json`. A vila do jogador (Vila Livre do Centro) fica na lista, mas é sempre Neutro e não aparece na janela (RE1-5).
+2. **O bando vencido** conta no território de uma facção só e também no mapa de uma cidade dela.
+3. **A volta** roda no tick em que a estação começa, depois das outras cidades, e entra no "Por quê?" ("a volta com o tempo"); se ela muda a faixa, também avisa.
+4. **A faixa vale nas lojas das outras cidades**, quando o grupo compra ou vende lá. A loja da vila do jogador não muda (RE1-5).
+5. **A doação:** os botões "Doar 100" e "Doar 500" ficam no painel "Loja desta cidade" do Mapa Mundial; o grupo precisa levar as moedas.
+6. **O `reputacao.json`** ganhou o `texto` de cada faixa ("Amigável") e os `nomes_das_faccoes` para a tela. A `base_por_afinidade` fica no arquivo, sem uso até o Início de Jogo.
+

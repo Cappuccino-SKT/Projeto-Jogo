@@ -6,6 +6,7 @@
 // chamam a mesma avancarUmTick(), então os dois rodam exatamente a mesma partida.
 
 #include <cstdint>
+#include <memory>
 #include <optional>
 #include <string>
 #include <vector>
@@ -29,6 +30,8 @@
 #include "Tempo/RelogioDoMundo.h"
 #include "Tempo/SorteioComSemente.h"
 #include "Clima/ClimaDaVila.h"
+#include "Viagem/ViagemDaVila.h"
+#include "Comercio/CaravanaDaCidade.h"
 
 // Os eventos sorteiam com a sequência 2 (ficha dos Eventos): um NPC a mais não muda os eventos.
 constexpr uint64_t sequenciaDoSorteioDosEventos = 2;
@@ -41,6 +44,10 @@ public:
     // trocar a do vila_inicial.json (jogo --simular 64 --semente 1).
     SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoTempo& regrasDoTempo, int distanciaDoCicloDeAndarEmMilesimos = 2400,
                     std::optional<uint64_t> sementeNoLugarDaDoArquivo = std::nullopt);
+
+    // Fase B1b (Outras cidades, regra 4.1): uma das outras cidades do mundo, em LOD 2. A
+    // semente é a da partida; as sequências são as da cidade (OC1-3).
+    SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoTempo& regrasDoTempo, const CidadeDoMundo& cidade, uint64_t sementeDaPartida);
 
     // Uma cópia levaria junto as referências da vila; não faz sentido.
     SimulacaoDaVila(const SimulacaoDaVila&) = delete;
@@ -56,6 +63,11 @@ public:
     //   5. quem está trabalhando soma 1 tick.
     // Devolve as linhas para o console (os avisos, os eventos e o resumo do dia).
     std::vector<std::string> avancarUmTick();
+
+    // Fase B1b (Outras cidades, regras 4.3 e 4.4): 1 tick de uma cidade em LOD 2. Os NPCs
+    // não andam; na virada da hora, o trabalho presumido e o ciclo de cada construção; na
+    // virada do dia, a ordem do dia inteira.
+    void avancarUmTickEmLod2();
 
     // Marco 8 (Interface, regra 10.8): aplica os pedidos do jogador que estão
     // na fila. O avancarUmTick() faz isso no começo; o laço do jogo também
@@ -88,6 +100,7 @@ public:
     EstadoDoClima clima;  // fase A1 (ficha do Clima)
     EstadoDoTrabalho trabalho;  // fase A2 (ficha do Trabalho): o leilão
     EstadoDaPopulacao populacao;  // fase A3 (ficha da População)
+    EstadoDaViagem viagem;  // fase B1 (ficha da Viagem)
     DecisoesDoJogador decisoes;
     ObrasDaVila obras;
     FilaDePedidosDoJogador pedidos;
@@ -97,15 +110,57 @@ public:
     // A linha do relatório do último dia que acabou (montada na meia-noite,
     // antes de as contas do dia voltarem a zero). Vazia antes da primeira.
     std::optional<LinhaDoRelatorio> linhaDoRelatorioDoUltimoDia;
+    // Fase B1b (Outras cidades): 0 a vila com tela; 2 uma outra cidade. O número do mapa
+    // dela (0 na vila) e, só na vila, as outras cidades, na ordem do número do mapa.
+    int lodDoMapa = 0;
+    int numeroDoMapaDaCidade = 0;
+    std::vector<std::unique_ptr<SimulacaoDaVila>> outrasCidades;
+    // Fase B2 (Comércio): as caravanas desta cidade, o que as caravanas já levam para cá
+    // (por item) e, só na vila, as contas do comércio do mundo.
+    std::vector<CaravanaDaCidade> caravanas;
+    std::vector<int> aCaminhoPorItem;
+    EstatisticasDoComercio estatisticasDoComercio;
+    // Fase B3 (Notícias): só na vila, as notícias do mundo e o que o jogador sabe.
+    EstadoDasNoticias noticias;
+    // Fase B4 (Reputação): só na vila, o que cada facção e Vila Livre pensa do jogador.
+    EstadoDaReputacao reputacao;
+    // Fase B5 (Tecnologia): só na vila, a pesquisa do mundo; em cada cidade, as receitas liberadas.
+    EstadoDaTecnologia tecnologia;
+    std::vector<bool> receitasLiberadas;
+    // Fase C1 (Facção): só na vila, as facções do mundo; em cada cidade, o que vem das leis.
+    EstadoDasFaccoes faccoes;
+    int impostoDaCidadeEmPorcento = -1;
+    int felicidadeDaFaccaoEmPontos = 0;
+    std::vector<int> tarifaDasFaccoesEmPorcento;
+    std::vector<bool> itensProibidos;
+    // Fase C2 (Cultura): o 5º fator da Felicidade, em décimos (calculado com as leis, todo dia).
+    int fatorLeisECulturaEmDecimos = 0;
+    // Fase C3 (Crime e Justiça): só na vila, o crime do jogador (a Recompensa, a prisão, a revista).
+    EstadoDoCrimeDoJogador crimeDoJogador;
+    // Fase C4 (Religião): o festival e a assimilação de cada cidade, o que a fé muda nela e, só
+    // na vila, a peregrinação e a Bênção do jogador.
+    EstadoDaReligiaoDaCidade religiao;
+    EfeitosDaReligiaoNaCidade efeitosDaReligiao;
+    EstadoDaReligiaoDoJogador religiaoDoJogador;
+    // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
+    int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
+    // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).
+    const std::vector<TipoDeClima>& climasDoMundo() const { return viagem.climaDeHojePorRegiao; }
+    // As caravanas sorteiam com a sequência da viagem desta cidade.
+    SorteioComSemente& sorteioDasCaravanas() { return sorteioDaViagem; }
 
 private:
     friend struct AcessoAoEstadoParaOSave;  // o save grava e restaura os sorteios (marco 9)
     // Cada linha do console que merece vira notificação (e entra no Diário).
     void registrarNasNotificacoes(const std::vector<std::string>& linhas, std::size_t aPartirDaLinha);
+    // Zera as contas do dia depois da ordem do dia (as duas formas de avançar).
+    void zerarAsContasDoDia();
     int ticksPorHoraDeJogo = 800;
     BuscadorDeCaminho buscadorDeCaminho;
     SorteioComSemente sorteioDosNpcs;
     SorteioComSemente sorteioDosEventos;
     SorteioComSemente sorteioDoClima;  // a sequência 3
     SorteioComSemente sorteioDaPopulacao;  // a sequência 4
+    SorteioComSemente sorteioDaViagem;  // a sequência 5
+    SorteioComSemente sorteioDoClimaDasOutrasRegioes;  // a sequência 9
 };

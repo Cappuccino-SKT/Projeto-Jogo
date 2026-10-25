@@ -7,6 +7,7 @@
 // Tudo em décimos de ponto (587 = 58,7), para o passo de 10% de uma
 // diferença pequena não se perder.
 
+#include <cstdint>
 #include <string>
 
 // Os números do "felicidade" do regras.json, em pontos (como no arquivo).
@@ -39,7 +40,10 @@ struct SituacaoDoDiaParaAFelicidade {
     long long gastoDaCestaDeHoje = 0;   // em décimos de moeda
     int civisDesempregados = 0;
     int civisSemCasa = 0;
-    int felicidadeDosEventosEmPontos = 0;  // a soma dos eventos ativos (ficha dos Eventos) e o calor forte (Clima)
+    int felicidadeDosEventosEmPontos = 0;
+    int fatorLeisECulturaEmDecimos = 0;  // fase C2: já calculado com as leis da facção
+    int felicidadeDaCriminalidadeEmDecimos = 0;  // fase C3 (Crime, 4.1, passo 3): entra nos eventos
+    int fatorReligiaoEmDecimos = 0;              // fase C4  // a soma dos eventos ativos (ficha dos Eventos) e o calor forte (Clima)
     int pontosDoClimaNoConsumo = 0;        // ficha do Clima, regra 4.4: −10 se faltou lenha hoje
 };
 
@@ -49,14 +53,20 @@ struct FatoresDaFelicidade {
     int desempregoERenda = 0;
     int moradia = 0;
     int eventosDuradouros = 0;
+    int leisECultura = 0;  // fase C2 (Cultura, 4.2 e 4.3), de −30,0 a +10,0
+    int religiao = 0;      // fase C4 (Religião, 4.2 e 4.5)
 
-    int soma() const { return consumoAtendido + desempregoERenda + moradia + eventosDuradouros; }
+    int soma() const { return consumoAtendido + desempregoERenda + moradia + eventosDuradouros + leisECultura + religiao; }
 };
 
 struct FelicidadeDaClasse {
     int felicidadeEmDecimos = 500;
     int alvoEmDecimos = 500;      // não vai no save: recalculado
     FatoresDaFelicidade fatoresDoDia;  // só para o resumo e o relatório
+    // Fase C3 (Crime e Justiça, 4.1 e 4.2): a Criminalidade da cidade, em décimos (11,0 no começo),
+    // e o primeiro dia em que pode haver outro furto no armazém.
+    int criminalidadeEmDecimos = 110;
+    int64_t diaDoProximoFurtoPossivel = 0;
 };
 
 // Regra 4.1.

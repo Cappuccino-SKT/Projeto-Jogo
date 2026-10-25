@@ -253,3 +253,15 @@ Total do dia: **12 Pães**, como nos dois casos inteiros. Nenhum salto.
 4. **OC1-4:** o conjunto de produção da vila inicial a cada 15 NPCs, arredondando para cima.
 5. **OC1-5:** a verba da Coroa de 5 moedas por NPC por estação para as outras cidades.
 6. **OC1-6:** a vila do jogador fica em LOD 1 (tudo, sem tela) quando ele sai (confirma a VI1-7).
+
+### 10.8 Ajustes do código (marco B1b, 2026-10-21)
+
+1. **O trabalho presumido foi medido em 73%**, não 98% (teste 1): a vila em LOD 0 paga 787 de salários por dia; com 98% em LOD 2, pagava 1.060. O caminho até o trabalho, as refeições e o campo dos Braçais tiram mais do que a medida antiga (FL6-7) dizia. Com 73%, os salários, o Pão e a Felicidade batem. **O Banco sozinho não bate** (a Carpintaria do jogador vende mais em LOD 2 e leva o dinheiro); o teste compara o Banco somado ao jogador. As outras cidades não têm construções do jogador.
+2. **O mundo tem 2.750 NPCs**, não 2.765: a vila do jogador já é a Vila Livre do Centro (a conta da parte 5 a contava duas vezes).
+3. **Sem conteúdo de cultura ainda:** a Riqueza vale 1; os pacotes (Templos, Laboratório) e as construções sem receita ficam de fora; os NPCs se chamam "Morador 1", "Morador 2"...
+4. **As casas e o estoque inicial** seguem a proporção da vila inicial (4 casas e o estoque da Cidade para 15 NPCs). O estoque não é "5 dias do consumo previsto": a vila inicial já foi feita assim.
+5. **A criação da cidade sorteia com a sequência 100 + mapa × 10 + 7**, para não gastar os números da sequência dos NPCs (1) antes do dia 1.
+6. **O clima de cada cidade** é o da região dela, sorteado pela viagem (sequência 9); a cidade não sorteia o seu.
+7. **Desempenho:** os empregados de cada construção passaram a ser montados uma vez por passo (a hora, a escolha das receitas, os gerentes). Antes, cada pergunta percorria todos os NPCs; com 300 NPCs e 200 construções, o ano levava 236 segundos. Agora leva cerca de 70 (a vila sozinha leva cerca de 50): bem dentro das 3 vezes do teste 7.
+8. **Entrar numa cidade (4.5 e 4.6)** ainda não existe: nenhum mapa de cidade tem desenho, e todas ficam em LOD 2 (10.5, último caso).
+

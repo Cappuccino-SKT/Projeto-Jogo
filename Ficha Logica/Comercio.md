@@ -266,3 +266,14 @@ D2 ganha (78,1 > 20% de 61,6 = 12,3). A **caravana 1** sai para D2 com 80 Tábua
 5. **CO1-5:** a caravana do jogador não precisa de Posto Comercial; só as das cidades.
 6. **CO1-6:** um destino só entra na conta se o Banco dele tem a reserva de 250 mais o valor da venda.
 7. **CO1-7:** nesta versão, as caravanas das cidades veem os preços de hoje de todas as cidades; com as Notícias, passam a ver os preços que chegaram até elas.
+
+### 10.8 Ajustes do código (marco B2, 2026-10-21)
+
+1. **O Posto Comercial** ainda não existe como construção: as cidades com Posto estão marcadas no `cidades_iniciais.json` (`posto_comercial`), as 6 capitais e a Cidade dos mercados.
+2. **O passo 3b roda depois do dia de todas as cidades** (e não entre o Mercado e o estabilizador de cada uma): a caravana precisa ver as outras cidades, e as cidades rodam uma depois da outra.
+3. **A caravana do jogador (4.9)** fica para quando houver Cavalos no conteúdo. O jogador comercia com o **grupo**: parado numa outra cidade, compra e vende na loja dela (o painel "Loja desta cidade" no Mapa Mundial), pela regra 4.7.
+4. **A faixa da Reputação** (4.7, passo 5) entra com a Reputação.
+5. **A loja da vila** passou a seguir a regra 4.7 também (CO1-3 é para todos): a compra tem a reserva de 2 dias (RE1-4); a venda paga 90% até o alvo e 45% do base além dele.
+6. **O mercador viajante** continua só no console.
+7. **Achado: o comércio quase não acontecia** (de 4 a 11 viagens em 1 ano): toda cidade era autossuficiente. **Rodada CO2, opção A do autor:** onde o recurso de comida é escasso, as Braçais cobrem só 75% do consumo; onde é normal ou de destaque, a cidade fica com o conjunto inteiro (`cobertura_da_comida_escassa_em_porcento` no bloco `outras_cidades`). Muda a MU1-2 do [[Ficha Logica/Mundo|Mundo]].
+

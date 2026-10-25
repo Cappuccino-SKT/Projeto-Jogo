@@ -26,7 +26,7 @@ bool classificarALinhaDoConsole(const ContextoDaProducao& contexto, const std::s
         nivel = NivelDaNotificacao::Aviso;
         return true;
     }
-    if (comeca("Obra pronta:") || comeca("Obra encomendada:")) {
+    if (comeca("Obra pronta:") || comeca("Obra encomendada:") || comeca("Notícia:") || comeca("Reputação:") || comeca("Tecnologia:")) {
         nivel = NivelDaNotificacao::Info;
         return true;
     }

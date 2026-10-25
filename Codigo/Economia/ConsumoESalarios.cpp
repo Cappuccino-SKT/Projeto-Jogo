@@ -1,5 +1,8 @@
 #include "Economia/ConsumoESalarios.h"
 
+#include "Crime/Crime.h"
+#include "Religiao/Religiao.h"
+
 #include "Eventos/EventosDaVila.h"
 #include "Vila/Populacao.h"
 #include "Vila/Trabalho.h"
@@ -120,10 +123,19 @@ void fazerOGastoExtra(ContextoDaProducao& contexto, int materiaisQueACestaTirou)
     dinheiro.gastoExtraDeHoje = 0;
 
     // 1 e 2. O teto do dia (80% da renda de ontem) menos a cesta, sem passar do dinheiro da classe.
-    const int64_t tetoDoDia = dinheiro.rendaDoDiaDaClasseCivil * economia.gastoDaClasseEmPorcentoDaRenda / 100;
+    //    Fase C1 (Facção, FA1-2): com a lei de imposto, o teto é 100% menos a taxa.
+    const int tetoEmPorcento = contexto.impostoDaCidadeEmPorcento >= 0 ? 100 - contexto.impostoDaCidadeEmPorcento : economia.gastoDaClasseEmPorcentoDaRenda;
+    const int64_t tetoDoDia = dinheiro.rendaDoDiaDaClasseCivil * tetoEmPorcento / 100;
     int64_t paraGastar = std::min(tetoDoDia - dinheiro.gastoDaCestaDeHoje, dinheiro.dinheiroDaClasseCivil);
     if (paraGastar <= 0) {
         return;
+    }
+    // Fase C4 (Religião, 4.3): as oferendas saem do gasto extra e vão para o Banco da cidade.
+    if (contexto.efeitosDaReligiao != nullptr && contexto.efeitosDaReligiao->oferendaEmPorcentoDaRenda > 0) {
+        const int64_t oferenda = std::min(paraGastar, dinheiro.rendaDoDiaDaClasseCivil * contexto.efeitosDaReligiao->oferendaEmPorcentoDaRenda / 100);
+        dinheiro.dinheiroDaClasseCivil -= oferenda;
+        dinheiro.bancoDaCidade += oferenda;
+        paraGastar -= oferenda;
     }
     // 3. Materiais a mais: até o mesmo número que a cesta tirou hoje.
     int comprasDoJogador = 0;
@@ -325,7 +337,16 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
             }
             // Passo 4, com o imposto retido na hora (regra 10.7): a parte da
             // cidade vai para o Banco, e o empregado recebe o resto.
-            const int64_t imposto = calcularImpostoDoSalario(salario, economia.imposto);
+            RegrasDoImposto impostoDaCidade = economia.imposto;
+            if (contexto.impostoDaCidadeEmPorcento >= 0) {
+                impostoDaCidade.taxaEmPorcento = contexto.impostoDaCidadeEmPorcento;  // fase C1: a lei da facção
+            }
+            // Fase C4 (Religião, 4.5): na Fé oficial, as minorias pagam 5 pontos a mais.
+            if (contexto.efeitosDaReligiao != nullptr && contexto.efeitosDaReligiao->impostoAMaisDasMinoriasEmPorcento > 0
+                && registro.get<IdentidadeDoNpc>(npc).cultura != contexto.efeitosDaReligiao->culturaBase) {
+                impostoDaCidade.taxaEmPorcento += contexto.efeitosDaReligiao->impostoAMaisDasMinoriasEmPorcento;
+            }
+            const int64_t imposto = calcularImpostoDoSalario(salario, impostoDaCidade);
             dinheiroDeQuemPaga -= salario;
             dinheiro.bancoDaCidade += imposto * economia.imposto.parteDaCidadeEmPorcento / 100;
             dinheiro.dinheiroDaClasseCivil += salario - imposto;
@@ -379,8 +400,10 @@ void rodarOEstabilizador(ContextoDaProducao& contexto, const RelogioDoMundo& rel
     // 1. No dia 1 de cada estação, entra a verba da Coroa (FE4-1: o único dinheiro de
     //    fora além do Mercador) e o teto recomeça.
     if (relogio.diaDaEstacaoAtual() == 1) {
-        dinheiro.bancoDaCidade += economia.verbaDaCoroaPorEstacaoEmDecimos;
-        dinheiro.dinheiroQueEntrouDeFora += economia.verbaDaCoroaPorEstacaoEmDecimos;
+        // As outras cidades têm a verba delas (Outras cidades, 4.7).
+        const int64_t verba = contexto.vila.verbaDaCoroaPorEstacaoEmDecimos >= 0 ? contexto.vila.verbaDaCoroaPorEstacaoEmDecimos : economia.verbaDaCoroaPorEstacaoEmDecimos;
+        dinheiro.bancoDaCidade += verba;
+        dinheiro.dinheiroQueEntrouDeFora += verba;
         dinheiro.bancoNoComecoDaEstacao = dinheiro.bancoDaCidade;
         dinheiro.ajudaDoEstabilizadorNaEstacao = 0;
     }
@@ -419,7 +442,13 @@ void rodarAFelicidadeDoDia(ContextoDaProducao& contexto)
          contexto.registroDasEntidades.view<IdentidadeDoNpc, CasaETrabalhoDoNpc, TrabalhoDoDia>().each()) {
         situacao.civisSemCasa += identidade.classe == "civil" && casaETrabalho.indiceDaCasa < 0 ? 1 : 0;
     }
-    situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto);
+    situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto) + contexto.felicidadeDaFaccaoEmPontos;
+    situacao.fatorLeisECulturaEmDecimos = contexto.fatorLeisECulturaEmDecimos;
+    situacao.felicidadeDaCriminalidadeEmDecimos = felicidadeDaCriminalidadeEmDecimos(contexto.felicidade.criminalidadeEmDecimos, contexto.dados.regrasDoCrime);
+    if (contexto.efeitosDaReligiao != nullptr) {  // fase C4: o 6º fator e o festival (nos eventos)
+        situacao.fatorReligiaoEmDecimos = contexto.efeitosDaReligiao->fatorEmDecimos;
+        situacao.felicidadeDosEventosEmPontos += contexto.efeitosDaReligiao->felicidadeDoFestivalEmPontos;
+    }
     situacao.pontosDoClimaNoConsumo = pontosDoClimaNoConsumoAtendido(contexto);
 
     FelicidadeDaClasse& felicidade = contexto.felicidade;
@@ -452,6 +481,7 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
             break;
         case PassoDaOrdemDoDia::Consumo:
             consumirACestaDoDia(contexto);
+            comprarAComidaDoFestival(contexto);  // fase C4 (Religião, 4.4, passo 4)
             break;
         case PassoDaOrdemDoDia::Salarios: {
             // O gerente de cada construção é escolhido antes dos salários (ficha da Construção).
@@ -479,9 +509,16 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
         case PassoDaOrdemDoDia::Estabilizador:
             rodarOEstabilizador(contexto, relogio);
             break;
-        case PassoDaOrdemDoDia::Felicidade:
+        case PassoDaOrdemDoDia::Felicidade: {
             rodarAFelicidadeDoDia(contexto);
+            // Fase C3 (Crime, passo 5b): a Criminalidade, com a Felicidade de hoje.
+            const int civis = contexto.dinheiro.quantidadeDeCivis;
+            const int64_t doisDiasDaCesta = 2 * calcularCestaDeUmCivilEmDecimos(contexto) * civis / std::max(1, contexto.dados.regras.economia.diasEntreMateriaisDoCivil);
+            const std::vector<std::string> linhasDoCrime =
+                rodarACriminalidadeDoDia(contexto, civis, contarOsDesempregados(contexto), contexto.dinheiro.dinheiroDaClasseCivil < doisDiasDaCesta);
+            linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDoCrime.begin(), linhasDoCrime.end());
             break;
+        }
         case PassoDaOrdemDoDia::Eventos:
             rodarOsEventosDoDia(contexto, relogio);
             linhasParaOConsole.insert(linhasParaOConsole.end(), contexto.eventos.linhasParaOConsole.begin(), contexto.eventos.linhasParaOConsole.end());

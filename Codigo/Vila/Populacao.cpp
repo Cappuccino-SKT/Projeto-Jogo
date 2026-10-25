@@ -1,5 +1,7 @@
 #include "Vila/Populacao.h"
 
+#include "Cultura/Cultura.h"
+
 #include <algorithm>
 
 #include "Construcao/ContasDasConstrucoes.h"
@@ -169,7 +171,7 @@ entt::entity trazerUmNpc(ContextoDaProducao& contexto, bool ehMigrante, std::vec
     const int idade = sorteio.sortearNumeroInteiroEntre(regras.idadeDoMigranteMinima, regras.idadeDoMigranteMaxima);
     const int bracal = sorteio.sortearNumeroInteiroEntre(regras.habilidadeDoMigranteMinima, regras.habilidadeDoMigranteMaxima);
     const int manufaturado = sorteio.sortearNumeroInteiroEntre(regras.habilidadeDoMigranteMinima, regras.habilidadeDoMigranteMaxima);
-    const entt::entity npc = criarNpcNaVila(contexto, idade, bracal, manufaturado);
+    const entt::entity npc = criarNpcNaVila(contexto, idade, bracal, manufaturado, true);
     if (npc != entt::null) {
         ++contexto.populacao.migracaoDeHoje;
         linhas.push_back("População: " + nomeDoNpc(contexto, npc) + " chegou à vila.");
@@ -203,9 +205,12 @@ void resolverOAcumulado(ContextoDaProducao& contexto, std::vector<std::string>& 
 
 int capacidadeDaVila(const ContextoDaProducao& contexto)
 {
-    // A vila é de nível 1 até a ficha da Cidade (fase A5).
+    // A vila é de nível 1 até a ficha da Cidade (fase A5); as outras cidades têm o nível delas (B1b).
     const std::vector<int>& capacidades = contexto.dados.regras.populacao.capacidadePorNivelDaCidade;
-    return capacidades.empty() ? 15 : capacidades.front();
+    if (capacidades.empty()) {
+        return 15;
+    }
+    return capacidades[static_cast<std::size_t>(std::clamp(contexto.vila.nivelDaCidade, 1, static_cast<int>(capacidades.size())) - 1)];
 }
 
 int calcularCrescimentoDaEstacao(int npcsReais, int felicidadeEmDecimos, bool houveFome, const RegrasDaPopulacao& regras)
@@ -228,7 +233,7 @@ int chanceDeMorrerDeVelhice(int idade, bool invernoRigoroso, const RegrasDaPopul
     return invernoRigoroso ? chance * regras.velhiceNoInvernoRigorosoEmPorcento / 100 : chance;
 }
 
-entt::entity criarNpcNaVila(ContextoDaProducao& contexto, int idade, int habilidadeBracal, int habilidadeManufaturado)
+entt::entity criarNpcNaVila(ContextoDaProducao& contexto, int idade, int habilidadeBracal, int habilidadeManufaturado, bool ehMigrante)
 {
     const int casa = casaComMaisCamasLivres(contexto);
     if (casa < 0) {
@@ -248,7 +253,13 @@ entt::entity criarNpcNaVila(ContextoDaProducao& contexto, int idade, int habilid
     entt::registry& registro = contexto.registroDasEntidades;
     // Aparece na porta da casa (o ponto "entrada_do_mapa" do Tiled fica para quando o mapa o tiver).
     const entt::entity npc = criarNpcNoTile(registro, contexto.vila.construcoes[casa].tileDaPorta);
-    registro.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{nome, "civil", numero});
+    const std::string cultura = ehMigrante ? escolherCulturaDoMigrante(contexto.dados, contexto.numeroDoMapaNoMundo, contexto.vila.sementeDaPartida, numero)
+                                           : culturaBaseDaCidade(contexto.dados, contexto.numeroDoMapaNoMundo);
+    if (contexto.lodDoMapa == 2) {
+        habilidadeBracal = habilidadeComACultura(contexto.dados, cultura, "bracal", habilidadeBracal);
+        habilidadeManufaturado = habilidadeComACultura(contexto.dados, cultura, "manufaturado", habilidadeManufaturado);
+    }
+    registro.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{nome, "civil", numero, cultura});
     registro.emplace<CasaETrabalhoDoNpc>(npc, CasaETrabalhoDoNpc{casa, -1, -1});
     DecisaoDoNpc decisao;
     decisao.indiceDaConstrucaoOndeEsta = casa;

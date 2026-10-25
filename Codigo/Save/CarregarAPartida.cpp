@@ -151,6 +151,265 @@ void restaurarOClima(SimulacaoDaVila& partida, const json& secao)
     guardarODiaDeHojeNoClima(partida.clima, partida.relogio);
 }
 
+TipoDeEncontro lerOEncontroDoSave(const json& nome)
+{
+    const std::string texto = nome.get<std::string>();
+    if (texto == "bandidos") {
+        return TipoDeEncontro::Bandidos;
+    }
+    if (texto == "mercador_viajante") {
+        return TipoDeEncontro::MercadorViajante;
+    }
+    if (texto == "cacadores") {
+        return TipoDeEncontro::Cacadores;
+    }
+    if (texto != "nenhum") {
+        throw RecusaDoSave("O save tem um encontro que o jogo não conhece (" + texto + ").");
+    }
+    return TipoDeEncontro::Nenhum;
+}
+
+// Uma entidade em trânsito (o grupo do jogador e as caravanas).
+void restaurarAEntidade(const DadosDoJogo& dados, EntidadeEmTransito& entidade, const json& entrada)
+{
+    entidade.tipoDeEntidade = entrada.at("tipoDeEntidade").get<std::string>();
+    entidade.emTransito = entrada.at("emTransito").get<bool>();
+    entidade.mapaAtual = entrada.at("mapaAtual").get<int>();
+    entidade.proximoMapa = entrada.at("proximoMapa").get<int>();
+    entidade.rota = entrada.at("rota").get<std::vector<int>>();
+    entidade.ticksDoTrecho = entrada.at("ticksDoTrecho").get<int>();
+    entidade.ticksAndadosNoTrecho = entrada.at("ticksAndadosNoTrecho").get<int>();
+    entidade.pessoas = entrada.at("pessoas").get<int>();
+    entidade.montados = entrada.at("montados").get<bool>();
+    entidade.cargaAcimaDoLimite = entrada.at("cargaAcimaDoLimite").get<bool>();
+    entidade.marchaForcada = entrada.at("marchaForcada").get<bool>();
+    entidade.noitesSemDormir = entrada.at("noitesSemDormir").get<int>();
+    entidade.ticksSemDormir = entrada.at("ticksSemDormir").get<int>();
+    entidade.encontroMarcado = EncontroMarcado{lerOEncontroDoSave(entrada.at("encontroMarcado")), entrada.at("bandidos").get<int>()};
+    entidade.encontroAcontecendo = entrada.at("encontroAcontecendo").get<bool>();
+    entidade.ticksParadoNaLuta = entrada.at("ticksParadoNaLuta").get<int>();
+    entidade.dinheiroEmDecimos = entrada.at("dinheiro").get<int64_t>();
+    entidade.vidaEmPorcento = entrada.at("vida").get<int>();
+    exigirTodosOsItens(dados, entrada.at("itens"), "viagem");
+    entidade.quantidadePorItem.assign(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    paraCadaItem(dados, entrada.at("itens"), [&](int numeroDoItem, const json& quantidade) {
+        entidade.quantidadePorItem[static_cast<std::size_t>(numeroDoItem)] = quantidade.get<int>();
+    });
+}
+
+std::vector<int> lerOsItens(const DadosDoJogo& dados, const json& objeto, const char* secao)
+{
+    exigirTodosOsItens(dados, objeto, secao);
+    std::vector<int> quantidades(static_cast<std::size_t>(dados.catalogoDeItens.quantidadeDeItens()), 0);
+    paraCadaItem(dados, objeto, [&](int numeroDoItem, const json& quantidade) { quantidades[static_cast<std::size_t>(numeroDoItem)] = quantidade.get<int>(); });
+    return quantidades;
+}
+
+// Fase B2 (ficha do Comércio).
+void restaurarOComercio(SimulacaoDaVila& partida, const json& secao)
+{
+    partida.aCaminhoPorItem = lerOsItens(partida.dados, secao.at("aCaminhoPorItem"), "comercio");
+    const json& caravanas = secao.at("caravanas");
+    if (caravanas.size() != partida.caravanas.size()) {
+        throw RecusaDoSave("O save tem outra quantidade de caravanas.");
+    }
+    for (std::size_t numero = 0; numero < caravanas.size(); ++numero) {
+        CaravanaDaCidade& caravana = partida.caravanas[numero];
+        restaurarAEntidade(partida.dados, caravana.entidade, caravanas[numero].at("entidade"));
+        caravana.situacao = static_cast<SituacaoDaCaravana>(caravanas[numero].at("situacao").get<int>());
+        caravana.mapaDeDestino = caravanas[numero].at("destino").get<int>();
+        caravana.marcadoNoDestino = lerOsItens(partida.dados, caravanas[numero].at("marcadoNoDestino"), "comercio");
+        caravana.tickDaPartida = caravanas[numero].at("tickDaPartida").get<int64_t>();
+    }
+}
+
+// Fase C3 (ficha do Crime e Justiça).
+void restaurarOCrime(SimulacaoDaVila& partida, const json& secao)
+{
+    EstadoDoCrimeDoJogador& crime = partida.crimeDoJogador;
+    crime.recompensaPorFaccao = secao.at("recompensaPorFaccao").get<std::vector<int>>();
+    crime.gravidadesNaFicha = secao.at("gravidadesNaFicha").get<std::vector<int>>();
+    crime.fiancaNaFicha = secao.at("fiancaNaFicha").get<std::vector<int>>();
+    crime.estacaoDaUltimaHeresia = secao.at("estacaoDaUltimaHeresia").get<std::vector<int>>();
+    if (crime.recompensaPorFaccao.size() != partida.dados.faccoes.faccoes.size()) {
+        throw RecusaDoSave("O save tem o crime de outra quantidade de facções.");
+    }
+    crime.presoAteODia = secao.at("presoAteODia").get<int64_t>();
+    crime.faccaoDaPrisao = secao.at("faccaoDaPrisao").get<int>();
+    crime.faccaoDosCacadores = secao.at("faccaoDosCacadores").get<int>();
+    crime.proximoMapaNaUltimaConferencia = secao.at("proximoMapaNaUltimaConferencia").get<int>();
+    const json& revista = secao.at("revista");
+    crime.revista = RevistaPendente{revista.at("ativa").get<bool>(), revista.at("faccao").get<int>(), revista.at("mapa").get<int>(), revista.at("mapaAnterior").get<int>(),
+                                    revista.at("crimes").get<std::vector<std::string>>(), revista.at("gravidade").get<int>(), revista.at("multa").get<int>()};
+}
+
+// Fase C1 (ficha da Facção).
+void restaurarAsFaccoes(SimulacaoDaVila& partida, const json& secao)
+{
+    const CatalogoDasFaccoes& catalogo = partida.dados.faccoes;
+    EstadoDasFaccoes& estado = partida.faccoes;
+    const json& faccoes = secao.at("faccoes");
+    if (faccoes.size() != catalogo.faccoes.size()) {
+        throw RecusaDoSave("O save tem outra quantidade de facções.");
+    }
+    for (std::size_t faccao = 0; faccao < faccoes.size(); ++faccao) {
+        const json& entrada = faccoes[faccao];
+        if (entrada.at("id").get<std::string>() != catalogo.faccoes[faccao].id) {
+            throw RecusaDoSave("O save tem outras facções.");
+        }
+        for (std::size_t lei = 0; lei < catalogo.leis.size(); ++lei) {
+            const std::vector<std::string>& opcoes = catalogo.leis[lei].opcoes;
+            const auto opcao = std::find(opcoes.begin(), opcoes.end(), entrada.at("leis").at(catalogo.leis[lei].id).get<std::string>());
+            if (opcao == opcoes.end()) {
+                throw RecusaDoSave("O save tem uma lei com uma opção que o jogo não conhece.");
+            }
+            estado.leisAtuais[faccao][lei] = static_cast<int>(opcao - opcoes.begin());
+        }
+        estado.bancoDaFaccao[faccao] = entrada.at("banco").get<int64_t>();
+        const json& lider = entrada.at("lider");
+        estado.lideres[faccao] = LiderDaFaccao{lider.at(0).get<int>(), lider.at(1).get<int>(), lider.at(2).get<int>(), lider.at(3).get<int>()};
+    }
+    estado.mudancasParaAmanha.clear();
+    for (const json& mudanca : secao.at("mudancasParaAmanha")) {
+        estado.mudancasParaAmanha.push_back({mudanca.at(0).get<int>(), mudanca.at(1).get<int>(), mudanca.at(2).get<int>()});
+    }
+    estado.perdeuAVotacaoAte = secao.at("perdeuAVotacaoAte").get<std::vector<int64_t>>();
+    estado.cunhagemTotal = secao.at("cunhagemTotal").get<int64_t>();
+}
+
+// Fase B5 (ficha da Tecnologia).
+void restaurarATecnologia(SimulacaoDaVila& partida, const json& secao)
+{
+    EstadoDaTecnologia& estado = partida.tecnologia;
+    const CatalogoDaTecnologia& catalogo = partida.dados.tecnologia;
+    const auto posicaoDaTecnologia = [&](const std::string& id) {
+        for (std::size_t posicao = 0; posicao < catalogo.tecnologias.size(); ++posicao) {
+            if (catalogo.tecnologias[posicao].identificadorDeTexto == id) {
+                return static_cast<int>(posicao);
+            }
+        }
+        throw RecusaDoSave("O save tem a tecnologia " + id + ", que o jogo não conhece.");
+    };
+    const json& pesquisadores = secao.at("pesquisadores");
+    if (pesquisadores.size() != estado.temATecnologia.size()) {
+        throw RecusaDoSave("O save tem a tecnologia de outra quantidade de facções.");
+    }
+    for (std::size_t pesquisador = 0; pesquisador < pesquisadores.size(); ++pesquisador) {
+        const json& entrada = pesquisadores[pesquisador];
+        std::fill(estado.temATecnologia[pesquisador].begin(), estado.temATecnologia[pesquisador].end(), false);
+        for (const json& id : entrada.at("tecnologias")) {
+            estado.temATecnologia[pesquisador][static_cast<std::size_t>(posicaoDaTecnologia(id.get<std::string>()))] = true;
+        }
+        estado.projetoAtual[pesquisador] = entrada.at("projeto").is_null() ? -1 : posicaoDaTecnologia(entrada.at("projeto").get<std::string>());
+        estado.pontosAcumulados[pesquisador] = entrada.at("pontos").get<int64_t>();
+    }
+    const json& marcos = secao.at("marcos");
+    if (marcos.size() != catalogo.marcos.size()) {
+        throw RecusaDoSave("O save tem outra quantidade de marcos.");
+    }
+    for (std::size_t marco = 0; marco < marcos.size(); ++marco) {
+        if (marcos[marco].at("id").get<std::string>() != catalogo.marcos[marco].identificadorDeTexto) {
+            throw RecusaDoSave("O save tem outros marcos.");
+        }
+        estado.diaSorteadoPorMarco[marco] = marcos[marco].at("diaSorteado").get<int64_t>();
+        estado.marcoChegou[marco] = marcos[marco].at("chegou").get<bool>();
+    }
+    estado.eraAtualDoMundo = secao.at("eraAtualDoMundo").get<int>();
+}
+
+// Fase B4 (ficha da Reputação).
+void restaurarAReputacao(SimulacaoDaVila& partida, const json& secao)
+{
+    const std::vector<std::string> donos = donosDaReputacao(partida.dados.mundo);
+    if (secao.size() != donos.size()) {
+        throw RecusaDoSave("O save tem a reputação de outra quantidade de facções.");
+    }
+    EstadoDaReputacao& reputacao = partida.reputacao;
+    for (std::size_t dono = 0; dono < donos.size(); ++dono) {
+        const json& entrada = secao[dono];
+        if (entrada.at("dono").get<std::string>() != donos[dono]) {
+            throw RecusaDoSave("O save tem a reputação de outras facções.");
+        }
+        reputacao.reputacaoPorFaccao[dono] = entrada.at("valor").get<int>();
+        reputacao.basePorFaccao[dono] = entrada.at("base").get<int>();
+        reputacao.ultimasMudancas[dono].clear();
+        for (const json& mudanca : entrada.at("ultimasMudancas")) {
+            reputacao.ultimasMudancas[dono].push_back({mudanca.at(0).get<int>(), mudanca.at(1).get<std::string>(), mudanca.at(2).get<int64_t>()});
+        }
+    }
+}
+
+// Fase B3 (ficha das Notícias).
+void restaurarAsNoticias(SimulacaoDaVila& partida, const json& secao)
+{
+    EstadoDasNoticias& noticias = partida.noticias;
+    noticias = EstadoDasNoticias{};
+    for (const json& entrada : secao.at("ativas")) {
+        Noticia noticia;
+        noticia.numeroDaNoticia = entrada.at("numero").get<int64_t>();
+        noticia.tipo = entrada.at("tipo").get<std::string>();
+        noticia.importancia = static_cast<ImportanciaDaNoticia>(entrada.at("importancia").get<int>());
+        noticia.mapaDeOrigem = entrada.at("mapaDeOrigem").get<int>();
+        noticia.tickDeOrigem = entrada.at("tickDeOrigem").get<int64_t>();
+        noticia.diaDeOrigem = entrada.at("diaDeOrigem").get<int64_t>();
+        noticia.titulo = entrada.at("titulo").get<std::string>();
+        noticia.numero = entrada.at("numeroDoAcontecimento").get<int64_t>();
+        noticia.rotuloDoNumero = entrada.at("rotuloDoNumero").get<std::string>();
+        noticia.porQue = entrada.at("porQue").get<std::string>();
+        noticia.diaEmQueSaiDoQuadro = entrada.at("diaEmQueSaiDoQuadro").get<int64_t>();
+        if (!entrada.at("item").is_null()) {
+            const auto numeroDoItem = partida.dados.catalogoDeItens.procurarNumeroDoItem(entrada.at("item").get<std::string>());
+            if (!numeroDoItem) {
+                throw RecusaDoSave("Uma notícia de preço fala de um item que o jogo não conhece.");
+            }
+            noticia.numeroDoItem = *numeroDoItem;
+        }
+        noticia.precoEmDecimos = entrada.at("preco").get<int>();
+        noticias.ativas.push_back(std::move(noticia));
+    }
+    noticias.proximoNumeroDaNoticia = secao.at("proximoNumero").get<int64_t>();
+    for (const json& sabida : secao.at("sabidas")) {
+        noticias.noticiasQueOJogadorSabe.push_back({sabida.at(0).get<int64_t>(), sabida.at(1).get<int64_t>(), sabida.at(2).get<int>()});
+    }
+    for (const json& linha : secao.at("cronica")) {
+        noticias.cronicaDoMundo.push_back({linha.at(0).get<int64_t>(), linha.at(1).get<int64_t>(), linha.at(2).get<int64_t>(), linha.at(3).get<std::string>()});
+    }
+    const int quantidadeDeItens = partida.dados.catalogoDeItens.quantidadeDeItens();
+    for (const json& doMapa : secao.at("diaDaUltimaNoticiaDePreco")) {
+        std::vector<int64_t> dias(static_cast<std::size_t>(quantidadeDeItens), -1);
+        paraCadaItem(partida.dados, doMapa, [&](int numeroDoItem, const json& dia) { dias[static_cast<std::size_t>(numeroDoItem)] = dia.get<int64_t>(); });
+        noticias.diaDaUltimaNoticiaDePreco.push_back(std::move(dias));
+    }
+    noticias.mapaDoJogadorNaUltimaConferencia = secao.at("mapaDoJogadorNaUltimaConferencia").get<int>();
+}
+
+// Fase B1 (ficha da Viagem).
+void restaurarAViagem(SimulacaoDaVila& partida, const json& secao)
+{
+    restaurarAEntidade(partida.dados, partida.viagem.grupoDoJogador, secao.at("grupo"));
+    const json& nevoa = secao.at("nevoa");
+    if (nevoa.size() != partida.viagem.nevoa.size()) {
+        throw RecusaDoSave("O save tem uma névoa de " + std::to_string(nevoa.size()) + " mapas, e o mundo tem " + std::to_string(partida.viagem.nevoa.size()) + ".");
+    }
+    for (std::size_t mapa = 0; mapa < nevoa.size(); ++mapa) {
+        partida.viagem.nevoa[mapa] = RegistroDaNevoa{nevoa[mapa].at(0).get<int64_t>(), nevoa[mapa].at(1).get<std::string>(), nevoa[mapa].at(2).get<int>(),
+                                                     static_cast<EstadoDoTerritorio>(nevoa[mapa].at(3).get<int>())};
+    }
+    partida.viagem.ameacaBandidaPorRegiao = secao.at("ameacaBandidaPorRegiao").get<std::vector<int>>();
+    const json& precos = secao.at("precosConhecidos");
+    if (precos.size() != partida.viagem.precosConhecidos.size()) {
+        throw RecusaDoSave("O save tem os preços de outra quantidade de mapas.");
+    }
+    for (std::size_t mapa = 0; mapa < precos.size(); ++mapa) {
+        partida.viagem.precosConhecidos[mapa] = PrecosConhecidos{precos[mapa].at(0).get<int64_t>(), precos[mapa].at(1).get<std::vector<int>>()};
+    }
+    const json& climas = secao.at("climaDeHojePorRegiao");
+    partida.viagem.climaDeHojePorRegiao.clear();
+    for (const json& clima : climas) {
+        partida.viagem.climaDeHojePorRegiao.push_back(lerOClimaDoSave(clima));
+    }
+}
+
 void restaurarOSorteio(SorteioComSemente& sorteio, const json& dadosDoSorteio)
 {
     Acesso::estadoDoGerador(sorteio) = dadosDoSorteio.at("estado").get<uint64_t>();
@@ -169,7 +428,7 @@ void restaurarAVila(SimulacaoDaVila& simulacao, const json& lista)
             throw RecusaDoSave("O save usa a " + construcao.tipo + ", que não existe mais.");
         }
         construcao.numeroDoLote = linha.at("lote").get<int>();
-        bool loteExiste = false;
+        bool loteExiste = construcao.numeroDoLote < 0 && simulacao.lodDoMapa == 2;  // as outras cidades não têm lotes (B1b)
         for (const LoteDeConstrucao& lote : simulacao.mapa.lotesDeConstrucao) {
             loteExiste = loteExiste || lote.identificadorDoLote == construcao.numeroDoLote;
         }
@@ -208,6 +467,7 @@ void restaurarAProducao(SimulacaoDaVila& simulacao, const json& lista)
         producao.receitaEscolhidaParaOProximoCiclo = indiceDaReceitaPeloTexto(dados, linha.at("receitaEscolhida"));
         producao.cicloComecou = linha.at("cicloComecou").get<bool>();
         producao.progressoDoCiclo = linha.at("progressoDoCiclo").get<int64_t>();
+        producao.pontosDePesquisaGuardados = linha.at("pontosDePesquisaGuardados").get<int>();
         producao.restoDaProducaoBracal = linha.at("restoDaProducaoBracal").get<int>();
         producao.estaParada = linha.at("estaParada").get<bool>();
         producao.motivoDaParada = linha.at("motivoDaParada").get<std::string>();
@@ -338,6 +598,10 @@ void restaurarAFelicidade(FelicidadeDaClasse& felicidade, const json& linha)
     felicidade.fatoresDoDia.desempregoERenda = linha.at("desempregoERenda").get<int>();
     felicidade.fatoresDoDia.moradia = linha.at("moradia").get<int>();
     felicidade.fatoresDoDia.eventosDuradouros = linha.at("eventosDuradouros").get<int>();
+    felicidade.fatoresDoDia.leisECultura = linha.at("leisECultura").get<int>();
+    felicidade.fatoresDoDia.religiao = linha.at("religiao").get<int>();
+    felicidade.criminalidadeEmDecimos = linha.at("criminalidade").get<int>();
+    felicidade.diaDoProximoFurtoPossivel = linha.at("diaDoProximoFurtoPossivel").get<int64_t>();
 }
 
 void restaurarOsEventos(SimulacaoDaVila& simulacao, const json& eventos)
@@ -394,7 +658,7 @@ void restaurarOsNpcs(SimulacaoDaVila& simulacao, const json& lista)
             throw RecusaDoSave("O save tem dois NPCs com o mesmo número.");
         }
         registro.emplace<IdentidadeDoNpc>(npc, IdentidadeDoNpc{linha.at("nome").get<std::string>(), linha.at("classe").get<std::string>(),
-                                                                 linha.at("numero").get<int>()});
+                                                                 linha.at("numero").get<int>(), linha.at("cultura").get<std::string>()});
         CasaETrabalhoDoNpc casaETrabalho{linha.at("casa").get<int>(), linha.at("trabalho").get<int>(), linha.at("saiuPorAtrasoDe").get<int>()};
         conferirOIndiceDaConstrucao(casaETrabalho.indiceDaCasa, quantidadeDeConstrucoes, "casa");
         conferirOIndiceDaConstrucao(casaETrabalho.indiceDoTrabalho, quantidadeDeConstrucoes, "trabalho");
@@ -475,6 +739,46 @@ void restaurarODiario(SimulacaoDaVila& simulacao, const json& lista)
 
 }  // namespace
 
+// Tudo o que uma simulação guarda, menos o relógio (a vila e cada uma das outras cidades).
+void restaurarASimulacao(SimulacaoDaVila& partida, const json& arvore)
+{
+    restaurarOSorteio(Acesso::sorteioDosNpcs(partida), arvore.at("sorteios").at("npcs"));
+    restaurarOSorteio(Acesso::sorteioDosEventos(partida), arvore.at("sorteios").at("eventos"));
+    restaurarOSorteio(Acesso::sorteioDoClima(partida), arvore.at("sorteios").at("clima"));
+    restaurarOSorteio(Acesso::sorteioDaPopulacao(partida), arvore.at("sorteios").at("populacao"));
+    partida.populacao.acumuladoDeCrescimentoEmPessoas = arvore.at("populacao").at("acumulado").get<int>();
+    partida.populacao.proximoNumeroDeNpc = arvore.at("populacao").at("proximoNumeroDeNpc").get<int>();
+    partida.populacao.diasDeFomeNaEstacao = arvore.at("populacao").at("diasDeFomeNaEstacao").get<int>();
+    restaurarOClima(partida, arvore.at("clima"));
+    restaurarOSorteio(Acesso::sorteioDaViagem(partida), arvore.at("sorteios").at("viagem"));
+    restaurarOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(partida), arvore.at("sorteios").at("climaDasOutrasRegioes"));
+    restaurarAViagem(partida, arvore.at("viagem"));
+    const json& religiao = arvore.at("religiao");  // fase C4
+    partida.religiao.diasDoFestival = religiao.at("diasDoFestival").get<int>();
+    partida.religiao.pontosDoFestival = religiao.at("pontosDoFestival").get<int>();
+    partida.religiao.primeiroDiaDoFestival = religiao.at("primeiroDiaDoFestival").get<bool>();
+    partida.religiao.diaDeFestival = religiao.at("diaDeFestival").get<bool>();
+    partida.religiao.fracaoDeAssimilacaoEmPessoas = religiao.at("fracaoDeAssimilacao").get<std::map<std::string, int>>();
+    restaurarOComercio(partida, arvore.at("comercio"));
+    {
+        const json& leilao = arvore.at("leilao");
+        partida.trabalho.leilao = LeilaoDeConstrucao{leilao.at("construcao").get<int>(), leilao.at("diasQueFaltam").get<int>(),
+                                                      leilao.at("maiorLance").get<int64_t>(), leilao.at("lanceEhDoJogador").get<bool>()};
+    }
+    restaurarAVila(partida, arvore.at("vila"));
+    restaurarAProducao(partida, arvore.at("producao"));
+    restaurarAsObras(partida, arvore.at("obras"));
+    restaurarOInventario(partida, arvore.at("inventario"));
+    restaurarODinheiro(partida.dinheiro, arvore.at("dinheiro"));
+    restaurarOMercado(partida, arvore.at("mercado"));
+    restaurarOConsumoMedido(partida, arvore.at("consumoMedido"));
+    restaurarAFelicidade(partida.felicidade, arvore.at("felicidade"));
+    restaurarOsEventos(partida, arvore.at("eventos"));
+    restaurarAsDecisoes(partida, arvore.at("decisoes"));
+    restaurarOsNpcs(partida, arvore.at("npcs"));
+    restaurarODiario(partida, arvore.at("diario"));
+}
+
 ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const RegrasDoTempo& regrasDoTempo,
                                                 int distanciaDoCicloDeAndarEmMilesimos, const std::vector<uint8_t>& bytes)
 {
@@ -498,31 +802,31 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
 
         // Passo 5: cada parte pela seção dela, na ordem do salvamento.
         restaurarORelogio(*partida, arvore.at("relogio"));
-        restaurarOSorteio(Acesso::sorteioDosNpcs(*partida), arvore.at("sorteios").at("npcs"));
-        restaurarOSorteio(Acesso::sorteioDosEventos(*partida), arvore.at("sorteios").at("eventos"));
-        restaurarOSorteio(Acesso::sorteioDoClima(*partida), arvore.at("sorteios").at("clima"));
-        restaurarOSorteio(Acesso::sorteioDaPopulacao(*partida), arvore.at("sorteios").at("populacao"));
-        partida->populacao.acumuladoDeCrescimentoEmPessoas = arvore.at("populacao").at("acumulado").get<int>();
-        partida->populacao.proximoNumeroDeNpc = arvore.at("populacao").at("proximoNumeroDeNpc").get<int>();
-        partida->populacao.diasDeFomeNaEstacao = arvore.at("populacao").at("diasDeFomeNaEstacao").get<int>();
-        restaurarOClima(*partida, arvore.at("clima"));
-        {
-            const json& leilao = arvore.at("leilao");
-            partida->trabalho.leilao = LeilaoDeConstrucao{leilao.at("construcao").get<int>(), leilao.at("diasQueFaltam").get<int>(),
-                                                          leilao.at("maiorLance").get<int64_t>(), leilao.at("lanceEhDoJogador").get<bool>()};
+        restaurarASimulacao(*partida, arvore);
+        // Fase B1b: as outras cidades, pelo número do mapa, com o mesmo relógio.
+        const json& cidades = arvore.at("outrasCidades");
+        if (cidades.size() != partida->outrasCidades.size()) {
+            throw RecusaDoSave("O save tem " + std::to_string(cidades.size()) + " outras cidades, e o mundo tem " + std::to_string(partida->outrasCidades.size()) + ".");
         }
-        restaurarAVila(*partida, arvore.at("vila"));
-        restaurarAProducao(*partida, arvore.at("producao"));
-        restaurarAsObras(*partida, arvore.at("obras"));
-        restaurarOInventario(*partida, arvore.at("inventario"));
-        restaurarODinheiro(partida->dinheiro, arvore.at("dinheiro"));
-        restaurarOMercado(*partida, arvore.at("mercado"));
-        restaurarOConsumoMedido(*partida, arvore.at("consumoMedido"));
-        restaurarAFelicidade(partida->felicidade, arvore.at("felicidade"));
-        restaurarOsEventos(*partida, arvore.at("eventos"));
-        restaurarAsDecisoes(*partida, arvore.at("decisoes"));
-        restaurarOsNpcs(*partida, arvore.at("npcs"));
-        restaurarODiario(*partida, arvore.at("diario"));
+        for (std::size_t cidade = 0; cidade < cidades.size(); ++cidade) {
+            SimulacaoDaVila& outra = *partida->outrasCidades[cidade];
+            if (cidades[cidade].at("numeroDoMapa").get<int>() != outra.numeroDoMapaDaCidade) {
+                throw RecusaDoSave("O save tem as outras cidades em outros mapas.");
+            }
+            restaurarORelogio(outra, arvore.at("relogio"));
+            restaurarASimulacao(outra, cidades[cidade]);
+        }
+
+        restaurarAsNoticias(*partida, arvore.at("noticias"));  // fase B3
+        restaurarAReputacao(*partida, arvore.at("reputacao"));  // fase B4
+        restaurarATecnologia(*partida, arvore.at("tecnologia"));  // fase B5
+        restaurarAsFaccoes(*partida, arvore.at("faccoes"));  // fase C1
+        restaurarOCrime(*partida, arvore.at("crime"));  // fase C3
+        const json& religiaoDoJogador = arvore.at("religiaoDoJogador");  // fase C4
+        partida->religiaoDoJogador = EstadoDaReligiaoDoJogador{religiaoDoJogador.at(0).get<int>(), religiaoDoJogador.at(1).get<int>(), religiaoDoJogador.at(2).get<int>()};
+        atualizarAsCidadesPelaReligiao(*partida);
+        atualizarAsCidadesPelasLeis(*partida);
+        atualizarAsTravasDasCidades(*partida);
 
         // Passo 6: o resto já foi recalculado (o mapa bloqueado e a capacidade).
         partida->avisosAoMontar.clear();

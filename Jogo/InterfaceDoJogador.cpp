@@ -15,6 +15,13 @@
 #include "Jogador/ObrasDaVila.h"
 #include "Npc/ComponentesDoNpc.h"
 #include "TextoDaDataDoJogo.h"
+#include "Viagem/ViagemDaVila.h"
+#include "Comercio/Comercio.h"
+#include "Noticias/Noticias.h"
+#include "Reputacao/Reputacao.h"
+#include "Tecnologia/Tecnologia.h"
+#include "Faccao/Faccao.h"
+#include "Crime/Crime.h"
 
 namespace {
 
@@ -201,6 +208,10 @@ bool InterfaceDoJogador::fecharOQueEstiverAberto()
         loteSelecionado = -1;
         return true;
     }
+    if (mapaMundialAberto) {
+        mapaMundialAberto = false;
+        return true;
+    }
     if (janelaDeGestaoAberta) {
         janelaDeGestaoAberta = false;
         return true;
@@ -212,6 +223,8 @@ void InterfaceDoJogador::aoTrocarDePartida()
 {
     loteSelecionado = -1;
     janelaDeGestaoAberta = false;
+    mapaMundialAberto = false;
+    destinoEscolhido = 0;
     abaPedida = -1;
     precosDeOntem.clear();
     precosDeHoje.clear();
@@ -259,6 +272,27 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     }
     if (loteSelecionado >= 0) {
         desenharOPainelDaConstrucao(simulacao, contexto, larguraDaTela, alturaDaTela);
+    }
+    if (mapaMundialAberto) {
+        desenharOMapaMundial(simulacao, larguraDaTela, alturaDaTela);
+    }
+    if (janelaDasNoticiasAberta) {
+        desenharAsNoticias(simulacao, larguraDaTela, alturaDaTela);
+    }
+    if (janelaDaReputacaoAberta) {
+        desenharAReputacao(simulacao, larguraDaTela, alturaDaTela);
+    }
+    if (janelaDaTecnologiaAberta) {
+        desenharATecnologia(simulacao, larguraDaTela, alturaDaTela);
+    }
+    if (janelaDasFaccoesAberta) {
+        desenharAsFaccoes(simulacao, larguraDaTela, alturaDaTela);
+    }
+    if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
+        desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
+    }
+    if (simulacao.crimeDoJogador.revista.ativa) {
+        desenharARevista(simulacao, larguraDaTela, alturaDaTela);
     }
     if (desenharPorCima) {
         desenharPorCima();
@@ -328,6 +362,47 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     // 4. A janela de gestão.
     if (ImGui::Button("Gestão (Tab)")) {
         alternarAJanelaDeGestao();
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Mapa Mundial")) {
+        alternarOMapaMundial();
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Notícias")) {
+        janelaDasNoticiasAberta = !janelaDasNoticiasAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reputação")) {
+        janelaDaReputacaoAberta = !janelaDaReputacaoAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Tecnologia")) {
+        janelaDaTecnologiaAberta = !janelaDaTecnologiaAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Facções")) {
+        janelaDasFaccoesAberta = !janelaDasFaccoesAberta;
+    }
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    // Fase C3 (Crime, 4.6): preso, o grupo espera ou paga a fiança.
+    const EstadoDoCrimeDoJogador& crime = simulacao.crimeDoJogador;
+    if (crime.estaPreso(simulacao.relogio.diaDaPartida()) && crime.faccaoDaPrisao >= 0) {
+        ImGui::SameLine(0, 16);
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("Preso até o dia %lld", static_cast<long long>(crime.presoAteODia + 1));
+        ImGui::SameLine();
+        if (ImGui::Button(("Pagar a fiança (" + std::to_string(crime.fiancaNaFicha[static_cast<std::size_t>(crime.faccaoDaPrisao)]) + ")").c_str())) {
+            simulacao.pedidos.acrescentar(PedidoPagarFianca{});
+        }
+    }
+    if (grupo.emTransito) {
+        ImGui::SameLine(0, 16);
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("Viajando para %s", simulacao.dados.mundo.nomeDoMapa(grupo.destino()).c_str());
+    } else if (!grupoEstaNaVila(simulacao.viagem, simulacao.dados)) {
+        ImGui::SameLine(0, 16);
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("O grupo está em %s", simulacao.dados.mundo.nomeDoMapa(grupo.mapaAtual).c_str());
     }
     (void)contexto;
     ImGui::End();
@@ -885,4 +960,516 @@ void InterfaceDoJogador::desenharOLoteLivre(SimulacaoDaVila& simulacao, Contexto
         }
         ImGui::PopID();
     }
+}
+
+// ---------------------------------------------------------------------------
+// Fase B1 (ficha da Viagem): o Mapa Mundial, com a névoa, e a janela do encontro.
+
+namespace {
+
+const char* nomeDoEstadoDoTerritorio(EstadoDoTerritorio estado)
+{
+    switch (estado) {
+    case EstadoDoTerritorio::ComCidade: return "com cidade";
+    case EstadoDoTerritorio::Territorio: return "território de facção";
+    case EstadoDoTerritorio::EmDisputa: return "em disputa";
+    case EstadoDoTerritorio::SemDono: return "sem dono";
+    }
+    return "";
+}
+
+ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
+{
+    switch (estado) {
+    case EstadoDoTerritorio::ComCidade: return ImVec4(0.55f, 0.45f, 0.20f, 1.0f);
+    case EstadoDoTerritorio::Territorio: return ImVec4(0.25f, 0.40f, 0.25f, 1.0f);
+    case EstadoDoTerritorio::EmDisputa: return ImVec4(0.55f, 0.25f, 0.20f, 1.0f);
+    case EstadoDoTerritorio::SemDono: return ImVec4(0.30f, 0.30f, 0.35f, 1.0f);
+    }
+    return ImVec4(0.2f, 0.2f, 0.2f, 1.0f);
+}
+
+}  // namespace
+
+void InterfaceDoJogador::desenharAsFaccoes(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const DadosDoJogo& dados = simulacao.dados;
+    const CatalogoDasFaccoes& catalogo = dados.faccoes;
+    const EstadoDasFaccoes& estado = simulacao.faccoes;
+    ImGui::SetNextWindowSize(ImVec2(760, 360), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Facções", &janelaDasFaccoesAberta)) {
+        ImGui::End();
+        return;
+    }
+    ImGui::TextWrapped("A sua vila é livre: não tem facção, paga 20%% de imposto e recebe a verba de fora. Os moradores são da cultura %s, a da região.",
+                       nomeDoDonoDaReputacao(dados.regrasDaReputacao, culturaBaseDaCidade(dados, dados.mundo.mapaDaVila)).c_str());
+    if (ImGui::BeginTable("##faccoes", 2 + static_cast<int>(catalogo.leis.size()), ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_ScrollX)) {
+        ImGui::TableSetupColumn("Facção");
+        ImGui::TableSetupColumn("Banco");
+        for (const DefinicaoDaLei& lei : catalogo.leis) {
+            ImGui::TableSetupColumn(lei.id.c_str());
+        }
+        ImGui::TableHeadersRow();
+        for (std::size_t faccao = 0; faccao < estado.leisAtuais.size(); ++faccao) {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(nomeDaFaccao(dados, static_cast<int>(faccao)).c_str());
+            if (ImGui::IsItemHovered()) {
+                const LiderDaFaccao& lider = estado.lideres[faccao];
+                ImGui::SetTooltip("Líder: %d anos, Agressividade %d, Sociabilidade %d, legitimidade %d", lider.idade, lider.agressividade, lider.sociabilidade,
+                                  lider.legitimidade);
+            }
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(dinheiro(estado.bancoDaFaccao[faccao]).c_str());
+            for (std::size_t lei = 0; lei < catalogo.leis.size(); ++lei) {
+                ImGui::TableNextColumn();
+                ImGui::TextUnformatted(catalogo.leis[lei].opcoes[static_cast<std::size_t>(estado.leisAtuais[faccao][lei])].c_str());
+            }
+        }
+        ImGui::EndTable();
+    }
+    ImGui::End();
+}
+
+void InterfaceDoJogador::desenharATecnologia(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const DadosDoJogo& dados = simulacao.dados;
+    const EstadoDaTecnologia& estado = simulacao.tecnologia;
+    const std::vector<std::string> faccoes = faccoesQuePesquisam(dados);
+    ImGui::SetNextWindowSize(ImVec2(620, 360), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Tecnologia", &janelaDaTecnologiaAberta)) {
+        ImGui::End();
+        return;
+    }
+    ImGui::Text("Era do mundo: %d. As tecnologias e os marcos são de exemplo até a rodada de conteúdo.", estado.eraAtualDoMundo);
+    if (ImGui::BeginTable("##tecnologia", 4, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+        ImGui::TableSetupColumn("Quem");
+        ImGui::TableSetupColumn("Pesquisando");
+        ImGui::TableSetupColumn("Pontos");
+        ImGui::TableSetupColumn("Tecnologias");
+        ImGui::TableHeadersRow();
+        for (std::size_t pesquisador = 0; pesquisador < estado.temATecnologia.size(); ++pesquisador) {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(pesquisador < faccoes.size() ? nomeDoDonoDaReputacao(dados.regrasDaReputacao, faccoes[pesquisador]).c_str() : "Sua vila");
+            ImGui::TableNextColumn();
+            const int projeto = estado.projetoAtual[pesquisador];
+            if (projeto >= 0) {
+                ImGui::TextUnformatted(dados.tabelaDeTextos.textoDe(dados.tecnologia.tecnologias[static_cast<std::size_t>(projeto)].identificadorDeTexto).c_str());
+            } else {
+                ImGui::TextDisabled(pesquisador < faccoes.size() ? "nada disponível" : "sem Laboratório");
+            }
+            ImGui::TableNextColumn();
+            if (projeto >= 0) {
+                ImGui::Text("%lld de %d", static_cast<long long>(estado.pontosAcumulados[pesquisador]),
+                            custoAtualDaTecnologia(estado, dados, static_cast<int>(pesquisador), projeto));
+            } else {
+                ImGui::Text("%lld", static_cast<long long>(estado.pontosAcumulados[pesquisador]));
+            }
+            ImGui::TableNextColumn();
+            std::string tem;
+            for (std::size_t tecnologia = 0; tecnologia < estado.temATecnologia[pesquisador].size(); ++tecnologia) {
+                if (estado.temATecnologia[pesquisador][tecnologia]) {
+                    tem += (tem.empty() ? "" : ", ") + dados.tabelaDeTextos.textoDe(dados.tecnologia.tecnologias[tecnologia].identificadorDeTexto);
+                }
+            }
+            ImGui::TextUnformatted(tem.empty() ? "nenhuma" : tem.c_str());
+        }
+        ImGui::EndTable();
+    }
+    ImGui::Separator();
+    for (std::size_t marco = 0; marco < dados.tecnologia.marcos.size(); ++marco) {
+        const DefinicaoDeMarco& definicao = dados.tecnologia.marcos[marco];
+        ImGui::Text("Marco: %s (anos %d a %d): %s", dados.tabelaDeTextos.textoDe(definicao.identificadorDeTexto).c_str(), definicao.primeiroAno, definicao.ultimoAno,
+                    estado.marcoChegou[marco] ? "já chegou" : "ainda não chegou");
+    }
+    ImGui::End();
+}
+
+void InterfaceDoJogador::desenharAReputacao(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const RegrasDaReputacao& regras = simulacao.dados.regrasDaReputacao;
+    const EstadoDaReputacao& reputacao = simulacao.reputacao;
+    const std::vector<std::string> donos = donosDaReputacao(simulacao.dados.mundo);
+    ImGui::SetNextWindowSize(ImVec2(460, 330), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Reputação", &janelaDaReputacaoAberta)) {
+        ImGui::End();
+        return;
+    }
+    ImGui::TextWrapped("A faixa muda os preços das lojas das outras cidades. A sua vila é sempre Neutro. Passe o mouse para ver o \"Por quê?\".");
+    if (ImGui::BeginTable("##reputacao", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+        ImGui::TableSetupColumn("Quem");
+        ImGui::TableSetupColumn("Valor");
+        ImGui::TableSetupColumn("Base");
+        ImGui::TableSetupColumn("Faixa");
+        ImGui::TableSetupColumn("Recompensa");
+        ImGui::TableHeadersRow();
+        for (std::size_t dono = 0; dono < reputacao.reputacaoPorFaccao.size() && dono < donos.size(); ++dono) {
+            if (simulacao.dados.mundo.cidadeNoMapa(simulacao.dados.mundo.mapaDaVila) != nullptr
+                && simulacao.dados.mundo.cidadeNoMapa(simulacao.dados.mundo.mapaDaVila)->nome == donos[dono]) {
+                continue;  // RE1-5: a vila do jogador não tem reputação
+            }
+            const int valor = reputacao.reputacaoPorFaccao[dono];
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(nomeDoDonoDaReputacao(regras, donos[dono]).c_str());
+            if (ImGui::IsItemHovered() && !reputacao.ultimasMudancas[dono].empty()) {
+                ImGui::BeginTooltip();
+                for (auto mudanca = reputacao.ultimasMudancas[dono].rbegin(); mudanca != reputacao.ultimasMudancas[dono].rend(); ++mudanca) {
+                    ImGui::Text("%s%d: %s, dia %lld", mudanca->valor > 0 ? "+" : "", mudanca->valor, mudanca->motivo.c_str(), static_cast<long long>(mudanca->dia + 1));
+                }
+                ImGui::EndTooltip();
+            }
+            ImGui::TableNextColumn();
+            ImGui::Text("%+d", valor);
+            ImGui::TableNextColumn();
+            ImGui::Text("%+d", reputacao.basePorFaccao[dono]);
+            ImGui::TableNextColumn();
+            if (!regras.faixas.empty()) {
+                ImGui::TextUnformatted(regras.faixas[static_cast<std::size_t>(faixaDaReputacao(regras, valor))].texto.c_str());
+            }
+            // Fase C3 (Crime, 4.5): a Recompensa da facção pela cabeça do jogador.
+            ImGui::TableNextColumn();
+            int recompensa = 0;
+            for (std::size_t faccao = 0; faccao < simulacao.dados.faccoes.faccoes.size(); ++faccao) {
+                if (simulacao.dados.faccoes.faccoes[faccao].cultura == donos[dono] && faccao < simulacao.crimeDoJogador.recompensaPorFaccao.size()) {
+                    recompensa = simulacao.crimeDoJogador.recompensaPorFaccao[faccao];
+                }
+            }
+            ImGui::Text("%d", recompensa);
+        }
+        ImGui::EndTable();
+    }
+    ImGui::End();
+}
+
+void InterfaceDoJogador::desenharAsNoticias(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const EstadoDasNoticias& noticias = simulacao.noticias;
+    const RegrasDasNoticias& regras = simulacao.dados.regrasDasNoticias;
+    const int64_t hoje = simulacao.relogio.diaDaPartida();
+    ImGui::SetNextWindowSize(ImVec2(620, 420), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Notícias", &janelaDasNoticiasAberta)) {
+        ImGui::End();
+        return;
+    }
+    if (ImGui::BeginTabBar("abasDasNoticias")) {
+        // As notícias que já chegaram ao jogador e ainda estão no prazo, da mais nova para a mais velha.
+        if (ImGui::BeginTabItem("Que você sabe")) {
+            bool alguma = false;
+            for (auto noticia = noticias.ativas.rbegin(); noticia != noticias.ativas.rend(); ++noticia) {
+                const NoticiaQueOJogadorSabe* sabida = oQueOJogadorSabe(noticias, noticia->numeroDaNoticia);
+                if (sabida == nullptr) {
+                    continue;
+                }
+                alguma = true;
+                const char* importancia = noticia->importancia == ImportanciaDaNoticia::Mundial ? "Mundial" : noticia->importancia == ImportanciaDaNoticia::Regional ? "Regional" : "Local";
+                ImGui::TextDisabled("Dia %lld, soube há %lld dias, %s", static_cast<long long>(noticia->diaDeOrigem + 1), static_cast<long long>(hoje - sabida->diaEmQueSoube), importancia);
+                ImGui::PushTextWrapPos(0);
+                ImGui::TextUnformatted(textoComPrecisao(*noticia, sabida->distancia, regras).c_str());
+                ImGui::PopTextWrapPos();
+            }
+            if (!alguma) {
+                ImGui::TextUnformatted("Nenhuma notícia chegou até você ainda.");
+            }
+            ImGui::EndTabItem();
+        }
+        // As Regionais e Mundiais que o jogador soube, para sempre.
+        if (ImGui::BeginTabItem("Crônica do mundo")) {
+            if (noticias.cronicaDoMundo.empty()) {
+                ImGui::TextUnformatted("A Crônica ainda está vazia.");
+            }
+            for (auto linha = noticias.cronicaDoMundo.rbegin(); linha != noticias.cronicaDoMundo.rend(); ++linha) {
+                ImGui::TextDisabled("Aconteceu no dia %lld; você soube no dia %lld", static_cast<long long>(linha->diaDoAcontecimento + 1),
+                                    static_cast<long long>(linha->diaEmQueSoube + 1));
+                ImGui::PushTextWrapPos(0);
+                ImGui::TextUnformatted(linha->texto.c_str());
+                ImGui::PopTextWrapPos();
+            }
+            ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
+    }
+    ImGui::End();
+}
+
+void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const MundoDoJogo& mundo = simulacao.dados.mundo;
+    const RegrasDaViagem& regras = simulacao.dados.regrasDaViagem;
+    const EstadoDaViagem& viagem = simulacao.viagem;
+    const EntidadeEmTransito& grupo = viagem.grupoDoJogador;
+    ImGui::SetNextWindowSize(ImVec2(760, 560), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Mapa Mundial", &mapaMundialAberto)) {
+        ImGui::End();
+        return;
+    }
+    if (mundo.mapas.empty()) {
+        ImGui::TextUnformatted("O mundo não foi lido (data/mundo/).");
+        ImGui::End();
+        return;
+    }
+    // A malha: cada mapa é um botão. "?" = nunca visto (a névoa, regra 4.10).
+    const int mapaDoGrupo = grupo.emTransito ? grupo.proximoMapa : grupo.mapaAtual;
+    for (int linha = 1; linha <= mundo.linhas; ++linha) {
+        for (int coluna = 1; coluna <= mundo.colunas; ++coluna) {
+            const int numero = mundo.numeroDoMapaNa(coluna, linha);
+            const RegistroDaNevoa& registro = viagem.nevoa[numero - 1];
+            const bool visto = registro.diaEmQueFoiVisto >= 0;
+            std::string rotulo = visto ? (registro.nivelDaCidade > 0 ? "Cidade " + std::to_string(registro.nivelDaCidade) : mundo.mapa(numero).terreno) : "?";
+            if (numero == mapaDoGrupo) {
+                rotulo = "[Grupo] " + rotulo;
+            }
+            rotulo += "##mapa" + std::to_string(numero);
+            ImGui::PushStyleColor(ImGuiCol_Button, visto ? corDoEstadoDoTerritorio(registro.estado) : ImVec4(0.12f, 0.12f, 0.14f, 1.0f));
+            if (numero == destinoEscolhido) {
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 2.0f);
+            }
+            if (ImGui::Button(rotulo.c_str(), ImVec2(86, 52))) {
+                destinoEscolhido = numero;
+            }
+            if (numero == destinoEscolhido) {
+                ImGui::PopStyleVar();
+            }
+            ImGui::PopStyleColor();
+            if (ImGui::IsItemHovered()) {
+                ImGui::BeginTooltip();
+                ImGui::Text("%s, região %d", mundo.nomeDoMapa(numero).c_str(), mundo.mapa(numero).regiao);
+                if (visto) {
+                    ImGui::Text("%s, %s, %s", mundo.mapa(numero).terreno.c_str(), infraestruturaDoMapa(mundo, numero).c_str(), nomeDoEstadoDoTerritorio(registro.estado));
+                    ImGui::Text("Visto no dia %lld", static_cast<long long>(registro.diaEmQueFoiVisto + 1));
+                    // Comércio, 4.8: os preços que o jogador viu, e há quantos dias.
+                    const PrecosConhecidos& precos = viagem.precosConhecidos[static_cast<std::size_t>(numero - 1)];
+                    if (precos.diaEmQueFoiVisto >= 0) {
+                        std::string texto = "Preços (há " + std::to_string(simulacao.relogio.diaDaPartida() - precos.diaEmQueFoiVisto) + " dias):";
+                        for (std::size_t item = 0; item < precos.precoPorItemEmDecimos.size(); ++item) {
+                            texto += " " + simulacao.dados.tabelaDeTextos.textoDe(simulacao.dados.catalogoDeItens.itemPeloNumero(static_cast<int>(item)).identificadorDeTexto)
+                                + " " + dinheiro(precos.precoPorItemEmDecimos[item]) + ";";
+                        }
+                        ImGui::PushTextWrapPos(360);
+                        ImGui::TextUnformatted(texto.c_str());
+                        ImGui::PopTextWrapPos();
+                    }
+                } else {
+                    ImGui::TextUnformatted("Nunca visto");
+                }
+                // Notícias, 4.5: as notícias daqui que o jogador sabe, e há quantos dias.
+                for (const Noticia& noticia : simulacao.noticias.ativas) {
+                    const NoticiaQueOJogadorSabe* sabida = oQueOJogadorSabe(simulacao.noticias, noticia.numeroDaNoticia);
+                    if (noticia.mapaDeOrigem == numero && sabida != nullptr) {
+                        const std::string texto = textoComPrecisao(noticia, sabida->distancia, simulacao.dados.regrasDasNoticias) + " (soube há "
+                            + std::to_string(simulacao.relogio.diaDaPartida() - sabida->diaEmQueSoube) + " dias)";
+                        ImGui::PushTextWrapPos(360);
+                        ImGui::TextUnformatted(texto.c_str());
+                        ImGui::PopTextWrapPos();
+                    }
+                }
+                ImGui::EndTooltip();
+            }
+            if (coluna < mundo.colunas) {
+                ImGui::SameLine();
+            }
+        }
+    }
+    ImGui::Separator();
+
+    // O grupo e a partida (regra 4.1).
+    if (grupo.emTransito) {
+        ImGui::Text("Viajando para %s: trecho até %s, %d de %d ticks%s.", mundo.nomeDoMapa(grupo.destino()).c_str(), mundo.nomeDoMapa(grupo.proximoMapa).c_str(),
+                    grupo.ticksAndadosNoTrecho, grupo.ticksDoTrecho, grupo.ticksParadoNaLuta > 0 ? " (parado depois da luta)" : "");
+        ImGui::Text("O grupo leva %s moedas.%s", dinheiro(grupo.dinheiroEmDecimos).c_str(), viagem.grupoSemComida ? " Está sem comida." : "");
+        ImGui::End();
+        return;
+    }
+    ImGui::Text("O grupo está em %s.", mundo.nomeDoMapa(grupo.mapaAtual).c_str());
+    // Comércio (4.7): numa outra cidade, o grupo compra e vende na loja dela com o que leva.
+    if (!grupoEstaNaVila(viagem, simulacao.dados)) {
+        SimulacaoDaVila* cidade = nullptr;
+        for (const auto& outra : simulacao.outrasCidades) {
+            cidade = outra->numeroDoMapaDaCidade == grupo.mapaAtual ? outra.get() : cidade;
+        }
+        if (cidade != nullptr && ImGui::CollapsingHeader("Loja desta cidade", ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::Text("O grupo leva %s moedas.", dinheiro(grupo.dinheiroEmDecimos).c_str());
+            // Fase B4 (Reputação): a faixa muda os preços; doar sobe a reputação.
+            const FaixaDaReputacao& faixa = faixaDoJogadorNaCidade(simulacao, grupo.mapaAtual);
+            if (faixa.compraEmPorcento < 0) {
+                ImGui::Text("Sua reputação aqui: %s. A loja se recusa a negociar com você.", faixa.texto.c_str());
+            } else {
+                ImGui::Text("Sua reputação aqui: %s (compra a %d%%, venda a %d%%).", faixa.texto.c_str(), faixa.compraEmPorcento, faixa.vendaEmPorcento);
+            }
+            for (const int moedas : {100, 500}) {
+                if (ImGui::SmallButton(("Doar " + std::to_string(moedas)).c_str())) {
+                    simulacao.pedidos.acrescentar(PedidoDoarNaCidade{moedas});
+                }
+                ImGui::SameLine();
+            }
+            ImGui::NewLine();
+            // Fase C4 (Religião, 4.9): a peregrinação no Templo da Capital Religiosa.
+            if (grupo.mapaAtual == mapaDaCidadeSanta(simulacao.dados)
+                && ImGui::SmallButton(("Peregrinação (oferenda de " + std::to_string(simulacao.dados.regrasDaReligiao.peregrinacaoOferendaMinima) + " moedas)").c_str())) {
+                simulacao.pedidos.acrescentar(PedidoPeregrinacao{simulacao.dados.regrasDaReligiao.peregrinacaoOferendaMinima});
+            }
+            const int faixaDaCompra = std::max(0, faixa.compraEmPorcento);
+            const int faixaDaVenda = std::max(0, faixa.vendaEmPorcento);
+            const ContextoDaProducao loja = cidade->contextoDaProducao();
+            const RegrasDoComercio& regras = simulacao.dados.regrasDoComercio;
+            if (ImGui::BeginTable("##loja_da_cidade", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+                ImGui::TableSetupColumn("Item");
+                ImGui::TableSetupColumn("A loja vende");
+                ImGui::TableSetupColumn("A loja paga");
+                ImGui::TableSetupColumn("O grupo tem");
+                ImGui::TableSetupColumn("");
+                ImGui::TableHeadersRow();
+                for (int item = 0; item < simulacao.dados.catalogoDeItens.quantidadeDeItens(); ++item) {
+                    const int precoLocal = precoLocalDoItem(loja, item);
+                    ImGui::PushID(item);
+                    ImGui::TableNextRow();
+                    ImGui::TableNextColumn();
+                    ImGui::TextUnformatted(simulacao.dados.tabelaDeTextos.textoDe(simulacao.dados.catalogoDeItens.itemPeloNumero(item).identificadorDeTexto).c_str());
+                    ImGui::TableNextColumn();
+                    ImGui::TextUnformatted(dinheiro(static_cast<int>(precoComAFaixa(precoLocal * regras.lojaVendeEmPorcento / 100, faixaDaCompra))).c_str());
+                    ImGui::TableNextColumn();
+                    ImGui::TextUnformatted(dinheiro(calcularAVendaParaALoja(loja, item, 1, faixaDaVenda).valorEmDecimos).c_str());
+                    ImGui::TableNextColumn();
+                    ImGui::Text("%d", grupo.quantidadePorItem[static_cast<std::size_t>(item)]);
+                    ImGui::TableNextColumn();
+                    for (const int quantidade : {1, 10}) {
+                        if (ImGui::SmallButton(("Comprar " + std::to_string(quantidade)).c_str())) {
+                            simulacao.pedidos.acrescentar(PedidoComercioNaCidade{item, quantidade, true});
+                        }
+                        ImGui::SameLine();
+                    }
+                    for (const int quantidade : {1, 10}) {
+                        if (ImGui::SmallButton(("Vender " + std::to_string(quantidade)).c_str())) {
+                            simulacao.pedidos.acrescentar(PedidoComercioNaCidade{item, quantidade, false});
+                        }
+                        ImGui::SameLine();
+                    }
+                    ImGui::PopID();
+                }
+                ImGui::EndTable();
+            }
+        }
+    }
+    if (destinoEscolhido == 0 || destinoEscolhido == grupo.mapaAtual) {
+        ImGui::TextUnformatted("Clique num mapa para escolher o destino.");
+        ImGui::End();
+        return;
+    }
+    EntidadeEmTransito comoVai = grupo;
+    comoVai.marchaForcada = marchaForcadaEscolhida;
+    const std::vector<int> rota = buscarRotaMaisRapida(grupo.mapaAtual, destinoEscolhido, comoVai, mundo, regras);
+    int ticksDaRota = 0;
+    for (const int mapa : rota) {
+        ticksDaRota += calcularTicksDoTrecho(comoVai, mundo, mapa, 100, regras);
+    }
+    ImGui::Text("Destino: %s, %d mapas, cerca de %d h andando (sem o clima e as noites).", mundo.nomeDoMapa(destinoEscolhido).c_str(), static_cast<int>(rota.size()),
+                ticksDaRota / 800);
+    const bool saiDaVila = grupoEstaNaVila(viagem, simulacao.dados);
+    if (saiDaVila) {
+        ImGui::SetNextItemWidth(120);
+        ImGui::InputInt("Pães para levar", &paesParaLevar);
+        ImGui::SetNextItemWidth(120);
+        ImGui::InputInt("Moedas para levar", &moedasParaLevar);
+        paesParaLevar = std::max(0, paesParaLevar);
+        moedasParaLevar = std::max(0, moedasParaLevar);
+    }
+    ImGui::Checkbox("Marcha forçada (não acampa; mais encontros)", &marchaForcadaEscolhida);
+    if (ImGui::Button("Partir")) {
+        simulacao.pedidos.acrescentar(PedidoPartirEmViagem{destinoEscolhido, saiDaVila ? paesParaLevar : 0,
+                                                           saiDaVila ? static_cast<int64_t>(moedasParaLevar) * 10 : 0, marchaForcadaEscolhida});
+    }
+    ImGui::End();
+}
+
+void InterfaceDoJogador::desenharARevista(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const RevistaPendente& revista = simulacao.crimeDoJogador.revista;
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    const RegrasDoCrime& regras = simulacao.dados.regrasDoCrime;
+    const int recompensa = simulacao.crimeDoJogador.recompensaPorFaccao[static_cast<std::size_t>(revista.faccao)];
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.4f), ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::Begin("Revista", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse);
+    ImGui::Text("Os guardas da %s revistaram o grupo em %s.", nomeDaFaccao(simulacao.dados, revista.faccao).c_str(), simulacao.dados.mundo.nomeDoMapa(revista.mapa).c_str());
+    for (const std::string& crime : revista.crimes) {
+        ImGui::BulletText("%s", crime == "crime.contrabando" ? "Contrabando (itens proibidos)" : crime == "crime.heresia_sem_livro" ? "Heresia: sem o Livro Sagrado" : crime.c_str());
+    }
+    const auto escolher = [&](EscolhaNaRevista escolha, int64_t oferta) {
+        simulacao.pedidos.acrescentar(PedidoResolverRevista{static_cast<int>(escolha), oferta});
+        if (simulacao.relogio.jogoEstaPausado()) {
+            simulacao.relogio.alternarPausa();
+        }
+    };
+    const int64_t valor = static_cast<int64_t>(recompensa + revista.multa) * 10;
+    if (grupo.dinheiroEmDecimos >= valor) {  // sem dinheiro, "Pagar" não aparece
+        if (ImGui::Button(("Pagar " + dinheiro(valor) + " moedas" + (recompensa > 0 ? " (com a Recompensa)" : "") + " e entregar os itens proibidos").c_str())) {
+            escolher(EscolhaNaRevista::Pagar, 0);
+        }
+    }
+    ImGui::SetNextItemWidth(100);
+    ImGui::InputInt("moedas", &ofertaDoSuborno);
+    ofertaDoSuborno = std::max(1, ofertaDoSuborno);
+    ImGui::SameLine();
+    const int chance = chanceDoSubornoEmPorcento(static_cast<int64_t>(ofertaDoSuborno) * 10, revista.multa, regras);
+    if (ImGui::Button(("Subornar (" + std::to_string(chance) + "%; se falhar, prisão)").c_str())) {
+        escolher(EscolhaNaRevista::Subornar, static_cast<int64_t>(ofertaDoSuborno) * 10);
+    }
+    if (ImGui::Button(("Fugir (a Recompensa sobe " + std::to_string(regras.recompensaVezesAMulta * revista.multa) + ")").c_str())) {
+        escolher(EscolhaNaRevista::Fugir, 0);
+    }
+    ImGui::End();
+}
+
+void InterfaceDoJogador::desenharOEncontro(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const RegrasDaViagem& regras = simulacao.dados.regrasDaViagem;
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    const int bandidos = grupo.encontroMarcado.bandidos;
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.4f), ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::Begin("Encontro na estrada", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse);
+    const auto escolher = [&](EscolhaNoEncontro escolha) {
+        simulacao.pedidos.acrescentar(PedidoResolverEncontro{escolha});
+        if (simulacao.relogio.jogoEstaPausado()) {
+            simulacao.relogio.alternarPausa();  // o encontro pausou; a escolha volta a andar
+        }
+    };
+    // Fase C3 (Crime, 4.7): com os Caçadores, só lutar ou ser preso.
+    if (grupo.encontroMarcado.tipo == TipoDeEncontro::Cacadores) {
+        const RegrasDoCombate& combate = simulacao.dados.regrasDoCombate;
+        const int chance = resolverPorCalculoRapido(combate, ladoDoGrupo(combate, grupo), ladoDoKit(combate, "guarda", std::max(1, bandidos / 3)), 0).chanceDoLadoAEmPorMil / 10;
+        ImGui::Text("%d Caçadores de Recompensa cercam o grupo (Vida do grupo: %d%%).", std::max(1, bandidos / 3), grupo.vidaEmPorcento);
+        if (ImGui::Button(("Lutar (" + std::to_string(chance) + "% de vencer; perder é a prisão)").c_str())) {
+            escolher(EscolhaNoEncontro::Lutar);
+        }
+        if (ImGui::Button("Render-se (prisão)")) {
+            escolher(EscolhaNoEncontro::Render);
+        }
+        ImGui::End();
+        return;
+    }
+    ImGui::Text("Um bando de %d bandidos cerca o grupo (Vida do grupo: %d%%).", bandidos, grupo.vidaEmPorcento);
+    const int64_t suborno = precoDoSubornoEmDecimos(bandidos, regras.carismaDoJogadorAteOsAtributos, regras);
+    if (grupo.dinheiroEmDecimos >= suborno) {  // só aparece se o grupo tiver o dinheiro
+        if (ImGui::Button(("Subornar (" + dinheiro(suborno) + " moedas)").c_str())) {
+            escolher(EscolhaNoEncontro::Subornar);
+        }
+    }
+    if (ImGui::Button(("Fugir (" + std::to_string(chanceDeFugirEmPorcento(grupo, bandidos, regras)) + "%; se falhar, luta)").c_str())) {
+        escolher(EscolhaNoEncontro::Fugir);
+    }
+    // Fase D1 (Combate, 4.8): a chance pelo cálculo rápido.
+    const RegrasDoCombate& combate = simulacao.dados.regrasDoCombate;
+    const int chanceDeVencer = resolverPorCalculoRapido(combate, ladoDoGrupo(combate, grupo), ladoDoKit(combate, "bandido", bandidos), 0).chanceDoLadoAEmPorMil / 10;
+    if (ImGui::Button(("Lutar (" + std::to_string(chanceDeVencer) + "% de vencer; perder tira " + std::to_string(regras.perdaAoPerderALutaEmPorcento) + "%)").c_str())) {
+        escolher(EscolhaNoEncontro::Lutar);
+    }
+    if (ImGui::Button(("Render-se (perde " + std::to_string(regras.perdaAoSeRenderEmPorcento) + "% do que leva)").c_str())) {
+        escolher(EscolhaNoEncontro::Render);
+    }
+    ImGui::End();
 }
