@@ -676,3 +676,16 @@ O que entrou ([[Ficha Logica/Crime|ficha do Crime e Justiça]]; os ajustes estã
 
 **Verificado pelo assistente:** os testes passam (563 conferências); as 10 sementes passam com o relatório da vila igual ao do C2 (a Criminalidade da vila fica em 12,6: abaixo de 20 e de 25); no mundo, a média fica em cerca de 12 e a maior em 16 a 18; nenhuma cidade com fome e o dinheiro do mundo conservado; salvar e carregar no dia 30 dá o mesmo relatório. A revista, a prisão e os Caçadores estão testados nos testes do código, não na janela.
 
+### Marco C4: a religião (2026-10-24, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Religiao|ficha da Religião]]; os ajustes estão na parte 10.8 dela):
+
+- **A fé de cada cultura** (arquivo novo `data/religiao.json`) e **os Templos** (a Torre Arcana na Arcana) nas cidades de facção, com a cobertura de 60% ou mais (RL1-1).
+- **O 6º fator da Felicidade, Religião** (de −5 a +10), com a minoria sem culto e a Perseguição.
+- **As oferendas** (2% da renda vão ao Banco), **os festivais** do calendário (+8 por 8 dias; o turno pela metade no primeiro dia; a comida extra só da sobra; notícia Local), **a Tolerância** (o imposto a mais das minorias na Fé oficial) e **a assimilação** das minorias.
+- **O Templo da Religiosa na Epidemia** (as mortes × 75%), **a peregrinação** do jogador na Capital Religiosa (+10 de reputação, uma vez por ano) e **a Bênção** do Sumo Sacerdote.
+- **Na tela:** o botão da peregrinação no painel da loja, na Capital Religiosa.
+- **Save versão 13.**
+
+**Verificado pelo assistente:** os testes passam (575 conferências); as 10 sementes passam com o relatório da vila igual ao do C3; o dinheiro do mundo se conserva; salvar e carregar no dia 30 dá o mesmo relatório. **Achado:** em 2 das 10 sementes, uma cidade termina o ano com fome curta (de 1 a 3 dias): a Vila Livre do Sul (5,6) ou o Entreposto do leste (4,5), as duas sem Templo e numa região com pouco Grão. Sem a comida extra do festival ou sem o turno pela metade, a semente 1 continua igual; a causa provável é indireta (as cidades de fé mais felizes crescem e sobra menos comida para as caravanas). Vale olhar numa rodada se aparecer de novo.
+

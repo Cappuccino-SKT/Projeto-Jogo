@@ -66,6 +66,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     montarOCrimeDaPartidaNova(*this);  // fase C3
     // Fase C1: as facções (as leis, o Banco da Facção e o líder).
     montarAsFaccoesDaPartidaNova(*this, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
+    atualizarAsCidadesPelaReligiao(*this);  // fase C4
     // Fase B5: a pesquisa do mundo (os marcos sorteados uma vez) e as travas de cada cidade.
     montarATecnologiaDaPartidaNova(tecnologia, dados, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     atualizarAsTravasDasCidades(*this);
@@ -172,6 +173,7 @@ ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
     contexto.fatorLeisECulturaEmDecimos = fatorLeisECulturaEmDecimos;
     contexto.numeroDoMapaNoMundo = numeroDoMapaNoMundo();
     contexto.lodDoMapa = lodDoMapa;
+    contexto.efeitosDaReligiao = &efeitosDaReligiao;
     return contexto;
 }
 
@@ -226,6 +228,11 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
             }
+        } else if (const auto* peregrinacao = std::get_if<PedidoPeregrinacao>(&pedido)) {
+            const std::string motivo = fazerPeregrinacao(*this, peregrinacao->moedas, linhas);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            }
         } else if (std::holds_alternative<PedidoPagarFianca>(pedido)) {
             const std::string motivo = pagarAFianca(*this, linhas);
             if (!motivo.empty()) {
@@ -235,6 +242,8 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
             const std::string motivo = doarParaAFaccao(*this, doacao->moedas, linhas);
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            } else if (culturaBaseDaCidade(dados, viagem.grupoDoJogador.mapaAtual) == "religiosa") {
+                anotarOAtoDeFe(*this);  // fase C4 (Religião, 4.8): a doação à Religiosa
             }
         } else if (const auto* encontro = std::get_if<PedidoResolverEncontro>(&pedido); encontro != nullptr && lodDoMapa == 0) {
             // Fase B4: vencer o bando no território de uma facção sobe a reputação com ela.
@@ -359,6 +368,9 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         const std::vector<std::string> linhasDoCrime = rodarOCrimeDoJogadorNoDiaNovo(*this);
         linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDoCrime.begin(), linhasDoCrime.end());
         atualizarAAmeacaBandida(*this);
+        // Fase C4 (Religião): os festivais, a assimilação, a Bênção e o que a fé muda em cada cidade.
+        const std::vector<std::string> linhasDaReligiao = rodarAReligiaoNoDiaNovo(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaReligiao.begin(), linhasDaReligiao.end());
     }
 
     // 6. As outras cidades (fase B1b), depois da vila e na ordem do número do mapa. Cada

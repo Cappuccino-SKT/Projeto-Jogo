@@ -1,5 +1,7 @@
 #include "Eventos/EventosDaVila.h"
 
+#include "Religiao/Religiao.h"
+
 #include "Vila/Populacao.h"
 #include <algorithm>
 #include <utility>
@@ -303,7 +305,9 @@ void rodarOsEventosDoDia(ContextoDaProducao& contexto, const RelogioDoMundo& rel
                 comecarOEvento(contexto, indiceDoEvento, hoje);
             }
         } else if (evento.tipo == TipoDeEvento::DataFixa) {
-            if (relogio.estacaoAtual() == evento.estacaoDaDataFixa && relogio.diaDaEstacaoAtual() == evento.diaDaDataFixa
+            const bool festaDoCalendario = contexto.efeitosDaReligiao != nullptr && contexto.efeitosDaReligiao->semAFestaDaColheitaDaFatia
+                && evento.identificadorDeTexto == "evento.festa_da_colheita";  // fase C4 (RL1-3)
+            if (!festaDoCalendario && relogio.estacaoAtual() == evento.estacaoDaDataFixa && relogio.diaDaEstacaoAtual() == evento.diaDaDataFixa
                 && !estado.eventoEstaAtivo(indiceDoEvento)) {
                 comecarOEvento(contexto, indiceDoEvento, hoje);
             }
@@ -450,7 +454,8 @@ int mortesDasDoencasHojeEmPessoas(const ContextoDaProducao& contexto)
             }
         }
     }
-    return mortes;
+    // Fase C4 (Religião, 4.7): o Templo da Religiosa.
+    return contexto.efeitosDaReligiao != nullptr ? mortes * contexto.efeitosDaReligiao->mortesDaEpidemiaEmPorcento / 100 : mortes;
 }
 
 bool algumaDoencaMataHoje(const ContextoDaProducao& contexto)

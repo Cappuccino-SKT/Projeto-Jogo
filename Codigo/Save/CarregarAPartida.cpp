@@ -598,6 +598,7 @@ void restaurarAFelicidade(FelicidadeDaClasse& felicidade, const json& linha)
     felicidade.fatoresDoDia.moradia = linha.at("moradia").get<int>();
     felicidade.fatoresDoDia.eventosDuradouros = linha.at("eventosDuradouros").get<int>();
     felicidade.fatoresDoDia.leisECultura = linha.at("leisECultura").get<int>();
+    felicidade.fatoresDoDia.religiao = linha.at("religiao").get<int>();
     felicidade.criminalidadeEmDecimos = linha.at("criminalidade").get<int>();
     felicidade.diaDoProximoFurtoPossivel = linha.at("diaDoProximoFurtoPossivel").get<int64_t>();
 }
@@ -751,6 +752,12 @@ void restaurarASimulacao(SimulacaoDaVila& partida, const json& arvore)
     restaurarOSorteio(Acesso::sorteioDaViagem(partida), arvore.at("sorteios").at("viagem"));
     restaurarOSorteio(Acesso::sorteioDoClimaDasOutrasRegioes(partida), arvore.at("sorteios").at("climaDasOutrasRegioes"));
     restaurarAViagem(partida, arvore.at("viagem"));
+    const json& religiao = arvore.at("religiao");  // fase C4
+    partida.religiao.diasDoFestival = religiao.at("diasDoFestival").get<int>();
+    partida.religiao.pontosDoFestival = religiao.at("pontosDoFestival").get<int>();
+    partida.religiao.primeiroDiaDoFestival = religiao.at("primeiroDiaDoFestival").get<bool>();
+    partida.religiao.diaDeFestival = religiao.at("diaDeFestival").get<bool>();
+    partida.religiao.fracaoDeAssimilacaoEmPessoas = religiao.at("fracaoDeAssimilacao").get<std::map<std::string, int>>();
     restaurarOComercio(partida, arvore.at("comercio"));
     {
         const json& leilao = arvore.at("leilao");
@@ -814,6 +821,9 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarATecnologia(*partida, arvore.at("tecnologia"));  // fase B5
         restaurarAsFaccoes(*partida, arvore.at("faccoes"));  // fase C1
         restaurarOCrime(*partida, arvore.at("crime"));  // fase C3
+        const json& religiaoDoJogador = arvore.at("religiaoDoJogador");  // fase C4
+        partida->religiaoDoJogador = EstadoDaReligiaoDoJogador{religiaoDoJogador.at(0).get<int>(), religiaoDoJogador.at(1).get<int>(), religiaoDoJogador.at(2).get<int>()};
+        atualizarAsCidadesPelaReligiao(*partida);
         atualizarAsCidadesPelasLeis(*partida);
         atualizarAsTravasDasCidades(*partida);
 

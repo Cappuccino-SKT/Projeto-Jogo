@@ -10,5 +10,7 @@
   { "id": "construcao.casa", "porte": "pequeno", "guarda": [], "moradores": 4 },
   { "id": "construcao.pedreira", "porte": "medio", "guarda": ["materia_prima", "bem_de_consumo"], "funcao": "pedreiro" },
   { "id": "construcao.laboratorio", "porte": "grande", "guarda": [], "funcao": "pesquisador",
-    "trabalho_sem_receita": "especialista", "pontos_de_pesquisa": true }
+    "trabalho_sem_receita": "especialista", "pontos_de_pesquisa": true },
+  { "id": "construcao.templo", "porte": "medio", "guarda": [], "funcao": "sacerdote", "trabalho_sem_receita": "manufaturado" },
+  { "id": "construcao.torre_arcana", "porte": "medio", "guarda": [], "funcao": "mago", "trabalho_sem_receita": "especialista" }
 ]

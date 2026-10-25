@@ -86,6 +86,10 @@ struct PedidoResolverRevista {
     int64_t ofertaEmDecimos = 0;
 };
 struct PedidoPagarFianca {};
+// Fase C4 (Religião, 4.9): a oferenda no Templo da Capital Religiosa.
+struct PedidoPeregrinacao {
+    int moedas = 0;
+};
 // Fase B4 (Reputação, 4.2): doar moedas na cidade onde o grupo está.
 struct PedidoDoarNaCidade {
     int moedas = 0;
@@ -94,7 +98,7 @@ struct PedidoDoarNaCidade {
 using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
                                      PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
                                      PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance,
-                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade, PedidoDoarNaCidade, PedidoResolverRevista, PedidoPagarFianca>;
+                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade, PedidoDoarNaCidade, PedidoResolverRevista, PedidoPagarFianca, PedidoPeregrinacao>;
 
 class FilaDePedidosDoJogador {
 public:

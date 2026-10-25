@@ -129,6 +129,10 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "crimes.json", problemas)) {
         dados.regrasDoCrime = lerArquivoDosCrimes(*texto, problemas);
     }
+    // 19. A Religião (fase C4).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "religiao.json", problemas)) {
+        dados.regrasDaReligiao = lerArquivoDaReligiao(*texto, problemas);
+    }
     return dados;
 }
 

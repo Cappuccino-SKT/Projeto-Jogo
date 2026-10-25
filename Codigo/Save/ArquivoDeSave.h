@@ -20,7 +20,7 @@
 #include "Vila/SimulacaoDaVila.h"
 
 // Sobe a cada mudança no que é gravado (a Felicidade ganha um fator, um campo novo...).
-constexpr int versaoDoFormatoDoSave = 12;  // 2: o clima (fase A1); 3: o trabalho e o leilão (fase A2); 4: a população (fase A3); 5: a viagem (fase B1); 6: o comércio (fase B2); 7: as notícias (fase B3); 8: a reputação (fase B4); 9: a tecnologia (fase B5); 10: as facções (fase C1); 11: a cultura (fase C2); 12: o crime (fase C3)
+constexpr int versaoDoFormatoDoSave = 13;  // 2: o clima (fase A1); 3: o trabalho e o leilão (fase A2); 4: a população (fase A3); 5: a viagem (fase B1); 6: o comércio (fase B2); 7: as notícias (fase B3); 8: a reputação (fase B4); 9: a tecnologia (fase B5); 10: as facções (fase C1); 11: a cultura (fase C2); 12: o crime (fase C3); 13: a religião (fase C4)
 constexpr const char* versaoDoJogoNoSave = "0.9";
 constexpr int espacosDeSaveManual = 3;
 constexpr const char* extensaoDoArquivoDeSave = ".save";

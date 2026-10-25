@@ -1,6 +1,7 @@
 #include "Cidades/OutrasCidades.h"
 
 #include "Cultura/Cultura.h"
+#include "Religiao/Religiao.h"
 
 #include <algorithm>
 
@@ -172,6 +173,24 @@ VilaDoJogo gerarAVilaDaCidade(const CidadeDoMundo& cidade, const DadosDoJogo& da
         // nas cidades sem desempregados o Laboratório ficaria vazio.
         vila.construcoes.insert(vila.construcoes.begin(), laboratorio);
     }
+    // Fase C4 (Religião, RL1-1): os Templos (a Torre Arcana na Arcana) com 60% ou mais de cobertura;
+    // as capitais com 2. A Tecnocrata não tem (o culto dela é o Laboratório). Primeiro na fila da
+    // contratação, como o Laboratório.
+    const auto fe = dados.regrasDaReligiao.fes.find(cidade.faccao);
+    if (!cidade.faccao.empty() && fe != dados.regrasDaReligiao.fes.end() && fe->second.devocao != Devocao::Nenhuma) {
+        const std::string tipoDoCulto = fe->second.culto == "torre_arcana" ? "construcao.torre_arcana" : "construcao.templo";
+        if (dados.catalogoDeConstrucoes.existeConstrucao(tipoDoCulto)) {
+            const int quantos = cidade.nivel >= 4 ? 2 : 1;
+            for (int templo = 0; templo < quantos; ++templo) {
+                ConstrucaoDaVila culto;
+                culto.identificador = (fe->second.culto == "torre_arcana" ? "torre_arcana_" : "templo_") + std::to_string(templo + 1);
+                culto.tipo = tipoDoCulto;
+                culto.nivel = std::clamp(cidade.nivel, 1, 5);
+                culto.numeroDoLote = -1;
+                vila.construcoes.insert(vila.construcoes.begin(), culto);
+            }
+        }
+    }
     // 3. As casas: na mesma proporção da vila inicial (4 para 15).
     const int npcsDaVila = std::max<int>(1, static_cast<int>(vilaInicial.npcsIniciais.size()));
     const int casas = std::max(1, (npcs * casasDaVila + npcsDaVila - 1) / npcsDaVila);
@@ -254,7 +273,10 @@ bool empregadoPresenteNestaHora(const ContextoDaProducao& contexto, entt::entity
 
 void presumirOTrabalhoDaHora(ContextoDaProducao& contexto, int horaQueAcabou)
 {
-    const int ticks = ticksPresumidosPorHora(contexto.dados, contexto.ticksPorHoraDeJogo);
+    int ticks = ticksPresumidosPorHora(contexto.dados, contexto.ticksPorHoraDeJogo);
+    if (contexto.efeitosDaReligiao != nullptr) {
+        ticks = ticks * contexto.efeitosDaReligiao->producaoPresumidaEmPorcento / 100;  // fase C4: o primeiro dia do festival
+    }
     for (const entt::entity npc : contexto.npcsDaVila) {
         if (empregadoPresenteNestaHora(contexto, npc, horaQueAcabou)) {
             TrabalhoDoDia& trabalho = contexto.registroDasEntidades.get<TrabalhoDoDia>(npc);

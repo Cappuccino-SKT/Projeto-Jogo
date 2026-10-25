@@ -96,6 +96,8 @@ struct ProducaoDaConstrucao {
 };
 
 // Tudo o que as regras da produção e da economia usam, junto.
+struct EfeitosDaReligiaoNaCidade;
+
 struct ContextoDaProducao {
     entt::registry& registroDasEntidades;
     const DadosDoJogo& dados;
@@ -141,6 +143,8 @@ struct ContextoDaProducao {
     int fatorLeisECulturaEmDecimos = 0;
     int numeroDoMapaNoMundo = 0;
     int lodDoMapa = 0;
+    // Fase C4 (Religião): o que a fé muda nesta cidade (nulo = nada).
+    const EfeitosDaReligiaoNaCidade* efeitosDaReligiao = nullptr;
 };
 
 // ---------------------------------------------------------------------------

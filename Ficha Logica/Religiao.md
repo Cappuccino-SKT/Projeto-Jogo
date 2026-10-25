@@ -256,3 +256,15 @@ Com a Cultura (−4,8, Cultura 10.2), a classe fica com **−2,6** desses dois f
 4. **RL1-4:** na assimilação, muda primeiro o NPC mais novo da minoria.
 5. **RL1-5:** os peregrinos do mundo (demanda e dinheiro na cidade santa) ficam para quando forem encontros de verdade na Viagem.
 6. **RL1-6:** as oferendas saem do gasto extra e vão para o Banco da cidade.
+
+### 10.8 Ajustes do código (marco C4, 2026-10-24)
+
+1. **O Templo e a Torre Arcana** são construções novas (médias e sem receita): o Sacerdote trabalha como Manufaturado; o Mago, como Especialista. As capitais têm 2 e as outras cidades de facção 1, no nível da cidade, e eles são os primeiros na fila da contratação. As Vilas Livres não têm.
+2. **A Perseguição nas minorias** (−15 pela proporção delas) entra no 6º fator, preso entre −30 e +10. A migração em dobro das minorias e o Controle +5 ficam para depois.
+3. **Patrocinar e cancelar o festival** ficam para quando a vila do jogador tiver facção: a vila livre continua com a Festa da Colheita da fatia (RL1-3).
+4. **Os festivais** são os 3 da parte 2. O resto da tabela do documento fica para a rodada de conteúdo.
+5. **A oferenda** é 2% da renda da classe quando a cultura base da cidade tem fé (não NPC por NPC).
+6. **Os festivais começam no dia novo,** antes do dia da cidade (junto da Facção), e não no passo 6: assim o turno pela metade e a comida extra valem já no primeiro dia.
+7. **O Livro Sagrado** ainda não é um item (Crime, 10.8): fica para a rodada de conteúdo.
+8. **A Bênção** olha o ato de fé da estação anterior: a peregrinação ou uma doação numa cidade Religiosa.
+

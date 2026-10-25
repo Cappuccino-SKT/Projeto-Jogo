@@ -1309,6 +1309,11 @@ void InterfaceDoJogador::desenharOMapaMundial(SimulacaoDaVila& simulacao, float 
                 ImGui::SameLine();
             }
             ImGui::NewLine();
+            // Fase C4 (Religião, 4.9): a peregrinação no Templo da Capital Religiosa.
+            if (grupo.mapaAtual == mapaDaCidadeSanta(simulacao.dados)
+                && ImGui::SmallButton(("Peregrinação (oferenda de " + std::to_string(simulacao.dados.regrasDaReligiao.peregrinacaoOferendaMinima) + " moedas)").c_str())) {
+                simulacao.pedidos.acrescentar(PedidoPeregrinacao{simulacao.dados.regrasDaReligiao.peregrinacaoOferendaMinima});
+            }
             const int faixaDaCompra = std::max(0, faixa.compraEmPorcento);
             const int faixaDaVenda = std::max(0, faixa.vendaEmPorcento);
             const ContextoDaProducao loja = cidade->contextoDaProducao();

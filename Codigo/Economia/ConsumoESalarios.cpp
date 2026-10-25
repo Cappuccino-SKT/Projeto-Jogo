@@ -1,6 +1,7 @@
 #include "Economia/ConsumoESalarios.h"
 
 #include "Crime/Crime.h"
+#include "Religiao/Religiao.h"
 
 #include "Eventos/EventosDaVila.h"
 #include "Vila/Populacao.h"
@@ -128,6 +129,13 @@ void fazerOGastoExtra(ContextoDaProducao& contexto, int materiaisQueACestaTirou)
     int64_t paraGastar = std::min(tetoDoDia - dinheiro.gastoDaCestaDeHoje, dinheiro.dinheiroDaClasseCivil);
     if (paraGastar <= 0) {
         return;
+    }
+    // Fase C4 (Religião, 4.3): as oferendas saem do gasto extra e vão para o Banco da cidade.
+    if (contexto.efeitosDaReligiao != nullptr && contexto.efeitosDaReligiao->oferendaEmPorcentoDaRenda > 0) {
+        const int64_t oferenda = std::min(paraGastar, dinheiro.rendaDoDiaDaClasseCivil * contexto.efeitosDaReligiao->oferendaEmPorcentoDaRenda / 100);
+        dinheiro.dinheiroDaClasseCivil -= oferenda;
+        dinheiro.bancoDaCidade += oferenda;
+        paraGastar -= oferenda;
     }
     // 3. Materiais a mais: até o mesmo número que a cesta tirou hoje.
     int comprasDoJogador = 0;
@@ -333,6 +341,11 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
             if (contexto.impostoDaCidadeEmPorcento >= 0) {
                 impostoDaCidade.taxaEmPorcento = contexto.impostoDaCidadeEmPorcento;  // fase C1: a lei da facção
             }
+            // Fase C4 (Religião, 4.5): na Fé oficial, as minorias pagam 5 pontos a mais.
+            if (contexto.efeitosDaReligiao != nullptr && contexto.efeitosDaReligiao->impostoAMaisDasMinoriasEmPorcento > 0
+                && registro.get<IdentidadeDoNpc>(npc).cultura != contexto.efeitosDaReligiao->culturaBase) {
+                impostoDaCidade.taxaEmPorcento += contexto.efeitosDaReligiao->impostoAMaisDasMinoriasEmPorcento;
+            }
             const int64_t imposto = calcularImpostoDoSalario(salario, impostoDaCidade);
             dinheiroDeQuemPaga -= salario;
             dinheiro.bancoDaCidade += imposto * economia.imposto.parteDaCidadeEmPorcento / 100;
@@ -432,6 +445,10 @@ void rodarAFelicidadeDoDia(ContextoDaProducao& contexto)
     situacao.felicidadeDosEventosEmPontos = felicidadeDosEventosAtivos(contexto) + pontosDoClimaNosEventos(contexto) + contexto.felicidadeDaFaccaoEmPontos;
     situacao.fatorLeisECulturaEmDecimos = contexto.fatorLeisECulturaEmDecimos;
     situacao.felicidadeDaCriminalidadeEmDecimos = felicidadeDaCriminalidadeEmDecimos(contexto.felicidade.criminalidadeEmDecimos, contexto.dados.regrasDoCrime);
+    if (contexto.efeitosDaReligiao != nullptr) {  // fase C4: o 6º fator e o festival (nos eventos)
+        situacao.fatorReligiaoEmDecimos = contexto.efeitosDaReligiao->fatorEmDecimos;
+        situacao.felicidadeDosEventosEmPontos += contexto.efeitosDaReligiao->felicidadeDoFestivalEmPontos;
+    }
     situacao.pontosDoClimaNoConsumo = pontosDoClimaNoConsumoAtendido(contexto);
 
     FelicidadeDaClasse& felicidade = contexto.felicidade;
@@ -464,6 +481,7 @@ std::vector<std::string> rodarAOrdemDoDia(ContextoDaProducao& contexto, const Re
             break;
         case PassoDaOrdemDoDia::Consumo:
             consumirACestaDoDia(contexto);
+            comprarAComidaDoFestival(contexto);  // fase C4 (Religião, 4.4, passo 4)
             break;
         case PassoDaOrdemDoDia::Salarios: {
             // O gerente de cada construção é escolhido antes dos salários (ficha da Construção).

@@ -197,6 +197,7 @@ json escreverAFelicidade(const FelicidadeDaClasse& felicidade)
                 {"moradia", felicidade.fatoresDoDia.moradia},
                 {"eventosDuradouros", felicidade.fatoresDoDia.eventosDuradouros},
                 {"leisECultura", felicidade.fatoresDoDia.leisECultura},
+                {"religiao", felicidade.fatoresDoDia.religiao},
                 {"criminalidade", felicidade.criminalidadeEmDecimos},
                 {"diaDoProximoFurtoPossivel", felicidade.diaDoProximoFurtoPossivel}};
 }
@@ -548,6 +549,12 @@ json escreverASimulacao(const SimulacaoDaVila& simulacao)
     arvore["npcs"] = escreverOsNpcs(simulacao);
     arvore["diario"] = escreverOsDiario(simulacao);
     arvore["viagem"] = escreverAViagem(simulacao);
+    // Fase C4 (Religião): o festival e a assimilação da cidade.
+    arvore["religiao"] = json{{"diasDoFestival", simulacao.religiao.diasDoFestival},
+                              {"pontosDoFestival", simulacao.religiao.pontosDoFestival},
+                              {"primeiroDiaDoFestival", simulacao.religiao.primeiroDiaDoFestival},
+                              {"diaDeFestival", simulacao.religiao.diaDeFestival},
+                              {"fracaoDeAssimilacao", simulacao.religiao.fracaoDeAssimilacaoEmPessoas}};
     arvore["comercio"] = escreverOComercio(simulacao);
     return arvore;
 }
@@ -576,5 +583,7 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["tecnologia"] = escreverATecnologia(simulacao);
     arvore["faccoes"] = escreverAsFaccoes(simulacao);
     arvore["crime"] = escreverOCrime(simulacao);
+    arvore["religiaoDoJogador"] = json::array({simulacao.religiaoDoJogador.anoDaUltimaPeregrinacao, simulacao.religiaoDoJogador.estacaoDaUltimaBencao,
+                                               simulacao.religiaoDoJogador.estacaoDoUltimoAtoDeFe});
     return json::to_msgpack(arvore);
 }

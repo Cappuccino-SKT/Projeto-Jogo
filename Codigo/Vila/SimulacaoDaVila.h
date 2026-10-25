@@ -137,6 +137,11 @@ public:
     int fatorLeisECulturaEmDecimos = 0;
     // Fase C3 (Crime e Justiça): só na vila, o crime do jogador (a Recompensa, a prisão, a revista).
     EstadoDoCrimeDoJogador crimeDoJogador;
+    // Fase C4 (Religião): o festival e a assimilação de cada cidade, o que a fé muda nela e, só
+    // na vila, a peregrinação e a Bênção do jogador.
+    EstadoDaReligiaoDaCidade religiao;
+    EfeitosDaReligiaoNaCidade efeitosDaReligiao;
+    EstadoDaReligiaoDoJogador religiaoDoJogador;
     // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
     int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
     // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).

@@ -42,7 +42,8 @@ struct SituacaoDoDiaParaAFelicidade {
     int civisSemCasa = 0;
     int felicidadeDosEventosEmPontos = 0;
     int fatorLeisECulturaEmDecimos = 0;  // fase C2: já calculado com as leis da facção
-    int felicidadeDaCriminalidadeEmDecimos = 0;  // fase C3 (Crime, 4.1, passo 3): entra nos eventos  // a soma dos eventos ativos (ficha dos Eventos) e o calor forte (Clima)
+    int felicidadeDaCriminalidadeEmDecimos = 0;  // fase C3 (Crime, 4.1, passo 3): entra nos eventos
+    int fatorReligiaoEmDecimos = 0;              // fase C4  // a soma dos eventos ativos (ficha dos Eventos) e o calor forte (Clima)
     int pontosDoClimaNoConsumo = 0;        // ficha do Clima, regra 4.4: −10 se faltou lenha hoje
 };
 
@@ -53,8 +54,9 @@ struct FatoresDaFelicidade {
     int moradia = 0;
     int eventosDuradouros = 0;
     int leisECultura = 0;  // fase C2 (Cultura, 4.2 e 4.3), de −30,0 a +10,0
+    int religiao = 0;      // fase C4 (Religião, 4.2 e 4.5)
 
-    int soma() const { return consumoAtendido + desempregoERenda + moradia + eventosDuradouros + leisECultura; }
+    int soma() const { return consumoAtendido + desempregoERenda + moradia + eventosDuradouros + leisECultura + religiao; }
 };
 
 struct FelicidadeDaClasse {

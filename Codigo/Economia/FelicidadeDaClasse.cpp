@@ -33,6 +33,9 @@ FatoresDaFelicidade calcularFatoresDaFelicidade(const SituacaoDoDiaParaAFelicida
 
     // 5. Leis × cultura (fase C2), de −30 a +10.
     fatores.leisECultura = std::clamp(situacao.fatorLeisECulturaEmDecimos, -300, 100);
+
+    // 6. Religião (fase C4): a fé e a Perseguição das minorias.
+    fatores.religiao = std::clamp(situacao.fatorReligiaoEmDecimos, -300, 100);
     return fatores;
 }
 
