@@ -24,6 +24,53 @@ Por quê: no combate visto, o jogador derruba um bandido de cada vez, e o lado d
 
 **Conflitos:** muda a CB1-1 e o 4.8 do [[Ficha Logica/Combate|Combate]]; muda o que a Viagem, o Comércio e o Crime (Caçadores) recebem.
 
+## Rodada HI1: a história do mundo, o geral (2026-10-25)
+
+**Contexto.** Pausa no código para começar a história, inspirada no Kenshi: um mundo cruel e desigual, de fantasia pré-industrial, onde o jogador pode ser bom, mas o mal é mais divertido. As opções completas estão no [[Documentos/Mundo e História/Descrição|Mundo e História]]. Não muda regra de jogo; muda os nomes e os textos depois.
+
+**Pergunta HI1-1: qual é o tema do mundo?** (parte 2)
+
+| Opção | Tema | Ganha | Perde |
+|---|---|---|---|
+| **T1** | Tudo tem dono (terra, lei, pessoas) | Casa com Escravidão, Classe Social e Crime | Menos épico |
+| **T2** | O preço do poder | Serve a todo povo e a toda escolha do jogador | Mais vago |
+| **T3** | As cinzas do império | Dá o pano de fundo e as ruínas | Sozinho, é comum |
+
+**Sugestão: T1 como tema e T3 como pano de fundo.**
+
+**Pergunta HI1-2: o que aconteceu no passado (o Ano 0)?** (parte 4)
+
+| Opção | O que é | Ganha | Perde |
+|---|---|---|---|
+| **A** | A Queda do Império, por guerra civil | Político e simples | Pouco mistério |
+| **B** | O Grande Sangramento: um ritual quebrou a magia | Explica a baixa magia e os ódios | Mais "fantasia" |
+| **C** | A Peste Cinzenta | Explica a escravidão; usa a Epidemia | Menos grandioso |
+| **D** | As três juntas: o ritual para salvar o Império causa o Sangramento, a fome e a peste, e o Império cai | Uma origem para cada povo e um segredo central (cada povo conta uma versão) | Mais coisa para escrever |
+
+**Sugestão: D.**
+
+**Pergunta HI1-3: como o mundo termina?** (parte 6)
+
+| Opção | O que é | Ganha | Perde |
+|---|---|---|---|
+| **A** | Sem final obrigatório: 6 destinos possíveis que a simulação alcança, com ou sem o jogador | Igual ao Kenshi; usa a simulação que já existe | Nenhum fim "de filme" |
+| **B** | Um final principal (por exemplo, descobrir o Ano 0 e decidir o destino), com os destinos como alternativas | Dá um objetivo claro | Uma trama para escrever e manter |
+| **C** | Sem destinos: o mundo só continua | Nada a fazer | Falta sensação de conquista |
+
+**Sugestão: A**, com a verdade do Ano 0 como mistério opcional na masmorra lendária.
+
+**Pergunta HI1-4: até onde vai a crueldade mostrada?**
+
+| Opção | O que é | Ganha | Perde |
+|---|---|---|---|
+| **A** | Cruel no que acontece (escravidão, fome, traição, tortura), mas contado sem detalhe gráfico, em texto e em consequência | Pesado como o Kenshi, sem chocar à toa | Menos impacto visual |
+| **B** | Cruel e gráfico (descrições e imagens fortes) | Mais impacto | Arte mais cara; público menor |
+| **C** | Cruel só no fundo; o jogador quase não vê | Mais leve | Perde o tema |
+
+**Sugestão: A.** Crianças nunca como alvo de violência.
+
+**Conflitos:** nenhum com as fichas; as decisões viram o documento Mundo e História e, depois, a rodada HI2 (os nomes).
+
 ---
 
 A rodada TE2 (a Tecnologia sem Especialistas e sem as listas) foi respondida pelo autor com a opção A em 2026-10-24: o B5 entrou com conteúdo provisório, e a habilidade Especialista é a Manufaturado até o A4 (ver a parte 10.8 da [[Ficha Logica/Tecnologia|Tecnologia]]). **Rodadas anteriores (já resolvidas):** A rodada CO2 (o comércio raro) foi respondida pelo autor com a opção A em 2026-10-21: as Braçais de comida cobrem 75% do consumo onde o recurso é escasso (ver o `Jogo/LEIA-ME.md`, marco B2). A rodada EQ1 (o Pão nas crises) foi decidida em modo automático em 2026-10-20 pelas sugestões A e B: o Pão acima de 2,6 só falha o teste de 1 ano se durar 8 dias seguidos; a EQ2 (a Padaria depois de uma crise) foi respondida pelo autor com a opção A: a Padaria começa no nível 2 (3 vagas), e o estoque-alvo do Pão voltou para 5 dias (ver o `Jogo/LEIA-ME.md`, marco A6). As rodadas CL1 e TP1 foram respondidas pelo autor com "seguir sugestão". As rodadas PO1, CS1, CI1 e CU1 (fase A) foram decididas em **modo automático** em 2026-10-19, a pedido do autor; as decisões estão na parte 10.7 de cada ficha ([[Ficha Logica/Populacao|População]], [[Ficha Logica/ClasseSocial|Classe Social]], [[Ficha Logica/Cidade|Cidade]], [[Ficha Logica/Cura|Cura]]).

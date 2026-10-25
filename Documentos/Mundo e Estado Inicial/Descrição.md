@@ -277,7 +277,7 @@ O estilo Dono de vila começa com o assentamento **já fundado** no ponto escolh
 
 ### História do mundo
 
-**[Em aberto]** Fica para depois, quando o autor começar a escrever a história do jogo: nomes das regiões, culturas, facções, cidades e personagens, a história antes do Ano 412 e o porquê das guerras. Quando for escrita, vira o documento **Mundo e História**.
+**[Em andamento]** Ver [[Mundo e História/Descrição|Mundo e História]]. Falta decidir: nomes das regiões, culturas, facções, cidades e personagens, a história antes do Ano 412 e o porquê das guerras. Quando for escrita, vira o documento **Mundo e História**.
 
 ### Parte técnica
 
