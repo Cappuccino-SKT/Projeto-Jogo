@@ -24,14 +24,64 @@ Por quê: no combate visto, o jogador derruba um bandido de cada vez, e o lado d
 
 **Conflitos:** muda a CB1-1 e o 4.8 do [[Ficha Logica/Combate|Combate]]; muda o que a Viagem, o Comércio e o Crime (Caçadores) recebem.
 
-## Rodada HI1: a história do mundo, o geral (2026-10-25)
+## Rodada HI2: o que o evento Y deixou (2026-10-25)
 
-**Contexto.** Pausa no código para começar a história, inspirada no Kenshi: um mundo cruel e desigual, de fantasia pré-industrial, onde o jogador pode ser bom, mas o mal é mais divertido. As opções completas estão no [[Documentos/Mundo e História/Descrição|Mundo e História]]. Não muda regra de jogo; muda os nomes e os textos depois.
+**Contexto.** A HI1 foi respondida: o tema é "Tudo tem dono"; o passado é a versão do autor (o Império Mágico, o ritual C, o feitiço de W e a fusão de duas dimensões no evento Y, que é o Ano 0); não há final real; a crueldade mistura texto e imagem rara. Tudo está no [[Documentos/Mundo e História/Descrição|Mundo e História]]. Pela regra do autor, **a história manda**. Estas perguntas resolvem onde ela bate nas fichas.
 
-**Pergunta HI1-1: qual é o tema do mundo?** (parte 2)
+**Pergunta HI2-1: como ficou a magia depois de Y?** (a ficha diz "baixa magia")
 
-| Opção | Tema | Ganha | Perde |
+| Opção | O que é | Ganha | Perde |
 |---|---|---|---|
+| **A** | A explosão consumiu quase toda a mana. A magia ficou **rara e instável**, forte só perto das marcas da fusão | Mantém a baixa magia e a ficha da Magia; as marcas viram lugares perigosos e cobiçados | Os magos de hoje são uma sombra dos antigos |
+| **B** | A fusão trouxe **mais** magia, mas selvagem e difícil de controlar | Mundo mais fantástico | Muda a Magia e o equilíbrio com a pólvora |
+| **C** | A magia segue como antes, só que proibida em quase todo lugar | Simples | Perde a ligação com o evento Y |
+
+**Sugestão: A.** Combina com a pólvora: quem não tem magia procura outro poder.
+
+**Pergunta HI2-2: o que veio da outra dimensão?**
+
+| Opção | O que é | Ganha | Perde |
+|---|---|---|---|
+| **A** | Só a terra mudou (biomas estranhos, minérios novos) | Pouco trabalho | Pouca fantasia |
+| **B** | Terra mudada **e criaturas** (feras e monstros nas regiões transformadas e nas masmorras) | Dá inimigos ao Combate e às masmorras | Arte e dados de criaturas |
+| **C** | B **e povos** de lá: novas raças | A variação de raças que o autor quer | Muda o "só humanos" de várias fichas |
+| **D** | B agora; as raças nascem de **humanos transformados pela fusão** em cada região e entram numa versão depois (o campo "Raça" do NPC já existe) | Dá raças sem travar o código de agora | As raças ficam para depois |
+
+**Sugestão: D.**
+
+**Pergunta HI2-3: o que era a outra dimensão?**
+
+| Opção | O que é | Ganha | Perde |
+|---|---|---|---|
+| **A** | O mundo dos deuses, de verdade. Eles estão mortos, presos ou furiosos | Mexe fundo nas fés | Fecha o mistério |
+| **B** | Outro mundo qualquer; o ritual errou o alvo | Os deuses continuam incertos | Menos peso |
+| **C** | Ninguém sabe; cada fé conta uma versão. A verdade (A ou B) fica escondida nas masmorras lendárias | O grande segredo do jogo; cada cultura tem a sua crença | Precisa decidir a verdade em segredo, para escrever as pistas |
+
+**Sugestão: C**, com a verdade decidida pelo autor depois.
+
+**Pergunta HI2-4: como nasceram as 6 facções?**
+
+| Opção | O que é | Ganha | Perde |
+|---|---|---|---|
+| **A** | Dos grupos da guerra B: os soldados rebeldes (Guerreira), os magos sobreviventes (Arcana), os nobres rebeldes (Autoritária), os que viram castigo divino (Religiosa), os que juraram largar a magia (Tecnocrata) e os mercadores que venderam os sobreviventes (Escravista) | Cada facção carrega uma parte da guerra; explica os ódios | W precisa de um destino (morreu na explosão?) |
+| **B** | Das províncias do Império, cada região seguiu sozinha | Simples, ligado ao mapa | Quase não usa a guerra B |
+| **C** | Misturar: as províncias deram as terras, os grupos da guerra deram as ideias | Os dois ganhos | Mais texto |
+
+**Sugestão: A**, e W morre no evento Y (a Autoritária diz ser a herdeira dele).
+
+**Pergunta HI2-5: onde fica a cratera da antiga capital?**
+
+| Opção | O que é | Ganha | Perde |
+|---|---|---|---|
+| **A** | No centro do mapa, entre as regiões, como um mapa novo de terra morta e perigosa | O lugar mais marcante do mundo, perto de todos | Muda o mapa 8 × 6 do Mundo |
+| **B** | Numa das 3 masmorras lendárias de hoje ((5,1), (3,4) ou (5,5)) | Não muda o mapa | A capital fica de lado |
+| **C** | A cratera virou um **mar** ou um lago no meio do continente | Visual forte | Muda o mapa e a Viagem |
+
+**Sugestão: B**, na lendária de (3,4), a mais central; as outras duas são restos dos laboratórios do ritual C.
+
+**Conflitos:** a HI2-1 toca a [[Ficha Logica/Magia|Magia]]; a HI2-2, o Combate, o NPC e o Mundo; a HI2-3, a [[Ficha Logica/Religiao|Religião]]; a HI2-4, a Cultura e a Facção (só a história, não as regras); a HI2-5, o Mundo.
+
+---|---|---|---|
 | **T1** | Tudo tem dono (terra, lei, pessoas) | Casa com Escravidão, Classe Social e Crime | Menos épico |
 | **T2** | O preço do poder | Serve a todo povo e a toda escolha do jogador | Mais vago |
 | **T3** | As cinzas do império | Dá o pano de fundo e as ruínas | Sozinho, é comum |
