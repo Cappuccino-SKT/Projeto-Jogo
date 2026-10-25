@@ -22,6 +22,8 @@ Ele **não** traz a história do mundo. O autor decidiu deixar a história, os n
 
 O mundo tem **48 Mapas Locais**, numa malha de **8 colunas × 6 linhas**. O tamanho pode mudar no futuro; por enquanto fica assim.
 
+**Provisório:** pela rodada HI3-1, este mapa será trocado por um mapa novo, de um continente inteiro ([[Mundo e História/Descrição|Mundo e História]]).
+
 São **6 regiões de 8 mapas** (blocos de 4 × 2), arrumadas em **2 colunas × 3 linhas** de blocos. (A sugestão original dizia "3 colunas por 2 linhas", mas essa conta dá 12 × 4; para manter a malha 8 × 6, o arranjo certo é 2 × 3.)
 
 | | Oeste (colunas 1 a 4) | Leste (colunas 5 a 8) |
@@ -190,14 +192,14 @@ Afinidade entre as culturas (afim, neutra ou hostil, ver [[Sistema de Cultura/De
 
 | | Gue | Arc | Aut | Rel | Tec | Esc |
 |---|---|---|---|---|---|---|
-| **Guerreira** | — | neutra | **hostil** | neutra | neutra | afim |
+| **Guerreira** | — | neutra | **hostil** | neutra | **hostil** | afim |
 | **Arcana** | neutra | — | neutra | **hostil** | **hostil** | neutra |
 | **Autoritária** | **hostil** | neutra | — | neutra | afim | afim |
-| **Religiosa** | neutra | **hostil** | neutra | — | neutra | **hostil** |
-| **Tecnocrata** | neutra | **hostil** | afim | neutra | — | neutra |
+| **Religiosa** | neutra | **hostil** | neutra | — | **hostil** | **hostil** |
+| **Tecnocrata** | **hostil** | **hostil** | afim | **hostil** | — | neutra |
 | **Escravista** | afim | neutra | afim | **hostil** | neutra | — |
 
-Por quê: a Guerreira despreza a obediência imperial da Autoritária, mas vende prisioneiros de guerra à Escravista; a Religiosa condena a magia da Arcana e o tráfico de pessoas e de Fumo da Escravista; a Tecnocrata proíbe a magia; a Autoritária valoriza a ordem da Tecnocrata e o trabalho barato da Escravista.
+Por quê: a Tecnocrata mata ou escraviza os tocados pela mana, e a Guerreira é feita deles, enquanto a Religiosa os diz abençoados (rodada HI3-3); a Guerreira despreza a obediência imperial da Autoritária, mas vende prisioneiros de guerra à Escravista; a Religiosa condena a magia da Arcana e o tráfico de pessoas e de Fumo da Escravista; a Tecnocrata proíbe a magia; a Autoritária valoriza a ordem da Tecnocrata e o trabalho barato da Escravista.
 
 **Valor inicial de relação** (−100 a +100) de cada par em contato:
 

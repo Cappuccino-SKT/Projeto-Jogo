@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 e HI2 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado em pontos-chave, o que o evento Y deixou, a origem das 6 facções, o tipo de fim e o limite da crueldade. Os nomes e os detalhes vêm nas próximas rodadas (HI3 em [[Rodada Pendente]]). Letras como **X**, **Y** e **W** marcam nomes e datas que ainda faltam.
+> **Estado:** rodadas HI1, HI2 e HI3 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado em pontos-chave, o que o evento Y deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Faltam os nomes (HI4) e o mapa novo. Letras como **X**, **Y** e **W** marcam nomes e datas que ainda faltam.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -29,7 +29,7 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 | 7 | Conflitos do presente | O que está para explodir no Ano 412? | Proposta (parte 5) |
 | 8 | Segredos | Que verdades o jogador pode descobrir? | Proposta (parte 4.3) |
 | 9 | Os povos | O que cada um quer, teme, esconde e faz de cruel? | **Decidido** (parte 7) |
-| 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Cratera na costa (parte 4.4); posição na HI3 |
+| 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Cratera na costa (parte 4.4); a posição sai do mapa novo |
 | 11 | Personagens importantes | O imperador, o nobre W, os magos reais | Nomes na HI2 |
 | 12 | Futuros possíveis | Como o mundo pode mudar? | **Decidido: sem final real** (parte 6) |
 | 13 | Como é contada | Por onde a história chega ao jogador? | Proposta (parte 8) |
@@ -57,9 +57,9 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 Já decidido nas fichas; o que a história mudar passa por rodada:
 
 - **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois do evento Y** (parte 7).
-- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas do evento Y (parte 4.4). Quando elas entram no jogo: HI3-2.
+- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas do evento Y (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos.
 - **Baixa magia** e tecnologia passando para a **pólvora**. A história explica as duas (parte 4.4).
-- **O mapa:** 6 regiões; montanhas ao norte, mar a leste e ao sul, estepe e deserto a oeste; 3 masmorras lendárias.
+- **O mapa:** o de hoje (6 regiões em 8 × 6) é **provisório**. Haverá um **mapa novo, de um continente inteiro**, ainda não desenhado (HI3-1); a cratera entra nele.
 - **O jogo começa no Ano 412** do calendário **V**, contado a partir do evento **Y**.
 
 ## 4. O começo: o passado do mundo (HI1-2, versão do autor)
@@ -108,7 +108,7 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 - O mesmo atingiu os animais e as plantas: surgiram **monstros** em certos lugares.
 - Quase toda a biologia mudou, e surgiram **biomas, terrenos e minérios novos**.
 
-**A cratera (HI2-5).** A antiga capital virou uma **cratera perto da costa**: uma região perigosa, com as **ruínas da capital** como masmorra para o jogador explorar. A posição no mapa: HI3-1.
+**A cratera (HI2-5).** A antiga capital virou uma **cratera perto da costa**: uma região perigosa, com as **ruínas da capital** como masmorra para o jogador explorar. A posição sai do mapa novo (HI3-1).
 
 ## 5. O meio: o presente, Ano 412 (proposta)
 
@@ -151,7 +151,7 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 | **Autoritária** | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (verdade ou não: o autor decide depois) | Obediência ao "imperador eterno" | A definir |
 | **Guerreira** | O **resto do exército rebelde**. Estavam no centro da fusão, sofreram a maior parte das mutações e são boa parte das outras raças | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
 
-**Consequências para os ódios das fichas** (proposta, a confirmar na HI3-3):
+**Os ódios entre os povos** (HI3-3, opção A; a tabela fica no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]):
 - Guerreira × Autoritária: os rebeldes contra os herdeiros do imperador. Confirma o ódio.
 - Arcana × Religiosa: a Arcana usa como cobaias as raças que a Religiosa diz abençoadas. Confirma o ódio.
 - Tecnocrata × Arcana: quem executa magos contra quem idolatra a magia. Confirma o ódio.
@@ -168,7 +168,7 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 
 ## 9. Próximos passos
 
-1. **Rodada HI3:** a posição da cratera, quando as raças entram no jogo e os ódios entre os povos.
+1. **O mapa novo** do continente inteiro (o autor desenha; depois, uma rodada para as fichas).
 2. **Rodada HI4:** os nomes (o Império, o imperador, W, Y, V, a guerra B, o ritual C, as facções, as regiões) e as datas X, Z e A.
 3. A linha do tempo do Ano 0 ao 412 e os mitos de cada povo.
 4. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).

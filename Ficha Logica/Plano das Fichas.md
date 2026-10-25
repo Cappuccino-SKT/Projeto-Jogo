@@ -70,6 +70,7 @@ Combate; Batalha; Guerra; Diplomacia; Magia; Escravidão; Companheiros e Diálog
 | D5 | **[[Ficha Logica/Diplomacia\|Diplomacia]]** (escrita em 2026-10-19; rodada DP1 automática) | Facção, Cultura, Reputação |
 | D6 | **[[Ficha Logica/Batalha\|Batalha]]** (escrita em 2026-10-19; rodada BA1 automática) | Combate (D1), Facção |
 | D7 | **[[Ficha Logica/Guerra\|Guerra]]** (escrita em 2026-10-19; rodada GU1 automática) | Batalha (D6), Diplomacia (D5), Viagem, Comércio |
+| D8 | **Raças** (a escrever; rodada HI3-2: entram depois dos marcos da fase D) | [[Documentos/Mundo e História/Descrição\|Mundo e História]], NPC, Cultura, Combate |
 
 ### Fase E — a partida completa (por último)
 
