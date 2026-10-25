@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodada HI1 respondida pelo autor (2026-10-25). O tema, o passado em pontos-chave, o tipo de fim e o limite da crueldade estão decididos. Os nomes e os detalhes vêm nas próximas rodadas (HI2 em [[Rodada Pendente]]). Letras como **X**, **Y** e **W** marcam nomes e datas que ainda faltam.
+> **Estado:** rodadas HI1 e HI2 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado em pontos-chave, o que o evento Y deixou, a origem das 6 facções, o tipo de fim e o limite da crueldade. Os nomes e os detalhes vêm nas próximas rodadas (HI3 em [[Rodada Pendente]]). Letras como **X**, **Y** e **W** marcam nomes e datas que ainda faltam.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -25,11 +25,11 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 | 3 | Mito de origem | Como cada povo explica o mundo e o evento Y? | A fazer |
 | 4 | Era de ouro | O Império Mágico | **Pontos-chave** (parte 4) |
 | 5 | Catástrofe | O ritual C e o evento Y | **Pontos-chave** (parte 4) |
-| 6 | Reconstrução | Do Ano 0 ao 412: as raças e as 6 facções | Rodada HI2 |
+| 6 | Reconstrução | Do Ano 0 ao 412: as raças e as 6 facções | **Decidido** (partes 4.4 e 7) |
 | 7 | Conflitos do presente | O que está para explodir no Ano 412? | Proposta (parte 5) |
 | 8 | Segredos | Que verdades o jogador pode descobrir? | Proposta (parte 4.3) |
-| 9 | Os povos | O que cada um quer, teme, esconde e faz de cruel? | A revisar depois da HI2 (parte 7) |
-| 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Rodada HI2 |
+| 9 | Os povos | O que cada um quer, teme, esconde e faz de cruel? | **Decidido** (parte 7) |
+| 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Cratera na costa (parte 4.4); posição na HI3 |
 | 11 | Personagens importantes | O imperador, o nobre W, os magos reais | Nomes na HI2 |
 | 12 | Futuros possíveis | Como o mundo pode mudar? | **Decidido: sem final real** (parte 6) |
 | 13 | Como é contada | Por onde a história chega ao jogador? | Proposta (parte 8) |
@@ -56,9 +56,9 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 
 Já decidido nas fichas; o que a história mudar passa por rodada:
 
-- **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois do evento Y** (HI2).
-- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". O autor quer **variação de raças** vinda do evento Y (HI2).
-- **Baixa magia** e tecnologia passando para a **pólvora**. A história conta que a magia já foi uma "alta tecnologia" (HI2: como ela ficou depois de Y).
+- **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois do evento Y** (parte 7).
+- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas do evento Y (parte 4.4). Quando elas entram no jogo: HI3-2.
+- **Baixa magia** e tecnologia passando para a **pólvora**. A história explica as duas (parte 4.4).
 - **O mapa:** 6 regiões; montanhas ao norte, mar a leste e ao sul, estepe e deserto a oeste; 3 masmorras lendárias.
 - **O jogo começa no Ano 412** do calendário **V**, contado a partir do evento **Y**.
 
@@ -76,21 +76,39 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 | O cerco da capital | Milhões de rebeldes contra alguns milhares de imperiais, mas com os melhores magos do continente. O cerco dura dias; um **círculo mágico imenso**, de uma borda à outra da cidade, se forma sobre a capital. |
 | A ofensiva final | As muralhas caem; os magos reais morrem um a um; no palácio sem teto, uma grande batalha de magos. Sobre o imperador indefeso, vários círculos se empilham, e o último abre **um portal imenso**. |
 | **Ano 0: o evento Y** | W lança um **feitiço de poder nuclear** contra o imperador. O poder dele mais a mana do ritual causam uma **anomalia**: em vez de fundir a magia da dimensão dos deuses no imperador, o ritual **funde duas dimensões**. A capital é varrida do mapa, e várias regiões do continente se transformam. |
-| Do Ano 0 ao 412 | Começa o **calendário V**. Nascem a variação de raças e as 6 facções (HI2). |
+| Do Ano 0 ao 412 | Começa o **calendário V**. Nascem as novas raças e as 6 facções (partes 4.4 e 7). |
 
 ### 4.2 O que isso dá ao jogo
 
 - **O tema na origem:** o mundo inteiro pagou pela ganância de um só dono. Os de hoje repetem a mesma ganância em escala menor.
 - **Ninguém é inocente:** o imperador quis ser deus; mas foi o feitiço de W, o herói da revolta, que causou a fusão.
 - **Lugares:** a cratera da antiga capital e as regiões transformadas são os lugares mais marcantes do mapa.
-- **A magia:** todo mundo viu o quão poderosa ela pode ser. Isso explica o medo e a proibição (Religiosa, Tecnocrata) e a cobiça (Arcana).
+- **A magia:** todo mundo viu o quão poderosa ela pode ser. Isso explica o tabu e a proibição (Tecnocrata), a fé (Religiosa) e a cobiça (Arcana).
 
 ### 4.3 Segredos possíveis (proposta)
 
-- O que era de fato a outra dimensão (HI2-3).
-- Se o imperador morreu mesmo ou se virou parte da fusão.
+- O que era de fato a outra dimensão: ninguém no mundo sabe que ela era só mana pura (parte 4.4).
+- Se o imperador morreu mesmo, ou se o imperador da Autoritária é o mesmo dos tempos antigos (o autor decide depois).
 - Se W sabia o que o feitiço faria.
 - Cada povo conta **uma versão** do evento Y (herói, vilão, castigo divino), e nenhuma está inteira. A verdade fica nas masmorras lendárias.
+
+### 4.4 O que o evento Y deixou (HI2, decidido pelo autor)
+
+**A outra dimensão (HI2-3).** Não era um lugar físico: era uma dimensão feita **só de mana pura**. Os magos do ritual não sabiam disso. Ela não é a única: podem existir várias outras. Como os magos buscavam o poder dos deuses, nasceu a **crença** de que ela pertencia a seres que seriam deuses.
+
+**A magia (HI2-1).**
+- A fusão causou uma grande instabilidade, e quase todos os efeitos da **magia antiga** se perderam. Todo o progresso mágico do Império voltou ao zero.
+- A **mana nova**, vinda da outra dimensão, ficou mais abundante no mundo, mas só **raros humanos novos** conseguem manipulá-la.
+- Pelo que os magos antigos fizeram, a magia virou **tabu** em grande parte do continente.
+- Com poucos magos, a busca por poder foi para outras áreas, como a guerra e as ferramentas. Por isso aparecem as **armas de pólvora** durante o jogo.
+
+**A vida e a terra (HI2-2).**
+- No mundo principal só existiam **humanos**, e só eles usavam magia; não havia outras espécies humanoides.
+- A mana de fora era diferente e **alterou fisicamente** o mundo. Misturada à biologia humana, ela causou **mutações**, que deram origem a **novas espécies humanoides**.
+- O mesmo atingiu os animais e as plantas: surgiram **monstros** em certos lugares.
+- Quase toda a biologia mudou, e surgiram **biomas, terrenos e minérios novos**.
+
+**A cratera (HI2-5).** A antiga capital virou uma **cratera perto da costa**: uma região perigosa, com as **ruínas da capital** como masmorra para o jogador explorar. A posição no mapa: HI3-1.
 
 ## 5. O meio: o presente, Ano 412 (proposta)
 
@@ -122,18 +140,23 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 
 O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Crônica do mundo ([[Ficha Logica/Noticias|Notícias]]). O jogador também pode virar o próprio destino: rei, senhor de escravos, libertador ou profeta ([[Ficha Logica/Objetivo|Objetivo e Progressão]]).
 
-## 7. Os seis povos: ideias (a revisar depois da HI2)
+## 7. Os seis povos (HI2-4, decidido pelo autor)
 
-A coluna "De onde vem" segue a sugestão da HI2-4.
+| Povo | De onde vem | No que acredita | A crueldade | Como vê as outras raças |
+|---|---|---|---|---|
+| **Religiosa** | Os que **mais sofreram** com a mana do outro mundo | Num deus que vive na outra dimensão e agraciou o mundo com a sua mana | Extremamente violenta com quem não crê nesse deus | **Abençoadas** pelo deus |
+| **Tecnocrata** | Os herdeiros dos combatentes que **sobreviveram ao cerco** da capital e viram o perigo da magia | Aversão a toda magia e todo mago | Executa, sem remorso, qualquer um com capacidade mágica | **Ameaças:** executadas ou escravizadas |
+| **Arcana** | Os descendentes dos antigos **guardas reais** | Desvendar e manipular a mana nova, chegar a um novo poder e à **imortalidade** dos seus magos | Tudo o que a mana tocou é experimento; quem não usa magia é inferior | **Escravas** para experimentos |
+| **Escravista** | Os **nobres do Império**, livres de um governante após a queda | Riqueza e mão de obra para o seu novo reino | Desde a devastação, captura como escravos os atingidos pela guerra | Mão de obra |
+| **Autoritária** | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (verdade ou não: o autor decide depois) | Obediência ao "imperador eterno" | A definir |
+| **Guerreira** | O **resto do exército rebelde**. Estavam no centro da fusão, sofreram a maior parte das mutações e são boa parte das outras raças | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
 
-| Povo | De onde vem | Quer | Teme | A mentira que conta | A crueldade | O lado bom |
-|---|---|---|---|---|---|---|
-| **Guerreira** | Os soldados da rebelião que nunca largaram as armas | Liberdade e glória | Ser domada | "Somos livres" (mas vivem do saque) | Saqueia e vende prisioneiros | Lealdade entre iguais |
-| **Arcana** | Os magos que sobreviveram, dos dois lados | O poder do ritual | Ser culpada pelo evento Y | "A magia não foi a culpada" | Usa pessoas como cobaias | Conhecimento e cura |
-| **Autoritária** | Os nobres da rebelião, que tomaram o lugar do imperador | Reunir o continente | A desordem | "Somos os herdeiros de W" | Obediência à força | Ordem, estradas e lei |
-| **Religiosa** | Os que viram no evento Y um castigo dos deuses | Purificar o mundo | A magia | "Os deuses nos escolheram" | Queima magos | Caridade; contra o tráfico |
-| **Tecnocrata** | Os que juraram nunca mais depender da magia | Ferramentas sem magia | A magia voltar | "O progresso é para todos" | Trabalho até a morte nas minas | Ciência e mérito |
-| **Escravista** | Os mercadores que venderam os sobreviventes | Lucro | A revolta | "O escravo vive melhor conosco" | Tráfico de pessoas e de Fumo | Riqueza; aceita quem paga |
+**Consequências para os ódios das fichas** (proposta, a confirmar na HI3-3):
+- Guerreira × Autoritária: os rebeldes contra os herdeiros do imperador. Confirma o ódio.
+- Arcana × Religiosa: a Arcana usa como cobaias as raças que a Religiosa diz abençoadas. Confirma o ódio.
+- Tecnocrata × Arcana: quem executa magos contra quem idolatra a magia. Confirma o ódio.
+- Religiosa × Escravista: confirma o ódio se a Escravista escravizar as raças "abençoadas".
+- **Novo:** Guerreira × Tecnocrata (a Tecnocrata executa ou escraviza os mutantes, e a Guerreira é feita deles) e Religiosa × Tecnocrata pelo mesmo motivo.
 
 ## 8. Como a história chega ao jogador (proposta)
 
@@ -145,7 +168,7 @@ A coluna "De onde vem" segue a sugestão da HI2-4.
 
 ## 9. Próximos passos
 
-1. **Rodada HI2:** a magia depois de Y, o que veio da outra dimensão, as raças, a origem das facções e a cratera.
-2. **Rodada HI3:** os nomes (o Império, o imperador, W, Y, V, a guerra B, o ritual C, as facções, as regiões) e as datas X, Z e A.
+1. **Rodada HI3:** a posição da cratera, quando as raças entram no jogo e os ódios entre os povos.
+2. **Rodada HI4:** os nomes (o Império, o imperador, W, Y, V, a guerra B, o ritual C, as facções, as regiões) e as datas X, Z e A.
 3. A linha do tempo do Ano 0 ao 412 e os mitos de cada povo.
 4. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).
