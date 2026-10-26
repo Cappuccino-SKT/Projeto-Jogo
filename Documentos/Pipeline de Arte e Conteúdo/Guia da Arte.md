@@ -6,7 +6,7 @@
 
 ## 1. O estilo em uma frase
 
-Bonecos simples vistos de cima, como no RimWorld: **cabeça grande e redonda sem rosto, corpo de manequim, contorno escuro grosso, cores lisas e sombra leve**; as roupas, as armaduras, os chapéus e as armas vão por cima, em camadas. As referências estão em `referencias/`:
+Bonecos simples vistos de cima, como no RimWorld: **cabeça grande e redonda com um rosto simples, corpo de manequim, contorno escuro grosso, cores lisas e sombra leve**; as roupas, as armaduras, os chapéus e as armas vão por cima, em camadas. As referências estão em `referencias/`:
 
 | Arquivo | O que mostra |
 |---|---|
@@ -17,7 +17,7 @@ Bonecos simples vistos de cima, como no RimWorld: **cabeça grande e redonda sem
 ## 2. As regras do desenho
 
 1. **Proporção:** a cabeça tem cerca de **40% da altura** do boneco; os pés quase não aparecem.
-2. **Sem rosto:** nem olhos, nem boca. O que identifica o boneco é a roupa, o chapéu, o cabelo e a cor.
+2. **Rosto simples, numa camada à parte** (decisão do autor, 2026-10-26): olhos, sobrancelhas e boca com poucos traços, como no RimWorld. O rosto **não é desenhado no corpo**: é uma camada própria, por cima da cabeça, para poder ser trocado (vários rostos no mesmo corpo) e animado depois (piscar, falar, expressões). Só aparece na frente e no lado; nas costas e na visão de longe, não.
 3. **Contorno:** quase preto (marrom muito escuro), grosso e do mesmo peso em todas as peças.
 4. **Cor:** lisa, com **uma** sombra suave (mais escura embaixo e à direita); sem brilho forte, sem textura de foto.
 5. **Luz:** vem de cima à esquerda, sempre.
@@ -44,7 +44,8 @@ Entre as duas há uma **transição** de zoom. [Proposta] De perto até cerca de
 | Boneco | Uma folha por peça e por visão: **3 colunas** (frente, costas, lado direito), cada célula com **128 × 128** |
 | Encaixe | Em todas as peças, o boneco fica no **mesmo lugar** da célula: os pés na mesma linha, o centro da cabeça no mesmo ponto. É isso que faz a roupa servir no corpo |
 | Tile do chão | **64 × 64**; os mapas continuam em tiles de 16 no Tiled (o jogo reduz) |
-| Camadas | Corpo, roupa de baixo, roupa de cima, armadura, cabelo, chapéu, arma: **um arquivo para cada** |
+| Camadas | Corpo (sem rosto), **rosto**, roupa de baixo, roupa de cima, armadura, cabelo, chapéu, arma: **um arquivo para cada**. O rosto fica entre o corpo e o cabelo |
+| Rosto | Folha de **2 colunas** (frente e lado direito), 128 × 128, os traços no lugar exato da cabeça do manequim oficial; fundo transparente |
 | Animação de perto [Proposta] | Andar: 4 quadros; golpe: 3 quadros; nas outras ações, 2 quadros; uma folha por ação, com as 3 direções nas linhas |
 | Nomes [Proposta] | `peca_visao_cultura.png`, por exemplo `chapeu_pena_perto_autoritaria.png` |
 
@@ -64,7 +65,7 @@ Entre as duas há uma **transição** de zoom. [Proposta] De perto até cerca de
 ESTILO FIXO (não mude nada disto):
 - Arte de jogo de simulação vista de cima, no estilo do RimWorld.
 - Use EXATAMENTE o manequim da imagem anexada: a mesma forma, a mesma proporção (cabeça grande e redonda, cerca de 40% da altura), o mesmo tamanho e a mesma posição na célula. Não redesenhe o corpo.
-- Sem rosto: sem olhos, nariz ou boca.
+- O manequim e as roupas vêm SEM rosto (a cabeça lisa): o rosto é desenhado à parte.
 - Contorno marrom muito escuro, grosso e do mesmo peso em tudo.
 - Cores lisas com uma única sombra suave embaixo e à direita; luz vindo de cima à esquerda. Sem textura de foto, sem brilho, sem degradê forte.
 - Fundo magenta puro (#FF00FF), liso, sem sombra no chão.
@@ -97,6 +98,12 @@ Agora desenhe SÓ a roupa da imagem anterior, sem o corpo e sem a cabeça, na me
 ```
 *Esta é a parte mais difícil para a IA. Se não sair certo, use a imagem vestida e apague a pele no Krita (seção 6).*
 
+**Um rosto (camada à parte):**
+```
+Desenhe SÓ um rosto simples para a cabeça do manequim anexado, sem a cabeça e sem o corpo: [olhos pequenos e redondos, sobrancelhas grossas, boca reta e séria]. Poucos traços, na cor do contorno, como os rostos do RimWorld. Folha com 2 colunas: frente e lado direito, com os traços no lugar exato onde ficariam na cabeça do manequim. Fundo magenta.
+```
+*Para as expressões (piscar, falar, raiva), peça edições do mesmo rosto: "Edite o rosto anterior: os olhos fechados. Não mude mais nada."*
+
 **Uma construção:**
 ```
 Uma [casa de camponês / ferraria / templo] da cultura [nome e estilo], no mesmo estilo de contorno e cor. Duas imagens lado a lado: DE PERTO (a fachada em 3/4) e DE LONGE (só o telhado, visto de cima). Fundo magenta.
@@ -113,7 +120,7 @@ Edite a imagem anterior: [mude só a cor da capa para vermelho / deixe a gola me
 - [ ] O contorno tem a mesma grossura das outras peças?
 - [ ] A luz vem de cima à esquerda?
 - [ ] As 3 colunas estão na ordem frente, costas, lado direito?
-- [ ] Não apareceu rosto, texto ou chão?
+- [ ] A cabeça veio lisa (o rosto é outra camada), sem texto e sem chão?
 
 Se algo falhou, peça uma **edição** (5.3), não uma imagem nova.
 
