@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1, HI2 e HI3 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado em pontos-chave, o que o evento Y deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Faltam os nomes (HI4) e o mapa novo. Letras como **X**, **Y** e **W** marcam nomes e datas que ainda faltam.
+> **Estado:** rodadas HI1 a HI4 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Faltam os nomes das facções (HI5) e o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -12,7 +12,7 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 
 | Parte | O que é | Onde aparece no jogo |
 |---|---|---|
-| **Começo** | O passado: o Império Mágico, a guerra e o evento **Y** (parte 4) | Ruínas, masmorras, livros, o que os NPCs contam |
+| **Começo** | O passado: o Império de Valdária, a guerra e a **Grande Fusão** (parte 4) | Ruínas, masmorras, livros, o que os NPCs contam |
 | **Meio** | O presente, do Ano 412 em diante: as tensões prestes a explodir (parte 5) | Facções, guerras, notícias, eventos |
 | **Fim** | Não há final real: vários destinos do mundo (parte 6) | A simulação, com ou sem o jogador |
 
@@ -22,15 +22,15 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 |---|---|---|---|
 | 1 | Tema | Sobre o que é este mundo? | **Decidido** (parte 2) |
 | 2 | Tom e regras | Até onde vai a crueldade? | **Decidido** (parte 2) |
-| 3 | Mito de origem | Como cada povo explica o mundo e o evento Y? | A fazer |
-| 4 | Era de ouro | O Império Mágico | **Pontos-chave** (parte 4) |
-| 5 | Catástrofe | O ritual C e o evento Y | **Pontos-chave** (parte 4) |
+| 3 | Mito de origem | Como cada povo explica o mundo e a Grande Fusão? | A fazer |
+| 4 | Era de ouro | O Império de Valdária | **Pontos-chave** (parte 4) |
+| 5 | Catástrofe | O Ritual de Ascensão e a Grande Fusão | **Pontos-chave** (parte 4) |
 | 6 | Reconstrução | Do Ano 0 ao 412: as raças e as 6 facções | **Decidido** (partes 4.4 e 7) |
 | 7 | Conflitos do presente | O que está para explodir no Ano 412? | Proposta (parte 5) |
 | 8 | Segredos | Que verdades o jogador pode descobrir? | Proposta (parte 4.3) |
 | 9 | Os povos | O que cada um quer, teme, esconde e faz de cruel? | **Decidido** (parte 7) |
 | 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Cratera na costa (parte 4.4); a posição sai do mapa novo |
-| 11 | Personagens importantes | O imperador, o nobre W, os magos reais | Nomes na HI2 |
+| 11 | Personagens importantes | Aurelian Valdren, Kassian Dravel, os magos reais | **Nomes decididos** (parte 4.0) |
 | 12 | Futuros possíveis | Como o mundo pode mudar? | **Decidido: sem final real** (parte 6) |
 | 13 | Como é contada | Por onde a história chega ao jogador? | Proposta (parte 8) |
 
@@ -56,32 +56,55 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 
 Já decidido nas fichas; o que a história mudar passa por rodada:
 
-- **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois do evento Y** (parte 7).
-- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas do evento Y (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos.
+- **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois da Grande Fusão** (parte 7).
+- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas da Grande Fusão (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos.
 - **Baixa magia** e tecnologia passando para a **pólvora**. A história explica as duas (parte 4.4).
 - **O mapa:** o de hoje (6 regiões em 8 × 6) é **provisório**. Haverá um **mapa novo, de um continente inteiro**, ainda não desenhado (HI3-1); a cratera entra nele.
-- **O jogo começa no Ano 412** do calendário **V**, contado a partir do evento **Y**.
+- **O jogo começa no Ano 412** do calendário **d.F.**, contado a partir da **Grande Fusão**.
 
 ## 4. O começo: o passado do mundo (HI1-2, versão do autor)
+
+### 4.0 Os nomes (HI4)
+
+**O estilo:** os **acontecimentos** têm nome em português; as **pessoas e os lugares** têm nomes inventados, com o som de cada cultura:
+
+| Cultura | O som dos nomes |
+|---|---|
+| Autoritária (e o antigo Império de Valdária) | Romano imperial |
+| Escravista | Árabe |
+| Guerreira | Oriental |
+| Tecnocrata | Europeu vitoriano |
+| Religiosa | A decidir (HI5-1) |
+| Arcana | A decidir (HI5-2) |
+
+| O que é | O nome | Como os povos o veem |
+|---|---|---|
+| O Império | **Império de Valdária** (durou 600 anos) | |
+| O imperador | **Aurelian Valdren** | Os outros povos: "o Último"; a Autoritária: "o Eterno" |
+| O líder da revolta | **Kassian Dravel**, Duque das Marcas: general da fronteira e mago de guerra, querido pelos soldados | Guerreira: o herói; Autoritária: o traidor; Tecnocrata: quem destruiu o mundo com um feitiço |
+| A guerra | **A Revolta dos Famintos** (12 a.F. ao Ano 0) | |
+| O ritual | **O Ritual de Ascensão** | |
+| O evento | **A Grande Fusão** (o Ano 0) | Religiosa: "a Graça"; Tecnocrata: "o Erro"; Autoritária: "a Ascensão" (diz que o ritual deu certo); Guerreira: "a Libertação"; Arcana: "a Abertura"; Escravista: "a Queda" |
+| O calendário | **d.F.** (depois da Fusão) e **a.F.** (antes); o jogo começa no **Ano 412 d.F.** | O nome oficial é o do comércio entre os povos |
 
 ### 4.1 A linha do tempo (pontos-chave)
 
 | Quando | O que aconteceu |
 |---|---|
-| Antes do Ano X | Um **Império Mágico**, com a magia como "alta tecnologia", unifica o continente inteiro. |
-| Ano X | O **imperador**, com medo da morte e ganância da vida eterna, manda toda a riqueza do Império para uma pesquisa mágica: alcançar o **poder divino dos deuses**. |
-| Do Ano X ao Z | O povo sofre com a decisão. A instabilidade cresce; civis e nobres começam a se revoltar. |
-| Ano Z | O nobre de alto escalão **W** lidera uma grande revolta, com o apoio do povo. Começa a **guerra B**, que dura vários anos e devasta o continente. |
-| Ano A | A pesquisa dá resultado. A rebelião, que estava vencendo, passa a ser ameaçada. O imperador manda os **magos reais** começarem o **ritual C**, para transformá-lo num deus. |
+| De 640 a 40 a.F. | O **Império de Valdária**, com a magia como "alta tecnologia", unifica o continente inteiro e o governa por 600 anos. |
+| 40 a.F. | O imperador **Aurelian Valdren**, com medo da morte e ganância da vida eterna, manda toda a riqueza do Império para uma pesquisa mágica: alcançar o **poder divino dos deuses**. |
+| De 40 a 12 a.F. | O povo sofre com a decisão. A instabilidade cresce; civis e nobres começam a se revoltar. |
+| 12 a.F. | O nobre de alto escalão **Kassian Dravel**, Duque das Marcas, general da fronteira e mago de guerra, lidera uma grande revolta, com o apoio do povo. Começa a **Revolta dos Famintos**, que dura 12 anos e devasta o continente. |
+| 1 a.F. | A pesquisa dá resultado. A rebelião, que estava vencendo, passa a ser ameaçada. O imperador manda os **magos reais** começarem o **Ritual de Ascensão**, para transformá-lo num deus. |
 | O cerco da capital | Milhões de rebeldes contra alguns milhares de imperiais, mas com os melhores magos do continente. O cerco dura dias; um **círculo mágico imenso**, de uma borda à outra da cidade, se forma sobre a capital. |
 | A ofensiva final | As muralhas caem; os magos reais morrem um a um; no palácio sem teto, uma grande batalha de magos. Sobre o imperador indefeso, vários círculos se empilham, e o último abre **um portal imenso**. |
-| **Ano 0: o evento Y** | W lança um **feitiço de poder nuclear** contra o imperador. O poder dele mais a mana do ritual causam uma **anomalia**: em vez de fundir a magia da dimensão dos deuses no imperador, o ritual **funde duas dimensões**. A capital é varrida do mapa, e várias regiões do continente se transformam. |
-| Do Ano 0 ao 412 | Começa o **calendário V**. Nascem as novas raças e as 6 facções (partes 4.4 e 7). |
+| **Ano 0: a Grande Fusão** | Kassian lança um **feitiço de poder nuclear** contra o imperador. O poder dele mais a mana do ritual causam uma **anomalia**: em vez de fundir a magia da dimensão dos deuses no imperador, o ritual **funde duas dimensões**. A capital é varrida do mapa, e várias regiões do continente se transformam. |
+| Do Ano 0 ao 412 | Começa o **calendário d.F.** (depois da Fusão). Nascem as novas raças e as 6 facções (partes 4.4 e 7). |
 
 ### 4.2 O que isso dá ao jogo
 
 - **O tema na origem:** o mundo inteiro pagou pela ganância de um só dono. Os de hoje repetem a mesma ganância em escala menor.
-- **Ninguém é inocente:** o imperador quis ser deus; mas foi o feitiço de W, o herói da revolta, que causou a fusão.
+- **Ninguém é inocente:** o imperador quis ser deus; mas foi o feitiço de Kassian, o herói da revolta, que causou a fusão.
 - **Lugares:** a cratera da antiga capital e as regiões transformadas são os lugares mais marcantes do mapa.
 - **A magia:** todo mundo viu o quão poderosa ela pode ser. Isso explica o tabu e a proibição (Tecnocrata), a fé (Religiosa) e a cobiça (Arcana).
 
@@ -89,10 +112,10 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 
 - O que era de fato a outra dimensão: ninguém no mundo sabe que ela era só mana pura (parte 4.4).
 - Se o imperador morreu mesmo, ou se o imperador da Autoritária é o mesmo dos tempos antigos (o autor decide depois).
-- Se W sabia o que o feitiço faria.
-- Cada povo conta **uma versão** do evento Y (herói, vilão, castigo divino), e nenhuma está inteira. A verdade fica nas masmorras lendárias.
+- Se Kassian sabia o que o feitiço faria.
+- Cada povo conta **uma versão** da Grande Fusão (herói, vilão, castigo divino), e nenhuma está inteira. A verdade fica nas masmorras lendárias.
 
-### 4.4 O que o evento Y deixou (HI2, decidido pelo autor)
+### 4.4 O que a Grande Fusão deixou (HI2, decidido pelo autor)
 
 **A outra dimensão (HI2-3).** Não era um lugar físico: era uma dimensão feita **só de mana pura**. Os magos do ritual não sabiam disso. Ela não é a única: podem existir várias outras. Como os magos buscavam o poder dos deuses, nasceu a **crença** de que ela pertencia a seres que seriam deuses.
 
@@ -123,7 +146,7 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 
 **O jogador** começa como ninguém: sem nome, sem terra, sem dono (ou com um, se começar escravo).
 
-**Ganchos pequenos:** alguém que diz ter o sangue do imperador; um mago que estuda os restos do ritual C; um ex-gladiador que junta escravos fugidos; um engenheiro que vende pólvora escondido; um sacerdote que descobre que a sua fé nasceu de uma mentira sobre o evento Y.
+**Ganchos pequenos:** alguém que diz ter o sangue do imperador; um mago que estuda os restos do Ritual de Ascensão; um ex-gladiador que junta escravos fugidos; um engenheiro que vende pólvora escondido; um sacerdote que descobre que a sua fé nasceu de uma mentira sobre a Grande Fusão.
 
 ## 6. O fim: os futuros possíveis (HI1-3: opção A)
 
@@ -133,7 +156,7 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 |---|---|---|---|
 | **O Novo Império** | Uma facção conquista as outras | Tirania de mil anos | Paz sob uma lei só |
 | **A Era da Pólvora** | A Tecnocrata vence a corrida das armas | Fim da magia; fábricas cheias de escravos | Mérito no lugar do sangue |
-| **O Segundo Ritual** | Alguém tenta de novo o ritual C | Outra fusão, outra devastação | A magia ao alcance de todos |
+| **O Segundo Ritual** | Alguém tenta de novo o Ritual de Ascensão | Outra fusão, outra devastação | A magia ao alcance de todos |
 | **As Correntes Quebradas** | A revolta dos escravizados vence | Vingança e caos | Fim da escravidão |
 | **A Fé Única** | A Religiosa converte ou vence todos | Fogueiras para hereges e magos | Caridade e fim do tráfico |
 | **O Colapso** | Peste, fome e guerra derrubam todos | Volta à devastação do Ano 0 | Vilas pequenas e livres |
@@ -160,7 +183,7 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 
 ## 8. Como a história chega ao jogador (proposta)
 
-- **Ruínas e masmorras** do Império; as lendárias guardam a verdade sobre o evento Y.
+- **Ruínas e masmorras** do Império; as lendárias guardam a verdade sobre a Grande Fusão.
 - **Livros e fragmentos** (itens), cada um com a versão de um povo.
 - **Falas dos NPCs e dos Companheiros** ([[Ficha Logica/Companheiros|Companheiros e Diálogo]]).
 - **Notícias, Crônica do mundo e Eventos.**
@@ -169,6 +192,6 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 ## 9. Próximos passos
 
 1. **O mapa novo** do continente inteiro (o autor desenha; depois, uma rodada para as fichas).
-2. **Rodada HI4:** os nomes (o Império, o imperador, W, Y, V, a guerra B, o ritual C, as facções, as regiões) e as datas X, Z e A.
+2. **Rodada HI5:** os nomes das facções, o som da Religiosa e da Arcana e o deus da Religiosa. Os nomes das regiões e das cidades saem com o mapa novo.
 3. A linha do tempo do Ano 0 ao 412 e os mitos de cada povo.
 4. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).
