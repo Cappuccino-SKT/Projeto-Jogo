@@ -11,8 +11,8 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 ### Quem desenha
 
 - **Novo estilo (decisão do autor, 2026-10-26): parecido com o do RimWorld, no lugar da pixel art.** Bonecos simples vistos de cima: cabeça grande e redonda, corpo de "manequim", contorno escuro grosso, cores lisas com sombra leve, e as roupas, as armaduras e os chapéus desenhados por cima, em camadas. As referências do autor estão em `referencias/` (ao lado deste documento): `manequins_do_autor_gemini.jpg` (o corpo, em vários tons de pele, homem, mulher e criança) e `roupas_do_autor_gemini.jpg` (nobres, piqueiros, damas e camponeses). **Não são a arte final**; são a base em que o autor vai se apoiar.
-- **IA de imagem volta a valer como ferramenta (2026-10-26):** neste estilo, o Gemini gerou bases úteis, o que não acontecia com a pixel art (o teste de 2026-10-18 tinha falhado). O autor gera as bases e corrige à mão.
-- **O assistente também consegue desenhar o manequim** por código (Python, com a biblioteca de imagens Pillow): `referencias/manequim_do_assistente.py` gera `manequim_teste_do_assistente.png` (frente, costas e lado, 4 tons de pele, fundo transparente). Ganha: o resultado é sempre igual, fácil de mudar (um tom de pele novo é uma linha) e já sai no formato do jogo. Perde: roupas com muito detalhe (bordados, golas, plumas) ficam mais simples que as do Gemini. Bom para o corpo, as peças simples e os testes.
+- **IA de imagem volta a valer como ferramenta (2026-10-26):** neste estilo, a IA gera bases úteis, o que não acontecia com a pixel art. **A ferramenta é o ChatGPT** (decisão do autor, 2026-10-26): o Gemini não manteve o boneco igual entre os pedidos; o ChatGPT fez o **manequim oficial** (`referencias/manequim_oficial_homem.webp` e `manequim_oficial_mulher.webp`). O autor gera as bases e corrige à mão.
+- **O assistente também consegue desenhar peças por código** (Python, com a biblioteca Pillow), no formato do jogo: bom para o corpo, as peças simples e os testes; roupas com muito detalhe ficam mais simples que as da IA.
 - **Por enquanto, sem arte no jogo:** o jogo segue com a arte de teste do assistente (os quadrados de cor e o boneco de teste) até o autor ter a primeira leva de arte (AR1-6).
 - **Pacotes de terceiros:** só onde ainda faltar uma peça, com a origem anotada em `assets/provisorio/LEIA-ME.txt`. Preferir licença **CC0** (domínio público) ou que permita uso em protótipo.
 - **Jogo final:** toda a arte passa pelas mãos do artista do projeto; o que for provisório sai.
@@ -22,7 +22,7 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 | Uso | Programa | Custo |
 |---|---|---|
 | Montar os mapas | **Tiled** | Grátis |
-| Gerar as bases dos bonecos e das roupas | **Gemini** (IA de imagem) | Grátis |
+| Gerar as bases dos bonecos e das roupas | **ChatGPT** (IA de imagem) | Grátis |
 | Corrigir e pintar as imagens | [Em aberto] na rodada AR1 (sugestão: **Krita**, grátis) | Grátis |
 | Peças geradas por código (corpo, testes) | Python + Pillow (o assistente) | Grátis |
 | Editar os dados | **VS Code** | Grátis |
@@ -51,7 +51,7 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 
 ### Especificação da arte
 
-**Estilo RimWorld (2026-10-26; rodada AR1).** As regras de desenho e o passo a passo com o Gemini estão no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]].
+**Estilo RimWorld (2026-10-26; rodada AR1).** As regras de desenho e o passo a passo com o ChatGPT estão no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]].
 
 | Item | Decisão |
 |---|---|
@@ -61,7 +61,7 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 | Boneco | Um **manequim** (o corpo, por tom de pele e por raça) com as peças por cima, em camadas: roupa, armadura, chapéu, cabelo, arma |
 | Traço | Contorno escuro grosso, cores lisas, sombra leve |
 | Paleta | Livre; as cores das culturas continuam |
-| Programa | **Krita** para corrigir e pintar (AR1-5); bases geradas no **Gemini** |
+| Programa | **Krita** para corrigir e pintar (AR1-5); bases geradas no **ChatGPT** |
 | Quando o código muda (AR1-6) | Quando o autor tiver a primeira leva de arte (o corpo e 2 ou 3 roupas). Até lá, a arte de teste continua |
 
 **Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). As cores das culturas saem da paleta Resurrect 64 (o Guia da Arte diz quais).
