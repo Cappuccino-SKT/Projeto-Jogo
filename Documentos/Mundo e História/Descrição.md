@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 a HI8 respondidas pelo autor (2026-10-26). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412 e os seus segredos. Falta o mapa novo.
+> **Estado:** rodadas HI1 a HI9 respondidas pelo autor (2026-10-26). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412, os seus segredos e as tensões do presente. Faltam as Grandes Histórias (HI10) e o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -186,20 +186,31 @@ O líder de cada facção é fixo no começo do jogo; depois, a simulação pode
 
 **Os segredos viram jogo (HI8-2, opção B).** O jogador pode **descobrir** um segredo (espionar, conversar, roubar cartas) e **usá-lo**: chantagear o líder, vendê-lo a uma facção inimiga ou revelá-lo ao povo. **Nem todo segredo pesa igual** (pedido do autor): uns mudam pouco (a fé perdida de Theodoros, se revelada, só abala a Teocracia), outros mudam o mundo (o quarto selado da Coroa). As regras ficam para a ficha de Segredos (D9 no [[Ficha Logica/Plano das Fichas|Plano das Fichas]]).
 
-## 5. O meio: o presente, Ano 412 (proposta)
+## 5. O meio: o presente, Ano 412 (HI9)
 
-| # | Tensão | Quem está envolvido | Pode virar |
+**O começo (HI9-4):** o jogo começa num **dia comum** do Ano 412. Nada especial acontece no dia 1; nas primeiras semanas chega a primeira notícia de uma faísca. O mundo não espera o jogador.
+
+### 5.1 As tensões (HI9-1)
+
+As faíscas não acontecem todas: a simulação acende uma ou outra conforme o mundo anda.
+
+| # | Tensão | Quem | A faísca |
 |---|---|---|---|
-| 1 | **A pólvora chegou.** A Tecnocrata está perto das armas de fogo | Tecnocrata contra Guerreira e Arcana | Corrida de armas; contrabando de pólvora |
-| 2 | **A herança do Império.** Alguém quer reunir o continente outra vez | Autoritária contra todos | Guerras de conquista |
-| 3 | **As correntes.** A riqueza do sul depende dos escravizados | Escravista; a Religiosa prega contra; a Guerreira vende prisioneiros | Revolta dos escravizados |
-| 4 | **A magia está mudando?** As marcas da fusão crescem ou mudam | Arcana; a Religiosa quer queimar os magos; a Tecnocrata quer estudá-los | Caça aos magos ou um novo ritual |
-| 5 | **A fome nas fronteiras.** Cada região tem o que falta à outra | Todos | Guerra por comida, saque de caravanas |
-| 6 | **A sucessão.** Líderes velhos e herdeiros fracos | Toda facção | Golpes, assassinatos, guerra civil |
+| 1 | **A pólvora chegou** | Ashmoor tem as primeiras armas; os Clãs (a força) e a Ordem (a magia) perdem a vantagem | O Sultanato de Yasmin compra pólvora escondido e a usa contra Theodoria |
+| 2 | **A Coroa volta a crescer** | 150 anos depois da Guerra das Cinzas, a Regente Lívia junta tropas "para quando o Eterno acordar" | Uma cidade de fronteira se rende à Coroa; os vizinhos lembram a guerra |
+| 3 | **As correntes** | O Sultanato vive do tráfico; Ashmoor vende mutantes a ele; Theodoria prega contra | Uma revolta num mercado de escravos de Zahran |
+| 4 | **A magia muda** | Nascem mais crianças com o dom; Ashmoor as executa, a Ordem as quer, Theodoria as abençoa | Uma vila esconde uma criança maga, e as três facções chegam para buscá-la |
+| 5 | **A fome nas fronteiras** | Cada região tem o que falta à outra | Um inverno ruim e uma caravana de comida saqueada |
+| 6 | **A sucessão** | Tian Feng envelhece; Theodoros IV tem 72 anos; Lívia não tem filhos | O duelo pelo título de Grande Lobo |
+| 7 | **A caça aos mudados** | Ashmoor mata ou escraviza os mudados; os Clãs (feitos deles) e Theodoria (que os chama de abençoados) os protegem | Um bando de mudados foge de uma mina de Ashmoor |
 
-**O jogador** começa como ninguém: sem nome, sem terra, sem dono (ou com um, se começar escravo).
+**A tensão principal (HI9-2): a pólvora.** É a que muda o mundo durante a partida, mesmo sem o jogador. Em segundo lugar, a Coroa, que aproveita a mudança de equilíbrio.
 
-**Ganchos pequenos:** alguém que diz ter o sangue do imperador; um mago que estuda os restos do Ritual de Ascensão; um ex-gladiador que junta escravos fugidos; um engenheiro que vende pólvora escondido; um sacerdote que descobre que a sua fé nasceu de uma mentira sobre a Grande Fusão.
+### 5.2 Os ganchos e as Grandes Histórias (HI9-3)
+
+**Ideia do autor (HI9-3), como no Stellaris:** um conjunto de **Grandes Histórias**, missões grandes que mudam o mundo. No começo de cada partida, o jogo sorteia uma delas para ser a **grande história** daquela partida; o jogador segue ou não. Para conhecer todas, é preciso jogar mais de uma vez. Os detalhes estão na rodada HI10.
+
+Os **ganchos menores** viram eventos da simulação e segredos (a ficha de Segredos, D9): o filho mago de Edmund Hale, a pólvora secreta de Yasmin, o espião de Cassius Varro, o último duelo de Tian Feng, a fé perdida de Theodoros IV, a criança maga escondida.
 
 ## 6. O fim: os futuros possíveis (HI1-3: opção A)
 
