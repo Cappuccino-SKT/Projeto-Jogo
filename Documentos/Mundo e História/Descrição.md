@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 a HI4 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Faltam os nomes das facções (HI5) e o mapa novo.
+> **Estado:** rodadas HI1 a HI5 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções. Faltam o período do Ano 0 ao 412 (HI6) e o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -74,8 +74,8 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 | Escravista | Árabe |
 | Guerreira | Oriental |
 | Tecnocrata | Europeu vitoriano |
-| Religiosa | A decidir (HI5-1) |
-| Arcana | A decidir (HI5-2) |
+| Religiosa | Grego bizantino |
+| Arcana | Latim erudito (o das academias) |
 
 | O que é | O nome | Como os povos o veem |
 |---|---|---|
@@ -86,6 +86,18 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 | O ritual | **O Ritual de Ascensão** | |
 | O evento | **A Grande Fusão** (o Ano 0) | Religiosa: "a Graça"; Tecnocrata: "o Erro"; Autoritária: "a Ascensão" (diz que o ritual deu certo); Guerreira: "a Libertação"; Arcana: "a Abertura"; Escravista: "a Queda" |
 | O calendário | **d.F.** (depois da Fusão) e **a.F.** (antes); o jogo começa no **Ano 412 d.F.** | O nome oficial é o do comércio entre os povos |
+| O deus da Religiosa | **O Doador**: dizer o nome é pecado, e só o Sumo Sacerdote o sabe (HI5-4) | Um segredo a descobrir |
+
+**As facções (HI5-3).** Os nomes de trabalho das fichas e do código (Guerreira, Arcana...) continuam; os nomes abaixo são os que o jogador vê.
+
+| Nome de trabalho | O nome da facção |
+|---|---|
+| Autoritária | **A Coroa de Valdren** |
+| Escravista | **Sultanato de Zahran** |
+| Guerreira | **Clãs de Tian-Lang** ("lobo celeste") |
+| Tecnocrata | **Comunidade de Ashmoor** ("ash" é cinza: nasceram das cinzas do cerco) |
+| Religiosa | **Teocracia de Manavar** ("mana" no nome da fé) |
+| Arcana | **Os Herdeiros de Sekhem** ("poder") |
 
 ### 4.1 A linha do tempo (pontos-chave)
 
@@ -167,12 +179,12 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 
 | Povo | De onde vem | No que acredita | A crueldade | Como vê as outras raças |
 |---|---|---|---|---|
-| **Religiosa** | Os que **mais sofreram** com a mana do outro mundo | Num deus que vive na outra dimensão e agraciou o mundo com a sua mana | Extremamente violenta com quem não crê nesse deus | **Abençoadas** pelo deus |
-| **Tecnocrata** | Os herdeiros dos combatentes que **sobreviveram ao cerco** da capital e viram o perigo da magia | Aversão a toda magia e todo mago | Executa, sem remorso, qualquer um com capacidade mágica | **Ameaças:** executadas ou escravizadas |
-| **Arcana** | Os descendentes dos antigos **guardas reais** | Desvendar e manipular a mana nova, chegar a um novo poder e à **imortalidade** dos seus magos | Tudo o que a mana tocou é experimento; quem não usa magia é inferior | **Escravas** para experimentos |
-| **Escravista** | Os **nobres do Império**, livres de um governante após a queda | Riqueza e mão de obra para o seu novo reino | Desde a devastação, captura como escravos os atingidos pela guerra | Mão de obra |
-| **Autoritária** | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (verdade ou não: o autor decide depois) | Obediência ao "imperador eterno" | A definir |
-| **Guerreira** | O **resto do exército rebelde**. Estavam no centro da fusão, sofreram a maior parte das mutações e são boa parte das outras raças | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
+| **Religiosa** (Teocracia de Manavar) | Os que **mais sofreram** com a mana do outro mundo | No **Doador**, um deus que vive na outra dimensão e agraciou o mundo com a sua mana | Extremamente violenta com quem não crê nesse deus | **Abençoadas** pelo deus |
+| **Tecnocrata** (Comunidade de Ashmoor) | Os herdeiros dos combatentes que **sobreviveram ao cerco** da capital e viram o perigo da magia | Aversão a toda magia e todo mago | Executa, sem remorso, qualquer um com capacidade mágica | **Ameaças:** executadas ou escravizadas |
+| **Arcana** (Herdeiros de Sekhem) | Os descendentes dos antigos **guardas reais** | Desvendar e manipular a mana nova, chegar a um novo poder e à **imortalidade** dos seus magos | Tudo o que a mana tocou é experimento; quem não usa magia é inferior | **Escravas** para experimentos |
+| **Escravista** (Sultanato de Zahran) | Os **nobres do Império**, livres de um governante após a queda | Riqueza e mão de obra para o seu novo reino | Desde a devastação, captura como escravos os atingidos pela guerra | Mão de obra |
+| **Autoritária** (Coroa de Valdren) | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (verdade ou não: o autor decide depois) | Obediência ao "imperador eterno" | A definir |
+| **Guerreira** (Clãs de Tian-Lang) | O **resto do exército rebelde**. Estavam no centro da fusão, sofreram a maior parte das mutações e são boa parte das outras raças | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
 
 **Os ódios entre os povos** (HI3-3, opção A; a tabela fica no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]):
 - Guerreira × Autoritária: os rebeldes contra os herdeiros do imperador. Confirma o ódio.
@@ -192,6 +204,6 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 ## 9. Próximos passos
 
 1. **O mapa novo** do continente inteiro (o autor desenha; depois, uma rodada para as fichas).
-2. **Rodada HI5:** os nomes das facções, o som da Religiosa e da Arcana e o deus da Religiosa. Os nomes das regiões e das cidades saem com o mapa novo.
-3. A linha do tempo do Ano 0 ao 412 e os mitos de cada povo.
+2. **Rodada HI6:** do Ano 0 ao 412 (os primeiros anos, o nascimento das facções, a grande guerra, a verdade da Coroa). Os nomes das regiões e das cidades saem com o mapa novo.
+3. Os mitos de cada povo e os personagens de hoje.
 4. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).
