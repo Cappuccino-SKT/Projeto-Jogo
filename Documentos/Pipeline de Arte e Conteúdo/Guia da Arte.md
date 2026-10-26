@@ -4,6 +4,8 @@
 
 # Guia da Arte
 
+> **Desatualizado (2026-10-26):** o autor trocou a pixel art pelo estilo do RimWorld ([[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]]). Este guia é da pixel art (Pixelorama, Resurrect 64, tiles de 16 px) e será reescrito depois da rodada AR1. Até lá, não seguir as regras de desenho daqui.
+
 ## 1. Como usar este guia
 
 Leia as partes 2 a 5 uma vez: elas valem para **tudo** o que for desenhado. Depois, para cada peça, vá direto à parte dela (6 a 11), que diz o tamanho, as cores, o arquivo e onde a peça entra no jogo. A parte 12 é a lista completa da fatia, na ordem para desenhar.

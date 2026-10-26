@@ -70,7 +70,7 @@ Combate; Batalha; Guerra; Diplomacia; Magia; Escravidão; Companheiros e Diálog
 | D5 | **[[Ficha Logica/Diplomacia\|Diplomacia]]** (escrita em 2026-10-19; rodada DP1 automática) | Facção, Cultura, Reputação |
 | D6 | **[[Ficha Logica/Batalha\|Batalha]]** (escrita em 2026-10-19; rodada BA1 automática) | Combate (D1), Facção |
 | D7 | **[[Ficha Logica/Guerra\|Guerra]]** (escrita em 2026-10-19; rodada GU1 automática) | Batalha (D6), Diplomacia (D5), Viagem, Comércio |
-| D8 | **Raças** (a escrever; rodada HI3-2: entram depois dos marcos da fase D) | [[Documentos/Mundo e História/Descrição\|Mundo e História]], NPC, Cultura, Combate |
+| D8 | **Raças** (a escrever; rodada HI3-2: entram depois dos marcos da fase D; cada raça com a sua idade de adulto e o seu tempo de vida, decisão do autor de 2026-10-26; cada raça com o seu manequim no estilo de arte novo) | [[Documentos/Mundo e História/Descrição\|Mundo e História]], NPC, Cultura, Combate |
 | D9 | **Segredos** (a escrever; rodada HI8-2: descobrir e usar os segredos dos líderes, uns pesando mais que outros) | Mundo e História, Crime, Diplomacia, Notícias, Facção (Estabilidade) |
 | D10 | **Grandes Histórias e Missões** (a escrever; rodadas HI9-3 e HI10: uma das 6 histórias acorda por partida, anda sozinha com prazos, e os papéis passam ao sucessor no cargo) | Mundo e História, Segredos (D9), Eventos, Notícias, Facção (sucessão), Objetivo |
 

@@ -46,7 +46,7 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 |---|---|
 | `fator_de_escala` | 1 NPC real = 100 pessoas (Facção). Só conta para a população total e para os nascimentos e mortes; na economia, 1 NPC = 1 trabalhador e 1 consumidor |
 | `capacidade_por_nivel_da_cidade` | O máximo de NPCs reais por nível da cidade. A vila é nível 1 |
-| `idade_adulto`, `idade_velho` | **Rodada HI12 (2026-10-26):** criança de 0 a 4; adulto de 5 a 30; velho de 31 em diante (antes: adulto de 4 a 20, velho aos 21) |
+| `idade_adulto`, `idade_velho` | **Por raça (decisão do autor, 2026-10-26):** cada raça terá a sua idade de adulto e o seu tempo de vida; estes valores são os do **Humano**, a única raça por enquanto. Quando as raças entrarem (D8), eles saem do `regras.json` e vão para os dados de cada raça. **Rodada HI12 (2026-10-26):** criança de 0 a 4; adulto de 5 a 30; velho de 31 em diante (antes: adulto de 4 a 20, velho aos 21) |
 | `chance_de_morrer_de_velhice...` | 10 = 10% por estação para cada ano de velhice (acima de 30): 31 anos, 10%; 35 anos, 50%; 40 anos, 100% |
 | `natalidade_por_estacao_em_por_mil` | 40 = 4% da população por estação (antes dos modificadores) |
 | `mortalidade_por_estacao_em_por_mil` | 10 = 1% por estação: as mortes das crianças e dos velhos que não são NPCs |
