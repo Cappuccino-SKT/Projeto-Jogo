@@ -115,7 +115,7 @@ Todos esses elementos são ajustáveis (ver acima).
 - **Botão esquerdo** seleciona e **botão direito** dá ordem (padrão de RTS).
 - **Câmera:** WASD ou setas, ou arrastar com o botão do meio. Mover pela borda da tela é uma opção futura, desligada por padrão (rodada FL2-3). Velocidade, zoom e limites na [[Ficha Logica/Interface|ficha da Interface]].
 - **Atalhos remapeáveis.**
-- **Zoom** em **níveis inteiros** (2x, 3x e 4x; padrão 3x em 1600 × 900, cerca de 33 × 19 tiles na tela) para a pixel-art continuar nítida (**a rever na rodada AR1**: com o estilo RimWorld, o zoom pode ser livre e suave); a roda do mouse troca de nível. A câmera anda com WASD ou com as setas, ou arrastando com o botão do meio (rodada FT1-4).
+- **Zoom** em **níveis inteiros** (2x, 3x e 4x; padrão 3x em 1600 × 900, cerca de 33 × 19 tiles na tela) para a pixel-art continuar nítida. **Mudado pela rodada AR1 (2026-10-26):** o zoom passa a ser livre e suave, com **duas visões**: de perto, os bonecos e as construções em 3/4, com detalhe; de longe, vistos de cima para baixo, com menos detalhe; e uma transição entre as duas ([[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte]]). Entra no código com a primeira leva de arte; a roda do mouse troca de nível. A câmera anda com WASD ou com as setas, ou arrastando com o botão do meio (rodada FT1-4).
 
 ---
 

@@ -51,14 +51,18 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 
 ### Especificação da arte
 
-**Estilo RimWorld (2026-10-26).** O tamanho em pixels das imagens, o zoom, as direções e a animação estão na rodada AR1 ([[Rodada Pendente]]). Decidido até agora:
+**Estilo RimWorld (2026-10-26; rodada AR1).** As regras de desenho e o passo a passo com o Gemini estão no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]].
 
 | Item | Decisão |
 |---|---|
-| Vista | De cima (como o RimWorld) |
+| **Duas visões, pelo zoom** (ideia do autor, AR1) | **De perto:** o boneco visto em 3/4, com o corpo detalhado (como as primeiras linhas das referências). **De longe:** vista de cima para baixo, quase só a cabeça, o chapéu e os ombros (como as linhas de "cabeças vistas de cima" das referências). Entre as duas há uma **transição**. Vale para os **bonecos e as construções** (de perto, a fachada; de longe, o telhado) |
+| Tamanho (AR1-1, opção C) | Os mapas e as contas continuam em tiles de 16 (o Tiled não muda). As **imagens** têm **64 × 64 por tile**; o boneco tem **128 × 128** (cerca de 1,5 tile). O jogo reduz ao desenhar |
+| Direções (AR1-3) | **3 desenhadas:** frente, costas e lado; o outro lado é o espelho |
 | Boneco | Um **manequim** (o corpo, por tom de pele e por raça) com as peças por cima, em camadas: roupa, armadura, chapéu, cabelo, arma |
-| Traço | Contorno escuro grosso, cores lisas, sombra leve; sem as regras de pixel |
-| Paleta | Livre (a Resurrect 64 da pixel art sai); as cores das culturas continuam |
+| Traço | Contorno escuro grosso, cores lisas, sombra leve |
+| Paleta | Livre; as cores das culturas continuam |
+| Programa | **Krita** para corrigir e pintar (AR1-5); bases geradas no **Gemini** |
+| Quando o código muda (AR1-6) | Quando o autor tiver a primeira leva de arte (o corpo e 2 ou 3 roupas). Até lá, a arte de teste continua |
 
 **Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). As cores das culturas saem da paleta Resurrect 64 (o Guia da Arte diz quais).
 
@@ -70,7 +74,14 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 
 ### Animação
 
-**[Em aberto] na rodada AR1.** A tabela antiga (54 quadros por direção, 162 por camada) era da pixel art. No estilo RimWorld, o boneco quase não tem quadros: o jogo move, gira e balança a imagem parada (ver AR1-2).
+**Rodada AR1-2 (pedido do autor):** animações **simples**, desenhadas pelo autor, diferentes em cada visão.
+
+| Visão | O que anima |
+|---|---|
+| **De perto** | Andar (pernas se mexendo, braços balançando), o combate simples (o golpe da arma) e outras ações simples. Poucos quadros por ação |
+| **De longe** | Quase nada: a visão é para ver a quantidade, a posição das construções e as batalhas grandes. No máximo, as armas se movendo no combate entre dois NPCs |
+
+O número de quadros de cada ação fica no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] [Proposta]. A tabela antiga (162 quadros por peça) era da pixel art e saiu.
 
 ### Estações
 
