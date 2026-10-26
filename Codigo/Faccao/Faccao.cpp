@@ -180,6 +180,17 @@ CatalogoDasFaccoes lerArquivosDasFaccoes(const std::string& textoDasFaccoes, con
         lerLeis(leisDaFaccao, faccao.id, faccao.leisIniciais);
         faccao.itensProibidos = objeto.value("itens_proibidos", std::vector<std::string>{});
         faccao.ajusteDePreco = objeto.value("ajuste_de_preco", std::map<std::string, int>{});
+        const Json lider = objeto.value("lider", Json::object());
+        faccao.lider.nome = lider.value("nome", std::string());
+        if (faccao.lider.nome.empty()) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDasFaccoes, 0, faccao.id + ": falta o líder (\"lider\" com \"nome\")");
+        }
+        faccao.lider.idadeNaHistoria = lider.value("idade", faccao.lider.idadeNaHistoria);
+        faccao.lider.coragem = lider.value("coragem", faccao.lider.coragem);
+        faccao.lider.ganancia = lider.value("ganancia", faccao.lider.ganancia);
+        faccao.lider.agressividade = lider.value("agressividade", faccao.lider.agressividade);
+        faccao.lider.sociabilidade = lider.value("sociabilidade", faccao.lider.sociabilidade);
+        faccao.lider.lealdade = lider.value("lealdade", faccao.lider.lealdade);
         catalogo.faccoes.push_back(std::move(faccao));
     }
     const auto lerInteiro = [&](const char* campo, int& valor) {
@@ -191,6 +202,8 @@ CatalogoDasFaccoes lerArquivosDasFaccoes(const std::string& textoDasFaccoes, con
     lerInteiro("verba_por_npc_por_estacao_em_decimos", catalogo.verbaPorNpcPorEstacaoEmDecimos);
     lerInteiro("banco_inicial_em_porcento_do_pib", catalogo.bancoInicialEmPorcentoDoPib);
     lerInteiro("legitimidade_inicial", catalogo.legitimidadeInicial);
+    lerInteiro("anos_da_historia_por_ano_do_jogo_em_decimos", catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos);
+    catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos = std::max(1, catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos);
     lerInteiro("veto_custa_legitimidade", catalogo.vetoCustaLegitimidade);
     lerInteiro("leis_por_assembleia", catalogo.leisPorAssembleia);
     lerInteiro("felicidade_de_quem_perdeu_a_votacao", catalogo.felicidadeDeQuemPerdeuAVotacao);
@@ -259,13 +272,12 @@ std::string nomeDaFaccao(const DadosDoJogo& dados, int faccao)
     return nomeDoDonoDaReputacao(dados.regrasDaReputacao, dados.faccoes.faccoes[static_cast<std::size_t>(faccao)].cultura);
 }
 
-void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, uint64_t sementeDaPartida)
+void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, [[maybe_unused]] uint64_t sementeDaPartida)
 {
     const CatalogoDasFaccoes& catalogo = vila.dados.faccoes;
     EstadoDasFaccoes& estado = vila.faccoes;
     estado = EstadoDasFaccoes{};
     estado.perdeuAVotacaoAte.assign(vila.dados.mundo.mapas.size(), -1);
-    SorteioComSemente sorteio(sementeDaPartida, sequenciaDoSorteioDasFaccoes);
     for (std::size_t faccao = 0; faccao < catalogo.faccoes.size(); ++faccao) {
         estado.leisAtuais.push_back(catalogo.faccoes[faccao].leisIniciais);
         // 4.4, passo 1: 25% do PIB (o dinheiro das cidades da facção).
@@ -274,11 +286,13 @@ void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, uint64_t sementeDaParti
             pib += cidade->dinheiro.dinheiroTotal();
         }
         estado.bancoDaFaccao.push_back(pib * catalogo.bancoInicialEmPorcentoDoPib / 100);
-        // 4.6: o líder (CP1-4: de 8 a 18 anos).
+        // 4.6 (rodadas HI7-1 e HI12): o líder fixo do Ano 412. A idade da história vira a do jogo, de 8 a 30 anos.
+        const LiderInicialDaFaccao& inicial = catalogo.faccoes[faccao].lider;
         LiderDaFaccao lider;
-        lider.idade = sorteio.sortearNumeroInteiroEntre(8, 18);
-        lider.agressividade = sorteio.sortearNumeroInteiroEntre(20, 80);
-        lider.sociabilidade = sorteio.sortearNumeroInteiroEntre(20, 80);
+        const int divisor = catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos;
+        lider.idade = std::clamp((inicial.idadeNaHistoria * 10 + divisor / 2) / divisor, 8, 30);
+        lider.agressividade = inicial.agressividade;
+        lider.sociabilidade = inicial.sociabilidade;
         lider.legitimidade = catalogo.legitimidadeInicial;
         estado.lideres.push_back(lider);
     }

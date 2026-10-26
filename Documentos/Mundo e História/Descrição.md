@@ -173,7 +173,7 @@ O que cada povo conta sobre a Grande Fusão. Nenhum mito é a verdade inteira (p
 
 ### 4.7 Os líderes do Ano 412 (HI8)
 
-O líder de cada facção é fixo no começo do jogo; depois, a simulação pode matá-lo, depô-lo ou fazê-lo trair. A Personalidade usa os 5 traços dos Importantes ([[Ficha Logica/Companheiros|Companheiros]]).
+O líder de cada facção é fixo no começo do jogo; depois, a simulação pode matá-lo, depô-lo ou fazê-lo trair. **A idade no jogo** é a da história ÷ 2,5 (rodada HI12: no jogo, adulto aos 5 anos e velho aos 31; 80 anos da história ≈ 32 do jogo). A Personalidade usa os 5 traços dos Importantes ([[Ficha Logica/Companheiros|Companheiros]]).
 
 | Facção | O líder | A Personalidade | O segredo |
 |---|---|---|---|
@@ -182,7 +182,7 @@ O líder de cada facção é fixo no começo do jogo; depois, a simulação pode
 | **Clãs de Tian-Lang** | **Grande Lobo Tian Feng**, 51 anos, mudado pela mana. Venceu o título num duelo, como manda a doutrina | Coragem e Agressividade altíssimas | Está envelhecendo e sabe que vai perder o próximo duelo |
 | **Comunidade de Ashmoor** | **Lorde-Engenheiro Edmund Hale**, 60 anos, presidente do Conselho da Comunidade | Lealdade e Coragem altas | O filho dele nasceu com o dom mágico, e ele o esconde da lei que manda executá-lo |
 | **Teocracia de Theodoria** | **Sumo Sacerdote Theodoros IV**, 72 anos, o único que sabe o nome do Doador | Sociabilidade alta; Coragem baixa | Perdeu a fé; nunca ouviu nada do Doador |
-| **Ordem de Custodum** | **Grão-Mestre Cassius Varro**, 131 anos, mantido vivo pelos próprios experimentos | Ganância e Agressividade altas | Sabe que Aurelian vive e tem um espião dentro da Coroa |
+| **Ordem de Custodum** | **Grão-Mestre Cassius Varro**, 131 anos, mantido vivo pelos próprios experimentos: não envelhece enquanto a Ordem tiver uma Torre Arcana funcionando (HI11-1, traço Vida prolongada) | Ganância e Agressividade altas | Sabe que Aurelian vive e tem um espião dentro da Coroa |
 
 **Os segredos viram jogo (HI8-2, opção B).** O jogador pode **descobrir** um segredo (espionar, conversar, roubar cartas) e **usá-lo**: chantagear o líder, vendê-lo a uma facção inimiga ou revelá-lo ao povo. **Nem todo segredo pesa igual** (pedido do autor): uns mudam pouco (a fé perdida de Theodoros, se revelada, só abala a Teocracia), outros mudam o mundo (o quarto selado da Coroa). As regras ficam para a ficha de Segredos (D9 no [[Ficha Logica/Plano das Fichas|Plano das Fichas]]).
 

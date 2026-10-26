@@ -23,6 +23,19 @@ struct DefinicaoDaLei {
     std::vector<int> felicidade;         // só no imposto: 0, −5, −10
 };
 
+// O líder fixo do Ano 412 (rodada HI7-1; os nomes e os traços vêm do Mundo e História, parte 4.7).
+struct LiderInicialDaFaccao {
+    std::string nome;
+    int idadeNaHistoria = 48;  // em anos da história; o jogo divide por "anos_da_historia_por_ano_do_jogo"
+    // A Personalidade de 5 traços (0 a 100). Nesta versão o jogo usa só a Agressividade e a Sociabilidade;
+    // a Coragem, a Ganância e a Lealdade ficam para os Companheiros (D2).
+    int coragem = 50;
+    int ganancia = 50;
+    int agressividade = 50;
+    int sociabilidade = 50;
+    int lealdade = 50;
+};
+
 struct DefinicaoDaFaccao {
     std::string id;       // "faccao.guerreira"
     std::string cultura;  // "guerreira"; também o "faccao" das cidades no cidades_iniciais.json
@@ -31,6 +44,7 @@ struct DefinicaoDaFaccao {
     std::vector<int> leisIniciais;           // a posição da opção, uma por lei
     std::vector<std::string> itensProibidos;  // o tipo ou o id do item: "narcotico"
     std::map<std::string, int> ajusteDePreco;  // o tipo ou o id do item: "alimento": −20
+    LiderInicialDaFaccao lider;
 };
 
 // O que a cultura deseja de uma lei (o data/culturas.json; a Cultura, C2, completa o arquivo).
@@ -47,6 +61,7 @@ struct CatalogoDasFaccoes {
     int verbaPorNpcPorEstacaoEmDecimos = 50;
     int bancoInicialEmPorcentoDoPib = 25;
     int legitimidadeInicial = 70;
+    int anosDaHistoriaPorAnoDoJogoEmDecimos = 25;  // HI12: 1 ano do jogo = 2,5 da história (80 anos da história ≈ 32 do jogo)
     int vetoCustaLegitimidade = 5;
     int leisPorAssembleia = 3;
     int felicidadeDeQuemPerdeuAVotacao = -5;

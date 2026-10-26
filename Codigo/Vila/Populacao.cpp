@@ -229,7 +229,7 @@ int chanceDeMorrerDeVelhice(int idade, bool invernoRigoroso, const RegrasDaPopul
     if (idade < regras.idadeVelho) {
         return 0;
     }
-    const int chance = (idade - (regras.idadeVelho - 1)) * regras.chanceDeMorrerDeVelhicePorAnoAcimaDe20EmPorcento;
+    const int chance = (idade - (regras.idadeVelho - 1)) * regras.chanceDeMorrerDeVelhicePorAnoDeVelhiceEmPorcento;
     return invernoRigoroso ? chance * regras.velhiceNoInvernoRigorosoEmPorcento / 100 : chance;
 }
 

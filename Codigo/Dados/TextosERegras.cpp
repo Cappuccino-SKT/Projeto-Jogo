@@ -487,7 +487,7 @@ RegrasDoJogo lerArquivoDeRegras(const std::string& textoDoArquivo, ListaDeProble
             {"fator_de_escala", &regrasDaPopulacao.fatorDeEscala},
             {"idade_adulto", &regrasDaPopulacao.idadeAdulto},
             {"idade_velho", &regrasDaPopulacao.idadeVelho},
-            {"chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_acima_de_20", &regrasDaPopulacao.chanceDeMorrerDeVelhicePorAnoAcimaDe20EmPorcento},
+            {"chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_de_velhice", &regrasDaPopulacao.chanceDeMorrerDeVelhicePorAnoDeVelhiceEmPorcento},
             {"natalidade_por_estacao_em_por_mil", &regrasDaPopulacao.natalidadePorEstacaoEmPorMil},
             {"mortalidade_por_estacao_em_por_mil", &regrasDaPopulacao.mortalidadePorEstacaoEmPorMil},
             {"mortalidade_sem_lenha_em_porcento", &regrasDaPopulacao.mortalidadeSemLenhaEmPorcento},

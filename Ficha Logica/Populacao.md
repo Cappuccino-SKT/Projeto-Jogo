@@ -29,8 +29,8 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 "populacao": {
   "fator_de_escala": 100,
   "capacidade_por_nivel_da_cidade": [15, 40, 100, 300],
-  "idade_adulto": 4, "idade_velho": 21,
-  "chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_acima_de_20": 10,
+  "idade_adulto": 5, "idade_velho": 31,
+  "chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_de_velhice": 10,
   "natalidade_por_estacao_em_por_mil": 40,
   "mortalidade_por_estacao_em_por_mil": 10,
   "mortalidade_sem_lenha_em_porcento": 150,
@@ -46,8 +46,8 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 |---|---|
 | `fator_de_escala` | 1 NPC real = 100 pessoas (Facção). Só conta para a população total e para os nascimentos e mortes; na economia, 1 NPC = 1 trabalhador e 1 consumidor |
 | `capacidade_por_nivel_da_cidade` | O máximo de NPCs reais por nível da cidade. A vila é nível 1 |
-| `idade_adulto`, `idade_velho` | Criança de 0 a 3; adulto de 4 a 20; velho de 21 em diante |
-| `chance_de_morrer_de_velhice...` | 10 = 10% por estação para cada ano acima de 20: 21 anos, 10%; 25 anos, 50%; 30 anos, 100% |
+| `idade_adulto`, `idade_velho` | **Rodada HI12 (2026-10-26):** criança de 0 a 4; adulto de 5 a 30; velho de 31 em diante (antes: adulto de 4 a 20, velho aos 21) |
+| `chance_de_morrer_de_velhice...` | 10 = 10% por estação para cada ano de velhice (acima de 30): 31 anos, 10%; 35 anos, 50%; 40 anos, 100% |
 | `natalidade_por_estacao_em_por_mil` | 40 = 4% da população por estação (antes dos modificadores) |
 | `mortalidade_por_estacao_em_por_mil` | 10 = 1% por estação: as mortes das crianças e dos velhos que não são NPCs |
 | `fome_mata_...` | Do 4º dia seguido de fome em diante, morrem por dia 2% das pessoas sem comida |
@@ -78,7 +78,7 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 ### 4.1 Idade e velhice (dia 1 de cada estação)
 
 1. **No dia 1 da Primavera:** some 1 à idade de cada NPC.
-2. **Para cada NPC com 21 anos ou mais**, na ordem da vila: sorteie de 0 a 99. Se for menor que (idade − 20) × 10, ele morre de velhice (regra 4.6), e **na hora** chega um jovem para a vaga (reposição, regra 4.5, com idade 4). A reposição não mexe no acumulado.
+2. **Para cada NPC com 31 anos ou mais** (a idade de velho), na ordem da vila: sorteie de 0 a 99. Se for menor que (idade − 30) × 10, ele morre de velhice (regra 4.6), e **na hora** chega um jovem para a vaga (reposição, regra 4.5, com a idade de adulto, 5). A reposição não mexe no acumulado.
 3. **No Inverno rigoroso** (ficha do [[Ficha Logica/Clima|Clima]]), a chance × 150%.
 
 ### 4.2 Nascimentos e mortalidade da estação (dia 1 de cada estação)
@@ -168,8 +168,8 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 | Entrada | Resultado esperado |
 |---|---|
 | Dia 1 da Primavera do ano 2 | Todos com +1 ano |
-| NPC de 21 anos, sorteio 5 | Morre (5 < 10); chega um jovem de 4 anos na mesma casa, desempregado |
-| NPC de 21 anos, sorteio 50 | Vive |
+| NPC de 31 anos, sorteio 5 | Morre (5 < 10); chega um jovem de 5 anos na mesma casa, desempregado |
+| NPC de 31 anos, sorteio 50 | Vive |
 | NPC de 30 anos | Morre com qualquer sorteio |
 | 15 NPCs, Felicidade 58, sem fome | Acumulado + 54 |
 | Vila cheia (15), acumulado 90, + 54 | Fica em 100; ninguém chega |
@@ -205,6 +205,8 @@ A vila do teste de 1 ano: 15 Civis (idades 5 a 19), 4 Casas (16 camas), capacida
 | 1 | Nada: a vila está cheia, e o acumulado fica em +100. O teste de 1 ano não muda |
 | 2 e 3 | Pedro faz 20 e 21 anos. No ano 3, cerca de 34% de chance de morrer; se morre, um jovem de 4 anos ocupa a casa dele, desempregado; o emprego dele vira vaga, e a Cidade contrata um dos desempregados no dia seguinte |
 | 4 a 10 | Cerca de 1 morte de velhice por ano (o NPC mais velho de cada vez), sempre com reposição. A vila fica em 15 |
+
+(A simulação de mesa acima usa a regra antiga, com velho aos 21; com a HI12, Pedro só fica velho dez anos depois.)
 
 **O que mostra:** com a vila cheia, a população **não muda de tamanho**: só gira. As idades vão se espalhando (os jovens de 4 anos entram no lugar dos velhos).
 

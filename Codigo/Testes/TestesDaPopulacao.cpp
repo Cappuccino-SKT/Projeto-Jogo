@@ -26,11 +26,12 @@ void testarAsContas(const RegrasDaPopulacao& regras)
 {
     conferir(calcularCrescimentoDaEstacao(15, 580, false, regras) == 54, "15 NPCs, Felicidade 58, sem fome: + 54 (69 − 15)");
     conferir(calcularCrescimentoDaEstacao(15, 580, true, regras) == 34 - 15, "com fome na estação: os nascimentos pela metade");
-    conferir(chanceDeMorrerDeVelhice(20, false, regras) == 0, "20 anos: não morre de velhice");
-    conferir(chanceDeMorrerDeVelhice(21, false, regras) == 10, "21 anos: 10% por estação");
-    conferir(chanceDeMorrerDeVelhice(23, false, regras) == 30, "23 anos: 30%");
-    conferir(chanceDeMorrerDeVelhice(30, false, regras) >= 100, "30 anos: morre com qualquer sorteio");
-    conferir(chanceDeMorrerDeVelhice(21, true, regras) == 15, "21 anos no Inverno rigoroso: 15%");
+    // Rodada HI12: velho aos 31.
+    conferir(chanceDeMorrerDeVelhice(30, false, regras) == 0, "30 anos: não morre de velhice");
+    conferir(chanceDeMorrerDeVelhice(31, false, regras) == 10, "31 anos: 10% por estação");
+    conferir(chanceDeMorrerDeVelhice(33, false, regras) == 30, "33 anos: 30%");
+    conferir(chanceDeMorrerDeVelhice(40, false, regras) >= 100, "40 anos: morre com qualquer sorteio");
+    conferir(chanceDeMorrerDeVelhice(31, true, regras) == 15, "31 anos no Inverno rigoroso: 15%");
 }
 
 void testarAVila(const DadosDoJogo& dados)
@@ -71,17 +72,17 @@ void testarAFomeEAVelhice(const DadosDoJogo& dados)
     avancarAteODia(simulacao, 1);  // a primeira meia-noite roda a ordem do dia
     conferir(simulacao.npcsDaVila.size() <= 15, "a fome não cria ninguém");
 
-    // Um NPC de 21 anos no dia 1 de uma estação: morre com o sorteio baixo, e um jovem ocupa a vaga.
+    // Um NPC de 31 anos no dia 1 de uma estação: morre com o sorteio baixo, e um jovem ocupa a vaga.
     SimulacaoDaVila velhos(dados, RegrasDoTempo{});
     for (const entt::entity npc : velhos.npcsDaVila) {
-        velhos.registroDasEntidades.get<IdadeDoNpc>(npc).anos = 30;  // 100%: todos morrem
+        velhos.registroDasEntidades.get<IdadeDoNpc>(npc).anos = 40;  // 100%: todos morrem
     }
     avancarAteODia(velhos, 16);  // o dia 1 do Verão
     int jovens = 0;
     for (const entt::entity npc : velhos.npcsDaVila) {
-        jovens += velhos.registroDasEntidades.get<IdadeDoNpc>(npc).anos == 4 ? 1 : 0;
+        jovens += velhos.registroDasEntidades.get<IdadeDoNpc>(npc).anos == 5 ? 1 : 0;
     }
-    conferir(velhos.npcsDaVila.size() == 15 && jovens == 15, "15 NPCs de 30 anos no dia 1 do Verão: todos morrem e 15 jovens de 4 anos ocupam as vagas");
+    conferir(velhos.npcsDaVila.size() == 15 && jovens == 15, "15 NPCs de 40 anos no dia 1 do Verão: todos morrem e 15 jovens de 5 anos ocupam as vagas");
 }
 
 }  // namespace

@@ -77,8 +77,8 @@
   "populacao": {
     "fator_de_escala": 100,
     "capacidade_por_nivel_da_cidade": [15, 40, 100, 300],
-    "idade_adulto": 4, "idade_velho": 21,
-    "chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_acima_de_20": 10,
+    "idade_adulto": 5, "idade_velho": 31,
+    "chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_de_velhice": 10,
     "natalidade_por_estacao_em_por_mil": 40,
     "mortalidade_por_estacao_em_por_mil": 10,
     "mortalidade_sem_lenha_em_porcento": 150,

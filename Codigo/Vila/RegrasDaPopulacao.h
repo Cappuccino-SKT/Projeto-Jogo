@@ -9,10 +9,10 @@
 struct RegrasDaPopulacao {
     int fatorDeEscala = 100;  // 1 NPC real = 100 pessoas
     std::vector<int> capacidadePorNivelDaCidade = {15, 40, 100, 300};
-    int idadeAdulto = 4;
-    int idadeVelho = 21;
+    int idadeAdulto = 5;
+    int idadeVelho = 31;
     // 10 = 10% por estação para cada ano acima de 20 (21 anos: 10%; 30: 100%).
-    int chanceDeMorrerDeVelhicePorAnoAcimaDe20EmPorcento = 10;
+    int chanceDeMorrerDeVelhicePorAnoDeVelhiceEmPorcento = 10;
     int natalidadePorEstacaoEmPorMil = 40;
     int mortalidadePorEstacaoEmPorMil = 10;
     int mortalidadeSemLenhaEmPorcento = 150;
