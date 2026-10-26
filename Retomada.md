@@ -8,7 +8,7 @@
 - **História:** [[Documentos/Mundo e História/Descrição|Mundo e História]], rodadas HI1 a HI10 respondidas (até as Grandes Histórias; fichas novas D8 a D10 no plano). Os 6 líderes fixos já estão no código (branch `codigo/lideres-fixos`); Rodadas HI11 e HI12 aplicadas (Vida prolongada de Cassius; adulto aos 5 e velho aos 31). Regra do autor: **a história manda** (quando ela bate numa ficha, a ficha muda por rodada). O autor vai desenhar um **mapa novo**, de um continente inteiro; o mapa 8 × 6 de hoje é provisório.
 - **Próximo passo:** na história, os mitos de cada povo e os personagens de hoje; no código, o marco D2 (Companheiros e Diálogo).
 - **Para o autor conferir** (decididas em modo automático): a MU1-2 (a Guerreira sustentável), a IN1-6 (o estilo Artesão da fatia) e a OB1-1 (a "maior fortuna").
-- **Arte:** por enquanto, só a arte de teste do assistente (decisão de 2026-10-18).
+- **Arte:** **estilo RimWorld** no lugar da pixel art (decisão de 2026-10-26; [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte]]). Rodada AR1 aplicada: duas visões pelo zoom (de perto em 3/4, de longe vista de cima), imagens de 64 por tile, 3 direções, Krita e Gemini; o passo a passo e o prompt estão no Guia da Arte. O código muda quando o autor tiver a primeira leva de arte.
 
 ## 2. Como trabalhamos
 

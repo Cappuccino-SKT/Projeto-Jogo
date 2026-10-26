@@ -10,33 +10,24 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 
 ### Quem desenha
 
-- O **artista definitivo ainda não foi escolhido**. Por enquanto, quem desenha é o autor, que **não tem experiência com pixel art**.
-- **Por enquanto, sem arte (decisão do autor, 2026-10-18, depois da FA1):** o jogo usa só a arte de teste feita pelo assistente (o terreno de quadrados de cor, o boneco de teste e os retângulos das construções). Quando o desenho voltar, vale o que está abaixo.
-- **Fatia vertical (decisão do autor, 2026-10-18):** o autor **desenha a arte à mão, no Pixelorama**, seguindo o [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]], que junta todos os critérios num lugar só. A **rodada FA1** (2026-10-18) decidiu os critérios novos: o quadro do boneco de 32 × 32 px, com os pés em (16, 28) e a esquerda espelhada no Pixelorama; a luz de cima, à esquerda, com contorno colorido; a sombra no chão como a cor 65 (a 01 com 50% de transparência) e no máximo 8 cores a mais; os conjuntos de cantos de 16 tiles para as bordas; e as construções com 32 px a mais de altura que o lote (64 × 96 e 96 × 128). Enquanto o boneco próprio não fica pronto, o jogo usa o boneco provisório do Mana Seed (fora do Git, rodada FL4-4).
-- **Arte gerada por IA: abandonada** (decisão do autor, 2026-10-18). O autor testou o Gemini, e o resultado não serviu.
-- **Pacotes de terceiros:** só onde ainda faltar uma peça, com a origem anotada em `assets/provisorio/LEIA-ME.txt`.
-- **Jogo final:** toda a arte é feita à mão pelo artista do projeto; o que for provisório sai.
-- Preferir pacotes com licença **CC0** (domínio público, uso livre) ou que permitam uso em protótipo, e anotar a origem de cada um num arquivo `assets/provisorio/LEIA-ME.txt`, para saber o que precisa ser trocado antes de qualquer versão pública. Procurar pacotes de **16 px em vista 3/4** (como Stardew), para os testes já usarem o tamanho final.
+- **Novo estilo (decisão do autor, 2026-10-26): parecido com o do RimWorld, no lugar da pixel art.** Bonecos simples vistos de cima: cabeça grande e redonda, corpo de "manequim", contorno escuro grosso, cores lisas com sombra leve, e as roupas, as armaduras e os chapéus desenhados por cima, em camadas. As referências do autor estão em `referencias/` (ao lado deste documento): `manequins_do_autor_gemini.jpg` (o corpo, em vários tons de pele, homem, mulher e criança) e `roupas_do_autor_gemini.jpg` (nobres, piqueiros, damas e camponeses). **Não são a arte final**; são a base em que o autor vai se apoiar.
+- **IA de imagem volta a valer como ferramenta (2026-10-26):** neste estilo, o Gemini gerou bases úteis, o que não acontecia com a pixel art (o teste de 2026-10-18 tinha falhado). O autor gera as bases e corrige à mão.
+- **O assistente também consegue desenhar o manequim** por código (Python, com a biblioteca de imagens Pillow): `referencias/manequim_do_assistente.py` gera `manequim_teste_do_assistente.png` (frente, costas e lado, 4 tons de pele, fundo transparente). Ganha: o resultado é sempre igual, fácil de mudar (um tom de pele novo é uma linha) e já sai no formato do jogo. Perde: roupas com muito detalhe (bordados, golas, plumas) ficam mais simples que as do Gemini. Bom para o corpo, as peças simples e os testes.
+- **Por enquanto, sem arte no jogo:** o jogo segue com a arte de teste do assistente (os quadrados de cor e o boneco de teste) até o autor ter a primeira leva de arte (AR1-6).
+- **Pacotes de terceiros:** só onde ainda faltar uma peça, com a origem anotada em `assets/provisorio/LEIA-ME.txt`. Preferir licença **CC0** (domínio público) ou que permita uso em protótipo.
+- **Jogo final:** toda a arte passa pelas mãos do artista do projeto; o que for provisório sai.
 
 ### Programas
 
-| Uso                                   | Programa       | Custo  |
-| ------------------------------------- | -------------- | ------ |
-| Montar os mapas                       | **Tiled**      | Grátis |
-| Desenhar tiles, bonecos e construções | **Pixelorama** | Grátis |
-| Editar os dados                       | **VS Code**    | Grátis |
+| Uso | Programa | Custo |
+|---|---|---|
+| Montar os mapas | **Tiled** | Grátis |
+| Gerar as bases dos bonecos e das roupas | **Gemini** (IA de imagem) | Grátis |
+| Corrigir e pintar as imagens | [Em aberto] na rodada AR1 (sugestão: **Krita**, grátis) | Grátis |
+| Peças geradas por código (corpo, testes) | Python + Pillow (o assistente) | Grátis |
+| Editar os dados | **VS Code** | Grátis |
 
-**Por que o Pixelorama.** O autor pediu um programa **grátis**, **fácil** e com **bastante suporte**, para quem nunca fez pixel art. O Aseprite foi descartado por ser pago.
-
-- É de código aberto e está em desenvolvimento ativo, com manual on-line e comunidade.
-- Tem o que o projeto precisa: camadas, linha do tempo de animação, pele de cebola (mostra o quadro anterior em transparência, para animar), paletas, espelhamento (desenha os dois lados ao mesmo tempo) e exportação em **folha de sprites** (uma imagem com todos os quadros).
-- **Alternativa:** o **LibreSprite**, também grátis. Ele é uma versão antiga do Aseprite, então os muitos tutoriais de Aseprite servem para ele, mas não recebe novidades. O Aseprite só pode ser usado de graça compilando o código-fonte, o que é difícil para quem está começando; não vale agora.
-
-**Primeiros passos para aprender:**
-
-1. **Lospec** (lospec.com): paletas prontas (inclusive a paleta mestre, ver abaixo) e uma lista de tutoriais por assunto.
-2. Tutoriais curtos de **Pedro Medeiros (Saint11)**, artista brasileiro de pixel art (Celeste, TowerFall), com dicas animadas de um assunto por vez.
-3. Exercícios na ordem em que a fatia vertical precisa: um tile de grama de 16 × 16 que se repete sem emenda; um boneco de 16 × 24 parado; a animação de andar (4 quadros); uma Casa simples.
+O **Pixelorama** e as regras da pixel art saem com a troca de estilo (2026-10-26).
 
 ### Mapas no Tiled
 
@@ -60,13 +51,18 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 
 ### Especificação da arte
 
+**Estilo RimWorld (2026-10-26; rodada AR1).** As regras de desenho e o passo a passo com o Gemini estão no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]].
+
 | Item | Decisão |
 |---|---|
-| Tile | 16 × 16 px |
-| Vista | De cima, em 3/4 (como Stardew) |
-| Boneco | 16 × 24 px (1 tile de largura, 1,5 de altura). O provisório da fatia (Mana Seed, fora do Git) tem cerca de 14 × 29 px em quadros de 64 × 64, 4 direções e 6 quadros de andar (rodada FL4-4; [[Ficha Logica/NPC\|ficha do NPC]]) |
-| Zoom padrão | 3x (rodada FT1-4): em 1600 × 900 aparecem 33 × 19 tiles (2x: 50 × 28; 4x: 25 × 14) |
-| Paleta | **Resurrect 64** (64 cores, do Lospec), com algumas cores a mais se precisar (decisão do autor, 2026-10-18). As cores, as rampas por material e as regras das cores a mais estão no [[Pipeline de Arte e Conteúdo/Guia da Arte\|Guia da Arte]] |
+| **Duas visões, pelo zoom** (ideia do autor, AR1) | **De perto:** o boneco visto em 3/4, com o corpo detalhado (como as primeiras linhas das referências). **De longe:** vista de cima para baixo, quase só a cabeça, o chapéu e os ombros (como as linhas de "cabeças vistas de cima" das referências). Entre as duas há uma **transição**. Vale para os **bonecos e as construções** (de perto, a fachada; de longe, o telhado) |
+| Tamanho (AR1-1, opção C) | Os mapas e as contas continuam em tiles de 16 (o Tiled não muda). As **imagens** têm **64 × 64 por tile**; o boneco tem **128 × 128** (cerca de 1,5 tile). O jogo reduz ao desenhar |
+| Direções (AR1-3) | **3 desenhadas:** frente, costas e lado; o outro lado é o espelho |
+| Boneco | Um **manequim** (o corpo, por tom de pele e por raça) com as peças por cima, em camadas: roupa, armadura, chapéu, cabelo, arma |
+| Traço | Contorno escuro grosso, cores lisas, sombra leve |
+| Paleta | Livre; as cores das culturas continuam |
+| Programa | **Krita** para corrigir e pintar (AR1-5); bases geradas no **Gemini** |
+| Quando o código muda (AR1-6) | Quando o autor tiver a primeira leva de arte (o corpo e 2 ou 3 roupas). Até lá, a arte de teste continua |
 
 **Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). As cores das culturas saem da paleta Resurrect 64 (o Guia da Arte diz quais).
 
@@ -78,19 +74,14 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 
 ### Animação
 
-Animações compartilhadas por tipo de arma, por camada do boneco (corpo, 3 peças de armadura, arma e escudo):
+**Rodada AR1-2 (pedido do autor):** animações **simples**, desenhadas pelo autor, diferentes em cada visão.
 
-| Animação | Quadros por direção |
+| Visão | O que anima |
 |---|---|
-| Parado | 2 |
-| Andar (correr usa o andar acelerado) | 4 |
-| Ataque, para cada um dos 8 tipos de arma | 4 (32 no total) |
-| Ferido | 1 |
-| Cair | 3 |
-| Trabalhar: golpear (machado, picareta, martelo), abaixar e colher, carregar | 4 cada (12 no total) |
-| **Total** | **54** |
+| **De perto** | Andar (pernas se mexendo, braços balançando), o combate simples (o golpe da arma) e outras ações simples. Poucos quadros por ação |
+| **De longe** | Quase nada: a visão é para ver a quantidade, a posição das construções e as batalhas grandes. No máximo, as armas se movendo no combate entre dois NPCs |
 
-São desenhadas **3 direções** (cima, baixo, direita); a esquerda é a direita espelhada. Total: cerca de **162 quadros por camada**. Com o espelhamento, o escudo troca de mão quando o boneco vira.
+O número de quadros de cada ação fica no [[Pipeline de Arte e Conteúdo/Guia da Arte|Guia da Arte]] [Proposta]. A tabela antiga (162 quadros por peça) era da pixel art e saiu.
 
 ### Estações
 

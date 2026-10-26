@@ -57,7 +57,7 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 Já decidido nas fichas; o que a história mudar passa por rodada:
 
 - **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois da Grande Fusão** (parte 7).
-- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas da Grande Fusão (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos.
+- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas da Grande Fusão (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos. **Cada raça tem a sua idade de adulto e o seu tempo de vida** (decisão do autor, 2026-10-26): a mutação pela mana pode alongar ou encurtar a vida.
 - **Baixa magia** e tecnologia passando para a **pólvora**. A história explica as duas (parte 4.4).
 - **O mapa:** o de hoje (6 regiões em 8 × 6) é **provisório**. Haverá um **mapa novo, de um continente inteiro**, ainda não desenhado (HI3-1); a cratera entra nele.
 - **O jogo começa no Ano 412** do calendário **d.F.**, contado a partir da **Grande Fusão**.

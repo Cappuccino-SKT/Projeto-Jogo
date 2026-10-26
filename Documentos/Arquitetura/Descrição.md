@@ -139,7 +139,7 @@ Os sistemas foram escritos com herança (por exemplo, Inventário abstrato que g
 
 - **Mapas:** serão desenhados no **Tiled**, um editor de mapas de tiles gratuito e de código aberto (<https://www.mapeditor.org>). Ele não faz parte do jogo: é só a ferramenta de desenho. Cada mapa é salvo em um arquivo JSON, que o jogo lê. O Tiled permite camadas (chão, objetos, colisão) e pontos marcados no mapa, como lotes de construção, portas e pontos de entrada.
 - **Dados:** os arquivos JSON de `data/` (itens, eventos, tecnologias...) podem ser editados em um editor de texto comum, com validação ao carregar.
-- **Arte:** desenhada no Pixelorama (grátis), com pacotes de terceiros provisórios na fatia vertical. Volume, ordem de produção e peso da arte na memória estão no [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]].
+- **Arte:** no estilo do RimWorld (desde 2026-10-26; antes, pixel art no Pixelorama), com bases geradas por IA e corrigidas à mão. Volume, ordem de produção e peso da arte na memória estão no [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte e Conteúdo]].
 - **Validação dos dados em C++**, pelo próprio jogo (inclusive um modo `--validar`); tabelas grandes em CSV, lidas direto pelo jogo.
 
 ### Primeira meta: fatia vertical
