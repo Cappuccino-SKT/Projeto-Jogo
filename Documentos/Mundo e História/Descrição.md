@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 a HI9 respondidas pelo autor (2026-10-26). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412, os seus segredos e as tensões do presente. Faltam as Grandes Histórias (HI10) e o mapa novo.
+> **Estado:** rodadas HI1 a HI10 respondidas pelo autor (2026-10-26). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412, os seus segredos e as tensões do presente. Também as Grandes Histórias. Falta o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -208,7 +208,26 @@ As faíscas não acontecem todas: a simulação acende uma ou outra conforme o m
 
 ### 5.2 Os ganchos e as Grandes Histórias (HI9-3)
 
-**Ideia do autor (HI9-3), como no Stellaris:** um conjunto de **Grandes Histórias**, missões grandes que mudam o mundo. No começo de cada partida, o jogo sorteia uma delas para ser a **grande história** daquela partida; o jogador segue ou não. Para conhecer todas, é preciso jogar mais de uma vez. Os detalhes estão na rodada HI10.
+**Ideia do autor (HI9-3), como no Stellaris:** um conjunto de **Grandes Histórias**, missões grandes que mudam o mundo. No começo de cada partida, o jogo sorteia uma delas para ser a **grande história** daquela partida; o jogador segue ou não. Para conhecer todas, é preciso jogar mais de uma vez.
+
+**As regras (HI10):**
+- **A verdade é sempre a mesma; muda qual história acorda** (HI10-1). Aurelian sempre vive no quarto selado; só na partida em que "O Despertar do Eterno" é sorteado essa história anda. Nas outras, o segredo existe, mas fica quieto.
+- **O jogador descobre** qual história acordou por boatos, notícias e pistas nos primeiros meses; um diário marca "uma grande história começou" quando ele acha a primeira pista (HI10-3).
+- **Ela anda sozinha**, com prazos: se o jogador ignora, as facções agem e o mundo muda mesmo assim. Só em partidas muito longas (por exemplo, depois de 30 anos de jogo) outra história pode acordar, sorteada entre as que sobraram (HI10-4).
+- **Os papéis pertencem ao cargo, não à pessoa** (pedido do autor, HI10-2). Os personagens do centro podem morrer de velhice, numa batalha ou num golpe; o papel deles na história passa ao **herdeiro ou ao sucessor** (o novo regente, o novo Grande Lobo, o novo Sumo Sacerdote). Por isso cada história fala do cargo ("o Grão-Mestre da Ordem"), e o nome é o de quem o ocupa naquele momento.
+
+**As 6 Grandes Histórias da primeira versão (HI10-2).** Cada uma leva a um destino da parte 6 e passa por uma masmorra lendária.
+
+| # | A Grande História | Os cargos no centro (no Ano 412) | Onde termina |
+|---|---|---|---|
+| 1 | **O Despertar do Eterno:** os sinais de que Aurelian vai acordar; o jogador ajuda a Coroa, a Ordem (que quer a imortalidade dele) ou os Clãs (que querem matá-lo) | O regente da Coroa (Lívia), o Grão-Mestre da Ordem (Cassius Varro), o Grande Lobo (Tian Feng) | O Despertar do Eterno, ou a morte do Eterno |
+| 2 | **A Espada de Kassian:** a busca nas ruínas da capital pela espada do herói da revolta | O Grande Lobo; o presidente do Conselho de Ashmoor (Edmund Hale) | Quem tiver a espada une os Clãs, ou acaba com o mito deles |
+| 3 | **O Segundo Ritual:** a Ordem junta as peças para terminar o Ritual de Ascensão | O Grão-Mestre da Ordem | O Segundo Ritual (outra fusão), ou a queda da Ordem |
+| 4 | **A Era da Pólvora:** Ashmoor chega às armas que vencem qualquer exército | O presidente do Conselho de Ashmoor; a sultana (Yasmin) | A Era da Pólvora, ou a pólvora em todas as mãos |
+| 5 | **As Correntes Quebradas:** uma revolta de escravizados nasce num mercado de Zahran e cresce | A sultana; o Sumo Sacerdote (Theodoros IV) | As Correntes Quebradas, ou um banho de sangue |
+| 6 | **A Voz do Doador:** Theodoria ouve o Doador pela primeira vez; ele é real ou é a outra dimensão chamando? | O Sumo Sacerdote | A Fé Única, ou uma nova fusão vinda da fé |
+
+As regras de jogo (os passos, os prazos, as pistas) ficam para a ficha D10 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]].
 
 Os **ganchos menores** viram eventos da simulação e segredos (a ficha de Segredos, D9): o filho mago de Edmund Hale, a pólvora secreta de Yasmin, o espião de Cassius Varro, o último duelo de Tian Feng, a fé perdida de Theodoros IV, a criança maga escondida.
 
