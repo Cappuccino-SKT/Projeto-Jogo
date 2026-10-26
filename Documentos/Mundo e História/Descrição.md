@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 a HI5 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções. Faltam o período do Ano 0 ao 412 (HI6) e o mapa novo.
+> **Estado:** rodadas HI1 a HI6 respondidas pelo autor (2026-10-25). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Faltam os mitos, os personagens de hoje e o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -96,8 +96,8 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 | Escravista | **Sultanato de Zahran** |
 | Guerreira | **Clãs de Tian-Lang** ("lobo celeste") |
 | Tecnocrata | **Comunidade de Ashmoor** ("ash" é cinza: nasceram das cinzas do cerco) |
-| Religiosa | **Teocracia de Manavar** ("mana" no nome da fé) |
-| Arcana | **Os Herdeiros de Sekhem** ("poder") |
+| Religiosa | **Patriarcado de Theodoria** (em grego, Theodora é "dádiva de Deus": a mana do Doador) |
+| Arcana | **Ordo Custodum** (latim: "a Ordem dos Guardiões", os guardas reais do Império) |
 
 ### 4.1 A linha do tempo (pontos-chave)
 
@@ -123,7 +123,7 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 ### 4.3 Segredos possíveis (proposta)
 
 - O que era de fato a outra dimensão: ninguém no mundo sabe que ela era só mana pura (parte 4.4).
-- Se o imperador morreu mesmo, ou se o imperador da Autoritária é o mesmo dos tempos antigos (o autor decide depois).
+- **A verdade da Coroa (HI6-4, opção B):** Aurelian Valdren **sobreviveu**, fundido à mana. Não é deus e não morre, mas virou outra coisa, presa e escondida no palácio da Coroa; a família governa em nome dele. Quase ninguém sabe.
 - Se Kassian sabia o que o feitiço faria.
 - Cada povo conta **uma versão** da Grande Fusão (herói, vilão, castigo divino), e nenhuma está inteira. A verdade fica nas masmorras lendárias.
 
@@ -144,6 +144,19 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 - Quase toda a biologia mudou, e surgiram **biomas, terrenos e minérios novos**.
 
 **A cratera (HI2-5).** A antiga capital virou uma **cratera perto da costa**: uma região perigosa, com as **ruínas da capital** como masmorra para o jogador explorar. A posição sai do mapa novo (HI3-1).
+
+### 4.5 Do Ano 0 ao 412 (HI6)
+
+| Quando | O que aconteceu |
+|---|---|
+| 0 a cerca de 50 d.F. | **Os Anos Cinzentos.** Sem Império e sem magia, o continente passa fome; os monstros nascem; uma peste mata metade dos sobreviventes. Quem tinha tropas ou comida virou senhor. |
+| Nos Anos Cinzentos | Nascem primeiro as facções que já tinham força: a **Coroa de Valdren** (as tropas imperiais, que levam escondido o que sobrou de Aurelian) e o **Sultanato de Zahran** (os nobres e o dinheiro, caçando escravos entre os famintos). |
+| Cerca de 50 a 100 d.F. | Nascem as que se juntaram na dor: os **Clãs de Tian-Lang** (o resto dos rebeldes, mudados pela mana) e a **Comunidade de Ashmoor** (os herdeiros dos que sobreviveram ao cerco). |
+| Cerca de 100 a 200 d.F. | Nascem as que precisaram ver a mana agir: o **Patriarcado de Theodoria** e a **Ordo Custodum**. Por serem as mais novas, são as mais radicais. |
+| Cerca de 230 a 260 d.F. | **A Guerra das Cinzas.** A Coroa tenta refazer o Império; todas as outras se unem contra ela e a param. Os tratados de paz desenham as fronteiras de hoje. |
+| 412 d.F. | O jogo começa. A Guerra das Cinzas virou lenda, e a Coroa volta a crescer. |
+
+**O que move as facções em torno do segredo da Coroa:** os Clãs de Tian-Lang suspeitam que Aurelian vive e querem matá-lo (a doutrina do mais forte); a Ordo Custodum suspeita o mesmo e quer a imortalidade dele.
 
 ## 5. O meio: o presente, Ano 412 (proposta)
 
@@ -179,11 +192,11 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 
 | Povo | De onde vem | No que acredita | A crueldade | Como vê as outras raças |
 |---|---|---|---|---|
-| **Religiosa** (Teocracia de Manavar) | Os que **mais sofreram** com a mana do outro mundo | No **Doador**, um deus que vive na outra dimensão e agraciou o mundo com a sua mana | Extremamente violenta com quem não crê nesse deus | **Abençoadas** pelo deus |
+| **Religiosa** (Patriarcado de Theodoria) | Os que **mais sofreram** com a mana do outro mundo | No **Doador**, um deus que vive na outra dimensão e agraciou o mundo com a sua mana | Extremamente violenta com quem não crê nesse deus | **Abençoadas** pelo deus |
 | **Tecnocrata** (Comunidade de Ashmoor) | Os herdeiros dos combatentes que **sobreviveram ao cerco** da capital e viram o perigo da magia | Aversão a toda magia e todo mago | Executa, sem remorso, qualquer um com capacidade mágica | **Ameaças:** executadas ou escravizadas |
-| **Arcana** (Herdeiros de Sekhem) | Os descendentes dos antigos **guardas reais** | Desvendar e manipular a mana nova, chegar a um novo poder e à **imortalidade** dos seus magos | Tudo o que a mana tocou é experimento; quem não usa magia é inferior | **Escravas** para experimentos |
+| **Arcana** (Ordo Custodum) | Os descendentes dos antigos **guardas reais** | Desvendar e manipular a mana nova, chegar a um novo poder e à **imortalidade** dos seus magos | Tudo o que a mana tocou é experimento; quem não usa magia é inferior | **Escravas** para experimentos |
 | **Escravista** (Sultanato de Zahran) | Os **nobres do Império**, livres de um governante após a queda | Riqueza e mão de obra para o seu novo reino | Desde a devastação, captura como escravos os atingidos pela guerra | Mão de obra |
-| **Autoritária** (Coroa de Valdren) | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (verdade ou não: o autor decide depois) | Obediência ao "imperador eterno" | A definir |
+| **Autoritária** (Coroa de Valdren) | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (e é meio verdade: parte 4.3) | Obediência ao "imperador eterno" | A definir |
 | **Guerreira** (Clãs de Tian-Lang) | O **resto do exército rebelde**. Estavam no centro da fusão, sofreram a maior parte das mutações e são boa parte das outras raças | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
 
 **Os ódios entre os povos** (HI3-3, opção A; a tabela fica no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]):
@@ -204,6 +217,5 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 ## 9. Próximos passos
 
 1. **O mapa novo** do continente inteiro (o autor desenha; depois, uma rodada para as fichas).
-2. **Rodada HI6:** do Ano 0 ao 412 (os primeiros anos, o nascimento das facções, a grande guerra, a verdade da Coroa). Os nomes das regiões e das cidades saem com o mapa novo.
-3. Os mitos de cada povo e os personagens de hoje.
+2. Os mitos de cada povo e os personagens de hoje (os líderes do Ano 412). Os nomes das regiões e das cidades saem com o mapa novo.
 4. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).
