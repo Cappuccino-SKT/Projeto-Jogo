@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 a HI7 respondidas pelo autor (2026-10-26). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Faltam os líderes do Ano 412 (HI8) e o mapa novo.
+> **Estado:** rodadas HI1 a HI8 respondidas pelo autor (2026-10-26). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412 e os seus segredos. Falta o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -30,7 +30,7 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 | 8 | Segredos | Que verdades o jogador pode descobrir? | Proposta (parte 4.3) |
 | 9 | Os povos | O que cada um quer, teme, esconde e faz de cruel? | **Decidido** (parte 7) |
 | 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Cratera na costa (parte 4.4); a posição sai do mapa novo |
-| 11 | Personagens importantes | Aurelian Valdren, Kassian Dravel, os magos reais; os líderes do Ano 412 | Passado decidido (parte 4.0); os líderes na HI8 |
+| 11 | Personagens importantes | Aurelian Valdren, Kassian Dravel, os magos reais; os líderes do Ano 412 | **Decidido** (partes 4.0 e 4.7) |
 | 12 | Futuros possíveis | Como o mundo pode mudar? | **Decidido: sem final real** (parte 6) |
 | 13 | Como é contada | Por onde a história chega ao jogador? | Proposta (parte 8) |
 
@@ -170,6 +170,21 @@ O que cada povo conta sobre a Grande Fusão. Nenhum mito é a verdade inteira (p
 | **Comunidade de Ashmoor** | **O Juramento das Cinzas.** Os sobreviventes do cerco juraram sobre as cinzas da capital: nenhum mago, nunca mais. |
 | **Teocracia de Theodoria** | **O Castigo e a Graça.** O Doador castigou o Império com a mana e, com a mesma mana, abençoou os que sofreram. |
 | **Ordem de Custodum** | **A Abertura.** O Ritual estava certo, só foi interrompido; a Ordem vai terminá-lo. |
+
+### 4.7 Os líderes do Ano 412 (HI8)
+
+O líder de cada facção é fixo no começo do jogo; depois, a simulação pode matá-lo, depô-lo ou fazê-lo trair. A Personalidade usa os 5 traços dos Importantes ([[Ficha Logica/Companheiros|Companheiros]]).
+
+| Facção | O líder | A Personalidade | O segredo |
+|---|---|---|---|
+| **Coroa de Valdren** | **Regente Lívia Valdren**, 54 anos, da linhagem direta. Fria e paciente, governa "em nome do Eterno" | Lealdade e Coragem altas; Sociabilidade baixa | Para Aurelian não definhar, a Coroa leva escravos com o dom mágico ao quarto selado, e eles nunca voltam |
+| **Sultanato de Zahran** | **Sultana Yasmin bint Qadir**, 35 anos. Subiu ao trono envenenando o irmão | Sociabilidade e Ganância altas; Lealdade baixa | Compra pólvora de Ashmoor às escondidas |
+| **Clãs de Tian-Lang** | **Grande Lobo Tian Feng**, 51 anos, mudado pela mana. Venceu o título num duelo, como manda a doutrina | Coragem e Agressividade altíssimas | Está envelhecendo e sabe que vai perder o próximo duelo |
+| **Comunidade de Ashmoor** | **Lorde-Engenheiro Edmund Hale**, 60 anos, presidente do Conselho da Comunidade | Lealdade e Coragem altas | O filho dele nasceu com o dom mágico, e ele o esconde da lei que manda executá-lo |
+| **Teocracia de Theodoria** | **Sumo Sacerdote Theodoros IV**, 72 anos, o único que sabe o nome do Doador | Sociabilidade alta; Coragem baixa | Perdeu a fé; nunca ouviu nada do Doador |
+| **Ordem de Custodum** | **Grão-Mestre Cassius Varro**, 131 anos, mantido vivo pelos próprios experimentos | Ganância e Agressividade altas | Sabe que Aurelian vive e tem um espião dentro da Coroa |
+
+**Os segredos viram jogo (HI8-2, opção B).** O jogador pode **descobrir** um segredo (espionar, conversar, roubar cartas) e **usá-lo**: chantagear o líder, vendê-lo a uma facção inimiga ou revelá-lo ao povo. **Nem todo segredo pesa igual** (pedido do autor): uns mudam pouco (a fé perdida de Theodoros, se revelada, só abala a Teocracia), outros mudam o mundo (o quarto selado da Coroa). As regras ficam para a ficha de Segredos (D9 no [[Ficha Logica/Plano das Fichas|Plano das Fichas]]).
 
 ## 5. O meio: o presente, Ano 412 (proposta)
 
