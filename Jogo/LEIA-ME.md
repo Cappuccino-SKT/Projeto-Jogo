@@ -708,6 +708,8 @@ Como testar: `testes_do_codigo` imprime a linha "por mil: contra 1 bandido ..." 
 
 ### Os líderes fixos do Ano 412 (2026-10-26, rodada HI7-1)
 
-Cada facção começa com o líder da história (Mundo e História, parte 4.7): nome, idade e Personalidade no `faccoes.json` (campo `lider`). No jogo, a idade é a da história ÷ 4, de 8 a 18 (Cassius Varro, com 131, fica no teto de 18; o traço Vida prolongada, da rodada HI11-1, entra com os Companheiros). A Agressividade e a Sociabilidade valem já (o veto da assembleia); os outros 3 traços esperam os Companheiros (D2). O save não muda.
+Cada facção começa com o líder da história (Mundo e História, parte 4.7): nome, idade e Personalidade no `faccoes.json` (campo `lider`). No jogo, a idade é a da história ÷ 2,5, de 8 a 30 (Cassius Varro, com 131, fica no teto de 30; o traço Vida prolongada, da rodada HI11-1, entra com os Companheiros).
 
-Como testar: na janela das Facções, passe o mouse sobre o nome de uma facção: a dica mostra o líder ("Líder: Grande Lobo Tian Feng, 13 anos, ...").
+**Rodada HI12:** a vida ficou mais longa: adulto aos 5 anos de jogo (antes 4) e velho aos 31 (antes 21). No `regras.json`, a chance de velhice virou `chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_de_velhice`. A Agressividade e a Sociabilidade valem já (o veto da assembleia); os outros 3 traços esperam os Companheiros (D2). O save não muda.
+
+Como testar: na janela das Facções, passe o mouse sobre o nome de uma facção: a dica mostra o líder ("Líder: Grande Lobo Tian Feng, 20 anos, ...").

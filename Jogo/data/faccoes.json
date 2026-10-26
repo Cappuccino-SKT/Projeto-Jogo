@@ -247,7 +247,7 @@
   "verba_por_npc_por_estacao_em_decimos": 50,
   "banco_inicial_em_porcento_do_pib": 25,
   "legitimidade_inicial": 70,
-  "anos_da_historia_por_ano_do_jogo": 4,
+  "anos_da_historia_por_ano_do_jogo_em_decimos": 25,
   "veto_custa_legitimidade": 5,
   "leis_por_assembleia": 3,
   "felicidade_de_quem_perdeu_a_votacao": -5

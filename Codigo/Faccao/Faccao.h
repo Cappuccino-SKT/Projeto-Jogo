@@ -61,7 +61,7 @@ struct CatalogoDasFaccoes {
     int verbaPorNpcPorEstacaoEmDecimos = 50;
     int bancoInicialEmPorcentoDoPib = 25;
     int legitimidadeInicial = 70;
-    int anosDaHistoriaPorAnoDoJogo = 4;  // no jogo, o adulto vai de 4 a 20 anos: 1 ano do jogo = 4 da história
+    int anosDaHistoriaPorAnoDoJogoEmDecimos = 25;  // HI12: 1 ano do jogo = 2,5 da história (80 anos da história ≈ 32 do jogo)
     int vetoCustaLegitimidade = 5;
     int leisPorAssembleia = 3;
     int felicidadeDeQuemPerdeuAVotacao = -5;

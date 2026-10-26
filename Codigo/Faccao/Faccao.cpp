@@ -202,8 +202,8 @@ CatalogoDasFaccoes lerArquivosDasFaccoes(const std::string& textoDasFaccoes, con
     lerInteiro("verba_por_npc_por_estacao_em_decimos", catalogo.verbaPorNpcPorEstacaoEmDecimos);
     lerInteiro("banco_inicial_em_porcento_do_pib", catalogo.bancoInicialEmPorcentoDoPib);
     lerInteiro("legitimidade_inicial", catalogo.legitimidadeInicial);
-    lerInteiro("anos_da_historia_por_ano_do_jogo", catalogo.anosDaHistoriaPorAnoDoJogo);
-    catalogo.anosDaHistoriaPorAnoDoJogo = std::max(1, catalogo.anosDaHistoriaPorAnoDoJogo);
+    lerInteiro("anos_da_historia_por_ano_do_jogo_em_decimos", catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos);
+    catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos = std::max(1, catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos);
     lerInteiro("veto_custa_legitimidade", catalogo.vetoCustaLegitimidade);
     lerInteiro("leis_por_assembleia", catalogo.leisPorAssembleia);
     lerInteiro("felicidade_de_quem_perdeu_a_votacao", catalogo.felicidadeDeQuemPerdeuAVotacao);
@@ -286,10 +286,11 @@ void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, [[maybe_unused]] uint64
             pib += cidade->dinheiro.dinheiroTotal();
         }
         estado.bancoDaFaccao.push_back(pib * catalogo.bancoInicialEmPorcentoDoPib / 100);
-        // 4.6 (rodada HI7-1): o líder fixo do Ano 412. A idade da história vira a do jogo (CP1-4: de 8 a 18 anos).
+        // 4.6 (rodadas HI7-1 e HI12): o líder fixo do Ano 412. A idade da história vira a do jogo, de 8 a 30 anos.
         const LiderInicialDaFaccao& inicial = catalogo.faccoes[faccao].lider;
         LiderDaFaccao lider;
-        lider.idade = std::clamp((inicial.idadeNaHistoria + catalogo.anosDaHistoriaPorAnoDoJogo / 2) / catalogo.anosDaHistoriaPorAnoDoJogo, 8, 18);
+        const int divisor = catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos;
+        lider.idade = std::clamp((inicial.idadeNaHistoria * 10 + divisor / 2) / divisor, 8, 30);
         lider.agressividade = inicial.agressividade;
         lider.sociabilidade = inicial.sociabilidade;
         lider.legitimidade = catalogo.legitimidadeInicial;

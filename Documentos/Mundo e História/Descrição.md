@@ -173,7 +173,7 @@ O que cada povo conta sobre a Grande Fusão. Nenhum mito é a verdade inteira (p
 
 ### 4.7 Os líderes do Ano 412 (HI8)
 
-O líder de cada facção é fixo no começo do jogo; depois, a simulação pode matá-lo, depô-lo ou fazê-lo trair. A Personalidade usa os 5 traços dos Importantes ([[Ficha Logica/Companheiros|Companheiros]]).
+O líder de cada facção é fixo no começo do jogo; depois, a simulação pode matá-lo, depô-lo ou fazê-lo trair. **A idade no jogo** é a da história ÷ 2,5 (rodada HI12: no jogo, adulto aos 5 anos e velho aos 31; 80 anos da história ≈ 32 do jogo). A Personalidade usa os 5 traços dos Importantes ([[Ficha Logica/Companheiros|Companheiros]]).
 
 | Facção | O líder | A Personalidade | O segredo |
 |---|---|---|---|

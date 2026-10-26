@@ -117,9 +117,9 @@ Alvo = 50 + salário (+10 em dia, −20 atrasado) + comida (−25 se o grupo fic
 ### 4.6 A família e as dinastias da IA (dia 1 de cada estação)
 
 1. **Casar:** cada adulto solteiro da dinastia (e o jogador, se pedir; 4.8) tem 25% por estação de casar com um nobre gerado da mesma cultura.
-2. **Filhos:** cada casal com a mulher entre 4 e 20 anos: 10% por estação. A gravidez dura 1 estação; o filho nasce como Importante, criança até os 4 anos.
-3. **Envelhecer e morrer:** os Importantes seguem a velhice da [[Ficha Logica/Populacao|População]] (a partir de 21 anos). A ficha da Facção dizia "o líder não morre": **agora morre** (CP1-4). **Exceção (rodada HI11-1, 2026-10-26):** o Grão-Mestre da Ordem de Custodum tem o traço **Vida prolongada**: não envelhece enquanto a Ordem tiver uma Torre Arcana com Magos trabalhando ([[Ficha Logica/Magia|Magia]]). Se a Torre cair (guerra, crise), ele envelhece de uma vez até a idade de velho e segue a velhice normal. O traço é de Cassius Varro (131 anos na história), não do cargo.
-4. **A dinastia do começo (CP1-5):** o líder tem de **8 a 18 anos** (não 30 a 50, como estava na Facção: no jogo, adulto é de 4 a 20). Se ele tem 12 ou mais, já começa casado e com 1 ou 2 filhos adultos.
+2. **Filhos:** cada casal com a mulher adulta, entre 5 e 30 anos (rodada HI12; antes, 4 a 20): 10% por estação. A gravidez dura 1 estação; o filho nasce como Importante, criança até os 5 anos.
+3. **Envelhecer e morrer:** os Importantes seguem a velhice da [[Ficha Logica/Populacao|População]] (a partir de 31 anos, rodada HI12). A ficha da Facção dizia "o líder não morre": **agora morre** (CP1-4). **Exceção (rodada HI11-1, 2026-10-26):** o Grão-Mestre da Ordem de Custodum tem o traço **Vida prolongada**: não envelhece enquanto a Ordem tiver uma Torre Arcana com Magos trabalhando ([[Ficha Logica/Magia|Magia]]). Se a Torre cair (guerra, crise), ele envelhece de uma vez até a idade de velho e segue a velhice normal. O traço é de Cassius Varro (131 anos na história), não do cargo.
+4. **A dinastia do começo (CP1-5):** o líder tem de **8 a 30 anos** (rodada HI12: no jogo, adulto é de 5 a 30; antes, 8 a 18). O líder do começo é fixo (rodada HI7-1, [[Ficha Logica/Faccao|Facção]] 4.6). Se ele tem 12 ou mais, já começa casado e com 1 ou 2 filhos adultos.
 
 ### 4.7 A sucessão
 
@@ -138,7 +138,7 @@ Quando o líder morre, o herdeiro sai da regra de sucessão da cultura:
 ### 4.8 O casamento e a sucessão do jogador
 
 1. **Pedir casamento** (diálogo): Opinião +60 ou mais, título compatível (com os títulos do Objetivo; até lá, o jogador só casa fora da Nobreza e da Realeza) e o **costume** da cultura do outro (dote, duelo, cerimônia no Templo, permissão, contrato de 50, Magos). Efeitos: o cônjuge vira Controlado; +20 de reputação com a facção da família dele.
-2. **Filhos:** a regra 4.6; o jogador escolhe o foco de educação (Combate, Magia, Comércio, Governo); aos 4 anos, as habilidades do foco nascem no topo da faixa.
+2. **Filhos:** a regra 4.6; o jogador escolhe o foco de educação (Combate, Magia, Comércio, Governo); aos 5 anos, as habilidades do foco nascem no topo da faixa.
 3. **Morte do jogador:** o filho adulto mais velho assume; sem filho, o companheiro com Opinião +60 ou mais que o jogador escolheu (ou o de maior Opinião). Sem ninguém: fim da partida, com o epílogo.
 
 ### 4.9 O diálogo
