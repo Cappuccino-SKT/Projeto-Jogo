@@ -82,6 +82,13 @@ void testarOMundo(const DadosDoJogo& dados)
     conferir(vila.faccoes.bancoDaFaccao.size() == 6 && vila.faccoes.bancoDaFaccao[static_cast<std::size_t>(guerreira)] > 0 && capitalGuerreira.impostoDaCidadeEmPorcento == 10
                  && capitalGuerreira.vila.verbaDaCoroaPorEstacaoEmDecimos == 0 && vila.impostoDaCidadeEmPorcento == -1,
              "6 facções com Banco; a capital Guerreira com imposto de 10% e a verba da facção; a vila sem facção, com o do regras.json");
+    // Rodada HI7-1: os líderes fixos do Ano 412 (a idade da história ÷ 4, de 8 a 18).
+    const LiderDaFaccao& tianFeng = vila.faccoes.lideres[static_cast<std::size_t>(guerreira)];
+    const LiderDaFaccao& yasmin = vila.faccoes.lideres[static_cast<std::size_t>(escravista)];
+    const LiderDaFaccao& cassius = vila.faccoes.lideres[static_cast<std::size_t>(faccaoPeloNome(dados, "arcana"))];
+    conferir(dados.faccoes.faccoes[static_cast<std::size_t>(guerreira)].lider.nome == "Grande Lobo Tian Feng" && tianFeng.idade == 13 && tianFeng.agressividade == 90
+                 && yasmin.idade == 9 && yasmin.sociabilidade == 75 && cassius.idade == 18,
+             "os líderes fixos: Tian Feng com 13 anos de jogo e Agressividade 90; Yasmin com 9; Cassius Varro (131) no teto de 18");
     const SimulacaoDaVila* escravistaCapital = nullptr;
     for (const auto& cidade : vila.outrasCidades) {
         escravistaCapital = faccaoDaCidade(dados, cidade->numeroDoMapaDaCidade) == escravista ? cidade.get() : escravistaCapital;

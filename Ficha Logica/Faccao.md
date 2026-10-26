@@ -137,7 +137,7 @@ Recalculado só quando uma cidade muda de dono. **Muda a Viagem (FA1-6):** o `es
 
 ### 4.6 O líder (nesta versão)
 
-Ao criar o mundo, cada facção ganha um líder: Agressividade e Sociabilidade de 20 a 80. **Mudado pela [[Ficha Logica/Companheiros|Companheiros]] (CP1-4, CP1-5):** o líder tem de 8 a 18 anos (no jogo, adulto é de 4 a 20; a idade de 30 a 50 que estava aqui o faria morrer logo), tem dinastia, envelhece, morre e tem sucessão (Companheiros, 4.6 e 4.7).
+**Rodada HI7-1 (2026-10-26):** o líder do começo é **fixo**: o nome, a idade e os 5 traços estão no `faccoes.json` (campo `lider`), tirados do [[Documentos/Mundo e História/Descrição|Mundo e História]] (parte 4.7). A idade da história vira a do jogo: idade ÷ 4 (`anos_da_historia_por_ano_do_jogo`), arredondada e presa de 8 a 18. Nesta versão o jogo usa a Agressividade e a Sociabilidade; a Coragem, a Ganância e a Lealdade ficam para os Companheiros. O nome do líder entra no save com a sucessão (D2). Antes: Agressividade e Sociabilidade sorteadas de 20 a 80. **Mudado pela [[Ficha Logica/Companheiros|Companheiros]] (CP1-4, CP1-5):** o líder tem de 8 a 18 anos (no jogo, adulto é de 4 a 20; a idade de 30 a 50 que estava aqui o faria morrer logo), tem dinastia, envelhece, morre e tem sucessão (Companheiros, 4.6 e 4.7).
 
 ### 4.7 As leis com efeito nesta versão
 

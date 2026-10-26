@@ -706,3 +706,8 @@ O que entrou ([[Ficha Logica/Combate|ficha do Combate]]; os ajustes estão na pa
 
 Como testar: `testes_do_codigo` imprime a linha "por mil: contra 1 bandido ..." na parte do Combate.
 
+### Os líderes fixos do Ano 412 (2026-10-26, rodada HI7-1)
+
+Cada facção começa com o líder da história (Mundo e História, parte 4.7): nome, idade e Personalidade no `faccoes.json` (campo `lider`). No jogo, a idade é a da história ÷ 4, de 8 a 18 (Cassius Varro, com 131, fica no teto de 18 até a rodada HI11). A Agressividade e a Sociabilidade valem já (o veto da assembleia); os outros 3 traços esperam os Companheiros (D2). O save não muda.
+
+Como testar: na janela das Facções, passe o mouse sobre o nome de uma facção: a dica mostra o líder ("Líder: Grande Lobo Tian Feng, 13 anos, ...").

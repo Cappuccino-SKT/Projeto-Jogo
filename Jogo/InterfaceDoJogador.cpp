@@ -1017,8 +1017,8 @@ void InterfaceDoJogador::desenharAsFaccoes(const SimulacaoDaVila& simulacao, flo
             ImGui::TextUnformatted(nomeDaFaccao(dados, static_cast<int>(faccao)).c_str());
             if (ImGui::IsItemHovered()) {
                 const LiderDaFaccao& lider = estado.lideres[faccao];
-                ImGui::SetTooltip("Líder: %d anos, Agressividade %d, Sociabilidade %d, legitimidade %d", lider.idade, lider.agressividade, lider.sociabilidade,
-                                  lider.legitimidade);
+                ImGui::SetTooltip("Líder: %s, %d anos, Agressividade %d, Sociabilidade %d, legitimidade %d", catalogo.faccoes[faccao].lider.nome.c_str(), lider.idade,
+                                  lider.agressividade, lider.sociabilidade, lider.legitimidade);
             }
             ImGui::TableNextColumn();
             ImGui::TextUnformatted(dinheiro(estado.bancoDaFaccao[faccao]).c_str());

@@ -94,6 +94,7 @@
     {
       "id": "faccao.guerreira",
       "cultura": "guerreira",
+      "lider": {"nome": "Grande Lobo Tian Feng", "idade": 51, "coragem": 90, "ganancia": 50, "agressividade": 90, "sociabilidade": 50, "lealdade": 50},
       "capital": [
         1,
         1
@@ -118,6 +119,7 @@
     {
       "id": "faccao.arcana",
       "cultura": "arcana",
+      "lider": {"nome": "Grão-Mestre Cassius Varro", "idade": 131, "coragem": 50, "ganancia": 75, "agressividade": 75, "sociabilidade": 50, "lealdade": 50},
       "capital": [
         8,
         1
@@ -142,6 +144,7 @@
     {
       "id": "faccao.autoritaria",
       "cultura": "autoritaria",
+      "lider": {"nome": "Regente Lívia Valdren", "idade": 54, "coragem": 75, "ganancia": 50, "agressividade": 50, "sociabilidade": 25, "lealdade": 75},
       "capital": [
         1,
         4
@@ -166,6 +169,7 @@
     {
       "id": "faccao.religiosa",
       "cultura": "religiosa",
+      "lider": {"nome": "Sumo Sacerdote Theodoros IV", "idade": 72, "coragem": 25, "ganancia": 50, "agressividade": 50, "sociabilidade": 75, "lealdade": 50},
       "capital": [
         8,
         4
@@ -191,6 +195,7 @@
     {
       "id": "faccao.tecnocrata",
       "cultura": "tecnocrata",
+      "lider": {"nome": "Lorde-Engenheiro Edmund Hale", "idade": 60, "coragem": 75, "ganancia": 50, "agressividade": 50, "sociabilidade": 50, "lealdade": 75},
       "capital": [
         2,
         6
@@ -219,6 +224,7 @@
     {
       "id": "faccao.escravista",
       "cultura": "escravista",
+      "lider": {"nome": "Sultana Yasmin bint Qadir", "idade": 35, "coragem": 50, "ganancia": 75, "agressividade": 50, "sociabilidade": 75, "lealdade": 25},
       "capital": [
         8,
         6
@@ -241,6 +247,7 @@
   "verba_por_npc_por_estacao_em_decimos": 50,
   "banco_inicial_em_porcento_do_pib": 25,
   "legitimidade_inicial": 70,
+  "anos_da_historia_por_ano_do_jogo": 4,
   "veto_custa_legitimidade": 5,
   "leis_por_assembleia": 3,
   "felicidade_de_quem_perdeu_a_votacao": -5
