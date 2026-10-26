@@ -12,7 +12,7 @@ Bonecos simples vistos de cima, como no RimWorld: **cabeça grande e redonda com
 |---|---|
 | `manequins_do_autor_gemini.jpg` | O corpo: 5 tons de pele, homem, mulher e criança, de perto e de cima |
 | `roupas_do_autor_gemini.jpg` | Nobres, piqueiros, damas e camponeses, de perto e de cima |
-| `manequim_teste_do_assistente.png` | O manequim feito por código (frente, costas e lado; `manequim_do_assistente.py`) |
+| `manequim_oficial_homem.webp` e `manequim_oficial_mulher.webp` | **O manequim oficial** (2026-10-26, feito no ChatGPT): 4 tons de pele, nas 3 direções. É a forma de todos os bonecos |
 
 ## 2. As regras do desenho
 
@@ -25,12 +25,12 @@ Bonecos simples vistos de cima, como no RimWorld: **cabeça grande e redonda com
 
 ## 3. As duas visões (rodada AR1)
 
-| | **De perto** | **De longe** |
-|---|---|---|
-| Como se vê | Em 3/4: o corpo inteiro, a roupa com detalhe | De cima para baixo: quase só a cabeça (ou o chapéu) e os ombros |
+|                | **De perto**                                         | **De longe**                                                    |
+| -------------- | ---------------------------------------------------- | --------------------------------------------------------------- |
+| Como se vê     | Em 3/4: o corpo inteiro, a roupa com detalhe         | De cima para baixo: quase só a cabeça (ou o chapéu) e os ombros |
 | Para que serve | Ver as pessoas, a roupa, o trabalho, a luta de perto | Ver a quantidade de gente, as construções e as batalhas grandes |
-| Construções | A fachada | O telhado |
-| Animação | Andar (pernas e braços), golpe, ações simples | Quase nada: no máximo a arma se movendo na luta |
+| Construções    | A fachada                                            | O telhado                                                       |
+| Animação       | Andar (pernas e braços), golpe, ações simples        | Quase nada: no máximo a arma se movendo na luta                 |
 
 Entre as duas há uma **transição** de zoom. [Proposta] De perto até cerca de 1,5x; abaixo de 1,25x, de longe; entre 1,25x e 1,5x, uma imagem some enquanto a outra aparece.
 
@@ -38,25 +38,25 @@ Entre as duas há uma **transição** de zoom. [Proposta] De perto até cerca de
 
 ## 4. O formato dos arquivos
 
-| Item | Regra |
-|---|---|
-| Formato | PNG com **fundo transparente** |
-| Boneco | Uma folha por peça e por visão: **3 colunas** (frente, costas, lado direito), cada célula com **128 × 128** |
-| Encaixe | Em todas as peças, o boneco fica no **mesmo lugar** da célula: os pés na mesma linha, o centro da cabeça no mesmo ponto. É isso que faz a roupa servir no corpo |
-| Tile do chão | **64 × 64**; os mapas continuam em tiles de 16 no Tiled (o jogo reduz) |
-| Camadas | Corpo (sem rosto), **rosto**, roupa de baixo, roupa de cima, armadura, cabelo, chapéu, arma: **um arquivo para cada**. O rosto fica entre o corpo e o cabelo |
-| Rosto | Folha de **2 colunas** (frente e lado direito), 128 × 128, os traços no lugar exato da cabeça do manequim oficial; fundo transparente |
-| Animação de perto [Proposta] | Andar: 4 quadros; golpe: 3 quadros; nas outras ações, 2 quadros; uma folha por ação, com as 3 direções nas linhas |
-| Nomes [Proposta] | `peca_visao_cultura.png`, por exemplo `chapeu_pena_perto_autoritaria.png` |
+| Item                         | Regra                                                                                                                                                           |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Formato                      | PNG com **fundo transparente**                                                                                                                                  |
+| Boneco                       | Uma folha por peça e por visão: **3 colunas** (frente, costas, lado direito), cada célula com **128 × 128**                                                     |
+| Encaixe                      | Em todas as peças, o boneco fica no **mesmo lugar** da célula: os pés na mesma linha, o centro da cabeça no mesmo ponto. É isso que faz a roupa servir no corpo |
+| Tile do chão                 | **64 × 64**; os mapas continuam em tiles de 16 no Tiled (o jogo reduz)                                                                                          |
+| Camadas                      | Corpo (sem rosto), **rosto**, roupa de baixo, roupa de cima, armadura, cabelo, chapéu, arma: **um arquivo para cada**. O rosto fica entre o corpo e o cabelo    |
+| Rosto                        | Folha de **2 colunas** (frente e lado direito), 128 × 128, os traços no lugar exato da cabeça do manequim oficial; fundo transparente                           |
+| Animação de perto [Proposta] | Andar: 4 quadros; golpe: 3 quadros; nas outras ações, 2 quadros; uma folha por ação, com as 3 direções nas linhas                                               |
+| Nomes [Proposta]             | `peca_visao_cultura.png`, por exemplo `chapeu_pena_perto_autoritaria.png`                                                                                       |
 
-## 5. Como gerar no Gemini sem perder a coerência
+## 5. Como gerar no ChatGPT sem perder a coerência
 
-**O problema:** o Gemini cria um boneco novo a cada pedido. **A solução** tem três partes: (1) **anexar sempre a mesma imagem de referência**, (2) **colar sempre o mesmo bloco de estilo** e (3) pedir **edições** de uma imagem que já deu certo, no lugar de imagens novas.
+**A ferramenta (decisão do autor, 2026-10-26):** o **ChatGPT**, que manteve o boneco bem mais igual que o Gemini. **O problema de toda IA:** ela tende a criar um boneco novo a cada pedido. **A solução** tem três partes: (1) **anexar sempre a mesma imagem de referência**, (2) **colar sempre o mesmo bloco de estilo** e (3) pedir **edições** de uma imagem que já deu certo, no lugar de imagens novas.
 
 ### 5.1 Antes de começar
 
-1. Escolha **uma** folha de manequim que ficou boa (a sua ou a do assistente) e guarde-a como `referencias/manequim_oficial.png`. Ela é a "forma" de todos os bonecos.
-2. Use **uma conversa do Gemini por coleção** (por exemplo, "roupas da Coroa"). Na mesma conversa ele lembra melhor o que já fez.
+1. Anexe sempre o **manequim oficial** (`referencias/manequim_oficial_homem.webp` ou `manequim_oficial_mulher.webp`). Ele é a "forma" de todos os bonecos.
+2. Use **uma conversa do ChatGPT por coleção** (por exemplo, "roupas da Coroa"). Na mesma conversa ele lembra melhor o que já fez.
 3. Peça **uma peça por vez**.
 
 ### 5.2 O bloco de estilo (colar no começo de todo pedido)
@@ -68,12 +68,12 @@ ESTILO FIXO (não mude nada disto):
 - O manequim e as roupas vêm SEM rosto (a cabeça lisa): o rosto é desenhado à parte.
 - Contorno marrom muito escuro, grosso e do mesmo peso em tudo.
 - Cores lisas com uma única sombra suave embaixo e à direita; luz vindo de cima à esquerda. Sem textura de foto, sem brilho, sem degradê forte.
-- Fundo magenta puro (#FF00FF), liso, sem sombra no chão.
+- Fundo magenta puro (#FF00FF), liso, SEM sombra no chão embaixo dos pés.
 - Folha com 3 colunas na ordem: frente, costas, lado direito. Cada célula quadrada, do mesmo tamanho, com o boneco centralizado e os pés na mesma linha.
 - Sem texto, sem números, sem moldura.
 ```
 
-**Por que o fundo magenta:** o Gemini quase nunca entrega fundo transparente, e o branco se confunde com as golas e os tecidos claros. O magenta não aparece em roupa nenhuma, e o Krita o apaga com um clique (seção 6).
+**Por que o fundo magenta:** a IA quase nunca entrega fundo transparente, e o branco se confunde com as golas e os tecidos claros. O magenta não aparece em roupa nenhuma, e o Krita o apaga com um clique (seção 6).
 
 ### 5.3 Os pedidos (sempre depois do bloco de estilo, com a imagem anexada)
 
@@ -121,6 +121,7 @@ Edite a imagem anterior: [mude só a cor da capa para vermelho / deixe a gola me
 - [ ] A luz vem de cima à esquerda?
 - [ ] As 3 colunas estão na ordem frente, costas, lado direito?
 - [ ] A cabeça veio lisa (o rosto é outra camada), sem texto e sem chão?
+- [ ] **Sem a sombra embaixo dos pés?** No manequim oficial ela veio (uma mancha magenta mais escura); o "Selecionar da cor" do Krita não a pega, e ela vira uma borda suja. Apague-a à mão ou peça "edite: tire a sombra do chão".
 
 Se algo falhou, peça uma **edição** (5.3), não uma imagem nova.
 
