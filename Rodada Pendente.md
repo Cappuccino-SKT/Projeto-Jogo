@@ -1,50 +1,28 @@
 # Rodada pendente
 
-## Rodada HI7: os mitos e os personagens de hoje (2026-10-26)
+## Rodada HI8: os líderes do Ano 412 (2026-10-26)
 
-**Contexto.** O passado está completo até o Ano 412 ([[Documentos/Mundo e História/Descrição|Mundo e História]], partes 4.0 a 4.5). Falta o que cada povo **conta** sobre esse passado (a peça 3 da lista, o mito) e **quem** está no poder quando o jogo começa (a peça 11). Hoje a ficha do [[Documentos/Mundo e Estado Inicial/Descrição|Mundo]] sorteia os líderes a cada partida: 1 líder, 1 herdeiro e 2 ou 3 nobres por facção, com nomes de uma lista da cultura. Ela também tem 5 Importantes fixos, ligados às Ambições.
+**Contexto.** A HI7 foi respondida: o líder de cada facção é **fixo** (o herdeiro e os nobres continuam sorteados); cada povo tem o seu mito; Kassian Dravel morreu, e a espada dele está nas ruínas; o jogador só conhece o mito da própria cultura ([[Documentos/Mundo e História/Descrição|Mundo e História]], partes 4.3, 4.6 e 8). Também ficaram os nomes Teocracia de Theodoria e Ordem de Custodum. Agora, os 6 líderes. Cada um tem a Personalidade de 5 traços dos Importantes ([[Ficha Logica/Companheiros|Companheiros]]: Coragem, Ganância, Agressividade, Sociabilidade e Lealdade), mostrada aqui como alta ou baixa, e **um segredo**. Na Coroa, o "imperador" é Aurelian, que dorme; quem governa é um regente.
 
-**Pergunta HI7-1: os líderes do Ano 412 são fixos ou sorteados?**
+**Pergunta HI8-1: quem governa cada facção?** (uma letra por linha, ou uma ideia sua)
+
+| Facção | Opção A | Opção B | Sugestão |
+|---|---|---|---|
+| **Coroa de Valdren** (romano) | **Regente Lívia Valdren**, 54 anos, da linhagem direta. Fria e paciente, governa "em nome do Eterno". Lealdade e Coragem altas; Sociabilidade baixa. **Segredo:** para Aurelian não definhar, a Coroa leva escravos com o dom mágico ao quarto selado, e eles nunca voltam | **Cônsul Marcus Severan**, 47 anos, um general que entrou na família pelo casamento. Quer acordar o Eterno com um novo ritual. Agressividade e Ganância altas. **Segredo:** não tem o sangue Valdren e teme ser descoberto | **A:** o segredo dela é a crueldade que o tema pede, e liga a Coroa ao Sultanato (de onde vêm os escravos) |
+| **Sultanato de Zahran** (árabe) | **Sultão Harun al-Zahran**, 68 anos, dono do maior mercado de escravos do continente. Ganância altíssima; Coragem baixa. **Segredo:** está doente, e os emires já disputam quem fica no lugar dele | **Sultana Yasmin bint Qadir**, 35 anos, que subiu ao trono envenenando o irmão. Sociabilidade e Ganância altas; Lealdade baixa. **Segredo:** compra pólvora de Ashmoor às escondidas | **B:** uma governante que trai e negocia com todos dá mais história ao comércio e à pólvora |
+| **Clãs de Tian-Lang** (chinês) | **Grande Lobo Tian Feng**, 51 anos, mudado pela mana, venceu o título num duelo, como manda a doutrina. Coragem e Agressividade altíssimas. **Segredo:** está envelhecendo e sabe que vai perder o próximo duelo | **Grande Loba Lang Mei**, 29 anos, mudada pela mana, matou o anterior em duelo. Coragem alta; Lealdade baixa. **Segredo:** sabe o caminho até a espada de Kassian nas ruínas | **A:** a velhice de um guerreiro numa cultura do mais forte é um drama pronto (a sucessão da parte 5) |
+| **Comunidade de Ashmoor** (vitoriano) | **Lorde-Engenheiro Edmund Hale**, 60 anos, o presidente do Conselho da Comunidade. Lealdade e Coragem altas. **Segredo:** o filho dele nasceu com o dom mágico, e ele o esconde da lei que manda executá-lo | **Chanceler Victoria Ashcombe**, 44 anos, dona das maiores minas. Ganância altíssima; Sociabilidade alta. **Segredo:** as minas usam mais mutantes escravizados do que a lei permite, e ela vende parte deles ao Sultanato | **A:** o líder da lei contra a magia escondendo um filho mago é o dilema bom-ou-cruel que o jogador pode usar |
+| **Teocracia de Theodoria** (bizantino) | **Sumo Sacerdote Theodoros IV**, 72 anos, o único que sabe o nome do Doador. Sociabilidade alta; Coragem baixa. **Segredo:** perdeu a fé; nunca ouviu nada do Doador | **Arquimandrita Irene Kallistos**, 38 anos, mudada pela mana e chamada de "santa viva". Coragem e Lealdade altas. **Segredo:** a mutação a está matando devagar | **A:** um chefe de fé sem fé, guardando um nome que talvez nem exista |
+| **Ordem de Custodum** (latim erudito) | **Grão-Mestre Cassius Varro**, 131 anos, mantido vivo pelos próprios experimentos. Ganância e Agressividade altas. **Segredo:** sabe que Aurelian vive e tem um espião dentro da Coroa | **Magistra Octavia Lenn**, 40 anos, a maga mais forte da Ordem. Coragem alta; Lealdade baixa. **Segredo:** quer terminar o Ritual em si mesma, não para a Ordem | **A:** um homem de 131 anos prova que a imortalidade é possível e explica por que a Ordem não para |
+
+**Pergunta HI8-2: os segredos dos líderes viram jogo?**
 
 | Opção | O que é | Ganha | Perde |
 |---|---|---|---|
-| **A** | Sorteados a cada partida, como a ficha diz hoje | Cada partida é diferente | A história não tem rostos; nenhum líder é famoso |
-| **B** | Todos fixos: cada facção começa com o mesmo líder, herdeiro e nobres, com nome e história | Personagens marcantes, como os do Kenshi | Toda partida começa igual; muito texto para escrever |
-| **C** | Misto: o **líder** de cada facção é fixo (nome, história, Personalidade); o herdeiro e os nobres são sorteados. Depois, a simulação muda tudo: o líder pode morrer, ser deposto ou trair | Seis rostos conhecidos, e o resto varia | Muda a ficha do Mundo (o sorteio do líder) |
+| **A** | Só história: aparecem em livros, falas e notícias | Nada a programar | O jogador não faz nada com eles |
+| **B** | O jogador pode **descobrir** um segredo (espionar, conversar, roubar cartas) e **usá-lo**: chantagear o líder, vendê-lo a uma facção inimiga ou revelá-lo ao povo (a Estabilidade cai). Entra como sistema numa ficha futura | É o "mal que dá mais caminhos" do tema; liga Crime, Diplomacia e Notícias | Uma ficha nova (Segredos) |
+| **C** | B, mas só para o segredo da Coroa (o mais importante) | Menos trabalho | Os outros cinco ficam só na história |
 
-**Sugestão: C.** Se aceitar, a HI8 traz os 6 líderes.
+**Sugestão: B**, com a ficha de Segredos entrando no Plano das Fichas depois da fase D.
 
-**Pergunta HI7-2: o mito de cada povo** (o que cada um conta sobre a Grande Fusão; cada linha pode ser A, B ou uma ideia sua)
-
-| Povo | Mito A | Mito B |
-|---|---|---|
-| **Coroa de Valdren** | **A Ascensão deu certo.** Aurelian virou o Eterno e governa para sempre; os rebeldes trouxeram a desgraça ao mundo | **O Eterno dorme** para curar o mundo; quando acordar, o Império volta |
-| **Sultanato de Zahran** | **A Queda foi o fim de um senhor fraco.** O mundo é de quem sabe tomá-lo; a riqueza é a prova do favor dos céus | **O Império devia aos nobres**, e o Sultanato só cobrou a dívida: os escravos são o pagamento |
-| **Clãs de Tian-Lang** | **A Libertação.** Kassian Dravel, o primeiro Lobo Celeste, deu a vida para derrubar o tirano; a mana que mudou os rebeldes é a marca de quem lutou | **A luta não acabou.** O tirano ainda vive, e cada geração treina para a última batalha |
-| **Comunidade de Ashmoor** | **O Erro.** A magia quase acabou com a humanidade; só a razão e o ferro salvam. Kassian não é herói: é quem destruiu o mundo | **O Juramento das Cinzas.** Os sobreviventes do cerco juraram sobre as cinzas da capital: nenhum mago, nunca mais |
-| **Patriarcado de Theodoria** | **A Graça.** O Doador abriu o céu e derramou a mana; o imperador e Kassian foram só instrumentos; os mudados são os escolhidos | **O Castigo e a Graça.** O Doador castigou o Império com a mana e, com a mesma mana, abençoou os que sofreram |
-| **Ordo Custodum** | **A Abertura.** O Ritual estava certo, só foi interrompido; a Ordo vai terminá-lo | **A Falha.** Os guardiões falharam em proteger o imperador; a redenção deles é vencer a morte |
-
-**Sugestão: A em todas.** Com a A, cada povo tem uma "verdade" que bate de frente com a de um vizinho: a Coroa contra os Clãs (a Ascensão contra a Libertação), Ashmoor contra a Ordo (o Erro contra a Abertura).
-
-**Pergunta HI7-3: o que houve com Kassian Dravel?**
-
-| Opção | O que é | Ganha | Perde |
-|---|---|---|---|
-| **A** | **Morreu na explosão** do próprio feitiço. A espada dele está nas ruínas da capital, a masmorra mais perigosa do mundo | Um fim trágico; um item lendário que todo povo cobiça (os Clãs, como relíquia; Ashmoor, para destruí-la) | Nenhum mistério sobre ele |
-| **B** | **Sumiu.** Ninguém achou o corpo; há quem diga que ele vive, mudado pela mana, como Aurelian | Um segundo segredo, espelho do da Coroa | Dois "imortais escondidos" pesam demais |
-| **C** | **Virou parte da cratera:** a mana dele ficou presa nas ruínas e ataca quem entra | Dá um chefe final à masmorra | Mais fantasia do que o resto do mundo |
-
-**Sugestão: A.**
-
-**Pergunta HI7-4: o que o jogador comum sabe do passado?**
-
-| Opção | O que é | Ganha | Perde |
-|---|---|---|---|
-| **A** | Só o mito da própria cultura; o resto ele descobre (livros, ruínas, falas) | A descoberta vira parte do jogo | Quem começa sem cultura não sabe nada |
-| **B** | Tudo o que é público (a Fusão, a Revolta, a Guerra das Cinzas); os segredos (Aurelian vivo, o que era a outra dimensão) ele descobre | Base clara para todo jogador; o mistério fica só no que importa | Menos descoberta |
-| **C** | Nada: começa sem memória | Mistério total | Clichê; confuso no começo |
-
-**Sugestão: B**, com o mito da cultura dele como a versão "que ele aprendeu" (liga com o [[Ficha Logica/Inicio|Início de Jogo]]).
-
-**Conflitos:** a HI7-1 C muda a ficha do Mundo (o líder deixa de ser sorteado). As outras não mudam regras: viram textos (livros, falas, notícias) e um item lendário (a HI7-3 A) no [[Ficha Logica/Objetivo|Objetivo e Progressão]].
+**Conflitos:** a HI8-1 entra no `faccoes.json` e muda o código que hoje sorteia o líder (`Faccao.cpp`, regra 4.6 da Facção: idade de 8 a 18 anos no poder, Agressividade e Sociabilidade de 20 a 80); isso vira uma tarefa de código depois desta rodada. A HI8-2 B cria uma ficha nova.

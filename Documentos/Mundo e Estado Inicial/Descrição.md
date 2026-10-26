@@ -230,7 +230,8 @@ Por quê: a Tecnocrata mata ou escraviza os tocados pela mana, e a Guerreira é 
 
 Nas primeiras versões os personagens são **abstratos**. Os personagens principais do mundo entram aos poucos, quando a história for escrita.
 
-- **Gerados no início de cada partida** (por facção): 1 líder (Realeza), 1 herdeiro e 2 ou 3 nobres da dinastia; o governador da cidade de nível 3 é um desses nobres. Os nomes saem de uma lista por cultura e a Personalidade, dos modelos, com a tendência da cultura.
+- **O líder de cada facção é fixo** (rodada HI7-1): nome, história e Personalidade vêm do [[Mundo e História/Descrição|Mundo e História]] (rodada HI8). [Em aberto] no código, que hoje sorteia o líder.
+- **Gerados no início de cada partida** (por facção): 1 herdeiro e 2 ou 3 nobres da dinastia; o governador da cidade de nível 3 é um desses nobres. Os nomes saem de uma lista por cultura e a Personalidade, dos modelos, com a tendência da cultura.
 - 5 **Importantes fixos**, por papel, cada um ligado a uma Ambição:
 
 | Papel | Onde começa | Ligação |
