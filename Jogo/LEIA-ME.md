@@ -719,7 +719,7 @@ Como testar: na janela das Facções, passe o mouse sobre o nome de uma facção
 O que entrou ([[Ficha Logica/Companheiros|ficha dos Companheiros]], regras 4.6 e 4.7):
 
 - **A dinastia de cada facção:** o líder fixo, o cônjuge e 1 ou 2 filhos adultos (com 12 anos ou mais) e 2 nobres, cada um com a Personalidade, o Carisma, o Corpo a Corpo e o Especialista.
-- **No dia 1 de cada estação:** a idade (na Primavera), a velhice da População, os casamentos (25%), os filhos (10%, da mulher de 5 a 30 anos) e os nobres repostos. [Proposta] Com 12 pessoas, a dinastia para de crescer.
+- **No dia 1 de cada estação:** a idade (na Primavera), a velhice da População, os casamentos (25%), os filhos (10%, da mulher de 5 a 30 anos) e os nobres repostos. Com 12 pessoas, a dinastia para de crescer (decisão do autor, para não pesar no desempenho; o número será medido depois).
 - **O líder morre e alguém sobe** pela sucessão da cultura (herança, duelo, mérito ou o clero). Sem herdeiro adulto, há crise: o nobre mais velho sobe e a legitimidade cai para 30. A morte vira notícia **Mundial**.
 - **Vida prolongada:** Cassius não envelhece enquanto a Torre Arcana estiver de pé (até a Magia, D4, a Torre conta sempre de pé).
 - **Os nomes da história na tela** (Coroa de Valdren, Clãs de Tian-Lang...), com o artigo certo (`reputacao.json`), e 8 nomes de homem e 8 de mulher por cultura (`culturas.json`).

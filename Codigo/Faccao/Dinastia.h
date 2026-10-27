@@ -32,7 +32,7 @@ struct RegrasDaFamilia {
     int fertilAte = 30;  // a mulher tem filhos da idade de adulto até esta (rodada HI12)
     int nobresPorDinastia = 2;
     int liderCasadoAPartirDe = 12;  // CP1-5: o líder do começo com 12 anos ou mais já é casado e tem filhos adultos
-    int membrosNoMaximo = 12;       // [Proposta] acima disto, ninguém mais casa nem tem filho na dinastia
+    int membrosNoMaximo = 12;       // acima disto, ninguém mais casa nem tem filho (o autor: sem crescer sem parar; o número será medido pelo desempenho)
     int legitimidadeNaCrise = 30;
     int tracoMinimo = 20;  // os traços e as habilidades sorteados vão de 20 a 80
     int tracoMaximo = 80;
