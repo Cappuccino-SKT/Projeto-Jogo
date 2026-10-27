@@ -1002,8 +1002,8 @@ void InterfaceDoJogador::desenharAsFaccoes(const SimulacaoDaVila& simulacao, flo
         ImGui::End();
         return;
     }
-    ImGui::TextWrapped("A sua vila é livre: não tem facção, paga 20%% de imposto e recebe a verba de fora. Os moradores são da cultura %s, a da região.",
-                       nomeDoDonoDaReputacao(dados.regrasDaReputacao, culturaBaseDaCidade(dados, dados.mundo.mapaDaVila)).c_str());
+    ImGui::TextWrapped("A sua vila é livre: não tem facção, paga 20%% de imposto e recebe a verba de fora. Os moradores são do mesmo povo %s, o da região.",
+                       nomeDoDonoComArtigo(dados.regrasDaReputacao, culturaBaseDaCidade(dados, dados.mundo.mapaDaVila), "de").c_str());
     if (ImGui::BeginTable("##faccoes", 2 + static_cast<int>(catalogo.leis.size()), ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_ScrollX)) {
         ImGui::TableSetupColumn("Facção");
         ImGui::TableSetupColumn("Banco");
@@ -1017,8 +1017,11 @@ void InterfaceDoJogador::desenharAsFaccoes(const SimulacaoDaVila& simulacao, flo
             ImGui::TextUnformatted(nomeDaFaccao(dados, static_cast<int>(faccao)).c_str());
             if (ImGui::IsItemHovered()) {
                 const LiderDaFaccao& lider = estado.lideres[faccao];
-                ImGui::SetTooltip("Líder: %s, %d anos, Agressividade %d, Sociabilidade %d, legitimidade %d", catalogo.faccoes[faccao].lider.nome.c_str(), lider.idade,
-                                  lider.agressividade, lider.sociabilidade, lider.legitimidade);
+                const DinastiaDaFaccao& dinastia = estado.dinastias[faccao];
+                ImGui::SetTooltip("Líder: %s, %d anos, Agressividade %d, Sociabilidade %d, legitimidade %d\nDinastia: %d pessoas (com %d nobres)",
+                                  dinastia.lider().nome.c_str(), dinastia.lider().idade, lider.agressividade, lider.sociabilidade, lider.legitimidade,
+                                  static_cast<int>(dinastia.membros.size()),
+                                  static_cast<int>(std::count_if(dinastia.membros.begin(), dinastia.membros.end(), [](const MembroDaDinastia& membro) { return membro.ehNobre; })));
             }
             ImGui::TableNextColumn();
             ImGui::TextUnformatted(dinheiro(estado.bancoDaFaccao[faccao]).c_str());

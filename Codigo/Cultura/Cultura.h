@@ -25,6 +25,8 @@ struct DefinicaoDaCultura {
     std::map<std::string, int> habilidadesEmPontos;  // "bracal": −5
     std::string ritoDeAdmissao;
     std::string sucessao;
+    std::vector<std::string> nomesDeHomem;  // D2: os nomes dos Importantes da dinastia
+    std::vector<std::string> nomesDeMulher;
 };
 
 struct CatalogoDasCulturas {

@@ -94,7 +94,7 @@ std::vector<std::string> soltarOJogador(SimulacaoDaVila& vila)
         crime.gravidadesNaFicha[static_cast<std::size_t>(faccao)] = 0;
         crime.fiancaNaFicha[static_cast<std::size_t>(faccao)] = 0;
         const int confiscados = confiscarOsItensProibidos(vila, faccao);
-        linhas.push_back("Aviso: o grupo saiu da prisão da " + nomeDaFaccao(vila.dados, faccao) + "; a ficha está limpa"
+        linhas.push_back("Aviso: o grupo saiu da prisão " + nomeDaFaccaoComArtigo(vila.dados, faccao, "de") + "; a ficha está limpa"
                          + (confiscados > 0 ? " (" + std::to_string(confiscados) + " itens proibidos confiscados)." : "."));
     }
     crime.presoAteODia = -1;
@@ -392,7 +392,7 @@ std::string resolverARevista(SimulacaoDaVila& vila, EscolhaNaRevista escolha, in
     anotarOCrimeNaoPago(vila, faccao, revista.gravidade, revista.multa);
     pararOGrupo(grupo);
     grupo.mapaAtual = revista.mapaAnterior > 0 ? revista.mapaAnterior : grupo.mapaAtual;
-    linhas.push_back("Aviso: o grupo fugiu da revista e voltou a " + vila.dados.mundo.nomeDoMapa(grupo.mapaAtual) + ". Recompensa da " + nomeDaFaccao(vila.dados, faccao)
+    linhas.push_back("Aviso: o grupo fugiu da revista e voltou a " + vila.dados.mundo.nomeDoMapa(grupo.mapaAtual) + ". Recompensa " + nomeDaFaccaoComArtigo(vila.dados, faccao, "de")
                      + ": " + std::to_string(crime.recompensaPorFaccao[static_cast<std::size_t>(faccao)]) + " moedas.");
     revista = {};
     return "";
@@ -413,7 +413,7 @@ void prenderJogador(SimulacaoDaVila& vila, int faccao, std::vector<std::string>&
         const DefinicaoDaFaccao& definicao = dados.faccoes.faccoes[static_cast<std::size_t>(faccao)];
         grupo.mapaAtual = dados.mundo.numeroDoMapaNa(definicao.colunaDaCapital, definicao.linhaDaCapital);  // levado para a capital
     }
-    linhas.push_back("Aviso: o grupo foi preso pela " + nomeDaFaccao(dados, faccao) + " em " + dados.mundo.nomeDoMapa(grupo.mapaAtual) + " por " + std::to_string(dias)
+    linhas.push_back("Aviso: o grupo foi preso " + nomeDaFaccaoComArtigo(dados, faccao, "por") + " em " + dados.mundo.nomeDoMapa(grupo.mapaAtual) + " por " + std::to_string(dias)
                      + " dias (fiança: " + std::to_string(crime.fiancaNaFicha[static_cast<std::size_t>(faccao)]) + " moedas).");
 }
 

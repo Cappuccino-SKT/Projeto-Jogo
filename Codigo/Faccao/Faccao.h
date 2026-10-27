@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 
+#include "Faccao/Dinastia.h"
+
 class SimulacaoDaVila;
 struct DadosDoJogo;
 struct CaravanaDaCidade;
@@ -26,9 +28,10 @@ struct DefinicaoDaLei {
 // O líder fixo do Ano 412 (rodada HI7-1; os nomes e os traços vêm do Mundo e História, parte 4.7).
 struct LiderInicialDaFaccao {
     std::string nome;
+    bool ehMulher = false;
+    bool vidaProlongada = false;  // HI11-1: Cassius Varro
     int idadeNaHistoria = 48;  // em anos da história; o jogo divide por "anos_da_historia_por_ano_do_jogo"
-    // A Personalidade de 5 traços (0 a 100). Nesta versão o jogo usa só a Agressividade e a Sociabilidade;
-    // a Coragem, a Ganância e a Lealdade ficam para os Companheiros (D2).
+    // A Personalidade de 5 traços (0 a 100); vai para o líder da dinastia (D2).
     int coragem = 50;
     int ganancia = 50;
     int agressividade = 50;
@@ -71,8 +74,9 @@ struct CatalogoDasFaccoes {
 
 CatalogoDasFaccoes lerArquivosDasFaccoes(const std::string& textoDasFaccoes, const std::string& textoDasCulturas, ListaDeProblemasDosDados& listaDeProblemas);
 
+// O que a assembleia usa do líder. A idade, o nome e a família estão na dinastia; a Agressividade e a
+// Sociabilidade são copiadas do líder da dinastia a cada sucessão.
 struct LiderDaFaccao {
-    int idade = 12;
     int agressividade = 50;
     int sociabilidade = 50;
     int legitimidade = 70;
@@ -94,6 +98,7 @@ struct EstadoDasFaccoes {
     std::vector<std::vector<int>> leisAtuais;  // [facção][lei]: a posição da opção
     std::vector<int64_t> bancoDaFaccao;
     std::vector<LiderDaFaccao> lideres;
+    std::vector<DinastiaDaFaccao> dinastias;  // D2: uma por facção
     std::vector<MudancaDeLei> mudancasParaAmanha;
     std::vector<int64_t> perdeuAVotacaoAte;  // [número do mapa − 1]: o último dia do −5 de Felicidade; −1 = nunca
     int64_t cunhagemTotal = 0;               // o dinheiro novo do mundo (conta como "de fora")
@@ -105,8 +110,10 @@ struct EstadoDasFaccoes {
 int faccaoDaCidade(const DadosDoJogo& dados, int numeroDoMapa);
 // A posição da facção dona do mapa (a cidade ou o território de uma facção só); −1 = nenhuma.
 int faccaoDoMapa(const DadosDoJogo& dados, int numeroDoMapa);
-// O nome na tela: "Guerreira".
+// O nome na tela: "Clãs de Tian-Lang".
 std::string nomeDaFaccao(const DadosDoJogo& dados, int faccao);
+// Com o artigo e a preposição: (guerreira, "de") → "dos Clãs de Tian-Lang" (nomeDoDonoComArtigo).
+std::string nomeDaFaccaoComArtigo(const DadosDoJogo& dados, int faccao, const std::string& preposicao = "", bool maiuscula = false);
 
 // Ao criar o mundo: as leis iniciais, o Banco (25% do PIB) e o líder (sequência 7).
 void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, uint64_t sementeDaPartida);

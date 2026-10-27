@@ -53,6 +53,7 @@ struct DadosDoJogo {
     RegrasDoCrime regrasDoCrime;                    // fase C3
     RegrasDaReligiao regrasDaReligiao;              // fase C4
     RegrasDoCombate regrasDoCombate;                // fase D1
+    RegrasDaFamilia regrasDaFamilia;                // fase D2 (o companheiros.json)
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }

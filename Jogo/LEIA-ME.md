@@ -713,3 +713,19 @@ Cada facção começa com o líder da história (Mundo e História, parte 4.7): 
 **Rodada HI12:** a vida ficou mais longa: adulto aos 5 anos de jogo (antes 4) e velho aos 31 (antes 21). No `regras.json`, a chance de velhice virou `chance_de_morrer_de_velhice_por_estacao_em_porcento_por_ano_de_velhice`. A Agressividade e a Sociabilidade valem já (o veto da assembleia); os outros 3 traços esperam os Companheiros (D2). O save não muda.
 
 Como testar: na janela das Facções, passe o mouse sobre o nome de uma facção: a dica mostra o líder ("Líder: Grande Lobo Tian Feng, 20 anos, ...").
+
+### Marco D2, parte 1: as dinastias (2026-10-27, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Companheiros|ficha dos Companheiros]], regras 4.6 e 4.7):
+
+- **A dinastia de cada facção:** o líder fixo, o cônjuge e 1 ou 2 filhos adultos (com 12 anos ou mais) e 2 nobres, cada um com a Personalidade, o Carisma, o Corpo a Corpo e o Especialista.
+- **No dia 1 de cada estação:** a idade (na Primavera), a velhice da População, os casamentos (25%), os filhos (10%, da mulher de 5 a 30 anos) e os nobres repostos. [Proposta] Com 12 pessoas, a dinastia para de crescer.
+- **O líder morre e alguém sobe** pela sucessão da cultura (herança, duelo, mérito ou o clero). Sem herdeiro adulto, há crise: o nobre mais velho sobe e a legitimidade cai para 30. A morte vira notícia **Mundial**.
+- **Vida prolongada:** Cassius não envelhece enquanto a Torre Arcana estiver de pé (até a Magia, D4, a Torre conta sempre de pé).
+- **Os nomes da história na tela** (Coroa de Valdren, Clãs de Tian-Lang...), com o artigo certo (`reputacao.json`), e 8 nomes de homem e 8 de mulher por cultura (`culturas.json`).
+- Arquivo novo `data/companheiros.json` (os blocos `familia` e `dinastia`). **Save versão 15.**
+- **Ficou para a parte 2:** o grupo do jogador (recrutar, salário, Opinião, cargos), o casamento e a sucessão do jogador e o diálogo.
+
+**Verificado pelo assistente:** os testes passam (604 conferências). Em 1.000 mundos e 20 anos, 1,2% das mortes de líder ficam sem herdeiro adulto (o limite da ficha é 10%).
+
+Como testar: `testes_do_codigo` imprime a linha "dinastias em 1.000 mundos". No jogo, a dica do nome da facção mostra o líder e o tamanho da dinastia.

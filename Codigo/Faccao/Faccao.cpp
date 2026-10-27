@@ -21,6 +21,25 @@ const char* const nomeDoArquivoDasFaccoes = "faccoes.json";
 const char* const nomeDoArquivoDasCulturas = "culturas.json";
 // O líder (ao criar o mundo) e o veto da assembleia sorteiam com a sequência 7 (parte 2 da ficha).
 constexpr uint64_t sequenciaDoSorteioDasFaccoes = 7;
+constexpr uint64_t sequenciaDoSorteioDasDinastias = 8;  // D2: casamentos, filhos, velhice (a partir do dia e da facção)
+
+CulturaDaDinastia culturaDaDinastia(const DadosDoJogo& dados, const std::string& cultura)
+{
+    CulturaDaDinastia resultado;
+    if (const DefinicaoDaCultura* definicao = dados.culturas.procurar(cultura)) {
+        resultado.nomesDeHomem = definicao->nomesDeHomem;
+        resultado.nomesDeMulher = definicao->nomesDeMulher;
+        resultado.sucessao = definicao->sucessao;
+    }
+    return resultado;
+}
+
+// A assembleia usa a Agressividade e a Sociabilidade do líder da dinastia.
+void copiarOsTracosDoLider(LiderDaFaccao& lider, const DinastiaDaFaccao& dinastia)
+{
+    lider.agressividade = dinastia.lider().personalidade.agressividade;
+    lider.sociabilidade = dinastia.lider().personalidade.sociabilidade;
+}
 
 int posicaoDaOpcao(const DefinicaoDaLei& lei, const std::string& opcao)
 {
@@ -185,6 +204,8 @@ CatalogoDasFaccoes lerArquivosDasFaccoes(const std::string& textoDasFaccoes, con
         if (faccao.lider.nome.empty()) {
             listaDeProblemas.anotarErro(nomeDoArquivoDasFaccoes, 0, faccao.id + ": falta o líder (\"lider\" com \"nome\")");
         }
+        faccao.lider.ehMulher = lider.value("mulher", false);
+        faccao.lider.vidaProlongada = lider.value("vida_prolongada", false);
         faccao.lider.idadeNaHistoria = lider.value("idade", faccao.lider.idadeNaHistoria);
         faccao.lider.coragem = lider.value("coragem", faccao.lider.coragem);
         faccao.lider.ganancia = lider.value("ganancia", faccao.lider.ganancia);
@@ -272,7 +293,15 @@ std::string nomeDaFaccao(const DadosDoJogo& dados, int faccao)
     return nomeDoDonoDaReputacao(dados.regrasDaReputacao, dados.faccoes.faccoes[static_cast<std::size_t>(faccao)].cultura);
 }
 
-void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, [[maybe_unused]] uint64_t sementeDaPartida)
+std::string nomeDaFaccaoComArtigo(const DadosDoJogo& dados, int faccao, const std::string& preposicao, bool maiuscula)
+{
+    if (faccao < 0 || faccao >= static_cast<int>(dados.faccoes.faccoes.size())) {
+        return "?";
+    }
+    return nomeDoDonoComArtigo(dados.regrasDaReputacao, dados.faccoes.faccoes[static_cast<std::size_t>(faccao)].cultura, preposicao, maiuscula);
+}
+
+void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, uint64_t sementeDaPartida)
 {
     const CatalogoDasFaccoes& catalogo = vila.dados.faccoes;
     EstadoDasFaccoes& estado = vila.faccoes;
@@ -287,12 +316,20 @@ void montarAsFaccoesDaPartidaNova(SimulacaoDaVila& vila, [[maybe_unused]] uint64
         }
         estado.bancoDaFaccao.push_back(pib * catalogo.bancoInicialEmPorcentoDoPib / 100);
         // 4.6 (rodadas HI7-1 e HI12): o líder fixo do Ano 412. A idade da história vira a do jogo, de 8 a 30 anos.
+        // D2 (Companheiros 4.6, passo 4): a dinastia dele, sorteada com a sequência 8.
         const LiderInicialDaFaccao& inicial = catalogo.faccoes[faccao].lider;
-        LiderDaFaccao lider;
         const int divisor = catalogo.anosDaHistoriaPorAnoDoJogoEmDecimos;
-        lider.idade = std::clamp((inicial.idadeNaHistoria * 10 + divisor / 2) / divisor, 8, 30);
-        lider.agressividade = inicial.agressividade;
-        lider.sociabilidade = inicial.sociabilidade;
+        LiderDoComeco doComeco;
+        doComeco.nome = inicial.nome;
+        doComeco.ehMulher = inicial.ehMulher;
+        doComeco.vidaProlongada = inicial.vidaProlongada;
+        doComeco.idade = std::clamp((inicial.idadeNaHistoria * 10 + divisor / 2) / divisor, 8, 30);
+        doComeco.personalidade = {inicial.coragem, inicial.ganancia, inicial.agressividade, inicial.sociabilidade, inicial.lealdade};
+        SorteioComSemente sorteio(sementeDaPartida + faccao, sequenciaDoSorteioDasDinastias);
+        estado.dinastias.push_back(montarADinastiaDoComeco(doComeco, culturaDaDinastia(vila.dados, catalogo.faccoes[faccao].cultura), vila.dados.regrasDaFamilia,
+                                                           vila.dados.regras.populacao, sorteio));
+        LiderDaFaccao lider;
+        copiarOsTracosDoLider(lider, estado.dinastias.back());
         lider.legitimidade = catalogo.legitimidadeInicial;
         estado.lideres.push_back(lider);
     }
@@ -553,6 +590,32 @@ std::vector<std::string> rodarAsFaccoesNoDiaNovo(SimulacaoDaVila& vila)
                 estado.bancoDaFaccao[static_cast<std::size_t>(faccao)] -= pagas[cidade];
             }
         }
+        // D2 (Companheiros 4.6 e 4.7): a dinastia no dia 1 de cada estação (não no primeiro dia da partida).
+        if (hoje > 0 && vila.relogio.diaDaEstacaoAtual() == 1 && static_cast<std::size_t>(faccao) < estado.dinastias.size()) {
+            const DefinicaoDaFaccao& definicao = catalogo.faccoes[static_cast<std::size_t>(faccao)];
+            DinastiaDaFaccao& dinastia = estado.dinastias[static_cast<std::size_t>(faccao)];
+            SorteioComSemente sorteio(vila.vila.sementeDaPartida + static_cast<uint64_t>(hoje) * 16 + static_cast<uint64_t>(faccao), sequenciaDoSorteioDasDinastias);
+            const ResultadoDaEstacaoDaDinastia resultado = passarUmaEstacaoNaDinastia(dinastia, culturaDaDinastia(dados, definicao.cultura), dados.regrasDaFamilia,
+                                                                                      dados.regras.populacao, vila.relogio.estacaoAtual() == Estacao::Primavera,
+                                                                                      true, sorteio);  // a Torre Arcana fica de pé até a Magia (D4)
+            if (resultado.liderMorreu) {
+                LiderDaFaccao& lider = estado.lideres[static_cast<std::size_t>(faccao)];
+                copiarOsTracosDoLider(lider, dinastia);
+                if (resultado.crise) {
+                    lider.legitimidade = std::min(lider.legitimidade, dados.regrasDaFamilia.legitimidadeNaCrise);
+                }
+                Noticia noticia;
+                noticia.tipo = "faccao.sucessao";
+                noticia.importancia = ImportanciaDaNoticia::Mundial;
+                noticia.mapaDeOrigem = dados.mundo.numeroDoMapaNa(definicao.colunaDaCapital, definicao.linhaDaCapital);
+                noticia.tickDeOrigem = vila.relogio.tickAtual();
+                noticia.diaDeOrigem = hoje;
+                noticia.titulo = "Morre " + resultado.nomeDoLiderMorto + ", líder " + nomeDaFaccaoComArtigo(dados, faccao, "de") + "; sobe " + resultado.nomeDoNovoLider
+                    + (resultado.crise ? " (crise: sem herdeiro adulto)" : "");
+                linhas.push_back("Facção: " + noticia.titulo + ".");
+                criarNoticia(vila, std::move(noticia));
+            }
+        }
         // 4.5: a assembleia no dia 1 de cada ano (não no primeiro dia da partida).
         if (hoje > 0 && vila.relogio.diaDoAnoAtual() == 0) {
             std::vector<VotanteDaAssembleia> votantes;
@@ -581,7 +644,7 @@ std::vector<std::string> rodarAsFaccoesNoDiaNovo(SimulacaoDaVila& vila)
                 noticia.mapaDeOrigem = dados.mundo.numeroDoMapaNa(definicao.colunaDaCapital, definicao.linhaDaCapital);
                 noticia.tickDeOrigem = vila.relogio.tickAtual();
                 noticia.diaDeOrigem = hoje;
-                noticia.titulo = "A " + nomeDaFaccao(dados, faccao) + " mudou a lei " + textoDaOpcao(lei.id) + " para "
+                noticia.titulo = nomeDaFaccaoComArtigo(dados, faccao, "", true) + " mudou a lei " + textoDaOpcao(lei.id) + " para "
                     + textoDaOpcao(lei.opcoes[static_cast<std::size_t>(resultado.novoValor[item])]);
                 criarNoticia(vila, std::move(noticia));
             }

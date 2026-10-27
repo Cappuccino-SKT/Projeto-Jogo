@@ -456,6 +456,21 @@ json escreverATecnologia(const SimulacaoDaVila& simulacao)
     return json{{"pesquisadores", pesquisadores}, {"marcos", marcos}, {"eraAtualDoMundo", estado.eraAtualDoMundo}};
 }
 
+// Fase D2 (ficha dos Companheiros): a dinastia de uma facção.
+json escreverADinastia(const DinastiaDaFaccao& dinastia)
+{
+    json membros = json::array();
+    for (const MembroDaDinastia& membro : dinastia.membros) {
+        const Personalidade& tracos = membro.personalidade;
+        membros.push_back(json{{"numero", membro.numero}, {"nome", membro.nome}, {"mulher", membro.ehMulher}, {"idade", membro.idade},
+                               {"tracos", json::array({tracos.coragem, tracos.ganancia, tracos.agressividade, tracos.sociabilidade, tracos.lealdade})},
+                               {"habilidades", json::array({membro.carisma, membro.corpoACorpo, membro.especialista})}, {"nobre", membro.ehNobre},
+                               {"familia", json::array({membro.conjuge, membro.pai, membro.mae})}, {"gravidez", membro.estacoesDeGravidez},
+                               {"vidaProlongada", membro.vidaProlongada}});
+    }
+    return json{{"membros", membros}, {"lider", dinastia.numeroDoLider}, {"proximoNumero", dinastia.proximoNumero}};
+}
+
 // Fase C1 (ficha da Facção): as leis pelo nome da opção, o Banco, o líder e a votação perdida.
 json escreverAsFaccoes(const SimulacaoDaVila& simulacao)
 {
@@ -471,7 +486,8 @@ json escreverAsFaccoes(const SimulacaoDaVila& simulacao)
         faccoes.push_back(json{{"id", catalogo.faccoes[faccao].id},
                                {"leis", leis},
                                {"banco", estado.bancoDaFaccao[faccao]},
-                               {"lider", json::array({lider.idade, lider.agressividade, lider.sociabilidade, lider.legitimidade})}});
+                               {"legitimidade", lider.legitimidade},
+                               {"dinastia", escreverADinastia(estado.dinastias[faccao])}});
     }
     json mudancas = json::array();
     for (const MudancaDeLei& mudanca : estado.mudancasParaAmanha) {
