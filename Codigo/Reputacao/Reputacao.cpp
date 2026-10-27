@@ -92,6 +92,13 @@ RegrasDaReputacao lerArquivoDaReputacao(const std::string& textoDoArquivo, Lista
             regras.nomesDasFaccoes[faccao] = nome.is_string() ? nome.get<std::string>() : faccao;
         }
     }
+    if (const auto artigos = documento.find("artigos_das_faccoes"); artigos != documento.end() && artigos->is_object()) {
+        for (const auto& [faccao, artigo] : artigos->items()) {
+            if (artigo.is_string()) {
+                regras.artigosDasFaccoes[faccao] = artigo.get<std::string>();
+            }
+        }
+    }
     if (const auto mudancas = documento.find("mudancas_no_por_que"); mudancas != documento.end() && mudancas->is_number_integer()) {
         regras.mudancasNoPorQue = std::max(1, mudancas->get<int>());
     }
@@ -114,6 +121,26 @@ std::string nomeDoDonoDaReputacao(const RegrasDaReputacao& regras, const std::st
 {
     const auto nome = regras.nomesDasFaccoes.find(dono);
     return nome == regras.nomesDasFaccoes.end() ? dono : nome->second;
+}
+
+std::string nomeDoDonoComArtigo(const RegrasDaReputacao& regras, const std::string& dono, const std::string& preposicao, bool maiuscula)
+{
+    const auto encontrado = regras.artigosDasFaccoes.find(dono);
+    const std::string artigo = encontrado == regras.artigosDasFaccoes.end() ? "a" : encontrado->second;
+    std::string junto = artigo;  // "a", "o", "os"
+    if (preposicao == "de") {
+        junto = "d" + artigo;
+    } else if (preposicao == "por") {
+        junto = "pel" + artigo;
+    } else if (preposicao == "em") {
+        junto = "n" + artigo;
+    } else if (!preposicao.empty()) {
+        junto = preposicao + " " + artigo;
+    }
+    if (maiuscula && !junto.empty() && junto[0] >= 'a' && junto[0] <= 'z') {
+        junto[0] = static_cast<char>(junto[0] - 'a' + 'A');
+    }
+    return junto + " " + nomeDoDonoDaReputacao(regras, dono);
 }
 
 void montarAReputacaoDaPartidaNova(EstadoDaReputacao& reputacao, const MundoDoJogo& mundo)
@@ -201,8 +228,8 @@ std::string mudarReputacao(SimulacaoDaVila& vila, int dono, int valor, const std
         return "";
     }
     // Passo 3: a faixa mudou.
-    const std::string nome = nomeDoDonoDaReputacao(regras, donosDaReputacao(vila.dados.mundo)[static_cast<std::size_t>(dono)]);
-    return "Reputação: sua reputação com a " + nome + " agora é " + regras.faixas[static_cast<std::size_t>(faixaDepois)].texto + ".";
+    const std::string nome = nomeDoDonoComArtigo(regras, donosDaReputacao(vila.dados.mundo)[static_cast<std::size_t>(dono)]);
+    return "Reputação: sua reputação com " + nome + " agora é " + regras.faixas[static_cast<std::size_t>(faixaDepois)].texto + ".";
 }
 
 std::vector<std::string> voltarReputacaoParaABase(SimulacaoDaVila& vila)
@@ -256,9 +283,9 @@ std::string doarParaAFaccao(SimulacaoDaVila& vila, int moedas, std::vector<std::
     }
     grupo.dinheiroEmDecimos -= static_cast<int64_t>(aceitas) * 10;
     cidade->dinheiro.bancoDaCidade += static_cast<int64_t>(aceitas) * 10;  // RE1-3: o Banco da cidade
-    const std::string nome = nomeDoDonoDaReputacao(regras, donosDaReputacao(vila.dados.mundo)[posicao]);
+    const std::string nome = nomeDoDonoComArtigo(regras, donosDaReputacao(vila.dados.mundo)[posicao], "com");
     linhas.push_back("Reputação: o grupo doou " + std::to_string(aceitas) + " moedas em " + vila.dados.mundo.nomeDoMapa(grupo.mapaAtual) + " ("
-                     + escreverComSinal(pontos) + " com a " + nome + ")." + (aceitas < moedas ? " Com " + std::to_string(aceitas) + " moedas você chegou ao máximo por doação." : ""));
+                     + escreverComSinal(pontos) + " " + nome + ")." + (aceitas < moedas ? " Com " + std::to_string(aceitas) + " moedas você chegou ao máximo por doação." : ""));
     const std::string faixa = mudarReputacao(vila, dono, pontos, "doou " + std::to_string(aceitas) + " moedas em " + vila.dados.mundo.nomeDoMapa(grupo.mapaAtual));
     if (!faixa.empty()) {
         linhas.push_back(faixa);

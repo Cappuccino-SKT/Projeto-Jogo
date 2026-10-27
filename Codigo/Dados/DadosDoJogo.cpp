@@ -137,6 +137,10 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "combate.json", problemas)) {
         dados.regrasDoCombate = lerArquivoDoCombate(*texto, problemas);
     }
+    // 21. A família e as dinastias (fase D2).
+    if (const auto texto = lerArquivoInteiro(pastaDosDados, "companheiros.json", problemas)) {
+        dados.regrasDaFamilia = lerArquivoDosCompanheiros(*texto, problemas);
+    }
     return dados;
 }
 

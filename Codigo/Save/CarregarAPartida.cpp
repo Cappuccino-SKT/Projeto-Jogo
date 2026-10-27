@@ -252,6 +252,8 @@ void restaurarAsFaccoes(SimulacaoDaVila& partida, const json& secao)
     if (faccoes.size() != catalogo.faccoes.size()) {
         throw RecusaDoSave("O save tem outra quantidade de facções.");
     }
+    estado.dinastias.resize(faccoes.size());
+    estado.lideres.resize(faccoes.size());
     for (std::size_t faccao = 0; faccao < faccoes.size(); ++faccao) {
         const json& entrada = faccoes[faccao];
         if (entrada.at("id").get<std::string>() != catalogo.faccoes[faccao].id) {
@@ -266,8 +268,40 @@ void restaurarAsFaccoes(SimulacaoDaVila& partida, const json& secao)
             estado.leisAtuais[faccao][lei] = static_cast<int>(opcao - opcoes.begin());
         }
         estado.bancoDaFaccao[faccao] = entrada.at("banco").get<int64_t>();
-        const json& lider = entrada.at("lider");
-        estado.lideres[faccao] = LiderDaFaccao{lider.at(0).get<int>(), lider.at(1).get<int>(), lider.at(2).get<int>(), lider.at(3).get<int>()};
+        // Fase D2: a dinastia; a assembleia copia a Agressividade e a Sociabilidade do líder dela.
+        const json& lidaDinastia = entrada.at("dinastia");
+        DinastiaDaFaccao& dinastia = estado.dinastias[faccao];
+        dinastia.membros.clear();
+        for (const json& lido : lidaDinastia.at("membros")) {
+            MembroDaDinastia membro;
+            membro.numero = lido.at("numero").get<int>();
+            membro.nome = lido.at("nome").get<std::string>();
+            membro.ehMulher = lido.at("mulher").get<bool>();
+            membro.idade = lido.at("idade").get<int>();
+            const json& tracos = lido.at("tracos");
+            membro.personalidade = {tracos.at(0).get<int>(), tracos.at(1).get<int>(), tracos.at(2).get<int>(), tracos.at(3).get<int>(), tracos.at(4).get<int>()};
+            const json& habilidades = lido.at("habilidades");
+            membro.carisma = habilidades.at(0).get<int>();
+            membro.corpoACorpo = habilidades.at(1).get<int>();
+            membro.especialista = habilidades.at(2).get<int>();
+            membro.ehNobre = lido.at("nobre").get<bool>();
+            const json& familia = lido.at("familia");
+            membro.conjuge = familia.at(0).get<int>();
+            membro.pai = familia.at(1).get<int>();
+            membro.mae = familia.at(2).get<int>();
+            membro.estacoesDeGravidez = lido.at("gravidez").get<int>();
+            membro.vidaProlongada = lido.at("vidaProlongada").get<bool>();
+            dinastia.membros.push_back(std::move(membro));
+        }
+        dinastia.numeroDoLider = lidaDinastia.at("lider").get<int>();
+        dinastia.proximoNumero = lidaDinastia.at("proximoNumero").get<int>();
+        if (dinastia.procurar(dinastia.numeroDoLider) == nullptr) {
+            throw RecusaDoSave("O save tem uma dinastia sem o líder.");
+        }
+        LiderDaFaccao& lider = estado.lideres[faccao];
+        lider.legitimidade = entrada.at("legitimidade").get<int>();
+        lider.agressividade = dinastia.lider().personalidade.agressividade;
+        lider.sociabilidade = dinastia.lider().personalidade.sociabilidade;
     }
     estado.mudancasParaAmanha.clear();
     for (const json& mudanca : secao.at("mudancasParaAmanha")) {

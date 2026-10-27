@@ -100,6 +100,8 @@ CatalogoDasCulturas lerArquivoDasCulturas(const std::string& textoDoArquivo, con
         cultura.habilidadesEmPontos = objeto.value("habilidades_em_pontos", std::map<std::string, int>{});
         cultura.ritoDeAdmissao = objeto.value("rito_de_admissao", std::string());
         cultura.sucessao = objeto.value("sucessao", std::string());
+        cultura.nomesDeHomem = objeto.value("nomes_de_homem", std::vector<std::string>{});
+        cultura.nomesDeMulher = objeto.value("nomes_de_mulher", std::vector<std::string>{});
         catalogo.culturas.push_back(std::move(cultura));
     }
     return catalogo;

@@ -1,0 +1,15 @@
+{
+  "familia": {
+    "gravidez_estacoes": 1,
+    "chance_de_filho_por_estacao_em_porcento": 10,
+    "chance_de_casar_por_estacao_em_porcento": 25,
+    "fertil_ate": 30
+  },
+  "dinastia": {
+    "nobres": 2,
+    "lider_casado_a_partir_de": 12,
+    "membros_no_maximo": 12,
+    "legitimidade_na_crise": 30,
+    "tracos_entre": [20, 80]
+  }
+}

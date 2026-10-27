@@ -44,7 +44,9 @@
       "manufaturado": -5
     },
     "rito_de_admissao": "combate",
-    "sucessao": "duelo"
+    "sucessao": "duelo",
+    "nomes_de_homem": ["Wei", "Jun", "Long", "Hao", "Bao", "Zhen", "Kang", "Lei"],
+    "nomes_de_mulher": ["Mei", "Lian", "Xiu", "Yun", "Hua", "Ling", "Jia", "Fen"]
   },
   {
     "id": "cultura.arcana",
@@ -95,7 +97,9 @@
       "bracal": -5
     },
     "rito_de_admissao": "teste_de_magia",
-    "sucessao": "merito"
+    "sucessao": "merito",
+    "nomes_de_homem": ["Ignatius", "Verus", "Sextus", "Albinus", "Corvinus", "Cassian", "Erasmus", "Magnus"],
+    "nomes_de_mulher": ["Prudentia", "Aurora", "Lucilla", "Minerva", "Sabina", "Vesta", "Celestina", "Seraphina"]
   },
   {
     "id": "cultura.autoritaria",
@@ -145,7 +149,9 @@
       "manufaturado": 5
     },
     "rito_de_admissao": "juramento",
-    "sucessao": "hereditaria"
+    "sucessao": "hereditaria",
+    "nomes_de_homem": ["Marcus", "Gaius", "Titus", "Decimus", "Valerius", "Maximus", "Lucian", "Drusus"],
+    "nomes_de_mulher": ["Julia", "Octavia", "Agrippina", "Cornelia", "Valeria", "Claudia", "Aemilia", "Flavia"]
   },
   {
     "id": "cultura.religiosa",
@@ -195,7 +201,9 @@
       "manufaturado": 5
     },
     "rito_de_admissao": "batismo",
-    "sucessao": "eleicao_do_clero"
+    "sucessao": "eleicao_do_clero",
+    "nomes_de_homem": ["Alexios", "Konstantinos", "Nikephoros", "Ioannes", "Basileios", "Demetrios", "Michael", "Theophilos"],
+    "nomes_de_mulher": ["Theodora", "Irene", "Zoe", "Anna", "Eudokia", "Helena", "Sophia", "Maria"]
   },
   {
     "id": "cultura.tecnocrata",
@@ -238,7 +246,9 @@
       "bracal": -5
     },
     "rito_de_admissao": "servico",
-    "sucessao": "merito"
+    "sucessao": "merito",
+    "nomes_de_homem": ["Arthur", "Edmund", "Albert", "Henry", "Charles", "William", "Frederick", "Thomas"],
+    "nomes_de_mulher": ["Victoria", "Charlotte", "Ada", "Eleanor", "Beatrice", "Florence", "Margaret", "Alice"]
   },
   {
     "id": "cultura.escravista",
@@ -288,6 +298,8 @@
       "bracal": 5
     },
     "rito_de_admissao": "compra",
-    "sucessao": "hereditaria"
+    "sucessao": "hereditaria",
+    "nomes_de_homem": ["Qadir", "Rashid", "Tariq", "Faris", "Idris", "Malik", "Nasir", "Harun"],
+    "nomes_de_mulher": ["Layla", "Samira", "Amira", "Zahra", "Nadia", "Farah", "Salma", "Rania"]
   }
 ]

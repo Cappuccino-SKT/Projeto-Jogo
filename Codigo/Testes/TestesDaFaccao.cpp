@@ -47,7 +47,7 @@ void testarAAssembleia(const DadosDoJogo& dados)
     std::vector<int> leis = catalogo.faccoes[static_cast<std::size_t>(arcana)].leisIniciais;
     std::vector<VotanteDaAssembleia> votantes{{"arcana", 60, 300, 4, true, 8}, {"arcana", 60, 100, 3, false, 15}, {"arcana", 60, 40, 2, false, 14},
                                               {"tecnocrata", 60, 15, 1, false, 20}};
-    LiderDaFaccao lider{12, 60, 40, 70};
+    LiderDaFaccao lider{60, 40, 70};
     const auto nuncaVeta = []() { return 99; };
     const int magia = catalogo.posicaoDaLei("magia");
     const ResultadoDaAssembleia noConselho = fazerAssembleia(catalogo, leis, votantes, "arcana", lider, nuncaVeta);
@@ -63,7 +63,7 @@ void testarAAssembleia(const DadosDoJogo& dados)
     // Com 3 cidades Tecnocratas, passa; o líder Arcano (moderado, 60 e 40) veta com 60% de chance.
     const std::vector<VotanteDaAssembleia> conquistadas{{"tecnocrata", 60, 100, 3, false, 1}, {"tecnocrata", 60, 100, 3, false, 2}, {"tecnocrata", 60, 100, 3, false, 3}};
     const ResultadoDaAssembleia vetada = fazerAssembleia(catalogo, leis, conquistadas, "arcana", lider, []() { return 59; });
-    LiderDaFaccao outro{12, 60, 40, 70};
+    LiderDaFaccao outro{60, 40, 70};
     const ResultadoDaAssembleia semVeto = fazerAssembleia(catalogo, leis, conquistadas, "arcana", outro, []() { return 60; });
     conferir(vetada.passou[0] && vetada.vetada[0] && lider.legitimidade == 65 && semVeto.passou[0] && !semVeto.vetada[0],
              "o veto: 60% de chance (59 veta, 60 não); o veto custa 5 de legitimidade");
@@ -83,11 +83,12 @@ void testarOMundo(const DadosDoJogo& dados)
                  && capitalGuerreira.vila.verbaDaCoroaPorEstacaoEmDecimos == 0 && vila.impostoDaCidadeEmPorcento == -1,
              "6 facções com Banco; a capital Guerreira com imposto de 10% e a verba da facção; a vila sem facção, com o do regras.json");
     // Rodadas HI7-1 e HI12: os líderes fixos do Ano 412 (a idade da história ÷ 2,5, de 8 a 30).
-    const LiderDaFaccao& tianFeng = vila.faccoes.lideres[static_cast<std::size_t>(guerreira)];
-    const LiderDaFaccao& yasmin = vila.faccoes.lideres[static_cast<std::size_t>(escravista)];
-    const LiderDaFaccao& cassius = vila.faccoes.lideres[static_cast<std::size_t>(faccaoPeloNome(dados, "arcana"))];
-    conferir(dados.faccoes.faccoes[static_cast<std::size_t>(guerreira)].lider.nome == "Grande Lobo Tian Feng" && tianFeng.idade == 20 && tianFeng.agressividade == 90
-                 && yasmin.idade == 14 && yasmin.sociabilidade == 75 && cassius.idade == 30,
+    const MembroDaDinastia& tianFeng = vila.faccoes.dinastias[static_cast<std::size_t>(guerreira)].lider();
+    const MembroDaDinastia& yasmin = vila.faccoes.dinastias[static_cast<std::size_t>(escravista)].lider();
+    const MembroDaDinastia& cassius = vila.faccoes.dinastias[static_cast<std::size_t>(faccaoPeloNome(dados, "arcana"))].lider();
+    conferir(tianFeng.nome == "Grande Lobo Tian Feng" && tianFeng.idade == 20 && vila.faccoes.lideres[static_cast<std::size_t>(guerreira)].agressividade == 90
+                 && yasmin.idade == 14 && yasmin.ehMulher && vila.faccoes.lideres[static_cast<std::size_t>(escravista)].sociabilidade == 75 && cassius.idade == 30
+                 && cassius.vidaProlongada,
              "os líderes fixos: Tian Feng com 20 anos de jogo e Agressividade 90; Yasmin com 14; Cassius Varro (131) no teto de 30");
     const SimulacaoDaVila* escravistaCapital = nullptr;
     for (const auto& cidade : vila.outrasCidades) {

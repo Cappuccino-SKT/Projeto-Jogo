@@ -26,7 +26,8 @@ struct RegrasDaReputacao {
     std::vector<FaixaDaReputacao> faixas;
     int voltaPorEstacao = 2;
     std::map<std::string, int> acoes;              // "venceu_bando_no_territorio": 1
-    std::map<std::string, std::string> nomesDasFaccoes;  // "escravista": "Escravista"
+    std::map<std::string, std::string> nomesDasFaccoes;  // "escravista": "Sultanato de Zahran"
+    std::map<std::string, std::string> artigosDasFaccoes;  // "escravista": "o"; sem entrada, "a"
     int mudancasNoPorQue = 5;
 
     int acao(const std::string& nome) const;
@@ -57,6 +58,10 @@ struct EstadoDaReputacao {
 std::vector<std::string> donosDaReputacao(const MundoDoJogo& mundo);
 // O nome na tela: "Escravista", "Vila Livre do Norte".
 std::string nomeDoDonoDaReputacao(const RegrasDaReputacao& regras, const std::string& dono);
+// O nome com o artigo, junto da preposição: ("escravista", "de") → "do Sultanato de Zahran";
+// ("guerreira", "por") → "pelos Clãs de Tian-Lang"; sem preposição, "os Clãs de Tian-Lang".
+// Com "maiuscula", a primeira letra sai maiúscula (começo da frase).
+std::string nomeDoDonoComArtigo(const RegrasDaReputacao& regras, const std::string& dono, const std::string& preposicao = "", bool maiuscula = false);
 // Regra 4.1 (RE1-6): sem estilo de início, a base é 0 e o valor começa na base.
 void montarAReputacaoDaPartidaNova(EstadoDaReputacao& reputacao, const MundoDoJogo& mundo);
 

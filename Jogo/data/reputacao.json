@@ -22,8 +22,9 @@
   },
   "base_por_afinidade": { "mesma": 20, "afim": 10, "neutra": 0, "hostil": -15 },
   "nomes_das_faccoes": {
-    "guerreira": "Guerreira", "arcana": "Arcana", "autoritaria": "Autoritária",
-    "escravista": "Escravista", "religiosa": "Religiosa", "tecnocrata": "Tecnocrata"
+    "guerreira": "Clãs de Tian-Lang", "arcana": "Ordem de Custodum", "autoritaria": "Coroa de Valdren",
+    "escravista": "Sultanato de Zahran", "religiosa": "Teocracia de Theodoria", "tecnocrata": "Comunidade de Ashmoor"
   },
+  "artigos_das_faccoes": { "guerreira": "os", "escravista": "o" },
   "mudancas_no_por_que": 5
 }

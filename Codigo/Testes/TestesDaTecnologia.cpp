@@ -81,7 +81,7 @@ void testarOMundo(const DadosDoJogo& dados)
     somarPontosEConcluirTecnologias(vila);
     conferir(estado.temATecnologia[static_cast<std::size_t>(tecnocrata)][1] && estado.pontosAcumulados[static_cast<std::size_t>(tecnocrata)] == 30
                  && estado.projetoAtual[static_cast<std::size_t>(tecnocrata)] == 2 && vila.noticias.ativas.size() == noticiasAntes + 1
-                 && vila.noticias.ativas.back().titulo == "A Tecnocrata descobriu Ferramentas melhores",
+                 && vila.noticias.ativas.back().titulo == "A Comunidade de Ashmoor descobriu Ferramentas melhores",
              "130 pontos completam Ferramentas melhores: sobram 30, nasce a notícia, o próximo é Andaimes");
     // Com a Tecnocrata tendo Ferramentas, a Escravista paga 90 por ela.
     conferir(custoAtualDaTecnologia(estado, dados, escravista, 1) == 90, "a difusão no mundo: a Escravista paga 90");

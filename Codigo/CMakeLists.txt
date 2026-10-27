@@ -37,6 +37,7 @@ add_library(regras_do_jogo STATIC
     Reputacao/Reputacao.cpp
     Tecnologia/Tecnologia.cpp
     Faccao/Faccao.cpp
+    Faccao/Dinastia.cpp
     Cultura/Cultura.cpp
     Crime/Crime.cpp
     Religiao/Religiao.cpp

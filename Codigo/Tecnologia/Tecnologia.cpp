@@ -147,7 +147,7 @@ std::string nomeDoPesquisador(const DadosDoJogo& dados, int pesquisador)
     if (pesquisador < 0 || pesquisador >= static_cast<int>(faccoes.size())) {
         return "Sua vila";
     }
-    return "A " + nomeDoDonoDaReputacao(dados.regrasDaReputacao, faccoes[static_cast<std::size_t>(pesquisador)]);
+    return nomeDoDonoComArtigo(dados.regrasDaReputacao, faccoes[static_cast<std::size_t>(pesquisador)], "", true);
 }
 
 int faccoesQueTem(const EstadoDaTecnologia& estado, const DadosDoJogo& dados, int tecnologia)

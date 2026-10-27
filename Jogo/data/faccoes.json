@@ -119,7 +119,7 @@
     {
       "id": "faccao.arcana",
       "cultura": "arcana",
-      "lider": {"nome": "Grão-Mestre Cassius Varro", "idade": 131, "coragem": 50, "ganancia": 75, "agressividade": 75, "sociabilidade": 50, "lealdade": 50},
+      "lider": {"nome": "Grão-Mestre Cassius Varro", "vida_prolongada": true, "idade": 131, "coragem": 50, "ganancia": 75, "agressividade": 75, "sociabilidade": 50, "lealdade": 50},
       "capital": [
         8,
         1
@@ -144,7 +144,7 @@
     {
       "id": "faccao.autoritaria",
       "cultura": "autoritaria",
-      "lider": {"nome": "Regente Lívia Valdren", "idade": 54, "coragem": 75, "ganancia": 50, "agressividade": 50, "sociabilidade": 25, "lealdade": 75},
+      "lider": {"nome": "Regente Lívia Valdren", "mulher": true, "idade": 54, "coragem": 75, "ganancia": 50, "agressividade": 50, "sociabilidade": 25, "lealdade": 75},
       "capital": [
         1,
         4
@@ -224,7 +224,7 @@
     {
       "id": "faccao.escravista",
       "cultura": "escravista",
-      "lider": {"nome": "Sultana Yasmin bint Qadir", "idade": 35, "coragem": 50, "ganancia": 75, "agressividade": 50, "sociabilidade": 75, "lealdade": 25},
+      "lider": {"nome": "Sultana Yasmin bint Qadir", "mulher": true, "idade": 35, "coragem": 50, "ganancia": 75, "agressividade": 50, "sociabilidade": 75, "lealdade": 25},
       "capital": [
         8,
         6
