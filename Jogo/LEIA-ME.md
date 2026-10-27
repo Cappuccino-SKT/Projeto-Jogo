@@ -724,8 +724,27 @@ O que entrou ([[Ficha Logica/Companheiros|ficha dos Companheiros]], regras 4.6 e
 - **Vida prolongada:** Cassius não envelhece enquanto a Torre Arcana estiver de pé (até a Magia, D4, a Torre conta sempre de pé).
 - **Os nomes da história na tela** (Coroa de Valdren, Clãs de Tian-Lang...), com o artigo certo (`reputacao.json`), e 8 nomes de homem e 8 de mulher por cultura (`culturas.json`).
 - Arquivo novo `data/companheiros.json` (os blocos `familia` e `dinastia`). **Save versão 15.**
-- **Ficou para a parte 2:** o grupo do jogador (recrutar, salário, Opinião, cargos), o casamento e a sucessão do jogador e o diálogo.
+- A parte 2 (o grupo do jogador) está logo abaixo.
 
 **Verificado pelo assistente:** os testes passam (604 conferências). Em 1.000 mundos e 20 anos, 1,2% das mortes de líder ficam sem herdeiro adulto (o limite da ficha é 10%).
 
 Como testar: `testes_do_codigo` imprime a linha "dinastias em 1.000 mundos". No jogo, a dica do nome da facção mostra o líder e o tamanho da dinastia.
+
+### Marco D2, parte 2: o grupo do jogador (2026-10-27, programado com o Opus a pedido do autor)
+
+O que entrou ([[Ficha Logica/Companheiros|ficha dos Companheiros]], regras 4.1 a 4.4, 4.8 e 4.9):
+
+- **A Taverna:** nas cidades de nível 2 em diante, com 1, 2 ou 4 recrutáveis que mudam no dia 1 de cada estação (foco Combate, Comércio ou Ofício; com Renome 0, só os comuns).
+- **Recrutar:** 100 moedas de entrada e 50 por estação. O grupo leva até 4; até 10 vinculados (os outros esperam na cidade). A entrada e o salário vão para a classe Civil da cidade de origem.
+- **O salário no dia 1 da estação:** primeiro com o dinheiro do grupo, depois com o da vila. Sem dinheiro, a Opinião cai; com 2 estações sem salário, ele vai embora.
+- **A Opinião** (vitória junto, salário, presente, aumento recusado; as quedas pesam menos em quem tem Lealdade alta) e **a Felicidade** (salário, fome no grupo, mortes). Com Felicidade 0 ele sai (com Opinião +60, só depois de 1 estação); com Opinião −20, pede aumento; com −60, pode desertar.
+- **No combate:** cada companheiro luta com a habilidade e a Coragem dele (os de Combate, com o kit de guarda).
+- **O casamento** (Opinião +60; +20 de reputação com a facção da cidade dele), **os filhos** (10% por estação; o jogador escolhe a educação; aos 5 anos o filho entra na família) e **o sucessor** (o filho adulto mais velho; senão, o escolhido com Opinião +60 ou o de maior Opinião).
+- **O diálogo:** a fórmula da chance (55% no exemplo do documento) e o presente.
+- **Na tela:** o botão **Companheiros** abre a Taverna, o grupo, a família e quem assume se o jogador morrer.
+- **Save versão 15** (o mesmo da parte 1, com os companheiros).
+- **Ficou para depois:** os cargos (o jogador ainda não tem caravana, e o gerente espera a produção ligar o cargo), o costume do casamento de cada cultura, a morte do jogador (ainda não existe) e as ações de diálogo com os NPCs Importantes das cidades (ainda não há donos de loja Importantes). Conversar e perguntar preços já acontecem sozinhos ao chegar na cidade.
+
+**Verificado pelo assistente:** os testes passam (612 conferências).
+
+Como testar: viaje até uma cidade de nível 2 ou mais, abra **Companheiros** e recrute. No dia 1 da estação seguinte, o salário sai do dinheiro do grupo.

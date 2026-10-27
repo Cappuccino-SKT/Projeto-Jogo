@@ -7,7 +7,10 @@
 #include "ConferenciaDosTestes.h"
 #include "Cultura/Cultura.h"
 #include "Dados/DadosDoJogo.h"
+#include "Companheiros/Companheiros.h"
 #include "Faccao/Dinastia.h"
+#include "Viagem/Viagem.h"
+#include "Vila/SimulacaoDaVila.h"
 #include "Tempo/SorteioComSemente.h"
 
 namespace {
@@ -115,6 +118,85 @@ void testarAsDinastiasEm1000Mundos(const DadosDoJogo& dados)
     conferir(mortesDeLider > 0 && crises * 10 < mortesDeLider, "teste 4: em 1.000 mundos, menos de 10% das mortes de líder ficam sem herdeiro adulto");
 }
 
+
+// Testes 1 e o presente: a fórmula do diálogo e da Opinião.
+void testarODialogo(const DadosDoJogo& dados)
+{
+    const RegrasDosCompanheiros& regras = dados.regrasDosCompanheiros;
+    Personalidade gananciosa;
+    gananciosa.ganancia = 80;
+    conferir(chanceDaAcaoDeDialogo(AcaoDeDialogo::Persuadir, 70, 20, gananciosa, regras) == 55, "teste 1: Carisma 70, Opinião +20, Ganância 80: 50 + 10 + 5 − 10 = 55%");
+    conferir(chanceDaAcaoDeDialogo(AcaoDeDialogo::Subornar, 100, 100, gananciosa, regras) == 95, "a chance fica entre 5% e 95%");
+    conferir(opiniaoDoPresente(100, 80, regras) == 6 && opiniaoDoPresente(1000, 80, regras) == 10, "o presente: 100 moedas a quem tem Ganância 80 dão +6; o teto é +10");
+    Companheiro fiel;
+    fiel.personalidade.lealdade = 80;
+    fiel.opiniao = 20;
+    mudarOpiniao(fiel, -10);
+    conferir(fiel.opiniao == 13, "teste 2: com Lealdade 80, o salário atrasado tira 7 (10 × 70%)");
+}
+
+// Testes 2 e 3 numa partida de verdade: os limites, a entrada e o salário.
+void testarOGrupo(const DadosDoJogo& dados)
+{
+    SimulacaoDaVila vila(dados, RegrasDoTempo{});
+    const int mapa = vila.outrasCidades.front()->numeroDoMapaDaCidade;
+    EntidadeEmTransito& grupo = vila.viagem.grupoDoJogador;
+    grupo.mapaAtual = mapa;
+    grupo.dinheiroEmDecimos = 100000;
+    std::vector<Companheiro>& naTaverna = vila.companheiros.recrutaveisPorMapa[static_cast<std::size_t>(mapa - 1)];
+    naTaverna.clear();
+    for (int numero = 100; numero < 111; ++numero) {
+        Companheiro recrutavel;
+        recrutavel.numero = numero;
+        recrutavel.nome = "R" + std::to_string(numero);
+        recrutavel.mapaDeOrigem = mapa;
+        recrutavel.personalidade.lealdade = 80;
+        naTaverna.push_back(recrutavel);
+    }
+    std::vector<std::string> linhas;
+    for (int numero = 100; numero < 110; ++numero) {
+        fazerAcaoComOCompanheiro(vila, AcaoComOCompanheiro::Recrutar, numero, 0, linhas);
+    }
+    const std::string recusa = fazerAcaoComOCompanheiro(vila, AcaoComOCompanheiro::Recrutar, 110, 0, linhas);
+    const EstadoDosCompanheiros& estado = vila.companheiros;
+    conferir(estado.vinculados.size() == 10 && estado.vinculados[3].noGrupo && !estado.vinculados[4].noGrupo && !recusa.empty() && grupo.pessoas == 5
+                 && grupo.lutadoresDoGrupo.size() == 4 && ladoDoGrupo(dados.regrasDoCombate, grupo).size() == 5,
+             "teste 3: com Renome 0, o 5º recruta fica fora do grupo e o 11º não entra; o grupo luta com 5");
+    conferir(grupo.dinheiroEmDecimos == 100000 - 10 * 1000, "a entrada: 100 moedas por recruta comum");
+
+    // Teste 2: sem dinheiro, a 1ª estação atrasa e a 2ª manda todos embora.
+    grupo.dinheiroEmDecimos = 0;
+    vila.dinheiro.dinheiroDoJogador = 0;
+    pagarVinculados(vila, linhas);
+    const bool atrasouUma = vila.companheiros.vinculados.size() == 10 && vila.companheiros.vinculados[0].opiniao == 13;
+    pagarVinculados(vila, linhas);
+    conferir(atrasouUma && vila.companheiros.vinculados.empty(), "teste 2: sem dinheiro por 2 estações, os companheiros saem");
+}
+
+// Regra 4.8, passo 3: quem assume quando o jogador morre.
+void testarOSucessorDoJogador()
+{
+    EstadoDosCompanheiros estado;
+    Companheiro amigo;
+    amigo.numero = 1;
+    amigo.opiniao = 70;
+    Companheiro outro;
+    outro.numero = 2;
+    outro.opiniao = 40;
+    estado.vinculados = {amigo, outro};
+    const bool peloMaiorOpiniao = escolherSucessorDoJogador(estado) == 1;
+    estado.sucessorEscolhido = 2;  // com Opinião 40, a escolha não vale
+    const bool escolhaSemOpiniao = escolherSucessorDoJogador(estado) == 1;
+    Companheiro filho;
+    filho.numero = 3;
+    filho.idade = 6;
+    filho.ehDaFamilia = true;
+    filho.ehFilhoDoJogador = true;
+    filho.opiniao = 0;
+    estado.vinculados.push_back(filho);
+    conferir(peloMaiorOpiniao && escolhaSemOpiniao && escolherSucessorDoJogador(estado) == 3 && escolherSucessorDoJogador(EstadoDosCompanheiros{}) == -1,
+             "o sucessor do jogador: o filho adulto; sem filho, o de maior Opinião; sem ninguém, fim da partida");
+}
 }  // namespace
 
 void testarCompanheiros()
@@ -125,4 +207,7 @@ void testarCompanheiros()
     testarOHerdeiro();
     testarOComecoEAVidaProlongada(dados);
     testarAsDinastiasEm1000Mundos(dados);
+    testarODialogo(dados);
+    testarOGrupo(dados);
+    testarOSucessorDoJogador();
 }

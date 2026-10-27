@@ -288,6 +288,9 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     if (janelaDasFaccoesAberta) {
         desenharAsFaccoes(simulacao, larguraDaTela, alturaDaTela);
     }
+    if (janelaDosCompanheirosAberta) {
+        desenharOsCompanheiros(simulacao, larguraDaTela, alturaDaTela);
+    }
     if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
         desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
@@ -382,6 +385,10 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     ImGui::SameLine();
     if (ImGui::Button("Facções")) {
         janelaDasFaccoesAberta = !janelaDasFaccoesAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Companheiros")) {
+        janelaDosCompanheirosAberta = !janelaDosCompanheirosAberta;
     }
     const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
     // Fase C3 (Crime, 4.6): preso, o grupo espera ou paga a fiança.
@@ -990,6 +997,155 @@ ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
 }
 
 }  // namespace
+
+// Fase D2 (Companheiros): a Taverna, o grupo, a família e o sucessor.
+void InterfaceDoJogador::desenharOsCompanheiros(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const DadosDoJogo& dados = simulacao.dados;
+    const RegrasDosCompanheiros& regras = dados.regrasDosCompanheiros;
+    const EstadoDosCompanheiros& estado = simulacao.companheiros;
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    const auto pedir = [&](AcaoComOCompanheiro acao, int numero, int valor) { simulacao.pedidos.acrescentar(PedidoDoCompanheiro{acao, numero, valor}); };
+    ImGui::SetNextWindowSize(ImVec2(760, 460), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Companheiros", &janelaDosCompanheirosAberta)) {
+        ImGui::End();
+        return;
+    }
+    int noGrupo = 0;
+    int custoPorEstacao = 0;
+    for (const Companheiro& companheiro : estado.vinculados) {
+        noGrupo += companheiro.noGrupo ? 1 : 0;
+        custoPorEstacao += companheiro.ehDaFamilia ? 0 : companheiro.salarioPorEstacaoEmDecimos;
+    }
+    ImGui::Text("No grupo: %d de %d. Vinculados: %d de %d (a família não conta). Salários: %s moedas por estação.", noGrupo, limiteDoGrupo(regras, 0),
+                vinculadosQueContam(estado), limiteDosVinculados(regras, 0), escreverDinheiroEmMoedas(custoPorEstacao).c_str());
+
+    // A Taverna da cidade onde o grupo está parado (4.1).
+    ImGui::SeparatorText("Taverna");
+    const bool temTaverna = !grupo.emTransito && grupo.mapaAtual >= 1 && grupo.mapaAtual <= static_cast<int>(estado.recrutaveisPorMapa.size())
+                            && !estado.recrutaveisPorMapa[static_cast<std::size_t>(grupo.mapaAtual - 1)].empty();
+    if (!temTaverna) {
+        ImGui::TextWrapped("Ninguém para recrutar aqui. O grupo precisa estar parado numa cidade de nível 2 ou mais; os recrutáveis mudam no dia 1 de cada estação.");
+    } else if (ImGui::BeginTable("##taverna", 6, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+        ImGui::TableSetupColumn("Nome");
+        ImGui::TableSetupColumn("Foco");
+        ImGui::TableSetupColumn("Qualidade");
+        ImGui::TableSetupColumn("Habilidade");
+        ImGui::TableSetupColumn("Entrada e salário");
+        ImGui::TableSetupColumn("");
+        ImGui::TableHeadersRow();
+        for (const Companheiro& recrutavel : estado.recrutaveisPorMapa[static_cast<std::size_t>(grupo.mapaAtual - 1)]) {
+            const QualidadeDoCompanheiro* qualidade =
+                recrutavel.qualidade < static_cast<int>(regras.qualidades.size()) ? &regras.qualidades[static_cast<std::size_t>(recrutavel.qualidade)] : nullptr;
+            const int principal = recrutavel.foco == FocoDoCompanheiro::Combate ? recrutavel.corpoACorpo
+                                  : recrutavel.foco == FocoDoCompanheiro::Comercio ? recrutavel.carisma
+                                                                                   : recrutavel.especialista;
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            ImGui::Text("%s (%d anos)", recrutavel.nome.c_str(), recrutavel.idade);
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(nomeDoFoco(recrutavel.foco).c_str());
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(qualidade != nullptr ? qualidade->id.c_str() : "?");
+            ImGui::TableNextColumn();
+            ImGui::Text("%d", principal);
+            ImGui::TableNextColumn();
+            ImGui::Text("%d + %d por estação", qualidade != nullptr ? qualidade->entradaEmMoedas : 0, recrutavel.salarioPorEstacaoEmDecimos / 10);
+            ImGui::TableNextColumn();
+            ImGui::PushID(recrutavel.numero);
+            if (ImGui::SmallButton("Recrutar")) {
+                pedir(AcaoComOCompanheiro::Recrutar, recrutavel.numero, 0);
+            }
+            ImGui::PopID();
+        }
+        ImGui::EndTable();
+    }
+
+    // Os vinculados (4.2 a 4.4) e a família (4.8).
+    ImGui::SeparatorText("Vinculados e família");
+    if (estado.vinculados.empty()) {
+        ImGui::TextUnformatted("Ninguém ainda.");
+    } else if (ImGui::BeginTable("##vinculados", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+        ImGui::TableSetupColumn("Nome");
+        ImGui::TableSetupColumn("Opinião");
+        ImGui::TableSetupColumn("Felicidade");
+        ImGui::TableSetupColumn("Onde");
+        ImGui::TableSetupColumn("Ações");
+        ImGui::TableHeadersRow();
+        for (const Companheiro& companheiro : estado.vinculados) {
+            ImGui::TableNextRow();
+            ImGui::TableNextColumn();
+            const char* papel = companheiro.numero == estado.numeroDoConjuge ? " (cônjuge)" : companheiro.ehFilhoDoJogador ? " (filho)" : "";
+            ImGui::Text("%s%s, %s", companheiro.nome.c_str(), papel, nomeDoFoco(companheiro.foco).c_str());
+            if (ImGui::IsItemHovered()) {
+                const Personalidade& tracos = companheiro.personalidade;
+                ImGui::SetTooltip("%d anos. Coragem %d, Ganância %d, Agressividade %d, Sociabilidade %d, Lealdade %d.\nCarisma %d, Corpo a Corpo %d, Especialista %d. Salário %s.",
+                                  companheiro.idade, tracos.coragem, tracos.ganancia, tracos.agressividade, tracos.sociabilidade, tracos.lealdade, companheiro.carisma,
+                                  companheiro.corpoACorpo, companheiro.especialista, escreverDinheiroEmMoedas(companheiro.salarioPorEstacaoEmDecimos).c_str());
+            }
+            ImGui::TableNextColumn();
+            ImGui::Text("%+d", companheiro.opiniao);
+            ImGui::TableNextColumn();
+            ImGui::Text("%d%s", companheiro.felicidade, companheiro.estacoesSemSalario > 0 ? " (salário atrasado)" : "");
+            ImGui::TableNextColumn();
+            ImGui::TextUnformatted(companheiro.noGrupo ? "no grupo" : dados.mundo.nomeDoMapa(companheiro.mapaOndeEsta).c_str());
+            ImGui::TableNextColumn();
+            ImGui::PushID(companheiro.numero);
+            if (ImGui::SmallButton(companheiro.noGrupo ? "Deixar aqui" : "Chamar")) {
+                pedir(companheiro.noGrupo ? AcaoComOCompanheiro::DeixarNaCidade : AcaoComOCompanheiro::ChamarParaOGrupo, companheiro.numero, 0);
+            }
+            ImGui::SameLine();
+            if (ImGui::SmallButton("Presente (20)")) {
+                pedir(AcaoComOCompanheiro::Presentear, companheiro.numero, 20);
+            }
+            if (companheiro.pediuAumento) {
+                ImGui::SameLine();
+                if (ImGui::SmallButton("Dar o aumento")) {
+                    pedir(AcaoComOCompanheiro::AceitarOAumento, companheiro.numero, 0);
+                }
+                ImGui::SameLine();
+                if (ImGui::SmallButton("Recusar")) {
+                    pedir(AcaoComOCompanheiro::RecusarOAumento, companheiro.numero, 0);
+                }
+            }
+            if (companheiro.opiniao >= 60 && estado.numeroDoConjuge < 0 && !companheiro.ehDaFamilia) {
+                ImGui::SameLine();
+                if (ImGui::SmallButton("Pedir em casamento")) {
+                    pedir(AcaoComOCompanheiro::PedirEmCasamento, companheiro.numero, 0);
+                }
+            }
+            if (companheiro.opiniao >= 60 && estado.sucessorEscolhido != companheiro.numero) {
+                ImGui::SameLine();
+                if (ImGui::SmallButton("Sucessor")) {
+                    pedir(AcaoComOCompanheiro::EscolherOSucessor, companheiro.numero, 0);
+                }
+            }
+            if (!companheiro.ehDaFamilia) {
+                ImGui::SameLine();
+                if (ImGui::SmallButton("Dispensar")) {
+                    pedir(AcaoComOCompanheiro::Dispensar, companheiro.numero, 0);
+                }
+            }
+            ImGui::PopID();
+        }
+        ImGui::EndTable();
+    }
+    // Os filhos (crianças): o foco da educação.
+    static const char* const focosDaEducacao[] = {"Combate", "Comércio", "Ofício", "Magia", "Governo"};
+    for (const FilhoDoJogador& filho : estado.filhos) {
+        ImGui::PushID(filho.numero);
+        int foco = static_cast<int>(filho.focoDeEducacao);
+        ImGui::SetNextItemWidth(140);
+        if (ImGui::Combo((filho.nome + " (" + std::to_string(filho.idade) + " anos): educação").c_str(), &foco, focosDaEducacao, 5)) {
+            pedir(AcaoComOCompanheiro::EscolherOFocoDoFilho, filho.numero, foco);
+        }
+        ImGui::PopID();
+    }
+    const Companheiro* sucessor = estado.procurar(escolherSucessorDoJogador(estado));
+    ImGui::Text("Se você morrer, quem assume: %s.", sucessor != nullptr ? sucessor->nome.c_str() : "ninguém (fim da partida)");
+    ImGui::End();
+}
 
 void InterfaceDoJogador::desenharAsFaccoes(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
 {

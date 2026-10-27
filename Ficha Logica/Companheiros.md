@@ -208,6 +208,8 @@ Quando o líder morre, o herdeiro sai da regra de sucessão da cultura:
 - O casamento entre dinastias como evento diplomático (Diplomacia, D5).
 - A guerra civil (Guerra, D7).
 - A Força, a Inteligência e a Percepção como atributos.
+- **No código (D2, parte 2), [Proposta]:** o salário sai primeiro do dinheiro do grupo e depois do da vila; o filho adulto começa com Opinião +60 e a habilidade do foco em 50 (Magia vai para o Especialista até a Magia, D4); o aumento não respondido até a estação seguinte conta como recusado; o companheiro fora do grupo espera na cidade onde ficou.
+- **Ficou para depois:** os cargos (sem caravana do jogador ainda), o costume do casamento, a morte do jogador e o diálogo com os Importantes das cidades.
 
 ## 10. Simulação de mesa
 

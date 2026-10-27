@@ -32,6 +32,7 @@
 #include "Clima/ClimaDaVila.h"
 #include "Viagem/ViagemDaVila.h"
 #include "Comercio/CaravanaDaCidade.h"
+#include "Companheiros/Companheiros.h"
 
 // Os eventos sorteiam com a sequência 2 (ficha dos Eventos): um NPC a mais não muda os eventos.
 constexpr uint64_t sequenciaDoSorteioDosEventos = 2;
@@ -142,6 +143,8 @@ public:
     EstadoDaReligiaoDaCidade religiao;
     EfeitosDaReligiaoNaCidade efeitosDaReligiao;
     EstadoDaReligiaoDoJogador religiaoDoJogador;
+    // Fase D2 (Companheiros): só na vila, o grupo, a família e o sucessor do jogador.
+    EstadoDosCompanheiros companheiros;
     // O número do mapa desta cidade no mundo (a vila: o mapa da vila).
     int numeroDoMapaNoMundo() const { return lodDoMapa == 2 ? numeroDoMapaDaCidade : dados.mundo.mapaDaVila; }
     // O clima de hoje de cada região (a vila sorteia; as outras cidades recebem uma cópia).

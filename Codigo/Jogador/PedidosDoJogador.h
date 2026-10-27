@@ -13,6 +13,7 @@
 #include "Producao/OrdemDoJogador.h"
 #include "Producao/ProducaoDaVila.h"
 #include "Viagem/Viagem.h"
+#include "Companheiros/Companheiros.h"
 
 struct PedidoTrocarAFilaDeOrdens {
     int indiceDaConstrucao = 0;
@@ -95,10 +96,17 @@ struct PedidoDoarNaCidade {
     int moedas = 0;
 };
 
+// Fase D2 (Companheiros): uma ação com um companheiro ("numero"); "valor": as moedas do presente ou o foco do filho.
+struct PedidoDoCompanheiro {
+    AcaoComOCompanheiro acao = AcaoComOCompanheiro::Recrutar;
+    int numero = 0;
+    int valor = 0;
+};
+
 using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
                                      PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
                                      PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance,
-                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade, PedidoDoarNaCidade, PedidoResolverRevista, PedidoPagarFianca, PedidoPeregrinacao>;
+                                     PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade, PedidoDoarNaCidade, PedidoResolverRevista, PedidoPagarFianca, PedidoPeregrinacao, PedidoDoCompanheiro>;
 
 class FilaDePedidosDoJogador {
 public:
