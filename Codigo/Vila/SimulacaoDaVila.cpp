@@ -67,6 +67,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     // Fase C1: as facções (as leis, o Banco da Facção e o líder).
     montarAsFaccoesDaPartidaNova(*this, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     atualizarAsCidadesPelaReligiao(*this);  // fase C4
+    montarOsCompanheirosDaPartidaNova(*this);  // fase D2
     // Fase B5: a pesquisa do mundo (os marcos sorteados uma vez) e as travas de cada cidade.
     montarATecnologiaDaPartidaNova(tecnologia, dados, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     atualizarAsTravasDasCidades(*this);
@@ -255,10 +256,17 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
             } else if (venceuALuta) {
+                anotarAVitoriaDoGrupo(*this);  // fase D2: a Opinião dos companheiros
                 const std::string faixa = anotarOBandoVencido(*this);
                 if (!faixa.empty()) {
                     linhas.push_back(faixa);
                 }
+            }
+        } else if (const auto* companheiro = std::get_if<PedidoDoCompanheiro>(&pedido)) {
+            // Fase D2 (Companheiros): recrutar, presentear, casar e o resto.
+            const std::string motivo = fazerAcaoComOCompanheiro(*this, companheiro->acao, companheiro->numero, companheiro->valor, linhas);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
             }
         } else if (const auto* comercio = std::get_if<PedidoComercioNaCidade>(&pedido)) {
             const std::string motivo = comerciarNaCidadeDoGrupo(*this, comercio->numeroDoItem, comercio->quantidade, comercio->comprar, linhas);
@@ -374,6 +382,9 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         // Fase C4 (Religião): os festivais, a assimilação, a Bênção e o que a fé muda em cada cidade.
         const std::vector<std::string> linhasDaReligiao = rodarAReligiaoNoDiaNovo(*this);
         linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaReligiao.begin(), linhasDaReligiao.end());
+        // Fase D2 (Companheiros): o salário, a Opinião, a Felicidade, os recrutáveis e a família.
+        const std::vector<std::string> linhasDosCompanheiros = rodarOsCompanheirosNoDiaNovo(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDosCompanheiros.begin(), linhasDosCompanheiros.end());
     }
 
     // 6. As outras cidades (fase B1b), depois da vila e na ordem do número do mapa. Cada

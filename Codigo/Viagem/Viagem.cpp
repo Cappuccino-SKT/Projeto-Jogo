@@ -253,8 +253,17 @@ PassoDaEntidade andarUmTick(EntidadeEmTransito& entidade, const MundoDoJogo& mun
 
 std::vector<Combatente> ladoDoGrupo(const RegrasDoCombate& combate, const EntidadeEmTransito& entidade)
 {
-    std::vector<Combatente> lado = ladoDoKit(combate, "civil", std::max(0, entidade.pessoas - 1), entidade.vidaEmPorcento);
-    lado.insert(lado.begin(), combatenteDoKit(combate, "jogador", entidade.vidaEmPorcento));
+    // D2: os companheiros lutam com o kit, a habilidade e a Coragem deles; o resto do grupo, como civis.
+    std::vector<Combatente> lado{combatenteDoKit(combate, "jogador", entidade.vidaEmPorcento)};
+    for (const LutadorDoGrupo& lutador : entidade.lutadoresDoGrupo) {
+        Combatente companheiro = combatenteDoKit(combate, lutador.kit, entidade.vidaEmPorcento);
+        companheiro.habilidadeEmCentesimos = lutador.habilidadeEmCentesimos;
+        companheiro.coragem = lutador.coragem;
+        lado.push_back(companheiro);
+    }
+    const std::vector<Combatente> civis = ladoDoKit(combate, "civil", std::max(0, entidade.pessoas - 1 - static_cast<int>(entidade.lutadoresDoGrupo.size())),
+                                                    entidade.vidaEmPorcento);
+    lado.insert(lado.end(), civis.begin(), civis.end());
     return lado;
 }
 

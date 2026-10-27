@@ -29,6 +29,7 @@
 #include "Crime/Crime.h"
 #include "Religiao/Religiao.h"
 #include "Combate/Combate.h"
+#include "Companheiros/Companheiros.h"
 
 struct DadosDoJogo {
     TabelaDeTextos tabelaDeTextos;
@@ -54,6 +55,7 @@ struct DadosDoJogo {
     RegrasDaReligiao regrasDaReligiao;              // fase C4
     RegrasDoCombate regrasDoCombate;                // fase D1
     RegrasDaFamilia regrasDaFamilia;                // fase D2 (o companheiros.json)
+    RegrasDosCompanheiros regrasDosCompanheiros;    // fase D2 (o mesmo arquivo)
     ListaDeProblemasDosDados listaDeProblemas;
 
     bool dadosEstaoProntos() const { return !listaDeProblemas.temErro(); }

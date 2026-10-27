@@ -243,6 +243,65 @@ void restaurarOCrime(SimulacaoDaVila& partida, const json& secao)
                                     revista.at("crimes").get<std::vector<std::string>>(), revista.at("gravidade").get<int>(), revista.at("multa").get<int>()};
 }
 
+// Fase D2 (ficha dos Companheiros).
+Companheiro lerOCompanheiro(const json& lido)
+{
+    Companheiro companheiro;
+    companheiro.numero = lido.at("numero").get<int>();
+    companheiro.nome = lido.at("nome").get<std::string>();
+    companheiro.cultura = lido.at("cultura").get<std::string>();
+    companheiro.ehMulher = lido.at("mulher").get<bool>();
+    companheiro.idade = lido.at("idade").get<int>();
+    companheiro.foco = static_cast<FocoDoCompanheiro>(lido.at("foco").get<int>());
+    companheiro.qualidade = lido.at("qualidade").get<int>();
+    const json& tracos = lido.at("tracos");
+    companheiro.personalidade = {tracos.at(0).get<int>(), tracos.at(1).get<int>(), tracos.at(2).get<int>(), tracos.at(3).get<int>(), tracos.at(4).get<int>()};
+    const json& habilidades = lido.at("habilidades");
+    companheiro.carisma = habilidades.at(0).get<int>();
+    companheiro.corpoACorpo = habilidades.at(1).get<int>();
+    companheiro.especialista = habilidades.at(2).get<int>();
+    companheiro.salarioPorEstacaoEmDecimos = lido.at("salario").get<int>();
+    companheiro.mapaDeOrigem = lido.at("mapas").at(0).get<int>();
+    companheiro.mapaOndeEsta = lido.at("mapas").at(1).get<int>();
+    const json& marcas = lido.at("marcas");
+    companheiro.noGrupo = marcas.at(0).get<bool>();
+    companheiro.ehDaFamilia = marcas.at(1).get<bool>();
+    companheiro.ehFilhoDoJogador = marcas.at(2).get<bool>();
+    companheiro.salarioAtrasado = marcas.at(3).get<bool>();
+    companheiro.pediuAumento = marcas.at(4).get<bool>();
+    companheiro.opiniao = lido.at("opiniao").get<int>();
+    companheiro.felicidade = lido.at("felicidade").get<int>();
+    companheiro.estacoesSemSalario = lido.at("estacoesSemSalario").get<int>();
+    companheiro.diasComFelicidadeZero = lido.at("diasComFelicidadeZero").get<int>();
+    companheiro.estacoesDeGravidez = lido.at("gravidez").get<int>();
+    return companheiro;
+}
+
+void restaurarOsCompanheiros(SimulacaoDaVila& partida, const json& secao)
+{
+    EstadoDosCompanheiros& estado = partida.companheiros;
+    estado = EstadoDosCompanheiros{};
+    for (const json& lido : secao.at("vinculados")) {
+        estado.vinculados.push_back(lerOCompanheiro(lido));
+    }
+    for (const json& doMapa : secao.at("recrutaveis")) {
+        std::vector<Companheiro> lista;
+        for (const json& lido : doMapa) {
+            lista.push_back(lerOCompanheiro(lido));
+        }
+        estado.recrutaveisPorMapa.push_back(std::move(lista));
+    }
+    for (const json& filho : secao.at("filhos")) {
+        estado.filhos.push_back({filho.at(0).get<int>(), filho.at(1).get<std::string>(), filho.at(2).get<bool>(), filho.at(3).get<int>(),
+                                 static_cast<FocoDoCompanheiro>(filho.at(4).get<int>())});
+    }
+    estado.numeroDoConjuge = secao.at("conjuge").get<int>();
+    estado.sucessorEscolhido = secao.at("sucessor").get<int>();
+    estado.proximoNumero = secao.at("proximoNumero").get<int>();
+    estado.mortosNaEstacao = secao.at("mortosNaEstacao").get<int>();
+    atualizarOGrupoPelosCompanheiros(partida);  // os lutadores e as pessoas do grupo
+}
+
 // Fase C1 (ficha da Facção).
 void restaurarAsFaccoes(SimulacaoDaVila& partida, const json& secao)
 {
@@ -856,6 +915,7 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarATecnologia(*partida, arvore.at("tecnologia"));  // fase B5
         restaurarAsFaccoes(*partida, arvore.at("faccoes"));  // fase C1
         restaurarOCrime(*partida, arvore.at("crime"));  // fase C3
+        restaurarOsCompanheiros(*partida, arvore.at("companheiros"));  // fase D2
         const json& religiaoDoJogador = arvore.at("religiaoDoJogador");  // fase C4
         partida->religiaoDoJogador = EstadoDaReligiaoDoJogador{religiaoDoJogador.at(0).get<int>(), religiaoDoJogador.at(1).get<int>(), religiaoDoJogador.at(2).get<int>()};
         atualizarAsCidadesPelaReligiao(*partida);

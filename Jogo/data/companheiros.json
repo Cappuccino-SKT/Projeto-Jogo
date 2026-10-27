@@ -1,9 +1,24 @@
 {
+  "grupo_controlado": { "base": 4, "renome_por_um": 20 },
+  "vinculados": { "base": 10, "renome_por_um": 5, "por_cidade_do_jogador": 3 },
+  "recrutaveis_por_nivel_da_cidade": [0, 1, 2, 4],
+  "qualidades": {
+    "comum":     { "renome_minimo": 0,  "habilidade_principal": [20, 50], "entrada": 100,  "salario_por_estacao": 50 },
+    "bom":       { "renome_minimo": 20, "habilidade_principal": [40, 70], "entrada": 300,  "salario_por_estacao": 150 },
+    "excelente": { "renome_minimo": 50, "habilidade_principal": [60, 90], "entrada": 1000, "salario_por_estacao": 400 }
+  },
+  "estacoes_sem_salario_para_sair": 2,
+  "opiniao": { "inicial": 20, "vitoria_junto": 2, "salario_em_dia": 1, "salario_atrasado": -10, "companheiro_morto": -5,
+               "presente_por_moedas": 20, "presente_maximo": 10, "aumento_recusado": -10, "aumento_pedido_em_porcento": 25 },
+  "felicidade_do_controlado": { "salario_em_dia": 10, "salario_atrasado": -20, "sem_comida": -25, "por_companheiro_morto_na_estacao": -10, "minimo_mortos": -30 },
+  "dialogo": { "base": 50, "habilidade_divide": 2, "opiniao_divide": 4, "traco_divide": 3, "limites": [5, 95],
+               "falha_persuadir": -5, "falha_intimidar": -10, "barganha_em_porcento": 5 },
   "familia": {
     "gravidez_estacoes": 1,
     "chance_de_filho_por_estacao_em_porcento": 10,
     "chance_de_casar_por_estacao_em_porcento": 25,
-    "fertil_ate": 30
+    "fertil_ate": 30,
+    "habilidade_do_filho_educado": 50
   },
   "dinastia": {
     "nobres": 2,

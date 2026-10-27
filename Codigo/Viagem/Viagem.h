@@ -34,6 +34,15 @@ struct EncontroMarcado {
 enum class EscolhaNoEncontro { Subornar, Fugir, Lutar, Render };
 
 // A parte 2 da ficha: uma entidade em trânsito. O grupo do jogador é a única desta versão.
+// D2 (Companheiros): um companheiro no grupo, para o combate (o kit, a habilidade e a Coragem).
+struct LutadorDoGrupo {
+    std::string kit = "civil";
+    int habilidadeEmCentesimos = 3000;
+    int coragem = 60;
+
+    bool operator==(const LutadorDoGrupo&) const = default;
+};
+
 struct EntidadeEmTransito {
     std::string tipoDeEntidade = "grupo_do_jogador";  // ou "caravana" (Comércio, B2)
     bool emTransito = false;
@@ -53,6 +62,7 @@ struct EntidadeEmTransito {
     int ticksParadoNaLuta = 0;
     std::vector<int> quantidadePorItem;  // o inventário do grupo, na ordem do itens.csv
     int64_t dinheiroEmDecimos = 0;
+    std::vector<LutadorDoGrupo> lutadoresDoGrupo;  // D2: os companheiros no grupo (não vai no save: vem dos Companheiros)
     int vidaEmPorcento = 100;  // fase D1 (Combate): a Vida de cada membro, em % (o vencedor perde; volta 1% por hora)
 
     bool ehCaravana() const { return tipoDeEntidade == "caravana"; }

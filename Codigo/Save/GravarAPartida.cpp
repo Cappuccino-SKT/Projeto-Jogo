@@ -471,6 +471,43 @@ json escreverADinastia(const DinastiaDaFaccao& dinastia)
     return json{{"membros", membros}, {"lider", dinastia.numeroDoLider}, {"proximoNumero", dinastia.proximoNumero}};
 }
 
+// Fase D2 (ficha dos Companheiros): um Controlado (o recrutável, o vinculado, a família).
+json escreverOCompanheiro(const Companheiro& companheiro)
+{
+    const Personalidade& tracos = companheiro.personalidade;
+    return json{{"numero", companheiro.numero}, {"nome", companheiro.nome}, {"cultura", companheiro.cultura}, {"mulher", companheiro.ehMulher},
+                {"idade", companheiro.idade}, {"foco", static_cast<int>(companheiro.foco)}, {"qualidade", companheiro.qualidade},
+                {"tracos", json::array({tracos.coragem, tracos.ganancia, tracos.agressividade, tracos.sociabilidade, tracos.lealdade})},
+                {"habilidades", json::array({companheiro.carisma, companheiro.corpoACorpo, companheiro.especialista})},
+                {"salario", companheiro.salarioPorEstacaoEmDecimos}, {"mapas", json::array({companheiro.mapaDeOrigem, companheiro.mapaOndeEsta})},
+                {"marcas", json::array({companheiro.noGrupo, companheiro.ehDaFamilia, companheiro.ehFilhoDoJogador, companheiro.salarioAtrasado, companheiro.pediuAumento})},
+                {"opiniao", companheiro.opiniao}, {"felicidade", companheiro.felicidade}, {"estacoesSemSalario", companheiro.estacoesSemSalario},
+                {"diasComFelicidadeZero", companheiro.diasComFelicidadeZero}, {"gravidez", companheiro.estacoesDeGravidez}};
+}
+
+json escreverOsCompanheiros(const SimulacaoDaVila& simulacao)
+{
+    const EstadoDosCompanheiros& estado = simulacao.companheiros;
+    json vinculados = json::array();
+    for (const Companheiro& companheiro : estado.vinculados) {
+        vinculados.push_back(escreverOCompanheiro(companheiro));
+    }
+    json recrutaveis = json::array();
+    for (const std::vector<Companheiro>& doMapa : estado.recrutaveisPorMapa) {
+        json lista = json::array();
+        for (const Companheiro& companheiro : doMapa) {
+            lista.push_back(escreverOCompanheiro(companheiro));
+        }
+        recrutaveis.push_back(std::move(lista));
+    }
+    json filhos = json::array();
+    for (const FilhoDoJogador& filho : estado.filhos) {
+        filhos.push_back(json::array({filho.numero, filho.nome, filho.ehMulher, filho.idade, static_cast<int>(filho.focoDeEducacao)}));
+    }
+    return json{{"vinculados", vinculados}, {"recrutaveis", recrutaveis}, {"filhos", filhos}, {"conjuge", estado.numeroDoConjuge},
+                {"sucessor", estado.sucessorEscolhido}, {"proximoNumero", estado.proximoNumero}, {"mortosNaEstacao", estado.mortosNaEstacao}};
+}
+
 // Fase C1 (ficha da Facção): as leis pelo nome da opção, o Banco, o líder e a votação perdida.
 json escreverAsFaccoes(const SimulacaoDaVila& simulacao)
 {
@@ -600,6 +637,7 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["tecnologia"] = escreverATecnologia(simulacao);
     arvore["faccoes"] = escreverAsFaccoes(simulacao);
     arvore["crime"] = escreverOCrime(simulacao);
+    arvore["companheiros"] = escreverOsCompanheiros(simulacao);  // fase D2
     arvore["religiaoDoJogador"] = json::array({simulacao.religiaoDoJogador.anoDaUltimaPeregrinacao, simulacao.religiaoDoJogador.estacaoDaUltimaBencao,
                                                simulacao.religiaoDoJogador.estacaoDoUltimoAtoDeFe});
     return json::to_msgpack(arvore);
