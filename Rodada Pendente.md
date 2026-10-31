@@ -2,156 +2,166 @@
 
 Aqui fica só a rodada aberta. Quando o autor responde, as decisões vão para as fichas (ou para o [[Documentos/Mundo e História/Descrição|Mundo e História]]) e a rodada sai deste arquivo.
 
-## Rodada RA1: as Raças (ficha D8)
+## Rodada RA1: as Raças no jogo (ficha D8)
 
 Responda em `C:\Users\Felipe\Desktop\Respostas.txt` com o código (RA1-1...). "Seguir sugestão" aceita a sugestão.
 
-**O que já está decidido:**
-- As raças nasceram da mana da Grande Fusão misturada aos humanos (HI2-2). Antes da Fusão só existiam humanos.
-- Os Clãs de Tian-Lang (Guerreira) são em boa parte dessas raças (HI2-4).
-- Cada raça tem a sua idade de adulto e o seu tempo de vida.
-- As raças entram no jogo depois dos marcos da fase D.
-- Cada raça precisa do seu manequim no estilo de arte novo.
+**A história das raças já está decidida** (Mundo e História, parte 7.1): Humanos, Langren, Khadim, Ascendidos, o Eterno e os Quitinos. Também já decidido:
+- As raças nasceram das Marés de Mana (parte 4.4).
+- O sistema precisa aceitar raças novas com facilidade. [Proposta] Cada raça é uma entrada no `racas.json`, e as leis e culturas reagem às **marcas** da raça (por exemplo, "mágica", "monstruosa", "artificial"), não ao nome. Assim, uma raça nova com uma marca conhecida já funciona sem regra nova.
 
-**As idades do jogo:** hoje o humano é adulto aos 5 e velho aos 31; na história, isso dá cerca de 12 e 77 anos (÷ 2,5).
+**As idades do jogo:** hoje o humano é adulto aos 5 anos e velho aos 31; na história, isso dá cerca de 12 e 77 anos (÷ 2,5).
 
 ---
 
-### RA1-1. Quantas raças e quais?
+### RA1-1. As idades de cada raça
 
-**Contexto:** cada raça nova custa um manequim e as roupas redesenhadas para o corpo dela, além dos números (idades e habilidades). Poucas raças, bem diferentes, valem mais que muitas parecidas.
+**Pergunta:** com que idade cada raça vira adulta e com que idade fica velha (anos do jogo)?
 
-**Pergunta:** quantas raças, além dos humanos, e como elas são?
+**Sugestão:**
 
-| Opção | O que ganha | O que perde |
-|---|---|---|
-| **A) 3 raças**, uma para cada jeito em que a mana mudou o corpo | Cada uma com um papel claro; a arte cabe | Menos variedade |
-| B) 5 ou mais raças | Um mundo mais variado | Muita arte e números para equilibrar |
-| C) 1 raça, com graus de mutação (leve, forte) | A arte mais barata | O mundo fica pouco diferente do humano |
-
-**Sugestão (A):** os nomes são provisórios; troque à vontade.
-
-| Raça | Como a mana a mudou | Adulto e velho (jogo) | Na história | Força e fraqueza |
+| Raça | Adulto | Velho | Na história | Por quê |
 |---|---|---|---|---|
-| **Humanos** | Não mudou | 5 e 31 | 12 e 77 | Medianos em tudo |
-| **Ferinos** | O corpo virou meio fera: garras, pelos e dentes | 4 e 21 | 10 e 52 | Fortes no combate; vida curta; ruins no Ofício fino |
-| **Pétreos** | A pele virou pedra e cristal | 8 e 60 | 20 e 150 | Duros e longevos; lentos; demoram para ser adultos e quase não têm filhos |
-| **Velados** | A mana ficou no sangue: pele pálida, olhos que brilham | 6 e 41 | 15 e 102 | Mais chance de nascer mago; frágeis no combate |
+| Humanos | 5 | 31 | 12 e 77 | Como hoje |
+| Langren | 4 | 24 | 10 e 60 | Crescem rápido e vivem pouco: a vida de guerra |
+| Khadim | Sai pronto | 10 | Cerca de 25 anos de vida | A vida mais curta de todas |
+| Ascendidos | 10 | 120 | 25 e 300 | A vida mais longa de todas |
+| Quitinos | 2 | 15 | 5 e 37 | A rainha fica velha só aos 40 |
+| Eterno | Sempre adulto | Nunca | (nenhuma) | Imortal |
 
-**Conflitos:** nenhum. Cassius Varro continua humano: a vida longa dele vem da Torre, não da raça.
+**Exemplo:** um companheiro Langren recrutado aos 6 anos fica velho em 18 anos de jogo; um Ascendido dura a partida inteira.
 
----
-
-### RA1-2. O que a raça muda no jogo?
-
-**Contexto:** a cultura já muda as habilidades com pontos (Guerreira +5 no combate, por exemplo).
-
-**Pergunta:** além da idade, o que mais a raça muda?
-
-| Opção | O que ganha | O que perde |
-|---|---|---|
-| A) Só a aparência e a idade | Simples | A raça quase não importa na hora de jogar |
-| **B) A idade, pontos de habilidade (como a cultura) e uma vantagem com um defeito** | A raça pesa na escolha de quem contratar e recrutar, sem regra nova pesada | Mais números para equilibrar |
-| C) B, mais necessidades próprias (comida, casa, clima) | Raças bem diferentes | Muito trabalho em várias fichas |
-
-**Sugestão (B):**
-- **Ferinos:** Corpo a Corpo +10, Ofício −10. Vantagem: não sentem o frio do inverno. Defeito: comem 50% mais.
-- **Pétreos:** Braçal +10, Velocidade −20%. Vantagem: −30% de dano recebido. Defeito: 1/4 da chance de ter filho.
-- **Velados:** Especialista +5, Corpo a Corpo −10. Vantagem: 10 vezes mais chance de ser mago (com a Magia, D4). Defeito: a Religiosa os venera e a Tecnocrata os caça (RA1-4).
-
-**Exemplo:** numa cidade fria, a Ferraria que contrata um Ferino ganha no inverno, mas o mercado vende mais comida.
-
-**Conflitos:** os pontos da cultura e os da raça somam, sempre entre 0 e 100.
+**Conflito:** os 131 anos de Cassius dão 52 no jogo, abaixo dos 120 da raça. Sugestão: ele continua com a Vida prolongada da Torre, porque é a idade de outra coisa. Na história ele estaria muito acima da vida normal de um Ascendido: aos 131 anos da história, ele já viveu pelo menos 4 séculos desde a guarda real. [Proposta] Os 131 anos passam a ser **431**: ele era da guarda real antes da Fusão, há 412 anos. No jogo, isso vira idade 172, acima do velho (120); por isso só a Torre o mantém vivo.
 
 ---
 
-### RA1-3. Quantos de cada raça em cada povo?
+### RA1-2. O que cada raça muda
 
-**Contexto:** cada NPC já tem uma cultura. A raça é um campo separado, porque um Ferino pode ter nascido na Teocracia.
+**Pergunta:** quais pontos de habilidade (como os da cultura), traços de Personalidade e vantagens ou defeitos cada raça ganha?
 
-**Pergunta:** como as raças se distribuem pelos povos no começo do jogo?
+**Sugestão:**
 
-| Opção | O que ganha | O que perde |
-|---|---|---|
-| **A) Uma tabela de % por povo** | Cada povo com o seu jeito, ligado à história | Mais um número no `culturas.json` |
-| B) A raça presa ao povo (todo Guerreiro é Ferino) | Simples | Contraria a história: os Clãs são só "boa parte" das raças |
-
-**Sugestão (A):** os NPCs livres. Os escravos de cada povo vêm à parte, com a Escravidão (D3).
-
-| Povo | Humanos | Ferinos | Pétreos | Velados |
+| Raça | Habilidades | Personalidade | Vantagem | Defeito |
 |---|---|---|---|---|
-| Clãs de Tian-Lang (Guerreira) | 40% | 35% | 20% | 5% |
-| Teocracia de Theodoria (Religiosa) | 70% | 10% | 5% | 15% |
-| Ordem de Custodum (Arcana) | 90% | 0 | 0 | 10% (magos) |
-| Sultanato de Zahran (Escravista) | 90% | 5% | 5% | 0 |
-| Coroa de Valdren (Autoritária) | 90% | 5% | 5% | 0 |
-| Comunidade de Ashmoor (Tecnocrata) | 100% | 0 | 0 | 0 |
+| Humanos | (nenhuma) | (nenhuma) | Têm a chance rara de nascer com o dom mágico | (nenhum) |
+| Langren | Corpo a Corpo +20; Ofício e Comércio −15 | Agressividade +30 | −20% de dano recebido no corpo a corpo | Produzem 30% menos nas oficinas |
+| Khadim | Braçal +15 | Lealdade 100 e Coragem 20, fixas | Nunca fazem greve nem fogem | Não sobem de habilidade; não lideram nada |
+| Ascendidos | Especialista +15 | Sociabilidade −20 | Todos nascem com o dom mágico | Quase não têm filhos: 1/20 da chance |
+| Quitinos | Braçal +10 | Coragem +20 | −30% de dano recebido; comem qualquer carne | As cidades de quase todos os povos os recusam (RA1-4) |
+| Eterno | Tudo em 100 | Própria | Imortal | Único |
+
+**Exemplo:** numa luta corpo a corpo, um Langren com o kit de guarda vence quase sempre um Humano igual. Mas na Carpintaria ele produz menos que o pior Humano.
+
+**Conflitos:** os pontos da raça somam com os da cultura, e o total fica entre 0 e 100.
+
+---
+
+### RA1-3. Quem existe em cada povo no começo
+
+**Pergunta:** de que raça são os NPCs livres de cada povo? Os escravos vêm à parte, com a Escravidão (D3).
+
+**Sugestão** (com o que você já decidiu):
+
+| Povo | Livres | Escravos (D3) |
+|---|---|---|
+| Clãs de Tian-Lang | 100% Langren | Os que eles capturam |
+| Ordem de Custodum | A elite Ascendida (cerca de 5%) e Humanos com o dom (95%) | Humanos e outras raças, para experimentos |
+| Sultanato de Zahran | 100% Humanos | Muitos Khadim, também nos exércitos |
+| Comunidade de Ashmoor | 100% Humanos | Khadim (sem saber da origem) |
+| Coroa de Valdren | 95% Humanos, 5% de outras raças | Poucos |
+| Teocracia de Theodoria | 85% Humanos, 10% Langren, 5% Quitinos | (nenhum) |
 
 **Conflitos:** nenhum.
 
 ---
 
-### RA1-4. Como cada povo trata as outras raças?
+### RA1-4. Como cada povo trata as outras raças
 
-**Contexto:** a história já dá o jeito de cada povo, menos o da Coroa ("a definir"). No jogo, isso precisa virar regra.
+**Pergunta:** isso vira uma lei de cada facção, que a assembleia pode mudar, ou fica fixo na cultura?
 
-**Pergunta:** isso vira uma lei de cada facção ou fica fixo na cultura?
-
-| Opção | O que ganha | O que perde |
-|---|---|---|
-| **A) Uma lei nova, "As outras raças"**, com 4 opções: iguais, segunda classe, escravizáveis e caçadas | A assembleia pode mudar a lei, as minorias reagem e o jogador vê isso no mapa | Mais uma lei para equilibrar |
-| B) Fixo na cultura, sem lei | Mais simples | O mundo não muda com o tempo |
+**Opções:**
+- **A) Uma lei nova, "As outras raças",** com 4 opções: iguais, segunda classe, escravizáveis e caçadas. Ganha: o mundo pode mudar, e a minoria reage na Felicidade como a minoria hostil da Cultura. Perde: mais uma lei para equilibrar.
+- B) Fixo na cultura. Ganha: é simples. Perde: o mundo não muda.
 
 **Sugestão (A), com o começo de cada povo:**
-- **Iguais:** Clãs e Teocracia (a Teocracia ainda dá +10 de Felicidade aos Velados, os "abençoados").
-- **Segunda classe:** Coroa (pagam o dobro de imposto: são súditos do "imperador eterno", mas abaixo dos humanos) e Sultanato.
-- **Escravizáveis:** Ordem de Custodum (cobaias).
-- **Caçadas:** Comunidade de Ashmoor (o NPC de outra raça é preso ou foge).
+- **Iguais:** Clãs (vale a lei do mais forte, não a raça) e Teocracia ("todas abençoadas", até os Quitinos).
+- **Segunda classe:** Coroa (pagam o dobro de imposto).
+- **Escravizáveis:** Sultanato e Ordem (para a Ordem, todos os que não têm magia).
+- **Caçadas:** Comunidade de Ashmoor caça quem tem a marca "mágica" ou "monstruosa". Os Khadim escapam, porque Ashmoor não sabe que eles são "mágicos".
 
-O NPC de outra raça sob uma lei ruim tem a Felicidade mais baixa, como a minoria hostil da Cultura.
-
-**Conflitos:** a Coroa estava "a definir" na história; esta sugestão a define. A lei entra com a ficha D8, e a escravidão de verdade, com a D3.
+**Exemplo:** um companheiro Langren que entra numa cidade de Ashmoor é preso na revista dos guardas (Crime); numa cidade da Coroa, ele paga mais caro.
 
 ---
 
 ### RA1-5. Os filhos de pais de raças diferentes
 
-**Pergunta:** o filho de um Humano com uma Ferina é de que raça?
+**Pergunta:** quais raças têm filhos juntas e de que raça é o filho?
 
-| Opção | O que ganha | O que perde |
-|---|---|---|
-| **A) Da raça de um dos pais, sorteada (50% cada)** | Simples; não cria raça nova nem arte nova | Nenhum mestiço visível |
-| B) Não podem ter filhos | Simples | Estranho para raças que vieram dos humanos |
-| C) Uma raça mestiça | Mais variedade | Mais manequins e números |
+**Sugestão:** só Humanos, Langren e Ascendidos têm filhos entre si. O filho é da raça de um dos pais, sorteada (50% cada), e não há raça mestiça. Os Quitinos põem ovos, e os Khadim e o Eterno não se reproduzem.
 
-**Sugestão (A).** A idade de adulto e de velho é a da raça do filho.
+**Exemplo:** o jogador humano que casa com uma Ascendida tem um filho Ascendido em 50% das vezes, já com o dom mágico. Mas os Ascendidos quase não têm filhos (RA1-2).
 
 ---
 
-### RA1-6. O jogador pode ser de outra raça?
+### RA1-6. De que raça o jogador pode ser?
 
-**Pergunta:** na criação do personagem, o jogador escolhe a raça?
+**Pergunta:** quais raças o jogador escolhe na criação do personagem?
 
-| Opção | O que ganha | O que perde |
-|---|---|---|
-| **A) Escolhe** | Outro jeito de jogar: um Ferino na Comunidade de Ashmoor é caçado | A criação do personagem ganha um passo |
-| B) Sempre humano | Simples | Perde a variedade |
+**Sugestão:**
+- **Humano:** o jeito normal de jogar.
+- **Langren:** forte no combate, sofre em Ashmoor e na Coroa.
+- **Khadim desperto:** começa como escravo fugido e é o modo mais difícil. Combina com o estilo "começar sem nada".
+- **Ascendido e Quitino:** ficam de fora no começo; Ascendido é raro demais e Quitino não tem facção onde caber. Podem entrar depois.
+- **Eterno:** nunca.
 
-**Sugestão (A).** A raça do jogador usa as mesmas leis da RA1-4. Se ele for caçado numa cidade, a revista dos guardas (Crime) o prende.
-
-**Conflitos:** a criação do personagem ainda não existe no jogo (o estilo é escolhido no começo); a raça entra junto do estilo.
+**Conflito:** a criação do personagem ainda não existe (hoje só se escolhe o estilo); a raça entra junto.
 
 ---
 
-### RA1-7. E os monstros?
+### RA1-7. As Marés de Mana no jogo
 
-**Contexto:** a Fusão também mudou os animais (HI2-2).
+**Pergunta:** como a Maré aparece durante a partida?
 
-**Pergunta:** os monstros entram nesta ficha?
+**Sugestão:**
+- **Frequência:** cerca de 1 Maré por ano no mundo, numa região sorteada, durando 1 estação.
+- **Os magos:** na região, eles ficam mais fortes (com a Magia, D4).
+- **Os nascidos:** quem nasce ali naquela estação tem 5 vezes mais chance de ter o dom mágico.
+- **Os animais:** podem virar monstros (com a ficha dos Monstros).
+- **Sem raças novas,** porque a Estabilização já passou.
+- **Notícia Regional:** "Maré de Mana na região X".
 
-| Opção | O que ganha | O que perde |
-|---|---|---|
-| A) Sim, nesta ficha | Tudo da mutação num lugar só | A ficha fica grande |
-| **B) Numa ficha própria (Fauna e Monstros), com o mapa novo** | Os monstros dependem dos biomas e da cratera do mapa novo | Mais uma ficha no plano |
+**Gancho:** a Ordem corre para lá; Ashmoor fecha as fronteiras.
 
-**Sugestão (B).**
+---
+
+### RA1-8. Como os Khadim são feitos
+
+**Pergunta:** de onde saem os Khadim novos durante a partida?
+
+**Sugestão:**
+- **A Câmara de Moldagem:** o Sultanato tem uma Câmara escondida na região da Maré original, mantida pela mana da Ordem.
+- **Produção:** ela transforma 1 escravo humano em 1 Khadim a cada 10 dias (com a Escravidão, D3).
+- **O lugar:** é secreto; o jogador pode achá-lo, roubar as provas (Segredos, D9) ou destruí-lo.
+- **Se ela cair,** os Khadim param de nascer e, com a vida curta, somem em cerca de 10 anos de jogo.
+
+---
+
+### RA1-9. As tribos Quitinas
+
+**Pergunta:** como as tribos funcionam no mapa?
+
+**Sugestão:**
+- **A tribo:** é um lugar sem facção, como uma cidade pequena.
+- **A população:** é um número que cresce rápido, mas para na comida da região. Só a rainha e 2 ou 3 guerreiros são NPCs Importantes, por causa do desempenho.
+- **Hostil ou neutra:** cada tribo sorteia; as hostis atacam caravanas, como os bandidos.
+- **Uma rainha nova** nasce a cada 5 anos, mais ou menos: ela assume a tribo ou sai para fundar outra (vira notícia).
+- **Se a rainha morrer** sem herdeira, a tribo acaba.
+- **Onde ficam:** na floresta do mapa novo.
+
+---
+
+### RA1-10. Os monstros
+
+**Pergunta:** os monstros entram nesta ficha ou numa ficha própria?
+
+**Sugestão:** numa ficha própria (**Fauna e Monstros**), junto com o mapa novo, porque eles dependem dos biomas, da cratera e das Marés.

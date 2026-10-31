@@ -57,7 +57,7 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 Já decidido nas fichas; o que a história mudar passa por rodada:
 
 - **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois da Grande Fusão** (parte 7).
-- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas da Grande Fusão (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos. **Cada raça tem a sua idade de adulto e o seu tempo de vida** (decisão do autor, 2026-10-26): a mutação pela mana pode alongar ou encurtar a vida.
+- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas da Grande Fusão (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos. **Cada raça tem a sua idade de adulto e o seu tempo de vida** (decisão do autor, 2026-10-26): a mutação pela mana pode alongar ou encurtar a vida. As raças estão na parte 7.1; o sistema precisa aceitar **raças novas com facilidade** (decisão do autor, 2026-10-31).
 - **Baixa magia** e tecnologia passando para a **pólvora**. A história explica as duas (parte 4.4).
 - **O mapa:** o de hoje (6 regiões em 8 × 6) é **provisório**. Haverá um **mapa novo, de um continente inteiro**, ainda não desenhado (HI3-1); a cratera entra nele.
 - **O jogo começa no Ano 412** do calendário **d.F.**, contado a partir da **Grande Fusão**.
@@ -124,7 +124,9 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 
 - O que era de fato a outra dimensão: ninguém no mundo sabe que ela era só mana pura (parte 4.4).
 - **A verdade da Coroa (HI6-4, opção B):** Aurelian Valdren **sobreviveu**, fundido à mana. Não é deus e não morre, mas virou outra coisa, presa e escondida no palácio da Coroa; a família governa em nome dele. Quase ninguém sabe.
-- **Kassian Dravel morreu** na explosão do próprio feitiço (HI7-3). A **espada dele** está nas ruínas da capital, um item lendário: os Clãs a querem como relíquia; Ashmoor, para destruí-la. Se ele sabia o que o feitiço faria, ninguém sabe.
+- **Kassian Dravel morreu** na explosão do próprio feitiço (HI7-3): é o que todos acreditam. **Segredo profundo (decisão do autor, 2026-10-31):** ele estava no centro da explosão, junto do Imperador, e também pode ter virado um **Eterno** (parte 7.1). O corpo nunca foi achado, só a espada.
+- **A origem dos Khadim:** o Sultanato e a Ordem de Custodum criaram essa raça juntos (parte 7.1). Ninguém de fora sabe. **A Comunidade de Ashmoor, que executa magos, usa Khadim nos seus campos de escravos sem saber que eles foram feitos com mana.** Se a verdade vier à tona, a crise é dentro de Ashmoor e entre ela e as duas facções.
+- A **espada de Kassian** está nas ruínas da capital, um item lendário: os Clãs a querem como relíquia; Ashmoor, para destruí-la. Se ele sabia o que o feitiço faria, ninguém sabe.
 - Cada povo conta **uma versão** da Grande Fusão (herói, vilão, castigo divino), e nenhuma está inteira. A verdade fica nas masmorras lendárias.
 
 ### 4.4 O que a Grande Fusão deixou (HI2, decidido pelo autor)
@@ -142,6 +144,8 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 - A mana de fora era diferente e **alterou fisicamente** o mundo. Misturada à biologia humana, ela causou **mutações**, que deram origem a **novas espécies humanoides**.
 - O mesmo atingiu os animais e as plantas: surgiram **monstros** em certos lugares.
 - Quase toda a biologia mudou, e surgiram **biomas, terrenos e minérios novos**.
+
+**As Marés de Mana (decisão do autor, 2026-10-31).** Às vezes a mana de uma região fica muito intensa: é uma **Maré de Mana**. Ela favorece os magos, mas quem fica exposto sofre **mutações ao longo da vida**. Logo depois da Fusão, as Marés eram constantes e fortes, e foram elas que mudaram os humanos, os animais e as plantas **aos poucos**, até as mudanças **se estabilizarem** e as raças ficarem como são hoje. [Proposta] A **Estabilização** foi por volta do Ano 120 d.F.; depois dela as Marés ficaram raras, mas ainda acontecem, uma região por vez.
 
 **A cratera (HI2-5).** A antiga capital virou uma **cratera perto da costa**: uma região perigosa, com as **ruínas da capital** como masmorra para o jogador explorar. A posição sai do mapa novo (HI3-1).
 
@@ -179,10 +183,10 @@ O líder de cada facção é fixo no começo do jogo; depois, a simulação pode
 |---|---|---|---|
 | **Coroa de Valdren** | **Regente Lívia Valdren**, 54 anos, da linhagem direta. Fria e paciente, governa "em nome do Eterno" | Lealdade e Coragem altas; Sociabilidade baixa | Para Aurelian não definhar, a Coroa leva escravos com o dom mágico ao quarto selado, e eles nunca voltam |
 | **Sultanato de Zahran** | **Sultana Yasmin bint Qadir**, 35 anos. Subiu ao trono envenenando o irmão | Sociabilidade e Ganância altas; Lealdade baixa | Compra pólvora de Ashmoor às escondidas |
-| **Clãs de Tian-Lang** | **Grande Lobo Tian Feng**, 51 anos, mudado pela mana. Venceu o título num duelo, como manda a doutrina | Coragem e Agressividade altíssimas | Está envelhecendo e sabe que vai perder o próximo duelo |
+| **Clãs de Tian-Lang** | **Grande Lobo Tian Feng**, 51 anos, um Langren (parte 7.1). Venceu o título num duelo, como manda a doutrina | Coragem e Agressividade altíssimas | Está envelhecendo e sabe que vai perder o próximo duelo |
 | **Comunidade de Ashmoor** | **Lorde-Engenheiro Edmund Hale**, 60 anos, presidente do Conselho da Comunidade | Lealdade e Coragem altas | O filho dele nasceu com o dom mágico, e ele o esconde da lei que manda executá-lo |
 | **Teocracia de Theodoria** | **Sumo Sacerdote Theodoros IV**, 72 anos, o único que sabe o nome do Doador | Sociabilidade alta; Coragem baixa | Perdeu a fé; nunca ouviu nada do Doador |
-| **Ordem de Custodum** | **Grão-Mestre Cassius Varro**, 131 anos, mantido vivo pelos próprios experimentos: não envelhece enquanto a Ordem tiver uma Torre Arcana funcionando (HI11-1, traço Vida prolongada) | Ganância e Agressividade altas | Sabe que Aurelian vive e tem um espião dentro da Coroa |
+| **Ordem de Custodum** | **Grão-Mestre Cassius Varro**, 131 anos, um Ascendido (parte 7.1). Velho demais até para a raça dele, é mantido vivo pelos próprios experimentos: não envelhece enquanto a Ordem tiver uma Torre Arcana funcionando (HI11-1, traço Vida prolongada) | Ganância e Agressividade altas | Sabe que Aurelian vive e tem um espião dentro da Coroa |
 
 **Os segredos viram jogo (HI8-2, opção B).** O jogador pode **descobrir** um segredo (espionar, conversar, roubar cartas) e **usá-lo**: chantagear o líder, vendê-lo a uma facção inimiga ou revelá-lo ao povo. **Nem todo segredo pesa igual** (pedido do autor): uns mudam pouco (a fé perdida de Theodoros, se revelada, só abala a Teocracia), outros mudam o mundo (o quarto selado da Coroa). As regras ficam para a ficha de Segredos (D9 no [[Ficha Logica/Plano das Fichas|Plano das Fichas]]).
 
@@ -256,7 +260,7 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 | **Arcana** (Ordem de Custodum) | Os descendentes dos antigos **guardas reais** | Desvendar e manipular a mana nova, chegar a um novo poder e à **imortalidade** dos seus magos | Tudo o que a mana tocou é experimento; quem não usa magia é inferior | **Escravas** para experimentos |
 | **Escravista** (Sultanato de Zahran) | Os **nobres do Império**, livres de um governante após a queda | Riqueza e mão de obra para o seu novo reino | Desde a devastação, captura como escravos os atingidos pela guerra | Mão de obra |
 | **Autoritária** (Coroa de Valdren) | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (e é meio verdade: parte 4.3) | Obediência ao "imperador eterno" | A definir |
-| **Guerreira** (Clãs de Tian-Lang) | O **resto do exército rebelde**. Estavam no centro da fusão, sofreram a maior parte das mutações e são boa parte das outras raças | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
+| **Guerreira** (Clãs de Tian-Lang) | O **resto do exército rebelde**. Estavam no centro da fusão e sofreram a maior parte das mutações: todos são Langren (parte 7.1) | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
 
 **Os ódios entre os povos** (HI3-3, opção A; a tabela fica no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]):
 - Guerreira × Autoritária: os rebeldes contra os herdeiros do imperador. Confirma o ódio.
@@ -264,6 +268,21 @@ O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Cr
 - Tecnocrata × Arcana: quem executa magos contra quem idolatra a magia. Confirma o ódio.
 - Religiosa × Escravista: confirma o ódio se a Escravista escravizar as raças "abençoadas".
 - **Novo:** Guerreira × Tecnocrata (a Tecnocrata executa ou escraviza os mutantes, e a Guerreira é feita deles) e Religiosa × Tecnocrata pelo mesmo motivo.
+
+### 7.1 As raças (decisão do autor, 2026-10-31)
+
+As mutações foram **lentas**: as Marés de Mana (parte 4.4) mudaram quem vivia exposto a elas, geração após geração, até a Estabilização. Os nomes foram sugeridos pelo assistente e aceitos pelo autor.
+
+| Raça | De onde vem | Como é | Onde se encontra |
+|---|---|---|---|
+| **Humanos** | Os que mudaram pouco | Continuam humanos; raros nascem com o dom de manipular a mana | Em todos os povos; são a **matéria-prima** dos Khadim |
+| **Langren** ("lobo", no som dos Clãs) | Os descendentes do exército rebelde, que estava no **centro** da Fusão e sofreu a maior influência da mana | Os mais fortes do corpo entre todas as raças; extremamente agressivos; só têm talento para o combate, de preferência corpo a corpo; produzem pouco e pensam pouco, por isso **saqueiam** outros povos para viver. Para eles vale a lei do mais forte | **Todos** os Clãs de Tian-Lang são Langren, inclusive Tian Feng |
+| **Khadim** ("servo", em árabe) | Uma raça **artificial**: numa Maré de Mana no território do Sultanato, ele deixou escravos na região, e a **Ordem de Custodum** ajudou com a sua capacidade de manipular a mana. Feitos para ser escravos eficientes | Hábeis no trabalho de escravo; quase sem consciência própria, por isso **totalmente submissos**; a **vida mais curta** de todas as raças; **não se reproduzem**: são feitos a partir de humanos | Nos campos de escravos do Sultanato e da Comunidade de Ashmoor e nos exércitos de escravos do Sultanato. **A origem é segredo** (parte 4.3) |
+| **Ascendidos** | Os descendentes da **guarda real**, magos habilidosos que estavam entre os poucos capazes de controlar a mana nova. Usaram essa mana para se aperfeiçoar: conseguiram o que o Ritual de Ascensão buscava | Manipulam a mana desde o nascimento; a **vida mais longa** de todas; o instinto de ter filhos é quase nulo; se acham superiores aos outros. É a **raça mais rara** do mundo | **Toda a elite** da Ordem de Custodum é Ascendida, inclusive Cassius Varro; o resto da Ordem são humanos com o dom |
+| **Eterno** | O **Imperador Aurelian**, que virou outra coisa na explosão | Imortal, com grande poder mágico, de combate e de quase tudo; não se reproduz. Em tese, é **único** | Escondido no palácio da Coroa (parte 4.3). **Segredo:** Kassian pode ser um segundo Eterno |
+| **Quitinos** (de quitina, a casca dos insetos) | Os humanos de uma **floresta** atingida por uma explosão de mana, que evoluíram para uma espécie meio monstro | Muito resistentes pela carapaça; põem ovos e se reproduzem rápido; nem todos são agressivos, mas alguns têm tendência canibal e comem outras raças. Vivem em **tribos com uma rainha**, a única fêmea, que é quem põe os ovos. Se a rainha morre, a tribo acaba; quando nasce outra rainha, ela assume ou sai para fundar a própria tribo | Um povo pequeno e espalhado, **sem facção**. Sofrem o racismo de quase todos os povos. [Proposta] A Teocracia é a exceção: diz que toda raça é abençoada pelo Doador e os aceita, com o nojo dos fiéis contra a fé. A floresta deles entra no mapa novo |
+
+**Ideias do assistente para o jogo** [Proposta]: os Clãs precisam saquear para viver (as caravanas e os vizinhos viram o sustento deles); um Khadim raro pode **despertar** e ganhar consciência (um companheiro e um estopim da Grande História "Correntes Quebradas"); cada Ascendido que morre é uma perda enorme para a Ordem; as tribos Quitinas contam a população em números, como as outras cidades, e só a rainha e poucos outros são Importantes (para o desempenho).
 
 ## 8. Como a história chega ao jogador (proposta)
 
