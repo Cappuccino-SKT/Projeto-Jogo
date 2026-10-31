@@ -2,11 +2,11 @@
 
 ## 1. Onde paramos
 
-- **Fichas:** todas as do [[Ficha Logica/Plano das Fichas|Plano das Fichas]] estão escritas (fases A a E), menos a D8 (Raças), que entra depois dos marcos da fase D.
+- **Fichas:** todas as do [[Ficha Logica/Plano das Fichas|Plano das Fichas]] estão escritas (fases A a E, mais a D8, Raças, em 2026-10-31); faltam a D9 (Segredos), a D10 (Grandes Histórias) e a D11 (Fauna e Monstros, com o mapa novo).
 - **Código, no `main`:** a fatia vertical (marcos 0 a 9) e os marcos A1, A2, A3, A6, B1, B1b, B2, B3, B4, B5 (com conteúdo provisório), C1, C2, C3, C4, D1 e D2, mais as rodadas EQ1, EQ2, CO2, TE2 e CB2. O que cada um trouxe e como testar: `Jogo/LEIA-ME.md`.
 - **Esperam conteúdo:** A4 (Classe Social) e A5 (Cidade) precisam do mapa com os lotes do nível 2, da comida Tier 2, do Luxo Tier 3 e do Casarão. Também faltam a Bebida, o Remédio, o Posto Comercial, o Cavalo e as listas de tecnologias e marcos (rodada de conteúdo C1).
 - **História:** [[Documentos/Mundo e História/Descrição|Mundo e História]], rodadas HI1 a HI10 respondidas (até as Grandes Histórias; fichas novas D8 a D10 no plano). Os 6 líderes fixos e as dinastias já estão no código; rodadas HI11 e HI12 aplicadas (Vida prolongada de Cassius; adulto aos 5 e velho aos 31). Regra do autor: **a história manda** (quando ela bate numa ficha, a ficha muda por rodada). O autor vai desenhar um **mapa novo**, de um continente inteiro; o mapa 8 × 6 de hoje é provisório.
-- **Próximo passo:** na história, os mitos de cada povo e os personagens de hoje; no design, as fichas D8 (Raças), D9 (Segredos) e D10 (Grandes Histórias); no código, o marco D3.
+- **Próximo passo:** na história, os mitos de cada povo e os personagens de hoje; no design, as fichas D9 (Segredos) e D10 (Grandes Histórias); no código, o marco D3.
 - **Para o autor conferir** (decididas em modo automático): a MU1-2 (a Guerreira sustentável), a IN1-6 (o estilo Artesão da fatia) e a OB1-1 (a "maior fortuna").
 - **Arte:** **estilo RimWorld** no lugar da pixel art (decisão de 2026-10-26; [[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte]]). Rodada AR1 aplicada: duas visões pelo zoom (de perto em 3/4, de longe vista de cima), imagens de 64 por tile, 3 direções, Krita e ChatGPT (o manequim oficial já existe); o passo a passo e o prompt estão no Guia da Arte. O código muda quando o autor tiver a primeira leva de arte.
 
