@@ -31,7 +31,11 @@ Responda em `C:\Users\Felipe\Desktop\Respostas.txt` com o código (RA1-1...). "S
 
 **Exemplo:** um companheiro Langren recrutado aos 6 anos fica velho em 18 anos de jogo; um Ascendido dura a partida inteira.
 
-**Conflito:** os 131 anos de Cassius dão 52 no jogo, abaixo dos 120 da raça. Sugestão: ele continua com a Vida prolongada da Torre, porque é a idade de outra coisa. Na história ele estaria muito acima da vida normal de um Ascendido: aos 131 anos da história, ele já viveu pelo menos 4 séculos desde a guarda real. [Proposta] Os 131 anos passam a ser **431**: ele era da guarda real antes da Fusão, há 412 anos. No jogo, isso vira idade 172, acima do velho (120); por isso só a Torre o mantém vivo.
+**Conflito com Cassius Varro:** hoje ele tem 131 anos na história (52 no jogo) e só vive porque a Torre Arcana o mantém (HI11-1). Como Ascendido, 52 anos é jovem (o velho é aos 120), e a Torre deixaria de ter função.
+- **A) Ele continua com 131 anos** e perde o traço Vida prolongada: é só um Ascendido maduro. Mais simples, mas some o gancho "derrube a Torre e ele envelhece".
+- **B) Ele é da guarda real original:** estava vivo antes da Fusão e tem mais de **430 anos** na história (cerca de 172 no jogo). Isso passa muito do velho da raça, e só a Torre o mantém vivo. Mantém o gancho e explica os "experimentos".
+
+**Sugestão (B).**
 
 ---
 
