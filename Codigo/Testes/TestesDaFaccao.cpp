@@ -89,7 +89,7 @@ void testarOMundo(const DadosDoJogo& dados)
     conferir(tianFeng.nome == "Grande Lobo Tian Feng" && tianFeng.idade == 20 && vila.faccoes.lideres[static_cast<std::size_t>(guerreira)].agressividade == 90
                  && yasmin.idade == 14 && yasmin.ehMulher && vila.faccoes.lideres[static_cast<std::size_t>(escravista)].sociabilidade == 75 && cassius.idade == 30
                  && cassius.vidaProlongada,
-             "os líderes fixos: Tian Feng com 20 anos de jogo e Agressividade 90; Yasmin com 14; Cassius Varro (131) no teto de 30");
+             "os líderes fixos: Tian Feng com 20 anos de jogo e Agressividade 90; Yasmin com 14; Cassius Varro (432) no teto de 30");
     const SimulacaoDaVila* escravistaCapital = nullptr;
     for (const auto& cidade : vila.outrasCidades) {
         escravistaCapital = faccaoDaCidade(dados, cidade->numeroDoMapaDaCidade) == escravista ? cidade.get() : escravistaCapital;
