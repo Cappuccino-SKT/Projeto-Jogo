@@ -1,6 +1,6 @@
 # Grande História 1: O Despertar do Eterno
 
-> **Estado:** rascunho para o autor ler (2026-11-04). Usa só o que está decidido no [[Documentos/Mundo e História/Descrição|Mundo e História]]; tudo o que é novo está marcado [Proposta]. Se o autor gostar, as regras de jogo (pistas, prazos) vão para a ficha D10 por rodada.
+> **Estado:** rascunho (2026-11-04), com as respostas do autor de 2026-11-05 (a Maré causada pelo despertar, os períodos mínimo e máximo, o final novo, a primeira fala). Usa só o que está decidido no [[Documentos/Mundo e História/Descrição|Mundo e História]]; tudo o que é novo está marcado [Proposta]. Se o autor gostar, as regras de jogo (pistas, prazos) vão para a ficha D10 por rodada.
 
 Duas partes: **o conto** (uma partida imaginada, para sentir a história) e **o roteiro** (os atos, as pistas, os prazos e os finais).
 
@@ -16,7 +16,7 @@ Na feira de Zahran, o mercador de escravos riu da pergunta dela.
 
 — Um com o dom? Esqueça. A Coroa compra todos. Pagam o triplo e não perguntam o preço.
 
-Mara anotou no diário só por hábito. Três semanas depois, um viajante contou na taverna que os cães da capital da Coroa uivavam toda noite, virados para o palácio. E um pastor jurou que as ovelhas tinham nascido com olhos azuis demais. Nada disso queria dizer nada. Até que Mara leu as três anotações juntas.
+Mara anotou no diário só por hábito. Não sabia que, num quarto selado a muitos dias dali, algo tinha começado a se mexer, e que a mana dele já escorria pelo mundo, fina como neblina. Três semanas depois, um viajante contou na taverna que os cães da capital da Coroa uivavam toda noite, virados para o palácio. E um pastor jurou que as ovelhas tinham nascido com olhos azuis demais. Nada disso queria dizer nada. Até que Mara leu as três anotações juntas.
 
 *Uma grande história começou.*
 
@@ -76,22 +76,43 @@ E Mara precisou decidir.
 
 Se um deles morre, o sucessor herda o papel (HI10-2). [Proposta] Um sucessor novo pode mudar o tom: um Grande Lobo jovem quer a glória, não a morte; um novo regente pode ter medo do Eterno e hesitar.
 
-### Por que ele acorda agora [Proposta]
+### O despertar causa a Maré (decisão do autor, 2026-11-05)
 
-Uma **Maré de Mana** se forma sobre a cidade-palácio da Coroa. O Eterno se alimenta dela e começa a despertar. A Coroa, para não perder o controle, aumenta os "sacrifícios": precisa de cada vez mais escravos com o dom. Isso liga a história à tensão 4 (nascem mais crianças com o dom) e ao tráfico de Zahran.
+**É o despertar que causa a Maré de Mana**, não o contrário. Quando Aurelian começa a acordar, a mana fundida nele começa a vazar do quarto selado e se espalha pelo mundo: uma **Maré de Mana que cresce aos poucos**. No começo quase ninguém percebe; no fim, o mundo inteiro mudou e não tem mais volta. A Coroa, para não perder o controle, aumenta os "sacrifícios": precisa de cada vez mais escravos com o dom.
 
-### Ato 1: Os sinais (primeiros meses) [Proposta]
+### O tempo da história (decisão do autor, 2026-11-05)
 
-O jogador não sabe de nada. As pistas aparecem pelo mundo, e **três delas** acendem o diário: "uma grande história começou".
+Antes de começar a partida, o jogador escolhe **dois tempos**, com nomes abstratos para ele não entender logo o que são:
 
-| Pista | Onde aparece |
+| Opção na tela | O que faz de verdade |
 |---|---|
-| O preço dos escravos com o dom dispara nos mercados | No comércio (o jogador vê nos números) |
-| Os animais perto do palácio agem estranho; nascem com olhos azuis | Boato numa taverna |
-| Uma vila de fronteira vende as suas crianças com o dom à Coroa | Notícia |
-| Um servo do palácio foge (o espião de Cassius) | Evento: o jogador pode cruzar com ele |
+| **Período mínimo para a grande história** | Quando o despertar começa: a Maré nasce e começam as mudanças no mundo |
+| **Período máximo até a grande história** | Quando a grande história começa de fato: as facções agem e os finais ficam possíveis |
 
-### Ato 2: O segredo vaza (fim do 1º ano)
+[Proposta] Os valores padrão: mínimo de **1 ano de jogo**, máximo de **3 anos de jogo**. O jogador pode mudá-los (por exemplo, de 0 a 10 anos para o mínimo; o máximo sempre depois do mínimo).
+
+A linha do tempo de uma partida:
+
+| Fase | Quando | O que acontece |
+|---|---|---|
+| **A calma** | Do Ano 412 até o período mínimo | Nada da grande história. O mundo anda normal |
+| **A Maré cresce** | Do período mínimo ao período máximo | Eventos de mudança no mundo, cada vez mais fortes (abaixo). O jogador sente que algo está acontecendo, mas não sabe o quê |
+| **A grande história** | Do período máximo em diante | Os Atos 1 a 3 (abaixo): o segredo vaza, as facções agem, a porta e os finais |
+
+### A Maré cresce: os eventos de mudança [Proposta]
+
+O tempo entre o mínimo e o máximo é dividido em **4 estágios**, com a mesma duração. Cada estágio traz eventos mais fortes, que começam perto do palácio da Coroa e se espalham pelo mapa.
+
+| Estágio | Como o mundo muda | Exemplos de eventos |
+|---|---|---|
+| **1. O sussurro** | Quase imperceptível, só perto do palácio | Os animais agem estranho; nascem ovelhas de olhos azuis; o preço dos escravos com o dom sobe um pouco; sonhos estranhos |
+| **2. A inquietação** | Já se nota nas regiões vizinhas | Nascem mais crianças com o dom (tensão 4); plantas mudam de cor e a colheita varia; os magos ficam mais fortes; o preço dos escravos com o dom dispara |
+| **3. A tempestade** | Atinge metade do mapa | Primeiras mutações em quem vive exposto; aparecem monstros novos; brotam minérios novos; Ashmoor executa magos em massa por medo |
+| **4. Sem volta** | O mundo inteiro | Biomas mudam de vez; vilas inteiras fogem ou são abandonadas; os mitos de cada povo ganham força (Theodoria fala em Graça, Ashmoor em outro Erro, a Coroa em Ascensão) |
+
+O diário marca "uma grande história começou" quando o jogador junta **três pistas** (HI10-3); isso pode acontecer já na fase em que a Maré cresce.
+
+### Ato 1: O segredo vaza (no período máximo)
 
 - O espião foge com a verdade do quarto selado. O jogador que o encontra pode **entregá-lo** (Coroa paga), **vendê-lo** (Ordem paga mais) ou **protegê-lo** (ganha a informação, e a Ordem e a Coroa passam a caçá-lo).
 - As três facções descobrem que o tempo está acabando e **procuram aliados**. Cada uma faz ao jogador um pedido que custa caro:
@@ -100,14 +121,14 @@ O jogador não sabe de nada. As pistas aparecem pelo mundo, e **três delas** ac
   - **Clãs:** abrir caminho até o palácio (guiar, abastecer, abrir os portões).
 - [Proposta] O jogador pode também **usar o segredo** sozinho: chantagear Lívia, ou espalhar a verdade ao povo da Coroa (liga com a ficha D9, Segredos).
 
-### Ato 3: O inverno (2º ano)
+### Ato 2: O inverno
 
 O mundo age sem o jogador:
 - A Coroa toma vilas de fronteira para "alimentar o Eterno" (tensão 2).
 - Os Clãs saqueiam para se armar; a Ordem move magos para perto da fronteira.
 - Ashmoor, assustada, executa magos em massa.
 
-### Ato 4: A porta (a masmorra lendária)
+### Ato 3: A porta (a masmorra lendária)
 
 **A masmorra:** o **Palácio da Coroa e o quarto selado** [Proposta]: corredores de guarda imperial, salas onde a mana distorce o lugar, e no fim a porta quente. Cada lado entra de um jeito:
 
@@ -121,9 +142,9 @@ O mundo age sem o jogador:
 
 | Final | Como chega | O mundo depois |
 |---|---|---|
-| **O Despertar do Eterno** (destino da parte 6) | A Coroa vence, ou ninguém age até o prazo [Proposta: 2 anos de jogo] | Aurelian volta a reinar; a regente vira serva. A Coroa cresce rápido. **Gancho:** "Onde está Kassian?" abre o segredo de Kassian como um segundo Eterno |
-| **O Eterno acorrentado** [Proposta] | A Ordem vence | Os Ascendidos ficam quase imortais; a Coroa entra em guerra civil. O Eterno pode se soltar numa partida longa |
-| **A morte do Eterno** (destino da parte 6) | Os Clãs vencem | A Coroa perde o mito e racha; o Grande Lobo vira lenda; nasce um item lendário (a arma que matou o Eterno) |
+| **O Despertar do Eterno** (destino da parte 6) | A Coroa vence, ou ninguém age até o fim da grande história [Proposta: 1 ano de jogo depois do período máximo] | Aurelian volta a reinar; a regente vira serva. A Coroa cresce rápido. [Proposta] A Maré fica para sempre em volta da Coroa. **Gancho (decisão do autor):** a primeira fala dele, "Onde está Kassian?", abre o segredo de Kassian como um segundo Eterno |
+| **O Eterno acorrentado** (decisão do autor, 2026-11-05: final novo) | A Ordem vence | Os Ascendidos ficam quase imortais; a Coroa entra em guerra civil. [Proposta] A Maré se concentra na torre da Ordem. O Eterno pode se soltar numa partida longa |
+| **A morte do Eterno** (destino da parte 6) | Os Clãs vencem | A Coroa perde o mito e racha; o Grande Lobo vira lenda; nasce um item lendário (a arma que matou o Eterno). [Proposta] A Maré some aos poucos, mas o que ela mudou fica |
 
 ### O que a história mostra do tema
 
@@ -132,9 +153,3 @@ O mundo age sem o jogador:
 - **Ninguém é herói:** a Coroa alimenta o seu deus com crianças; a Ordem quer fazer dele uma fonte; os Clãs matam porque é a lei do mais forte, não por justiça.
 - **A esperança é pequena:** no melhor caso, o jogador salva a própria vila e talvez algumas crianças.
 
-### Perguntas para o autor (só se gostar)
-
-1. A Maré de Mana como motivo do despertar está boa?
-2. O final novo, "O Eterno acorrentado", pode entrar ao lado dos dois da parte 6?
-3. A primeira fala de Aurelian ("Onde está Kassian?") como gancho do segredo de Kassian: sim ou não?
-4. O prazo de 2 anos de jogo até o despertar sozinho parece certo?
