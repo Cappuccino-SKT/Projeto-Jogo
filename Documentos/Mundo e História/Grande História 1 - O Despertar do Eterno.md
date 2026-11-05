@@ -89,7 +89,7 @@ Antes de começar a partida, o jogador escolhe **dois tempos**, com nomes abstra
 | **Período mínimo para a grande história** | Quando o despertar começa: a Maré nasce e começam as mudanças no mundo |
 | **Período máximo até a grande história** | Quando a grande história começa de fato: as facções agem e os finais ficam possíveis |
 
-Padrão (decisão do autor, 2026-11-05): mínimo de **2 anos de jogo**, máximo de **5 anos de jogo**. A regra vale para todas as Grandes Histórias (parte 5.2 do Mundo e História).
+Padrão (decisão do autor, 2026-11-05): mínimo de **2 anos de jogo**, máximo de **5 anos de jogo**. A regra vale para todas as Grandes Histórias (parte 5.2 do Mundo e História). Esta história **nunca é a primeira** do mundo; a condição que a adianta é o segredo do quarto selado revelado, ou muitos escravos com o dom entregues à Coroa (mesma parte).
 
 A linha do tempo de uma partida:
 

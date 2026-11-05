@@ -212,7 +212,7 @@ As faíscas não acontecem todas: a simulação acende uma ou outra conforme o m
 
 ### 5.2 Os ganchos e as Grandes Histórias (HI9-3)
 
-**Ideia do autor (HI9-3), como no Stellaris:** um conjunto de **Grandes Histórias**, missões grandes que mudam o mundo. No começo de cada partida, o jogo sorteia uma delas para ser a **grande história** daquela partida; o jogador segue ou não. Para conhecer todas, é preciso jogar mais de uma vez.
+**Ideia do autor (HI9-3), como no Stellaris:** um conjunto de **Grandes Histórias**, missões grandes que mudam o mundo. No começo de cada partida, o jogo sorteia uma delas (com pesos, abaixo) para ser a **grande história** daquela partida; o jogador segue ou não. Para conhecer todas, é preciso jogar mais de uma vez.
 
 **As regras (HI10):**
 - **A verdade é sempre a mesma; muda qual história acorda** (HI10-1). Aurelian sempre vive no quarto selado; só na partida em que "O Despertar do Eterno" é sorteado essa história anda. Nas outras, o segredo existe, mas fica quieto.
@@ -233,6 +233,32 @@ As faíscas não acontecem todas: a simulação acende uma ou outra conforme o m
 | 4 | **A Era da Pólvora:** Ashmoor chega às armas que vencem qualquer exército | O presidente do Conselho de Ashmoor; a sultana (Yasmin) | A Era da Pólvora, ou a pólvora em todas as mãos |
 | 5 | **As Correntes Quebradas:** uma revolta de escravizados nasce num mercado de Zahran e cresce | A sultana; o Sumo Sacerdote (Theodoros IV) | As Correntes Quebradas, ou um banho de sangue |
 | 6 | **A Voz do Doador:** Theodoria ouve o Doador pela primeira vez; ele é real ou é a outra dimensão chamando? | O Sumo Sacerdote | A Fé Única, ou uma nova fusão vinda da fé |
+
+**Qual história acorda (decisão do autor, 2026-11-05).** O jogador **não escolhe** a história; o jogo sorteia **com pesos**. As histórias mais possíveis (uma tecnologia, uma revolta) saem com mais frequência; as que mexem com a mana são mais raras e acontecem mais tarde, numa segunda ou terceira história do mundo. [Proposta] Os pesos:
+
+| Grande História | Peso na 1ª história | Peso da 2ª em diante |
+|---|---|---|
+| A Era da Pólvora | 40 | 15 |
+| As Correntes Quebradas | 30 | 15 |
+| A Espada de Kassian | 20 | 15 |
+| A Voz do Doador | 10 | 15 |
+| O Segundo Ritual | 0 (nunca é a primeira) | 20 |
+| O Despertar do Eterno | 0 (nunca é a primeira) | 20 |
+
+Exemplo: na 1ª história, a Era da Pólvora sai 40 vezes em 100. O Despertar só pode sair da 2ª em diante, e então sai 20 vezes em 100 (entre as que ainda não aconteceram).
+
+**As condições do mundo (decisão do autor, 2026-11-05).** Cada história tem uma **condição** que, se cumprida, faz ela acontecer **antes do previsto**, pelo jogador ou pela simulação. Exemplo do autor: o jogador investe nas pesquisas de armas de fogo e força a Era da Pólvora a chegar antes. [Proposta] As condições:
+
+| Grande História | A condição |
+|---|---|
+| A Era da Pólvora | Alguém (o jogador ou uma facção) pesquisa as armas de fogo até o fim da linha da pólvora |
+| As Correntes Quebradas | Uma revolta num mercado de escravos de Zahran (tensão 3), ou o jogador liberta muitos escravos (por exemplo, 50) |
+| A Espada de Kassian | Alguém chega ao fundo das ruínas da capital |
+| A Voz do Doador | A fé perdida do Sumo Sacerdote é revelada ao povo (a Teocracia precisa de um milagre) |
+| O Segundo Ritual | A Ordem junta as peças do Ritual: por exemplo, compra ou rouba 3 relíquias das masmorras lendárias |
+| O Despertar do Eterno | O segredo do quarto selado é revelado, ou a Coroa recebe muitos escravos com o dom (por exemplo, 20) |
+
+[Proposta] **O que a condição faz:** se a história ainda está na calma ou com o mundo mudando aos poucos, os estágios que faltam passam rápido, e a grande história começa em **3 meses de jogo**. Se a condição for de uma história que **não** foi sorteada, ela toma o lugar da sorteada, que volta ao sorteio. As histórias de mana continuam sem poder ser a primeira, nem por condição.
 
 As regras de jogo (os passos, os prazos, as pistas) ficam para a ficha D10 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]].
 
