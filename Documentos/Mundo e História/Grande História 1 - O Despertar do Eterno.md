@@ -89,7 +89,7 @@ Antes de começar a partida, o jogador escolhe **dois tempos**, com nomes abstra
 | **Período mínimo para a grande história** | Quando o despertar começa: a Maré nasce e começam as mudanças no mundo |
 | **Período máximo até a grande história** | Quando a grande história começa de fato: as facções agem e os finais ficam possíveis |
 
-[Proposta] Os valores padrão: mínimo de **1 ano de jogo**, máximo de **3 anos de jogo**. O jogador pode mudá-los (por exemplo, de 0 a 10 anos para o mínimo; o máximo sempre depois do mínimo).
+Padrão (decisão do autor, 2026-11-05): mínimo de **2 anos de jogo**, máximo de **5 anos de jogo**. A regra vale para todas as Grandes Histórias (parte 5.2 do Mundo e História).
 
 A linha do tempo de uma partida:
 
