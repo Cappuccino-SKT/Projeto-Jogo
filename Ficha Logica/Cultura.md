@@ -146,7 +146,7 @@ No fim de cada estação: a cultura com **mais NPCs** somados nas cidades da fac
 - Rito de Admissão e sucessão (guardados nos dados; usados pela Facção na fase D).
 - As tendências de Personalidade por cultura (quando o NPC tiver Personalidade).
 - A assimilação das minorias (Religião, C4).
-- A arte por cultura (troca de paleta; Pipeline de Arte).
+- A arte por cultura (tingimento; Pipeline de Arte).
 - O efeito do extremo na Diplomacia.
 - A discriminação dos não Magos na Arcana (quando existir o atributo Mago).
 

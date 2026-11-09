@@ -302,7 +302,7 @@ Cerca de **180 itens**: 29 matérias-primas brutas (com os 5 animais), 14 manufa
 | Inventário | Pilhas e instâncias; Dono; peso |
 | Classe Social | Consumo pelo Tier do bem |
 | Combate e Batalha | Atributos das armas e armaduras; kits dos Esquadrões |
-| Cultura e Pipeline | Textura por cultura; troca de paleta pelo material |
+| Cultura e Pipeline | Textura por cultura; tingimento pela cor do material |
 | Crime e Justiça | Itens proibidos; Grilhões; roupa Furtiva |
 | Magia | Cajados e Cetro, Pedra de Mana, Aço Mágico, encantamento, Grimório, Joia e Anel de Mana |
 | Tecnologia | Eras liberam Tiers e Ranks; Pólvora, Arcabuz e Bombarda na Era 2 |

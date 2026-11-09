@@ -130,7 +130,7 @@ No inverno, as moradias gastam **lenha** (Tora):
 
 ## Dia, noite e estações na tela
 
-- **Estações:** troca de paleta na placa de vídeo, como a das culturas (sem memória extra): primavera verde vivo, verão quente, outono alaranjado, inverno frio e dessaturado. A troca é gradual nos 2 primeiros dias da estação.
+- **Estações:** um tom de cor sobre o mapa, na placa de vídeo (sem memória extra): primavera verde vivo, verão quente, outono alaranjado, inverno frio e dessaturado. A troca é gradual nos 2 primeiros dias da estação.
 - **Dia e noite:** um tom de cor sobre o mapa em 4 fases, sem luzes dinâmicas na primeira versão:
 
 | Fase | Horas |
