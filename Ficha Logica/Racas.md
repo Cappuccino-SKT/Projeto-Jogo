@@ -57,7 +57,7 @@ Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câ
 ```
 
 - **`reproducao`:** "normal" (casal da mesma raça), "rainha" (só a rainha põe ovos), "fabricada" (só pela Câmara de Moldagem) ou "nenhuma".
-- **`dom_magico_em_por_mil`:** a chance de nascer com o dom de manipular a mana ([[Ficha Logica/Magia|Magia]]). [Proposta] 5 por mil nos Humanos ("raros").
+- **`dom_magico_em_por_mil`:** a chance de nascer com o dom de manipular a mana ([[Ficha Logica/Magia|Magia]]). [Proposta] 5 por mil nos Humanos ("raros"). **[Em aberto] (rodada RV1-3):** a ficha da Magia diz 3% (10% na Arcana), e a tabela abaixo diz que 95% da Ordem tem o dom; os três números não combinam.
 - **`habilidades_fixas`:** o Eterno tem tudo em 100.
 
 ### No `culturas.json`, cada cultura ganha
@@ -173,7 +173,7 @@ A raça do jogador **depende do início escolhido** (decisão do autor). [Propos
 |---|---|
 | Humano com Corpo a Corpo 40 da cultura Guerreira (+5) vs. Langren da mesma cultura | 45 vs. 65 |
 | Langren na Carpintaria, com habilidade igual à de um Humano | Produz 70% |
-| Filhos de um casal Ascendido em 100 estações férteis | 10% × 5% = 0,5% por estação: **cerca de 0,4 filho** |
+| Filhos de um casal Ascendido em 100 estações férteis | 10% × 5% = 0,5% por estação: **cerca de 0,5 filho** (4 em cada 10 casais têm pelo menos um) |
 | Khadim da Câmara em 10 anos de jogo (40 estações de 16 dias, 1 a cada 10 dias) | Cerca de **64** (se houver escravos humanos) |
 | Humanos com o dom numa cidade de 300 NPCs | 5 por mil: cerca de **1 ou 2** |
 
@@ -240,7 +240,7 @@ O jogador recruta Hao, um Langren de Combate, numa cidade da Teocracia (a lei: i
 
 ### 10.2 A Ordem em 50 anos
 
-A Ordem começa com cerca de 15 Ascendidos entre 300 NPCs. Com 0,5% de filho por estação e por casal, nascem cerca de **2 Ascendidos em 50 anos**; nenhum morre de velho (o velho é aos 120). **A elite quase não muda**, e cada Ascendido morto numa guerra é uma perda que a Ordem não repõe. Isso combina com a história ("a raça mais rara").
+A Ordem começa com cerca de 15 Ascendidos entre 300 NPCs. Com 0,5% de filho por estação e por casal, cada casal tem cerca de 1 filho em 50 anos (200 estações): nascem cerca de **2 Ascendidos se só 2 casais se formarem, e até 7 se todos os 15 casarem entre si** (a conta antiga dizia 2, sem dizer quantos casais; a pergunta está na rodada RV1-4). Nenhum morre de velho (o velho é aos 120). **A elite muda pouco**, e cada Ascendido morto numa guerra é uma perda que a Ordem não repõe. Isso combina com a história ("a raça mais rara").
 
 ### 10.3 Verificações
 

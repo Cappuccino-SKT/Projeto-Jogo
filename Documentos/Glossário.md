@@ -23,6 +23,27 @@
 | **Dia, Estação, Ano** | 24 h de jogo = 16 min reais a 1x; estação = 16 dias; ano = 4 estações = 64 dias. Não existem meses. [[Sistema de Tempo/Descrição\|Tempo]] |
 | **Pausa ativa** | Pausar o jogo para dar ordens, que são executadas ao despausar |
 
+## História do mundo
+
+Tudo desta parte vem do [[Mundo e História/Descrição|Mundo e História]].
+
+| Termo | Significado |
+|---|---|
+| **Império de Valdária** | O império que governou o continente por 600 anos, com a magia como "alta tecnologia". Caiu no Ano 0 |
+| **Grande Fusão** | O Ano 0: o Ritual de Ascensão do imperador Aurelian Valdren, atingido pelo feitiço de Kassian Dravel, fundiu o mundo com uma dimensão de mana pura. Destruiu a capital e criou as raças e os monstros |
+| **d.F. e a.F.** | Depois e antes da Fusão. O jogo começa no **Ano 412 d.F.** |
+| **Maré de Mana** | A mana de uma região fica intensa por 1 estação: favorece os magos e causa mutações. [[Ficha Logica/Racas\|Raças]] |
+| **Raça** | Humanos, Langren, Khadim, Ascendidos, Quitinos e o Eterno. Decide a idade de adulto e de velho, as habilidades e como cada povo trata o NPC. Entra no jogo depois da fase D. [[Ficha Logica/Racas\|Raças]] |
+| **Langren** | Os descendentes do exército rebelde: fortes e agressivos, produzem pouco. Todos os Clãs de Tian-Lang |
+| **Khadim** | Raça artificial de escravos submissos, feita de humanos na Câmara de Moldagem; vida curta, sem filhos. A origem é segredo |
+| **Ascendidos** | A elite de magos da Ordem de Custodum: vida muito longa, quase sem filhos; a raça mais rara |
+| **Quitinos** | Povo de carapaça, sem facção, que vive em tribos com uma rainha |
+| **Eterno** | O que o imperador Aurelian virou na Fusão: imortal, escondido no palácio da Coroa |
+| **Nomes das facções** | Autoritária = Coroa de Valdren; Escravista = Sultanato de Zahran; Guerreira = Clãs de Tian-Lang; Tecnocrata = Comunidade de Ashmoor; Religiosa = Teocracia de Theodoria; Arcana = Ordem de Custodum. As fichas e o código usam o nome de trabalho |
+| **O Doador** | O deus da Teocracia de Theodoria; só o Sumo Sacerdote sabe o nome |
+| **Grande História** | Uma das 6 missões grandes que mudam o mundo; uma acorda por partida (ficha D10, a escrever) |
+| **Segredo** | Uma verdade escondida de um líder ou do mundo, que o jogador pode descobrir e usar (ficha D9, a escrever) |
+
 ## Pessoas
 
 | Termo | Significado |
