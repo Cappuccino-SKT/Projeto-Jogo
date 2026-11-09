@@ -23,7 +23,7 @@ struct RegrasDaPopulacao {
     int migranteSaiComFelicidadeAbaixoDe = 30;
     int migranteSaiComDesempregoEmPorcento = 30;
     int idadeDoMigranteMinima = 5;  // nunca abaixo da idade de adulto (rodada HI12)
-    int idadeDoMigranteMaxima = 12;
+    int idadeDoMigranteMaxima = 17;  // a primeira metade da vida adulta (rodada RV1-5)
     int habilidadeDoMigranteMinima = 20;  // a faixa do Civil (PO1-3)
     int habilidadeDoMigranteMaxima = 60;
     std::vector<std::string> nomesDosNovosNpcs = {"Rita", "Tiago", "Úrsula", "Vítor", "Wanda", "Xavier", "Yara", "Zeca"};

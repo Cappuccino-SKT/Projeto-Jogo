@@ -21,7 +21,7 @@ Bonecos simples vistos de cima, como no RimWorld: **cabeça grande e redonda com
 3. **Contorno:** quase preto (marrom muito escuro), grosso e do mesmo peso em todas as peças.
 4. **Cor:** lisa, com **uma** sombra suave (mais escura embaixo e à direita); sem brilho forte, sem textura de foto.
 5. **Luz:** vem de cima à esquerda, sempre.
-6. **Cores das culturas:** as do [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]] (Guerreira vermelho-sangue e ferro, Arcana roxo e azul-noite, e assim por diante).
+6. **Cores das culturas (rodada RV1-2):** o jogo **tinge** a peça com as cores do [[Pipeline de Arte e Conteúdo/Descrição|Pipeline]] (Guerreira vermelho-sangue e ferro, Arcana roxo e azul-noite, e assim por diante). Por isso, a roupa que muda de cor por cultura é pintada em **tons claros de cinza**, com uma **máscara** ao lado (vermelho = cor principal; verde = cor secundária; preto = não muda). A roupa única, que não muda de cor, é pintada normalmente e não tem máscara.
 
 ## 3. As duas visões (rodada AR1)
 
@@ -86,6 +86,16 @@ Usando o manequim anexado, faça a mesma folha com pele [tom: muito clara / méd
 ```
 Vista o manequim anexado com [descrição: gibão azul-escuro com bordados dourados, gola branca franzida e mangas bufantes listradas], no estilo da cultura [Coroa de Valdren: romano imperial, dourado e preto]. Mostre o manequim por baixo só onde a roupa não cobre. Visão DE PERTO, 3 colunas.
 ```
+
+**Uma roupa que muda de cor por cultura (rodada RV1-2):**
+```
+Vista o manequim anexado com [descrição: túnica de camponês com cinto e barra]. Pinte a roupa SÓ em tons claros de cinza, com a sombra suave de sempre; não use nenhuma cor na roupa. Mostre o manequim por baixo só onde a roupa não cobre. Visão DE PERTO, 3 colunas.
+```
+Depois, a máscara, na mesma conversa:
+```
+Agora a MESMA imagem como máscara, sem contorno e sem sombra: pinte de vermelho puro (#FF0000) as partes principais da roupa [a túnica], de verde puro (#00FF00) os detalhes [o cinto e a barra] e de preto todo o resto (o manequim e o fundo). Mesma posição e mesmo tamanho.
+```
+Se a máscara da IA sair torta, é mais rápido pintá-la à mão no Krita, numa camada por cima da roupa.
 
 **A mesma roupa, de longe:**
 ```

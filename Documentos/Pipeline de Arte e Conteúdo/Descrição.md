@@ -68,9 +68,9 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 
 ### Variações por cultura
 
-- **[Em aberto] (rodada RV1-2):** a troca de paleta por tabela foi pensada para a pixel art, que tem poucas cores exatas. No estilo RimWorld, as imagens têm bordas suaves e sombras, e a tabela não funciona; o que o RimWorld faz é **tingir** uma imagem clara com a cor da cultura ou do material.
-- **Primeiras versões:** **troca de paleta**. Cada peça (armadura, arma, roupa, parte de construção) é desenhada uma vez, à mão, e o jogo troca as cores por uma tabela: o "metal" vira ferro escuro na Guerreira e bronze polido na Escravista. A mesma técnica dá a cor do material (Tier) e da roupa.
-- **Objetivo final:** cada cultura com **estilo de arte próprio** nas **armas, armaduras e construções** (formas diferentes, não só cores). **[Refinar depois]** A troca de paleta continua valendo para as variações de cor dentro de cada cultura.
+- **Tingimento, como no RimWorld (rodada RV1-2):** cada peça (armadura, arma, roupa, parte de construção) é desenhada uma vez, com as partes que mudam de cor pintadas em **tons claros de cinza**. O jogo multiplica o cinza pela cor da cultura ou do material: a túnica cinza-clara sai vermelho-sangue com detalhes cor de ferro na Guerreira e branca com azul-celeste na Religiosa. A sombra e a borda suave continuam, porque a cor é multiplicada, não trocada.
+- **Duas cores por peça:** a principal e a secundária. Uma segunda imagem, a **máscara**, diz onde cada uma entra: vermelho = cor principal; verde = cor secundária; preto = não muda. A peça **sem máscara** é desenhada com as cores dela (serve para a roupa única, que não muda por cultura). A pele e o cabelo usam o mesmo tingimento: os tons de pele são cores, não manequins a mais. [Proposta] Os nomes: `peca.png` e `peca_mascara.png`. A troca de paleta por tabela, decidida na época da pixel art, saiu.
+- **Objetivo final:** cada cultura com **estilo de arte próprio** nas **armas, armaduras e construções** (formas diferentes, não só cores). **[Refinar depois]** O tingimento continua valendo para as variações de cor dentro de cada cultura.
 - **Construções:** a aparência muda nos **níveis 1, 3 e 5** (os níveis 2 e 4 repetem a aparência anterior com detalhes pequenos), montada com **peças reaproveitáveis** por cultura (paredes, telhados, portas).
 
 ### Animação
@@ -115,7 +115,7 @@ A arte é feita em camadas, igual à programação:
 | Mapas Locais | 48 de 128 × 128 tiles | 1 na fatia vertical; 8 na primeira região |
 | Criaturas | cerca de 10 tipos × 40 quadros | 3 tipos |
 | Interface | molduras, botões e cerca de 150 ícones de itens | ícones da fatia vertical |
-| Muralhas | tileset de paliçada e de pedra (paleta por cultura), com portão e brecha | 1 tileset |
+| Muralhas | tileset de paliçada e de pedra (cor por cultura), com portão e brecha | 1 tileset |
 | Clima | poucos sprites de partícula (pingo, floco) e uma textura de névoa | os mesmos |
 
 ### Peso da arte
@@ -132,11 +132,11 @@ O autor pediu atenção ao **peso da arte no jogo**. Estimativa, considerando im
 | Construções (lote médio de 4 × 4 tiles = 256 × 256 px, nas duas visões) | 22 tipos × 3 aparências × 6 culturas × 512 KB | cerca de 200 MB |
 | Mapas Locais | não são imagens, são números: 128 × 128 × 7 camadas × 2 bytes | cerca de 230 KB por mapa; 11 MB os 48 |
 
-**Conta refeita em 2026-11-09 [Proposta]** (a anterior era da pixel art, com tile de 16 × 16, e dava menos de 100 MB). Com as imagens de 64 por tile, cada imagem pesa **16 vezes mais**:
+**Conta refeita em 2026-11-09** (a anterior era da pixel art, com tile de 16 × 16, e dava menos de 100 MB). Com as imagens de 64 por tile, cada imagem pesa **16 vezes mais**:
 
 - **Tudo carregado ao mesmo tempo:** cerca de **520 MB**, acima do teto de 256 MB.
 - **Só o necessário** (a regra abaixo: o terreno e 2 culturas dos mapas ativos): cerca de **175 MB**, dentro do teto, mas com pouca folga.
-- O que fazer com isso é a pergunta **RV1-1** da [[Rodada Pendente]].
+- **Decisão (rodada RV1-1, opção A):** as imagens continuam com 64 por tile, e o teto de 256 MB continua. O jogo carrega só as culturas dos mapas ativos e guarda **cópias menores** de cada imagem para o zoom de longe (para a imagem reduzida não "piscar"), o que soma um terço: cerca de **235 MB** no pior caso. A medição é feita na primeira leva de arte; se passar do teto, entra a **compressão da placa de vídeo** (4 vezes menos memória).
 
 O que mais pesa continua sendo a **quantidade de coisas desenhadas por quadro** e a **simulação dos NPCs**.
 
@@ -179,7 +179,7 @@ data/
 ```
 
 - **Mundo ajustável:** o tamanho da malha do Mapa Mundial vem dos dados (`mapas.json`), não de números fixos no código, para o mundo poder crescer depois dos testes (ver [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]).
-- **Troca de paleta:** feita na placa de vídeo, na hora de desenhar, com uma tabela de cores por cultura e material. Não custa memória extra.
+- **Tingimento:** feito na placa de vídeo, na hora de desenhar, com a cor da cultura e do material e a máscara da peça (rodada RV1-2). A máscara custa uma imagem a mais por peça tingida.
 - **Fatia vertical:** usa só arte provisória; serve também para medir o peso da arte.
 
 ### Ligação com outros sistemas
@@ -189,10 +189,10 @@ data/
 | Arquitetura | Atlas, desenho em lote, Tracy, validação em C++, pastas `assets/` e `data/` |
 | Mapa | Padrão de camadas do Tiled; interiores próprios ou genéricos |
 | Mundo e Estado Inicial | Malha ajustável pelos dados |
-| Cultura | Troca de paleta agora, estilo próprio no futuro; cores das culturas |
+| Cultura | Tingimento agora, estilo próprio no futuro; cores das culturas |
 | Construção | Aparência nos níveis 1, 3 e 5, com peças reaproveitáveis |
 | Combate | Boneco de 128 × 128, 3 direções e espelho; o golpe com 3 quadros [Proposta] ([[Pipeline de Arte e Conteúdo/Guia da Arte\|Guia da Arte]]) |
-| Batalha e Guerra | 7ª camada Elevação; tileset de Muralha; os bonecos da batalha são os mesmos, com paleta por cultura (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
+| Batalha e Guerra | 7ª camada Elevação; tileset de Muralha; os bonecos da batalha são os mesmos, com a cor da cultura (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Interface | Cores das culturas na lente Política; ícones de itens |
 | Clima e Estações | Paleta por estação, tom do dia, partículas e névoa; neve no chão, rios congelados, folhas e flores no futuro (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |
 | Itens | A lista de itens manda até a pasta `data/` existir |
@@ -203,4 +203,4 @@ data/
 2. **Ferramenta de atlas:** de terceiros ou própria, no início do código.
 3. **Teto de memória da arte:** 256 MB proposto; o PC alvo mínimo tem placa de vídeo de 2 GB (rodada V3-12).
 4. **Estações no futuro:** quando entram neve, rios congelados, folhas e flores (com o Clima e Estações).
-5. **Estilo próprio por cultura:** quando sai da troca de paleta para formas próprias.
+5. **Estilo próprio por cultura:** quando sai do tingimento para formas próprias.

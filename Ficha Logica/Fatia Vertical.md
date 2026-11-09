@@ -200,7 +200,7 @@ Os salários por hora ficam em **centésimos** de moeda (75 = 0,75 moeda), só p
 | **A cada 5 minutos de jogo** (cerca de 67 ticks) | Reavaliar a Utilidade de cada NPC. Distribuída: em cada tick, só 1/67 dos NPCs reavalia, para não pesar num tick só |
 | **A cada hora de jogo** | Produção (cada trabalhador presente soma horas no ciclo); obras; fase do dia (luz) |
 | **A cada dia** (virada às **0h**, rodada FT1-5) | A sequência do dia, na ordem abaixo |
-| **A cada estação** (no dia 1) | Produtividade da estação; manutenção das construções; redistribuição dos empregos; nascimentos e mortes; troca de paleta |
+| **A cada estação** (no dia 1) | Produtividade da estação; manutenção das construções; redistribuição dos empregos; nascimentos e mortes; o tom de cor da estação |
 
 **A sequência do dia** (FT1-5):
 

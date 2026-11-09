@@ -154,4 +154,4 @@ Os estilos de início têm documento próprio: **Sistema de Início de Jogo**.
 ### Perguntas em aberto
 
 1. **Nomes das culturas e regiões.** Ficam para a história do jogo; por ora, nomes significativos.
-2. **Arte por cultura:** quando sair da troca de paleta para formas próprias (ver Pipeline de Arte e Conteúdo).
+2. **Arte por cultura:** quando sair do tingimento para formas próprias (ver Pipeline de Arte e Conteúdo).

@@ -88,6 +88,7 @@ A **Inteligência** do documento ainda não existe: a Mana e a quantidade de fei
 3. **Os filhos de Importantes e do jogador** (que têm pais registrados): 3% (ou 10%), 25% com um pai Mago, 60% com os dois.
 4. **O migrante:** Mago com a chance da proporção da região de onde vem.
 5. **O começo:** 15% dos NPCs da Arcana e 5% dos outros são Magos.
+6. **A raça (rodada RV1-3):** esta regra vale para as raças com `dom_magico` "normal" (o Humano). O Langren, o Khadim e o Quitino nunca nascem Magos; o Ascendido e o Eterno sempre ([[Ficha Logica/Racas|Raças]]). Numa região com Maré de Mana, a base é multiplicada por 5.
 
 ### 4.2 A Mana
 

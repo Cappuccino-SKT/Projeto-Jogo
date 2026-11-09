@@ -29,26 +29,27 @@ Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câ
 {
   "racas": [
     { "id": "humano", "nome": "Humanos", "adulto": 5, "velho": 31, "reproducao": "normal", "fertilidade_em_porcento": 100,
-      "habilidades_em_pontos": {}, "personalidade_em_pontos": {}, "dom_magico_em_por_mil": 5, "marcas": [] },
+      "habilidades_em_pontos": {}, "personalidade_em_pontos": {}, "dom_magico": "normal", "marcas": [] },
     { "id": "langren", "nome": "Langren", "adulto": 4, "velho": 24, "reproducao": "normal", "fertilidade_em_porcento": 100,
       "habilidades_em_pontos": { "corpo_a_corpo": 20, "oficio": -15, "comercio": -15 }, "personalidade_em_pontos": { "agressividade": 30 },
-      "dano_recebido_no_corpo_a_corpo_em_porcento": 80, "producao_em_porcento": 70, "dom_magico_em_por_mil": 0, "marcas": ["mutante"] },
+      "dano_recebido_no_corpo_a_corpo_em_porcento": 80, "producao_em_porcento": 70, "dom_magico": "nunca", "marcas": ["mutante"] },
     { "id": "khadim", "nome": "Khadim", "adulto": 0, "velho": 10, "reproducao": "fabricada",
       "habilidades_em_pontos": { "bracal": 15 }, "personalidade_fixa": { "lealdade": 100, "coragem": 20 },
-      "sobe_de_habilidade": false, "pode_liderar": false, "faz_greve_e_foge": false, "dom_magico_em_por_mil": 0, "marcas": ["artificial"] },
-    { "id": "ascendido", "nome": "Ascendidos", "adulto": 10, "velho": 120, "reproducao": "normal", "fertilidade_em_porcento": 5,
+      "sobe_de_habilidade": false, "pode_liderar": false, "faz_greve_e_foge": false, "dom_magico": "nunca", "marcas": ["artificial"] },
+    { "id": "ascendido", "nome": "Ascendidos", "adulto": 10, "velho": 120, "reproducao": "normal", "fertilidade_em_porcento": 2,
       "habilidades_em_pontos": { "especialista": 15 }, "personalidade_em_pontos": { "sociabilidade": -20 },
-      "dom_magico_em_por_mil": 1000, "marcas": ["mutante", "magica"] },
+      "dom_magico": "sempre", "marcas": ["mutante", "magica"] },
     { "id": "quitino", "nome": "Quitinos", "adulto": 2, "velho": 15, "velho_da_rainha": 40, "reproducao": "rainha",
       "habilidades_em_pontos": { "bracal": 10 }, "personalidade_em_pontos": { "coragem": 20 },
-      "dano_recebido_em_porcento": 70, "come_qualquer_carne": true, "dom_magico_em_por_mil": 0, "marcas": ["mutante", "monstruosa"] },
+      "dano_recebido_em_porcento": 70, "come_qualquer_carne": true, "dom_magico": "nunca", "marcas": ["mutante", "monstruosa"] },
     { "id": "eterno", "nome": "Eterno", "adulto": 0, "velho": null, "reproducao": "nenhuma", "populacao_maxima": 1,
-      "habilidades_fixas": 100, "dom_magico_em_por_mil": 1000, "marcas": ["magica", "unica"] }
+      "habilidades_fixas": 100, "dom_magico": "sempre", "marcas": ["magica", "unica"] }
   ],
   "lei_das_outras_racas": {
     "opcoes": ["iguais", "segunda_classe", "escravizaveis", "cacadas"],
     "felicidade": [0, -10, -25, -40],
-    "imposto_da_segunda_classe_em_porcento": 200
+    "imposto_da_segunda_classe_em_porcento": 200,
+    "sem_o_dom_na_ordem": "segunda_classe"
   },
   "mare_de_mana": { "por_ano_no_mundo": 1, "dura_estacoes": 1, "dom_magico_dos_nascidos_vezes": 5 },
   "camara_de_moldagem": { "dias_por_khadim": 10 },
@@ -57,7 +58,7 @@ Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câ
 ```
 
 - **`reproducao`:** "normal" (casal da mesma raça), "rainha" (só a rainha põe ovos), "fabricada" (só pela Câmara de Moldagem) ou "nenhuma".
-- **`dom_magico_em_por_mil`:** a chance de nascer com o dom de manipular a mana ([[Ficha Logica/Magia|Magia]]). [Proposta] 5 por mil nos Humanos ("raros"). **[Em aberto] (rodada RV1-3):** a ficha da Magia diz 3% (10% na Arcana), e a tabela abaixo diz que 95% da Ordem tem o dom; os três números não combinam.
+- **`dom_magico` (rodada RV1-3):** "normal" (a regra de nascer Mago da [[Ficha Logica/Magia|Magia]], 4.1), "nunca" ou "sempre". O número fica só na ficha da Magia.
 - **`habilidades_fixas`:** o Eterno tem tudo em 100.
 
 ### No `culturas.json`, cada cultura ganha
@@ -68,12 +69,12 @@ Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câ
 ```
 
 - **`racas_dos_livres`:** a porcentagem de cada raça entre os NPCs livres (RA1-3).
-- **`racas_do_povo`:** as raças que a lei "As outras raças" **não** atinge. [Proposta] Na Ordem de Custodum, também não atinge quem tem o dom mágico.
+- **`racas_do_povo`:** as raças que a lei "As outras raças" **não** atinge. **Na Ordem de Custodum (rodada RV1-3),** o Humano sem o dom mágico é de **segunda classe** (o dobro de imposto), mesmo sendo da raça do povo; quem tem o dom não é atingido.
 
 | Povo | Livres (RA1-3) | Escravos ([[Ficha Logica/Escravidao\|Escravidão]]) | A lei no começo (RA1-4) |
 |---|---|---|---|
 | Clãs de Tian-Lang | 100% Langren | Os que eles capturam | Iguais (vale a lei do mais forte, não a raça) |
-| Ordem de Custodum | 5% Ascendidos (a elite), 95% Humanos com o dom | Humanos e outras raças, para experimentos | Escravizáveis (todos os sem magia) |
+| Ordem de Custodum | 5% Ascendidos (a elite) e 95% Humanos: cerca de 15% com o dom (os membros da Ordem) e 80% sem o dom, o povo comum (rodada RV1-3) | Humanos e outras raças, para experimentos | Escravizáveis (as outras raças); os Humanos sem o dom, segunda classe |
 | Sultanato de Zahran | 100% Humanos | Muitos Khadim, também nos exércitos | Escravizáveis |
 | Comunidade de Ashmoor | 100% Humanos | Khadim (sem saber da origem) | Caçadas: quem tem a marca "mutante" ou "mágica" |
 | Coroa de Valdren | 95% Humanos, 5% Langren | Poucos | Segunda classe (o dobro de imposto) |
@@ -84,7 +85,7 @@ Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câ
 | Campo | O que é |
 |---|---|
 | `raca` | O id da raça ("langren"). Até o marco, todos "humano" |
-| `temDomMagico` | Sorteado ao nascer (a chance da raça; 5 vezes maior na Maré) |
+| `temDomMagico` | Sorteado ao nascer pela regra da [[Ficha Logica/Magia\|Magia]] (4.1), se a raça deixa; 5 vezes maior na Maré |
 | `ehRainha` | Só nos Quitinos |
 | `estaDesperto` | Só nos Khadim: o raro que ganhou consciência (um companheiro, o estilo Escravo) |
 
@@ -111,12 +112,12 @@ Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câ
 1. **A raça:** sorteada pela tabela `racas_dos_livres` da cultura dele. O filho é **sempre da raça dos pais** (RA1-5: só a mesma raça tem filhos).
 2. **As habilidades:** os pontos da raça somam com os da cultura; o total fica entre 0 e 100.
 3. **A Personalidade:** os pontos da raça somam ao sorteio (de 20 a 80), entre 0 e 100; os traços fixos (Khadim) trocam o sorteio.
-4. **O dom mágico:** chance da raça em por mil (vezes 5 se nasceu numa região com Maré de Mana).
+4. **O dom mágico (rodada RV1-3):** vale a regra 4.1 da [[Ficha Logica/Magia|Magia]] (3% sem pais Magos; 10% na cultura Arcana; 25% com um pai Mago e 60% com os dois). A raça só diz se ela se aplica: "normal" usa a regra; "nunca", nunca nasce com o dom; "sempre", todos nascem. Numa região com Maré de Mana, a chance base é multiplicada por 5 (3% vira 15%; 10% vira 50%).
 
 ### 4.2 A vida e os filhos
 
 1. **A velhice:** a regra da [[Ficha Logica/Populacao|População]] com o `velho` da raça (Langren a partir de 24; Ascendido a partir de 120). O Eterno nunca envelhece.
-2. **Os filhos (RA1-5):** só um casal da mesma raça; a chance da [[Ficha Logica/Companheiros|família]] (10% por estação) × `fertilidade_em_porcento` (Ascendidos: 0,5%). A mulher é fértil da idade de adulto da raça até o velho dela − 1 [Proposta]. Raças diferentes podem casar, mas não têm filhos.
+2. **Os filhos (RA1-5):** só um casal da mesma raça; a chance da [[Ficha Logica/Companheiros|família]] (10% por estação) × `fertilidade_em_porcento` (Ascendidos: 2%, ou 0,2% por estação; rodada RV1-4). A mulher é fértil da idade de adulto da raça até o velho dela − 1 [Proposta]. Raças diferentes podem casar, mas não têm filhos.
 3. **Os Khadim** não têm filhos: só nascem na Câmara (4.5). **Os Quitinos** só nascem da rainha (4.6).
 
 ### 4.3 A lei "As outras raças" (RA1-4)
@@ -173,9 +174,9 @@ A raça do jogador **depende do início escolhido** (decisão do autor). [Propos
 |---|---|
 | Humano com Corpo a Corpo 40 da cultura Guerreira (+5) vs. Langren da mesma cultura | 45 vs. 65 |
 | Langren na Carpintaria, com habilidade igual à de um Humano | Produz 70% |
-| Filhos de um casal Ascendido em 100 estações férteis | 10% × 5% = 0,5% por estação: **cerca de 0,5 filho** (4 em cada 10 casais têm pelo menos um) |
+| Filhos de um casal Ascendido em 100 estações férteis | 10% × 2% = 0,2% por estação: **cerca de 0,2 filho** (1 em cada 5 casais tem um) |
 | Khadim da Câmara em 10 anos de jogo (40 estações de 16 dias, 1 a cada 10 dias) | Cerca de **64** (se houver escravos humanos) |
-| Humanos com o dom numa cidade de 300 NPCs | 5 por mil: cerca de **1 ou 2** |
+| Humanos com o dom numa cidade de 300 NPCs | 5% no mundo: cerca de **15**; na Arcana, 15%: cerca de **45** (Magia, 4.1) |
 
 ## 6. Conversa com outros sistemas
 
@@ -211,8 +212,8 @@ A raça do jogador **depende do início escolhido** (decisão do autor). [Propos
 ## 8. Testes
 
 1. **As idades:** um Langren fica velho aos 24; um Ascendido, aos 120; o Eterno nunca.
-2. **Os filhos:** um casal Humano e Langren nunca tem filho; um casal Ascendido tem cerca de 1/20 da chance dos Humanos.
-3. **A cultura:** em 1.000 NPCs da Teocracia, cerca de 850 Humanos, 100 Langren e 50 Quitinos; nos Clãs, todos Langren.
+2. **Os filhos:** um casal Humano e Langren nunca tem filho; um casal Ascendido tem cerca de 1/50 da chance dos Humanos; nenhum Langren, Khadim ou Quitino nasce com o dom, e todo Ascendido nasce.
+3. **A cultura:** em 1.000 NPCs da Teocracia, cerca de 850 Humanos, 100 Langren e 50 Quitinos; nos Clãs, todos Langren; na Ordem, cerca de 50 Ascendidos, 150 Humanos com o dom e 800 sem.
 4. **A lei:** um Langren em Ashmoor é preso na revista; na Coroa, paga o dobro de imposto; nos Clãs, nada.
 5. **O segredo:** antes da revelação, o Khadim não é caçado em Ashmoor.
 6. **A Câmara:** com escravos humanos, 1 Khadim a cada 10 dias; destruída, nenhum.
@@ -240,7 +241,7 @@ O jogador recruta Hao, um Langren de Combate, numa cidade da Teocracia (a lei: i
 
 ### 10.2 A Ordem em 50 anos
 
-A Ordem começa com cerca de 15 Ascendidos entre 300 NPCs. Com 0,5% de filho por estação e por casal, cada casal tem cerca de 1 filho em 50 anos (200 estações): nascem cerca de **2 Ascendidos se só 2 casais se formarem, e até 7 se todos os 15 casarem entre si** (a conta antiga dizia 2, sem dizer quantos casais; a pergunta está na rodada RV1-4). Nenhum morre de velho (o velho é aos 120). **A elite muda pouco**, e cada Ascendido morto numa guerra é uma perda que a Ordem não repõe. Isso combina com a história ("a raça mais rara").
+A Ordem começa com cerca de 15 Ascendidos entre 300 NPCs. Com 0,2% de filho por estação e por casal (rodada RV1-4), mesmo que os 15 formem 7 casais, nascem cerca de **3 Ascendidos em 50 anos** (7 × 200 estações × 0,2%); nenhum morre de velho (o velho é aos 120). **A elite quase não muda**, e cada Ascendido morto numa guerra é uma perda que a Ordem não repõe. Isso combina com a história ("a raça mais rara").
 
 ### 10.3 Verificações
 
@@ -265,3 +266,4 @@ A Ordem começa com cerca de 15 Ascendidos entre 300 NPCs. Com 0,5% de filho por
 - **Companheiros:** Cassius tem 432 anos na história (RA1-1, opção B); a Vida prolongada continua.
 - **Facção:** a lei nova; a raça do líder.
 - **Plano das Fichas:** a ficha nova **Fauna e Monstros**.
+- **Magia (rodada RV1-3):** a regra 4.1 dela vale para o dom; a raça diz "normal", "nunca" ou "sempre".
