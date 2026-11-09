@@ -7,14 +7,15 @@
 Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **desempenho**: ele deve rodar com facilidade em qualquer PC.
 
 - **Inspiração de jogabilidade:** RimWorld, Kenshi, Total War, Mount & Blade, The Guild, Songs of Syx e Sword & Banner.
-- **Inspiração gráfica:** Songs of Syx, Sword & Banner, Romestead, Dimraeth e Stardew Valley.
-- Toda a parte gráfica é feita à mão, sem nada procedural ou aleatório.
+- **Inspiração gráfica:** o estilo do RimWorld (decisão de 2026-10-26; antes, pixel art como a de Songs of Syx e Stardew Valley).
+- Nada na parte gráfica é procedural ou aleatório: as bases vêm da IA de imagem e são corrigidas à mão pelo autor, e os mapas são desenhados à mão ([[Pipeline de Arte e Conteúdo/Descrição|Pipeline de Arte]]).
 
 ## Sistemas
 
 ### Mundo
 
 - [[Sistema de Mapa/Descrição|Sistema de Mapa]] — Mundial, Local, Interno e de Guerra
+- [[Mundo e História/Descrição|Mundo e História]] — o tema, o passado (a Grande Fusão), as 6 facções, as raças, os líderes do Ano 412 e as Grandes Histórias. **A história manda:** quando ela bate numa ficha, a ficha muda
 - [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]] — regiões, cidades, masmorras e relações no primeiro dia
 - [[Sistema de Cidade/Descrição|Sistema de Cidade]]
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
@@ -30,6 +31,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Classe Social/Descrição|Sistema de Classe Social]]
 - [[Sistema de IA/Descrição|Sistema de IA]]
 - [[Sistema de Cultura/Descrição|Sistema de Cultura]] — 6 culturas iniciais
+- [[Ficha Logica/Racas|Raças]] — Humanos, Langren, Khadim, Ascendidos, Quitinos e o Eterno (só ficha; entram depois da fase D)
 - [[Sistema de Religião/Descrição|Religião e Fé]] — Devoção, Templo, festivais, heresia, assimilação e Sumo Sacerdote
 - [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
 - [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, dinastia, exércitos
@@ -68,12 +70,12 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 
 ## Próximos passos
 
-O design está completo e revisado. A fase agora é o **código da fatia vertical**, marco a marco, seguindo a [[Ficha Logica/Fatia Vertical|Ficha Lógica]]. O caminho de cada sistema é: este documento → a ficha dele em `Ficha Logica/` → as regras em `Codigo/` → o programa em `Jogo/`.
+O design está completo e revisado, e a fatia vertical está pronta. A fase agora é o **código depois da fatia**, marco a marco, na ordem do [[Ficha Logica/Plano das Fichas|Plano das Fichas]] (o ponto exato está na [[Retomada]]). O caminho de cada sistema é: este documento → a ficha dele em `Ficha Logica/` → as regras em `Codigo/` → o programa em `Jogo/`.
 
-## Primeira meta de desenvolvimento
+## Primeira meta de desenvolvimento (concluída em 2026-10-19)
 
 Uma **fatia vertical**: 1 cidade, 1 cadeia de produção (Fazenda → Cozinha → Mercado), NPCs com rotina, consumo e Felicidade, 1 personagem controlável e sem guerra. Detalhes na [[Arquitetura/Descrição|Arquitetura]].
 
 ## Estado atual
 
-A situação geral e os números-chave estão no [[Estado do Projeto]]. Para retomar o trabalho, veja a [[Retomada]]. As revisões antigas estão na pasta `Histórico/`, dentro de `Documentos/` ([[Revisão do Projeto]] e [[Revisão Completa]]).
+A situação geral e os números-chave estão no [[Estado do Projeto]]. Para retomar o trabalho, veja a [[Retomada]]. Os termos do jogo estão no [[Glossário]]. As revisões antigas estão na pasta `Histórico/`, dentro de `Documentos/` ([[Revisão do Projeto]] e [[Revisão Completa]]).

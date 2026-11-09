@@ -39,7 +39,7 @@ Documento do sistema: [[Sistema de Companheiros e Diálogo/Descrição|Companhei
                "ordem_contra_a_personalidade": -5, "missao_pessoal": 10, "presente_por_moedas": 20 },
   "felicidade_do_controlado": { "salario_em_dia": 10, "salario_atrasado": -20, "sem_comida": -25, "por_companheiro_morto_na_estacao": -10, "minimo_mortos": -30 },
   "familia": { "gravidez_estacoes": 1, "chance_de_filho_por_estacao_em_porcento": 10,
-               "chance_de_casar_por_estacao_em_porcento": 25, "adulto_aos": 4, "fertil_ate": 20 },
+               "chance_de_casar_por_estacao_em_porcento": 25, "fertil_ate": 30 },
   "dialogo": { "base": 50, "habilidade_divide": 2, "opiniao_divide": 4, "traco_divide": 3, "limites": [5, 95],
                "falha_persuadir": -5, "falha_intimidar": -10, "barganha_em_porcento": 5 }
 }
@@ -231,6 +231,8 @@ O jogador é Aventureiro, com 300 moedas e Renome 0. A Cidade Religiosa (7,3), n
 **Achado:** o lucro da Carpintaria (54 a 70 por estação) não paga nem 2 companheiros comuns (100 por estação), e o jogador sozinho tem 8,8% contra 6 bandidos (Combate, 10.4). O começo fica apertado de propósito: o primeiro companheiro vem com o comércio, não com a oficina. **Decisão (CP1-6):** fica assim, e a Interface mostra o custo por estação antes de recrutar. Os estilos com dinheiro (Mercador, 800) começam com companheiros mais cedo, como o documento quer.
 
 ### 10.3 A dinastia Arcana em 20 anos
+
+(Esta simulação usa a regra antiga: adulto aos 4 e velho aos 21. Com a rodada HI12, adulto aos 5 e velho aos 31, as idades da tabela mudam, mas a conclusão é a mesma.)
 
 | Ano | O que acontece |
 |---|---|

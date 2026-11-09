@@ -22,7 +22,7 @@ struct RegrasDaPopulacao {
     int migranteChegaComFelicidadeMinima = 50;
     int migranteSaiComFelicidadeAbaixoDe = 30;
     int migranteSaiComDesempregoEmPorcento = 30;
-    int idadeDoMigranteMinima = 4;
+    int idadeDoMigranteMinima = 5;  // nunca abaixo da idade de adulto (rodada HI12)
     int idadeDoMigranteMaxima = 12;
     int habilidadeDoMigranteMinima = 20;  // a faixa do Civil (PO1-3)
     int habilidadeDoMigranteMaxima = 60;

@@ -76,7 +76,7 @@ struct CasaETrabalhoDoNpc {
     int saiuPorAtrasoDe = -1;
 };
 
-// Fase A3 (ficha da População): a idade em anos (adulto aos 4, velho aos 21).
+// Fase A3 (ficha da População): a idade em anos (adulto aos 5, velho aos 31; rodada HI12).
 struct IdadeDoNpc {
     int anos = 10;
 };

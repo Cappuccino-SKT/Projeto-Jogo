@@ -168,7 +168,9 @@ entt::entity trazerUmNpc(ContextoDaProducao& contexto, bool ehMigrante, std::vec
         return npc;
     }
     SorteioComSemente& sorteio = contexto.sorteioDaPopulacao;
-    const int idade = sorteio.sortearNumeroInteiroEntre(regras.idadeDoMigranteMinima, regras.idadeDoMigranteMaxima);
+    // O migrante é sempre adulto: a idade mínima nunca fica abaixo da idade de adulto.
+    const int idadeMinimaDoMigrante = std::max(regras.idadeDoMigranteMinima, regras.idadeAdulto);
+    const int idade = sorteio.sortearNumeroInteiroEntre(idadeMinimaDoMigrante, std::max(idadeMinimaDoMigrante, regras.idadeDoMigranteMaxima));
     const int bracal = sorteio.sortearNumeroInteiroEntre(regras.habilidadeDoMigranteMinima, regras.habilidadeDoMigranteMaxima);
     const int manufaturado = sorteio.sortearNumeroInteiroEntre(regras.habilidadeDoMigranteMinima, regras.habilidadeDoMigranteMaxima);
     const entt::entity npc = criarNpcNaVila(contexto, idade, bracal, manufaturado, true);

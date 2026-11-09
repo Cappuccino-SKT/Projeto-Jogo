@@ -100,7 +100,7 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 
 ### 4.4 Migração (dia 1 de cada estação, depois da regra 4.2)
 
-1. **Chega 1 migrante** se tudo isto vale: há cama livre; há vaga livre de emprego (na Cidade ou na construção do jogador); a Felicidade é 50 ou mais; não houve fome na estação; os NPCs reais estão abaixo da capacidade. Ele chega como na regra 4.5, com idade sorteada de 4 a 12.
+1. **Chega 1 migrante** se tudo isto vale: há cama livre; há vaga livre de emprego (na Cidade ou na construção do jogador); a Felicidade é 50 ou mais; não houve fome na estação; os NPCs reais estão abaixo da capacidade. Ele chega como na regra 4.5, com idade sorteada de 5 a 12 (o mínimo é a idade de adulto, rodada HI12; antes, 4).
 2. **Sai 1 NPC** se a Felicidade está abaixo de 30, **ou** o desemprego é de 30% ou mais: vai embora o desempregado de menor habilidade (no empate, o de maior número). Sem desempregados, vai o empregado da Cidade de menor habilidade. Ele anda até a borda do mapa e some (regra 4.6, sem morrer).
 - **Ajuste do código (marco A3, 2026-10-20):** a saída do passo 2 é decidida **antes** da velhice e dos nascimentos do dia, com a vila da estação que terminou. Sem isso, uma reposição grande (vários velhos morrem juntos) enchia a vila de desempregados por um dia (a Cidade só contrata no dia seguinte) e expulsava alguém na hora.
 - **Ajuste do código:** enquanto o mapa não tiver o ponto `entrada_do_mapa`, o migrante aparece na porta da casa dele, como o nascido.
@@ -109,7 +109,7 @@ Documento do sistema: [[Sistema de População/Descrição|População]].
 ### 4.5 Chega um NPC
 
 1. **Onde mora:** a Casa com mais camas livres (no empate, a primeira na ordem da vila). Sem cama livre, ele **não chega**: o acumulado fica em +100 (ou o migrante não vem).
-2. **Quem é:** um Civil adulto com o número `proximoNumeroDeNpc` (que soma 1), nome tirado da lista de nomes (`textos`), idade 4 (nascido ou reposição) ou sorteada (migrante), habilidades 50 (o migrante: sorteadas na faixa da classe, 20 a 60 no Civil, PO1-3 e a [[Ficha Logica/ClasseSocial|ficha da Classe Social]]).
+2. **Quem é:** um Civil adulto com o número `proximoNumeroDeNpc` (que soma 1), nome tirado da lista de nomes (`textos`), idade 5, a de adulto (nascido ou reposição; rodada HI12) ou sorteada (migrante), habilidades 50 (o migrante: sorteadas na faixa da classe, 20 a 60 no Civil, PO1-3 e a [[Ficha Logica/ClasseSocial|ficha da Classe Social]]).
 3. **Emprego:** chega **desempregado**. A regra 4.1 do [[Ficha Logica/Trabalho|Trabalho]] o contrata no dia seguinte, se houver vaga na Cidade.
 4. **Onde aparece:** o nascido e a reposição, na porta da casa; o migrante, no tile de **entrada da vila** (a borda do mapa no fim da estrada; o Mapa ganha o ponto `entrada_do_mapa` no Tiled).
 5. Escreva no Diário ("Rita chegou à vila", "Nasceu um novo morador: Tiago").

@@ -23,7 +23,7 @@ O projeto **não tem prazo**. O limite da arte não é o tempo de produção, e 
 |---|---|---|
 | Montar os mapas | **Tiled** | Grátis |
 | Gerar as bases dos bonecos e das roupas | **ChatGPT** (IA de imagem) | Grátis |
-| Corrigir e pintar as imagens | [Em aberto] na rodada AR1 (sugestão: **Krita**, grátis) | Grátis |
+| Corrigir e pintar as imagens | **Krita** (rodada AR1-5) | Grátis |
 | Peças geradas por código (corpo, testes) | Python + Pillow (o assistente) | Grátis |
 | Editar os dados | **VS Code** | Grátis |
 
@@ -64,10 +64,11 @@ O Tiled funciona como um "Paint de azulejos": escolhe-se um tile e pinta-se no m
 | Programa | **Krita** para corrigir e pintar (AR1-5); bases geradas no **ChatGPT** |
 | Quando o código muda (AR1-6) | Quando o autor tiver a primeira leva de arte (o corpo e 2 ou 3 roupas). Até lá, a arte de teste continua |
 
-**Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). As cores das culturas saem da paleta Resurrect 64 (o Guia da Arte diz quais).
+**Cores das culturas** (bandeiras, roupas, telhados e a lente Política do Mapa Mundial): Guerreira (vermelho-sangue e ferro), Arcana (roxo e azul-noite), Autoritária (dourado e preto), Religiosa (branco e azul-celeste), Tecnocrata (cobre e verde-oliva), Escravista (púrpura e areia). A paleta é livre desde a troca de estilo (a Resurrect 64 era da pixel art).
 
 ### Variações por cultura
 
+- **[Em aberto] (rodada RV1-2):** a troca de paleta por tabela foi pensada para a pixel art, que tem poucas cores exatas. No estilo RimWorld, as imagens têm bordas suaves e sombras, e a tabela não funciona; o que o RimWorld faz é **tingir** uma imagem clara com a cor da cultura ou do material.
 - **Primeiras versões:** **troca de paleta**. Cada peça (armadura, arma, roupa, parte de construção) é desenhada uma vez, à mão, e o jogo troca as cores por uma tabela: o "metal" vira ferro escuro na Guerreira e bronze polido na Escravista. A mesma técnica dá a cor do material (Tier) e da roupa.
 - **Objetivo final:** cada cultura com **estilo de arte próprio** nas **armas, armaduras e construções** (formas diferentes, não só cores). **[Refinar depois]** A troca de paleta continua valendo para as variações de cor dentro de cada cultura.
 - **Construções:** a aparência muda nos **níveis 1, 3 e 5** (os níveis 2 e 4 repetem a aparência anterior com detalhes pequenos), montada com **peças reaproveitáveis** por cultura (paredes, telhados, portas).
@@ -110,7 +111,7 @@ A arte é feita em camadas, igual à programação:
 |---|---|---|
 | Tiles de terreno | cerca de 200 por bioma × 6 = 1.200 | cerca de 200 |
 | Construções | 22 tipos × 3 aparências × 6 culturas = 396 | 66 |
-| Bonecos | cerca de 20 camadas × 162 quadros = 3.200 quadros | cerca de 1.500 (troca de paleta) |
+| Bonecos | cerca de 20 camadas × 39 células (de perto: 12 quadros × 3 direções; de longe: 3) = cerca de 780 células | as mesmas (a cor muda por cultura) |
 | Mapas Locais | 48 de 128 × 128 tiles | 1 na fatia vertical; 8 na primeira região |
 | Criaturas | cerca de 10 tipos × 40 quadros | 3 tipos |
 | Interface | molduras, botões e cerca de 150 ícones de itens | ícones da fatia vertical |
@@ -123,14 +124,21 @@ O autor pediu atenção ao **peso da arte no jogo**. Estimativa, considerando im
 
 | Item | Conta | Memória |
 |---|---|---|
-| 1 tile (16 × 16) | 256 pixels × 4 bytes | 1 KB |
-| Tiles de terreno (sem arte extra de estações) | cerca de 1.200 tiles | cerca de 1,2 MB |
-| Bonecos, no pior caso (sem espelhamento) | 20 camadas × 216 quadros × 1,5 KB | cerca de 6,6 MB |
-| Bonecos com forma própria por cultura (meta final) | o mesmo × 6 | cerca de 40 MB |
-| Construções (média de 64 × 64 px) | 22 tipos × 5 níveis × 6 culturas × 16 KB | cerca de 11 MB |
+| 1 tile (64 × 64, rodada AR1-1) | 4.096 pixels × 4 bytes | 16 KB |
+| Tiles de terreno (sem arte extra de estações) | cerca de 1.200 tiles | cerca de 19 MB |
+| 1 célula de boneco (128 × 128) | 16.384 pixels × 4 bytes | 64 KB |
+| Bonecos, uma forma para todas as culturas | 20 camadas × 39 células × 64 KB | cerca de 50 MB |
+| Bonecos com forma própria por cultura (meta final) | o mesmo × 6 | cerca de 300 MB |
+| Construções (lote médio de 4 × 4 tiles = 256 × 256 px, nas duas visões) | 22 tipos × 3 aparências × 6 culturas × 512 KB | cerca de 200 MB |
 | Mapas Locais | não são imagens, são números: 128 × 128 × 7 camadas × 2 bytes | cerca de 230 KB por mapa; 11 MB os 48 |
 
-**Conclusão:** mesmo o jogo completo deve ficar abaixo de **100 MB de arte** na placa de vídeo. Pixel art é leve; o que pesa de verdade é a **quantidade de coisas desenhadas por quadro** e a **simulação dos NPCs**.
+**Conta refeita em 2026-11-09 [Proposta]** (a anterior era da pixel art, com tile de 16 × 16, e dava menos de 100 MB). Com as imagens de 64 por tile, cada imagem pesa **16 vezes mais**:
+
+- **Tudo carregado ao mesmo tempo:** cerca de **520 MB**, acima do teto de 256 MB.
+- **Só o necessário** (a regra abaixo: o terreno e 2 culturas dos mapas ativos): cerca de **175 MB**, dentro do teto, mas com pouca folga.
+- O que fazer com isso é a pergunta **RV1-1** da [[Rodada Pendente]].
+
+O que mais pesa continua sendo a **quantidade de coisas desenhadas por quadro** e a **simulação dos NPCs**.
 
 **Regras para manter leve:**
 
@@ -151,16 +159,16 @@ O jogo é feito em **C++**. Outras linguagens podem ajudar, mas nada essencial d
 
 ### Onde guardar
 
-- Tudo na pasta `Jogo/` deste repositório (rodada FT1-7 e organização de 2026-10-17): `Jogo/assets/` com as fontes (arquivos do Pixelorama e do Tiled) e `Jogo/data/` com o que o jogo lê.
-- **Sem Git LFS** (complemento do Git para arquivos grandes): pixel art é leve.
+- Tudo na pasta `Jogo/` deste repositório (rodada FT1-7 e organização de 2026-10-17): `Jogo/assets/` com as fontes (arquivos do Krita e do Tiled) e `Jogo/data/` com o que o jogo lê.
+- **Sem Git LFS** (complemento do Git para arquivos grandes) por enquanto: as imagens de cor lisa ficam pequenas em PNG. A rever se os arquivos do Krita (`.kra`) passarem de alguns MB cada.
 
 ### Parte técnica
 
-- **Fluxo:** Pixelorama → PNG (folhas de sprites) → atlas; Tiled → mapa em JSON. **[Refinar depois]** A ferramenta que monta os atlas (de terceiros ou nossa, em C++) fica para o início do código.
+- **Fluxo:** ChatGPT (base) → Krita → PNG (folhas de sprites) → atlas; Tiled → mapa em JSON. **[Refinar depois]** A ferramenta que monta os atlas (de terceiros ou nossa, em C++) fica para o início do código.
 - **Pastas:**
 
 ```
-assets/            fontes (Pixelorama, Tiled)
+assets/            fontes (Krita, Tiled)
   provisorio/      pacotes de terceiros + LEIA-ME.txt com a origem
 data/
   imagens/         PNG exportados
@@ -183,7 +191,7 @@ data/
 | Mundo e Estado Inicial | Malha ajustável pelos dados |
 | Cultura | Troca de paleta agora, estilo próprio no futuro; cores das culturas |
 | Construção | Aparência nos níveis 1, 3 e 5, com peças reaproveitáveis |
-| Combate | Boneco de 16 × 24, 54 quadros por direção, 3 direções e espelho |
+| Combate | Boneco de 128 × 128, 3 direções e espelho; o golpe com 3 quadros [Proposta] ([[Pipeline de Arte e Conteúdo/Guia da Arte\|Guia da Arte]]) |
 | Batalha e Guerra | 7ª camada Elevação; tileset de Muralha; os bonecos da batalha são os mesmos, com paleta por cultura (ver [[Sistema de Batalha/Descrição\|Sistema de Batalha]]) |
 | Interface | Cores das culturas na lente Política; ícones de itens |
 | Clima e Estações | Paleta por estação, tom do dia, partículas e névoa; neve no chão, rios congelados, folhas e flores no futuro (ver [[Sistema de Clima e Estações/Descrição\|Clima e Estações]]) |

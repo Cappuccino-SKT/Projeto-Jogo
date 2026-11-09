@@ -16,7 +16,7 @@ Ele **não** traz a história do mundo. O autor decidiu deixar a história, os n
 
 - **Tom:** fantasia de **baixa magia**, com a tecnologia em transição para a **pólvora**. Sombrio e político, mais perto de Mount & Blade do que de um conto de fadas.
 - **Criaturas:** na primeira versão, só **animais e monstros comuns** (lobos, ursos, bandidos, aranhas gigantes). **Criaturas míticas** (dragões, mortos-vivos) podem aparecer no futuro, **dentro das masmorras**.
-- **Raças:** só **humanos** nas primeiras versões, diferenciados pelas 6 culturas. Outras raças podem entrar no futuro. Para não fechar essa porta, os dados do NPC já guardam um campo "Raça" (com um único valor, Humano), assim acrescentar raças depois não exige mudar o formato do save.
+- **Raças:** só **humanos** nas primeiras versões, diferenciados pelas 6 culturas. As outras raças (Langren, Khadim, Ascendidos, Quitinos e o Eterno) entram depois dos marcos da fase D: [[Ficha Logica/Racas|ficha das Raças]]. Para não fechar essa porta, os dados do NPC já guardam um campo "Raça" (com um único valor, Humano), assim acrescentar raças depois não exige mudar o formato do save.
 
 ### Disposição do mundo
 

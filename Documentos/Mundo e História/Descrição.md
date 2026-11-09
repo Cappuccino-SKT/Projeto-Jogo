@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 a HI10 respondidas pelo autor (2026-10-26). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412, os seus segredos e as tensões do presente. Também as Grandes Histórias. Falta o mapa novo.
+> **Estado:** rodadas HI1 a HI12 e RA1 respondidas pelo autor (até 2026-10-31). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412, os seus segredos e as tensões do presente. Também as Grandes Histórias e as raças. Falta o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -26,8 +26,8 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 | 4 | Era de ouro | O Império de Valdária | **Pontos-chave** (parte 4) |
 | 5 | Catástrofe | O Ritual de Ascensão e a Grande Fusão | **Pontos-chave** (parte 4) |
 | 6 | Reconstrução | Do Ano 0 ao 412: as raças e as 6 facções | **Decidido** (partes 4.4 e 7) |
-| 7 | Conflitos do presente | O que está para explodir no Ano 412? | Proposta (parte 5) |
-| 8 | Segredos | Que verdades o jogador pode descobrir? | Proposta (parte 4.3) |
+| 7 | Conflitos do presente | O que está para explodir no Ano 412? | **Decidido** (parte 5) |
+| 8 | Segredos | Que verdades o jogador pode descobrir? | Os dos líderes, **decididos** (parte 4.7); os outros, proposta (parte 4.3) |
 | 9 | Os povos | O que cada um quer, teme, esconde e faz de cruel? | **Decidido** (parte 7) |
 | 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Cratera na costa (parte 4.4); a posição sai do mapa novo |
 | 11 | Personagens importantes | Aurelian Valdren, Kassian Dravel, os magos reais; os líderes do Ano 412 | **Decidido** (partes 4.0 e 4.7) |
@@ -156,7 +156,7 @@ Já decidido nas fichas; o que a história mudar passa por rodada:
 | 0 a cerca de 50 d.F. | **Os Anos Cinzentos.** Sem Império e sem magia, o continente passa fome; os monstros nascem; uma peste mata metade dos sobreviventes. Quem tinha tropas ou comida virou senhor. |
 | Nos Anos Cinzentos | Nascem primeiro as facções que já tinham força: a **Coroa de Valdren** (as tropas imperiais, que levam escondido o que sobrou de Aurelian) e o **Sultanato de Zahran** (os nobres e o dinheiro, caçando escravos entre os famintos). |
 | Cerca de 50 a 100 d.F. | Nascem as que se juntaram na dor: os **Clãs de Tian-Lang** (o resto dos rebeldes, mudados pela mana) e a **Comunidade de Ashmoor** (os herdeiros dos que sobreviveram ao cerco). |
-| Cerca de 100 a 200 d.F. | Nascem as que precisaram ver a mana agir: o **Teocracia de Theodoria** e a **Ordem de Custodum**. Por serem as mais novas, são as mais radicais. |
+| Cerca de 100 a 200 d.F. | Nascem as que precisaram ver a mana agir: a **Teocracia de Theodoria** e a **Ordem de Custodum**. Por serem as mais novas, são as mais radicais. |
 | Cerca de 230 a 260 d.F. | **A Guerra das Cinzas.** A Coroa tenta refazer o Império; todas as outras se unem contra ela e a param. Os tratados de paz desenham as fronteiras de hoje. |
 | 412 d.F. | O jogo começa. A Guerra das Cinzas virou lenda, e a Coroa volta a crescer. |
 
@@ -289,13 +289,13 @@ As mutações foram **lentas**: as Marés de Mana (parte 4.4) mudaram quem vivia
 - **Ruínas e masmorras** do Império; as lendárias guardam a verdade sobre a Grande Fusão.
 - **Livros e fragmentos** (itens), cada um com a versão de um povo.
 - **Falas dos NPCs e dos Companheiros** ([[Ficha Logica/Companheiros|Companheiros e Diálogo]]).
-
-**O que o jogador sabe (HI7-4, opção A):** só o mito da própria cultura. O resto ele descobre: livros, ruínas, falas. [Proposta] Quem começa sem cultura (escravo, andarilho) conhece só os boatos da região onde começa.
 - **Notícias, Crônica do mundo e Eventos.**
 - **Nomes de lugares** que lembram o passado.
 
+**O que o jogador sabe (HI7-4, opção A):** só o mito da própria cultura. O resto ele descobre: livros, ruínas, falas. [Proposta] Quem começa sem cultura (escravo, andarilho) conhece só os boatos da região onde começa.
+
 ## 9. Próximos passos
 
-1. **O mapa novo** do continente inteiro (o autor desenha; depois, uma rodada para as fichas).
-2. Os mitos de cada povo e os personagens de hoje (os líderes do Ano 412). Os nomes das regiões e das cidades saem com o mapa novo.
-4. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).
+1. **O mapa novo** do continente inteiro (o autor desenha; depois, uma rodada para as fichas). Os nomes das regiões e das cidades saem com ele.
+2. As fichas novas: Segredos (D9), Grandes Histórias (D10) e Fauna e Monstros (D11), no [[Ficha Logica/Plano das Fichas|Plano das Fichas]].
+3. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).

@@ -20,7 +20,7 @@ Já existe nos outros sistemas:
 - Magos são **raros**: cerca de **5%** da população nasce Mago, e **15%** na cultura Arcana.
 - **Filho de Mago** tem chance maior de nascer Mago.
 - Ser Mago não se aprende: é a booleana do NPC, definida no nascimento.
-- **Chance de nascer Mago** (rodada V3-11): 2% sem pais Magos, 25% com um e 60% com os dois. Em LOD 2, vale a média da cidade.
+- **Chance de nascer Mago** (rodadas V3-11 e MG1-1): 3% sem pais Magos (10% na cultura Arcana; antes, 2%, que não chegava aos 5% do mundo), 25% com um e 60% com os dois. Em LOD 2, vale a média da cidade.
 
 ## Escolas
 
