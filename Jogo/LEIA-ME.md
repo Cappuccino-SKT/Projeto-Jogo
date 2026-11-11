@@ -776,3 +776,19 @@ Como testar: abra o jogo e veja a Reputação e as notícias com os nomes novos;
 **Verificado pelo assistente:** os testes passam (634 conferências). **Não verificado:** o equilíbrio do mundo em partidas longas com os escravos (a comida e o dinheiro das cidades ao longo de anos); a ficha do Mundo pede refazer essa conta.
 
 Como testar: não há tela nova. Os testes mostram os escravos do primeiro dia de cada cidade ("Império 90 de 300...").
+
+### Marco D3, parte 2: o Mercado de Escravos e o jogador (2026-11-11)
+
+- **O Mercado de Escravos** existe na capital de cada reino que permite a escravidão, no Grande porto (8,6) e na Cidade dos mercados (7,5). O preço é 200 + 4 × a melhor habilidade (metade se velho, 80% se a cultura é hostil à do comprador), vezes a oferta e a procura (o estoque contra o alvo de 2 × as vagas Braçais vazias, no mínimo 2).
+- **No dia 1 de cada estação:** os cativos dos bandidos entram de graça nos Mercados abaixo do alvo (1 por Mercado), e cada Cidade compra escravos para as vagas Braçais vazias dela, se o Banco tem 250 moedas mais o preço. O dinheiro só passa de um Banco para outro.
+- **O jogador compra** com o grupo parado numa cidade com Mercado (botão **Escravos** na barra de cima). O escravo vai para a vila do jogador; precisa de uma cama livre, e a lei da vila tem de permitir (a vila fica em região de cultura Autoritária: a lei é "ampla"). Reputação −1 com o Clero.
+- **O escravo do jogador** come do estoque do jogador, trabalha sem salário (o jogador o contrata nas construções dele como os outros moradores) e trabalha só a parte do tempo igual à Obediência dele. **Grilhões:** Obediência +15, Felicidade −5, trabalho 80%. **Castigo público:** Medo +5 e Felicidade −10 por 8 dias; reputação −2 com o Clero.
+- **Vender** (com o grupo num Mercado): 70% do preço; reputação −3 com o Clero. **Libertar:** vira Civil da vila; +2 com o Clero e −5 com cada reino que permite a escravidão.
+- **O jogador capturado (ES1-4):** ao perder uma luta para bandidos, 50% de chance de ser levado ao Mercado mais perto, sem o dinheiro que sobrou. Preço 400; a Cidade o compra no dia 1 da estação seguinte; daí em diante ele junta 4 moedas de pecúlio por dia. Saídas: **comprar a liberdade** (600 moedas) ou **tentar fugir** (50% de ser visto: 8 dias sem tentar de novo; livre, ganha uma Recompensa de 300 no reino da cidade). A abolição também o liberta. Cativo, o grupo não viaja nem comercia, e a janela Escravos abre sozinha.
+- **O save** passou para a versão 18.
+- **Decisões de implementação:** o estoque do Mercado são escravos da Cidade marcados "à venda" (eles continuam trabalhando para ela); o preço de venda conta o escravo como já estando no estoque (sem isso, comprar e revender na hora dava lucro); o pecúlio entra sozinho, 4 por dia (o jogador ainda não tem um turno de trabalho próprio); o jogador vale como habilidade 50 no preço.
+- **Ficou para depois:** os companheiros capturados (hoje eles ficam com o jogador), o caminho "servir" e os donos Ricos (esperam a Classe Social, A4), a comida refinada (espera a comida Tier 2), a Senzala e o Mercado como construções (esperam o conteúdo), as notícias de fuga e de rebelião, os prisioneiros de guerra e a infantaria de escravos (Guerra e Batalha).
+
+**Verificado pelo assistente:** os testes passam (652 conferências). **Não verificado:** o painel Escravos na tela (compila, mas não abri o jogo) e o equilíbrio do mundo em partidas longas.
+
+Como testar: viaje até o Grande porto (8,6) ou a capital do Império (1,4), abra **Escravos** e compre. De volta à vila, contrate o escravo numa construção sua e veja a Obediência na mesma janela.

@@ -14,6 +14,7 @@
 #include "Producao/ProducaoDaVila.h"
 #include "Viagem/Viagem.h"
 #include "Companheiros/Companheiros.h"
+#include "Escravidao/Escravidao.h"
 
 struct PedidoTrocarAFilaDeOrdens {
     int indiceDaConstrucao = 0;
@@ -103,7 +104,13 @@ struct PedidoDoCompanheiro {
     int valor = 0;
 };
 
-using PedidoDoJogador = std::variant<PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
+// Fase D3 (Escravidão): comprar, vender, libertar e tratar escravos; o jogador cativo compra a liberdade ou foge.
+struct PedidoDaEscravidao {
+    AcaoDaEscravidao acao = AcaoDaEscravidao::ComprarNoMercado;
+    int numero = 0;
+};
+
+using PedidoDoJogador = std::variant<PedidoDaEscravidao, PedidoTrocarAFilaDeOrdens, PedidoFixarOPreco, PedidoTrocarONivelDeSalario, PedidoContratar, PedidoDemitir,
                                      PedidoEncomendarConstrucaoNova, PedidoSubirDeNivel, PedidoComprarDaLoja, PedidoVenderParaALoja,
                                      PedidoComprarConstrucao, PedidoVenderConstrucao, PedidoTrocarOModoAutomatico, PedidoDarLance,
                                      PedidoPartirEmViagem, PedidoResolverEncontro, PedidoComercioNaCidade, PedidoDoarNaCidade, PedidoResolverRevista, PedidoPagarFianca, PedidoPeregrinacao, PedidoDoCompanheiro>;

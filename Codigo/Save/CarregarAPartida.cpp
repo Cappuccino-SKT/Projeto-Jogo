@@ -798,7 +798,8 @@ void restaurarOsNpcs(SimulacaoDaVila& simulacao, const json& lista)
         }
         if (linha.contains("cativeiro")) {  // fase D3
             const json& cativeiro = linha.at("cativeiro");
-            registro.emplace<CativeiroDoNpc>(npc, CativeiroDoNpc{cativeiro.at(0).get<int64_t>(), cativeiro.at(1).get<bool>(), cativeiro.at(2).get<int>(), cativeiro.at(3).get<int64_t>()});
+            registro.emplace<CativeiroDoNpc>(npc, CativeiroDoNpc{cativeiro.at(0).get<int64_t>(), cativeiro.at(1).get<bool>(), cativeiro.at(2).get<int>(), cativeiro.at(3).get<int64_t>(),
+                                                                 cativeiro.at(4).get<bool>(), cativeiro.at(5).get<bool>()});
         }
         if (linha.contains("caminho")) {
             CaminhoDoNpc caminho;
@@ -868,6 +869,7 @@ void restaurarASimulacao(SimulacaoDaVila& partida, const json& arvore)
     partida.escravidao.fugasNoTotal = escravidao.at("fugas").get<int>();
     partida.escravidao.alforriasNoTotal = escravidao.at("alforrias").get<int>();
     partida.escravidao.rebelioesNoTotal = escravidao.at("rebelioes").get<int>();
+    partida.escravidao.castigoPublicoAte = escravidao.at("castigoPublicoAte").get<int64_t>();
     restaurarOComercio(partida, arvore.at("comercio"));
     {
         const json& leilao = arvore.at("leilao");
@@ -932,6 +934,10 @@ ResultadoDoCarregamento carregarAPartidaDeBytes(const DadosDoJogo& dados, const 
         restaurarAsFaccoes(*partida, arvore.at("faccoes"));  // fase C1
         restaurarOCrime(*partida, arvore.at("crime"));  // fase C3
         restaurarOsCompanheiros(*partida, arvore.at("companheiros"));  // fase D2
+        const json& cativeiroDoJogador = arvore.at("cativeiroDoJogador");  // fase D3, parte 2
+        partida->cativeiroDoJogador = EstadoDoCativeiroDoJogador{cativeiroDoJogador.at(0).get<bool>(), cativeiroDoJogador.at(1).get<int>(), cativeiroDoJogador.at(2).get<int>(),
+                                                                 cativeiroDoJogador.at(3).get<bool>(), cativeiroDoJogador.at(4).get<int64_t>(),
+                                                                 cativeiroDoJogador.at(5).get<int64_t>(), cativeiroDoJogador.at(6).get<int64_t>()};
         const json& religiaoDoJogador = arvore.at("religiaoDoJogador");  // fase C4
         partida->religiaoDoJogador = EstadoDaReligiaoDoJogador{religiaoDoJogador.at(0).get<int>(), religiaoDoJogador.at(1).get<int>(), religiaoDoJogador.at(2).get<int>()};
         atualizarAsCidadesPelaReligiao(*partida);

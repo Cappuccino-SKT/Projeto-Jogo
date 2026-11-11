@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "Construcao/ContasDasConstrucoes.h"
+#include "Escravidao/Escravidao.h"
 #include "Npc/ComponentesDoNpc.h"
 
 namespace {
@@ -104,6 +105,24 @@ int64_t calcularValorDaConstrucao(const ContextoDaProducao& contexto, int indice
     return valorDoNivel * construcao.nivel * contexto.dados.regras.trabalho.valorDaConstrucaoEmPorcentoDaObra / 100;
 }
 
+int contarVagasBracaisVaziasDaCidade(const ContextoDaProducao& contexto)
+{
+    int vazias = 0;
+    for (int indice = 0; indice < static_cast<int>(contexto.vila.construcoes.size()); ++indice) {
+        const ConstrucaoDaVila& construcao = contexto.vila.construcoes[indice];
+        if (construcao.donoEhOJogador || construcao.emObra || !construcaoEmprega(contexto, indice)
+            || trabalhoDaConstrucao(contexto, indice) != TrabalhoDaReceita::Bracal) {
+            continue;
+        }
+        int empregados = 0;
+        for (const auto [npc, casaETrabalho] : contexto.registroDasEntidades.view<CasaETrabalhoDoNpc>().each()) {
+            empregados += casaETrabalho.indiceDoTrabalho == indice ? 1 : 0;
+        }
+        vazias += std::max(0, calcularVagas(construcao.nivel, contexto.dados.regras.construcoes) - empregados);
+    }
+    return vazias;
+}
+
 std::vector<std::string> preencherVagasDaCidade(ContextoDaProducao& contexto)
 {
     std::vector<std::string> linhas;
@@ -127,6 +146,11 @@ std::vector<std::string> preencherVagasDaCidade(ContextoDaProducao& contexto)
             for (const NpcDaVila& npc : npcsDaVilaEmOrdem(contexto)) {
                 const CasaETrabalhoDoNpc& casaETrabalho = contexto.registroDasEntidades.get<CasaETrabalhoDoNpc>(npc.entidade);
                 if (casaETrabalho.indiceDoTrabalho >= 0 || casaETrabalho.saiuPorAtrasoDe == indice) {
+                    continue;
+                }
+                // Fase D3: o escravo do jogador e o que está à venda no Mercado não trabalham para a Cidade.
+                if (const CativeiroDoNpc* cativeiro = contexto.registroDasEntidades.try_get<CativeiroDoNpc>(npc.entidade);
+                    cativeiro != nullptr && (cativeiro->doJogador || cativeiro->aVenda)) {
                     continue;
                 }
                 const int habilidade = contexto.registroDasEntidades.get<HabilidadesDoNpc>(npc.entidade).habilidadeNoTrabalho(trabalho);

@@ -669,6 +669,15 @@ void contarOsTicksTrabalhados(ContextoDaProducao& contexto)
 {
     for (const auto [npc, trabalhoDoDia] : contexto.registroDasEntidades.view<TrabalhoDoDia>().each()) {
         if (npcEstaTrabalhandoAgora(contexto, npc)) {
+            // Fase D3 (Escravidão, 4.3 e ES1-1): o escravo trabalha a parte do tempo igual à Obediência dele
+            // (com Grilhões, 80% disso). A conta sai do tick e do NPC, sem sorteio: é sempre a mesma.
+            if (const CativeiroDoNpc* cativeiro = contexto.registroDasEntidades.try_get<CativeiroDoNpc>(npc); cativeiro != nullptr && contexto.relogio != nullptr) {
+                const int parte = cativeiro->obedienciaEmDecimos * (cativeiro->grilhoes ? contexto.dados.regrasDaEscravidao.grilhoesNoTrabalhoEmPorcento : 100) / 100;
+                const uint64_t mistura = static_cast<uint64_t>(contexto.relogio->tickAtual()) * 7919u + static_cast<uint64_t>(entt::to_integral(npc)) * 104729u;
+                if (static_cast<int>(mistura % 1000u) >= parte) {
+                    continue;
+                }
+            }
             ++trabalhoDoDia.ticksTrabalhadosNestaHora;
             ++trabalhoDoDia.ticksTrabalhadosHoje;
         }

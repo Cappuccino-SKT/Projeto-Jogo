@@ -12,6 +12,9 @@
 #include "Dados/ProblemasDosDados.h"
 #include "Economia/ConsumoESalarios.h"
 #include "Economia/FelicidadeDaClasse.h"
+#include "Economia/MercadoLocal.h"
+#include "Reputacao/Reputacao.h"
+#include "Vila/Trabalho.h"
 #include "Eventos/EventosDaVila.h"
 #include "Faccao/Faccao.h"
 #include "Npc/ComponentesDoNpc.h"
@@ -132,6 +135,9 @@ void resolverARebeliao(SimulacaoDaVila& vila, SimulacaoDaVila& cidade, int64_t h
     linhas.push_back("Escravidão: a rebelião dos escravos de " + nome + " foi esmagada (" + std::to_string(perdidos) + " executados ou vendidos).");
 }
 
+void rodarOsMercadosNaEstacao(SimulacaoDaVila& vila);
+void rodarOCativeiroDoJogador(SimulacaoDaVila& vila, std::vector<std::string>& linhas);
+
 // O dia de uma cidade.
 void rodarODiaDaCidade(SimulacaoDaVila& vila, SimulacaoDaVila& cidade, std::vector<std::string>& linhas)
 {
@@ -163,7 +169,12 @@ void rodarODiaDaCidade(SimulacaoDaVila& vila, SimulacaoDaVila& cidade, std::vect
     }
 
     // Passo 1: a comida. 1 por escravo, do estoque da Cidade (o dono), sem dinheiro.
-    estado.escravosSemComidaHoje = alimentarOsEscravosDaCidade(contexto, static_cast<int>(escravos.size()));
+    int escravosDoJogador = 0;
+    for (const entt::entity npc : escravos) {
+        escravosDoJogador += cidade.registroDasEntidades.get<CativeiroDoNpc>(npc).doJogador ? 1 : 0;
+    }
+    estado.escravosSemComidaHoje = alimentarOsEscravosDaCidade(contexto, static_cast<int>(escravos.size()) - escravosDoJogador)
+        + alimentarOsEscravosDaCidade(contexto, escravosDoJogador, true);
 
     // Passo 5: a Felicidade dos Escravos.
     int semCasa = 0;
@@ -181,10 +192,15 @@ void rodarODiaDaCidade(SimulacaoDaVila& vila, SimulacaoDaVila& cidade, std::vect
     const int controle = 1000 - cidade.felicidade.criminalidadeEmDecimos;
     for (const entt::entity npc : escravos) {
         CativeiroDoNpc& cativeiro = cidade.registroDasEntidades.get<CativeiroDoNpc>(npc);
-        const int felicidadeDele = estado.felicidadeDosEscravosEmDecimos + (cativeiro.castigadoAte >= hoje ? regras.castigoDaFugaNaFelicidade * 10 : 0);
+        const bool castigoPublico = estado.castigoPublicoAte >= hoje;
+        const int felicidadeDele = estado.felicidadeDosEscravosEmDecimos + (cativeiro.castigadoAte >= hoje ? regras.castigoDaFugaNaFelicidade * 10 : 0)
+            + (cativeiro.grilhoes ? regras.grilhoesNaFelicidade * 10 : 0) + (castigoPublico ? regras.castigoPublicoNaFelicidade * 10 : 0);
         const int estacoes = static_cast<int>((hoje - cativeiro.diaDoInicio) / std::max(1, vila.relogio.diasPorEstacao()));
         cativeiro.obedienciaEmDecimos = calcularObedienciaEmDecimos(regras, controle, std::max(0, felicidadeDele), cativeiro.grilhoes, estacoes,
                                                                     cidade.registroDasEntidades.get<IdentidadeDoNpc>(npc).cultura);
+        if (castigoPublico) {  // o castigo público soma 5 ao Medo
+            cativeiro.obedienciaEmDecimos = std::min(1000, cativeiro.obedienciaEmDecimos + regras.castigoPublicoNoMedo * 10);
+        }
     }
 
     SorteioComSemente sorteio = sorteioDoDia(cidade, hoje);
@@ -284,6 +300,39 @@ RegrasDaEscravidao lerArquivoDaEscravidao(const std::string& textoDoArquivo, Lis
     regras.felicidadeDosEscravosSePerdem = rebeliao.value("felicidade_dos_escravos_se_perdem", regras.felicidadeDosEscravosSePerdem);
 
     regras.alforriaPorEstacaoEmPorcento = documento.value("alforria_por_estacao_em_porcento", std::map<std::string, int>{});
+
+    // Parte 2.
+    regras.outrasCidadesComMercado = documento.value("outras_cidades_com_mercado", std::vector<std::vector<int>>{});
+    for (const std::vector<int>& par : regras.outrasCidadesComMercado) {
+        if (par.size() != 2) {
+            listaDeProblemas.anotarErro(nomeDoArquivoDaEscravidao, 0, "\"outras_cidades_com_mercado\" precisa de pares [coluna, linha]");
+        }
+    }
+    const Json alvo = documento.value("mercado_alvo", Json::object());
+    regras.mercadoAlvoPorVagaBracalVazia = alvo.value("por_vaga_bracal_vazia", regras.mercadoAlvoPorVagaBracalVazia);
+    regras.mercadoAlvoMinimo = alvo.value("minimo", regras.mercadoAlvoMinimo);
+    regras.vendaPeloDonoEmPorcento = documento.value("venda_pelo_dono_em_porcento", regras.vendaPeloDonoEmPorcento);
+    regras.reservaDoBancoParaComprarEmMoedas = documento.value("reserva_do_banco_para_comprar_em_moedas", regras.reservaDoBancoParaComprarEmMoedas);
+    regras.cativosDosBandidosPorEstacao = documento.value("cativos_dos_bandidos_por_estacao", regras.cativosDosBandidosPorEstacao);
+    const Json tratamentos = documento.value("tratamentos", Json::object());
+    const Json grilhoes = tratamentos.value("grilhoes", Json::object());
+    regras.grilhoesNaFelicidade = grilhoes.value("felicidade", regras.grilhoesNaFelicidade);
+    regras.grilhoesNoTrabalhoEmPorcento = grilhoes.value("velocidade_em_porcento", regras.grilhoesNoTrabalhoEmPorcento);
+    const Json castigo = tratamentos.value("castigo_publico", Json::object());
+    regras.castigoPublicoNoMedo = castigo.value("medo", regras.castigoPublicoNoMedo);
+    regras.castigoPublicoEmDias = castigo.value("dias", regras.castigoPublicoEmDias);
+    regras.castigoPublicoNaFelicidade = castigo.value("felicidade", regras.castigoPublicoNaFelicidade);
+    regras.reputacaoReligiosaNoCastigoPublico = castigo.value("reputacao_religiosa", regras.reputacaoReligiosaNoCastigoPublico);
+    const Json reputacao = documento.value("reputacao", Json::object());
+    regras.reputacaoReligiosaAoComprar = reputacao.value("religiosa_ao_comprar", regras.reputacaoReligiosaAoComprar);
+    regras.reputacaoReligiosaAoVender = reputacao.value("religiosa_ao_vender", regras.reputacaoReligiosaAoVender);
+    regras.reputacaoReligiosaAoLibertar = reputacao.value("religiosa_ao_libertar", regras.reputacaoReligiosaAoLibertar);
+    regras.reputacaoDeQuemPermiteAoLibertar = reputacao.value("de_quem_permite_ao_libertar", regras.reputacaoDeQuemPermiteAoLibertar);
+    regras.capturaDoJogadorPelosBandidosEmPorcento = documento.value("captura_do_jogador_pelos_bandidos_em_porcento", regras.capturaDoJogadorPelosBandidosEmPorcento);
+    regras.habilidadeDoJogadorNoPreco = documento.value("habilidade_do_jogador_no_preco", regras.habilidadeDoJogadorNoPreco);
+    regras.comprarALiberdadeEmPorcentoDoPreco = documento.value("comprar_a_liberdade_em_porcento_do_preco", regras.comprarALiberdadeEmPorcentoDoPreco);
+    regras.peculioMaximoPorDiaEmDecimos = documento.value("peculio_maximo_por_dia_em_decimos", regras.peculioMaximoPorDiaEmDecimos);
+    regras.recompensaPelaFugaEmMoedas = documento.value("recompensa_pela_fuga_em_moedas", regras.recompensaPelaFugaEmMoedas);
     return regras;
 }
 
@@ -376,7 +425,9 @@ void tornarEscravo(ContextoDaProducao& contexto, entt::entity npc, int64_t dia)
         return;
     }
     registro.get<IdentidadeDoNpc>(npc).classe = "escravo";
-    registro.emplace<CativeiroDoNpc>(npc, CativeiroDoNpc{dia, false, 500, -1});
+    CativeiroDoNpc cativeiro;
+    cativeiro.diaDoInicio = dia;
+    registro.emplace<CativeiroDoNpc>(npc, cativeiro);
     contexto.dinheiro.quantidadeDeCivis = std::max(0, contexto.dinheiro.quantidadeDeCivis - 1);
 }
 
@@ -435,6 +486,13 @@ void montarAEscravidaoDaPartidaNova(SimulacaoDaVila& vila)
         for (std::size_t posicao = 0; posicao < quantos; ++posicao) {
             tornarEscravo(contexto, candidatos[posicao].npc, 0);
         }
+        // Parte 2 (4.2): a cidade com Mercado começa com o estoque-alvo à venda (os últimos da lista).
+        if (cidadeTemMercadoDeEscravos(vila, mapa)) {
+            const std::size_t aVenda = std::min(quantos, static_cast<std::size_t>(std::max(0, estoqueAlvoDoMercado(*cidade))));
+            for (std::size_t posicao = quantos - aVenda; posicao < quantos; ++posicao) {
+                cidade->registroDasEntidades.get<CativeiroDoNpc>(candidatos[posicao].npc).aVenda = true;
+            }
+        }
     }
 }
 
@@ -444,7 +502,452 @@ std::vector<std::string> rodarAEscravidaoNoDiaNovo(SimulacaoDaVila& vila)
     for (SimulacaoDaVila* cidade : cidadesDoMundo(vila)) {
         rodarODiaDaCidade(vila, *cidade, linhas);
     }
+    if (vila.relogio.diaDaEstacaoAtual() == 1) {
+        rodarOsMercadosNaEstacao(vila);
+    }
+    rodarOCativeiroDoJogador(vila, linhas);
     return linhas;
+}
+
+// ---------------------------------------------------------------------------
+// Parte 2: o Mercado de Escravos, os escravos do jogador e o jogador capturado.
+// ---------------------------------------------------------------------------
+
+namespace {
+
+// A posição do dono da reputação ("religiosa", "Vila Livre do Norte"), ou −1.
+int posicaoDoDonoDaReputacao(const DadosDoJogo& dados, const std::string& dono)
+{
+    const std::vector<std::string> donos = donosDaReputacao(dados.mundo);
+    const auto achado = std::find(donos.begin(), donos.end(), dono);
+    return achado == donos.end() ? -1 : static_cast<int>(achado - donos.begin());
+}
+
+void mudarAReputacaoCom(SimulacaoDaVila& vila, const std::string& dono, int valor, const std::string& motivo, std::vector<std::string>& linhas)
+{
+    const int posicao = posicaoDoDonoDaReputacao(vila.dados, dono);
+    if (posicao < 0 || valor == 0) {
+        return;
+    }
+    const std::string linha = mudarReputacao(vila, posicao, valor, motivo);
+    if (!linha.empty()) {
+        linhas.push_back(linha);
+    }
+}
+
+// O NPC da cidade com esse número, ou entt::null.
+entt::entity npcDeNumero(const SimulacaoDaVila& cidade, int numero)
+{
+    for (const entt::entity npc : cidade.npcsDaVila) {
+        if (cidade.registroDasEntidades.get<IdentidadeDoNpc>(npc).numeroDoNpc == numero) {
+            return npc;
+        }
+    }
+    return entt::null;
+}
+
+std::string nomeDaCidadeNoMapa(const DadosDoJogo& dados, int numeroDoMapa)
+{
+    const CidadeDoMundo* cidade = dados.mundo.cidadeNoMapa(numeroDoMapa);
+    return cidade != nullptr ? cidade->nome : "a vila";
+}
+
+// A distância entre dois mapas da malha, em passos (sem diagonal).
+int distanciaEntreMapas(const MundoDoJogo& mundo, int umMapa, int outroMapa)
+{
+    if (!mundo.mapaExiste(umMapa) || !mundo.mapaExiste(outroMapa)) {
+        return 9999;
+    }
+    const MapaDoMundo& um = mundo.mapa(umMapa);
+    const MapaDoMundo& outro = mundo.mapa(outroMapa);
+    return std::abs(um.coluna - outro.coluna) + std::abs(um.linha - outro.linha);
+}
+
+// A cidade onde o grupo do jogador está parado (não a vila dele), ou nullptr.
+SimulacaoDaVila* cidadeOndeOGrupoEsta(SimulacaoDaVila& vila)
+{
+    const EntidadeEmTransito& grupo = vila.viagem.grupoDoJogador;
+    if (grupo.emTransito) {
+        return nullptr;
+    }
+    SimulacaoDaVila* cidade = cidadeDoMundoNoMapa(vila, grupo.mapaAtual);
+    return cidade == &vila ? nullptr : cidade;
+}
+
+// Regra 4.2: no dia 1 de cada estação, os cativos dos bandidos entram de graça nos Mercados abaixo
+// do alvo (ES1-3), e cada Cidade compra escravos para as vagas Braçais vazias dela.
+void rodarOsMercadosNaEstacao(SimulacaoDaVila& vila)
+{
+    const DadosDoJogo& dados = vila.dados;
+    const RegrasDaEscravidao& regras = dados.regrasDaEscravidao;
+    const int64_t hoje = vila.relogio.diaDaPartida();
+    std::vector<SimulacaoDaVila*> mercados;
+    for (SimulacaoDaVila* cidade : cidadesDoMundo(vila)) {
+        if (cidade == &vila || !cidadeTemMercadoDeEscravos(vila, cidade->numeroDoMapaNoMundo())) {
+            continue;
+        }
+        mercados.push_back(cidade);
+        ContextoDaProducao contexto = cidade->contextoDaProducao();
+        const int faltam = estoqueAlvoDoMercado(*cidade) - static_cast<int>(escravosAVenda(*cidade).size());
+        for (int cativo = 0; cativo < std::min(faltam, regras.cativosDosBandidosPorEstacao); ++cativo) {
+            const entt::entity novo = criarNpcNaVila(contexto, dados.regras.populacao.idadeAdulto + 5, 50, 50, true);
+            if (novo == entt::null) {
+                break;  // sem cama livre na cidade
+            }
+            tornarEscravo(contexto, novo, hoje);
+            cidade->registroDasEntidades.get<CativeiroDoNpc>(novo).aVenda = true;
+        }
+    }
+    for (SimulacaoDaVila* cidade : cidadesDoMundo(vila)) {
+        const int mapa = cidade->numeroDoMapaNoMundo();
+        if (cidade == &vila || !escravidaoPermitidaNaCidade(vila, mapa)) {
+            continue;
+        }
+        ContextoDaProducao contexto = cidade->contextoDaProducao();
+        int vagas = contarVagasBracaisVaziasDaCidade(contexto);
+        // O Mercado da própria cidade: o dono é a Cidade, então o escravo só sai da venda.
+        for (const entt::entity npc : escravosAVenda(*cidade)) {
+            if (vagas <= 0) {
+                break;
+            }
+            cidade->registroDasEntidades.get<CativeiroDoNpc>(npc).aVenda = false;
+            --vagas;
+        }
+        // Os outros Mercados, na ordem do número do mapa: o Banco precisa da reserva mais o preço.
+        const std::string cultura = culturaBaseDaCidade(dados, mapa);
+        for (SimulacaoDaVila* mercado : mercados) {
+            if (mercado == cidade) {
+                continue;
+            }
+            for (const entt::entity npc : escravosAVenda(*mercado)) {
+                const int64_t preco = precoNoMercadoEmDecimos(*mercado, npc, cultura);
+                if (vagas <= 0 || cidade->dinheiro.bancoDaCidade < static_cast<int64_t>(regras.reservaDoBancoParaComprarEmMoedas) * 10 + preco) {
+                    break;
+                }
+                if (moverEscravoDeCidade(*mercado, npc, *cidade, false, false) == entt::null) {
+                    vagas = 0;  // sem cama livre
+                    break;
+                }
+                cidade->dinheiro.bancoDaCidade -= preco;
+                mercado->dinheiro.bancoDaCidade += preco;
+                --vagas;
+            }
+        }
+    }
+}
+
+void soltarOJogador(SimulacaoDaVila& vila)
+{
+    vila.cativeiroDoJogador = EstadoDoCativeiroDoJogador{};
+}
+
+// Regra 4.8: o jogador cativo, todo dia. A Cidade o compra no dia 1 da estação seguinte; comprado, ele
+// junta o pecúlio (ES1-7); a abolição o liberta.
+void rodarOCativeiroDoJogador(SimulacaoDaVila& vila, std::vector<std::string>& linhas)
+{
+    EstadoDoCativeiroDoJogador& cativeiro = vila.cativeiroDoJogador;
+    if (!cativeiro.estaCativo) {
+        return;
+    }
+    const RegrasDaEscravidao& regras = vila.dados.regrasDaEscravidao;
+    const int64_t hoje = vila.relogio.diaDaPartida();
+    const bool primeiroDiaDaEstacao = vila.relogio.diaDaEstacaoAtual() == 1;
+    if (primeiroDiaDaEstacao && !escravidaoPermitidaNaCidade(vila, cativeiro.mapaDoMercado)) {
+        soltarOJogador(vila);
+        linhas.push_back("Escravidão: a abolição libertou você.");
+        return;
+    }
+    if (!cativeiro.foiComprado) {
+        if (primeiroDiaDaEstacao && hoje > cativeiro.diaDaCaptura) {
+            cativeiro.foiComprado = true;
+            linhas.push_back("Escravidão: a Cidade de " + nomeDaCidadeNoMapa(vila.dados, cativeiro.mapaDoMercado) + " comprou você. Trabalhe e junte o pecúlio, ou tente fugir.");
+        }
+        return;
+    }
+    cativeiro.peculioEmDecimos += regras.peculioMaximoPorDiaEmDecimos;
+}
+
+}  // namespace
+
+SimulacaoDaVila* cidadeDoMundoNoMapa(SimulacaoDaVila& vila, int numeroDoMapa)
+{
+    return cidadeDoMapa(vila, numeroDoMapa);
+}
+
+bool cidadeTemMercadoDeEscravos(const SimulacaoDaVila& vila, int numeroDoMapa)
+{
+    const DadosDoJogo& dados = vila.dados;
+    if (dados.mundo.cidadeNoMapa(numeroDoMapa) == nullptr || !escravidaoPermitidaNaCidade(vila, numeroDoMapa)) {
+        return false;
+    }
+    for (const DefinicaoDaFaccao& faccao : dados.faccoes.faccoes) {
+        if (dados.mundo.numeroDoMapaNa(faccao.colunaDaCapital, faccao.linhaDaCapital) == numeroDoMapa) {
+            return true;
+        }
+    }
+    for (const std::vector<int>& par : dados.regrasDaEscravidao.outrasCidadesComMercado) {
+        if (par.size() == 2 && dados.mundo.numeroDoMapaNa(par[0], par[1]) == numeroDoMapa) {
+            return true;
+        }
+    }
+    return false;
+}
+
+std::vector<entt::entity> escravosAVenda(const SimulacaoDaVila& cidade)
+{
+    std::vector<entt::entity> aVenda;
+    for (const entt::entity npc : cidade.npcsDaVila) {
+        const CativeiroDoNpc* cativeiro = cidade.registroDasEntidades.try_get<CativeiroDoNpc>(npc);
+        if (cativeiro != nullptr && cativeiro->aVenda) {
+            aVenda.push_back(npc);
+        }
+    }
+    return aVenda;
+}
+
+int estoqueAlvoDoMercado(SimulacaoDaVila& cidade)
+{
+    const RegrasDaEscravidao& regras = cidade.dados.regrasDaEscravidao;
+    const ContextoDaProducao contexto = cidade.contextoDaProducao();
+    return std::max(regras.mercadoAlvoMinimo, regras.mercadoAlvoPorVagaBracalVazia * contarVagasBracaisVaziasDaCidade(contexto));
+}
+
+int64_t precoNoMercadoEmDecimos(SimulacaoDaVila& cidade, entt::entity npc, const std::string& culturaDoComprador)
+{
+    const DadosDoJogo& dados = cidade.dados;
+    const HabilidadesDoNpc* habilidades = cidade.registroDasEntidades.try_get<HabilidadesDoNpc>(npc);
+    const IdadeDoNpc* idade = cidade.registroDasEntidades.try_get<IdadeDoNpc>(npc);
+    const std::string& cultura = cidade.registroDasEntidades.get<IdentidadeDoNpc>(npc).cultura;
+    const bool hostil = !culturaDoComprador.empty() && dados.culturas.afinidade(culturaDoComprador, cultura) == AfinidadeEntreCulturas::Hostil;
+    const int precoBase = precoBaseDoEscravo(dados.regrasDaEscravidao, habilidades != nullptr ? std::max(habilidades->bracal, habilidades->manufaturado) : 0, false,
+                                             idade != nullptr && idade->anos >= dados.regras.populacao.idadeVelho, hostil);
+    const int fator = calcularFatorDoMercadoLocal(static_cast<int>(escravosAVenda(cidade).size()), static_cast<int64_t>(estoqueAlvoDoMercado(cidade)) * 100,
+                                                  dados.regras.economia.mercadoLocal);
+    return static_cast<int64_t>(precoBase) * fator / 100 * 10;
+}
+
+entt::entity moverEscravoDeCidade(SimulacaoDaVila& origem, entt::entity npc, SimulacaoDaVila& destino, bool doJogador, bool aVenda)
+{
+    const IdentidadeDoNpc identidade = origem.registroDasEntidades.get<IdentidadeDoNpc>(npc);
+    const HabilidadesDoNpc habilidades = origem.registroDasEntidades.get<HabilidadesDoNpc>(npc);
+    const int idade = origem.registroDasEntidades.get<IdadeDoNpc>(npc).anos;
+    const CativeiroDoNpc cativeiroAntigo = origem.registroDasEntidades.get<CativeiroDoNpc>(npc);
+    ContextoDaProducao contextoDoDestino = destino.contextoDaProducao();
+    const entt::entity novo = criarNpcNaVila(contextoDoDestino, idade, habilidades.bracal, habilidades.manufaturado, true);
+    if (novo == entt::null) {
+        return entt::null;
+    }
+    IdentidadeDoNpc& identidadeNova = destino.registroDasEntidades.get<IdentidadeDoNpc>(novo);
+    identidadeNova.nome = identidade.nome;
+    identidadeNova.cultura = identidade.cultura;
+    // O criarNpcNaVila soma os pontos da cultura nas outras cidades; a habilidade dele não muda na viagem.
+    destino.registroDasEntidades.get<HabilidadesDoNpc>(novo) = habilidades;
+    tornarEscravo(contextoDoDestino, novo, cativeiroAntigo.diaDoInicio);
+    CativeiroDoNpc& cativeiroNovo = destino.registroDasEntidades.get<CativeiroDoNpc>(novo);
+    cativeiroNovo.obedienciaEmDecimos = cativeiroAntigo.obedienciaEmDecimos;
+    cativeiroNovo.doJogador = doJogador;
+    cativeiroNovo.aVenda = aVenda;
+    ContextoDaProducao contextoDaOrigem = origem.contextoDaProducao();
+    tirarNpcDaVila(contextoDaOrigem, npc);
+    return novo;
+}
+
+int64_t custoDaLiberdadeEmDecimos(const SimulacaoDaVila& vila)
+{
+    return static_cast<int64_t>(vila.cativeiroDoJogador.precoEmMoedas) * vila.dados.regrasDaEscravidao.comprarALiberdadeEmPorcentoDoPreco / 100 * 10;
+}
+
+std::string fazerAcaoDaEscravidao(SimulacaoDaVila& vila, AcaoDaEscravidao acao, int numero, std::vector<std::string>& linhas)
+{
+    const DadosDoJogo& dados = vila.dados;
+    const RegrasDaEscravidao& regras = dados.regrasDaEscravidao;
+    EntidadeEmTransito& grupo = vila.viagem.grupoDoJogador;
+    EstadoDoCativeiroDoJogador& cativeiro = vila.cativeiroDoJogador;
+    const int64_t hoje = vila.relogio.diaDaPartida();
+    const bool acaoDeCativo = acao == AcaoDaEscravidao::ComprarALiberdade || acao == AcaoDaEscravidao::TentarFugir;
+    if (acaoDeCativo != cativeiro.estaCativo) {
+        return cativeiro.estaCativo ? "você é escravo" : "você não é escravo";
+    }
+
+    switch (acao) {
+    case AcaoDaEscravidao::ComprarALiberdade: {
+        const int64_t custo = custoDaLiberdadeEmDecimos(vila);
+        if (cativeiro.peculioEmDecimos + grupo.dinheiroEmDecimos < custo) {
+            return "faltam " + std::to_string((custo - cativeiro.peculioEmDecimos - grupo.dinheiroEmDecimos + 9) / 10) + " moedas para a liberdade";
+        }
+        grupo.dinheiroEmDecimos -= std::max<int64_t>(0, custo - cativeiro.peculioEmDecimos);
+        if (SimulacaoDaVila* cidade = cidadeDoMundoNoMapa(vila, cativeiro.mapaDoMercado); cidade != nullptr) {
+            cidade->dinheiro.bancoDaCidade += custo;
+        }
+        soltarOJogador(vila);
+        linhas.push_back("Escravidão: você comprou a sua liberdade por " + std::to_string(custo / 10) + " moedas.");
+        return "";
+    }
+    case AcaoDaEscravidao::TentarFugir: {
+        if (hoje <= cativeiro.semFugirAte) {
+            return "você foi castigado e só pode tentar de novo depois do dia " + std::to_string(cativeiro.semFugirAte + 1);
+        }
+        SorteioComSemente sorteio(vila.vila.sementeDaPartida ^ (static_cast<uint64_t>(vila.relogio.tickAtual() + 1) * 0x9E3779B97F4A7C15ULL), 6000);
+        if (sorteio.sortearNumeroInteiroEntre(1, 100) <= regras.fugaDetectadaEmPorcento) {
+            cativeiro.semFugirAte = hoje + regras.castigoDaFugaEmDias;
+            linhas.push_back("Escravidão: a fuga falhou. Você foi visto e castigado; só pode tentar de novo em " + std::to_string(regras.castigoDaFugaEmDias) + " dias.");
+            return "";
+        }
+        const int mapa = cativeiro.mapaDoMercado;
+        soltarOJogador(vila);
+        std::string linha = "Escravidão: você fugiu de " + nomeDaCidadeNoMapa(dados, mapa) + ".";
+        const int faccao = faccaoDaCidade(dados, mapa);
+        if (faccao >= 0 && faccao < static_cast<int>(vila.crimeDoJogador.recompensaPorFaccao.size())) {
+            vila.crimeDoJogador.recompensaPorFaccao[static_cast<std::size_t>(faccao)] += regras.recompensaPelaFugaEmMoedas;
+            linha += " " + nomeDaFaccaoComArtigo(dados, faccao, "", true) + " pôs uma Recompensa de " + std::to_string(regras.recompensaPelaFugaEmMoedas) + " moedas por você.";
+        }
+        linhas.push_back(linha);
+        return "";
+    }
+    case AcaoDaEscravidao::ComprarNoMercado: {
+        SimulacaoDaVila* cidade = cidadeOndeOGrupoEsta(vila);
+        if (cidade == nullptr || !cidadeTemMercadoDeEscravos(vila, cidade->numeroDoMapaNoMundo())) {
+            return "o grupo precisa estar parado numa cidade com Mercado de Escravos";
+        }
+        if (!escravidaoPermitidaNaCidade(vila, dados.mundo.mapaDaVila)) {
+            return "a lei da sua vila proíbe a escravidão";
+        }
+        const entt::entity npc = npcDeNumero(*cidade, numero);
+        const CativeiroDoNpc* doNpc = npc != entt::null ? cidade->registroDasEntidades.try_get<CativeiroDoNpc>(npc) : nullptr;
+        if (doNpc == nullptr || !doNpc->aVenda) {
+            return "esse escravo não está à venda";
+        }
+        const int64_t preco = precoNoMercadoEmDecimos(*cidade, npc, culturaBaseDaCidade(dados, dados.mundo.mapaDaVila));
+        if (grupo.dinheiroEmDecimos < preco) {
+            return "o grupo não tem as " + std::to_string((preco + 9) / 10) + " moedas";
+        }
+        const std::string nome = cidade->registroDasEntidades.get<IdentidadeDoNpc>(npc).nome;
+        if (moverEscravoDeCidade(*cidade, npc, vila, true, false) == entt::null) {
+            return "não há cama livre na sua vila";
+        }
+        grupo.dinheiroEmDecimos -= preco;
+        cidade->dinheiro.bancoDaCidade += preco;
+        linhas.push_back("Escravidão: você comprou " + nome + " por " + std::to_string(preco / 10) + " moedas. Ele foi levado para a sua vila.");
+        mudarAReputacaoCom(vila, "religiosa", regras.reputacaoReligiosaAoComprar, "comprou um escravo", linhas);
+        return "";
+    }
+    default:
+        break;
+    }
+
+    // As ações sobre um escravo do jogador, na vila dele.
+    ContextoDaProducao contextoDaVila = vila.contextoDaProducao();
+    if (acao == AcaoDaEscravidao::CastigoPublico) {
+        bool temEscravo = false;
+        for (const entt::entity outro : vila.npcsDaVila) {
+            const CativeiroDoNpc* doOutro = vila.registroDasEntidades.try_get<CativeiroDoNpc>(outro);
+            temEscravo = temEscravo || (doOutro != nullptr && doOutro->doJogador);
+        }
+        if (!temEscravo) {
+            return "você não tem escravos";
+        }
+        if (vila.escravidao.castigoPublicoAte >= hoje) {
+            return "já há um castigo público valendo";
+        }
+        vila.escravidao.castigoPublicoAte = hoje + regras.castigoPublicoEmDias;
+        linhas.push_back("Escravidão: você mandou fazer um castigo público. O Medo sobe e a Felicidade dos escravos cai por " + std::to_string(regras.castigoPublicoEmDias) + " dias.");
+        mudarAReputacaoCom(vila, "religiosa", regras.reputacaoReligiosaNoCastigoPublico, "castigou escravos em público", linhas);
+        return "";
+    }
+    const entt::entity npc = npcDeNumero(vila, numero);
+    CativeiroDoNpc* doNpc = npc != entt::null ? vila.registroDasEntidades.try_get<CativeiroDoNpc>(npc) : nullptr;
+    if (doNpc == nullptr || !doNpc->doJogador) {
+        return "esse NPC não é um escravo seu";
+    }
+    const std::string nome = vila.registroDasEntidades.get<IdentidadeDoNpc>(npc).nome;
+    switch (acao) {
+    case AcaoDaEscravidao::PorGrilhoes:
+    case AcaoDaEscravidao::TirarGrilhoes:
+        doNpc->grilhoes = acao == AcaoDaEscravidao::PorGrilhoes;
+        linhas.push_back(std::string("Escravidão: ") + nome + (doNpc->grilhoes ? " agora usa Grilhões." : " não usa mais Grilhões."));
+        return "";
+    case AcaoDaEscravidao::Libertar: {
+        libertarEscravo(contextoDaVila, npc);
+        linhas.push_back("Escravidão: você libertou " + nome + ". Agora é um Civil da vila.");
+        mudarAReputacaoCom(vila, "religiosa", regras.reputacaoReligiosaAoLibertar, "libertou um escravo", linhas);
+        for (std::size_t faccao = 0; faccao < dados.faccoes.faccoes.size(); ++faccao) {
+            const DefinicaoDaFaccao& definicao = dados.faccoes.faccoes[faccao];
+            if (escravidaoPermitidaNaCidade(vila, dados.mundo.numeroDoMapaNa(definicao.colunaDaCapital, definicao.linhaDaCapital))) {
+                mudarAReputacaoCom(vila, definicao.cultura, regras.reputacaoDeQuemPermiteAoLibertar, "libertou um escravo", linhas);
+            }
+        }
+        return "";
+    }
+    case AcaoDaEscravidao::Vender: {
+        SimulacaoDaVila* cidade = cidadeOndeOGrupoEsta(vila);
+        if (cidade == nullptr || !cidadeTemMercadoDeEscravos(vila, cidade->numeroDoMapaNoMundo())) {
+            return "o grupo precisa estar parado numa cidade com Mercado de Escravos";
+        }
+        // O dono vende por 70% do preço do Mercado (o preço é calculado como se ele já estivesse lá).
+        const HabilidadesDoNpc habilidades = vila.registroDasEntidades.get<HabilidadesDoNpc>(npc);
+        const bool velho = vila.registroDasEntidades.get<IdadeDoNpc>(npc).anos >= dados.regras.populacao.idadeVelho;
+        // O estoque conta com ele (+1): sem isso, comprar com o Mercado cheio e revender com ele vazio daria lucro.
+        const int fator = calcularFatorDoMercadoLocal(static_cast<int>(escravosAVenda(*cidade).size()) + 1, static_cast<int64_t>(estoqueAlvoDoMercado(*cidade)) * 100,
+                                                      dados.regras.economia.mercadoLocal);
+        const int64_t valor = static_cast<int64_t>(precoBaseDoEscravo(regras, std::max(habilidades.bracal, habilidades.manufaturado), false, velho, false)) * fator / 100
+            * regras.vendaPeloDonoEmPorcento / 100 * 10;
+        if (cidade->dinheiro.bancoDaCidade < valor) {
+            return "o Mercado não tem as " + std::to_string((valor + 9) / 10) + " moedas";
+        }
+        if (moverEscravoDeCidade(vila, npc, *cidade, false, true) == entt::null) {
+            return "o Mercado não tem lugar para mais um escravo";
+        }
+        cidade->dinheiro.bancoDaCidade -= valor;
+        grupo.dinheiroEmDecimos += valor;
+        linhas.push_back("Escravidão: você vendeu " + nome + " por " + std::to_string(valor / 10) + " moedas.");
+        mudarAReputacaoCom(vila, "religiosa", regras.reputacaoReligiosaAoVender, "vendeu um escravo", linhas);
+        return "";
+    }
+    default:
+        return "ação desconhecida";
+    }
+}
+
+bool sortearACapturaDoJogador(SimulacaoDaVila& vila, std::vector<std::string>& linhas)
+{
+    const DadosDoJogo& dados = vila.dados;
+    const RegrasDaEscravidao& regras = dados.regrasDaEscravidao;
+    EntidadeEmTransito& grupo = vila.viagem.grupoDoJogador;
+    if (vila.cativeiroDoJogador.estaCativo) {
+        return false;
+    }
+    SorteioComSemente sorteio(vila.vila.sementeDaPartida ^ (static_cast<uint64_t>(vila.relogio.tickAtual() + 1) * 0x9E3779B97F4A7C15ULL), 6001);
+    if (sorteio.sortearNumeroInteiroEntre(1, 100) > regras.capturaDoJogadorPelosBandidosEmPorcento) {
+        return false;
+    }
+    // O Mercado mais perto; no empate, o de menor número de mapa.
+    int mapaDoMercado = 0;
+    for (SimulacaoDaVila* cidade : cidadesDoMundo(vila)) {
+        const int mapa = cidade->numeroDoMapaNoMundo();
+        if (cidade != &vila && cidadeTemMercadoDeEscravos(vila, mapa)
+            && (mapaDoMercado == 0 || distanciaEntreMapas(dados.mundo, grupo.mapaAtual, mapa) < distanciaEntreMapas(dados.mundo, grupo.mapaAtual, mapaDoMercado))) {
+            mapaDoMercado = mapa;
+        }
+    }
+    if (mapaDoMercado == 0) {
+        return false;  // nenhum Mercado no mundo: os bandidos só roubam
+    }
+    grupo.emTransito = false;
+    grupo.mapaAtual = mapaDoMercado;
+    grupo.proximoMapa = 0;
+    grupo.rota.clear();
+    grupo.ticksDoTrecho = 0;
+    grupo.ticksAndadosNoTrecho = 0;
+    grupo.dinheiroEmDecimos = 0;  // os captores ficam com o dinheiro que sobrou
+    EstadoDoCativeiroDoJogador& cativeiro = vila.cativeiroDoJogador;
+    cativeiro = EstadoDoCativeiroDoJogador{};
+    cativeiro.estaCativo = true;
+    cativeiro.mapaDoMercado = mapaDoMercado;
+    cativeiro.precoEmMoedas = precoBaseDoEscravo(regras, regras.habilidadeDoJogadorNoPreco, false, false, false);
+    cativeiro.diaDaCaptura = vila.relogio.diaDaPartida();
+    linhas.push_back("Escravidão: os bandidos capturaram o grupo e o levaram ao Mercado de Escravos de " + nomeDaCidadeNoMapa(dados, mapaDoMercado) + " (preço: "
+                     + std::to_string(cativeiro.precoEmMoedas) + " moedas).");
+    return true;
 }
 
 void anotarONascimentoNaEscravidao(ContextoDaProducao& contexto, entt::entity npc)

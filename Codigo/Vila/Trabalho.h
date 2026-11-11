@@ -21,6 +21,9 @@ int64_t calcularValorDaConstrucao(const ContextoDaProducao& contexto, int indice
 // se o Banco tem 3 dias do salário da vaga. Devolve as linhas do Diário.
 std::vector<std::string> preencherVagasDaCidade(ContextoDaProducao& contexto);
 
+// Fase D3 (Escravidão, 4.2): as vagas Braçais sem ninguém nas construções da Cidade.
+int contarVagasBracaisVaziasDaCidade(const ContextoDaProducao& contexto);
+
 // Regra 4.2 (dia 1 de cada estação): troca os empregados da Cidade de
 // Trabalhos diferentes quando a soma das habilidades usadas sobe 10 ou mais.
 std::vector<std::string> redistribuirEmpregosDaCidade(ContextoDaProducao& contexto);

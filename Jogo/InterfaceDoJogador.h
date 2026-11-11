@@ -70,6 +70,7 @@ private:
     // Fase C1 (ficha da Facção): as leis, o Banco e o líder de cada facção.
     void desenharAsFaccoes(const SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
     void desenharOsCompanheiros(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);  // fase D2
+    void desenharAEscravidao(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);  // fase D3
     // Fase C3 (ficha do Crime e Justiça): a revista na entrada da cidade.
     void desenharARevista(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela);
 
@@ -97,5 +98,6 @@ private:
     bool janelaDaTecnologiaAberta = false;
     bool janelaDasFaccoesAberta = false;
     bool janelaDosCompanheirosAberta = false;  // fase D2
+    bool janelaDaEscravidaoAberta = false;  // fase D3
     int ofertaDoSuborno = 50;  // em moedas
 };

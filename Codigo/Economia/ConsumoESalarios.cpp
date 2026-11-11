@@ -286,14 +286,15 @@ void consumirACestaDoDia(ContextoDaProducao& contexto)
     contexto.consumoMedido.fecharODia();
 }
 
-int alimentarOsEscravosDaCidade(ContextoDaProducao& contexto, int escravos)
+int alimentarOsEscravosDaCidade(ContextoDaProducao& contexto, int escravos, bool doJogador)
 {
+    const DonoDoItem dono = doJogador ? DonoDoItem::Jogador : DonoDoItem::Cidade;
     int semComida = 0;
     for (int escravo = 0; escravo < escravos; ++escravo) {
         // A comida da Cidade de menor preço local; no empate, a de menor número.
         int maisBarata = -1;
         for (const DefinicaoDeItem& item : contexto.dados.catalogoDeItens.todosOsItens()) {
-            if (item.ehComida() && contexto.inventario.quantidadeDe(item.numeroInterno, DonoDoItem::Cidade) > 0
+            if (item.ehComida() && contexto.inventario.quantidadeDe(item.numeroInterno, dono) > 0
                 && (maisBarata < 0 || precoLocalDoItem(contexto, item.numeroInterno) < precoLocalDoItem(contexto, maisBarata))) {
                 maisBarata = item.numeroInterno;
             }
@@ -302,7 +303,7 @@ int alimentarOsEscravosDaCidade(ContextoDaProducao& contexto, int escravos)
             ++semComida;
             continue;
         }
-        contexto.inventario.tentarTirar(maisBarata, DonoDoItem::Cidade, 1);
+        contexto.inventario.tentarTirar(maisBarata, dono, 1);
         contexto.consumoMedido.anotarOQueSaiu(maisBarata, 1);
     }
     // A comida que faltou também é demanda (regra 10.1 da Economia).
