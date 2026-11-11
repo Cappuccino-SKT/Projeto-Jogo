@@ -4,7 +4,7 @@ tags: [ficha-logica]
 
 > O que não tem marcação foi decidido pelo autor. **[Proposta]** = sugestão ainda não decidida. **[Em aberto]** = pergunta que precisa de decisão. **[Refinar depois]** = ideia aceita em linhas gerais, com detalhes a definir mais adiante.
 >
-> Ficha escrita em 2026-10-31 (fase D8 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]]), com a **rodada RA1** (as respostas do autor; quase todas "seguir a sugestão"). A história das raças está no [[Documentos/Mundo e História/Descrição|Mundo e História]], partes 4.4 e 7.1. **O marco vem depois dos marcos da fase D** (HI3-2); até lá, o jogo tem só humanos.
+> Ficha escrita em 2026-10-31 (fase D8 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]], rodada RA1) e **refeita em 2026-11-11 pela rodada HI13**, com as raças da história nova. A história das raças está no [[Documentos/Mundo e História/Descrição|Mundo e História]], parte 6. **O marco vem depois dos marcos da fase D** (HI3-2); até lá, o jogo tem só humanos.
 
 # Ficha Lógica: Raças
 
@@ -15,11 +15,25 @@ Dá a cada NPC uma **raça**, ao lado da cultura. A raça decide:
 1. **A idade de adulto e de velho** (decisão do autor, 2026-10-26).
 2. **As habilidades, a Personalidade, uma vantagem e um defeito** (RA1-2).
 3. **Como ela tem filhos:** só com a mesma raça (RA1-5).
-4. **Como cada povo a trata:** a lei nova "As outras raças" (RA1-4).
+4. **Como cada reino a trata:** a lei "As outras raças" (RA1-4).
 
-Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câmara de Moldagem** dos Khadim (RA1-8) e as **tribos Quitinas** (RA1-9). Os monstros ficam numa ficha própria, **Fauna e Monstros** (RA1-10).
+Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7; mantidas pela HI13-9), a **Câmara de Forja** dos Forjados e as **colônias Fungoides**. Os monstros ficam numa ficha própria, **Fauna e Monstros** (RA1-10).
 
-**O sistema precisa aceitar raças novas com facilidade** (decisão do autor, 2026-10-31). Por isso, cada raça é uma entrada no `racas.json`, e as leis e as culturas reagem às **marcas** da raça ("mutante", "mágica", "monstruosa", "artificial", "única"), não ao nome dela. Uma raça nova com marcas conhecidas já funciona sem regra nova.
+**O sistema precisa aceitar raças novas com facilidade** (decisão do autor, 2026-10-31). Por isso, cada raça é uma entrada no `racas.json`, e as leis e as culturas reagem às **marcas** da raça ("mutante", "magica", "monstruosa", "artificial", "mestica", "de_outro_mundo"), não ao nome dela. Uma raça nova com marcas conhecidas já funciona sem regra nova.
+
+### De onde vieram os números (HI13-4)
+
+| Raça nova | Herdou os números de | O que mudou |
+|---|---|---|
+| Humanos | Humanos | Nada |
+| **Rudeanos** (os Magos do outro mundo) | Ascendidos | A vida bem mais longa: velho aos 400 [Proposta] (1.000 anos da história), para os que vieram na Colisão ainda estarem vivos no Ano 412 |
+| **Mestiços** | Humanos | Todos nascem com o dom mágico |
+| **Forjados** (o nome novo dos Humanos-Cinzentos) | Khadim | Feitos para a guerra, não para o trabalho: os pontos vão para o combate |
+| **Cinzentos** | Langren | Nada |
+| **Fungoides** | Quitinos | A mente coletiva no lugar da rainha |
+| **Humanos-Peludos** | Raça nova | Adulto aos 2, velho aos 12, fertilidade dobrada |
+
+O Eterno saiu. Os Forjados são a tentativa do Antigo Império Mágico de **copiar em laboratório a força dos Cinzentos**.
 
 ## 2. Dados
 
@@ -30,99 +44,115 @@ Três coisas do mundo nascem desta ficha: as **Marés de Mana** (RA1-7), a **Câ
   "racas": [
     { "id": "humano", "nome": "Humanos", "adulto": 5, "velho": 31, "reproducao": "normal", "fertilidade_em_porcento": 100,
       "habilidades_em_pontos": {}, "personalidade_em_pontos": {}, "dom_magico": "normal", "marcas": [] },
-    { "id": "langren", "nome": "Langren", "adulto": 4, "velho": 24, "reproducao": "normal", "fertilidade_em_porcento": 100,
+    { "id": "rudeano", "nome": "Rudeanos", "adulto": 10, "velho": 400, "reproducao": "normal", "fertilidade_em_porcento": 2,
+      "habilidades_em_pontos": { "especialista": 15 }, "personalidade_em_pontos": { "sociabilidade": -20 },
+      "dom_magico": "sempre", "marcas": ["magica", "de_outro_mundo"] },
+    { "id": "mestico", "nome": "Mestiços", "adulto": 5, "velho": 31, "reproducao": "normal", "fertilidade_em_porcento": 100,
+      "habilidades_em_pontos": {}, "personalidade_em_pontos": { "sociabilidade": -10 },
+      "dom_magico": "sempre", "marcas": ["magica", "mestica"] },
+    { "id": "forjado", "nome": "Forjados", "adulto": 0, "velho": 10, "reproducao": "fabricada",
+      "habilidades_em_pontos": { "corpo_a_corpo": 20, "oficio": -15, "comercio": -15 },
+      "personalidade_fixa": { "lealdade": 100, "coragem": 80 },
+      "sobe_de_habilidade": false, "pode_liderar": false, "faz_greve_e_foge": false, "dom_magico": "nunca", "marcas": ["artificial"] },
+    { "id": "cinzento", "nome": "Cinzentos", "adulto": 4, "velho": 24, "reproducao": "normal", "fertilidade_em_porcento": 100,
       "habilidades_em_pontos": { "corpo_a_corpo": 20, "oficio": -15, "comercio": -15 }, "personalidade_em_pontos": { "agressividade": 30 },
       "dano_recebido_no_corpo_a_corpo_em_porcento": 80, "producao_em_porcento": 70, "dom_magico": "nunca", "marcas": ["mutante"] },
-    { "id": "khadim", "nome": "Khadim", "adulto": 0, "velho": 10, "reproducao": "fabricada",
-      "habilidades_em_pontos": { "bracal": 15 }, "personalidade_fixa": { "lealdade": 100, "coragem": 20 },
-      "sobe_de_habilidade": false, "pode_liderar": false, "faz_greve_e_foge": false, "dom_magico": "nunca", "marcas": ["artificial"] },
-    { "id": "ascendido", "nome": "Ascendidos", "adulto": 10, "velho": 120, "reproducao": "normal", "fertilidade_em_porcento": 2,
-      "habilidades_em_pontos": { "especialista": 15 }, "personalidade_em_pontos": { "sociabilidade": -20 },
-      "dom_magico": "sempre", "marcas": ["mutante", "magica"] },
-    { "id": "quitino", "nome": "Quitinos", "adulto": 2, "velho": 15, "velho_da_rainha": 40, "reproducao": "rainha",
+    { "id": "fungoide", "nome": "Fungoides", "adulto": 2, "velho": 15, "reproducao": "colonia",
       "habilidades_em_pontos": { "bracal": 10 }, "personalidade_em_pontos": { "coragem": 20 },
-      "dano_recebido_em_porcento": 70, "come_qualquer_carne": true, "dom_magico": "nunca", "marcas": ["mutante", "monstruosa"] },
-    { "id": "eterno", "nome": "Eterno", "adulto": 0, "velho": null, "reproducao": "nenhuma", "populacao_maxima": 1,
-      "habilidades_fixas": 100, "dom_magico": "sempre", "marcas": ["magica", "unica"] }
+      "dano_recebido_em_porcento": 70, "dom_magico": "nunca", "marcas": ["mutante", "monstruosa"] },
+    { "id": "peludo", "nome": "Humanos-Peludos", "adulto": 2, "velho": 12, "reproducao": "normal", "fertilidade_em_porcento": 200,
+      "habilidades_em_pontos": {}, "personalidade_em_pontos": {},
+      "dano_recebido_em_porcento": 80, "alguns_monstros_nao_atacam": true, "dom_magico": "normal", "marcas": ["mutante"] }
   ],
   "lei_das_outras_racas": {
     "opcoes": ["iguais", "segunda_classe", "escravizaveis", "cacadas"],
     "felicidade": [0, -10, -25, -40],
-    "imposto_da_segunda_classe_em_porcento": 200,
-    "sem_o_dom_na_ordem": "segunda_classe"
+    "imposto_da_segunda_classe_em_porcento": 200
   },
   "mare_de_mana": { "por_ano_no_mundo": 1, "dura_estacoes": 1, "dom_magico_dos_nascidos_vezes": 5 },
-  "camara_de_moldagem": { "dias_por_khadim": 10 },
-  "tribo_quitina": { "importantes": 3, "anos_por_rainha_nova": 5, "chance_de_ser_hostil_em_porcento": 50 }
+  "camara_de_forja": { "dias_por_forjado": 10 },
+  "colonia_fungoide": { "importantes": 3, "anos_por_colonia_nova": 5, "chance_de_ser_hostil_em_porcento": 50,
+                        "chance_de_nascer_com_mente_propria_em_porcento": 1 }
 }
 ```
 
-- **`reproducao`:** "normal" (casal da mesma raça), "rainha" (só a rainha põe ovos), "fabricada" (só pela Câmara de Moldagem) ou "nenhuma".
+- **`reproducao`:** "normal" (casal da mesma raça), "colonia" (os Fungoides não têm gênero: nascem da colônia), "fabricada" (só pela Câmara de Forja) ou "nenhuma".
 - **`dom_magico` (rodada RV1-3):** "normal" (a regra de nascer Mago da [[Ficha Logica/Magia|Magia]], 4.1), "nunca" ou "sempre". O número fica só na ficha da Magia.
-- **`habilidades_fixas`:** o Eterno tem tudo em 100.
+- **Os números dos Forjados, dos Peludos e a mente própria dos Fungoides são [Proposta]:** a história só diz "altos atributos de combate", "alta resistência", "se reproduzem muito rápido" e "alguns poucos nascem com intelecto".
+- **`alguns_monstros_nao_atacam`:** quais monstros, decide a ficha Fauna e Monstros.
 
 ### No `culturas.json`, cada cultura ganha
 
 ```json
-"racas_dos_livres": { "humano": 85, "langren": 10, "quitino": 5 },
-"racas_do_povo": ["humano", "langren", "quitino"]
+"racas_da_populacao": { "humano": 80, "outras": 20 },
+"racas_do_povo": ["humano"],
+"lei_das_outras_racas": "escravizaveis",
+"lei_por_marca": { "magica": "cacadas", "com_o_dom": "cacadas" }
 ```
 
-- **`racas_dos_livres`:** a porcentagem de cada raça entre os NPCs livres (RA1-3).
-- **`racas_do_povo`:** as raças que a lei "As outras raças" **não** atinge. **Na Ordem de Custodum (rodada RV1-3),** o Humano sem o dom mágico é de **segunda classe** (o dobro de imposto), mesmo sendo da raça do povo; quem tem o dom não é atingido.
+(O exemplo é o da Federação Humana.)
 
-| Povo | Livres (RA1-3) | Escravos ([[Ficha Logica/Escravidao\|Escravidão]]) | A lei no começo (RA1-4) |
-|---|---|---|---|
-| Clãs de Tian-Lang | 100% Langren | Os que eles capturam | Iguais (vale a lei do mais forte, não a raça) |
-| Ordem de Custodum | 5% Ascendidos (a elite) e 95% Humanos: cerca de 15% com o dom (os membros da Ordem) e 80% sem o dom, o povo comum (rodada RV1-3) | Humanos e outras raças, para experimentos | Escravizáveis (as outras raças); os Humanos sem o dom, segunda classe |
-| Sultanato de Zahran | 100% Humanos | Muitos Khadim, também nos exércitos | Escravizáveis |
-| Comunidade de Ashmoor | 100% Humanos | Khadim (sem saber da origem) | Caçadas: quem tem a marca "mutante" ou "mágica" |
-| Coroa de Valdren | 95% Humanos, 5% Langren | Poucos | Segunda classe (o dobro de imposto) |
-| Teocracia de Theodoria | 85% Humanos, 10% Langren, 5% Quitinos | Nenhum | Iguais (todas abençoadas pelo Doador) |
+- **`racas_da_populacao`:** a porcentagem de cada raça no reino (as da história, parte 5.4). **"outras"** [Proposta] é dividido por igual entre as raças que a linha não cita e que a lei do reino não caça; nunca Rudeanos nem Fungoides de colônia.
+- **`racas_do_povo`:** as raças que a lei "As outras raças" **não** atinge.
+- **`lei_das_outras_racas`:** a opção para quem não é do povo.
+- **`lei_por_marca`:** exceções que valem **mais** do que as duas regras acima. Além das marcas da raça, existem duas marcas do NPC: **"com_o_dom"** e **"sem_o_dom"**. É assim que a Federação caça até o humano que nasce mago (HI13-7) e que a União rebaixa quem não tem magia.
+
+| Reino (cultura) | A população (história, 5.4) | O povo | Os outros | Exceções por marca |
+|---|---|---|---|---|
+| Império Mágico (Autoritária) | Mestiços 40%, Humanos 30%, Forjados 10%, outras 18%, Rudeanos 2% (presos) | Mestiços | Escravizáveis | Nenhuma |
+| União Mágica (Arcana) | Humanos 60%, Forjados 10%, outras 28%, Rudeanos 2% (presos) | Qualquer raça, se tiver o dom | (não se aplica) | "sem_o_dom": segunda classe; "mestica": caçadas |
+| Federação Humana (Tecnocrata) | Humanos 80%, outras 20% | Humanos | Escravizáveis | "magica" e "com_o_dom": caçadas |
+| Clero de Rudeus (Religiosa) | Rudeanos 10%, Humanos 50%, outras 40% | Todas | Iguais | Nenhuma (mas só Rudeanos entram no conselho) |
+| Reino Bárbaro (Guerreira) | Cinzentos 30%, Peludos 30%, Humanos 20%, outras 20% | Todas | Iguais (vale a lei do mais forte, não a raça) | Nenhuma |
+
+**Na União,** 30% dos Humanos e 10% das outras raças têm o dom (história, 5.4): no primeiro dia, esses números trocam a regra de nascer Mago da Magia. **Os Rudeanos presos** do Império e da União são escravos de laboratório: não trabalham e não andam pela cidade [Refinar depois, com a ficha de Segredos]. **Quantos de cada raça começam escravos** em cada reino sai com o marco, numa rodada da [[Ficha Logica/Escravidao|Escravidão]].
 
 ### O NPC ganha
 
 | Campo | O que é |
 |---|---|
-| `raca` | O id da raça ("langren"). Até o marco, todos "humano" |
+| `raca` | O id da raça ("cinzento"). Até o marco, todos "humano" |
 | `temDomMagico` | Sorteado ao nascer pela regra da [[Ficha Logica/Magia\|Magia]] (4.1), se a raça deixa; 5 vezes maior na Maré |
-| `ehRainha` | Só nos Quitinos |
-| `estaDesperto` | Só nos Khadim: o raro que ganhou consciência (um companheiro, o estilo Escravo) |
+| `temMentePropria` | Só nos Fungoides: o raro que não está preso à mente coletiva. Só ele vive numa cidade ou vira companheiro |
 
 ### Estado (vai no save)
 
-- A raça, o dom, a rainha e o desperto de cada NPC.
+- A raça, o dom e a mente própria de cada NPC.
 - As Marés de Mana ativas (a região e a estação em que acaba).
-- A Câmara de Moldagem (de pé ou destruída; os dias até o próximo Khadim).
-- Cada tribo Quitina (o mapa, a população, a rainha, se é hostil).
+- Cada Câmara de Forja (de pé ou destruída; os dias até o próximo Forjado).
+- Cada colônia Fungoide (o mapa, a população, se é hostil).
 
 ## 3. Quando roda
 
 | Quando | O quê |
 |---|---|
 | Ao criar o NPC | A raça (pela cultura), os pontos, a Personalidade e o dom (4.1) |
-| No dia 1 de cada estação | A idade de velho da raça na velhice; os filhos (só da mesma raça); a Maré nova (4.4); as tribos (4.6) |
-| A cada dia | A Câmara de Moldagem (4.5) |
+| No dia 1 de cada estação | A idade de velho da raça na velhice; os filhos (só da mesma raça); a Maré nova (4.4); as colônias (4.6) |
+| A cada dia | As Câmaras de Forja (4.5) |
 | Na revista dos guardas e no imposto | A lei "As outras raças" (4.3) |
 
 ## 4. Regras passo a passo
 
 ### 4.1 Criar o NPC
 
-1. **A raça:** sorteada pela tabela `racas_dos_livres` da cultura dele. O filho é **sempre da raça dos pais** (RA1-5: só a mesma raça tem filhos).
+1. **A raça:** sorteada pela tabela `racas_da_populacao` da cultura dele. O filho é **sempre da raça dos pais** (RA1-5: só a mesma raça tem filhos).
 2. **As habilidades:** os pontos da raça somam com os da cultura; o total fica entre 0 e 100.
-3. **A Personalidade:** os pontos da raça somam ao sorteio (de 20 a 80), entre 0 e 100; os traços fixos (Khadim) trocam o sorteio.
-4. **O dom mágico (rodada RV1-3):** vale a regra 4.1 da [[Ficha Logica/Magia|Magia]] (3% sem pais Magos; 10% na cultura Arcana; 25% com um pai Mago e 60% com os dois). A raça só diz se ela se aplica: "normal" usa a regra; "nunca", nunca nasce com o dom; "sempre", todos nascem. Numa região com Maré de Mana, a chance base é multiplicada por 5 (3% vira 15%; 10% vira 50%).
+3. **A Personalidade:** os pontos da raça somam ao sorteio (de 20 a 80), entre 0 e 100; os traços fixos (Forjado) trocam o sorteio.
+4. **O dom mágico (rodada RV1-3):** vale a regra 4.1 da [[Ficha Logica/Magia|Magia]]. A raça só diz se ela se aplica: "normal" usa a regra; "nunca", nunca nasce com o dom; "sempre", todos nascem. Numa região com Maré de Mana, a chance base é multiplicada por 5.
 
 ### 4.2 A vida e os filhos
 
-1. **A velhice:** a regra da [[Ficha Logica/Populacao|População]] com o `velho` da raça (Langren a partir de 24; Ascendido a partir de 120). O Eterno nunca envelhece.
-2. **Os filhos (RA1-5):** só um casal da mesma raça; a chance da [[Ficha Logica/Companheiros|família]] (10% por estação) × `fertilidade_em_porcento` (Ascendidos: 2%, ou 0,2% por estação; rodada RV1-4). A mulher é fértil da idade de adulto da raça até o velho dela − 1 [Proposta]. Raças diferentes podem casar, mas não têm filhos.
-3. **Os Khadim** não têm filhos: só nascem na Câmara (4.5). **Os Quitinos** só nascem da rainha (4.6).
+1. **A velhice:** a regra da [[Ficha Logica/Populacao|População]] com o `velho` da raça (Cinzento a partir de 24; Peludo, de 12; Rudeano, de 400).
+2. **Os filhos (RA1-5):** só um casal da mesma raça; a chance da [[Ficha Logica/Companheiros|família]] (10% por estação) × `fertilidade_em_porcento` (Rudeanos: 2%, ou 0,2% por estação; Peludos: 200%, ou 20%). A mulher é fértil da idade de adulto da raça até o velho dela − 1 [Proposta]. Raças diferentes podem casar, mas não têm filhos. **Um Mestiço só nasce de dois Mestiços:** a mistura original foi feita em laboratório.
+3. **Os Forjados** não têm filhos: só nascem na Câmara (4.5). **Os Fungoides** só nascem da colônia (4.6).
 
 ### 4.3 A lei "As outras raças" (RA1-4)
 
-Uma lei nova da [[Ficha Logica/Faccao|Facção]], com 4 opções; vale para o NPC cuja raça não está nas `racas_do_povo` da cultura da facção (e, em Ashmoor, para quem tem as marcas caçadas).
+Uma lei da [[Ficha Logica/Faccao|Facção]], com 4 opções. Para cada NPC, a ordem é:
+
+1. Se ele tem uma marca que está em `lei_por_marca`, vale a opção dela (a pior, se tiver mais de uma).
+2. Senão, se a raça dele está em `racas_do_povo`, nada acontece.
+3. Senão, vale a `lei_das_outras_racas` do reino.
 
 | Opção | O que acontece com ele |
 |---|---|
@@ -133,27 +163,28 @@ Uma lei nova da [[Ficha Logica/Faccao|Facção]], com 4 opções; vale para o NP
 
 As culturas desejam a opção do começo (peso 4, como as outras leis do `culturas.json`); a assembleia pode mudá-la.
 
-**O segredo dos Khadim:** Ashmoor caça as marcas "mutante" e "mágica", e os Khadim têm só "artificial". Se o segredo da origem for revelado (Segredos, D9), [Proposta] os Khadim passam a contar como "mágicos" em Ashmoor.
+**A criança com o dom na Federação (HI13-7):** quem nasce com o dom ganha a marca "com_o_dom" e passa a ser caçado. [Proposta] Os pais podem **esconder** a criança: ela só é presa se a revista dos guardas a pegar ou se alguém a denunciar. É um segredo para a ficha D9.
 
-### 4.4 As Marés de Mana (RA1-7)
+### 4.4 As Marés de Mana (RA1-7, mantidas pela HI13-9)
 
 1. Cerca de **1 Maré por ano** no mundo: no dia 1 de cada estação, 25% de chance de começar uma, numa região sorteada; dura 1 estação.
 2. Na região: os magos ficam mais fortes ([[Ficha Logica/Magia|Magia]]); quem nasce ali tem o dom mágico 5 vezes mais; os animais podem virar monstros (Fauna e Monstros).
-3. Não cria raças novas: a Estabilização já passou (por volta do Ano 120 d.F.).
-4. Notícia **Regional:** "Maré de Mana na região X". A Ordem manda magos para lá; Ashmoor fecha a fronteira com ela ([Refinar depois] com a Diplomacia).
+3. Não cria raças novas: a Transformação (do Ano 0 ao 40) já passou. As Marés são o que resta dela.
+4. Notícia **Regional:** "Maré de Mana na região X". A União manda magos para lá; a Federação fecha a fronteira com ela ([Refinar depois] com a Diplomacia).
 
-### 4.5 A Câmara de Moldagem (RA1-8)
+### 4.5 A Câmara de Forja (era a Câmara de Moldagem, RA1-8)
 
-1. O Sultanato tem uma Câmara **escondida** na região da Maré original, mantida pela mana da Ordem.
-2. A cada **10 dias**, ela transforma 1 escravo humano do Sultanato em 1 Khadim (com a [[Ficha Logica/Escravidao|Escravidão]]); sem escravo humano, para.
-3. O jogador pode achá-la (como uma masmorra secreta), roubar as provas (um segredo para a D9) ou destruí-la. Destruída, os Khadim param de nascer e, com a vida de 10 anos, somem do mundo em cerca de 10 anos de jogo.
+1. O **Império Mágico** e a **União Mágica** têm, cada um, uma Câmara de Forja na capital [Proposta]: é a herança dos laboratórios do Antigo Império. Não é segredo.
+2. A cada **10 dias**, cada Câmara transforma 1 escravo humano do reino em 1 Forjado (com a [[Ficha Logica/Escravidao|Escravidão]]); sem escravo humano, para.
+3. O jogador pode destruir uma Câmara. Destruída, aquele reino deixa de ganhar Forjados e, com a vida de 10 anos, perde os que tem em cerca de 10 anos de jogo: sem a elite pesada, o exército dele enfraquece.
 
-### 4.6 As tribos Quitinas (RA1-9)
+### 4.6 As colônias Fungoides (eram as tribos Quitinas, RA1-9)
 
-1. Cada tribo é um **lugar sem facção** no mapa novo (na floresta da explosão), como uma cidade pequena.
-2. **A população** é um número, como a das [[Ficha Logica/OutrasCidades|outras cidades]]: cresce rápido, mas para na comida da região. Só a **rainha e 2 guerreiros** são NPCs Importantes (pelo desempenho, o mesmo cuidado do limite das dinastias).
-3. **Hostil ou neutra:** sorteado ao nascer a tribo (50%). A hostil ataca as caravanas como os bandidos.
-4. **A rainha nova:** cerca de 1 a cada 5 anos. Se a rainha velha vive, a nova sai e funda outra tribo num mapa vizinho (notícia Regional); se a rainha morreu, a nova assume. **Sem rainha nem herdeira, a tribo acaba.**
+1. Cada colônia é um **lugar sem facção** na Grande Floresta de Esporos (o mapa novo), como uma cidade pequena.
+2. **A população** é um número, como a das [[Ficha Logica/OutrasCidades|outras cidades]]: cresce rápido, mas para na comida da região. Só **3 guardiões** são NPCs Importantes (pelo desempenho).
+3. **A mente coletiva:** a colônia age como um só. Sorteia-se ao nascer se ela é hostil (50%); a hostil ataca as caravanas como os bandidos. Por isso quase todos os reinos tratam os Fungoides como monstros.
+4. **A mente própria:** 1 em cada 100 Fungoides nasce com intelecto próprio [Proposta]. Ele pode sair da colônia, morar numa cidade e ser companheiro do jogador.
+5. **A colônia nova:** cerca de 1 a cada 5 anos, num mapa vizinho da floresta (notícia Regional). **A colônia acaba** se a população chegar a zero.
 
 ### 4.7 O jogador (RA1-6)
 
@@ -162,38 +193,38 @@ A raça do jogador **depende do início escolhido** (decisão do autor). [Propos
 | Estilo | Raças |
 |---|---|
 | Dono de vila, Mercador, Nobre exilado, Artesão | Humano |
-| Aventureiro | Humano ou Langren |
-| Membro de facção | A raça do povo da facção (Clãs: Langren) |
-| Escravo | Humano ou **Khadim desperto** (o modo mais difícil) |
-| Mago | Humano com o dom ou Ascendido |
-| Eterno, Quitino | Nunca no começo (um início próprio para Quitino [Refinar depois]) |
+| Aventureiro | Humano, Cinzento ou Humano-Peludo |
+| Membro de facção | Uma raça do povo do reino (Império: Mestiço; União: quem tem o dom; Federação: Humano) |
+| Escravo | Humano ou Humano-Peludo |
+| Mago | Humano com o dom ou Mestiço |
+| Rudeano, Forjado, Fungoide | Nunca no começo (um início próprio para o Fungoide de mente própria [Refinar depois]) |
 
 ## 5. Contas
 
 | Conta | Valor |
 |---|---|
-| Humano com Corpo a Corpo 40 da cultura Guerreira (+5) vs. Langren da mesma cultura | 45 vs. 65 |
-| Langren na Carpintaria, com habilidade igual à de um Humano | Produz 70% |
-| Filhos de um casal Ascendido em 100 estações férteis | 10% × 2% = 0,2% por estação: **cerca de 0,2 filho** (1 em cada 5 casais tem um) |
-| Khadim da Câmara em 10 anos de jogo (40 estações de 16 dias, 1 a cada 10 dias) | Cerca de **64** (se houver escravos humanos) |
-| Humanos com o dom numa cidade de 300 NPCs | 5% no mundo: cerca de **15**; na Arcana, 15%: cerca de **45** (Magia, 4.1) |
+| Humano com Corpo a Corpo 40 da cultura Guerreira (+5) vs. Cinzento da mesma cultura | 45 vs. 65 |
+| Cinzento na Carpintaria, com habilidade igual à de um Humano | Produz 70% |
+| Filhos de um casal Rudeano | 10% × 2% = 0,2% por estação: 1 filho a cada 500 estações (125 anos de jogo) |
+| Filhos de um casal Peludo | 10% × 200% = 20% por estação: cerca de 1 filho a cada 5 estações, em 9 anos férteis (dos 2 aos 11) |
+| Forjados de uma Câmara em 10 anos de jogo (40 estações de 16 dias, 1 a cada 10 dias) | Cerca de **64** (se houver escravos humanos) |
 
 ## 6. Conversa com outros sistemas
 
 | Sistema | O quê |
 |---|---|
 | NPC e População | O campo da raça; a velhice da raça; os filhos só da mesma raça |
-| Cultura | `racas_dos_livres`, `racas_do_povo`; os pontos somam |
-| Facção | A lei "As outras raças"; o líder tem raça (Tian Feng é Langren; Cassius, Ascendido) |
-| Companheiros | O recrutável tem a raça da Taverna; o Khadim desperto como companheiro |
-| Combate | Os danos recebidos dos Langren e dos Quitinos |
-| Produção | Os 70% dos Langren |
+| Cultura | `racas_da_populacao`, `racas_do_povo`, `lei_por_marca`; os pontos somam |
+| Facção | A lei "As outras raças"; o líder tem raça (o do Império é Mestiço; o do Clero, Rudeano) |
+| Companheiros | O recrutável tem a raça da Taverna; o Fungoide de mente própria como companheiro |
+| Combate | Os danos recebidos dos Cinzentos, dos Fungoides e dos Peludos |
+| Produção | Os 70% dos Cinzentos |
 | Crime | A revista prende quem a lei caça |
-| Escravidão | Os Khadim; a captura das raças escravizáveis |
+| Escravidão | Os Forjados; a captura das raças escravizáveis |
 | Magia | O dom mágico; as Marés deixam os magos mais fortes |
-| Segredos (D9) | A origem dos Khadim; o segundo Eterno |
-| Fauna e Monstros (nova) | Os animais que a Maré transforma |
-| Arte | Um manequim por raça ([[Pipeline de Arte e Conteúdo/Guia da Arte\|Guia da Arte]]); o Eterno e a rainha Quitina, únicos |
+| Segredos (D9) | A criança com o dom escondida; os Rudeanos presos |
+| Fauna e Monstros (nova) | Os animais que a Maré transforma; os monstros que não atacam os Peludos |
+| Arte | Um manequim por raça ([[Pipeline de Arte e Conteúdo/Guia da Arte\|Guia da Arte]]) |
 | Save | Tudo da parte 2 |
 
 ## 7. Nomes no código
@@ -204,52 +235,53 @@ A raça do jogador **depende do início escolhido** (decisão do autor). [Propos
 | `sortearARacaDoNpc(cultura)` | Regra 4.1, passo 1 |
 | `idadeDeVelhoDaRaca(raca)` | Regra 4.2, passo 1 |
 | `podemTerFilhos(umaRaca, outraRaca)` | Regra 4.2, passo 2 |
-| `opcaoDaLeiParaARaca(faccao, npc)` | Regra 4.3 |
+| `opcaoDaLeiParaONpc(faccao, npc)` | Regra 4.3 |
 | `rodarAsMaresDeMana()` | Regra 4.4 |
-| `rodarACamaraDeMoldagem()` | Regra 4.5 |
-| `rodarAsTribosQuitinas()` | Regra 4.6 |
+| `rodarAsCamarasDeForja()` | Regra 4.5 |
+| `rodarAsColoniasFungoides()` | Regra 4.6 |
 
 ## 8. Testes
 
-1. **As idades:** um Langren fica velho aos 24; um Ascendido, aos 120; o Eterno nunca.
-2. **Os filhos:** um casal Humano e Langren nunca tem filho; um casal Ascendido tem cerca de 1/50 da chance dos Humanos; nenhum Langren, Khadim ou Quitino nasce com o dom, e todo Ascendido nasce.
-3. **A cultura:** em 1.000 NPCs da Teocracia, cerca de 850 Humanos, 100 Langren e 50 Quitinos; nos Clãs, todos Langren; na Ordem, cerca de 50 Ascendidos, 150 Humanos com o dom e 800 sem.
-4. **A lei:** um Langren em Ashmoor é preso na revista; na Coroa, paga o dobro de imposto; nos Clãs, nada.
-5. **O segredo:** antes da revelação, o Khadim não é caçado em Ashmoor.
-6. **A Câmara:** com escravos humanos, 1 Khadim a cada 10 dias; destruída, nenhum.
-7. **A tribo:** sem rainha nem herdeira, a tribo acaba; a população para na comida.
+1. **As idades:** um Cinzento fica velho aos 24; um Peludo, aos 12; um Rudeano, aos 400.
+2. **Os filhos:** um casal Humano e Cinzento nunca tem filho; um casal Rudeano tem cerca de 1/50 da chance dos Humanos, e um casal Peludo, o dobro; nenhum Cinzento, Forjado ou Fungoide nasce com o dom; todo Mestiço e todo Rudeano nasce.
+3. **A cultura:** em 1.000 NPCs do Império, cerca de 400 Mestiços, 300 Humanos e 100 Forjados; no Reino Bárbaro, cerca de 300 Cinzentos e 300 Peludos.
+4. **A lei:** um Mestiço na Federação e na União é preso na revista; um Humano com o dom é preso na Federação e é do povo na União; um Humano sem o dom paga o dobro de imposto na União; um Cinzento no Reino Bárbaro e no Clero, nada.
+5. **A ordem da lei:** a exceção por marca vale mais do que a raça do povo (o Humano com o dom na Federação).
+6. **A Câmara:** com escravos humanos, 1 Forjado a cada 10 dias; destruída, nenhum.
+7. **A colônia:** com a população em zero, acaba; a população para na comida; cerca de 1 em 100 nasce com mente própria.
 8. **O teste de 1 ano não muda** antes do marco (todos humanos).
 
 ## 9. Fora desta versão
 
 - Os monstros (Fauna e Monstros, com o mapa novo).
-- O lugar das tribos, da Câmara e da Maré original (o mapa novo).
-- A Grande História dos Khadim despertos (Correntes Quebradas, D10).
-- O início próprio de Quitino.
+- O lugar das colônias e da Floresta de Esporos (o mapa novo).
+- Quantos de cada raça começam escravos em cada reino (rodada da Escravidão, com o marco).
+- Os Rudeanos presos como parte das Grandes Histórias (D10).
+- O início próprio do Fungoide de mente própria.
 
 ## 10. Simulação de mesa
 
-### 10.1 Um companheiro Langren em 3 povos
+### 10.1 Um companheiro Cinzento em 3 reinos
 
-O jogador recruta Hao, um Langren de Combate, numa cidade da Teocracia (a lei: iguais). Corpo a Corpo 45 + 20 = **65**.
+O jogador recruta Bjorn, um Cinzento de Combate, numa cidade do Clero (a lei: iguais). Corpo a Corpo 45 + 20 = **65**.
 
 | Onde | O que acontece |
 |---|---|
-| Teocracia | Nada; ele luta no grupo com 65 e −20% de dano recebido no corpo a corpo |
-| Coroa de Valdren | A lei é "segunda classe": ele não paga imposto (não mora lá), mas a Felicidade dele cai 10 enquanto o grupo fica |
-| Comunidade de Ashmoor | A lei é "caçadas": na revista, os guardas o prendem. O jogador deixa Hao do lado de fora (a ação "Deixar aqui" dos Companheiros) |
+| Clero de Rudeus | Nada; ele luta no grupo com 65 e −20% de dano recebido no corpo a corpo |
+| Império Mágico | A lei é "escravizáveis": a Felicidade dele cai 25 enquanto o grupo fica, e ele pode ser capturado como escravo |
+| Federação Humana | Ele não tem magia, então a lei também é "escravizáveis". Se o companheiro fosse um Mestiço, a revista o prenderia: o jogador o deixaria do lado de fora (a ação "Deixar aqui" dos Companheiros) |
 
-### 10.2 A Ordem em 50 anos
+### 10.2 Os Rudeanos em 50 anos
 
-A Ordem começa com cerca de 15 Ascendidos entre 300 NPCs. Com 0,2% de filho por estação e por casal (rodada RV1-4), mesmo que os 15 formem 7 casais, nascem cerca de **3 Ascendidos em 50 anos** (7 × 200 estações × 0,2%); nenhum morre de velho (o velho é aos 120). **A elite quase não muda**, e cada Ascendido morto numa guerra é uma perda que a Ordem não repõe. Isso combina com a história ("a raça mais rara").
+O Clero começa com cerca de 30 Rudeanos entre 300 NPCs (10%). Com 0,2% de filho por estação e por casal, mesmo que formem 15 casais, nascem cerca de **6 Rudeanos em 50 anos** (15 × 200 estações × 0,2%); nenhum morre de velho. **O conselho quase não muda**, e cada Rudeano morto é uma perda que o Clero não repõe. Isso combina com a história: foi pelo número que eles perderam a Morte dos Deuses.
 
 ### 10.3 Verificações
 
 | Pergunta | Resultado |
 |---|---|
 | Uma raça nova precisa de código novo? | **Não**, se usar as reproduções e as marcas que já existem |
-| A população Quitina pesa no desempenho? | **Não:** é um número, com 3 Importantes por tribo |
-| Os Khadim somem se a Câmara cair? | **Sim**, em cerca de 10 anos de jogo |
+| A população Fungoide pesa no desempenho? | **Não:** é um número, com 3 Importantes por colônia |
+| Os Forjados somem se a Câmara cair? | **Sim**, em cerca de 10 anos de jogo, e só naquele reino |
 | O teste de 1 ano muda antes do marco? | **Não** |
 
 ### 10.4 Casos extremos
@@ -257,13 +289,14 @@ A Ordem começa com cerca de 15 Ascendidos entre 300 NPCs. Com 0,2% de filho por
 | Caso | O que acontece |
 |---|---|
 | O jogador casa com alguém de outra raça | Casa, mas não tem filhos; o sucessor sai dos companheiros (Companheiros 4.8) |
-| A rainha Quitina é companheira do jogador | Não pode: a rainha não sai da tribo |
+| O filho do jogador nasce com o dom numa vila da Federação | Ganha a marca "com_o_dom": o jogador esconde a criança, foge do reino ou a entrega |
 | A Maré começa na região da vila do jogador | Os nascidos têm mais chance do dom; os animais podem virar monstros |
-| A Teocracia muda a lei para "caçadas" | Os Langren e os Quitinos dela ficam com Felicidade −40 e fogem |
+| O Clero muda a lei para "caçadas" | As raças que não são do povo ficam com Felicidade −40 e fogem |
 
 ### 10.5 O que muda em outras fichas
 
-- **Companheiros:** Cassius tem 432 anos na história (RA1-1, opção B); a Vida prolongada continua.
-- **Facção:** a lei nova; a raça do líder.
-- **Plano das Fichas:** a ficha nova **Fauna e Monstros**.
-- **Magia (rodada RV1-3):** a regra 4.1 dela vale para o dom; a raça diz "normal", "nunca" ou "sempre".
+- **Facção:** a lei com exceções por marca; a raça do líder.
+- **Cultura:** os 3 campos novos por cultura.
+- **Magia:** os 30% e 10% de magos da União no primeiro dia.
+- **Escravidão:** a Câmara de Forja; os Forjados como escravos militares.
+- **Companheiros:** a Vida prolongada passa ao líder da União (história, parte 5.8).

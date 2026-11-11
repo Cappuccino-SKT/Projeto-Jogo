@@ -1,6 +1,6 @@
 # Mundo e História
 
-> **Estado:** rodadas HI1 a HI12 e RA1 respondidas pelo autor (até 2026-10-31). Estão decididos o tema, o passado com os nomes e as datas, o que a Grande Fusão deixou, a origem das 6 facções e os ódios entre elas, quando as raças entram, o tipo de fim e o limite da crueldade. Também os nomes das facções e o período do Ano 0 ao 412. Também os mitos de cada povo. Também os líderes do Ano 412, os seus segredos e as tensões do presente. Também as Grandes Histórias e as raças. Falta o mapa novo.
+> **Estado:** história **refeita pelo autor em 2026-11-11** (a Colisão dos Mundos e os 5 reinos). Ela substitui a versão antiga (o Império de Valdária, a Grande Fusão e as 6 facções), que ficou só no Git. **Rodada HI13 respondida** (2026-11-11): o que ela decidiu está marcado com o código (HI13-1...). O que está sem marca veio do texto do autor; o que o assistente acrescentou e ainda não passou por rodada está marcado **[Proposta]**. Faltam os nomes das pessoas e dos lugares e o mapa novo.
 
 Este documento guarda a história do mundo: o tema, o tom, o passado, o presente e os futuros possíveis.
 
@@ -12,290 +12,332 @@ Como no Kenshi, o jogador não segue uma trama do começo ao fim:
 
 | Parte | O que é | Onde aparece no jogo |
 |---|---|---|
-| **Começo** | O passado: o Império de Valdária, a guerra e a **Grande Fusão** (parte 4) | Ruínas, masmorras, livros, o que os NPCs contam |
-| **Meio** | O presente, do Ano 412 em diante: as tensões prestes a explodir (parte 5) | Facções, guerras, notícias, eventos |
-| **Fim** | Não há final real: vários destinos do mundo (parte 6) | A simulação, com ou sem o jogador |
+| **Começo** | O passado: a Colisão dos Mundos, a Era dos Conflitos e a queda do Antigo Império Mágico (parte 4) | Ruínas, masmorras, livros, o que os NPCs contam |
+| **Meio** | O presente: a **Era da Estabilidade**, com os 5 reinos em paz armada (parte 7) | Reinos, guerras, notícias, eventos |
+| **Fim** | Não há final real: as 5 Grandes Histórias e os destinos do mundo (partes 8 e 9) | A simulação, com ou sem o jogador |
 
-## 1. O que uma boa história de mundo precisa
+## 1. Tema e tom
 
-| # | Peça | Pergunta que responde | Estado |
-|---|---|---|---|
-| 1 | Tema | Sobre o que é este mundo? | **Decidido** (parte 2) |
-| 2 | Tom e regras | Até onde vai a crueldade? | **Decidido** (parte 2) |
-| 3 | Mito de origem | Como cada povo explica o mundo e a Grande Fusão? | **Decidido** (parte 4.6) |
-| 4 | Era de ouro | O Império de Valdária | **Pontos-chave** (parte 4) |
-| 5 | Catástrofe | O Ritual de Ascensão e a Grande Fusão | **Pontos-chave** (parte 4) |
-| 6 | Reconstrução | Do Ano 0 ao 412: as raças e as 6 facções | **Decidido** (partes 4.4 e 7) |
-| 7 | Conflitos do presente | O que está para explodir no Ano 412? | **Decidido** (parte 5) |
-| 8 | Segredos | Que verdades o jogador pode descobrir? | Os dos líderes, **decididos** (parte 4.7); os outros, proposta (parte 4.3) |
-| 9 | Os povos | O que cada um quer, teme, esconde e faz de cruel? | **Decidido** (parte 7) |
-| 10 | Lugares marcantes | A cratera da capital, as terras mudadas | Cratera na costa (parte 4.4); a posição sai do mapa novo |
-| 11 | Personagens importantes | Aurelian Valdren, Kassian Dravel, os magos reais; os líderes do Ano 412 | **Decidido** (partes 4.0 e 4.7) |
-| 12 | Futuros possíveis | Como o mundo pode mudar? | **Decidido: sem final real** (parte 6) |
-| 13 | Como é contada | Por onde a história chega ao jogador? | Proposta (parte 8) |
+**Tema: "Tudo tem dono"**, com **as cinzas do Antigo Império Mágico** como pano de fundo. A terra, a comida, a lei e as pessoas têm dono. A pergunta do jogo: quem é o seu dono, e de quem você quer ser dono?
 
-## 2. Tema e tom (HI1-1 e HI1-4)
-
-**Tema: "Tudo tem dono"**, com **as cinzas do Império** como pano de fundo. A terra, a comida, a lei e as pessoas têm dono. A pergunta do jogo: quem é o seu dono, e de quem você quer ser dono? Todos brigam pelos restos de um império que caiu pela ganância de um só homem.
+**A segunda pergunta: "quem é gente?" (HI13-9)** Cada um dos 5 reinos tem uma resposta diferente para quem é **livre** e quem é **inferior** (parte 5.1), e nenhuma resposta inclui todo mundo. A história nova pede isso: desde que a mana chegou, cada povo que teve poder usou esse poder para pôr outro povo abaixo de si.
 
 ### Os pilares do tom
 
-1. **O mundo não espera o jogador.** As facções vivem, guerreiam e caem sozinhas.
-2. **Ninguém é herói nem vilão de desenho.** Cada povo tem um motivo que faz sentido **e** uma crueldade que pratica.
+1. **O mundo não espera o jogador.** Os reinos vivem, guerreiam e caem sozinhos.
+2. **Ninguém é herói nem vilão de desenho.** Cada povo tem um motivo que faz sentido **e** uma crueldade que pratica. As vítimas de uma era viram os carrascos da seguinte: os humanos sem magia foram escravos e hoje a Federação quer exterminar; os mestiços foram criados em laboratório e hoje escravizam.
 3. **A desigualdade é a regra.** A lei protege quem tem; quem não tem é preso, vendido ou esquecido.
-4. **O mal compensa rápido; o bem compensa devagar.** Ser cruel dá lucro e opções na hora; ser bom é caro e lento, mas dá reputação, lealdade e estabilidade. O mal precisa abrir **mais caminhos**, não só ser "malvado".
+4. **O mal compensa rápido; o bem compensa devagar.** Ser cruel dá lucro e opções na hora; ser bom é caro e lento, mas dá reputação, lealdade e estabilidade.
 5. **A esperança é rara e pequena:** uma vila salva, um escravo liberto.
 
-### A crueldade mostrada (HI1-4: mistura de A e B)
+### A crueldade mostrada (HI1-4)
 
-- A crueldade **acontece** de verdade (escravidão, fome, traição, tortura) e é contada sobretudo por texto e consequência, na pegada do Kenshi.
-- **Centros de escravos** espalhados pelo mundo: o jogador pode comprar, vender ou tentar libertar os escravos (liga com a [[Ficha Logica/Escravidao|Escravidão]]).
-- **Tortura** mostrada na imagem só em momentos raros e específicos. Como desenhar isso fica para quando a parte gráfica for decidida.
+- A crueldade **acontece** de verdade (escravidão, fome, traição, tortura, experimentos) e é contada sobretudo por texto e consequência, na pegada do Kenshi.
+- **Centros de escravos** espalhados pelo mundo: o jogador pode comprar, vender ou tentar libertar os escravos ([[Ficha Logica/Escravidao|Escravidão]]).
+- **Tortura** mostrada na imagem só em momentos raros e específicos.
 
-## 3. O que a história precisa respeitar (ou mudar por rodada)
+## 2. O que a história muda nas fichas
 
-Já decidido nas fichas; o que a história mudar passa por rodada:
+A história nova bate em coisas já escritas e programadas. A rodada HI13 decidiu o que muda; as fichas já mudaram, e o código muda num marco próprio.
 
-- **6 culturas e facções:** Guerreira, Arcana, Autoritária, Religiosa, Tecnocrata e Escravista, com os ódios do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]. Pela história, elas **surgem depois da Grande Fusão** (parte 7).
-- **Só humanos** nas primeiras versões; o NPC já guarda um campo "Raça". Pela história, **existem outras raças**, nascidas da Grande Fusão (parte 4.4). **Elas entram no jogo depois dos marcos da fase D** (HI3-2), com uma ficha de Raças; até lá o jogo tem só humanos. **Cada raça tem a sua idade de adulto e o seu tempo de vida** (decisão do autor, 2026-10-26): a mutação pela mana pode alongar ou encurtar a vida. As raças estão na parte 7.1; o sistema precisa aceitar **raças novas com facilidade** (decisão do autor, 2026-10-31).
-- **Baixa magia** e tecnologia passando para a **pólvora**. A história explica as duas (parte 4.4).
-- **O mapa:** o de hoje (6 regiões em 8 × 6) é **provisório**. Haverá um **mapa novo, de um continente inteiro**, ainda não desenhado (HI3-1); a cratera entra nele.
-- **O jogo começa no Ano 412** do calendário **d.F.**, contado a partir da **Grande Fusão**.
+- **De 6 facções para 5 reinos (HI13-1).** Os nomes de trabalho das fichas e do código continuam; só a Escravista sai, porque agora todos os reinos têm escravos:
 
-## 4. O começo: o passado do mundo (HI1-2, versão do autor)
-
-### 4.0 Os nomes (HI4)
-
-**O estilo:** os **acontecimentos** têm nome em português; as **pessoas e os lugares** têm nomes inventados, com o som de cada cultura:
-
-| Cultura | O som dos nomes |
-|---|---|
-| Autoritária (e o antigo Império de Valdária) | Romano imperial |
-| Escravista | Árabe |
-| Guerreira | Oriental |
-| Tecnocrata | Europeu vitoriano |
-| Religiosa | Grego bizantino |
-| Arcana | Latim erudito (o das academias) |
-
-| O que é | O nome | Como os povos o veem |
+| Nome de trabalho (fichas e código) | Antes | Agora |
 |---|---|---|
-| O Império | **Império de Valdária** (durou 600 anos) | |
-| O imperador | **Aurelian Valdren** | Os outros povos: "o Último"; a Autoritária: "o Eterno" |
-| O líder da revolta | **Kassian Dravel**, Duque das Marcas: general da fronteira e mago de guerra, querido pelos soldados | Guerreira: o herói; Autoritária: o traidor; Tecnocrata: quem destruiu o mundo com um feitiço |
-| A guerra | **A Revolta dos Famintos** (12 a.F. ao Ano 0) | |
-| O ritual | **O Ritual de Ascensão** | |
-| O evento | **A Grande Fusão** (o Ano 0) | Religiosa: "a Graça"; Tecnocrata: "o Erro"; Autoritária: "a Ascensão" (diz que o ritual deu certo); Guerreira: "a Libertação"; Arcana: "a Abertura"; Escravista: "a Queda" |
-| O calendário | **d.F.** (depois da Fusão) e **a.F.** (antes); o jogo começa no **Ano 412 d.F.** | O nome oficial é o do comércio entre os povos |
-| O deus da Religiosa | **O Doador**: dizer o nome é pecado, e só o Sumo Sacerdote o sabe (HI5-4) | Um segredo a descobrir |
+| Autoritária | Coroa de Valdren | **Império Mágico** |
+| Arcana | Ordem de Custodum | **União Mágica** |
+| Tecnocrata | Comunidade de Ashmoor | **Federação Humana** |
+| Religiosa | Teocracia de Theodoria | **Clero de Rudeus** |
+| Guerreira | Clãs de Tian-Lang | **Reino Bárbaro** |
+| Escravista | Sultanato de Zahran | Não existe mais |
 
-**As facções (HI5-3).** Os nomes de trabalho das fichas e do código (Guerreira, Arcana...) continuam; os nomes abaixo são os que o jogador vê.
+  No mapa provisório, a região da Escravista vira **terra sem dono**, disputada pelos 5 reinos, até o mapa novo. **Pedido do autor:** pôr ou tirar uma facção tem de ser fácil; a regra está na [[Ficha Logica/Faccao|ficha da Facção]] ("Facções modulares").
 
-| Nome de trabalho | O nome da facção |
-|---|---|
-| Autoritária | **A Coroa de Valdren** |
-| Escravista | **Sultanato de Zahran** |
-| Guerreira | **Clãs de Tian-Lang** ("lobo celeste") |
-| Tecnocrata | **Comunidade de Ashmoor** ("ash" é cinza: nasceram das cinzas do cerco) |
-| Religiosa | **Teocracia de Theodoria** (em grego, Theodora é "dádiva de Deus": a mana do Doador) |
-| Arcana | **Ordem de Custodum** (do latim *custos*, "guardião": os guardas reais do Império) |
+- **As raças mudaram** (parte 6): saem os Langren, os Khadim, os Ascendidos, os Quitinos e o Eterno; entram os Rudeanos (os Magos do outro mundo), os Mestiços, os Forjados, os Cinzentos, os Fungoides e os Humanos-Peludos. A [[Ficha Logica/Racas|ficha de Raças]] foi refeita (HI13-4).
+- **Os líderes** do começo do jogo e os segredos deles foram refeitos (parte 5.8, HI13-5); os nomes saem depois do mapa.
+- **A magia** continua rara entre os humanos, mas não é mais tabu em todo lugar: dois reinos vivem dela, um a esconde e um quer acabar com ela.
+- **A pólvora** continua: é a Grande História da Federação (parte 8).
+- **O mapa** de hoje (8 × 6) é provisório; o mapa novo, de um continente inteiro, ainda será desenhado pelo autor.
+- **O ano em que o jogo começa (HI13-3):** continua sendo o **Ano 412**, agora contado a partir da Grande Colisão (parte 4.1).
 
-### 4.1 A linha do tempo (pontos-chave)
+## 3. Os dois mundos e os dois povos
 
-| Quando | O que aconteceu |
-|---|---|
-| De 640 a 40 a.F. | O **Império de Valdária**, com a magia como "alta tecnologia", unifica o continente inteiro e o governa por 600 anos. |
-| 40 a.F. | O imperador **Aurelian Valdren**, com medo da morte e ganância da vida eterna, manda toda a riqueza do Império para uma pesquisa mágica: alcançar o **poder divino dos deuses**. |
-| De 40 a 12 a.F. | O povo sofre com a decisão. A instabilidade cresce; civis e nobres começam a se revoltar. |
-| 12 a.F. | O nobre de alto escalão **Kassian Dravel**, Duque das Marcas, general da fronteira e mago de guerra, lidera uma grande revolta, com o apoio do povo. Começa a **Revolta dos Famintos**, que dura 12 anos e devasta o continente. |
-| 1 a.F. | A pesquisa dá resultado. A rebelião, que estava vencendo, passa a ser ameaçada. O imperador manda os **magos reais** começarem o **Ritual de Ascensão**, para transformá-lo num deus. |
-| O cerco da capital | Milhões de rebeldes contra alguns milhares de imperiais, mas com os melhores magos do continente. O cerco dura dias; um **círculo mágico imenso**, de uma borda à outra da cidade, se forma sobre a capital. |
-| A ofensiva final | As muralhas caem; os magos reais morrem um a um; no palácio sem teto, uma grande batalha de magos. Sobre o imperador indefeso, vários círculos se empilham, e o último abre **um portal imenso**. |
-| **Ano 0: a Grande Fusão** | Kassian lança um **feitiço de poder nuclear** contra o imperador. O poder dele mais a mana do ritual causam uma **anomalia**: em vez de fundir a magia da dimensão dos deuses no imperador, o ritual **funde duas dimensões**. A capital é varrida do mapa, e várias regiões do continente se transformam. |
-| Do Ano 0 ao 412 | Começa o **calendário d.F.** (depois da Fusão). Nascem as novas raças e as 6 facções (partes 4.4 e 7). |
+| | O mundo humano | O mundo mágico |
+|---|---|---|
+| **Como era** | Um mundo comum, **sem magia**, com tecnologia de Idade Média | Um mundo cheio de **mana** |
+| **Quem vivia nele** | Os **humanos**, divididos em muitos reinos e culturas, sempre em pequenas guerras entre si, o que impedia a prosperidade | Os **Magos**, unidos num grande império próspero. Com a mana, tinham alcançado a sua utopia |
+| **Como é o povo** | Medianos em quase tudo, mas com uma enorme capacidade de **se adaptar**. Curiosos e gananciosos | Humanoides com grande domínio da mana, vida **muito longa**, **poucos filhos** e uma grande **curiosidade** pelo desconhecido |
 
-### 4.2 O que isso dá ao jogo
+- **O nome "Magos"** foi dado pelos humanos, espantados com quem conjurava uma bola de fogo numa época em que nenhum humano conseguia.
+- A maioria dos Magos só queria saciar a curiosidade sobre o mundo. **Nem todos pensavam igual.**
+- **Os nomes (HI13-2).** O mundo mágico se chama **Rudeus**, e os Magos do outro mundo chamam a si mesmos de **Rudeanos**. Isso resolve duas coisas: explica o nome do **Clero de Rudeus** (o "paraíso" que o Clero prega é a terra natal dos seus líderes) e separa, no texto e no jogo, o "Mago do outro mundo" do "mago humano". Daqui em diante este documento usa **Rudeanos** para a raça e **magos** para qualquer um que manipula a mana.
 
-- **O tema na origem:** o mundo inteiro pagou pela ganância de um só dono. Os de hoje repetem a mesma ganância em escala menor.
-- **Ninguém é inocente:** o imperador quis ser deus; mas foi o feitiço de Kassian, o herói da revolta, que causou a fusão.
-- **Lugares:** a cratera da antiga capital e as regiões transformadas são os lugares mais marcantes do mapa.
-- **A magia:** todo mundo viu o quão poderosa ela pode ser. Isso explica o tabu e a proibição (Tecnocrata), a fé (Religiosa) e a cobiça (Arcana).
+## 4. O começo: o passado do mundo
 
-### 4.3 Segredos possíveis (proposta)
+### 4.1 A linha do tempo
 
-- O que era de fato a outra dimensão: ninguém no mundo sabe que ela era só mana pura (parte 4.4).
-- **A verdade da Coroa (HI6-4, opção B):** Aurelian Valdren **sobreviveu**, fundido à mana. Não é deus e não morre, mas virou outra coisa, presa e escondida no palácio da Coroa; a família governa em nome dele. Quase ninguém sabe.
-- **Kassian Dravel morreu** na explosão do próprio feitiço (HI7-3): é o que todos acreditam. **Segredo profundo (decisão do autor, 2026-10-31):** ele estava no centro da explosão, junto do Imperador, e também pode ter virado um **Eterno** (parte 7.1). O corpo nunca foi achado, só a espada.
-- **A origem dos Khadim:** o Sultanato e a Ordem de Custodum criaram essa raça juntos (parte 7.1). Ninguém de fora sabe. **A Comunidade de Ashmoor, que executa magos, usa Khadim nos seus campos de escravos sem saber que eles foram feitos com mana.** Se a verdade vier à tona, a crise é dentro de Ashmoor e entre ela e as duas facções.
-- A **espada de Kassian** está nas ruínas da capital, um item lendário: os Clãs a querem como relíquia; Ashmoor, para destruí-la. Se ele sabia o que o feitiço faria, ninguém sabe.
-- Cada povo conta **uma versão** da Grande Fusão (herói, vilão, castigo divino), e nenhuma está inteira. A verdade fica nas masmorras lendárias.
-
-### 4.4 O que a Grande Fusão deixou (HI2, decidido pelo autor)
-
-**A outra dimensão (HI2-3).** Não era um lugar físico: era uma dimensão feita **só de mana pura**. Os magos do ritual não sabiam disso. Ela não é a única: podem existir várias outras. Como os magos buscavam o poder dos deuses, nasceu a **crença** de que ela pertencia a seres que seriam deuses.
-
-**A magia (HI2-1).**
-- A fusão causou uma grande instabilidade, e quase todos os efeitos da **magia antiga** se perderam. Todo o progresso mágico do Império voltou ao zero.
-- A **mana nova**, vinda da outra dimensão, ficou mais abundante no mundo, mas só **raros humanos novos** conseguem manipulá-la.
-- Pelo que os magos antigos fizeram, a magia virou **tabu** em grande parte do continente.
-- Com poucos magos, a busca por poder foi para outras áreas, como a guerra e as ferramentas. Por isso aparecem as **armas de pólvora** durante o jogo.
-
-**A vida e a terra (HI2-2).**
-- No mundo principal só existiam **humanos**, e só eles usavam magia; não havia outras espécies humanoides.
-- A mana de fora era diferente e **alterou fisicamente** o mundo. Misturada à biologia humana, ela causou **mutações**, que deram origem a **novas espécies humanoides**.
-- O mesmo atingiu os animais e as plantas: surgiram **monstros** em certos lugares.
-- Quase toda a biologia mudou, e surgiram **biomas, terrenos e minérios novos**.
-
-**As Marés de Mana (decisão do autor, 2026-10-31).** Às vezes a mana de uma região fica muito intensa: é uma **Maré de Mana**. Ela favorece os magos, mas quem fica exposto sofre **mutações ao longo da vida**. Logo depois da Fusão, as Marés eram constantes e fortes, e foram elas que mudaram os humanos, os animais e as plantas **aos poucos**, até as mudanças **se estabilizarem** e as raças ficarem como são hoje. [Proposta] A **Estabilização** foi por volta do Ano 120 d.F.; depois dela as Marés ficaram raras, mas ainda acontecem, uma região por vez.
-
-**A cratera (HI2-5).** A antiga capital virou uma **cratera perto da costa**: uma região perigosa, com as **ruínas da capital** como masmorra para o jogador explorar. A posição sai do mapa novo (HI3-1).
-
-### 4.5 Do Ano 0 ao 412 (HI6)
+A ordem dos acontecimentos é do autor; as datas foram sugeridas pelo assistente e aceitas (HI13-3). Os anos são contados a partir da Grande Colisão e escritos como **"Ano 412 E.C." (Era da Colisão)**; antes dela, "antes da Colisão".
 
 | Quando | O que aconteceu |
 |---|---|
-| 0 a cerca de 50 d.F. | **Os Anos Cinzentos.** Sem Império e sem magia, o continente passa fome; os monstros nascem; uma peste mata metade dos sobreviventes. Quem tinha tropas ou comida virou senhor. |
-| Nos Anos Cinzentos | Nascem primeiro as facções que já tinham força: a **Coroa de Valdren** (as tropas imperiais, que levam escondido o que sobrou de Aurelian) e o **Sultanato de Zahran** (os nobres e o dinheiro, caçando escravos entre os famintos). |
-| Cerca de 50 a 100 d.F. | Nascem as que se juntaram na dor: os **Clãs de Tian-Lang** (o resto dos rebeldes, mudados pela mana) e a **Comunidade de Ashmoor** (os herdeiros dos que sobreviveram ao cerco). |
-| Cerca de 100 a 200 d.F. | Nascem as que precisaram ver a mana agir: a **Teocracia de Theodoria** e a **Ordem de Custodum**. Por serem as mais novas, são as mais radicais. |
-| Cerca de 230 a 260 d.F. | **A Guerra das Cinzas.** A Coroa tenta refazer o Império; todas as outras se unem contra ela e a param. Os tratados de paz desenham as fronteiras de hoje. |
-| 412 d.F. | O jogo começa. A Guerra das Cinzas virou lenda, e a Coroa volta a crescer. |
+| Antes da Colisão | O mundo humano medieval, sem magia, dividido em reinos em guerra. |
+| Cerca de 30 anos antes | **Os Presságios:** o vínculo entre os mundos começa fraco. Só a mana passa, e pouco: metais com capacidades estranhas, animais com peculiaridades, plantas diferentes. |
+| **Ano 0** | **A Grande Colisão:** o vórtice no céu, que dura algumas horas (parte 4.2). |
+| 0 a cerca de 40 | **A Transformação:** a mana muda os minérios, depois as plantas e os biomas, depois os animais (os monstros) e, por último, os humanos. Os Rudeanos exploram o mundo novo. |
+| Cerca de 40 a 60 | Nascem os primeiros humanos capazes de manipular a mana. Alguns Rudeanos os ensinam: surgem os **magos humanos**. |
+| Cerca de 60 a 75 | **Primeiro grande conflito: a Unificação Humana.** Nasce o **Antigo Império Mágico**. Começa a **Era dos Conflitos**. |
+| Cerca de 140 a 160 | **Segundo grande conflito: a Morte dos Deuses.** |
+| Cerca de 160 a 290 | A era de ouro do Antigo Império. Os experimentos criam os Forjados e, por volta do Ano 200, os **Mestiços**. |
+| Cerca de 290 a 330 | **Terceiro grande conflito: a Queda.** O Império se fragmenta. Fim da Era dos Conflitos. |
+| Cerca de 330 a 370 | **A Era dos 5 Reinos:** nascem, nesta ordem, o Império Mágico e a União Mágica, a Federação Humana, o Clero de Rudeus e o Reino Bárbaro. |
+| Cerca de 370 a 412 | **A Era da Estabilidade.** O jogo começa no **Ano 412**. |
 
-**O que move as facções em torno do segredo da Coroa:** os Clãs de Tian-Lang suspeitam que Aurelian vive e querem matá-lo (a doutrina do mais forte); a Ordem de Custodum suspeita o mesmo e quer a imortalidade dele.
+### 4.2 A Colisão dos Mundos
 
-### 4.6 Os mitos de cada povo (HI7-2)
+- **Ninguém sabe o que causou a Colisão:** um evento natural ou algo forçado por alguém. Só se conhecem as consequências.
+- Dois mundos, em duas dimensões diferentes, criaram um **vínculo**. **Portais de mana** ligaram um ao outro: uns do tamanho de uma pessoa, outros do tamanho de uma montanha.
+- O vínculo cresceu de forma **exponencial**. No começo só trouxe um pouco de mana e pequenas mudanças (os Presságios).
+- **A Grande Colisão.** Num certo dia o vínculo ficou completo e abriu-se um **grande vórtice de mana**: um portal circular no céu, dentro do qual os humanos viam outro mundo, como **um continente de ponta-cabeça**. O vórtice era violento: puxava tudo do mundo mágico e jogava no mundo humano.
+- A mana vinha tão densa que se solidificava e ficava visível: **uma cachoeira de gás brilhante chovendo sobre o mundo**. Junto vieram, arrastados à força, os seres do outro mundo.
+- **Depois de algumas horas** o portal ficou instável e se fechou. O vínculo enfraqueceu e a mana parou de vir. Mas a quantidade que já tinha passado foi tanta que **o mundo humano passou a produzir mana sozinho**.
+- **Poucos Rudeanos vieram**, e nem todos por vontade própria. A única coisa que veio em abundância foi a mana. Alguns humanos foram levados para o mundo mágico, mas são insignificantes para a história.
 
-O que cada povo conta sobre a Grande Fusão. Nenhum mito é a verdade inteira (parte 4.3).
+### 4.3 A Transformação
 
-| Povo | O mito |
-|---|---|
-| **Coroa de Valdren** | **O Eterno dorme** para curar o mundo; quando ele acordar, o Império volta. (E ele dorme mesmo: Aurelian vive, fundido à mana.) |
-| **Sultanato de Zahran** | **A Queda foi o fim de um senhor fraco.** O mundo é de quem sabe tomá-lo; a riqueza é a prova do favor dos céus. |
-| **Clãs de Tian-Lang** | **A Libertação.** Kassian Dravel, o primeiro Lobo Celeste, deu a vida para derrubar o tirano; a mana que mudou os rebeldes é a marca de quem lutou. |
-| **Comunidade de Ashmoor** | **O Juramento das Cinzas.** Os sobreviventes do cerco juraram sobre as cinzas da capital: nenhum mago, nunca mais. |
-| **Teocracia de Theodoria** | **O Castigo e a Graça.** O Doador castigou o Império com a mana e, com a mesma mana, abençoou os que sofreram. |
-| **Ordem de Custodum** | **A Abertura.** O Ritual estava certo, só foi interrompido; a Ordem vai terminá-lo. |
+A mana mudou o mundo humano em quatro passos, do mais simples ao mais complexo:
 
-### 4.7 Os líderes do Ano 412 (HI8)
+1. **Os minérios:** minerais nunca vistos, com brilhos e capacidades estranhas.
+2. **As plantas e os biomas:** nascem biomas novos, como a **Grande Floresta de Esporos** (com árvores de cogumelo gigantes) e a **Floresta de Cristal** (onde os cristais crescem como plantas).
+3. **Os animais:** para viver nesses biomas e com a mana, os animais mudaram e ganharam grandes capacidades. Foram apelidados de **monstros**.
+4. **Os humanos:** alguns passaram a nascer diferentes, com capacidades acima do comum ou com defeitos. A grande mudança: **alguns humanos nasceram capazes de manipular a mana**. Tinham a capacidade, mas não o conhecimento.
 
-O líder de cada facção é fixo no começo do jogo; depois, a simulação pode matá-lo, depô-lo ou fazê-lo trair. **A idade no jogo** é a da história ÷ 2,5 (rodada HI12: no jogo, adulto aos 5 anos e velho aos 31; 80 anos da história ≈ 32 do jogo). A Personalidade usa os 5 traços dos Importantes ([[Ficha Logica/Companheiros|Companheiros]]).
+**Os Rudeanos no mundo novo.** A maioria virou **aventureira**: explorou o mundo humano e viu de perto o que a mana fazia num mundo que nunca a tivera. Alguns usaram a superioridade para **mandar**. Outros se dispuseram a **ensinar** os humanos com o dom, e assim nasceram os primeiros magos humanos. Alguns desses alunos usaram o poder para o mal.
 
-| Facção | O líder | A Personalidade | O segredo |
+**As Marés de Mana continuam (HI13-9).** Às vezes a mana de uma região fica intensa por uma estação e causa mutações: é o que resta, em escala pequena, da Transformação. As regras estão na [[Ficha Logica/Racas|ficha de Raças]]. **Saíram** da história a cratera da capital e a espada de Kassian; as masmorras lendárias agora são os laboratórios do Antigo Império e os esconderijos dos Rudeanos.
+
+### 4.4 A Era dos Conflitos
+
+Com a mana mais estável, os primeiros magos humanos e alguns Rudeanos gananciosos, começou uma era das trevas de guerras sangrentas, que durou gerações.
+
+**Primeiro grande conflito: a Unificação Humana.**
+- Os magos humanos e alguns Rudeanos se uniram para dominar o mundo humano. Os humanos sem magia não tiveram a menor chance e perderam rápido.
+- Todos os reinos e culturas ficaram sob um só governo: o **Antigo Império Mágico**, erguido sobre a ideia da **superioridade mágica**. Os Rudeanos eram vistos como **deuses**.
+- Quem não manipulava a mana virou **inferior**: muitos viraram escravos, alguns viraram **experimentos**. Foi daí que saíram as variantes de humanos (parte 6).
+
+**Segundo grande conflito: a Morte dos Deuses.**
+- Alguns magos humanos passaram a cobiçar o poder dos Rudeanos: queriam usá-los como **experimento** para aprender mais sobre a mana.
+- Os Rudeanos eram melhores na magia, mas eram **poucos**: cada perda pesava demais. Os magos humanos, junto dos humanos sem magia, venceram **pelo número**.
+- Parte dos Rudeanos foi **capturada** e virou experimento. Os que escaparam se dividiram em pequenos grupos: uns criaram esconderijos e passaram a fazer os próprios experimentos em humanos, uns voltaram a vagar pelo mundo, uns se juntaram para tentar criar um reino só deles (o que, mais tarde, deu no Clero de Rudeus).
+
+**Terceiro grande conflito: a Queda.**
+- Depois da Morte dos Deuses veio a **era de ouro** do Antigo Império, que durou séculos.
+- Dos experimentos que cruzaram Rudeanos presos com humanos sem magia nasceu a primeira **raça mestiça**. Os **Mestiços** herdaram dos humanos o tempo de vida e a fertilidade, e dos Rudeanos a capacidade mágica. Foram o maior sucesso do Império, e a causa da sua queda.
+- Tratados como os **novos deuses**, os Mestiços ficaram arrogantes: passaram a ver todas as raças como inferiores, até os seus criadores.
+- Estourou a disputa pelo trono entre os **Mestiços** e os **magos humanos**. Os Mestiços tinham toda a vantagem: magia mais forte e, a essa altura, mais gente.
+- Os humanos sem magia e as outras raças aproveitaram a briga dos senhores para uma **grande revolta**. Virou uma **guerra de três frentes**, todos contra todos.
+- Os rebeldes não tinham uma bandeira só: só concordavam em se livrar do Império. O resultado foi a **fragmentação completa**.
+
+### 4.5 A Era dos 5 Reinos
+
+Sem um grande império, pequenos grupos foram se juntando em busca de uma terra próspera. Nasceram 5 reinos, nesta ordem:
+
+1. **Império Mágico:** os Mestiços, em tese, ganharam a guerra e ficaram com o que restou do Antigo Império, mas só conseguiram segurar algumas regiões, entre elas a **capital**.
+2. **União Mágica:** os magos humanos, derrotados pelos Mestiços, se agruparam em terras isoladas e criaram a sua União. Surgiu quase junto com o Império.
+3. **Federação Humana:** humanos sem magia, unidos por um mesmo ideal, se refugiaram numa terra de **grande riqueza mineral**.
+4. **Clero de Rudeus:** anos depois, numa região distante, dentro de um **bioma mágico**, os antigos Rudeanos fundaram um reino governado por eles. Por serem poucos, se esconderam sob o **disfarce de um clero** e abriram as portas a todos os que buscavam proteção.
+5. **Reino Bárbaro:** quando as terras boas acabaram, escravos e criminosos do Antigo Império se refugiaram numa terra **gelada e pobre** para tentar sobreviver.
+
+## 5. Os 5 reinos
+
+### 5.1 Quem são e o que querem
+
+| Reino | Quem é livre | Quem é inferior | O que busca |
 |---|---|---|---|
-| **Coroa de Valdren** | **Regente Lívia Valdren**, 54 anos, da linhagem direta. Fria e paciente, governa "em nome do Eterno" | Lealdade e Coragem altas; Sociabilidade baixa | Para Aurelian não definhar, a Coroa leva escravos com o dom mágico ao quarto selado, e eles nunca voltam |
-| **Sultanato de Zahran** | **Sultana Yasmin bint Qadir**, 35 anos. Subiu ao trono envenenando o irmão | Sociabilidade e Ganância altas; Lealdade baixa | Compra pólvora de Ashmoor às escondidas |
-| **Clãs de Tian-Lang** | **Grande Lobo Tian Feng**, 51 anos, um Langren (parte 7.1). Venceu o título num duelo, como manda a doutrina | Coragem e Agressividade altíssimas | Está envelhecendo e sabe que vai perder o próximo duelo |
-| **Comunidade de Ashmoor** | **Lorde-Engenheiro Edmund Hale**, 60 anos, presidente do Conselho da Comunidade | Lealdade e Coragem altas | O filho dele nasceu com o dom mágico, e ele o esconde da lei que manda executá-lo |
-| **Teocracia de Theodoria** | **Sumo Sacerdote Theodoros IV**, 72 anos, o único que sabe o nome do Doador | Sociabilidade alta; Coragem baixa | Perdeu a fé; nunca ouviu nada do Doador |
-| **Ordem de Custodum** | **Grão-Mestre Cassius Varro**, 432 anos (rodada RA1-1: era da guarda real antes da Fusão), um Ascendido (parte 7.1). Velho demais até para a raça dele, é mantido vivo pelos próprios experimentos: não envelhece enquanto a Ordem tiver uma Torre Arcana funcionando (HI11-1, traço Vida prolongada) | Ganância e Agressividade altas | Sabe que Aurelian vive e tem um espião dentro da Coroa |
+| **Império Mágico** | Só os Mestiços | Todas as outras raças. Continua os experimentos do Antigo Império nos Rudeanos que mantém presos | Unificar de novo o mundo humano e trazer de volta a glória do Antigo Império, agora sob os Mestiços |
+| **União Mágica** | Quem tem magia | Quem não tem o dom. **Os Mestiços são odiados:** são a "criação ingrata" que se voltou contra os criadores | Alcançar o conhecimento dos Rudeanos para dominar o mundo humano, e se vingar dos Mestiços |
+| **Federação Humana** | Só os humanos sem magia | As raças sem magia que não são humanas viram escravas. **Mestiços e qualquer ser com magia devem ser exterminados** | Exterminar todos os seres mágicos e devolver o mundo humano à sua origem, sem magia |
+| **Clero de Rudeus** | Na teoria, todos, de todas as raças, com ou sem magia | Na prática, todos os que nasceram no mundo humano. Só os Rudeanos mandam; os cidadãos dão a mão de obra em troca da proteção | Salvar todos os Rudeanos presos e criar uma **nova Colisão** para voltar ao seu mundo |
+| **Reino Bárbaro** | Os fortes | Os fracos | Destruir os outros reinos para conseguir uma terra próspera |
 
-**Os segredos viram jogo (HI8-2, opção B).** O jogador pode **descobrir** um segredo (espionar, conversar, roubar cartas) e **usá-lo**: chantagear o líder, vendê-lo a uma facção inimiga ou revelá-lo ao povo. **Nem todo segredo pesa igual** (pedido do autor): uns mudam pouco (a fé perdida de Theodoros, se revelada, só abala a Teocracia), outros mudam o mundo (o quarto selado da Coroa). As regras ficam para a ficha de Segredos (D9 no [[Ficha Logica/Plano das Fichas|Plano das Fichas]]).
+### 5.2 O governo
 
-## 5. O meio: o presente, Ano 412 (HI9)
+| Reino | Como é governado |
+|---|---|
+| **Império Mágico** | Governo imperial. Uma **família** toma todas as decisões: a do líder que começou a guerra contra os magos humanos e a venceu |
+| **União Mágica** | Uma **assembleia dos 7 magos mais fortes** do reino. [Proposta] O mais forte dos 7 preside a assembleia (o autor escreveu as duas coisas: "o líder é o mago mais forte" e "a assembleia dos 7 decide") |
+| **Federação Humana** | Uma **tecnocracia**. O líder é vitalício: só há eleição quando ele morre, e só **os escolhidos** votam |
+| **Clero de Rudeus** | Um **conselho de 12 Rudeanos** decide os caminhos do reino |
+| **Reino Bárbaro** | **O mais forte governa.** Quem vence o rei num duelo vira o novo rei, e o rei decide tudo |
 
-**O começo (HI9-4):** o jogo começa num **dia comum** do Ano 412. Nada especial acontece no dia 1; nas primeiras semanas chega a primeira notícia de uma faísca. O mundo não espera o jogador.
+### 5.3 A aparência
 
-### 5.1 As tensões (HI9-1)
+| Reino | Estilo | Cores |
+|---|---|---|
+| **Império Mágico** | Imperial, lembrando o romano (a mesma cultura da União) | **Vermelho** |
+| **União Mágica** | Imperial, lembrando o romano | **Roxo** |
+| **Federação Humana** | Começa vitoriana e evolui para um steampunk arcano: as máquinas usam um mineral de mana, e o governo esconde isso (parte 10) | **Preto** com detalhes dourados |
+| **Clero de Rudeus** | Bizantino, com ar de coisa divina | **Branco** com detalhes dourados |
+| **Reino Bárbaro** | Nórdico (viking); no começo, com cara de sucata, por viver numa terra pobre | **Marrom** |
 
-As faíscas não acontecem todas: a simulação acende uma ou outra conforme o mundo anda.
+O som dos nomes de pessoas e lugares segue o estilo: romano (Império e União), vitoriano (Federação), grego bizantino (Clero), nórdico (Reino Bárbaro). Os nomes em si ficam para depois do mapa.
+
+### 5.4 A população
+
+| Reino | Quem vive nele |
+|---|---|
+| **Império Mágico** | Mestiços 40%; Humanos 30%; Forjados 10%; outras raças 18%; Rudeanos 2% (presos) |
+| **União Mágica** | Humanos 60% (30% deles são magos); Forjados 10%; outras raças 28% (10% delas são magas); Rudeanos 2% (presos) |
+| **Federação Humana** | Humanos 80%; outras raças 20% (escravas) |
+| **Clero de Rudeus** | Rudeanos 10%; Humanos 50%; outras raças 40% |
+| **Reino Bárbaro** | Cinzentos 30%; Humanos-Peludos 30%; Humanos 20%; outras raças 20% |
+
+[Proposta] Como os Rudeanos são poucos no mundo inteiro, o Clero precisa ser o **menor** dos 5 reinos em população para os 10% fazerem sentido.
+
+### 5.5 Os exércitos
+
+| Reino | Linha de frente | Retaguarda |
+|---|---|---|
+| **Império Mágico** | Esquadrões de elite pesada de **Forjados**, mais um exército de escravos das raças inferiores | **Magos de combate** Mestiços |
+| **União Mágica** | O mesmo estilo: Forjados e escravos | Magos de combate. [Proposta] Aqui eles são **magos humanos**, já que a União odeia os Mestiços |
+| **Federação Humana** | Só humanos. **Antes da arma de fogo:** alta disciplina e formações, com piqueiros e arqueiros. **Depois:** primeiro linhas de tiro, como nas guerras de Napoleão; mais tarde, guerrilha e **trincheiras**, como na Primeira Guerra | Antes: armas de cerco. Depois: **canhões** |
+| **Clero de Rudeus** | Os **Cavaleiros Sagrados**, cavalaria pesada que avança sobre o inimigo, com uma milícia de apoio | Os **Clérigos** (os Rudeanos), dando suporte com magia |
+| **Reino Bárbaro** | Uma elite de **guerreiros destemidos**, que prende o inimigo no lugar | Um **exército de escravos**, que cerca o inimigo por trás, montado em **monstros domados** pelos Humanos-Peludos (HI13-8) |
+
+(O texto do autor usa "vanguarda" para quem fica atrás dando apoio; aqui está como "retaguarda".)
+
+### 5.6 Quem odeia quem (HI13-1)
+
+Tirado dos objetivos de cada reino. Os números estão nas relações iniciais do [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]].
+
+| Par | Por quê |
+|---|---|
+| Império × União | Os Mestiços contra os seus criadores; a "criação ingrata". O ódio mais antigo |
+| Federação × Império, União e Clero | A Federação quer exterminar todo ser mágico |
+| Clero × Império e União | Os dois mantêm Rudeanos presos como experimento. O Clero **esconde** esse ódio: por fora, é neutro e acolhedor |
+| Reino Bárbaro × Império | Os bárbaros descendem dos escravos e criminosos do Antigo Império, e o Império de hoje se diz herdeiro dele |
+| Reino Bárbaro × todos | Vive de saquear os vizinhos |
+
+### 5.7 Como cada reino conta a Colisão [Proposta]
+
+O jogador começa sabendo só a versão do seu povo. Nenhuma é a verdade inteira.
+
+| Reino | O mito |
+|---|---|
+| **Império Mágico** | **A Herança.** Os deuses desceram do céu e deixaram herdeiros melhores do que eles: os Mestiços |
+| **União Mágica** | **A Conquista.** A mana é um prêmio que os humanos tomaram dos deuses pelo próprio mérito. Os deuses sangram como qualquer um |
+| **Federação Humana** | **A Praga.** A Colisão foi uma invasão, e a mana é uma doença. O mundo tem cura |
+| **Clero de Rudeus** | **A Promessa.** Rudeus, o paraíso além do céu, se abriu uma vez e vai se abrir de novo para os fiéis |
+| **Reino Bárbaro** | **O céu caiu e ninguém veio ajudar.** Só a força salvou quem sobreviveu |
+
+### 5.8 Os líderes do Ano 412 (HI13-5)
+
+O líder de cada reino é fixo no começo do jogo; depois, a simulação pode matá-lo, depô-lo ou fazê-lo trair. A idade no jogo é a da história ÷ 2,5 (rodada HI12). **Os nomes saem depois do mapa novo;** até lá, o código segue com os nomes antigos.
+
+| Reino | O líder | O segredo |
+|---|---|---|
+| **Império Mágico** | A **imperatriz Mestiça**, da família que venceu a guerra contra os magos humanos. Fria e paciente; não tem filhos | [Proposta] A família imperial já pesquisa a necromancia às escondidas |
+| **União Mágica** | O **mais forte dos 7**, velho demais para um humano | É mantido vivo por experimentos com um Rudeano preso: não envelhece enquanto a União tiver uma Torre Arcana funcionando (o traço Vida prolongada, HI11-1) |
+| **Federação Humana** | O **líder vitalício**, escolhido pelos eleitos | O filho dele nasceu com o dom mágico, e ele o esconde da lei que manda exterminá-lo |
+| **Clero de Rudeus** | O **chefe do conselho dos 12**, um Rudeano que se apresenta como um sacerdote humano | O disfarce, e para que servem os fiéis (parte 10) |
+| **Reino Bárbaro** | O **rei**, que ganhou o trono num duelo | Está envelhecendo e sabe que vai perder o próximo duelo |
+
+## 6. As raças
+
+| Raça | De onde vem | Como é |
+|---|---|---|
+| **Humanos** | A espécie dominante do mundo humano | Normais em quase tudo, com alta capacidade de se adaptar. Têm uma chance de nascer com a capacidade mágica |
+| **Magos do outro mundo (Rudeanos)** | Vieram do mundo mágico na Colisão | Vida muito longa, alta capacidade mágica, baixa fertilidade |
+| **Mestiços** | Um experimento do Antigo Império que deu certo: a mistura de humanos com Rudeanos | Tempo de vida e fertilidade de humano; **todos** têm alta capacidade mágica; se acham superiores a todos |
+| **Forjados** (o nome novo dos Humanos-Cinzentos, HI13-4) | Um experimento do Antigo Império: uma raça humana modificada, feita para copiar em laboratório a força dos Cinzentos | Baixo intelecto, vida curta, **só se reproduzem por meios artificiais**; altos atributos de combate; sem magia. Usados como escravos militares |
+| **Cinzentos** | Modificados **naturalmente** pela mana do mundo | Altos atributos de combate; muito agressivos |
+| **Fungoides** | A Floresta de Esporos | Sem gênero; seguem uma **mente coletiva** e costumam ser tratados como monstros. Uns poucos nascem com intelecto próprio e não ficam presos a ela |
+| **Humanos-Peludos** | Humanos modificados naturalmente pela mana, adaptados a uma vida mais animal | **Alguns monstros não os tratam como inimigos**; muito resistentes; se reproduzem muito rápido; vida muito curta |
+
+Os números de cada raça (idades, filhos, habilidades) e as leis de cada reino estão na [[Ficha Logica/Racas|ficha de Raças]].
+
+## 7. O meio: a Era da Estabilidade
+
+**É aqui que o jogo se passa.** Os 5 reinos vivem um momento de estabilidade: nenhuma grande guerra, só os conflitos de sempre entre reinos que não se gostam. Ninguém sabe quando algo grande vai acontecer e a era vai ruir.
+
+O jogo começa num **dia comum**. O mundo não espera o jogador.
+
+### 7.1 As tensões do presente [Proposta]
+
+Tiradas dos objetivos dos reinos; são as faíscas que a simulação pode acender.
 
 | # | Tensão | Quem | A faísca |
 |---|---|---|---|
-| 1 | **A pólvora chegou** | Ashmoor tem as primeiras armas; os Clãs (a força) e a Ordem (a magia) perdem a vantagem | O Sultanato de Yasmin compra pólvora escondido e a usa contra Theodoria |
-| 2 | **A Coroa volta a crescer** | 150 anos depois da Guerra das Cinzas, a Regente Lívia junta tropas "para quando o Eterno acordar" | Uma cidade de fronteira se rende à Coroa; os vizinhos lembram a guerra |
-| 3 | **As correntes** | O Sultanato vive do tráfico; Ashmoor vende mutantes a ele; Theodoria prega contra | Uma revolta num mercado de escravos de Zahran |
-| 4 | **A magia muda** | Nascem mais crianças com o dom; Ashmoor as executa, a Ordem as quer, Theodoria as abençoa | Uma vila esconde uma criança maga, e as três facções chegam para buscá-la |
-| 5 | **A fome nas fronteiras** | Cada região tem o que falta à outra | Um inverno ruim e uma caravana de comida saqueada |
-| 6 | **A sucessão** | Tian Feng envelhece; Theodoros IV tem 72 anos; Lívia não tem filhos | O duelo pelo título de Grande Lobo |
-| 7 | **A caça aos mudados** | Ashmoor mata ou escraviza os mudados; os Clãs (feitos deles) e Theodoria (que os chama de abençoados) os protegem | Um bando de mudados foge de uma mina de Ashmoor |
+| 1 | **Os deuses presos** | O Império e a União mantêm Rudeanos como experimento; o Clero quer todos de volta | Um Rudeano foge de um laboratório e pede abrigo |
+| 2 | **Os cristais de mana** | A União precisa deles; as jazidas ficam nas terras dos outros, sobretudo na Federação, rica em minérios | Uma mina de fronteira muda de mãos |
+| 3 | **As crianças com o dom** | Humanos podem nascer magos em qualquer reino, até na Federação, que os extermina | Uma vila da Federação esconde uma criança maga |
+| 4 | **A fome do norte** | O Reino Bárbaro vive de saques | Um inverno ruim e uma caravana saqueada |
+| 5 | **Os fugitivos** | Escravos do Império e da União fogem para o Clero, que acolhe a todos | O Império exige a devolução, e o Clero recusa |
+| 6 | **A criação ingrata** | O ódio velho entre o Império e a União | Um mago da União é executado na capital imperial |
+| 7 | **As sucessões** | O rei bárbaro pode cair num duelo; o líder da Federação é vitalício | Um desafio ao rei; a morte do líder e a eleição dos escolhidos |
 
-**A tensão principal (HI9-2): a pólvora.** É a que muda o mundo durante a partida, mesmo sem o jogador. Em segundo lugar, a Coroa, que aproveita a mudança de equilíbrio.
+## 8. As 5 Grandes Histórias
 
-### 5.2 Os ganchos e as Grandes Histórias (HI9-3)
+**O que vai acabar com a Era da Estabilidade.** São 5 Grandes Histórias, **uma de cada reino**. Cada uma é o reino tentando alcançar o seu objetivo final, e **nem sempre dá certo**.
 
-**Ideia do autor (HI9-3), como no Stellaris:** um conjunto de **Grandes Histórias**, missões grandes que mudam o mundo. No começo de cada partida, o jogo sorteia uma delas para ser a **grande história** daquela partida; o jogador segue ou não. Para conhecer todas, é preciso jogar mais de uma vez.
+| # | A Grande História | O que a acorda | O que acontece | Se o reino vence |
+|---|---|---|---|---|
+| 1 | **O Necromante** (Império Mágico) | A descoberta da **necromancia** | Fascinados pelo poder sobre a vida e a morte, os Mestiços passam a **exterminar os próprios cidadãos** para erguer um exército de mortos-vivos: os escravos perfeitos, totalmente obedientes. Com ele, marcham para retomar as terras do Antigo Império | Fim do Império Mágico e começo do **Império Necromante**: o mundo é dos Mestiços, e as outras raças são caçadas para virar mortos-vivos |
+| 2 | **O Perigo Nuclear** (União Mágica) | A descoberta de como **guardar mana em cristais** | Com muita mana guardada, a União consegue fazer grandes rituais de **destruição em massa**. Passa a caçar cristais de mana sem descanso para continuar a pesquisa | A União usa a Magia Nuclear contra a **capital imperial** e unifica tudo pela ameaça dessas magias |
+| 3 | **O Pó Explosivo** (Federação Humana) | A descoberta do **pó explosivo** | Com uma arma que mata até magos poderosos, a Federação deixa de estar em desvantagem e começa a sua campanha de extermínio. As guerras mudam: primeiro como as de Napoleão, depois trincheiras. O reino fica cada vez mais **supremacista**, até lembrar o nazismo | A Federação domina o mundo humano e extermina todas as outras raças |
+| 4 | **O Ritual de Colisão** (Clero de Rudeus) | O Clero junta **recursos suficientes**: pessoas e materiais | O Clero tenta resgatar os Rudeanos presos e começa o ritual, **sacrificando materiais e pessoas** para criar uma nova Colisão | A maioria dos cidadãos do Clero é sacrificada; os Rudeanos voltam para o seu mundo, e não sobra nenhum no mundo humano |
+| 5 | **A Grande Fome** (Reino Bárbaro) | A **escassez** de recursos | O rei proclama que vai dominar o mundo humano e lança uma grande invasão. Cada território tomado dá recursos, e os seus escravos viram soldados da linha de frente | O Reino Bárbaro domina o continente e vira um **novo Império**, que abandona os ideais bárbaros: já não precisa saquear para viver |
 
-**As regras (HI10):**
-- **A verdade é sempre a mesma; muda qual história acorda** (HI10-1). Aurelian sempre vive no quarto selado; só na partida em que "O Despertar do Eterno" é sorteado essa história anda. Nas outras, o segredo existe, mas fica quieto.
-- **O jogador descobre** qual história acordou por boatos, notícias e pistas nos primeiros meses; um diário marca "uma grande história começou" quando ele acha a primeira pista (HI10-3).
-- **Ela anda sozinha**, com prazos: se o jogador ignora, as facções agem e o mundo muda mesmo assim. Só em partidas muito longas (por exemplo, depois de 30 anos de jogo) outra história pode acordar, sorteada entre as que sobraram (HI10-4).
-- **Os papéis pertencem ao cargo, não à pessoa** (pedido do autor, HI10-2). Os personagens do centro podem morrer de velhice, numa batalha ou num golpe; o papel deles na história passa ao **herdeiro ou ao sucessor** (o novo regente, o novo Grande Lobo, o novo Sumo Sacerdote). Por isso cada história fala do cargo ("o Grão-Mestre da Ordem"), e o nome é o de quem o ocupa naquele momento.
+**Quando a Grande História falha (HI13-6).** Nem sempre dá certo:
 
-**As 6 Grandes Histórias da primeira versão (HI10-2).** Cada uma leva a um destino da parte 6 e passa por uma masmorra lendária.
+| # | Se o reino falha |
+|---|---|
+| 1 | Os cidadãos do Império descobrem o destino que os espera e se revoltam, ou os mortos escapam do controle dos necromantes. O Império cai por dentro |
+| 2 | Os cristais acabam antes de o ritual ficar pronto, ou um ritual explode dentro da própria União. Nasce uma terra devastada de mana |
+| 3 | O pó explosivo vaza e todos os reinos passam a tê-lo. A Federação perde a única vantagem que tinha |
+| 4 | Os fiéis descobrem quem são os Clérigos e para que serviam. O Clero cai, e os últimos Rudeanos voltam a ser caçados |
+| 5 | O rei morre num duelo no meio da campanha e a horda se parte em bandos |
 
-| # | A Grande História | Os cargos no centro (no Ano 412) | Onde termina |
-|---|---|---|---|
-| 1 | **O Despertar do Eterno:** os sinais de que Aurelian vai acordar; o jogador ajuda a Coroa, a Ordem (que quer a imortalidade dele) ou os Clãs (que querem matá-lo) | O regente da Coroa (Lívia), o Grão-Mestre da Ordem (Cassius Varro), o Grande Lobo (Tian Feng) | O Despertar do Eterno, ou a morte do Eterno |
-| 2 | **A Espada de Kassian:** a busca nas ruínas da capital pela espada do herói da revolta | O Grande Lobo; o presidente do Conselho de Ashmoor (Edmund Hale) | Quem tiver a espada une os Clãs, ou acaba com o mito deles |
-| 3 | **O Segundo Ritual:** a Ordem junta as peças para terminar o Ritual de Ascensão | O Grão-Mestre da Ordem | O Segundo Ritual (outra fusão), ou a queda da Ordem |
-| 4 | **A Era da Pólvora:** Ashmoor chega às armas que vencem qualquer exército | O presidente do Conselho de Ashmoor; a sultana (Yasmin) | A Era da Pólvora, ou a pólvora em todas as mãos |
-| 5 | **As Correntes Quebradas:** uma revolta de escravizados nasce num mercado de Zahran e cresce | A sultana; o Sumo Sacerdote (Theodoros IV) | As Correntes Quebradas, ou um banho de sangue |
-| 6 | **A Voz do Doador:** Theodoria ouve o Doador pela primeira vez; ele é real ou é a outra dimensão chamando? | O Sumo Sacerdote | A Fé Única, ou uma nova fusão vinda da fé |
+**Como elas acordam (HI13-6): por gatilho, uma por vez.** Cada história acorda quando a condição dela acontece no mundo. A primeira que acordar **trava as outras** até terminar, com vitória ou falha; depois, outra pode acordar. Exemplo: a Federação descobre o pó explosivo no ano 3 da partida; enquanto a campanha dela durar, o Clero continua juntando recursos, mas o ritual só pode começar depois. Os papéis pertencem ao cargo, não à pessoa (HI10-2). Os passos e os prazos ficam para a ficha D10 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]].
 
-As regras de jogo (os passos, os prazos, as pistas) ficam para a ficha D10 do [[Ficha Logica/Plano das Fichas|Plano das Fichas]].
+## 9. O fim: os futuros possíveis
 
-Os **ganchos menores** viram eventos da simulação e segredos (a ficha de Segredos, D9): o filho mago de Edmund Hale, a pólvora secreta de Yasmin, o espião de Cassius Varro, o último duelo de Tian Feng, a fé perdida de Theodoros IV, a criança maga escondida.
+**Não há final real.** O mundo pode mudar de vários jeitos, pela simulação e pelo jogador.
 
-## 6. O fim: os futuros possíveis (HI1-3: opção A)
-
-**Não há final real.** O mundo pode mudar de vários jeitos, pela simulação e pelo jogador. Destinos propostos:
-
-| Destino | Como acontece | Lado sombrio | Lado menos ruim |
-|---|---|---|---|
-| **O Novo Império** | Uma facção conquista as outras | Tirania de mil anos | Paz sob uma lei só |
-| **A Era da Pólvora** | A Tecnocrata vence a corrida das armas | Fim da magia; fábricas cheias de escravos | Mérito no lugar do sangue |
-| **O Despertar do Eterno** (pedido do autor, HI7-2) | Aurelian acorda de verdade, como a Coroa promete | Um imperador imortal e mudado pela mana volta a reinar | O mito vira prova, e a Coroa perde a desculpa da mentira |
-| **O Segundo Ritual** | Alguém tenta de novo o Ritual de Ascensão | Outra fusão, outra devastação | A magia ao alcance de todos |
-| **As Correntes Quebradas** | A revolta dos escravizados vence | Vingança e caos | Fim da escravidão |
-| **A Fé Única** | A Religiosa converte ou vence todos | Fogueiras para hereges e magos | Caridade e fim do tráfico |
-| **O Colapso** | Peste, fome e guerra derrubam todos | Volta à devastação do Ano 0 | Vilas pequenas e livres |
+| Destino | Como acontece | O que sobra do mundo |
+|---|---|---|
+| **O Império Necromante** | O Império Mágico vence a sua Grande História | Os Mestiços reinam sobre os mortos; os vivos das outras raças são caçados |
+| **A Paz do Medo** [Proposta de nome] | A União Mágica vence | Um só governo de magos, mantido pela ameaça da Magia Nuclear |
+| **O Mundo Sem Magia** [Proposta de nome] | A Federação Humana vence | Só restam humanos sem magia; todas as outras raças foram exterminadas |
+| **O Retorno** [Proposta de nome] | O Clero de Rudeus vence | Os Rudeanos vão embora; um reino vazio, e talvez um céu aberto de novo |
+| **O Novo Império** | O Reino Bárbaro vence | Um império de ex-escravos que já não precisa saquear |
+| **O Colapso** [Proposta] | Várias Grandes Histórias falham, ou peste, fome e guerra derrubam todos | Vilas pequenas e livres num mundo em ruínas |
 
 O jogo **reconhece** quando um destino acontece: uma notícia, uma página na Crônica do mundo ([[Ficha Logica/Noticias|Notícias]]). O jogador também pode virar o próprio destino: rei, senhor de escravos, libertador ou profeta ([[Ficha Logica/Objetivo|Objetivo e Progressão]]).
 
-## 7. Os seis povos (HI2-4, decidido pelo autor)
+## 10. Segredos [Proposta]
 
-| Povo | De onde vem | No que acredita | A crueldade | Como vê as outras raças |
-|---|---|---|---|---|
-| **Religiosa** (Teocracia de Theodoria) | Os que **mais sofreram** com a mana do outro mundo | No **Doador**, um deus que vive na outra dimensão e agraciou o mundo com a sua mana | Extremamente violenta com quem não crê nesse deus | **Abençoadas** pelo deus |
-| **Tecnocrata** (Comunidade de Ashmoor) | Os herdeiros dos combatentes que **sobreviveram ao cerco** da capital e viram o perigo da magia | Aversão a toda magia e todo mago | Executa, sem remorso, qualquer um com capacidade mágica | **Ameaças:** executadas ou escravizadas |
-| **Arcana** (Ordem de Custodum) | Os descendentes dos antigos **guardas reais** | Desvendar e manipular a mana nova, chegar a um novo poder e à **imortalidade** dos seus magos | Tudo o que a mana tocou é experimento; quem não usa magia é inferior | **Escravas** para experimentos |
-| **Escravista** (Sultanato de Zahran) | Os **nobres do Império**, livres de um governante após a queda | Riqueza e mão de obra para o seu novo reino | Desde a devastação, captura como escravos os atingidos pela guerra | Mão de obra |
-| **Autoritária** (Coroa de Valdren) | Os **descendentes diretos do imperador**: herdeiros que estavam num canto do continente e sobreviveram com tropas imperiais | Mantêm a mentira de que o ritual deu certo e de que o seu imperador é **o mesmo** dos tempos antigos (e é meio verdade: parte 4.3) | Obediência ao "imperador eterno" | A definir |
-| **Guerreira** (Clãs de Tian-Lang) | O **resto do exército rebelde**. Estavam no centro da fusão e sofreram a maior parte das mutações: todos são Langren (parte 7.1) | A doutrina do **mais forte**: estar pronta para matar o imperador, caso ele ainda viva | A lei do mais forte | Elas são parte dela |
+Verdades que o jogador pode descobrir e usar (as regras ficam para a ficha D9, Segredos). São sugestões do assistente em cima do texto do autor; as duas da Federação já foram aceitas (HI13-7).
 
-**Os ódios entre os povos** (HI3-3, opção A; a tabela fica no [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]]):
-- Guerreira × Autoritária: os rebeldes contra os herdeiros do imperador. Confirma o ódio.
-- Arcana × Religiosa: a Arcana usa como cobaias as raças que a Religiosa diz abençoadas. Confirma o ódio.
-- Tecnocrata × Arcana: quem executa magos contra quem idolatra a magia. Confirma o ódio.
-- Religiosa × Escravista: confirma o ódio se a Escravista escravizar as raças "abençoadas".
-- **Novo:** Guerreira × Tecnocrata (a Tecnocrata executa ou escraviza os mutantes, e a Guerreira é feita deles) e Religiosa × Tecnocrata pelo mesmo motivo.
+- **O disfarce do Clero** (do autor): os Clérigos são os Rudeanos, e a liberdade do Clero é uma mentira para ter segurança e mão de obra. **A Promessa é verdadeira, só não é para os fiéis:** a volta a Rudeus é só dos Rudeanos, e os fiéis são o combustível do ritual.
+- **O que queima no pó explosivo:** o ingrediente principal é um **mineral mudado pela mana**, tirado da terra rica da Federação. O reino que quer acabar com a magia depende dela para a sua maior arma. Isso também explica o "steampunk arcano": as máquinas da Federação usam mana, e o governo esconde isso do povo.
+- **Os filhos com o dom:** humanos nascem magos em qualquer reino. Na Federação, a lei manda exterminá-los; famílias os escondem, até famílias poderosas.
+- **Quem causou a Colisão:** ninguém sabe. "Nem todos os Magos pensavam igual": pode ter sido obra de um grupo de Rudeanos descontente com a utopia. Se foi, alguém desse grupo pode estar vivo, e até sentado no conselho dos 12.
+- **Os humanos levados para o outro mundo:** insignificantes para a história, mas uma nova Colisão pode mostrar o que foi feito deles.
+- **Os primeiros Mestiços:** os Rudeanos presos no Império são os pais e as mães de uma raça que os mantém em jaulas.
 
-### 7.1 As raças (decisão do autor, 2026-10-31)
+## 11. Como a história chega ao jogador
 
-As mutações foram **lentas**: as Marés de Mana (parte 4.4) mudaram quem vivia exposto a elas, geração após geração, até a Estabilização. Os nomes foram sugeridos pelo assistente e aceitos pelo autor.
-
-| Raça | De onde vem | Como é | Onde se encontra |
-|---|---|---|---|
-| **Humanos** | Os que mudaram pouco | Continuam humanos; raros nascem com o dom de manipular a mana | Em todos os povos; são a **matéria-prima** dos Khadim |
-| **Langren** ("lobo", no som dos Clãs) | Os descendentes do exército rebelde, que estava no **centro** da Fusão e sofreu a maior influência da mana | Os mais fortes do corpo entre todas as raças; extremamente agressivos; só têm talento para o combate, de preferência corpo a corpo; produzem pouco e pensam pouco, por isso **saqueiam** outros povos para viver. Para eles vale a lei do mais forte | **Todos** os Clãs de Tian-Lang são Langren, inclusive Tian Feng |
-| **Khadim** ("servo", em árabe) | Uma raça **artificial**: numa Maré de Mana no território do Sultanato, ele deixou escravos na região, e a **Ordem de Custodum** ajudou com a sua capacidade de manipular a mana. Feitos para ser escravos eficientes | Hábeis no trabalho de escravo; quase sem consciência própria, por isso **totalmente submissos**; a **vida mais curta** de todas as raças; **não se reproduzem**: são feitos a partir de humanos | Nos campos de escravos do Sultanato e da Comunidade de Ashmoor e nos exércitos de escravos do Sultanato. **A origem é segredo** (parte 4.3) |
-| **Ascendidos** | Os descendentes da **guarda real**, magos habilidosos que estavam entre os poucos capazes de controlar a mana nova. Usaram essa mana para se aperfeiçoar: conseguiram o que o Ritual de Ascensão buscava | Manipulam a mana desde o nascimento; a **vida mais longa** de todas; o instinto de ter filhos é quase nulo; se acham superiores aos outros. É a **raça mais rara** do mundo | **Toda a elite** da Ordem de Custodum é Ascendida, inclusive Cassius Varro; o resto da Ordem são humanos com o dom |
-| **Eterno** | O **Imperador Aurelian**, que virou outra coisa na explosão | Imortal, com grande poder mágico, de combate e de quase tudo; não se reproduz. Em tese, é **único** | Escondido no palácio da Coroa (parte 4.3). **Segredo:** Kassian pode ser um segundo Eterno |
-| **Quitinos** (de quitina, a casca dos insetos) | Os humanos de uma **floresta** atingida por uma explosão de mana, que evoluíram para uma espécie meio monstro | Muito resistentes pela carapaça; põem ovos e se reproduzem rápido; nem todos são agressivos, mas alguns têm tendência canibal e comem outras raças. Vivem em **tribos com uma rainha**, a única fêmea, que é quem põe os ovos. Se a rainha morre, a tribo acaba; quando nasce outra rainha, ela assume ou sai para fundar a própria tribo | Um povo pequeno e espalhado, **sem facção**. Sofrem o racismo de quase todos os povos. [Proposta] A Teocracia é a exceção: diz que toda raça é abençoada pelo Doador e os aceita, com o nojo dos fiéis contra a fé. A floresta deles entra no mapa novo |
-
-**Ideias do assistente para o jogo** [Proposta]: os Clãs precisam saquear para viver (as caravanas e os vizinhos viram o sustento deles); um Khadim raro pode **despertar** e ganhar consciência (um companheiro e um estopim da Grande História "Correntes Quebradas"); cada Ascendido que morre é uma perda enorme para a Ordem; as tribos Quitinas contam a população em números, como as outras cidades, e só a rainha e poucos outros são Importantes (para o desempenho).
-
-## 8. Como a história chega ao jogador (proposta)
-
-- **Ruínas e masmorras** do Império; as lendárias guardam a verdade sobre a Grande Fusão.
+- **Ruínas e masmorras** do Antigo Império Mágico; os laboratórios e os esconderijos dos Rudeanos guardam a verdade.
 - **Livros e fragmentos** (itens), cada um com a versão de um povo.
 - **Falas dos NPCs e dos Companheiros** ([[Ficha Logica/Companheiros|Companheiros e Diálogo]]).
 - **Notícias, Crônica do mundo e Eventos.**
 - **Nomes de lugares** que lembram o passado.
 
-**O que o jogador sabe (HI7-4, opção A):** só o mito da própria cultura. O resto ele descobre: livros, ruínas, falas. [Proposta] Quem começa sem cultura (escravo, andarilho) conhece só os boatos da região onde começa.
+**O que o jogador sabe (HI7-4):** só o mito do próprio povo (parte 5.7). O resto ele descobre.
 
-## 9. Próximos passos
+## 12. Próximos passos
 
-1. **O mapa novo** do continente inteiro (o autor desenha; depois, uma rodada para as fichas). Os nomes das regiões e das cidades saem com ele.
-2. As fichas novas: Segredos (D9), Grandes Histórias (D10) e Fauna e Monstros (D11), no [[Ficha Logica/Plano das Fichas|Plano das Fichas]].
-3. As fichas que mudarem pela história (Mundo, Cultura, Magia, NPC).
+1. **O marco de código da HI13:** tirar a Escravista, deixar as facções modulares e trocar os nomes que o jogador vê.
+2. Os **nomes** de pessoas e lugares (com eles, os nomes dos 5 líderes).
+3. **O mapa novo** do continente inteiro (o autor desenha): a capital imperial, as terras isoladas da União, a terra mineral da Federação, o bioma mágico do Clero, a terra gelada dos bárbaros, a Floresta de Esporos e a Floresta de Cristal.
+4. As fichas: Segredos (D9), Grandes Histórias (D10), Fauna e Monstros (D11).

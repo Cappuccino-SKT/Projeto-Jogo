@@ -70,10 +70,10 @@ Combate; Batalha; Guerra; Diplomacia; Magia; Escravidão; Companheiros e Diálog
 | D5 | **[[Ficha Logica/Diplomacia\|Diplomacia]]** (escrita em 2026-10-19; rodada DP1 automática) | Facção, Cultura, Reputação |
 | D6 | **[[Ficha Logica/Batalha\|Batalha]]** (escrita em 2026-10-19; rodada BA1 automática) | Combate (D1), Facção |
 | D7 | **[[Ficha Logica/Guerra\|Guerra]]** (escrita em 2026-10-19; rodada GU1 automática) | Batalha (D6), Diplomacia (D5), Viagem, Comércio |
-| D8 | **[[Ficha Logica/Racas\|Raças]]** (escrita em 2026-10-31; rodada RA1; o código vem depois dos marcos da fase D) | [[Documentos/Mundo e História/Descrição\|Mundo e História]], NPC, Cultura, Combate |
-| D11 | **Fauna e Monstros** (a escrever, com o mapa novo; rodada RA1-10: os animais que as Marés de Mana transformam, os biomas e a cratera) | Raças (D8), Combate, o mapa novo |
+| D8 | **[[Ficha Logica/Racas\|Raças]]** (escrita em 2026-10-31, rodada RA1; refeita em 2026-11-11, rodada HI13; o código vem depois dos marcos da fase D) | [[Documentos/Mundo e História/Descrição\|Mundo e História]], NPC, Cultura, Combate |
+| D11 | **Fauna e Monstros** (a escrever, com o mapa novo; rodada RA1-10: os animais que as Marés de Mana transformam, e os biomas) | Raças (D8), Combate, o mapa novo |
 | D9 | **Segredos** (a escrever; rodada HI8-2: descobrir e usar os segredos dos líderes, uns pesando mais que outros) | Mundo e História, Crime, Diplomacia, Notícias, Facção (Estabilidade) |
-| D10 | **Grandes Histórias e Missões** (a escrever; rodadas HI9-3 e HI10: uma das 6 histórias acorda por partida, anda sozinha com prazos, e os papéis passam ao sucessor no cargo) | Mundo e História, Segredos (D9), Eventos, Notícias, Facção (sucessão), Objetivo |
+| D10 | **Grandes Histórias e Missões** (a escrever; rodadas HI9-3, HI10 e HI13-6: 5 histórias, cada uma com o seu gatilho, uma por vez, anda sozinha com prazos, e os papéis passam ao sucessor no cargo) | Mundo e História, Segredos (D9), Eventos, Notícias, Facção (sucessão), Objetivo |
 
 ### Fase E — a partida completa (por último)
 

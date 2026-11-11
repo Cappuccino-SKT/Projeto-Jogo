@@ -15,7 +15,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 ### Mundo
 
 - [[Sistema de Mapa/Descrição|Sistema de Mapa]] — Mundial, Local, Interno e de Guerra
-- [[Mundo e História/Descrição|Mundo e História]] — o tema, o passado (a Grande Fusão), as 6 facções, as raças, os líderes do Ano 412 e as Grandes Histórias. **A história manda:** quando ela bate numa ficha, a ficha muda
+- [[Mundo e História/Descrição|Mundo e História]] — o tema, o passado (a Colisão dos Mundos e o Antigo Império Mágico), os 5 reinos, as raças e as 5 Grandes Histórias (história refeita em 2026-11-11). **A história manda:** quando ela bate numa ficha, a ficha muda
 - [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]] — regiões, cidades, masmorras e relações no primeiro dia
 - [[Sistema de Cidade/Descrição|Sistema de Cidade]]
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade
@@ -31,7 +31,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 - [[Sistema de Classe Social/Descrição|Sistema de Classe Social]]
 - [[Sistema de IA/Descrição|Sistema de IA]]
 - [[Sistema de Cultura/Descrição|Sistema de Cultura]] — 6 culturas iniciais
-- [[Ficha Logica/Racas|Raças]] — Humanos, Langren, Khadim, Ascendidos, Quitinos e o Eterno (só ficha; entram depois da fase D)
+- [[Ficha Logica/Racas|Raças]] — Humanos, Rudeanos, Mestiços, Forjados, Cinzentos, Fungoides e Humanos-Peludos (só ficha; entram depois da fase D)
 - [[Sistema de Religião/Descrição|Religião e Fé]] — Devoção, Templo, festivais, heresia, assimilação e Sumo Sacerdote
 - [[Sistema de Felicidade e Estabilidade/Descrição|Sistema de Felicidade e Estabilidade]] — Felicidade por classe, Controle, revolta
 - [[Sistema de Facção/Descrição|Sistema de Facção]] — leis, assembleia, dinastia, exércitos

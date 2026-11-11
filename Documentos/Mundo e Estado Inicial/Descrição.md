@@ -16,9 +16,11 @@ Ele **não** traz a história do mundo. O autor decidiu deixar a história, os n
 
 - **Tom:** fantasia de **baixa magia**, com a tecnologia em transição para a **pólvora**. Sombrio e político, mais perto de Mount & Blade do que de um conto de fadas.
 - **Criaturas:** na primeira versão, só **animais e monstros comuns** (lobos, ursos, bandidos, aranhas gigantes). **Criaturas míticas** (dragões, mortos-vivos) podem aparecer no futuro, **dentro das masmorras**.
-- **Raças:** só **humanos** nas primeiras versões, diferenciados pelas 6 culturas. As outras raças (Langren, Khadim, Ascendidos, Quitinos e o Eterno) entram depois dos marcos da fase D: [[Ficha Logica/Racas|ficha das Raças]]. Para não fechar essa porta, os dados do NPC já guardam um campo "Raça" (com um único valor, Humano), assim acrescentar raças depois não exige mudar o formato do save.
+- **Raças:** só **humanos** nas primeiras versões, diferenciados pelas 6 culturas. As outras raças (Rudeanos, Mestiços, Forjados, Cinzentos, Fungoides e Humanos-Peludos) entram depois dos marcos da fase D: [[Ficha Logica/Racas|ficha das Raças]]. Para não fechar essa porta, os dados do NPC já guardam um campo "Raça" (com um único valor, Humano), assim acrescentar raças depois não exige mudar o formato do save.
 
 ### Disposição do mundo
+
+> **Rodada HI13-1 (2026-11-11):** a história nova tem **5 reinos** (Autoritária = Império Mágico; Arcana = União Mágica; Tecnocrata = Federação Humana; Religiosa = Clero de Rudeus; Guerreira = Reino Bárbaro). A região **Escravista vira terra sem dono**: as 4 cidades dela ficam sem facção até o mapa novo. O mapa, as cidades e os números abaixo ainda são os do mundo provisório de 6 facções; mudam com o marco de código da HI13 e, depois, com o mapa novo.
 
 O mundo tem **48 Mapas Locais**, numa malha de **8 colunas × 6 linhas**. O tamanho pode mudar no futuro; por enquanto fica assim.
 
@@ -207,20 +209,22 @@ Por quê: a Tecnocrata mata ou escraviza os tocados pela mana, e a Guerreira é 
 - **−15** se as duas dividem um mapa em disputa;
 - desvio sorteado de **−15 a +15** a cada partida.
 
-**Contato:** as facções vizinhas se conhecem desde o início. A **Escravista**, por ser mercantil, tem contato com todas (rede de comércio). A Arcana e a Tecnocrata não se conhecem no primeiro dia.
+**Contato:** os 5 reinos se conhecem desde o início.
+
+Os valores são os da história nova (rodada HI13-1; [[Mundo e História/Descrição|Mundo e História]], parte 5.6). Os números são [Proposta].
 
 | Par | Valor base | Atitude inicial |
 |---|---|---|
-| Guerreira × Autoritária | −55 | Hostil, candidata a guerra |
-| Arcana × Religiosa | −55 | Hostil, candidata a guerra |
-| Religiosa × Escravista | −55 | Hostil, candidata a guerra |
-| Tecnocrata × Escravista | −15 | Fria (disputa um mapa) |
-| Guerreira × Arcana | 0 | Neutra |
-| Autoritária × Religiosa | 0 | Neutra |
-| Escravista × Arcana | 0 | Neutra |
-| Autoritária × Tecnocrata | +40 | Amigável, candidata a acordo |
-| Escravista × Guerreira | +40 | Amigável, candidata a acordo |
-| Escravista × Autoritária | +40 | Amigável, candidata a acordo |
+| Autoritária × Arcana (Império × União) | −55 | Hostil, candidata a guerra |
+| Tecnocrata × Arcana (Federação × União) | −55 | Hostil, candidata a guerra |
+| Guerreira × Autoritária (Reino Bárbaro × Império) | −55 | Hostil, candidata a guerra |
+| Tecnocrata × Autoritária (Federação × Império) | −40 | Hostil |
+| Tecnocrata × Religiosa (Federação × Clero) | −40 | Hostil |
+| Religiosa × Autoritária (Clero × Império) | −15 | Fria (o Clero esconde o ódio) |
+| Religiosa × Arcana (Clero × União) | −15 | Fria (o Clero esconde o ódio) |
+| Guerreira × Arcana, Tecnocrata e Religiosa | −15 | Fria (os saques) |
+
+Nenhum par começa amigável. [Em aberto] Os acordos comerciais iniciais ficam para a rodada do mapa novo.
 
 **Guerras iniciais:** sorteia-se **1 guerra (70% das partidas) ou 2 (30%)** entre os três pares candidatos. O par em guerra começa com relação −70. Os outros pares começam em Paz; a atitude é a faixa da relação (ver [[Sistema de Diplomacia/Descrição|Sistema de Diplomacia]]).
 
@@ -230,7 +234,7 @@ Por quê: a Tecnocrata mata ou escraviza os tocados pela mana, e a Guerreira é 
 
 Nas primeiras versões os personagens são **abstratos**. Os personagens principais do mundo entram aos poucos, quando a história for escrita.
 
-- **O líder de cada facção é fixo** (rodada HI7-1): nome, história e Personalidade vêm do [[Mundo e História/Descrição|Mundo e História]] (parte 4.7). No código desde 2026-10-26 (`faccoes.json`).
+- **O líder de cada facção é fixo** (rodada HI7-1): nome, história e Personalidade vêm do [[Mundo e História/Descrição|Mundo e História]] (parte 5.8; os 5 líderes novos, rodada HI13-5, entram no código quando tiverem nome). No código desde 2026-10-26 (`faccoes.json`).
 - **Gerados no início de cada partida** (por facção): 1 herdeiro e 2 ou 3 nobres da dinastia; o governador da cidade de nível 3 é um desses nobres. Os nomes saem de uma lista por cultura e a Personalidade, dos modelos, com a tendência da cultura.
 - 5 **Importantes fixos**, por papel, cada um ligado a uma Ambição:
 
