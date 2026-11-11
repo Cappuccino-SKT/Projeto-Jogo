@@ -748,3 +748,13 @@ O que entrou ([[Ficha Logica/Companheiros|ficha dos Companheiros]], regras 4.1 a
 **Verificado pelo assistente:** os testes passam (612 conferências).
 
 Como testar: viaje até uma cidade de nível 2 ou mais, abra **Companheiros** e recrute. No dia 1 da estação seguinte, o salário sai do dinheiro do grupo.
+
+### Marco HI13: os 5 reinos e as facções modulares (2026-11-11)
+
+- **Os 5 reinos:** a Escravista saiu do `faccoes.json`. As 4 cidades dela (o Grande porto, a Cidade dos mercados, a Plantação e o Porto de pesca) ficaram **sem facção**, como as Vilas Livres.
+- **Os nomes na tela** agora moram no `faccoes.json` (`nome`, `artigo`, `cor`): Império Mágico, União Mágica, Federação Humana, Clero de Rudeus e Reino Bárbaro. Saíram do `reputacao.json`.
+- **Facções modulares:** se uma cidade aponta para uma facção que não está no `faccoes.json`, ela fica sem facção e o jogo dá um **aviso** (não um erro). Para tirar uma facção, basta apagar a entrada dela; para pôr, acrescentar a entrada e as cidades.
+- **O save** passou para a versão 16: as partidas salvas antes não abrem (a lista de facções mudou).
+- **Ficou para depois:** os nomes dos 5 líderes (o jogo ainda mostra os antigos, como Tian Feng e Cassius Varro), as `relacoes_iniciais` (entram com a Diplomacia), a `cor` na interface e as contas das fichas que ainda citam a Escravista.
+
+Como testar: abra o jogo e veja a Reputação e as notícias com os nomes novos; viaje até (8,6): o Grande porto não tem facção.

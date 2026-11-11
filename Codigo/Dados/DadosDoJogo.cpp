@@ -124,6 +124,7 @@ DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados)
     if (textoDasFaccoes && textoDasCulturas) {
         dados.faccoes = lerArquivosDasFaccoes(*textoDasFaccoes, *textoDasCulturas, problemas);
         dados.culturas = lerArquivoDasCulturas(*textoDasCulturas, dados.faccoes, problemas);  // fase C2
+        ajustarOMundoAsFaccoesQueExistem(dados, problemas);  // rodada HI13-1: facções modulares
     }
     // 18. O Crime e a Justiça (fase C3).
     if (const auto texto = lerArquivoInteiro(pastaDosDados, "crimes.json", problemas)) {
@@ -150,6 +151,35 @@ std::string escreverDinheiroEmMoedas(int valorEmDecimos)
     const char* sinal = valorEmDecimos < 0 ? "-" : "";
     const int valorPositivo = valorEmDecimos < 0 ? -valorEmDecimos : valorEmDecimos;
     return sinal + std::to_string(valorPositivo / 10) + "," + std::to_string(valorPositivo % 10);
+}
+
+void ajustarOMundoAsFaccoesQueExistem(DadosDoJogo& dados, ListaDeProblemasDosDados& listaDeProblemas)
+{
+    // 1. A cidade de uma facção que não está no faccoes.json fica sem facção.
+    for (CidadeDoMundo& cidade : dados.mundo.cidades) {
+        if (cidade.faccao.empty()) {
+            continue;
+        }
+        bool aFaccaoExiste = false;
+        for (const DefinicaoDaFaccao& faccao : dados.faccoes.faccoes) {
+            aFaccaoExiste = aFaccaoExiste || faccao.cultura == cidade.faccao;
+        }
+        if (!aFaccaoExiste) {
+            listaDeProblemas.anotarAviso("mundo/cidades_iniciais.json", 0,
+                                         "a cidade \"" + cidade.nome + "\" aponta para a facção \"" + cidade.faccao
+                                             + "\", que não existe no faccoes.json: ela fica sem facção");
+            cidade.faccao.clear();
+        }
+    }
+    // 2. O nome e o artigo que o jogador vê.
+    for (const DefinicaoDaFaccao& faccao : dados.faccoes.faccoes) {
+        if (!faccao.nome.empty()) {
+            dados.regrasDaReputacao.nomesDasFaccoes[faccao.cultura] = faccao.nome;
+        }
+        if (!faccao.artigo.empty()) {
+            dados.regrasDaReputacao.artigosDasFaccoes[faccao.cultura] = faccao.artigo;
+        }
+    }
 }
 
 std::string montarResumoDosDados(const DadosDoJogo& dados)

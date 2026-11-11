@@ -77,25 +77,44 @@ void testarOMundo(const DadosDoJogo& dados)
 {
     SimulacaoDaVila vila(dados, RegrasDoTempo{});
     const int guerreira = faccaoPeloNome(dados, "guerreira");
-    const int escravista = faccaoPeloNome(dados, "escravista");
+    const int autoritaria = faccaoPeloNome(dados, "autoritaria");
     SimulacaoDaVila& capitalGuerreira = *vila.outrasCidades.front();
-    conferir(vila.faccoes.bancoDaFaccao.size() == 6 && vila.faccoes.bancoDaFaccao[static_cast<std::size_t>(guerreira)] > 0 && capitalGuerreira.impostoDaCidadeEmPorcento == 10
+    conferir(vila.faccoes.bancoDaFaccao.size() == dados.faccoes.faccoes.size() && vila.faccoes.bancoDaFaccao[static_cast<std::size_t>(guerreira)] > 0 && capitalGuerreira.impostoDaCidadeEmPorcento == 10
                  && capitalGuerreira.vila.verbaDaCoroaPorEstacaoEmDecimos == 0 && vila.impostoDaCidadeEmPorcento == -1,
-             "6 facções com Banco; a capital Guerreira com imposto de 10% e a verba da facção; a vila sem facção, com o do regras.json");
+             "cada facção do faccoes.json com Banco; a capital Guerreira com imposto de 10% e a verba da facção; a vila sem facção, com o do regras.json");
     // Rodadas HI7-1 e HI12: os líderes fixos do Ano 412 (a idade da história ÷ 2,5, de 8 a 30).
     const MembroDaDinastia& tianFeng = vila.faccoes.dinastias[static_cast<std::size_t>(guerreira)].lider();
-    const MembroDaDinastia& yasmin = vila.faccoes.dinastias[static_cast<std::size_t>(escravista)].lider();
+    const MembroDaDinastia& livia = vila.faccoes.dinastias[static_cast<std::size_t>(autoritaria)].lider();
     const MembroDaDinastia& cassius = vila.faccoes.dinastias[static_cast<std::size_t>(faccaoPeloNome(dados, "arcana"))].lider();
     conferir(tianFeng.nome == "Grande Lobo Tian Feng" && tianFeng.idade == 20 && vila.faccoes.lideres[static_cast<std::size_t>(guerreira)].agressividade == 90
-                 && yasmin.idade == 14 && yasmin.ehMulher && vila.faccoes.lideres[static_cast<std::size_t>(escravista)].sociabilidade == 75 && cassius.idade == 30
+                 && livia.nome == "Regente Lívia Valdren" && livia.ehMulher && vila.faccoes.lideres[static_cast<std::size_t>(autoritaria)].sociabilidade == 25 && cassius.idade == 30
                  && cassius.vidaProlongada,
-             "os líderes fixos: Tian Feng com 20 anos de jogo e Agressividade 90; Yasmin com 14; Cassius Varro (432) no teto de 30");
-    const SimulacaoDaVila* escravistaCapital = nullptr;
-    for (const auto& cidade : vila.outrasCidades) {
-        escravistaCapital = faccaoDaCidade(dados, cidade->numeroDoMapaDaCidade) == escravista ? cidade.get() : escravistaCapital;
+             "os líderes fixos: Tian Feng com 20 anos de jogo e Agressividade 90; Lívia, mulher e com Sociabilidade 25; Cassius Varro (432) no teto de 30");
+    // Rodada HI13-1: a Escravista saiu; as cidades dela ficaram sem facção (terra sem dono).
+    conferir(faccaoPeloNome(dados, "escravista") == -1 && faccaoDaCidade(dados, dados.mundo.numeroDoMapaNa(8, 6)) == -1
+                 && faccaoDaCidade(dados, dados.mundo.numeroDoMapaNa(7, 5)) == -1,
+             "HI13-1: sem a Escravista, o Grande porto e a Cidade dos mercados não têm facção");
+    // Facções modulares: tirar uma facção do catálogo solta as cidades dela, com um aviso, e o mundo roda.
+    {
+        DadosDoJogo comUmaAMenos = dados;
+        const std::string culturaTirada = comUmaAMenos.faccoes.faccoes.back().cultura;
+        const int mapaDaCapitalTirada = comUmaAMenos.mundo.numeroDoMapaNa(comUmaAMenos.faccoes.faccoes.back().colunaDaCapital, comUmaAMenos.faccoes.faccoes.back().linhaDaCapital);
+        comUmaAMenos.faccoes.faccoes.pop_back();
+        ListaDeProblemasDosDados avisos;
+        ajustarOMundoAsFaccoesQueExistem(comUmaAMenos, avisos);
+        bool algumaCidadeAindaAponta = false;
+        for (const CidadeDoMundo& cidade : comUmaAMenos.mundo.cidades) {
+            algumaCidadeAindaAponta = algumaCidadeAindaAponta || cidade.faccao == culturaTirada;
+        }
+        SimulacaoDaVila mundoMenor(comUmaAMenos, RegrasDoTempo{});
+        while (mundoMenor.relogio.diaDaPartida() < 1) {
+            mundoMenor.avancarUmTick();
+        }
+        conferir(!algumaCidadeAindaAponta && !avisos.temErro() && avisos.algumAvisoContem("ela fica sem facção")
+                     && faccaoDaCidade(comUmaAMenos, mapaDaCapitalTirada) == -1
+                     && mundoMenor.faccoes.bancoDaFaccao.size() == comUmaAMenos.faccoes.faccoes.size(),
+                 "facções modulares: com uma facção a menos, as cidades dela ficam sem facção (aviso, sem erro) e o mundo roda 1 dia");
     }
-    conferir(escravistaCapital != nullptr && escravistaCapital->impostoDaCidadeEmPorcento == 30 && escravistaCapital->felicidadeDaFaccaoEmPontos == -10,
-             "a Escravista: imposto Alto, 30% e Felicidade −10");
     // 1 dia: a cunhagem da Casa da Moeda da capital entra no Banco da Facção.
     const int64_t bancoAntes = vila.faccoes.bancoDaFaccao[static_cast<std::size_t>(guerreira)];
     while (vila.relogio.diaDaPartida() < 1) {

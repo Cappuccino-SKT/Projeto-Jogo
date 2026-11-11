@@ -36,8 +36,8 @@ void testarAsAcoes(const DadosDoJogo& dados)
     EntidadeEmTransito& grupo = vila.viagem.grupoDoJogador;
     SimulacaoDaVila& cidade = *vila.outrasCidades.front();  // a capital Guerreira
     const int dono = donoDaCidadeDoMapa(mundo, cidade.numeroDoMapaDaCidade);
-    conferir(vila.reputacao.reputacaoPorFaccao.size() == 9 && dono >= 0 && donoDaCidadeDoMapa(mundo, mundo.mapaDaVila) == -1,
-             "9 donos (6 facções e 3 Vilas Livres); a vila do jogador não tem reputação");
+    conferir(vila.reputacao.reputacaoPorFaccao.size() == 12 && dono >= 0 && donoDaCidadeDoMapa(mundo, mundo.mapaDaVila) == -1,
+             "12 donos (5 facções, 3 Vilas Livres e as 4 cidades sem dono da antiga Escravista); a vila do jogador não tem reputação");
 
     // Teste 3: Inimigo não compra nem vende.
     grupo.mapaAtual = cidade.numeroDoMapaDaCidade;

@@ -1,6 +1,6 @@
 #pragma once
 
-// As facções (Ficha Lógica: Facção, fase C1): as 6 facções com as cidades delas, as leis, o
+// As facções (Ficha Lógica: Facção, fase C1): as facções do faccoes.json (os 5 reinos; a lista é modular, HI13-1) com as cidades delas, as leis, o
 // Banco da Facção (cunhagem, tarifa e a verba às cidades), o líder e a assembleia anual. O
 // território vem das cidades vizinhas (MundoDoJogo::estadoDoTerritorio, FA1-6).
 
@@ -42,6 +42,10 @@ struct LiderInicialDaFaccao {
 struct DefinicaoDaFaccao {
     std::string id;       // "faccao.guerreira"
     std::string cultura;  // "guerreira"; também o "faccao" das cidades no cidades_iniciais.json
+    // Rodada HI13-1 (facções modulares): o que o jogador vê mora no registro da própria facção.
+    std::string nome;    // "Reino Bárbaro"; vazio = usa o nome de trabalho
+    std::string artigo;  // "o" ou "a" ("do Reino Bárbaro", "da União Mágica"); vazio = "a"
+    std::string cor;     // "marrom"; a interface ainda não usa
     int colunaDaCapital = 1;
     int linhaDaCapital = 1;
     std::vector<int> leisIniciais;           // a posição da opção, uma por lei
@@ -110,9 +114,9 @@ struct EstadoDasFaccoes {
 int faccaoDaCidade(const DadosDoJogo& dados, int numeroDoMapa);
 // A posição da facção dona do mapa (a cidade ou o território de uma facção só); −1 = nenhuma.
 int faccaoDoMapa(const DadosDoJogo& dados, int numeroDoMapa);
-// O nome na tela: "Clãs de Tian-Lang".
+// O nome na tela: "Reino Bárbaro".
 std::string nomeDaFaccao(const DadosDoJogo& dados, int faccao);
-// Com o artigo e a preposição: (guerreira, "de") → "dos Clãs de Tian-Lang" (nomeDoDonoComArtigo).
+// Com o artigo e a preposição: (guerreira, "de") → "do Reino Bárbaro" (nomeDoDonoComArtigo).
 std::string nomeDaFaccaoComArtigo(const DadosDoJogo& dados, int faccao, const std::string& preposicao = "", bool maiuscula = false);
 
 // Ao criar o mundo: as leis iniciais, o Banco (25% do PIB) e o líder (sequência 7).
