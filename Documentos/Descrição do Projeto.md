@@ -15,7 +15,7 @@ Um jogo 2D de gerenciamento e RPG, com **engine própria em C++** e foco em **de
 ### Mundo
 
 - [[Sistema de Mapa/Descrição|Sistema de Mapa]] — Mundial, Local, Interno e de Guerra
-- [[Mundo e História/Descrição|Mundo e História]] — o tema, o passado (a Grande Fusão), as 6 facções, as raças, os líderes do Ano 412 e as Grandes Histórias. **A história manda:** quando ela bate numa ficha, a ficha muda
+- [[Mundo e História/Descrição|Mundo e História]] — o tema, o passado (a Colisão dos Mundos e o Antigo Império Mágico), os 5 reinos, as raças e as 5 Grandes Histórias (história refeita em 2026-11-11; rodada HI13 aberta). **A história manda:** quando ela bate numa ficha, a ficha muda
 - [[Mundo e Estado Inicial/Descrição|Mundo e Estado Inicial]] — regiões, cidades, masmorras e relações no primeiro dia
 - [[Sistema de Cidade/Descrição|Sistema de Cidade]]
 - [[Sistema de População/Descrição|Sistema de População]] — crescimento, migração, moradias, níveis de cidade

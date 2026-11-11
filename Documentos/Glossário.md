@@ -29,18 +29,19 @@ Tudo desta parte vem do [[Mundo e História/Descrição|Mundo e História]].
 
 | Termo | Significado |
 |---|---|
-| **Império de Valdária** | O império que governou o continente por 600 anos, com a magia como "alta tecnologia". Caiu no Ano 0 |
-| **Grande Fusão** | O Ano 0: o Ritual de Ascensão do imperador Aurelian Valdren, atingido pelo feitiço de Kassian Dravel, fundiu o mundo com uma dimensão de mana pura. Destruiu a capital e criou as raças e os monstros |
-| **d.F. e a.F.** | Depois e antes da Fusão. O jogo começa no **Ano 412 d.F.** |
+| **Colisão dos Mundos** | O vínculo entre o mundo humano (sem magia) e o mundo mágico, que trouxe a mana e os Magos do outro mundo. O auge foi a **Grande Colisão** (o Ano 0): um vórtice no céu, por algumas horas. [[Mundo e História/Descrição\|Mundo e História]] |
+| **Ano 412 E.C.** | [Proposta] Era da Colisão: os anos contam a partir da Grande Colisão. O jogo começa no **Ano 412** |
+| **Antigo Império Mágico** | O império dos magos humanos que unificou o mundo depois da Colisão, escravizou quem não tinha magia e caiu na guerra chamada a Queda |
+| **Os 5 reinos** | Império Mágico (Mestiços), União Mágica (magos humanos), Federação Humana (humanos sem magia), Clero de Rudeus (Magos do outro mundo, disfarçados de clero) e Reino Bárbaro (a lei do mais forte). [Proposta] Nomes de trabalho nas fichas e no código: Autoritária, Arcana, Tecnocrata, Religiosa e Guerreira; a Escravista sai (rodada HI13-1) |
 | **Maré de Mana** | A mana de uma região fica intensa por 1 estação: favorece os magos e causa mutações. [[Ficha Logica/Racas\|Raças]] |
-| **Raça** | Humanos, Langren, Khadim, Ascendidos, Quitinos e o Eterno. Decide a idade de adulto e de velho, as habilidades e como cada povo trata o NPC. Entra no jogo depois da fase D. [[Ficha Logica/Racas\|Raças]] |
-| **Langren** | Os descendentes do exército rebelde: fortes e agressivos, produzem pouco. Todos os Clãs de Tian-Lang |
-| **Khadim** | Raça artificial de escravos submissos, feita de humanos na Câmara de Moldagem; vida curta, sem filhos. A origem é segredo |
-| **Ascendidos** | A elite de magos da Ordem de Custodum: vida muito longa, quase sem filhos; a raça mais rara |
-| **Quitinos** | Povo de carapaça, sem facção, que vive em tribos com uma rainha |
-| **Eterno** | O que o imperador Aurelian virou na Fusão: imortal, escondido no palácio da Coroa |
-| **Nomes das facções** | Autoritária = Coroa de Valdren; Escravista = Sultanato de Zahran; Guerreira = Clãs de Tian-Lang; Tecnocrata = Comunidade de Ashmoor; Religiosa = Teocracia de Theodoria; Arcana = Ordem de Custodum. As fichas e o código usam o nome de trabalho |
-| **O Doador** | O deus da Teocracia de Theodoria; só o Sumo Sacerdote sabe o nome |
+| **Raça** | Humanos, Magos do outro mundo, Mestiços, Humanos-Cinzentos, Cinzentos, Fungoides e Humanos-Peludos. Decide a idade de adulto e de velho, as habilidades e como cada povo trata o NPC. Entra no jogo depois da fase D. A [[Ficha Logica/Racas\|ficha de Raças]] ainda traz as raças antigas (rodada HI13-4) |
+| **Magos do outro mundo** | Os humanoides que vieram do mundo mágico na Colisão: vida muito longa, alta capacidade mágica, poucos filhos. [Proposta] Chamam a si mesmos de **Rudeanos**, e o mundo deles é **Rudeus** |
+| **Mestiços** | Raça criada pelo Antigo Império ao misturar humanos e Magos do outro mundo: vida e fertilidade de humano, todos com alta capacidade mágica. Donos do Império Mágico |
+| **Humanos-Cinzentos** | Raça humana modificada pelo Antigo Império: pouco intelecto, vida curta, só se reproduz por meios artificiais, forte no combate, sem magia. Escravos militares |
+| **Cinzentos** | Raça modificada naturalmente pela mana: forte no combate e muito agressiva |
+| **Fungoides** | Raça da Floresta de Esporos, sem gênero, de mente coletiva; poucos nascem com intelecto próprio |
+| **Humanos-Peludos** | Humanos modificados naturalmente pela mana: resistentes, de vida curta, se reproduzem rápido; alguns monstros não os atacam |
+| **Grandes Histórias** | As 5 histórias que podem acabar com a Era da Estabilidade, uma de cada reino: o Necromante, o Perigo Nuclear, o Pó Explosivo, o Ritual de Colisão e a Grande Fome |
 | **Grande História** | Uma das 6 missões grandes que mudam o mundo; uma acorda por partida (ficha D10, a escrever) |
 | **Segredo** | Uma verdade escondida de um líder ou do mundo, que o jogador pode descobrir e usar (ficha D9, a escrever) |
 
