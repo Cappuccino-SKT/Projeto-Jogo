@@ -67,6 +67,7 @@ SimulacaoDaVila::SimulacaoDaVila(const DadosDoJogo& dadosDoJogo, const RegrasDoT
     // Fase C1: as facções (as leis, o Banco da Facção e o líder).
     montarAsFaccoesDaPartidaNova(*this, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
     atualizarAsCidadesPelaReligiao(*this);  // fase C4
+    montarAEscravidaoDaPartidaNova(*this);  // fase D3 (depois das leis das facções)
     montarOsCompanheirosDaPartidaNova(*this);  // fase D2
     // Fase B5: a pesquisa do mundo (os marcos sorteados uma vez) e as travas de cada cidade.
     montarATecnologiaDaPartidaNova(tecnologia, dados, sementeNoLugarDaDoArquivo.value_or(dados.vilaInicial.sementeDaPartida));
@@ -175,6 +176,7 @@ ContextoDaProducao SimulacaoDaVila::contextoDaProducao()
     contexto.numeroDoMapaNoMundo = numeroDoMapaNoMundo();
     contexto.lodDoMapa = lodDoMapa;
     contexto.efeitosDaReligiao = &efeitosDaReligiao;
+    contexto.escravidao = &escravidao;  // fase D3
     return contexto;
 }
 
@@ -382,6 +384,10 @@ std::vector<std::string> SimulacaoDaVila::avancarUmTick()
         // Fase C4 (Religião): os festivais, a assimilação, a Bênção e o que a fé muda em cada cidade.
         const std::vector<std::string> linhasDaReligiao = rodarAReligiaoNoDiaNovo(*this);
         linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaReligiao.begin(), linhasDaReligiao.end());
+        // Fase D3 (Escravidão): a comida, a Felicidade e a Obediência dos escravos, a fuga, a rebelião,
+        // a alforria e a abolição, em cada cidade, antes do dia dela.
+        const std::vector<std::string> linhasDaEscravidao = rodarAEscravidaoNoDiaNovo(*this);
+        linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDaEscravidao.begin(), linhasDaEscravidao.end());
         // Fase D2 (Companheiros): o salário, a Opinião, a Felicidade, os recrutáveis e a família.
         const std::vector<std::string> linhasDosCompanheiros = rodarOsCompanheirosNoDiaNovo(*this);
         linhasParaOConsole.insert(linhasParaOConsole.end(), linhasDosCompanheiros.begin(), linhasDosCompanheiros.end());

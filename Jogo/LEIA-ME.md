@@ -758,3 +758,21 @@ Como testar: viaje até uma cidade de nível 2 ou mais, abra **Companheiros** e 
 - **Ficou para depois:** os nomes dos 5 líderes (o jogo ainda mostra os antigos, como Tian Feng e Cassius Varro), as `relacoes_iniciais` (entram com a Diplomacia), a `cor` na interface e as contas das fichas que ainda citam a Escravista.
 
 Como testar: abra o jogo e veja a Reputação e as notícias com os nomes novos; viaje até (8,6): o Grande porto não tem facção.
+
+### Marco D3, parte 1: os escravos nas cidades (2026-11-11)
+
+- **A classe Escravo** existe nas cidades cuja lei permite a escravidão. No primeiro dia: Império 30% dos NPCs, União 25%, Federação 20%, Reino Bárbaro 15%, Clero 0% e 30% nas 4 cidades sem dono (o `data/escravidao.json`, rodada LE1). São os NPCs de Braçal mais alto, primeiro os dos empregos Braçais.
+- **O escravo** trabalha sem salário e come 1 comida por dia do estoque da Cidade. Ele sai da conta dos Civis (o dinheiro, o desemprego e a Felicidade dos Civis não o contam).
+- **A Felicidade dos Escravos** é uma por cidade (base 30). **A Obediência** é de cada um: 50 + o Medo (o Controle da cidade) + o tempo de cativeiro − a Felicidade que falta. O trabalho dele nas outras cidades é multiplicado pela Obediência.
+- **A fuga** (toda noite, com Obediência abaixo de 30): metade é vista e castigada; dos que fogem, metade vira bandido (a Criminalidade da cidade sobe) e metade vai para uma Vila Livre sem escravos.
+- **A rebelião** (Felicidade e Controle abaixo de 10 por 4 dias): os escravos contra os guardas e os Civis, pelo cálculo rápido do Combate.
+- **A alforria** (1% por estação com a lei de Tolerância) e **a abolição** (quando a lei vira "proibida", todos viram Civis no dia 1 da estação).
+- **Os filhos** de escravos nascem escravos (a parte dos nascidos igual à parte de escravos da cidade).
+- **A cidade sem facção** segue a lei de Escravidão que a cultura dela deseja (LE1-4).
+- **O save** passou para a versão 17.
+- **Decisões de implementação:** a casa do escravo conta como Senzala (a construção Senzala espera o conteúdo de construções); o sorteio da fuga sai da semente, do mapa e do dia (não mexe nos outros sorteios); tudo roda uma vez por dia, antes do dia de cada cidade.
+- **Ficou para a parte 2:** o Mercado de Escravos (o preço já está programado e testado), a compra pela Cidade, os escravos do jogador (os Grilhões, os tratamentos, o trabalho na vila), o jogador capturado e os 3 caminhos dele, e as notícias de fuga e de rebelião. Os donos Ricos esperam a Classe Social (A4).
+
+**Verificado pelo assistente:** os testes passam (634 conferências). **Não verificado:** o equilíbrio do mundo em partidas longas com os escravos (a comida e o dinheiro das cidades ao longo de anos); a ficha do Mundo pede refazer essa conta.
+
+Como testar: não há tela nova. Os testes mostram os escravos do primeiro dia de cada cidade ("Império 90 de 300...").

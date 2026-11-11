@@ -1,0 +1,24 @@
+{
+  "proporcao_inicial_em_porcento": { "autoritaria": 30, "arcana": 25, "tecnocrata": 20, "guerreira": 15, "religiosa": 0, "escravista": 30 },
+  "preco": { "base": 200, "por_ponto_da_melhor_habilidade": 4, "mago_em_porcento": 200, "velho_em_porcento": 50, "cultura_hostil_em_porcento": 80 },
+  "mercado_alvo": { "por_vaga_bracal_vazia": 2, "minimo": 2 },
+  "venda_pelo_dono_em_porcento": 70,
+  "comprar_a_liberdade_em_porcento_do_preco": 150,
+  "felicidade_base_do_escravo": 30,
+  "obediencia": { "base": 50, "medo_maximo": 30, "grilhoes": 15, "por_estacao_de_cativeiro": 1, "cativeiro_maximo": 10,
+                  "felicidade_abaixo_de": 30, "por_cultura": { "guerreira": -10 } },
+  "fuga": { "obediencia_abaixo_de": 30, "detectado_em_porcento": 50, "castigo_felicidade": -10, "castigo_dias": 8,
+            "vira_bandido_em_porcento": 50, "criminalidade_por_bandido": 1 },
+  "rebeliao": { "felicidade_abaixo_de": 10, "controle_abaixo_de": 10, "dias_seguidos": 4, "perdedores_executados_ou_vendidos_em_porcento": 20,
+                "guardas_por_nivel_da_cidade": 2, "felicidade_dos_civis_se_vencem": -5, "felicidade_dos_escravos_se_perdem": -10 },
+  "alforria_por_estacao_em_porcento": { "tolerancia": 1, "escravista": 0 },
+  "abolicao": { "ricos_felicidade": -15, "dias": 64 },
+  "tratamentos": {
+    "comida_refinada": { "felicidade": 5 },
+    "grilhoes": { "obediencia": 15, "felicidade": -5, "velocidade_em_porcento": 80 },
+    "castigo_publico": { "medo": 5, "dias": 8, "felicidade": -10, "reputacao_religiosa": -2 }
+  },
+  "captura_do_jogador_pelos_bandidos_em_porcento": 50,
+  "peculio_por_hora_livre_em_decimos": 10,
+  "peculio_maximo_por_dia_em_decimos": 40
+}

@@ -286,6 +286,32 @@ void consumirACestaDoDia(ContextoDaProducao& contexto)
     contexto.consumoMedido.fecharODia();
 }
 
+int alimentarOsEscravosDaCidade(ContextoDaProducao& contexto, int escravos)
+{
+    int semComida = 0;
+    for (int escravo = 0; escravo < escravos; ++escravo) {
+        // A comida da Cidade de menor preço local; no empate, a de menor número.
+        int maisBarata = -1;
+        for (const DefinicaoDeItem& item : contexto.dados.catalogoDeItens.todosOsItens()) {
+            if (item.ehComida() && contexto.inventario.quantidadeDe(item.numeroInterno, DonoDoItem::Cidade) > 0
+                && (maisBarata < 0 || precoLocalDoItem(contexto, item.numeroInterno) < precoLocalDoItem(contexto, maisBarata))) {
+                maisBarata = item.numeroInterno;
+            }
+        }
+        if (maisBarata < 0) {
+            ++semComida;
+            continue;
+        }
+        contexto.inventario.tentarTirar(maisBarata, DonoDoItem::Cidade, 1);
+        contexto.consumoMedido.anotarOQueSaiu(maisBarata, 1);
+    }
+    // A comida que faltou também é demanda (regra 10.1 da Economia).
+    if (const int comida = itemMaisBaratoDoTipo(contexto, true); comida >= 0 && semComida > 0) {
+        contexto.consumoMedido.anotarADemandaQueFaltou(comida, static_cast<int64_t>(semComida) * 100);
+    }
+    return semComida;
+}
+
 std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
 {
     std::vector<std::string> linhasParaOConsole;
@@ -323,7 +349,8 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
         bool alguemFicouSemReceber = false;
         for (const auto& [numeroDoNpc, npc] : empregados) {
             const int ticksDoDia = registro.get<TrabalhoDoDia>(npc).ticksTrabalhadosHoje;
-            if (ticksDoDia <= 0) {
+            // Fase D3 (Escravidão): o escravo trabalha sem salário.
+            if (ticksDoDia <= 0 || registro.all_of<CativeiroDoNpc>(npc)) {
                 continue;
             }
             const int gerente = numeroDoNpc == producao.numeroDoGerente ? economia.salarioDoGerenteEmPorcento : 100;
@@ -372,6 +399,9 @@ std::vector<std::string> pagarOsSalariosDoDia(ContextoDaProducao& contexto)
         // Regra 10.8: com 16 dias seguidos de atraso, os empregados saem.
         if (producao.diasDeSalarioAtrasado >= economia.diasDeAtrasoAteOsEmpregadosSairem) {
             for (const auto& [numeroDoNpc, npc] : empregados) {
+                if (registro.all_of<CativeiroDoNpc>(npc)) {
+                    continue;  // fase D3: o escravo não sai por falta de salário
+                }
                 registro.get<CasaETrabalhoDoNpc>(npc).indiceDoTrabalho = -1;
                 registro.get<CasaETrabalhoDoNpc>(npc).saiuPorAtrasoDe = static_cast<int>(indice);  // Trabalho, regra 4.1, passo 3
             }
@@ -448,6 +478,9 @@ void rodarAFelicidadeDoDia(ContextoDaProducao& contexto)
     if (contexto.efeitosDaReligiao != nullptr) {  // fase C4: o 6º fator e o festival (nos eventos)
         situacao.fatorReligiaoEmDecimos = contexto.efeitosDaReligiao->fatorEmDecimos;
         situacao.felicidadeDosEventosEmPontos += contexto.efeitosDaReligiao->felicidadeDoFestivalEmPontos;
+    }
+    if (contexto.escravidao != nullptr) {  // fase D3: o −5 depois de uma rebelião de escravos que venceu
+        situacao.felicidadeDosEventosEmPontos += contexto.escravidao->pontosNaFelicidadeDosCivisHoje;
     }
     situacao.pontosDoClimaNoConsumo = pontosDoClimaNoConsumoAtendido(contexto);
 
