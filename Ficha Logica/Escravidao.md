@@ -14,6 +14,8 @@ Põe a **classe Escravo** nas cidades das facções que permitem a escravidão: 
 
 Documento do sistema: [[Sistema de Escravidão/Descrição|Escravidão]].
 
+**No código (2026-11-11):** a **parte 1** está programada (os escravos da Cidade em todas as cidades: o começo, a comida, a Felicidade, a Obediência, a fuga, a rebelião, a alforria, a abolição e o save). A **parte 2** falta: o Mercado, os escravos do jogador e o jogador capturado. O que foi decidido ao programar está no `Jogo/LEIA-ME.md`.
+
 **Esta versão:** a classe Escravo, o preço e o Mercado, a Obediência, a fuga, a rebelião (pelo cálculo rápido), a libertação, a alforria, a abolição, a captura do jogador e os 3 caminhos dele. **Prisioneiros de guerra, infantaria de escravos, tráfico no mercado negro, venda de prisioneiros entre facções e missões** ficam na parte 9.
 
 ## 2. Dados

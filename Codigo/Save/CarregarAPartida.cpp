@@ -796,6 +796,10 @@ void restaurarOsNpcs(SimulacaoDaVila& simulacao, const json& lista)
         if (linha.contains("doenca")) {
             registro.emplace<DoencaDoNpc>(npc, DoencaDoNpc{linha.at("doenca").get<int>()});
         }
+        if (linha.contains("cativeiro")) {  // fase D3
+            const json& cativeiro = linha.at("cativeiro");
+            registro.emplace<CativeiroDoNpc>(npc, CativeiroDoNpc{cativeiro.at(0).get<int64_t>(), cativeiro.at(1).get<bool>(), cativeiro.at(2).get<int>(), cativeiro.at(3).get<int64_t>()});
+        }
         if (linha.contains("caminho")) {
             CaminhoDoNpc caminho;
             const json& tiles = linha.at("caminho").at("tiles");
@@ -852,6 +856,18 @@ void restaurarASimulacao(SimulacaoDaVila& partida, const json& arvore)
     partida.religiao.primeiroDiaDoFestival = religiao.at("primeiroDiaDoFestival").get<bool>();
     partida.religiao.diaDeFestival = religiao.at("diaDeFestival").get<bool>();
     partida.religiao.fracaoDeAssimilacaoEmPessoas = religiao.at("fracaoDeAssimilacao").get<std::map<std::string, int>>();
+    const json& escravidao = arvore.at("escravidao");  // fase D3
+    partida.escravidao.felicidadeDosEscravosEmDecimos = escravidao.at("felicidade").get<int>();
+    partida.escravidao.diasSeguidosParaRebeliao = escravidao.at("diasParaRebeliao").get<int>();
+    partida.escravidao.alforriaAcumuladaEmCentesimos = escravidao.at("alforriaAcumulada").get<int>();
+    partida.escravidao.nascimentosAcumuladosEmMilesimos = escravidao.at("nascimentosAcumulados").get<int>();
+    partida.escravidao.civisAbaladosAte = escravidao.at("civisAbaladosAte").get<int64_t>();
+    partida.escravidao.escravosCastigadosAte = escravidao.at("escravosCastigadosAte").get<int64_t>();
+    partida.escravidao.pontosNaFelicidadeDosCivisHoje = escravidao.at("pontosDosCivisHoje").get<int>();
+    partida.escravidao.escravosSemComidaHoje = escravidao.at("semComidaHoje").get<int>();
+    partida.escravidao.fugasNoTotal = escravidao.at("fugas").get<int>();
+    partida.escravidao.alforriasNoTotal = escravidao.at("alforrias").get<int>();
+    partida.escravidao.rebelioesNoTotal = escravidao.at("rebelioes").get<int>();
     restaurarOComercio(partida, arvore.at("comercio"));
     {
         const json& leilao = arvore.at("leilao");

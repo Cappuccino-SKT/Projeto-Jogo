@@ -163,6 +163,7 @@ entt::entity trazerUmNpc(ContextoDaProducao& contexto, bool ehMigrante, std::vec
         const entt::entity npc = criarNpcNaVila(contexto, regras.idadeAdulto, 50, 50);
         if (npc != entt::null) {
             ++contexto.populacao.nascimentosDeHoje;
+            anotarONascimentoNaEscravidao(contexto, npc);  // fase D3: os filhos de escravos nascem escravos
             linhas.push_back("População: nasceu um novo morador, " + nomeDoNpc(contexto, npc) + ".");
         }
         return npc;
@@ -277,9 +278,12 @@ entt::entity criarNpcNaVila(ContextoDaProducao& contexto, int idade, int habilid
 void tirarNpcDaVila(ContextoDaProducao& contexto, entt::entity npc)
 {
     const int trabalho = contexto.registroDasEntidades.get<CasaETrabalhoDoNpc>(npc).indiceDoTrabalho;
+    const bool eraEscravo = contexto.registroDasEntidades.all_of<CativeiroDoNpc>(npc);  // fase D3: o escravo não conta nos Civis
     contexto.registroDasEntidades.destroy(npc);
     contexto.npcsDaVila.erase(std::remove(contexto.npcsDaVila.begin(), contexto.npcsDaVila.end(), npc), contexto.npcsDaVila.end());
-    contexto.dinheiro.quantidadeDeCivis = std::max(0, contexto.dinheiro.quantidadeDeCivis - 1);
+    if (!eraEscravo) {
+        contexto.dinheiro.quantidadeDeCivis = std::max(0, contexto.dinheiro.quantidadeDeCivis - 1);
+    }
     if (trabalho >= 0) {
         escolherOsGerentes(contexto);  // a vaga abre; o gerente é escolhido de novo
     }

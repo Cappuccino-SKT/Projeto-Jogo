@@ -97,6 +97,7 @@ struct ProducaoDaConstrucao {
 
 // Tudo o que as regras da produção e da economia usam, junto.
 struct EfeitosDaReligiaoNaCidade;
+struct EstadoDaEscravidaoDaCidade;
 
 struct ContextoDaProducao {
     entt::registry& registroDasEntidades;
@@ -145,6 +146,8 @@ struct ContextoDaProducao {
     int lodDoMapa = 0;
     // Fase C4 (Religião): o que a fé muda nesta cidade (nulo = nada).
     const EfeitosDaReligiaoNaCidade* efeitosDaReligiao = nullptr;
+    // Fase D3 (Escravidão): o estado da escravidão desta cidade (nulo = não participa).
+    EstadoDaEscravidaoDaCidade* escravidao = nullptr;
 };
 
 // ---------------------------------------------------------------------------

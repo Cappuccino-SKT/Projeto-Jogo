@@ -268,6 +268,9 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
         if (const DoencaDoNpc* doenca = registro.try_get<DoencaDoNpc>(npc)) {
             registroDoNpc["doenca"] = doenca->diasQueFaltam;
         }
+        if (const CativeiroDoNpc* cativeiro = registro.try_get<CativeiroDoNpc>(npc)) {  // fase D3
+            registroDoNpc["cativeiro"] = json::array({cativeiro->diaDoInicio, cativeiro->grilhoes, cativeiro->obedienciaEmDecimos, cativeiro->castigadoAte});
+        }
         if (const CaminhoDoNpc* caminho = registro.try_get<CaminhoDoNpc>(npc)) {
             json tiles = json::array();
             for (const PosicaoDeTile& tile : caminho->tilesDoCaminho) {
@@ -609,6 +612,18 @@ json escreverASimulacao(const SimulacaoDaVila& simulacao)
                               {"primeiroDiaDoFestival", simulacao.religiao.primeiroDiaDoFestival},
                               {"diaDeFestival", simulacao.religiao.diaDeFestival},
                               {"fracaoDeAssimilacao", simulacao.religiao.fracaoDeAssimilacaoEmPessoas}};
+    const EstadoDaEscravidaoDaCidade& escravidao = simulacao.escravidao;  // fase D3
+    arvore["escravidao"] = json{{"felicidade", escravidao.felicidadeDosEscravosEmDecimos},
+                                {"diasParaRebeliao", escravidao.diasSeguidosParaRebeliao},
+                                {"alforriaAcumulada", escravidao.alforriaAcumuladaEmCentesimos},
+                                {"nascimentosAcumulados", escravidao.nascimentosAcumuladosEmMilesimos},
+                                {"civisAbaladosAte", escravidao.civisAbaladosAte},
+                                {"escravosCastigadosAte", escravidao.escravosCastigadosAte},
+                                {"pontosDosCivisHoje", escravidao.pontosNaFelicidadeDosCivisHoje},
+                                {"semComidaHoje", escravidao.escravosSemComidaHoje},
+                                {"fugas", escravidao.fugasNoTotal},
+                                {"alforrias", escravidao.alforriasNoTotal},
+                                {"rebelioes", escravidao.rebelioesNoTotal}};
     arvore["comercio"] = escreverOComercio(simulacao);
     return arvore;
 }

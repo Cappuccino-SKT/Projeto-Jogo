@@ -34,6 +34,7 @@ void testarFaccao();
 void testarCultura();
 void testarCrime();
 void testarReligiao();
+void testarEscravidao();
 void testarCombate();
 void testarCompanheiros();
 
@@ -67,6 +68,7 @@ int main()
     testarCultura();
     testarCrime();
     testarReligiao();
+    testarEscravidao();
     testarCombate();
     testarCompanheiros();
 

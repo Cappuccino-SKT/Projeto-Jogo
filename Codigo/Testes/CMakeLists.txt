@@ -26,6 +26,7 @@ add_executable(testes_do_codigo
     TestesDaCultura.cpp
     TestesDoCrime.cpp
     TestesDaReligiao.cpp
+    TestesDaEscravidao.cpp
     TestesDoCombate.cpp
     TestesDosCompanheiros.cpp
 )
