@@ -94,6 +94,7 @@
     {
       "id": "faccao.guerreira",
       "cultura": "guerreira",
+      "nome": "Reino Bárbaro", "artigo": "o", "cor": "marrom",
       "lider": {"nome": "Grande Lobo Tian Feng", "idade": 51, "coragem": 90, "ganancia": 50, "agressividade": 90, "sociabilidade": 50, "lealdade": 50},
       "capital": [
         1,
@@ -119,6 +120,7 @@
     {
       "id": "faccao.arcana",
       "cultura": "arcana",
+      "nome": "União Mágica", "artigo": "a", "cor": "roxo",
       "lider": {"nome": "Grão-Mestre Cassius Varro", "vida_prolongada": true, "idade": 432, "coragem": 50, "ganancia": 75, "agressividade": 75, "sociabilidade": 50, "lealdade": 50},
       "capital": [
         8,
@@ -144,6 +146,7 @@
     {
       "id": "faccao.autoritaria",
       "cultura": "autoritaria",
+      "nome": "Império Mágico", "artigo": "o", "cor": "vermelho",
       "lider": {"nome": "Regente Lívia Valdren", "mulher": true, "idade": 54, "coragem": 75, "ganancia": 50, "agressividade": 50, "sociabilidade": 25, "lealdade": 75},
       "capital": [
         1,
@@ -169,6 +172,7 @@
     {
       "id": "faccao.religiosa",
       "cultura": "religiosa",
+      "nome": "Clero de Rudeus", "artigo": "o", "cor": "branco_e_dourado",
       "lider": {"nome": "Sumo Sacerdote Theodoros IV", "idade": 72, "coragem": 25, "ganancia": 50, "agressividade": 50, "sociabilidade": 75, "lealdade": 50},
       "capital": [
         8,
@@ -195,6 +199,7 @@
     {
       "id": "faccao.tecnocrata",
       "cultura": "tecnocrata",
+      "nome": "Federação Humana", "artigo": "a", "cor": "preto_e_dourado",
       "lider": {"nome": "Lorde-Engenheiro Edmund Hale", "idade": 60, "coragem": 75, "ganancia": 50, "agressividade": 50, "sociabilidade": 50, "lealdade": 75},
       "capital": [
         2,
@@ -220,27 +225,6 @@
         "arma_de_fogo": -20,
         "polvora": -20
       }
-    },
-    {
-      "id": "faccao.escravista",
-      "cultura": "escravista",
-      "lider": {"nome": "Sultana Yasmin bint Qadir", "mulher": true, "idade": 35, "coragem": 50, "ganancia": 75, "agressividade": 50, "sociabilidade": 75, "lealdade": 25},
-      "capital": [
-        8,
-        6
-      ],
-      "leis": {
-        "imposto": "alto",
-        "tarifa": "baixa",
-        "magia": "livre",
-        "escravidao": "ampla",
-        "poder_do_lider": "fraco",
-        "sistema_de_votacao": "por_nivel",
-        "tolerancia_religiosa": "tolerancia",
-        "livro_sagrado_obrigatorio": "nao"
-      },
-      "itens_proibidos": [],
-      "ajuste_de_preco": {}
     }
   ],
   "cunhagem_por_casa_da_moeda_por_dia_em_decimos": 1400,

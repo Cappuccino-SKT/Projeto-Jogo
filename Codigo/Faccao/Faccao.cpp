@@ -192,6 +192,9 @@ CatalogoDasFaccoes lerArquivosDasFaccoes(const std::string& textoDasFaccoes, con
         DefinicaoDaFaccao faccao;
         faccao.id = objeto.value("id", std::string());
         faccao.cultura = objeto.value("cultura", std::string());
+        faccao.nome = objeto.value("nome", std::string());
+        faccao.artigo = objeto.value("artigo", std::string());
+        faccao.cor = objeto.value("cor", std::string());
         const std::vector<int> capital = objeto.value("capital", std::vector<int>{1, 1});
         faccao.colunaDaCapital = capital.size() == 2 ? capital[0] : 1;
         faccao.linhaDaCapital = capital.size() == 2 ? capital[1] : 1;

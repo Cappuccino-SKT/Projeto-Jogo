@@ -65,6 +65,13 @@ struct DadosDoJogo {
 // erro: junta todos na listaDeProblemas.
 DadosDoJogo carregarDadosDoJogo(const std::string& pastaDosDados);
 
+// Facções modulares (ficha da Facção, rodada HI13-1). Depois de ler o faccoes.json:
+// 1. a cidade que aponta para uma facção que não existe vira cidade sem facção (terra sem
+//    dono, com as regras das Vilas Livres), com um aviso no lugar de um erro;
+// 2. o nome e o artigo de cada facção ("do Reino Bárbaro") passam para a Reputação, que é
+//    quem escreve os nomes na tela.
+void ajustarOMundoAsFaccoesQueExistem(DadosDoJogo& dados, ListaDeProblemasDosDados& listaDeProblemas);
+
 // "Dados conferidos: 8 itens, ..., 1 mapa, 1 vila (10 construções e 15 NPCs), 11 eventos. 0 erros, 0 avisos."
 std::string montarResumoDosDados(const DadosDoJogo& dados);
 

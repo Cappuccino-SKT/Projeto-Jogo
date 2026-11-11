@@ -41,11 +41,11 @@ void testarOMundo(const DadosDoJogo& dados)
     SimulacaoDaVila vila(dados, RegrasDoTempo{});
     EstadoDaTecnologia& estado = vila.tecnologia;
     const int tecnocrata = posicaoDaFaccao(dados, "tecnocrata");
-    const int escravista = posicaoDaFaccao(dados, "escravista");
-    // 4.3: a Tecnocrata começa pela produção; a Escravista, pela economia.
-    conferir(estado.temATecnologia.size() == 7 && estado.projetoAtual[static_cast<std::size_t>(tecnocrata)] == 1
-                 && estado.projetoAtual[static_cast<std::size_t>(escravista)] == 0 && estado.projetoAtual.back() == -1,
-             "os projetos iniciais: Ferramentas melhores na Tecnocrata, Contabilidade na Escravista; a vila sem Laboratório, nenhum");
+    const int guerreira = posicaoDaFaccao(dados, "guerreira");
+    // 4.3: a Tecnocrata começa pela produção; a Guerreira também (não há tecnologia militar, e Andaimes pede Ferramentas).
+    conferir(estado.temATecnologia.size() == dados.faccoes.faccoes.size() + 1 && estado.projetoAtual[static_cast<std::size_t>(tecnocrata)] == 1
+                 && estado.projetoAtual[static_cast<std::size_t>(guerreira)] == 1 && estado.projetoAtual.back() == -1,
+             "os projetos iniciais: Ferramentas melhores na Tecnocrata e na Guerreira; a vila sem Laboratório, nenhum");
     // Teste 5: o dia sorteado fica dentro da janela.
     const DefinicaoDeMarco& marco = dados.tecnologia.marcos.front();
     conferir(estado.diaSorteadoPorMarco[0] >= primeiroDiaDoMarco(marco) && estado.diaSorteadoPorMarco[0] <= ultimoDiaDoMarco(marco)
@@ -70,10 +70,10 @@ void testarOMundo(const DadosDoJogo& dados)
     while (vila.relogio.diaDaPartida() < 2) {
         vila.avancarUmTick();
     }
-    std::printf("    pontos no dia 2: Tecnocrata %lld, Escravista %lld\n", static_cast<long long>(estado.pontosAcumulados[static_cast<std::size_t>(tecnocrata)]),
-                static_cast<long long>(estado.pontosAcumulados[static_cast<std::size_t>(escravista)]));
-    conferir(estado.pontosAcumulados[static_cast<std::size_t>(escravista)] > 0
-                 && estado.pontosAcumulados[static_cast<std::size_t>(tecnocrata)] > estado.pontosAcumulados[static_cast<std::size_t>(escravista)],
+    std::printf("    pontos no dia 2: Tecnocrata %lld, Guerreira %lld\n", static_cast<long long>(estado.pontosAcumulados[static_cast<std::size_t>(tecnocrata)]),
+                static_cast<long long>(estado.pontosAcumulados[static_cast<std::size_t>(guerreira)]));
+    conferir(estado.pontosAcumulados[static_cast<std::size_t>(guerreira)] > 0
+                 && estado.pontosAcumulados[static_cast<std::size_t>(tecnocrata)] > estado.pontosAcumulados[static_cast<std::size_t>(guerreira)],
              "os pontos chegam: a Tecnocrata, com 2 Laboratórios, junta mais");
     // Uma tecnologia completa: a sobra fica, a notícia nasce e o próximo projeto é escolhido.
     estado.pontosAcumulados[static_cast<std::size_t>(tecnocrata)] = 130;
@@ -81,10 +81,10 @@ void testarOMundo(const DadosDoJogo& dados)
     somarPontosEConcluirTecnologias(vila);
     conferir(estado.temATecnologia[static_cast<std::size_t>(tecnocrata)][1] && estado.pontosAcumulados[static_cast<std::size_t>(tecnocrata)] == 30
                  && estado.projetoAtual[static_cast<std::size_t>(tecnocrata)] == 2 && vila.noticias.ativas.size() == noticiasAntes + 1
-                 && vila.noticias.ativas.back().titulo == "A Comunidade de Ashmoor descobriu Ferramentas melhores",
+                 && vila.noticias.ativas.back().titulo == "A Federação Humana descobriu Ferramentas melhores",
              "130 pontos completam Ferramentas melhores: sobram 30, nasce a notícia, o próximo é Andaimes");
-    // Com a Tecnocrata tendo Ferramentas, a Escravista paga 90 por ela.
-    conferir(custoAtualDaTecnologia(estado, dados, escravista, 1) == 90, "a difusão no mundo: a Escravista paga 90");
+    // Com a Tecnocrata tendo Ferramentas, a Guerreira paga 90 por ela.
+    conferir(custoAtualDaTecnologia(estado, dados, guerreira, 1) == 90, "a difusão no mundo: a Guerreira paga 90");
     // O save leva a tecnologia.
     const std::vector<uint8_t> bytes = gravarAPartidaEmBytes(vila, "teste", "2026-10-24");
     ResultadoDoCarregamento carregado = carregarAPartidaDeBytes(dados, RegrasDoTempo{}, 2400, bytes);
@@ -97,11 +97,11 @@ void testarAsTravas(const DadosDoJogo& dados)
     DadosDoJogo comTrava = dados;
     comTrava.tecnologia.tecnologias[0].libera.push_back({"receita", "receita.tabua"});
     SimulacaoDaVila vila(comTrava, RegrasDoTempo{});
-    const int escravista = posicaoDaFaccao(comTrava, "escravista");
-    const bool semATecnologia = !estaLiberado(vila.tecnologia, comTrava, escravista, "receita", "receita.tabua");
-    const bool livre = estaLiberado(vila.tecnologia, comTrava, escravista, "receita", "receita.grao");
-    vila.tecnologia.temATecnologia[static_cast<std::size_t>(escravista)][0] = true;
-    conferir(semATecnologia && livre && estaLiberado(vila.tecnologia, comTrava, escravista, "receita", "receita.tabua"),
+    const int guerreira = posicaoDaFaccao(comTrava, "guerreira");
+    const bool semATecnologia = !estaLiberado(vila.tecnologia, comTrava, guerreira, "receita", "receita.tabua");
+    const bool livre = estaLiberado(vila.tecnologia, comTrava, guerreira, "receita", "receita.grao");
+    vila.tecnologia.temATecnologia[static_cast<std::size_t>(guerreira)][0] = true;
+    conferir(semATecnologia && livre && estaLiberado(vila.tecnologia, comTrava, guerreira, "receita", "receita.tabua"),
              "a trava: a Tábua só com Contabilidade; o Grão, fora de todo libera, é livre");
     // As cidades recebem a trava: na capital Guerreira (sem a tecnologia), a Tábua fica travada.
     const auto tabua = std::find_if(comTrava.catalogoDeReceitas.todasAsReceitas().begin(), comTrava.catalogoDeReceitas.todasAsReceitas().end(),

@@ -125,7 +125,8 @@ void testarAViagemNaPartida(const DadosDoJogo& dados)
         case EstadoDoTerritorio::SemDono: ++semDono; break;
         }
     }
-    conferir(comCidade == 22 && territorio == 16 && emDisputa == 6 && semDono == 4, "o primeiro dia: 22 com cidade, 16 de território, 6 em disputa, 4 sem dono");
+    std::printf("    territorio no primeiro dia: %d com cidade, %d de territorio, %d em disputa, %d sem dono\n", comCidade, territorio, emDisputa, semDono);
+    conferir(comCidade == 22 && territorio == 18 && emDisputa == 3 && semDono == 5, "o primeiro dia (sem a Escravista, HI13-1): 22 com cidade, 18 de território, 3 em disputa, 5 sem dono");
 
     SimulacaoDaVila simulacao(dados, RegrasDoTempo{});
     const int pao = *dados.catalogoDeItens.procurarNumeroDoItem("item.pao");
