@@ -29,18 +29,19 @@ void testarOFator(const DadosDoJogo& dados)
     // Teste 1: cada cultura com as leis iniciais da sua facção: fator 0.
     bool todasEmZero = true;
     for (const DefinicaoDaFaccao& faccao : dados.faccoes.faccoes) {
-        todasEmZero = todasEmZero && fatorDaCulturaContraAsLeis(dados, faccao.leisIniciais, faccao.cultura) == 0;
+        // Rodada LE1-2: a Arcana (Uniao Magica) comeca no extremo dela ("so magos governam"): +10.
+        todasEmZero = todasEmZero && fatorDaCulturaContraAsLeis(dados, faccao.leisIniciais, faccao.cultura) == (faccao.cultura == "arcana" ? 10 : 0);
     }
-    conferir(todasEmZero, "fator 0: cada cultura com as leis iniciais da sua facção");
+    conferir(todasEmZero, "cada cultura com as leis iniciais da sua facção: fator 0; a Arcana, no extremo dela, +10 (LE1-2)");
     // Teste 2 (parte 5): Tecnocratas com a Magia em "privilégio dos magos": −12 e o extremo violado (−15).
     std::vector<int> leis = leisIniciaisDe(dados, "tecnocrata");
     leis[static_cast<std::size_t>(dados.faccoes.posicaoDaLei("magia"))] = 1;
     conferir(fatorDaCulturaContraAsLeis(dados, leis, "tecnocrata") == -27, "Tecnocratas com a Magia em privilégio: −27");
     // Teste 3 (parte 10.2): 80 Arcanos e 20 Religiosos (hostis) na Arcana: −2,8 e −2,0 = −4,8.
     const std::vector<int> arcanas = leisIniciaisDe(dados, "arcana");
-    conferir(fatorDaCulturaContraAsLeis(dados, arcanas, "religiosa") == -14
-                 && fatorLeisECulturaDaClasseEmDecimos(dados, arcanas, {{"arcana", 80}, {"religiosa", 20}}, "arcana") == -48,
-             "a mistura: Religiosos −14; a classe com 20% deles fica em −4,8");
+    conferir(fatorDaCulturaContraAsLeis(dados, arcanas, "religiosa") == -16
+                 && fatorLeisECulturaDaClasseEmDecimos(dados, arcanas, {{"arcana", 80}, {"religiosa", 20}}, "arcana") == 28,
+             "a mistura (leis da LE1): Religiosos −16; a classe, com 80% de Arcanos em +10, fica em +2,8");
     // Teste 4: o teto de −30.
     conferir(fatorDaCulturaContraAsLeis(dados, arcanas, "tecnocrata") == -30, "o teto: os Tecnocratas nas leis Arcanas ficam em −30");
     conferir(dados.culturas.afinidade("arcana", "religiosa") == AfinidadeEntreCulturas::Hostil && dados.culturas.afinidade("autoritaria", "tecnocrata") == AfinidadeEntreCulturas::Afim,
@@ -64,9 +65,12 @@ void testarOMundo(const DadosDoJogo& dados)
     // Teste 1 no mundo: as cidades começam com o fator 0; a vila, sem facção, também.
     int foraDeZero = 0;
     for (const auto& cidade : vila.outrasCidades) {
-        foraDeZero += cidade->fatorLeisECulturaEmDecimos != 0 ? 1 : 0;
+        // Rodada LE1-2: as cidades da Arcana começam no extremo dela (+10,0).
+        const bool ehArcana = faccaoDaCidade(dados, cidade->numeroDoMapaDaCidade) >= 0
+            && dados.faccoes.faccoes[static_cast<std::size_t>(faccaoDaCidade(dados, cidade->numeroDoMapaDaCidade))].cultura == "arcana";
+        foraDeZero += cidade->fatorLeisECulturaEmDecimos != (ehArcana ? 100 : 0) ? 1 : 0;
     }
-    conferir(foraDeZero == 0 && vila.fatorLeisECulturaEmDecimos == 0, "no começo, todas as cidades com o fator 0");
+    conferir(foraDeZero == 0 && vila.fatorLeisECulturaEmDecimos == 0, "no começo, todas as cidades com o fator 0; as da Arcana, com +10");
     // Teste 6: em 1.000 migrantes da capital Arcana, cerca de 750 da cultura da região.
     const int mapaArcano = dados.mundo.numeroDoMapaNa(8, 1);
     int daRegiao = 0;

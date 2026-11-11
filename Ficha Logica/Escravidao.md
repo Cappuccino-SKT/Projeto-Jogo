@@ -22,7 +22,7 @@ Documento do sistema: [[Sistema de Escravidão/Descrição|Escravidão]].
 
 ```json
 {
-  "proporcao_inicial_em_porcento": { "escravista": 30, "guerreira": 0, "autoritaria": 0 },
+  "proporcao_inicial_em_porcento": { "autoritaria": 30, "arcana": 25, "tecnocrata": 20, "guerreira": 15, "religiosa": 0, "escravista": 30 },
   "preco": { "base": 200, "por_ponto_da_melhor_habilidade": 4, "mago": 200, "velho": 50, "cultura_hostil": 80 },
   "mercado_alvo": { "por_vaga_bracal_vazia": 2, "minimo": 2 },
   "venda_pelo_dono_em_porcento": 70,
@@ -82,7 +82,7 @@ Documento do sistema: [[Sistema de Escravidão/Descrição|Escravidão]].
 
 ### 4.1 O começo
 
-Nas cidades da **Escravista**, 30% dos NPCs começam Escravos (os de habilidade Braçal mais alta, nos empregos Braçais), da Cidade, com Senzala. A Guerreira (só prisioneiros) e a Autoritária (trabalho forçado como pena) começam sem escravos: eles chegam pela guerra e pelo Crime.
+**Rodada LE1-1 (os 5 reinos):** uma parte dos NPCs de cada cidade começa Escravo (os de habilidade Braçal mais alta, nos empregos Braçais), da Cidade, com Senzala. A porcentagem é a da **cultura da cidade**: Império Mágico (Autoritária) **30%**, União Mágica (Arcana) **25%**, Federação Humana (Tecnocrata) **20%**, Reino Bárbaro (Guerreira) **15%** (capturados nos saques; a lei é "só prisioneiros") e Clero de Rudeus (Religiosa) **0%**. **As 4 cidades sem dono** de cultura Escravista começam com **30%**, e o Grande porto (8,6) e a Cidade dos mercados (7,5) têm Mercado de Escravos (LE1-4). A lei de Escravidão de uma cidade sem facção é a que a cultura dela deseja ([[Ficha Logica/Faccao|Facção]], "Facções modulares", item 6).
 
 ### 4.2 O Mercado de Escravos
 
@@ -118,9 +118,9 @@ Obediência = 50 + Medo + 15 (Grilhões) + 1 por estação de cativeiro (até 10
 
 ### 4.6 A libertação, a alforria e a abolição
 
-- **O dono liberta:** vira Civil (Plebeu); +20 de Opinião sobre o jogador; reputação +2 com a Religiosa e −5 com as facções que permitem a escravidão.
-- **Alforria** (dia 1 da estação): com a lei de Tolerância, 1% dos escravos da cidade (fração acumulada, como a assimilação); na Escravista, 0%.
-- **Abolição** (a assembleia muda a lei para "proibida"): todos viram Civis no dia 1 da estação seguinte; as Senzalas viram Casas; os Ricos −15 de Felicidade por 64 dias; na Escravista, o extremo é violado (Cultura).
+- **O dono liberta:** vira Civil (Plebeu); +20 de Opinião sobre o jogador; reputação +2 com a Religiosa (o Clero de Rudeus, o único reino que proíbe) e −5 com as facções que permitem a escravidão.
+- **Alforria** (dia 1 da estação): com a lei de Tolerância, 1% dos escravos da cidade (fração acumulada, como a assimilação); nas cidades de cultura Escravista, 0%.
+- **Abolição** (a assembleia muda a lei para "proibida"): todos viram Civis no dia 1 da estação seguinte; as Senzalas viram Casas; os Ricos −15 de Felicidade por 64 dias; numa cidade de cultura Escravista, o extremo é violado (Cultura).
 - **Reputação do jogador:** vender −3 e comprar −1 com a Religiosa.
 
 ### 4.7 O escravo do jogador
@@ -131,7 +131,7 @@ Obediência = 50 + Medo + 15 (Grilhões) + 1 por estação de cativeiro (até 10
 ### 4.8 O jogador capturado (ES1-4)
 
 1. Quando o grupo do jogador perde para **bandidos** (Combate, 4.7): 50% de chance de **roubo** (75%, como antes) e 50% de **captura**.
-2. **Captura:** o grupo é levado ao Mercado de Escravos mais perto que fica numa facção que permite a escravidão ((6,6), (5,6), ou outro), e cada um entra no estoque. O jogador é **comprado** pelo primeiro comprador (a Cidade, na próxima estação, se nenhum Rico comprar antes).
+2. **Captura:** o grupo é levado ao Mercado de Escravos mais perto, numa cidade cuja lei permite a escravidão (os do Grande porto e da Cidade dos mercados, ou o de um reino), e cada um entra no estoque. O jogador é **comprado** pelo primeiro comprador (a Cidade, na próxima estação, se nenhum Rico comprar antes).
 3. **Os 3 caminhos:**
    - **Comprar a liberdade:** 1,5 × o preço dele. O jogador junta o **pecúlio**: 1 moeda por hora livre que ele trabalha a mais, até 4 por dia;
    - **Fugir:** a regra 4.4 (o jogador decide tentar; ele não precisa de Obediência baixa); vira fugitivo com Recompensa;
@@ -162,7 +162,7 @@ Obediência = 50 + Medo + 15 (Grilhões) + 1 por estação de cativeiro (até 10
 | Facção | A lei de Escravidão; a abolição pela assembleia |
 | Reputação | Comprar, vender, libertar |
 | Companheiros | A Opinião do libertado; os escravos fora dos limites |
-| Save | A classe Escravo, os dados de cada escravo, o Mercado; o formato passa para a **versão 16** |
+| Save | A classe Escravo, os dados de cada escravo, o Mercado; o formato passa para a **versão 17** |
 
 ## 7. Nomes no código
 
@@ -178,7 +178,8 @@ Obediência = 50 + Medo + 15 (Grilhões) + 1 por estação de cativeiro (até 10
 ## 8. Testes
 
 1. **Os números da parte 5.**
-2. **O teste de 1 ano não muda:** a vila não tem facção nem escravos.
+2. **O teste de 1 ano não muda:** a vila do jogador não tem facção, e a cultura dela não deseja a escravidão.
+   **O equilíbrio do mundo muda (LE1-1):** com 15 a 30% dos NPCs sem salário em 4 reinos, as contas de comida e de dinheiro das cidades (ficha do Mundo) são refeitas no marco.
 3. **Obediência e trabalho:** um escravo com Obediência 60 em LOD 2 produz 60% do trabalho presumido.
 4. **Fuga:** Obediência 20 → 10% por noite de tentar; metade das tentativas é vista.
 5. **Abolição:** 30 escravos viram 30 Civis no dia 1 da estação seguinte; as Senzalas, Casas.

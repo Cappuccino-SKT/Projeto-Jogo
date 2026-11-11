@@ -103,9 +103,9 @@
       "leis": {
         "imposto": "baixo",
         "tarifa": "media",
-        "magia": "restrita",
+        "magia": "livre",
         "escravidao": "so_prisioneiros",
-        "poder_do_lider": "moderado",
+        "poder_do_lider": "autoritario",
         "sistema_de_votacao": "maioria_simples",
         "tolerancia_religiosa": "tolerancia",
         "livro_sagrado_obrigatorio": "nao"
@@ -129,8 +129,8 @@
       "leis": {
         "imposto": "normal",
         "tarifa": "media",
-        "magia": "privilegio_dos_magos",
-        "escravidao": "proibida",
+        "magia": "so_magos_governam",
+        "escravidao": "ampla",
         "poder_do_lider": "moderado",
         "sistema_de_votacao": "conselho",
         "tolerancia_religiosa": "fe_oficial",
@@ -155,8 +155,8 @@
       "leis": {
         "imposto": "normal",
         "tarifa": "alta",
-        "magia": "restrita",
-        "escravidao": "como_pena",
+        "magia": "privilegio_dos_magos",
+        "escravidao": "ampla",
         "poder_do_lider": "autoritario",
         "sistema_de_votacao": "conselho",
         "tolerancia_religiosa": "fe_oficial",
@@ -181,11 +181,11 @@
       "leis": {
         "imposto": "normal",
         "tarifa": "media",
-        "magia": "restrita",
+        "magia": "livre",
         "escravidao": "proibida",
         "poder_do_lider": "moderado",
-        "sistema_de_votacao": "dois_tercos",
-        "tolerancia_religiosa": "perseguicao",
+        "sistema_de_votacao": "conselho",
+        "tolerancia_religiosa": "fe_oficial",
         "livro_sagrado_obrigatorio": "sim"
       },
       "itens_proibidos": [
@@ -209,9 +209,9 @@
         "imposto": "normal",
         "tarifa": "media",
         "magia": "proibida",
-        "escravidao": "proibida",
-        "poder_do_lider": "fraco",
-        "sistema_de_votacao": "por_populacao",
+        "escravidao": "ampla",
+        "poder_do_lider": "moderado",
+        "sistema_de_votacao": "conselho",
         "tolerancia_religiosa": "tolerancia",
         "livro_sagrado_obrigatorio": "nao"
       },

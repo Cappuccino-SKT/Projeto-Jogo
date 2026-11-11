@@ -91,15 +91,17 @@ Cada facção tem um conjunto de leis, e cada lei se liga a um sistema que já e
 
 As leis do primeiro dia seguem o desejo de cada cultura, sem o pensamento extremo (o extremo fica para o jogo produzir). **Ideia do autor:** todas as facções proíbem os **narcóticos**, menos a **Escravista**, que é a única produtora inicial, sobretudo com mão de obra escrava.
 
+**Rodada LE1 (2026-11-11):** as leis de Escravidão, Magia, Poder do líder, Sistema de votação e Tolerância religiosa mudaram para bater com a história dos 5 reinos (Guerreira = Reino Bárbaro; Arcana = União Mágica; Autoritária = Império Mágico; Religiosa = Clero de Rudeus; Tecnocrata = Federação Humana). A coluna Escravista vale só como a **cultura** das 4 cidades sem dono. **Consequência da LE1-2:** a União Mágica começa na lei extrema da cultura Arcana ("só magos governam"), então os Arcanos dela começam com **+10** no fator Leis × cultura (as outras culturas começam em 0), e a assembleia da União não mexe nessa lei.
+
 | Lei | Guerreira | Arcana | Autoritária | Religiosa | Tecnocrata | Escravista |
 |---|---|---|---|---|---|---|
-| Escravidão | Permitida (só prisioneiros de guerra) | Proibida | Permitida (trabalho forçado como pena) | Proibida | Proibida | Permitida, ampla |
+| Escravidão | Permitida (só prisioneiros de guerra) | Permitida, ampla | Permitida, ampla | Proibida | Permitida, ampla | Permitida, ampla |
 | Imposto | Baixo | Normal | Normal | Normal | Normal, mais o imposto para pesquisa | Alto |
 | Conscrição | Alta (10% da população) | Baixa (3%) | Alta (8%) | Média (5%) | Baixa (3%) | Média (5%; escravos podem ser alistados) |
-| Magia | Restrita | Privilégio dos magos | Restrita | Restrita | Proibida (usar magia é crime; banir os Magos é o pensamento extremo) | Livre |
-| Poder do líder | Moderado | Moderado | Autoritário | Moderado | Fraco | Fraco |
-| Sistema de votação | Maioria simples | Conselho (só Magos) | Conselho de nobres | Maioria qualificada (2/3) | Ponderada pela população | Ponderada pelo nível da cidade |
-| Tolerância religiosa | Tolerância | Fé oficial | Fé oficial | Perseguição | Tolerância | Tolerância |
+| Magia | Livre | Só magos governam | Privilégio dos magos | Livre | Proibida (usar magia é crime; banir os Magos é o pensamento extremo) | Livre |
+| Poder do líder | Autoritário | Moderado | Autoritário | Moderado | Moderado | Fraco |
+| Sistema de votação | Maioria simples | Conselho (os 7 magos mais fortes) | Conselho de nobres | Conselho (os 12) | Conselho (os escolhidos) | Ponderada pelo nível da cidade |
+| Tolerância religiosa | Tolerância | Fé oficial | Fé oficial | Fé oficial | Tolerância | Tolerância |
 | Livro Sagrado obrigatório | Não | Não | Não | Sim | Não | Não |
 | Tarifa | Média (10% da carga) | Média | Alta (20%) | Média | Média | Baixa (5%) |
 | Itens proibidos | Narcóticos | Narcóticos | Narcóticos | Narcóticos | Narcóticos; Cajados, Cetro e Joia de Mana | — |

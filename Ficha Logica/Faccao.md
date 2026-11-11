@@ -60,6 +60,7 @@ Pôr ou tirar uma facção tem de ser **só mexer nos dados**, sem mudar o códi
 3. **Para acrescentar uma facção:** uma entrada no `faccoes.json`, a cultura dela no `culturas.json` (se for nova) e as cidades no `cidades_iniciais.json` com o `id` dela.
 4. **Para tirar uma facção:** apagar a entrada. As cidades que apontavam para ela viram **cidades sem facção** (terra sem dono, com as regras das Vilas Livres), e o jogo avisa no log em vez de travar.
 5. **Teste novo:** carregar o mundo com 4, 5 e 7 facções e rodar 1 estação sem erro.
+6. **A lei de Escravidão da cidade sem facção (rodada LE1-4):** vale a que a **cultura da cidade deseja** (`culturas.json`). Nas 4 cidades de cultura Escravista, "ampla"; nas Vilas Livres, a da cultura da região delas. As outras leis da cidade sem facção continuam como estavam (imposto de 20%, por exemplo).
 
 | `id` (nome de trabalho) | O nome que o jogador vê | Cor |
 |---|---|---|

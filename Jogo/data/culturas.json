@@ -8,7 +8,7 @@
         "peso": 2
       },
       "magia": {
-        "valor": "restrita",
+        "valor": "livre",
         "peso": 2
       },
       "escravidao": {
@@ -16,7 +16,7 @@
         "peso": 4
       },
       "poder_do_lider": {
-        "valor": "moderado",
+        "valor": "autoritario",
         "peso": 3
       },
       "sistema_de_votacao": {
@@ -57,11 +57,11 @@
         "peso": 2
       },
       "magia": {
-        "valor": "privilegio_dos_magos",
+        "valor": "so_magos_governam",
         "peso": 4
       },
       "escravidao": {
-        "valor": "proibida",
+        "valor": "ampla",
         "peso": 2
       },
       "poder_do_lider": {
@@ -110,11 +110,11 @@
         "peso": 2
       },
       "magia": {
-        "valor": "restrita",
+        "valor": "privilegio_dos_magos",
         "peso": 2
       },
       "escravidao": {
-        "valor": "como_pena",
+        "valor": "ampla",
         "peso": 3
       },
       "poder_do_lider": {
@@ -162,7 +162,7 @@
         "peso": 2
       },
       "magia": {
-        "valor": "restrita",
+        "valor": "livre",
         "peso": 3
       },
       "escravidao": {
@@ -174,11 +174,11 @@
         "peso": 2
       },
       "sistema_de_votacao": {
-        "valor": "dois_tercos",
+        "valor": "conselho",
         "peso": 1
       },
       "tolerancia_religiosa": {
-        "valor": "perseguicao",
+        "valor": "fe_oficial",
         "peso": 3
       },
       "livro_sagrado_obrigatorio": {
@@ -217,12 +217,16 @@
         "valor": "proibida",
         "peso": 4
       },
+      "escravidao": {
+        "valor": "ampla",
+        "peso": 3
+      },
       "poder_do_lider": {
-        "valor": "fraco",
+        "valor": "moderado",
         "peso": 3
       },
       "sistema_de_votacao": {
-        "valor": "por_populacao",
+        "valor": "conselho",
         "peso": 2
       },
       "tolerancia_religiosa": {
