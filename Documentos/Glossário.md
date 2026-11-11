@@ -30,14 +30,14 @@ Tudo desta parte vem do [[Mundo e História/Descrição|Mundo e História]].
 | Termo | Significado |
 |---|---|
 | **Colisão dos Mundos** | O vínculo entre o mundo humano (sem magia) e o mundo mágico, que trouxe a mana e os Magos do outro mundo. O auge foi a **Grande Colisão** (o Ano 0): um vórtice no céu, por algumas horas. [[Mundo e História/Descrição\|Mundo e História]] |
-| **Ano 412 E.C.** | [Proposta] Era da Colisão: os anos contam a partir da Grande Colisão. O jogo começa no **Ano 412** |
+| **Ano 412 E.C.** | Era da Colisão: os anos contam a partir da Grande Colisão. O jogo começa no **Ano 412** |
 | **Antigo Império Mágico** | O império dos magos humanos que unificou o mundo depois da Colisão, escravizou quem não tinha magia e caiu na guerra chamada a Queda |
-| **Os 5 reinos** | Império Mágico (Mestiços), União Mágica (magos humanos), Federação Humana (humanos sem magia), Clero de Rudeus (Magos do outro mundo, disfarçados de clero) e Reino Bárbaro (a lei do mais forte). [Proposta] Nomes de trabalho nas fichas e no código: Autoritária, Arcana, Tecnocrata, Religiosa e Guerreira; a Escravista sai (rodada HI13-1) |
+| **Os 5 reinos** | Império Mágico (Mestiços), União Mágica (magos humanos), Federação Humana (humanos sem magia), Clero de Rudeus (Magos do outro mundo, disfarçados de clero) e Reino Bárbaro (a lei do mais forte). Nomes de trabalho nas fichas e no código, na mesma ordem: Autoritária, Arcana, Tecnocrata, Religiosa e Guerreira (a Escravista saiu) |
 | **Maré de Mana** | A mana de uma região fica intensa por 1 estação: favorece os magos e causa mutações. [[Ficha Logica/Racas\|Raças]] |
-| **Raça** | Humanos, Magos do outro mundo, Mestiços, Humanos-Cinzentos, Cinzentos, Fungoides e Humanos-Peludos. Decide a idade de adulto e de velho, as habilidades e como cada povo trata o NPC. Entra no jogo depois da fase D. A [[Ficha Logica/Racas\|ficha de Raças]] ainda traz as raças antigas (rodada HI13-4) |
-| **Magos do outro mundo** | Os humanoides que vieram do mundo mágico na Colisão: vida muito longa, alta capacidade mágica, poucos filhos. [Proposta] Chamam a si mesmos de **Rudeanos**, e o mundo deles é **Rudeus** |
+| **Raça** | Humanos, Rudeanos, Mestiços, Forjados, Cinzentos, Fungoides e Humanos-Peludos. Decide a idade de adulto e de velho, as habilidades e como cada povo trata o NPC. Entra no jogo depois da fase D. [[Ficha Logica/Racas\|Raças]] |
+| **Rudeanos (Magos do outro mundo)** | Os humanoides que vieram do mundo mágico na Colisão: vida muito longa, alta capacidade mágica, poucos filhos. Chamam a si mesmos de Rudeanos, e o mundo deles é **Rudeus** |
 | **Mestiços** | Raça criada pelo Antigo Império ao misturar humanos e Magos do outro mundo: vida e fertilidade de humano, todos com alta capacidade mágica. Donos do Império Mágico |
-| **Humanos-Cinzentos** | Raça humana modificada pelo Antigo Império: pouco intelecto, vida curta, só se reproduz por meios artificiais, forte no combate, sem magia. Escravos militares |
+| **Forjados** | O nome novo dos Humanos-Cinzentos. Raça humana feita pelo Antigo Império para copiar a força dos Cinzentos, hoje nas Câmaras de Forja do Império e da União: pouco intelecto, vida curta, só se reproduz por meios artificiais, forte no combate, sem magia. Escravos militares |
 | **Cinzentos** | Raça modificada naturalmente pela mana: forte no combate e muito agressiva |
 | **Fungoides** | Raça da Floresta de Esporos, sem gênero, de mente coletiva; poucos nascem com intelecto próprio |
 | **Humanos-Peludos** | Humanos modificados naturalmente pela mana: resistentes, de vida curta, se reproduzem rápido; alguns monstros não os atacam |

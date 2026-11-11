@@ -18,17 +18,7 @@ As sessões estavam caras. Obrigações:
 - **Sem subagentes.**
 - **Documentar uma vez:** cada fato num lugar só (a ficha ou o `Jogo/LEIA-ME.md`); a Retomada só ganha uma linha de estado, e o que já foi resolvido sai dela.
 - **Respostas curtas:** o resumo final em poucas linhas; sem repetir o que o autor já sabe.
-- **Pode seguir na mesma sessão** de uma etapa para a outra (pedido do autor, 2026-10-19). A cada etapa nova, conferir se o modelo bate com a tabela abaixo e avisar o autor se não bater.
-
-## Modelo e esforço (pedido do autor, 2026-10-19)
-
-| Tarefa | Modelo e esforço |
-|---|---|
-| Programar um marco pelas fichas, corrigir testes, aplicar as respostas de uma rodada | **Sonnet, esforço médio** |
-| Escrever fichas e rodadas de design; um erro difícil que o Sonnet não resolveu | **Opus, esforço médio** |
-| Esforço alto | Só quando o autor pedir |
-
-**Obrigação:** na primeira mensagem de cada sessão **e no começo de cada etapa nova** (uma rodada, uma ficha ou um marco), antes de qualquer outra coisa, conferir o modelo em uso (está nas instruções do sistema) e a tarefa pedida. Se não bater com a tabela, **avisar o autor em uma linha** ("Esta tarefa pede o Sonnet com esforço médio; troque no seletor de modelo do app e me mande de novo.") e **parar até ele responder**. Se ele mandar seguir assim mesmo, seguir. O esforço não aparece nas instruções: lembrar a tabela só quando o modelo estiver errado.
+- **Pode seguir na mesma sessão** de uma etapa para a outra (pedido do autor, 2026-10-19).
 
 ## Regras
 

@@ -10,7 +10,7 @@ tags: [ficha-logica]
 
 ## 1. O que faz
 
-Agrupa as cidades em **6 facções**, com um líder, as **leis**, um **Banco da Facção** e a **assembleia** anual que muda as leis. Diz também de quem é cada mapa sem cidade (o **território**).
+Agrupa as cidades em **facções** (os 5 reinos da história desde a rodada HI13; antes eram 6), com um líder, as **leis**, um **Banco da Facção** e a **assembleia** anual que muda as leis. Diz também de quem é cada mapa sem cidade (o **território**).
 
 Documento do sistema: [[Sistema de Facção/Descrição|Facção]]; as leis desejadas vêm da [[Sistema de Cultura/Descrição|Cultura]].
 
@@ -49,7 +49,27 @@ Documento do sistema: [[Sistema de Facção/Descrição|Facção]]; as leis dese
 }
 ```
 
-As 6 facções seguem a tabela de leis iniciais do documento (V3-1). A Conscrição e os Crimes e penas entram com a Guerra e o Crime.
+As facções seguem a tabela de leis iniciais do documento (V3-1). A Conscrição e os Crimes e penas entram com a Guerra e o Crime.
+
+### Facções modulares (pedido do autor, rodada HI13-1)
+
+Pôr ou tirar uma facção tem de ser **só mexer nos dados**, sem mudar o código:
+
+1. **A lista vem só do `faccoes.json`.** Nenhum código e nenhum teste pode ter escrito à mão a quantidade de facções (6 ou 5) nem o nome de uma delas. Tudo o que hoje é "um número por facção" (reputação, diplomacia, tecnologia, notícias, interface) percorre a lista.
+2. **Cada facção traz tudo no próprio registro:** o `id`, o `nome` que o jogador vê, a `cultura`, a `capital`, as `leis`, a `cor`, o `lider` e as `relacoes_iniciais` (um valor por `id` de outra facção; quem não aparece vale 0).
+3. **Para acrescentar uma facção:** uma entrada no `faccoes.json`, a cultura dela no `culturas.json` (se for nova) e as cidades no `cidades_iniciais.json` com o `id` dela.
+4. **Para tirar uma facção:** apagar a entrada. As cidades que apontavam para ela viram **cidades sem facção** (terra sem dono, com as regras das Vilas Livres), e o jogo avisa no log em vez de travar.
+5. **Teste novo:** carregar o mundo com 4, 5 e 7 facções e rodar 1 estação sem erro.
+
+| `id` (nome de trabalho) | O nome que o jogador vê | Cor |
+|---|---|---|
+| `faccao.autoritaria` | Império Mágico | Vermelho |
+| `faccao.arcana` | União Mágica | Roxo |
+| `faccao.tecnocrata` | Federação Humana | Preto e dourado |
+| `faccao.religiosa` | Clero de Rudeus | Branco e dourado |
+| `faccao.guerreira` | Reino Bárbaro | Marrom |
+
+**A Escravista saiu** (HI13-1, opção C): as 4 cidades dela no mapa provisório ficam sem facção até o mapa novo, e o mercado de escravos da cidade (7,5) continua. A cultura Escravista continua no `culturas.json` para os NPCs dessas cidades. **As contas e os exemplos com a Escravista** nesta ficha e nas outras (Diplomacia, Guerra, Tecnologia, Reputação, Mundo, Escravidão) são do mundo provisório de 6 facções: valem até o marco de código da HI13, que os refaz junto com os testes.
 
 ### Na Cultura (`data/culturas.json`, o que a Facção usa)
 
