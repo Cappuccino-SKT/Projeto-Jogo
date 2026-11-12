@@ -145,6 +145,7 @@ public:
     EstadoDaReligiaoDoJogador religiaoDoJogador;
     // Fase D3 (Escravidão): os escravos desta cidade (a Felicidade deles, a rebelião, a alforria).
     EstadoDaEscravidaoDaCidade escravidao;
+    EstadoDoCativeiroDoJogador cativeiroDoJogador;  // só na vila
     // Fase D2 (Companheiros): só na vila, o grupo, a família e o sucessor do jogador.
     EstadoDosCompanheiros companheiros;
     // O número do mapa desta cidade no mundo (a vila: o mapa da vila).

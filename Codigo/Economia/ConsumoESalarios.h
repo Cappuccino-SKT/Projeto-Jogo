@@ -53,9 +53,9 @@ int contarOsDesempregados(const ContextoDaProducao& contexto);
 // medido fecha (regra 10.1 da Produção).
 void consumirACestaDoDia(ContextoDaProducao& contexto);
 
-// Fase D3 (Escravidão, passo 1): 1 comida por escravo, a mais barata do estoque da Cidade (o
-// dono paga com o estoque, sem dinheiro). Devolve quantos ficaram sem comida.
-int alimentarOsEscravosDaCidade(ContextoDaProducao& contexto, int escravos);
+// Fase D3 (Escravidão, passo 1): 1 comida por escravo, a mais barata do estoque do dono (a Cidade
+// ou o jogador; o dono paga com o estoque, sem dinheiro). Devolve quantos ficaram sem comida.
+int alimentarOsEscravosDaCidade(ContextoDaProducao& contexto, int escravos, bool doJogador = false);
 
 // Regra 4.2, com as regras 10.6 a 10.8: o salário de cada empregado pelas
 // horas do dia, com os multiplicadores e o imposto. Quem paga é o dono da

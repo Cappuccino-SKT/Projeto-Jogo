@@ -291,6 +291,10 @@ void InterfaceDoJogador::desenharUmQuadro(SimulacaoDaVila& simulacao, int largur
     if (janelaDosCompanheirosAberta) {
         desenharOsCompanheiros(simulacao, larguraDaTela, alturaDaTela);
     }
+    // Fase D3: cativo, a janela abre sozinha (é o único jeito de sair do cativeiro).
+    if (janelaDaEscravidaoAberta || simulacao.cativeiroDoJogador.estaCativo) {
+        desenharAEscravidao(simulacao, larguraDaTela, alturaDaTela);
+    }
     if (simulacao.viagem.grupoDoJogador.encontroAcontecendo) {
         desenharOEncontro(simulacao, larguraDaTela, alturaDaTela);
     }
@@ -389,6 +393,10 @@ void InterfaceDoJogador::desenharABarraDeCima(SimulacaoDaVila& simulacao, Contex
     ImGui::SameLine();
     if (ImGui::Button("Companheiros")) {
         janelaDosCompanheirosAberta = !janelaDosCompanheirosAberta;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Escravos")) {
+        janelaDaEscravidaoAberta = !janelaDaEscravidaoAberta;
     }
     const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
     // Fase C3 (Crime, 4.6): preso, o grupo espera ou paga a fiança.
@@ -997,6 +1005,143 @@ ImVec4 corDoEstadoDoTerritorio(EstadoDoTerritorio estado)
 }
 
 }  // namespace
+
+// Fase D3 (Escravidão): o jogador cativo, o Mercado de Escravos da cidade onde o grupo está e os escravos do jogador.
+void InterfaceDoJogador::desenharAEscravidao(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)
+{
+    const DadosDoJogo& dados = simulacao.dados;
+    const EntidadeEmTransito& grupo = simulacao.viagem.grupoDoJogador;
+    const EstadoDoCativeiroDoJogador& cativeiro = simulacao.cativeiroDoJogador;
+    const auto pedir = [&](AcaoDaEscravidao acao, int numero) { simulacao.pedidos.acrescentar(PedidoDaEscravidao{acao, numero}); };
+    ImGui::SetNextWindowSize(ImVec2(720, 440), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(larguraDaTela * 0.5f, alturaDaTela * 0.5f), ImGuiCond_FirstUseEver, ImVec2(0.5f, 0.5f));
+    if (!ImGui::Begin("Escravos", &janelaDaEscravidaoAberta)) {
+        ImGui::End();
+        return;
+    }
+
+    // O jogador cativo (regra 4.8).
+    if (cativeiro.estaCativo) {
+        const CidadeDoMundo* cidade = dados.mundo.cidadeNoMapa(cativeiro.mapaDoMercado);
+        ImGui::SeparatorText("Você é escravo");
+        ImGui::TextWrapped("Onde: %s. %s", cidade != nullptr ? cidade->nome.c_str() : "?",
+                           cativeiro.foiComprado ? "A Cidade comprou você: todo dia você junta pecúlio." : "Você está no Mercado, à espera de um comprador (o dia 1 da próxima estação).");
+        ImGui::Text("Pecúlio: %s moedas. A liberdade custa %s moedas.", escreverDinheiroEmMoedas(static_cast<int>(cativeiro.peculioEmDecimos)).c_str(),
+                    escreverDinheiroEmMoedas(static_cast<int>(custoDaLiberdadeEmDecimos(simulacao))).c_str());
+        if (ImGui::Button("Comprar a liberdade")) {
+            pedir(AcaoDaEscravidao::ComprarALiberdade, 0);
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Tentar fugir (50% de ser visto)")) {
+            pedir(AcaoDaEscravidao::TentarFugir, 0);
+        }
+        if (cativeiro.semFugirAte >= simulacao.relogio.diaDaPartida()) {
+            ImGui::TextWrapped("Você foi castigado por uma fuga: só pode tentar de novo depois do dia %lld.", static_cast<long long>(cativeiro.semFugirAte + 1));
+        }
+        ImGui::End();
+        return;
+    }
+
+    // O Mercado de Escravos da cidade onde o grupo está parado (regra 4.2).
+    ImGui::SeparatorText("Mercado de Escravos");
+    SimulacaoDaVila* cidade = grupo.emTransito ? nullptr : cidadeDoMundoNoMapa(simulacao, grupo.mapaAtual);
+    const bool temMercado = cidade != nullptr && cidade != &simulacao && cidadeTemMercadoDeEscravos(simulacao, grupo.mapaAtual);
+    const bool aVilaPermite = escravidaoPermitidaNaCidade(simulacao, dados.mundo.mapaDaVila);
+    if (!temMercado) {
+        ImGui::TextWrapped("Não há Mercado de Escravos aqui. O grupo precisa estar parado na capital de um reino que permite a escravidão, no Grande porto ou na Cidade dos mercados.");
+    } else {
+        if (!aVilaPermite) {
+            ImGui::TextWrapped("A lei da sua vila proíbe a escravidão: você não pode comprar.");
+        }
+        const std::string culturaDaVila = culturaBaseDaCidade(dados, dados.mundo.mapaDaVila);
+        if (ImGui::BeginTable("##mercadoDeEscravos", 5, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+            ImGui::TableSetupColumn("Nome");
+            ImGui::TableSetupColumn("Idade");
+            ImGui::TableSetupColumn("Braçal / Manufaturado");
+            ImGui::TableSetupColumn("Preço");
+            ImGui::TableSetupColumn("");
+            ImGui::TableHeadersRow();
+            for (const entt::entity npc : escravosAVenda(*cidade)) {
+                const IdentidadeDoNpc& identidade = cidade->registroDasEntidades.get<IdentidadeDoNpc>(npc);
+                const HabilidadesDoNpc& habilidades = cidade->registroDasEntidades.get<HabilidadesDoNpc>(npc);
+                const int64_t preco = precoNoMercadoEmDecimos(*cidade, npc, culturaDaVila);
+                ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::TextUnformatted(identidade.nome.c_str());
+                ImGui::TableNextColumn();
+                ImGui::Text("%d", cidade->registroDasEntidades.get<IdadeDoNpc>(npc).anos);
+                ImGui::TableNextColumn();
+                ImGui::Text("%d / %d", habilidades.bracal, habilidades.manufaturado);
+                ImGui::TableNextColumn();
+                ImGui::Text("%s", escreverDinheiroEmMoedas(static_cast<int>(preco)).c_str());
+                ImGui::TableNextColumn();
+                ImGui::PushID(identidade.numeroDoNpc);
+                ImGui::BeginDisabled(!aVilaPermite || grupo.dinheiroEmDecimos < preco);
+                if (ImGui::SmallButton("Comprar")) {
+                    pedir(AcaoDaEscravidao::ComprarNoMercado, identidade.numeroDoNpc);
+                }
+                ImGui::EndDisabled();
+                ImGui::PopID();
+            }
+            ImGui::EndTable();
+        }
+        ImGui::Text("O grupo leva %s moedas.", escreverDinheiroEmMoedas(static_cast<int>(grupo.dinheiroEmDecimos)).c_str());
+    }
+
+    // Os escravos do jogador, na vila dele (regra 4.7).
+    ImGui::SeparatorText("Os seus escravos");
+    int meusEscravos = 0;
+    for (const entt::entity npc : simulacao.npcsDaVila) {
+        const CativeiroDoNpc* doNpc = simulacao.registroDasEntidades.try_get<CativeiroDoNpc>(npc);
+        meusEscravos += doNpc != nullptr && doNpc->doJogador ? 1 : 0;
+    }
+    if (meusEscravos == 0) {
+        ImGui::TextWrapped("Você não tem escravos. Eles comem do seu estoque, trabalham sem salário e você os contrata nas suas construções como os outros moradores.");
+    } else {
+        ImGui::Text("Felicidade dos escravos: %.1f. %s", simulacao.escravidao.felicidadeDosEscravosEmDecimos / 10.0,
+                    simulacao.escravidao.escravosSemComidaHoje > 0 ? "Faltou comida hoje!" : "");
+        if (ImGui::BeginTable("##meusEscravos", 4, ImGuiTableFlags_RowBg | ImGuiTableFlags_SizingFixedFit)) {
+            ImGui::TableSetupColumn("Nome");
+            ImGui::TableSetupColumn("Obediência");
+            ImGui::TableSetupColumn("Grilhões");
+            ImGui::TableSetupColumn("");
+            ImGui::TableHeadersRow();
+            for (const entt::entity npc : simulacao.npcsDaVila) {
+                const CativeiroDoNpc* doNpc = simulacao.registroDasEntidades.try_get<CativeiroDoNpc>(npc);
+                if (doNpc == nullptr || !doNpc->doJogador) {
+                    continue;
+                }
+                const IdentidadeDoNpc& identidade = simulacao.registroDasEntidades.get<IdentidadeDoNpc>(npc);
+                ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::TextUnformatted(identidade.nome.c_str());
+                ImGui::TableNextColumn();
+                ImGui::Text("%.1f", doNpc->obedienciaEmDecimos / 10.0);
+                ImGui::TableNextColumn();
+                ImGui::PushID(identidade.numeroDoNpc);
+                if (ImGui::SmallButton(doNpc->grilhoes ? "Tirar" : "Pôr")) {
+                    pedir(doNpc->grilhoes ? AcaoDaEscravidao::TirarGrilhoes : AcaoDaEscravidao::PorGrilhoes, identidade.numeroDoNpc);
+                }
+                ImGui::TableNextColumn();
+                if (ImGui::SmallButton("Libertar")) {
+                    pedir(AcaoDaEscravidao::Libertar, identidade.numeroDoNpc);
+                }
+                ImGui::SameLine();
+                ImGui::BeginDisabled(!temMercado);
+                if (ImGui::SmallButton("Vender aqui")) {
+                    pedir(AcaoDaEscravidao::Vender, identidade.numeroDoNpc);
+                }
+                ImGui::EndDisabled();
+                ImGui::PopID();
+            }
+            ImGui::EndTable();
+        }
+        if (ImGui::Button("Castigo público (Medo +5, Felicidade −10, por 8 dias)")) {
+            pedir(AcaoDaEscravidao::CastigoPublico, 0);
+        }
+    }
+    ImGui::End();
+}
 
 // Fase D2 (Companheiros): a Taverna, o grupo, a família e o sucessor.
 void InterfaceDoJogador::desenharOsCompanheiros(SimulacaoDaVila& simulacao, float larguraDaTela, float alturaDaTela)

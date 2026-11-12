@@ -282,7 +282,9 @@ void presumirOTrabalhoDaHora(ContextoDaProducao& contexto, int horaQueAcabou)
             TrabalhoDoDia& trabalho = contexto.registroDasEntidades.get<TrabalhoDoDia>(npc);
             // Fase D3 (Escravidão, ES1-1): o trabalho presumido do escravo × a Obediência dele.
             const CativeiroDoNpc* cativeiro = contexto.registroDasEntidades.try_get<CativeiroDoNpc>(npc);
-            const int ticksDele = cativeiro != nullptr ? ticks * cativeiro->obedienciaEmDecimos / 1000 : ticks;
+            const int ticksDele = cativeiro != nullptr ? ticks * cativeiro->obedienciaEmDecimos / 1000
+                                                             * (cativeiro->grilhoes ? contexto.dados.regrasDaEscravidao.grilhoesNoTrabalhoEmPorcento : 100) / 100
+                                                       : ticks;
             trabalho.ticksTrabalhadosNestaHora = ticksDele;
             trabalho.ticksTrabalhadosHoje += ticksDele;
         }

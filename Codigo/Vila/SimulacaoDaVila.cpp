@@ -222,12 +222,18 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
     FilaDePedidosDoJogador outrosPedidos;
     for (PedidoDoJogador& pedido : pedidos.tomarTodos()) {
         const bool preso = crimeDoJogador.estaPreso(relogio.diaDaPartida());
-        const bool bloqueado = preso || crimeDoJogador.revista.ativa;
+        const bool cativo = cativeiroDoJogador.estaCativo;  // fase D3: escravo, o grupo não viaja nem comercia
+        const bool bloqueado = preso || cativo || crimeDoJogador.revista.ativa;
         if (bloqueado && (std::holds_alternative<PedidoPartirEmViagem>(pedido) || std::holds_alternative<PedidoComercioNaCidade>(pedido)
                           || std::holds_alternative<PedidoDoarNaCidade>(pedido))) {
-            linhas.push_back(std::string("Aviso: pedido recusado (") + (preso ? "o grupo está preso" : "o grupo espera a revista") + ").");
+            linhas.push_back(std::string("Aviso: pedido recusado (") + (preso ? "o grupo está preso" : cativo ? "o grupo é escravo" : "o grupo espera a revista") + ").");
         } else if (const auto* revista = std::get_if<PedidoResolverRevista>(&pedido)) {
             const std::string motivo = resolverARevista(*this, static_cast<EscolhaNaRevista>(revista->escolha), revista->ofertaEmDecimos, linhas);
+            if (!motivo.empty()) {
+                linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            }
+        } else if (const auto* escravidaoPedida = std::get_if<PedidoDaEscravidao>(&pedido)) {
+            const std::string motivo = fazerAcaoDaEscravidao(*this, escravidaoPedida->acao, escravidaoPedida->numero, linhas);
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
             }
@@ -257,6 +263,9 @@ std::vector<std::string> SimulacaoDaVila::aplicarOsPedidosPendentes()
                 : resolverOEncontroDoGrupo(contexto, encontro->escolha, linhas, &venceuALuta);
             if (!motivo.empty()) {
                 linhas.push_back("Aviso: pedido recusado (" + motivo + ").");
+            } else if (!venceuALuta && viagem.grupoDoJogador.vidaEmPorcento == 10 && !linhas.empty() && linhas.back().find("perdeu a luta") != std::string::npos) {
+                // Fase D3 (Escravidão, 4.8): a derrota para os bandidos pode virar captura e venda.
+                sortearACapturaDoJogador(*this, linhas);
             } else if (venceuALuta) {
                 anotarAVitoriaDoGrupo(*this);  // fase D2: a Opinião dos companheiros
                 const std::string faixa = anotarOBandoVencido(*this);

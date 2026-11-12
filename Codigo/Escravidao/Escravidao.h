@@ -5,8 +5,8 @@
 // Felicidade própria (base 30) e uma Obediência, que decide o quanto ele trabalha e se foge.
 // A rebelião, a alforria e a abolição tiram gente da classe.
 //
-// Parte 1 (este arquivo): os escravos da Cidade, em todas as cidades do mundo.
-// Parte 2 (depois): o Mercado de Escravos, os escravos do jogador e o jogador capturado.
+// Parte 1: os escravos da Cidade, em todas as cidades do mundo.
+// Parte 2: o Mercado de Escravos, os escravos do jogador e o jogador capturado.
 
 #include <cstdint>
 #include <map>
@@ -55,6 +55,31 @@ struct RegrasDaEscravidao {
     int felicidadeDosEscravosSePerdem = -10;
     // A alforria (regra 4.6): por estação, em %, pela lei de Tolerância ou pela cultura da cidade.
     std::map<std::string, int> alforriaPorEstacaoEmPorcento;  // "tolerancia": 1, "escravista": 0
+    // Parte 2. O Mercado de Escravos (regra 4.2).
+    std::vector<std::vector<int>> outrasCidadesComMercado;  // [coluna, linha]; as capitais dos reinos que permitem já têm
+    int mercadoAlvoPorVagaBracalVazia = 2;
+    int mercadoAlvoMinimo = 2;
+    int vendaPeloDonoEmPorcento = 70;
+    int reservaDoBancoParaComprarEmMoedas = 250;
+    int cativosDosBandidosPorEstacao = 1;  // ES1-3: entram de graça no estoque que está abaixo do alvo
+    // Os tratamentos do escravo do jogador (regra 4.7).
+    int grilhoesNaFelicidade = -5;
+    int grilhoesNoTrabalhoEmPorcento = 80;
+    int castigoPublicoNoMedo = 5;
+    int castigoPublicoEmDias = 8;
+    int castigoPublicoNaFelicidade = -10;
+    // A reputação do jogador (regra 4.6).
+    int reputacaoReligiosaAoComprar = -1;
+    int reputacaoReligiosaAoVender = -3;
+    int reputacaoReligiosaAoLibertar = 2;
+    int reputacaoReligiosaNoCastigoPublico = -2;
+    int reputacaoDeQuemPermiteAoLibertar = -5;
+    // O jogador capturado (regra 4.8).
+    int capturaDoJogadorPelosBandidosEmPorcento = 50;
+    int habilidadeDoJogadorNoPreco = 50;  // até o jogador ter atributos: 200 + 4 × 50 = 400
+    int comprarALiberdadeEmPorcentoDoPreco = 150;
+    int peculioMaximoPorDiaEmDecimos = 40;
+    int recompensaPelaFugaEmMoedas = 300;
 };
 
 RegrasDaEscravidao lerArquivoDaEscravidao(const std::string& textoDoArquivo, ListaDeProblemasDosDados& listaDeProblemas);
@@ -65,6 +90,8 @@ struct CativeiroDoNpc {
     bool grilhoes = false;
     int obedienciaEmDecimos = 500;  // recalculada todo dia
     int64_t castigadoAte = -1;      // o último dia do castigo de uma fuga vista; −1 = sem castigo
+    bool doJogador = false;         // parte 2: o dono é o jogador (senão, a Cidade)
+    bool aVenda = false;            // parte 2: está no estoque do Mercado de Escravos da cidade
 
     bool operator==(const CativeiroDoNpc&) const = default;
 };
@@ -83,9 +110,26 @@ struct EstadoDaEscravidaoDaCidade {
     int fugasNoTotal = 0;
     int alforriasNoTotal = 0;
     int rebelioesNoTotal = 0;
+    int64_t castigoPublicoAte = -1;  // parte 2: o castigo público que o jogador mandou fazer na vila dele
 
     bool operator==(const EstadoDaEscravidaoDaCidade&) const = default;
 };
+
+// Parte 2 (regra 4.8): o jogador capturado pelos bandidos e vendido. Só na vila; vai no save.
+struct EstadoDoCativeiroDoJogador {
+    bool estaCativo = false;
+    int mapaDoMercado = 0;      // a cidade para onde foi levado
+    int precoEmMoedas = 0;
+    bool foiComprado = false;   // a Cidade o compra no dia 1 da estação seguinte
+    int64_t peculioEmDecimos = 0;
+    int64_t diaDaCaptura = -1;
+    int64_t semFugirAte = -1;   // depois de uma fuga vista: o castigo
+
+    bool operator==(const EstadoDoCativeiroDoJogador&) const = default;
+};
+
+// O que o jogador pode pedir (o "numero" é o número do NPC, quando há um).
+enum class AcaoDaEscravidao { ComprarNoMercado, Vender, Libertar, PorGrilhoes, TirarGrilhoes, CastigoPublico, ComprarALiberdade, TentarFugir };
 
 // ---------------------------------------------------------------------------
 // As contas (parte 5 da ficha). Felicidade, Obediência e Controle em décimos (767 = 76,7).
@@ -133,6 +177,33 @@ void montarAEscravidaoDaPartidaNova(SimulacaoDaVila& vila);
 // Todo dia novo, em cada cidade: a comida, a Felicidade, a Obediência, a rebelião e a fuga; no
 // dia 1 da estação, a abolição (se a lei mudou para "proibida") e a alforria.
 std::vector<std::string> rodarAEscravidaoNoDiaNovo(SimulacaoDaVila& vila);
+
+// ---------------------------------------------------------------------------
+// Parte 2: o Mercado de Escravos, os escravos do jogador e o jogador capturado.
+// ---------------------------------------------------------------------------
+
+// A cidade tem Mercado de Escravos: a lei permite e ela é a capital de um reino ou está na lista do escravidao.json.
+bool cidadeTemMercadoDeEscravos(const SimulacaoDaVila& vila, int numeroDoMapa);
+// Os escravos à venda na cidade, na ordem dos NPCs.
+std::vector<entt::entity> escravosAVenda(const SimulacaoDaVila& cidade);
+// O estoque-alvo: 2 × as vagas Braçais vazias da cidade, no mínimo 2.
+int estoqueAlvoDoMercado(SimulacaoDaVila& cidade);
+// O preço de um escravo no Mercado da cidade, em décimos de moeda: o preço base × o fator da oferta e
+// da procura (o do Mercado Local, de 50 a 200%).
+int64_t precoNoMercadoEmDecimos(SimulacaoDaVila& cidade, entt::entity npc, const std::string& culturaDoComprador);
+// A cidade do mundo que fica no mapa (a vila do jogador também), ou nullptr.
+SimulacaoDaVila* cidadeDoMundoNoMapa(SimulacaoDaVila& vila, int numeroDoMapa);
+// Leva um escravo de uma cidade para outra (precisa de uma cama livre no destino). Devolve o NPC novo, ou entt::null.
+entt::entity moverEscravoDeCidade(SimulacaoDaVila& origem, entt::entity npc, SimulacaoDaVila& destino, bool doJogador, bool aVenda);
+
+// Os pedidos do jogador. Devolve o motivo da recusa, ou vazio se deu certo.
+std::string fazerAcaoDaEscravidao(SimulacaoDaVila& vila, AcaoDaEscravidao acao, int numero, std::vector<std::string>& linhas);
+// O custo de comprar a própria liberdade (1,5 × o preço), em décimos.
+int64_t custoDaLiberdadeEmDecimos(const SimulacaoDaVila& vila);
+
+// Regra 4.8 (ES1-4): o grupo perdeu para os bandidos. Sorteia a captura; se capturado, o grupo é
+// levado ao Mercado de Escravos mais perto e perde o dinheiro que levava. Devolve se foi capturado.
+bool sortearACapturaDoJogador(SimulacaoDaVila& vila, std::vector<std::string>& linhas);
 
 // População: os filhos de escravos nascem escravos (a parte dos nascidos igual à parte de escravos da cidade).
 void anotarONascimentoNaEscravidao(ContextoDaProducao& contexto, entt::entity npc);

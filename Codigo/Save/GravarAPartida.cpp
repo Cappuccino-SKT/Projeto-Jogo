@@ -269,7 +269,7 @@ json escreverOsNpcs(const SimulacaoDaVila& simulacao)
             registroDoNpc["doenca"] = doenca->diasQueFaltam;
         }
         if (const CativeiroDoNpc* cativeiro = registro.try_get<CativeiroDoNpc>(npc)) {  // fase D3
-            registroDoNpc["cativeiro"] = json::array({cativeiro->diaDoInicio, cativeiro->grilhoes, cativeiro->obedienciaEmDecimos, cativeiro->castigadoAte});
+            registroDoNpc["cativeiro"] = json::array({cativeiro->diaDoInicio, cativeiro->grilhoes, cativeiro->obedienciaEmDecimos, cativeiro->castigadoAte, cativeiro->doJogador, cativeiro->aVenda});
         }
         if (const CaminhoDoNpc* caminho = registro.try_get<CaminhoDoNpc>(npc)) {
             json tiles = json::array();
@@ -623,7 +623,8 @@ json escreverASimulacao(const SimulacaoDaVila& simulacao)
                                 {"semComidaHoje", escravidao.escravosSemComidaHoje},
                                 {"fugas", escravidao.fugasNoTotal},
                                 {"alforrias", escravidao.alforriasNoTotal},
-                                {"rebelioes", escravidao.rebelioesNoTotal}};
+                                {"rebelioes", escravidao.rebelioesNoTotal},
+                                {"castigoPublicoAte", escravidao.castigoPublicoAte}};
     arvore["comercio"] = escreverOComercio(simulacao);
     return arvore;
 }
@@ -653,6 +654,9 @@ std::vector<uint8_t> gravarAPartidaEmBytes(const SimulacaoDaVila& simulacao, con
     arvore["faccoes"] = escreverAsFaccoes(simulacao);
     arvore["crime"] = escreverOCrime(simulacao);
     arvore["companheiros"] = escreverOsCompanheiros(simulacao);  // fase D2
+    const EstadoDoCativeiroDoJogador& cativeiroDoJogador = simulacao.cativeiroDoJogador;  // fase D3, parte 2
+    arvore["cativeiroDoJogador"] = json::array({cativeiroDoJogador.estaCativo, cativeiroDoJogador.mapaDoMercado, cativeiroDoJogador.precoEmMoedas, cativeiroDoJogador.foiComprado,
+                                                cativeiroDoJogador.peculioEmDecimos, cativeiroDoJogador.diaDaCaptura, cativeiroDoJogador.semFugirAte});
     arvore["religiaoDoJogador"] = json::array({simulacao.religiaoDoJogador.anoDaUltimaPeregrinacao, simulacao.religiaoDoJogador.estacaoDaUltimaBencao,
                                                simulacao.religiaoDoJogador.estacaoDoUltimoAtoDeFe});
     return json::to_msgpack(arvore);
